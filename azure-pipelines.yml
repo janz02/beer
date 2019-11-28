@@ -6,6 +6,9 @@
 trigger:
 - master
 
+variables:
+  DockerImageName: 'nkm-rtd-246410/couponmanager'
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -19,3 +22,19 @@ steps:
     npm install --silent
     npm run build
   displayName: 'npm install and build'
+
+- task: Docker@0
+  displayName: 'Build image'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
+    imageName: '$(DockerImageName):$(Build.BuildId)'
+    dockerfile: 'Dockerfile'
+
+- task: Docker@0
+  displayName: 'Publish image'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
+    action: 'Push an image'
+    imageName: '$(DockerImageName):$(Build.BuildId)'
