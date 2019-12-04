@@ -1,12 +1,13 @@
 import React from 'react';
-import { withRouter, Switch, Route } from 'react-router-dom';
+import { withRouter, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Home from '../components/views/Home';
+import PrivateRoute from '../components/routes/PrivateRoute';
 
 const Routes = () => {
   return (
     <Switch>
-      <Route component={Home} />
+      <PrivateRoute exact path="/" component={Home} />
     </Switch>
   );
 };
