@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { useMediaQuery } from 'react-responsive';
+import Logo from 'assets/img/logo.svg';
 
 const PrivateLayout: React.FC = ({ children }) => {
   const isMobile = !useMediaQuery({
@@ -36,6 +37,12 @@ const PrivateLayout: React.FC = ({ children }) => {
             className="trigger"
             type={'menu'}
             onClick={() => setCollapsed(!collapsed)}
+          />
+          <img
+            src={Logo}
+            alt="Logo"
+            title="Logo"
+            style={{ width: '150px', color: 'black', paddingLeft: '25px' }}
           />
         </Layout.Header>
         <Layout.Content>{children}</Layout.Content>
