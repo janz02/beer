@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import Home from '../components/views/Home';
-import PrivateRoute from '../components/routes/PrivateRoute';
+import PrivateRoute from 'components/routes/PrivateRoute';
+import Home from 'components/views/Home';
 
 const Routes = () => {
   return (

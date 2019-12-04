@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, RouteProps } from 'react-router-dom';
-import PrivateLayout from '../layout/PrivateLayout';
+import PrivateLayout from 'components/layout/PrivateLayout';
 
 interface PrivateRouteProps extends RouteProps {}
 
