@@ -13,6 +13,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = (props) => {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
+    localStorage.setItem('selectedLanguage', lng);
     i18n.changeLanguage(lng);
   };
 
