@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import Logo from 'assets/img/logo.svg';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from 'components/widgets/LanguageSelector';
+import { Link } from 'react-router-dom';
 
 const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
@@ -14,17 +15,25 @@ const PrivateLayout: React.FC = ({ children }) => {
 
   const [menuOpened, setMenuOpened] = useState(!isMobile);
 
+  const closeDrawer = () => {
+    if (isMobile) {
+      setMenuOpened(false);
+    }
+  };
+
   const NavigationContent = () => {
     return (
       <React.Fragment>
         <Menu theme="dark" mode="inline">
-          <Menu.Item>
+          <Menu.Item onClick={closeDrawer}>
             <Icon type="desktop" />
             <span>{t('menu.create-coupon')}</span>
+            <Link to="/" />
           </Menu.Item>
-          <Menu.Item>
+          <Menu.Item onClick={closeDrawer}>
             <Icon type="file" />
             <span>{t('menu.edit-coupon')}</span>
+            <Link to="/test" />
           </Menu.Item>
         </Menu>
         <LanguageSelector menuClosed={!menuOpened} />
