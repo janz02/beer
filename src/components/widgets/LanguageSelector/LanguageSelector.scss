@@ -1,0 +1,33 @@
+.language-selector {
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  padding-left: 24px;
+  margin-top: 15px;
+
+  &.menu-collapsed {
+    padding-left: 32px;
+  }
+
+  .language-selector__image,
+  .language-selector__text {
+    margin-right: 10px;
+  }
+
+  .language-selector__image {
+    width: 20px;
+  }
+}
+
+.language-selector-dropdown-content {
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+
+  .language-selector-dropdown-content__image,
+  .language-selector-dropdown-content__text {
+    margin-right: 10px;
+  }
+
+  .language-selector-dropdown-content__image {
+    width: 20px;
+  }
+}

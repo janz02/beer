@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import Logo from 'assets/img/logo.svg';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from 'components/widgets/LanguageSelector';
 
 const PrivateLayout: React.FC = ({ children }) => {
+  const { t } = useTranslation();
+
   const isMobile = !useMediaQuery({
     query: '(min-device-width: 576px)',
   });
@@ -22,13 +26,14 @@ const PrivateLayout: React.FC = ({ children }) => {
         <Menu theme="dark" mode="inline">
           <Menu.Item>
             <Icon type="desktop" />
-            <span>Create coupon</span>
+            <span>{t('menu.create-coupon')}</span>
           </Menu.Item>
           <Menu.Item>
             <Icon type="file" />
-            <span>Edit coupon</span>
+            <span>{t('menu.edit-coupon')}</span>
           </Menu.Item>
         </Menu>
+        <LanguageSelector menuCollapsed={collapsed} />
       </Layout.Sider>
       <Layout>
         <Layout.Header style={{ background: '#fff', padding: 0 }}>
