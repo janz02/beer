@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Drawer } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import Logo from 'assets/img/logo.svg';
 import { useTranslation } from 'react-i18next';
@@ -12,17 +12,11 @@ const PrivateLayout: React.FC = ({ children }) => {
     query: '(min-device-width: 576px)',
   });
 
-  const [collapsed, setCollapsed] = useState(isMobile);
+  const [menuOpened, setMenuOpened] = useState(!isMobile);
 
-  return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Layout.Sider
-        collapsedWidth={!isMobile ? 80 : 0}
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(collapsed) => setCollapsed(collapsed)}
-      >
+  const NavigationContent = () => {
+    return (
+      <React.Fragment>
         <Menu theme="dark" mode="inline">
           <Menu.Item>
             <Icon type="desktop" />
@@ -33,15 +27,45 @@ const PrivateLayout: React.FC = ({ children }) => {
             <span>{t('menu.edit-coupon')}</span>
           </Menu.Item>
         </Menu>
-        <LanguageSelector menuCollapsed={collapsed} />
-      </Layout.Sider>
+        <LanguageSelector menuClosed={!menuOpened} />
+      </React.Fragment>
+    );
+  };
+
+  return (
+    <Layout style={{ minHeight: '100vh' }}>
+      {isMobile ? (
+        <Drawer
+          drawerStyle={{
+            backgroundColor: '#001529',
+          }}
+          bodyStyle={{
+            padding: '0',
+          }}
+          placement="left"
+          closable={false}
+          onClose={() => setMenuOpened(false)}
+          visible={menuOpened}
+        >
+          <NavigationContent />
+        </Drawer>
+      ) : (
+        <Layout.Sider
+          trigger={null}
+          collapsible
+          collapsed={!menuOpened}
+          onCollapse={(collapsed) => setMenuOpened(collapsed)}
+        >
+          <NavigationContent />
+        </Layout.Sider>
+      )}
+
       <Layout>
         <Layout.Header style={{ background: '#fff', padding: 0 }}>
           <Icon
             style={{ paddingLeft: '25px' }}
-            className="trigger"
             type={'menu'}
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={() => setMenuOpened(!menuOpened)}
           />
           <img
             src={Logo}

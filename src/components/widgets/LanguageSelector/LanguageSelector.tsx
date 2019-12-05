@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import './LanguageSelector.scss';
 
 interface LanguageSelectorProps {
-  menuCollapsed?: boolean;
+  menuClosed?: boolean;
 }
 
 const LanguageSelector: React.FC<LanguageSelectorProps> = (props) => {
@@ -70,14 +70,14 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = (props) => {
   return (
     <Dropdown
       className={`language-selector ${
-        props.menuCollapsed ? 'menu-collapsed' : ''
+        props.menuClosed ? 'menu-collapsed' : ''
       }`}
       overlay={languageOptions}
       trigger={['click']}
     >
       <div>
         <CurrentLanguageImg />
-        {props.menuCollapsed || (
+        {props.menuClosed || (
           <React.Fragment>
             <span className="language-selector__text">
               {t('languages.language')}
