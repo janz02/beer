@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Icon, Drawer } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import Logo from 'assets/img/logo.svg';
@@ -14,12 +14,22 @@ const PrivateLayout: React.FC = ({ children }) => {
   });
 
   const [menuOpened, setMenuOpened] = useState(!isMobile);
+  const [lastMediaQuery, setLastMediaQuery] = useState(isMobile);
 
   const closeDrawer = () => {
     if (isMobile) {
       setMenuOpened(false);
     }
   };
+
+  useEffect(() => {
+    if (lastMediaQuery !== isMobile) {
+      if (isMobile) {
+        setMenuOpened(false);
+      }
+    }
+    setLastMediaQuery(isMobile);
+  }, [isMobile, lastMediaQuery]);
 
   const NavigationContent = () => {
     return (
