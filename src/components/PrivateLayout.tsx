@@ -3,7 +3,7 @@ import { Layout, Menu, Icon, Drawer } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import Logo from 'assets/img/logo.svg';
 import { useTranslation } from 'react-i18next';
-import LanguageSelector from 'components/widgets/LanguageSelector';
+import LanguageSelector from 'components/LanguageSelector';
 import { Link } from 'react-router-dom';
 
 const PrivateLayout: React.FC = ({ children }) => {

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
-import { history } from 'router';
-import RouterView from 'router';
+import { history } from 'app/router';
+import RouterView from 'app/router';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from 'store';
+import { store } from 'app/store';
 
 const App: React.FC = () => (
   <BrowserRouter>

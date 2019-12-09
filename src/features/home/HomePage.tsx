@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'store';
-import { setLoggedIn } from 'store/auth';
+import { RootState } from 'app/store';
+import { setLoggedIn } from 'features/auth/authSlice';
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   const dispatch = useDispatch();
 
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
@@ -22,4 +22,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -1,15 +1,15 @@
 import React from 'react';
 import { withRouter, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import PrivateRoute from 'components/routes/PrivateRoute';
-import Home from 'components/views/Home';
-import Test from 'components/views/Test';
+import PrivateRoute from 'components/PrivateRoute';
+import HomePage from 'features/home/HomePage';
+import TestPage from 'features/test/TestPage';
 
 const Routes = () => {
   return (
     <Switch>
-      <PrivateRoute exact path="/" component={Home} />
-      <PrivateRoute exact path="/test" component={Test} />
+      <PrivateRoute exact path="/" component={HomePage} />
+      <PrivateRoute exact path="/test" component={TestPage} />
     </Switch>
   );
 };
