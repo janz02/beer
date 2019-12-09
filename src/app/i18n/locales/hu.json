@@ -1,7 +1,10 @@
 {
   "menu": {
-    "create-coupon": "Új kupon",
-    "edit-coupon": "Kupon szerkesztése"
+    "dashboard": "Irányítópult",
+    "coupons": "Kuponok"
+  },
+  "coupons": {
+    "create": "Létrehozás"
   },
   "languages": {
     "en": "English",

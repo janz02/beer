@@ -37,13 +37,13 @@ const PrivateLayout: React.FC = ({ children }) => {
         <Menu theme="dark" mode="inline">
           <Menu.Item onClick={closeDrawer}>
             <Icon type="desktop" />
-            <span>{t('menu.create-coupon')}</span>
+            <span>{t('menu.dashboard')}</span>
             <Link to="/" />
           </Menu.Item>
           <Menu.Item onClick={closeDrawer}>
             <Icon type="file" />
-            <span>{t('menu.edit-coupon')}</span>
-            <Link to="/test" />
+            <span>{t('menu.coupons')}</span>
+            <Link to="/coupons" />
           </Menu.Item>
         </Menu>
         <LanguageSelector menuClosed={!menuOpened} />

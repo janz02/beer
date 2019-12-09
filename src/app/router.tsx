@@ -2,14 +2,14 @@ import React from 'react';
 import { withRouter, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import PrivateRoute from 'components/PrivateRoute';
-import HomePage from 'features/home/HomePage';
-import TestPage from 'features/test/TestPage';
+import DashboardPage from 'features/dashboard/DashboardPage';
+import CouponsListPage from 'features/couponsList/CouponsListPage';
 
 const Routes = () => {
   return (
     <Switch>
-      <PrivateRoute exact path="/" component={HomePage} />
-      <PrivateRoute exact path="/test" component={TestPage} />
+      <PrivateRoute exact path="/" component={DashboardPage} />
+      <PrivateRoute exact path="/coupons" component={CouponsListPage} />
     </Switch>
   );
 };

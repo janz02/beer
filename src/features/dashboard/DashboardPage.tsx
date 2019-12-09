@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setLoggedIn } from 'features/auth/authSlice';
 import { RootState } from 'app/rootReducer';
 
-const HomePage: React.FC = () => {
+const DashboardPage: React.FC = () => {
   const dispatch = useDispatch();
 
   const { loggedIn } = useSelector((state: RootState) => state.auth);
@@ -19,4 +19,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default DashboardPage;

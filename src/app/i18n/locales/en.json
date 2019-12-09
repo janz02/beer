@@ -1,7 +1,10 @@
 {
   "menu": {
-    "create-coupon": "Create coupon",
-    "edit-coupon": "Edit coupon"
+    "dashboard": "Dashboard",
+    "coupons": "Coupons"
+  },
+  "coupons": {
+    "create": "Create"
   },
   "languages": {
     "en": "English",
