@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'app/store';
 import { setLoggedIn } from 'features/auth/authSlice';
+import { RootState } from 'app/rootReducer';
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();

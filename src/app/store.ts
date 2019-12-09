@@ -1,10 +1,17 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import authReducer from 'features/auth/authSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './rootReducer';
 
-const rootReducer = combineReducers({ auth: authReducer });
-
-export type RootState = ReturnType<typeof rootReducer>;
-
-export const store = configureStore({
+const store = configureStore({
   reducer: rootReducer,
 });
+
+if (process.env.NODE_ENV === 'development' && (module as any).hot) {
+  (module as any).hot.accept('./rootReducer', () => {
+    const newRootReducer = require('./rootReducer').default;
+    store.replaceReducer(newRootReducer);
+  });
+}
+
+export type AppDispatch = typeof store.dispatch;
+
+export default store;
