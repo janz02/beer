@@ -3,8 +3,13 @@
     "dashboard": "Irányítópult",
     "coupons": "Kuponok"
   },
-  "coupons": {
-    "create": "Létrehozás"
+  "couponsList": {
+    "create": "Létrehozás",
+    "coupons": "Kuponok"
+  },
+  "couponEditor": {
+    "save": "Mentés",
+    "editor": "Kupon szerkesztő"
   },
   "languages": {
     "en": "English",

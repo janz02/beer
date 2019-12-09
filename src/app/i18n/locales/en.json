@@ -3,8 +3,13 @@
     "dashboard": "Dashboard",
     "coupons": "Coupons"
   },
-  "coupons": {
-    "create": "Create"
+  "couponsList": {
+    "create": "Create",
+    "coupons": "Coupons"
+  },
+  "couponEditor": {
+    "save": "Save",
+    "editor": "Coupon editor"
   },
   "languages": {
     "en": "English",
