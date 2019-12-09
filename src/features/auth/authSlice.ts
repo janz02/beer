@@ -1,13 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+type AuthState = {
+  loggedIn: boolean;
+};
+
+let initialState: AuthState = {
+  loggedIn: true,
+};
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    loggedIn: true,
-  },
+  initialState,
   reducers: {
-    setLoggedIn(state, action) {
-      state.loggedIn = action.payload.loggedIn;
+    setLoggedIn(state, action: PayloadAction<boolean>) {
+      state.loggedIn = action.payload;
     },
   },
 });

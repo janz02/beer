@@ -7,15 +7,12 @@ import { RootState } from 'app/rootReducer';
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
 
-  const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
 
   return (
     <div>
       {/* Button is for demo purposes */}
-      <Button
-        onClick={() => dispatch(setLoggedIn({ loggedIn: !loggedIn }))}
-        type="primary"
-      >
+      <Button onClick={() => dispatch(setLoggedIn(!loggedIn))} type="primary">
         Logged in: {loggedIn ? 'true' : 'false'}
       </Button>
     </div>
