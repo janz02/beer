@@ -8,8 +8,11 @@
     "coupons": "Coupons"
   },
   "couponEditor": {
-    "save": "Save",
-    "editor": "Coupon editor"
+    "create": "Create",
+    "editor": "Coupon editor",
+    "name": "Name",
+    "nameIsRequired": "Name field is required.",
+    "createCouponSuccess": "Creating a coupon was successful."
   },
   "languages": {
     "en": "English",

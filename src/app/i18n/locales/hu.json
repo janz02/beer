@@ -8,8 +8,11 @@
     "coupons": "Kuponok"
   },
   "couponEditor": {
-    "save": "Mentés",
-    "editor": "Kupon szerkesztő"
+    "create": "Létrehozás",
+    "editor": "Kupon szerkesztő",
+    "name": "Név",
+    "nameIsRequired": "A név mező megadása kötelező.",
+    "createCouponSuccess": "Sikeres kupon létrehozás."
   },
   "languages": {
     "en": "English",

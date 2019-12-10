@@ -1,15 +1,21 @@
 import React from 'react';
-import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
+import CouponEditorForm from './CouponEditorForm';
+import { message } from 'antd';
 
 const CouponEditorPage: React.FC = () => {
   const { t } = useTranslation();
 
+  const handleCouponSave = (values: any) => {
+    console.log('Name: ', values['name']);
+
+    message.success(t('couponEditor.createCouponSuccess'), 10);
+  };
+
   return (
-    <div>
-      <h1>{t('couponEditor.editor')}</h1>
-      <Button type="primary">{t('couponEditor.save')}</Button>
-    </div>
+    <>
+      <CouponEditorForm handleCouponSave={handleCouponSave} />
+    </>
   );
 };
 

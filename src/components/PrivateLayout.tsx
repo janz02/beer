@@ -33,7 +33,7 @@ const PrivateLayout: React.FC = ({ children }) => {
 
   const NavigationContent = () => {
     return (
-      <React.Fragment>
+      <>
         <Menu theme="dark" mode="inline">
           <Menu.Item onClick={closeDrawer}>
             <Icon type="desktop" />
@@ -47,7 +47,7 @@ const PrivateLayout: React.FC = ({ children }) => {
           </Menu.Item>
         </Menu>
         <LanguageSelector menuClosed={!menuOpened} />
-      </React.Fragment>
+      </>
     );
   };
 
