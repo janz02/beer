@@ -38,3 +38,4 @@ steps:
     dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
     action: 'Push an image'
     imageName: '$(DockerImageName):$(Build.BuildId)'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
