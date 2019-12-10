@@ -29,6 +29,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
   };
 
   const ranks = ['basic', 'standard', 'super', 'premium'];
+  const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
 
   return (
     <Card title={t('couponEditor.editor')}>
@@ -52,6 +53,18 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
           {getFieldDecorator('rank', { initialValue: ['basic'] })(
             <Select>
               {ranks.map((x) => (
+                <Select.Option key={x} value={x}>
+                  {x}
+                </Select.Option>
+              ))}
+            </Select>,
+          )}
+        </Form.Item>
+
+        <Form.Item label={t('couponEditor.category')}>
+          {getFieldDecorator('category', { initialValue: ['c1'] })(
+            <Select>
+              {categories.map((x) => (
                 <Select.Option key={x} value={x}>
                   {x}
                 </Select.Option>

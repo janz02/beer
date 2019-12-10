@@ -13,6 +13,7 @@
     "name": "Név",
     "description": "Leírás",
     "rank": "Rang",
+    "category": "Kategória",
     "nameIsRequired": "A név mező megadása kötelező.",
     "createCouponSuccess": "Sikeres kupon létrehozás."
   },
