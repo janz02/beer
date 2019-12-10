@@ -11,6 +11,8 @@
     "create": "Create",
     "editor": "Coupon editor",
     "name": "Name",
+    "description": "Description",
+    "rank": "Rank",
     "nameIsRequired": "Name field is required.",
     "createCouponSuccess": "Creating a coupon was successful."
   },

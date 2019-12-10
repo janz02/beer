@@ -11,6 +11,8 @@
     "create": "Létrehozás",
     "editor": "Kupon szerkesztő",
     "name": "Név",
+    "description": "Leírás",
+    "rank": "Rang",
     "nameIsRequired": "A név mező megadása kötelező.",
     "createCouponSuccess": "Sikeres kupon létrehozás."
   },

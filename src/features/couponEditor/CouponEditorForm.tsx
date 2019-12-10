@@ -1,7 +1,8 @@
 import React from 'react';
-import { Form, Input, Button, Card } from 'antd';
+import { Form, Input, Button, Card, Select } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
+import TextArea from 'antd/lib/input/TextArea';
 
 const hasErrors = (fieldsError: any) => {
   return Object.keys(fieldsError).some((field) => fieldsError[field]);
@@ -27,6 +28,8 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
     });
   };
 
+  const ranks = ['basic', 'standard', 'super', 'premium'];
+
   return (
     <Card title={t('couponEditor.editor')}>
       <Form onSubmit={handleSubmit}>
@@ -39,6 +42,22 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
               },
             ],
           })(<Input />)}
+        </Form.Item>
+
+        <Form.Item label={t('couponEditor.description')}>
+          {getFieldDecorator('description')(<TextArea />)}
+        </Form.Item>
+
+        <Form.Item label={t('couponEditor.rank')}>
+          {getFieldDecorator('rank', { initialValue: ['basic'] })(
+            <Select>
+              {ranks.map((x) => (
+                <Select.Option key={x} value={x}>
+                  {x}
+                </Select.Option>
+              ))}
+            </Select>,
+          )}
         </Form.Item>
 
         <Form.Item>

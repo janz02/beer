@@ -11,7 +11,7 @@ const CouponEditorPage: React.FC = () => {
   const handleCouponSave = (values: any) => {
     setLoading(true);
     setTimeout(() => {
-      console.log('Name: ', values['name']);
+      console.log(values);
 
       message.success(t('couponEditor.createCouponSuccess'), 10);
       setLoading(false);
