@@ -107,12 +107,17 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         </Form.Item>
 
         <Form.Item
-          label={t('couponEditor.distributionDateRange')}
+          label={t('couponEditor.distributionStartDate')}
           {...formItemLayout}
         >
-          {getFieldDecorator('distributionDateRange')(
-            <DatePicker.RangePicker />,
-          )}
+          {getFieldDecorator('distributionStartDate')(<DatePicker />)}
+        </Form.Item>
+
+        <Form.Item
+          label={t('couponEditor.distributionEndDate')}
+          {...formItemLayout}
+        >
+          {getFieldDecorator('distributionEndDate')(<DatePicker />)}
         </Form.Item>
 
         <Form.Item label={t('couponEditor.expirationDate')} {...formItemLayout}>
