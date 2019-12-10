@@ -1,0 +1,32 @@
+{
+  "menu": {
+    "dashboard": "Irányítópult",
+    "coupons": "Kuponok"
+  },
+  "couponsList": {
+    "create": "Létrehozás",
+    "coupons": "Kuponok"
+  },
+  "couponEditor": {
+    "create": "Létrehozás",
+    "editor": "Kupon szerkesztő",
+    "name": "Név",
+    "description": "Leírás",
+    "rank": "Rang",
+    "category": "Kategória",
+    "discountType": "Kedvezmény típusa",
+    "discountAmount": "Kedvezmény mennyisége",
+    "distributionStartDate": "Kiosztási kezdő dátum",
+    "distributionEndDate": "Kiosztási vég dátum",
+    "couponCount": "Kuponok száma",
+    "minimumShoppingValue": "Minimális vásárlási érték",
+    "expirationDate": "Lejárati dátum",
+    "nameIsRequired": "A név mező megadása kötelező.",
+    "createCouponSuccess": "Sikeres kupon létrehozás."
+  },
+  "languages": {
+    "en": "English",
+    "hu": "Magyar",
+    "language": "Nyelv"
+  }
+}

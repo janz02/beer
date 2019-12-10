@@ -3,7 +3,7 @@ import { Layout, Menu, Icon, Drawer } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import Logo from 'assets/img/logo.svg';
 import { useTranslation } from 'react-i18next';
-import LanguageSelector from 'components/widgets/LanguageSelector';
+import LanguageSelector from 'components/LanguageSelector';
 import { Link } from 'react-router-dom';
 
 const PrivateLayout: React.FC = ({ children }) => {
@@ -33,21 +33,21 @@ const PrivateLayout: React.FC = ({ children }) => {
 
   const NavigationContent = () => {
     return (
-      <React.Fragment>
+      <>
         <Menu theme="dark" mode="inline">
           <Menu.Item onClick={closeDrawer}>
             <Icon type="desktop" />
-            <span>{t('menu.create-coupon')}</span>
+            <span>{t('menu.dashboard')}</span>
             <Link to="/" />
           </Menu.Item>
           <Menu.Item onClick={closeDrawer}>
             <Icon type="file" />
-            <span>{t('menu.edit-coupon')}</span>
-            <Link to="/test" />
+            <span>{t('menu.coupons')}</span>
+            <Link to="/coupons" />
           </Menu.Item>
         </Menu>
         <LanguageSelector menuClosed={!menuOpened} />
-      </React.Fragment>
+      </>
     );
   };
 

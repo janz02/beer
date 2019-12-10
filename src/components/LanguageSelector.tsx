@@ -78,12 +78,12 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = (props) => {
       <div>
         <CurrentLanguageImg />
         {props.menuClosed || (
-          <React.Fragment>
+          <>
             <span className="language-selector__text">
               {t('languages.language')}
             </span>
             <Icon type="down" />
-          </React.Fragment>
+          </>
         )}
       </div>
     </Dropdown>

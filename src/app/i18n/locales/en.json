@@ -1,0 +1,32 @@
+{
+  "menu": {
+    "dashboard": "Dashboard",
+    "coupons": "Coupons"
+  },
+  "couponsList": {
+    "create": "Create",
+    "coupons": "Coupons"
+  },
+  "couponEditor": {
+    "create": "Create",
+    "editor": "Coupon editor",
+    "name": "Name",
+    "description": "Description",
+    "rank": "Rank",
+    "category": "Category",
+    "discountType": "Discount type",
+    "discountAmount": "Discount amount",
+    "distributionStartDate": "Distribution start date",
+    "distributionEndDate": "Distribution end date",
+    "expirationDate": "Distribution date range",
+    "couponCount": "Coupon count",
+    "minimumShoppingValue": "Minimum shopping value",
+    "nameIsRequired": "Name field is required.",
+    "createCouponSuccess": "Creating a coupon was successful."
+  },
+  "languages": {
+    "en": "English",
+    "hu": "Magyar",
+    "language": "Language"
+  }
+}
