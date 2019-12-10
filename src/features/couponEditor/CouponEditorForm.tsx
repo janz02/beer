@@ -45,6 +45,9 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
   const ranks = ['basic', 'standard', 'super', 'premium'];
   const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
   const discountTypes = ['percent', 'fix'];
+  const defaultDiscountType = 'percent';
+  const discountType =
+    props.form.getFieldValue('discountType') || defaultDiscountType;
 
   return (
     <Card title={t('couponEditor.editor')}>
@@ -89,7 +92,9 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         </Form.Item>
 
         <Form.Item label={t('couponEditor.discountType')} {...formItemLayout}>
-          {getFieldDecorator('discountType', { initialValue: ['percent'] })(
+          {getFieldDecorator('discountType', {
+            initialValue: [defaultDiscountType],
+          })(
             <Select>
               {discountTypes.map((x) => (
                 <Select.Option key={x} value={x}>
@@ -102,7 +107,10 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
 
         <Form.Item label={t('couponEditor.discountAmount')} {...formItemLayout}>
           {getFieldDecorator('discountAmount')(
-            <InputNumber min={1} max={100} />,
+            <InputNumber
+              min={1}
+              max={discountType === 'percent' ? 100 : undefined}
+            />,
           )}
         </Form.Item>
 
