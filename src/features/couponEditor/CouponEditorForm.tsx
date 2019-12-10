@@ -9,13 +9,14 @@ const hasErrors = (fieldsError: any) => {
 
 interface CouponEditorFormProps extends FormComponentProps {
   handleCouponSave: (values: any) => void;
+  loading: boolean;
 }
 
 const CouponEditorForm = (props: CouponEditorFormProps) => {
   const { t } = useTranslation();
 
   const { getFieldDecorator, getFieldsError } = props.form;
-  const { handleCouponSave } = props;
+  const { handleCouponSave, loading } = props;
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -45,6 +46,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             type="primary"
             htmlType="submit"
             disabled={hasErrors(getFieldsError())}
+            loading={loading}
           >
             {t('couponEditor.create')}
           </Button>
