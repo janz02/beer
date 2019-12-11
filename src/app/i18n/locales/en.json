@@ -5,7 +5,11 @@
   },
   "couponsList": {
     "create": "Create",
-    "coupons": "Coupons"
+    "coupons": "Coupons",
+    "name": "Name",
+    "description": "Description",
+    "action": "Action",
+    "edit": "Edit"
   },
   "couponEditor": {
     "create": "Create",
@@ -23,6 +27,9 @@
     "minimumShoppingValue": "Minimum shopping value",
     "nameIsRequired": "Name field is required.",
     "createCouponSuccess": "Creating a coupon was successful."
+  },
+  "couponDisplay": {
+    "coupon": "Coupon"
   },
   "languages": {
     "en": "English",
