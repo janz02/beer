@@ -14,6 +14,8 @@ const CouponsListPage: React.FC = () => {
   const [pagination, setPagination] = useState({
     pageSize: 10,
     current: 1,
+    pageSizeOptions: ['10', '20', '50', '100'],
+    showSizeChanger: true,
   } as PaginationConfig);
 
   const notActionCellProps = {
