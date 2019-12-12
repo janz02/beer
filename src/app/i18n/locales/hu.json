@@ -5,7 +5,11 @@
   },
   "couponsList": {
     "create": "Létrehozás",
-    "coupons": "Kuponok"
+    "coupons": "Kuponok",
+    "name": "Név",
+    "description": "Leírás",
+    "action": "Műveletek",
+    "edit": "Szerkesztés"
   },
   "couponEditor": {
     "create": "Létrehozás",
@@ -23,6 +27,9 @@
     "expirationDate": "Lejárati dátum",
     "nameIsRequired": "A név mező megadása kötelező.",
     "createCouponSuccess": "Sikeres kupon létrehozás."
+  },
+  "couponDisplay": {
+    "coupon": "Kupon"
   },
   "languages": {
     "en": "English",
