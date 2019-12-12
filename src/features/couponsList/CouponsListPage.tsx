@@ -7,15 +7,20 @@ import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
 import { PaginationConfig, ColumnProps } from 'antd/lib/table';
 import { Coupon } from 'models/coupon';
+import { useMediaQuery } from 'react-responsive';
 
 const CouponsListPage: React.FC = () => {
   const { t } = useTranslation();
+  const isMobile = !useMediaQuery({
+    query: '(min-device-width: 576px)',
+  });
   const { coupons } = useSelector((state: RootState) => state.couponsList);
   const [pagination, setPagination] = useState({
     pageSize: 10,
     current: 1,
     pageSizeOptions: ['10', '20', '50', '100'],
     showSizeChanger: true,
+    simple: isMobile,
   } as PaginationConfig);
 
   const notActionCellProps = {
