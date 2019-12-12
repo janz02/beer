@@ -7,10 +7,16 @@ type CouponsListState = {
 
 let initialState: CouponsListState = {
   // TODO: remove mock data.
-  coupons: [
-    { name: 'Coupon 1', description: 'Description of coupon 1' },
-    { name: 'Coupon 2', description: 'Description of coupon 2' },
-  ],
+  coupons: Array(100)
+    .fill(0)
+    .map((e, i) => i + 1)
+    .map((x) => {
+      return {
+        id: x,
+        name: `Coupon ${x}`,
+        description: `Description of coupon ${x}`,
+      } as Coupon;
+    }),
 };
 
 const couponsListSlice = createSlice({
