@@ -1,0 +1,9 @@
+@import '../../assets/scss/variables';
+
+.coupons-list-page {
+  .ant-table-pagination {
+    @media (max-width: $ant-bp-sm) {
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CouponsListPage.scss';
 import { Button, Table, Input, Icon } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -89,7 +90,7 @@ const CouponsListPage: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div className="coupons-list-page">
       <h1>{t('couponsList.coupons')}</h1>
       <Button type="primary">
         <Link to="/coupons/create">{t('couponsList.create')}</Link>
