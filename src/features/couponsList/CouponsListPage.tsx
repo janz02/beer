@@ -41,25 +41,22 @@ const CouponsListPage: React.FC = () => {
       confirm,
       clearFilters,
     }) => (
-      <div style={{ padding: 8 }}>
+      <div className="table-filter">
         <Input
           placeholder={`Search ${dataIndex}`}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
+          className="table-filter__search-field"
         />
         <Button
           type="primary"
           icon="search"
           size="small"
-          style={{ width: 90, marginRight: 8 }}
           onClick={() => confirm!()}
         >
           Search
         </Button>
       </div>
     ),
-    filterIcon: (filtered) => (
-      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
-    ),
+    filterIcon: () => <Icon type="search" />,
   });
 
   const columns: ColumnProps<Coupon>[] = [
@@ -112,7 +109,6 @@ const CouponsListPage: React.FC = () => {
           console.log(sorter);
         }}
       />
-      ;
     </div>
   );
 };
