@@ -8,13 +8,11 @@ import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
 import { PaginationConfig, ColumnProps } from 'antd/lib/table';
 import { Coupon } from 'models/coupon';
-import { useMediaQuery } from 'react-responsive';
+import { useIsMobile } from 'hooks';
 
 const CouponsListPage: React.FC = () => {
   const { t } = useTranslation();
-  const isMobile = useMediaQuery({
-    query: '(max-device-width: 575px)',
-  });
+  const isMobile = useIsMobile();
   const { coupons } = useSelector((state: RootState) => state.couponsList);
   const [pagination, setPagination] = useState({
     pageSize: 10,

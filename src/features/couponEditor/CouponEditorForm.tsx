@@ -4,7 +4,7 @@ import { FormComponentProps } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
 import TextArea from 'antd/lib/input/TextArea';
 import { DatePicker } from 'antd';
-import { useMediaQuery } from 'react-responsive';
+import { useIsMobile } from 'hooks';
 
 const hasErrors = (fieldsError: any) => {
   return Object.keys(fieldsError).some((field) => fieldsError[field]);
@@ -17,10 +17,7 @@ interface CouponEditorFormProps extends FormComponentProps {
 
 const CouponEditorForm = (props: CouponEditorFormProps) => {
   const { t } = useTranslation();
-
-  const isMobile = useMediaQuery({
-    query: '(max-device-width: 575px)',
-  });
+  const isMobile = useIsMobile();
   const formLayout = isMobile ? 'vertical' : 'horizontal';
   const formItemLayout =
     formLayout === 'horizontal'
