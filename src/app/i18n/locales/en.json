@@ -11,7 +11,7 @@
     "action": "Action",
     "edit": "Edit"
   },
-  "couponEditor": {
+  "couponCreate": {
     "create": "Create",
     "editor": "Coupon editor",
     "name": "Name",
@@ -22,14 +22,14 @@
     "discountAmount": "Discount amount",
     "distributionStartDate": "Distribution start date",
     "distributionEndDate": "Distribution end date",
-    "expirationDate": "Distribution date range",
+    "expirationDate": "Expiration date",
     "couponCount": "Coupon count",
     "minimumShoppingValue": "Minimum shopping value",
     "nameIsRequired": "Name field is required.",
     "createCouponSuccess": "Creating a coupon was successful."
   },
-  "couponDisplay": {
-    "coupon": "Coupon"
+  "couponEditor": {
+    "saveCouponSuccess": "Saving a coupon was successful."
   },
   "languages": {
     "en": "English",

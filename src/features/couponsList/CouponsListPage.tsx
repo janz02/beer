@@ -76,9 +76,9 @@ const CouponsListPage: React.FC = () => {
     {
       title: t('couponsList.action'),
       key: 'action',
-      render: () => (
+      render: (text, record) => (
         <span>
-          <Link to="/coupons/create"> {t('couponsList.edit')}</Link>
+          <Link to={`/coupons/edit/${record.id}`}>{t('couponsList.edit')}</Link>
         </span>
       ),
     },

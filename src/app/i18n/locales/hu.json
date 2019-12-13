@@ -11,7 +11,7 @@
     "action": "Műveletek",
     "edit": "Szerkesztés"
   },
-  "couponEditor": {
+  "couponCreate": {
     "create": "Létrehozás",
     "editor": "Kupon szerkesztő",
     "name": "Név",
@@ -28,8 +28,8 @@
     "nameIsRequired": "A név mező megadása kötelező.",
     "createCouponSuccess": "Sikeres kupon létrehozás."
   },
-  "couponDisplay": {
-    "coupon": "Kupon"
+  "couponEditor": {
+    "saveCouponSuccess": "Sikeres kupon mentés."
   },
   "languages": {
     "en": "English",
