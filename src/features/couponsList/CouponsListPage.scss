@@ -2,7 +2,7 @@
 
 .coupons-list-page {
   .ant-table-pagination {
-    @media (max-width: $ant-bp-sm) {
+    @media (max-width: $screen-sm) {
       margin-right: 10px;
     }
   }

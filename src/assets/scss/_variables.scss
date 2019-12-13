@@ -1,3 +1,6 @@
-$ant-bp-sm: 576px;
-
-$color-primary: green;
+// How to reuse ant variables
+// 1. Pick a variable form here: https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+// 2. Convert it to sass and place it in _ant-variables.scss.
+// 3. You can also override it by using a new value for that variable.
+// 4. Define only new variables when there's no variable for the same purpose in the above file. E.g: $primary-color.
+@import 'ant-variables';
