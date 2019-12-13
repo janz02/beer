@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
 
-  const isMobile = !useMediaQuery({
-    query: '(min-device-width: 576px)',
+  const isMobile = useMediaQuery({
+    query: '(max-device-width: 575px)',
   });
 
   const [menuOpened, setMenuOpened] = useState(!isMobile);

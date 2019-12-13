@@ -18,8 +18,8 @@ interface CouponEditorFormProps extends FormComponentProps {
 const CouponEditorForm = (props: CouponEditorFormProps) => {
   const { t } = useTranslation();
 
-  const isMobile = !useMediaQuery({
-    query: '(min-device-width: 576px)',
+  const isMobile = useMediaQuery({
+    query: '(max-device-width: 575px)',
   });
   const formLayout = isMobile ? 'vertical' : 'horizontal';
   const formItemLayout =

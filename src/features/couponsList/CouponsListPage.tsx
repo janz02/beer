@@ -12,8 +12,8 @@ import { useMediaQuery } from 'react-responsive';
 
 const CouponsListPage: React.FC = () => {
   const { t } = useTranslation();
-  const isMobile = !useMediaQuery({
-    query: '(min-device-width: 576px)',
+  const isMobile = useMediaQuery({
+    query: '(max-device-width: 575px)',
   });
   const { coupons } = useSelector((state: RootState) => state.couponsList);
   const [pagination, setPagination] = useState({
