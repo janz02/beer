@@ -28,6 +28,7 @@ const CouponEditorPage: React.FC = () => {
     name: 'Coupon 1',
     description: 'Decription of coupon 1',
     rank: 'standard',
+    category: 'c1',
     discountType: 'fix',
     discountAmount: 1500,
     distributionStartDate: moment(new Date()),
@@ -41,6 +42,7 @@ const CouponEditorPage: React.FC = () => {
     handleCouponSave,
     loading,
     coupon,
+    couponIsNew: false,
   };
 
   return (

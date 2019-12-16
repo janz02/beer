@@ -9,11 +9,14 @@
     "name": "Name",
     "description": "Description",
     "action": "Action",
-    "edit": "Edit"
+    "edit": "Edit",
+    "search": "Search"
   },
   "couponCreate": {
     "create": "Create",
+    "save": "Save",
     "editor": "Coupon editor",
+    "edit": "Edit",
     "name": "Name",
     "description": "Description",
     "rank": "Rank",

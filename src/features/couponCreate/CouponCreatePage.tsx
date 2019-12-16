@@ -23,6 +23,7 @@ const CouponCreatePage: React.FC = () => {
   const props = {
     handleCouponSave,
     loading,
+    couponIsNew: true,
   };
 
   return (

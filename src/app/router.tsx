@@ -15,7 +15,7 @@ const Routes = () => {
       <PrivateRoute exact path="/coupons/create" component={CouponCreatePage} />
       <PrivateRoute
         exact
-        path="/coupons/edit/:id"
+        path="/coupons/:id/:editing"
         component={CouponEditorPage}
       />
     </Switch>

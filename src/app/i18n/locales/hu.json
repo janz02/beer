@@ -9,11 +9,14 @@
     "name": "Név",
     "description": "Leírás",
     "action": "Műveletek",
-    "edit": "Szerkesztés"
+    "edit": "Szerkesztés",
+    "search": "Keresés"
   },
   "couponCreate": {
     "create": "Létrehozás",
+    "save": "Mentés",
     "editor": "Kupon szerkesztő",
+    "edit": "Szerkesztés",
     "name": "Név",
     "description": "Leírás",
     "rank": "Rang",

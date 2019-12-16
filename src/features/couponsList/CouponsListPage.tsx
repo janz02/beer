@@ -22,11 +22,11 @@ const CouponsListPage: React.FC = () => {
     simple: isMobile,
   } as PaginationConfig);
 
-  const notActionCellProps = {
-    onCell: () => {
+  const notActionCellProps: ColumnProps<Coupon> = {
+    onCell: (record: Coupon) => {
       return {
         onClick: () => {
-          history.push('/coupons/view');
+          history.push(`/coupons/${record.id}/${false}`);
         },
       };
     },
@@ -50,7 +50,7 @@ const CouponsListPage: React.FC = () => {
           size="small"
           onClick={() => confirm!()}
         >
-          Search
+          {t('couponsList.search')}
         </Button>
       </div>
     ),
@@ -78,7 +78,9 @@ const CouponsListPage: React.FC = () => {
       key: 'action',
       render: (text, record) => (
         <span>
-          <Link to={`/coupons/edit/${record.id}`}>{t('couponsList.edit')}</Link>
+          <Link to={`/coupons/${record.id}/${true}`}>
+            {t('couponsList.edit')}
+          </Link>
         </span>
       ),
     },
