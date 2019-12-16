@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Icon, Drawer } from 'antd';
-import { useMediaQuery } from 'react-responsive';
 import Logo from 'assets/img/logo.svg';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from 'components/LanguageSelector';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from 'hooks';
 
 const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
-
-  const isMobile = !useMediaQuery({
-    query: '(min-device-width: 576px)',
-  });
-
+  const isMobile = useIsMobile();
   const [menuOpened, setMenuOpened] = useState(!isMobile);
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile);
 

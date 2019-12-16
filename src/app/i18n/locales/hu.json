@@ -9,11 +9,14 @@
     "name": "Név",
     "description": "Leírás",
     "action": "Műveletek",
-    "edit": "Szerkesztés"
+    "edit": "Szerkesztés",
+    "search": "Keresés"
   },
-  "couponEditor": {
+  "couponCreate": {
     "create": "Létrehozás",
+    "save": "Mentés",
     "editor": "Kupon szerkesztő",
+    "edit": "Szerkesztés",
     "name": "Név",
     "description": "Leírás",
     "rank": "Rang",
@@ -28,8 +31,8 @@
     "nameIsRequired": "A név mező megadása kötelező.",
     "createCouponSuccess": "Sikeres kupon létrehozás."
   },
-  "couponDisplay": {
-    "coupon": "Kupon"
+  "couponEditor": {
+    "saveCouponSuccess": "Sikeres kupon mentés."
   },
   "languages": {
     "en": "English",

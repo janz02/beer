@@ -8,13 +8,11 @@ import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
 import { PaginationConfig, ColumnProps } from 'antd/lib/table';
 import { Coupon } from 'models/coupon';
-import { useMediaQuery } from 'react-responsive';
+import { useIsMobile } from 'hooks';
 
 const CouponsListPage: React.FC = () => {
   const { t } = useTranslation();
-  const isMobile = !useMediaQuery({
-    query: '(min-device-width: 576px)',
-  });
+  const isMobile = useIsMobile();
   const { coupons } = useSelector((state: RootState) => state.couponsList);
   const [pagination, setPagination] = useState({
     pageSize: 10,
@@ -24,11 +22,11 @@ const CouponsListPage: React.FC = () => {
     simple: isMobile,
   } as PaginationConfig);
 
-  const notActionCellProps = {
-    onCell: () => {
+  const notActionCellProps: ColumnProps<Coupon> = {
+    onCell: (record: Coupon) => {
       return {
         onClick: () => {
-          history.push('/coupons/view');
+          history.push(`/coupons/${record.id}/${false}`);
         },
       };
     },
@@ -52,7 +50,7 @@ const CouponsListPage: React.FC = () => {
           size="small"
           onClick={() => confirm!()}
         >
-          Search
+          {t('couponsList.search')}
         </Button>
       </div>
     ),
@@ -78,9 +76,11 @@ const CouponsListPage: React.FC = () => {
     {
       title: t('couponsList.action'),
       key: 'action',
-      render: () => (
+      render: (text, record) => (
         <span>
-          <Link to="/coupons/create"> {t('couponsList.edit')}</Link>
+          <Link to={`/coupons/${record.id}/${true}`}>
+            {t('couponsList.edit')}
+          </Link>
         </span>
       ),
     },
