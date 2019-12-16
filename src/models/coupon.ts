@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export interface Coupon {
   id: number;
   name?: string;
@@ -6,9 +8,9 @@ export interface Coupon {
   category?: string;
   discountType?: string;
   discountAmount?: number;
-  distributionStartDate?: Date;
-  distributionEndDate?: Date;
-  expirationDate?: Date;
+  distributionStartDate?: moment.Moment;
+  distributionEndDate?: moment.Moment;
+  expirationDate?: moment.Moment;
   couponCount?: number;
   minimumShoppingValue?: number;
 }

@@ -4,6 +4,7 @@ import CouponEditorForm from 'components/CouponEditorForm';
 import { history } from 'app/router';
 import { message } from 'antd';
 import { Coupon } from 'models/coupon';
+import moment from 'moment';
 
 const CouponEditorPage: React.FC = () => {
   const { t } = useTranslation();
@@ -28,6 +29,12 @@ const CouponEditorPage: React.FC = () => {
     description: 'Decription of coupon 1',
     rank: 'standard',
     discountType: 'fix',
+    discountAmount: 1500,
+    distributionStartDate: moment(new Date()),
+    distributionEndDate: moment(new Date()),
+    expirationDate: moment(new Date()),
+    couponCount: 100,
+    minimumShoppingValue: 10000,
   };
 
   const props = {

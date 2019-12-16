@@ -45,8 +45,6 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
   const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
   const discountTypes = ['percent', 'fix'];
   const defaultDiscountType = 'percent';
-  const discountType =
-    props.form.getFieldValue('discountType') || defaultDiscountType;
 
   return (
     <Card title={t('couponCreate.editor')}>
@@ -120,7 +118,11 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
           })(
             <InputNumber
               min={1}
-              max={discountType === 'percent' ? 100 : undefined}
+              max={
+                props.form.getFieldValue('discountType') === 'percent'
+                  ? 100
+                  : undefined
+              }
             />,
           )}
         </Form.Item>
