@@ -27,7 +27,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
   const { getFieldDecorator, getFieldsError } = props.form;
   const { handleCouponSave, loading, couponIsNew, coupon } = props;
 
-  let { editing } = useParams();
+  const { editing } = useParams();
   const [formEditing, setFormEditing] = useState(editing === 'true');
   const displayEditor = couponIsNew || formEditing;
 
@@ -184,7 +184,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         </Form.Item>
 
         <Form.Item label={t('couponCreate.expirationDate')} {...formItemLayout}>
-          {formEditing
+          {displayEditor
             ? getFieldDecorator('expirationDate', {
                 initialValue: coupon && coupon.expirationDate,
               })(<DatePicker />)

@@ -1,34 +1,62 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Coupon } from 'models/coupon';
+import { AppThunk } from 'app/store';
+import api from 'api';
 
 type CouponsListState = {
   coupons?: Coupon[];
+  error: string | null;
+  loading: boolean;
 };
 
-let initialState: CouponsListState = {
-  // TODO: remove mock data.
-  coupons: Array(100)
-    .fill(0)
-    .map((e, i) => i + 1)
-    .map((x) => {
-      return {
-        id: x,
-        name: `Coupon ${x}`,
-        description: `Description of coupon ${x}`,
-      } as Coupon;
-    }),
+const initialState: CouponsListState = {
+  coupons: [],
+  error: null,
+  loading: false,
 };
 
 const couponsListSlice = createSlice({
   name: 'couponsList',
   initialState,
   reducers: {
-    setCoupons(state, action: PayloadAction<Coupon[]>) {
+    getCouponsSuccess(state, action: PayloadAction<Coupon[]>) {
       state.coupons = action.payload;
+
+      state.loading = false;
+      state.error = null;
+    },
+    setLoadingStart(state) {
+      state.loading = true;
+    },
+    setLoadingFailed(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });
 
-export const { setCoupons } = couponsListSlice.actions;
+export const {
+  getCouponsSuccess,
+  setLoadingStart,
+  setLoadingFailed,
+} = couponsListSlice.actions;
 
 export default couponsListSlice.reducer;
+
+export const getCoupons = (): AppThunk => async (dispatch) => {
+  dispatch(setLoadingStart());
+
+  try {
+    const coupons = await api.coupons.listCoupons({});
+    dispatch(
+      getCouponsSuccess(
+        coupons.result!.map(
+          (x) =>
+            ({ id: x.id, name: x.name, description: x.description } as Coupon),
+        ),
+      ),
+    );
+  } catch (err) {
+    dispatch(setLoadingFailed(err.toString()));
+  }
+};

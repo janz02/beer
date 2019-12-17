@@ -4,7 +4,7 @@ type AuthState = {
   loggedIn: boolean;
 };
 
-let initialState: AuthState = {
+const initialState: AuthState = {
   loggedIn: true,
 };
 

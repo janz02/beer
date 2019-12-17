@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CouponsListPage.scss';
 import { Button, Table, Input, Icon } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
 import { PaginationConfig, ColumnProps } from 'antd/lib/table';
 import { Coupon } from 'models/coupon';
 import { useIsMobile } from 'hooks';
+import { getCoupons } from './couponsListSlice';
 
 const CouponsListPage: React.FC = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const isMobile = useIsMobile();
-  const { coupons } = useSelector((state: RootState) => state.couponsList);
+  const { coupons, loading } = useSelector(
+    (state: RootState) => state.couponsList,
+  );
+
+  useEffect(() => {
+    dispatch(getCoupons());
+  }, [dispatch]);
+
   const [pagination, setPagination] = useState({
     pageSize: 10,
     current: 1,
@@ -97,8 +106,7 @@ const CouponsListPage: React.FC = () => {
         columns={columns}
         rowKey={(x) => x.id.toString()}
         pagination={pagination}
-        // TODO: store in Redux.
-        // loading={true}
+        loading={loading}
         onChange={(pagination, filters, sorter) => {
           setPagination(pagination);
 

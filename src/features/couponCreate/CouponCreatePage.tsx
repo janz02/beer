@@ -3,21 +3,30 @@ import { useTranslation } from 'react-i18next';
 import CouponEditorForm from 'components/CouponEditorForm';
 import { message } from 'antd';
 import { history } from 'app/router';
+import api from 'api';
 
 const CouponCreatePage: React.FC = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
-  const handleCouponSave = (values: any) => {
+  const handleCouponSave = async (values: any) => {
     setLoading(true);
-    setTimeout(() => {
-      // TODO: integrate API.
-      console.log(values);
+
+    try {
+      await api.coupons.createCoupons({
+        couponDto: {
+          name: values['name'],
+          description: values['description'],
+        },
+      });
 
       message.success(t('couponCreate.createCouponSuccess'), 10);
       setLoading(false);
       history.push('/');
-    }, 2000);
+    } catch (err) {
+      message.error(err.toString(), 10);
+      setLoading(false);
+    }
   };
 
   const props = {

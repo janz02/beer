@@ -1,48 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import CouponEditorForm from 'components/CouponEditorForm';
 import { history } from 'app/router';
 import { message } from 'antd';
 import { Coupon } from 'models/coupon';
-import moment from 'moment';
+import api from 'api';
+import { useParams } from 'react-router-dom';
 
 const CouponEditorPage: React.FC = () => {
   const { t } = useTranslation();
+  const { id } = useParams();
   const [loading, setLoading] = useState(false);
+  const [coupon, setCoupon] = useState<Coupon>();
 
-  const handleCouponSave = (values: any) => {
+  const handleCouponSave = async (values: any) => {
     setLoading(true);
-    setTimeout(() => {
-      // TODO: integrate API.
-      console.log(values);
+
+    try {
+      await api.coupons.updateCoupons({
+        id2: id!,
+        couponDto: {
+          name: values['name'],
+          description: values['description'],
+        },
+      });
 
       message.success(t('couponEditor.saveCouponSuccess'), 10);
       setLoading(false);
       history.push('/');
-    }, 2000);
+    } catch (err) {
+      message.error(err.toString(), 10);
+      setLoading(false);
+    }
   };
 
-  // TODO: integrate API.
-  const coupon: Coupon = {
-    id: 1,
-    name: 'Coupon 1',
-    description: 'Decription of coupon 1',
-    rank: 'standard',
-    category: 'c1',
-    discountType: 'fix',
-    discountAmount: 1500,
-    distributionStartDate: moment(new Date()),
-    distributionEndDate: moment(new Date()),
-    expirationDate: moment(new Date()),
-    couponCount: 100,
-    minimumShoppingValue: 10000,
-  };
+  useEffect(() => {
+    const getCoupon = async () => {
+      try {
+        const coupon = await api.coupons.getCoupons({ id: +id! });
+        setCoupon({
+          id: coupon.id,
+          name: coupon.name,
+          description: coupon.description,
+        } as Coupon);
+
+        setLoading(false);
+      } catch (err) {
+        message.error(err.toString(), 10);
+        setLoading(false);
+      }
+    };
+
+    setLoading(true);
+
+    getCoupon();
+  }, [id]);
 
   const props = {
     handleCouponSave,
     loading,
-    coupon,
     couponIsNew: false,
+    coupon,
   };
 
   return (
