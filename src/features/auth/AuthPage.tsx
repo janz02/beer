@@ -1,15 +1,16 @@
 import React, { useState, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import CouponEditorForm from 'components/CouponEditorForm';
-import { message } from 'antd';
+import { message, Layout, Card } from 'antd';
 import { history } from 'app/router';
+import { LoginForm } from 'components/auth/LoginForm';
 
 
 export const AuthPage: FC = () => {
   return (
-    <div>
-      auth 
-    </div>
+    <Layout>
+       <LoginForm></LoginForm>
+    </Layout>
   )
 }
 

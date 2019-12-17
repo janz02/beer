@@ -1,7 +1,16 @@
 {
   "auth": {
     "login": "Login",
-    "logout": "Logout"
+    "logout": "Logout",
+    "field": {
+      "username": "Username",
+      "password": "Password",
+      "remember-me": "Remember me!"
+    },
+    "error": {
+      "username-required": "Please enter your Username!",
+      "password-required": "Please enter your Password!"
+    }
   },
   "menu": {
     "dashboard": "Dashboard",

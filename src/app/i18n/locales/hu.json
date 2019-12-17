@@ -1,7 +1,10 @@
 {
   "auth": {
     "login": "Belépés",
-    "logout": "Kilépés"
+    "logout": "Kilépés",
+    "error": {
+      "username.required": "Adja meg a felhasználó nevét!"
+    }
   },
   "menu": {
     "dashboard": "Irányítópult",
