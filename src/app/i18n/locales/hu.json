@@ -1,4 +1,8 @@
 {
+  "auth": {
+    "login": "Belépés",
+    "logout": "Kilépés"
+  },
   "menu": {
     "dashboard": "Irányítópult",
     "coupons": "Kuponok"

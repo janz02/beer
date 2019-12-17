@@ -7,7 +7,7 @@ import { RootState } from 'app/rootReducer';
 const DashboardPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { loggedIn } = useSelector((state: RootState) => state.auth);
+  const { isLoggedIn: loggedIn } = useSelector((state: RootState) => state.auth);
 
   return (
     <div>
