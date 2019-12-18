@@ -1,32 +1,20 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
 import CouponEditorForm from 'components/CouponEditorForm';
-import { message } from 'antd';
-import { history } from 'app/router';
-import api from 'api';
+import { RootState } from 'app/rootReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { createCoupons } from './couponCreateSlice';
 
 const CouponCreatePage: React.FC = () => {
-  const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state: RootState) => state.couponCreate);
 
-  const handleCouponSave = async (values: any) => {
-    setLoading(true);
-
-    try {
-      await api.coupons.createCoupons({
-        couponDto: {
-          name: values['name'],
-          description: values['description'],
-        },
-      });
-
-      message.success(t('couponCreate.createCouponSuccess'), 10);
-      setLoading(false);
-      history.push('/');
-    } catch (err) {
-      message.error(err.toString(), 10);
-      setLoading(false);
-    }
+  const handleCouponSave = (values: any) => {
+    dispatch(
+      createCoupons({
+        name: values['name'],
+        description: values['description'],
+      }),
+    );
   };
 
   const props = {

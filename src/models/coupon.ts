@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export interface Coupon {
-  id: number;
+  id?: number;
   name?: string;
   description?: string;
   rank?: string;

@@ -1,60 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect } from 'react';
 import CouponEditorForm from 'components/CouponEditorForm';
-import { history } from 'app/router';
-import { message } from 'antd';
-import { Coupon } from 'models/coupon';
-import api from 'api';
 import { useParams } from 'react-router-dom';
+import { RootState } from 'app/rootReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCoupons, updateCoupons } from './couponEditorSlice';
 
 const CouponEditorPage: React.FC = () => {
-  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
-  const [coupon, setCoupon] = useState<Coupon>();
-
-  const handleCouponSave = async (values: any) => {
-    setLoading(true);
-
-    try {
-      await api.coupons.updateCoupons({
-        id2: id!,
-        couponDto: {
-          name: values['name'],
-          description: values['description'],
-        },
-      });
-
-      message.success(t('couponEditor.saveCouponSuccess'), 10);
-      setLoading(false);
-      history.push('/');
-    } catch (err) {
-      message.error(err.toString(), 10);
-      setLoading(false);
-    }
-  };
+  const { coupon, loading } = useSelector(
+    (state: RootState) => state.couponEditor,
+  );
 
   useEffect(() => {
-    const getCoupon = async () => {
-      try {
-        const coupon = await api.coupons.getCoupons({ id: +id! });
-        setCoupon({
-          id: coupon.id,
-          name: coupon.name,
-          description: coupon.description,
-        } as Coupon);
+    dispatch(getCoupons(id!));
+  }, [id, dispatch]);
 
-        setLoading(false);
-      } catch (err) {
-        message.error(err.toString(), 10);
-        setLoading(false);
-      }
-    };
-
-    setLoading(true);
-
-    getCoupon();
-  }, [id]);
+  const handleCouponSave = (values: any) => {
+    dispatch(
+      updateCoupons({
+        id: +id!,
+        name: values['name'],
+        description: values['description'],
+      }),
+    );
+  };
 
   const props = {
     handleCouponSave,

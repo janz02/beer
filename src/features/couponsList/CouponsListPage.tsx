@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './CouponsListPage.scss';
-import { Button, Table, Input, Icon } from 'antd';
+import { Button, Table, Input, Icon, Popconfirm } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import { history } from 'app/router';
 import { PaginationConfig, ColumnProps } from 'antd/lib/table';
 import { Coupon } from 'models/coupon';
 import { useIsMobile } from 'hooks';
-import { getCoupons } from './couponsListSlice';
+import { getCoupons, deleteCoupons } from './couponsListSlice';
 
 const CouponsListPage: React.FC = () => {
   const { t } = useTranslation();
@@ -90,6 +90,19 @@ const CouponsListPage: React.FC = () => {
           <Link to={`/coupons/${record.id}/${true}`}>
             {t('couponsList.edit')}
           </Link>
+          |
+          <Popconfirm
+            title={t('couponsList.deleteConfirmMessage')}
+            onConfirm={() => {
+              dispatch(deleteCoupons(record.id!.toString()));
+            }}
+            okText={t('common.ok')}
+            cancelText={t('common.cancel')}
+          >
+            <Button type="danger" size="small">
+              {t('couponsList.delete')}
+            </Button>
+          </Popconfirm>
         </span>
       ),
     },
@@ -104,7 +117,7 @@ const CouponsListPage: React.FC = () => {
       <Table
         dataSource={coupons}
         columns={columns}
-        rowKey={(x) => x.id.toString()}
+        rowKey={(x) => x.id!.toString()}
         pagination={pagination}
         loading={loading}
         onChange={(pagination, filters, sorter) => {
