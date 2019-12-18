@@ -13,7 +13,7 @@ const CouponEditorPage: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(getCoupons(id!));
+    dispatch(getCoupons(+id!));
   }, [id, dispatch]);
 
   const handleCouponSave = (values: any) => {

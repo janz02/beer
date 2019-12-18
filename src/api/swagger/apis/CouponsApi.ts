@@ -37,8 +37,7 @@ export interface CreateCouponsRequest {
 }
 
 export interface DeleteCouponsRequest {
-    id2: string;
-    id?: number;
+    id: number;
 }
 
 export interface GetCouponsRequest {
@@ -55,8 +54,7 @@ export interface ListCouponsRequest {
 }
 
 export interface UpdateCouponsRequest {
-    id2: string;
-    id?: number;
+    id: number;
     couponDto?: CouponDto;
 }
 
@@ -95,20 +93,16 @@ export class CouponsApi extends runtime.BaseAPI {
     /**
      */
     async deleteCouponsRaw(requestParameters: DeleteCouponsRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.id2 === null || requestParameters.id2 === undefined) {
-            throw new runtime.RequiredError('id2','Required parameter requestParameters.id2 was null or undefined when calling deleteCoupons.');
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCoupons.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters.id !== undefined) {
-            queryParameters['id'] = requestParameters.id;
-        }
-
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id2))),
+            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -202,22 +196,18 @@ export class CouponsApi extends runtime.BaseAPI {
     /**
      */
     async updateCouponsRaw(requestParameters: UpdateCouponsRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.id2 === null || requestParameters.id2 === undefined) {
-            throw new runtime.RequiredError('id2','Required parameter requestParameters.id2 was null or undefined when calling updateCoupons.');
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCoupons.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.id !== undefined) {
-            queryParameters['id'] = requestParameters.id;
-        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
-            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id2))),
+            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,

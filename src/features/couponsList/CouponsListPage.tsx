@@ -94,7 +94,7 @@ const CouponsListPage: React.FC = () => {
           <Popconfirm
             title={t('couponsList.deleteConfirmMessage')}
             onConfirm={() => {
-              dispatch(deleteCoupons(record.id!.toString()));
+              dispatch(deleteCoupons(record.id!));
             }}
             okText={t('common.ok')}
             cancelText={t('common.cancel')}

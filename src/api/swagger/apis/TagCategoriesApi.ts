@@ -15,12 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    GetPaginatedTagCategoryQuery,
-    GetPaginatedTagCategoryQueryFromJSON,
-    GetPaginatedTagCategoryQueryToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     TagCategoryDto,
     TagCategoryDtoFromJSON,
     TagCategoryDtoToJSON,
@@ -37,7 +37,7 @@ export interface CreateTagCategoriesRequest {
 }
 
 export interface DeleteTagCategoriesRequest {
-    id?: number;
+    id: number;
 }
 
 export interface GetTagCategoriesRequest {
@@ -45,11 +45,15 @@ export interface GetTagCategoriesRequest {
 }
 
 export interface ListTagCategoriesRequest {
-    getPaginatedTagCategoryQuery?: GetPaginatedTagCategoryQuery;
+    name?: string;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string;
+    orderByType?: OrderByType;
 }
 
 export interface UpdateTagCategoriesRequest {
-    id?: number;
+    id: number;
     tagCategoryDto?: TagCategoryDto;
 }
 
@@ -88,16 +92,16 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     /**
      */
     async deleteTagCategoriesRaw(requestParameters: DeleteTagCategoriesRequest): Promise<runtime.ApiResponse<void>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.id !== undefined) {
-            queryParameters['id'] = requestParameters.id;
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTagCategories.');
         }
+
+        const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/api/TagCategories`,
+            path: `/api/TagCategories/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -145,16 +149,33 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     async listTagCategoriesRaw(requestParameters: ListTagCategoriesRequest): Promise<runtime.ApiResponse<TagCategoryVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        const headerParameters: runtime.HTTPHeaders = {};
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
 
-        headerParameters['Content-Type'] = 'application/json';
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
             path: `/api/TagCategories`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-            body: GetPaginatedTagCategoryQueryToJSON(requestParameters.getPaginatedTagCategoryQuery),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TagCategoryVmPaginatedResponseFromJSON(jsonValue));
@@ -170,18 +191,18 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     /**
      */
     async updateTagCategoriesRaw(requestParameters: UpdateTagCategoriesRequest): Promise<runtime.ApiResponse<void>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.id !== undefined) {
-            queryParameters['id'] = requestParameters.id;
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTagCategories.');
         }
+
+        const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
-            path: `/api/TagCategories`,
+            path: `/api/TagCategories/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,

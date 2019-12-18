@@ -52,11 +52,11 @@ export const {
 
 export default couponEditorSlice.reducer;
 
-export const getCoupons = (id: string): AppThunk => async (dispatch) => {
+export const getCoupons = (id: number): AppThunk => async (dispatch) => {
   dispatch(setLoadingStart());
 
   try {
-    const coupon = await api.coupons.getCoupons({ id: +id });
+    const coupon = await api.coupons.getCoupons({ id: id });
     dispatch(
       getCouponsSuccess({
         id: coupon.id,
@@ -74,7 +74,7 @@ export const updateCoupons = (coupon: Coupon): AppThunk => async (dispatch) => {
 
   try {
     await api.coupons.updateCoupons({
-      id2: coupon.id!.toString(),
+      id: coupon.id!,
       couponDto: coupon,
     });
 
