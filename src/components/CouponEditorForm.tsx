@@ -68,6 +68,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
           </Button>
         ) : null
       }
+      loading={loading}
     >
       <Form onSubmit={handleSubmit} layout={formLayout}>
         <Form.Item label={t('couponCreate.name')} {...formItemLayout}>
