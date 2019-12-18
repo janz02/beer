@@ -93,7 +93,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             : coupon && coupon.description}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.rank')} {...formItemLayout}>
+        {/* <Form.Item label={t('couponCreate.rank')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('rank', {
                 initialValue: coupon && coupon.rank ? coupon.rank : 'basic',
@@ -209,7 +209,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
                 initialValue: coupon && coupon.minimumShoppingValue,
               })(<InputNumber min={1} />)
             : coupon && coupon.minimumShoppingValue}
-        </Form.Item>
+        </Form.Item> */}
 
         {displayEditor && (
           <Form.Item>

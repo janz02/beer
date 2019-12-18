@@ -13,12 +13,29 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    CouponRank,
+    CouponRankFromJSON,
+    CouponRankFromJSONTyped,
+    CouponRankToJSON,
+    CouponType,
+    CouponTypeFromJSON,
+    CouponTypeFromJSONTyped,
+    CouponTypeToJSON,
+} from './';
+
 /**
  * 
  * @export
  * @interface CouponVm
  */
 export interface CouponVm {
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CouponVm
+     */
+    tags?: Array<number> | null;
     /**
      * 
      * @type {number}
@@ -37,6 +54,66 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     description?: string | null;
+    /**
+     * 
+     * @type {CouponRank}
+     * @memberof CouponVm
+     */
+    rank?: CouponRank;
+    /**
+     * 
+     * @type {CouponType}
+     * @memberof CouponVm
+     */
+    type?: CouponType;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponVm
+     */
+    startDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponVm
+     */
+    endDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponVm
+     */
+    expireDate?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    couponCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    minimumShoppingValue?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    discountValue?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    categoryId?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CouponVm
+     */
+    isDrawable?: boolean;
 }
 
 export function CouponVmFromJSON(json: any): CouponVm {
@@ -49,9 +126,20 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
+        'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'rank': !exists(json, 'rank') ? undefined : CouponRankFromJSON(json['rank']),
+        'type': !exists(json, 'type') ? undefined : CouponTypeFromJSON(json['type']),
+        'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
+        'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
+        'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
+        'couponCount': !exists(json, 'couponCount') ? undefined : json['couponCount'],
+        'minimumShoppingValue': !exists(json, 'minimumShoppingValue') ? undefined : json['minimumShoppingValue'],
+        'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
+        'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
+        'isDrawable': !exists(json, 'isDrawable') ? undefined : json['isDrawable'],
     };
 }
 
@@ -64,9 +152,20 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
     }
     return {
         
+        'tags': value.tags,
         'id': value.id,
         'name': value.name,
         'description': value.description,
+        'rank': CouponRankToJSON(value.rank),
+        'type': CouponTypeToJSON(value.type),
+        'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
+        'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
+        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
+        'couponCount': value.couponCount,
+        'minimumShoppingValue': value.minimumShoppingValue,
+        'discountValue': value.discountValue,
+        'categoryId': value.categoryId,
+        'isDrawable': value.isDrawable,
     };
 }
 

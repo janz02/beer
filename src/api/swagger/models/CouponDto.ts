@@ -13,12 +13,29 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    CouponRank,
+    CouponRankFromJSON,
+    CouponRankFromJSONTyped,
+    CouponRankToJSON,
+    CouponType,
+    CouponTypeFromJSON,
+    CouponTypeFromJSONTyped,
+    CouponTypeToJSON,
+} from './';
+
 /**
  * 
  * @export
  * @interface CouponDto
  */
 export interface CouponDto {
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CouponDto
+     */
+    tags?: Array<number> | null;
     /**
      * 
      * @type {string}
@@ -31,6 +48,66 @@ export interface CouponDto {
      * @memberof CouponDto
      */
     description?: string | null;
+    /**
+     * 
+     * @type {CouponRank}
+     * @memberof CouponDto
+     */
+    rank?: CouponRank;
+    /**
+     * 
+     * @type {CouponType}
+     * @memberof CouponDto
+     */
+    type?: CouponType;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponDto
+     */
+    startDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponDto
+     */
+    endDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponDto
+     */
+    expireDate?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponDto
+     */
+    couponCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponDto
+     */
+    minimumShoppingValue?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponDto
+     */
+    discountValue?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponDto
+     */
+    categoryId?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CouponDto
+     */
+    isDrawable?: boolean;
 }
 
 export function CouponDtoFromJSON(json: any): CouponDto {
@@ -43,8 +120,19 @@ export function CouponDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
+        'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'rank': !exists(json, 'rank') ? undefined : CouponRankFromJSON(json['rank']),
+        'type': !exists(json, 'type') ? undefined : CouponTypeFromJSON(json['type']),
+        'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
+        'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
+        'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
+        'couponCount': !exists(json, 'couponCount') ? undefined : json['couponCount'],
+        'minimumShoppingValue': !exists(json, 'minimumShoppingValue') ? undefined : json['minimumShoppingValue'],
+        'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
+        'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
+        'isDrawable': !exists(json, 'isDrawable') ? undefined : json['isDrawable'],
     };
 }
 
@@ -57,8 +145,19 @@ export function CouponDtoToJSON(value?: CouponDto | null): any {
     }
     return {
         
+        'tags': value.tags,
         'name': value.name,
         'description': value.description,
+        'rank': CouponRankToJSON(value.rank),
+        'type': CouponTypeToJSON(value.type),
+        'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
+        'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
+        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
+        'couponCount': value.couponCount,
+        'minimumShoppingValue': value.minimumShoppingValue,
+        'discountValue': value.discountValue,
+        'categoryId': value.categoryId,
+        'isDrawable': value.isDrawable,
     };
 }
 
