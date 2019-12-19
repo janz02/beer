@@ -1,15 +1,21 @@
 {
+  "common": {
+    "ok": "OK",
+    "cancel": "Mégsem"
+  },
   "menu": {
     "dashboard": "Irányítópult",
     "coupons": "Kuponok"
   },
-  "couponsList": {
+  "couponList": {
     "create": "Létrehozás",
     "coupons": "Kuponok",
     "name": "Név",
     "description": "Leírás",
     "action": "Műveletek",
     "edit": "Szerkesztés",
+    "delete": "Törlés",
+    "deleteConfirmMessage": "Biztosan törölni akarja ezt a kupont?",
     "search": "Keresés"
   },
   "couponCreate": {

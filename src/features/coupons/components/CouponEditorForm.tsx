@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Card, Select, InputNumber } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,11 @@ import { DatePicker } from 'antd';
 import { useIsMobile } from 'hooks';
 import { Coupon } from 'models/coupon';
 import { useParams } from 'react-router-dom';
-import MomentDisplay from './MomentDisplay';
+import MomentDisplay from '../../../components/MomentDisplay';
+import { CouponRank, CouponType } from 'api/swagger/models';
+import { useDispatch, useSelector } from 'react-redux';
+import { listCategories } from '../couponsSlice';
+import { RootState } from 'app/rootReducer';
 
 const hasErrors = (fieldsError: any) => {
   return Object.keys(fieldsError).some((field) => fieldsError[field]);
@@ -22,12 +26,18 @@ interface CouponEditorFormProps extends FormComponentProps {
 
 const CouponEditorForm = (props: CouponEditorFormProps) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const isMobile = useIsMobile();
+  const { categories } = useSelector((state: RootState) => state.coupons);
+
+  useEffect(() => {
+    dispatch(listCategories());
+  }, [dispatch]);
 
   const { getFieldDecorator, getFieldsError } = props.form;
   const { handleCouponSave, loading, couponIsNew, coupon } = props;
 
-  let { editing } = useParams();
+  const { editing } = useParams();
   const [formEditing, setFormEditing] = useState(editing === 'true');
   const displayEditor = couponIsNew || formEditing;
 
@@ -44,15 +54,26 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        handleCouponSave(values);
+        const coupon = {
+          name: values['name'],
+          description: values['description'],
+          rank: values['rank'],
+          categoryId: values['categoryId'],
+          type: values['type'],
+          discountValue: values['discountValue'],
+          startDate: values['startDate'],
+          endDate: values['endDate'],
+          expireDate: values['expireDate'],
+          couponCount: values['couponCount'],
+          minimumShoppingValue: values['minimumShoppingValue'],
+          // TODO: integrate tags and isDrawable.
+          tags: [],
+          isDrawable: false,
+        } as Coupon;
+        handleCouponSave(coupon);
       }
     });
   };
-
-  const ranks = ['basic', 'standard', 'super', 'premium'];
-  const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
-  const discountTypes = ['percent', 'fix'];
-  const defaultDiscountType = 'percent';
 
   return (
     <Card
@@ -95,10 +116,11 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         <Form.Item label={t('couponCreate.rank')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('rank', {
-                initialValue: coupon && coupon.rank ? coupon.rank : 'basic',
+                initialValue:
+                  coupon && coupon.rank ? coupon.rank : CouponRank.Bronze,
               })(
                 <Select>
-                  {ranks.map((x) => (
+                  {Object.keys(CouponRank).map((x) => (
                     <Select.Option key={x} value={x}>
                       {x}
                     </Select.Option>
@@ -110,55 +132,53 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
 
         <Form.Item label={t('couponCreate.category')} {...formItemLayout}>
           {displayEditor
-            ? getFieldDecorator('category', {
-                initialValue:
-                  coupon && coupon.category ? coupon.category : 'c1',
+            ? getFieldDecorator('categoryId', {
+                initialValue: coupon && coupon.categoryId,
               })(
                 <Select>
-                  {categories.map((x) => (
-                    <Select.Option key={x} value={x}>
-                      {x}
-                    </Select.Option>
-                  ))}
+                  {categories &&
+                    categories.map((x) => (
+                      <Select.Option key={x.id} value={x.id}>
+                        {x.name}
+                      </Select.Option>
+                    ))}
                 </Select>,
               )
-            : coupon && coupon.category}
+            : coupon && coupon.categoryId}
         </Form.Item>
 
         <Form.Item label={t('couponCreate.discountType')} {...formItemLayout}>
           {displayEditor
-            ? getFieldDecorator('discountType', {
+            ? getFieldDecorator('type', {
                 initialValue:
-                  coupon && coupon.discountType
-                    ? coupon.discountType
-                    : defaultDiscountType,
+                  coupon && coupon.type ? coupon.type : CouponType.FixValue,
               })(
                 <Select>
-                  {discountTypes.map((x) => (
+                  {Object.keys(CouponType).map((x) => (
                     <Select.Option key={x} value={x}>
                       {x}
                     </Select.Option>
                   ))}
                 </Select>,
               )
-            : coupon && coupon.discountType}
+            : coupon && coupon.type}
         </Form.Item>
 
         <Form.Item label={t('couponCreate.discountAmount')} {...formItemLayout}>
           {displayEditor
-            ? getFieldDecorator('discountAmount', {
-                initialValue: coupon && coupon.discountAmount,
+            ? getFieldDecorator('discountValue', {
+                initialValue: coupon && coupon.discountValue,
               })(
                 <InputNumber
                   min={1}
                   max={
-                    props.form.getFieldValue('discountType') === 'percent'
+                    props.form.getFieldValue('type') === CouponType.PercentValue
                       ? 100
                       : undefined
                   }
                 />,
               )
-            : coupon && coupon.discountAmount}
+            : coupon && coupon.discountValue}
         </Form.Item>
 
         <Form.Item
@@ -166,10 +186,10 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
           {...formItemLayout}
         >
           {displayEditor
-            ? getFieldDecorator('distributionStartDate', {
-                initialValue: coupon && coupon.distributionStartDate,
+            ? getFieldDecorator('startDate', {
+                initialValue: coupon && coupon.startDate,
               })(<DatePicker />)
-            : coupon && <MomentDisplay date={coupon.distributionStartDate} />}
+            : coupon && <MomentDisplay date={coupon.startDate} />}
         </Form.Item>
 
         <Form.Item
@@ -177,18 +197,18 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
           {...formItemLayout}
         >
           {displayEditor
-            ? getFieldDecorator('distributionEndDate', {
-                initialValue: coupon && coupon.distributionEndDate,
+            ? getFieldDecorator('endDate', {
+                initialValue: coupon && coupon.endDate,
               })(<DatePicker />)
-            : coupon && <MomentDisplay date={coupon.distributionEndDate} />}
+            : coupon && <MomentDisplay date={coupon.endDate} />}
         </Form.Item>
 
         <Form.Item label={t('couponCreate.expirationDate')} {...formItemLayout}>
-          {formEditing
-            ? getFieldDecorator('expirationDate', {
-                initialValue: coupon && coupon.expirationDate,
+          {displayEditor
+            ? getFieldDecorator('expireDate', {
+                initialValue: coupon && coupon.expireDate,
               })(<DatePicker />)
-            : coupon && <MomentDisplay date={coupon.expirationDate} />}
+            : coupon && <MomentDisplay date={coupon.expireDate} />}
         </Form.Item>
 
         <Form.Item label={t('couponCreate.couponCount')} {...formItemLayout}>
