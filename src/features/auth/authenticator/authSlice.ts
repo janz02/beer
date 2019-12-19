@@ -66,7 +66,7 @@ const loginSlice = createSlice({
 const userSlice = createSlice({
   name: '@auth/user',
   initialState: {
-    isLoggedIn: false,
+    isLoggedIn: true,
     userData: null as any
   },
   reducers: {
