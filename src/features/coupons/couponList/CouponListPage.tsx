@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
-import { PaginationConfig, ColumnProps } from 'antd/lib/table';
+import { ColumnProps } from 'antd/lib/table';
 import { Coupon } from 'models/coupon';
 import { useIsMobile } from 'hooks';
 import { listCoupons, deleteCoupons } from './couponListSlice';
 import { useTranslation } from 'react-i18next';
+import { CouponListingOptions } from 'models/couponListingOptions';
+import { OrderByType } from 'api/swagger/models';
 
 const CouponListPage: React.FC = () => {
   const { t } = useTranslation();
@@ -19,17 +21,14 @@ const CouponListPage: React.FC = () => {
     (state: RootState) => state.couponList,
   );
 
-  const [pagination, setPagination] = useState({
+  const [listingOptions, setListingOptions] = useState<CouponListingOptions>({
     pageSize: 10,
     current: 1,
-    pageSizeOptions: ['10', '20', '50', '100'],
-    showSizeChanger: true,
-    simple: isMobile,
-  } as PaginationConfig);
+  });
 
   useEffect(() => {
-    dispatch(listCoupons(pagination.pageSize!, pagination.current!));
-  }, [dispatch, pagination]);
+    dispatch(listCoupons(listingOptions));
+  }, [dispatch, listingOptions]);
 
   const notActionCellProps: ColumnProps<Coupon> = {
     onCell: (record: Coupon) => {
@@ -118,10 +117,33 @@ const CouponListPage: React.FC = () => {
         dataSource={coupons}
         columns={columns}
         rowKey={(x) => x.id!.toString()}
-        pagination={{ ...pagination, total: allCouponsCount }}
+        pagination={{
+          pageSizeOptions: ['10', '20', '50', '100'],
+          showSizeChanger: true,
+          simple: isMobile,
+          total: allCouponsCount,
+        }}
         loading={loading}
         onChange={(pagination, filters, sorter) => {
-          setPagination(pagination);
+          let orderByType: OrderByType;
+          let orderBy: string;
+          switch (sorter.order) {
+            case 'descend':
+              orderByType = OrderByType.Descending;
+              orderBy = sorter.columnKey;
+              break;
+            case 'ascend':
+              orderByType = OrderByType.Ascending;
+              orderBy = sorter.columnKey;
+              break;
+          }
+
+          setListingOptions({
+            pageSize: pagination.pageSize!,
+            current: pagination.current!,
+            orderByType,
+            orderBy,
+          });
         }}
       />
     </div>

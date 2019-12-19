@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Coupon } from 'models/coupon';
 import { AppThunk } from 'app/store';
 import api from 'api';
+import { CouponListingOptions } from 'models/couponListingOptions';
 
 type couponListState = {
   coupons?: Coupon[];
@@ -54,13 +55,16 @@ export const {
 
 export default couponListSlice.reducer;
 
-export const listCoupons = (pageSize: number, page: number): AppThunk => async (
-  dispatch,
-) => {
+export const listCoupons = (
+  listingOptions: CouponListingOptions,
+): AppThunk => async (dispatch) => {
   dispatch(setLoadingStart());
 
   try {
-    const coupons = await api.coupons.listCoupons({ pageSize, page });
+    const coupons = await api.coupons.listCoupons({
+      ...listingOptions,
+      page: listingOptions.current,
+    });
     dispatch(
       listCouponsSuccess({
         coupons: coupons.result!.map(
