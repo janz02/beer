@@ -15,13 +15,9 @@ const CouponListPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
-  const { coupons, loading } = useSelector(
+  const { coupons, loading, allCouponsCount } = useSelector(
     (state: RootState) => state.couponList,
   );
-
-  useEffect(() => {
-    dispatch(listCoupons());
-  }, [dispatch]);
 
   const [pagination, setPagination] = useState({
     pageSize: 10,
@@ -30,6 +26,10 @@ const CouponListPage: React.FC = () => {
     showSizeChanger: true,
     simple: isMobile,
   } as PaginationConfig);
+
+  useEffect(() => {
+    dispatch(listCoupons(pagination.pageSize!, pagination.current!));
+  }, [dispatch, pagination]);
 
   const notActionCellProps: ColumnProps<Coupon> = {
     onCell: (record: Coupon) => {
@@ -118,16 +118,10 @@ const CouponListPage: React.FC = () => {
         dataSource={coupons}
         columns={columns}
         rowKey={(x) => x.id!.toString()}
-        pagination={pagination}
+        pagination={{ ...pagination, total: allCouponsCount }}
         loading={loading}
         onChange={(pagination, filters, sorter) => {
           setPagination(pagination);
-
-          // TODO: use Redux to fetch data.
-          setPagination(pagination);
-          console.log(pagination);
-          console.log(filters);
-          console.log(sorter);
         }}
       />
     </div>

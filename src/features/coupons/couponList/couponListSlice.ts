@@ -5,6 +5,7 @@ import api from 'api';
 
 type couponListState = {
   coupons?: Coupon[];
+  allCouponsCount?: number;
   error: string | null;
   loading: boolean;
 };
@@ -18,8 +19,12 @@ const couponListSlice = createSlice({
   name: 'couponList',
   initialState,
   reducers: {
-    listCouponsSuccess(state, action: PayloadAction<Coupon[]>) {
-      state.coupons = action.payload;
+    listCouponsSuccess(
+      state,
+      action: PayloadAction<{ coupons: Coupon[]; allCouponsCount: number }>,
+    ) {
+      state.coupons = action.payload.coupons;
+      state.allCouponsCount = action.payload.allCouponsCount;
 
       state.loading = false;
       state.error = null;
@@ -49,18 +54,21 @@ export const {
 
 export default couponListSlice.reducer;
 
-export const listCoupons = (): AppThunk => async (dispatch) => {
+export const listCoupons = (pageSize: number, page: number): AppThunk => async (
+  dispatch,
+) => {
   dispatch(setLoadingStart());
 
   try {
-    const coupons = await api.coupons.listCoupons({});
+    const coupons = await api.coupons.listCoupons({ pageSize, page });
     dispatch(
-      listCouponsSuccess(
-        coupons.result!.map(
+      listCouponsSuccess({
+        coupons: coupons.result!.map(
           (x) =>
             ({ id: x.id, name: x.name, description: x.description } as Coupon),
         ),
-      ),
+        allCouponsCount: coupons.size!,
+      }),
     );
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()));
