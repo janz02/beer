@@ -24,7 +24,6 @@ const couponCreateSlice = createSlice({
       message.success(i18n.t('couponCreate.createCouponSuccess'), 10);
       state.loading = false;
       state.error = null;
-      history.push('/');
     },
     setLoadingStart(state) {
       state.loading = true;
@@ -58,6 +57,7 @@ export const createCoupons = (coupon: Coupon): AppThunk => async (dispatch) => {
     });
 
     dispatch(createCouponsSuccess());
+    history.push('/');
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()));
   }
