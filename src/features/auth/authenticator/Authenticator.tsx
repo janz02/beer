@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { LoginForm } from './LoginForm'
 import { SignupForm } from './SignupForm'
 import { PasswordRecoveryForm } from './PasswordRecoveryForm'
-import './Auth.scss'
+import './Authenticator.scss'
 
 enum AuthFormView {
   RECOVERY = 'forgot-password',
@@ -12,7 +12,7 @@ enum AuthFormView {
   LOGIN = 'login'
 }
 
-export const Auth = () => {
+export const Authenticator = () => {
   
   const { t } = useTranslation()
 
@@ -30,7 +30,7 @@ export const Auth = () => {
 
 
   return (
-    <div className='auth-component' >
+    <div className='authenticator' >
       <Card title={t(`auth.${view}`)} className='auth-card'>
         {view === AuthFormView.LOGIN && <LoginForm />}
         {view === AuthFormView.SIGNUP && <SignupForm />}

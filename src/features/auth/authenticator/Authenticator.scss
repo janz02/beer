@@ -1,7 +1,5 @@
-.auth-component {
-  
+.authenticator {
   .auth-card {
-    max-width: 300px;
 
     .ant-checkbox-wrapper {
       margin-left: 0.2rem;
@@ -17,5 +15,6 @@
         float: right
       }
     }
+
   }
 }

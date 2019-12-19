@@ -10,10 +10,10 @@ const signupSlice = createSlice({
     error: null as any
   },
   reducers: {
-    signupRequest(state, action: PayloadAction<any>) {
+    signupRequest(state) {
       state.isLoading = true
     },
-    signupSuccess(state, action: PayloadAction<any>) {
+    signupSuccess(state) {
       state.isLoading = false
       state.error = null
     },
@@ -31,10 +31,10 @@ const passwordRecoverySlice = createSlice({
     isLoading: false
   },
   reducers: {
-    passwordRecoveryRequest(state, action: PayloadAction<any>) {
+    passwordRecoveryRequest(state) {
       state.isLoading = true
     },
-    passwordRecoverySuccess(state, action: PayloadAction<any>) {
+    passwordRecoverySuccess(state) {
       state.isLoading = false
     }
   },
@@ -48,10 +48,10 @@ const loginSlice = createSlice({
     error: null as any,
   },
   reducers: {
-    loginRequest(state, action: PayloadAction<any>) {
+    loginRequest(state) {
       state.isLoading = true
     },
-    loginSuccess(state, action: PayloadAction<any>) {
+    loginSuccess(state) {
       state.isLoading = false
       state.error = null
     },
@@ -96,7 +96,7 @@ const doLogin = (params: any): AppThunk => async dispatch => {
   try {
     const userData = await delay(params)
     dispatch(setUser(userData))
-    dispatch(loginSuccess(userData))
+    dispatch(loginSuccess())
     history.push('/')
   } catch (err) {
     dispatch(clearUser())

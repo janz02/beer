@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'app/rootReducer';
-import { doLogout } from 'store/auth';
+import { doLogout } from './authenticator/authSlice';
 
 interface IProps {
   onClick: () => void

@@ -3,7 +3,7 @@ import { Form, Input, Icon, Button, Alert } from 'antd'
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAntdForm } from './useAntdForm';
-import { doLogin } from 'store/auth';
+import { doLogin } from './authSlice';
 import { RootState } from 'app/rootReducer';
 
 

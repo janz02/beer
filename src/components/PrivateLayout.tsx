@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSelector from 'components/LanguageSelector';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from 'hooks';
-import { AuthMenuOptions } from './auth/AuthMenuOptions';
+import { AuthMenuOptions } from 'features/auth/AuthMenuOptions';
 
 const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
