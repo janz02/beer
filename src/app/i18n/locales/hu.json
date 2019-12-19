@@ -2,8 +2,30 @@
   "auth": {
     "login": "Belépés",
     "logout": "Kilépés",
+    "signup": "Regisztrálok",
+    "forgot-password": "Elfelejtettem a jelszavam",
+    "password-recovery": "Jelszó megkeresése",
+    "send-email": "Email küldése",
+    "text": {
+      "new-password-email": "Kérek egy e-mailt az új jelszóval.",
+      "accept-bla": "Elfogadom a ",
+      "terms-and-services": "Feltételeket és Szolgáltatásokat"
+    },
+    "field": {
+      "username": "Felhasználónév",
+      "password": "Jelszó",
+      "password-again": "Jelszó ismét",
+      "remember-me": "Emlékezz rám!",
+      "email": "E-mail-cím",
+      "company": "Cég neve",
+      "name": "Teljes név",
+      "phone": "Telefonszám"
+    },
     "error": {
-      "username.required": "Adja meg a felhasználó nevét!"
+      "login-failed": "Sikertelen autentikáció.",
+      "signup-failed": "A regisztrálás sikertelen volt.",
+      "username-required": "Kérem add meg a felhasználó nevedet!",
+      "password-required": "Kérem add meg a jelszavadat!"
     }
   },
   "menu": {

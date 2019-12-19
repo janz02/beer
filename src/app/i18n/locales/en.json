@@ -8,7 +8,7 @@
     "send-email": "Send email",
     "text": {
       "new-password-email": "Get an email with the new password.",
-      "accept-bla": "I accept the {{bla}}",
+      "accept-bla": "I accept the ",
       "terms-and-services": "Terms & Services"
     },
     "field": {
