@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Card, Select, InputNumber } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,11 @@ import { DatePicker } from 'antd';
 import { useIsMobile } from 'hooks';
 import { Coupon } from 'models/coupon';
 import { useParams } from 'react-router-dom';
-import MomentDisplay from './MomentDisplay';
+import MomentDisplay from '../../../components/MomentDisplay';
+import { CouponRank } from 'api/swagger/models';
+import { useDispatch, useSelector } from 'react-redux';
+import { listCategories } from '../couponsSlice';
+import { RootState } from 'app/rootReducer';
 
 const hasErrors = (fieldsError: any) => {
   return Object.keys(fieldsError).some((field) => fieldsError[field]);
@@ -22,7 +26,13 @@ interface CouponEditorFormProps extends FormComponentProps {
 
 const CouponEditorForm = (props: CouponEditorFormProps) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const isMobile = useIsMobile();
+  const { categories } = useSelector((state: RootState) => state.coupons);
+
+  useEffect(() => {
+    dispatch(listCategories());
+  }, [dispatch]);
 
   const { getFieldDecorator, getFieldsError } = props.form;
   const { handleCouponSave, loading, couponIsNew, coupon } = props;
@@ -49,8 +59,6 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
     });
   };
 
-  const ranks = ['basic', 'standard', 'super', 'premium'];
-  const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
   const discountTypes = ['percent', 'fix'];
   const defaultDiscountType = 'percent';
 
@@ -93,13 +101,14 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             : coupon && coupon.description}
         </Form.Item>
 
-        {/* <Form.Item label={t('couponCreate.rank')} {...formItemLayout}>
+        <Form.Item label={t('couponCreate.rank')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('rank', {
-                initialValue: coupon && coupon.rank ? coupon.rank : 'basic',
+                initialValue:
+                  coupon && coupon.rank ? coupon.rank : CouponRank.Bronze,
               })(
                 <Select>
-                  {ranks.map((x) => (
+                  {Object.keys(CouponRank).map((x) => (
                     <Select.Option key={x} value={x}>
                       {x}
                     </Select.Option>
@@ -111,22 +120,22 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
 
         <Form.Item label={t('couponCreate.category')} {...formItemLayout}>
           {displayEditor
-            ? getFieldDecorator('category', {
-                initialValue:
-                  coupon && coupon.category ? coupon.category : 'c1',
+            ? getFieldDecorator('categoryId', {
+                initialValue: coupon && coupon.categoryId,
               })(
                 <Select>
-                  {categories.map((x) => (
-                    <Select.Option key={x} value={x}>
-                      {x}
-                    </Select.Option>
-                  ))}
+                  {categories &&
+                    categories.map((x) => (
+                      <Select.Option key={x.id} value={x.id}>
+                        {x.name}
+                      </Select.Option>
+                    ))}
                 </Select>,
               )
-            : coupon && coupon.category}
+            : coupon && coupon.categoryId}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.discountType')} {...formItemLayout}>
+        {/* <Form.Item label={t('couponCreate.discountType')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('discountType', {
                 initialValue:

@@ -3,15 +3,15 @@ import { withRouter, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import PrivateRoute from 'components/PrivateRoute';
 import DashboardPage from 'features/dashboard/DashboardPage';
-import CouponsListPage from 'features/couponsList/CouponsListPage';
-import CouponCreatePage from 'features/couponCreate/CouponCreatePage';
-import CouponEditorPage from 'features/couponEditor/CouponEditorPage';
+import CouponCreatePage from 'features/coupons/couponCreate/CouponCreatePage';
+import CouponEditorPage from 'features/coupons/couponEditor/CouponEditorPage';
+import CouponListPage from 'features/coupons/couponList/CouponListPage';
 
 const Routes = () => {
   return (
     <Switch>
       <PrivateRoute exact path="/" component={DashboardPage} />
-      <PrivateRoute exact path="/coupons" component={CouponsListPage} />
+      <PrivateRoute exact path="/coupons" component={CouponListPage} />
       <PrivateRoute exact path="/coupons/create" component={CouponCreatePage} />
       <PrivateRoute
         exact

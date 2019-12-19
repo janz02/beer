@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import CouponEditorForm from 'components/CouponEditorForm';
+import CouponEditorForm from 'features/coupons/components/CouponEditorForm';
 import { useParams } from 'react-router-dom';
 import { RootState } from 'app/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';

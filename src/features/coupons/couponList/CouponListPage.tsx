@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './CouponsListPage.scss';
+import './CouponListPage.scss';
 import { Button, Table, Input, Icon, Popconfirm } from 'antd';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'app/rootReducer';
@@ -9,18 +8,19 @@ import { history } from 'app/router';
 import { PaginationConfig, ColumnProps } from 'antd/lib/table';
 import { Coupon } from 'models/coupon';
 import { useIsMobile } from 'hooks';
-import { getCoupons, deleteCoupons } from './couponsListSlice';
+import { listCoupons, deleteCoupons } from './couponListSlice';
+import { useTranslation } from 'react-i18next';
 
-const CouponsListPage: React.FC = () => {
+const CouponListPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
   const { coupons, loading } = useSelector(
-    (state: RootState) => state.couponsList,
+    (state: RootState) => state.couponList,
   );
 
   useEffect(() => {
-    dispatch(getCoupons());
+    dispatch(listCoupons());
   }, [dispatch]);
 
   const [pagination, setPagination] = useState({
@@ -59,7 +59,7 @@ const CouponsListPage: React.FC = () => {
           size="small"
           onClick={() => confirm!()}
         >
-          {t('couponsList.search')}
+          {t('couponList.search')}
         </Button>
       </div>
     ),
@@ -68,7 +68,7 @@ const CouponsListPage: React.FC = () => {
 
   const columns: ColumnProps<Coupon>[] = [
     {
-      title: t('couponsList.name'),
+      title: t('couponList.name'),
       dataIndex: 'name',
       key: 'name',
       sorter: true,
@@ -76,23 +76,23 @@ const CouponsListPage: React.FC = () => {
       ...getColumnSearchProps('name'),
     },
     {
-      title: t('couponsList.description'),
+      title: t('couponList.description'),
       dataIndex: 'description',
       key: 'description',
       ...notActionCellProps,
       ...getColumnSearchProps('description'),
     },
     {
-      title: t('couponsList.action'),
+      title: t('couponList.action'),
       key: 'action',
       render: (text, record) => (
         <span>
           <Link to={`/coupons/${record.id}/${true}`}>
-            {t('couponsList.edit')}
+            {t('couponList.edit')}
           </Link>
           |
           <Popconfirm
-            title={t('couponsList.deleteConfirmMessage')}
+            title={t('couponList.deleteConfirmMessage')}
             onConfirm={() => {
               dispatch(deleteCoupons(record.id!));
             }}
@@ -100,7 +100,7 @@ const CouponsListPage: React.FC = () => {
             cancelText={t('common.cancel')}
           >
             <Button type="danger" size="small">
-              {t('couponsList.delete')}
+              {t('couponList.delete')}
             </Button>
           </Popconfirm>
         </span>
@@ -110,9 +110,9 @@ const CouponsListPage: React.FC = () => {
 
   return (
     <div className="coupons-list-page">
-      <h1>{t('couponsList.coupons')}</h1>
+      <h1>{t('couponList.coupons')}</h1>
       <Button type="primary">
-        <Link to="/coupons/create">{t('couponsList.create')}</Link>
+        <Link to="/coupons/create">{t('couponList.create')}</Link>
       </Button>
       <Table
         dataSource={coupons}
@@ -134,4 +134,4 @@ const CouponsListPage: React.FC = () => {
   );
 };
 
-export default CouponsListPage;
+export default CouponListPage;

@@ -3,23 +3,22 @@ import { Coupon } from 'models/coupon';
 import { AppThunk } from 'app/store';
 import api from 'api';
 
-type CouponsListState = {
+type couponListState = {
   coupons?: Coupon[];
   error: string | null;
   loading: boolean;
 };
 
-const initialState: CouponsListState = {
-  coupons: [],
+const initialState: couponListState = {
   error: null,
   loading: false,
 };
 
-const couponsListSlice = createSlice({
-  name: 'couponsList',
+const couponListSlice = createSlice({
+  name: 'couponList',
   initialState,
   reducers: {
-    getCouponsSuccess(state, action: PayloadAction<Coupon[]>) {
+    listCouponsSuccess(state, action: PayloadAction<Coupon[]>) {
       state.coupons = action.payload;
 
       state.loading = false;
@@ -42,21 +41,21 @@ const couponsListSlice = createSlice({
 });
 
 export const {
-  getCouponsSuccess,
+  listCouponsSuccess,
   deleteCouponsSuccess,
   setLoadingStart,
   setLoadingFailed,
-} = couponsListSlice.actions;
+} = couponListSlice.actions;
 
-export default couponsListSlice.reducer;
+export default couponListSlice.reducer;
 
-export const getCoupons = (): AppThunk => async (dispatch) => {
+export const listCoupons = (): AppThunk => async (dispatch) => {
   dispatch(setLoadingStart());
 
   try {
     const coupons = await api.coupons.listCoupons({});
     dispatch(
-      getCouponsSuccess(
+      listCouponsSuccess(
         coupons.result!.map(
           (x) =>
             ({ id: x.id, name: x.name, description: x.description } as Coupon),
