@@ -49,7 +49,12 @@ export const createCoupons = (coupon: Coupon): AppThunk => async (dispatch) => {
 
   try {
     await api.coupons.createCoupons({
-      couponDto: coupon,
+      couponDto: {
+        ...coupon,
+        startDate: coupon.startDate && coupon.startDate.toDate(),
+        endDate: coupon.endDate && coupon.endDate.toDate(),
+        expireDate: coupon.expireDate && coupon.expireDate.toDate(),
+      },
     });
 
     dispatch(createCouponsSuccess());

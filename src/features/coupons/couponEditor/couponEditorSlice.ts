@@ -5,6 +5,7 @@ import api from 'api';
 import { message } from 'antd';
 import { history } from 'app/router';
 import i18n from 'app/i18n';
+import moment from 'moment';
 
 type CouponEditorState = {
   coupon?: Coupon;
@@ -59,9 +60,10 @@ export const getCoupons = (id: number): AppThunk => async (dispatch) => {
     const coupon = await api.coupons.getCoupons({ id: id });
     dispatch(
       getCouponsSuccess({
-        id: coupon.id,
-        name: coupon.name,
-        description: coupon.description,
+        ...coupon,
+        startDate: coupon.startDate && moment(coupon.startDate),
+        endDate: coupon.endDate && moment(coupon.endDate),
+        expireDate: coupon.expireDate && moment(coupon.expireDate),
       } as Coupon),
     );
   } catch (err) {
@@ -75,7 +77,12 @@ export const updateCoupons = (coupon: Coupon): AppThunk => async (dispatch) => {
   try {
     await api.coupons.updateCoupons({
       id: coupon.id!,
-      couponDto: coupon,
+      couponDto: {
+        ...coupon,
+        startDate: coupon.startDate && coupon.startDate.toDate(),
+        endDate: coupon.endDate && coupon.endDate.toDate(),
+        expireDate: coupon.expireDate && coupon.expireDate.toDate(),
+      },
     });
 
     dispatch(updateCouponsSuccess());

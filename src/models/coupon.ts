@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { CouponRank } from 'api/swagger/models';
+import { CouponRank, CouponType } from 'api/swagger/models';
 
 export interface Coupon {
   id?: number;
@@ -7,11 +7,13 @@ export interface Coupon {
   description?: string;
   rank?: CouponRank;
   categoryId?: number;
-  // discountType?: string;
-  // discountAmount?: number;
-  // distributionStartDate?: moment.Moment;
-  // distributionEndDate?: moment.Moment;
-  // expirationDate?: moment.Moment;
-  // couponCount?: number;
-  // minimumShoppingValue?: number;
+  type?: CouponType;
+  discountValue?: number;
+  startDate?: moment.Moment;
+  endDate?: moment.Moment;
+  expireDate?: moment.Moment;
+  couponCount?: number;
+  minimumShoppingValue?: number;
+  tags?: [];
+  isDrawable?: boolean;
 }

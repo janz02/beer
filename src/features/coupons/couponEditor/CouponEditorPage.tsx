@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { RootState } from 'app/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCoupons, updateCoupons } from './couponEditorSlice';
+import { Coupon } from 'models/coupon';
 
 const CouponEditorPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,12 +17,11 @@ const CouponEditorPage: React.FC = () => {
     dispatch(getCoupons(+id!));
   }, [id, dispatch]);
 
-  const handleCouponSave = (values: any) => {
+  const handleCouponSave = (coupon: Coupon) => {
     dispatch(
       updateCoupons({
+        ...coupon,
         id: +id!,
-        name: values['name'],
-        description: values['description'],
       }),
     );
   };
