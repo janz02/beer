@@ -4,12 +4,14 @@ import CouponEditorForm from 'components/CouponEditorForm';
 import { message, Layout, Card } from 'antd';
 import { history } from 'app/router';
 import { LoginForm } from 'components/auth/LoginForm';
+import { SignupForm } from 'components/auth/SignupForm';
+import { Auth } from 'components/auth/Auth';
 
 
 export const AuthPage: FC = () => {
   return (
     <Layout>
-       <LoginForm></LoginForm>
+      <Auth />
     </Layout>
   )
 }

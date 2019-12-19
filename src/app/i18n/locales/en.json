@@ -2,12 +2,28 @@
   "auth": {
     "login": "Login",
     "logout": "Logout",
+    "signup": "Sign up",
+    "forgot-password": "Forgot password",
+    "password-recovery": "Password recovery",
+    "send-email": "Send email",
+    "text": {
+      "new-password-email": "Get an email with the new password.",
+      "accept-bla": "I accept the {{bla}}",
+      "terms-and-services": "Terms & Services"
+    },
     "field": {
       "username": "Username",
       "password": "Password",
-      "remember-me": "Remember me!"
+      "password-again": "Password again",
+      "remember-me": "Remember me!",
+      "email": "E-mail address",
+      "company": "Company name",
+      "name": "Full Name",
+      "phone": "Phone number"
     },
     "error": {
+      "login-failed": "Authentication failed.",
+      "signup-failed": "Something went wrong, please try again.",
       "username-required": "Please enter your Username!",
       "password-required": "Please enter your Password!"
     }

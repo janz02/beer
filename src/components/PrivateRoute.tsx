@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 interface PrivateRouteProps extends RouteProps {}
 
 const PrivateRoute: React.FC<PrivateRouteProps> = (props) => {
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.user.isLoggedIn);
 
   if (!isLoggedIn) {
     return <Redirect to={{ pathname: '/auth' }} />
