@@ -16,7 +16,7 @@
     "send-email": "Email küldése",
     "text": {
       "new-password-email": "Kérek egy e-mailt az új jelszóval.",
-      "accept-bla": "Elfogadom a ",
+      "accept-prefix": "Elfogadom a ",
       "terms-and-services": "Feltételeket és Szolgáltatásokat"
     },
     "field": {
@@ -33,10 +33,11 @@
       "login-failed": "Sikertelen autentikáció.",
       "signup-failed": "A regisztrálás sikertelen volt.",
       "username-required": "Kérem add meg a felhasználó nevedet!",
+      "email-required": "Kérem add meg az E-mail-címedet!",
       "password-required": "Kérem add meg a jelszavadat!"
     }
   },
-  "couponList": {
+  "coupon-list": {
     "create": "Létrehozás",
     "coupons": "Kuponok",
     "name": "Név",
@@ -44,10 +45,10 @@
     "action": "Műveletek",
     "edit": "Szerkesztés",
     "delete": "Törlés",
-    "deleteConfirmMessage": "Biztosan törölni akarja ezt a kupont?",
+    "delete-confirm-message": "Biztosan törölni akarja ezt a kupont?",
     "search": "Keresés"
   },
-  "couponCreate": {
+  "coupon-create": {
     "create": "Létrehozás",
     "save": "Mentés",
     "editor": "Kupon szerkesztő",
@@ -56,18 +57,18 @@
     "description": "Leírás",
     "rank": "Rang",
     "category": "Kategória",
-    "discountType": "Kedvezmény típusa",
-    "discountAmount": "Kedvezmény mennyisége",
-    "distributionStartDate": "Kiosztási kezdő dátum",
-    "distributionEndDate": "Kiosztási vég dátum",
-    "couponCount": "Kuponok száma",
-    "minimumShoppingValue": "Minimális vásárlási érték",
-    "expirationDate": "Lejárati dátum",
-    "nameIsRequired": "A név mező megadása kötelező.",
-    "createCouponSuccess": "Sikeres kupon létrehozás."
+    "discount-type": "Kedvezmény típusa",
+    "discount-amount": "Kedvezmény mennyisége",
+    "distribution-start-date": "Kiosztási kezdő dátum",
+    "distribution-end-date": "Kiosztási vég dátum",
+    "coupon-count": "Kuponok száma",
+    "minimum-shopping-value": "Minimális vásárlási érték",
+    "expiration-date": "Lejárati dátum",
+    "name-is-required": "A név mező megadása kötelező.",
+    "create-coupon-success": "Sikeres kupon létrehozás."
   },
-  "couponEditor": {
-    "saveCouponSuccess": "Sikeres kupon mentés."
+  "coupon-editor": {
+    "save-coupon-success": "Sikeres kupon mentés."
   },
   "languages": {
     "en": "English",

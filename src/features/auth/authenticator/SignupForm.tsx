@@ -1,30 +1,35 @@
-import React from 'react'
-import { Form, Input, Icon, Button, Alert } from 'antd'
+import React from 'react';
+import { Form, Input, Icon, Button, Alert } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAntdForm } from './useAntdForm';
-import { doSignUp } from './authSlice';
+import { signUp } from '../authSlice';
 import { RootState } from 'app/rootReducer';
 
 export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
+  const { loading, error } = useSelector(
+    (state: RootState) => state.auth.signup
+  );
 
-  const { isLoading, error } = useSelector((state: RootState) => state.auth.signup);
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { t } = useTranslation();
 
-  const { handleSubmit, getFieldDecorator } = useAntdForm(form)
+  const { handleSubmit, getFieldDecorator } = useAntdForm(form);
 
-
-  return (<>
-      {error && (<Alert message={t('auth.error.signup-failed')} type="error" />)}
-      <Form onSubmit={(event) => handleSubmit(event, (values) => dispatch(doSignUp(values)))}>
+  return (
+    <>
+      {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
+      <Form
+        onSubmit={event =>
+          handleSubmit(event, values => dispatch(signUp(values)))
+        }
+      >
         <Form.Item>
           {getFieldDecorator('username', {
             rules: [
-              { required: true, message: t('auth.error.username-required') }
-            ]
+              { required: true, message: t('auth.error.username-required') },
+            ],
           })(
             <Input
               prefix={<Icon type="user" />}
@@ -36,7 +41,7 @@ export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
           {getFieldDecorator('password', {
             rules: [
               // { required: true, message: t('auth.error.password-required') }
-            ]
+            ],
           })(
             <Input.Password
               prefix={<Icon type="lock" />}
@@ -49,7 +54,7 @@ export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
           {getFieldDecorator('passwordAgain', {
             rules: [
               // { required: true, message: t('auth.error.password-required') }
-            ]
+            ],
           })(
             <Input.Password
               prefix={<Icon type="lock" />}
@@ -62,7 +67,7 @@ export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
           {getFieldDecorator('company', {
             rules: [
               // { required: true, message: t('auth.error.company-required') }
-            ]
+            ],
           })(
             <Input
               prefix={<Icon type="home" />}
@@ -75,7 +80,7 @@ export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
           {getFieldDecorator('name', {
             rules: [
               // { required: true, message: t('auth.error.name-required') }
-            ]
+            ],
           })(
             <Input
               prefix={<Icon type="user" />}
@@ -88,7 +93,7 @@ export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
           {getFieldDecorator('phone', {
             rules: [
               // { required: true, message: t('auth.error.phone-required') }
-            ]
+            ],
           })(
             <Input
               prefix={<Icon type="phone" />}
@@ -101,7 +106,7 @@ export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
         {/* <Form.Item>
           {getFieldDecorator('rememember')(
             <Checkbox>
-              {t('auth.text.accept-bla')}
+              {t('auth.text.accept-prefix')}
               <Button 
               type='link' 
               style={{padding: 0}}
@@ -112,7 +117,7 @@ export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
           )}
         </Form.Item> */}
         <Button
-          loading={isLoading}
+          loading={loading}
           block
           size="large"
           type="primary"
@@ -121,5 +126,6 @@ export const SignupForm = Form.create({ name: 'signup' })(({ form }) => {
           {t('auth.signup')}
         </Button>
       </Form>
-  </>)
-})
+    </>
+  );
+});
