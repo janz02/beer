@@ -89,7 +89,7 @@ const CouponListPage: React.FC = () => {
           <Link to={`/coupons/${record.id}/${true}`}>
             {t('couponList.edit')}
           </Link>
-          |
+          &nbsp;|&nbsp;
           <Popconfirm
             title={t('couponList.deleteConfirmMessage')}
             onConfirm={() => {
