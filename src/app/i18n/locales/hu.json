@@ -10,8 +10,8 @@
   "auth": {
     "login": "Belépés",
     "logout": "Kilépés",
-    "signup": "Regisztrálok",
-    "forgot-password": "Elfelejtettem a jelszavam",
+    "signup": "Regisztrálás",
+    "forgot-password": "Elfelejtettem a jelszavamat!",
     "password-recovery": "Jelszó megkeresése",
     "send-email": "Email küldése",
     "text": {
