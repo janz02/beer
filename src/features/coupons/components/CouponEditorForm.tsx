@@ -77,7 +77,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
 
   return (
     <Card
-      title={t('couponCreate.editor')}
+      title={t('coupon-create.editor')}
       extra={
         !displayEditor ? (
           <Button
@@ -85,27 +85,27 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             htmlType="button"
             onClick={() => setFormEditing(true)}
           >
-            {t('couponCreate.edit')}
+            {t('coupon-create.edit')}
           </Button>
         ) : null
       }
     >
       <Form onSubmit={handleSubmit} layout={formLayout}>
-        <Form.Item label={t('couponCreate.name')} {...formItemLayout}>
+        <Form.Item label={t('coupon-create.name')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('name', {
                 initialValue: coupon && coupon.name,
                 rules: [
                   {
                     required: true,
-                    message: t('couponCreate.nameIsRequired'),
+                    message: t('coupon-create.name-is-required'),
                   },
                 ],
               })(<Input />)
             : coupon && coupon.name}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.description')} {...formItemLayout}>
+        <Form.Item label={t('coupon-create.description')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('description', {
                 initialValue: coupon && coupon.description,
@@ -113,7 +113,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             : coupon && coupon.description}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.rank')} {...formItemLayout}>
+        <Form.Item label={t('coupon-create.rank')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('rank', {
                 initialValue:
@@ -130,7 +130,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             : coupon && coupon.rank}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.category')} {...formItemLayout}>
+        <Form.Item label={t('coupon-create.category')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('categoryId', {
                 initialValue: coupon && coupon.categoryId,
@@ -147,7 +147,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             : coupon && coupon.categoryId}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.discountType')} {...formItemLayout}>
+        <Form.Item label={t('coupon-create.discount-type')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('type', {
                 initialValue:
@@ -164,7 +164,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             : coupon && coupon.type}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.discountAmount')} {...formItemLayout}>
+        <Form.Item label={t('coupon-create.discount-amount')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('discountValue', {
                 initialValue: coupon && coupon.discountValue,
@@ -182,7 +182,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         </Form.Item>
 
         <Form.Item
-          label={t('couponCreate.distributionStartDate')}
+          label={t('coupon-create.distribution-start-date')}
           {...formItemLayout}
         >
           {displayEditor
@@ -193,7 +193,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         </Form.Item>
 
         <Form.Item
-          label={t('couponCreate.distributionEndDate')}
+          label={t('coupon-create.distribution-end-date')}
           {...formItemLayout}
         >
           {displayEditor
@@ -203,7 +203,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             : coupon && <MomentDisplay date={coupon.endDate} />}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.expirationDate')} {...formItemLayout}>
+        <Form.Item label={t('coupon-create.expirationDate')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('expireDate', {
                 initialValue: coupon && coupon.expireDate,
@@ -211,7 +211,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
             : coupon && <MomentDisplay date={coupon.expireDate} />}
         </Form.Item>
 
-        <Form.Item label={t('couponCreate.couponCount')} {...formItemLayout}>
+        <Form.Item label={t('coupon-create.coupon-count')} {...formItemLayout}>
           {displayEditor
             ? getFieldDecorator('couponCount', {
                 initialValue: coupon && coupon.couponCount,
@@ -220,7 +220,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         </Form.Item>
 
         <Form.Item
-          label={t('couponCreate.minimumShoppingValue')}
+          label={t('coupon-create.minimumShoppingValue')}
           {...formItemLayout}
         >
           {displayEditor
@@ -238,7 +238,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
               disabled={hasErrors(getFieldsError())}
               loading={loading}
             >
-              {couponIsNew ? t('couponCreate.create') : t('couponCreate.save')}
+              {couponIsNew ? t('coupon-create.create') : t('coupon-create.save')}
             </Button>
           </Form.Item>
         )}

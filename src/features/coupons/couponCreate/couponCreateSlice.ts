@@ -17,11 +17,11 @@ const initialState: CouponEditorState = {
 };
 
 const couponCreateSlice = createSlice({
-  name: 'couponCreate',
+  name: 'coupon-create',
   initialState,
   reducers: {
     createCouponsSuccess(state) {
-      message.success(i18n.t('couponCreate.createCouponSuccess'), 10);
+      message.success(i18n.t('coupon-create.create-coupon-success'), 10);
       state.loading = false;
       state.error = null;
     },

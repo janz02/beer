@@ -1,0 +1,40 @@
+.auth-card {
+  margin: auto;
+  margin-top: 2rem;
+
+  min-width: 300px;
+  max-width: 450px;
+
+  &--mobile {
+    margin-top: 0rem;
+  }
+
+  .login-additional-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    button {
+      height: inherit;
+    }
+    .ant-form-item {
+      margin: 0;
+    }
+  }
+  .recovery-additional-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    padding: 0 0.1rem;
+  }
+
+  &__option-buttons {
+    width: 100%;
+    padding-top: 1rem;
+    .ant-btn-sm {
+      height: 30px;
+    }
+    button:nth-child(2) {
+      float: right;
+    }
+  }
+}

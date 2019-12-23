@@ -58,7 +58,7 @@ const CouponListPage: React.FC = () => {
           size="small"
           onClick={() => confirm!()}
         >
-          {t('couponList.search')}
+          {t('coupon-list.search')}
         </Button>
       </div>
     ),
@@ -67,7 +67,7 @@ const CouponListPage: React.FC = () => {
 
   const columns: ColumnProps<Coupon>[] = [
     {
-      title: t('couponList.name'),
+      title: t('coupon-list.name'),
       dataIndex: 'name',
       key: 'name',
       sorter: true,
@@ -75,23 +75,23 @@ const CouponListPage: React.FC = () => {
       ...getColumnSearchProps('name'),
     },
     {
-      title: t('couponList.description'),
+      title: t('coupon-list.description'),
       dataIndex: 'description',
       key: 'description',
       ...notActionCellProps,
       ...getColumnSearchProps('description'),
     },
     {
-      title: t('couponList.action'),
+      title: t('coupon-list.action'),
       key: 'action',
       render: (text, record) => (
         <span>
           <Link to={`/coupons/${record.id}/${true}`}>
-            {t('couponList.edit')}
+            {t('coupon-list.edit')}
           </Link>
           &nbsp;|&nbsp;
           <Popconfirm
-            title={t('couponList.deleteConfirmMessage')}
+            title={t('coupon-list.delete-confirm-message')}
             onConfirm={() => {
               dispatch(deleteCoupons(record.id!));
             }}
@@ -99,7 +99,7 @@ const CouponListPage: React.FC = () => {
             cancelText={t('common.cancel')}
           >
             <Button type="danger" size="small">
-              {t('couponList.delete')}
+              {t('coupon-list.delete')}
             </Button>
           </Popconfirm>
         </span>
@@ -109,9 +109,9 @@ const CouponListPage: React.FC = () => {
 
   return (
     <div className="coupons-list-page">
-      <h1>{t('couponList.coupons')}</h1>
+      <h1>{t('coupon-list.coupons')}</h1>
       <Button type="primary">
-        <Link to="/coupons/create">{t('couponList.create')}</Link>
+        <Link to="/coupons/create">{t('coupon-list.create')}</Link>
       </Button>
       <Table
         dataSource={coupons}

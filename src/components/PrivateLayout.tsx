@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSelector from 'components/LanguageSelector';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from 'hooks';
+import { AuthMenuOptions } from 'features/auth/AuthMenuOptions';
 
 const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ const PrivateLayout: React.FC = ({ children }) => {
   const NavigationContent = () => {
     return (
       <>
-        <Menu theme="dark" mode="inline">
+        <Menu theme="dark">
           <Menu.Item onClick={closeDrawer}>
             <Icon type="desktop" />
             <span>{t('menu.dashboard')}</span>
@@ -42,6 +43,7 @@ const PrivateLayout: React.FC = ({ children }) => {
             <Link to="/coupons" />
           </Menu.Item>
         </Menu>
+        <AuthMenuOptions onClick={closeDrawer} />
         <LanguageSelector menuClosed={!menuOpened} />
       </>
     );
@@ -65,15 +67,15 @@ const PrivateLayout: React.FC = ({ children }) => {
           <NavigationContent />
         </Drawer>
       ) : (
-        <Layout.Sider
-          trigger={null}
-          collapsible
-          collapsed={!menuOpened}
-          onCollapse={(collapsed) => setMenuOpened(collapsed)}
-        >
-          <NavigationContent />
-        </Layout.Sider>
-      )}
+          <Layout.Sider
+            trigger={null}
+            collapsible
+            collapsed={!menuOpened}
+            onCollapse={(collapsed) => setMenuOpened(collapsed)}
+          >
+            <NavigationContent />
+          </Layout.Sider>
+        )}
 
       <Layout>
         <Layout.Header style={{ background: '#fff', padding: 0 }}>
