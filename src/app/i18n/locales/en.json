@@ -20,7 +20,8 @@
     "text": {
       "new-password-email": "Get an email with the new password.",
       "accept-prefix": "I accept the ",
-      "terms-and-services": "Terms & Services"
+      "terms-and-services": "Terms & Services",
+      "client-code-info": "Provided in the contract."
     },
     "field": {
       "username": "Username",
@@ -30,7 +31,8 @@
       "email": "E-mail address",
       "company": "Company name",
       "name": "Full Name",
-      "phone": "Phone number"
+      "phone": "Phone number",
+      "code": "Client code"
     },
     "error": {
       "login-failed": "Authentication failed.",

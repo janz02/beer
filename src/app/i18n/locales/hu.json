@@ -17,7 +17,8 @@
     "text": {
       "new-password-email": "Kérek egy e-mailt az új jelszóval.",
       "accept-prefix": "Elfogadom a ",
-      "terms-and-services": "Feltételeket és Szolgáltatásokat"
+      "terms-and-services": "Feltételeket és Szolgáltatásokat",
+      "client-code-info": "A szerződésben található."
     },
     "field": {
       "username": "Felhasználónév",
@@ -27,7 +28,8 @@
       "email": "E-mail-cím",
       "company": "Cég neve",
       "name": "Teljes név",
-      "phone": "Telefonszám"
+      "phone": "Telefonszám",
+      "code": "Ügyfél kód"
     },
     "error": {
       "login-failed": "Sikertelen autentikáció.",
