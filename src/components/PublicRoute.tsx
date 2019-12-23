@@ -11,7 +11,7 @@ interface PublicRouteProps extends RouteProps {
 const PublicRoute: React.FC<PublicRouteProps> = props => {
   const { onlyPublic } = props;
 
-  const loggedIn = useSelector((state: RootState) => state.auth.user.loggedIn);
+  const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
 
   if (loggedIn && onlyPublic) {
     return <Redirect to={{ pathname: '/' }} />;

@@ -35,6 +35,7 @@
     "error": {
       "login-failed": "Authentication failed.",
       "signup-failed": "Something went wrong, please try again.",
+      "recovery-failed": "Failed to send the password recovery email.",
       "username-required": "Please enter your Username!",
       "email-required": "Please enter your E-mail address!",
       "password-required": "Please enter your Password!"

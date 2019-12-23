@@ -15,9 +15,7 @@ export const AuthMenuOptions: FC<AuthMenuOptionsProps> = ({ onClick }) => {
 
   const dispatch = useDispatch();
 
-  const { loggedIn } = useSelector(
-    (state: RootState) => state.auth.user
-  );
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
 
   const buttonContent = {
     icon: loggedIn ? 'logout' : 'login',

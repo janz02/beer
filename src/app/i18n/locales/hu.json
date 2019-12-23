@@ -32,6 +32,7 @@
     "error": {
       "login-failed": "Sikertelen autentikáció.",
       "signup-failed": "A regisztrálás sikertelen volt.",
+      "recovery-failed": "Sikertelen volt a jelszó visszaállító e-mail elküldése.",
       "username-required": "Kérem add meg a felhasználó nevedet!",
       "email-required": "Kérem add meg az E-mail-címedet!",
       "password-required": "Kérem add meg a jelszavadat!"
