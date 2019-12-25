@@ -1,14 +1,14 @@
 import React from 'react';
-import { Form, Input, Icon, Button, Alert, Checkbox } from 'antd';
+import { Form, Input, Button, Alert, Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAntdForm } from './useAntdForm';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { RootState } from 'app/rootReducer';
 import { login } from './authSlice';
 import { history } from 'app/router';
 import { AuthLayout } from './AuthLayout';
 
-export const LoginPage = Form.create({ name: 'login' })(({ form }) => {
+export const LoginPage = () => {
   const { loadingLogin: loading, errorLogin: error } = useSelector(
     (state: RootState) => state.auth
   );
@@ -17,54 +17,41 @@ export const LoginPage = Form.create({ name: 'login' })(({ form }) => {
 
   const { t } = useTranslation();
 
-  const { handleSubmit, getFieldDecorator } = useAntdForm(form);
-
   return (
     <AuthLayout title={t(`auth.login`)}>
       {error && <Alert message={t('auth.error.login-failed')} type="error" />}
       <Form
-        onSubmit={event =>
-          handleSubmit(event, values => dispatch(login(values)))
-        }
+        name="login"
+        initialValues={{ remember: true }}
+        onFinish={values => dispatch(login(values))}
       >
-        <Form.Item>
-          {getFieldDecorator('username', {
-            rules: [
-              {
-                required: true,
-                message: t('auth.error.username-required'),
-              },
-            ],
-          })(
-            <Input
-              prefix={<Icon type="user" />}
-              placeholder={t('auth.field.username')}
-            />
-          )}
+        <Form.Item
+          name="username"
+          rules={[
+            { required: true, message: t('auth.error.username-required') },
+          ]}
+        >
+          <Input
+            prefix={<UserOutlined />}
+            placeholder={t('auth.field.username')}
+          />
         </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('password', {
-            rules: [
-              {
-                required: true,
-                message: t('auth.error.password-required'),
-              },
-            ],
-          })(
-            <Input
-              prefix={<Icon type="lock" />}
-              type="password"
-              placeholder={t('auth.field.password')}
-            />
-          )}
+        <Form.Item
+          name="password"
+          rules={[
+            { required: true, message: t('auth.error.password-required') },
+          ]}
+        >
+          <Input.Password
+            prefix={<LockOutlined />}
+            placeholder={t('auth.field.password')}
+          />
         </Form.Item>
-        <div className="login-additional-options">
-          <Form.Item>
-            {getFieldDecorator('rememember', { valuePropName: 'checked' })(
-              <Checkbox>{t('auth.field.remember-me')}</Checkbox>
-            )}
-          </Form.Item>
 
+        <div className="login-additional-options">
+          <Form.Item name="remember" valuePropName="checked">
+            <Checkbox>{t('auth.field.remember-me')}</Checkbox>
+          </Form.Item>
           <Button
             type="link"
             style={{ padding: 0 }}
@@ -92,4 +79,4 @@ export const LoginPage = Form.create({ name: 'login' })(({ form }) => {
       </Button>
     </AuthLayout>
   );
-});
+};

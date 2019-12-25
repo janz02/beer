@@ -37,7 +37,13 @@
       "recovery-failed": "Sikertelen volt a jelszó visszaállító e-mail elküldése.",
       "username-required": "Kérem add meg a felhasználó nevedet!",
       "email-required": "Kérem add meg az E-mail-címedet!",
-      "password-required": "Kérem add meg a jelszavadat!"
+      "name-required": "Kérem add meg a teljes nevedet!",
+      "phone-required": "Kérem add meg a telefonszámodat!",
+      "company-required": "Kérem add meg a munkahelyed nevét!",
+      "code-required": "Kérem add meg az ügyfél kódodat!",
+      "password-required": "Kérem add meg a jelszavadat!",
+      "password-inconsistent": "A két jelszó nem egyezik meg.",
+      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú."
     }
   },
   "coupon-list": {
@@ -56,19 +62,24 @@
     "save": "Mentés",
     "editor": "Kupon szerkesztő",
     "edit": "Szerkesztés",
-    "name": "Név",
-    "description": "Leírás",
-    "rank": "Rang",
-    "category": "Kategória",
-    "discount-type": "Kedvezmény típusa",
-    "discount-amount": "Kedvezmény mennyisége",
-    "distribution-start-date": "Kiosztási kezdő dátum",
-    "distribution-end-date": "Kiosztási vég dátum",
-    "coupon-count": "Kuponok száma",
-    "minimum-shopping-value": "Minimális vásárlási érték",
-    "expiration-date": "Lejárati dátum",
-    "name-is-required": "A név mező megadása kötelező.",
-    "create-coupon-success": "Sikeres kupon létrehozás."
+    "create-coupon-success": "Sikeres kupon létrehozás.",
+    "field": {
+      "name": "Név",
+      "description": "Leírás",
+      "rank": "Rang",
+      "category": "Kategória",
+      "discount-type": "Kedvezmény típusa",
+      "discount-amount": "Kedvezmény mennyisége",
+      "distribution-start-date": "Kiosztási kezdő dátum",
+      "distribution-end-date": "Kiosztási vég dátum",
+      "coupon-count": "Kuponok száma",
+      "minimum-shopping-value": "Minimális vásárlási érték",
+      "expiration-date": "Lejárati dátum"
+    },
+    "error": {
+      "name-required": "A név mező megadása kötelező.",
+      "percentage-max-100": "A százalék érték maximum 100 lehet."
+    }
   },
   "coupon-editor": {
     "save-coupon-success": "Sikeres kupon mentés."

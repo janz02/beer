@@ -40,7 +40,13 @@
       "recovery-failed": "Failed to send the password recovery email.",
       "username-required": "Please enter your Username!",
       "email-required": "Please enter your E-mail address!",
-      "password-required": "Please enter your Password!"
+      "code-required": "Please enter your client code!",
+      "name-required": "Please enter your full name!",
+      "phone-required": "Please enter your phone number!",
+      "company-required": "Please enter your name of your workplace!",
+      "password-required": "Please enter your Password!",
+      "password-inconsistent": "The two passwords are not matching.",
+      "password-format": "Must have a letter, a number, a special character and contain 8 characters."
     }
   },
   "coupon-list": {
@@ -59,19 +65,24 @@
     "save": "Save",
     "editor": "Coupon editor",
     "edit": "Edit",
-    "name": "Name",
-    "description": "Description",
-    "rank": "Rank",
-    "category": "Category",
-    "discount-type": "Discount type",
-    "discount-amount": "Discount amount",
-    "distribution-start-date": "Distribution start date",
-    "distribution-end-date": "Distribution end date",
-    "expiration-date": "Expiration date",
-    "coupon-count": "Coupon count",
-    "minimum-shopping-value": "Minimum shopping value",
-    "name-is-required": "Name field is required.",
-    "create-coupon-success": "Creating a coupon was successful."
+    "create-coupon-success": "Creating a coupon was successful.",
+    "field": {
+      "name": "Name",
+      "description": "Description",
+      "rank": "Rank",
+      "category": "Category",
+      "discount-type": "Discount type",
+      "discount-amount": "Discount amount",
+      "distribution-start-date": "Distribution start date",
+      "distribution-end-date": "Distribution end date",
+      "coupon-count": "Coupon count",
+      "minimum-shopping-value": "Minimum shopping value",
+      "expiration-date": "Expiration date"
+    },
+    "error": {
+      "name-required": "Name field is required.",
+      "percentage-max-100": "The percentage value cannot exceed 100."
+    }
   },
   "coupon-editor": {
     "save-coupon-success": "Saving a coupon was successful."

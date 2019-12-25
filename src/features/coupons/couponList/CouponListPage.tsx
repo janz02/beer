@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import './CouponListPage.scss';
-import { Button, Table, Input, Icon, Popconfirm } from 'antd';
+import { Button, Table, Input, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
-import { ColumnProps } from 'antd/lib/table';
 import { Coupon } from 'models/coupon';
 import { useIsMobile } from 'hooks';
 import { listCoupons, deleteCoupons } from './couponListSlice';
 import { useTranslation } from 'react-i18next';
 import { CouponListingOptions } from 'models/couponListingOptions';
+import { SearchOutlined } from '@ant-design/icons';
 import { OrderByType } from 'api/swagger/models';
+import { ColumnType } from 'antd/lib/table/interface';
 
 const CouponListPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
   const { coupons, loading, allCouponsCount } = useSelector(
-    (state: RootState) => state.couponList,
+    (state: RootState) => state.couponList
   );
-
   const [listingOptions, setListingOptions] = useState<CouponListingOptions>({
     pageSize: 10,
     current: 1,
@@ -30,7 +30,7 @@ const CouponListPage: React.FC = () => {
     dispatch(listCoupons(listingOptions));
   }, [dispatch, listingOptions]);
 
-  const notActionCellProps: ColumnProps<Coupon> = {
+  const notActionCellProps: any = {
     onCell: (record: Coupon) => {
       return {
         onClick: () => {
@@ -40,7 +40,7 @@ const CouponListPage: React.FC = () => {
     },
   };
 
-  const getColumnSearchProps = (dataIndex: string): ColumnProps<Coupon> => ({
+  const getColumnSearchProps = (dataIndex: string): ColumnType<Coupon> => ({
     filterDropdown: ({
       setSelectedKeys,
       selectedKeys,
@@ -62,10 +62,10 @@ const CouponListPage: React.FC = () => {
         </Button>
       </div>
     ),
-    filterIcon: () => <Icon type="search" />,
+    filterIcon: () => <SearchOutlined />,
   });
 
-  const columns: ColumnProps<Coupon>[] = [
+  const columns: ColumnType<Coupon>[] = [
     {
       title: t('coupon-list.name'),
       dataIndex: 'name',
@@ -116,7 +116,7 @@ const CouponListPage: React.FC = () => {
       <Table
         dataSource={coupons}
         columns={columns}
-        rowKey={(x) => x.id!.toString()}
+        rowKey={x => x.id!.toString()}
         pagination={{
           pageSizeOptions: ['10', '20', '50', '100'],
           showSizeChanger: true,
@@ -124,7 +124,7 @@ const CouponListPage: React.FC = () => {
           total: allCouponsCount,
         }}
         loading={loading}
-        onChange={(pagination, filters, sorter) => {
+        onChange={(pagination, filters, sorter: any) => {
           let orderByType: OrderByType;
           let orderBy: string;
           switch (sorter.order) {
@@ -141,8 +141,8 @@ const CouponListPage: React.FC = () => {
           setListingOptions({
             pageSize: pagination.pageSize!,
             current: pagination.current!,
-            orderByType,
-            orderBy,
+            orderByType: orderByType!,
+            orderBy: orderBy!,
           });
         }}
       />
