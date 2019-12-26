@@ -55,7 +55,7 @@ const authSlice = createSlice({
     logout(state) {
       state.loggedIn = false;
       state.userData = {};
-    }
+    },
   },
 });
 
@@ -68,12 +68,13 @@ const delay = (p: any) =>
     }, 1000);
   });
 
-const login = (params: any): AppThunk => async dispatch => {
+const login = (params: any): AppThunk => async (dispatch, state) => {
   dispatch(loginRequest());
   try {
     const userData = await delay(params);
+    const cameFrom = state().routerHistory.cameFrom;
     dispatch(loginSuccess(userData as UserData));
-    history.push('/');
+    history.push(cameFrom);
   } catch (err) {
     dispatch(loginFail(err.toString()));
   }
@@ -99,7 +100,6 @@ const signUp = (params: any): AppThunk => async dispatch => {
     dispatch(signupFail());
   }
 };
-
 
 export const {
   loginRequest,

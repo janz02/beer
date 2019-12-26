@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import { history } from 'app/router';
 import RouterView from 'app/router';
 import { BrowserRouter } from 'react-router-dom';
@@ -9,9 +9,9 @@ import store from './store';
 const App: React.FC = () => (
   <BrowserRouter>
     <Provider store={store}>
-      <Router history={history}>
+      <ConnectedRouter history={history}>
         <RouterView />
-      </Router>
+      </ConnectedRouter>
     </Provider>
   </BrowserRouter>
 );
