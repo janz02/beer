@@ -1,12 +1,21 @@
 .auth-card {
   margin: auto;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 
   min-width: 300px;
   max-width: 450px;
 
   &--mobile {
-    margin-top: 0rem;
+    margin: 0rem;
+  }
+
+  .ant-form-item-explain, .ant-form-item-extra {
+    text-align: end;
+  }
+
+  .ant-checkbox-wrapper {
+    margin-left: 0.5rem;
   }
 
   .login-additional-options {

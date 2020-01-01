@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Card, Select, InputNumber } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
-import { useTranslation } from 'react-i18next';
+import {
+  Form,
+  Input,
+  Button,
+  Card,
+  Select,
+  InputNumber,
+  DatePicker,
+} from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { DatePicker } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { useIsMobile } from 'hooks';
 import { Coupon } from 'models/coupon';
-import { useParams } from 'react-router-dom';
-import MomentDisplay from '../../../components/MomentDisplay';
 import { CouponRank, CouponType } from 'api/swagger/models';
-import { useDispatch, useSelector } from 'react-redux';
 import { listCategories } from '../couponsSlice';
 import { RootState } from 'app/rootReducer';
 
-const hasErrors = (fieldsError: any) => {
-  return Object.keys(fieldsError).some((field) => fieldsError[field]);
-};
-
-interface CouponEditorFormProps extends FormComponentProps {
+interface CouponEditorFormProps {
   handleCouponSave: (values: any) => void;
   loading: boolean;
   couponIsNew: boolean;
@@ -25,20 +26,21 @@ interface CouponEditorFormProps extends FormComponentProps {
 }
 
 const CouponEditorForm = (props: CouponEditorFormProps) => {
+  const { handleCouponSave, loading, couponIsNew, coupon } = props;
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
   const { categories } = useSelector((state: RootState) => state.coupons);
+  const [submitable, setSubmitable] = useState(false);
+  const { editing } = useParams();
+  const [formEditing, setFormEditing] = useState(editing === 'true');
+  const [form] = Form.useForm();
 
   useEffect(() => {
     dispatch(listCategories());
   }, [dispatch]);
 
-  const { getFieldDecorator, getFieldsError } = props.form;
-  const { handleCouponSave, loading, couponIsNew, coupon } = props;
-
-  const { editing } = useParams();
-  const [formEditing, setFormEditing] = useState(editing === 'true');
   const displayEditor = couponIsNew || formEditing;
 
   const formLayout = isMobile ? 'vertical' : 'horizontal';
@@ -50,28 +52,12 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         }
       : null;
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    props.form.validateFields((err, values) => {
-      if (!err) {
-        const coupon = {
-          name: values['name'],
-          description: values['description'],
-          rank: values['rank'],
-          categoryId: values['categoryId'],
-          type: values['type'],
-          discountValue: values['discountValue'],
-          startDate: values['startDate'],
-          endDate: values['endDate'],
-          expireDate: values['expireDate'],
-          couponCount: values['couponCount'],
-          minimumShoppingValue: values['minimumShoppingValue'],
-          // TODO: integrate tags and isDrawable.
-          tags: [],
-          isDrawable: false,
-        } as Coupon;
-        handleCouponSave(coupon);
-      }
+  const handleSubmit = (values: any) => {
+    handleCouponSave({
+      ...values,
+      // TODO: integrate tags and isDrawable.
+      tags: [],
+      isDrawable: false,
     });
   };
 
@@ -90,163 +76,164 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
         ) : null
       }
     >
-      <Form onSubmit={handleSubmit} layout={formLayout}>
-        <Form.Item label={t('coupon-create.name')} {...formItemLayout}>
-          {displayEditor
-            ? getFieldDecorator('name', {
-                initialValue: coupon && coupon.name,
-                rules: [
-                  {
-                    required: true,
-                    message: t('coupon-create.name-is-required'),
-                  },
-                ],
-              })(<Input />)
-            : coupon && coupon.name}
-        </Form.Item>
-
-        <Form.Item label={t('coupon-create.description')} {...formItemLayout}>
-          {displayEditor
-            ? getFieldDecorator('description', {
-                initialValue: coupon && coupon.description,
-              })(<TextArea />)
-            : coupon && coupon.description}
-        </Form.Item>
-
-        <Form.Item label={t('coupon-create.rank')} {...formItemLayout}>
-          {displayEditor
-            ? getFieldDecorator('rank', {
-                initialValue:
-                  coupon && coupon.rank ? coupon.rank : CouponRank.Bronze,
-              })(
-                <Select>
-                  {Object.keys(CouponRank).map((x) => (
-                    <Select.Option key={x} value={x}>
-                      {x}
-                    </Select.Option>
-                  ))}
-                </Select>,
-              )
-            : coupon && coupon.rank}
-        </Form.Item>
-
-        <Form.Item label={t('coupon-create.category')} {...formItemLayout}>
-          {displayEditor
-            ? getFieldDecorator('categoryId', {
-                initialValue: coupon && coupon.categoryId,
-              })(
-                <Select>
-                  {categories &&
-                    categories.map((x) => (
-                      <Select.Option key={x.id} value={x.id}>
-                        {x.name}
-                      </Select.Option>
-                    ))}
-                </Select>,
-              )
-            : coupon && coupon.categoryId}
-        </Form.Item>
-
-        <Form.Item label={t('coupon-create.discount-type')} {...formItemLayout}>
-          {displayEditor
-            ? getFieldDecorator('type', {
-                initialValue:
-                  coupon && coupon.type ? coupon.type : CouponType.FixValue,
-              })(
-                <Select>
-                  {Object.keys(CouponType).map((x) => (
-                    <Select.Option key={x} value={x}>
-                      {x}
-                    </Select.Option>
-                  ))}
-                </Select>,
-              )
-            : coupon && coupon.type}
-        </Form.Item>
-
-        <Form.Item label={t('coupon-create.discount-amount')} {...formItemLayout}>
-          {displayEditor
-            ? getFieldDecorator('discountValue', {
-                initialValue: coupon && coupon.discountValue,
-              })(
-                <InputNumber
-                  min={1}
-                  max={
-                    props.form.getFieldValue('type') === CouponType.PercentValue
-                      ? 100
-                      : undefined
-                  }
-                />,
-              )
-            : coupon && coupon.discountValue}
+      <Form
+        name="coupon-editor-form"
+        onFinish={handleSubmit}
+        form={form}
+        layout={formLayout}
+        onFieldsChange={v => {
+          const hasErrors = form
+            .getFieldsError()
+            .some(field => field.errors.length);
+          if (submitable === hasErrors) {
+            setSubmitable(!submitable);
+          }
+        }}
+        initialValues={{
+          rank: CouponRank.Bronze,
+          type: CouponType.FixValue,
+          ...coupon,
+        }}
+      >
+        <Form.Item
+          name="name"
+          label={t('coupon-create.field.name')}
+          rules={[
+            { required: true, message: t('coupon-create.error.name-required') },
+          ]}
+          {...formItemLayout}
+        >
+          <Input readOnly={!displayEditor} />
         </Form.Item>
 
         <Form.Item
-          label={t('coupon-create.distribution-start-date')}
+          name="description"
+          label={t('coupon-create.field.description')}
           {...formItemLayout}
         >
-          {displayEditor
-            ? getFieldDecorator('startDate', {
-                initialValue: coupon && coupon.startDate,
-              })(<DatePicker />)
-            : coupon && <MomentDisplay date={coupon.startDate} />}
+          <TextArea readOnly={!displayEditor} />
         </Form.Item>
 
         <Form.Item
-          label={t('coupon-create.distribution-end-date')}
+          name="rank"
+          label={t('coupon-create.field.rank')}
           {...formItemLayout}
         >
-          {displayEditor
-            ? getFieldDecorator('endDate', {
-                initialValue: coupon && coupon.endDate,
-              })(<DatePicker />)
-            : coupon && <MomentDisplay date={coupon.endDate} />}
-        </Form.Item>
-
-        <Form.Item label={t('coupon-create.expirationDate')} {...formItemLayout}>
-          {displayEditor
-            ? getFieldDecorator('expireDate', {
-                initialValue: coupon && coupon.expireDate,
-              })(<DatePicker />)
-            : coupon && <MomentDisplay date={coupon.expireDate} />}
-        </Form.Item>
-
-        <Form.Item label={t('coupon-create.coupon-count')} {...formItemLayout}>
-          {displayEditor
-            ? getFieldDecorator('couponCount', {
-                initialValue: coupon && coupon.couponCount,
-              })(<InputNumber min={1} />)
-            : coupon && coupon.couponCount}
+          <Select disabled={!displayEditor}>
+            {Object.keys(CouponRank).map(x => (
+              <Select.Option key={x} value={x}>
+                {x}
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
 
         <Form.Item
-          label={t('coupon-create.minimumShoppingValue')}
+          name="categoryId"
+          label={t('coupon-create.field.category')}
           {...formItemLayout}
         >
-          {displayEditor
-            ? getFieldDecorator('minimumShoppingValue', {
-                initialValue: coupon && coupon.minimumShoppingValue,
-              })(<InputNumber min={1} />)
-            : coupon && coupon.minimumShoppingValue}
+          <Select disabled={!displayEditor}>
+            {categories &&
+              categories.map(x => (
+                <Select.Option key={x.id} value={x.id!}>
+                  {x.name}
+                </Select.Option>
+              ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          name="type"
+          label={t('coupon-create.field.discount-type')}
+          {...formItemLayout}
+        >
+          <Select disabled={!displayEditor}>
+            {Object.keys(CouponType).map(x => (
+              <Select.Option key={x} value={x}>
+                {x}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          name="discountValue"
+          label={t('coupon-create.field.discount-amount')}
+          dependencies={['type']}
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (
+                  100 < value &&
+                  getFieldValue('type') === CouponType.PercentValue
+                ) {
+                  return Promise.reject(
+                    t('coupon-create.error.percentage-max-100')
+                  );
+                }
+                return Promise.resolve();
+              },
+            }),
+          ]}
+          {...formItemLayout}
+        >
+          <InputNumber min={1} />
+        </Form.Item>
+
+        <Form.Item
+          name="startDate"
+          label={t('coupon-create.field.distribution-start-date')}
+          {...formItemLayout}
+        >
+          <DatePicker disabled={!displayEditor} />
+        </Form.Item>
+
+        <Form.Item
+          name="endDate"
+          label={t('coupon-create.field.distribution-end-date')}
+          {...formItemLayout}
+        >
+          <DatePicker disabled={!displayEditor} />
+        </Form.Item>
+
+        <Form.Item
+          name="expireDate"
+          label={t('coupon-create.field.expiration-date')}
+          {...formItemLayout}
+        >
+          <DatePicker disabled={!displayEditor} />
+        </Form.Item>
+
+        <Form.Item
+          name="couponCount"
+          label={t('coupon-create.field.coupon-count')}
+          {...formItemLayout}
+        >
+          <InputNumber readOnly={!displayEditor} min={1} />
+        </Form.Item>
+
+        <Form.Item
+          name="minimumShoppingValue"
+          label={t('coupon-create.field.minimum-shopping-value')}
+          {...formItemLayout}
+        >
+          <InputNumber readOnly={!displayEditor} min={1} />
         </Form.Item>
 
         {displayEditor && (
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
-              loading={loading}
-            >
-              {couponIsNew ? t('coupon-create.create') : t('coupon-create.save')}
-            </Button>
-          </Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={!submitable}
+            loading={loading}
+          >
+            {couponIsNew ? t('coupon-create.create') : t('coupon-create.save')}
+          </Button>
         )}
       </Form>
     </Card>
   );
 };
 
-export default Form.create<CouponEditorFormProps>({
-  name: 'coupon-editor-form',
-})(CouponEditorForm);
+export default CouponEditorForm;

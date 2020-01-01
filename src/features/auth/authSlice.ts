@@ -7,7 +7,7 @@ interface UserData {}
 const authSlice = createSlice({
   name: '@auth',
   initialState: {
-    loggedIn: false,
+    loggedIn: true,
     userData: {} as UserData,
     loadingSignup: false,
     loadingPasswordRecovery: false,
@@ -62,6 +62,7 @@ const authSlice = createSlice({
 // TODO: Only for simulating async actions, remove after API is connected
 const delay = (p: any) =>
   new Promise(resolve => {
+    console.log('mock api call', p);
     setTimeout(() => {
       resolve(p);
     }, 1000);

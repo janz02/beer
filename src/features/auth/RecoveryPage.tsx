@@ -1,19 +1,17 @@
 import React from 'react';
-import { Form, Input, Icon, Button, Alert } from 'antd';
+import { Form, Input, Button, Alert } from 'antd';
+import { MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAntdForm } from './useAntdForm';
 import { recoverPassword } from './authSlice';
 import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
 import { AuthLayout } from './AuthLayout';
 
-export const RecoveryPage = Form.create({ name: 'recovery' })(({ form }) => {
+export const RecoveryPage = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
-
-  const { handleSubmit, getFieldDecorator } = useAntdForm(form);
 
   const {
     loadingPasswordRecovery: loading,
@@ -26,22 +24,22 @@ export const RecoveryPage = Form.create({ name: 'recovery' })(({ form }) => {
         <Alert message={t('auth.error.recovery-failed')} type="error" />
       )}
       <Form
-        onSubmit={event =>
-          handleSubmit(event, values => dispatch(recoverPassword(values)))
-        }
+        name="recovery"
+        onFinish={values => {
+          dispatch(recoverPassword(values));
+        }}
       >
-        <div>{t('auth.text.new-password-email')}</div>
-        <Form.Item>
-          {getFieldDecorator('email', {
-            rules: [
-              { required: true, message: t('auth.error.email-required') },
-            ],
-          })(
-            <Input
-              prefix={<Icon type="mail" />}
-              placeholder={t('auth.field.email')}
-            />
-          )}
+        <div style={{ marginBottom: '0.5rem' }}>
+          {t('auth.text.new-password-email')}
+        </div>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: t('auth.error.email-required') }]}
+        >
+          <Input
+            prefix={<MailOutlined />}
+            placeholder={t('auth.field.email')}
+          />
         </Form.Item>
         <Button
           loading={loading}
@@ -63,4 +61,4 @@ export const RecoveryPage = Form.create({ name: 'recovery' })(({ form }) => {
       </div>
     </AuthLayout>
   );
-});
+};
