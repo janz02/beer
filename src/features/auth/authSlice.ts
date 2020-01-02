@@ -24,7 +24,7 @@ const authSlice = createSlice({
       state.loadingSignup = false;
       state.errorSignup = null;
     },
-    signupFail(state, action: PayloadAction<any>) {
+    signupFail(state, action: PayloadAction<string>) {
       state.loadingSignup = false;
       state.errorSignup = action.payload;
     },
@@ -35,7 +35,7 @@ const authSlice = createSlice({
       state.loadingPasswordRecovery = false;
       state.errorPasswordRecovery = null;
     },
-    passwordRecoveryFail(state, action: PayloadAction<any>) {
+    passwordRecoveryFail(state, action: PayloadAction<string>) {
       state.loadingPasswordRecovery = false;
       state.errorPasswordRecovery = action.payload;
     },
@@ -48,14 +48,14 @@ const authSlice = createSlice({
       state.loggedIn = true;
       state.userData = action.payload;
     },
-    loginFail(state, action: PayloadAction<any>) {
+    loginFail(state, action: PayloadAction<string>) {
       state.loadingLogin = false;
       state.errorLogin = action.payload;
     },
     logout(state) {
       state.loggedIn = false;
       state.userData = {};
-    }
+    },
   },
 });
 
@@ -68,12 +68,13 @@ const delay = (p: any) =>
     }, 1000);
   });
 
-const login = (params: any): AppThunk => async dispatch => {
+const login = (params: any): AppThunk => async (dispatch, state) => {
   dispatch(loginRequest());
   try {
     const userData = await delay(params);
+    const cameFrom = state().routerHistory.cameFrom;
     dispatch(loginSuccess(userData as UserData));
-    history.push('/');
+    history.push(cameFrom);
   } catch (err) {
     dispatch(loginFail(err.toString()));
   }
@@ -85,7 +86,7 @@ const recoverPassword = (params: any): AppThunk => async dispatch => {
     await delay(params);
     dispatch(passwordRecoverySuccess());
   } catch (err) {
-    dispatch(passwordRecoveryFail());
+    dispatch(passwordRecoveryFail(err.toString()));
   }
 };
 
@@ -96,10 +97,9 @@ const signUp = (params: any): AppThunk => async dispatch => {
     dispatch(signupSuccess());
     dispatch(login(params as UserData));
   } catch (err) {
-    dispatch(signupFail());
+    dispatch(signupFail(err.toString()));
   }
 };
-
 
 export const {
   loginRequest,
