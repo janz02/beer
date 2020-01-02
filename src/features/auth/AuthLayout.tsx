@@ -5,14 +5,19 @@ import './auth.scss';
 
 interface AuthLayoutProps {
   title: string;
+  className?: string;
 }
 
-export const AuthLayout: FC<AuthLayoutProps> = ({ title, children }) => {
+export const AuthLayout: FC<AuthLayoutProps> = props => {
+  const { title, className, children } = props;
   const isMobile = useIsMobile();
-  
+
   return (
     <Layout.Content>
-      <Card title={title} className={`auth-card ${isMobile ? 'auth-card--mobile' : ''}`}>
+      <Card
+        title={title}
+        className={`auth-card ${className} ${isMobile ? 'auth-card--mobile' : ''}`}
+      >
         {children}
       </Card>
     </Layout.Content>
