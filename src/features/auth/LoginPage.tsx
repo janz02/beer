@@ -18,7 +18,7 @@ export const LoginPage = () => {
   const { t } = useTranslation();
 
   return (
-    <AuthLayout title={t(`auth.login`)}>
+    <AuthLayout className="login" title={t(`auth.login`)}>
       {error && <Alert message={t('auth.error.login-failed')} type="error" />}
       <Form
         name="login"
@@ -48,13 +48,12 @@ export const LoginPage = () => {
           />
         </Form.Item>
 
-        <div className="login-additional-options">
+        <div className="login__options">
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>{t('auth.field.remember-me')}</Checkbox>
           </Form.Item>
           <Button
             type="link"
-            style={{ padding: 0 }}
             onClick={() => history.push('/auth/recovery')}
           >
             {t('auth.forgot-password')}
@@ -71,8 +70,8 @@ export const LoginPage = () => {
         </Button>
       </Form>
       <Button
+        className="login__signup-button"
         type="link"
-        style={{ float: 'right', marginTop: '0.75rem' }}
         onClick={() => history.push('/auth/signup')}
       >
         {t('auth.signup')}

@@ -19,7 +19,7 @@ export const RecoveryPage = () => {
   } = useSelector((state: RootState) => state.auth);
 
   return (
-    <AuthLayout title={t(`auth.forgot-password`)}>
+    <AuthLayout className='recovery' title={t(`auth.forgot-password`)}>
       {error && (
         <Alert message={t('auth.error.recovery-failed')} type="error" />
       )}
@@ -29,7 +29,7 @@ export const RecoveryPage = () => {
           dispatch(recoverPassword(values));
         }}
       >
-        <div style={{ marginBottom: '0.5rem' }}>
+        <div className='instruction-text'>
           {t('auth.text.new-password-email')}
         </div>
         <Form.Item
@@ -51,7 +51,7 @@ export const RecoveryPage = () => {
           {t('auth.send-email')}
         </Button>
       </Form>
-      <div className="recovery-additional-options">
+      <div className="recovery__additional-options">
         <Button onClick={() => history.push('/auth/')}>
           {t(`auth.login`)}
         </Button>

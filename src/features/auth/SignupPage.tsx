@@ -24,7 +24,7 @@ export const SignupPage = () => {
   const { t } = useTranslation();
 
   return (
-    <AuthLayout title={t(`auth.signup`)}>
+    <AuthLayout className="signup" title={t(`auth.signup`)}>
       {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
       <Form
         name="signup"
@@ -117,8 +117,8 @@ export const SignupPage = () => {
           <Checkbox>
             {t('auth.text.accept-prefix')}
             <Button
+              className="signup__accept-terms"
               type="link"
-              style={{ padding: 0 }}
               onClick={() => console.log('TODO: open terms and services')}
             >
               {' '}
@@ -189,7 +189,7 @@ export const SignupPage = () => {
         </Button> */}
       </Form>
       <Button
-        style={{ float: 'right', marginTop: '0.75rem' }}
+        className="signup__login-button"
         onClick={() => history.push('/auth')}
       >
         {t('auth.login')}
