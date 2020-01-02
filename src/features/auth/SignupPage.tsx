@@ -136,57 +136,6 @@ export const SignupPage = () => {
         >
           {t('auth.signup')}
         </Button>
-
-        {/* <Form.Item>
-          {getFieldDecorator('phone', {
-            rules: [
-              // { required: true, message: t('auth.error.phone-required') }
-            ],
-          })(
-            <Input
-              prefix={<Icon type="phone" />}
-              type="tel"
-              placeholder={t('auth.field.phone')}
-            />
-          )}
-        </Form.Item>
-        <Form.Item extra={t('auth.text.client-code-info')}>
-          {getFieldDecorator('code', {
-            rules: [
-              // { required: true, message: t('auth.error.phone-required') }
-            ],
-          })(
-            <Input
-              prefix={<Icon type="crown" />}
-              type="text"
-              placeholder={t('auth.field.code')}
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('accept', { valuePropName: 'checked' })(
-            <Checkbox>
-              {t('auth.text.accept-prefix')}
-              <Button
-                type="link"
-                style={{ padding: 0 }}
-                onClick={() => console.log('TODO: open terms and services')}
-              >
-                {' '}
-                {t('auth.text.terms-and-services')}
-              </Button>
-            </Checkbox>
-          )}
-        </Form.Item>
-        <Button
-          loading={loading}
-          block
-          size="large"
-          type="primary"
-          htmlType="submit"
-        >
-          {t('auth.signup')}
-        </Button> */}
       </Form>
       <Button
         className="signup__login-button"
