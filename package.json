@@ -14,6 +14,7 @@
     "antd": "4.0.0-beta.0",
     "connected-react-router": "^6.6.1",
     "customize-cra": "^0.9.1",
+    "env-cmd": "^10.0.1",
     "i18next": "^19.0.1",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
@@ -34,9 +35,9 @@
     "less-loader": "^5.0.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "start": "env-cmd -e dev react-app-rewired start",
+    "test": "env-cmd -e dev react-app-rewired test",
+    "build": "env-cmd -e prod react-app-rewired build",
     "eject": "react-app-rewired eject",
     "generate-client": "openapi-generator generate -i src/api/swagger.json -g typescript-fetch -p typescriptThreePlus=true -o src/api/swagger"
   },
