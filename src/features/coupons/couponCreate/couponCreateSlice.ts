@@ -57,7 +57,7 @@ export const createCoupons = (coupon: Coupon): AppThunk => async (dispatch) => {
     });
 
     dispatch(createCouponsSuccess());
-    history.push('/');
+    history.push('/coupons');
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()));
   }

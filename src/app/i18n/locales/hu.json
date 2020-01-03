@@ -10,14 +10,15 @@
   "auth": {
     "login": "Belépés",
     "logout": "Kilépés",
-    "signup": "Regisztrálok",
-    "forgot-password": "Elfelejtettem a jelszavam",
+    "signup": "Regisztrálás",
+    "forgot-password": "Elfelejtettem a jelszavamat!",
     "password-recovery": "Jelszó megkeresése",
     "send-email": "Email küldése",
     "text": {
       "new-password-email": "Kérek egy e-mailt az új jelszóval.",
       "accept-prefix": "Elfogadom a ",
-      "terms-and-services": "Feltételeket és Szolgáltatásokat"
+      "terms-and-services": "Feltételeket és Szolgáltatásokat",
+      "client-code-info": "A szerződésben található."
     },
     "field": {
       "username": "Felhasználónév",
@@ -27,14 +28,22 @@
       "email": "E-mail-cím",
       "company": "Cég neve",
       "name": "Teljes név",
-      "phone": "Telefonszám"
+      "phone": "Telefonszám",
+      "code": "Ügyfél kód"
     },
     "error": {
       "login-failed": "Sikertelen autentikáció.",
       "signup-failed": "A regisztrálás sikertelen volt.",
+      "recovery-failed": "Sikertelen volt a jelszó visszaállító e-mail elküldése.",
       "username-required": "Kérem add meg a felhasználó nevedet!",
       "email-required": "Kérem add meg az E-mail-címedet!",
-      "password-required": "Kérem add meg a jelszavadat!"
+      "name-required": "Kérem add meg a teljes nevedet!",
+      "phone-required": "Kérem add meg a telefonszámodat!",
+      "company-required": "Kérem add meg a munkahelyed nevét!",
+      "code-required": "Kérem add meg az ügyfél kódodat!",
+      "password-required": "Kérem add meg a jelszavadat!",
+      "password-inconsistent": "A két jelszó nem egyezik meg.",
+      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú."
     }
   },
   "coupon-list": {
@@ -53,19 +62,24 @@
     "save": "Mentés",
     "editor": "Kupon szerkesztő",
     "edit": "Szerkesztés",
-    "name": "Név",
-    "description": "Leírás",
-    "rank": "Rang",
-    "category": "Kategória",
-    "discount-type": "Kedvezmény típusa",
-    "discount-amount": "Kedvezmény mennyisége",
-    "distribution-start-date": "Kiosztási kezdő dátum",
-    "distribution-end-date": "Kiosztási vég dátum",
-    "coupon-count": "Kuponok száma",
-    "minimum-shopping-value": "Minimális vásárlási érték",
-    "expiration-date": "Lejárati dátum",
-    "name-is-required": "A név mező megadása kötelező.",
-    "create-coupon-success": "Sikeres kupon létrehozás."
+    "create-coupon-success": "Sikeres kupon létrehozás.",
+    "field": {
+      "name": "Név",
+      "description": "Leírás",
+      "rank": "Rang",
+      "category": "Kategória",
+      "discount-type": "Kedvezmény típusa",
+      "discount-amount": "Kedvezmény mennyisége",
+      "distribution-start-date": "Kiosztási kezdő dátum",
+      "distribution-end-date": "Kiosztási vég dátum",
+      "coupon-count": "Kuponok száma",
+      "minimum-shopping-value": "Minimális vásárlási érték",
+      "expiration-date": "Lejárati dátum"
+    },
+    "error": {
+      "name-required": "A név mező megadása kötelező.",
+      "percentage-max-100": "A százalék érték maximum 100 lehet."
+    }
   },
   "coupon-editor": {
     "save-coupon-success": "Sikeres kupon mentés."

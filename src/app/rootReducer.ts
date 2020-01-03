@@ -1,4 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import { connectRouter } from 'connected-react-router';
+import { history } from './router';
+import routerHistoryReducer from './routerHistoryStore';
 import authReducer from 'features/auth/authSlice';
 import couponListReducer from 'features/coupons/couponList/couponListSlice';
 import couponEditorReducer from 'features/coupons/couponEditor/couponEditorSlice';
@@ -6,12 +9,14 @@ import couponCreateReducer from 'features/coupons/couponCreate/couponCreateSlice
 import couponsReducer from 'features/coupons/couponsSlice';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  couponList: couponListReducer,
-  couponEditor: couponEditorReducer,
-  couponCreate: couponCreateReducer,
-  coupons: couponsReducer,
-});
+    router: connectRouter(history),
+    routerHistory: routerHistoryReducer,
+    auth: authReducer,
+    couponList: couponListReducer,
+    couponEditor: couponEditorReducer,
+    couponCreate: couponCreateReducer,
+    coupons: couponsReducer,
+  });
 
 export type RootState = ReturnType<typeof rootReducer>;
 

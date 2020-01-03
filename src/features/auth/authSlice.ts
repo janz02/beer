@@ -1,78 +1,60 @@
-import { createSlice, PayloadAction, combineReducers } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'app/store';
 import { history } from 'app/router';
 
-const signupSlice = createSlice({
-  name: '@auth/signup',
+interface UserData {}
+
+const authSlice = createSlice({
+  name: '@auth',
   initialState: {
-    loading: false,
-    error: null as any,
+    loggedIn: true,
+    userData: {} as UserData,
+    loadingSignup: false,
+    loadingPasswordRecovery: false,
+    loadingLogin: false,
+    errorSignup: null as any,
+    errorLogin: null as any,
+    errorPasswordRecovery: null as any,
   },
   reducers: {
     signupRequest(state) {
-      state.loading = true;
+      state.loadingSignup = true;
     },
     signupSuccess(state) {
-      state.loading = false;
-      state.error = null;
+      state.loadingSignup = false;
+      state.errorSignup = null;
     },
-    signupFail(state, action: PayloadAction<any>) {
-      state.loading = false;
-      state.error = action.payload;
+    signupFail(state, action: PayloadAction<string>) {
+      state.loadingSignup = false;
+      state.errorSignup = action.payload;
     },
-  },
-});
-
-const passwordRecoverySlice = createSlice({
-  name: '@auth/passwordRecovery',
-  initialState: {
-    loading: false,
-  },
-  reducers: {
     passwordRecoveryRequest(state) {
-      state.loading = true;
+      state.loadingPasswordRecovery = true;
     },
     passwordRecoverySuccess(state) {
-      state.loading = false;
+      state.loadingPasswordRecovery = false;
+      state.errorPasswordRecovery = null;
     },
-  },
-});
-
-const loginSlice = createSlice({
-  name: '@auth/login',
-  initialState: {
-    loading: false,
-    error: null as any,
-  },
-  reducers: {
+    passwordRecoveryFail(state, action: PayloadAction<string>) {
+      state.loadingPasswordRecovery = false;
+      state.errorPasswordRecovery = action.payload;
+    },
     loginRequest(state) {
-      state.loading = true;
+      state.loadingLogin = true;
     },
-    loginSuccess(state) {
-      state.loading = false;
-      state.error = null;
-    },
-    loginFail(state, action: PayloadAction<any>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-  },
-});
-
-const userSlice = createSlice({
-  name: '@auth/user',
-  initialState: {
-    loggedIn: true,
-    userData: null as any,
-  },
-  reducers: {
-    setUser(state, action: PayloadAction<any>) {
+    loginSuccess(state, action: PayloadAction<UserData>) {
+      state.loadingLogin = false;
+      state.errorLogin = null;
       state.loggedIn = true;
       state.userData = action.payload;
     },
-    clearUser(state) {
+    loginFail(state, action: PayloadAction<string>) {
+      state.loadingLogin = false;
+      state.errorLogin = action.payload;
+    },
+    logout(state) {
       state.loggedIn = false;
-      state.userData = null;
+      state.userData = {};
     },
   },
 });
@@ -80,57 +62,58 @@ const userSlice = createSlice({
 // TODO: Only for simulating async actions, remove after API is connected
 const delay = (p: any) =>
   new Promise(resolve => {
+    console.log('mock api call', p);
     setTimeout(() => {
       resolve(p);
     }, 1000);
   });
 
-const login = (params: any): AppThunk => async dispatch => {
+const login = (params: any): AppThunk => async (dispatch, state) => {
   dispatch(loginRequest());
   try {
     const userData = await delay(params);
-    dispatch(setUser(userData));
-    dispatch(loginSuccess());
-    history.push('/');
+    const cameFrom = state().routerHistory.cameFrom;
+    dispatch(loginSuccess(userData as UserData));
+    history.push(cameFrom);
   } catch (err) {
-    dispatch(clearUser());
     dispatch(loginFail(err.toString()));
   }
 };
 
-const logout = (): AppThunk => async dispatch => {
-  const { clearUser } = userSlice.actions;
-  dispatch(clearUser());
-};
-
 const recoverPassword = (params: any): AppThunk => async dispatch => {
   dispatch(passwordRecoveryRequest());
-  await delay(params);
-  dispatch(passwordRecoverySuccess());
+  try {
+    await delay(params);
+    dispatch(passwordRecoverySuccess());
+  } catch (err) {
+    dispatch(passwordRecoveryFail(err.toString()));
+  }
 };
 
 const signUp = (params: any): AppThunk => async dispatch => {
   dispatch(signupRequest());
-  await delay(params);
-  dispatch(signupSuccess());
+  try {
+    await delay(params);
+    dispatch(signupSuccess());
+    dispatch(login(params as UserData));
+  } catch (err) {
+    dispatch(signupFail(err.toString()));
+  }
 };
 
-export const { signupRequest, signupSuccess } = signupSlice.actions;
-
 export const {
+  loginRequest,
+  loginSuccess,
+  loginFail,
   passwordRecoveryRequest,
   passwordRecoverySuccess,
-} = passwordRecoverySlice.actions;
+  passwordRecoveryFail,
+  signupRequest,
+  signupSuccess,
+  signupFail,
+  logout,
+} = authSlice.actions;
 
-export const { loginRequest, loginSuccess, loginFail } = loginSlice.actions;
+export { login, recoverPassword, signUp };
 
-export const { setUser, clearUser } = userSlice.actions;
-
-export { login, logout, recoverPassword, signUp };
-
-export default combineReducers({
-  login: loginSlice.reducer,
-  passwordRecovery: passwordRecoverySlice.reducer,
-  signup: signupSlice.reducer,
-  user: userSlice.reducer,
-});
+export default authSlice.reducer;

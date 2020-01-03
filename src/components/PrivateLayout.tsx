@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Icon, Drawer } from 'antd';
-import Logo from 'assets/img/logo.svg';
+import { Layout, Menu, Drawer } from 'antd';
+import { MenuOutlined, DesktopOutlined, FileOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import LanguageSelector from 'components/LanguageSelector';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from 'hooks';
 import { AuthMenuOptions } from 'features/auth/AuthMenuOptions';
+import LanguageSelector from 'components/LanguageSelector';
+import Logo from 'assets/img/logo.svg';
+
 
 const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
@@ -33,12 +35,12 @@ const PrivateLayout: React.FC = ({ children }) => {
       <>
         <Menu theme="dark">
           <Menu.Item onClick={closeDrawer}>
-            <Icon type="desktop" />
+            <DesktopOutlined />
             <span>{t('menu.dashboard')}</span>
             <Link to="/" />
           </Menu.Item>
           <Menu.Item onClick={closeDrawer}>
-            <Icon type="file" />
+            <FileOutlined />
             <span>{t('menu.coupons')}</span>
             <Link to="/coupons" />
           </Menu.Item>
@@ -79,9 +81,8 @@ const PrivateLayout: React.FC = ({ children }) => {
 
       <Layout>
         <Layout.Header style={{ background: '#fff', padding: 0 }}>
-          <Icon
+          <MenuOutlined
             style={{ paddingLeft: '25px' }}
-            type={'menu'}
             onClick={() => setMenuOpened(!menuOpened)}
           />
           <img

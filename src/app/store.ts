@@ -1,9 +1,11 @@
 import { configureStore, Action } from '@reduxjs/toolkit';
 import rootReducer, { RootState } from './rootReducer';
-import { ThunkAction } from 'redux-thunk';
+import thunk, { ThunkAction } from 'redux-thunk';
 
 const store = configureStore({
   reducer: rootReducer,
+  // To suppress "A non-serializable value was detected in an action, in the path" error caused by Date or moment: https://github.com/rt2zz/redux-persist/issues/988
+  middleware: [thunk],
 });
 
 if (process.env.NODE_ENV === 'development' && (module as any).hot) {
