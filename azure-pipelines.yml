@@ -30,11 +30,13 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      if( $(SkipApiClientCheck) ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
       npm run generate-client
       $changed = git diff --stat
       if( $changed ) { `
         throw "There is a new version of the Backend API, please refresh the frontend api client by running `
-        npm run generate-client, and commiting the changes." `
+        npm run generate-client, and commiting the changes. `
+        If this is an urgent case, you can override SkipApiClientCheck parameter manually in the build." `
       } else { `
         Write-Host "The solution is using the latest API client." `
       }
