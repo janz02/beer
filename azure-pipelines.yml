@@ -30,11 +30,11 @@ steps:
       if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
       npm run generate-client
       $changed = git status -s
-      if( $changed ) { `
-        Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options in the build." `
-        $env:LASTEXITCODE = -1 `
-      } else { `
-        Write-Host "The solution is using the latest API client." `
+      if( $changed ) {
+        Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options in the build."
+        $env:LASTEXITCODE = -1
+      } else {
+        Write-Host "The solution is using the latest API client."
       }
   displayName: 'Check for new version of the Backend API'
 
