@@ -34,12 +34,13 @@
     "babel-plugin-import": "^1.12.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "jest-junit": "^10.0.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0"
   },
   "scripts": {
     "start": "env-cmd -e dev react-app-rewired start",
-    "test": "env-cmd -e dev react-app-rewired test --setupFiles ./config/setupTests.ts --all",
+    "test": "env-cmd -e dev react-app-rewired test --setupFiles ./config/setupTests.ts",
     "build": "env-cmd -e prod react-app-rewired build",
     "eject": "react-app-rewired eject",
     "generate-client": "openapi-generator generate -i src/api/swagger.json -g typescript-fetch -p typescriptThreePlus=true -o src/api/swagger"
