@@ -35,8 +35,14 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    customCommand: 'test -- --watchAll=false'
+    customCommand: 'test -- --watchAll=false --reporters jest-junit'
   displayName: 'Run Tests'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: '**/junit.xml'
 
 - task: Docker@0
   displayName: 'Build Docker image'
