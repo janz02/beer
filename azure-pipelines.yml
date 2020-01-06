@@ -13,9 +13,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: |
-    ci=true
-  displayName: 'Set CI for Build'
 - task: NodeTool@0
   inputs:
     versionSpec: '12.x'
