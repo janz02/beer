@@ -21,6 +21,11 @@ steps:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
 
+- task: Npm@1
+  inputs:
+    command: 'ci'
+  displayName: 'Install packages'
+
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -31,12 +36,8 @@ steps:
         throw "There is a new version of the Backend API, please refresh the frontend api client by running `
         npm run generate-client, and commiting the changes." `
       }
+    failOnStderr: true
   displayName: 'Check for new version of the Backend API'
-
-- task: Npm@1
-  inputs:
-    command: 'ci'
-  displayName: 'Install packages'
 
 - task: Npm@1
   inputs:
