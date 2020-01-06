@@ -35,7 +35,7 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    customCommand: 'test -- --watchAll=false --reporters jest-junit'
+    customCommand: 'test -- --watchAll=false --reporters jest-junit --coverage --coverageDirectory=output --coverageReporters cobertura'
   displayName: 'Run Tests'
 
 - task: PublishTestResults@2
@@ -43,6 +43,18 @@ steps:
   inputs:
     testRunner: JUnit
     testResultsFiles: '**/junit.xml'
+
+- task: reportgenerator@4
+  inputs:
+    reports: '$(Build.SourcesDirectory)/**/cobertura-coverage.xml'
+    targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 
 - task: Docker@0
   displayName: 'Build Docker image'
