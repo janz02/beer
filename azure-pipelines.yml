@@ -29,7 +29,7 @@ steps:
     script: |
       if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
       npm run generate-client
-      $changed = git diff --stat
+      $changed = git status -s
       if( $changed ) { `
         throw "There is a new version of the Backend API, please refresh the frontend api client by running `
         npm run generate-client, and commiting the changes. `
