@@ -4,8 +4,6 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install --silent
 COPY . ./
-RUN echo "This is a production optimailed, and production configured environment. It has a dependency on couponapi docker file, and will call it as a backend."
-RUN echo "Without couponapi in the cluster or compose, it will not work."
 RUN npm run build
 
 
