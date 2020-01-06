@@ -13,6 +13,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- script: |
+    $(ci)=true
+  displayName: 'Set CI for Build'
 - task: NodeTool@0
   inputs:
     versionSpec: '12.x'
@@ -21,19 +24,22 @@ steps:
 - task: Npm@1
   inputs:
     command: 'ci'
-
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run test'
+  displayName: 'Install packages'
 
 - task: Npm@1
   inputs:
     command: 'custom'
     customCommand: 'run build'
+  displayName: 'Build solution'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'test'
+  displayName: 'Run Tests'
 
 - task: Docker@0
-  displayName: 'Build image'
+  displayName: 'Build Docker image'
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
@@ -41,7 +47,7 @@ steps:
     dockerfile: 'Dockerfile'
 
 - task: Docker@0
-  displayName: 'Publish image'
+  displayName: 'Publish Docker Image'
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
