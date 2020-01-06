@@ -36,7 +36,7 @@ steps:
       if( $changed ) { `
         throw "There is a new version of the Backend API, please refresh the frontend api client by running `
         npm run generate-client, and commiting the changes. `
-        If this is an urgent case, you can override SkipApiClientCheck parameter manually in the build." `
+        If this is an urgent case, you can override SkipApiClientCheck parameter manually in the Advanved options in the build." `
       } else { `
         Write-Host "The solution is using the latest API client." `
       }
