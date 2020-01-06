@@ -27,7 +27,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      if( $(SkipApiClientCheck) ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
+      if( $env:SKIPAPICLIENTCHECK ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
       npm run generate-client
       $changed = git diff --stat
       if( $changed ) { `
