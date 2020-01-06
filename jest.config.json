@@ -1,0 +1,9 @@
+﻿{
+    "name": "pkm-couponmanager",
+    "jest": {
+        "setupFiles": "./config/setupTests.tsx",
+        "collectCoverage": false,
+        "verbose": true,
+        "all": true
+    }
+}
