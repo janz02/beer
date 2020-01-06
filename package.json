@@ -24,22 +24,27 @@
     "react-redux": "^7.1.3",
     "react-responsive": "^8.0.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.3.0",
     "redux": "^4.0.4",
     "typescript": "3.7.2"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^1.0.8-4.2.2",
+    "@types/enzyme": "^3.10.4",
     "babel-plugin-import": "^1.12.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest-junit": "^10.0.0",
     "less": "^3.10.3",
-    "less-loader": "^5.0.0"
+    "less-loader": "^5.0.0",
+    "shelljs": "^0.8.3"
   },
   "scripts": {
     "start": "env-cmd -e dev react-app-rewired start",
-    "test": "env-cmd -e dev react-app-rewired test",
+    "test": "env-cmd -e dev react-app-rewired test --setupFiles ./config/setupTests.ts",
     "build": "env-cmd -e prod react-app-rewired build",
-    "eject": "react-app-rewired eject",
-    "generate-client": "openapi-generator generate -i src/api/swagger.json -g typescript-fetch -p typescriptThreePlus=true -o src/api/swagger"
+    "eject": "react-app-rewired eject",    
+    "generate-client": "node ./config/generate-client.js"
   },
   "eslintConfig": {
     "extends": "react-app"
