@@ -35,7 +35,7 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    customCommand: 'test'
+    customCommand: 'test -- --watchAll=false'
   displayName: 'Run Tests'
 
 - task: Docker@0
