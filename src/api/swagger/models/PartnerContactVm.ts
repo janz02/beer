@@ -16,28 +16,40 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CategoryVm
+ * @interface PartnerContactVm
  */
-export interface CategoryVm {
+export interface PartnerContactVm {
     /**
      * 
      * @type {number}
-     * @memberof CategoryVm
+     * @memberof PartnerContactVm
      */
     id?: number;
     /**
      * 
      * @type {string}
-     * @memberof CategoryVm
+     * @memberof PartnerContactVm
      */
     name?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartnerContactVm
+     */
+    email?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PartnerContactVm
+     */
+    phone?: number;
 }
 
-export function CategoryVmFromJSON(json: any): CategoryVm {
-    return CategoryVmFromJSONTyped(json, false);
+export function PartnerContactVmFromJSON(json: any): PartnerContactVm {
+    return PartnerContactVmFromJSONTyped(json, false);
 }
 
-export function CategoryVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): CategoryVm {
+export function PartnerContactVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerContactVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -45,10 +57,12 @@ export function CategoryVmFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+        'phone': !exists(json, 'phone') ? undefined : json['phone'],
     };
 }
 
-export function CategoryVmToJSON(value?: CategoryVm | null): any {
+export function PartnerContactVmToJSON(value?: PartnerContactVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -59,6 +73,8 @@ export function CategoryVmToJSON(value?: CategoryVm | null): any {
         
         'id': value.id,
         'name': value.name,
+        'email': value.email,
+        'phone': value.phone,
     };
 }
 

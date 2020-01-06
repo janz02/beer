@@ -14,61 +14,61 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    CategoryVm,
-    CategoryVmFromJSON,
-    CategoryVmFromJSONTyped,
-    CategoryVmToJSON,
+    PartnerVm,
+    PartnerVmFromJSON,
+    PartnerVmFromJSONTyped,
+    PartnerVmToJSON,
 } from './';
 
 /**
  * 
  * @export
- * @interface CategoryVmPaginatedResponse
+ * @interface PartnerVmPaginatedResponse
  */
-export interface CategoryVmPaginatedResponse {
+export interface PartnerVmPaginatedResponse {
     /**
      * 
-     * @type {Array<CategoryVm>}
-     * @memberof CategoryVmPaginatedResponse
+     * @type {Array<PartnerVm>}
+     * @memberof PartnerVmPaginatedResponse
      */
-    result?: Array<CategoryVm> | null;
+    result?: Array<PartnerVm> | null;
     /**
      * 
      * @type {number}
-     * @memberof CategoryVmPaginatedResponse
+     * @memberof PartnerVmPaginatedResponse
      */
     page?: number;
     /**
      * 
      * @type {number}
-     * @memberof CategoryVmPaginatedResponse
+     * @memberof PartnerVmPaginatedResponse
      */
     from?: number;
     /**
      * 
      * @type {number}
-     * @memberof CategoryVmPaginatedResponse
+     * @memberof PartnerVmPaginatedResponse
      */
     to?: number;
     /**
      * 
      * @type {number}
-     * @memberof CategoryVmPaginatedResponse
+     * @memberof PartnerVmPaginatedResponse
      */
     size?: number;
 }
 
-export function CategoryVmPaginatedResponseFromJSON(json: any): CategoryVmPaginatedResponse {
-    return CategoryVmPaginatedResponseFromJSONTyped(json, false);
+export function PartnerVmPaginatedResponseFromJSON(json: any): PartnerVmPaginatedResponse {
+    return PartnerVmPaginatedResponseFromJSONTyped(json, false);
 }
 
-export function CategoryVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CategoryVmPaginatedResponse {
+export function PartnerVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerVmPaginatedResponse {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(CategoryVmFromJSON)),
+        'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(PartnerVmFromJSON)),
         'page': !exists(json, 'page') ? undefined : json['page'],
         'from': !exists(json, 'from') ? undefined : json['from'],
         'to': !exists(json, 'to') ? undefined : json['to'],
@@ -76,7 +76,7 @@ export function CategoryVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function CategoryVmPaginatedResponseToJSON(value?: CategoryVmPaginatedResponse | null): any {
+export function PartnerVmPaginatedResponseToJSON(value?: PartnerVmPaginatedResponse | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -85,7 +85,7 @@ export function CategoryVmPaginatedResponseToJSON(value?: CategoryVmPaginatedRes
     }
     return {
         
-        'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(CategoryVmToJSON)),
+        'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(PartnerVmToJSON)),
         'page': value.page,
         'from': value.from,
         'to': value.to,

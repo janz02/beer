@@ -1,13 +1,15 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "NKM PKN Coupon Api",
+    "title": "NKM PKM Coupon Api",
     "version": "v1"
   },
   "paths": {
     "/api/Categories": {
       "post": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "operationId": "createCategories",
         "requestBody": {
           "content": {
@@ -57,7 +59,9 @@
         }
       },
       "get": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "operationId": "listCategories",
         "parameters": [
           {
@@ -124,7 +128,9 @@
     },
     "/api/Categories/{id}": {
       "get": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "operationId": "getCategories",
         "parameters": [
           {
@@ -161,7 +167,9 @@
         }
       },
       "put": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "operationId": "updateCategories",
         "parameters": [
           {
@@ -205,7 +213,9 @@
         }
       },
       "delete": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "operationId": "deleteCategories",
         "parameters": [
           {
@@ -227,7 +237,9 @@
     },
     "/api/Coupons": {
       "post": {
-        "tags": ["Coupons"],
+        "tags": [
+          "Coupons"
+        ],
         "operationId": "createCoupons",
         "requestBody": {
           "content": {
@@ -277,7 +289,9 @@
         }
       },
       "get": {
-        "tags": ["Coupons"],
+        "tags": [
+          "Coupons"
+        ],
         "operationId": "listCoupons",
         "parameters": [
           {
@@ -351,7 +365,9 @@
     },
     "/api/Coupons/{id}": {
       "get": {
-        "tags": ["Coupons"],
+        "tags": [
+          "Coupons"
+        ],
         "operationId": "getCoupons",
         "parameters": [
           {
@@ -388,7 +404,9 @@
         }
       },
       "put": {
-        "tags": ["Coupons"],
+        "tags": [
+          "Coupons"
+        ],
         "operationId": "updateCoupons",
         "parameters": [
           {
@@ -432,8 +450,286 @@
         }
       },
       "delete": {
-        "tags": ["Coupons"],
+        "tags": [
+          "Coupons"
+        ],
         "operationId": "deleteCoupons",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Partners": {
+      "post": {
+        "tags": [
+          "Partners"
+        ],
+        "operationId": "createPartners",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Partners"
+        ],
+        "operationId": "listPartners",
+        "parameters": [
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RegistrationNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TaxNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "BankAccount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ContactName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ContactEmail",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ContactPhone",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVmPaginatedResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVmPaginatedResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVmPaginatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Partners/{id}": {
+      "get": {
+        "tags": [
+          "Partners"
+        ],
+        "operationId": "getPartners",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVm"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Partners"
+        ],
+        "operationId": "updatePartners",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Partners"
+        ],
+        "operationId": "deletePartners",
         "parameters": [
           {
             "name": "id",
@@ -454,7 +750,9 @@
     },
     "/api/TagCategories": {
       "post": {
-        "tags": ["TagCategories"],
+        "tags": [
+          "TagCategories"
+        ],
         "operationId": "createTagCategories",
         "requestBody": {
           "content": {
@@ -504,7 +802,9 @@
         }
       },
       "get": {
-        "tags": ["TagCategories"],
+        "tags": [
+          "TagCategories"
+        ],
         "operationId": "listTagCategories",
         "parameters": [
           {
@@ -571,7 +871,9 @@
     },
     "/api/TagCategories/{id}": {
       "get": {
-        "tags": ["TagCategories"],
+        "tags": [
+          "TagCategories"
+        ],
         "operationId": "getTagCategories",
         "parameters": [
           {
@@ -608,7 +910,9 @@
         }
       },
       "put": {
-        "tags": ["TagCategories"],
+        "tags": [
+          "TagCategories"
+        ],
         "operationId": "updateTagCategories",
         "parameters": [
           {
@@ -652,7 +956,9 @@
         }
       },
       "delete": {
-        "tags": ["TagCategories"],
+        "tags": [
+          "TagCategories"
+        ],
         "operationId": "deleteTagCategories",
         "parameters": [
           {
@@ -674,7 +980,9 @@
     },
     "/api/Tags": {
       "post": {
-        "tags": ["Tags"],
+        "tags": [
+          "Tags"
+        ],
         "operationId": "createTags",
         "requestBody": {
           "content": {
@@ -724,7 +1032,9 @@
         }
       },
       "get": {
-        "tags": ["Tags"],
+        "tags": [
+          "Tags"
+        ],
         "operationId": "listTags",
         "parameters": [
           {
@@ -805,7 +1115,9 @@
     },
     "/api/Tags/{id}": {
       "get": {
-        "tags": ["Tags"],
+        "tags": [
+          "Tags"
+        ],
         "operationId": "getTags",
         "parameters": [
           {
@@ -842,7 +1154,9 @@
         }
       },
       "put": {
-        "tags": ["Tags"],
+        "tags": [
+          "Tags"
+        ],
         "operationId": "updateTags",
         "parameters": [
           {
@@ -886,7 +1200,9 @@
         }
       },
       "delete": {
-        "tags": ["Tags"],
+        "tags": [
+          "Tags"
+        ],
         "operationId": "deleteTags",
         "parameters": [
           {
@@ -930,7 +1246,10 @@
         "additionalProperties": false
       },
       "OrderByType": {
-        "enum": ["Ascending", "Descending"],
+        "enum": [
+          "Ascending",
+          "Descending"
+        ],
         "type": "string"
       },
       "CategoryVm": {
@@ -977,24 +1296,24 @@
         "additionalProperties": false
       },
       "CouponRank": {
-        "enum": ["Bronze", "Silver", "Gold"],
+        "enum": [
+          "Bronze",
+          "Silver",
+          "Gold"
+        ],
         "type": "string"
       },
       "CouponType": {
-        "enum": ["FixValue", "PercentValue", "Gift"],
+        "enum": [
+          "FixValue",
+          "PercentValue",
+          "Gift"
+        ],
         "type": "string"
       },
       "CouponDto": {
         "type": "object",
         "properties": {
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
           "name": {
             "type": "string",
             "nullable": true
@@ -1037,6 +1356,14 @@
             "type": "integer",
             "format": "int32"
           },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
           "isDrawable": {
             "type": "boolean"
           }
@@ -1046,14 +1373,6 @@
       "CouponVm": {
         "type": "object",
         "properties": {
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
           "id": {
             "type": "integer",
             "format": "int32"
@@ -1100,6 +1419,14 @@
             "type": "integer",
             "format": "int32"
           },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
           "isDrawable": {
             "type": "boolean"
           }
@@ -1113,6 +1440,142 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CouponVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PartnerContactDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PartnerDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taxNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bankAccount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PartnerContactDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PartnerContactVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PartnerVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taxNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bankAccount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PartnerContactVm"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PartnerVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PartnerVm"
             },
             "nullable": true
           },

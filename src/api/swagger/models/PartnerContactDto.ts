@@ -16,28 +16,40 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CategoryVm
+ * @interface PartnerContactDto
  */
-export interface CategoryVm {
+export interface PartnerContactDto {
     /**
      * 
      * @type {number}
-     * @memberof CategoryVm
+     * @memberof PartnerContactDto
      */
-    id?: number;
+    id?: number | null;
     /**
      * 
      * @type {string}
-     * @memberof CategoryVm
+     * @memberof PartnerContactDto
      */
     name?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartnerContactDto
+     */
+    email?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PartnerContactDto
+     */
+    phone?: number;
 }
 
-export function CategoryVmFromJSON(json: any): CategoryVm {
-    return CategoryVmFromJSONTyped(json, false);
+export function PartnerContactDtoFromJSON(json: any): PartnerContactDto {
+    return PartnerContactDtoFromJSONTyped(json, false);
 }
 
-export function CategoryVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): CategoryVm {
+export function PartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerContactDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -45,10 +57,12 @@ export function CategoryVmFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+        'phone': !exists(json, 'phone') ? undefined : json['phone'],
     };
 }
 
-export function CategoryVmToJSON(value?: CategoryVm | null): any {
+export function PartnerContactDtoToJSON(value?: PartnerContactDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -59,6 +73,8 @@ export function CategoryVmToJSON(value?: CategoryVm | null): any {
         
         'id': value.id,
         'name': value.name,
+        'email': value.email,
+        'phone': value.phone,
     };
 }
 
