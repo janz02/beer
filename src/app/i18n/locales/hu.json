@@ -8,6 +8,7 @@
     "coupons": "Kuponok"
   },
   "auth": {
+    "profile": "Személyes adatok",
     "login": "Belépés",
     "logout": "Kilépés",
     "signup": "Regisztrálás",
@@ -83,6 +84,11 @@
   },
   "coupon-editor": {
     "save-coupon-success": "Sikeres kupon mentés."
+  },
+  "notification": {
+    "notifications": "Értesítések",
+    "empty-list": "Üres",
+    "load-more": "Régebbiek..."
   },
   "languages": {
     "en": "English",
