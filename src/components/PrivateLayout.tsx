@@ -4,22 +4,18 @@ import { MenuOutlined, DesktopOutlined, FileOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from 'hooks';
-import { AuthMenuOptions } from 'features/auth/AuthMenuOptions';
 import LanguageSelector from 'components/LanguageSelector';
 import Logo from 'assets/img/logo.svg';
-
+import { NotificationDrawer } from 'features/notification/NotificationDrawer';
+import { HeaderOptions } from './HeaderOptions';
 
 const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
   const isMobile = useIsMobile();
-  const [menuOpened, setMenuOpened] = useState(!isMobile);
-  const [lastMediaQuery, setLastMediaQuery] = useState(isMobile);
 
-  const closeDrawer = () => {
-    if (isMobile) {
-      setMenuOpened(false);
-    }
-  };
+  const [menuOpened, setMenuOpened] = useState(!isMobile);
+  const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false);
+  const [lastMediaQuery, setLastMediaQuery] = useState(isMobile);
 
   useEffect(() => {
     if (lastMediaQuery !== isMobile) {
@@ -29,6 +25,12 @@ const PrivateLayout: React.FC = ({ children }) => {
     }
     setLastMediaQuery(isMobile);
   }, [isMobile, lastMediaQuery]);
+
+  const closeDrawer = () => {
+    if (isMobile) {
+      setMenuOpened(false);
+    }
+  };
 
   const NavigationContent = () => {
     return (
@@ -45,7 +47,6 @@ const PrivateLayout: React.FC = ({ children }) => {
             <Link to="/coupons" />
           </Menu.Item>
         </Menu>
-        <AuthMenuOptions onClick={closeDrawer} />
         <LanguageSelector menuClosed={!menuOpened} />
       </>
     );
@@ -69,15 +70,20 @@ const PrivateLayout: React.FC = ({ children }) => {
           <NavigationContent />
         </Drawer>
       ) : (
-          <Layout.Sider
-            trigger={null}
-            collapsible
-            collapsed={!menuOpened}
-            onCollapse={(collapsed) => setMenuOpened(collapsed)}
-          >
-            <NavigationContent />
-          </Layout.Sider>
-        )}
+        <Layout.Sider
+          trigger={null}
+          collapsible
+          collapsed={!menuOpened}
+          onCollapse={collapsed => setMenuOpened(collapsed)}
+        >
+          <NavigationContent />
+        </Layout.Sider>
+      )}
+
+      <NotificationDrawer
+        open={notificationDrawerOpen}
+        onClose={() => setNotificationDrawerOpen(false)}
+      />
 
       <Layout>
         <Layout.Header style={{ background: '#fff', padding: 0 }}>
@@ -90,6 +96,9 @@ const PrivateLayout: React.FC = ({ children }) => {
             alt="Logo"
             title="Logo"
             style={{ width: '150px', color: 'black', paddingLeft: '25px' }}
+          />
+          <HeaderOptions
+            openNotifications={() => setNotificationDrawerOpen(true)}
           />
         </Layout.Header>
         <Layout.Content>{children}</Layout.Content>

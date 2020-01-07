@@ -11,6 +11,7 @@
     "coupons": "Coupons"
   },
   "auth": {
+    "profile": "Profile",
     "login": "Login",
     "logout": "Logout",
     "signup": "Sign up",
@@ -86,6 +87,11 @@
   },
   "coupon-editor": {
     "save-coupon-success": "Saving a coupon was successful."
+  },
+  "notification": {
+    "notifications": "Notifications",
+    "empty-list": "Empty",
+    "load-more": "Load more..."
   },
   "languages": {
     "en": "English",
