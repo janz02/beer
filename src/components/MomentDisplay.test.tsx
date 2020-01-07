@@ -3,11 +3,9 @@ import MomentDisplay from './MomentDisplay';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 
+describe('MomentDisplay tests', () => {
 
-
-describe('MomentDisplay positive cases', () => {
-
-  it('Rendering moment, will format it properly', () => {
+  it('should render a formatted date when props is given', () => {
     
     // Arrange
     const date: moment.Moment = moment("20111031", "YYYYMMDD");
@@ -21,7 +19,7 @@ describe('MomentDisplay positive cases', () => {
   });
 
 
-  it('Empty parameter return nothing', () => {
+  it('should render nothing when props is empty', () => {
     
     // Arrange
 
