@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import './HeaderOptions.scss';
-// import SubMenu from 'antd/lib/menu/SubMenu';
+import SubMenu from 'antd/lib/menu/SubMenu';
 import { Menu, Avatar, Badge } from 'antd';
 import { UserOutlined, BellOutlined, LogoutOutlined } from '@ant-design/icons';
 import { RootState } from 'app/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { logout } from 'features/auth/authSlice';
-import SubMenu from 'antd/lib/menu/SubMenu';
 
 interface HeaderOptionsProps {
   openNotifications: () => void;

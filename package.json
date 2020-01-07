@@ -5,7 +5,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.0.4",
     "@types/jest": "24.0.23",
-    "@types/node": "^13.1.2",
+    "@types/node": "^13.1.4",
     "@types/react": "16.9.13",
     "@types/react-dom": "16.9.4",
     "@types/react-infinite-scroller": "^1.2.1",
@@ -45,7 +45,7 @@
     "start": "env-cmd -e dev react-app-rewired start",
     "test": "env-cmd -e dev react-app-rewired test --setupFiles ./config/setupTests.ts",
     "build": "env-cmd -e prod react-app-rewired build",
-    "eject": "react-app-rewired eject",    
+    "eject": "react-app-rewired eject",
     "generate-client": "node ./config/generate-client.js"
   },
   "eslintConfig": {
