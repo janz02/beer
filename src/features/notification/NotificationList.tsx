@@ -1,13 +1,12 @@
 import React, { FC, useEffect } from 'react';
 import './notification.scss';
-import moment from 'moment';
-import { List, Avatar, Empty, Button } from 'antd';
-import { BellFilled } from '@ant-design/icons';
+import InfiniteScroll from 'react-infinite-scroller';
+import { List, Empty, Button } from 'antd';
 import { RootState } from 'app/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
-import { inspectNotification, getNotifications } from './notificationSlice';
+import { getNotifications } from './notificationSlice';
 import { useTranslation } from 'react-i18next';
-import InfiniteScroll from 'react-infinite-scroller';
+import { ListItem } from './NotificationItem';
 
 interface NotificationListProps {
   onClick: () => any;
@@ -31,14 +30,21 @@ export const NotificationList: FC<NotificationListProps> = props => {
     dispatch(getNotifications());
   }, [dispatch]);
 
-  const inspectItem = (id: string) => {
-    dispatch(inspectNotification(id));
-    onClick();
-  };
-
   const loadMore = () => {
     dispatch(getNotifications());
   };
+
+  const canLoadMore = () => !loading && hasMoreNotifications;
+
+  const loadMoreButton = canLoadMore() && (
+    <Button
+      className="notification-list__load-more-btn"
+      type="dashed"
+      onClick={loadMore}
+    >
+      {t('notification.load-more')}
+    </Button>
+  );
 
   return (
     <div className="infinite-list-container">
@@ -46,25 +52,14 @@ export const NotificationList: FC<NotificationListProps> = props => {
         initialLoad={false}
         pageStart={0}
         loadMore={loadMore}
-        hasMore={!loading && hasMoreNotifications}
+        hasMore={canLoadMore()}
         useWindow={false}
       >
         <List
           className="notification-list"
           itemLayout="vertical"
           dataSource={notifications}
-          loadMore={
-            !loading &&
-            hasMoreNotifications && (
-              <Button
-                className="notification-list__load-more-btn"
-                type="dashed"
-                onClick={loadMore}
-              >
-                {t('notification.load-more')}
-              </Button>
-            )
-          }
+          loadMore={loadMoreButton}
           loading={loading}
           rowKey={item => item.id}
           locale={{
@@ -75,32 +70,7 @@ export const NotificationList: FC<NotificationListProps> = props => {
               />
             ),
           }}
-          renderItem={item => (
-            <List.Item
-              className={`notification-item ${
-                item.read ? '' : 'notification-item--unread'
-              }`}
-              onClick={() => inspectItem(item.id)}
-              actions={[
-                // TODO: Locale translation for moment
-                <div className="notification-item__date">
-                  {item.deliveryTime ? moment(item.deliveryTime).fromNow() : ''}
-                </div>,
-              ]}
-            >
-              <List.Item.Meta
-                avatar={
-                  item.image ? (
-                    <Avatar src={item.image} />
-                  ) : (
-                    <Avatar icon={<BellFilled />} />
-                  )
-                }
-                title={item.title}
-                description={item.description}
-              />
-            </List.Item>
-          )}
+          renderItem={item => <ListItem {...{ item, onClick }} />}
         />
       </InfiniteScroll>
     </div>
