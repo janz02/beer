@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Drawer } from 'antd';
-import { MenuOutlined, DesktopOutlined, FileOutlined } from '@ant-design/icons';
+import { DesktopOutlined, FileOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from 'hooks';
 import LanguageSelector from 'components/LanguageSelector';
-import Logo from 'assets/img/logo.svg';
 import { NotificationDrawer } from 'features/notification/NotificationDrawer';
 import { HeaderOptions } from './HeaderOptions';
+import { Header } from './Header';
+import './layout.scss';
 
 const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation();
@@ -46,6 +47,11 @@ const PrivateLayout: React.FC = ({ children }) => {
             <span>{t('menu.coupons')}</span>
             <Link to="/coupons" />
           </Menu.Item>
+          <Menu.Item onClick={closeDrawer}>
+            <FileOutlined />
+            <span>{t('menu.coupon-categories')}</span>
+            <Link to="/coupon-categories" />
+          </Menu.Item>
         </Menu>
         <LanguageSelector menuClosed={!menuOpened} />
       </>
@@ -53,15 +59,10 @@ const PrivateLayout: React.FC = ({ children }) => {
   };
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout className="layout">
       {isMobile ? (
         <Drawer
-          drawerStyle={{
-            backgroundColor: '#001529',
-          }}
-          bodyStyle={{
-            padding: '0',
-          }}
+          className="drawer"
           placement="left"
           closable={false}
           onClose={() => setMenuOpened(false)}
@@ -86,21 +87,11 @@ const PrivateLayout: React.FC = ({ children }) => {
       />
 
       <Layout>
-        <Layout.Header style={{ background: '#fff', padding: 0 }}>
-          <MenuOutlined
-            style={{ paddingLeft: '25px' }}
-            onClick={() => setMenuOpened(!menuOpened)}
-          />
-          <img
-            src={Logo}
-            alt="Logo"
-            title="Logo"
-            style={{ width: '150px', color: 'black', paddingLeft: '25px' }}
-          />
+        <Header onMenuClick={() => setMenuOpened(!menuOpened)}>
           <HeaderOptions
             openNotifications={() => setNotificationDrawerOpen(true)}
           />
-        </Layout.Header>
+        </Header>
         <Layout.Content>{children}</Layout.Content>
       </Layout>
     </Layout>

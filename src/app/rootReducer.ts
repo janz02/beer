@@ -7,18 +7,20 @@ import couponListReducer from 'features/coupons/couponList/couponListSlice';
 import couponEditorReducer from 'features/coupons/couponEditor/couponEditorSlice';
 import couponCreateReducer from 'features/coupons/couponCreate/couponCreateSlice';
 import couponsReducer from 'features/coupons/couponsSlice';
-import notificationReducer from 'features/notification/notificationSlice'
+import notificationReducer from 'features/notification/notificationSlice';
+import couponCategoriesReducer from 'features/coupon-categories/categoriesSlice';
 
 const rootReducer = combineReducers({
-    router: connectRouter(history),
-    routerHistory: routerHistoryReducer,
-    auth: authReducer,
-    couponList: couponListReducer,
-    couponEditor: couponEditorReducer,
-    couponCreate: couponCreateReducer,
-    coupons: couponsReducer,
-    notification: notificationReducer
-  });
+  router: connectRouter(history),
+  routerHistory: routerHistoryReducer,
+  auth: authReducer,
+  couponList: couponListReducer,
+  couponEditor: couponEditorReducer,
+  couponCreate: couponCreateReducer,
+  coupons: couponsReducer,
+  couponCategories: couponCategoriesReducer,
+  notification: notificationReducer,
+});
 
 export type RootState = ReturnType<typeof rootReducer>;
 

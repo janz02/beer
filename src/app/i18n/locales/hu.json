@@ -1,11 +1,15 @@
 {
   "common": {
     "ok": "OK",
-    "cancel": "Mégsem"
+    "cancel": "Mégsem",
+    "edit": "Szerkesztés",
+    "create": "Létrehozás",
+    "delete": "Törlés"
   },
   "menu": {
     "dashboard": "Irányítópult",
-    "coupons": "Kuponok"
+    "coupons": "Kuponok",
+    "coupon-categories": "Kategóriák"
   },
   "auth": {
     "profile": "Személyes adatok",
@@ -84,6 +88,9 @@
   },
   "coupon-editor": {
     "save-coupon-success": "Sikeres kupon mentés."
+  },
+  "coupon-category": {
+    "list-title": "Kupon kategóriák"
   },
   "notification": {
     "notifications": "Értesítések",

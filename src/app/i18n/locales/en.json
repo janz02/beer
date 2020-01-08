@@ -1,14 +1,15 @@
 {
-
-
   "common": {
     "ok": "OK",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "create": "Create",
+    "delete": "Delete"
   },
-  
   "menu": {
     "dashboard": "Dashboard",
-    "coupons": "Coupons"
+    "coupons": "Coupons",
+    "coupon-categories": "Categories"
   },
   "auth": {
     "profile": "Profile",
@@ -87,6 +88,9 @@
   },
   "coupon-editor": {
     "save-coupon-success": "Saving a coupon was successful."
+  },
+  "coupon-category": {
+    "list-title": "Coupon categories"
   },
   "notification": {
     "notifications": "Notifications",
