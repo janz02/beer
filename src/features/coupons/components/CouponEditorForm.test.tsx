@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallowWithProvider } from '../../../../config/shallowWithProvider';
+import shallowWithProvider from '../../../../config/shallowWithProvider';
 import CouponEditorForm from './CouponEditorForm';
 import { Card } from 'antd';
 
@@ -22,10 +22,11 @@ describe('CouponEditorForm tests', () => {
 
     // Act
     const wrapper = shallowWithProvider(<CouponEditorForm {...props} />)(state);
-
+    
     // Assert    
-    expect(wrapper.find(Card)).toBeTruthy();
-    expect(wrapper.props().couponIsNew).toEqual('baz');
+    const sut = wrapper.find(CouponEditorForm);
+    expect(sut.find(Card)).toBeTruthy();
+    expect(sut.props().couponIsNew).toEqual(false);
   });
 
   it('should display button when new', () => {
@@ -40,9 +41,11 @@ describe('CouponEditorForm tests', () => {
 
     // Act
     const wrapper = shallowWithProvider(<CouponEditorForm {...props} />)(state);
+    
     // Assert
-
-    expect(wrapper.find(Card)).toBeTruthy();
+    const sut = wrapper.find(CouponEditorForm);
+    expect(sut.find(Card)).toBeTruthy();
+    expect(sut.props().couponIsNew).toEqual(true);
 
   });
 })
