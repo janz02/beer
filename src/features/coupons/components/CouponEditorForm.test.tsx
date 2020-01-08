@@ -5,12 +5,7 @@ import { Card } from 'antd';
 
 describe('CouponEditorForm tests', () => {
 
-  jest.mock("react-redux", () => ({
-    useSelector: jest.fn(fn => fn()),
-    useDispatch: () => jest.fn()
-  }));
-
-  it('should not display button when not editing or not new', () => {
+   it('should not display button when not editing or not new', () => {
 
     // Arrange
     const props = {
