@@ -1,7 +1,7 @@
 import React from 'react';
-import shallowWithProvider from '../../../../config/shallowWithProvider';
+import { shallowWithProvider } from '../../../../config/shallowWithProvider';
 import CouponEditorForm from './CouponEditorForm';
-import { Button, Card } from 'antd';
+import { Card } from 'antd';
 
 describe('CouponEditorForm tests', () => {
 
@@ -24,7 +24,8 @@ describe('CouponEditorForm tests', () => {
     const wrapper = shallowWithProvider(<CouponEditorForm {...props} />)(state);
 
     // Assert    
-     expect(wrapper.find(Card)).toBeTruthy();
+    expect(wrapper.find(Card)).toBeTruthy();
+    expect(wrapper.props().couponIsNew).toEqual('baz');
   });
 
   it('should display button when new', () => {
@@ -40,7 +41,7 @@ describe('CouponEditorForm tests', () => {
     // Act
     const wrapper = shallowWithProvider(<CouponEditorForm {...props} />)(state);
     // Assert
-    
+
     expect(wrapper.find(Card)).toBeTruthy();
 
   });
