@@ -27,14 +27,17 @@ interface CouponEditorFormProps {
 
 const CouponEditorForm = (props: CouponEditorFormProps) => {
   const { handleCouponSave, loading, couponIsNew, coupon } = props;
+  const { editing } = useParams();
 
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
+
   const { categories } = useSelector((state: RootState) => state.coupons);
+  
   const [submitable, setSubmitable] = useState(false);
-  const { editing } = useParams();
   const [formEditing, setFormEditing] = useState(editing === 'true');
+
   const [form] = Form.useForm();
 
   useEffect(() => {
