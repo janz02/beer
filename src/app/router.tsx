@@ -10,7 +10,7 @@ import PublicRoute from 'components/PublicRoute';
 import { LoginPage } from 'features/auth/LoginPage';
 import { RecoveryPage } from 'features/auth/RecoveryPage';
 import { SignupPage } from 'features/auth/SignupPage';
-import { CategoryListPage } from 'features/coupon-categories/categoryList/CategoryListPage';
+import { CategoryPage } from 'features/coupon-category/CategoryPage';
 
 const Routes = () => {
   return (
@@ -21,7 +21,7 @@ const Routes = () => {
       <PrivateRoute exact path="/" component={DashboardPage} />
       <PrivateRoute exact path="/coupons" component={CouponListPage} />
       <PrivateRoute exact path="/coupons/create" component={CouponCreatePage} />
-      <PrivateRoute exact path="/coupon-categories" component={CategoryListPage} />
+      <PrivateRoute exact path="/coupon-categories" component={CategoryPage} />
       <PrivateRoute
         exact
         path="/coupons/:id/:editing"
