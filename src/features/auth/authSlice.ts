@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'app/store';
 import { history } from 'app/router';
 import api from 'api';
-import { AuthLoginRequest } from 'api/swagger/apis';
+import { AuthLoginRequest, AuthRegisterRequest } from 'api/swagger/apis';
 import { UserVm } from 'api/swagger';
 
 interface UserData {}
@@ -83,7 +83,7 @@ const login = (params: any): AppThunk => async (dispatch, state) => {
       }
     }
 
-    const userData:UserVm  = await api.auth.authLogin(loginRequest);
+    const userData = await api.auth.authLogin(loginRequest);
     const cameFrom = state().routerHistory.cameFrom;
 
     dispatch(loginSuccess(userData));
@@ -105,11 +105,26 @@ const recoverPassword = (params: any): AppThunk => async dispatch => {
 };
 
 const signUp = (params: any): AppThunk => async dispatch => {
+
   dispatch(signupRequest());
+
+  const requestRequest: AuthRegisterRequest = {
+    userDto: {
+      email: params.username,
+      password: params.password
+    }
+  }
+
   try {
-    await delay(params);
+
+    // Register
+    await api.auth.authRegister(requestRequest);
+    
     dispatch(signupSuccess());
+
+    // Login after it
     dispatch(login(params as UserData));
+
   } catch (err) {
     dispatch(signupFail(err.toString()));
   }
