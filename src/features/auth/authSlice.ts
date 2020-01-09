@@ -10,7 +10,7 @@ interface UserData {}
 const authSlice = createSlice({
   name: '@auth',
   initialState: {
-    loggedIn: false,
+    loggedIn: !!sessionStorage.getItem("jwt"),
     userData: {} as UserData,
     loadingSignup: false,
     loadingPasswordRecovery: false,
@@ -50,15 +50,17 @@ const authSlice = createSlice({
       state.errorLogin = null;
       state.loggedIn = true;
       state.userData = action.payload;
-      sessionStorage.setItem("jwt", action.payload.token!)
+      sessionStorage.setItem('jwt', action.payload.token!)
     },
     loginFail(state, action: PayloadAction<string>) {
       state.loadingLogin = false;
       state.errorLogin = action.payload;
+      sessionStorage.removeItem('jwt');
     },
     logout(state) {
       state.loggedIn = false;
       state.userData = {};
+      sessionStorage.removeItem('jwt');
     },
   },
 });
@@ -83,10 +85,10 @@ const login = (params: any): AppThunk => async (dispatch, state) => {
       }
     }
 
-    const userData = await api.auth.authLogin(loginRequest);
+    const userVm = await api.auth.authLogin(loginRequest);
     const cameFrom = state().routerHistory.cameFrom;
 
-    dispatch(loginSuccess(userData));
+    dispatch(loginSuccess(userVm));
 
     history.push(cameFrom);
   } catch (err) {
@@ -116,14 +118,13 @@ const signUp = (params: any): AppThunk => async dispatch => {
   }
 
   try {
-
     // Register
     await api.auth.authRegister(requestRequest);
     
     dispatch(signupSuccess());
 
     // Login after it
-    dispatch(login(params as UserData));
+    dispatch(login(params));
 
   } catch (err) {
     dispatch(signupFail(err.toString()));
