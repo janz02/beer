@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'app/store';
 import { history } from 'app/router';
+import api from 'api';
+import { AuthLoginRequest } from 'api/swagger/apis';
+import { UserVm } from 'api/swagger';
 
 interface UserData {}
 
 const authSlice = createSlice({
   name: '@auth',
   initialState: {
-    loggedIn: true,
+    loggedIn: false,
     userData: {} as UserData,
     loadingSignup: false,
     loadingPasswordRecovery: false,
@@ -42,11 +45,12 @@ const authSlice = createSlice({
     loginRequest(state) {
       state.loadingLogin = true;
     },
-    loginSuccess(state, action: PayloadAction<UserData>) {
+    loginSuccess(state, action: PayloadAction<UserVm>) {
       state.loadingLogin = false;
       state.errorLogin = null;
       state.loggedIn = true;
       state.userData = action.payload;
+      sessionStorage.setItem("jwt", action.payload.token!)
     },
     loginFail(state, action: PayloadAction<string>) {
       state.loadingLogin = false;
@@ -71,9 +75,19 @@ const delay = (p: any) =>
 const login = (params: any): AppThunk => async (dispatch, state) => {
   dispatch(loginRequest());
   try {
-    const userData = await delay(params);
+
+    const loginRequest: AuthLoginRequest = {
+      userDto: {
+        email: params.username,
+        password: params.password
+      }
+    }
+
+    const userData:UserVm  = await api.auth.authLogin(loginRequest);
     const cameFrom = state().routerHistory.cameFrom;
-    dispatch(loginSuccess(userData as UserData));
+
+    dispatch(loginSuccess(userData));
+
     history.push(cameFrom);
   } catch (err) {
     dispatch(loginFail(err.toString()));

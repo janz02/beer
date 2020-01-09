@@ -19,3 +19,5 @@ export * from './TagCategoryVmPaginatedResponse';
 export * from './TagDto';
 export * from './TagVm';
 export * from './TagVmPaginatedResponse';
+export * from './UserDto';
+export * from './UserVm';
