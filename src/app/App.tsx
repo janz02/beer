@@ -6,8 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import { ConfigProvider } from 'antd';
-import huHU from 'antd/es/locale/hu_HU';
-import enGB from 'antd/es/locale/en_GB';
+import huHU from 'antd/lib/locale/hu_HU';
+import enGB from 'antd/lib/locale/en_GB';
 import { useTranslation } from 'react-i18next';
 
 const App: React.FC = () => {
