@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import './notification.scss';
 import InfiniteScroll from 'react-infinite-scroller';
 import { List, Empty, Button } from 'antd';

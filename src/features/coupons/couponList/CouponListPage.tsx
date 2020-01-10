@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import './CouponListPage.scss';
 import { Button, Table, Input, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';

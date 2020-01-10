@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Form,
   Input,
@@ -11,7 +11,7 @@ import {
 import TextArea from 'antd/lib/input/TextArea';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
-import { useParams } from 'react-router-dom';
+import * as Router from 'react-router-dom';
 import { useIsMobile } from 'hooks';
 import { Coupon } from 'models/coupon';
 import { CouponRank, CouponType } from 'api/swagger/models';
@@ -27,7 +27,7 @@ interface CouponEditorFormProps {
 
 const CouponEditorForm = (props: CouponEditorFormProps) => {
   const { handleCouponSave, loading, couponIsNew, coupon } = props;
-  const { editing } = useParams();
+  const { editing } = Router.useParams();
 
   const { t } = useTranslation();
   const isMobile = useIsMobile();

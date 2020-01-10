@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CouponEditorForm from 'features/coupons/components/CouponEditorForm';
 import { useParams } from 'react-router-dom';
 import { RootState } from 'app/rootReducer';
