@@ -5,9 +5,11 @@ import './layout.scss';
 
 const PublicLayout: FC = ({ children }) => {
   return (
-    <Layout  className="layout">
-      <Header empty />
-      <Layout.Content>{children}</Layout.Content>
+    <Layout className="layout">
+      <Layout>
+        <Header empty />
+        <Layout.Content>{children}</Layout.Content>
+      </Layout>
     </Layout>
   );
 };
