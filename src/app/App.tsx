@@ -14,7 +14,6 @@ const App: React.FC = () => {
   const { i18n } = useTranslation();
 
   const antLocale = () => {
-    console.log('antLocale');
     switch (i18n.language) {
       case 'en':
         return enGB;
