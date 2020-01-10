@@ -16,12 +16,22 @@ const Routes = () => {
   return (
     <Switch>
       <PublicRoute onlyPublic exact path="/auth" component={LoginPage} />
-      <PublicRoute onlyPublic exact path="/auth/signup" component={SignupPage} />
-      <PublicRoute onlyPublic exact path="/auth/recovery" component={RecoveryPage} />
+      <PublicRoute
+        onlyPublic
+        exact
+        path="/auth/signup"
+        component={SignupPage}
+      />
+      <PublicRoute
+        onlyPublic
+        exact
+        path="/auth/recovery"
+        component={RecoveryPage}
+      />
       <PrivateRoute exact path="/" component={DashboardPage} />
       <PrivateRoute exact path="/coupons" component={CouponListPage} />
       <PrivateRoute exact path="/coupons/create" component={CouponCreatePage} />
-      <PrivateRoute exact path="/coupon-categories" component={CategoryPage} />
+      <PrivateRoute exact path="/categories" component={CategoryPage} />
       <PrivateRoute
         exact
         path="/coupons/:id/:editing"

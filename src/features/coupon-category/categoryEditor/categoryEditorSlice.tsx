@@ -3,6 +3,7 @@ import { AppThunk } from 'app/store';
 import { Category } from 'models/category';
 import api from 'api';
 import { GetCategoriesRequest } from 'api/swagger';
+import { getCategories } from '../categoryList/categoryListSlice';
 
 interface CouponCategoryEditorState {
   id?: number;
@@ -84,7 +85,7 @@ export const saveCategory = (
   dispatch(saveCategoryRequest(category));
   let id = category.id!;
   try {
-    if (category?.id && typeof category.id === 'number') {
+    if (category?.id && !isNaN(category?.id)) {
       await api.categories.updateCategories({
         id,
         categoryDto: {
@@ -100,6 +101,7 @@ export const saveCategory = (
       id = response.id!;
     }
     dispatch(saveCategorySuccess({ ...category, id }));
+    dispatch(getCategories());
     return true;
   } catch (err) {
     dispatch(saveCategoryFail(err.toString()));

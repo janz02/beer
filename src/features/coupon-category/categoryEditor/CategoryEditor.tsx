@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'app/rootReducer';
 import { FormProps, FormLayout } from 'antd/lib/form/Form';
 import { useIsMobile } from 'hooks';
-import { getCategories } from '../categoryList/categoryListSlice';
 import { Category } from 'models/category';
 
 enum EditorMode {
@@ -67,6 +66,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
   }, [category, form]);
 
   const afterCloseExtended = () => {
+    // clear the editor after the exit animation has finished
     afterClose();
     dispatch(clearCategoryEditor());
   };
@@ -76,7 +76,6 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
     const saved = await dispatch(saveCategory(newCategory));
     if (!!saved) {
       onExit();
-      dispatch(getCategories());
     }
   };
 
@@ -110,7 +109,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
           <Input maxLength={20} />
         </Form.Item>
       </Form>
-      <div className="category-editor__error-msg">{error}</div>
+      <div className="category-modal__error-msg">{error}</div>
     </Modal>
   );
 };

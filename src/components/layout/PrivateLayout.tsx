@@ -50,7 +50,7 @@ const PrivateLayout: React.FC = ({ children }) => {
           <Menu.Item onClick={closeDrawer}>
             <FileOutlined />
             <span>{t('menu.coupon-categories')}</span>
-            <Link to="/coupon-categories" />
+            <Link to="/categories" />
           </Menu.Item>
         </Menu>
         <LanguageSelector menuClosed={!menuOpened} />
