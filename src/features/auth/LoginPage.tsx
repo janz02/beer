@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Alert, Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { RootState } from 'app/rootReducer';
 import { login } from './authSlice';

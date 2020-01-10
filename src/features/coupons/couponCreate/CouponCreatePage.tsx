@@ -1,7 +1,7 @@
 import React from 'react';
 import CouponEditorForm from 'features/coupons/components/CouponEditorForm';
 import { RootState } from 'app/rootReducer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks';
 import { createCoupons } from './couponCreateSlice';
 import { Coupon } from 'models/coupon';
 

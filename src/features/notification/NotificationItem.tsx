@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import moment from 'moment';
 import { NotificationData, inspectNotification } from './notificationSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from 'hooks/react-redux-hooks';
 import { List, Avatar } from 'antd';
 import { BellFilled } from '@ant-design/icons';
 

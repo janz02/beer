@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, RouteProps, Redirect } from 'react-router-dom';
 import PublicLayout from 'components/PublicLayout';
 import { RootState } from 'app/rootReducer';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'hooks/react-redux-hooks';
 
 interface PublicRouteProps extends RouteProps {
   onlyPublic?: boolean;

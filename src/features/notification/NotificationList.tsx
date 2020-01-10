@@ -3,7 +3,7 @@ import './notification.scss';
 import InfiniteScroll from 'react-infinite-scroller';
 import { List, Empty, Button } from 'antd';
 import { RootState } from 'app/rootReducer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks';
 import { getNotifications } from './notificationSlice';
 import { useTranslation } from 'react-i18next';
 import { ListItem } from './NotificationItem';

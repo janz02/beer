@@ -4,7 +4,7 @@ import SubMenu from 'antd/lib/menu/SubMenu';
 import { Menu, Avatar, Badge } from 'antd';
 import { UserOutlined, BellOutlined, LogoutOutlined } from '@ant-design/icons';
 import { RootState } from 'app/rootReducer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks';
 import { useTranslation } from 'react-i18next';
 import { logout } from 'features/auth/authSlice';
 

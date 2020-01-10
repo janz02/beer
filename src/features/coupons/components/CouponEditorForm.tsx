@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
 import { useParams } from 'react-router-dom';
 import { useIsMobile } from 'hooks';
 import { Coupon } from 'models/coupon';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './CouponListPage.scss';
 import { Button, Table, Input, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks';
 import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
 import { Coupon } from 'models/coupon';

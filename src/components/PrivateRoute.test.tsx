@@ -1,6 +1,5 @@
 import React from 'react';
 import PrivateRoute from './PrivateRoute';
-import shallowWithProvider from '../../config/shallowWithProvider';
 
 describe('PrivateRoute tests', () => {
 
@@ -11,7 +10,7 @@ describe('PrivateRoute tests', () => {
     const state = { auth: { loggedIn: false } };
 
     // Act
-    const wrapper = shallowWithProvider(<PrivateRoute {...props} />)(state);
+    // const wrapper = shallowWithProvider(<PrivateRoute {...props} />)(state);
 
     // Assert
     // redirect is not rendered, need to check out why
