@@ -1,14 +1,18 @@
 {
-
-
   "common": {
     "ok": "OK",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "create": "Create",
+    "save": "Save",
+    "delete": "Delete",
+    "actions": "Actions",
+    "data": "Data"
   },
-  
   "menu": {
     "dashboard": "Dashboard",
-    "coupons": "Coupons"
+    "coupons": "Coupons",
+    "coupon-categories": "Categories"
   },
   "auth": {
     "profile": "Profile",
@@ -87,6 +91,21 @@
   },
   "coupon-editor": {
     "save-coupon-success": "Saving a coupon was successful."
+  },
+  "coupon-category": {
+    "list-title": "Coupon categories",
+    "editor-edit": "Edit coupon category",
+    "editor-create": "Create coupon category",
+    "delete-popup": {
+      "title": "Are you sure?",
+      "text": "You are about to delete permanetly the following coupon category:"
+    },
+    "field": {
+      "name": "Category name"
+    },
+    "error": {
+      "name-required": "Please enter the category name!"
+    }
   },
   "notification": {
     "notifications": "Notifications",

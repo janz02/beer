@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './HeaderOptions.scss';
+import './layout.scss';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import { Menu, Avatar, Badge } from 'antd';
 import { UserOutlined, BellOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -22,7 +22,7 @@ export const HeaderOptions: FC<HeaderOptionsProps> = props => {
     (state: RootState) => state.notification.unreadCount
   );
   return (
-    <Menu className="header-options" mode="horizontal" selectable={false}>
+    <Menu className="header__options" mode="horizontal" selectable={false}>
       <Menu.Item key="notification" onClick={openNotifications}>
         <Badge className="notification-badge" count={unreadCount}>
           <BellOutlined />
