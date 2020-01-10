@@ -106,4 +106,26 @@
       padding-bottom: 0;
     }
   }
+
+  &__col {
+    &--data {
+      width: 130px;
+      text-align: end;
+      .ant-btn {
+        padding: 0 10px;
+        margin: 10px;
+      }
+    }
+    &--action {
+      width: 140px;
+      padding: 0 14px 0 5px !important;
+      .ant-btn {
+        &:first-child {
+          margin-right: 8px;
+        }
+
+        padding: 0 10px;
+      }
+    }
+  }
 }

@@ -2,7 +2,7 @@ import React, { FC, useState, useMemo } from 'react';
 import '../category.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'app/rootReducer';
-import { Table, Button} from 'antd';
+import { Table, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from 'hooks';
 import { TablePaginationConfig } from 'antd/lib/table/Table';
@@ -10,20 +10,20 @@ import { getCategories } from './categoryListSlice';
 import { Category } from 'models/category';
 import { CategoryDeletePopup } from '../CategoryDeletePopup';
 
-
 const CategoryListHeader = ({ onCreate = () => {}, error = '' }) => {
   const { t } = useTranslation();
-
   return (
     <div className="category-list__header">
       <h3>{t('coupon-category.list-title')}</h3>
-      <Button onClick={onCreate}>{t('common.create')}</Button>
+      <Button type="primary" onClick={onCreate}>
+        {t('common.create')}
+      </Button>
     </div>
   );
 };
 
 interface CategoryListProps {
-  onOpenEditor: (id: string, createNew?: boolean) => void;
+  onOpenEditor: (id?: number, createNew?: boolean) => void;
 }
 
 export const CategoryList: FC<CategoryListProps> = props => {
@@ -45,35 +45,35 @@ export const CategoryList: FC<CategoryListProps> = props => {
     (state: RootState) => state.categoryList.categories
   );
 
-
   const errorMsg = () => <div className="list-error">{error}</div>;
 
   const columnsConfig = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: t('common.data'),
+      key: 'data',
+      render: (value: any, record: Category, index: number) => {
+        return (
+          <>
+            <div>{record.name}</div>
+            <div>id:{record.id}</div>
+          </>
+        );
+      },
     },
     {
-      title: 'Id',
-      dataIndex: 'id',
-      key: 'id',
-    },
-    {
-      title: 'Actions',
-      dataIndex: '',
-      key: 'x',
+      title: t('common.actions'),
+      key: 'actions',
+      className: 'category-list__col--action',
+      colSpan: 1,
+      // width: 180,
       render: (value: any, record: Category, index: number) => {
         console.log({ value, record, index });
 
         return (
           <>
-            <Button type="link" onClick={() => onOpenEditor('old')}>
-              Edit
-            </Button>{' '}
-            |{' '}
+            <Button onClick={() => onOpenEditor(record.id!)}>Edit</Button>{' '}
             <Button
-              type="link"
+              danger
               onClick={() =>
                 setCategoryToDelete({ category: record, popupVisible: true })
               }
@@ -96,7 +96,6 @@ export const CategoryList: FC<CategoryListProps> = props => {
       current: pagination?.page,
       pageSizeOptions: ['5', '10', '25', '50'],
       showSizeChanger: !error,
-      locale: () => 'khfdkh',
       onShowSizeChange: (current, size) => {
         const newPage = Math.ceil(pagination!.from! / size);
         dispatch(getCategories({ page: newPage, pageSize: size }));
@@ -108,22 +107,20 @@ export const CategoryList: FC<CategoryListProps> = props => {
     [isMobile, pagination, error, dispatch]
   );
 
-  console.log(paginationConfig);
-
   return (
     <>
       <Table
         className="category-list list-card_table"
         title={() => (
           <CategoryListHeader
-            onCreate={() => onOpenEditor('', true)}
+            onCreate={() => onOpenEditor(undefined, true)}
             error={error}
           />
         )}
         footer={error ? errorMsg : undefined}
         columns={columnsConfig}
         dataSource={categories.map((c, i) => ({ ...c, key: '' + i + c.id }))}
-        pagination={paginationConfig}
+        pagination={categories.length ? paginationConfig : false}
       />
       <CategoryDeletePopup
         visible={!!categoryToDelete?.popupVisible}

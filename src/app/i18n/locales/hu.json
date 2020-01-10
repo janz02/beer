@@ -4,7 +4,9 @@
     "cancel": "Mégsem",
     "edit": "Szerkesztés",
     "create": "Létrehozás",
-    "delete": "Törlés"
+    "delete": "Törlés",
+    "actions": "Műveletek",
+    "data": "Adatok"
   },
   "menu": {
     "dashboard": "Irányítópult",
@@ -90,7 +92,10 @@
     "save-coupon-success": "Sikeres kupon mentés."
   },
   "coupon-category": {
-    "list-title": "Kupon kategóriák"
+    "list-title": "Kupon kategóriák",
+    "col": {
+      "data": "Kategória adat"
+    }
   },
   "notification": {
     "notifications": "Értesítések",

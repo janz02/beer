@@ -3,7 +3,7 @@ import './category.scss';
 import { CategoryList } from './categoryList/CategoryList';
 import { Card } from 'antd';
 import { useIsMobile } from 'hooks';
-import { CategoryEditor } from './categoryEditor/CategoryEditor';
+import { CategoryEditor, CategoryEditorParams } from './categoryEditor/CategoryEditor';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'app/rootReducer';
 import { history } from 'app/router';
@@ -13,15 +13,16 @@ export const CategoryPage = () => {
   const isMobile = useIsMobile();
   const dispatch = useDispatch();
 
-  const selectedId: string = useSelector(
+  const [firstLoad, setFirstLoad] = useState(true)
+  const [editorParams, setEditorParams] = useState<CategoryEditorParams>({visible: false});
+
+  const selectedId: number = useSelector(
     (state: RootState) => (state.router.location as any)?.query?.id
   );
 
-  const [editorVisible, setEditorVisible] = useState(false);
-
-  const openEditor = useCallback((id: string, createNew?: boolean) => {
+  const openEditor = useCallback((id?: number, createNew?: boolean) => {
     if (id || createNew) {
-      setEditorVisible(true);
+      setEditorParams({visible: true, isNew: createNew, categoryId: id});
       history.push(`/coupon-categories/?id=${id}`);
     }
   }, []);
@@ -31,8 +32,11 @@ export const CategoryPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    openEditor(selectedId);
-  }, [selectedId, openEditor, dispatch]);
+    if(selectedId && firstLoad) {
+      setFirstLoad(false);
+      openEditor(selectedId);
+    }
+  }, [selectedId, openEditor, dispatch, firstLoad]);
 
   return (
     <div className={`category-page ${isMobile ? 'category-page--mobile' : ''}`}>
@@ -40,10 +44,12 @@ export const CategoryPage = () => {
         <CategoryList onOpenEditor={openEditor} />
       </Card>
       <CategoryEditor
-        categoryId={selectedId}
-        visible={editorVisible}
-        onExit={() => setEditorVisible(false)}
-        afterExit={() => history.push('/coupon-categories')}
+        params={editorParams}
+        onExit={() => setEditorParams({...editorParams, visible: false})}
+        afterClose={() => {
+          history.push('/coupon-categories')
+          setEditorParams({visible: false})
+        }}
       />
     </div>
   );

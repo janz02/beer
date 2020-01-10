@@ -4,7 +4,9 @@
     "cancel": "Cancel",
     "edit": "Edit",
     "create": "Create",
-    "delete": "Delete"
+    "delete": "Delete",
+    "actions": "Actions",
+    "data": "Data"
   },
   "menu": {
     "dashboard": "Dashboard",
@@ -90,7 +92,10 @@
     "save-coupon-success": "Saving a coupon was successful."
   },
   "coupon-category": {
-    "list-title": "Coupon categories"
+    "list-title": "Coupon categories",
+    "col": {
+      "data": "Category data"
+    }
   },
   "notification": {
     "notifications": "Notifications",

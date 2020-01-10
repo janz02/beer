@@ -2,46 +2,47 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'app/store';
 import { Category } from 'models/category';
 import api from 'api';
-import { ListCategoriesRequest } from 'api/swagger';
+import { GetCategoriesRequest } from 'api/swagger';
 
-interface Pagination {
-  page: number;
-  from: number;
-  to: number;
-  size: number;
-  pageSize: number;
-}
-
-interface CouponCategoryListState {
-  categories: Category[];
-  pagination?: Pagination;
+interface CouponCategoryEditorState {
+  id?: number;
+  category?: Category | null;
   loading: boolean;
   error: string;
 }
 
-const initialState: CouponCategoryListState = {
-  categories: [],
+const initialState: CouponCategoryEditorState = {
   loading: false,
   error: '',
 };
 
-const couponCategoryListSlice = createSlice({
-  name: 'category-list',
+const couponCategoryEditorSlice = createSlice({
+  name: '@category-editor',
   initialState,
   reducers: {
-    getCategoriesRequest(state) {
+    getCategoryRequest(state) {
       state.loading = true;
     },
-    getCategoriesSuccess(
-      state,
-      action: PayloadAction<{ categories: Category[]; pagination: Pagination }>
-    ) {
-      state.categories = action.payload.categories;
-      state.pagination = action.payload.pagination;
+    getCategorySuccess(state, action: PayloadAction<Category>) {
+      state.category = action.payload;
       state.loading = false;
       state.error = '';
     },
-    getCategoriesFail(state, action: PayloadAction<string>) {
+    getCategoryFail(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    clearEditor(state) {
+      state.category = null;
+    },
+    saveCategoryRequest(state) {
+      state.loading = true;
+    },
+    saveCategorySuccess(state, action: PayloadAction<Category>) {
+      state.loading = false;
+      state.error = '';
+    },
+    saveCategoryFail(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -49,39 +50,26 @@ const couponCategoryListSlice = createSlice({
 });
 
 export const {
-  getCategoriesRequest,
-  getCategoriesSuccess,
-  getCategoriesFail,
-} = couponCategoryListSlice.actions;
+  clearEditor,
+  getCategoryRequest,
+  getCategorySuccess,
+  getCategoryFail,
+  saveCategoryRequest,
+  saveCategorySuccess,
+  saveCategoryFail,
+} = couponCategoryEditorSlice.actions;
 
-export default couponCategoryListSlice.reducer;
+export default couponCategoryEditorSlice.reducer;
 
-export const getCategories = (
-  params: ListCategoriesRequest = {}
-): AppThunk => async (dispatch, getState) => {
-  dispatch(getCategoriesRequest());
+export const getCategory = (params: GetCategoriesRequest): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  dispatch(getCategoryRequest());
   try {
-    const pageSize =
-      params.pageSize ?? getState().categoryList.pagination?.pageSize! ?? 10;
-
-    const response = await api.categories.listCategories({
-      pageSize,
-      ...params,
-    });
-
-    dispatch(
-      getCategoriesSuccess({
-        categories: response.result as Category[],
-        pagination: {
-          page: response.page!,
-          from: response.from!,
-          size: response.size!,
-          to: response.to!,
-          pageSize,
-        },
-      })
-    );
+    const response = await api.categories.getCategories(params);
+    dispatch(getCategorySuccess(response as Category));
   } catch (err) {
-    dispatch(getCategoriesFail(err.toString()));
+    dispatch(getCategoryFail(err.toString()));
   }
 };

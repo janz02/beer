@@ -9,6 +9,7 @@ import couponCreateReducer from 'features/coupons/couponCreate/couponCreateSlice
 import couponsReducer from 'features/coupons/couponsSlice';
 import notificationReducer from 'features/notification/notificationSlice';
 import categoryListReducer from 'features/coupon-category/categoryList/categoryListSlice';
+import categoryEditorReducer from 'features/coupon-category/categoryEditor/categoryEditorSlice';
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   couponCreate: couponCreateReducer,
   coupons: couponsReducer,
   categoryList: categoryListReducer,
+  categoryEditor: categoryEditorReducer,
   notification: notificationReducer,
 });
 

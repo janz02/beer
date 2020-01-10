@@ -29,7 +29,7 @@ const initialState: CouponCategoryListState = {
 };
 
 const couponCategoryListSlice = createSlice({
-  name: 'category-list',
+  name: '@category-list',
   initialState,
   reducers: {
     getCategoriesRequest(state, action: PayloadAction<object>) {
