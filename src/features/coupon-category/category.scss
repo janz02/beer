@@ -128,4 +128,19 @@
       }
     }
   }
+
+  &__item {
+    &--editing {
+      .ant-table-cell {
+        background: rgba(3, 86, 9, 0.217);
+      }
+    }
+  }
+}
+
+.category-modal {
+  &__error-msg {
+    text-align: center;
+    color: red;
+  }
 }

@@ -17,6 +17,7 @@ interface CouponCategoryListState {
   pagination?: Pagination;
   loading: boolean;
   error: string;
+  errorDeletion: string;
 }
 
 const initialState: CouponCategoryListState = {
@@ -26,6 +27,7 @@ const initialState: CouponCategoryListState = {
   },
   loading: false,
   error: '',
+  errorDeletion: '',
 };
 
 const couponCategoryListSlice = createSlice({
@@ -53,11 +55,11 @@ const couponCategoryListSlice = createSlice({
     },
     deleteSuccess(state) {
       state.loading = false;
-      state.error = '';
+      state.errorDeletion = '';
     },
     deleteFail(state, action: PayloadAction<string>) {
       state.loading = false;
-      state.error = action.payload;
+      state.errorDeletion = action.payload;
     },
   },
 });
@@ -115,11 +117,12 @@ export const deleteCategory = (
       const oldPagination = getState().categoryList.pagination;
       const reductPage = oldPagination?.to! === oldPagination?.from!;
       const page = oldPagination?.page! - +reductPage;
-
       dispatch(getCategories({ page }));
     }
     dispatch(deleteSuccess());
+    return true;
   } catch (err) {
     dispatch(deleteFail(err.toString()));
+    return false;
   }
 };

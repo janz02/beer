@@ -4,6 +4,7 @@
     "cancel": "Mégsem",
     "edit": "Szerkesztés",
     "create": "Létrehozás",
+    "save": "Mentés",
     "delete": "Törlés",
     "actions": "Műveletek",
     "data": "Adatok"
@@ -93,8 +94,17 @@
   },
   "coupon-category": {
     "list-title": "Kupon kategóriák",
-    "col": {
-      "data": "Kategória adat"
+    "editor-edit": "Kupon katgória szerkesztése",
+    "editor-create": "Kupon katgória létrehozása",
+    "field": {
+      "name": "Kategória neve"
+    },
+    "delete-popup": {
+      "title": "Biztos?",
+      "text": "A következő kuponkategóriát véglegesen törlöm:"
+    },
+    "error": {
+      "name-required": "Kérem add meg a kategória nevét!"
     }
   },
   "notification": {

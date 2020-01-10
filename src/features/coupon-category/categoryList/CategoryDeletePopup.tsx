@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { Modal } from 'antd';
-import { useDispatch } from 'react-redux';
-import { deleteCategory } from './categoryList/categoryListSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteCategory } from './categoryListSlice';
 import { Category } from 'models/category';
 import { useTranslation } from 'react-i18next';
+import { RootState } from 'app/rootReducer';
 
 interface CategoryDeletePopupProps {
   visible: boolean;
@@ -16,11 +17,16 @@ export const CategoryDeletePopup: FC<CategoryDeletePopupProps> = props => {
   const { visible, category, onExit, afterClose } = props;
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const error = useSelector(
+    (state: RootState) => state.categoryList.errorDeletion
+  );
 
-  const onDelete = () => {
+  const onDelete = async () => {
     if (category?.id) {
-      dispatch(deleteCategory(category.id));
-      onExit();
+      const deleted = await dispatch(deleteCategory(category.id));
+      if (!!deleted) {
+        onExit();
+      }
     }
   };
 
@@ -30,10 +36,12 @@ export const CategoryDeletePopup: FC<CategoryDeletePopupProps> = props => {
       title={t(`coupon-category.delete-popup.title`)}
       onOk={onDelete}
       onCancel={onExit}
+      okText={t('common.delete')}
       afterClose={afterClose}
     >
       <p>{t(`coupon-category.delete-popup.text`)}</p>
-      <p>{category?.name}</p>
+      <h4>{category?.name}</h4>
+      <div className="category-modal__error-msg">{error}</div>
     </Modal>
   );
 };

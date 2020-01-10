@@ -32,14 +32,19 @@ const couponCategoryEditorSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    clearEditor(state) {
+
+    clearCategoryEditor(state) {
       state.category = null;
+      state.error = '';
+      state.loading = false;
     },
-    saveCategoryRequest(state) {
+    saveCategoryRequest(state, action: PayloadAction<Category>) {
+      state.category = action.payload;
       state.loading = true;
     },
     saveCategorySuccess(state, action: PayloadAction<Category>) {
       state.loading = false;
+      state.category = action.payload;
       state.error = '';
     },
     saveCategoryFail(state, action: PayloadAction<string>) {
@@ -50,7 +55,7 @@ const couponCategoryEditorSlice = createSlice({
 });
 
 export const {
-  clearEditor,
+  clearCategoryEditor,
   getCategoryRequest,
   getCategorySuccess,
   getCategoryFail,
@@ -61,15 +66,43 @@ export const {
 
 export default couponCategoryEditorSlice.reducer;
 
-export const getCategory = (params: GetCategoriesRequest): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const getCategory = (
+  params: GetCategoriesRequest
+): AppThunk => async dispatch => {
   dispatch(getCategoryRequest());
   try {
     const response = await api.categories.getCategories(params);
     dispatch(getCategorySuccess(response as Category));
   } catch (err) {
     dispatch(getCategoryFail(err.toString()));
+  }
+};
+
+export const saveCategory = (
+  category: Category
+): AppThunk => async dispatch => {
+  dispatch(saveCategoryRequest(category));
+  let id = category.id!;
+  try {
+    if (category?.id && typeof category.id === 'number') {
+      await api.categories.updateCategories({
+        id,
+        categoryDto: {
+          name: category.name,
+        },
+      });
+    } else {
+      const response = await api.categories.createCategories({
+        categoryDto: {
+          name: category.name,
+        },
+      });
+      id = response.id!;
+    }
+    dispatch(saveCategorySuccess({ ...category, id }));
+    return true;
+  } catch (err) {
+    dispatch(saveCategoryFail(err.toString()));
+    return false;
   }
 };

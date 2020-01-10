@@ -4,6 +4,7 @@
     "cancel": "Cancel",
     "edit": "Edit",
     "create": "Create",
+    "save": "Save",
     "delete": "Delete",
     "actions": "Actions",
     "data": "Data"
@@ -93,8 +94,17 @@
   },
   "coupon-category": {
     "list-title": "Coupon categories",
-    "col": {
-      "data": "Category data"
+    "editor-edit": "Edit coupon category",
+    "editor-create": "Create coupon category",
+    "delete-popup": {
+      "title": "Are you sure?",
+      "text": "You are about to delete permanetly the following coupon category:"
+    },
+    "field": {
+      "name": "Category name"
+    },
+    "error": {
+      "name-required": "Please enter the category name!"
     }
   },
   "notification": {

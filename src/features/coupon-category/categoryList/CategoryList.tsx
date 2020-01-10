@@ -8,7 +8,7 @@ import { useIsMobile } from 'hooks';
 import { TablePaginationConfig } from 'antd/lib/table/Table';
 import { getCategories } from './categoryListSlice';
 import { Category } from 'models/category';
-import { CategoryDeletePopup } from '../CategoryDeletePopup';
+import { CategoryDeletePopup } from './CategoryDeletePopup';
 
 const CategoryListHeader = ({ onCreate = () => {}, error = '' }) => {
   const { t } = useTranslation();
@@ -45,6 +45,9 @@ export const CategoryList: FC<CategoryListProps> = props => {
     (state: RootState) => state.categoryList.categories
   );
 
+  const editedId = useSelector(
+    (state: RootState) => state.categoryEditor.category?.id
+  );
   const errorMsg = () => <div className="list-error">{error}</div>;
 
   const columnsConfig = [
@@ -54,8 +57,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
       render: (value: any, record: Category, index: number) => {
         return (
           <>
-            <div>{record.name}</div>
-            <div>id:{record.id}</div>
+            <h4>{record.name}</h4>
           </>
         );
       },
@@ -65,10 +67,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
       key: 'actions',
       className: 'category-list__col--action',
       colSpan: 1,
-      // width: 180,
       render: (value: any, record: Category, index: number) => {
-        console.log({ value, record, index });
-
         return (
           <>
             <Button onClick={() => onOpenEditor(record.id!)}>Edit</Button>{' '}
@@ -121,6 +120,9 @@ export const CategoryList: FC<CategoryListProps> = props => {
         columns={columnsConfig}
         dataSource={categories.map((c, i) => ({ ...c, key: '' + i + c.id }))}
         pagination={categories.length ? paginationConfig : false}
+        rowClassName={row =>
+          row.id === editedId ? 'category-list__item--editing' : ''
+        }
       />
       <CategoryDeletePopup
         visible={!!categoryToDelete?.popupVisible}
