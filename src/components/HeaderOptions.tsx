@@ -22,7 +22,7 @@ export const HeaderOptions: FC<HeaderOptionsProps> = props => {
     (state: RootState) => state.notification.unreadCount
   );
   return (
-    <Menu className="header-options" mode="horizontal" selectable={false}>
+    <Menu className="header-options" mode="horizontal" selectable={false} subMenuCloseDelay={1.2}>
       <Menu.Item key="notification" onClick={openNotifications}>
         <Badge className="notification-badge" count={unreadCount}>
           <BellOutlined />

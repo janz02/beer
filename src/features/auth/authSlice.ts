@@ -4,8 +4,11 @@ import { history } from 'app/router';
 import api from 'api';
 import { AuthLoginRequest, AuthRegisterRequest } from 'api/swagger/apis';
 import { UserVm } from 'api/swagger';
+import jwt_decode from "jwt-decode";
 
-interface UserData {}
+interface UserData {
+  userName?: string
+}
 
 const authSlice = createSlice({
   name: '@auth',
@@ -49,8 +52,10 @@ const authSlice = createSlice({
       state.loadingLogin = false;
       state.errorLogin = null;
       state.loggedIn = true;
-      state.userData = action.payload;
-      sessionStorage.setItem('jwt', action.payload.token!)
+      const token: string = action.payload.token!;
+
+      state.userData = { userName: (jwt_decode(token) as any).name };
+      sessionStorage.setItem('jwt', token)
     },
     loginFail(state, action: PayloadAction<string>) {
       state.loadingLogin = false;
@@ -120,7 +125,7 @@ const signUp = (params: any): AppThunk => async dispatch => {
   try {
     // Register
     await api.auth.authRegister(requestRequest);
-    
+
     dispatch(signupSuccess());
 
     // Login after it
