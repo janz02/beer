@@ -26,7 +26,7 @@ export const NotificationList: FC<NotificationListProps> = props => {
   );
   const loading = useSelector((state: RootState) => state.notification.loading);
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getNotifications());
   }, [dispatch]);
 

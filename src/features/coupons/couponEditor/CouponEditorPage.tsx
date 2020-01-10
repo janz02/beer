@@ -13,7 +13,7 @@ const CouponEditorPage: React.FC = () => {
     (state: RootState) => state.couponEditor,
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getCoupons(+id!));
   }, [id, dispatch]);
 

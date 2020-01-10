@@ -26,7 +26,7 @@ const CouponListPage: React.FC = () => {
     current: 1,
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(listCoupons(listingOptions));
   }, [dispatch, listingOptions]);
 

@@ -40,7 +40,7 @@ const CouponEditorForm = (props: CouponEditorFormProps) => {
 
   const [form] = Form.useForm();
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(listCategories());
   }, [dispatch]);
 

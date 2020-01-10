@@ -17,7 +17,7 @@ const PrivateLayout: React.FC = ({ children }) => {
   const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false);
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (lastMediaQuery !== isMobile) {
       if (isMobile) {
         setMenuOpened(false);
