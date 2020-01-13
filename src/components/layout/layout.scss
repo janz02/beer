@@ -1,0 +1,74 @@
+.layout {
+  section.ant-layout {
+    height: 100vh;
+    overflow: hidden !important;
+  }
+  main.ant-layout-content {
+    overflow: auto;
+  }
+}
+
+.content {
+  overflow: auto;
+}
+
+.drawer {
+  .ant-drawer-wrapper-body {
+    background: #001529;
+    .ant-drawer-body {
+      padding: 0;
+    }
+  }
+}
+
+.header {
+  box-shadow: -1px -2px 13px -3px #000000;
+  z-index: 100;
+  background: #fff;
+  padding: 0;
+
+  img {
+    padding-left: 25px;
+    width: 150px;
+  }
+
+  &--empty {
+    text-align: center;
+
+    img {
+      padding-left: 0;
+    }
+  }
+
+  &__menu-button {
+    padding-left: 25px;
+  }
+
+  &__options {
+    width: min-content;
+    display: inline-block;
+    line-height: 62px;
+    position: absolute;
+    right: 0;
+    border: none;
+
+    .ant-menu-item,
+    .ant-menu-submenu {
+      &:hover {
+        background: rgba($color: #000000, $alpha: 0.03);
+      }
+    }
+
+    .ant-menu-item {
+      padding: 0 15px;
+    }
+    .notification-badge {
+      padding: 0 8px;
+      vertical-align: middle;
+    }
+    .anticon {
+      margin-right: 0px;
+      font-size: 1.2rem;
+    }
+  }
+}

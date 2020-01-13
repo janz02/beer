@@ -24,3 +24,4 @@ yarn-error.log*
 yarn.lock
 /junit.xml
 /output/cobertura-coverage.xml
+*.orig

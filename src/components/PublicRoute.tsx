@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, RouteProps, Redirect } from 'react-router-dom';
-import PublicLayout from 'components/PublicLayout';
+import PublicLayout from 'components/layout/PublicLayout';
 import { RootState } from 'app/rootReducer';
 import { useSelector } from 'react-redux';
 

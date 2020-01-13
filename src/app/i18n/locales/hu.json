@@ -1,11 +1,18 @@
 {
   "common": {
     "ok": "OK",
-    "cancel": "Mégsem"
+    "cancel": "Mégsem",
+    "edit": "Szerkesztés",
+    "create": "Létrehozás",
+    "save": "Mentés",
+    "delete": "Törlés",
+    "actions": "Műveletek",
+    "data": "Adatok"
   },
   "menu": {
     "dashboard": "Irányítópult",
-    "coupons": "Kuponok"
+    "coupons": "Kuponok",
+    "coupon-categories": "Kategóriák"
   },
   "auth": {
     "profile": "Személyes adatok",
@@ -84,6 +91,21 @@
   },
   "coupon-editor": {
     "save-coupon-success": "Sikeres kupon mentés."
+  },
+  "coupon-category": {
+    "list-title": "Kupon kategóriák",
+    "editor-edit": "Kupon katgória szerkesztése",
+    "editor-create": "Kupon katgória létrehozása",
+    "field": {
+      "name": "Kategória neve"
+    },
+    "delete-popup": {
+      "title": "Biztos?",
+      "text": "A következő kuponkategóriát véglegesen törlöm:"
+    },
+    "error": {
+      "name-required": "Kérem add meg a kategória nevét!"
+    }
   },
   "notification": {
     "notifications": "Értesítések",
