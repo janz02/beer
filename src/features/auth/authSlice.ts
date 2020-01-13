@@ -1,13 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'app/store';
 import { history } from 'app/router';
+import api from 'api';
+import { LoginRequest, RegisterRequest } from 'api/swagger/apis';
+import { UserVm } from 'api/swagger';
+import jwt_decode from "jwt-decode";
 
-interface UserData {}
+interface UserData {
+  userName?: string
+}
 
 const authSlice = createSlice({
   name: '@auth',
   initialState: {
-    loggedIn: true,
+    loggedIn: !!sessionStorage.getItem("jwt"),
     userData: {} as UserData,
     loadingSignup: false,
     loadingPasswordRecovery: false,
@@ -42,19 +48,24 @@ const authSlice = createSlice({
     loginRequest(state) {
       state.loadingLogin = true;
     },
-    loginSuccess(state, action: PayloadAction<UserData>) {
+    loginSuccess(state, action: PayloadAction<UserVm>) {
       state.loadingLogin = false;
       state.errorLogin = null;
       state.loggedIn = true;
-      state.userData = action.payload;
+      const token: string = action.payload.jwtToken!;
+
+      state.userData = { userName: (jwt_decode(token) as any).name };
+      sessionStorage.setItem('jwt', token)
     },
     loginFail(state, action: PayloadAction<string>) {
       state.loadingLogin = false;
       state.errorLogin = action.payload;
+      sessionStorage.removeItem('jwt');
     },
     logout(state) {
       state.loggedIn = false;
       state.userData = {};
+      sessionStorage.removeItem('jwt');
     },
   },
 });
@@ -71,9 +82,19 @@ const delay = (p: any) =>
 const login = (params: any): AppThunk => async (dispatch, state) => {
   dispatch(loginRequest());
   try {
-    const userData = await delay(params);
+
+    const loginRequest: LoginRequest = {
+      loginDto: {
+        email: params.username,
+        password: params.password
+      }
+    }
+
+    const userVm = await api.auth.login(loginRequest);
     const cameFrom = state().routerHistory.cameFrom;
-    dispatch(loginSuccess(userData as UserData));
+
+    dispatch(loginSuccess(userVm));
+
     history.push(cameFrom);
   } catch (err) {
     dispatch(loginFail(err.toString()));
@@ -91,11 +112,28 @@ const recoverPassword = (params: any): AppThunk => async dispatch => {
 };
 
 const signUp = (params: any): AppThunk => async dispatch => {
+
   dispatch(signupRequest());
+
+  const requestRequest: RegisterRequest = {
+    registerDto: {
+      email: params.username,
+      password: params.password,
+      partnerName: params.company,
+      fullName: params.name,
+      phone: +params.phone
+    }
+  }
+
   try {
-    await delay(params);
+    // Register
+    await api.auth.register(requestRequest);
+
     dispatch(signupSuccess());
-    dispatch(login(params as UserData));
+
+    // Login after it
+    dispatch(login(params));
+
   } catch (err) {
     dispatch(signupFail(err.toString()));
   }

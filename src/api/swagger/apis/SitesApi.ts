@@ -21,50 +21,52 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
-    TagCategoryDto,
-    TagCategoryDtoFromJSON,
-    TagCategoryDtoToJSON,
-    TagCategoryVm,
-    TagCategoryVmFromJSON,
-    TagCategoryVmToJSON,
-    TagCategoryVmPaginatedResponse,
-    TagCategoryVmPaginatedResponseFromJSON,
-    TagCategoryVmPaginatedResponseToJSON,
+    SiteDto,
+    SiteDtoFromJSON,
+    SiteDtoToJSON,
+    SiteVm,
+    SiteVmFromJSON,
+    SiteVmToJSON,
+    SiteVmPaginatedResponse,
+    SiteVmPaginatedResponseFromJSON,
+    SiteVmPaginatedResponseToJSON,
 } from '../models';
 
-export interface CreateTagCategoriesRequest {
-    tagCategoryDto?: TagCategoryDto;
+export interface CreateSitesRequest {
+    siteDto?: SiteDto;
 }
 
-export interface DeleteTagCategoriesRequest {
+export interface DeleteSitesRequest {
     id: number;
 }
 
-export interface GetTagCategoriesRequest {
+export interface GetSitesRequest {
     id: number;
 }
 
-export interface ListTagCategoriesRequest {
+export interface ListSitesRequest {
     name?: string;
+    address?: string;
+    partnerId?: number;
     page?: number;
     pageSize?: number;
     orderBy?: string;
     orderByType?: OrderByType;
 }
 
-export interface UpdateTagCategoriesRequest {
+export interface UpdateSitesRequest {
     id: number;
-    tagCategoryDto?: TagCategoryDto;
+    siteDto?: SiteDto;
 }
 
 /**
  * no description
  */
-export class TagCategoriesApi extends runtime.BaseAPI {
+export class SitesApi extends runtime.BaseAPI {
 
     /**
      */
-    async createTagCategoriesRaw(requestParameters: CreateTagCategoriesRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createSitesRaw(requestParameters: CreateSitesRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -76,11 +78,11 @@ export class TagCategoriesApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/TagCategories`,
+            path: `/api/Sites`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TagCategoryDtoToJSON(requestParameters.tagCategoryDto),
+            body: SiteDtoToJSON(requestParameters.siteDto),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => Int32EntityCreatedVmFromJSON(jsonValue));
@@ -88,16 +90,16 @@ export class TagCategoriesApi extends runtime.BaseAPI {
 
     /**
      */
-    async createTagCategories(requestParameters: CreateTagCategoriesRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createTagCategoriesRaw(requestParameters);
+    async createSites(requestParameters: CreateSitesRequest): Promise<Int32EntityCreatedVm> {
+        const response = await this.createSitesRaw(requestParameters);
         return await response.value();
     }
 
     /**
      */
-    async deleteTagCategoriesRaw(requestParameters: DeleteTagCategoriesRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteSitesRaw(requestParameters: DeleteSitesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTagCategories.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteSites.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -109,7 +111,7 @@ export class TagCategoriesApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/TagCategories/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Sites/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -120,15 +122,15 @@ export class TagCategoriesApi extends runtime.BaseAPI {
 
     /**
      */
-    async deleteTagCategories(requestParameters: DeleteTagCategoriesRequest): Promise<void> {
-        await this.deleteTagCategoriesRaw(requestParameters);
+    async deleteSites(requestParameters: DeleteSitesRequest): Promise<void> {
+        await this.deleteSitesRaw(requestParameters);
     }
 
     /**
      */
-    async getTagCategoriesRaw(requestParameters: GetTagCategoriesRequest): Promise<runtime.ApiResponse<TagCategoryVm>> {
+    async getSitesRaw(requestParameters: GetSitesRequest): Promise<runtime.ApiResponse<SiteVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTagCategories.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSites.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -140,29 +142,37 @@ export class TagCategoriesApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/TagCategories/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Sites/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TagCategoryVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SiteVmFromJSON(jsonValue));
     }
 
     /**
      */
-    async getTagCategories(requestParameters: GetTagCategoriesRequest): Promise<TagCategoryVm> {
-        const response = await this.getTagCategoriesRaw(requestParameters);
+    async getSites(requestParameters: GetSitesRequest): Promise<SiteVm> {
+        const response = await this.getSitesRaw(requestParameters);
         return await response.value();
     }
 
     /**
      */
-    async listTagCategoriesRaw(requestParameters: ListTagCategoriesRequest): Promise<runtime.ApiResponse<TagCategoryVmPaginatedResponse>> {
+    async listSitesRaw(requestParameters: ListSitesRequest): Promise<runtime.ApiResponse<SiteVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
             queryParameters['Name'] = requestParameters.name;
+        }
+
+        if (requestParameters.address !== undefined) {
+            queryParameters['Address'] = requestParameters.address;
+        }
+
+        if (requestParameters.partnerId !== undefined) {
+            queryParameters['PartnerId'] = requestParameters.partnerId;
         }
 
         if (requestParameters.page !== undefined) {
@@ -188,27 +198,27 @@ export class TagCategoriesApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/TagCategories`,
+            path: `/api/Sites`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TagCategoryVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SiteVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
      */
-    async listTagCategories(requestParameters: ListTagCategoriesRequest): Promise<TagCategoryVmPaginatedResponse> {
-        const response = await this.listTagCategoriesRaw(requestParameters);
+    async listSites(requestParameters: ListSitesRequest): Promise<SiteVmPaginatedResponse> {
+        const response = await this.listSitesRaw(requestParameters);
         return await response.value();
     }
 
     /**
      */
-    async updateTagCategoriesRaw(requestParameters: UpdateTagCategoriesRequest): Promise<runtime.ApiResponse<void>> {
+    async updateSitesRaw(requestParameters: UpdateSitesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTagCategories.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateSites.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -222,11 +232,11 @@ export class TagCategoriesApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/TagCategories/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Sites/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: TagCategoryDtoToJSON(requestParameters.tagCategoryDto),
+            body: SiteDtoToJSON(requestParameters.siteDto),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -234,8 +244,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
 
     /**
      */
-    async updateTagCategories(requestParameters: UpdateTagCategoriesRequest): Promise<void> {
-        await this.updateTagCategoriesRaw(requestParameters);
+    async updateSites(requestParameters: UpdateSitesRequest): Promise<void> {
+        await this.updateSitesRaw(requestParameters);
     }
 
 }
