@@ -16,39 +16,32 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UserVm
+ * @interface RefreshDto
  */
-export interface UserVm {
+export interface RefreshDto {
     /**
      * 
      * @type {string}
-     * @memberof UserVm
-     */
-    jwtToken?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserVm
+     * @memberof RefreshDto
      */
     refreshToken?: string | null;
 }
 
-export function UserVmFromJSON(json: any): UserVm {
-    return UserVmFromJSONTyped(json, false);
+export function RefreshDtoFromJSON(json: any): RefreshDto {
+    return RefreshDtoFromJSONTyped(json, false);
 }
 
-export function UserVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserVm {
+export function RefreshDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): RefreshDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'jwtToken': !exists(json, 'jwtToken') ? undefined : json['jwtToken'],
         'refreshToken': !exists(json, 'refreshToken') ? undefined : json['refreshToken'],
     };
 }
 
-export function UserVmToJSON(value?: UserVm | null): any {
+export function RefreshDtoToJSON(value?: RefreshDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,7 +50,6 @@ export function UserVmToJSON(value?: UserVm | null): any {
     }
     return {
         
-        'jwtToken': value.jwtToken,
         'refreshToken': value.refreshToken,
     };
 }

@@ -16,39 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UserVm
+ * @interface LoginDto
  */
-export interface UserVm {
+export interface LoginDto {
     /**
      * 
      * @type {string}
-     * @memberof UserVm
+     * @memberof LoginDto
      */
-    jwtToken?: string | null;
+    email?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof UserVm
+     * @memberof LoginDto
      */
-    refreshToken?: string | null;
+    password?: string | null;
 }
 
-export function UserVmFromJSON(json: any): UserVm {
-    return UserVmFromJSONTyped(json, false);
+export function LoginDtoFromJSON(json: any): LoginDto {
+    return LoginDtoFromJSONTyped(json, false);
 }
 
-export function UserVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserVm {
+export function LoginDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): LoginDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'jwtToken': !exists(json, 'jwtToken') ? undefined : json['jwtToken'],
-        'refreshToken': !exists(json, 'refreshToken') ? undefined : json['refreshToken'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+        'password': !exists(json, 'password') ? undefined : json['password'],
     };
 }
 
-export function UserVmToJSON(value?: UserVm | null): any {
+export function LoginDtoToJSON(value?: LoginDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +57,8 @@ export function UserVmToJSON(value?: UserVm | null): any {
     }
     return {
         
-        'jwtToken': value.jwtToken,
-        'refreshToken': value.refreshToken,
+        'email': value.email,
+        'password': value.password,
     };
 }
 

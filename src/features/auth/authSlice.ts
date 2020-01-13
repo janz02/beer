@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'app/store';
 import { history } from 'app/router';
 import api from 'api';
-import { AuthLoginRequest, AuthRegisterRequest } from 'api/swagger/apis';
+import { LoginRequest, RegisterRequest } from 'api/swagger/apis';
 import { UserVm } from 'api/swagger';
 import jwt_decode from "jwt-decode";
 
@@ -52,7 +52,7 @@ const authSlice = createSlice({
       state.loadingLogin = false;
       state.errorLogin = null;
       state.loggedIn = true;
-      const token: string = action.payload.token!;
+      const token: string = action.payload.jwtToken!;
 
       state.userData = { userName: (jwt_decode(token) as any).name };
       sessionStorage.setItem('jwt', token)
@@ -83,14 +83,14 @@ const login = (params: any): AppThunk => async (dispatch, state) => {
   dispatch(loginRequest());
   try {
 
-    const loginRequest: AuthLoginRequest = {
-      userDto: {
+    const loginRequest: LoginRequest = {
+      loginDto: {
         email: params.username,
         password: params.password
       }
     }
 
-    const userVm = await api.auth.authLogin(loginRequest);
+    const userVm = await api.auth.login(loginRequest);
     const cameFrom = state().routerHistory.cameFrom;
 
     dispatch(loginSuccess(userVm));
@@ -115,16 +115,19 @@ const signUp = (params: any): AppThunk => async dispatch => {
 
   dispatch(signupRequest());
 
-  const requestRequest: AuthRegisterRequest = {
-    userDto: {
+  const requestRequest: RegisterRequest = {
+    registerDto: {
       email: params.username,
-      password: params.password
+      password: params.password,
+      partnerName: params.company,
+      fullName: params.name,
+      phone: +params.phone
     }
   }
 
   try {
     // Register
-    await api.auth.authRegister(requestRequest);
+    await api.auth.register(requestRequest);
 
     dispatch(signupSuccess());
 

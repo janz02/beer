@@ -15,20 +15,30 @@
 
 import * as runtime from '../runtime';
 import {
-    UserDto,
-    UserDtoFromJSON,
-    UserDtoToJSON,
+    LoginDto,
+    LoginDtoFromJSON,
+    LoginDtoToJSON,
+    RefreshDto,
+    RefreshDtoFromJSON,
+    RefreshDtoToJSON,
+    RegisterDto,
+    RegisterDtoFromJSON,
+    RegisterDtoToJSON,
     UserVm,
     UserVmFromJSON,
     UserVmToJSON,
 } from '../models';
 
-export interface AuthLoginRequest {
-    userDto?: UserDto;
+export interface LoginRequest {
+    loginDto?: LoginDto;
 }
 
-export interface AuthRegisterRequest {
-    userDto?: UserDto;
+export interface RefreshRequest {
+    refreshDto?: RefreshDto;
+}
+
+export interface RegisterRequest {
+    registerDto?: RegisterDto;
 }
 
 /**
@@ -38,7 +48,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      */
-    async authLoginRaw(requestParameters: AuthLoginRequest): Promise<runtime.ApiResponse<UserVm>> {
+    async loginRaw(requestParameters: LoginRequest): Promise<runtime.ApiResponse<UserVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -54,7 +64,7 @@ export class AuthApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UserDtoToJSON(requestParameters.userDto),
+            body: LoginDtoToJSON(requestParameters.loginDto),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserVmFromJSON(jsonValue));
@@ -62,14 +72,45 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      */
-    async authLogin(requestParameters: AuthLoginRequest): Promise<UserVm> {
-        const response = await this.authLoginRaw(requestParameters);
+    async login(requestParameters: LoginRequest): Promise<UserVm> {
+        const response = await this.loginRaw(requestParameters);
         return await response.value();
     }
 
     /**
      */
-    async authRegisterRaw(requestParameters: AuthRegisterRequest): Promise<runtime.ApiResponse<void>> {
+    async refreshRaw(requestParameters: RefreshRequest): Promise<runtime.ApiResponse<UserVm>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/Refresh`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: RefreshDtoToJSON(requestParameters.refreshDto),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserVmFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async refresh(requestParameters: RefreshRequest): Promise<UserVm> {
+        const response = await this.refreshRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async registerRaw(requestParameters: RegisterRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -85,7 +126,7 @@ export class AuthApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UserDtoToJSON(requestParameters.userDto),
+            body: RegisterDtoToJSON(requestParameters.registerDto),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -93,8 +134,8 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      */
-    async authRegister(requestParameters: AuthRegisterRequest): Promise<void> {
-        await this.authRegisterRaw(requestParameters);
+    async register(requestParameters: RegisterRequest): Promise<void> {
+        await this.registerRaw(requestParameters);
     }
 
 }

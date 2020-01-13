@@ -16,39 +16,46 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UserVm
+ * @interface SiteDto
  */
-export interface UserVm {
+export interface SiteDto {
     /**
      * 
      * @type {string}
-     * @memberof UserVm
+     * @memberof SiteDto
      */
-    jwtToken?: string | null;
+    name?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof UserVm
+     * @memberof SiteDto
      */
-    refreshToken?: string | null;
+    address?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SiteDto
+     */
+    partnerId?: number;
 }
 
-export function UserVmFromJSON(json: any): UserVm {
-    return UserVmFromJSONTyped(json, false);
+export function SiteDtoFromJSON(json: any): SiteDto {
+    return SiteDtoFromJSONTyped(json, false);
 }
 
-export function UserVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserVm {
+export function SiteDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): SiteDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'jwtToken': !exists(json, 'jwtToken') ? undefined : json['jwtToken'],
-        'refreshToken': !exists(json, 'refreshToken') ? undefined : json['refreshToken'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
+        'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
     };
 }
 
-export function UserVmToJSON(value?: UserVm | null): any {
+export function SiteDtoToJSON(value?: SiteDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +64,9 @@ export function UserVmToJSON(value?: UserVm | null): any {
     }
     return {
         
-        'jwtToken': value.jwtToken,
-        'refreshToken': value.refreshToken,
+        'name': value.name,
+        'address': value.address,
+        'partnerId': value.partnerId,
     };
 }
 
