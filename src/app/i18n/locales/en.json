@@ -51,7 +51,9 @@
       "company-required": "Please enter your name of your workplace!",
       "password-required": "Please enter your Password!",
       "password-inconsistent": "The two passwords are not matching.",
-      "password-format": "Must have a letter, a number, a special character and contain 8 characters."
+      "password-format": "Must have a letter, a number, a special character and contain 8 characters.",
+      "user-exists": "User already exists!",
+      "invalid-email": "Invalid email!"
     }
   },
   "coupon-list": {
