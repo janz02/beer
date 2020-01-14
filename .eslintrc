@@ -1,6 +1,21 @@
 {
-  "extends": ["standard", "plugin:prettier/recommended", "standard-react"],
+  "extends": [
+    "standard",
+    "plugin:prettier/recommended",
+    "standard-react",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   "plugins": ["react-hooks"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {
     "jsx-quotes": ["error", "prefer-double"],
     "react-hooks/rules-of-hooks": "error",
@@ -21,7 +36,14 @@
         "trailingComma": "none",
         "useTabs": false
       }
-    ]
+    ],
+    // TODO: instead of turning it off just give it a better config https://github.com/typescript-eslint/typescript-eslint/blob/v2.16.0/packages/eslint-plugin/docs/rules/explicit-function-return-type.md ?
+    "@typescript-eslint/explicit-function-return-type": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "env": {
     "browser": true,

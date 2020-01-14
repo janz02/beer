@@ -3,11 +3,17 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "files.associations": {
-    "**/components/**/*.js": "javascriptreact"
+    "**/features/**/*.ts": "typescriptreact"
   },
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
-  "editor.formatOnSave": true
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  }
 }
