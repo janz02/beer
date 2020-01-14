@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "thibaudcolas.stylelint",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}

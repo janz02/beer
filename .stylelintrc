@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-property-sort-order-smacss"
+  ],
+  "rules": {
+    "color-named": "never",
+    "color-hex-case": "upper",
+    "color-hex-length": "long",
+    "number-leading-zero": "always",
+    "max-nesting-depth": 4,
+    "declaration-no-important": true,
+    "selector-max-id": 0,
+    "at-rule-no-unknown": null
+  }
+}

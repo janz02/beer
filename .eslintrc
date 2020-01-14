@@ -1,0 +1,30 @@
+{
+  "extends": ["standard", "plugin:prettier/recommended", "standard-react"],
+  "plugins": ["react-hooks"],
+  "rules": {
+    "jsx-quotes": ["error", "prefer-double"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        // Based on https://github.com/npetruzzelli/prettier-config-standard/blob/master/.prettierrc.json
+        "arrowParens": "avoid",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false, // true breaks component closing tags
+        "jsxSingleQuote": false,
+        "printWidth": 100,
+        "quoteProps": "as-needed",
+        "semi": false,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "none",
+        "useTabs": false
+      }
+    ]
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  }
+}

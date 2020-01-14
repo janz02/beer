@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import './CouponListPage.scss';
-import { Button, Table, Input, Popconfirm } from 'antd';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'app/rootReducer';
-import { history } from 'app/router';
-import { Coupon } from 'models/coupon';
-import { useIsMobile } from 'hooks';
-import { listCoupons, deleteCoupons } from './couponListSlice';
-import { useTranslation } from 'react-i18next';
-import { CouponListingOptions } from 'models/couponListingOptions';
-import { SearchOutlined } from '@ant-design/icons';
-import { OrderByType } from 'api/swagger/models';
-import { ColumnType } from 'antd/lib/table/interface';
+import React, { useState, useEffect } from "react";
+import "./CouponListPage.scss";
+import { Button, Table, Input, Popconfirm } from "antd";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "app/rootReducer";
+import { history } from "app/router";
+import { Coupon } from "models/coupon";
+import { useIsMobile } from "hooks";
+import { listCoupons, deleteCoupons } from "./couponListSlice";
+import { useTranslation } from "react-i18next";
+import { CouponListingOptions } from "models/couponListingOptions";
+import { SearchOutlined } from "@ant-design/icons";
+import { OrderByType } from "api/swagger/models";
+import { ColumnType } from "antd/lib/table/interface";
 
 const CouponListPage: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ const CouponListPage: React.FC = () => {
   );
   const [listingOptions, setListingOptions] = useState<CouponListingOptions>({
     pageSize: 10,
-    current: 1,
+    current: 1
   });
 
   useEffect(() => {
@@ -35,9 +35,9 @@ const CouponListPage: React.FC = () => {
       return {
         onClick: () => {
           history.push(`/coupons/${record.id}/${false}`);
-        },
+        }
       };
-    },
+    }
   };
 
   const getColumnSearchProps = (dataIndex: string): ColumnType<Coupon> => ({
@@ -45,7 +45,7 @@ const CouponListPage: React.FC = () => {
       setSelectedKeys,
       selectedKeys,
       confirm,
-      clearFilters,
+      clearFilters
     }) => (
       <div className="table-filter">
         <Input
@@ -58,81 +58,81 @@ const CouponListPage: React.FC = () => {
           size="small"
           onClick={() => confirm!()}
         >
-          {t('coupon-list.search')}
+          {t("coupon-list.search")}
         </Button>
       </div>
     ),
-    filterIcon: () => <SearchOutlined />,
+    filterIcon: () => <SearchOutlined />
   });
 
   const columns: ColumnType<Coupon>[] = [
     {
-      title: t('coupon-list.name'),
-      dataIndex: 'name',
-      key: 'name',
+      title: t("coupon-list.name"),
+      dataIndex: "name",
+      key: "name",
       sorter: true,
       ...notActionCellProps,
-      ...getColumnSearchProps('name'),
+      ...getColumnSearchProps("name")
     },
     {
-      title: t('coupon-list.description'),
-      dataIndex: 'description',
-      key: 'description',
+      title: t("coupon-list.description"),
+      dataIndex: "description",
+      key: "description",
       ...notActionCellProps,
-      ...getColumnSearchProps('description'),
+      ...getColumnSearchProps("description")
     },
     {
-      title: t('coupon-list.action'),
-      key: 'action',
+      title: t("coupon-list.action"),
+      key: "action",
       render: (text, record) => (
         <span>
           <Link to={`/coupons/${record.id}/${true}`}>
-            {t('coupon-list.edit')}
+            {t("coupon-list.edit")}
           </Link>
           &nbsp;|&nbsp;
           <Popconfirm
-            title={t('coupon-list.delete-confirm-message')}
+            title={t("coupon-list.delete-confirm-message")}
             onConfirm={() => {
               dispatch(deleteCoupons(record.id!));
             }}
-            okText={t('common.ok')}
-            cancelText={t('common.cancel')}
+            okText={t("common.ok")}
+            cancelText={t("common.cancel")}
           >
             <Button type="danger" size="small">
-              {t('coupon-list.delete')}
+              {t("coupon-list.delete")}
             </Button>
           </Popconfirm>
         </span>
-      ),
-    },
+      )
+    }
   ];
 
   return (
     <div className="coupons-list-page">
-      <h1>{t('coupon-list.coupons')}</h1>
+      <h1>{t("coupon-list.coupons")}</h1>
       <Button type="primary">
-        <Link to="/coupons/create">{t('coupon-list.create')}</Link>
+        <Link to="/coupons/create">{t("coupon-list.create")}</Link>
       </Button>
       <Table
         dataSource={coupons}
         columns={columns}
         rowKey={x => x.id!.toString()}
         pagination={{
-          pageSizeOptions: ['10', '20', '50', '100'],
+          pageSizeOptions: ["10", "20", "50", "100"],
           showSizeChanger: true,
           simple: isMobile,
-          total: allCouponsCount,
+          total: allCouponsCount
         }}
         loading={loading}
         onChange={(pagination, filters, sorter: any) => {
           let orderByType: OrderByType;
           let orderBy: string;
           switch (sorter.order) {
-            case 'descend':
+            case "descend":
               orderByType = OrderByType.Descending;
               orderBy = sorter.columnKey;
               break;
-            case 'ascend':
+            case "ascend":
               orderByType = OrderByType.Ascending;
               orderBy = sorter.columnKey;
               break;
@@ -142,7 +142,7 @@ const CouponListPage: React.FC = () => {
             pageSize: pagination.pageSize!,
             current: pagination.current!,
             orderByType: orderByType!,
-            orderBy: orderBy!,
+            orderBy: orderBy!
           });
         }}
       />
