@@ -1,69 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import './CouponListPage.scss';
-import { Button, Table, Input, Popconfirm } from 'antd';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'app/rootReducer';
-import { history } from 'app/router';
-import { Coupon } from 'models/coupon';
-import { useIsMobile } from 'hooks';
-import { listCoupons, deleteCoupons } from './couponListSlice';
-import { useTranslation } from 'react-i18next';
-import { CouponListingOptions } from 'models/couponListingOptions';
-import { SearchOutlined } from '@ant-design/icons';
-import { OrderByType } from 'api/swagger/models';
-import { ColumnType } from 'antd/lib/table/interface';
+import React, { useState, useEffect } from 'react'
+import './CouponListPage.scss'
+import { Button, Table, Input, Popconfirm } from 'antd'
+import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from 'app/rootReducer'
+import { history } from 'app/router'
+import { Coupon } from 'models/coupon'
+import { useIsMobile } from 'hooks'
+import { listCoupons, deleteCoupons } from './couponListSlice'
+import { useTranslation } from 'react-i18next'
+import { CouponListingOptions } from 'models/couponListingOptions'
+import { SearchOutlined } from '@ant-design/icons'
+import { OrderByType } from 'api/swagger/models'
+import { ColumnType, SorterResult } from 'antd/lib/table/interface'
 
 const CouponListPage: React.FC = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const isMobile = useIsMobile();
-  const { coupons, loading, allCouponsCount } = useSelector(
-    (state: RootState) => state.couponList
-  );
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const isMobile = useIsMobile()
+  const { coupons, loading, allCouponsCount } = useSelector((state: RootState) => state.couponList)
   const [listingOptions, setListingOptions] = useState<CouponListingOptions>({
     pageSize: 10,
-    current: 1,
-  });
+    current: 1
+  })
 
   useEffect(() => {
-    dispatch(listCoupons(listingOptions));
-  }, [dispatch, listingOptions]);
+    dispatch(listCoupons(listingOptions))
+  }, [dispatch, listingOptions])
 
-  const notActionCellProps: any = {
+  const notActionCellProps = {
     onCell: (record: Coupon) => {
       return {
         onClick: () => {
-          history.push(`/coupons/${record.id}/${false}`);
-        },
-      };
-    },
-  };
+          history.push(`/coupons/${record.id}/${false}`)
+        }
+      }
+    }
+  }
 
   const getColumnSearchProps = (dataIndex: string): ColumnType<Coupon> => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div className="table-filter">
-        <Input
-          placeholder={`Search ${dataIndex}`}
-          className="table-filter__search-field"
-        />
-        <Button
-          type="primary"
-          icon="search"
-          size="small"
-          onClick={() => confirm!()}
-        >
-          {t('coupon-list.search')}
-        </Button>
-      </div>
-    ),
-    filterIcon: () => <SearchOutlined />,
-  });
+    filterDropdown({ confirm }) {
+      return (
+        <div className="table-filter">
+          <Input placeholder={`Search ${dataIndex}`} className="table-filter__search-field" />
+          <Button type="primary" icon="search" size="small" onClick={() => confirm()}>
+            {t('coupon-list.search')}
+          </Button>
+        </div>
+      )
+    },
+    filterIcon: <SearchOutlined />
+  })
 
   const columns: ColumnType<Coupon>[] = [
     {
@@ -72,40 +59,40 @@ const CouponListPage: React.FC = () => {
       key: 'name',
       sorter: true,
       ...notActionCellProps,
-      ...getColumnSearchProps('name'),
+      ...getColumnSearchProps('name')
     },
     {
       title: t('coupon-list.description'),
       dataIndex: 'description',
       key: 'description',
       ...notActionCellProps,
-      ...getColumnSearchProps('description'),
+      ...getColumnSearchProps('description')
     },
     {
       title: t('coupon-list.action'),
       key: 'action',
-      render: (text, record) => (
-        <span>
-          <Link to={`/coupons/${record.id}/${true}`}>
-            {t('coupon-list.edit')}
-          </Link>
-          &nbsp;|&nbsp;
-          <Popconfirm
-            title={t('coupon-list.delete-confirm-message')}
-            onConfirm={() => {
-              dispatch(deleteCoupons(record.id!));
-            }}
-            okText={t('common.ok')}
-            cancelText={t('common.cancel')}
-          >
-            <Button type="danger" size="small">
-              {t('coupon-list.delete')}
-            </Button>
-          </Popconfirm>
-        </span>
-      ),
-    },
-  ];
+      render(_text, record) {
+        return (
+          <span>
+            <Link to={`/coupons/${record.id}/${true}`}>{t('coupon-list.edit')}</Link>
+            &nbsp;|&nbsp;
+            <Popconfirm
+              title={t('coupon-list.delete-confirm-message')}
+              onConfirm={() => {
+                record.id && dispatch(deleteCoupons(record.id))
+              }}
+              okText={t('common.ok')}
+              cancelText={t('common.cancel')}
+            >
+              <Button type="danger" size="small">
+                {t('coupon-list.delete')}
+              </Button>
+            </Popconfirm>
+          </span>
+        )
+      }
+    }
+  ]
 
   return (
     <div className="coupons-list-page">
@@ -116,38 +103,43 @@ const CouponListPage: React.FC = () => {
       <Table
         dataSource={coupons}
         columns={columns}
-        rowKey={x => x.id!.toString()}
+        rowKey={(x): string => (x.id ? x.id.toString() : '')}
         pagination={{
           pageSizeOptions: ['10', '20', '50', '100'],
           showSizeChanger: true,
           simple: isMobile,
-          total: allCouponsCount,
+          total: allCouponsCount
         }}
         loading={loading}
-        onChange={(pagination, filters, sorter: any) => {
-          let orderByType: OrderByType;
-          let orderBy: string;
-          switch (sorter.order) {
-            case 'descend':
-              orderByType = OrderByType.Descending;
-              orderBy = sorter.columnKey;
-              break;
-            case 'ascend':
-              orderByType = OrderByType.Ascending;
-              orderBy = sorter.columnKey;
-              break;
+        onChange={(pagination, _filters, sorter) => {
+          const couponListingOptions: CouponListingOptions = {
+            pageSize: pagination.pageSize,
+            current: pagination.current
           }
 
-          setListingOptions({
-            pageSize: pagination.pageSize!,
-            current: pagination.current!,
-            orderByType: orderByType!,
-            orderBy: orderBy!,
-          });
+          const couponSorter = sorter as SorterResult<Coupon>
+          if (couponSorter.order) {
+            switch (couponSorter.order) {
+              case 'descend':
+                couponListingOptions.orderByType = OrderByType.Descending
+                if (couponSorter.columnKey) {
+                  couponListingOptions.orderBy = couponSorter.columnKey.toString()
+                }
+                break
+              case 'ascend':
+                couponListingOptions.orderByType = OrderByType.Ascending
+                if (couponSorter.columnKey) {
+                  couponListingOptions.orderBy = couponSorter.columnKey.toString()
+                }
+                break
+            }
+          }
+
+          setListingOptions(couponListingOptions)
         }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default CouponListPage;
+export default CouponListPage

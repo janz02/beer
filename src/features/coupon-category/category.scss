@@ -8,6 +8,7 @@
 
   height: 100%;
   padding: 2rem 0;
+
   &--mobile {
     padding: 0;
   }
@@ -20,60 +21,69 @@
 }
 
 .list-card {
-  overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 0px 6px 12px -10px black;
-  margin: 0rem auto;
   max-width: 650px;
   height: inherit;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 6px 12px -10px black;
 
   .ant-card-body {
-    padding: 0rem;
     // for making the table adaptive
     height: inherit;
+    padding: 0;
+
     & > * {
       height: inherit;
+
       & > * {
         height: inherit;
+
         & > .ant-spin-container {
           height: inherit;
         }
       }
     }
   }
+
   &--mobile {
     border-radius: unset;
-    box-shadow: 0px 6px 12px -10px black;
+    box-shadow: 0 6px 12px -10px black;
   }
 }
 
 .list-card_table {
   height: calc(100% - var(--footer-height));
+
   .ant-table-title {
     height: var(--title-height);
   }
+
   .ant-table-footer {
     height: var(--footer-height);
     margin-top: 2px;
   }
+
   .ant-pagination {
     background: red;
   }
+
   .ant-table-container {
     height: calc(100% - var(--title-height));
 
     .ant-table-content {
-      overflow-y: auto;
-      overflow-x: hidden;
       height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
 
       table {
         th {
-          border-bottom: 2px solid rgba(0, 0, 0, 0.068);
           position: sticky;
-          top: 0;
           z-index: 1;
+          top: 0;
+          border-bottom: 2px solid rgba(0, 0, 0, 0.068);
         }
+
         tbody > tr:last-child > td {
           border: none;
         }
@@ -82,14 +92,15 @@
   }
 
   & + .ant-pagination.ant-table-pagination {
-    border-top: 2px solid rgba(0, 0, 0, 0.068);
     display: flex;
     align-items: center;
     justify-content: center;
-    float: unset;
-    text-align: center;
-    margin: 0;
     height: var(--footer-height) !important;
+    margin: 0;
+    float: unset;
+    border-top: 2px solid rgba(0, 0, 0, 0.068);
+    text-align: center;
+
     .ant-pagination-options {
       width: 120px;
     }
@@ -100,6 +111,7 @@
   &__header {
     display: flex;
     justify-content: space-between;
+
     h3 {
       display: inline-flex;
       padding-top: 0.1rem;
@@ -111,13 +123,15 @@
     &--data {
       // text-align: end;
       .ant-btn {
-        padding: 0 10px;
         margin: 10px;
+        padding: 0 10px;
       }
     }
+
     &--action {
       width: 110px;
       padding: 0 14px 0 5px !important;
+
       .ant-btn {
         &:first-child {
           margin-right: 8px;
@@ -139,7 +153,7 @@
 
 .category-modal {
   &__error-msg {
-    text-align: center;
     color: red;
+    text-align: center;
   }
 }

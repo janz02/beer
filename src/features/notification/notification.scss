@@ -1,36 +1,36 @@
-
 .notification-drawer {
   --notification-drawer-header-height: 56px;
   --notification-drawer-footer-height: 56px;
-  --notification-drawer-background: #ffffff;
+  --notification-drawer-background: #FFFFFF;
 
   .ant-drawer-body {
     padding: 0;
   }
 
   &__header {
-    background: var(--notification-drawer-background);
-    height: var(--notification-drawer-header-height);
-    line-height: var(--notification-drawer-header-height);
-    box-shadow: 3px 1px 9px 0px #0000004d;
-    padding: 0;
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
     z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--notification-drawer-header-height);
+    padding: 0;
+    background: var(--notification-drawer-background);
+    box-shadow: 3px 1px 9px 0 #0000004D;
+    line-height: var(--notification-drawer-header-height);
+
     &__title {
+      margin-left: 1.2rem;
       font-size: 1.1rem;
       font-weight: 600;
-      margin-left: 1.2rem;
     }
   }
 }
 
 .infinite-list-container {
+  height: calc(100vh - var(--notification-drawer-header-height));
   margin-top: var(--notification-drawer-header-height);
   overflow: auto;
-  height: calc(100vh - var(--notification-drawer-header-height));
 }
 
 .notification-list {
@@ -51,12 +51,15 @@
 .notification-item {
   padding: 0.5rem 1rem !important;
   border-bottom: 1px solid black;
+
   .ant-list-item-meta {
     margin-bottom: 0 !important;
+
     &-title {
       margin-bottom: 0 !important;
     }
   }
+
   .ant-list-item-action {
     margin-top: 0.2rem !important;
     padding-left: 3rem;
@@ -65,8 +68,8 @@
   border-left: 7px solid transparent;
 
   &--unread {
-    background: rgba($color: #ff7070, $alpha: 0.06);
     border-left: 7px solid rgb(255, 101, 101);
+    background: rgba($color: #FF7070, $alpha: 0.06);
   }
 
   &__date {
@@ -76,6 +79,7 @@
   &:hover {
     background: rgba($color: #000000, $alpha: 0.05);
   }
+
   &:active {
     background: rgba($color: #000000, $alpha: 0.075);
   }

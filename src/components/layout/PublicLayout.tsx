@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { Layout } from 'antd';
-import { Header } from './Header';
-import './layout.scss';
+import React, { FC } from 'react'
+import { Layout } from 'antd'
+import { Header } from './Header'
+import './layout.scss'
 
 const PublicLayout: FC = ({ children }) => {
   return (
@@ -11,7 +11,7 @@ const PublicLayout: FC = ({ children }) => {
         <Layout.Content>{children}</Layout.Content>
       </Layout>
     </Layout>
-  );
-};
+  )
+}
 
-export default PublicLayout;
+export default PublicLayout

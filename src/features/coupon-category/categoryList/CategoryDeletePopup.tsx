@@ -1,34 +1,30 @@
-import React, { FC } from 'react';
-import { Modal } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteCategory } from './categoryListSlice';
-import { Category } from 'models/category';
-import { useTranslation } from 'react-i18next';
-import { RootState } from 'app/rootReducer';
+import React, { FC } from 'react'
+import { Modal } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteCategory } from './categoryListSlice'
+import { Category } from 'models/category'
+import { useTranslation } from 'react-i18next'
+import { RootState } from 'app/rootReducer'
 
 interface CategoryDeletePopupProps {
-  visible: boolean;
-  category: Category | undefined;
-  onExit: () => void;
-  afterClose: () => void;
+  visible: boolean
+  category: Category | undefined
+  onExit: () => void
+  afterClose: () => void
 }
 
 export const CategoryDeletePopup: FC<CategoryDeletePopupProps> = props => {
-  const { visible, category, onExit, afterClose } = props;
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
-  const error = useSelector(
-    (state: RootState) => state.categoryList.errorDeletion
-  );
+  const { visible, category, onExit, afterClose } = props
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+  const error = useSelector((state: RootState) => state.categoryList.errorDeletion)
 
-  const onDelete = async () => {
+  const onDelete = async (): Promise<void> => {
     if (category?.id) {
-      const deleted = await dispatch(deleteCategory(category.id));
-      if (!!deleted) {
-        onExit();
-      }
+      dispatch(deleteCategory(category.id))
+      onExit()
     }
-  };
+  }
 
   return (
     <Modal
@@ -43,5 +39,5 @@ export const CategoryDeletePopup: FC<CategoryDeletePopupProps> = props => {
       <h4>{category?.name}</h4>
       <div className="category-modal__error-msg">{error}</div>
     </Modal>
-  );
-};
+  )
+}

@@ -1,58 +1,52 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk } from 'app/store';
-import api from 'api';
-import { Category } from 'models/category';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AppThunk } from 'app/store'
+import api from 'api'
+import { Category } from 'models/category'
 
-type couponsState = {
-  categories?: Category[];
-  error: string | null;
-  loading: boolean;
-};
+interface CouponsState {
+  categories?: Category[]
+  error: string | null
+  loading: boolean
+}
 
-const initialState: couponsState = {
+const initialState: CouponsState = {
   error: null,
-  loading: false,
-};
+  loading: false
+}
 
 const couponsSlice = createSlice({
   name: 'coupons',
   initialState,
   reducers: {
     listCategoriesSuccess(state, action: PayloadAction<Category[]>) {
-      state.categories = action.payload;
+      state.categories = action.payload
 
-      state.loading = false;
-      state.error = null;
+      state.loading = false
+      state.error = null
     },
     setLoadingStart(state) {
-      state.loading = true;
+      state.loading = true
     },
     setLoadingFailed(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-  },
-});
+      state.loading = false
+      state.error = action.payload
+    }
+  }
+})
 
-export const {
-  listCategoriesSuccess,
-  setLoadingStart,
-  setLoadingFailed,
-} = couponsSlice.actions;
+export const { listCategoriesSuccess, setLoadingStart, setLoadingFailed } = couponsSlice.actions
 
-export default couponsSlice.reducer;
+export default couponsSlice.reducer
 
-export const listCategories = (): AppThunk => async (dispatch) => {
-  dispatch(setLoadingStart());
+export const listCategories = (): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
 
   try {
-    const categories = await api.categories.listCategories({});
+    const categories = await api.categories.listCategories({})
     dispatch(
-      listCategoriesSuccess(
-        categories.result!.map((x) => ({ id: x.id, name: x.name } as Category)),
-      ),
-    );
+      listCategoriesSuccess(categories.result!.map(x => ({ id: x.id, name: x.name } as Category)))
+    )
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()));
+    dispatch(setLoadingFailed(err.toString()))
   }
-};
+}
