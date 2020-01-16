@@ -1,68 +1,68 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk } from 'app/store';
-import { Category } from 'models/category';
-import api from 'api';
-import { ListCategoriesRequest } from 'api/swagger';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AppThunk } from 'app/store'
+import { Category } from 'models/category'
+import api from 'api'
+import { ListCategoriesRequest } from 'api/swagger'
 
 interface Pagination {
-  page?: number;
-  from?: number;
-  to?: number;
-  size?: number;
-  pageSize?: number;
+  page?: number
+  from?: number
+  to?: number
+  size?: number
+  pageSize?: number
 }
 
 interface CouponCategoryListState {
-  categories: Category[];
-  pagination?: Pagination;
-  loading: boolean;
-  error: string;
-  errorDeletion: string;
+  categories: Category[]
+  pagination?: Pagination
+  loading: boolean
+  error: string
+  errorDeletion: string
 }
 
 const initialState: CouponCategoryListState = {
   categories: [],
   pagination: {
-    pageSize: 10,
+    pageSize: 10
   },
   loading: false,
   error: '',
-  errorDeletion: '',
-};
+  errorDeletion: ''
+}
 
 const couponCategoryListSlice = createSlice({
   name: '@category-list',
   initialState,
   reducers: {
     getCategoriesRequest(state, action: PayloadAction<object>) {
-      state.loading = true;
+      state.loading = true
     },
     getCategoriesSuccess(
       state,
       action: PayloadAction<{ categories: Category[]; pagination: Pagination }>
     ) {
-      state.categories = action.payload.categories;
-      state.pagination = action.payload.pagination;
-      state.loading = false;
-      state.error = '';
+      state.categories = action.payload.categories
+      state.pagination = action.payload.pagination
+      state.loading = false
+      state.error = ''
     },
     getCategoriesFail(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading = false
+      state.error = action.payload
     },
     deleteRequest(state) {
-      state.loading = true;
+      state.loading = true
     },
     deleteSuccess(state) {
-      state.loading = false;
-      state.errorDeletion = '';
+      state.loading = false
+      state.errorDeletion = ''
     },
     deleteFail(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.errorDeletion = action.payload;
-    },
-  },
-});
+      state.loading = false
+      state.errorDeletion = action.payload
+    }
+  }
+})
 
 export const {
   getCategoriesRequest,
@@ -70,24 +70,25 @@ export const {
   getCategoriesFail,
   deleteRequest,
   deleteSuccess,
-  deleteFail,
-} = couponCategoryListSlice.actions;
+  deleteFail
+} = couponCategoryListSlice.actions
 
-export default couponCategoryListSlice.reducer;
+export default couponCategoryListSlice.reducer
 
-export const getCategories = (
-  params: ListCategoriesRequest = {}
-): AppThunk => async (dispatch, getState) => {
-  dispatch(getCategoriesRequest(params));
+export const getCategories = (params: ListCategoriesRequest = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  dispatch(getCategoriesRequest(params))
   try {
-    const oldPagination = getState().categoryList.pagination;
-    const pageSize = params.pageSize ?? oldPagination?.pageSize! ?? 10;
-    const page = params.page ?? oldPagination?.page! ?? 1;
+    const oldPagination = getState().categoryList.pagination
+    const pageSize = params.pageSize ?? oldPagination?.pageSize! ?? 10
+    const page = params.page ?? oldPagination?.page! ?? 1
 
     const response = await api.categories.listCategories({
       pageSize,
-      page: Math.max(page, 1),
-    });
+      page: Math.max(page, 1)
+    })
 
     dispatch(
       getCategoriesSuccess({
@@ -97,32 +98,32 @@ export const getCategories = (
           from: response.from!,
           size: response.size!,
           to: response.to!,
-          pageSize,
-        },
+          pageSize
+        }
       })
-    );
+    )
   } catch (err) {
-    dispatch(getCategoriesFail(err.toString()));
+    dispatch(getCategoriesFail(err.toString()))
   }
-};
+}
 
-export const deleteCategory = (
-  id: number,
-  refreshList = true
-): AppThunk => async (dispatch, getState) => {
-  dispatch(deleteRequest());
+export const deleteCategory = (id: number, refreshList = true): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  dispatch(deleteRequest())
   try {
-    await api.categories.deleteCategories({ id });
+    await api.categories.deleteCategories({ id })
     if (refreshList) {
-      const oldPagination = getState().categoryList.pagination;
-      const reductPage = oldPagination?.to! === oldPagination?.from!;
-      const page = oldPagination?.page! - +reductPage;
-      dispatch(getCategories({ page }));
+      const oldPagination = getState().categoryList.pagination
+      const reductPage = oldPagination?.to! === oldPagination?.from!
+      const page = oldPagination?.page! - +reductPage
+      dispatch(getCategories({ page }))
     }
-    dispatch(deleteSuccess());
-    return true;
+    dispatch(deleteSuccess())
+    return true
   } catch (err) {
-    dispatch(deleteFail(err.toString()));
-    return false;
+    dispatch(deleteFail(err.toString()))
+    return false
   }
-};
+}

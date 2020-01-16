@@ -1,4 +1,4 @@
-@import '../../../assets/scss/variables';
+@import "../../../assets/scss/variables";
 
 .coupon-list-page {
   .ant-table-pagination {
@@ -13,7 +13,7 @@
 }
 
 .table-filter__search-field {
+  display: block;
   width: 188px;
   margin-bottom: 8px;
-  display: block;
 }

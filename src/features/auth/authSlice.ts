@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk } from 'app/store';
-import { history } from 'app/router';
-import api from 'api';
-import { LoginRequest, RegisterRequest } from 'api/swagger/apis';
-import { UserVm } from 'api/swagger';
-import jwt_decode from "jwt-decode";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AppThunk } from 'app/store'
+import { history } from 'app/router'
+import api from 'api'
+import { LoginRequest, RegisterRequest } from 'api/swagger/apis'
+import { UserVm } from 'api/swagger'
+import JwtDecode from 'jwt-decode'
 
 interface UserData {
   userName?: string
@@ -13,76 +13,92 @@ interface UserData {
 const authSlice = createSlice({
   name: '@auth',
   initialState: {
-    loggedIn: !!sessionStorage.getItem("jwt"),
+    loggedIn: !!sessionStorage.getItem('jwt'),
     userData: {} as UserData,
     loadingSignup: false,
     loadingPasswordRecovery: false,
     loadingLogin: false,
     errorSignup: null as any,
     errorLogin: null as any,
-    errorPasswordRecovery: null as any,
+    errorPasswordRecovery: null as any
   },
   reducers: {
     signupRequest(state) {
-      state.loadingSignup = true;
+      state.loadingSignup = true
     },
     signupSuccess(state) {
-      state.loadingSignup = false;
-      state.errorSignup = null;
+      state.loadingSignup = false
+      state.errorSignup = null
     },
     signupFail(state, action: PayloadAction<string>) {
-      state.loadingSignup = false;
-      state.errorSignup = action.payload;
+      state.loadingSignup = false
+      state.errorSignup = action.payload
     },
     passwordRecoveryRequest(state) {
-      state.loadingPasswordRecovery = true;
+      state.loadingPasswordRecovery = true
     },
     passwordRecoverySuccess(state) {
-      state.loadingPasswordRecovery = false;
-      state.errorPasswordRecovery = null;
+      state.loadingPasswordRecovery = false
+      state.errorPasswordRecovery = null
     },
     passwordRecoveryFail(state, action: PayloadAction<string>) {
-      state.loadingPasswordRecovery = false;
-      state.errorPasswordRecovery = action.payload;
+      state.loadingPasswordRecovery = false
+      state.errorPasswordRecovery = action.payload
     },
     loginRequest(state) {
-      state.loadingLogin = true;
+      state.loadingLogin = true
     },
     loginSuccess(state, action: PayloadAction<UserVm>) {
-      state.loadingLogin = false;
-      state.errorLogin = null;
-      state.loggedIn = true;
-      const token: string = action.payload.jwtToken!;
+      state.loadingLogin = false
+      state.errorLogin = null
+      state.loggedIn = true
+      const token = action.payload.jwtToken
 
-      state.userData = { userName: (jwt_decode(token) as any).name };
-      sessionStorage.setItem('jwt', token)
+      if (token) {
+        state.userData = { userName: (JwtDecode(token) as any).name }
+        sessionStorage.setItem('jwt', token)
+      }
     },
     loginFail(state, action: PayloadAction<string>) {
-      state.loadingLogin = false;
-      state.errorLogin = action.payload;
-      sessionStorage.removeItem('jwt');
+      state.loadingLogin = false
+      state.errorLogin = action.payload
+      sessionStorage.removeItem('jwt')
     },
     logout(state) {
-      state.loggedIn = false;
-      state.userData = {};
-      sessionStorage.removeItem('jwt');
-    },
-  },
-});
+      state.loggedIn = false
+      state.userData = {}
+      sessionStorage.removeItem('jwt')
+    }
+  }
+})
+
+export const {
+  loginRequest,
+  loginSuccess,
+  loginFail,
+  passwordRecoveryRequest,
+  passwordRecoverySuccess,
+  passwordRecoveryFail,
+  signupRequest,
+  signupSuccess,
+  signupFail,
+  logout
+} = authSlice.actions
+
+export default authSlice.reducer
 
 // TODO: Only for simulating async actions, remove after API is connected
-const delay = (p: any) =>
+const delay = (p: any): Promise<unknown> =>
   new Promise(resolve => {
-    console.log('mock api call', p);
+    console.log('mock api call', p)
     setTimeout(() => {
-      resolve(p);
-    }, 1000);
-  });
+      resolve(p)
+    }, 1000)
+  })
 
-const login = (params: any): AppThunk => async (dispatch, state) => {
-  dispatch(loginRequest());
+export const login = (params: any): AppThunk => async (dispatch, state) => {
+  dispatch(loginRequest())
   try {
-
     const loginRequest: LoginRequest = {
       loginDto: {
         email: params.username,
@@ -90,30 +106,29 @@ const login = (params: any): AppThunk => async (dispatch, state) => {
       }
     }
 
-    const userVm = await api.auth.login(loginRequest);
-    const cameFrom = state().routerHistory.cameFrom;
+    const userVm = await api.auth.login(loginRequest)
+    const cameFrom = state().routerHistory.cameFrom
 
-    dispatch(loginSuccess(userVm));
+    dispatch(loginSuccess(userVm))
 
-    history.push(cameFrom);
+    history.push(cameFrom)
   } catch (err) {
-    dispatch(loginFail(err.toString()));
+    dispatch(loginFail(err.toString()))
   }
-};
+}
 
-const recoverPassword = (params: any): AppThunk => async dispatch => {
-  dispatch(passwordRecoveryRequest());
+export const recoverPassword = (params: any): AppThunk => async dispatch => {
+  dispatch(passwordRecoveryRequest())
   try {
-    await delay(params);
-    dispatch(passwordRecoverySuccess());
+    await delay(params)
+    dispatch(passwordRecoverySuccess())
   } catch (err) {
-    dispatch(passwordRecoveryFail(err.toString()));
+    dispatch(passwordRecoveryFail(err.toString()))
   }
-};
+}
 
-const signUp = (params: any): AppThunk => async dispatch => {
-
-  dispatch(signupRequest());
+export const signUp = (params: any): AppThunk => async dispatch => {
+  dispatch(signupRequest())
 
   const requestRequest: RegisterRequest = {
     registerDto: {
@@ -127,31 +142,13 @@ const signUp = (params: any): AppThunk => async dispatch => {
 
   try {
     // Register
-    await api.auth.register(requestRequest);
+    await api.auth.register(requestRequest)
 
-    dispatch(signupSuccess());
+    dispatch(signupSuccess())
 
     // Login after it
-    dispatch(login(params));
-
+    dispatch(login(params))
   } catch (err) {
-    dispatch(signupFail(err.toString()));
+    dispatch(signupFail(err.toString()))
   }
-};
-
-export const {
-  loginRequest,
-  loginSuccess,
-  loginFail,
-  passwordRecoveryRequest,
-  passwordRecoverySuccess,
-  passwordRecoveryFail,
-  signupRequest,
-  signupSuccess,
-  signupFail,
-  logout,
-} = authSlice.actions;
-
-export { login, recoverPassword, signUp };
-
-export default authSlice.reducer;
+}

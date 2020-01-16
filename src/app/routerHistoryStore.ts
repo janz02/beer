@@ -1,20 +1,18 @@
 const initialState = {
-  cameFrom: '/',
-};
+  cameFrom: '/'
+}
 
-type RouteHistory = typeof initialState;
+type RouteHistory = typeof initialState
 
-export default (
-  state = { ...initialState },
-  action: any
-): RouteHistory => {
+export default (state = { ...initialState }, action: any): RouteHistory => {
   switch (action.type) {
-    case '@@router/LOCATION_CHANGE':
-      const pathname: string = action.payload.location.pathname;
+    case '@@router/LOCATION_CHANGE': {
+      const pathname: string = action.payload.location.pathname
       return {
-        cameFrom: pathname.startsWith('/auth') ? state.cameFrom : pathname,
-      };
+        cameFrom: pathname.startsWith('/auth') ? state.cameFrom : pathname
+      }
+    }
     default:
-      return state;
+      return state
   }
-};
+}

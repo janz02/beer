@@ -1,9 +1,9 @@
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from 'react-responsive'
 
-const useIsMobile = () => {
+const useIsMobile = (): boolean => {
   return useMediaQuery({
-    query: '(max-device-width: 575px)',
-  });
-};
+    query: '(max-device-width: 575px)'
+  })
+}
 
-export default useIsMobile;
+export default useIsMobile

@@ -1,50 +1,42 @@
-import React, { FC, useEffect } from 'react';
-import './notification.scss';
-import InfiniteScroll from 'react-infinite-scroller';
-import { List, Empty, Button } from 'antd';
-import { RootState } from 'app/rootReducer';
-import { useSelector, useDispatch } from 'react-redux';
-import { getNotifications } from './notificationSlice';
-import { useTranslation } from 'react-i18next';
-import { ListItem } from './NotificationItem';
+import React, { FC, useEffect } from 'react'
+import './notification.scss'
+import InfiniteScroll from 'react-infinite-scroller'
+import { List, Empty, Button } from 'antd'
+import { RootState } from 'app/rootReducer'
+import { useSelector, useDispatch } from 'react-redux'
+import { getNotifications } from './notificationSlice'
+import { useTranslation } from 'react-i18next'
+import ListItem from './NotificationItem'
 
 interface NotificationListProps {
-  onClick: () => any;
+  onClick: () => any
 }
 
-export const NotificationList: FC<NotificationListProps> = props => {
-  const { onClick } = props;
+const NotificationList: FC<NotificationListProps> = props => {
+  const { onClick } = props
 
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
 
-  const notifications = useSelector(
-    (state: RootState) => state.notification.notifications
-  );
-  const hasMoreNotifications = useSelector(
-    (state: RootState) => state.notification.hasMore
-  );
-  const loading = useSelector((state: RootState) => state.notification.loading);
+  const notifications = useSelector((state: RootState) => state.notification.notifications)
+  const hasMoreNotifications = useSelector((state: RootState) => state.notification.hasMore)
+  const loading = useSelector((state: RootState) => state.notification.loading)
 
   useEffect(() => {
-    dispatch(getNotifications());
-  }, [dispatch]);
+    dispatch(getNotifications())
+  }, [dispatch])
 
-  const loadMore = () => {
-    dispatch(getNotifications());
-  };
+  const loadMore = (): void => {
+    dispatch(getNotifications())
+  }
 
-  const canLoadMore = () => !loading && hasMoreNotifications;
+  const canLoadMore = (): boolean => !loading && hasMoreNotifications
 
   const loadMoreButton = canLoadMore() && (
-    <Button
-      className="notification-list__load-more-btn"
-      type="dashed"
-      onClick={loadMore}
-    >
+    <Button className="notification-list__load-more-btn" type="dashed" onClick={loadMore}>
       {t('notification.load-more')}
     </Button>
-  );
+  )
 
   return (
     <div className="infinite-list-container">
@@ -68,11 +60,13 @@ export const NotificationList: FC<NotificationListProps> = props => {
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description={t('notification.empty-list')}
               />
-            ),
+            )
           }}
           renderItem={item => <ListItem {...{ item, onClick }} />}
         />
       </InfiniteScroll>
     </div>
-  );
-};
+  )
+}
+
+export default NotificationList

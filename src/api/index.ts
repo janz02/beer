@@ -4,11 +4,11 @@ import { notification } from 'antd'
 import i18n from 'app/i18n'
 
 interface RequestError {
-  Code?: number;
-  ErrorKey?: string;
-  Message?: string;
-  Guid?: string;
-  StackTrace?: string;
+  Code?: number
+  ErrorKey?: string
+  Message?: string
+  Guid?: string
+  StackTrace?: string
 }
 
 const config: Configuration = new Configuration({
@@ -20,7 +20,7 @@ const config: Configuration = new Configuration({
         if (ctx.response.status >= 400) {
           ctx.response.json().then((x: RequestError) => {
             notification.error({
-              message: i18n.t(x.ErrorKey!),
+              message: x.ErrorKey ? i18n.t(x.ErrorKey) : x.Message,
               description: x.Guid,
               duration: null
             })

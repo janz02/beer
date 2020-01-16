@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { CouponListingOptions } from 'models/couponListingOptions'
 import { SearchOutlined } from '@ant-design/icons'
 import { OrderByType } from 'api/swagger/models'
-import { ColumnType } from 'antd/lib/table/interface'
+import { ColumnType, SorterResult } from 'antd/lib/table/interface'
 
 const CouponListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -39,7 +39,6 @@ const CouponListPage: React.FC = () => {
   }
 
   const getColumnSearchProps = (dataIndex: string): ColumnType<Coupon> => ({
-    // eslint-disable-next-line react/prop-types
     filterDropdown({ confirm }) {
       return (
         <div className="table-filter">
@@ -72,25 +71,26 @@ const CouponListPage: React.FC = () => {
     {
       title: t('coupon-list.action'),
       key: 'action',
-      // eslint-disable-next-line react/display-name
-      render: (text, record) => (
-        <span>
-          <Link to={`/coupons/${record.id}/${true}`}>{t('coupon-list.edit')}</Link>
-          &nbsp;|&nbsp;
-          <Popconfirm
-            title={t('coupon-list.delete-confirm-message')}
-            onConfirm={() => {
-              dispatch(deleteCoupons(record.id!))
-            }}
-            okText={t('common.ok')}
-            cancelText={t('common.cancel')}
-          >
-            <Button type="danger" size="small">
-              {t('coupon-list.delete')}
-            </Button>
-          </Popconfirm>
-        </span>
-      )
+      render(_text, record) {
+        return (
+          <span>
+            <Link to={`/coupons/${record.id}/${true}`}>{t('coupon-list.edit')}</Link>
+            &nbsp;|&nbsp;
+            <Popconfirm
+              title={t('coupon-list.delete-confirm-message')}
+              onConfirm={() => {
+                record.id && dispatch(deleteCoupons(record.id))
+              }}
+              okText={t('common.ok')}
+              cancelText={t('common.cancel')}
+            >
+              <Button type="danger" size="small">
+                {t('coupon-list.delete')}
+              </Button>
+            </Popconfirm>
+          </span>
+        )
+      }
     }
   ]
 
@@ -103,7 +103,7 @@ const CouponListPage: React.FC = () => {
       <Table
         dataSource={coupons}
         columns={columns}
-        rowKey={x => x.id!.toString()}
+        rowKey={(x): string => (x.id ? x.id.toString() : '')}
         pagination={{
           pageSizeOptions: ['10', '20', '50', '100'],
           showSizeChanger: true,
@@ -111,26 +111,31 @@ const CouponListPage: React.FC = () => {
           total: allCouponsCount
         }}
         loading={loading}
-        onChange={(pagination, filters, sorter: any) => {
-          let orderByType: OrderByType
-          let orderBy: string
-          switch (sorter.order) {
-            case 'descend':
-              orderByType = OrderByType.Descending
-              orderBy = sorter.columnKey
-              break
-            case 'ascend':
-              orderByType = OrderByType.Ascending
-              orderBy = sorter.columnKey
-              break
+        onChange={(pagination, _filters, sorter) => {
+          const couponListingOptions: CouponListingOptions = {
+            pageSize: pagination.pageSize,
+            current: pagination.current
           }
 
-          setListingOptions({
-            pageSize: pagination.pageSize!,
-            current: pagination.current!,
-            orderByType: orderByType!,
-            orderBy: orderBy!
-          })
+          const couponSorter = sorter as SorterResult<Coupon>
+          if (couponSorter.order) {
+            switch (couponSorter.order) {
+              case 'descend':
+                couponListingOptions.orderByType = OrderByType.Descending
+                if (couponSorter.columnKey) {
+                  couponListingOptions.orderBy = couponSorter.columnKey.toString()
+                }
+                break
+              case 'ascend':
+                couponListingOptions.orderByType = OrderByType.Ascending
+                if (couponSorter.columnKey) {
+                  couponListingOptions.orderBy = couponSorter.columnKey.toString()
+                }
+                break
+            }
+          }
+
+          setListingOptions(couponListingOptions)
         }}
       />
     </div>

@@ -3,7 +3,8 @@
     "standard",
     "standard-react",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
   "plugins": ["react-hooks"],
   "parser": "@typescript-eslint/parser",
@@ -35,8 +36,21 @@
         "useTabs": false
       }
     ],
-    // TODO: instead of turning it off just give it a better config https://github.com/typescript-eslint/typescript-eslint/blob/v2.16.0/packages/eslint-plugin/docs/rules/explicit-function-return-type.md ?
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "none"
+        }
+      }
+    ],
+    "react/prop-types": ["error", { "skipUndeclared": true }]
   },
   "settings": {
     "react": {
