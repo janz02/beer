@@ -3,7 +3,9 @@ import { Route, RouteProps, Redirect } from 'react-router-dom'
 import PrivateLayout from 'components/layout/PrivateLayout'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
-import { hasPermission, Role } from '../services/jwt-reader'
+import { hasPermission } from '../services/jwt-reader'
+import { Role } from 'models/user'
+
 interface PrivateRouteProps extends RouteProps {
   roles?: Role[]
 }

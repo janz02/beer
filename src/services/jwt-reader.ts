@@ -1,16 +1,12 @@
 import JwtDecode from 'jwt-decode'
-import { UserData } from 'models/user'
-
-export enum Role {
-  PARTNER = 'partner'
-}
+import { UserData, Role } from 'models/user'
 
 export const getJwtUserdata = (token?: string): UserData => {
   const jwt = token ?? sessionStorage.getItem('jwt')
   const decodedJwt: any = jwt && JwtDecode(jwt)
   const user: UserData = {
     userName: decodedJwt?.sub ?? '',
-    roles: decodedJwt?.roles ?? [Role.PARTNER]
+    roles: decodedJwt?.roles ?? []
   }
   return user
 }
