@@ -54,15 +54,15 @@
     border: none;
     line-height: 62px;
 
+    .ant-menu-item {
+      padding: 0 15px;
+    }
+
     .ant-menu-item,
     .ant-menu-submenu {
       &:hover {
         background: rgba($color: #000000, $alpha: 0.03);
       }
-    }
-
-    .ant-menu-item {
-      padding: 0 15px;
     }
 
     .notification-badge {

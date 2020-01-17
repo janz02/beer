@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConnectedRouter } from 'connected-react-router'
-import RouterView, { history } from 'app/router'
+import RouterView, { history } from 'router/router'
 
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'

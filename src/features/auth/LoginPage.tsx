@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { RootState } from 'app/rootReducer'
 import { login } from './authSlice'
-import { history } from 'app/router'
+import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 
 const LoginPage: React.FC = () => {

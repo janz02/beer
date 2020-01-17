@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { recoverPassword } from './authSlice'
 import { RootState } from 'app/rootReducer'
-import { history } from 'app/router'
+import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 
 const RecoveryPage: React.FC = () => {
