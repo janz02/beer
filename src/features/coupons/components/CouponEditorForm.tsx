@@ -10,7 +10,7 @@ import { CouponRank, CouponType } from 'api/swagger/models'
 import { listCategories } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 
-interface CouponEditorFormProps {
+export interface CouponEditorFormProps {
   handleCouponSave: (values: any) => void
   loading: boolean
   couponIsNew: boolean
@@ -53,6 +53,14 @@ const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     })
   }
 
+  useEffect(() => {
+    form.setFieldsValue({
+      rank: CouponRank.Bronze,
+      type: CouponType.FixValue,
+      ...coupon
+    })
+  }, [coupon, form])
+
   return (
     <Card
       title={t('coupon-create.editor')}
@@ -69,16 +77,11 @@ const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         onFinish={handleSubmit}
         form={form}
         layout={formLayout}
-        onFieldsChange={v => {
+        onFieldsChange={() => {
           const hasErrors = form.getFieldsError().some(field => field.errors.length)
           if (submitable === hasErrors) {
             setSubmitable(!submitable)
           }
-        }}
-        initialValues={{
-          rank: CouponRank.Bronze,
-          type: CouponType.FixValue,
-          ...coupon
         }}
       >
         <Form.Item
