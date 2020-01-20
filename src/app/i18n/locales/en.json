@@ -73,6 +73,14 @@
     "editor": "Coupon editor",
     "edit": "Edit",
     "create-coupon-success": "Creating a coupon was successful.",
+    "states": {
+      "accept": "Accept",
+      "reject": "Reject",
+      "wait": "Wait",
+      "close": "Close",
+      "archive": "Archive"
+    },
+    "state-action-confirm-message": "Are you sure?",
     "field": {
       "name": "Name",
       "description": "Description",
@@ -84,7 +92,8 @@
       "distribution-end-date": "Distribution end date",
       "coupon-count": "Coupon count",
       "minimum-shopping-value": "Minimum shopping value",
-      "expiration-date": "Expiration date"
+      "expiration-date": "Expiration date",
+      "comment": "Comment"
     },
     "error": {
       "name-required": "Name field is required.",
