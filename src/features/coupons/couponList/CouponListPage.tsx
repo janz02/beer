@@ -10,7 +10,7 @@ import { useIsMobile } from 'hooks'
 import { listCoupons, deleteCoupons } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import { CouponListingOptions } from 'models/couponListingOptions'
-import { SearchOutlined } from '@ant-design/icons'
+import { SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { OrderByType } from 'api/swagger/models'
 import { ColumnType, SorterResult } from 'antd/lib/table/interface'
 
@@ -74,8 +74,12 @@ const CouponListPage: React.FC = () => {
       render(_text, record) {
         return (
           <span>
-            <Link to={`/coupons/${record.id}/${true}`}>{t('coupon-list.edit')}</Link>
-            &nbsp;|&nbsp;
+            <Button>
+              <Link to={`/coupons/${record.id}/${true}`}>
+                <EditOutlined />
+              </Link>
+            </Button>
+            &nbsp;
             <Popconfirm
               title={t('coupon-list.delete-confirm-message')}
               onConfirm={() => {
@@ -84,8 +88,8 @@ const CouponListPage: React.FC = () => {
               okText={t('common.ok')}
               cancelText={t('common.cancel')}
             >
-              <Button type="danger" size="small">
-                {t('coupon-list.delete')}
+              <Button danger>
+                <DeleteOutlined />
               </Button>
             </Popconfirm>
           </span>
@@ -94,13 +98,19 @@ const CouponListPage: React.FC = () => {
     }
   ]
 
-  return (
-    <div className="coupons-list-page">
-      <h1>{t('coupon-list.coupons')}</h1>
+  const cardHeader = (): JSX.Element => (
+    <div className="coupons-list__header">
+      <h3>{t('coupon-list.coupons')}</h3>
       <Button type="primary">
         <Link to="/coupons/create">{t('coupon-list.create')}</Link>
       </Button>
+    </div>
+  )
+
+  return (
+    <div className="coupons-list-page">
       <Table
+        title={() => cardHeader()}
         dataSource={coupons}
         columns={columns}
         rowKey={(x): string => (x.id ? x.id.toString() : '')}

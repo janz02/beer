@@ -73,6 +73,14 @@
     "editor": "Kupon szerkesztő",
     "edit": "Szerkesztés",
     "create-coupon-success": "Sikeres kupon létrehozás.",
+    "states": {
+      "accept": "Elfogadás",
+      "reject": "Elutasítás",
+      "wait": "Várakozás",
+      "close": "Lezárás",
+      "archive": "Archiválás"
+    },
+    "state-action-confirm-message": "Biztos benne?",
     "field": {
       "name": "Név",
       "description": "Leírás",
@@ -84,7 +92,8 @@
       "distribution-end-date": "Kiosztási vég dátum",
       "coupon-count": "Kuponok száma",
       "minimum-shopping-value": "Minimális vásárlási érték",
-      "expiration-date": "Lejárati dátum"
+      "expiration-date": "Lejárati dátum",
+      "comment": "Komment"
     },
     "error": {
       "name-required": "A név mező megadása kötelező.",

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Coupon } from 'models/coupon'
+import { Coupon, CouponState } from 'models/coupon'
 import { AppThunk } from 'app/store'
 import api from 'api'
 import { message } from 'antd'
@@ -62,7 +62,13 @@ export const getCoupons = (id: number): AppThunk => async dispatch => {
         ...coupon,
         startDate: coupon.startDate && moment(coupon.startDate),
         endDate: coupon.endDate && moment(coupon.endDate),
-        expireDate: coupon.expireDate && moment(coupon.expireDate)
+        expireDate: coupon.expireDate && moment(coupon.expireDate),
+        // TODO: integrate, remove these to use BE state
+        couponState: CouponState.Created,
+        comments: [
+          'Accepted because it is such a beautiful coupon.',
+          'Closed because it is no longer needed.'
+        ]
       } as Coupon)
     )
   } catch (err) {

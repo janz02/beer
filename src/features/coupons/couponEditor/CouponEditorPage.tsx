@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCoupons, updateCoupons } from './couponEditorSlice'
-import { Coupon } from 'models/coupon'
+import { Coupon, CouponState } from 'models/coupon'
 
 const CouponEditorPage: React.FC = () => {
   const dispatch = useDispatch()
@@ -22,8 +22,18 @@ const CouponEditorPage: React.FC = () => {
     id && dispatch(updateCoupons({ ...coupon, id: +id }))
   }
 
+  const handleCouponStateAction = (
+    couponId: number,
+    couponState: CouponState,
+    comment: string
+  ): void => {
+    // TODO: integrate.
+    console.log(`${couponState} action triggered.`)
+  }
+
   const props: CouponEditorFormProps = {
     handleCouponSave,
+    handleCouponStateAction,
     loading,
     couponIsNew: false,
     coupon

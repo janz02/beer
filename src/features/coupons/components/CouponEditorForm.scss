@@ -1,0 +1,12 @@
+@import "../../../assets/scss/variables";
+
+.coupon-editor-form {
+  &__actions {
+    display: flex;
+    align-items: center;
+
+    & > *:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+}
