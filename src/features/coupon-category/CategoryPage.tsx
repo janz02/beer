@@ -6,7 +6,7 @@ import { useIsMobile } from 'hooks'
 import CategoryEditor, { CategoryEditorParams } from './categoryEditor/CategoryEditor'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
-import { history } from 'app/router'
+import { history } from 'router/router'
 import { getCategories } from './categoryList/categoryListSlice'
 
 const CategoryPage: React.FC = () => {

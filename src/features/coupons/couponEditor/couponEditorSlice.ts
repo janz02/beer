@@ -3,7 +3,7 @@ import { Coupon, CouponState } from 'models/coupon'
 import { AppThunk } from 'app/store'
 import api from 'api'
 import { message } from 'antd'
-import { history } from 'app/router'
+import { history } from 'router/router'
 import i18n from 'app/i18n'
 import moment from 'moment'
 

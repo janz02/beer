@@ -123,6 +123,11 @@
     "empty-list": "Üres",
     "load-more": "Régebbiek..."
   },
+  "error-page": {
+    "back": "Vissza a főoldalra",
+    "title": "Hiba!",
+    "title404": "Hozzáférési hiba!"
+  },
   "languages": {
     "en": "English",
     "hu": "Magyar",

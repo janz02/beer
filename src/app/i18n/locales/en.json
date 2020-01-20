@@ -123,6 +123,11 @@
     "empty-list": "Empty",
     "load-more": "Load more..."
   },
+  "error-page": {
+    "back": "Back to home",
+    "title": "Error!",
+    "title404": "Permission error!"
+  },
   "languages": {
     "en": "English",
     "hu": "Magyar",

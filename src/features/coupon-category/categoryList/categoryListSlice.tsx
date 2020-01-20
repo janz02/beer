@@ -34,7 +34,7 @@ const couponCategoryListSlice = createSlice({
   name: '@category-list',
   initialState,
   reducers: {
-    getCategoriesRequest(state, action: PayloadAction<object>) {
+    getCategoriesRequest(state) {
       state.loading = true
     },
     getCategoriesSuccess(
@@ -79,11 +79,11 @@ export const getCategories = (params: ListCategoriesRequest = {}): AppThunk => a
   dispatch,
   getState
 ) => {
-  dispatch(getCategoriesRequest(params))
+  dispatch(getCategoriesRequest())
   try {
     const oldPagination = getState().categoryList.pagination
-    const pageSize = params.pageSize ?? oldPagination?.pageSize! ?? 10
-    const page = params.page ?? oldPagination?.page! ?? 1
+    const pageSize = params.pageSize ?? oldPagination?.pageSize ?? 10
+    const page = params.page ?? oldPagination?.page ?? 1
 
     const response = await api.categories.listCategories({
       pageSize,
@@ -94,10 +94,10 @@ export const getCategories = (params: ListCategoriesRequest = {}): AppThunk => a
       getCategoriesSuccess({
         categories: response.result as Category[],
         pagination: {
-          page: response.page!,
-          from: response.from!,
-          size: response.size!,
-          to: response.to!,
+          page: response.page,
+          from: response.from,
+          size: response.size,
+          to: response.to,
           pageSize
         }
       })
@@ -116,7 +116,7 @@ export const deleteCategory = (id: number, refreshList = true): AppThunk => asyn
     await api.categories.deleteCategories({ id })
     if (refreshList) {
       const oldPagination = getState().categoryList.pagination
-      const reductPage = oldPagination?.to! === oldPagination?.from!
+      const reductPage = oldPagination?.to === oldPagination?.from
       const page = oldPagination?.page! - +reductPage
       dispatch(getCategories({ page }))
     }

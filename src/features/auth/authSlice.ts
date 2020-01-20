@@ -1,26 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { history } from 'app/router'
+import { history } from 'router/router'
 import api from 'api'
 import { LoginRequest, RegisterRequest } from 'api/swagger/apis'
 import { UserVm } from 'api/swagger'
-import JwtDecode from 'jwt-decode'
-
-interface UserData {
-  userName?: string
-}
+import { getJwtUserdata } from 'services/jwt-reader'
 
 const authSlice = createSlice({
   name: '@auth',
   initialState: {
     loggedIn: !!sessionStorage.getItem('jwt'),
-    userData: {} as UserData,
+    userData: getJwtUserdata(),
     loadingSignup: false,
     loadingPasswordRecovery: false,
     loadingLogin: false,
-    errorSignup: null as any,
-    errorLogin: null as any,
-    errorPasswordRecovery: null as any
+    errorSignup: '',
+    errorLogin: '',
+    errorPasswordRecovery: ''
   },
   reducers: {
     signupRequest(state) {
@@ -28,7 +24,7 @@ const authSlice = createSlice({
     },
     signupSuccess(state) {
       state.loadingSignup = false
-      state.errorSignup = null
+      state.errorSignup = ''
     },
     signupFail(state, action: PayloadAction<string>) {
       state.loadingSignup = false
@@ -39,7 +35,7 @@ const authSlice = createSlice({
     },
     passwordRecoverySuccess(state) {
       state.loadingPasswordRecovery = false
-      state.errorPasswordRecovery = null
+      state.errorPasswordRecovery = ''
     },
     passwordRecoveryFail(state, action: PayloadAction<string>) {
       state.loadingPasswordRecovery = false
@@ -50,13 +46,13 @@ const authSlice = createSlice({
     },
     loginSuccess(state, action: PayloadAction<UserVm>) {
       state.loadingLogin = false
-      state.errorLogin = null
+      state.errorLogin = ''
       state.loggedIn = true
       const token = action.payload.jwtToken
 
       if (token) {
-        state.userData = { userName: (JwtDecode(token) as any).name }
         sessionStorage.setItem('jwt', token)
+        state.userData = getJwtUserdata(token)
       }
     },
     loginFail(state, action: PayloadAction<string>) {
