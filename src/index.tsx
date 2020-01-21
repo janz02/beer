@@ -5,7 +5,7 @@ import * as serviceWorker from 'serviceWorker'
 import './app/i18n'
 
 const render = (): void => {
-  const App = require('./app/App').default
+  const App = require('./app/App').App
   ReactDOM.render(<App />, document.getElementById('root'))
 }
 

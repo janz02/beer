@@ -14,7 +14,7 @@ import { SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { OrderByType } from 'api/swagger/models'
 import { ColumnType, SorterResult } from 'antd/lib/table/interface'
 
-const CouponListPage: React.FC = () => {
+export const CouponListPage: React.FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const isMobile = useIsMobile()
@@ -151,5 +151,3 @@ const CouponListPage: React.FC = () => {
     </div>
   )
 }
-
-export default CouponListPage

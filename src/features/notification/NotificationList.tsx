@@ -6,13 +6,13 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { getNotifications } from './notificationSlice'
 import { useTranslation } from 'react-i18next'
-import ListItem from './NotificationItem'
+import { ListItem } from './NotificationItem'
 
 interface NotificationListProps {
   onClick: () => any
 }
 
-const NotificationList: FC<NotificationListProps> = props => {
+export const NotificationList: FC<NotificationListProps> = props => {
   const { onClick } = props
 
   const { t } = useTranslation()
@@ -68,5 +68,3 @@ const NotificationList: FC<NotificationListProps> = props => {
     </div>
   )
 }
-
-export default NotificationList

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import './notification.scss'
 import { Drawer } from 'antd'
-import NotificationList from './NotificationList'
+import { NotificationList } from './NotificationList'
 import { useTranslation } from 'react-i18next'
 
 interface NotificationDrawerProps {
@@ -9,7 +9,7 @@ interface NotificationDrawerProps {
   onClose: any
 }
 
-const NotificationDrawer: FC<NotificationDrawerProps> = props => {
+export const NotificationDrawer: FC<NotificationDrawerProps> = props => {
   const { open, onClose } = props
   const { t } = useTranslation()
 
@@ -29,5 +29,3 @@ const NotificationDrawer: FC<NotificationDrawerProps> = props => {
     </Drawer>
   )
 }
-
-export default NotificationDrawer

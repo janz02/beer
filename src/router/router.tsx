@@ -1,16 +1,16 @@
 import React from 'react'
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
-import PrivateRoute from 'router/PrivateRoute'
-import DashboardPage from 'features/dashboard/DashboardPage'
-import CouponCreatePage from 'features/coupons/couponCreate/CouponCreatePage'
-import CouponEditorPage from 'features/coupons/couponEditor/CouponEditorPage'
-import CouponListPage from 'features/coupons/couponList/CouponListPage'
-import PublicRoute from 'router/PublicRoute'
-import LoginPage from 'features/auth/LoginPage'
-import RecoveryPage from 'features/auth/RecoveryPage'
-import SignupPage from 'features/auth/SignupPage'
-import CategoryPage from 'features/coupon-category/CategoryPage'
+import { PrivateRoute } from 'router/PrivateRoute'
+import { DashboardPage } from 'features/dashboard/DashboardPage'
+import { CouponCreatePage } from 'features/coupons/couponCreate/CouponCreatePage'
+import { CouponEditorPage } from 'features/coupons/couponEditor/CouponEditorPage'
+import { CouponListPage } from 'features/coupons/couponList/CouponListPage'
+import { PublicRoute } from 'router/PublicRoute'
+import { LoginPage } from 'features/auth/LoginPage'
+import { RecoveryPage } from 'features/auth/RecoveryPage'
+import { SignupPage } from 'features/auth/SignupPage'
+import { CategoryPage } from 'features/coupon-category/CategoryPage'
 import { ErrorPage } from '../components/error/ErrorPage'
 
 const Routes = (): JSX.Element => (
@@ -29,5 +29,5 @@ const Routes = (): JSX.Element => (
   </Switch>
 )
 
-export default withRouter(Routes)
+export const RouterView = withRouter(Routes)
 export const history = createBrowserHistory()

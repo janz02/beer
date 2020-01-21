@@ -26,7 +26,7 @@ interface CategoryEditorProps {
   afterClose: () => void
 }
 
-const CategoryEditor: FC<CategoryEditorProps> = props => {
+export const CategoryEditor: FC<CategoryEditorProps> = props => {
   const { params, onExit, afterClose } = props
   const { visible, categoryId: id, isNew } = params
   const isMobile = useIsMobile()
@@ -104,5 +104,3 @@ const CategoryEditor: FC<CategoryEditorProps> = props => {
     </Modal>
   )
 }
-
-export default CategoryEditor

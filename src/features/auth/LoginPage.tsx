@@ -8,7 +8,7 @@ import { login } from './authSlice'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 
-const LoginPage: React.FC = () => {
+export const LoginPage: React.FC = () => {
   const { loadingLogin: loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
 
   const dispatch = useDispatch()
@@ -58,5 +58,3 @@ const LoginPage: React.FC = () => {
     </AuthLayout>
   )
 }
-
-export default LoginPage

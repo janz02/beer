@@ -3,7 +3,7 @@ import { Layout } from 'antd'
 import { Header } from './Header'
 import './layout.scss'
 
-const PublicLayout: FC = ({ children }) => {
+export const PublicLayout: FC = ({ children }) => {
   return (
     <Layout className="layout">
       <Layout>
@@ -13,5 +13,3 @@ const PublicLayout: FC = ({ children }) => {
     </Layout>
   )
 }
-
-export default PublicLayout

@@ -1,7 +1,5 @@
 import React from 'react'
 
-const DashboardPage: React.FC = () => {
+export const DashboardPage: React.FC = () => {
   return <div />
 }
-
-export default DashboardPage

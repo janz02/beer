@@ -32,7 +32,7 @@ export interface CouponEditorFormProps {
   coupon?: Coupon
 }
 
-const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
+export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { handleCouponSave, handleCouponStateAction, loading, couponIsNew, coupon } = props
 
   const { t } = useTranslation()
@@ -295,5 +295,3 @@ const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     </Card>
   )
 }
-
-export default CouponEditorForm

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import api from 'api'
+import { api } from 'api'
 import { Category } from 'models/category'
 
 interface CouponsState {
