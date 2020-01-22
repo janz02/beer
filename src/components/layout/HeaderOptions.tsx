@@ -7,6 +7,7 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { logout } from 'features/auth/authSlice'
+import { Link } from 'react-router-dom'
 
 interface HeaderOptionsProps {
   openNotifications: () => void
@@ -29,8 +30,10 @@ export const HeaderOptions: FC<HeaderOptionsProps> = props => {
       </Menu.Item>
       {/* // TODO: User picture */}
       <SubMenu title={<Avatar shape="square" icon={<UserOutlined />} />}>
-        <Menu.Item key="profile" onClick={() => {}}>
-          <UserOutlined /> {t('auth.profile')}
+        <Menu.Item key="profile">
+          <UserOutlined />
+          {t('auth.profile')}
+          <Link to="/profile" />
         </Menu.Item>
         <Menu.Item key="logout" onClick={() => dispatch(logout())}>
           <LogoutOutlined /> {t('auth.logout')}

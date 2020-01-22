@@ -45,7 +45,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
           <Menu.Item onClick={closeDrawer}>
             <FileOutlined />
             <span>{t('menu.partner-data')}</span>
-            <Link to="/partners" />
+            <Link to="/partner" />
           </Menu.Item>
           <Menu.Item onClick={closeDrawer}>
             <FileOutlined />

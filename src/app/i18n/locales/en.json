@@ -57,6 +57,21 @@
       "invalid-email": "Invalid email!"
     }
   },
+  "profile": {
+    "save": "Save",
+    "save-profile-success": "Saving profile was successful.",
+    "editor-title": "Profile",
+    "field": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "error": {
+      "name-required": "Company name field is required",
+      "email-required": "Email field is required",
+      "phone-required": "Phone field is required"
+    }
+  },
   "coupon-list": {
     "create": "Create",
     "coupons": "Coupons",

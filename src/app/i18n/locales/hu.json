@@ -57,6 +57,21 @@
       "invalid-email": "Hibás email formátum!"
     }
   },
+  "profile": {
+    "save": "Mentés",
+    "save-profile-success": "Profile mentése sikeres.",
+    "editor-title": "Profil",
+    "field": {
+      "name": "Név",
+      "email": "Email",
+      "phone": "Telefonszám"
+    },
+    "error": {
+      "name-required": "A név mező megadása kötelező.",
+      "email-required": "Az email mező megadása kötelező.",
+      "phone-required": "A telefonszám mező megadása kötelező."
+    }
+  },
   "coupon-list": {
     "create": "Létrehozás",
     "coupons": "Kuponok",
