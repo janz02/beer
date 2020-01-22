@@ -14,10 +14,18 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    CouponCommentVm,
+    CouponCommentVmFromJSON,
+    CouponCommentVmFromJSONTyped,
+    CouponCommentVmToJSON,
     CouponRank,
     CouponRankFromJSON,
     CouponRankFromJSONTyped,
     CouponRankToJSON,
+    CouponState,
+    CouponStateFromJSON,
+    CouponStateFromJSONTyped,
+    CouponStateToJSON,
     CouponType,
     CouponTypeFromJSON,
     CouponTypeFromJSONTyped,
@@ -60,6 +68,12 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     type?: CouponType;
+    /**
+     * 
+     * @type {CouponState}
+     * @memberof CouponVm
+     */
+    state?: CouponState;
     /**
      * 
      * @type {Date}
@@ -110,6 +124,12 @@ export interface CouponVm {
     tags?: Array<number> | null;
     /**
      * 
+     * @type {Array<CouponCommentVm>}
+     * @memberof CouponVm
+     */
+    comments?: Array<CouponCommentVm> | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof CouponVm
      */
@@ -131,6 +151,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'description': !exists(json, 'description') ? undefined : json['description'],
         'rank': !exists(json, 'rank') ? undefined : CouponRankFromJSON(json['rank']),
         'type': !exists(json, 'type') ? undefined : CouponTypeFromJSON(json['type']),
+        'state': !exists(json, 'state') ? undefined : CouponStateFromJSON(json['state']),
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
         'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
@@ -139,6 +160,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
+        'comments': !exists(json, 'comments') ? undefined : (json['comments'] === null ? null : (json['comments'] as Array<any>).map(CouponCommentVmFromJSON)),
         'isDrawable': !exists(json, 'isDrawable') ? undefined : json['isDrawable'],
     };
 }
@@ -157,6 +179,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'description': value.description,
         'rank': CouponRankToJSON(value.rank),
         'type': CouponTypeToJSON(value.type),
+        'state': CouponStateToJSON(value.state),
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
         'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
@@ -165,6 +188,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'discountValue': value.discountValue,
         'categoryId': value.categoryId,
         'tags': value.tags,
+        'comments': value.comments === undefined ? undefined : (value.comments === null ? null : (value.comments as Array<any>).map(CouponCommentVmToJSON)),
         'isDrawable': value.isDrawable,
     };
 }
