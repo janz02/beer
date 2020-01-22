@@ -117,7 +117,9 @@
     }
   },
   "coupon-editor": {
-    "save-coupon-success": "Sikeres kupon mentés."
+    "save-coupon-success": "Sikeres kupon mentés.",
+    "comment-delete-confirm-message": "Biztos benne, hogy törölni szeretné ezt a kommentet?",
+    "save-coupon-status-success": "Kupon státusz mentése sikeres."
   },
   "coupon-category": {
     "list-title": "Kupon kategóriák",

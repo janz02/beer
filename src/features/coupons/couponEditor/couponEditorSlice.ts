@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Coupon, CouponState } from 'models/coupon'
+import { Coupon } from 'models/coupon'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { message } from 'antd'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import moment from 'moment'
+import { CouponState, CouponCommentVm } from 'api/swagger'
 
 interface CouponEditorState {
   coupon?: Coupon
@@ -33,6 +34,22 @@ const couponEditorSlice = createSlice({
       state.loading = false
       state.error = null
     },
+    updateCouponStatusSuccess(state) {
+      message.success(i18n.t('coupon-editor.save-coupon-status-success'), 10)
+      state.loading = false
+      state.error = null
+    },
+    deleteCouponCommentsSuccess(state) {
+      state.loading = false
+      state.error = null
+    },
+    getCouponCommentsSuccess(state, action: PayloadAction<CouponCommentVm[]>) {
+      if (state.coupon) {
+        state.coupon.comments = action.payload
+      }
+      state.loading = false
+      state.error = null
+    },
     setLoadingStart(state) {
       state.loading = true
     },
@@ -46,6 +63,9 @@ const couponEditorSlice = createSlice({
 export const {
   getCouponsSuccess,
   updateCouponSuccess,
+  updateCouponStatusSuccess,
+  deleteCouponCommentsSuccess,
+  getCouponCommentsSuccess,
   setLoadingStart,
   setLoadingFailed
 } = couponEditorSlice.actions
@@ -62,13 +82,7 @@ export const getCoupons = (id: number): AppThunk => async dispatch => {
         ...coupon,
         startDate: coupon.startDate && moment(coupon.startDate),
         endDate: coupon.endDate && moment(coupon.endDate),
-        expireDate: coupon.expireDate && moment(coupon.expireDate),
-        // TODO: integrate, remove these to use BE state
-        couponState: CouponState.Created,
-        comments: [
-          'Accepted because it is such a beautiful coupon.',
-          'Closed because it is no longer needed.'
-        ]
+        expireDate: coupon.expireDate && moment(coupon.expireDate)
       } as Coupon)
     )
   } catch (err) {
@@ -92,6 +106,57 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
 
     dispatch(updateCouponSuccess())
     history.push('/coupons')
+  } catch (err) {
+    dispatch(setLoadingFailed(err.toString()))
+  }
+}
+
+export const updateCouponStatus = (
+  id: number,
+  couponState: CouponState,
+  comment: string
+): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    await api.coupons.updateCouponStatus({
+      id: id,
+      changeCouponStateDto: { state: couponState, comment }
+    })
+
+    dispatch(updateCouponStatusSuccess())
+    dispatch(getCoupons(id))
+  } catch (err) {
+    dispatch(setLoadingFailed(err.toString()))
+  }
+}
+
+export const getCouponComments = (couponId: number): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    const comments = await api.couponComments.getCouponComments({ couponId })
+
+    dispatch(getCouponCommentsSuccess(comments))
+  } catch (err) {
+    dispatch(setLoadingFailed(err.toString()))
+  }
+}
+
+export const deleteCouponComments = (
+  couponId: number,
+  commentId: number
+): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    await api.couponComments.deleteCouponComments({
+      commentId,
+      couponId
+    })
+
+    dispatch(deleteCouponCommentsSuccess())
+    dispatch(getCouponComments(couponId))
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }

@@ -1,15 +1,5 @@
 import moment from 'moment'
-import { CouponRank, CouponType } from 'api/swagger/models'
-
-// TODO: use swagger type.
-export enum CouponState {
-  Created = 'Created',
-  Accepted = 'Accepted',
-  Rejected = 'Rejected',
-  Waiting = 'Waiting',
-  Closed = 'Closed',
-  Archived = 'Archived'
-}
+import { CouponRank, CouponType, CouponState, CouponCommentVm } from 'api/swagger/models'
 
 export interface Coupon {
   id?: number
@@ -26,6 +16,6 @@ export interface Coupon {
   minimumShoppingValue?: number
   tags?: []
   isDrawable?: boolean
-  couponState?: CouponState
-  comments?: string[]
+  state?: CouponState
+  comments?: CouponCommentVm[]
 }
