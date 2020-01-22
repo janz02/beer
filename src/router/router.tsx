@@ -12,6 +12,7 @@ import { RecoveryPage } from 'features/auth/RecoveryPage'
 import { SignupPage } from 'features/auth/SignupPage'
 import { CategoryPage } from 'features/coupon-category/CategoryPage'
 import { ErrorPage } from '../components/error/ErrorPage'
+import { PartnerEditorPage } from 'features/partner/PartnerEditorPage'
 
 const Routes = (): JSX.Element => (
   <Switch>
@@ -25,6 +26,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/coupons/create" component={CouponCreatePage} />
     <PrivateRoute exact path="/categories" component={CategoryPage} />
     <PrivateRoute exact path="/coupons/:id/:editing" component={CouponEditorPage} />
+    <PrivateRoute exact path="/partners" component={PartnerEditorPage} />
     <Route path="*" render={() => <Redirect to="/" />} />
   </Switch>
 )

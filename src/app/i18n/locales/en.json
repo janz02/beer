@@ -12,7 +12,8 @@
   "menu": {
     "dashboard": "Dashboard",
     "coupons": "Coupons",
-    "coupon-categories": "Categories"
+    "coupon-categories": "Categories",
+    "partner-data": "Partner data"
   },
   "auth": {
     "profile": "Profile",
@@ -122,6 +123,27 @@
     "notifications": "Notifications",
     "empty-list": "Empty",
     "load-more": "Load more..."
+  },
+  "partner": {
+    "editor-title": "Partner",
+    "save": "Save",
+    "save-partner-success": "Saving partner was successful.",
+    "field": {
+      "name": "Company name",
+      "active": "Active",
+      "major-partner": "Major partner",
+      "address": "Address",
+      "company-register-number": "Company register number",
+      "vat-number": "VAT number"
+    },
+    "error": {
+      "name-required": "Company name field is required",
+      "active-required": "Active field is required",
+      "major-partner-required": "Major partner field is required",
+      "address-required": "Address field is required",
+      "company-register-number-required": "Company register number field is required",
+      "vat-number-required": "VAT number field is required"
+    }
   },
   "error-page": {
     "back": "Back to home",
