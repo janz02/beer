@@ -12,7 +12,8 @@
   "menu": {
     "dashboard": "Irányítópult",
     "coupons": "Kuponok",
-    "coupon-categories": "Kategóriák"
+    "coupon-categories": "Kategóriák",
+    "partner-data": "Partner adatok"
   },
   "auth": {
     "profile": "Személyes adatok",
@@ -54,6 +55,21 @@
       "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú.",
       "user-exists": "A felhasználó már létezik!",
       "invalid-email": "Hibás email formátum!"
+    }
+  },
+  "profile": {
+    "save": "Mentés",
+    "save-profile-success": "Profile mentése sikeres.",
+    "editor-title": "Profil",
+    "field": {
+      "name": "Név",
+      "email": "Email",
+      "phone": "Telefonszám"
+    },
+    "error": {
+      "name-required": "A név mező megadása kötelező.",
+      "email-required": "Az email mező megadása kötelező.",
+      "phone-required": "A telefonszám mező megadása kötelező."
     }
   },
   "coupon-list": {
@@ -122,6 +138,27 @@
     "notifications": "Értesítések",
     "empty-list": "Üres",
     "load-more": "Régebbiek..."
+  },
+  "partner": {
+    "editor-title": "Partner",
+    "save": "Mentés",
+    "save-partner-success": "Partner mentése sikeres.",
+    "field": {
+      "name": "Cégnév",
+      "active": "Aktív",
+      "major-partner": "Kiemelt partner",
+      "address": "Cím",
+      "company-register-number": "Cégjegyzék szám",
+      "vat-number": "Adószám"
+    },
+    "error": {
+      "name-required": "Kérem adja meg a partner nevét!",
+      "active-required": "Kérem adja meg hogy a partner aktív-e!",
+      "major-partner-required": "Kérem adja meg hogy a partner kiemelt patner-e!",
+      "address-required": "Kérem adja meg a partner címét!",
+      "company-register-number-required": "Kérem adja meg a partner cégjegyzék számát!",
+      "vat-number-required": "Kérem adja meg a partner adószámát!"
+    }
   },
   "error-page": {
     "back": "Vissza a főoldalra",

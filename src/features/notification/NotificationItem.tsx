@@ -10,7 +10,7 @@ interface NotificationItemProps {
   onClick: () => any
 }
 
-const ListItem: FC<NotificationItemProps> = ({ item, onClick }) => {
+export const ListItem: FC<NotificationItemProps> = ({ item, onClick }) => {
   const dispatch = useDispatch()
 
   const inspectItem = (id: string): void => {
@@ -38,5 +38,3 @@ const ListItem: FC<NotificationItemProps> = ({ item, onClick }) => {
     </List.Item>
   )
 }
-
-export default ListItem

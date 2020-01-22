@@ -4,7 +4,7 @@ const initialState = {
 
 type RouteHistory = typeof initialState
 
-export default (state = { ...initialState }, action: any): RouteHistory => {
+export const routerHistoryStore = (state = { ...initialState }, action: any): RouteHistory => {
   switch (action.type) {
     case '@@router/LOCATION_CHANGE': {
       const pathname: string = action.payload.location.pathname

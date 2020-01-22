@@ -34,7 +34,7 @@ const config: Configuration = new Configuration({
   ]
 })
 
-export default {
+export const api = {
   coupons: new CouponsApi(config),
   categories: new CategoriesApi(config),
   auth: new AuthApi(config)

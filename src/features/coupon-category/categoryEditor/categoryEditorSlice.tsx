@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
-import api from 'api'
+import { api } from 'api'
 import { GetCategoriesRequest } from 'api/swagger'
 import { getCategories } from '../categoryList/categoryListSlice'
 

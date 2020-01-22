@@ -405,6 +405,120 @@
         }
       }
     },
+    "/api/Coupon/{couponId}/Comment": {
+      "get": {
+        "tags": [
+          "CouponComments"
+        ],
+        "operationId": "getCouponComments",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CouponCommentVm"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CouponCommentVm"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CouponCommentVm"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CouponComments"
+        ],
+        "operationId": "createCouponComments",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CouponCommentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Coupon/{couponId}/Comment/{commentId}": {
+      "delete": {
+        "tags": [
+          "CouponComments"
+        ],
+        "operationId": "deleteCouponComments",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Coupons": {
       "post": {
         "tags": [
@@ -562,7 +676,7 @@
         "tags": [
           "Coupons"
         ],
-        "operationId": "updateCoupons",
+        "operationId": "updateCoupon",
         "parameters": [
           {
             "name": "id",
@@ -605,6 +719,39 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Coupons/{id}/Status": {
+      "put": {
+        "tags": [
+          "Coupons"
+        ],
+        "operationId": "updateCouponStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeCouponStateDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -1688,6 +1835,59 @@
         },
         "additionalProperties": false
       },
+      "CouponState": {
+        "enum": [
+          "Created",
+          "Accepted",
+          "Rejected",
+          "Waiting",
+          "Closed",
+          "Archived"
+        ],
+        "type": "string"
+      },
+      "CouponCommentVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "couponId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "stateFrom": {
+            "$ref": "#/components/schemas/CouponState"
+          },
+          "stateTo": {
+            "$ref": "#/components/schemas/CouponState"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CouponCommentDto": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CouponRank": {
         "enum": [
           "Bronze",
@@ -1784,6 +1984,9 @@
           "type": {
             "$ref": "#/components/schemas/CouponType"
           },
+          "state": {
+            "$ref": "#/components/schemas/CouponState"
+          },
           "startDate": {
             "type": "string",
             "format": "date-time"
@@ -1820,6 +2023,13 @@
             },
             "nullable": true
           },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CouponCommentVm"
+            },
+            "nullable": true
+          },
           "isDrawable": {
             "type": "boolean"
           }
@@ -1851,6 +2061,19 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeCouponStateDto": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/CouponState"
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

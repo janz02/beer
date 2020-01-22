@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
-import CouponEditorForm, {
+import {
+  CouponEditorForm,
   CouponEditorFormProps
 } from 'features/coupons/components/CouponEditorForm'
 import { useParams } from 'react-router-dom'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
-import { getCoupons, updateCoupons } from './couponEditorSlice'
+import { getCoupons, updateCoupon } from './couponEditorSlice'
 import { Coupon, CouponState } from 'models/coupon'
 
-const CouponEditorPage: React.FC = () => {
+export const CouponEditorPage: React.FC = () => {
   const dispatch = useDispatch()
   const { id } = useParams()
 
@@ -19,7 +20,7 @@ const CouponEditorPage: React.FC = () => {
   }, [id, dispatch])
 
   const handleCouponSave = (coupon: Coupon): void => {
-    id && dispatch(updateCoupons({ ...coupon, id: +id }))
+    id && dispatch(updateCoupon({ ...coupon, id: +id }))
   }
 
   const handleCouponStateAction = (
@@ -45,5 +46,3 @@ const CouponEditorPage: React.FC = () => {
     </>
   )
 }
-
-export default CouponEditorPage

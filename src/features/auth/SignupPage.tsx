@@ -14,7 +14,7 @@ import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 
-const SignupPage: React.FC = () => {
+export const SignupPage: React.FC = () => {
   const { loadingSignup: loading, errorSignup: error } = useSelector(
     (state: RootState) => state.auth
   )
@@ -127,5 +127,3 @@ const SignupPage: React.FC = () => {
     </AuthLayout>
   )
 }
-
-export default SignupPage

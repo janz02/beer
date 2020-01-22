@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { history } from 'router/router'
-import api from 'api'
 import { LoginRequest, RegisterRequest } from 'api/swagger/apis'
 import { UserVm } from 'api/swagger'
 import { getJwtUserdata } from 'services/jwt-reader'
+import { api } from 'api'
 
 const authSlice = createSlice({
   name: '@auth',

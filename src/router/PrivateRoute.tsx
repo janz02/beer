@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, RouteProps, Redirect } from 'react-router-dom'
-import PrivateLayout from 'components/layout/PrivateLayout'
+import { PrivateLayout } from 'components/layout/PrivateLayout'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { hasPermission } from '../services/jwt-reader'
@@ -10,7 +10,7 @@ interface PrivateRouteProps extends RouteProps {
   roles?: Role[]
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = props => {
+export const PrivateRoute: React.FC<PrivateRouteProps> = props => {
   const { roles } = props
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn)
 
@@ -32,5 +32,3 @@ const PrivateRoute: React.FC<PrivateRouteProps> = props => {
     </>
   )
 }
-
-export default PrivateRoute

@@ -8,7 +8,7 @@ import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 
-const RecoveryPage: React.FC = () => {
+export const RecoveryPage: React.FC = () => {
   const { t } = useTranslation()
 
   const dispatch = useDispatch()
@@ -45,5 +45,3 @@ const RecoveryPage: React.FC = () => {
     </AuthLayout>
   )
 }
-
-export default RecoveryPage

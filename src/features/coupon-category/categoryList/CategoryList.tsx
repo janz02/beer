@@ -16,7 +16,7 @@ interface CategoryListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
 }
 
-const CategoryList: FC<CategoryListProps> = props => {
+export const CategoryList: FC<CategoryListProps> = props => {
   const { onOpenEditor } = props
 
   const isMobile = useIsMobile()
@@ -132,5 +132,3 @@ const CategoryList: FC<CategoryListProps> = props => {
     </>
   )
 }
-
-export default CategoryList

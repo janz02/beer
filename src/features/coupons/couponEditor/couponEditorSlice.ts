@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Coupon, CouponState } from 'models/coupon'
 import { AppThunk } from 'app/store'
-import api from 'api'
+import { api } from 'api'
 import { message } from 'antd'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
@@ -28,7 +28,7 @@ const couponEditorSlice = createSlice({
       state.loading = false
       state.error = null
     },
-    updateCouponsSuccess(state) {
+    updateCouponSuccess(state) {
       message.success(i18n.t('coupon-editor.save-coupon-success'), 10)
       state.loading = false
       state.error = null
@@ -45,7 +45,7 @@ const couponEditorSlice = createSlice({
 
 export const {
   getCouponsSuccess,
-  updateCouponsSuccess,
+  updateCouponSuccess,
   setLoadingStart,
   setLoadingFailed
 } = couponEditorSlice.actions
@@ -76,11 +76,11 @@ export const getCoupons = (id: number): AppThunk => async dispatch => {
   }
 }
 
-export const updateCoupons = (coupon: Coupon): AppThunk => async dispatch => {
+export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    await api.coupons.updateCoupons({
+    await api.coupons.updateCoupon({
       id: coupon.id!,
       couponDto: {
         ...coupon,
@@ -90,7 +90,7 @@ export const updateCoupons = (coupon: Coupon): AppThunk => async dispatch => {
       }
     })
 
-    dispatch(updateCouponsSuccess())
+    dispatch(updateCouponSuccess())
     history.push('/coupons')
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))

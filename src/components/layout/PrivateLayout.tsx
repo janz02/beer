@@ -4,13 +4,13 @@ import { DesktopOutlined, FileOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useIsMobile } from 'hooks'
-import LanguageSelector from 'components/LanguageSelector'
-import NotificationDrawer from 'features/notification/NotificationDrawer'
 import { HeaderOptions } from './HeaderOptions'
 import { Header } from './Header'
 import './layout.scss'
+import { LanguageSelector } from 'components/LanguageSelector'
+import { NotificationDrawer } from 'features/notification/NotificationDrawer'
 
-const PrivateLayout: React.FC = ({ children }) => {
+export const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation()
   const isMobile = useIsMobile()
 
@@ -41,6 +41,11 @@ const PrivateLayout: React.FC = ({ children }) => {
             <DesktopOutlined />
             <span>{t('menu.dashboard')}</span>
             <Link to="/" />
+          </Menu.Item>
+          <Menu.Item onClick={closeDrawer}>
+            <FileOutlined />
+            <span>{t('menu.partner-data')}</span>
+            <Link to="/partner" />
           </Menu.Item>
           <Menu.Item onClick={closeDrawer}>
             <FileOutlined />
@@ -95,5 +100,3 @@ const PrivateLayout: React.FC = ({ children }) => {
     </Layout>
   )
 }
-
-export default PrivateLayout

@@ -1,3 +1,3 @@
-import useIsMobile from './isMobileHook'
+import { useIsMobile } from './isMobileHook'
 
 export { useIsMobile }

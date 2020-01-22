@@ -10,7 +10,7 @@ interface LanguageSelectorProps {
   menuClosed?: boolean
 }
 
-const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
+export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
   const { t, i18n } = useTranslation()
 
   const changeLanguage = (lng: string): void => {
@@ -82,5 +82,3 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
     </Dropdown>
   )
 }
-
-export default LanguageSelector

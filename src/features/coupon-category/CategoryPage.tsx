@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import './category.scss'
-import CategoryList from './categoryList/CategoryList'
+import { CategoryList } from './categoryList/CategoryList'
 import { Card } from 'antd'
 import { useIsMobile } from 'hooks'
-import CategoryEditor, { CategoryEditorParams } from './categoryEditor/CategoryEditor'
+import { CategoryEditor, CategoryEditorParams } from './categoryEditor/CategoryEditor'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { getCategories } from './categoryList/categoryListSlice'
 
-const CategoryPage: React.FC = () => {
+export const CategoryPage: React.FC = () => {
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
 
@@ -59,5 +59,3 @@ const CategoryPage: React.FC = () => {
     </div>
   )
 }
-
-export default CategoryPage

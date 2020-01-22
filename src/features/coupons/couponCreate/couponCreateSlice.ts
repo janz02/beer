@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Coupon } from 'models/coupon'
 import { AppThunk } from 'app/store'
-import api from 'api'
+import { api } from 'api'
 import { message } from 'antd'
 import { history } from 'router/router'
 import i18n from 'app/i18n'

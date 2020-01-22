@@ -16,39 +16,32 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UserDto
+ * @interface CouponCommentDto
  */
-export interface UserDto {
+export interface CouponCommentDto {
     /**
      * 
      * @type {string}
-     * @memberof UserDto
+     * @memberof CouponCommentDto
      */
-    email?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDto
-     */
-    password?: string | null;
+    comment?: string | null;
 }
 
-export function UserDtoFromJSON(json: any): UserDto {
-    return UserDtoFromJSONTyped(json, false);
+export function CouponCommentDtoFromJSON(json: any): CouponCommentDto {
+    return CouponCommentDtoFromJSONTyped(json, false);
 }
 
-export function UserDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserDto {
+export function CouponCommentDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): CouponCommentDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'password': !exists(json, 'password') ? undefined : json['password'],
+        'comment': !exists(json, 'comment') ? undefined : json['comment'],
     };
 }
 
-export function UserDtoToJSON(value?: UserDto | null): any {
+export function CouponCommentDtoToJSON(value?: CouponCommentDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +50,7 @@ export function UserDtoToJSON(value?: UserDto | null): any {
     }
     return {
         
-        'email': value.email,
-        'password': value.password,
+        'comment': value.comment,
     };
 }
 

@@ -1,17 +1,16 @@
 import React from 'react'
 import { ConnectedRouter } from 'connected-react-router'
-import RouterView, { history } from 'router/router'
-
+import { history, RouterView } from 'router/router'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './store'
 import { ConfigProvider } from 'antd'
 import huHU from 'antd/lib/locale/hu_HU'
 import enGB from 'antd/lib/locale/en_GB'
 import { useTranslation } from 'react-i18next'
 import { Locale } from 'antd/lib/locale-provider'
+import { store } from './store'
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   const { i18n } = useTranslation()
 
   const antLocale: () => Locale | undefined = () => {
@@ -35,5 +34,3 @@ const App: React.FC = () => {
     </BrowserRouter>
   )
 }
-
-export default App
