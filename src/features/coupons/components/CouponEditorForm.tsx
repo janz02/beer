@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import './CouponEditorForm.scss'
 import {
   Form,
@@ -13,12 +13,10 @@ import {
   Col,
   Timeline
 } from 'antd'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
-import * as Router from 'react-router-dom';
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
+import * as Router from 'react-router-dom'
 import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import { useIsMobile } from 'hooks'
 import { Coupon, CouponState } from 'models/coupon'
 import { CouponRank, CouponType } from 'api/swagger/models'
@@ -36,17 +34,17 @@ export interface CouponEditorFormProps {
 
 export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { handleCouponSave, handleCouponStateAction, loading, couponIsNew, coupon } = props
-  const { editing } = Router.useParams();
 
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const isMobile = useIsMobile()
   const { categories } = useSelector((state: RootState) => state.coupons)
   const [submitable, setSubmitable] = useState(false)
-  const { editing } = useParams()
+  const { editing } = Router.useParams()
   const [formEditing, setFormEditing] = useState(editing === 'true')
   const [form] = Form.useForm()
   const [commentForm] = Form.useForm()
+
   React.useEffect(() => {
     dispatch(listCategories())
   }, [dispatch])
@@ -72,7 +70,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     })
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     form.setFieldsValue({
       rank: CouponRank.Bronze,
       type: CouponType.FixValue,

@@ -1,5 +1,5 @@
 import React from 'react';
-import CouponEditorForm from './CouponEditorForm';
+import { CouponEditorForm } from './CouponEditorForm';
 import { Card } from 'antd';
 import configureStore from "redux-mock-store";
 import * as ReactReduxHooks from "hooks/react-redux-hooks";
