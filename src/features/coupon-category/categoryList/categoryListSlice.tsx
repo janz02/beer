@@ -3,18 +3,11 @@ import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
 import { api } from 'api'
 import { ListCategoriesRequest } from 'api/swagger'
-
-interface Pagination {
-  page?: number
-  from?: number
-  to?: number
-  size?: number
-  pageSize?: number
-}
+import { Pagination, recalculatePagination, calculatePagination } from 'models/pagination'
 
 interface CouponCategoryListState {
   categories: Category[]
-  pagination?: Pagination
+  pagination: Pagination
   loading: boolean
   error: string
   errorDeletion: string
@@ -82,12 +75,13 @@ export const getCategories = (params: ListCategoriesRequest = {}): AppThunk => a
   dispatch(getCategoriesRequest())
   try {
     const oldPagination = getState().categoryList.pagination
-    const pageSize = params.pageSize ?? oldPagination?.pageSize ?? 10
-    const page = params.page ?? oldPagination?.page ?? 1
-
+    const pagination = calculatePagination(
+      { pageSize: params.pageSize, page: params.page },
+      oldPagination
+    )
     const response = await api.categories.listCategories({
-      pageSize,
-      page: Math.max(page, 1)
+      pageSize: pagination.pageSize,
+      page: pagination.page
     })
 
     dispatch(
@@ -98,7 +92,7 @@ export const getCategories = (params: ListCategoriesRequest = {}): AppThunk => a
           from: response.from,
           size: response.size,
           to: response.to,
-          pageSize
+          pageSize: pagination.pageSize
         }
       })
     )
@@ -116,9 +110,8 @@ export const deleteCategory = (id: number, refreshList = true): AppThunk => asyn
     await api.categories.deleteCategories({ id })
     if (refreshList) {
       const oldPagination = getState().categoryList.pagination
-      const reductPage = oldPagination?.to === oldPagination?.from
-      const page = oldPagination?.page! - +reductPage
-      dispatch(getCategories({ page }))
+      const newPage = recalculatePagination(oldPagination)
+      dispatch(getCategories({ page: newPage }))
     }
     dispatch(deleteSuccess())
     return true

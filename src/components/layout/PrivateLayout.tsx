@@ -57,6 +57,11 @@ export const PrivateLayout: React.FC = ({ children }) => {
             <span>{t('menu.coupon-categories')}</span>
             <Link to="/categories" />
           </Menu.Item>
+          <Menu.Item onClick={closeDrawer}>
+            <FileOutlined />
+            <span>{t('menu.sites')}</span>
+            <Link to="/sites" />
+          </Menu.Item>
         </Menu>
         <LanguageSelector menuClosed={!menuOpened} />
       </>
