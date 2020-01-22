@@ -18,6 +18,10 @@ import {
     PartnerContactVmFromJSON,
     PartnerContactVmFromJSONTyped,
     PartnerContactVmToJSON,
+    SiteVm,
+    SiteVmFromJSON,
+    SiteVmFromJSONTyped,
+    SiteVmToJSON,
 } from './';
 
 /**
@@ -62,6 +66,12 @@ export interface PartnerVm {
      * @memberof PartnerVm
      */
     contacts?: Array<PartnerContactVm> | null;
+    /**
+     * 
+     * @type {Array<SiteVm>}
+     * @memberof PartnerVm
+     */
+    sites?: Array<SiteVm> | null;
 }
 
 export function PartnerVmFromJSON(json: any): PartnerVm {
@@ -80,6 +90,7 @@ export function PartnerVmFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'taxNumber': !exists(json, 'taxNumber') ? undefined : json['taxNumber'],
         'bankAccount': !exists(json, 'bankAccount') ? undefined : json['bankAccount'],
         'contacts': !exists(json, 'contacts') ? undefined : (json['contacts'] === null ? null : (json['contacts'] as Array<any>).map(PartnerContactVmFromJSON)),
+        'sites': !exists(json, 'sites') ? undefined : (json['sites'] === null ? null : (json['sites'] as Array<any>).map(SiteVmFromJSON)),
     };
 }
 
@@ -98,6 +109,7 @@ export function PartnerVmToJSON(value?: PartnerVm | null): any {
         'taxNumber': value.taxNumber,
         'bankAccount': value.bankAccount,
         'contacts': value.contacts === undefined ? undefined : (value.contacts === null ? null : (value.contacts as Array<any>).map(PartnerContactVmToJSON)),
+        'sites': value.sites === undefined ? undefined : (value.sites === null ? null : (value.sites as Array<any>).map(SiteVmToJSON)),
     };
 }
 

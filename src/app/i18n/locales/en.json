@@ -1,14 +1,19 @@
 {
-
-
   "common": {
     "ok": "OK",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "create": "Create",
+    "save": "Save",
+    "delete": "Delete",
+    "actions": "Actions",
+    "data": "Data"
   },
-  
   "menu": {
     "dashboard": "Dashboard",
-    "coupons": "Coupons"
+    "coupons": "Coupons",
+    "coupon-categories": "Categories",
+    "partner-data": "Partner data"
   },
   "auth": {
     "profile": "Profile",
@@ -47,7 +52,24 @@
       "company-required": "Please enter your name of your workplace!",
       "password-required": "Please enter your Password!",
       "password-inconsistent": "The two passwords are not matching.",
-      "password-format": "Must have a letter, a number, a special character and contain 8 characters."
+      "password-format": "Must have a letter, a number, a special character and contain 8 characters.",
+      "user-exists": "User already exists!",
+      "invalid-email": "Invalid email!"
+    }
+  },
+  "profile": {
+    "save": "Save",
+    "save-profile-success": "Saving profile was successful.",
+    "editor-title": "Profile",
+    "field": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "error": {
+      "name-required": "Company name field is required",
+      "email-required": "Email field is required",
+      "phone-required": "Phone field is required"
     }
   },
   "coupon-list": {
@@ -67,6 +89,14 @@
     "editor": "Coupon editor",
     "edit": "Edit",
     "create-coupon-success": "Creating a coupon was successful.",
+    "states": {
+      "accept": "Accept",
+      "reject": "Reject",
+      "wait": "Wait",
+      "close": "Close",
+      "archive": "Archive"
+    },
+    "state-action-confirm-message": "Are you sure?",
     "field": {
       "name": "Name",
       "description": "Description",
@@ -78,7 +108,8 @@
       "distribution-end-date": "Distribution end date",
       "coupon-count": "Coupon count",
       "minimum-shopping-value": "Minimum shopping value",
-      "expiration-date": "Expiration date"
+      "expiration-date": "Expiration date",
+      "comment": "Comment"
     },
     "error": {
       "name-required": "Name field is required.",
@@ -88,10 +119,51 @@
   "coupon-editor": {
     "save-coupon-success": "Saving a coupon was successful."
   },
+  "coupon-category": {
+    "list-title": "Coupon categories",
+    "editor-edit": "Edit coupon category",
+    "editor-create": "Create coupon category",
+    "delete-popup": {
+      "title": "Are you sure?",
+      "text": "You are about to delete permanetly the following coupon category:"
+    },
+    "field": {
+      "name": "Category name"
+    },
+    "error": {
+      "name-required": "Please enter the category name!"
+    }
+  },
   "notification": {
     "notifications": "Notifications",
     "empty-list": "Empty",
     "load-more": "Load more..."
+  },
+  "partner": {
+    "editor-title": "Partner",
+    "save": "Save",
+    "save-partner-success": "Saving partner was successful.",
+    "field": {
+      "name": "Company name",
+      "active": "Active",
+      "major-partner": "Major partner",
+      "address": "Address",
+      "company-register-number": "Company register number",
+      "vat-number": "VAT number"
+    },
+    "error": {
+      "name-required": "Company name field is required",
+      "active-required": "Active field is required",
+      "major-partner-required": "Major partner field is required",
+      "address-required": "Address field is required",
+      "company-register-number-required": "Company register number field is required",
+      "vat-number-required": "VAT number field is required"
+    }
+  },
+  "error-page": {
+    "back": "Back to home",
+    "title": "Error!",
+    "title404": "Permission error!"
   },
   "languages": {
     "en": "English",

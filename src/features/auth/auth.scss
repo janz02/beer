@@ -1,10 +1,10 @@
 .auth-card {
-  margin: 2rem auto !important;
   min-width: 300px;
   max-width: 450px;
+  margin: 2rem auto;
 
   &--mobile {
-    margin: 0rem;
+    margin: 0;
   }
 
   --minor-inset: 0.5rem;
@@ -21,15 +21,17 @@
   &,
   .login {
     &__signup-button {
-      float: right;
       margin-top: 0.75rem;
+      float: right;
     }
+
     &__options {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
       flex-wrap: wrap;
+      justify-content: space-between;
       margin: 1rem 0;
+
       button {
         height: 100%;
         padding: 0 var(--minor-inset);
@@ -42,6 +44,7 @@
     &__instruction-text {
       margin-bottom: 0.5rem;
     }
+
     &__additional-options {
       display: flex;
       justify-content: space-between;
@@ -53,9 +56,10 @@
   &,
   .signup {
     &__login-button {
-      float: right;
       margin-top: 0.75rem;
+      float: right;
     }
+
     &__accept-terms {
       padding: 0;
     }

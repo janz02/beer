@@ -1,43 +1,48 @@
 import React from 'react';
-import CouponEditorForm from 'features/coupons/components/CouponEditorForm';
-import { useParams } from 'react-router-dom';
-import { RootState } from 'app/rootReducer';
+import {
+  CouponEditorForm,
+  CouponEditorFormProps
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks';
-import { getCoupons, updateCoupons } from './couponEditorSlice';
-import { Coupon } from 'models/coupon';
+import { useParams } from 'react-router-dom'
+import { RootState } from 'app/rootReducer'
+import { useSelector, useDispatch } from 'react-redux'
+import { getCoupons, updateCoupon } from './couponEditorSlice'
+import { Coupon, CouponState } from 'models/coupon'
 
-const CouponEditorPage: React.FC = () => {
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const { coupon, loading } = useSelector(
-    (state: RootState) => state.couponEditor,
-  );
+export const CouponEditorPage: React.FC = () => {
+  const dispatch = useDispatch()
+  const { id } = useParams()
+
+  const { coupon, loading } = useSelector((state: RootState) => state.couponEditor)
 
   React.useEffect(() => {
-    dispatch(getCoupons(+id!));
-  }, [id, dispatch]);
+    id && dispatch(getCoupons(+id))
+  }, [id, dispatch])
 
-  const handleCouponSave = (coupon: Coupon) => {
-    dispatch(
-      updateCoupons({
-        ...coupon,
-        id: +id!,
-      }),
-    );
-  };
+  const handleCouponSave = (coupon: Coupon): void => {
+    id && dispatch(updateCoupon({ ...coupon, id: +id }))
+  }
 
-  const props = {
+  const handleCouponStateAction = (
+    couponId: number,
+    couponState: CouponState,
+    comment: string
+  ): void => {
+    // TODO: integrate.
+    console.log(`${couponState} action triggered.`)
+  }
+
+  const props: CouponEditorFormProps = {
     handleCouponSave,
+    handleCouponStateAction,
     loading,
     couponIsNew: false,
-    coupon,
-  };
+    coupon
+  }
 
   return (
     <>
       <CouponEditorForm {...props} />
     </>
-  );
-};
-
-export default CouponEditorPage;
+  )
+}

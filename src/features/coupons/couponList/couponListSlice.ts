@@ -1,20 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Coupon } from 'models/coupon';
-import { AppThunk } from 'app/store';
-import api from 'api';
-import { CouponListingOptions } from 'models/couponListingOptions';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Coupon } from 'models/coupon'
+import { AppThunk } from 'app/store'
+import { api } from 'api'
+import { CouponListingOptions } from 'models/couponListingOptions'
 
-type couponListState = {
-  coupons?: Coupon[];
-  allCouponsCount?: number;
-  error: string | null;
-  loading: boolean;
-};
+interface CouponListState {
+  coupons?: Coupon[]
+  allCouponsCount?: number
+  error: string | null
+  loading: boolean
+}
 
-const initialState: couponListState = {
+const initialState: CouponListState = {
   error: null,
-  loading: false,
-};
+  loading: false
+}
 
 const couponListSlice = createSlice({
   name: 'coupon-list',
@@ -22,70 +22,69 @@ const couponListSlice = createSlice({
   reducers: {
     listCouponsSuccess(
       state,
-      action: PayloadAction<{ coupons: Coupon[]; allCouponsCount: number }>,
+      action: PayloadAction<{ coupons?: Coupon[]; allCouponsCount: number }>
     ) {
-      state.coupons = action.payload.coupons;
-      state.allCouponsCount = action.payload.allCouponsCount;
+      state.coupons = action.payload.coupons
+      state.allCouponsCount = action.payload.allCouponsCount
 
-      state.loading = false;
-      state.error = null;
+      state.loading = false
+      state.error = null
     },
     deleteCouponsSuccess(state, action: PayloadAction<number>) {
-      state.coupons = state.coupons!.filter((x) => x.id !== action.payload);
+      state.coupons = state.coupons && state.coupons.filter(x => x.id !== action.payload)
 
-      state.loading = false;
-      state.error = null;
+      state.loading = false
+      state.error = null
     },
     setLoadingStart(state) {
-      state.loading = true;
+      state.loading = true
     },
     setLoadingFailed(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-  },
-});
+      state.loading = false
+      state.error = action.payload
+    }
+  }
+})
 
 export const {
   listCouponsSuccess,
   deleteCouponsSuccess,
   setLoadingStart,
-  setLoadingFailed,
-} = couponListSlice.actions;
+  setLoadingFailed
+} = couponListSlice.actions
 
-export default couponListSlice.reducer;
+export default couponListSlice.reducer
 
-export const listCoupons = (
-  listingOptions: CouponListingOptions,
-): AppThunk => async (dispatch) => {
-  dispatch(setLoadingStart());
+export const listCoupons = (listingOptions: CouponListingOptions): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
 
   try {
     const coupons = await api.coupons.listCoupons({
       ...listingOptions,
-      page: listingOptions.current,
-    });
+      page: listingOptions.current
+    })
     dispatch(
       listCouponsSuccess({
-        coupons: coupons.result!.map(
-          (x) =>
-            ({ id: x.id, name: x.name, description: x.description } as Coupon),
-        ),
-        allCouponsCount: coupons.size!,
-      }),
-    );
+        coupons: coupons.result
+          ? coupons.result.map(
+              x => ({ id: x.id, name: x.name, description: x.description } as Coupon)
+            )
+          : undefined,
+        allCouponsCount: coupons.size || 0
+      })
+    )
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()));
+    dispatch(setLoadingFailed(err.toString()))
   }
-};
+}
 
-export const deleteCoupons = (id: number): AppThunk => async (dispatch) => {
-  dispatch(setLoadingStart());
+export const deleteCoupons = (id: number): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
 
   try {
-    await api.coupons.deleteCoupons({ id: id });
-    dispatch(deleteCouponsSuccess(id));
+    await api.coupons.deleteCoupons({ id: id })
+    dispatch(deleteCouponsSuccess(id))
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()));
+    dispatch(setLoadingFailed(err.toString()))
   }
-};
+}

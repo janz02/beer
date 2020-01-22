@@ -1,5 +1,5 @@
-import React from 'react';
-import MomentDisplay from './MomentDisplay';
+import React from 'react'
+import { MomentDisplay } from './MomentDisplay'
 import { shallow } from 'enzyme';
 import moment from 'moment';
 

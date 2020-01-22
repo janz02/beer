@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
-import { Layout, Card } from 'antd';
-import { useIsMobile } from 'hooks';
-import './auth.scss';
+import React, { FC } from 'react'
+import { Layout, Card } from 'antd'
+import { useIsMobile } from 'hooks'
+import './auth.scss'
 
 interface AuthLayoutProps {
-  title: string;
-  className?: string;
+  title: string
+  className?: string
 }
 
 export const AuthLayout: FC<AuthLayoutProps> = props => {
-  const { title, className, children } = props;
-  const isMobile = useIsMobile();
+  const { title, className, children } = props
+  const isMobile = useIsMobile()
 
   return (
     <Layout.Content>
@@ -21,5 +21,5 @@ export const AuthLayout: FC<AuthLayoutProps> = props => {
         {children}
       </Card>
     </Layout.Content>
-  );
-};
+  )
+}

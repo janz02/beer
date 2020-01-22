@@ -1,42 +1,36 @@
-import React from 'react';
-import { Form, Input, Button, Alert, Checkbox } from 'antd';
-import { useTranslation } from 'react-i18next';
+import React from 'react'
+import { Form, Input, Button, Alert, Checkbox } from 'antd'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
 import {
   UserOutlined,
   LockOutlined,
   HomeOutlined,
   PhoneOutlined,
-  CrownOutlined,
-} from '@ant-design/icons';
-import { signUp } from './authSlice';
-import { RootState } from 'app/rootReducer';
-import { history } from 'app/router';
-import { AuthLayout } from './AuthLayout';
+  CrownOutlined
+} from '@ant-design/icons'
+import { signUp } from './authSlice'
+import { RootState } from 'app/rootReducer'
+import { history } from 'router/router'
+import { AuthLayout } from './AuthLayout'
 
-export const SignupPage = () => {
+export const SignupPage: React.FC = () => {
   const { loadingSignup: loading, errorSignup: error } = useSelector(
     (state: RootState) => state.auth
-  );
+  )
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <AuthLayout className="signup" title={t(`auth.signup`)}>
       {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
-      <Form
-        name="signup"
-        layout="vertical"
-        onFinish={values => dispatch(signUp(values))}
-      >
+      <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
         <Form.Item
           name="username"
           label={t('auth.field.username')}
-          rules={[
-            { required: true, message: t('auth.error.username-required') },
-          ]}
+          rules={[{ required: true, message: t('auth.error.username-required') }]}
         >
           <Input prefix={<UserOutlined />} />
         </Form.Item>
@@ -48,11 +42,9 @@ export const SignupPage = () => {
           rules={[
             { required: true, message: t('auth.error.password-required') },
             {
-              pattern: new RegExp(
-                '^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
-              ),
-              message: t('auth.error.password-format'),
-            },
+              pattern: new RegExp('^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'),
+              message: t('auth.error.password-format')
+            }
           ]}
         >
           <Input.Password prefix={<LockOutlined />} />
@@ -68,11 +60,11 @@ export const SignupPage = () => {
             ({ getFieldValue }) => ({
               validator(rule, value) {
                 if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
+                  return Promise.resolve()
                 }
-                return Promise.reject(t('auth.error.password-inconsistent'));
-              },
-            }),
+                return Promise.reject(t('auth.error.password-inconsistent'))
+              }
+            })
           ]}
         >
           <Input.Password prefix={<LockOutlined />} />
@@ -81,9 +73,7 @@ export const SignupPage = () => {
         <Form.Item
           name="company"
           label={t('auth.field.company')}
-          rules={[
-            { required: true, message: t('auth.error.company-required') },
-          ]}
+          rules={[{ required: true, message: t('auth.error.company-required') }]}
         >
           <Input prefix={<HomeOutlined />} />
         </Form.Item>
@@ -127,22 +117,13 @@ export const SignupPage = () => {
           </Checkbox>
         </Form.Item>
 
-        <Button
-          loading={loading}
-          block
-          size="large"
-          type="primary"
-          htmlType="submit"
-        >
+        <Button loading={loading} block size="large" type="primary" htmlType="submit">
           {t('auth.signup')}
         </Button>
       </Form>
-      <Button
-        className="signup__login-button"
-        onClick={() => history.push('/auth')}
-      >
+      <Button className="signup__login-button" onClick={() => history.push('/auth')}>
         {t('auth.login')}
       </Button>
     </AuthLayout>
-  );
-};
+  )
+}

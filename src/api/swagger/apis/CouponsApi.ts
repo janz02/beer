@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    ChangeCouponStateDto,
+    ChangeCouponStateDtoFromJSON,
+    ChangeCouponStateDtoToJSON,
     CouponDto,
     CouponDtoFromJSON,
     CouponDtoToJSON,
@@ -53,9 +56,14 @@ export interface ListCouponsRequest {
     orderByType?: OrderByType;
 }
 
-export interface UpdateCouponsRequest {
+export interface UpdateCouponRequest {
     id: number;
     couponDto?: CouponDto;
+}
+
+export interface UpdateCouponStatusRequest {
+    id: number;
+    changeCouponStateDto?: ChangeCouponStateDto;
 }
 
 /**
@@ -71,6 +79,10 @@ export class CouponsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
 
         const response = await this.request({
             path: `/api/Coupons`,
@@ -101,6 +113,10 @@ export class CouponsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
         const response = await this.request({
             path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
@@ -127,6 +143,10 @@ export class CouponsApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
 
         const response = await this.request({
             path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
@@ -176,6 +196,10 @@ export class CouponsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
         const response = await this.request({
             path: `/api/Coupons`,
             method: 'GET',
@@ -195,9 +219,9 @@ export class CouponsApi extends runtime.BaseAPI {
 
     /**
      */
-    async updateCouponsRaw(requestParameters: UpdateCouponsRequest): Promise<runtime.ApiResponse<void>> {
+    async updateCouponRaw(requestParameters: UpdateCouponRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCoupons.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCoupon.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -205,6 +229,10 @@ export class CouponsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
 
         const response = await this.request({
             path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
@@ -219,8 +247,42 @@ export class CouponsApi extends runtime.BaseAPI {
 
     /**
      */
-    async updateCoupons(requestParameters: UpdateCouponsRequest): Promise<void> {
-        await this.updateCouponsRaw(requestParameters);
+    async updateCoupon(requestParameters: UpdateCouponRequest): Promise<void> {
+        await this.updateCouponRaw(requestParameters);
+    }
+
+    /**
+     */
+    async updateCouponStatusRaw(requestParameters: UpdateCouponStatusRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCouponStatus.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/{id}/Status`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ChangeCouponStateDtoToJSON(requestParameters.changeCouponStateDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async updateCouponStatus(requestParameters: UpdateCouponStatusRequest): Promise<void> {
+        await this.updateCouponStatusRaw(requestParameters);
     }
 
 }

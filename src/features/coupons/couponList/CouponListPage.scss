@@ -1,6 +1,19 @@
-@import '../../../assets/scss/variables';
+@import "../../../assets/scss/variables";
 
-.coupon-list-page {
+.coupons-list-page {
+  .coupons-list {
+    &__header {
+      display: flex;
+      justify-content: space-between;
+
+      h3 {
+        display: inline-flex;
+        padding-top: 0.1rem;
+        padding-bottom: 0;
+      }
+    }
+  }
+
   .ant-table-pagination {
     @media (max-width: $screen-sm) {
       margin-right: 10px;
@@ -13,7 +26,7 @@
 }
 
 .table-filter__search-field {
+  display: block;
   width: 188px;
   margin-bottom: 8px;
-  display: block;
 }

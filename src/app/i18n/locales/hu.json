@@ -1,11 +1,19 @@
 {
   "common": {
     "ok": "OK",
-    "cancel": "Mégsem"
+    "cancel": "Mégsem",
+    "edit": "Szerkesztés",
+    "create": "Létrehozás",
+    "save": "Mentés",
+    "delete": "Törlés",
+    "actions": "Műveletek",
+    "data": "Adatok"
   },
   "menu": {
     "dashboard": "Irányítópult",
-    "coupons": "Kuponok"
+    "coupons": "Kuponok",
+    "coupon-categories": "Kategóriák",
+    "partner-data": "Partner adatok"
   },
   "auth": {
     "profile": "Személyes adatok",
@@ -44,7 +52,24 @@
       "code-required": "Kérem add meg az ügyfél kódodat!",
       "password-required": "Kérem add meg a jelszavadat!",
       "password-inconsistent": "A két jelszó nem egyezik meg.",
-      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú."
+      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú.",
+      "user-exists": "A felhasználó már létezik!",
+      "invalid-email": "Hibás email formátum!"
+    }
+  },
+  "profile": {
+    "save": "Mentés",
+    "save-profile-success": "Profile mentése sikeres.",
+    "editor-title": "Profil",
+    "field": {
+      "name": "Név",
+      "email": "Email",
+      "phone": "Telefonszám"
+    },
+    "error": {
+      "name-required": "A név mező megadása kötelező.",
+      "email-required": "Az email mező megadása kötelező.",
+      "phone-required": "A telefonszám mező megadása kötelező."
     }
   },
   "coupon-list": {
@@ -64,6 +89,14 @@
     "editor": "Kupon szerkesztő",
     "edit": "Szerkesztés",
     "create-coupon-success": "Sikeres kupon létrehozás.",
+    "states": {
+      "accept": "Elfogadás",
+      "reject": "Elutasítás",
+      "wait": "Várakozás",
+      "close": "Lezárás",
+      "archive": "Archiválás"
+    },
+    "state-action-confirm-message": "Biztos benne?",
     "field": {
       "name": "Név",
       "description": "Leírás",
@@ -75,7 +108,8 @@
       "distribution-end-date": "Kiosztási vég dátum",
       "coupon-count": "Kuponok száma",
       "minimum-shopping-value": "Minimális vásárlási érték",
-      "expiration-date": "Lejárati dátum"
+      "expiration-date": "Lejárati dátum",
+      "comment": "Komment"
     },
     "error": {
       "name-required": "A név mező megadása kötelező.",
@@ -85,10 +119,51 @@
   "coupon-editor": {
     "save-coupon-success": "Sikeres kupon mentés."
   },
+  "coupon-category": {
+    "list-title": "Kupon kategóriák",
+    "editor-edit": "Kupon katgória szerkesztése",
+    "editor-create": "Kupon katgória létrehozása",
+    "field": {
+      "name": "Kategória neve"
+    },
+    "delete-popup": {
+      "title": "Biztos?",
+      "text": "A következő kuponkategóriát véglegesen törlöm:"
+    },
+    "error": {
+      "name-required": "Kérem add meg a kategória nevét!"
+    }
+  },
   "notification": {
     "notifications": "Értesítések",
     "empty-list": "Üres",
     "load-more": "Régebbiek..."
+  },
+  "partner": {
+    "editor-title": "Partner",
+    "save": "Mentés",
+    "save-partner-success": "Partner mentése sikeres.",
+    "field": {
+      "name": "Cégnév",
+      "active": "Aktív",
+      "major-partner": "Kiemelt partner",
+      "address": "Cím",
+      "company-register-number": "Cégjegyzék szám",
+      "vat-number": "Adószám"
+    },
+    "error": {
+      "name-required": "Kérem adja meg a partner nevét!",
+      "active-required": "Kérem adja meg hogy a partner aktív-e!",
+      "major-partner-required": "Kérem adja meg hogy a partner kiemelt patner-e!",
+      "address-required": "Kérem adja meg a partner címét!",
+      "company-register-number-required": "Kérem adja meg a partner cégjegyzék számát!",
+      "vat-number-required": "Kérem adja meg a partner adószámát!"
+    }
+  },
+  "error-page": {
+    "back": "Vissza a főoldalra",
+    "title": "Hiba!",
+    "title404": "Hozzáférési hiba!"
   },
   "languages": {
     "en": "English",
