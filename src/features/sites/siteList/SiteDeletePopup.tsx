@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { Modal } from 'antd'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { deleteSite } from '../siteSlice'
+import { deleteSite } from './siteListSlice'
 import { Site } from 'models/site'
 
 interface SiteDeletePopupProps {

@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import '../category.scss'
 import { Modal, Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { getCategory, clearCategoryEditor, saveCategory } from './categoryEditorSlice'
@@ -50,7 +49,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
 
   useEffect(() => {
     if (id && mode === EditorMode.EDIT) {
-      dispatch(getCategory({ id: id! }))
+      dispatch(getCategory({ id }))
     }
   }, [dispatch, id, mode])
 
@@ -64,7 +63,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
     dispatch(clearCategoryEditor())
   }
 
-  const onSave = async (values: any): Promise<void> => {
+  const onSave = async (values: Category): Promise<void> => {
     const newCategory: Category = { id, name: values.name }
     dispatch(saveCategory(newCategory))
     onExit()

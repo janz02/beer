@@ -12,7 +12,8 @@ import categoryListReducer from 'features/coupon-category/categoryList/categoryL
 import categoryEditorReducer from 'features/coupon-category/categoryEditor/categoryEditorSlice'
 import partnerReducer from 'features/partner/partnerSlice'
 import profileReducer from 'features/profile/profileSlice'
-import sitesReducer from 'features/sites/siteSlice'
+import siteListReducer from 'features/sites/siteList/siteListSlice'
+import siteEditorReducer from 'features/sites/siteEditor/siteEditorSlice'
 
 export const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -27,7 +28,8 @@ export const rootReducer = combineReducers({
   notification: notificationReducer,
   partner: partnerReducer,
   profile: profileReducer,
-  sites: sitesReducer
+  siteList: siteListReducer,
+  siteEditor: siteEditorReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

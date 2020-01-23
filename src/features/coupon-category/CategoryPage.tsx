@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import './category.scss'
 import { CategoryList } from './categoryList/CategoryList'
-import { useIsMobile } from 'hooks'
 import { CategoryEditor, CategoryEditorParams } from './categoryEditor/CategoryEditor'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { getCategories } from './categoryList/categoryListSlice'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { ResponsivePage } from 'components/responsive/ResponsivePage'
 
 export const CategoryPage: React.FC = () => {
-  const isMobile = useIsMobile()
   const dispatch = useDispatch()
 
   const [firstLoad, setFirstLoad] = useState(true)
@@ -44,7 +42,7 @@ export const CategoryPage: React.FC = () => {
   }, [selectedId, openEditor, dispatch, firstLoad])
 
   return (
-    <div className={`category-page ${isMobile ? 'category-page--mobile' : ''}`}>
+    <ResponsivePage>
       <ResponsiveCard>
         <CategoryList onOpenEditor={openEditor} />
       </ResponsiveCard>
@@ -56,6 +54,6 @@ export const CategoryPage: React.FC = () => {
           setEditorParams({ visible: false })
         }}
       />
-    </div>
+    </ResponsivePage>
   )
 }

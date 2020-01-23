@@ -3,19 +3,18 @@ import './ResponsiveCard.scss'
 import { useIsMobile } from 'hooks'
 import { Card } from 'antd'
 
-interface ResponsiveCardProps {
-  headerTitle?: string
-  headerOptions?: FC
-}
-
-export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
+export const ResponsiveCard: FC = props => {
   const { children } = props
 
   const isMobile = useIsMobile()
 
   return (
-    <Card className={`responsive-card ${isMobile ? 'responsive-card--mobile' : ''}`}>
-      {children}
-    </Card>
+    <div
+      className={`responsive-card-container ${isMobile ? 'responsive-card-container--mobile' : ''}`}
+    >
+      <Card className={`responsive-card ${isMobile ? 'responsive-card--mobile' : ''}`}>
+        {children}
+      </Card>
+    </div>
   )
 }

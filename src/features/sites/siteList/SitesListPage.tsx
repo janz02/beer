@@ -1,32 +1,33 @@
 import React, { FC, useEffect, useMemo, useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useIsMobile } from 'hooks'
-import '../sites.scss'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSites } from '../siteSlice'
+import { getSites } from './siteListSlice'
 import { useTranslation } from 'react-i18next'
-import { Button, Tooltip } from 'antd'
+import { Button } from 'antd'
 import { TablePaginationConfig } from 'antd/lib/table/Table'
 import { basePaginationConfig, projectPage } from 'models/pagination'
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { SiteDeletePopup } from './SiteDeletePopup'
+import { history } from 'router/router'
+import { CrudButtons } from 'components/buttons/CrudButtons'
+import { ResponsivePage } from 'components/responsive/ResponsivePage'
 
-export const SitesPage: FC = () => {
+export const SitesListPage: FC = () => {
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const sites = useSelector((state: RootState) => state.sites.sites)
-  const pagination = useSelector((state: RootState) => state.sites.pagination)
-  const error = useSelector((state: RootState) => state.sites.errorList)
+  const sites = useSelector((state: RootState) => state.siteList.sites)
+  const pagination = useSelector((state: RootState) => state.siteList.pagination)
+  const error = useSelector((state: RootState) => state.siteList.errorList)
 
   const [siteToDelete, setSiteToDelete] = useState<{
-    site: Site
-    popupVisible: boolean
-  }>()
+    site?: Site
+    popupVisible?: boolean
+  } | null>()
 
   useEffect(() => {
     dispatch(getSites())
@@ -49,31 +50,19 @@ export const SitesPage: FC = () => {
       {
         title: t('common.actions'),
         key: 'actions',
-        className: 'category-list__col--action',
         colSpan: 1,
         render(value: unknown, record: Site) {
           return (
             <>
-              <Tooltip mouseEnterDelay={0.5} placement="topRight" title={t('common.edit')}>
-                <Button onClick={() => {}}>
-                  <EditOutlined />
-                </Button>
-              </Tooltip>
-              <Tooltip mouseEnterDelay={0.5} placement="topRight" title={t('common.delete')}>
-                <Button
-                  danger
-                  onClick={() => {
-                    console.log('DDLe')
-
-                    setSiteToDelete({
-                      site: record,
-                      popupVisible: true
-                    })
-                  }}
-                >
-                  <DeleteOutlined />
-                </Button>
-              </Tooltip>
+              <CrudButtons
+                onEdit={() => history.push(`/sites/editor/${record.id}`)}
+                onDelete={() => {
+                  setSiteToDelete({
+                    site: record,
+                    popupVisible: true
+                  })
+                }}
+              />
             </>
           )
         }
@@ -84,11 +73,11 @@ export const SitesPage: FC = () => {
 
   const paginationConfig = useMemo(
     (): TablePaginationConfig => ({
-      ...basePaginationConfig(pagination!, isMobile, !error),
+      ...basePaginationConfig(isMobile, !!error, pagination),
       onShowSizeChange: (current, size) => {
-        dispatch(getSites({ page: projectPage(size, pagination!), pageSize: size }))
+        dispatch(getSites({ page: projectPage(size, pagination), pageSize: size }))
       },
-      onChange: (page, c) => {
+      onChange: page => {
         dispatch(getSites({ page }))
       }
     }),
@@ -96,14 +85,14 @@ export const SitesPage: FC = () => {
   )
 
   const headerOptions = (): JSX.Element => (
-    <Button type="primary" onClick={() => {}}>
+    <Button type="primary" onClick={() => history.push(`/sites/editor`)}>
       {t('common.create')}
     </Button>
   )
 
   return (
     <>
-      <div className={`sites-page ${isMobile ? 'category-page--mobile' : ''}`}>
+      <ResponsivePage>
         <ResponsiveCard>
           <ResponsiveTable
             headerTitle={t('sites.list-title')}
@@ -116,10 +105,11 @@ export const SitesPage: FC = () => {
             error={error}
           />
         </ResponsiveCard>
-      </div>
+      </ResponsivePage>
+
       <SiteDeletePopup
-        afterClose={() => setSiteToDelete(undefined)}
-        onExit={() => setSiteToDelete({ ...siteToDelete!, popupVisible: false })}
+        afterClose={() => setSiteToDelete(null)}
+        onExit={() => setSiteToDelete({ ...siteToDelete, popupVisible: false })}
         site={siteToDelete?.site}
         visible={!!siteToDelete?.popupVisible}
       />

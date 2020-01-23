@@ -1,5 +1,8 @@
 import { TablePaginationConfig } from 'antd/lib/table/Table'
 
+const showTotalText = (total: number, range: number[]): string =>
+  `${range[1] - range[0] + +!!range[1]} / ${total}`
+
 export interface Pagination {
   page?: number
   from?: number
@@ -38,16 +41,14 @@ export const recalculatePagination = (oldPagination?: Pagination): number => {
   return page
 }
 
-const showTotalText = (total: number, range: number[]): string =>
-  `${range[1] - range[0] + +!!range[1]} / ${total}`
-
 /**
- * When the page size is changed, this will keep the previous top element on the page.
+ * When the page size is changed, this will keep the previous top element on the new (resized) page.
  * @param newSize
  * @param pagination
  */
-export const projectPage = (newSize: number, pagination: Pagination): number =>
-  Math.ceil(pagination.from! / newSize)
+export const projectPage = (newSize: number, pagination?: Pagination): number => {
+  return typeof pagination?.from === 'number' ? Math.ceil(pagination.from / newSize) : 1
+}
 
 /**
  * The common pagination config.
@@ -56,15 +57,15 @@ export const projectPage = (newSize: number, pagination: Pagination): number =>
  * @param tableHasError
  */
 export const basePaginationConfig = (
-  pagination: Pagination,
   isMobile: boolean,
-  tableHasError: boolean
+  tableHasError: boolean,
+  pagination?: Pagination
 ): TablePaginationConfig => ({
   showTotal: showTotalText,
+  pageSize: pagination?.pageSize ?? 10,
+  current: pagination?.page ?? 1,
+  total: pagination?.size ?? 0,
   simple: isMobile,
-  pageSize: pagination?.pageSize,
-  total: pagination?.size,
-  current: pagination?.page,
   pageSizeOptions: ['5', '10', '25', '50'],
   showSizeChanger: !tableHasError
 })

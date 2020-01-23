@@ -14,7 +14,7 @@ import { CategoryPage } from 'features/coupon-category/CategoryPage'
 import { ErrorPage } from '../components/error/ErrorPage'
 import { PartnerEditorPage } from 'features/partner/PartnerEditorPage'
 import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
-import { SitesPage } from 'features/sites/siteList/SitesPage'
+import { SitesListPage } from 'features/sites/siteList/SitesListPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 
 const Routes = (): JSX.Element => (
@@ -31,8 +31,9 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/coupons/:id/:editing" component={CouponEditorPage} />
     <PrivateRoute exact path="/partner" component={PartnerEditorPage} />
     <PrivateRoute exact path="/profile" component={ProfileEditorPage} />
-    <PrivateRoute exact path="/sites" component={SitesPage} />
-    <PrivateRoute exact path="/sites/:id" component={SiteEditorPage} />
+    <PrivateRoute exact path="/sites" component={SitesListPage} />
+    <PrivateRoute exact path="/sites/editor/" component={SiteEditorPage} />
+    <PrivateRoute exact path="/sites/editor/:id" component={SiteEditorPage} />
     <Route path="*" render={() => <Redirect to="/" />} />
   </Switch>
 )

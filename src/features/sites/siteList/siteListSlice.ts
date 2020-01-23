@@ -5,63 +5,59 @@ import { ListCategoriesRequest } from 'api/swagger'
 import { Pagination, calculatePagination, recalculatePagination } from 'models/pagination'
 import { Site } from 'models/site'
 
-interface SiteState {
+interface SiteListState {
   sites: Site[]
   pagination?: Pagination
-  loadingList: boolean
-  loadingEditor: boolean
+  loading: boolean
   errorList: string
-  errorEditor: string
   errorDeletion: string
 }
 
-const initialState: SiteState = {
+const initialState: SiteListState = {
   sites: [],
   pagination: {
     pageSize: 10
   },
-  loadingList: false,
-  loadingEditor: false,
+  loading: false,
   errorList: '',
-  errorEditor: '',
   errorDeletion: ''
 }
 
-const siteSlice = createSlice({
-  name: '@sites',
+const siteListSlice = createSlice({
+  name: '@site-list',
   initialState,
   reducers: {
     getSitesRequest(state) {
-      state.loadingList = true
+      state.loading = true
     },
     getSitesSuccess(state, action: PayloadAction<{ sites: Site[]; pagination: Pagination }>) {
       state.sites = action.payload.sites
       state.pagination = action.payload.pagination
-      state.loadingList = false
+      state.loading = false
       state.errorList = ''
     },
     getSitesFail(state, action: PayloadAction<string>) {
-      state.loadingList = false
+      state.loading = false
       state.errorList = action.payload
     },
     deleteSiteRequest(state) {
-      state.loadingList = true
+      state.loading = true
     },
     deleteSiteSuccess(state) {
-      state.loadingList = false
+      state.loading = false
       state.errorDeletion = ''
     },
     deleteSiteFail(state, action: PayloadAction<string>) {
-      state.loadingList = false
+      state.loading = false
       state.errorDeletion = action.payload
     }
   }
 })
 
-const { getSitesRequest, getSitesSuccess, getSitesFail } = siteSlice.actions
-const { deleteSiteRequest, deleteSiteSuccess, deleteSiteFail } = siteSlice.actions
+const { getSitesRequest, getSitesSuccess, getSitesFail } = siteListSlice.actions
+const { deleteSiteRequest, deleteSiteSuccess, deleteSiteFail } = siteListSlice.actions
 
-export default siteSlice.reducer
+export default siteListSlice.reducer
 
 export const getSites = (params: ListCategoriesRequest = {}): AppThunk => async (
   dispatch,
@@ -104,7 +100,7 @@ export const deleteSite = (id: number, refreshList = true): AppThunk => async (
   try {
     await api.sites.deleteSites({ id })
     if (refreshList) {
-      const oldPagination = getState().sites.pagination
+      const oldPagination = getState().siteList.pagination
       const newPage = recalculatePagination(oldPagination)
       dispatch(getSites({ page: newPage }))
     }
