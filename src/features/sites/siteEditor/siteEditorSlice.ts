@@ -99,7 +99,8 @@ export const saveSite = (site: Site, id: number): AppThunk => async dispatch => 
       }
       dispatch(saveSiteSuccess())
     } else {
-      throw 'No partner id'
+      // TODO: see if is necesary after integration
+      throw Error('No partner id')
     }
   } catch (err) {
     dispatch(saveSiteFail(err.toString()))
