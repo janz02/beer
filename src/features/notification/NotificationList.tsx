@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react'
 import './notification.scss'
 import InfiniteScroll from 'react-infinite-scroller'
 import { List, Empty, Button } from 'antd'
 import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'hooks/react-redux-hooks';
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { getNotifications } from './notificationSlice'
 import { useTranslation } from 'react-i18next'
 import { ListItem } from './NotificationItem'
@@ -22,7 +22,7 @@ export const NotificationList: FC<NotificationListProps> = props => {
   const hasMoreNotifications = useSelector((state: RootState) => state.notification.hasMore)
   const loading = useSelector((state: RootState) => state.notification.loading)
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getNotifications())
   }, [dispatch])
 

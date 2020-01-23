@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CouponEditorFormProps, CouponEditorForm } from '../components/CouponEditorForm'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { useParams } from 'react-router-dom'
@@ -12,7 +12,7 @@ export const CouponEditorPage: React.FC = () => {
 
   const { coupon, loading } = useSelector((state: RootState) => state.couponEditor)
 
-  React.useEffect(() => {
+  useEffect(() => {
     id && dispatch(getCoupons(+id))
   }, [id, dispatch])
 

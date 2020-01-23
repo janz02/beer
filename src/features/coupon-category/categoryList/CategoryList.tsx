@@ -1,6 +1,6 @@
 import React, { FC, useState, useMemo } from 'react'
 import '../category.scss'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { Table, Button, Tooltip } from 'antd'
 import { useTranslation } from 'react-i18next'

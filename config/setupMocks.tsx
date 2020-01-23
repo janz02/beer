@@ -14,7 +14,7 @@ import React from 'react'
  * @param children The Component which it needs to be rendered
  * @param store An object, that represents the Redux store. Just simply pass an object, that the useSelector will query like: {auth: { loggedIn: true }}
  */
-export const setupMocks = (store: {} = {}): void => {
+export const setupStore = (store: {} = {}): void => {
   const mockStore = configureStore([thunk])(store)
 
   const useEffect = jest.spyOn(React, 'useEffect')

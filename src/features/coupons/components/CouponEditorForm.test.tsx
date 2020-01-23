@@ -2,7 +2,7 @@
 import React from 'react'
 import { CouponEditorForm } from './CouponEditorForm'
 import { Card } from 'antd'
-import { setupMocks, setupUseParams } from '../../../../config/setupMocks'
+import { setupStore, setupUseParams } from '../../../../config/setupMocks'
 
 import { shallow, mount } from 'enzyme'
 
@@ -17,11 +17,11 @@ describe('CouponEditorForm tests', () => {
       couponIsNew: false
     }
 
-    setupMocks({ coupons: { categories: [] } })
+    setupStore({ coupons: { categories: [] } })
     setupUseParams({ editing: false })
 
     // Act
-    const wrapper = mount(<CouponEditorForm {...props} />)
+    const wrapper = shallow(<CouponEditorForm {...props} />)
 
     // Assert
     const sut = wrapper.find(CouponEditorForm)

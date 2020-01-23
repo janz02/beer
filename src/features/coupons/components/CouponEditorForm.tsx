@@ -45,7 +45,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const [form] = Form.useForm()
   const [commentForm] = Form.useForm()
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(listCategories())
   }, [dispatch])
 
