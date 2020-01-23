@@ -21,11 +21,9 @@ describe('CouponEditorForm tests', () => {
     setupUseParams({ editing: false })
 
     // Act
-    const wrapper = shallow(<CouponEditorForm {...props} />)
+    const sut = mount(<CouponEditorForm {...props} />)
 
     // Assert
-    const sut = wrapper.find(CouponEditorForm)
-
     expect(sut.find(Card)).toBeTruthy()
     expect(sut.props().couponIsNew).toEqual(false)
   })
