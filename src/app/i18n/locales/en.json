@@ -7,7 +7,9 @@
     "save": "Save",
     "delete": "Delete",
     "actions": "Actions",
-    "data": "Data"
+    "data": "Data",
+    "discard": "Discard",
+    "go-back": "Go back"
   },
   "menu": {
     "dashboard": "Dashboard",
@@ -160,6 +162,23 @@
       "address-required": "Address field is required",
       "company-register-number-required": "Company register number field is required",
       "vat-number-required": "VAT number field is required"
+    }
+  },
+  "site": {
+    "list-title": "Sites",
+    "editor-title-create": "Create new site",
+    "editor-title-edit": "Update site",
+    "field": {
+      "name": "Site name",
+      "address": "Address"
+    },
+    "error": {
+      "name-required": "Site name field is required!",
+      "address-required": "Address field is required!"
+    },
+    "delete-popup": {
+      "title": "Are you sure?",
+      "text": "You are about to delete permanetly the following site:"
     }
   },
   "error-page": {

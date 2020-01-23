@@ -36,6 +36,7 @@ export const SiteDeletePopup: FC<SiteDeletePopupProps> = props => {
       onOk={onDelete}
       onCancel={onExit}
       okText={t('common.delete')}
+      okButtonProps={{ danger: true }}
       afterClose={() => {
         afterClose()
         setError('')

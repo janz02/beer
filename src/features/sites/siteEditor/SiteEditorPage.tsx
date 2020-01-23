@@ -40,6 +40,7 @@ export const SiteEditorPage: FC = () => {
           history.push('/sites/')
         }}
         site={site}
+        id={+id!}
       />
     </div>
   )

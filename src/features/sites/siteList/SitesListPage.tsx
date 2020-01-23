@@ -95,7 +95,7 @@ export const SitesListPage: FC = () => {
       <ResponsivePage>
         <ResponsiveCard>
           <ResponsiveTable
-            headerTitle={t('sites.list-title')}
+            headerTitle={t('site.list-title')}
             headerOptions={headerOptions}
             tableProps={{
               columns: columnsConfig,

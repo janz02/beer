@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useRef } from 'react'
 import { Form, Input, Button, Card, Modal } from 'antd'
 import { useIsMobile } from 'hooks'
 import { useTranslation } from 'react-i18next'
@@ -10,10 +10,11 @@ export interface SiteEditorFormProps {
   onExit: () => void
   loading: boolean
   site?: Site
+  id?: number | undefined
 }
 
 export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
-  const { onSave, loading, site, onExit } = props
+  const { onSave, loading, site, onExit, id } = props
 
   const [form] = Form.useForm()
 
@@ -31,9 +32,16 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
         }
       : null
 
+  // TODO: revert to this after antd upgrade
+  // useEffect(() => {
+  //   form.setFieldsValue({ ...site })
+  // }, [site, form])
+  const ref = useRef(form)
   useEffect(() => {
-    form.setFieldsValue({ ...site })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    ref.current = form
+  }, [form])
+  useEffect(() => {
+    ref.current.setFieldsValue({ ...site })
   }, [site])
 
   const onSubmit = (values: Site): void => {
@@ -52,7 +60,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
   const header = (): JSX.Element => (
     <div>
       <BackButton onClick={onLeave} primary={!submitable} />
-      {t('sites.editor-title')}
+      {t(`site.editor-title-${id ? 'edit' : 'create'}`)}
     </div>
   )
 
@@ -73,8 +81,8 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
         >
           <Form.Item
             name="name"
-            label={t('sites.field.name')}
-            rules={[{ required: true, message: t('partner.error.name-required') }]}
+            label={t('site.field.name')}
+            rules={[{ required: true, message: t('site.error.name-required') }]}
             {...formItemLayout}
           >
             <Input />
@@ -82,8 +90,8 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
 
           <Form.Item
             name="address"
-            label={t('sites.field.address')}
-            rules={[{ required: true, message: t('partner.error.address-required') }]}
+            label={t('site.field.address')}
+            rules={[{ required: true, message: t('site.error.address-required') }]}
             {...formItemLayout}
           >
             <Input />
