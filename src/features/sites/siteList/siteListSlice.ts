@@ -63,9 +63,6 @@ export const getSites = (params: ListSitesRequest = {}): AppThunk => async (disp
   dispatch(getSitesRequest())
   try {
     const oldPagination = getState().siteList.pagination
-
-    console.log({ params, oldPagination })
-
     const pagination = calculatePagination(
       { pageSize: params.pageSize, page: params.page },
       oldPagination
