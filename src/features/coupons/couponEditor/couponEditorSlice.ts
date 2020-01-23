@@ -94,13 +94,19 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
+    const tags = await api.tags.listTags({})
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const tagId = (tags && tags.result && tags.result[0].id!) || 0
+
     await api.coupons.updateCoupon({
       id: coupon.id!,
       couponDto: {
         ...coupon,
         startDate: coupon.startDate && coupon.startDate.toDate(),
         endDate: coupon.endDate && coupon.endDate.toDate(),
-        expireDate: coupon.expireDate && coupon.expireDate.toDate()
+        expireDate: coupon.expireDate && coupon.expireDate.toDate(),
+        // TODO fix this with tags
+        tags: [tagId]
       }
     })
 
