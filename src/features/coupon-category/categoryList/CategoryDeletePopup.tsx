@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Modal } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { deleteCategory } from './categoryListSlice'
 import { Category } from 'models/category'
 import { useTranslation } from 'react-i18next'

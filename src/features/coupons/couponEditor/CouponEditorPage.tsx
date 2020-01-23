@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
-import {
-  CouponEditorForm,
-  CouponEditorFormProps
-} from 'features/coupons/components/CouponEditorForm'
+import { CouponEditorFormProps, CouponEditorForm } from '../components/CouponEditorForm'
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { useParams } from 'react-router-dom'
 import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'react-redux'
 import { getCoupons, updateCoupon } from './couponEditorSlice'
 import { Coupon } from 'models/coupon'
 

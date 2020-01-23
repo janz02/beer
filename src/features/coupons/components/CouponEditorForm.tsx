@@ -13,10 +13,9 @@ import {
   Col,
   Timeline
 } from 'antd'
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import { useIsMobile } from 'hooks'
 import { Coupon } from 'models/coupon'
 import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
@@ -24,6 +23,7 @@ import { listCategories } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteOutlined } from '@ant-design/icons'
 import { updateCouponStatus, deleteCouponComments } from '../couponEditor/couponEditorSlice'
+import { useParams } from 'hooks/react-router-dom-hooks'
 
 export interface CouponEditorFormProps {
   handleCouponSave: (values: any) => void

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { getPartners, updatePartners } from './partnerSlice'
 import { PartnerEditorFormProps, PartnerEditorForm } from './PartnerEditorForm'
 import { Partner } from 'models/partner'

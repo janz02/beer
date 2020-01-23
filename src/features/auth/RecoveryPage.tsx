@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Button, Alert } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
 import { recoverPassword } from './authSlice'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
