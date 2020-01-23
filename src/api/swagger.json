@@ -1730,6 +1730,10 @@
           "phone": {
             "type": "integer",
             "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
