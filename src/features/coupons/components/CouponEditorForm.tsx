@@ -18,22 +18,22 @@ import * as Router from 'react-router-dom'
 import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
 import { useIsMobile } from 'hooks'
-import { Coupon, CouponState } from 'models/coupon'
-import { CouponRank, CouponType } from 'api/swagger/models'
+import { Coupon } from 'models/coupon'
+import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
 import { listCategories } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteOutlined } from '@ant-design/icons'
+import { updateCouponStatus, deleteCouponComments } from '../couponEditor/couponEditorSlice'
 
 export interface CouponEditorFormProps {
   handleCouponSave: (values: any) => void
-  handleCouponStateAction?: (couponId: number, couponState: CouponState, comment: string) => void
   loading: boolean
   couponIsNew: boolean
   coupon?: Coupon
 }
 
 export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
-  const { handleCouponSave, handleCouponStateAction, loading, couponIsNew, coupon } = props
+  const { handleCouponSave, loading, couponIsNew, coupon } = props
 
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -50,7 +50,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }, [dispatch])
 
   const displayEditor =
-    couponIsNew || (formEditing && coupon && coupon.couponState !== CouponState.Archived)
+    couponIsNew || (formEditing && coupon && coupon.state !== CouponState.Archived)
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =
@@ -78,14 +78,19 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     })
   }, [coupon, form])
 
+  useEffect(() => {
+    commentForm.setFieldsValue({
+      comment: ''
+    })
+  }, [coupon, commentForm])
+
   const actionButton = (couponState: CouponState, buttonText: string): JSX.Element => (
     <Popconfirm
       title={t('coupon-create.state-action-confirm-message')}
       onConfirm={() => {
         coupon &&
           coupon.id &&
-          handleCouponStateAction &&
-          handleCouponStateAction(coupon.id, couponState, commentForm.getFieldsValue().comment)
+          dispatch(updateCouponStatus(coupon.id, couponState, commentForm.getFieldsValue().comment))
       }}
       okText={t('common.ok')}
       cancelText={t('common.cancel')}
@@ -95,7 +100,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   )
   const couponActions = (): JSX.Element => {
     let statusButtons = <></>
-    switch (coupon?.couponState) {
+    switch (coupon?.state) {
       case CouponState.Created:
         statusButtons = (
           <>
@@ -281,12 +286,21 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             {coupon &&
               coupon.comments &&
               coupon.comments.map(x => (
-                <Timeline.Item key={x}>
-                  {x}
+                <Timeline.Item key={x.id}>
+                  {x.comment}
                   &nbsp;
-                  <Button danger size="small">
-                    <DeleteOutlined />
-                  </Button>
+                  <Popconfirm
+                    title={t('coupon-editor.comment-delete-confirm-message')}
+                    onConfirm={() => {
+                      coupon && coupon.id && x.id && dispatch(deleteCouponComments(coupon.id, x.id))
+                    }}
+                    okText={t('common.ok')}
+                    cancelText={t('common.cancel')}
+                  >
+                    <Button danger size="small">
+                      <DeleteOutlined />
+                    </Button>
+                  </Popconfirm>
                 </Timeline.Item>
               ))}
           </Timeline>
