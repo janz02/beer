@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { CategoryList } from './categoryList/CategoryList'
 import { CategoryEditor, CategoryEditorParams } from './categoryEditor/CategoryEditor'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { getCategories } from './categoryList/categoryListSlice'

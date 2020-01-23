@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, RouteProps, Redirect } from 'react-router-dom'
 import { PrivateLayout } from 'components/layout/PrivateLayout'
 import { RootState } from 'app/rootReducer'
-import { useSelector } from 'react-redux'
+import { useSelector } from 'hooks/react-redux-hooks'
 import { hasPermission } from '../services/jwt-reader'
 import { Role } from 'models/user'
 
