@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { ListCategoriesRequest } from 'api/swagger'
+import { ListSitesRequest } from 'api/swagger'
 import { Pagination, calculatePagination, recalculatePagination } from 'models/pagination'
 import { Site } from 'models/site'
 
 interface SiteListState {
   sites: Site[]
-  pagination?: Pagination
+  pagination: Pagination
   loading: boolean
   errorList: string
   errorDeletion: string
@@ -59,18 +59,19 @@ const { deleteSiteRequest, deleteSiteSuccess, deleteSiteFail } = siteListSlice.a
 
 export default siteListSlice.reducer
 
-export const getSites = (params: ListCategoriesRequest = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const getSites = (params: ListSitesRequest = {}): AppThunk => async (dispatch, getState) => {
   dispatch(getSitesRequest())
   try {
-    const oldPagination = getState().categoryList.pagination
+    const oldPagination = getState().siteList.pagination
+
+    console.log({ params, oldPagination })
 
     const pagination = calculatePagination(
       { pageSize: params.pageSize, page: params.page },
       oldPagination
     )
+
+    // TODO: integrate partnerid when is available on jwt
     const response = await api.sites.listSites({
       pageSize: pagination.pageSize,
       page: pagination.page

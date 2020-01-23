@@ -12,21 +12,20 @@ export interface Pagination {
 }
 
 /**
- * Use the old and new paginatition
+ * Combine the old and new pagination values.
+ *
  * @param newPagination
  * @param oldPagination
  */
 export const calculatePagination = (
   newPagination: Pagination,
   oldPagination: Pagination
-): Pagination => {
-  const pageSize = newPagination?.pageSize ?? oldPagination?.pageSize ?? 10
-  const page = newPagination?.page ?? oldPagination?.page ?? 1
-  return {
-    pageSize,
-    page: Math.max(page, 1)
-  }
-}
+): Pagination => ({
+  ...oldPagination,
+  ...newPagination,
+  // page must be atleast 1 in all case
+  page: Math.max(newPagination?.page ?? oldPagination?.page ?? 1, 1)
+})
 
 /**
  * When the last item is deleted on page, the page must be reduced.

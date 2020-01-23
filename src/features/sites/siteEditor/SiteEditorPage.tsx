@@ -28,7 +28,7 @@ export const SiteEditorPage: FC = () => {
   }, [dispatch, id])
 
   const onSave = (site: Site): void => {
-    id && dispatch(saveSite(+id, { ...site }))
+    dispatch(saveSite({ ...site }, +id!))
   }
 
   return (

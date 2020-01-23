@@ -71,7 +71,7 @@ export const getSite = (id: number): AppThunk => async dispatch => {
   }
 }
 
-export const saveSite = (id: number, site: Site): AppThunk => async dispatch => {
+export const saveSite = (site: Site, id: number): AppThunk => async dispatch => {
   dispatch(saveSiteRequest())
   try {
     // Todo: integrate correct partner Id
@@ -79,7 +79,7 @@ export const saveSite = (id: number, site: Site): AppThunk => async dispatch => 
     const partnerId = partners.result?.[0]?.id
 
     if (partnerId) {
-      if (id) {
+      if (id > 0) {
         await api.sites.updateSites({
           id,
           siteDto: {
@@ -97,8 +97,10 @@ export const saveSite = (id: number, site: Site): AppThunk => async dispatch => 
         })
         newId.id && dispatch(getSite(newId.id))
       }
+      dispatch(saveSiteSuccess())
+    } else {
+      throw 'No partner id'
     }
-    dispatch(saveSiteSuccess())
   } catch (err) {
     dispatch(saveSiteFail(err.toString()))
   }
