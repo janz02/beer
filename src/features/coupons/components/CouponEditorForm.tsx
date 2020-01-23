@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './CouponEditorForm.scss'
 import {
   Form,
@@ -14,7 +14,6 @@ import {
   Timeline
 } from 'antd'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
-import * as Router from 'react-router-dom'
 import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
 import { useIsMobile } from 'hooks'
@@ -24,6 +23,7 @@ import { listCategories } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteOutlined } from '@ant-design/icons'
 import { updateCouponStatus, deleteCouponComments } from '../couponEditor/couponEditorSlice'
+import { useParams } from 'hooks/react-router-dom-hooks'
 
 export interface CouponEditorFormProps {
   handleCouponSave: (values: any) => void
@@ -40,7 +40,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const isMobile = useIsMobile()
   const { categories } = useSelector((state: RootState) => state.coupons)
   const [submitable, setSubmitable] = useState(false)
-  const { editing } = Router.useParams()
+  const { editing } = useParams()
   const [formEditing, setFormEditing] = useState(editing === 'true')
   const [form] = Form.useForm()
   const [commentForm] = Form.useForm()
@@ -70,7 +70,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     })
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     form.setFieldsValue({
       rank: CouponRank.Bronze,
       type: CouponType.FixValue,

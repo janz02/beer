@@ -2,10 +2,9 @@
 import React from 'react'
 import { CouponEditorForm } from './CouponEditorForm'
 import { Card } from 'antd'
-import * as ReactRouterDom from 'react-router-dom'
-import { setupMocks } from '../../../../config/setupMocks'
+import { setupMocks, setupUseParams } from '../../../../config/setupMocks'
 
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 describe('CouponEditorForm tests', () => {
   it('should not display button when not editing or not new', () => {
@@ -19,13 +18,10 @@ describe('CouponEditorForm tests', () => {
     }
 
     setupMocks({ coupons: { categories: [] } })
+    setupUseParams({ editing: false })
 
     // Act
-    const wrapper = shallow(
-      <ReactRouterDom.BrowserRouter>
-        <CouponEditorForm {...props} />
-      </ReactRouterDom.BrowserRouter>
-    )
+    const wrapper = mount(<CouponEditorForm {...props} />)
 
     // Assert
     const sut = wrapper.find(CouponEditorForm)

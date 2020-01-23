@@ -1,15 +1,13 @@
-// we do it in such way to be able to mock it in test
-import {
-    useSelector as originalUseSelector,
-    useDispatch as originalUseDispatch
-  } from 'react-redux';
-  
+import { useSelector as originalUseSelector, useDispatch as originalUseDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
 
-//   export function useSelector<TState, TSelected>(
-//     selector: (state: TState) => TSelected,
-//     equalityFn?: (left: TSelected, right: TSelected) => boolean
-// ): TSelected;
+// The wrapper is necessary in order to be able to Mock the useSelector and useDispatch in unit tests
 
-  export const useSelector = function<TState, TSelected>(selector: (state: TState) => TSelected) { return originalUseSelector<TState, TSelected>(selector) };
-  export const useDispatch = () => originalUseDispatch();
-  
+export const useSelector = function<TState, TSelected>(
+  selector: (state: TState) => TSelected
+): TSelected {
+  return originalUseSelector<TState, TSelected>(selector)
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useDispatch = (): Dispatch<any> => originalUseDispatch()

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import configureStore from 'redux-mock-store'
 import * as ReactReduxHooks from '../src/hooks/react-redux-hooks'
+import * as ReactRouterDomHooks from '../src/hooks/react-router-dom-hooks'
 import thunk from 'redux-thunk'
 import React from 'react'
 
@@ -22,4 +23,9 @@ export const setupMocks = (store: {} = {}): void => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   jest.spyOn(ReactReduxHooks, 'useSelector').mockImplementation(state => mockStore.getState())
   jest.spyOn(ReactReduxHooks, 'useDispatch').mockImplementation(() => mockStore.dispatch)
+}
+
+export const setupUseParams = (params: {} = {}): void => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  jest.spyOn(ReactRouterDomHooks, 'useParams').mockImplementation(() => params)
 }
