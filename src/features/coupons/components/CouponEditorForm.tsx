@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './CouponEditorForm.scss'
 import {
   Form,
@@ -70,13 +70,28 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     })
   }
 
+  // TODO: revisit this problem after upgrading andt package.
+  // https://github.com/ant-design/ant-design/issues/18983
+  // https://github.com/ant-design/ant-design/issues/20987
+  // This should work instead of the workaround below.
+  // useEffect(() => {
+  //   form.setFieldsValue({
+  //     rank: CouponRank.Bronze,
+  //     type: CouponType.FixValue,
+  //     ...coupon
+  //   })
+  // }, [coupon, form])
+  const ref = useRef(form)
   useEffect(() => {
-    form.setFieldsValue({
+    ref.current = form
+  }, [form])
+  useEffect(() => {
+    ref.current.setFieldsValue({
       rank: CouponRank.Bronze,
       type: CouponType.FixValue,
       ...coupon
     })
-  }, [coupon, form])
+  }, [coupon])
 
   useEffect(() => {
     commentForm.setFieldsValue({
