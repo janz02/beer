@@ -71,18 +71,20 @@ export const SitesListPage: FC = () => {
     [t]
   )
 
-  const paginationConfig = useMemo(
-    (): TablePaginationConfig => ({
-      ...basePaginationConfig(isMobile, !!error, pagination),
-      onShowSizeChange: (current, size) => {
-        dispatch(getSites({ page: projectPage(size, pagination), pageSize: size }))
-      },
-      onChange: page => {
-        dispatch(getSites({ page }))
-      }
-    }),
-    [dispatch, error, isMobile, pagination]
-  )
+  const paginationConfig = useMemo((): TablePaginationConfig | false => {
+    const baseConfig = basePaginationConfig(isMobile, !!error, pagination)
+    return baseConfig.total
+      ? {
+          ...baseConfig,
+          onShowSizeChange: (current, size) => {
+            dispatch(getSites({ page: projectPage(size, pagination), pageSize: size }))
+          },
+          onChange: page => {
+            dispatch(getSites({ page }))
+          }
+        }
+      : false
+  }, [dispatch, error, isMobile, pagination])
 
   const headerOptions = (): JSX.Element => (
     <Button type="primary" onClick={() => history.push(`/sites/editor`)}>
@@ -100,7 +102,7 @@ export const SitesListPage: FC = () => {
             tableProps={{
               columns: columnsConfig,
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
-              pagination: sites.length ? paginationConfig : false
+              pagination: paginationConfig
             }}
             error={error}
           />

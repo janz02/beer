@@ -68,18 +68,20 @@ export const CategoryList: FC<CategoryListProps> = props => {
     [t, onOpenEditor]
   )
 
-  const paginationConfig = useMemo(
-    (): TablePaginationConfig => ({
-      ...basePaginationConfig(isMobile, !!error, pagination),
-      onShowSizeChange: (current, size) => {
-        dispatch(getCategories({ page: projectPage(size, pagination), pageSize: size }))
-      },
-      onChange: page => {
-        dispatch(getCategories({ page }))
-      }
-    }),
-    [isMobile, pagination, error, dispatch]
-  )
+  const paginationConfig = useMemo((): TablePaginationConfig | false => {
+    const baseConfig = basePaginationConfig(isMobile, !!error, pagination)
+    return baseConfig.total
+      ? {
+          ...baseConfig,
+          onShowSizeChange: (current, size) => {
+            dispatch(getCategories({ page: projectPage(size, pagination), pageSize: size }))
+          },
+          onChange: page => {
+            dispatch(getCategories({ page }))
+          }
+        }
+      : false
+  }, [dispatch, error, isMobile, pagination])
 
   const headerOptions = (): JSX.Element => (
     <Button type="primary" onClick={() => onOpenEditor(undefined, true)}>
@@ -95,7 +97,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
         tableProps={{
           columns: columnsConfig,
           dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
-          pagination: categories.length ? paginationConfig : false
+          pagination: paginationConfig
         }}
         error={error}
       />

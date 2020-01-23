@@ -75,10 +75,8 @@ export const getCategories = (params: ListCategoriesRequest = {}): AppThunk => a
   dispatch(getCategoriesRequest())
   try {
     const oldPagination = getState().categoryList.pagination
-    const pagination = calculatePagination(
-      { pageSize: params.pageSize, page: params.page },
-      oldPagination
-    )
+    const pagination = calculatePagination(params, oldPagination)
+
     const response = await api.categories.listCategories({
       pageSize: pagination.pageSize,
       page: pagination.page

@@ -63,10 +63,7 @@ export const getSites = (params: ListSitesRequest = {}): AppThunk => async (disp
   dispatch(getSitesRequest())
   try {
     const oldPagination = getState().siteList.pagination
-    const pagination = calculatePagination(
-      { pageSize: params.pageSize, page: params.page },
-      oldPagination
-    )
+    const pagination = calculatePagination(params, oldPagination)
 
     // TODO: integrate partnerid when is available on jwt
     const response = await api.sites.listSites({
