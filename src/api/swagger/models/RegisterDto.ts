@@ -49,6 +49,12 @@ export interface RegisterDto {
      * @memberof RegisterDto
      */
     phone?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RegisterDto
+     */
+    code?: string | null;
 }
 
 export function RegisterDtoFromJSON(json: any): RegisterDto {
@@ -66,6 +72,7 @@ export function RegisterDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'partnerName': !exists(json, 'partnerName') ? undefined : json['partnerName'],
         'fullName': !exists(json, 'fullName') ? undefined : json['fullName'],
         'phone': !exists(json, 'phone') ? undefined : json['phone'],
+        'code': !exists(json, 'code') ? undefined : json['code'],
     };
 }
 
@@ -83,6 +90,7 @@ export function RegisterDtoToJSON(value?: RegisterDto | null): any {
         'partnerName': value.partnerName,
         'fullName': value.fullName,
         'phone': value.phone,
+        'code': value.code,
     };
 }
 
