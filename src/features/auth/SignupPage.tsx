@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Input, Button, Alert, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import {
   UserOutlined,
   LockOutlined,

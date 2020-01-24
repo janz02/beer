@@ -1,7 +1,7 @@
 import React from 'react'
-import { Form, Input, Button, Alert, Checkbox } from 'antd'
+import { Form, Input, Button, Alert } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { RootState } from 'app/rootReducer'
 import { login } from './authSlice'
@@ -35,15 +35,15 @@ export const LoginPage: React.FC = () => {
         >
           <Input.Password prefix={<LockOutlined />} placeholder={t('auth.field.password')} />
         </Form.Item>
-
-        <div className="login__options">
+        {/* TODO: was commented out because there is BE support yet -> see NRMRTDKPR-125 */}
+        {/* <div className="login__options">
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>{t('auth.field.remember-me')}</Checkbox>
           </Form.Item>
           <Button type="link" onClick={() => history.push('/auth/recovery')}>
             {t('auth.forgot-password')}
           </Button>
-        </div>
+        </div> */}
         <Button loading={loading} block size="large" type="primary" htmlType="submit">
           {t('auth.login')}
         </Button>
