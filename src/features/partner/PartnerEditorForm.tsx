@@ -117,7 +117,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
           rules={[{ required: true, message: t('partner.error.vat-number-required') }]}
           {...formItemLayout}
         >
-          <InputNumber min={1} />
+          <Input />
         </Form.Item>
 
         <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>

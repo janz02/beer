@@ -5,5 +5,5 @@ export interface Partner {
   majorPartner?: boolean
   address?: string
   companyRegisterNumber?: string
-  vatNumber?: number
+  vatNumber?: string
 }

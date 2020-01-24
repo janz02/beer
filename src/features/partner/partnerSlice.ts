@@ -59,7 +59,7 @@ export const getPartners = (): AppThunk => async dispatch => {
     majorPartner: true,
     address: 'Example address',
     companyRegisterNumber: '321-3123-31313',
-    vatNumber: 2132132131
+    vatNumber: '2132132131'
   }
   dispatch(getPartnersSuccess(partner))
 }
