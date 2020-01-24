@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Form, Input, Button, Card, InputNumber, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useIsMobile } from 'hooks'
@@ -33,11 +33,24 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
     })
   }
 
+  // TODO: revisit this problem after upgrading andt package.
+  // https://github.com/ant-design/ant-design/issues/18983
+  // https://github.com/ant-design/ant-design/issues/20987
+  // This should work instead of the workaround below.
+  // useEffect(() => {
+  //   form.setFieldsValue({
+  //     ...partner
+  //   })
+  // }, [form, partner])
+  const formRef = useRef(form)
   useEffect(() => {
-    form.setFieldsValue({
+    formRef.current = form
+  }, [form])
+  useEffect(() => {
+    formRef.current.setFieldsValue({
       ...partner
     })
-  }, [form, partner])
+  }, [partner])
 
   return (
     <Card className="partner-editor-form" title={t('partner.editor-title')}>

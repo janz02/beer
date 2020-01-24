@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Form, Input, Button, Card } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useIsMobile } from 'hooks'
@@ -34,11 +34,24 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
     })
   }
 
+  // TODO: revisit this problem after upgrading andt package.
+  // https://github.com/ant-design/ant-design/issues/18983
+  // https://github.com/ant-design/ant-design/issues/20987
+  // This should work instead of the workaround below.
+  // useEffect(() => {
+  //   form.setFieldsValue({
+  //     ...profile
+  //   })
+  // }, [form, profile])
+  const formRef = useRef(form)
   useEffect(() => {
-    form.setFieldsValue({
+    formRef.current = form
+  }, [form])
+  useEffect(() => {
+    formRef.current.setFieldsValue({
       ...profile
     })
-  }, [form, profile])
+  }, [profile])
 
   return (
     <Card className="profile-editor-form" title={t('profile.editor-title')}>

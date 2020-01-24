@@ -81,23 +81,33 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   //     ...coupon
   //   })
   // }, [coupon, form])
-  const ref = useRef(form)
+  // useEffect(() => {
+  //   commentForm.setFieldsValue({
+  //     comment: ''
+  //   })
+  // }, [coupon, commentForm])
+
+  const formRef = useRef(form)
   useEffect(() => {
-    ref.current = form
+    formRef.current = form
   }, [form])
   useEffect(() => {
-    ref.current.setFieldsValue({
+    formRef.current.setFieldsValue({
       rank: CouponRank.Bronze,
       type: CouponType.FixValue,
       ...coupon
     })
   }, [coupon])
 
+  const commentFormRef = useRef(commentForm)
   useEffect(() => {
-    commentForm.setFieldsValue({
+    commentFormRef.current = commentForm
+  }, [commentForm])
+  useEffect(() => {
+    commentFormRef.current.setFieldsValue({
       comment: ''
     })
-  }, [coupon, commentForm])
+  }, [coupon])
 
   const actionButton = (couponState: CouponState, buttonText: string): JSX.Element => (
     <Popconfirm
