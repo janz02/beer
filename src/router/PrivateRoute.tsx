@@ -14,8 +14,6 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = props => {
   const { roles } = props
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn)
 
-  console.log(hasPermission([Role.PARTNER]))
-
   if (!loggedIn) {
     return <Redirect to={{ pathname: '/auth' }} />
   }

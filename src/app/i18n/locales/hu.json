@@ -7,11 +7,14 @@
     "save": "Mentés",
     "delete": "Törlés",
     "actions": "Műveletek",
-    "data": "Adatok"
+    "data": "Adatok",
+    "discard": "Elvetés",
+    "go-back": "Vissza"
   },
   "menu": {
     "dashboard": "Irányítópult",
     "coupons": "Kuponok",
+    "sites": "Telephelyek",
     "coupon-categories": "Kategóriák",
     "partner-data": "Partner adatok"
   },
@@ -160,6 +163,23 @@
       "address-required": "Kérem adja meg a partner címét!",
       "company-register-number-required": "Kérem adja meg a partner cégjegyzék számát!",
       "vat-number-required": "Kérem adja meg a partner adószámát!"
+    }
+  },
+  "site": {
+    "list-title": "Telephelyek",
+    "editor-title-create": "Új telephely regisztrálása",
+    "editor-title-edit": "Telephely szerkeztése",
+    "field": {
+      "name": "Telephely név",
+      "address": "Cím"
+    },
+    "error": {
+      "name-required": "Kérem adja meg a telephely nevét!",
+      "address-required": "Kérem adja meg a telephely címét!"
+    },
+    "delete-popup": {
+      "title": "Biztos?",
+      "text": "A következő telephelyet véglegesen törlöm:"
     }
   },
   "error-page": {

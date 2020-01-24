@@ -1,6 +1,6 @@
 import { CouponCommentsApi } from './swagger/apis/CouponCommentsApi'
 import { Configuration } from './swagger/runtime'
-import { CouponsApi, CategoriesApi, AuthApi, TagsApi } from './swagger/apis'
+import { CouponsApi, CategoriesApi, AuthApi, SitesApi, PartnersApi, TagsApi } from './swagger/apis'
 import { notification } from 'antd'
 import i18n from 'app/i18n'
 
@@ -40,5 +40,7 @@ export const api = {
   tags: new TagsApi(config),
   couponComments: new CouponCommentsApi(config),
   categories: new CategoriesApi(config),
-  auth: new AuthApi(config)
+  auth: new AuthApi(config),
+  sites: new SitesApi(config),
+  partner: new PartnersApi(config)
 }

@@ -1,0 +1,40 @@
+.responsive-card-container {
+  height: inherit;
+  padding: 2rem;
+
+  &--mobile {
+    padding: 0;
+  }
+}
+
+.responsive-card {
+  max-width: 650px;
+  height: inherit;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
+
+  .ant-card-body {
+    // for making the table responsive
+    height: inherit;
+    padding: 0;
+
+    & > * {
+      height: inherit;
+
+      & > * {
+        height: inherit;
+
+        & > .ant-spin-container {
+          height: inherit;
+        }
+      }
+    }
+  }
+
+  &--mobile {
+    border-radius: unset;
+    box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
+  }
+}
