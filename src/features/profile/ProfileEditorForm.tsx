@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Input, Button, Card } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useIsMobile } from 'hooks'
+import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Profile } from 'models/profile'
 import { MailOutlined } from '@ant-design/icons'
 
@@ -18,6 +18,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   const isMobile = useIsMobile()
   const [submitable, setSubmitable] = useState(false)
   const [form] = Form.useForm()
+  const rule = useCommonFormRules()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =
@@ -57,7 +58,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           name="name"
           label={t('profile.field.name')}
-          rules={[{ required: true, message: t('profile.error.name-required') }]}
+          rules={[rule.required('profile.error.name-required')]}
           {...formItemLayout}
         >
           <Input />
@@ -66,7 +67,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           name="email"
           label={t('profile.field.email')}
-          rules={[{ required: true, type: 'email', message: t('profile.error.email-required') }]}
+          rules={[rule.required('profile.error.email-required', { type: 'email' })]}
           {...formItemLayout}
         >
           <Input prefix={<MailOutlined />} />
@@ -75,7 +76,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           name="phone"
           label={t('profile.field.phone')}
-          rules={[{ required: true, message: t('profile.error.phone-required') }]}
+          rules={[rule.required('profile.error.phone-required')]}
           {...formItemLayout}
         >
           <Input />

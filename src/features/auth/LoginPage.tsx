@@ -7,13 +7,14 @@ import { RootState } from 'app/rootReducer'
 import { login } from './authSlice'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
+import { useCommonFormRules } from 'hooks/useCommonFormRules'
 
 export const LoginPage: React.FC = () => {
-  const { loadingLogin: loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
-
   const dispatch = useDispatch()
-
   const { t } = useTranslation()
+  const rule = useCommonFormRules()
+
+  const { loadingLogin: loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
 
   return (
     <AuthLayout className="login" title={t(`auth.login`)}>
@@ -23,16 +24,10 @@ export const LoginPage: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={values => dispatch(login(values))}
       >
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: t('auth.error.username-required') }]}
-        >
+        <Form.Item name="username" rules={[rule.required(t('auth.error.username-required'))]}>
           <Input prefix={<UserOutlined />} placeholder={t('auth.field.username')} />
         </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: t('auth.error.password-required') }]}
-        >
+        <Form.Item name="password" rules={[rule.required(t('auth.error.password-required'))]}>
           <Input.Password prefix={<LockOutlined />} placeholder={t('auth.field.password')} />
         </Form.Item>
         {/* TODO: was commented out because there is BE support yet -> see NRMRTDKPR-125 */}

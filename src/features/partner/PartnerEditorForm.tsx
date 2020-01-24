@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Input, Button, Card, InputNumber, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useIsMobile } from 'hooks'
+import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Partner } from 'models/partner'
 
 export interface PartnerEditorFormProps {
@@ -17,6 +17,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const isMobile = useIsMobile()
   const [submitable, setSubmitable] = useState(false)
   const [form] = Form.useForm()
+  const rule = useCommonFormRules()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =
@@ -56,7 +57,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="name"
           label={t('partner.field.name')}
-          rules={[{ required: true, message: t('partner.error.name-required') }]}
+          rules={[rule.required('partner.error.name-required')]}
           {...formItemLayout}
         >
           <Input />
@@ -65,7 +66,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           valuePropName="active"
           label={t('partner.field.active')}
-          rules={[{ required: true, message: t('partner.error.active-required') }]}
+          rules={[rule.required('partner.error.active-required')]}
           {...formItemLayout}
         >
           <Switch defaultChecked />
@@ -74,7 +75,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           valuePropName="majorPartner"
           label={t('partner.field.major-partner')}
-          rules={[{ required: true, message: t('partner.error.major-partner-required') }]}
+          rules={[rule.required('partner.error.major-partner-required')]}
           {...formItemLayout}
         >
           <Switch />
@@ -83,7 +84,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="address"
           label={t('partner.field.address')}
-          rules={[{ required: true, message: t('partner.error.address-required') }]}
+          rules={[rule.required('partner.error.address-required')]}
           {...formItemLayout}
         >
           <Input />
@@ -92,7 +93,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="companyRegisterNumber"
           label={t('partner.field.company-register-number')}
-          rules={[{ required: true, message: t('partner.error.company-register-number-required') }]}
+          rules={[rule.required('partner.error.company-register-number-required')]}
           {...formItemLayout}
         >
           <Input />
@@ -101,7 +102,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="vatNumber"
           label={t('partner.field.vat-number')}
-          rules={[{ required: true, message: t('partner.error.vat-number-required') }]}
+          rules={[rule.required('partner.error.vat-number-required')]}
           {...formItemLayout}
         >
           <InputNumber min={1} />

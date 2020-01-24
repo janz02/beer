@@ -9,7 +9,11 @@
     "actions": "Actions",
     "data": "Data",
     "discard": "Discard",
-    "go-back": "Go back"
+    "go-back": "Go back",
+    "rule-error": {
+      "field-required": "This information is required!",
+      "password-format": "Must have a letter, a number, a special character and contain 8 characters."
+    }
   },
   "menu": {
     "dashboard": "Dashboard",
@@ -55,7 +59,6 @@
       "company-required": "Please enter your name of your workplace!",
       "password-required": "Please enter your Password!",
       "password-inconsistent": "The two passwords are not matching.",
-      "password-format": "Must have a letter, a number, a special character and contain 8 characters.",
       "user-exists": "User already exists!",
       "invalid-email": "Invalid email!"
     }

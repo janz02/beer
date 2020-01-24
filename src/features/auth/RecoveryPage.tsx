@@ -7,11 +7,12 @@ import { recoverPassword } from './authSlice'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
+import { useCommonFormRules } from 'hooks'
 
 export const RecoveryPage: React.FC = () => {
   const { t } = useTranslation()
-
   const dispatch = useDispatch()
+  const rule = useCommonFormRules()
 
   const { loadingPasswordRecovery: loading, errorPasswordRecovery: error } = useSelector(
     (state: RootState) => state.auth
@@ -28,10 +29,7 @@ export const RecoveryPage: React.FC = () => {
         }}
       >
         <div className="instruction-text">{t('auth.text.new-password-email')}</div>
-        <Form.Item
-          name="email"
-          rules={[{ required: true, message: t('auth.error.email-required') }]}
-        >
+        <Form.Item name="email" rules={[rule.required('auth.error.email-required')]}>
           <Input prefix={<MailOutlined />} placeholder={t('auth.field.email')} />
         </Form.Item>
         <Button loading={loading} block size="large" type="primary" htmlType="submit">
