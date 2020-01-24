@@ -24,13 +24,13 @@ export const LoginPage: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={values => dispatch(login(values))}
       >
-        <Form.Item name="username" rules={[rule.required(t('auth.error.username-required'))]}>
+        <Form.Item name="username" rules={[rule.required('auth.error.username-required')]}>
           <Input prefix={<UserOutlined />} placeholder={t('auth.field.username')} />
         </Form.Item>
-        <Form.Item name="password" rules={[rule.required(t('auth.error.password-required'))]}>
+        <Form.Item name="password" rules={[rule.required('auth.error.password-required')]}>
           <Input.Password prefix={<LockOutlined />} placeholder={t('auth.field.password')} />
         </Form.Item>
-        {/* TODO: was commented out because there is BE support yet -> see NRMRTDKPR-125 */}
+        {/* TODO: was commented out because there is no BE support yet -> see NRMRTDKPR-125 */}
         {/* <div className="login__options">
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>{t('auth.field.remember-me')}</Checkbox>
