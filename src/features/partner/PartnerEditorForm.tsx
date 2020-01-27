@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Form, Input, Button, Card, InputNumber, Switch } from 'antd'
+import React, { useState, useEffect, useRef } from 'react'
+import { Form, Input, Button, Card, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Partner } from 'models/partner'
+import { useIsMobile, useCommonFormRules } from 'hooks'
 
 export interface PartnerEditorFormProps {
   handlePartnerSave: (values: any) => void
@@ -30,15 +30,32 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
 
   const handleSubmit = (values: any): void => {
     handlePartnerSave({
-      ...values
+      ...values,
+      registrationNumber: +values.registrationNumber,
+      taxNumber: +values.taxNumber
     })
   }
 
+  // TODO: revisit this problem after upgrading andt package.
+  // https://github.com/ant-design/ant-design/issues/18983
+  // https://github.com/ant-design/ant-design/issues/20987
+  // This should work instead of the workaround below.
+  // useEffect(() => {
+  //   form.setFieldsValue({
+  //     ...partner
+  //   })
+  // }, [form, partner])
+  const formRef = useRef(form)
   useEffect(() => {
-    form.setFieldsValue({
-      ...partner
+    formRef.current = form
+  }, [form])
+  useEffect(() => {
+    formRef.current.setFieldsValue({
+      ...partner,
+      registrationNumber: partner?.registrationNumber?.toString(),
+      taxNumber: partner?.taxNumber?.toString()
     })
-  }, [form, partner])
+  }, [partner])
 
   return (
     <Card className="partner-editor-form" title={t('partner.editor-title')}>
@@ -64,18 +81,8 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          valuePropName="active"
-          label={t('partner.field.active')}
-          rules={[rule.required('partner.error.active-required')]}
-          {...formItemLayout}
-        >
-          <Switch defaultChecked />
-        </Form.Item>
-
-        <Form.Item
           valuePropName="majorPartner"
           label={t('partner.field.major-partner')}
-          rules={[rule.required('partner.error.major-partner-required')]}
           {...formItemLayout}
         >
           <Switch />
@@ -91,21 +98,21 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          name="companyRegisterNumber"
-          label={t('partner.field.company-register-number')}
-          rules={[rule.required('partner.error.company-register-number-required')]}
+          name="registrationNumber"
+          label={t('partner.field.registration-number')}
+          rules={[rule.required(), rule.number()]}
           {...formItemLayout}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name="vatNumber"
-          label={t('partner.field.vat-number')}
-          rules={[rule.required('partner.error.vat-number-required')]}
+          name="taxNumber"
+          label={t('partner.field.tax-number')}
+          rules={[rule.required(), rule.number()]}
           {...formItemLayout}
         >
-          <InputNumber min={1} />
+          <Input />
         </Form.Item>
 
         <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>

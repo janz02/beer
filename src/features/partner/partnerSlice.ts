@@ -3,6 +3,7 @@ import { AppThunk } from 'app/store'
 import { Partner } from 'models/partner'
 import { message } from 'antd'
 import i18n from 'app/i18n'
+import { api } from 'api'
 
 interface PartnerState {
   partner?: Partner
@@ -49,24 +50,41 @@ export const {
 
 export default partnerSlice.reducer
 
-export const getPartners = (): AppThunk => async dispatch => {
+export const getPartners = (): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
-  const partner: Partner = {
-    id: 1,
-    name: 'Partner 1',
-    active: true,
-    majorPartner: true,
-    address: 'Example address',
-    companyRegisterNumber: '321-3123-31313',
-    vatNumber: 2132132131
+  try {
+    const id = getState().auth.userData.partnerId
+    if (id) {
+      const partner = await api.partner.getPartners({ id })
+      dispatch(
+        getPartnersSuccess({
+          ...partner
+        })
+      )
+    }
+  } catch (err) {
+    dispatch(setLoadingFailed(err.toString()))
   }
-  dispatch(getPartnersSuccess(partner))
 }
 
-export const updatePartners = (partner: Partner): AppThunk => async dispatch => {
+export const updatePartners = (partner: Partner): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
-  // TODO: integrate
-  dispatch(updatePartnerSuccess())
+  try {
+    const id = getState().auth.userData.partnerId
+    if (id) {
+      await api.partner.updatePartners({
+        id,
+        partnerDto: {
+          ...getState().partner.partner,
+          ...partner
+        }
+      })
+
+      dispatch(updatePartnerSuccess())
+    }
+  } catch (err) {
+    dispatch(setLoadingFailed(err.toString()))
+  }
 }

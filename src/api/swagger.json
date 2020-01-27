@@ -51,7 +51,7 @@
         "operationId": "listApiKey",
         "parameters": [
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -59,7 +59,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -67,14 +67,14 @@
             }
           },
           {
-            "name": "OrderBy",
+            "name": "orderBy",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "OrderByType",
+            "name": "orderByType",
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
@@ -250,14 +250,14 @@
         "operationId": "listCategories",
         "parameters": [
           {
-            "name": "Name",
+            "name": "name",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -265,7 +265,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -273,14 +273,14 @@
             }
           },
           {
-            "name": "OrderBy",
+            "name": "orderBy",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "OrderByType",
+            "name": "orderByType",
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
@@ -564,21 +564,21 @@
         "operationId": "listCoupons",
         "parameters": [
           {
-            "name": "Name",
+            "name": "name",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "Description",
+            "name": "description",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -586,7 +586,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -594,14 +594,14 @@
             }
           },
           {
-            "name": "OrderBy",
+            "name": "orderBy",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "OrderByType",
+            "name": "orderByType",
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
@@ -804,14 +804,14 @@
         "operationId": "listPartners",
         "parameters": [
           {
-            "name": "Name",
+            "name": "name",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "RegistrationNumber",
+            "name": "registrationNumber",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -819,7 +819,7 @@
             }
           },
           {
-            "name": "TaxNumber",
+            "name": "taxNumber",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -827,7 +827,7 @@
             }
           },
           {
-            "name": "BankAccount",
+            "name": "bankAccount",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -835,21 +835,21 @@
             }
           },
           {
-            "name": "ContactName",
+            "name": "contactName",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "ContactEmail",
+            "name": "contactEmail",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "ContactPhone",
+            "name": "contactPhone",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -857,7 +857,7 @@
             }
           },
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -865,7 +865,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -873,14 +873,14 @@
             }
           },
           {
-            "name": "OrderBy",
+            "name": "orderBy",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "OrderByType",
+            "name": "orderByType",
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
@@ -1050,21 +1050,21 @@
         "operationId": "listSites",
         "parameters": [
           {
-            "name": "Name",
+            "name": "name",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "Address",
+            "name": "address",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "PartnerId",
+            "name": "partnerId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1072,7 +1072,7 @@
             }
           },
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1080,7 +1080,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1088,14 +1088,14 @@
             }
           },
           {
-            "name": "OrderBy",
+            "name": "orderBy",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "OrderByType",
+            "name": "orderByType",
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
@@ -1265,14 +1265,14 @@
         "operationId": "listTagCategories",
         "parameters": [
           {
-            "name": "Name",
+            "name": "name",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1280,7 +1280,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1288,14 +1288,14 @@
             }
           },
           {
-            "name": "OrderBy",
+            "name": "orderBy",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "OrderByType",
+            "name": "orderByType",
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
@@ -1465,28 +1465,28 @@
         "operationId": "listTags",
         "parameters": [
           {
-            "name": "Value",
+            "name": "value",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "TagCategory",
+            "name": "tagCategory",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "IsActive",
+            "name": "isActive",
             "in": "query",
             "schema": {
               "type": "boolean"
             }
           },
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1494,7 +1494,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1502,14 +1502,14 @@
             }
           },
           {
-            "name": "OrderBy",
+            "name": "orderBy",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "OrderByType",
+            "name": "orderByType",
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
@@ -2082,6 +2082,14 @@
         },
         "additionalProperties": false
       },
+      "PartnerState": {
+        "enum": [
+          "Inactive",
+          "Registered",
+          "Approved"
+        ],
+        "type": "string"
+      },
       "PartnerContactDto": {
         "type": "object",
         "properties": {
@@ -2123,6 +2131,12 @@
           "bankAccount": {
             "type": "integer",
             "format": "int32"
+          },
+          "majorPartner": {
+            "type": "boolean"
+          },
+          "partnerState": {
+            "$ref": "#/components/schemas/PartnerState"
           },
           "contacts": {
             "type": "array",
@@ -2203,6 +2217,12 @@
           "bankAccount": {
             "type": "integer",
             "format": "int32"
+          },
+          "majorPartner": {
+            "type": "boolean"
+          },
+          "partnerState": {
+            "$ref": "#/components/schemas/PartnerState"
           },
           "contacts": {
             "type": "array",

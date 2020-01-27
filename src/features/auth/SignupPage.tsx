@@ -84,7 +84,7 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="phone"
           label={t('auth.field.phone')}
-          rules={[rule.required('auth.error.phone-required')]}
+          rules={[rule.required('auth.error.phone-required'), rule.number()]}
         >
           <Input type="tel" prefix={<PhoneOutlined />} />
         </Form.Item>

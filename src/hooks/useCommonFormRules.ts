@@ -33,5 +33,17 @@ export function useCommonFormRules() {
     [t]
   )
 
-  return { required, password }
+  /**
+   * Number
+   * @param message (optional) i18n key
+   */
+  const number = useCallback(
+    (message?: string): Rule => ({
+      pattern: new RegExp('^\\d+$'),
+      message: t(message ?? 'common.rule-error.field-number')
+    }),
+    [t]
+  )
+
+  return { required, password, number }
 }

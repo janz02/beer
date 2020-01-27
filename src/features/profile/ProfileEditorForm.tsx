@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Form, Input, Button, Card } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Profile } from 'models/profile'
-import { MailOutlined } from '@ant-design/icons'
+import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 
 export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
@@ -35,11 +35,25 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
     })
   }
 
+  // TODO: revisit this problem after upgrading andt package.
+  // https://github.com/ant-design/ant-design/issues/18983
+  // https://github.com/ant-design/ant-design/issues/20987
+  // This should work instead of the workaround below.
+  // useEffect(() => {
+  //   form.setFieldsValue({
+  //     ...profile
+  //   })
+  // }, [form, profile])
+  const formRef = useRef(form)
   useEffect(() => {
-    form.setFieldsValue({
-      ...profile
+    formRef.current = form
+  }, [form])
+  useEffect(() => {
+    formRef.current.setFieldsValue({
+      ...profile,
+      phone: profile?.phone?.toString()
     })
-  }, [form, profile])
+  }, [profile])
 
   return (
     <Card className="profile-editor-form" title={t('profile.editor-title')}>
@@ -76,10 +90,10 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           name="phone"
           label={t('profile.field.phone')}
-          rules={[rule.required('profile.error.phone-required')]}
+          rules={[rule.required()]}
           {...formItemLayout}
         >
-          <Input />
+          <Input type="tel" prefix={<PhoneOutlined />} />
         </Form.Item>
 
         <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>

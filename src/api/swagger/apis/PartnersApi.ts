@@ -168,47 +168,47 @@ export class PartnersApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
-            queryParameters['Name'] = requestParameters.name;
+            queryParameters['name'] = requestParameters.name;
         }
 
         if (requestParameters.registrationNumber !== undefined) {
-            queryParameters['RegistrationNumber'] = requestParameters.registrationNumber;
+            queryParameters['registrationNumber'] = requestParameters.registrationNumber;
         }
 
         if (requestParameters.taxNumber !== undefined) {
-            queryParameters['TaxNumber'] = requestParameters.taxNumber;
+            queryParameters['taxNumber'] = requestParameters.taxNumber;
         }
 
         if (requestParameters.bankAccount !== undefined) {
-            queryParameters['BankAccount'] = requestParameters.bankAccount;
+            queryParameters['bankAccount'] = requestParameters.bankAccount;
         }
 
         if (requestParameters.contactName !== undefined) {
-            queryParameters['ContactName'] = requestParameters.contactName;
+            queryParameters['contactName'] = requestParameters.contactName;
         }
 
         if (requestParameters.contactEmail !== undefined) {
-            queryParameters['ContactEmail'] = requestParameters.contactEmail;
+            queryParameters['contactEmail'] = requestParameters.contactEmail;
         }
 
         if (requestParameters.contactPhone !== undefined) {
-            queryParameters['ContactPhone'] = requestParameters.contactPhone;
+            queryParameters['contactPhone'] = requestParameters.contactPhone;
         }
 
         if (requestParameters.page !== undefined) {
-            queryParameters['Page'] = requestParameters.page;
+            queryParameters['page'] = requestParameters.page;
         }
 
         if (requestParameters.pageSize !== undefined) {
-            queryParameters['PageSize'] = requestParameters.pageSize;
+            queryParameters['pageSize'] = requestParameters.pageSize;
         }
 
         if (requestParameters.orderBy !== undefined) {
-            queryParameters['OrderBy'] = requestParameters.orderBy;
+            queryParameters['orderBy'] = requestParameters.orderBy;
         }
 
         if (requestParameters.orderByType !== undefined) {
-            queryParameters['OrderByType'] = requestParameters.orderByType;
+            queryParameters['orderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

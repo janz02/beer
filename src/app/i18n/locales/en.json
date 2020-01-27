@@ -11,8 +11,9 @@
     "discard": "Discard",
     "go-back": "Go back",
     "rule-error": {
-      "field-required": "This information is required!",
-      "password-format": "Must have a letter, a number, a special character and contain 8 characters."
+      "field-required": "This field is required!",
+      "password-format": "Must have a letter, a number, a special character and contain 8 characters.",
+      "field-number": "This filed must be a number."
     }
   },
   "menu": {
@@ -156,16 +157,14 @@
       "active": "Active",
       "major-partner": "Major partner",
       "address": "Address",
-      "company-register-number": "Company register number",
-      "vat-number": "VAT number"
+      "registration-number": "Company register number",
+      "tax-number": "VAT number"
     },
     "error": {
       "name-required": "Company name field is required",
       "active-required": "Active field is required",
       "major-partner-required": "Major partner field is required",
-      "address-required": "Address field is required",
-      "company-register-number-required": "Company register number field is required",
-      "vat-number-required": "VAT number field is required"
+      "address-required": "Address field is required"
     }
   },
   "site": {

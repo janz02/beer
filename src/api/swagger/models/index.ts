@@ -17,6 +17,7 @@ export * from './OrderByType';
 export * from './PartnerContactDto';
 export * from './PartnerContactVm';
 export * from './PartnerDto';
+export * from './PartnerState';
 export * from './PartnerVm';
 export * from './PartnerVmPaginatedResponse';
 export * from './RefreshDto';
