@@ -16,7 +16,7 @@ import {
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
-import { useIsMobile } from 'hooks'
+import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Coupon } from 'models/coupon'
 import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
 import { listCategories } from '../couponsSlice'
@@ -44,6 +44,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const [formEditing, setFormEditing] = useState(editing === 'true')
   const [form] = Form.useForm()
   const [commentForm] = Form.useForm()
+  const rule = useCommonFormRules()
 
   useEffect(() => {
     dispatch(listCategories())
@@ -170,7 +171,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             <Form.Item
               name="name"
               label={t('coupon-create.field.name')}
-              rules={[{ required: true, message: t('coupon-create.error.name-required') }]}
+              rules={[rule.required('coupon-create.error.name-required')]}
               {...formItemLayout}
             >
               <Input disabled={!displayEditor} />

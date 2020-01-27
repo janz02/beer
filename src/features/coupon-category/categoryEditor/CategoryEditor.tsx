@@ -5,7 +5,7 @@ import { getCategory, clearCategoryEditor, saveCategory } from './categoryEditor
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { FormProps, FormLayout } from 'antd/lib/form/Form'
-import { useIsMobile } from 'hooks'
+import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Category } from 'models/category'
 
 enum EditorMode {
@@ -28,11 +28,12 @@ interface CategoryEditorProps {
 export const CategoryEditor: FC<CategoryEditorProps> = props => {
   const { params, onExit, afterClose } = props
   const { visible, categoryId: id, isNew } = params
+
   const isMobile = useIsMobile()
   const [form] = Form.useForm()
-
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const rule = useCommonFormRules()
 
   const mode = isNew || id === ('undefined' as any) ? EditorMode.CREATE : EditorMode.EDIT
 
@@ -89,12 +90,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
         <Form.Item
           label={t('coupon-category.field.name')}
           name="name"
-          rules={[
-            {
-              required: true,
-              message: t('coupon-category.error.name-required')
-            }
-          ]}
+          rules={[rule.required('coupon-category.error.name-required')]}
         >
           <Input maxLength={20} />
         </Form.Item>

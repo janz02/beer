@@ -18,8 +18,7 @@
     margin-left: var(--minor-inset);
   }
 
-  &,
-  .login {
+  & .login {
     &__signup-button {
       margin-top: 0.75rem;
       float: right;
@@ -39,8 +38,7 @@
     }
   }
 
-  &,
-  .recovery {
+  & .recovery {
     &__instruction-text {
       margin-bottom: 0.5rem;
     }
@@ -53,8 +51,7 @@
     }
   }
 
-  &,
-  .signup {
+  & .signup {
     &__login-button {
       margin-top: 0.75rem;
       float: right;
@@ -62,6 +59,14 @@
 
     &__accept-terms {
       padding: 0;
+    }
+
+    // bugfix: long string overlaps eye icon in password field.
+    // TODO:  see if newer antd versions (4.0.0-beta.0) fix this issue
+    .ant-input-password {
+      .ant-input {
+        padding-right: 3rem;
+      }
     }
   }
 }
