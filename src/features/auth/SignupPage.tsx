@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Input, Button, Alert, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import {
   UserOutlined,
   LockOutlined,
@@ -13,15 +13,16 @@ import { signUp } from './authSlice'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
+import { useCommonFormRules } from 'hooks/useCommonFormRules'
 
 export const SignupPage: React.FC = () => {
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+  const rule = useCommonFormRules()
+
   const { loadingSignup: loading, errorSignup: error } = useSelector(
     (state: RootState) => state.auth
   )
-
-  const dispatch = useDispatch()
-
-  const { t } = useTranslation()
 
   return (
     <AuthLayout className="signup" title={t(`auth.signup`)}>
@@ -30,7 +31,7 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="username"
           label={t('auth.field.username')}
-          rules={[{ required: true, message: t('auth.error.username-required') }]}
+          rules={[rule.required('auth.error.username-required')]}
         >
           <Input prefix={<UserOutlined />} />
         </Form.Item>
@@ -39,13 +40,7 @@ export const SignupPage: React.FC = () => {
           name="password"
           hasFeedback
           label={t('auth.field.password')}
-          rules={[
-            { required: true, message: t('auth.error.password-required') },
-            {
-              pattern: new RegExp('^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'),
-              message: t('auth.error.password-format')
-            }
-          ]}
+          rules={[rule.required('auth.error.password-required'), rule.password()]}
         >
           <Input.Password prefix={<LockOutlined />} />
         </Form.Item>
@@ -56,7 +51,7 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.password-again')}
           dependencies={['password']}
           rules={[
-            { required: true, message: t('auth.error.password-required') },
+            rule.required('auth.error.password-required'),
             ({ getFieldValue }) => ({
               validator(rule, value) {
                 if (!value || getFieldValue('password') === value) {
@@ -73,7 +68,7 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="company"
           label={t('auth.field.company')}
-          rules={[{ required: true, message: t('auth.error.company-required') }]}
+          rules={[rule.required('auth.error.company-required')]}
         >
           <Input prefix={<HomeOutlined />} />
         </Form.Item>
@@ -81,7 +76,7 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="name"
           label={t('auth.field.name')}
-          rules={[{ required: true, message: t('auth.error.name-required') }]}
+          rules={[rule.required('auth.error.name-required')]}
         >
           <Input prefix={<UserOutlined />} />
         </Form.Item>
@@ -89,7 +84,7 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="phone"
           label={t('auth.field.phone')}
-          rules={[{ required: true, message: t('auth.error.phone-required') }]}
+          rules={[rule.required('auth.error.phone-required')]}
         >
           <Input type="tel" prefix={<PhoneOutlined />} />
         </Form.Item>
@@ -98,7 +93,7 @@ export const SignupPage: React.FC = () => {
           name="code"
           label={t('auth.field.code')}
           extra={t('auth.text.client-code-info')}
-          rules={[{ required: true, message: t('auth.error.code-required') }]}
+          rules={[rule.required('auth.error.code-required')]}
         >
           <Input prefix={<CrownOutlined />} />
         </Form.Item>

@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
 import { Form, Input, Button, Card, Modal } from 'antd'
-import { useIsMobile } from 'hooks'
+import { useIsMobile, useCommonFormRules } from 'hooks'
 import { useTranslation } from 'react-i18next'
 import { Site } from 'models/site'
 import { BackButton } from 'components/buttons/BackButton'
@@ -17,11 +17,11 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
   const { onSave, loading, site, onExit, id } = props
 
   const [form] = Form.useForm()
-
   const { t } = useTranslation()
   const isMobile = useIsMobile()
   const [submitable, setSubmitable] = useState(false)
   const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
+  const rule = useCommonFormRules()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =
@@ -82,7 +82,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
           <Form.Item
             name="name"
             label={t('site.field.name')}
-            rules={[{ required: true, message: t('site.error.name-required') }]}
+            rules={[rule.required('site.error.name-required')]}
             {...formItemLayout}
           >
             <Input />
@@ -91,7 +91,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
           <Form.Item
             name="address"
             label={t('site.field.address')}
-            rules={[{ required: true, message: t('site.error.address-required') }]}
+            rules={[rule.required('site.error.address-required')]}
             {...formItemLayout}
           >
             <Input />

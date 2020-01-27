@@ -9,7 +9,11 @@
     "actions": "Műveletek",
     "data": "Adatok",
     "discard": "Elvetés",
-    "go-back": "Vissza"
+    "go-back": "Vissza",
+    "rule-error": {
+      "field-required": "Ez a mező kötelező!",
+      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú."
+    }
   },
   "menu": {
     "dashboard": "Irányítópult",
@@ -55,7 +59,6 @@
       "code-required": "Kérem add meg az ügyfél kódodat!",
       "password-required": "Kérem add meg a jelszavadat!",
       "password-inconsistent": "A két jelszó nem egyezik meg.",
-      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú.",
       "user-exists": "A felhasználó már létezik!",
       "invalid-email": "Hibás email formátum!"
     }

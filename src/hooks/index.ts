@@ -1,3 +1,4 @@
 import { useIsMobile } from './isMobileHook'
+import { useCommonFormRules } from './useCommonFormRules'
 
-export { useIsMobile }
+export { useIsMobile, useCommonFormRules }

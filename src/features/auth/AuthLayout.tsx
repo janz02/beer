@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Layout, Card } from 'antd'
 import { useIsMobile } from 'hooks'
-import './auth.scss'
+import './AuthLayout.scss'
 
 interface AuthLayoutProps {
   title: string
@@ -14,11 +14,8 @@ export const AuthLayout: FC<AuthLayoutProps> = props => {
 
   return (
     <Layout.Content>
-      <Card
-        title={title}
-        className={`auth-card ${className} ${isMobile ? 'auth-card--mobile' : ''}`}
-      >
-        {children}
+      <Card title={title} className={`auth-card ${isMobile ? 'auth-card--mobile' : ''}`}>
+        <div className={className ?? ''}>{children}</div>
       </Card>
     </Layout.Content>
   )

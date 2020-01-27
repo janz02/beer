@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Form, Input, Button, Card, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useIsMobile } from 'hooks'
+import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Partner } from 'models/partner'
 
 export interface PartnerEditorFormProps {
@@ -17,6 +17,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const isMobile = useIsMobile()
   const [submitable, setSubmitable] = useState(false)
   const [form] = Form.useForm()
+  const rule = useCommonFormRules()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =
@@ -71,7 +72,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="name"
           label={t('partner.field.name')}
-          rules={[{ required: true, message: t('partner.error.name-required') }]}
+          rules={[rule.required('partner.error.name-required')]}
           {...formItemLayout}
         >
           <Input />
@@ -80,7 +81,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           valuePropName="majorPartner"
           label={t('partner.field.major-partner')}
-          rules={[{ required: true, message: t('partner.error.major-partner-required') }]}
+          rules={[rule.required('partner.error.major-partner-required')]}
           {...formItemLayout}
         >
           <Switch />
@@ -89,31 +90,25 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="address"
           label={t('partner.field.address')}
-          rules={[{ required: true, message: t('partner.error.address-required') }]}
+          rules={[rule.required('partner.error.address-required')]}
           {...formItemLayout}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name="registrationNumber"
-          label={t('partner.field.registration-number')}
-          rules={[
-            {
-              required: true,
-              pattern: new RegExp('^\\d+$'),
-              message: t('partner.error.registration-number-required')
-            }
-          ]}
+          name="companyRegisterNumber"
+          label={t('partner.field.company-register-number')}
+          rules={[rule.required('partner.error.company-register-number-required')]}
           {...formItemLayout}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name="taxNumber"
-          label={t('partner.field.tax-number')}
-          rules={[{ required: true, message: t('partner.error.tax-number-required') }]}
+          name="vatNumber"
+          label={t('partner.field.vat-number')}
+          rules={[rule.required('partner.error.vat-number-required')]}
           {...formItemLayout}
         >
           <Input />

@@ -1,19 +1,20 @@
 import React from 'react'
-import { Form, Input, Button, Alert, Checkbox } from 'antd'
+import { Form, Input, Button, Alert } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks';
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { RootState } from 'app/rootReducer'
 import { login } from './authSlice'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
+import { useCommonFormRules } from 'hooks/useCommonFormRules'
 
 export const LoginPage: React.FC = () => {
-  const { loadingLogin: loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
-
   const dispatch = useDispatch()
-
   const { t } = useTranslation()
+  const rule = useCommonFormRules()
+
+  const { loadingLogin: loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
 
   return (
     <AuthLayout className="login" title={t(`auth.login`)}>
@@ -23,27 +24,21 @@ export const LoginPage: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={values => dispatch(login(values))}
       >
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: t('auth.error.username-required') }]}
-        >
+        <Form.Item name="username" rules={[rule.required('auth.error.username-required')]}>
           <Input prefix={<UserOutlined />} placeholder={t('auth.field.username')} />
         </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: t('auth.error.password-required') }]}
-        >
+        <Form.Item name="password" rules={[rule.required('auth.error.password-required')]}>
           <Input.Password prefix={<LockOutlined />} placeholder={t('auth.field.password')} />
         </Form.Item>
-
-        <div className="login__options">
+        {/* TODO: was commented out because there is no BE support yet -> see NRMRTDKPR-125 */}
+        {/* <div className="login__options">
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>{t('auth.field.remember-me')}</Checkbox>
           </Form.Item>
           <Button type="link" onClick={() => history.push('/auth/recovery')}>
             {t('auth.forgot-password')}
           </Button>
-        </div>
+        </div> */}
         <Button loading={loading} block size="large" type="primary" htmlType="submit">
           {t('auth.login')}
         </Button>
