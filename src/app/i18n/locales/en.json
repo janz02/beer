@@ -153,16 +153,16 @@
       "active": "Active",
       "major-partner": "Major partner",
       "address": "Address",
-      "company-register-number": "Company register number",
-      "vat-number": "VAT number"
+      "registration-number": "Company register number",
+      "tax-number": "VAT number"
     },
     "error": {
       "name-required": "Company name field is required",
       "active-required": "Active field is required",
       "major-partner-required": "Major partner field is required",
       "address-required": "Address field is required",
-      "company-register-number-required": "Company register number field is required",
-      "vat-number-required": "VAT number field is required"
+      "registration-number-required": "Company register number field is required",
+      "tax-number-required": "VAT number field is required"
     }
   },
   "site": {

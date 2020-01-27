@@ -3,8 +3,11 @@ import { AppThunk } from 'app/store'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Profile } from 'models/profile'
+import { api } from 'api'
+import { Partner } from 'models/partner'
 
 interface ProfileState {
+  partner?: Partner
   profile?: Profile
   error: string | null
   loading: boolean
@@ -19,8 +22,9 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    getProfilesSuccess(state, action: PayloadAction<Profile>) {
-      state.profile = action.payload
+    getProfilesSuccess(state, action: PayloadAction<Partner>) {
+      state.partner = action.payload
+      state.profile = action.payload.contacts ? action.payload.contacts[0] : {}
 
       state.loading = false
       state.error = null
@@ -49,21 +53,37 @@ export const {
 
 export default profileSlice.reducer
 
-export const getProfiles = (): AppThunk => async dispatch => {
+export const getProfiles = (): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
-  const profile: Profile = {
-    id: 1,
-    name: 'Kiss Pista',
-    email: 'a@a.com',
-    phone: '+36201111111'
+  try {
+    const id = getState().auth.userData.partnerId
+    if (id) {
+      const partner = await api.partner.getPartners({ id })
+      dispatch(getProfilesSuccess({ ...partner }))
+    }
+  } catch (err) {
+    dispatch(setLoadingFailed(err.toString()))
   }
-  dispatch(getProfilesSuccess(profile))
 }
 
-export const updateProfiles = (profile: Profile): AppThunk => async dispatch => {
+export const updateProfiles = (profile: Profile): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
-  // TODO: integrate
-  dispatch(updateProfileSuccess())
+  try {
+    const id = getState().auth.userData.partnerId
+    if (id) {
+      await api.partner.updatePartners({
+        id,
+        partnerDto: {
+          ...getState().profile.partner,
+          contacts: [{ ...getState().profile.profile, ...profile }]
+        }
+      })
+
+      dispatch(updateProfileSuccess())
+    }
+  } catch (err) {
+    dispatch(setLoadingFailed(err.toString()))
+  }
 }

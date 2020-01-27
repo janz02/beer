@@ -29,7 +29,9 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
 
   const handleSubmit = (values: any): void => {
     handlePartnerSave({
-      ...values
+      ...values,
+      registrationNumber: +values.registrationNumber,
+      taxNumber: +values.taxNumber
     })
   }
 
@@ -76,15 +78,6 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          valuePropName="active"
-          label={t('partner.field.active')}
-          rules={[{ required: true, message: t('partner.error.active-required') }]}
-          {...formItemLayout}
-        >
-          <Switch defaultChecked />
-        </Form.Item>
-
-        <Form.Item
           valuePropName="majorPartner"
           label={t('partner.field.major-partner')}
           rules={[{ required: true, message: t('partner.error.major-partner-required') }]}
@@ -103,18 +96,24 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          name="companyRegisterNumber"
-          label={t('partner.field.company-register-number')}
-          rules={[{ required: true, message: t('partner.error.company-register-number-required') }]}
+          name="registrationNumber"
+          label={t('partner.field.registration-number')}
+          rules={[
+            {
+              required: true,
+              pattern: new RegExp('^\\d+$'),
+              message: t('partner.error.registration-number-required')
+            }
+          ]}
           {...formItemLayout}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name="vatNumber"
-          label={t('partner.field.vat-number')}
-          rules={[{ required: true, message: t('partner.error.vat-number-required') }]}
+          name="taxNumber"
+          label={t('partner.field.tax-number')}
+          rules={[{ required: true, message: t('partner.error.tax-number-required') }]}
           {...formItemLayout}
         >
           <Input />

@@ -153,16 +153,16 @@
       "active": "Aktív",
       "major-partner": "Kiemelt partner",
       "address": "Cím",
-      "company-register-number": "Cégjegyzék szám",
-      "vat-number": "Adószám"
+      "registration-number": "Cégjegyzék szám",
+      "tax-number": "Adószám"
     },
     "error": {
       "name-required": "Kérem adja meg a partner nevét!",
       "active-required": "Kérem adja meg hogy a partner aktív-e!",
       "major-partner-required": "Kérem adja meg hogy a partner kiemelt patner-e!",
       "address-required": "Kérem adja meg a partner címét!",
-      "company-register-number-required": "Kérem adja meg a partner cégjegyzék számát!",
-      "vat-number-required": "Kérem adja meg a partner adószámát!"
+      "registration-number-required": "Kérem adja meg a partner cégjegyzék számát!",
+      "tax-number-required": "Kérem adja meg a partner adószámát!"
     }
   },
   "site": {

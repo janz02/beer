@@ -4,9 +4,11 @@ import { UserData, Role } from 'models/user'
 export const getJwtUserdata = (token?: string): UserData => {
   const jwt = token ?? sessionStorage.getItem('jwt')
   const decodedJwt: any = jwt && JwtDecode(jwt)
+
   const user: UserData = {
     userName: decodedJwt?.sub ?? '',
-    roles: decodedJwt?.roles ?? []
+    roles: decodedJwt?.roles ?? [],
+    partnerId: decodedJwt?.partnerId
   }
   return user
 }
