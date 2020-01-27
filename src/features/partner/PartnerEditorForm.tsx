@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Form, Input, Button, Card, InputNumber, Switch } from 'antd'
+import { Form, Input, Button, Card, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useIsMobile } from 'hooks'
 import { Partner } from 'models/partner'

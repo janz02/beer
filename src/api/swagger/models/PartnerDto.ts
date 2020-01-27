@@ -18,6 +18,10 @@ import {
     PartnerContactDtoFromJSON,
     PartnerContactDtoFromJSONTyped,
     PartnerContactDtoToJSON,
+    PartnerState,
+    PartnerStateFromJSON,
+    PartnerStateFromJSONTyped,
+    PartnerStateToJSON,
 } from './';
 
 /**
@@ -52,6 +56,18 @@ export interface PartnerDto {
     bankAccount?: number;
     /**
      * 
+     * @type {boolean}
+     * @memberof PartnerDto
+     */
+    majorPartner?: boolean;
+    /**
+     * 
+     * @type {PartnerState}
+     * @memberof PartnerDto
+     */
+    partnerState?: PartnerState;
+    /**
+     * 
      * @type {Array<PartnerContactDto>}
      * @memberof PartnerDto
      */
@@ -72,6 +88,8 @@ export function PartnerDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'registrationNumber': !exists(json, 'registrationNumber') ? undefined : json['registrationNumber'],
         'taxNumber': !exists(json, 'taxNumber') ? undefined : json['taxNumber'],
         'bankAccount': !exists(json, 'bankAccount') ? undefined : json['bankAccount'],
+        'majorPartner': !exists(json, 'majorPartner') ? undefined : json['majorPartner'],
+        'partnerState': !exists(json, 'partnerState') ? undefined : PartnerStateFromJSON(json['partnerState']),
         'contacts': !exists(json, 'contacts') ? undefined : (json['contacts'] === null ? null : (json['contacts'] as Array<any>).map(PartnerContactDtoFromJSON)),
     };
 }
@@ -89,6 +107,8 @@ export function PartnerDtoToJSON(value?: PartnerDto | null): any {
         'registrationNumber': value.registrationNumber,
         'taxNumber': value.taxNumber,
         'bankAccount': value.bankAccount,
+        'majorPartner': value.majorPartner,
+        'partnerState': PartnerStateToJSON(value.partnerState),
         'contacts': value.contacts === undefined ? undefined : (value.contacts === null ? null : (value.contacts as Array<any>).map(PartnerContactDtoToJSON)),
     };
 }

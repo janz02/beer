@@ -162,23 +162,23 @@ export class CategoriesApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
-            queryParameters['Name'] = requestParameters.name;
+            queryParameters['name'] = requestParameters.name;
         }
 
         if (requestParameters.page !== undefined) {
-            queryParameters['Page'] = requestParameters.page;
+            queryParameters['page'] = requestParameters.page;
         }
 
         if (requestParameters.pageSize !== undefined) {
-            queryParameters['PageSize'] = requestParameters.pageSize;
+            queryParameters['pageSize'] = requestParameters.pageSize;
         }
 
         if (requestParameters.orderBy !== undefined) {
-            queryParameters['OrderBy'] = requestParameters.orderBy;
+            queryParameters['orderBy'] = requestParameters.orderBy;
         }
 
         if (requestParameters.orderByType !== undefined) {
-            queryParameters['OrderByType'] = requestParameters.orderByType;
+            queryParameters['orderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

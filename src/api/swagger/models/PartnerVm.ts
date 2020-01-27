@@ -18,6 +18,10 @@ import {
     PartnerContactVmFromJSON,
     PartnerContactVmFromJSONTyped,
     PartnerContactVmToJSON,
+    PartnerState,
+    PartnerStateFromJSON,
+    PartnerStateFromJSONTyped,
+    PartnerStateToJSON,
     SiteVm,
     SiteVmFromJSON,
     SiteVmFromJSONTyped,
@@ -62,6 +66,18 @@ export interface PartnerVm {
     bankAccount?: number;
     /**
      * 
+     * @type {boolean}
+     * @memberof PartnerVm
+     */
+    majorPartner?: boolean;
+    /**
+     * 
+     * @type {PartnerState}
+     * @memberof PartnerVm
+     */
+    partnerState?: PartnerState;
+    /**
+     * 
      * @type {Array<PartnerContactVm>}
      * @memberof PartnerVm
      */
@@ -89,6 +105,8 @@ export function PartnerVmFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'registrationNumber': !exists(json, 'registrationNumber') ? undefined : json['registrationNumber'],
         'taxNumber': !exists(json, 'taxNumber') ? undefined : json['taxNumber'],
         'bankAccount': !exists(json, 'bankAccount') ? undefined : json['bankAccount'],
+        'majorPartner': !exists(json, 'majorPartner') ? undefined : json['majorPartner'],
+        'partnerState': !exists(json, 'partnerState') ? undefined : PartnerStateFromJSON(json['partnerState']),
         'contacts': !exists(json, 'contacts') ? undefined : (json['contacts'] === null ? null : (json['contacts'] as Array<any>).map(PartnerContactVmFromJSON)),
         'sites': !exists(json, 'sites') ? undefined : (json['sites'] === null ? null : (json['sites'] as Array<any>).map(SiteVmFromJSON)),
     };
@@ -108,6 +126,8 @@ export function PartnerVmToJSON(value?: PartnerVm | null): any {
         'registrationNumber': value.registrationNumber,
         'taxNumber': value.taxNumber,
         'bankAccount': value.bankAccount,
+        'majorPartner': value.majorPartner,
+        'partnerState': PartnerStateToJSON(value.partnerState),
         'contacts': value.contacts === undefined ? undefined : (value.contacts === null ? null : (value.contacts as Array<any>).map(PartnerContactVmToJSON)),
         'sites': value.sites === undefined ? undefined : (value.sites === null ? null : (value.sites as Array<any>).map(SiteVmToJSON)),
     };
