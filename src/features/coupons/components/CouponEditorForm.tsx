@@ -51,7 +51,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }, [dispatch])
 
   const displayEditor =
-    couponIsNew || (formEditing && coupon && coupon.state !== CouponState.Archived)
+    couponIsNew ||
+    (formEditing &&
+      coupon &&
+      coupon.state !== CouponState.Closed &&
+      coupon.state !== CouponState.Archived)
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =
@@ -153,9 +157,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         {!displayEditor && (
           <div className="coupon-editor-form__actions">
             {statusButtons}
-            <Button type="primary" htmlType="button" onClick={() => setFormEditing(true)}>
-              {t('coupon-create.edit')}
-            </Button>
+            {coupon &&
+              coupon.state !== CouponState.Closed &&
+              coupon.state !== CouponState.Archived && (
+                <Button type="primary" htmlType="button" onClick={() => setFormEditing(true)}>
+                  {t('coupon-create.edit')}
+                </Button>
+              )}
           </div>
         )}
       </>
