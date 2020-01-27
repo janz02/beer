@@ -12,7 +12,8 @@
     "go-back": "Vissza",
     "rule-error": {
       "field-required": "Ez a mező kötelező!",
-      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú."
+      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú.",
+      "field-number": "Ennek a mezőnek számot kell tartalmaznia."
     }
   },
   "menu": {
@@ -163,9 +164,7 @@
       "name-required": "Kérem adja meg a partner nevét!",
       "active-required": "Kérem adja meg hogy a partner aktív-e!",
       "major-partner-required": "Kérem adja meg hogy a partner kiemelt patner-e!",
-      "address-required": "Kérem adja meg a partner címét!",
-      "registration-number-required": "Kérem adja meg a partner cégjegyzék számát!",
-      "tax-number-required": "Kérem adja meg a partner adószámát!"
+      "address-required": "Kérem adja meg a partner címét!"
     }
   },
   "site": {

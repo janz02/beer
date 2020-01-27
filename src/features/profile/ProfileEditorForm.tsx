@@ -50,7 +50,8 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   }, [form])
   useEffect(() => {
     formRef.current.setFieldsValue({
-      ...profile
+      ...profile,
+      phone: profile?.phone?.toString()
     })
   }, [profile])
 
@@ -89,7 +90,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           name="phone"
           label={t('profile.field.phone')}
-          rules={[rule.required('profile.error.phone-required')]}
+          rules={[rule.required('profile.error.phone-required'), rule.number()]}
           {...formItemLayout}
         >
           <Input />

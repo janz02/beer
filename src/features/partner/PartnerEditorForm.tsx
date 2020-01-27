@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Form, Input, Button, Card, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Partner } from 'models/partner'
+import { useIsMobile, useCommonFormRules } from 'hooks'
 
 export interface PartnerEditorFormProps {
   handlePartnerSave: (values: any) => void
@@ -51,7 +51,9 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   }, [form])
   useEffect(() => {
     formRef.current.setFieldsValue({
-      ...partner
+      ...partner,
+      registrationNumber: partner?.registrationNumber?.toString(),
+      taxNumber: partner?.taxNumber?.toString()
     })
   }, [partner])
 
@@ -81,7 +83,6 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           valuePropName="majorPartner"
           label={t('partner.field.major-partner')}
-          rules={[rule.required('partner.error.major-partner-required')]}
           {...formItemLayout}
         >
           <Switch />
@@ -97,18 +98,18 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          name="companyRegisterNumber"
-          label={t('partner.field.company-register-number')}
-          rules={[rule.required('partner.error.company-register-number-required')]}
+          name="registrationNumber"
+          label={t('partner.field.registration-number')}
+          rules={[rule.required()]}
           {...formItemLayout}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name="vatNumber"
-          label={t('partner.field.vat-number')}
-          rules={[rule.required('partner.error.vat-number-required')]}
+          name="taxNumber"
+          label={t('partner.field.tax-number')}
+          rules={[rule.required()]}
           {...formItemLayout}
         >
           <Input />
