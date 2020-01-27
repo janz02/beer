@@ -3,7 +3,7 @@ import { Form, Input, Button, Card } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Profile } from 'models/profile'
-import { MailOutlined } from '@ant-design/icons'
+import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 
 export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
@@ -90,10 +90,10 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           name="phone"
           label={t('profile.field.phone')}
-          rules={[rule.required('profile.error.phone-required'), rule.number()]}
+          rules={[rule.required()]}
           {...formItemLayout}
         >
-          <Input />
+          <Input type="tel" prefix={<PhoneOutlined />} />
         </Form.Item>
 
         <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>

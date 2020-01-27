@@ -100,7 +100,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="registrationNumber"
           label={t('partner.field.registration-number')}
-          rules={[rule.required()]}
+          rules={[rule.required(), rule.number()]}
           {...formItemLayout}
         >
           <Input />
@@ -109,7 +109,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="taxNumber"
           label={t('partner.field.tax-number')}
-          rules={[rule.required()]}
+          rules={[rule.required(), rule.number()]}
           {...formItemLayout}
         >
           <Input />
