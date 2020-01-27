@@ -72,12 +72,14 @@ export const updateProfiles = (profile: Profile): AppThunk => async (dispatch, g
 
   try {
     const id = getState().auth.userData.partnerId
+    const profileToSave = { ...getState().profile.profile, ...profile, id: undefined }
+
     if (id) {
       await api.partner.updatePartners({
         id,
         partnerDto: {
           ...getState().profile.partner,
-          contacts: [{ ...getState().profile.profile, ...profile }]
+          contacts: [profileToSave]
         }
       })
 
