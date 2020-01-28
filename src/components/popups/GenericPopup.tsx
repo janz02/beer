@@ -62,7 +62,7 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
 
   const handleOk = async (e: React.MouseEvent<HTMLElement>): Promise<void> => {
     if (onOkAction) {
-      setLoading(true)
+      refId.current && setLoading(true)
       const response: any = await dispatch(onOkAction)
       if (response?.id && response.id === refId.current) {
         if (!response?.error) {
