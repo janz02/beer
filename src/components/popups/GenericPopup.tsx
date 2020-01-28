@@ -17,6 +17,7 @@ interface GenericPopupProps extends ModalProps {
 
   /**
    * Id of the current item. Used for filtering out the delayed async actions of older items.
+   * If you don't provide it the inbuilt okButton loading and error msg will be disabled.
    */
   id?: number
 
