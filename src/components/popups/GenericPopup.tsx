@@ -75,19 +75,17 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
   }
 
   return (
-    <>
-      <Modal
-        className="generic-popup"
-        title={t(`common.popup.${type}-title`)}
-        okText={t(`common.${type}`)}
-        cancelText={t(`common.cancel`)}
-        onOk={handleOk}
-        {...{ okButtonProps }}
-        {...modalProps}
-      >
-        {children ?? t(`common.popup.${type}-text`)}
-        {error && <div className="generic-popup__error"> {t(error)} </div>}
-      </Modal>
-    </>
+    <Modal
+      className="generic-popup"
+      title={t(`common.popup.${type}-title`)}
+      okText={t(`common.${type}`)}
+      cancelText={t(`common.cancel`)}
+      onOk={handleOk}
+      {...{ okButtonProps }}
+      {...modalProps}
+    >
+      {children ?? t(`common.popup.${type}-text`)}
+      {error && <div className="generic-popup__error"> {t(error)} </div>}
+    </Modal>
   )
 }
