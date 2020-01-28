@@ -4,10 +4,8 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Profile } from 'models/profile'
 import { api } from 'api'
-import { Partner } from 'models/partner'
 
 interface ProfileState {
-  partner?: Partner
   profile?: Profile
   error: string | null
   loading: boolean
@@ -22,9 +20,8 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    getProfilesSuccess(state, action: PayloadAction<Partner>) {
-      state.partner = action.payload
-      state.profile = action.payload.contacts ? action.payload.contacts[0] : {}
+    getProfilesSuccess(state, action: PayloadAction<Profile>) {
+      state.profile = action.payload
 
       state.loading = false
       state.error = null
@@ -53,34 +50,29 @@ export const {
 
 export default profileSlice.reducer
 
-export const getProfiles = (): AppThunk => async (dispatch, getState) => {
+export const getProfile = (): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
   try {
     const id = getState().auth.userData.partnerId
     if (id) {
-      const partner = await api.partner.getPartners({ id })
-      dispatch(getProfilesSuccess({ ...partner }))
+      const profile = await api.partnerContacts.getPartnerContacts({ id })
+      dispatch(getProfilesSuccess({ ...profile }))
     }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }
 }
 
-export const updateProfiles = (profile: Profile): AppThunk => async (dispatch, getState) => {
+export const updateProfile = (profile: Profile): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
   try {
     const id = getState().auth.userData.partnerId
-    const profileToSave = { ...getState().profile.profile, ...profile, id: undefined }
-
     if (id) {
-      await api.partner.updatePartners({
+      await api.partnerContacts.updatePartnerContacts({
         id,
-        partnerDto: {
-          ...getState().profile.partner
-          // contacts: [profileToSave]
-        }
+        partnerContactDto: { ...getState().profile.profile, ...profile }
       })
 
       dispatch(updateProfileSuccess())

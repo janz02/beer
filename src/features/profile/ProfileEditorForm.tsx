@@ -31,7 +31,8 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
 
   const handleSubmit = (values: any): void => {
     handleProfileSave({
-      ...values
+      ...values,
+      phone: +values.phone
     })
   }
 

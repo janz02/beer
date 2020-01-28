@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { getProfiles, updateProfiles } from './profileSlice'
+import { getProfile, updateProfile } from './profileSlice'
 import { ProfileEditorFormProps, ProfileEditorForm } from './ProfileEditorForm'
 import { Profile } from 'models/profile'
 
@@ -11,11 +11,11 @@ export const ProfileEditorPage: React.FC = () => {
   const { profile, loading } = useSelector((state: RootState) => state.profile)
 
   useEffect(() => {
-    dispatch(getProfiles())
+    dispatch(getProfile())
   }, [dispatch])
 
   const handleProfileSave = (profile: Profile): void => {
-    dispatch(updateProfiles({ ...profile }))
+    dispatch(updateProfile({ ...profile }))
   }
 
   const props: ProfileEditorFormProps = {
