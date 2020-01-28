@@ -16,6 +16,9 @@
       "password-format": "Must have a letter, a number, a special character and contain 8 characters.",
       "field-number": "This filed must be a number."
     },
+    "message": {
+      "save-success": "Successful saving"
+    },
     "popup": {
       "discard-title": "Discard draft",
       "discard-text": "Are you sure about discarding your modifications?",

@@ -16,6 +16,9 @@
       "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú.",
       "field-number": "Ennek a mezőnek számot kell tartalmaznia."
     },
+    "message": {
+      "save-success": "Sikeres mentés"
+    },
     "popup": {
       "discard-title": "Módosítások elvetése",
       "discard-text": "Biztos, hogy el szeretnéd vetni a módositásokat?",
