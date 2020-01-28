@@ -110,11 +110,11 @@ export const deleteCategory = (id: number, refreshList = true): AppThunk => asyn
       const oldPagination = getState().categoryList.pagination
       const newPage = recalculatePagination(oldPagination)
       dispatch(getCategories({ page: newPage }))
+      return { id }
     }
     dispatch(deleteSuccess())
-    return true
   } catch (err) {
     dispatch(deleteFail(err.toString()))
-    return false
+    return { id, error: err.toString() }
   }
 }

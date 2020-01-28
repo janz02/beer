@@ -9,11 +9,25 @@
     "actions": "Actions",
     "data": "Data",
     "discard": "Discard",
+    "confirm": "Confirm",
     "go-back": "Go back",
     "rule-error": {
       "field-required": "This field is required!",
       "password-format": "Must have a letter, a number, a special character and contain 8 characters.",
       "field-number": "This filed must be a number."
+    },
+    "message": {
+      "save-success": "Successful saving"
+    },
+    "popup": {
+      "discard-title": "Discard draft",
+      "discard-text": "Are you sure about discarding your modifications?",
+      "delete-title": "Delete data",
+      "delete-text": "Are you sure about deleting this data?",
+      "confirm-title": "Confirm action",
+      "confirm-text": "Are you sure",
+      "save-title": "Save data",
+      "save-text": "Do you really want to save this data?"
     }
   },
   "menu": {
@@ -132,10 +146,6 @@
     "list-title": "Coupon categories",
     "editor-edit": "Edit coupon category",
     "editor-create": "Create coupon category",
-    "delete-popup": {
-      "title": "Are you sure?",
-      "text": "You are about to delete permanetly the following coupon category:"
-    },
     "field": {
       "name": "Category name"
     },
@@ -178,10 +188,6 @@
     "error": {
       "name-required": "Site name field is required!",
       "address-required": "Address field is required!"
-    },
-    "delete-popup": {
-      "title": "Are you sure?",
-      "text": "You are about to delete permanetly the following site:"
     }
   },
   "error-page": {

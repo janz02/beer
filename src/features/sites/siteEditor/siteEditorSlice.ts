@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { Site } from 'models/site'
+import { message } from 'antd'
+import i18n from 'app/i18n'
 
 interface SiteEditorState {
   site?: Site
@@ -43,6 +45,7 @@ const siteEditorSlice = createSlice({
       state.loadingSave = true
     },
     saveSiteSuccess(state) {
+      message.success(i18n.t('common.message.save-success'), 5)
       state.loadingSave = false
       state.error = ''
     },

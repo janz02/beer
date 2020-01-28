@@ -8,12 +8,26 @@
     "delete": "Törlés",
     "actions": "Műveletek",
     "data": "Adatok",
+    "confirm": "Megerősítés",
     "discard": "Elvetés",
     "go-back": "Vissza",
     "rule-error": {
       "field-required": "Ez a mező kötelező!",
       "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú.",
       "field-number": "Ennek a mezőnek számot kell tartalmaznia."
+    },
+    "message": {
+      "save-success": "Sikeres mentés"
+    },
+    "popup": {
+      "discard-title": "Módosítások elvetése",
+      "discard-text": "Biztos, hogy el szeretnéd vetni a módositásokat?",
+      "delete-title": "Törlés megerősítése",
+      "delete-text": "Biztos, hogy törölni szeretnéd?",
+      "confirm-title": "Megerősítés",
+      "confirm-text": "Biztos?",
+      "save-title": "Mentés megerősítése",
+      "save-text": "Biztos, hogy el szertnéd menteni?"
     }
   },
   "menu": {
@@ -135,10 +149,6 @@
     "field": {
       "name": "Kategória neve"
     },
-    "delete-popup": {
-      "title": "Biztos?",
-      "text": "A következő kuponkategóriát véglegesen törlöm:"
-    },
     "error": {
       "name-required": "Kérem add meg a kategória nevét!"
     }
@@ -178,10 +188,6 @@
     "error": {
       "name-required": "Kérem adja meg a telephely nevét!",
       "address-required": "Kérem adja meg a telephely címét!"
-    },
-    "delete-popup": {
-      "title": "Biztos?",
-      "text": "A következő telephelyet véglegesen törlöm:"
     }
   },
   "error-page": {

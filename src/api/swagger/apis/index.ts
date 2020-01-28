@@ -3,6 +3,7 @@ export * from './AuthApi';
 export * from './CategoriesApi';
 export * from './CouponCommentsApi';
 export * from './CouponsApi';
+export * from './PartnerContactsApi';
 export * from './PartnersApi';
 export * from './SitesApi';
 export * from './TagCategoriesApi';

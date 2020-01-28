@@ -14,10 +14,6 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    PartnerContactDto,
-    PartnerContactDtoFromJSON,
-    PartnerContactDtoFromJSONTyped,
-    PartnerContactDtoToJSON,
     PartnerState,
     PartnerStateFromJSON,
     PartnerStateFromJSONTyped,
@@ -66,12 +62,6 @@ export interface PartnerDto {
      * @memberof PartnerDto
      */
     partnerState?: PartnerState;
-    /**
-     * 
-     * @type {Array<PartnerContactDto>}
-     * @memberof PartnerDto
-     */
-    contacts?: Array<PartnerContactDto> | null;
 }
 
 export function PartnerDtoFromJSON(json: any): PartnerDto {
@@ -90,7 +80,6 @@ export function PartnerDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'bankAccount': !exists(json, 'bankAccount') ? undefined : json['bankAccount'],
         'majorPartner': !exists(json, 'majorPartner') ? undefined : json['majorPartner'],
         'partnerState': !exists(json, 'partnerState') ? undefined : PartnerStateFromJSON(json['partnerState']),
-        'contacts': !exists(json, 'contacts') ? undefined : (json['contacts'] === null ? null : (json['contacts'] as Array<any>).map(PartnerContactDtoFromJSON)),
     };
 }
 
@@ -109,7 +98,6 @@ export function PartnerDtoToJSON(value?: PartnerDto | null): any {
         'bankAccount': value.bankAccount,
         'majorPartner': value.majorPartner,
         'partnerState': PartnerStateToJSON(value.partnerState),
-        'contacts': value.contacts === undefined ? undefined : (value.contacts === null ? null : (value.contacts as Array<any>).map(PartnerContactDtoToJSON)),
     };
 }
 

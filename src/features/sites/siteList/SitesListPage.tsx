@@ -3,14 +3,14 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useIsMobile } from 'hooks'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSites } from './siteListSlice'
+import { getSites, deleteSite } from './siteListSlice'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
 import { TablePaginationConfig } from 'antd/lib/table/Table'
 import { basePaginationConfig, projectPage } from 'models/pagination'
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
-import { SiteDeletePopup } from './SiteDeletePopup'
+import { GenericPopup } from 'components/popups/GenericPopup'
 import { history } from 'router/router'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
@@ -109,12 +109,18 @@ export const SitesListPage: FC = () => {
         </ResponsiveCard>
       </ResponsivePage>
 
-      <SiteDeletePopup
-        afterClose={() => setSiteToDelete(null)}
-        onExit={() => setSiteToDelete({ ...siteToDelete, popupVisible: false })}
-        site={siteToDelete?.site}
+      <GenericPopup
+        type="delete"
+        id={siteToDelete?.site?.id!}
         visible={!!siteToDelete?.popupVisible}
-      />
+        onCancel={() => setSiteToDelete({ ...siteToDelete, popupVisible: false })}
+        onOkAction={deleteSite(siteToDelete?.site?.id!)}
+        afterClose={() => setSiteToDelete(null)}
+      >
+        <p>{t(`common.popup.delete-text`)}</p>
+        <h4>{siteToDelete?.site?.name}</h4>
+        <p>{siteToDelete?.site?.address}</p>
+      </GenericPopup>
     </>
   )
 }
