@@ -112,9 +112,8 @@ export const deleteCategory = (id: number, refreshList = true): AppThunk => asyn
       dispatch(getCategories({ page: newPage }))
     }
     dispatch(deleteSuccess())
-    return true
   } catch (err) {
     dispatch(deleteFail(err.toString()))
-    return false
+    return { id, error: err.toString() }
   }
 }

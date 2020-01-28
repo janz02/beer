@@ -5,9 +5,9 @@ import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useIsMobile } from 'hooks'
 import { TablePaginationConfig } from 'antd/lib/table/Table'
-import { getCategories } from './categoryListSlice'
+import { getCategories, deleteCategory } from './categoryListSlice'
 import { Category } from 'models/category'
-import { CategoryDeletePopup } from './CategoryDeletePopup'
+import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { basePaginationConfig, projectPage } from 'models/pagination'
@@ -102,10 +102,12 @@ export const CategoryList: FC<CategoryListProps> = props => {
         error={error}
       />
 
-      <CategoryDeletePopup
+      <GenericPopup
+        id={categoryToDelete?.category?.id}
+        type="delete"
         visible={!!categoryToDelete?.popupVisible}
-        category={categoryToDelete?.category}
-        onExit={() => setCategoryToDelete({ ...categoryToDelete, popupVisible: false })}
+        onOkAction={deleteCategory(categoryToDelete?.category?.id!)}
+        onCancel={() => setCategoryToDelete({ ...categoryToDelete, popupVisible: false })}
         afterClose={() => setCategoryToDelete(null)}
       />
     </>

@@ -1,9 +1,10 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
-import { Form, Input, Button, Card, Modal } from 'antd'
+import { Form, Input, Button, Card } from 'antd'
 import { useIsMobile, useCommonFormRules } from 'hooks'
 import { useTranslation } from 'react-i18next'
 import { Site } from 'models/site'
 import { BackButton } from 'components/buttons/BackButton'
+import { GenericPopup } from 'components/popups/GenericPopup'
 
 export interface SiteEditorFormProps {
   onSave: (values: Site) => void
@@ -102,16 +103,12 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
           </Button>
         </Form>
       </Card>
-      <Modal
+      <GenericPopup
+        type="discard"
         visible={visibleDiscardPopup}
-        title={t(`site.discard-popup.title`)}
         onOk={onExit}
         onCancel={() => setVisibleDiscardPopup(false)}
-        okText={t('common.discard')}
-        okButtonProps={{ danger: true }}
-      >
-        <p>{t(`site.discard-popup.text`)}</p>
-      </Modal>
+      />
     </>
   )
 }
