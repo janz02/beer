@@ -1,14 +1,19 @@
 import JwtDecode from 'jwt-decode'
 import { UserData, Role } from 'models/user'
 
+const formatRoles = (rawRules: string): Role[] => {
+  return rawRules ? (rawRules.split(';') as Role[]) : []
+}
+
 export const getJwtUserdata = (token?: string): UserData => {
   const jwt = token ?? sessionStorage.getItem('jwt')
   const decodedJwt: any = jwt && JwtDecode(jwt)
-
   const user: UserData = {
-    userName: decodedJwt?.sub ?? '',
-    roles: decodedJwt?.roles ?? [],
-    partnerId: decodedJwt?.partnerId
+    userName: decodedJwt?.email ?? '',
+    email: decodedJwt?.email ?? '',
+    roles: formatRoles(decodedJwt?.Roles),
+    partnerId: decodedJwt?.partnerId,
+    partnerContactId: decodedJwt?.partnerContactId
   }
   return user
 }
