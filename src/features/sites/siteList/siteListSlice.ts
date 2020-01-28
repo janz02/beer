@@ -100,6 +100,7 @@ export const deleteSite = (id: number, refreshList = true): AppThunk => async (
       dispatch(getSites({ page: newPage }))
     }
     dispatch(deleteSiteSuccess())
+    return { id }
   } catch (err) {
     dispatch(deleteSiteFail(err.toString()))
     return { id, error: err.toString() }

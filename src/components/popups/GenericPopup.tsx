@@ -22,7 +22,7 @@ interface GenericPopupProps extends ModalProps {
 
   /**
    * Put your dispatch-thunk-action here, which should return an object with
-   * * error:  i18n key | string
+   * * error?:  i18n key | string
    * * id: item id
    */
   onOkAction?: AppThunk
@@ -64,12 +64,14 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
     if (onOkAction) {
       setLoading(true)
       const response: any = await dispatch(onOkAction)
-      if (!response?.error) {
-        modalProps.onCancel && modalProps.onCancel(e)
-        setLoading(false)
-      } else if (response?.id && response.id === refId.current) {
-        setError(response?.error)
-        setLoading(false)
+      if (response?.id && response.id === refId.current) {
+        if (!response?.error) {
+          modalProps.onCancel && modalProps.onCancel(e)
+          setLoading(false)
+        } else {
+          setError(response?.error)
+          setLoading(false)
+        }
       }
     }
   }
