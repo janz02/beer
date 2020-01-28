@@ -1,3 +1,4 @@
+import { PartnerContactsApi } from './swagger/apis/PartnerContactsApi'
 import { CouponCommentsApi } from './swagger/apis/CouponCommentsApi'
 import { Configuration } from './swagger/runtime'
 import { CouponsApi, CategoriesApi, AuthApi, SitesApi, PartnersApi, TagsApi } from './swagger/apis'
@@ -42,5 +43,6 @@ export const api = {
   categories: new CategoriesApi(config),
   auth: new AuthApi(config),
   sites: new SitesApi(config),
-  partner: new PartnersApi(config)
+  partner: new PartnersApi(config),
+  partnerContacts: new PartnerContactsApi(config)
 }

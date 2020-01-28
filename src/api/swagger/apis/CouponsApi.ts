@@ -50,6 +50,7 @@ export interface GetCouponsRequest {
 export interface ListCouponsRequest {
     name?: string;
     description?: string;
+    includeArchived?: boolean;
     page?: number;
     pageSize?: number;
     orderBy?: string;
@@ -176,6 +177,10 @@ export class CouponsApi extends runtime.BaseAPI {
 
         if (requestParameters.description !== undefined) {
             queryParameters['description'] = requestParameters.description;
+        }
+
+        if (requestParameters.includeArchived !== undefined) {
+            queryParameters['includeArchived'] = requestParameters.includeArchived;
         }
 
         if (requestParameters.page !== undefined) {
