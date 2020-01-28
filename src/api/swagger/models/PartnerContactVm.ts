@@ -27,6 +27,12 @@ export interface PartnerContactVm {
     id?: number;
     /**
      * 
+     * @type {number}
+     * @memberof PartnerContactVm
+     */
+    partnerId?: number;
+    /**
+     * 
      * @type {string}
      * @memberof PartnerContactVm
      */
@@ -56,6 +62,7 @@ export function PartnerContactVmFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
+        'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'phone': !exists(json, 'phone') ? undefined : json['phone'],
@@ -72,6 +79,7 @@ export function PartnerContactVmToJSON(value?: PartnerContactVm | null): any {
     return {
         
         'id': value.id,
+        'partnerId': value.partnerId,
         'name': value.name,
         'email': value.email,
         'phone': value.phone,
