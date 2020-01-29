@@ -6,6 +6,7 @@ import { Profile } from 'models/profile'
 import { api } from 'api'
 
 interface ProfileState {
+  editable?: boolean
   profile?: Profile
   error: string | null
   loading: boolean
@@ -20,9 +21,15 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    getProfilesSuccess(state, action: PayloadAction<Profile>) {
+    getProfileSuccess(state, action: PayloadAction<Profile>) {
+      state.editable = true
       state.profile = action.payload
-
+      state.loading = false
+      state.error = null
+    },
+    getProfileFallback(state, action: PayloadAction<Profile>) {
+      state.editable = false
+      state.profile = action.payload
       state.loading = false
       state.error = null
     },
@@ -42,7 +49,8 @@ const profileSlice = createSlice({
 })
 
 export const {
-  getProfilesSuccess,
+  getProfileSuccess,
+  getProfileFallback,
   updateProfileSuccess,
   setLoadingStart,
   setLoadingFailed
@@ -54,14 +62,19 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
   try {
-    const id = getState().auth.userData.partnerId
+    const userData = getState().auth.userData
+    const id = userData.partnerId
     if (id) {
       const partner = await api.partner.getPartners({ id })
       if (partner.contacts && partner.contacts[0].id) {
-        const profile = await api.partnerContacts.getPartnerContacts({ id: partner.contacts[0].id })
-
-        dispatch(getProfilesSuccess({ ...profile }))
+        const profile = await api.partnerContacts.getPartnerContacts({
+          id: partner.contacts[0].id
+        })
+        dispatch(getProfileSuccess({ ...profile }))
       }
+    } else {
+      const jwtProfile: Profile = { name: userData.userName, email: userData.email }
+      dispatch(getProfileFallback({ ...jwtProfile }))
     }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
