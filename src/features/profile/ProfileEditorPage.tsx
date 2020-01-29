@@ -8,7 +8,7 @@ import { Profile } from 'models/profile'
 export const ProfileEditorPage: React.FC = () => {
   const dispatch = useDispatch()
 
-  const { profile, loading } = useSelector((state: RootState) => state.profile)
+  const { profile, loading, editable } = useSelector((state: RootState) => state.profile)
 
   useEffect(() => {
     dispatch(getProfile())
@@ -21,7 +21,8 @@ export const ProfileEditorPage: React.FC = () => {
   const props: ProfileEditorFormProps = {
     handleProfileSave,
     loading,
-    profile
+    profile,
+    editable
   }
 
   return (

@@ -11,7 +11,7 @@ export const getJwtUserdata = (token?: string): UserData => {
   const user: UserData = {
     userName: decodedJwt?.email ?? '',
     email: decodedJwt?.email ?? '',
-    roles: formatRoles(decodedJwt?.Roles),
+    roles: formatRoles(decodedJwt?.roles),
     partnerId: decodedJwt?.partnerId,
     partnerContactId: decodedJwt?.partnerContactId
   }

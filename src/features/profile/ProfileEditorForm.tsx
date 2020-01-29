@@ -9,10 +9,11 @@ export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
   loading: boolean
   profile?: Profile
+  editable?: boolean
 }
 
 export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
-  const { handleProfileSave, loading, profile } = props
+  const { handleProfileSave, loading, profile, editable } = props
 
   const { t } = useTranslation()
   const isMobile = useIsMobile()
@@ -76,7 +77,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           rules={[rule.required('profile.error.name-required')]}
           {...formItemLayout}
         >
-          <Input />
+          <Input disabled={!editable} />
         </Form.Item>
 
         <Form.Item
@@ -85,7 +86,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           rules={[rule.required('profile.error.email-required', { type: 'email' })]}
           {...formItemLayout}
         >
-          <Input prefix={<MailOutlined />} />
+          <Input disabled={!editable} prefix={<MailOutlined />} />
         </Form.Item>
 
         <Form.Item
@@ -94,10 +95,16 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           rules={[rule.required()]}
           {...formItemLayout}
         >
-          <Input type="tel" prefix={<PhoneOutlined />} />
+          <Input disabled={!editable} type="tel" prefix={<PhoneOutlined />} />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>
+        <Button
+          hidden={!editable}
+          type="primary"
+          htmlType="submit"
+          disabled={!submitable}
+          loading={loading}
+        >
           {t('profile.save')}
         </Button>
       </Form>
