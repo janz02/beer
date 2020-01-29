@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Profile } from 'models/profile'
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
-import { FormItemProps } from 'antd/lib/form/FormItem'
 
 export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
@@ -30,8 +29,6 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           wrapperCol: { span: 14 }
         }
       : null
-
-  const formItemSetting: Partial<FormItemProps> = {}
 
   const handleSubmit = (values: any): void => {
     handleProfileSave({
