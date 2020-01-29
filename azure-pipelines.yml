@@ -87,7 +87,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
-    imageName: '$(DockerImageName):$(Build.BuildId)'
+    imageName: '$(DockerImageName):$(Build.BuildNumber).$(Build.BuildId)'
     dockerfile: 'Dockerfile'
 
 - task: Docker@0
@@ -96,5 +96,5 @@ steps:
     containerregistrytype: 'Container Registry'
     dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
     action: 'Push an image'
-    imageName: '$(DockerImageName):$(Build.BuildId)'
+    imageName: '$(DockerImageName):$(Build.BuildNumber).$(Build.BuildId)'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
