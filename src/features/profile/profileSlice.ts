@@ -56,8 +56,12 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
   try {
     const id = getState().auth.userData.partnerId
     if (id) {
-      const profile = await api.partnerContacts.getPartnerContacts({ id })
-      dispatch(getProfilesSuccess({ ...profile }))
+      const partner = await api.partner.getPartners({ id })
+      if (partner.contacts && partner.contacts[0].id) {
+        const profile = await api.partnerContacts.getPartnerContacts({ id: partner.contacts[0].id })
+
+        dispatch(getProfilesSuccess({ ...profile }))
+      }
     }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
@@ -70,12 +74,15 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
   try {
     const id = getState().auth.userData.partnerId
     if (id) {
-      await api.partnerContacts.updatePartnerContacts({
-        id,
-        partnerContactDto: { ...getState().profile.profile, ...profile }
-      })
+      const partner = await api.partner.getPartners({ id })
+      if (partner.contacts && partner.contacts[0].id) {
+        await api.partnerContacts.updatePartnerContacts({
+          id: partner.contacts[0].id,
+          partnerContactDto: { ...getState().profile.profile, ...profile }
+        })
 
-      dispatch(updateProfileSuccess())
+        dispatch(updateProfileSuccess())
+      }
     }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
