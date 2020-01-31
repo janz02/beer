@@ -1,203 +1,155 @@
 {
-  "common": {
-    "ok": "OK",
-    "cancel": "Mégsem",
-    "edit": "Szerkesztés",
-    "create": "Létrehozás",
-    "save": "Mentés",
-    "delete": "Törlés",
-    "actions": "Műveletek",
-    "data": "Adatok",
-    "confirm": "Megerősítés",
-    "discard": "Elvetés",
-    "go-back": "Vissza",
-    "rule-error": {
-      "field-required": "Ez a mező kötelező!",
-      "password-format": "Tartalmazzon betűt, számot, speciális karaktert; és legyen minimum 8 karakter hosszú.",
-      "field-number": "Ennek a mezőnek számot kell tartalmaznia."
+  "auth": {
+    "error": {
+      "login-failed": "Sikertelen autentikáció.",
+      "password-inconsistent": "A két jelszó nem egyezik meg.",
+      "recovery-failed": "Sikertelen volt a jelszó visszaállító e-mail elküldése.",
+      "signup-failed": "A regisztrálás sikertelen volt."
     },
+    "field": {
+      "code": "Ügyfél kód",
+      "company": "Cég neve",
+      "email": "E-mail-cím",
+      "name": "Teljes név",
+      "password": "Jelszó",
+      "password-again": "Jelszó ismét",
+      "phone": "Telefonszám",
+      "remember-me": "Emlékezz rám!",
+      "username": "Felhasználónév"
+    },
+    "forgot-password": "Elfelejtettem a jelszavamat!",
+    "login": "Belépés",
+    "logout": "Kilépés",
+    "profile": "Személyes adatok",
+    "send-email": "Email küldése",
+    "signup": "Regisztrálás",
+    "text": {
+      "accept-prefix": "Elfogadom a ",
+      "client-code-info": "A szerződésben található.",
+      "new-password-email": "Kérek egy e-mailt az új jelszóval.",
+      "terms-and-services": "Feltételeket és Szolgáltatásokat"
+    }
+  },
+  "common": {
+    "actions": "Műveletek",
+    "cancel": "Mégsem",
+    "create": "Létrehozás",
+    "data": "Adatok",
+    "delete": "Törlés",
+    "edit": "Szerkesztés",
+    "go-back": "Vissza",
     "message": {
       "save-success": "Sikeres mentés"
     },
+    "ok": "OK",
     "popup": {
-      "discard-title": "Módosítások elvetése",
-      "discard-text": "Biztos, hogy el szeretnéd vetni a módositásokat?",
-      "delete-title": "Törlés megerősítése",
-      "delete-text": "Biztos, hogy törölni szeretnéd?",
-      "confirm-title": "Megerősítés",
-      "confirm-text": "Biztos?",
-      "save-title": "Mentés megerősítése",
-      "save-text": "Biztos, hogy el szertnéd menteni?"
-    }
-  },
-  "menu": {
-    "dashboard": "Irányítópult",
-    "coupons": "Kuponok",
-    "sites": "Telephelyek",
-    "coupon-categories": "Kategóriák",
-    "partner-data": "Partner adatok"
-  },
-  "auth": {
-    "profile": "Személyes adatok",
-    "login": "Belépés",
-    "logout": "Kilépés",
-    "signup": "Regisztrálás",
-    "forgot-password": "Elfelejtettem a jelszavamat!",
-    "password-recovery": "Jelszó megkeresése",
-    "send-email": "Email küldése",
-    "text": {
-      "new-password-email": "Kérek egy e-mailt az új jelszóval.",
-      "accept-prefix": "Elfogadom a ",
-      "terms-and-services": "Feltételeket és Szolgáltatásokat",
-      "client-code-info": "A szerződésben található."
+      "delete-text": "Biztos, hogy törölni szeretnéd?"
     },
-    "field": {
-      "username": "Felhasználónév",
-      "password": "Jelszó",
-      "password-again": "Jelszó ismét",
-      "remember-me": "Emlékezz rám!",
-      "email": "E-mail-cím",
-      "company": "Cég neve",
-      "name": "Teljes név",
-      "phone": "Telefonszám",
-      "code": "Ügyfél kód"
-    },
-    "error": {
-      "login-failed": "Sikertelen autentikáció.",
-      "signup-failed": "A regisztrálás sikertelen volt.",
-      "recovery-failed": "Sikertelen volt a jelszó visszaállító e-mail elküldése.",
-      "username-required": "Kérem add meg a felhasználó nevedet!",
-      "email-required": "Kérem add meg az E-mail-címedet!",
-      "name-required": "Kérem add meg a teljes nevedet!",
-      "phone-required": "Kérem add meg a telefonszámodat!",
-      "company-required": "Kérem add meg a munkahelyed nevét!",
-      "code-required": "Kérem add meg az ügyfél kódodat!",
-      "password-required": "Kérem add meg a jelszavadat!",
-      "password-inconsistent": "A két jelszó nem egyezik meg.",
-      "user-exists": "A felhasználó már létezik!",
-      "invalid-email": "Hibás email formátum!"
-    }
-  },
-  "profile": {
-    "save": "Mentés",
-    "save-profile-success": "Profile mentése sikeres.",
-    "editor-title": "Profil",
-    "field": {
-      "name": "Név",
-      "email": "Email",
-      "phone": "Telefonszám"
-    },
-    "error": {
-      "name-required": "A név mező megadása kötelező.",
-      "email-required": "Az email mező megadása kötelező.",
-      "phone-required": "A telefonszám mező megadása kötelező."
-    }
-  },
-  "coupon-list": {
-    "create": "Létrehozás",
-    "coupons": "Kuponok",
-    "name": "Név",
-    "description": "Leírás",
-    "action": "Műveletek",
-    "edit": "Szerkesztés",
-    "delete": "Törlés",
-    "delete-confirm-message": "Biztosan törölni akarja ezt a kupont?",
-    "search": "Keresés"
-  },
-  "coupon-create": {
-    "create": "Létrehozás",
-    "save": "Mentés",
-    "editor": "Kupon szerkesztő",
-    "edit": "Szerkesztés",
-    "create-coupon-success": "Sikeres kupon létrehozás.",
-    "states": {
-      "accept": "Elfogadás",
-      "reject": "Elutasítás",
-      "wait": "Várakozás",
-      "close": "Lezárás",
-      "archive": "Archiválás"
-    },
-    "state-action-confirm-message": "Biztos benne?",
-    "field": {
-      "name": "Név",
-      "description": "Leírás",
-      "rank": "Rang",
-      "category": "Kategória",
-      "discount-type": "Kedvezmény típusa",
-      "discount-amount": "Kedvezmény mennyisége",
-      "distribution-start-date": "Kiosztási kezdő dátum",
-      "distribution-end-date": "Kiosztási vég dátum",
-      "coupon-count": "Kuponok száma",
-      "minimum-shopping-value": "Minimális vásárlási érték",
-      "expiration-date": "Lejárati dátum",
-      "comment": "Komment"
-    },
-    "error": {
-      "name-required": "A név mező megadása kötelező.",
-      "percentage-max-100": "A százalék érték maximum 100 lehet."
-    }
-  },
-  "coupon-editor": {
-    "save-coupon-success": "Sikeres kupon mentés.",
-    "comment-delete-confirm-message": "Biztos benne, hogy törölni szeretné ezt a kommentet?",
-    "save-coupon-status-success": "Kupon státusz mentése sikeres."
+    "save": "Mentés"
   },
   "coupon-category": {
-    "list-title": "Kupon kategóriák",
-    "editor-edit": "Kupon katgória szerkesztése",
-    "editor-create": "Kupon katgória létrehozása",
+    "delete-popup": {
+      "text": "Szöveg",
+      "title": "Cím"
+    },
     "field": {
       "name": "Kategória neve"
     },
+    "list-title": "Kupon kategóriák"
+  },
+  "coupon-create": {
+    "create": "Létrehozás",
+    "create-coupon-success": "Sikeres kupon létrehozás.",
+    "edit": "Szerkesztés",
+    "editor": "Kupon szerkesztő",
     "error": {
-      "name-required": "Kérem add meg a kategória nevét!"
-    }
-  },
-  "notification": {
-    "notifications": "Értesítések",
-    "empty-list": "Üres",
-    "load-more": "Régebbiek..."
-  },
-  "partner": {
-    "editor-title": "Partner",
+      "percentage-max-100": "A százalék érték maximum 100 lehet."
+    },
+    "field": {
+      "category": "Kategória",
+      "comment": "Komment",
+      "coupon-count": "Kuponok száma",
+      "description": "Leírás",
+      "discount-amount": "Kedvezmény mennyisége",
+      "discount-type": "Kedvezmény típusa",
+      "distribution-end-date": "Kiosztási vég dátum",
+      "distribution-start-date": "Kiosztási kezdő dátum",
+      "expiration-date": "Lejárati dátum",
+      "minimum-shopping-value": "Minimális vásárlási érték",
+      "name": "Név",
+      "rank": "Rang"
+    },
     "save": "Mentés",
-    "save-partner-success": "Partner mentése sikeres.",
-    "field": {
-      "name": "Cégnév",
-      "active": "Aktív",
-      "major-partner": "Kiemelt partner",
-      "address": "Cím",
-      "registration-number": "Cégjegyzék szám",
-      "tax-number": "Adószám"
-    },
-    "error": {
-      "name-required": "Kérem adja meg a partner nevét!",
-      "active-required": "Kérem adja meg hogy a partner aktív-e!",
-      "major-partner-required": "Kérem adja meg hogy a partner kiemelt patner-e!",
-      "address-required": "Kérem adja meg a partner címét!"
+    "state-action-confirm-message": "Biztos benne?",
+    "states": {
+      "accept": "Elfogadás",
+      "archive": "Archiválás",
+      "close": "Lezárás",
+      "reject": "Elutasítás",
+      "wait": "Várakozás"
     }
   },
-  "site": {
-    "list-title": "Telephelyek",
-    "editor-title-create": "Új telephely regisztrálása",
-    "editor-title-edit": "Telephely szerkeztése",
-    "field": {
-      "name": "Telephely név",
-      "address": "Cím"
-    },
-    "error": {
-      "name-required": "Kérem adja meg a telephely nevét!",
-      "address-required": "Kérem adja meg a telephely címét!"
-    }
+  "coupon-editor": {
+    "comment-delete-confirm-message": "Biztos benne, hogy törölni szeretné ezt a kommentet?",
+    "save-coupon-status-success": "Kupon státusz mentése sikeres.",
+    "save-coupon-success": "Sikeres kupon mentés."
+  },
+  "coupon-list": {
+    "action": "Műveletek",
+    "coupons": "Kuponok",
+    "create": "Létrehozás",
+    "delete-confirm-message": "Biztosan törölni akarja ezt a kupont?",
+    "description": "Leírás",
+    "name": "Név",
+    "search": "Keresés"
   },
   "error-page": {
-    "back": "Vissza a főoldalra",
-    "title": "Hiba!",
-    "title404": "Hozzáférési hiba!"
+    "back": "Vissza a főoldalra"
   },
   "languages": {
     "en": "English",
     "hu": "Magyar",
     "language": "Nyelv"
+  },
+  "menu": {
+    "coupon-categories": "Kategóriák",
+    "coupons": "Kuponok",
+    "dashboard": "Irányítópult",
+    "partner-data": "Partner adatok",
+    "sites": "Telephelyek"
+  },
+  "notification": {
+    "empty-list": "Üres",
+    "load-more": "Régebbiek...",
+    "notifications": "Értesítések"
+  },
+  "partner": {
+    "editor-title": "Partner",
+    "field": {
+      "address": "Cím",
+      "major-partner": "Kiemelt partner",
+      "name": "Cégnév",
+      "registration-number": "Cégjegyzék szám",
+      "tax-number": "Adószám"
+    },
+    "save": "Mentés",
+    "save-partner-success": "Partner mentése sikeres."
+  },
+  "profile": {
+    "editor-title": "Profil",
+    "field": {
+      "email": "Email",
+      "name": "Név",
+      "phone": "Telefonszám"
+    },
+    "save": "Mentés",
+    "save-profile-success": "Profile mentése sikeres."
+  },
+  "site": {
+    "field": {
+      "address": "Cím",
+      "name": "Telephely név"
+    },
+    "list-title": "Telephelyek"
   }
 }
