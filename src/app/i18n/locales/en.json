@@ -96,12 +96,15 @@
   },
   "coupon-list": {
     "action": "Action",
+    "categoryId": "Category",
     "coupons": "Coupons",
     "create": "Create",
     "delete-confirm-message": "Are you sure you want to delete this coupon?",
-    "description": "Description",
+    "endDate": "End date",
+    "expireDate": "Expire date",
     "name": "Name",
-    "search": "Search"
+    "startDate": "Start datre",
+    "state": "State"
   },
   "error-page": {
     "back": "Back to home"

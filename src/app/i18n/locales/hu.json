@@ -96,12 +96,15 @@
   },
   "coupon-list": {
     "action": "Műveletek",
+    "categoryId": "Kategória",
     "coupons": "Kuponok",
     "create": "Létrehozás",
     "delete-confirm-message": "Biztosan törölni akarja ezt a kupont?",
-    "description": "Leírás",
+    "endDate": "Vég dátum",
+    "expireDate": "Lejárati dátum",
     "name": "Név",
-    "search": "Keresés"
+    "startDate": "Kezdő dátum",
+    "state": "Státusz"
   },
   "error-page": {
     "back": "Vissza a főoldalra"
