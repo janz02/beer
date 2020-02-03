@@ -37,14 +37,11 @@
     "@openapitools/openapi-generator-cli": "^1.0.8-4.2.2",
     "@types/enzyme": "^3.10.4",
     "@types/redux-mock-store": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
     "babel-plugin-import": "^1.12.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "jest-junit": "^10.0.0",
-    "less": "^3.10.3",
-    "less-loader": "^5.0.0",
-    "redux-mock-store": "^1.5.4",
-    "shelljs": "^0.8.3",
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.9.0",
     "eslint-config-standard": "^14.1.0",
@@ -56,21 +53,26 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "eslint-plugin-standard": "^4.0.1",
-    "standard": "^14.3.1",
+    "i18next-scanner": "^2.10.3",
+    "jest-junit": "^10.0.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "prettier": "^1.19.1",
     "prettier-stylelint": "^0.4.2",
+    "redux-mock-store": "^1.5.4",
+    "shelljs": "^0.8.3",
+    "standard": "^14.3.1",
     "stylelint": "^12.0.0",
     "stylelint-config-property-sort-order-smacss": "^5.2.0",
-    "stylelint-config-standard": "^19.0.0",
-    "@typescript-eslint/eslint-plugin": "^2.16.0",
-    "@typescript-eslint/parser": "^2.16.0"
+    "stylelint-config-standard": "^19.0.0"
   },
   "scripts": {
     "start": "env-cmd -e dev react-app-rewired start",
     "test": "env-cmd -e dev react-app-rewired test --setupFiles ./config/setupTests.ts",
     "build": "env-cmd -e prod react-app-rewired build",
     "eject": "react-app-rewired eject",
-    "generate-client": "node ./config/generate-client.js"
+    "generate-client": "node ./config/generate-client.js",
+    "i18n:generate": "i18next-scanner --config config/i18next-scanner.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"

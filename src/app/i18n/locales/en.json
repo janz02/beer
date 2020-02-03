@@ -1,203 +1,158 @@
 {
-  "common": {
-    "ok": "OK",
-    "cancel": "Cancel",
-    "edit": "Edit",
-    "create": "Create",
-    "save": "Save",
-    "delete": "Delete",
-    "actions": "Actions",
-    "data": "Data",
-    "discard": "Discard",
-    "confirm": "Confirm",
-    "go-back": "Go back",
-    "rule-error": {
-      "field-required": "This field is required!",
-      "password-format": "Must have a letter, a number, a special character and contain 8 characters.",
-      "field-number": "This filed must be a number."
+  "auth": {
+    "error": {
+      "login-failed": "Authentication failed.",
+      "password-inconsistent": "The two passwords are not matching.",
+      "recovery-failed": "Failed to send the password recovery email.",
+      "signup-failed": "Something went wrong, please try again."
     },
+    "field": {
+      "code": "Client code",
+      "company": "Company name",
+      "email": "E-mail address",
+      "name": "Full Name",
+      "password": "Password",
+      "password-again": "Password again",
+      "phone": "Phone number",
+      "remember-me": "Remember me!",
+      "username": "Username"
+    },
+    "forgot-password": "Forgot password",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "send-email": "Send email",
+    "signup": "Sign up",
+    "text": {
+      "accept-prefix": "I accept the ",
+      "client-code-info": "Provided in the contract.",
+      "new-password-email": "Get an email with the new password.",
+      "terms-and-services": "Terms & Services"
+    }
+  },
+  "common": {
+    "actions": "Actions",
+    "cancel": "Cancel",
+    "create": "Create",
+    "data": "Data",
+    "delete": "Delete",
+    "edit": "Edit",
+    "go-back": "Go back",
     "message": {
       "save-success": "Successful saving"
     },
+    "ok": "OK",
     "popup": {
-      "discard-title": "Discard draft",
-      "discard-text": "Are you sure about discarding your modifications?",
-      "delete-title": "Delete data",
-      "delete-text": "Are you sure about deleting this data?",
-      "confirm-title": "Confirm action",
-      "confirm-text": "Are you sure",
-      "save-title": "Save data",
-      "save-text": "Do you really want to save this data?"
-    }
-  },
-  "menu": {
-    "dashboard": "Dashboard",
-    "coupons": "Coupons",
-    "sites": "Sites",
-    "coupon-categories": "Categories",
-    "partner-data": "Partner data"
-  },
-  "auth": {
-    "profile": "Profile",
-    "login": "Login",
-    "logout": "Logout",
-    "signup": "Sign up",
-    "forgot-password": "Forgot password",
-    "password-recovery": "Password recovery",
-    "send-email": "Send email",
-    "text": {
-      "new-password-email": "Get an email with the new password.",
-      "accept-prefix": "I accept the ",
-      "terms-and-services": "Terms & Services",
-      "client-code-info": "Provided in the contract."
+      "delete-text": "Are you sure about deleting this data?"
     },
-    "field": {
-      "username": "Username",
-      "password": "Password",
-      "password-again": "Password again",
-      "remember-me": "Remember me!",
-      "email": "E-mail address",
-      "company": "Company name",
-      "name": "Full Name",
-      "phone": "Phone number",
-      "code": "Client code"
-    },
-    "error": {
-      "login-failed": "Authentication failed.",
-      "signup-failed": "Something went wrong, please try again.",
-      "recovery-failed": "Failed to send the password recovery email.",
-      "username-required": "Please enter your Username!",
-      "email-required": "Please enter your E-mail address!",
-      "code-required": "Please enter your client code!",
-      "name-required": "Please enter your full name!",
-      "phone-required": "Please enter your phone number!",
-      "company-required": "Please enter your name of your workplace!",
-      "password-required": "Please enter your Password!",
-      "password-inconsistent": "The two passwords are not matching.",
-      "user-exists": "User already exists!",
-      "invalid-email": "Invalid email!"
-    }
-  },
-  "profile": {
-    "save": "Save",
-    "save-profile-success": "Saving profile was successful.",
-    "editor-title": "Profile",
-    "field": {
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone"
-    },
-    "error": {
-      "name-required": "Company name field is required",
-      "email-required": "Email field is required",
-      "phone-required": "Phone field is required"
-    }
-  },
-  "coupon-list": {
-    "create": "Create",
-    "coupons": "Coupons",
-    "name": "Name",
-    "description": "Description",
-    "action": "Action",
-    "edit": "Edit",
-    "delete": "Delete",
-    "delete-confirm-message": "Are you sure you want to delete this coupon?",
-    "search": "Search"
-  },
-  "coupon-create": {
-    "create": "Create",
-    "save": "Save",
-    "editor": "Coupon editor",
-    "edit": "Edit",
-    "create-coupon-success": "Creating a coupon was successful.",
-    "states": {
-      "accept": "Accept",
-      "reject": "Reject",
-      "wait": "Wait",
-      "close": "Close",
-      "archive": "Archive"
-    },
-    "state-action-confirm-message": "Are you sure?",
-    "field": {
-      "name": "Name",
-      "description": "Description",
-      "rank": "Rank",
-      "category": "Category",
-      "discount-type": "Discount type",
-      "discount-amount": "Discount amount",
-      "distribution-start-date": "Distribution start date",
-      "distribution-end-date": "Distribution end date",
-      "coupon-count": "Coupon count",
-      "minimum-shopping-value": "Minimum shopping value",
-      "expiration-date": "Expiration date",
-      "comment": "Comment"
-    },
-    "error": {
-      "name-required": "Name field is required.",
-      "percentage-max-100": "The percentage value cannot exceed 100."
-    }
-  },
-  "coupon-editor": {
-    "save-coupon-success": "Saving coupon was successful.",
-    "comment-delete-confirm-message": "Are you sure you want to delete this comment?",
-    "save-coupon-status-success": "Saving coupon status was successful."
+    "save": "Save"
   },
   "coupon-category": {
-    "list-title": "Coupon categories",
-    "editor-edit": "Edit coupon category",
-    "editor-create": "Create coupon category",
+    "delete-popup": {
+      "text": "Text",
+      "title": "Title"
+    },
     "field": {
       "name": "Category name"
     },
+    "list-title": "Coupon categories"
+  },
+  "coupon-create": {
+    "create": "Create",
+    "create-coupon-success": "Creating a coupon was successful.",
+    "edit": "Edit",
+    "editor": "Coupon editor",
     "error": {
-      "name-required": "Please enter the category name!"
-    }
-  },
-  "notification": {
-    "notifications": "Notifications",
-    "empty-list": "Empty",
-    "load-more": "Load more..."
-  },
-  "partner": {
-    "editor-title": "Partner",
+      "percentage-max-100": "The percentage value cannot exceed 100."
+    },
+    "field": {
+      "category": "Category",
+      "comment": "Comment",
+      "coupon-count": "Coupon count",
+      "description": "Description",
+      "discount-amount": "Discount amount",
+      "discount-type": "Discount type",
+      "distribution-end-date": "Distribution end date",
+      "distribution-start-date": "Distribution start date",
+      "expiration-date": "Expiration date",
+      "minimum-shopping-value": "Minimum shopping value",
+      "name": "Name",
+      "rank": "Rank"
+    },
     "save": "Save",
-    "save-partner-success": "Saving partner was successful.",
-    "field": {
-      "name": "Company name",
-      "active": "Active",
-      "major-partner": "Major partner",
-      "address": "Address",
-      "registration-number": "Company register number",
-      "tax-number": "VAT number"
-    },
-    "error": {
-      "name-required": "Company name field is required",
-      "active-required": "Active field is required",
-      "major-partner-required": "Major partner field is required",
-      "address-required": "Address field is required"
+    "state-action-confirm-message": "Are you sure?",
+    "states": {
+      "accept": "Accept",
+      "archive": "Archive",
+      "close": "Close",
+      "reject": "Reject",
+      "wait": "Wait"
     }
   },
-  "site": {
-    "list-title": "Sites",
-    "editor-title-create": "Create new site",
-    "editor-title-edit": "Update site",
-    "field": {
-      "name": "Site name",
-      "address": "Address"
-    },
-    "error": {
-      "name-required": "Site name field is required!",
-      "address-required": "Address field is required!"
-    }
+  "coupon-editor": {
+    "comment-delete-confirm-message": "Are you sure you want to delete this comment?",
+    "save-coupon-status-success": "Saving coupon status was successful.",
+    "save-coupon-success": "Saving coupon was successful."
+  },
+  "coupon-list": {
+    "action": "Action",
+    "categoryId": "Category",
+    "coupons": "Coupons",
+    "create": "Create",
+    "delete-confirm-message": "Are you sure you want to delete this coupon?",
+    "endDate": "End date",
+    "expireDate": "Expire date",
+    "name": "Name",
+    "startDate": "Start datre",
+    "state": "State"
   },
   "error-page": {
-    "back": "Back to home",
-    "title": "Error!",
-    "title404": "Permission error!"
+    "back": "Back to home"
   },
   "languages": {
     "en": "English",
     "hu": "Magyar",
     "language": "Language"
+  },
+  "menu": {
+    "coupon-categories": "Categories",
+    "coupons": "Coupons",
+    "dashboard": "Dashboard",
+    "partner-data": "Partner data",
+    "sites": "Sites"
+  },
+  "notification": {
+    "empty-list": "Empty",
+    "load-more": "Load more...",
+    "notifications": "Notifications"
+  },
+  "partner": {
+    "editor-title": "Partner",
+    "field": {
+      "address": "Address",
+      "major-partner": "Major partner",
+      "name": "Company name",
+      "registration-number": "Company register number",
+      "tax-number": "VAT number"
+    },
+    "save": "Save",
+    "save-partner-success": "Saving partner was successful."
+  },
+  "profile": {
+    "editor-title": "Profile",
+    "field": {
+      "email": "Email",
+      "name": "Name",
+      "phone": "Phone"
+    },
+    "save": "Save",
+    "save-profile-success": "Saving profile was successful."
+  },
+  "site": {
+    "field": {
+      "address": "Address",
+      "name": "Site name"
+    },
+    "list-title": "Sites"
   }
 }

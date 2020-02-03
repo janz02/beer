@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './CouponListPage.scss'
-import { Button, Table, Input, Popconfirm } from 'antd'
+import { Button, Table, Popconfirm } from 'antd'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -10,25 +10,34 @@ import { useIsMobile } from 'hooks'
 import { listCoupons, deleteCoupons } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import { CouponListingOptions } from 'models/couponListingOptions'
-import { SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import { OrderByType } from 'api/swagger/models'
-import { ColumnType, SorterResult } from 'antd/lib/table/interface'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import { OrderByType, CouponState } from 'api/swagger/models'
+import { ColumnType, SorterResult, ColumnFilterItem } from 'antd/lib/table/interface'
+import { MomentDisplay } from 'components/MomentDisplay'
+import { listCategories } from '../couponsSlice'
 
 export const CouponListPage: React.FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const isMobile = useIsMobile()
   const { coupons, loading, allCouponsCount } = useSelector((state: RootState) => state.couponList)
+  const { categories } = useSelector((state: RootState) => state.coupons)
+
   const [listingOptions, setListingOptions] = useState<CouponListingOptions>({
     pageSize: 10,
     current: 1
   })
 
   useEffect(() => {
+    dispatch(listCategories())
+  }, [dispatch])
+
+  useEffect(() => {
     dispatch(listCoupons(listingOptions))
   }, [dispatch, listingOptions])
 
   const notActionCellProps = {
+    sorter: true,
     onCell: (record: Coupon) => {
       return {
         onClick: () => {
@@ -38,35 +47,64 @@ export const CouponListPage: React.FC = () => {
     }
   }
 
-  const getColumnSearchProps = (dataIndex: string): ColumnType<Coupon> => ({
-    filterDropdown({ confirm }) {
-      return (
-        <div className="table-filter">
-          <Input placeholder={`Search ${dataIndex}`} className="table-filter__search-field" />
-          <Button type="primary" icon="search" size="small" onClick={() => confirm()}>
-            {t('coupon-list.search')}
-          </Button>
-        </div>
-      )
-    },
-    filterIcon: <SearchOutlined />
-  })
-
   const columns: ColumnType<Coupon>[] = [
     {
       title: t('coupon-list.name'),
       dataIndex: 'name',
       key: 'name',
-      sorter: true,
-      ...notActionCellProps,
-      ...getColumnSearchProps('name')
+      ...notActionCellProps
     },
     {
-      title: t('coupon-list.description'),
-      dataIndex: 'description',
-      key: 'description',
+      title: t('coupon-list.state'),
+      dataIndex: 'state',
+      key: 'state',
       ...notActionCellProps,
-      ...getColumnSearchProps('description')
+      filters: Object.keys(CouponState).map(x => {
+        return { text: x, value: x } as ColumnFilterItem
+      }),
+      filterMultiple: false
+    },
+    {
+      title: t('coupon-list.categoryId'),
+      dataIndex: 'categoryId',
+      key: 'categoryId',
+      ...notActionCellProps,
+      render(value) {
+        return categories && categories.find(x => x.id === +value)?.name
+      },
+      filters: categories
+        ? categories.map(x => {
+            return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
+          })
+        : [],
+      filterMultiple: false
+    },
+    {
+      title: t('coupon-list.startDate'),
+      dataIndex: 'startDate',
+      key: 'startDate',
+      ...notActionCellProps,
+      render(value) {
+        return <MomentDisplay date={value} />
+      }
+    },
+    {
+      title: t('coupon-list.endDate'),
+      dataIndex: 'endDate',
+      key: 'endDate',
+      ...notActionCellProps,
+      render(value) {
+        return <MomentDisplay date={value} />
+      }
+    },
+    {
+      title: t('coupon-list.expireDate'),
+      dataIndex: 'expireDate',
+      key: 'expireDate',
+      ...notActionCellProps,
+      render(value) {
+        return <MomentDisplay date={value} />
+      }
     },
     {
       title: t('coupon-list.action'),
@@ -121,7 +159,7 @@ export const CouponListPage: React.FC = () => {
           total: allCouponsCount
         }}
         loading={loading}
-        onChange={(pagination, _filters, sorter) => {
+        onChange={(pagination, filters, sorter) => {
           const couponListingOptions: CouponListingOptions = {
             pageSize: pagination.pageSize,
             current: pagination.current
@@ -143,6 +181,14 @@ export const CouponListPage: React.FC = () => {
                 }
                 break
             }
+          }
+
+          // TODO: integrate filtering.
+          if (filters.state) {
+            console.log(filters.state[0])
+          }
+          if (filters.categoryId) {
+            console.log(filters.categoryId[0])
           }
 
           setListingOptions(couponListingOptions)
