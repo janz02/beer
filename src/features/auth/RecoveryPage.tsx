@@ -29,7 +29,7 @@ export const RecoveryPage: React.FC = () => {
         }}
       >
         <div className="instruction-text">{t('auth.text.new-password-email')}</div>
-        <Form.Item name="email" rules={[rule.required('auth.error.email-required')]}>
+        <Form.Item name="email" rules={[rule.required()]}>
           <Input prefix={<MailOutlined />} placeholder={t('auth.field.email')} />
         </Form.Item>
         <Button loading={loading} block size="large" type="primary" htmlType="submit">

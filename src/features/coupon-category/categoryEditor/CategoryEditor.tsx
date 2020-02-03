@@ -87,11 +87,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
         layout={formLayout}
         onFinish={onSave}
       >
-        <Form.Item
-          label={t('coupon-category.field.name')}
-          name="name"
-          rules={[rule.required('coupon-category.error.name-required')]}
-        >
+        <Form.Item label={t('coupon-category.field.name')} name="name" rules={[rule.required()]}>
           <Input maxLength={20} />
         </Form.Item>
       </Form>

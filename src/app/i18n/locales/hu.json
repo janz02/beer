@@ -45,6 +45,11 @@
     "popup": {
       "delete-text": "Biztos, hogy törölni szeretnéd?"
     },
+    "rule-error": {
+      "field-number": "Ebbe a mezőbe számot kell megadni.",
+      "field-required": "A mező kitö kötelező.",
+      "password-format": "A jelszó formátuma nem megfelelő."
+    },
     "save": "Mentés"
   },
   "coupon-category": {
@@ -130,6 +135,7 @@
     "editor-title": "Partner",
     "field": {
       "address": "Cím",
+      "bankAccount": "Bankszámla szám",
       "major-partner": "Kiemelt partner",
       "name": "Cégnév",
       "registration-number": "Cégjegyzék szám",

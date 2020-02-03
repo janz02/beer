@@ -24,10 +24,10 @@ export const LoginPage: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={values => dispatch(login(values))}
       >
-        <Form.Item name="username" rules={[rule.required('auth.error.username-required')]}>
+        <Form.Item name="username" rules={[rule.required()]}>
           <Input prefix={<UserOutlined />} placeholder={t('auth.field.username')} />
         </Form.Item>
-        <Form.Item name="password" rules={[rule.required('auth.error.password-required')]}>
+        <Form.Item name="password" rules={[rule.required()]}>
           <Input.Password prefix={<LockOutlined />} placeholder={t('auth.field.password')} />
         </Form.Item>
         {/* TODO: was commented out because there is no BE support yet -> see NRMRTDKPR-125 */}

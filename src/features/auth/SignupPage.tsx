@@ -28,11 +28,7 @@ export const SignupPage: React.FC = () => {
     <AuthLayout className="signup" title={t(`auth.signup`)}>
       {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
       <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
-        <Form.Item
-          name="username"
-          label={t('auth.field.username')}
-          rules={[rule.required('auth.error.username-required')]}
-        >
+        <Form.Item name="username" label={t('auth.field.username')} rules={[rule.required()]}>
           <Input prefix={<UserOutlined />} />
         </Form.Item>
 
@@ -40,7 +36,7 @@ export const SignupPage: React.FC = () => {
           name="password"
           hasFeedback
           label={t('auth.field.password')}
-          rules={[rule.required('auth.error.password-required'), rule.password()]}
+          rules={[rule.required(), rule.password()]}
         >
           <Input.Password prefix={<LockOutlined />} />
         </Form.Item>
@@ -51,7 +47,7 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.password-again')}
           dependencies={['password']}
           rules={[
-            rule.required('auth.error.password-required'),
+            rule.required(),
             ({ getFieldValue }) => ({
               validator(rule, value) {
                 if (!value || getFieldValue('password') === value) {
@@ -65,26 +61,18 @@ export const SignupPage: React.FC = () => {
           <Input.Password prefix={<LockOutlined />} />
         </Form.Item>
 
-        <Form.Item
-          name="company"
-          label={t('auth.field.company')}
-          rules={[rule.required('auth.error.company-required')]}
-        >
+        <Form.Item name="company" label={t('auth.field.company')} rules={[rule.required()]}>
           <Input prefix={<HomeOutlined />} />
         </Form.Item>
 
-        <Form.Item
-          name="name"
-          label={t('auth.field.name')}
-          rules={[rule.required('auth.error.name-required')]}
-        >
+        <Form.Item name="name" label={t('auth.field.name')} rules={[rule.required()]}>
           <Input prefix={<UserOutlined />} />
         </Form.Item>
 
         <Form.Item
           name="phone"
           label={t('auth.field.phone')}
-          rules={[rule.required('auth.error.phone-required'), rule.number()]}
+          rules={[rule.required(), rule.number()]}
         >
           <Input type="tel" prefix={<PhoneOutlined />} />
         </Form.Item>
@@ -93,7 +81,7 @@ export const SignupPage: React.FC = () => {
           name="code"
           label={t('auth.field.code')}
           extra={t('auth.text.client-code-info')}
-          rules={[rule.required('auth.error.code-required')]}
+          rules={[rule.required()]}
         >
           <Input prefix={<CrownOutlined />} />
         </Form.Item>

@@ -78,9 +78,7 @@ export const updatePartners = (partner: Partner): AppThunk => async (dispatch, g
         id,
         partnerDto: {
           ...getState().partner.partner,
-          ...partner,
-          // TODO: integrate bankAccount.
-          bankAccount: 1111111111
+          ...partner
         }
       })
 
