@@ -146,6 +146,9 @@
   },
   "profile": {
     "editor-title": "Profil",
+    "error": {
+      "email-required": "Az email mező megadása kötelező."
+    },
     "field": {
       "email": "Email",
       "name": "Név",

@@ -83,7 +83,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           name="email"
           label={t('profile.field.email')}
-          rules={[rule.required('profile.error.email-required'), { type: 'email' }]}
+          rules={[rule.required(t('profile.error.email-required'), { type: 'email' })]}
           {...formItemLayout}
         >
           <Input disabled={!editable} prefix={<MailOutlined />} />

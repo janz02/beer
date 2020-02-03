@@ -146,6 +146,9 @@
   },
   "profile": {
     "editor-title": "Profile",
+    "error": {
+      "email-required": "Email field is required."
+    },
     "field": {
       "email": "Email",
       "name": "Name",
