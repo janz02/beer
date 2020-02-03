@@ -34,6 +34,12 @@ export interface PartnerDto {
     name?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof PartnerDto
+     */
+    address?: string | null;
+    /**
+     * 
      * @type {number}
      * @memberof PartnerDto
      */
@@ -75,6 +81,7 @@ export function PartnerDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
         'registrationNumber': !exists(json, 'registrationNumber') ? undefined : json['registrationNumber'],
         'taxNumber': !exists(json, 'taxNumber') ? undefined : json['taxNumber'],
         'bankAccount': !exists(json, 'bankAccount') ? undefined : json['bankAccount'],
@@ -93,6 +100,7 @@ export function PartnerDtoToJSON(value?: PartnerDto | null): any {
     return {
         
         'name': value.name,
+        'address': value.address,
         'registrationNumber': value.registrationNumber,
         'taxNumber': value.taxNumber,
         'bankAccount': value.bankAccount,
