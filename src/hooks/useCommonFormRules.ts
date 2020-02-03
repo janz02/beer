@@ -16,7 +16,7 @@ export function useCommonFormRules() {
       ...other,
       required: true,
       whitespace: true,
-      message: t(message ?? 'common.rule-error.field-required')
+      message: message || t('common.rule-error.field-required')
     }),
     [t]
   )
@@ -28,7 +28,7 @@ export function useCommonFormRules() {
   const password = useCallback(
     (message?: string): Rule => ({
       pattern: new RegExp('^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'),
-      message: t(message ?? 'common.rule-error.password-format')
+      message: message || t('common.rule-error.password-format')
     }),
     [t]
   )
@@ -40,7 +40,7 @@ export function useCommonFormRules() {
   const number = useCallback(
     (message?: string): Rule => ({
       pattern: new RegExp('^\\d+$'),
-      message: t(message ?? 'common.rule-error.field-number')
+      message: message || t('common.rule-error.field-number')
     }),
     [t]
   )

@@ -32,7 +32,8 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
     handlePartnerSave({
       ...values,
       registrationNumber: +values.registrationNumber,
-      taxNumber: +values.taxNumber
+      taxNumber: +values.taxNumber,
+      bankAccount: +values.bankAccount
     })
   }
 
@@ -53,7 +54,8 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
     formRef.current.setFieldsValue({
       ...partner,
       registrationNumber: partner?.registrationNumber?.toString(),
-      taxNumber: partner?.taxNumber?.toString()
+      taxNumber: partner?.taxNumber?.toString(),
+      bankAccount: partner?.bankAccount?.toString()
     })
   }, [partner])
 
@@ -74,7 +76,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="name"
           label={t('partner.field.name')}
-          rules={[rule.required('partner.error.name-required')]}
+          rules={[rule.required()]}
           {...formItemLayout}
         >
           <Input />
@@ -91,7 +93,16 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="address"
           label={t('partner.field.address')}
-          rules={[rule.required('partner.error.address-required')]}
+          rules={[rule.required()]}
+          {...formItemLayout}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          name="bankAccount"
+          label={t('partner.field.bankAccount')}
+          rules={[rule.required(), rule.number()]}
           {...formItemLayout}
         >
           <Input />

@@ -189,7 +189,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             <Form.Item
               name="name"
               label={t('coupon-create.field.name')}
-              rules={[rule.required('coupon-create.error.name-required')]}
+              rules={[rule.required()]}
               {...formItemLayout}
             >
               <Input disabled={!displayEditor} />

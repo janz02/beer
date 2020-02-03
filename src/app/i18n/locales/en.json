@@ -45,6 +45,11 @@
     "popup": {
       "delete-text": "Are you sure about deleting this data?"
     },
+    "rule-error": {
+      "field-number": "This field must be a number.",
+      "field-required": "This field is required.",
+      "password-format": "Password format is invalid."
+    },
     "save": "Save"
   },
   "coupon-category": {
@@ -130,6 +135,7 @@
     "editor-title": "Partner",
     "field": {
       "address": "Address",
+      "bankAccount": "Bank account",
       "major-partner": "Major partner",
       "name": "Company name",
       "registration-number": "Company register number",
@@ -140,6 +146,9 @@
   },
   "profile": {
     "editor-title": "Profile",
+    "error": {
+      "email-required": "Email field is required."
+    },
     "field": {
       "email": "Email",
       "name": "Name",

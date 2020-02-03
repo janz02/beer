@@ -27,7 +27,5 @@ module.exports = {
       prefix: "{{",
       suffix: "}}"
     }
-    // NB: do not removed "unused", we translate some strings by ID on i18n being loaded, so it can't see them during generation - hence it thinks they are missing and removes them
-    // removeUnusedKeys: true
   }
 };
