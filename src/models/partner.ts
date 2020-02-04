@@ -5,7 +5,7 @@ export interface Partner {
   id?: number
   name?: string | null
   majorPartner?: boolean
-  address?: string
+  address?: string | null
   registrationNumber?: number
   taxNumber?: number
   bankAccount?: number

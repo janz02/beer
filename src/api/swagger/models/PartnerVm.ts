@@ -48,6 +48,12 @@ export interface PartnerVm {
     name?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof PartnerVm
+     */
+    address?: string | null;
+    /**
+     * 
      * @type {number}
      * @memberof PartnerVm
      */
@@ -102,6 +108,7 @@ export function PartnerVmFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'address': !exists(json, 'address') ? undefined : json['address'],
         'registrationNumber': !exists(json, 'registrationNumber') ? undefined : json['registrationNumber'],
         'taxNumber': !exists(json, 'taxNumber') ? undefined : json['taxNumber'],
         'bankAccount': !exists(json, 'bankAccount') ? undefined : json['bankAccount'],
@@ -123,6 +130,7 @@ export function PartnerVmToJSON(value?: PartnerVm | null): any {
         
         'id': value.id,
         'name': value.name,
+        'address': value.address,
         'registrationNumber': value.registrationNumber,
         'taxNumber': value.taxNumber,
         'bankAccount': value.bankAccount,

@@ -1011,6 +1011,13 @@
             }
           },
           {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "registrationNumber",
             "in": "query",
             "schema": {
@@ -2378,6 +2385,10 @@
             "type": "string",
             "nullable": true
           },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
           "registrationNumber": {
             "type": "integer",
             "format": "int32"
@@ -2432,6 +2443,10 @@
             "format": "int32"
           },
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
             "type": "string",
             "nullable": true
           },

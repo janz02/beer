@@ -46,6 +46,7 @@ export interface GetPartnersRequest {
 
 export interface ListPartnersRequest {
     name?: string;
+    address?: string;
     registrationNumber?: number;
     taxNumber?: number;
     bankAccount?: number;
@@ -169,6 +170,10 @@ export class PartnersApi extends runtime.BaseAPI {
 
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.address !== undefined) {
+            queryParameters['address'] = requestParameters.address;
         }
 
         if (requestParameters.registrationNumber !== undefined) {
