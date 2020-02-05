@@ -16,7 +16,6 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const { t } = useTranslation()
   const isMobile = useIsMobile()
   const [submitable, setSubmitable] = useState(false)
-  const [majorPartner, setMajorPartner] = useState<boolean>()
   const [form] = Form.useForm()
   const rule = useCommonFormRules()
 
@@ -34,8 +33,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       ...values,
       registrationNumber: +values.registrationNumber,
       taxNumber: +values.taxNumber,
-      bankAccount: +values.bankAccount,
-      majorPartner
+      bankAccount: +values.bankAccount
     })
   }
 
@@ -59,15 +57,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       taxNumber: partner?.taxNumber?.toString(),
       bankAccount: partner?.bankAccount?.toString()
     })
-    setMajorPartner(partner?.majorPartner)
   }, [partner])
-
-  const onFieldsChange = (): void => {
-    const hasErrors = form.getFieldsError().some(field => field.errors.length)
-    if (submitable === hasErrors) {
-      setSubmitable(!submitable)
-    }
-  }
 
   return (
     <Card className="partner-editor-form" title={t('partner.editor-title')}>
@@ -77,7 +67,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         form={form}
         layout={formLayout}
         onFieldsChange={() => {
-          onFieldsChange()
+          const hasErrors = form.getFieldsError().some(field => field.errors.length)
+          if (submitable === hasErrors) {
+            setSubmitable(!submitable)
+          }
         }}
       >
         <Form.Item
@@ -90,17 +83,12 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          valuePropName="majorPartner"
+          name="majorPartner"
+          valuePropName="checked"
           label={t('partner.field.major-partner')}
           {...formItemLayout}
         >
-          <Switch
-            checked={majorPartner}
-            onChange={value => {
-              setMajorPartner(value)
-              onFieldsChange()
-            }}
-          />
+          <Switch />
         </Form.Item>
 
         <Form.Item
