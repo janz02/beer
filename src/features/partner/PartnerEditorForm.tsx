@@ -16,6 +16,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const { t } = useTranslation()
   const isMobile = useIsMobile()
   const [submitable, setSubmitable] = useState(false)
+  const [majorPartner, setMajorPartner] = useState<boolean>()
   const [form] = Form.useForm()
   const rule = useCommonFormRules()
 
@@ -33,7 +34,8 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       ...values,
       registrationNumber: +values.registrationNumber,
       taxNumber: +values.taxNumber,
-      bankAccount: +values.bankAccount
+      bankAccount: +values.bankAccount,
+      majorPartner
     })
   }
 
@@ -57,7 +59,15 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       taxNumber: partner?.taxNumber?.toString(),
       bankAccount: partner?.bankAccount?.toString()
     })
+    setMajorPartner(partner?.majorPartner)
   }, [partner])
+
+  const onFieldsChange = (): void => {
+    const hasErrors = form.getFieldsError().some(field => field.errors.length)
+    if (submitable === hasErrors) {
+      setSubmitable(!submitable)
+    }
+  }
 
   return (
     <Card className="partner-editor-form" title={t('partner.editor-title')}>
@@ -67,10 +77,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         form={form}
         layout={formLayout}
         onFieldsChange={() => {
-          const hasErrors = form.getFieldsError().some(field => field.errors.length)
-          if (submitable === hasErrors) {
-            setSubmitable(!submitable)
-          }
+          onFieldsChange()
         }}
       >
         <Form.Item
@@ -87,7 +94,13 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
           label={t('partner.field.major-partner')}
           {...formItemLayout}
         >
-          <Switch />
+          <Switch
+            checked={majorPartner}
+            onChange={value => {
+              setMajorPartner(value)
+              onFieldsChange()
+            }}
+          />
         </Form.Item>
 
         <Form.Item
