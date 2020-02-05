@@ -55,11 +55,11 @@ export const {
 
 export default couponListSlice.reducer
 
-export const listCoupons = (listingOptions: CouponListingOptions): AppThunk => async dispatch => {
+export const getCoupons = (listingOptions: CouponListingOptions): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const coupons = await api.coupons.listCoupons({
+    const coupons = await api.coupons.getCoupons({
       ...listingOptions,
       page: listingOptions.current
     })

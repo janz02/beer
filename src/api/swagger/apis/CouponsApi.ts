@@ -18,6 +18,9 @@ import {
     ChangeCouponStateDto,
     ChangeCouponStateDtoFromJSON,
     ChangeCouponStateDtoToJSON,
+    CouponCodeVm,
+    CouponCodeVmFromJSON,
+    CouponCodeVmToJSON,
     CouponDto,
     CouponDtoFromJSON,
     CouponDtoToJSON,
@@ -33,7 +36,14 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
+    UserCouponVmPaginatedResponse,
+    UserCouponVmPaginatedResponseFromJSON,
+    UserCouponVmPaginatedResponseToJSON,
 } from '../models';
+
+export interface ClaimCouponRequest {
+    id: number;
+}
 
 export interface CreateCouponsRequest {
     couponDto?: CouponDto;
@@ -44,13 +54,21 @@ export interface DeleteCouponsRequest {
 }
 
 export interface GetCouponsRequest {
-    id: number;
-}
-
-export interface ListCouponsRequest {
     name?: string;
     description?: string;
     includeArchived?: boolean;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string;
+    orderByType?: OrderByType;
+}
+
+export interface GetOneCouponRequest {
+    id: number;
+}
+
+export interface GetUserCouponsRequest {
+    userId?: string;
     page?: number;
     pageSize?: number;
     orderBy?: string;
@@ -71,6 +89,38 @@ export interface UpdateCouponStatusRequest {
  * no description
  */
 export class CouponsApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async claimCouponRaw(requestParameters: ClaimCouponRequest): Promise<runtime.ApiResponse<CouponCodeVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling claimCoupon.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/{id}/Claim`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponCodeVmFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async claimCoupon(requestParameters: ClaimCouponRequest): Promise<CouponCodeVm> {
+        const response = await this.claimCouponRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      */
@@ -136,39 +186,7 @@ export class CouponsApi extends runtime.BaseAPI {
 
     /**
      */
-    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<CouponVm>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCoupons.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmFromJSON(jsonValue));
-    }
-
-    /**
-     */
-    async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVm> {
-        const response = await this.getCouponsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     */
-    async listCouponsRaw(requestParameters: ListCouponsRequest): Promise<runtime.ApiResponse<CouponVmPaginatedResponse>> {
+    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<CouponVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -217,8 +235,88 @@ export class CouponsApi extends runtime.BaseAPI {
 
     /**
      */
-    async listCoupons(requestParameters: ListCouponsRequest): Promise<CouponVmPaginatedResponse> {
-        const response = await this.listCouponsRaw(requestParameters);
+    async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVmPaginatedResponse> {
+        const response = await this.getCouponsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async getOneCouponRaw(requestParameters: GetOneCouponRequest): Promise<runtime.ApiResponse<CouponVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getOneCoupon.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getOneCoupon(requestParameters: GetOneCouponRequest): Promise<CouponVm> {
+        const response = await this.getOneCouponRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async getUserCouponsRaw(requestParameters: GetUserCouponsRequest): Promise<runtime.ApiResponse<UserCouponVmPaginatedResponse>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.userId !== undefined) {
+            queryParameters['userId'] = requestParameters.userId;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/User`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserCouponVmPaginatedResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getUserCoupons(requestParameters: GetUserCouponsRequest): Promise<UserCouponVmPaginatedResponse> {
+        const response = await this.getUserCouponsRaw(requestParameters);
         return await response.value();
     }
 

@@ -19,8 +19,7 @@
  */
 export enum PartnerState {
     Inactive = 'Inactive',
-    Registered = 'Registered',
-    Approved = 'Approved'
+    Active = 'Active'
 }
 
 export function PartnerStateFromJSON(json: any): PartnerState {
