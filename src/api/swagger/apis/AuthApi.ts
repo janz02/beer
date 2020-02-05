@@ -21,9 +21,12 @@ import {
     RefreshDto,
     RefreshDtoFromJSON,
     RefreshDtoToJSON,
-    RegisterDto,
-    RegisterDtoFromJSON,
-    RegisterDtoToJSON,
+    RegisterPartnerDto,
+    RegisterPartnerDtoFromJSON,
+    RegisterPartnerDtoToJSON,
+    RegisterUserDto,
+    RegisterUserDtoFromJSON,
+    RegisterUserDtoToJSON,
     UserVm,
     UserVmFromJSON,
     UserVmToJSON,
@@ -37,8 +40,12 @@ export interface RefreshRequest {
     refreshDto?: RefreshDto;
 }
 
-export interface RegisterRequest {
-    registerDto?: RegisterDto;
+export interface RegisterPartnerRequest {
+    registerPartnerDto?: RegisterPartnerDto;
+}
+
+export interface RegisterUserRequest {
+    registerUserDto?: RegisterUserDto;
 }
 
 /**
@@ -110,7 +117,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      */
-    async registerRaw(requestParameters: RegisterRequest): Promise<runtime.ApiResponse<void>> {
+    async registerPartnerRaw(requestParameters: RegisterPartnerRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -122,11 +129,11 @@ export class AuthApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Auth/Register`,
+            path: `/api/Auth/RegisterPartner`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: RegisterDtoToJSON(requestParameters.registerDto),
+            body: RegisterPartnerDtoToJSON(requestParameters.registerPartnerDto),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -134,8 +141,38 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      */
-    async register(requestParameters: RegisterRequest): Promise<void> {
-        await this.registerRaw(requestParameters);
+    async registerPartner(requestParameters: RegisterPartnerRequest): Promise<void> {
+        await this.registerPartnerRaw(requestParameters);
+    }
+
+    /**
+     */
+    async registerUserRaw(requestParameters: RegisterUserRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/RegisterUser`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: RegisterUserDtoToJSON(requestParameters.registerUserDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async registerUser(requestParameters: RegisterUserRequest): Promise<void> {
+        await this.registerUserRaw(requestParameters);
     }
 
 }

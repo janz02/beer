@@ -16,52 +16,52 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface RegisterDto
+ * @interface RegisterPartnerDto
  */
-export interface RegisterDto {
+export interface RegisterPartnerDto {
     /**
      * 
      * @type {string}
-     * @memberof RegisterDto
+     * @memberof RegisterPartnerDto
      */
     email?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof RegisterDto
+     * @memberof RegisterPartnerDto
      */
     password?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof RegisterDto
+     * @memberof RegisterPartnerDto
      */
     partnerName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof RegisterDto
+     * @memberof RegisterPartnerDto
      */
     fullName?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof RegisterDto
+     * @memberof RegisterPartnerDto
      */
     phone?: number;
     /**
      * 
      * @type {string}
-     * @memberof RegisterDto
+     * @memberof RegisterPartnerDto
      */
     code?: string | null;
 }
 
-export function RegisterDtoFromJSON(json: any): RegisterDto {
-    return RegisterDtoFromJSONTyped(json, false);
+export function RegisterPartnerDtoFromJSON(json: any): RegisterPartnerDto {
+    return RegisterPartnerDtoFromJSONTyped(json, false);
 }
 
-export function RegisterDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegisterDto {
+export function RegisterPartnerDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegisterPartnerDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -76,7 +76,7 @@ export function RegisterDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function RegisterDtoToJSON(value?: RegisterDto | null): any {
+export function RegisterPartnerDtoToJSON(value?: RegisterPartnerDto | null): any {
     if (value === undefined) {
         return undefined;
     }

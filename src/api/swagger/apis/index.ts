@@ -2,6 +2,8 @@ export * from './ApiKeyApi';
 export * from './AuthApi';
 export * from './CategoriesApi';
 export * from './CouponCommentsApi';
+export * from './CouponUserCodesApi';
+export * from './CouponUserPairsApi';
 export * from './CouponsApi';
 export * from './PartnerContactsApi';
 export * from './PartnersApi';

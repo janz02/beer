@@ -83,7 +83,8 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          valuePropName="majorPartner"
+          name="majorPartner"
+          valuePropName="checked"
           label={t('partner.field.major-partner')}
           {...formItemLayout}
         >

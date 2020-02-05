@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { history } from 'router/router'
-import { LoginRequest, RegisterRequest } from 'api/swagger/apis'
+import { LoginRequest, RegisterPartnerRequest } from 'api/swagger/apis'
 import { UserVm } from 'api/swagger'
 import { getJwtUserdata } from 'services/jwt-reader'
 import { api } from 'api'
@@ -126,8 +126,8 @@ export const recoverPassword = (params: any): AppThunk => async dispatch => {
 export const signUp = (params: any): AppThunk => async dispatch => {
   dispatch(signupRequest())
 
-  const requestRequest: RegisterRequest = {
-    registerDto: {
+  const requestRequest: RegisterPartnerRequest = {
+    registerPartnerDto: {
       email: params.username,
       password: params.password,
       partnerName: params.company,
@@ -139,7 +139,7 @@ export const signUp = (params: any): AppThunk => async dispatch => {
 
   try {
     // Register
-    await api.auth.register(requestRequest)
+    await api.auth.registerPartner(requestRequest)
 
     dispatch(signupSuccess())
 

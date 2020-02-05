@@ -7,7 +7,7 @@ import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
 import { useIsMobile } from 'hooks'
-import { listCoupons, deleteCoupons } from './couponListSlice'
+import { getCoupons, deleteCoupons } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import { CouponListingOptions } from 'models/couponListingOptions'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
@@ -33,7 +33,7 @@ export const CouponListPage: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(listCoupons(listingOptions))
+    dispatch(getCoupons(listingOptions))
   }, [dispatch, listingOptions])
 
   const notActionCellProps = {
