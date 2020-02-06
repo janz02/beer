@@ -16,7 +16,7 @@ interface RequestError {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function getUrl() {
   const getUrl = window.location
-  return getUrl.protocol + '//' + getUrl.host + '/' + getUrl.pathname.split('/')[1]
+  return getUrl.protocol + '//' + getUrl.host
 }
 
 const config: Configuration = new Configuration({
