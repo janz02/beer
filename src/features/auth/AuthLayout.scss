@@ -1,40 +1,44 @@
-.auth-card {
+.auth {
   min-width: 300px;
-  max-width: 450px;
+  max-width: 350px;
   margin: 2rem auto;
-
-  &--mobile {
-    margin: 0;
-  }
 
   --minor-inset: 0.5rem;
 
-  .ant-form-item-explain,
-  .ant-form-item-extra {
-    text-align: end;
+  .ant-card-head {
+    padding-top: 1rem;
+    border-bottom: none;
+    text-align: center;
+
+    img {
+      width: 7rem;
+    }
+  }
+
+  .ant-card-body {
+    padding: 0.5rem 2rem 1.5rem;
   }
 
   .ant-checkbox-wrapper {
     margin-left: var(--minor-inset);
   }
 
-  & .login {
-    &__signup-button {
-      margin-top: 0.75rem;
-      float: right;
+  &__form-fields-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  &__action-btn {
+    display: block;
+    min-width: 150px;
+    margin: auto;
+    margin-top: 0.5rem;
+
+    &.ant-btn-link {
+      font-weight: 600;
     }
 
-    &__options {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 1rem 0;
-
-      button {
-        height: 100%;
-        padding: 0 var(--minor-inset);
-      }
+    &--main {
+      margin-top: 2.5rem;
     }
   }
 
@@ -52,17 +56,12 @@
   }
 
   & .signup {
-    &__login-button {
-      margin-top: 0.75rem;
-      float: right;
-    }
-
     &__accept-terms {
       padding: 0;
     }
 
-    // bugfix: long string overlaps eye icon in password field.
-    // TODO:  see if newer antd versions (4.0.0-beta.0) fix this issue
+    // bugfix: long string overlaps eye icon in password field
+    // TODO:  see if newer antd versions (4.0.0-rc.3) fix this issue
     .ant-input-password {
       .ant-input {
         padding-right: 3rem;

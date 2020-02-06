@@ -1,0 +1,41 @@
+:root {
+  .ant-form-item-label > label.ant-form-item-required {
+    // "Required" asterisk goes after the label.
+    &::before {
+      all: unset;
+    }
+
+    &::after {
+      content: "*";
+      display: inline-block;
+      margin-left: 4px;
+      font-family: SimSun, sans-serif;
+      font-size: 14px;
+      line-height: 1;
+    }
+  }
+
+  h4.ant-typography {
+    // Title level 4
+    margin-bottom: 1rem;
+    color: $primary-color;
+  }
+
+  .ant-card {
+    border: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.102);
+  }
+
+  .ant-form-item {
+    margin-bottom: 0.7rem;
+
+    .ant-form-item-label {
+      padding-bottom: 0.1rem;
+    }
+
+    .ant-form-item-explain,
+    .ant-form-item-extra {
+      text-align: end;
+    }
+  }
+}
