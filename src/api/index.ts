@@ -13,11 +13,14 @@ interface RequestError {
   StackTrace?: string
 }
 
-const getUrl = window.location
-const baseUrl = getUrl.protocol + '//' + getUrl.host + '/' + getUrl.pathname.split('/')[1]
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function getUrl() {
+  const getUrl = window.location
+  return getUrl.protocol + '//' + getUrl.host + '/' + getUrl.pathname.split('/')[1]
+}
 
 const config: Configuration = new Configuration({
-  basePath: process.env.REACT_APP_API_URL || baseUrl,
+  basePath: process.env.REACT_APP_API_URL || getUrl(),
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: [
     {
