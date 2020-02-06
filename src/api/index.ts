@@ -22,7 +22,15 @@ const config: Configuration = new Configuration({
   middleware: [
     {
       post: ctx => {
-        if (ctx.response.status >= 400) {
+        // TODO: handle 503 like the rest of errors? (Currently it doesn't return json.)
+        if (ctx.response.status === 503) {
+          notification.error({
+            message: 'The server is currently unavailable',
+            duration: null
+          })
+          console.error('The server is currently unavailable')
+          console.table(ctx.response)
+        } else if (ctx.response.status >= 400) {
           ctx.response.json().then((x: RequestError) => {
             notification.error({
               message: x.ErrorKey ? i18n.t(x.ErrorKey) : x.Message,
