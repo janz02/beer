@@ -13,8 +13,11 @@ interface RequestError {
   StackTrace?: string
 }
 
+const getUrl = window.location
+const baseUrl = getUrl.protocol + '//' + getUrl.host + '/' + getUrl.pathname.split('/')[1]
+
 const config: Configuration = new Configuration({
-  basePath: process.env.REACT_APP_API_URL || ((window.location as unknown) as string),
+  basePath: process.env.REACT_APP_API_URL || baseUrl,
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: [
     {
