@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Layout, Menu, Drawer } from 'antd'
+import { Layout, Menu } from 'antd'
 import { DesktopOutlined, FileOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { Header } from './Header'
 import './layout.scss'
 import { LanguageSelector } from 'components/LanguageSelector'
 import { NotificationDrawer } from 'features/notification/NotificationDrawer'
+import { SideMenu } from './SideMenu'
 
 export const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation()
@@ -70,26 +71,9 @@ export const PrivateLayout: React.FC = ({ children }) => {
 
   return (
     <Layout className="layout">
-      {isMobile ? (
-        <Drawer
-          className="drawer"
-          placement="left"
-          closable={false}
-          onClose={() => setMenuOpened(false)}
-          visible={menuOpened}
-        >
-          <NavigationContent />
-        </Drawer>
-      ) : (
-        <Layout.Sider
-          trigger={null}
-          collapsible
-          collapsed={!menuOpened}
-          onCollapse={collapsed => setMenuOpened(collapsed)}
-        >
-          <NavigationContent />
-        </Layout.Sider>
-      )}
+      <SideMenu open={menuOpened} onClose={(open: boolean) => setMenuOpened(open)}>
+        <NavigationContent />
+      </SideMenu>
 
       <NotificationDrawer
         open={notificationDrawerOpen}

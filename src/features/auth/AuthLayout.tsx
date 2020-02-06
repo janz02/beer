@@ -1,9 +1,8 @@
 import React, { FC } from 'react'
 import './AuthLayout.scss'
-import Logo from 'assets/img/logo.svg'
+import { ReactComponent as Logo } from 'assets/img/logo.svg'
 import { Layout, Card, Typography } from 'antd'
 import { useIsMobile } from 'hooks'
-
 const { Title } = Typography
 interface AuthLayoutProps {
   title: string
@@ -18,7 +17,7 @@ export const AuthLayout: FC<AuthLayoutProps> = props => {
     <Layout.Content>
       <Card
         className={`auth ${isMobile ? 'auth--mobile' : ''}`}
-        title={<img src={Logo} alt="Logo" title="Logo" />}
+        title={<Logo className="auth__logo" />}
       >
         <Title level={4}>{title}</Title>
         <div className={className ?? ''}>{children}</div>

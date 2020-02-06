@@ -1,0 +1,21 @@
+@import "assets/scss/_variables";
+
+.side-menu {
+  &__header {
+    margin: 0.75rem;
+  }
+
+  &__logo {
+    margin: auto;
+    fill: $primary-color;
+
+    &--mini {
+      margin-left: 0.55rem;
+
+      // last three letters (NKM)
+      path:nth-last-child(-n + 3) {
+        display: none;
+      }
+    }
+  }
+}
