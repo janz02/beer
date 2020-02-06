@@ -14,7 +14,7 @@ interface RequestError {
 }
 
 const config: Configuration = new Configuration({
-  basePath: process.env.REACT_APP_API_URL,
+  basePath: process.env.REACT_APP_API_URL || ((window.location as unknown) as string),
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: [
     {
