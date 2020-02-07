@@ -3,7 +3,7 @@ const shell = require('shelljs')
 
 // TODO: Use final DNS, lookout for prod - staging differences
 shell
-  .ShellString(shell.exec('curl http://104.199.97.19/swagger/v1/swagger.json'))
+  .ShellString(shell.exec('curl https://pkm-coupon-dev.grapetest.xyz/swagger/v1/swagger.json'))
   .to('src/api/swagger.json')
 
 shell.exec(
