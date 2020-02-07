@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Layout } from 'antd'
-import { useTranslation } from 'react-i18next'
 import { useIsMobile } from 'hooks'
 import { HeaderOptions } from './HeaderOptions'
 import { Header } from './Header'
@@ -11,7 +10,6 @@ import { SideMenu } from './SideMenu'
 import { SideMenuOptions } from './SideMenuOptions'
 
 export const PrivateLayout: React.FC = ({ children }) => {
-  const { t } = useTranslation()
   const isMobile = useIsMobile()
 
   const [menuOpened, setMenuOpened] = useState(!isMobile)
