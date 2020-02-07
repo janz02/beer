@@ -5,9 +5,10 @@ const formatRoles = (rawRules: string): Role[] => {
   return rawRules ? (rawRules.split(';') as Role[]) : []
 }
 
-export const getJwtUserdata = (token?: string): UserData => {
+export const getJwtUserdata = (token?: string | null): UserData => {
   const jwt = token ?? sessionStorage.getItem('jwt')
   const decodedJwt: any = jwt && JwtDecode(jwt)
+
   const user: UserData = {
     userName: decodedJwt?.email ?? '',
     email: decodedJwt?.email ?? '',

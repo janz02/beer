@@ -5,6 +5,13 @@ import { LoginRequest, RegisterPartnerRequest } from 'api/swagger/apis'
 import { UserVm } from 'api/swagger'
 import { getJwtUserdata } from 'services/jwt-reader'
 import { api } from 'api'
+import JwtDecode from 'jwt-decode'
+
+const clearJwtData = (): void => {
+  sessionStorage.removeItem('jwt')
+  sessionStorage.removeItem('refreshToken')
+  sessionStorage.removeItem('jwtExpiration')
+}
 
 const authSlice = createSlice({
   name: '@auth',
@@ -48,22 +55,26 @@ const authSlice = createSlice({
       state.loadingLogin = false
       state.errorLogin = ''
       state.loggedIn = true
-      const token = action.payload.jwtToken
+      const jwt = action.payload.jwtToken
+      const refreshToken = action.payload.refreshToken
+      const decodedJwt: any = jwt && JwtDecode(jwt)
+      const jwtExpiration = decodedJwt?.exp
 
-      if (token) {
-        sessionStorage.setItem('jwt', token)
-        state.userData = getJwtUserdata(token)
-      }
+      jwt && sessionStorage.setItem('jwt', jwt)
+      refreshToken && sessionStorage.setItem('refreshToken', refreshToken)
+      // Also correcting precision.
+      jwtExpiration && sessionStorage.setItem('jwtExpiration', `${jwtExpiration}000`)
+      state.userData = getJwtUserdata(jwt)
     },
     loginFail(state, action: PayloadAction<string>) {
       state.loadingLogin = false
       state.errorLogin = action.payload
-      sessionStorage.removeItem('jwt')
+      clearJwtData()
     },
     logout(state) {
       state.loggedIn = false
       state.userData = {}
-      sessionStorage.removeItem('jwt')
+      clearJwtData()
     }
   }
 })
