@@ -14,61 +14,61 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    UserCouponVm,
-    UserCouponVmFromJSON,
-    UserCouponVmFromJSONTyped,
-    UserCouponVmToJSON,
+    WaitingCouponVm,
+    WaitingCouponVmFromJSON,
+    WaitingCouponVmFromJSONTyped,
+    WaitingCouponVmToJSON,
 } from './';
 
 /**
  * 
  * @export
- * @interface UserCouponVmPaginatedResponse
+ * @interface WaitingCouponVmPaginatedResponse
  */
-export interface UserCouponVmPaginatedResponse {
+export interface WaitingCouponVmPaginatedResponse {
     /**
      * 
-     * @type {Array<UserCouponVm>}
-     * @memberof UserCouponVmPaginatedResponse
+     * @type {Array<WaitingCouponVm>}
+     * @memberof WaitingCouponVmPaginatedResponse
      */
-    result?: Array<UserCouponVm> | null;
+    result?: Array<WaitingCouponVm> | null;
     /**
      * 
      * @type {number}
-     * @memberof UserCouponVmPaginatedResponse
+     * @memberof WaitingCouponVmPaginatedResponse
      */
     page?: number;
     /**
      * 
      * @type {number}
-     * @memberof UserCouponVmPaginatedResponse
+     * @memberof WaitingCouponVmPaginatedResponse
      */
     from?: number;
     /**
      * 
      * @type {number}
-     * @memberof UserCouponVmPaginatedResponse
+     * @memberof WaitingCouponVmPaginatedResponse
      */
     to?: number;
     /**
      * 
      * @type {number}
-     * @memberof UserCouponVmPaginatedResponse
+     * @memberof WaitingCouponVmPaginatedResponse
      */
     size?: number;
 }
 
-export function UserCouponVmPaginatedResponseFromJSON(json: any): UserCouponVmPaginatedResponse {
-    return UserCouponVmPaginatedResponseFromJSONTyped(json, false);
+export function WaitingCouponVmPaginatedResponseFromJSON(json: any): WaitingCouponVmPaginatedResponse {
+    return WaitingCouponVmPaginatedResponseFromJSONTyped(json, false);
 }
 
-export function UserCouponVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserCouponVmPaginatedResponse {
+export function WaitingCouponVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): WaitingCouponVmPaginatedResponse {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(UserCouponVmFromJSON)),
+        'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(WaitingCouponVmFromJSON)),
         'page': !exists(json, 'page') ? undefined : json['page'],
         'from': !exists(json, 'from') ? undefined : json['from'],
         'to': !exists(json, 'to') ? undefined : json['to'],
@@ -76,7 +76,7 @@ export function UserCouponVmPaginatedResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function UserCouponVmPaginatedResponseToJSON(value?: UserCouponVmPaginatedResponse | null): any {
+export function WaitingCouponVmPaginatedResponseToJSON(value?: WaitingCouponVmPaginatedResponse | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -85,7 +85,7 @@ export function UserCouponVmPaginatedResponseToJSON(value?: UserCouponVmPaginate
     }
     return {
         
-        'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(UserCouponVmToJSON)),
+        'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(WaitingCouponVmToJSON)),
         'page': value.page,
         'from': value.from,
         'to': value.to,
