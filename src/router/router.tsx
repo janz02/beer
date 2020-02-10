@@ -16,6 +16,7 @@ import { PartnerEditorPage } from 'features/partner/PartnerEditorPage'
 import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
 import { SitesListPage } from 'features/sites/siteList/SitesListPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
+import { NewsLetterEditorPage } from 'features/news-letter/NewsLetterEditorPage'
 
 const Routes = (): JSX.Element => (
   <Switch>
@@ -34,6 +35,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/sites" component={SitesListPage} />
     <PrivateRoute exact path="/sites/editor/" component={SiteEditorPage} />
     <PrivateRoute exact path="/sites/editor/:id" component={SiteEditorPage} />
+    <PrivateRoute exact path="/news-letter" component={NewsLetterEditorPage} />
     <Route path="*" render={() => <Redirect to="/" />} />
   </Switch>
 )
