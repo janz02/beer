@@ -14,7 +14,7 @@ export const LoginPage: React.FC = () => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
-  const { loadingLogin: loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
+  const { loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
 
   return (
     <AuthLayout className="login" title={t(`auth.login`)}>

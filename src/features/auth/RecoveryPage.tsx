@@ -14,9 +14,7 @@ export const RecoveryPage: React.FC = () => {
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { loadingPasswordRecovery: loading, errorPasswordRecovery: error } = useSelector(
-    (state: RootState) => state.auth
-  )
+  const { loading, errorPasswordRecovery: error } = useSelector((state: RootState) => state.auth)
 
   return (
     <AuthLayout className="recovery" title={t(`auth.forgot-password`)}>
