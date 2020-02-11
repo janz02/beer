@@ -69,10 +69,7 @@ export const getCoupons = (listingOptions: CouponListingOptions): AppThunk => as
       ? response.result.map(
           x =>
             ({
-              id: x.id,
-              name: x.name,
-              state: x.state,
-              categoryId: x.categoryId,
+              ...x,
               startDate: moment(x.startDate),
               endDate: moment(x.endDate),
               expireDate: moment(x.expireDate)
