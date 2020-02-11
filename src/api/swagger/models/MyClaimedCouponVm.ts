@@ -16,46 +16,46 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface MyCouponVm
+ * @interface MyClaimedCouponVm
  */
-export interface MyCouponVm {
+export interface MyClaimedCouponVm {
     /**
      * 
      * @type {number}
-     * @memberof MyCouponVm
+     * @memberof MyClaimedCouponVm
      */
     id?: number;
     /**
      * 
      * @type {string}
-     * @memberof MyCouponVm
+     * @memberof MyClaimedCouponVm
      */
     name?: string | null;
     /**
      * 
      * @type {Date}
-     * @memberof MyCouponVm
+     * @memberof MyClaimedCouponVm
      */
     expireDate?: Date;
     /**
      * 
      * @type {string}
-     * @memberof MyCouponVm
+     * @memberof MyClaimedCouponVm
      */
-    description?: string | null;
+    couponCode?: string | null;
     /**
      * 
-     * @type {boolean}
-     * @memberof MyCouponVm
+     * @type {string}
+     * @memberof MyClaimedCouponVm
      */
-    isClaimed?: boolean;
+    description?: string | null;
 }
 
-export function MyCouponVmFromJSON(json: any): MyCouponVm {
-    return MyCouponVmFromJSONTyped(json, false);
+export function MyClaimedCouponVmFromJSON(json: any): MyClaimedCouponVm {
+    return MyClaimedCouponVmFromJSONTyped(json, false);
 }
 
-export function MyCouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): MyCouponVm {
+export function MyClaimedCouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): MyClaimedCouponVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -64,12 +64,12 @@ export function MyCouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
+        'couponCode': !exists(json, 'couponCode') ? undefined : json['couponCode'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'isClaimed': !exists(json, 'isClaimed') ? undefined : json['isClaimed'],
     };
 }
 
-export function MyCouponVmToJSON(value?: MyCouponVm | null): any {
+export function MyClaimedCouponVmToJSON(value?: MyClaimedCouponVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -81,8 +81,8 @@ export function MyCouponVmToJSON(value?: MyCouponVm | null): any {
         'id': value.id,
         'name': value.name,
         'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
+        'couponCode': value.couponCode,
         'description': value.description,
-        'isClaimed': value.isClaimed,
     };
 }
 
