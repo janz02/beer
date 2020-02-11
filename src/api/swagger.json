@@ -2751,13 +2751,12 @@
             "type": "string",
             "format": "date-time"
           },
-          "couponCode": {
-            "type": "string",
-            "nullable": true
-          },
           "description": {
             "type": "string",
             "nullable": true
+          },
+          "isClaimed": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

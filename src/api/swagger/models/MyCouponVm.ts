@@ -42,13 +42,13 @@ export interface MyCouponVm {
      * @type {string}
      * @memberof MyCouponVm
      */
-    couponCode?: string | null;
+    description?: string | null;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof MyCouponVm
      */
-    description?: string | null;
+    isClaimed?: boolean;
 }
 
 export function MyCouponVmFromJSON(json: any): MyCouponVm {
@@ -64,8 +64,8 @@ export function MyCouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
-        'couponCode': !exists(json, 'couponCode') ? undefined : json['couponCode'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'isClaimed': !exists(json, 'isClaimed') ? undefined : json['isClaimed'],
     };
 }
 
@@ -81,8 +81,8 @@ export function MyCouponVmToJSON(value?: MyCouponVm | null): any {
         'id': value.id,
         'name': value.name,
         'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
-        'couponCode': value.couponCode,
         'description': value.description,
+        'isClaimed': value.isClaimed,
     };
 }
 
