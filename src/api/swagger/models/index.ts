@@ -16,6 +16,7 @@ export * from './CouponVmPaginatedResponse';
 export * from './Int32EntityCreatedVm';
 export * from './Int32StringCreateSiteApiKeyVm';
 export * from './LoginDto';
+export * from './MyClaimedCouponVm';
 export * from './MyCouponVm';
 export * from './OrderByType';
 export * from './PartnerContactDto';

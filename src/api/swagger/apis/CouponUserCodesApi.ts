@@ -18,6 +18,9 @@ import {
     CouponUserCodeVmPaginatedResponse,
     CouponUserCodeVmPaginatedResponseFromJSON,
     CouponUserCodeVmPaginatedResponseToJSON,
+    MyClaimedCouponVm,
+    MyClaimedCouponVmFromJSON,
+    MyClaimedCouponVmToJSON,
 } from '../models';
 
 export interface GetClaimedCouponsRequest {
@@ -85,6 +88,34 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
      */
     async getClaimedCoupons(requestParameters: GetClaimedCouponsRequest): Promise<CouponUserCodeVmPaginatedResponse> {
         const response = await this.getClaimedCouponsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async getMyClaimedCouponsRaw(): Promise<runtime.ApiResponse<Array<MyClaimedCouponVm>>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/CouponUserCodes/MyClaimedCoupons`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MyClaimedCouponVmFromJSON));
+    }
+
+    /**
+     */
+    async getMyClaimedCoupons(): Promise<Array<MyClaimedCouponVm>> {
+        const response = await this.getMyClaimedCouponsRaw();
         return await response.value();
     }
 
