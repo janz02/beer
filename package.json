@@ -19,6 +19,7 @@
     "customize-cra": "^0.9.1",
     "env-cmd": "^10.0.1",
     "grapesjs": "^0.15.10",
+    "grapesjs-preset-newsletter": "^0.2.20",
     "i18next": "^19.0.1",
     "jwt-decode": "^2.2.0",
     "node-sass": "^4.13.1",
