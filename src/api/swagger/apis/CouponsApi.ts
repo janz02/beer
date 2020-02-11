@@ -24,6 +24,9 @@ import {
     CouponDto,
     CouponDtoFromJSON,
     CouponDtoToJSON,
+    CouponState,
+    CouponStateFromJSON,
+    CouponStateToJSON,
     CouponVm,
     CouponVmFromJSON,
     CouponVmToJSON,
@@ -36,9 +39,9 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
-    UserCouponVmPaginatedResponse,
-    UserCouponVmPaginatedResponseFromJSON,
-    UserCouponVmPaginatedResponseToJSON,
+    WaitingCouponVmPaginatedResponse,
+    WaitingCouponVmPaginatedResponseFromJSON,
+    WaitingCouponVmPaginatedResponseToJSON,
 } from '../models';
 
 export interface ClaimCouponRequest {
@@ -67,8 +70,13 @@ export interface GetOneCouponRequest {
     id: number;
 }
 
-export interface GetUserCouponsRequest {
-    userId?: string;
+export interface GetWaitingCouponsRequest {
+    name?: string;
+    state?: CouponState;
+    categoryId?: number;
+    startDate?: Date;
+    endDate?: Date;
+    expireDate?: Date;
     page?: number;
     pageSize?: number;
     orderBy?: string;
@@ -274,11 +282,31 @@ export class CouponsApi extends runtime.BaseAPI {
 
     /**
      */
-    async getUserCouponsRaw(requestParameters: GetUserCouponsRequest): Promise<runtime.ApiResponse<UserCouponVmPaginatedResponse>> {
+    async getWaitingCouponsRaw(requestParameters: GetWaitingCouponsRequest): Promise<runtime.ApiResponse<WaitingCouponVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters.userId !== undefined) {
-            queryParameters['userId'] = requestParameters.userId;
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.state !== undefined) {
+            queryParameters['state'] = requestParameters.state;
+        }
+
+        if (requestParameters.categoryId !== undefined) {
+            queryParameters['categoryId'] = requestParameters.categoryId;
+        }
+
+        if (requestParameters.startDate !== undefined) {
+            queryParameters['startDate'] = (requestParameters.startDate as any).toISOString();
+        }
+
+        if (requestParameters.endDate !== undefined) {
+            queryParameters['endDate'] = (requestParameters.endDate as any).toISOString();
+        }
+
+        if (requestParameters.expireDate !== undefined) {
+            queryParameters['expireDate'] = (requestParameters.expireDate as any).toISOString();
         }
 
         if (requestParameters.page !== undefined) {
@@ -304,19 +332,19 @@ export class CouponsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Coupons/User`,
+            path: `/api/Coupons/Waiting`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserCouponVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => WaitingCouponVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
      */
-    async getUserCoupons(requestParameters: GetUserCouponsRequest): Promise<UserCouponVmPaginatedResponse> {
-        const response = await this.getUserCouponsRaw(requestParameters);
+    async getWaitingCoupons(requestParameters: GetWaitingCouponsRequest): Promise<WaitingCouponVmPaginatedResponse> {
+        const response = await this.getWaitingCouponsRaw(requestParameters);
         return await response.value();
     }
 

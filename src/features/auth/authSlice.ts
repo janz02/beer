@@ -5,77 +5,78 @@ import { LoginRequest, RegisterPartnerRequest } from 'api/swagger/apis'
 import { UserVm } from 'api/swagger'
 import { getJwtUserdata } from 'services/jwt-reader'
 import { api } from 'api'
+import JwtDecode from 'jwt-decode'
+
+const clearJwtData = (): void => {
+  sessionStorage.removeItem('jwt')
+  sessionStorage.removeItem('refreshToken')
+  sessionStorage.removeItem('jwtExpiration')
+}
 
 const authSlice = createSlice({
   name: '@auth',
   initialState: {
     loggedIn: !!sessionStorage.getItem('jwt'),
     userData: getJwtUserdata(),
-    loadingSignup: false,
-    loadingPasswordRecovery: false,
-    loadingLogin: false,
+    loading: false,
     errorSignup: '',
     errorLogin: '',
     errorPasswordRecovery: ''
   },
   reducers: {
-    signupRequest(state) {
-      state.loadingSignup = true
+    setLoadingStart(state) {
+      state.loading = true
     },
     signupSuccess(state) {
-      state.loadingSignup = false
+      state.loading = false
       state.errorSignup = ''
     },
     signupFail(state, action: PayloadAction<string>) {
-      state.loadingSignup = false
+      state.loading = false
       state.errorSignup = action.payload
     },
-    passwordRecoveryRequest(state) {
-      state.loadingPasswordRecovery = true
-    },
     passwordRecoverySuccess(state) {
-      state.loadingPasswordRecovery = false
+      state.loading = false
       state.errorPasswordRecovery = ''
     },
     passwordRecoveryFail(state, action: PayloadAction<string>) {
-      state.loadingPasswordRecovery = false
+      state.loading = false
       state.errorPasswordRecovery = action.payload
     },
-    loginRequest(state) {
-      state.loadingLogin = true
-    },
     loginSuccess(state, action: PayloadAction<UserVm>) {
-      state.loadingLogin = false
+      state.loading = false
       state.errorLogin = ''
       state.loggedIn = true
-      const token = action.payload.jwtToken
+      const jwt = action.payload.jwtToken
+      const refreshToken = action.payload.refreshToken
+      const decodedJwt: any = jwt && JwtDecode(jwt)
+      const jwtExpiration = decodedJwt?.exp
 
-      if (token) {
-        sessionStorage.setItem('jwt', token)
-        state.userData = getJwtUserdata(token)
-      }
+      jwt && sessionStorage.setItem('jwt', jwt)
+      refreshToken && sessionStorage.setItem('refreshToken', refreshToken)
+      // Also correcting precision.
+      jwtExpiration && sessionStorage.setItem('jwtExpiration', `${jwtExpiration}000`)
+      state.userData = getJwtUserdata(jwt)
     },
     loginFail(state, action: PayloadAction<string>) {
-      state.loadingLogin = false
+      state.loading = false
       state.errorLogin = action.payload
-      sessionStorage.removeItem('jwt')
+      clearJwtData()
     },
     logout(state) {
       state.loggedIn = false
       state.userData = {}
-      sessionStorage.removeItem('jwt')
+      clearJwtData()
     }
   }
 })
 
 export const {
-  loginRequest,
+  setLoadingStart,
   loginSuccess,
   loginFail,
-  passwordRecoveryRequest,
   passwordRecoverySuccess,
   passwordRecoveryFail,
-  signupRequest,
   signupSuccess,
   signupFail,
   logout
@@ -93,7 +94,7 @@ const delay = (p: any): Promise<unknown> =>
   })
 
 export const login = (params: any): AppThunk => async (dispatch, state) => {
-  dispatch(loginRequest())
+  dispatch(setLoadingStart())
   try {
     const loginRequest: LoginRequest = {
       loginDto: {
@@ -114,7 +115,7 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
 }
 
 export const recoverPassword = (params: any): AppThunk => async dispatch => {
-  dispatch(passwordRecoveryRequest())
+  dispatch(setLoadingStart())
   try {
     await delay(params)
     dispatch(passwordRecoverySuccess())
@@ -124,7 +125,7 @@ export const recoverPassword = (params: any): AppThunk => async dispatch => {
 }
 
 export const signUp = (params: any): AppThunk => async dispatch => {
-  dispatch(signupRequest())
+  dispatch(setLoadingStart())
 
   const requestRequest: RegisterPartnerRequest = {
     registerPartnerDto: {
