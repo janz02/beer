@@ -17,27 +17,27 @@ export const NewsLetterEditor: FC = () => {
         storageManager: {
           id: storagePrefix
         },
-        deviceManager: {
-          devices: [
-            {
-              name: 'Desktop',
-              width: '' // default size
-            },
-            {
-              name: 'Mobile',
-              width: '320px', // this value will be used on canvas width
-              widthMedia: '480px' // this value will be used in CSS @media
-            }
-          ]
-        },
+        // deviceManager: {
+        //   devices: [
+        //     {
+        //       name: 'Desktop',
+        //       width: '' // default size
+        //     },
+        //     {
+        //       name: 'Mobile',
+        //       width: '320px', // this value will be used on canvas width
+        //       widthMedia: '480px' // this value will be used in CSS @media
+        //     }
+        //   ]
+        // },
         height: '100%',
-        plugins: ['gjs-preset-newsletter'],
-        pluginsOpts: {
-          'gjs-preset-newsletter': {
-            modalTitleImport: 'Import templateeee'
-            // ... other options
-          }
-        },
+        plugins: [grapesjsNewsLetter],
+        // pluginsOpts: {
+        //   'gjs-preset-newsletter': {
+        //     modalTitleImport: 'Import templateeee'
+        //     // ... other options
+        //   }
+        // },
         components: '<article class="hello">Hello PKM K K user!</article>'
         // style: '.hello{color: red}',
         // plugins: ['gjs-preset-newsletter'],
