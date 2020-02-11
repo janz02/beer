@@ -183,12 +183,11 @@ export const CouponListPage: React.FC = () => {
             }
           }
 
-          // TODO: integrate filtering.
           if (filters.state) {
-            console.log(filters.state[0])
+            couponListingOptions.state = filters.state[0] as CouponState
           }
           if (filters.categoryId) {
-            console.log(filters.categoryId[0])
+            couponListingOptions.categoryId = filters.categoryId[0] as number
           }
 
           setListingOptions(couponListingOptions)
