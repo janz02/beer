@@ -13,70 +13,63 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    CouponType,
-    CouponTypeFromJSON,
-    CouponTypeFromJSONTyped,
-    CouponTypeToJSON,
-} from './';
-
 /**
  * 
  * @export
- * @interface UserCouponVm
+ * @interface MyCouponVm
  */
-export interface UserCouponVm {
+export interface MyCouponVm {
+    /**
+     * 
+     * @type {number}
+     * @memberof MyCouponVm
+     */
+    id?: number;
     /**
      * 
      * @type {string}
-     * @memberof UserCouponVm
+     * @memberof MyCouponVm
      */
     name?: string | null;
     /**
      * 
-     * @type {string}
-     * @memberof UserCouponVm
-     */
-    description?: string | null;
-    /**
-     * 
      * @type {Date}
-     * @memberof UserCouponVm
+     * @memberof MyCouponVm
      */
     expireDate?: Date;
     /**
      * 
-     * @type {CouponType}
-     * @memberof UserCouponVm
+     * @type {string}
+     * @memberof MyCouponVm
      */
-    type?: CouponType;
+    couponCode?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof UserCouponVm
+     * @type {string}
+     * @memberof MyCouponVm
      */
-    discountValue?: number;
+    description?: string | null;
 }
 
-export function UserCouponVmFromJSON(json: any): UserCouponVm {
-    return UserCouponVmFromJSONTyped(json, false);
+export function MyCouponVmFromJSON(json: any): MyCouponVm {
+    return MyCouponVmFromJSONTyped(json, false);
 }
 
-export function UserCouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserCouponVm {
+export function MyCouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): MyCouponVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'description': !exists(json, 'description') ? undefined : json['description'],
         'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
-        'type': !exists(json, 'type') ? undefined : CouponTypeFromJSON(json['type']),
-        'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
+        'couponCode': !exists(json, 'couponCode') ? undefined : json['couponCode'],
+        'description': !exists(json, 'description') ? undefined : json['description'],
     };
 }
 
-export function UserCouponVmToJSON(value?: UserCouponVm | null): any {
+export function MyCouponVmToJSON(value?: MyCouponVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -85,11 +78,11 @@ export function UserCouponVmToJSON(value?: UserCouponVm | null): any {
     }
     return {
         
+        'id': value.id,
         'name': value.name,
-        'description': value.description,
         'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
-        'type': CouponTypeToJSON(value.type),
-        'discountValue': value.discountValue,
+        'couponCode': value.couponCode,
+        'description': value.description,
     };
 }
 

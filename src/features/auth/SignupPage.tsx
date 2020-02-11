@@ -13,9 +13,7 @@ export const SignupPage: React.FC = () => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
-  const { loadingSignup: loading, errorSignup: error } = useSelector(
-    (state: RootState) => state.auth
-  )
+  const { loading, errorSignup: error } = useSelector((state: RootState) => state.auth)
 
   return (
     <AuthLayout className="signup" title={t(`auth.signup`)}>

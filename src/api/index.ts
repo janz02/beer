@@ -1,7 +1,14 @@
-import { PartnerContactsApi } from './swagger/apis/PartnerContactsApi'
-import { CouponCommentsApi } from './swagger/apis/CouponCommentsApi'
 import { Configuration } from './swagger/runtime'
-import { CouponsApi, CategoriesApi, AuthApi, SitesApi, PartnersApi, TagsApi } from './swagger/apis'
+import {
+  CouponsApi,
+  CategoriesApi,
+  AuthApi,
+  SitesApi,
+  PartnersApi,
+  TagsApi,
+  CouponCommentsApi,
+  PartnerContactsApi
+} from './swagger/apis'
 import { notification } from 'antd'
 import i18n from 'app/i18n'
 
@@ -19,13 +26,21 @@ function getUrl() {
   return getUrl.protocol + '//' + getUrl.host
 }
 
-const config: Configuration = new Configuration({
+export const config: Configuration = new Configuration({
   basePath: process.env.REACT_APP_API_URL || getUrl(),
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: [
     {
       post: ctx => {
-        if (ctx.response.status >= 400) {
+        // TODO: handle 503 like the rest of errors? (Currently it doesn't return json.)
+        if (ctx.response.status === 503) {
+          notification.error({
+            message: 'The server is currently unavailable',
+            duration: null
+          })
+          console.error('The server is currently unavailable')
+          console.table(ctx.response)
+        } else if (ctx.response.status >= 400) {
           ctx.response.json().then((x: RequestError) => {
             notification.error({
               message: x.ErrorKey ? i18n.t(x.ErrorKey) : x.Message,
