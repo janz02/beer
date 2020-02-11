@@ -4,12 +4,10 @@ import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { CouponListingOptions } from 'models/couponListingOptions'
 import moment from 'moment'
-import { Category } from 'models/category'
 
 interface CouponListState {
   coupons?: Coupon[]
   allCouponsCount?: number
-  mentionedCategories?: Category
   error: string | null
   loading: boolean
 }
