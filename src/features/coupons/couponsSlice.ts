@@ -42,7 +42,8 @@ export const listCategories = (): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const categories = await api.categories.listCategories({})
+    // TODO: categories pageSize is hardcoded, consider to do a better form field with lazy loading and search
+    const categories = await api.categories.listCategories({ pageSize: 10000, orderBy: 'name' })
     dispatch(
       listCategoriesSuccess(categories.result!.map(x => ({ id: x.id, name: x.name } as Category)))
     )

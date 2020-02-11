@@ -991,6 +991,45 @@
         }
       }
     },
+    "/api/CouponUserCodes/MyClaimedCoupons": {
+      "get": {
+        "tags": [
+          "CouponUserCodes"
+        ],
+        "operationId": "GetMyClaimedCoupons",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MyClaimedCouponVm"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MyClaimedCouponVm"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MyClaimedCouponVm"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CouponUserPairs/GeneratePairs": {
       "post": {
         "tags": [
@@ -2736,7 +2775,7 @@
         },
         "additionalProperties": false
       },
-      "MyCouponVm": {
+      "MyClaimedCouponVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -2758,6 +2797,31 @@
           "description": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MyCouponVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "expireDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isClaimed": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
