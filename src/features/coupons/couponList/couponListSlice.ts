@@ -3,6 +3,7 @@ import { Coupon } from 'models/coupon'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { CouponListingOptions } from 'models/couponListingOptions'
+import moment from 'moment'
 
 interface CouponListState {
   coupons?: Coupon[]
@@ -59,18 +60,27 @@ export const getCoupons = (listingOptions: CouponListingOptions): AppThunk => as
   dispatch(setLoadingStart())
 
   try {
-    const coupons = await api.coupons.getCoupons({
+    const response = await api.coupons.getWaitingCoupons({
       ...listingOptions,
       page: listingOptions.current
     })
+
+    const coupons = response.result
+      ? response.result.map(
+          x =>
+            ({
+              ...x,
+              startDate: moment(x.startDate),
+              endDate: moment(x.endDate),
+              expireDate: moment(x.expireDate)
+            } as Coupon)
+        )
+      : undefined
+
     dispatch(
       listCouponsSuccess({
-        coupons: coupons.result
-          ? coupons.result.map(
-              x => ({ id: x.id, name: x.name, description: x.description } as Coupon)
-            )
-          : undefined,
-        allCouponsCount: coupons.size || 0
+        coupons,
+        allCouponsCount: response.size || 0
       })
     )
   } catch (err) {
