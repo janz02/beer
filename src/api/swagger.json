@@ -2790,12 +2790,13 @@
             "type": "string",
             "format": "date-time"
           },
-          "description": {
+          "couponCode": {
             "type": "string",
             "nullable": true
           },
-          "isClaimed": {
-            "type": "boolean"
+          "description": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
