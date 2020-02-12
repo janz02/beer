@@ -10,11 +10,31 @@ import grapesjsNewsLetter from 'grapesjs-preset-newsletter'
 // @ts-ignore
 import grapesjsIndexxeddb from 'grapesjs-indexeddb'
 
-export const NewsLetterEditor: FC = () => {
+export interface NewsLetterTemplate {
+  html: string | null
+  css: string | null
+  components: string | null
+  style: string | null
+}
+
+const defaultTemplate: NewsLetterTemplate = {
+  html: `<div>...</div>`,
+  css: null,
+  components: null,
+  style: null
+}
+
+export interface NewsLetterEditorProps {
+  template?: NewsLetterTemplate
+}
+
+export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
+  const template = props?.template ?? defaultTemplate
+
   useEffect(() => {
-    const storagePrefix = 'gjs-pkm'
+    const storagePrefix = 'gjs-pkm-'
     setTimeout(() => {
-      grapesjs.init({
+      const editor = grapesjs.init({
         container: '#grapesjs',
         storageManager: {
           type: 'indexeddb',
@@ -22,17 +42,29 @@ export const NewsLetterEditor: FC = () => {
         },
         height: '100%',
         plugins: [grapesjsNewsLetter, grapesjsIndexxeddb],
-        components: '<article class="hello">Hello PKM user!</article>'
+        pluginsOpts: {
+          'grapesjs-indexeddb': {
+            dbName: 'cxxx'
+          }
+        },
+        components: template?.components || template?.html,
+        style: template?.style || template?.css
       })
+      editor.on('storage:load', function(e: any) {
+        console.log('STORAGE:LOAD ', e)
+      })
+      editor.on('storage:store', function(e: any) {
+        console.log('STORAGE:STORE ', e)
+      })
+      editor.on('storage:error', function(e: any) {
+        console.log('STORAGE:ERROR ', e)
+      })
+      console.log(grapesjsIndexxeddb)
     }, 0)
     return () => {
-      for (const key in localStorage) {
-        if (key.startsWith(storagePrefix)) {
-          localStorage.removeItem(key)
-        }
-      }
+      indexedDB.deleteDatabase('gjs')
     }
-  }, [])
+  }, [template])
 
   return (
     <div className="newsletter-editor-containter">
