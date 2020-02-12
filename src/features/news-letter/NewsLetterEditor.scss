@@ -10,6 +10,7 @@ $quaternaryColor: $primary-color;
 // ...
 
 @import "grapesjs/src/styles/scss/main.scss";
+@import "grapesjs-preset-newsletter/src/style/main.scss";
 
 .newsletter-editor-containter {
   height: 100%;
