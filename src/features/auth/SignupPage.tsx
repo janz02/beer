@@ -2,13 +2,6 @@ import React from 'react'
 import { Form, Input, Button, Alert, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
-import {
-  UserOutlined,
-  LockOutlined,
-  HomeOutlined,
-  PhoneOutlined,
-  CrownOutlined
-} from '@ant-design/icons'
 import { signUp } from './authSlice'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
@@ -27,7 +20,7 @@ export const SignupPage: React.FC = () => {
       {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
       <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
         <Form.Item name="username" label={t('auth.field.username')} rules={[rule.required()]}>
-          <Input prefix={<UserOutlined />} />
+          <Input />
         </Form.Item>
 
         <Form.Item
@@ -36,7 +29,7 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.password')}
           rules={[rule.required(), rule.password()]}
         >
-          <Input.Password prefix={<LockOutlined />} />
+          <Input.Password />
         </Form.Item>
 
         <Form.Item
@@ -56,15 +49,15 @@ export const SignupPage: React.FC = () => {
             })
           ]}
         >
-          <Input.Password prefix={<LockOutlined />} />
+          <Input.Password />
         </Form.Item>
 
         <Form.Item name="company" label={t('auth.field.company')} rules={[rule.required()]}>
-          <Input prefix={<HomeOutlined />} />
+          <Input />
         </Form.Item>
 
         <Form.Item name="name" label={t('auth.field.name')} rules={[rule.required()]}>
-          <Input prefix={<UserOutlined />} />
+          <Input />
         </Form.Item>
 
         <Form.Item
@@ -72,7 +65,7 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.phone')}
           rules={[rule.required(), rule.number()]}
         >
-          <Input type="tel" prefix={<PhoneOutlined />} />
+          <Input type="tel" />
         </Form.Item>
 
         <Form.Item
@@ -81,7 +74,7 @@ export const SignupPage: React.FC = () => {
           extra={t('auth.text.client-code-info')}
           rules={[rule.required()]}
         >
-          <Input prefix={<CrownOutlined />} />
+          <Input />
         </Form.Item>
 
         <Form.Item name="acceptTerms" valuePropName="checked">
@@ -98,11 +91,17 @@ export const SignupPage: React.FC = () => {
           </Checkbox>
         </Form.Item>
 
-        <Button loading={loading} block size="large" type="primary" htmlType="submit">
+        <Button
+          className="auth__action-btn auth__action-btn--main"
+          loading={loading}
+          size="large"
+          type="primary"
+          htmlType="submit"
+        >
           {t('auth.signup')}
         </Button>
       </Form>
-      <Button className="signup__login-button" onClick={() => history.push('/auth')}>
+      <Button className="auth__action-btn" type="link" onClick={() => history.push('/auth')}>
         {t('auth.login')}
       </Button>
     </AuthLayout>

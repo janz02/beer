@@ -61,7 +61,7 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    customCommand: 'test -- --watchAll=false --reporters jest-junit --coverage --coverageDirectory=output --coverageReporters cobertura'
+    customCommand: 'test -- --watchAll=false --passWithNoTests --reporters jest-junit --coverage --coverageDirectory=output --coverageReporters cobertura'
   displayName: 'Run Tests'
 
 - task: PublishTestResults@2

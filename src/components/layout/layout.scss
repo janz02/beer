@@ -29,19 +29,6 @@
   background: #FFFFFF;
   box-shadow: -1px -2px 13px -3px #000000;
 
-  img {
-    width: 150px;
-    padding-left: 25px;
-  }
-
-  &--empty {
-    text-align: center;
-
-    img {
-      padding-left: 0;
-    }
-  }
-
   &__menu-button {
     padding-left: 25px;
   }
