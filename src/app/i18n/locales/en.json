@@ -158,6 +158,20 @@
     "save-profile-success": "Saving profile was successful."
   },
   "site": {
+    "editor": {
+      "add-api-key": {
+        "generate": "Generate",
+        "name": "Api key owner name"
+      },
+      "add-new-api-key": "Add new api key",
+      "add-new-api-key-title": "Add api key",
+      "api-key-name": "Name",
+      "api-keys-title": "Api keys",
+      "copy-api-key": "Copy key",
+      "copy-api-key-success": "Copied!",
+      "copy-api-key-title": "Api key",
+      "expire-date": "Expire date"
+    },
     "field": {
       "address": "Address",
       "name": "Site name"
