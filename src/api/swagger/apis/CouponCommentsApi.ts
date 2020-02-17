@@ -43,6 +43,8 @@ export interface GetCouponCommentsRequest {
 export class CouponCommentsApi extends runtime.BaseAPI {
 
     /**
+     * Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"
+     * Adds a comment to a coupon
      */
     async createCouponCommentsRaw(requestParameters: CreateCouponCommentsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
@@ -71,12 +73,16 @@ export class CouponCommentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"
+     * Adds a comment to a coupon
      */
     async createCouponComments(requestParameters: CreateCouponCommentsRequest): Promise<void> {
         await this.createCouponCommentsRaw(requestParameters);
     }
 
     /**
+     * Deletes the comment with an Id of \"commentId\" from a coupon with Id of \"couponId\"
+     * Deletes a comment from a coupon
      */
     async deleteCouponCommentsRaw(requestParameters: DeleteCouponCommentsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
@@ -106,12 +112,16 @@ export class CouponCommentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the comment with an Id of \"commentId\" from a coupon with Id of \"couponId\"
+     * Deletes a comment from a coupon
      */
     async deleteCouponComments(requestParameters: DeleteCouponCommentsRequest): Promise<void> {
         await this.deleteCouponCommentsRaw(requestParameters);
     }
 
     /**
+     * Returns the comment list on the coupon with an Id of \"couponId\"
+     * Gets the comments on a coupon
      */
     async getCouponCommentsRaw(requestParameters: GetCouponCommentsRequest): Promise<runtime.ApiResponse<Array<CouponCommentVm>>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
@@ -137,6 +147,8 @@ export class CouponCommentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the comment list on the coupon with an Id of \"couponId\"
+     * Gets the comments on a coupon
      */
     async getCouponComments(requestParameters: GetCouponCommentsRequest): Promise<Array<CouponCommentVm>> {
         const response = await this.getCouponCommentsRaw(requestParameters);

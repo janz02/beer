@@ -99,6 +99,8 @@ export interface UpdateCouponStatusRequest {
 export class CouponsApi extends runtime.BaseAPI {
 
     /**
+     * Claims a coupon to put it in the used up coupons for the user
+     * Claims a coupon for the logged in user
      */
     async claimCouponRaw(requestParameters: ClaimCouponRequest): Promise<runtime.ApiResponse<CouponCodeVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -124,6 +126,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Claims a coupon to put it in the used up coupons for the user
+     * Claims a coupon for the logged in user
      */
     async claimCoupon(requestParameters: ClaimCouponRequest): Promise<CouponCodeVm> {
         const response = await this.claimCouponRaw(requestParameters);
@@ -131,6 +135,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the id of the new Coupon upon success
+     * Creates a Coupon entity
      */
     async createCouponsRaw(requestParameters: CreateCouponsRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -155,6 +161,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the id of the new Coupon upon success
+     * Creates a Coupon entity
      */
     async createCoupons(requestParameters: CreateCouponsRequest): Promise<Int32EntityCreatedVm> {
         const response = await this.createCouponsRaw(requestParameters);
@@ -162,6 +170,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the Coupon entity with Id of \"id\"
+     * Deletes a Coupon entity
      */
     async deleteCouponsRaw(requestParameters: DeleteCouponsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -187,12 +197,16 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the Coupon entity with Id of \"id\"
+     * Deletes a Coupon entity
      */
     async deleteCoupons(requestParameters: DeleteCouponsRequest): Promise<void> {
         await this.deleteCouponsRaw(requestParameters);
     }
 
     /**
+     * Returns the Coupon list with the specified filters applied
+     * Gets a Coupon entity list sorted and filtered
      */
     async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<CouponVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -242,6 +256,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Coupon list with the specified filters applied
+     * Gets a Coupon entity list sorted and filtered
      */
     async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVmPaginatedResponse> {
         const response = await this.getCouponsRaw(requestParameters);
@@ -249,6 +265,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Coupon with the specified Id upon success
+     * Gets a Coupon entity by Id
      */
     async getOneCouponRaw(requestParameters: GetOneCouponRequest): Promise<runtime.ApiResponse<CouponVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -274,6 +292,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Coupon with the specified Id upon success
+     * Gets a Coupon entity by Id
      */
     async getOneCoupon(requestParameters: GetOneCouponRequest): Promise<CouponVm> {
         const response = await this.getOneCouponRaw(requestParameters);
@@ -281,6 +301,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state
+     * Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state
      */
     async getWaitingCouponsRaw(requestParameters: GetWaitingCouponsRequest): Promise<runtime.ApiResponse<WaitingCouponVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -342,6 +364,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state
+     * Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state
      */
     async getWaitingCoupons(requestParameters: GetWaitingCouponsRequest): Promise<WaitingCouponVmPaginatedResponse> {
         const response = await this.getWaitingCouponsRaw(requestParameters);
@@ -349,6 +373,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a Coupon entity with Id of \"id\" to entity \"item\"
+     * Updates a Coupon entity
      */
     async updateCouponRaw(requestParameters: UpdateCouponRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -377,12 +403,16 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a Coupon entity with Id of \"id\" to entity \"item\"
+     * Updates a Coupon entity
      */
     async updateCoupon(requestParameters: UpdateCouponRequest): Promise<void> {
         await this.updateCouponRaw(requestParameters);
     }
 
     /**
+     * Updates a Coupon entity status only with Id of \"id\" to entity \"changeCouponStateDto\"
+     * Updates a Coupon entity status only
      */
     async updateCouponStatusRaw(requestParameters: UpdateCouponStatusRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -411,6 +441,8 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a Coupon entity status only with Id of \"id\" to entity \"changeCouponStateDto\"
+     * Updates a Coupon entity status only
      */
     async updateCouponStatus(requestParameters: UpdateCouponStatusRequest): Promise<void> {
         await this.updateCouponStatusRaw(requestParameters);

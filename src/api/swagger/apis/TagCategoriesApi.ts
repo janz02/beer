@@ -63,6 +63,8 @@ export interface UpdateTagCategoriesRequest {
 export class TagCategoriesApi extends runtime.BaseAPI {
 
     /**
+     * Returns the id of the TagCategory upon success
+     * Creates a TagCategory entity
      */
     async createTagCategoriesRaw(requestParameters: CreateTagCategoriesRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -87,6 +89,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the id of the TagCategory upon success
+     * Creates a TagCategory entity
      */
     async createTagCategories(requestParameters: CreateTagCategoriesRequest): Promise<Int32EntityCreatedVm> {
         const response = await this.createTagCategoriesRaw(requestParameters);
@@ -94,6 +98,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the TagCategory entity with Id of \"id\"
+     * Deletes a TagCategory entity
      */
     async deleteTagCategoriesRaw(requestParameters: DeleteTagCategoriesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -119,12 +125,16 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the TagCategory entity with Id of \"id\"
+     * Deletes a TagCategory entity
      */
     async deleteTagCategories(requestParameters: DeleteTagCategoriesRequest): Promise<void> {
         await this.deleteTagCategoriesRaw(requestParameters);
     }
 
     /**
+     * Returns the TagCategory with the specified Id upon success
+     * Gets a TagCategory entity by Id
      */
     async getTagCategoriesRaw(requestParameters: GetTagCategoriesRequest): Promise<runtime.ApiResponse<TagCategoryVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -150,6 +160,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the TagCategory with the specified Id upon success
+     * Gets a TagCategory entity by Id
      */
     async getTagCategories(requestParameters: GetTagCategoriesRequest): Promise<TagCategoryVm> {
         const response = await this.getTagCategoriesRaw(requestParameters);
@@ -157,6 +169,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the TagCategory list with the specified filters applied
+     * Gets a TagCategory entity list sorted and filtered
      */
     async listTagCategoriesRaw(requestParameters: ListTagCategoriesRequest): Promise<runtime.ApiResponse<TagCategoryVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -198,6 +212,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the TagCategory list with the specified filters applied
+     * Gets a TagCategory entity list sorted and filtered
      */
     async listTagCategories(requestParameters: ListTagCategoriesRequest): Promise<TagCategoryVmPaginatedResponse> {
         const response = await this.listTagCategoriesRaw(requestParameters);
@@ -205,6 +221,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a TagCategory entity with Id of \"id\" to entity \"category\"
+     * Updates a TagCategory entity
      */
     async updateTagCategoriesRaw(requestParameters: UpdateTagCategoriesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -233,6 +251,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a TagCategory entity with Id of \"id\" to entity \"category\"
+     * Updates a TagCategory entity
      */
     async updateTagCategories(requestParameters: UpdateTagCategoriesRequest): Promise<void> {
         await this.updateTagCategoriesRaw(requestParameters);

@@ -15,52 +15,15 @@
 
 import * as runtime from '../runtime';
 import {
-    Int32EntityCreatedVm,
-    Int32EntityCreatedVmFromJSON,
-    Int32EntityCreatedVmToJSON,
-    OrderByType,
-    OrderByTypeFromJSON,
-    OrderByTypeToJSON,
     PartnerDto,
     PartnerDtoFromJSON,
     PartnerDtoToJSON,
     PartnerVm,
     PartnerVmFromJSON,
     PartnerVmToJSON,
-    PartnerVmPaginatedResponse,
-    PartnerVmPaginatedResponseFromJSON,
-    PartnerVmPaginatedResponseToJSON,
 } from '../models';
 
-export interface CreatePartnersRequest {
-    partnerDto?: PartnerDto;
-}
-
-export interface DeletePartnersRequest {
-    id: number;
-}
-
-export interface GetPartnersRequest {
-    id: number;
-}
-
-export interface ListPartnersRequest {
-    name?: string;
-    address?: string;
-    registrationNumber?: number;
-    taxNumber?: number;
-    bankAccount?: number;
-    contactName?: string;
-    contactEmail?: string;
-    contactPhone?: number;
-    page?: number;
-    pageSize?: number;
-    orderBy?: string;
-    orderByType?: OrderByType;
-}
-
 export interface UpdatePartnersRequest {
-    id: number;
     partnerDto?: PartnerDto;
 }
 
@@ -71,12 +34,10 @@ export class PartnersApi extends runtime.BaseAPI {
 
     /**
      */
-    async createPartnersRaw(requestParameters: CreatePartnersRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async getPartnersRaw(): Promise<runtime.ApiResponse<PartnerVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -84,70 +45,6 @@ export class PartnersApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/api/Partners`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PartnerDtoToJSON(requestParameters.partnerDto),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => Int32EntityCreatedVmFromJSON(jsonValue));
-    }
-
-    /**
-     */
-    async createPartners(requestParameters: CreatePartnersRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createPartnersRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     */
-    async deletePartnersRaw(requestParameters: DeletePartnersRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePartners.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Partners/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     */
-    async deletePartners(requestParameters: DeletePartnersRequest): Promise<void> {
-        await this.deletePartnersRaw(requestParameters);
-    }
-
-    /**
-     */
-    async getPartnersRaw(requestParameters: GetPartnersRequest): Promise<runtime.ApiResponse<PartnerVm>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPartners.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Partners/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -158,94 +55,14 @@ export class PartnersApi extends runtime.BaseAPI {
 
     /**
      */
-    async getPartners(requestParameters: GetPartnersRequest): Promise<PartnerVm> {
-        const response = await this.getPartnersRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     */
-    async listPartnersRaw(requestParameters: ListPartnersRequest): Promise<runtime.ApiResponse<PartnerVmPaginatedResponse>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.name !== undefined) {
-            queryParameters['name'] = requestParameters.name;
-        }
-
-        if (requestParameters.address !== undefined) {
-            queryParameters['address'] = requestParameters.address;
-        }
-
-        if (requestParameters.registrationNumber !== undefined) {
-            queryParameters['registrationNumber'] = requestParameters.registrationNumber;
-        }
-
-        if (requestParameters.taxNumber !== undefined) {
-            queryParameters['taxNumber'] = requestParameters.taxNumber;
-        }
-
-        if (requestParameters.bankAccount !== undefined) {
-            queryParameters['bankAccount'] = requestParameters.bankAccount;
-        }
-
-        if (requestParameters.contactName !== undefined) {
-            queryParameters['contactName'] = requestParameters.contactName;
-        }
-
-        if (requestParameters.contactEmail !== undefined) {
-            queryParameters['contactEmail'] = requestParameters.contactEmail;
-        }
-
-        if (requestParameters.contactPhone !== undefined) {
-            queryParameters['contactPhone'] = requestParameters.contactPhone;
-        }
-
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
-        }
-
-        if (requestParameters.pageSize !== undefined) {
-            queryParameters['pageSize'] = requestParameters.pageSize;
-        }
-
-        if (requestParameters.orderBy !== undefined) {
-            queryParameters['orderBy'] = requestParameters.orderBy;
-        }
-
-        if (requestParameters.orderByType !== undefined) {
-            queryParameters['orderByType'] = requestParameters.orderByType;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Partners`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerVmPaginatedResponseFromJSON(jsonValue));
-    }
-
-    /**
-     */
-    async listPartners(requestParameters: ListPartnersRequest): Promise<PartnerVmPaginatedResponse> {
-        const response = await this.listPartnersRaw(requestParameters);
+    async getPartners(): Promise<PartnerVm> {
+        const response = await this.getPartnersRaw();
         return await response.value();
     }
 
     /**
      */
     async updatePartnersRaw(requestParameters: UpdatePartnersRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePartners.');
-        }
-
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -257,7 +74,7 @@ export class PartnersApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Partners/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Partners`,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
