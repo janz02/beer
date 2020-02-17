@@ -15,9 +15,18 @@
 
 import * as runtime from '../runtime';
 import {
+    AuthRegistrationFailedException,
+    AuthRegistrationFailedExceptionFromJSON,
+    AuthRegistrationFailedExceptionToJSON,
+    HttpStatusCode,
+    HttpStatusCodeFromJSON,
+    HttpStatusCodeToJSON,
     LoginDto,
     LoginDtoFromJSON,
     LoginDtoToJSON,
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
     RefreshDto,
     RefreshDtoFromJSON,
     RefreshDtoToJSON,
@@ -54,6 +63,8 @@ export interface RegisterUserRequest {
 export class AuthApi extends runtime.BaseAPI {
 
     /**
+     * Returns user info about the logged in user
+     * Logs in a user
      */
     async loginRaw(requestParameters: LoginRequest): Promise<runtime.ApiResponse<UserVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -78,6 +89,8 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns user info about the logged in user
+     * Logs in a user
      */
     async login(requestParameters: LoginRequest): Promise<UserVm> {
         const response = await this.loginRaw(requestParameters);
@@ -85,6 +98,8 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns user info about the logged in user
+     * Refreshes the JWT token
      */
     async refreshRaw(requestParameters: RefreshRequest): Promise<runtime.ApiResponse<UserVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -109,6 +124,8 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns user info about the logged in user
+     * Refreshes the JWT token
      */
     async refresh(requestParameters: RefreshRequest): Promise<UserVm> {
         const response = await this.refreshRaw(requestParameters);
@@ -116,8 +133,10 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns nothing, but registers a contact for the partner
+     * Registers a contact for a partner
      */
-    async registerPartnerRaw(requestParameters: RegisterPartnerRequest): Promise<runtime.ApiResponse<void>> {
+    async registerPartnerRaw(requestParameters: RegisterPartnerRequest): Promise<runtime.ApiResponse<HttpStatusCode>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -136,16 +155,21 @@ export class AuthApi extends runtime.BaseAPI {
             body: RegisterPartnerDtoToJSON(requestParameters.registerPartnerDto),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => HttpStatusCodeFromJSON(jsonValue));
     }
 
     /**
+     * Returns nothing, but registers a contact for the partner
+     * Registers a contact for a partner
      */
-    async registerPartner(requestParameters: RegisterPartnerRequest): Promise<void> {
-        await this.registerPartnerRaw(requestParameters);
+    async registerPartner(requestParameters: RegisterPartnerRequest): Promise<HttpStatusCode> {
+        const response = await this.registerPartnerRaw(requestParameters);
+        return await response.value();
     }
 
     /**
+     * Returns nothing, but registers a user
+     * Registers a user
      */
     async registerUserRaw(requestParameters: RegisterUserRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -170,6 +194,8 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns nothing, but registers a user
+     * Registers a user
      */
     async registerUser(requestParameters: RegisterUserRequest): Promise<void> {
         await this.registerUserRaw(requestParameters);

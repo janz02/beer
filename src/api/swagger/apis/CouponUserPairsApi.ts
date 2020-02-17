@@ -26,6 +26,8 @@ import {
 export class CouponUserPairsApi extends runtime.BaseAPI {
 
     /**
+     * Archives every pair of coupons and users, used before generating new pairs
+     * Archives every pair of coupons and users
      */
     async archivePairsRaw(): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -47,12 +49,16 @@ export class CouponUserPairsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Archives every pair of coupons and users, used before generating new pairs
+     * Archives every pair of coupons and users
      */
     async archivePairs(): Promise<void> {
         await this.archivePairsRaw();
     }
 
     /**
+     * Generates 8 pairs for every user or as many coupons are available
+     * Generates pairs of users and coupons
      */
     async generatePairsRaw(): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -74,12 +80,16 @@ export class CouponUserPairsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Generates 8 pairs for every user or as many coupons are available
+     * Generates pairs of users and coupons
      */
     async generatePairs(): Promise<void> {
         await this.generatePairsRaw();
     }
 
     /**
+     * Returns a coupon list that contains up to 8 coupons for the user for today
+     * Returns the coupons generated for the user
      */
     async getMyCouponsRaw(): Promise<runtime.ApiResponse<Array<MyCouponVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -101,6 +111,8 @@ export class CouponUserPairsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns a coupon list that contains up to 8 coupons for the user for today
+     * Returns the coupons generated for the user
      */
     async getMyCoupons(): Promise<Array<MyCouponVm>> {
         const response = await this.getMyCouponsRaw();

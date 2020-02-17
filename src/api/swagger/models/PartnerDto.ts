@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    PartnerState,
-    PartnerStateFromJSON,
-    PartnerStateFromJSONTyped,
-    PartnerStateToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -56,18 +49,6 @@ export interface PartnerDto {
      * @memberof PartnerDto
      */
     bankAccount?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PartnerDto
-     */
-    majorPartner?: boolean;
-    /**
-     * 
-     * @type {PartnerState}
-     * @memberof PartnerDto
-     */
-    partnerState?: PartnerState;
 }
 
 export function PartnerDtoFromJSON(json: any): PartnerDto {
@@ -85,8 +66,6 @@ export function PartnerDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'registrationNumber': !exists(json, 'registrationNumber') ? undefined : json['registrationNumber'],
         'taxNumber': !exists(json, 'taxNumber') ? undefined : json['taxNumber'],
         'bankAccount': !exists(json, 'bankAccount') ? undefined : json['bankAccount'],
-        'majorPartner': !exists(json, 'majorPartner') ? undefined : json['majorPartner'],
-        'partnerState': !exists(json, 'partnerState') ? undefined : PartnerStateFromJSON(json['partnerState']),
     };
 }
 
@@ -104,8 +83,6 @@ export function PartnerDtoToJSON(value?: PartnerDto | null): any {
         'registrationNumber': value.registrationNumber,
         'taxNumber': value.taxNumber,
         'bankAccount': value.bankAccount,
-        'majorPartner': value.majorPartner,
-        'partnerState': PartnerStateToJSON(value.partnerState),
     };
 }
 

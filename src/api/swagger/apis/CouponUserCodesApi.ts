@@ -33,6 +33,8 @@ export interface GetClaimedCouponsRequest {
 export class CouponUserCodesApi extends runtime.BaseAPI {
 
     /**
+     * Archives every couponcode in the database
+     * Archives all couponcodes
      */
     async archiveCouponUserCodesRaw(): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -54,12 +56,16 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Archives every couponcode in the database
+     * Archives all couponcodes
      */
     async archiveCouponUserCodes(): Promise<void> {
         await this.archiveCouponUserCodesRaw();
     }
 
     /**
+     * Returns a list of couponcodes that have been claimed for coupon with an Id of couponId
+     * Returns the claimed couponcodes for a coupon
      */
     async getClaimedCouponsRaw(requestParameters: GetClaimedCouponsRequest): Promise<runtime.ApiResponse<CouponUserCodeVmPaginatedResponse>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
@@ -85,6 +91,8 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns a list of couponcodes that have been claimed for coupon with an Id of couponId
+     * Returns the claimed couponcodes for a coupon
      */
     async getClaimedCoupons(requestParameters: GetClaimedCouponsRequest): Promise<CouponUserCodeVmPaginatedResponse> {
         const response = await this.getClaimedCouponsRaw(requestParameters);

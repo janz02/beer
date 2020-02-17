@@ -93,34 +93,23 @@ export const getSite = (id: number): AppThunk => async dispatch => {
 export const saveSite = (site: Site, id: number): AppThunk => async dispatch => {
   dispatch(saveSiteRequest())
   try {
-    // Todo: integrate correct partner Id
-    const partners = await api.partner.listPartners({})
-    const partnerId = partners.result?.[0]?.id
-
-    if (partnerId) {
-      if (id > 0) {
-        await api.sites.updateSites({
-          id,
-          siteDto: {
-            ...site,
-            partnerId
-          }
-        })
-        dispatch(getSite(id))
-      } else {
-        const newId = await api.sites.createSites({
-          siteDto: {
-            ...site,
-            partnerId
-          }
-        })
-        newId.id && dispatch(getSite(newId.id))
-      }
-      dispatch(saveSiteSuccess())
+    if (id > 0) {
+      await api.sites.updateSites({
+        id,
+        siteDto: {
+          ...site
+        }
+      })
+      dispatch(getSite(id))
     } else {
-      // TODO: see if is necesary after integration
-      throw Error('No partner id')
+      const newId = await api.sites.createSites({
+        siteDto: {
+          ...site
+        }
+      })
+      newId.id && dispatch(getSite(newId.id))
     }
+    dispatch(saveSiteSuccess())
   } catch (err) {
     dispatch(saveSiteFail(err.toString()))
   }
