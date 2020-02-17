@@ -98,7 +98,7 @@ export const SiteEditorPage: FC = () => {
           tableProps={{
             columns: columns,
             dataSource: siteApiKeys,
-            rowKey: (x): string => (x.id ? x.id.toString() : '')
+            rowKey: (x): string => x.id?.toString() ?? ''
           }}
           error={error}
         />
@@ -146,8 +146,9 @@ export const SiteEditorPage: FC = () => {
             <Popover content={copyPopoverText} trigger="hover">
               <Button
                 type="primary"
-                onClick={e => {
-                  ;(inputToCopyRef?.current as any).select()
+                onClick={() => {
+                  const current = inputToCopyRef?.current as any
+                  current.select()
                   document.execCommand('copy')
                   setCopyPopoverText(t('site.editor.copy-api-key-success'))
                 }}
