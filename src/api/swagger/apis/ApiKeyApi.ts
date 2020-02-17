@@ -21,6 +21,9 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
     SiteApiKeyVmPaginatedResponse,
     SiteApiKeyVmPaginatedResponseFromJSON,
     SiteApiKeyVmPaginatedResponseToJSON,
@@ -43,6 +46,8 @@ export interface ListApiKeyRequest {
 export class ApiKeyApi extends runtime.BaseAPI {
 
     /**
+     * Returns the new Api Key
+     * Creates an Api Key for a site
      */
     async createApiKeyRaw(requestParameters: CreateApiKeyRequest): Promise<runtime.ApiResponse<Int32StringCreateSiteApiKeyVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -68,6 +73,8 @@ export class ApiKeyApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the new Api Key
+     * Creates an Api Key for a site
      */
     async createApiKey(requestParameters: CreateApiKeyRequest): Promise<Int32StringCreateSiteApiKeyVm> {
         const response = await this.createApiKeyRaw(requestParameters);
@@ -75,6 +82,8 @@ export class ApiKeyApi extends runtime.BaseAPI {
     }
 
     /**
+     * No Api Key included in the query
+     * Returns the already created Sites with Api Keys
      */
     async listApiKeyRaw(requestParameters: ListApiKeyRequest): Promise<runtime.ApiResponse<SiteApiKeyVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -112,6 +121,8 @@ export class ApiKeyApi extends runtime.BaseAPI {
     }
 
     /**
+     * No Api Key included in the query
+     * Returns the already created Sites with Api Keys
      */
     async listApiKey(requestParameters: ListApiKeyRequest): Promise<SiteApiKeyVmPaginatedResponse> {
         const response = await this.listApiKeyRaw(requestParameters);

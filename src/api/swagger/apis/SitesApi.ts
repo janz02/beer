@@ -65,6 +65,8 @@ export interface UpdateSitesRequest {
 export class SitesApi extends runtime.BaseAPI {
 
     /**
+     * Returns the id of the entity upon success
+     * Creates an entity
      */
     async createSitesRaw(requestParameters: CreateSitesRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -89,6 +91,8 @@ export class SitesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the id of the entity upon success
+     * Creates an entity
      */
     async createSites(requestParameters: CreateSitesRequest): Promise<Int32EntityCreatedVm> {
         const response = await this.createSitesRaw(requestParameters);
@@ -96,6 +100,8 @@ export class SitesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes an entity with Id of \"id\"
+     * Deletes an entity
      */
     async deleteSitesRaw(requestParameters: DeleteSitesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -121,12 +127,16 @@ export class SitesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes an entity with Id of \"id\"
+     * Deletes an entity
      */
     async deleteSites(requestParameters: DeleteSitesRequest): Promise<void> {
         await this.deleteSitesRaw(requestParameters);
     }
 
     /**
+     * Returns the entity with the specified Id upon success
+     * Gets an entity by Id
      */
     async getSitesRaw(requestParameters: GetSitesRequest): Promise<runtime.ApiResponse<SiteVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -152,6 +162,8 @@ export class SitesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the entity with the specified Id upon success
+     * Gets an entity by Id
      */
     async getSites(requestParameters: GetSitesRequest): Promise<SiteVm> {
         const response = await this.getSitesRaw(requestParameters);
@@ -159,6 +171,8 @@ export class SitesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the entity list with the specified filters applied
+     * Gets an entity list sorted and filtered
      */
     async listSitesRaw(requestParameters: ListSitesRequest): Promise<runtime.ApiResponse<SiteVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -208,6 +222,8 @@ export class SitesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the entity list with the specified filters applied
+     * Gets an entity list sorted and filtered
      */
     async listSites(requestParameters: ListSitesRequest): Promise<SiteVmPaginatedResponse> {
         const response = await this.listSitesRaw(requestParameters);
@@ -215,6 +231,8 @@ export class SitesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates an entity with Id of \"id\" to entity \"dto\"
+     * Updates an entity
      */
     async updateSitesRaw(requestParameters: UpdateSitesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -243,6 +261,8 @@ export class SitesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates an entity with Id of \"id\" to entity \"dto\"
+     * Updates an entity
      */
     async updateSites(requestParameters: UpdateSitesRequest): Promise<void> {
         await this.updateSitesRaw(requestParameters);

@@ -103,6 +103,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
           </Button>
         </Form>
       </Card>
+
       <GenericPopup
         type="discard"
         visible={visibleDiscardPopup}

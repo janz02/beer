@@ -5,6 +5,8 @@ export * from './CouponCommentsApi';
 export * from './CouponUserCodesApi';
 export * from './CouponUserPairsApi';
 export * from './CouponsApi';
+export * from './EmailSenderApi';
+export * from './InformationApi';
 export * from './PartnerContactsApi';
 export * from './PartnersApi';
 export * from './SitesApi';

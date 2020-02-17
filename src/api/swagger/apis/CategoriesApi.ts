@@ -63,6 +63,8 @@ export interface UpdateCategoriesRequest {
 export class CategoriesApi extends runtime.BaseAPI {
 
     /**
+     * Returns the id of the Category upon success
+     * Creates a Category entity
      */
     async createCategoriesRaw(requestParameters: CreateCategoriesRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -87,6 +89,8 @@ export class CategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the id of the Category upon success
+     * Creates a Category entity
      */
     async createCategories(requestParameters: CreateCategoriesRequest): Promise<Int32EntityCreatedVm> {
         const response = await this.createCategoriesRaw(requestParameters);
@@ -94,6 +98,8 @@ export class CategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the Category entity with Id of \"id\"
+     * Deletes a Category entity
      */
     async deleteCategoriesRaw(requestParameters: DeleteCategoriesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -119,12 +125,16 @@ export class CategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the Category entity with Id of \"id\"
+     * Deletes a Category entity
      */
     async deleteCategories(requestParameters: DeleteCategoriesRequest): Promise<void> {
         await this.deleteCategoriesRaw(requestParameters);
     }
 
     /**
+     * Returns the Category with the specified Id upon success
+     * Gets a Category entity by Id
      */
     async getCategoriesRaw(requestParameters: GetCategoriesRequest): Promise<runtime.ApiResponse<CategoryVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -150,6 +160,8 @@ export class CategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Category with the specified Id upon success
+     * Gets a Category entity by Id
      */
     async getCategories(requestParameters: GetCategoriesRequest): Promise<CategoryVm> {
         const response = await this.getCategoriesRaw(requestParameters);
@@ -157,6 +169,8 @@ export class CategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Category list with the specified filters applied
+     * Gets a Category entity list sorted and filtered
      */
     async listCategoriesRaw(requestParameters: ListCategoriesRequest): Promise<runtime.ApiResponse<CategoryVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -198,6 +212,8 @@ export class CategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Category list with the specified filters applied
+     * Gets a Category entity list sorted and filtered
      */
     async listCategories(requestParameters: ListCategoriesRequest): Promise<CategoryVmPaginatedResponse> {
         const response = await this.listCategoriesRaw(requestParameters);
@@ -205,6 +221,8 @@ export class CategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a Category entity with Id of \"id\" to entity \"category\"
+     * Updates a Category entity
      */
     async updateCategoriesRaw(requestParameters: UpdateCategoriesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -233,6 +251,8 @@ export class CategoriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a Category entity with Id of \"id\" to entity \"category\"
+     * Updates a Category entity
      */
     async updateCategories(requestParameters: UpdateCategoriesRequest): Promise<void> {
         await this.updateCategoriesRaw(requestParameters);

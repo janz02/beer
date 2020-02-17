@@ -158,6 +158,20 @@
     "save-profile-success": "Profile mentése sikeres."
   },
   "site": {
+    "editor": {
+      "add-api-key": {
+        "generate": "Generálás",
+        "name": "Api kulcs tulajdonos neve"
+      },
+      "add-new-api-key": "Új kulcs hozzáadása",
+      "add-new-api-key-title": "Api kulcs hozzáadása",
+      "api-key-name": "Név",
+      "api-keys-title": "Api kulcsok",
+      "copy-api-key": "Kód másolása",
+      "copy-api-key-success": "Másolva!",
+      "copy-api-key-title": "Api kulcs",
+      "expire-date": "Lejárati dátum"
+    },
     "field": {
       "address": "Cím",
       "name": "Telephely név"

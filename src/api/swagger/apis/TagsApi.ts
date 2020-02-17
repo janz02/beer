@@ -65,6 +65,8 @@ export interface UpdateTagsRequest {
 export class TagsApi extends runtime.BaseAPI {
 
     /**
+     * Returns the id of the Tag upon success
+     * Creates a Tag entity
      */
     async createTagsRaw(requestParameters: CreateTagsRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -89,6 +91,8 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the id of the Tag upon success
+     * Creates a Tag entity
      */
     async createTags(requestParameters: CreateTagsRequest): Promise<Int32EntityCreatedVm> {
         const response = await this.createTagsRaw(requestParameters);
@@ -96,6 +100,8 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the Tag entity with Id of \"id\"
+     * Deletes a Tag entity
      */
     async deleteTagsRaw(requestParameters: DeleteTagsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -121,12 +127,16 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes the Tag entity with Id of \"id\"
+     * Deletes a Tag entity
      */
     async deleteTags(requestParameters: DeleteTagsRequest): Promise<void> {
         await this.deleteTagsRaw(requestParameters);
     }
 
     /**
+     * Returns the Tag with the specified Id upon success
+     * Gets a Tag entity by Id
      */
     async getTagsRaw(requestParameters: GetTagsRequest): Promise<runtime.ApiResponse<TagVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -152,6 +162,8 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Tag with the specified Id upon success
+     * Gets a Tag entity by Id
      */
     async getTags(requestParameters: GetTagsRequest): Promise<TagVm> {
         const response = await this.getTagsRaw(requestParameters);
@@ -159,6 +171,8 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Tag list with the specified filters applied
+     * Gets a Tag entity list sorted and filtered
      */
     async listTagsRaw(requestParameters: ListTagsRequest): Promise<runtime.ApiResponse<TagVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -208,6 +222,8 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the Tag list with the specified filters applied
+     * Gets a Tag entity list sorted and filtered
      */
     async listTags(requestParameters: ListTagsRequest): Promise<TagVmPaginatedResponse> {
         const response = await this.listTagsRaw(requestParameters);
@@ -215,6 +231,8 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a Tag entity with Id of \"id\" to entity \"category\"
+     * Updates a Tag entity
      */
     async updateTagsRaw(requestParameters: UpdateTagsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -243,6 +261,8 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Updates a Tag entity with Id of \"id\" to entity \"category\"
+     * Updates a Tag entity
      */
     async updateTags(requestParameters: UpdateTagsRequest): Promise<void> {
         await this.updateTagsRaw(requestParameters);

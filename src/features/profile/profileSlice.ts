@@ -65,11 +65,9 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
     const userData = getState().auth.userData
     const id = userData.partnerId
     if (id) {
-      const partner = await api.partner.getPartners({ id })
+      const partner = await api.partner.getPartners()
       if (partner.contacts && partner.contacts[0].id) {
-        const profile = await api.partnerContacts.getPartnerContacts({
-          id: partner.contacts[0].id
-        })
+        const profile = await api.partnerContacts.getPartnerContacts()
         dispatch(getProfileSuccess({ ...profile }))
       }
     } else {
@@ -87,10 +85,9 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
   try {
     const id = getState().auth.userData.partnerId
     if (id) {
-      const partner = await api.partner.getPartners({ id })
+      const partner = await api.partner.getPartners()
       if (partner.contacts && partner.contacts[0].id) {
         await api.partnerContacts.updatePartnerContacts({
-          id: partner.contacts[0].id,
           partnerContactDto: { ...getState().profile.profile, ...profile }
         })
 

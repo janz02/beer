@@ -151,7 +151,7 @@ export const CouponListPage: React.FC = () => {
         title={() => cardHeader()}
         dataSource={coupons}
         columns={columns}
-        rowKey={(x): string => (x.id ? x.id.toString() : '')}
+        rowKey={(x): string => x.id?.toString() ?? ''}
         pagination={{
           pageSizeOptions: ['10', '20', '50', '100'],
           showSizeChanger: true,

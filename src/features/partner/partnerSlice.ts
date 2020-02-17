@@ -50,19 +50,16 @@ export const {
 
 export default partnerSlice.reducer
 
-export const getPartners = (): AppThunk => async (dispatch, getState) => {
+export const getPartners = (): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const id = getState().auth.userData.partnerId
-    if (id) {
-      const partner = await api.partner.getPartners({ id })
-      dispatch(
-        getPartnersSuccess({
-          ...partner
-        })
-      )
-    }
+    const partner = await api.partner.getPartners()
+    dispatch(
+      getPartnersSuccess({
+        ...partner
+      })
+    )
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }
@@ -72,18 +69,14 @@ export const updatePartners = (partner: Partner): AppThunk => async (dispatch, g
   dispatch(setLoadingStart())
 
   try {
-    const id = getState().auth.userData.partnerId
-    if (id) {
-      await api.partner.updatePartners({
-        id,
-        partnerDto: {
-          ...getState().partner.partner,
-          ...partner
-        }
-      })
+    await api.partner.updatePartners({
+      partnerDto: {
+        ...getState().partner.partner,
+        ...partner
+      }
+    })
 
-      dispatch(updatePartnerSuccess())
-    }
+    dispatch(updatePartnerSuccess())
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }

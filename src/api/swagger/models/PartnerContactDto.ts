@@ -21,18 +21,6 @@ import { exists, mapValues } from '../runtime';
 export interface PartnerContactDto {
     /**
      * 
-     * @type {number}
-     * @memberof PartnerContactDto
-     */
-    id?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartnerContactDto
-     */
-    partnerId?: number;
-    /**
-     * 
      * @type {string}
      * @memberof PartnerContactDto
      */
@@ -61,8 +49,6 @@ export function PartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'phone': !exists(json, 'phone') ? undefined : json['phone'],
@@ -78,8 +64,6 @@ export function PartnerContactDtoToJSON(value?: PartnerContactDto | null): any {
     }
     return {
         
-        'id': value.id,
-        'partnerId': value.partnerId,
         'name': value.name,
         'email': value.email,
         'phone': value.phone,

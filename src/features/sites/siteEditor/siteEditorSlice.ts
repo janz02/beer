@@ -4,9 +4,12 @@ import { api } from 'api'
 import { Site } from 'models/site'
 import { message } from 'antd'
 import i18n from 'app/i18n'
+import { SiteApiKey } from 'models/siteApiKey'
+import moment from 'moment'
 
 interface SiteEditorState {
   site?: Site
+  siteApiKeys?: SiteApiKey[]
   loadingData: boolean
   loadingSave: boolean
   error: string
@@ -40,7 +43,18 @@ const siteEditorSlice = createSlice({
       state.loadingData = false
       state.error = action.payload
     },
-
+    getSiteApiKeysRequest(state) {
+      state.loadingData = true
+    },
+    getSiteApiKeysSuccess(state, action: PayloadAction<SiteApiKey[]>) {
+      state.siteApiKeys = action.payload
+      state.loadingData = false
+      state.error = ''
+    },
+    getSiteApiKeysFail(state, action: PayloadAction<string>) {
+      state.loadingData = false
+      state.error = action.payload
+    },
     saveSiteRequest(state) {
       state.loadingSave = true
     },
@@ -58,6 +72,8 @@ const siteEditorSlice = createSlice({
 
 const { getSiteRequest, getSiteSuccess, getSiteFail } = siteEditorSlice.actions
 const { saveSiteRequest, saveSiteSuccess, saveSiteFail } = siteEditorSlice.actions
+const { getSiteApiKeysRequest, getSiteApiKeysSuccess, getSiteApiKeysFail } = siteEditorSlice.actions
+
 export const { resetSiteEditor } = siteEditorSlice.actions
 
 export default siteEditorSlice.reducer
@@ -77,35 +93,41 @@ export const getSite = (id: number): AppThunk => async dispatch => {
 export const saveSite = (site: Site, id: number): AppThunk => async dispatch => {
   dispatch(saveSiteRequest())
   try {
-    // Todo: integrate correct partner Id
-    const partners = await api.partner.listPartners({})
-    const partnerId = partners.result?.[0]?.id
-
-    if (partnerId) {
-      if (id > 0) {
-        await api.sites.updateSites({
-          id,
-          siteDto: {
-            ...site,
-            partnerId
-          }
-        })
-        dispatch(getSite(id))
-      } else {
-        const newId = await api.sites.createSites({
-          siteDto: {
-            ...site,
-            partnerId
-          }
-        })
-        newId.id && dispatch(getSite(newId.id))
-      }
-      dispatch(saveSiteSuccess())
+    if (id > 0) {
+      await api.sites.updateSites({
+        id,
+        siteDto: {
+          ...site
+        }
+      })
+      dispatch(getSite(id))
     } else {
-      // TODO: see if is necesary after integration
-      throw Error('No partner id')
+      const newId = await api.sites.createSites({
+        siteDto: {
+          ...site
+        }
+      })
+      newId.id && dispatch(getSite(newId.id))
     }
+    dispatch(saveSiteSuccess())
   } catch (err) {
     dispatch(saveSiteFail(err.toString()))
+  }
+}
+
+export const getSiteApiKeys = (): AppThunk => async dispatch => {
+  dispatch(getSiteApiKeysRequest())
+
+  try {
+    // TODO: integrate.
+    const siteApiKeys: SiteApiKey[] = [
+      { id: 1, name: 'Test 1', expireDate: moment(new Date()) },
+      { id: 2, name: 'Test 2', expireDate: moment(new Date()) },
+      { id: 3, name: 'Test 3', expireDate: moment(new Date()) }
+    ]
+
+    dispatch(getSiteApiKeysSuccess(siteApiKeys))
+  } catch (err) {
+    dispatch(getSiteApiKeysFail(err.toString()))
   }
 }
