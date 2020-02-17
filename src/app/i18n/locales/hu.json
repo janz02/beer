@@ -7,9 +7,9 @@
       "signup-failed": "A regisztrálás sikertelen volt."
     },
     "field": {
-      "code": "Ügyfél kód",
+      "code": "Partner regisztrációs kód",
       "company": "Cég neve",
-      "email": "E-mail-cím",
+      "email": "E-mail cím",
       "name": "Teljes név",
       "password": "Jelszó",
       "password-again": "Jelszó ismét",
@@ -17,17 +17,17 @@
       "remember-me": "Emlékezz rám!",
       "username": "Felhasználónév"
     },
-    "forgot-password": "Elfelejtettem a jelszavamat!",
+    "forgot-password": "Elfelejtett jelszó",
     "login": "Belépés",
     "logout": "Kilépés",
     "profile": "Személyes adatok",
     "send-email": "Email küldése",
-    "signup": "Regisztrálás",
+    "signup": "Regisztráció",
     "text": {
       "accept-prefix": "Elfogadom a ",
       "client-code-info": "A szerződésben található.",
       "new-password-email": "Kérek egy e-mailt az új jelszóval.",
-      "terms-and-services": "Feltételeket és Szolgáltatásokat"
+      "terms-and-services": "felhasználási feltételeket."
     }
   },
   "common": {

@@ -124,6 +124,7 @@ export const recoverPassword = (params: any): AppThunk => async dispatch => {
   }
 }
 
+// TODO: integration, use proper typing instead of any.
 export const signUp = (params: any): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
@@ -131,8 +132,10 @@ export const signUp = (params: any): AppThunk => async dispatch => {
     registerPartnerDto: {
       email: params.username,
       password: params.password,
-      partnerName: params.company,
+      // TODO: integration, remove partnerName field.
+      partnerName: 'remove',
       fullName: params.name,
+      // TODO: integration, move number conversion to component.
       phone: +params.phone,
       code: params.code
     }
