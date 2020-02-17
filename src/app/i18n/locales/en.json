@@ -7,7 +7,7 @@
       "signup-failed": "Something went wrong, please try again."
     },
     "field": {
-      "code": "Client code",
+      "code": "Partner registration code",
       "company": "Company name",
       "email": "E-mail address",
       "name": "Full Name",

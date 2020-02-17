@@ -24,7 +24,7 @@ export const LoginPage: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={values => dispatch(login(values))}
       >
-        <Form.Item label={t('auth.field.username')} name="username" rules={[rule.required()]}>
+        <Form.Item label={t('auth.field.email')} name="username" rules={[rule.required()]}>
           <Input />
         </Form.Item>
         <Form.Item label={t('auth.field.password')} name="password" rules={[rule.required()]}>

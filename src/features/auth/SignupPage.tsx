@@ -19,7 +19,11 @@ export const SignupPage: React.FC = () => {
     <AuthLayout className="signup" title={t(`auth.signup`)}>
       {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
       <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
-        <Form.Item name="username" label={t('auth.field.username')} rules={[rule.required()]}>
+        <Form.Item name="name" label={t('auth.field.name')} rules={[rule.required()]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item name="username" label={t('auth.field.email')} rules={[rule.required()]}>
           <Input />
         </Form.Item>
 
@@ -52,14 +56,6 @@ export const SignupPage: React.FC = () => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item name="company" label={t('auth.field.company')} rules={[rule.required()]}>
-          <Input />
-        </Form.Item>
-
-        <Form.Item name="name" label={t('auth.field.name')} rules={[rule.required()]}>
-          <Input />
-        </Form.Item>
-
         <Form.Item
           name="phone"
           label={t('auth.field.phone')}
@@ -68,25 +64,19 @@ export const SignupPage: React.FC = () => {
           <Input type="tel" />
         </Form.Item>
 
-        <Form.Item
-          name="code"
-          label={t('auth.field.code')}
-          extra={t('auth.text.client-code-info')}
-          rules={[rule.required()]}
-        >
+        <Form.Item name="code" label={t('auth.field.code')} rules={[rule.required()]}>
           <Input />
         </Form.Item>
 
         <Form.Item name="acceptTerms" valuePropName="checked">
           <Checkbox>
-            {t('auth.text.accept-prefix')}
+            <span className="text-faded">{t('auth.text.accept-prefix')}</span>
             <Button
               className="signup__accept-terms"
               type="link"
               onClick={() => console.log('TODO: open terms and services')}
             >
-              {' '}
-              {t('auth.text.terms-and-services')}
+              <span className="underlined text-faded">{t('auth.text.terms-and-services')}</span>
             </Button>
           </Checkbox>
         </Form.Item>
