@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import './NewsLetterEditor.scss'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -31,45 +31,42 @@ export interface NewsLetterEditorProps {
 export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
   const template = props?.template ?? defaultTemplate
 
+  const editor = useRef<any>()
+
   useEffect(() => {
-    const storagePrefix = 'gjs-pkm-'
-    setTimeout(() => {
-      const editor = grapesjs.init({
+    const storagePrefix = 'gjs-pkm'
+
+    if (!editor.current) {
+      editor.current = grapesjs.init({
         container: '#grapesjs',
         storageManager: {
           type: 'indexeddb',
-          id: storagePrefix
+          id: `${storagePrefix}-`
         },
         height: '100%',
         plugins: [grapesjsNewsLetter, grapesjsIndexxeddb],
         pluginsOpts: {
-          'grapesjs-indexeddb': {
-            dbName: 'cxxx'
+          [grapesjsIndexxeddb]: {
+            dbName: storagePrefix
           }
-        },
-        components: template?.components || template?.html,
-        style: template?.style || template?.css
+        }
       })
-      editor.on('storage:load', function(e: any) {
-        console.log('STORAGE:LOAD ', e)
-      })
-      editor.on('storage:store', function(e: any) {
-        console.log('STORAGE:STORE ', e)
-      })
-      editor.on('storage:error', function(e: any) {
-        console.log('STORAGE:ERROR ', e)
-      })
-      console.log(grapesjsIndexxeddb)
-    }, 0)
+    }
     return () => {
-      indexedDB.deleteDatabase('gjs')
+      indexedDB.deleteDatabase(storagePrefix)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (editor.current) {
+      editor.current.setComponents(template?.components || template?.html)
+      editor.current.setStyle(template?.style || template?.css)
     }
   }, [template])
 
   return (
     <div className="newsletter-editor-containter">
       <div id="grapesjs" />
-      <div id="blocks" />
     </div>
   )
 }
