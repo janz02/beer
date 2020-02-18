@@ -124,7 +124,8 @@
     "coupons": "Coupons",
     "dashboard": "Dashboard",
     "partner-data": "Partner data",
-    "sites": "Sites"
+    "sites": "Sites",
+    "news-letter": "News letter"
   },
   "notification": {
     "empty-list": "Empty",
