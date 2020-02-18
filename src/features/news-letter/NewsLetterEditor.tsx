@@ -9,12 +9,14 @@ import grapesjsNewsLetter from 'grapesjs-preset-newsletter'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import grapesjsIndexxeddb from 'grapesjs-indexeddb'
+import { Button } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 export interface NewsLetterTemplate {
-  html: string | null
-  css: string | null
-  components: string | null
-  style: string | null
+  html?: string | null
+  css?: string | null
+  components?: string | null
+  style?: string | null
 }
 
 const defaultTemplate: NewsLetterTemplate = {
@@ -31,12 +33,19 @@ export interface NewsLetterEditorProps {
 export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
   const template = props?.template ?? defaultTemplate
 
+  const { t } = useTranslation()
+
   const editor = useRef<any>()
+
+  const saveTemplate = (newTemplate: NewsLetterTemplate): void => {
+    console.log({ newTemplate, editor: editor.current, cmd: editor.current.Commands.getAll() })
+  }
 
   useEffect(() => {
     const storagePrefix = 'gjs-pkm'
 
     if (!editor.current) {
+      indexedDB.deleteDatabase(storagePrefix)
       editor.current = grapesjs.init({
         container: '#grapesjs',
         storageManager: {
@@ -51,11 +60,30 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
           }
         }
       })
+      editor.current.Commands.add('save-template', {
+        run: (editor: any, sender: any) => {
+          const html = editor.getHtml()
+          const css = editor.getCss()
+          saveTemplate({ html, css })
+        }
+      })
+      editor.current.Panels.addButton('options', [
+        {
+          id: 'save-template',
+          className: 'fa fa-save',
+          attributes: {
+            title: t('common.save')
+          },
+          command: (editor: any, sender: any) => {
+            editor.runCommand('save-template')
+          }
+        }
+      ])
     }
     return () => {
       indexedDB.deleteDatabase(storagePrefix)
     }
-  }, [])
+  }, [t])
 
   useEffect(() => {
     if (editor.current) {

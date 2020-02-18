@@ -13,14 +13,14 @@ export const NewsLetterEditorPage: FC = () => {
   })
   return (
     <>
-      <Button
+      {/* <Button
         onClick={() => {
           setCount(count + 1)
           setTemplate({ ...template, html: `<div>...template ${count} ...</div>` })
         }}
       >
         Update
-      </Button>
+      </Button> */}
       <ErrorBoundary>
         <NewsLetterEditor template={template} />
       </ErrorBoundary>
