@@ -323,24 +323,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful registration",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/HttpStatusCode"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HttpStatusCode"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HttpStatusCode"
-                }
-              }
-            }
+            "description": "Successful registration"
           },
           "400": {
             "description": "Invalid e-mail: auth.error.invalid-email; \r\n                Invalid password: auth.error.password-format; \r\n                Error occured in registration: auth.error.registration-failed;\r\n                User already exists: auth.error.user-exists",
@@ -2603,77 +2586,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "HttpStatusCode": {
-        "enum": [
-          "Continue",
-          "SwitchingProtocols",
-          "Processing",
-          "EarlyHints",
-          "OK",
-          "Created",
-          "Accepted",
-          "NonAuthoritativeInformation",
-          "NoContent",
-          "ResetContent",
-          "PartialContent",
-          "MultiStatus",
-          "AlreadyReported",
-          "IMUsed",
-          "MultipleChoices",
-          "Ambiguous",
-          "MovedPermanently",
-          "Moved",
-          "Found",
-          "Redirect",
-          "SeeOther",
-          "RedirectMethod",
-          "NotModified",
-          "UseProxy",
-          "Unused",
-          "TemporaryRedirect",
-          "RedirectKeepVerb",
-          "PermanentRedirect",
-          "BadRequest",
-          "Unauthorized",
-          "PaymentRequired",
-          "Forbidden",
-          "NotFound",
-          "MethodNotAllowed",
-          "NotAcceptable",
-          "ProxyAuthenticationRequired",
-          "RequestTimeout",
-          "Conflict",
-          "Gone",
-          "LengthRequired",
-          "PreconditionFailed",
-          "RequestEntityTooLarge",
-          "RequestUriTooLong",
-          "UnsupportedMediaType",
-          "RequestedRangeNotSatisfiable",
-          "ExpectationFailed",
-          "MisdirectedRequest",
-          "UnprocessableEntity",
-          "Locked",
-          "FailedDependency",
-          "UpgradeRequired",
-          "PreconditionRequired",
-          "TooManyRequests",
-          "RequestHeaderFieldsTooLarge",
-          "UnavailableForLegalReasons",
-          "InternalServerError",
-          "NotImplemented",
-          "BadGateway",
-          "ServiceUnavailable",
-          "GatewayTimeout",
-          "HttpVersionNotSupported",
-          "VariantAlsoNegotiates",
-          "InsufficientStorage",
-          "LoopDetected",
-          "NotExtended",
-          "NetworkAuthenticationRequired"
-        ],
-        "type": "string"
       },
       "RegisterUserDto": {
         "type": "object",

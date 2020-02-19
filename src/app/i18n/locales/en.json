@@ -8,24 +8,20 @@
     },
     "field": {
       "code": "Partner registration code",
-      "company": "Company name",
       "email": "E-mail address",
       "name": "Full Name",
       "password": "Password",
       "password-again": "Password again",
       "phone": "Phone number",
-      "remember-me": "Remember me!",
-      "username": "Username"
+      "remember-me": "Remember me!"
     },
     "forgot-password": "Forgot password",
     "login": "Login",
     "logout": "Logout",
-    "profile": "Profile",
     "send-email": "Send email",
     "signup": "Sign up",
     "text": {
       "accept-prefix": "I accept the ",
-      "client-code-info": "Provided in the contract.",
       "new-password-email": "Get an email with the new password.",
       "terms-and-services": "Terms & Services"
     }
@@ -123,9 +119,9 @@
     "coupon-categories": "Categories",
     "coupons": "Coupons",
     "dashboard": "Dashboard",
+    "news-letter": "News letter",
     "partner-data": "Partner data",
-    "sites": "Sites",
-    "news-letter": "News letter"
+    "sites": "Sites"
   },
   "notification": {
     "empty-list": "Empty",
@@ -147,15 +143,15 @@
   },
   "profile": {
     "editor-title": "Profile",
-    "error": {
-      "email-required": "Email field is required."
-    },
     "field": {
+      "code": "Partner registration code",
       "email": "Email",
-      "name": "Name",
+      "name": "Full name",
+      "password": "Password",
+      "password-again": "Password again",
       "phone": "Phone"
     },
-    "save": "Save",
+    "save": "Save changes",
     "save-profile-success": "Saving profile was successful."
   },
   "site": {
@@ -173,6 +169,8 @@
       "copy-api-key-title": "Api key",
       "expire-date": "Expire date"
     },
+    "editor-title-create": "Site create",
+    "editor-title-edit": "Site edit",
     "field": {
       "address": "Address",
       "name": "Site name"

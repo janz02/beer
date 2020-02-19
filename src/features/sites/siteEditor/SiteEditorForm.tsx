@@ -61,7 +61,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
   const header = (): JSX.Element => (
     <div>
       <BackButton onClick={onLeave} primary={!submitable} />
-      {t(`site.editor-title-${id ? 'edit' : 'create'}`)}
+      {id ? t('site.editor-title-edit') : t('site.editor-title-create')}
     </div>
   )
 

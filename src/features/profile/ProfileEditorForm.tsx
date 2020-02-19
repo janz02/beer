@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Form, Input, Button, Card } from 'antd'
+import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useIsMobile, useCommonFormRules } from 'hooks'
+import { useCommonFormRules } from 'hooks'
 import { Profile } from 'models/profile'
-import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 
 export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
@@ -16,19 +16,9 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   const { handleProfileSave, loading, profile, editable } = props
 
   const { t } = useTranslation()
-  const isMobile = useIsMobile()
   const [submitable, setSubmitable] = useState(false)
   const [form] = Form.useForm()
   const rule = useCommonFormRules()
-
-  const formLayout = isMobile ? 'vertical' : 'horizontal'
-  const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: { span: 4 },
-          wrapperCol: { span: 14 }
-        }
-      : null
 
   const handleSubmit = (values: any): void => {
     handleProfileSave({
@@ -58,12 +48,12 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   }, [profile])
 
   return (
-    <Card className="profile-editor-form" title={t('profile.editor-title')}>
+    <ResponsiveCard className="profile-editor-form">
       <Form
         name="profile-editor-form"
         onFinish={handleSubmit}
         form={form}
-        layout={formLayout}
+        layout="vertical"
         onFieldsChange={() => {
           const hasErrors = form.getFieldsError().some(field => field.errors.length)
           if (submitable === hasErrors) {
@@ -71,43 +61,63 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           }
         }}
       >
-        <Form.Item
-          name="name"
-          label={t('profile.field.name')}
-          rules={[rule.required()]}
-          {...formItemLayout}
-        >
+        <Form.Item name="name" label={t('profile.field.name')} rules={[rule.required()]}>
           <Input disabled={!editable} />
         </Form.Item>
 
         <Form.Item
-          name="email"
-          label={t('profile.field.email')}
-          rules={[rule.required(t('profile.error.email-required'), { type: 'email' })]}
-          {...formItemLayout}
+          name="password"
+          hasFeedback
+          label={t('profile.field.password')}
+          rules={[rule.password()]}
         >
-          <Input disabled={!editable} prefix={<MailOutlined />} />
+          <Input.Password disabled={!editable} />
         </Form.Item>
 
         <Form.Item
-          name="phone"
-          label={t('profile.field.phone')}
-          rules={[rule.required()]}
-          {...formItemLayout}
+          name="passwordAgain"
+          hasFeedback
+          label={t('profile.field.password-again')}
+          dependencies={['password']}
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve()
+                }
+                return Promise.reject(t('auth.error.password-inconsistent'))
+              }
+            })
+          ]}
         >
-          <Input disabled={!editable} type="tel" prefix={<PhoneOutlined />} />
+          <Input.Password disabled={!editable} />
         </Form.Item>
 
-        <Button
-          hidden={!editable}
-          type="primary"
-          htmlType="submit"
-          disabled={!submitable}
-          loading={loading}
-        >
-          {t('profile.save')}
-        </Button>
+        <Form.Item name="phone" label={t('profile.field.phone')}>
+          <Input disabled={!editable} type="tel" />
+        </Form.Item>
+
+        <Form.Item name="email" label={t('profile.field.email')}>
+          <Input disabled />
+        </Form.Item>
+
+        <Form.Item name="code" label={t('profile.field.code')}>
+          <Input disabled />
+        </Form.Item>
+
+        <div className="form-actions">
+          <Button>{t('common.cancel')}</Button>
+          <Button
+            hidden={!editable}
+            type="primary"
+            htmlType="submit"
+            disabled={!submitable}
+            loading={loading}
+          >
+            {t('profile.save')}
+          </Button>
+        </div>
       </Form>
-    </Card>
+    </ResponsiveCard>
   )
 }

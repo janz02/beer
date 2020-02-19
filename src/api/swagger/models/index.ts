@@ -15,7 +15,6 @@ export * from './CouponUserCodeVmPaginatedResponse';
 export * from './CouponVm';
 export * from './CouponVmPaginatedResponse';
 export * from './CreateSiteApiKeyDto';
-export * from './HttpStatusCode';
 export * from './Int32EntityCreatedVm';
 export * from './Int32StringEntityCreatedCompositeVm';
 export * from './LoginDto';

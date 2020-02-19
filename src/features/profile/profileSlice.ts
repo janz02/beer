@@ -4,6 +4,7 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Profile } from 'models/profile'
 import { api } from 'api'
+import { Role } from 'models/user'
 
 interface ProfileState {
   editable?: boolean
@@ -27,7 +28,7 @@ const profileSlice = createSlice({
       state.loading = false
       state.error = null
     },
-    getProfileFallback(state, action: PayloadAction<Profile>) {
+    setProfileFromJWT(state, action: PayloadAction<Profile>) {
       state.editable = false
       state.profile = action.payload
       state.loading = false
@@ -50,7 +51,7 @@ const profileSlice = createSlice({
 
 export const {
   getProfileSuccess,
-  getProfileFallback,
+  setProfileFromJWT,
   updateProfileSuccess,
   setLoadingStart,
   setLoadingFailed
@@ -63,16 +64,11 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
 
   try {
     const userData = getState().auth.userData
-    const id = userData.partnerId
-    if (id) {
-      const partner = await api.partner.getPartners()
-      if (partner.contacts && partner.contacts[0].id) {
-        const profile = await api.partnerContacts.getPartnerContacts()
-        dispatch(getProfileSuccess({ ...profile }))
-      }
+    if (userData.roles?.includes(Role.PARTNER)) {
+      const profile = await api.partnerContacts.getPartnerContacts()
+      dispatch(getProfileSuccess(profile))
     } else {
-      const jwtProfile: Profile = { name: userData.userName, email: userData.email }
-      dispatch(getProfileFallback({ ...jwtProfile }))
+      dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
     }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
@@ -83,16 +79,13 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
   dispatch(setLoadingStart())
 
   try {
-    const id = getState().auth.userData.partnerId
-    if (id) {
-      const partner = await api.partner.getPartners()
-      if (partner.contacts && partner.contacts[0].id) {
-        await api.partnerContacts.updatePartnerContacts({
-          partnerContactDto: { ...getState().profile.profile, ...profile }
-        })
-
-        dispatch(updateProfileSuccess())
-      }
+    const userData = getState().auth.userData
+    if (userData.roles?.includes(Role.PARTNER)) {
+      await api.partnerContacts.updatePartnerContacts({
+        partnerContactDto: { ...getState().profile.profile, ...profile }
+      })
+      dispatch(updateProfileSuccess())
+      dispatch(getProfile())
     }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
