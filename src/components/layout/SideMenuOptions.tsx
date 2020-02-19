@@ -24,7 +24,8 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
       { label: t('menu.partner-data'), link: '/partner', icon: <FileOutlined /> },
       { label: t('menu.coupons'), link: '/coupons', icon: <FileOutlined /> },
       { label: t('menu.coupon-categories'), link: '/categories', icon: <FileOutlined /> },
-      { label: t('menu.sites'), link: '/sites', icon: <FileOutlined /> }
+      { label: t('menu.sites'), link: '/sites', icon: <FileOutlined /> },
+      { label: t('menu.news-letter'), link: '/newsletter', icon: <FileOutlined /> }
     ],
     [t]
   )
