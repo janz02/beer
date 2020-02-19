@@ -7,6 +7,12 @@
   main.ant-layout-content {
     overflow: auto;
   }
+
+  .language-selector-container {
+    position: absolute;
+    right: 0;
+    margin-top: 24px;
+  }
 }
 
 .content {
