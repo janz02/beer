@@ -1,18 +1,29 @@
 import React, { FC } from 'react'
-import { Layout } from 'antd'
-import { MenuOutlined } from '@ant-design/icons'
+import { Layout, Button } from 'antd'
+import { RightOutlined, LeftOutlined } from '@ant-design/icons'
+import { useIsMobile } from 'hooks'
+import './Header.scss'
 
-interface HeaderProps {
+export interface HeaderProps {
   onMenuClick?: () => void
+  open: boolean
 }
 
 export const Header: FC<HeaderProps> = props => {
-  const { onMenuClick, children } = props
+  const { children, onMenuClick, open } = props
+
+  const isMobile = useIsMobile()
 
   return (
     <Layout.Header className="header">
-      {onMenuClick && <MenuOutlined className="header__menu-button" onClick={onMenuClick} />}
       {children}
+      {onMenuClick && (
+        <Button
+          className={`header__menu-button ${isMobile ? ' mobile' : ''}`}
+          onClick={onMenuClick}
+          icon={isMobile ? <RightOutlined /> : open ? <LeftOutlined /> : <RightOutlined />}
+        />
+      )}
     </Layout.Header>
   )
 }
