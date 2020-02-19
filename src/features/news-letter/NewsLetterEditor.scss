@@ -1,0 +1,11 @@
+@import "assets/scss/_variables";
+
+// grapesjs-preset-newsletter overrides
+$active-color: $primary-color !default;
+
+@import "grapesjs/src/styles/scss/main.scss";
+@import "grapesjs-preset-newsletter/src/style/main.scss";
+
+.newsletter-editor-containter {
+  height: 100%;
+}
