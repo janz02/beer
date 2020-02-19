@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react'
 import { Menu } from 'antd'
 import { Link } from 'react-router-dom'
-import { DesktopOutlined, FileOutlined } from '@ant-design/icons'
+import { DesktopOutlined, FileOutlined, BarcodeOutlined, HomeFilled } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 
 interface SideMenuOptionProps {
@@ -20,11 +20,11 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
 
   const options = useMemo<SideMenuOptionProps[]>(
     () => [
+      { label: t('menu.coupons'), link: '/coupons', icon: <BarcodeOutlined /> },
+      { label: t('menu.sites'), link: '/sites', icon: <HomeFilled /> },
       { label: t('menu.dashboard'), link: '/', icon: <DesktopOutlined /> },
       { label: t('menu.partner-data'), link: '/partner', icon: <FileOutlined /> },
-      { label: t('menu.coupons'), link: '/coupons', icon: <FileOutlined /> },
-      { label: t('menu.coupon-categories'), link: '/categories', icon: <FileOutlined /> },
-      { label: t('menu.sites'), link: '/sites', icon: <FileOutlined /> }
+      { label: t('menu.coupon-categories'), link: '/categories', icon: <FileOutlined /> }
     ],
     [t]
   )

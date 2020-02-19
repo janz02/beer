@@ -6,11 +6,7 @@ import { DownOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import './LanguageSelector.scss'
 
-interface LanguageSelectorProps {
-  menuClosed?: boolean
-}
-
-export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
+export const LanguageSelector: React.FC = props => {
   const { t, i18n } = useTranslation()
 
   const changeLanguage = (lng: string): void => {
@@ -65,19 +61,11 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
   }
 
   return (
-    <Dropdown
-      className={`language-selector ${props.menuClosed ? 'menu-collapsed' : ''}`}
-      overlay={languageOptions}
-      trigger={['click']}
-    >
+    <Dropdown className="language-selector" overlay={languageOptions} trigger={['click']}>
       <div>
         <CurrentLanguageImg />
-        {props.menuClosed || (
-          <>
-            <span className="language-selector__text">{t('languages.language')}</span>
-            <DownOutlined />
-          </>
-        )}
+        <span className="language-selector__text">{t('languages.language')}</span>
+        <DownOutlined />
       </div>
     </Dropdown>
   )

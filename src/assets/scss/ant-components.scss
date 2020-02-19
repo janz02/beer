@@ -38,4 +38,23 @@
       text-align: end;
     }
   }
+
+  .ant-modal-content {
+    border-radius: 14px;
+  }
+
+  .ant-modal-header {
+    padding: 28px 28px 0 28px;
+    border-bottom: 0;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+  }
+
+  .ant-modal-title {
+    font-weight: bold;
+  }
+
+  .ant-layout-header {
+    position: relative;
+  }
 }

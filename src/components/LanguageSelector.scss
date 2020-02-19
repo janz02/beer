@@ -1,16 +1,10 @@
 .language-selector {
-  margin-top: 15px;
-  padding-left: 24px;
-  color: rgba(255, 255, 255, 0.65);
+  max-width: 200px;
   cursor: pointer;
-
-  &.menu-collapsed {
-    padding-left: 32px;
-  }
 
   .language-selector__image,
   .language-selector__text {
-    margin-right: 10px;
+    margin-right: 5px;
   }
 
   .language-selector__image {
@@ -19,9 +13,6 @@
 }
 
 .language-selector-dropdown-content {
-  color: rgba(255, 255, 255, 0.65);
-  cursor: pointer;
-
   .language-selector-dropdown-content__image,
   .language-selector-dropdown-content__text {
     margin-right: 10px;
