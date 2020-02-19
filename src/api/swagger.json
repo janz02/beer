@@ -5,68 +5,46 @@
     "version": "v1"
   },
   "paths": {
-    "/api/ApiKey": {
+    "/api/ApiKey/CreateApiKey": {
       "post": {
         "tags": [
           "ApiKey"
         ],
-        "summary": "Creates an Api Key for a site",
-        "description": "Returns the new Api Key",
-        "operationId": "createApiKey",
-        "parameters": [
-          {
-            "name": "siteId",
-            "in": "query",
-            "description": "Id of the site",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+        "summary": "This is the only implemented api key creation endpoint",
+        "operationId": "CreateApiKey",
+        "requestBody": {
+          "description": "Api key details for the creation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSiteApiKeyDto"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "Successful creation",
+            "description": "Successful apikey generation",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Int32StringCreateSiteApiKeyVm"
+                  "$ref": "#/components/schemas/Int32StringEntityCreatedCompositeVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Int32StringCreateSiteApiKeyVm"
+                  "$ref": "#/components/schemas/Int32StringEntityCreatedCompositeVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Int32StringCreateSiteApiKeyVm"
+                  "$ref": "#/components/schemas/Int32StringEntityCreatedCompositeVm"
                 }
               }
             }
           },
           "400": {
-            "description": "Error occured while sending the Api Key to the store: siteApiKey.error.cant-send-to-store",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Site with that Id not found: error.not-found;",
+            "description": "Could not send apikey to store: siteApiKey.error.cant-send-to-store;",
             "content": {
               "text/plain": {
                 "schema": {
@@ -86,15 +64,68 @@
             }
           }
         }
+      }
+    },
+    "/api/ApiKey": {
+      "post": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Creates an entity",
+        "description": "Returns the id of the entity upon success",
+        "operationId": "createApiKey",
+        "requestBody": {
+          "description": "Details of the entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSiteApiKeyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation: Id of the new entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          }
+        }
       },
       "get": {
         "tags": [
           "ApiKey"
         ],
-        "summary": "Returns the already created Sites with Api Keys",
-        "description": "No Api Key included in the query",
+        "summary": "Gets an entity list sorted and filtered",
+        "description": "Returns the entity list with the specified filters applied",
         "operationId": "listApiKey",
         "parameters": [
+          {
+            "name": "siteId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "page",
             "in": "query",
@@ -128,7 +159,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful query: List of sites that have Api Keys",
+            "description": "Successful query: List of entities",
             "content": {
               "text/plain": {
                 "schema": {
@@ -146,6 +177,128 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          }
+        }
+      }
+    },
+    "/api/ApiKey/{id}": {
+      "get": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Gets an entity by Id",
+        "description": "Returns the entity with the specified Id upon success",
+        "operationId": "getApiKey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the entity",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: entity details",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteApiKeyVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteApiKeyVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteApiKeyVm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Updates an entity",
+        "description": "Updates an entity with Id of \"id\" to entity \"dto\"",
+        "operationId": "updateApiKey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "New entity details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSiteApiKeyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update"
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Deletes an entity",
+        "description": "Deletes an entity with Id of \"id\"",
+        "operationId": "deleteApiKey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful deletion"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
           }
         }
       }
@@ -2290,10 +2443,24 @@
   },
   "components": {
     "schemas": {
-      "Int32StringCreateSiteApiKeyVm": {
+      "CreateSiteApiKeyDto": {
         "type": "object",
         "properties": {
-          "apiKey": {
+          "siteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Int32StringEntityCreatedCompositeVm": {
+        "type": "object",
+        "properties": {
+          "id2": {
             "type": "string",
             "nullable": true
           },
@@ -2336,6 +2503,16 @@
             },
             "nullable": true,
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Int32EntityCreatedVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -2623,16 +2800,6 @@
           "name": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Int32EntityCreatedVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
