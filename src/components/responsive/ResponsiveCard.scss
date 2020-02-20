@@ -1,3 +1,5 @@
+@import "../../assets/scss/variables";
+
 .responsive-card-container {
   height: inherit;
   padding: 2rem;
@@ -18,7 +20,7 @@
   .ant-card-body {
     // for making the table responsive
     height: inherit;
-    padding: 0;
+    padding: 35px 60px;
 
     & > * {
       height: inherit;
@@ -37,4 +39,12 @@
     border-radius: unset;
     box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
   }
+}
+
+.responsive-card-title {
+  max-width: 650px;
+  margin: 0 auto 15px auto;
+  color: $primary-color;
+  font-size: 25px;
+  font-weight: bold;
 }

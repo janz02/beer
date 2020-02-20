@@ -25,9 +25,5 @@ export const ProfileEditorPage: React.FC = () => {
     editable
   }
 
-  return (
-    <>
-      <ProfileEditorForm {...props} />
-    </>
-  )
+  return <ProfileEditorForm {...props} />
 }

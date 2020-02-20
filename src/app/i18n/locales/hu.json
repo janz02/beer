@@ -8,24 +8,20 @@
     },
     "field": {
       "code": "Partner regisztrációs kód",
-      "company": "Cég neve",
       "email": "E-mail cím",
       "name": "Teljes név",
       "password": "Jelszó",
       "password-again": "Jelszó ismét",
       "phone": "Telefonszám",
-      "remember-me": "Emlékezz rám!",
-      "username": "Felhasználónév"
+      "remember-me": "Emlékezz rám!"
     },
     "forgot-password": "Elfelejtett jelszó",
     "login": "Belépés",
     "logout": "Kijelentkezés",
-    "profile": "Személyes adatok",
     "send-email": "Email küldése",
     "signup": "Regisztráció",
     "text": {
       "accept-prefix": "Elfogadom a ",
-      "client-code-info": "A szerződésben található.",
       "new-password-email": "Kérek egy e-mailt az új jelszóval.",
       "terms-and-services": "felhasználási feltételeket."
     }
@@ -42,13 +38,14 @@
       "save-success": "Sikeres mentés"
     },
     "ok": "OK",
+    "password-format-help": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
     "popup": {
       "delete-text": "Biztos, hogy törölni szeretnéd?"
     },
     "rule-error": {
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitö kötelező.",
-      "password-format": "A jelszó formátuma nem megfelelő."
+      "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt."
     },
     "save": "Mentés"
   },
@@ -123,9 +120,9 @@
     "coupon-categories": "Kategóriák",
     "coupons": "Kuponok",
     "dashboard": "Irányítópult",
+    "news-letter": "Hírlevél",
     "partner-data": "Partner adatok",
-    "sites": "Telephelyek",
-    "news-letter": "Hírlevél"
+    "sites": "Telephelyek"
   },
   "notification": {
     "empty-list": "Üres",
@@ -146,16 +143,16 @@
     "save-partner-success": "Partner mentése sikeres."
   },
   "profile": {
-    "editor-title": "Profil",
-    "error": {
-      "email-required": "Az email mező megadása kötelező."
-    },
+    "editor-title": "Profiladatok",
     "field": {
-      "email": "Email",
-      "name": "Név",
+      "code": "Partner regisztrációs kód",
+      "email": "E-mail cím",
+      "name": "Teljes név",
+      "password": "Jelszó",
+      "password-again": "Jelszó ismét",
       "phone": "Telefonszám"
     },
-    "save": "Mentés",
+    "save": "Módosítás mentése",
     "save-profile-success": "Profile mentése sikeres."
   },
   "site": {
@@ -173,6 +170,8 @@
       "copy-api-key-title": "Api kulcs",
       "expire-date": "Lejárati dátum"
     },
+    "editor-title-create": "Telephely létrehozása",
+    "editor-title-edit": "Telephely szerkesztése",
     "field": {
       "address": "Cím",
       "name": "Telephely név"

@@ -59,4 +59,31 @@ export class EmailSenderApi extends runtime.BaseAPI {
         await this.createEmailSenderRaw(requestParameters);
     }
 
+    /**
+     */
+    async getEmailSenderRaw(): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/EmailSender`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async getEmailSender(): Promise<void> {
+        await this.getEmailSenderRaw();
+    }
+
 }

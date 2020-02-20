@@ -15,56 +15,29 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateSiteApiKeyDto,
-    CreateSiteApiKeyDtoFromJSON,
-    CreateSiteApiKeyDtoToJSON,
-    Int32EntityCreatedVm,
-    Int32EntityCreatedVmFromJSON,
-    Int32EntityCreatedVmToJSON,
-    Int32StringEntityCreatedCompositeVm,
-    Int32StringEntityCreatedCompositeVmFromJSON,
-    Int32StringEntityCreatedCompositeVmToJSON,
+    Int32StringCreateSiteApiKeyVm,
+    Int32StringCreateSiteApiKeyVmFromJSON,
+    Int32StringCreateSiteApiKeyVmToJSON,
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
     ProblemDetails,
     ProblemDetailsFromJSON,
     ProblemDetailsToJSON,
-    SiteApiKeyVm,
-    SiteApiKeyVmFromJSON,
-    SiteApiKeyVmToJSON,
     SiteApiKeyVmPaginatedResponse,
     SiteApiKeyVmPaginatedResponseFromJSON,
     SiteApiKeyVmPaginatedResponseToJSON,
 } from '../models';
 
 export interface CreateApiKeyRequest {
-    createSiteApiKeyDto?: CreateSiteApiKeyDto;
-}
-
-export interface CreateApiKey0Request {
-    createSiteApiKeyDto?: CreateSiteApiKeyDto;
-}
-
-export interface DeleteApiKeyRequest {
-    id: number;
-}
-
-export interface GetApiKeyRequest {
-    id: number;
+    siteId?: number;
 }
 
 export interface ListApiKeyRequest {
-    siteId?: number;
     page?: number;
     pageSize?: number;
     orderBy?: string;
     orderByType?: OrderByType;
-}
-
-export interface UpdateApiKeyRequest {
-    id: number;
-    createSiteApiKeyDto?: CreateSiteApiKeyDto;
 }
 
 /**
@@ -73,48 +46,17 @@ export interface UpdateApiKeyRequest {
 export class ApiKeyApi extends runtime.BaseAPI {
 
     /**
-     * This is the only implemented api key creation endpoint
+     * Returns the new Api Key
+     * Creates an Api Key for a site
      */
-    async createApiKeyRaw(requestParameters: CreateApiKeyRequest): Promise<runtime.ApiResponse<Int32StringEntityCreatedCompositeVm>> {
+    async createApiKeyRaw(requestParameters: CreateApiKeyRequest): Promise<runtime.ApiResponse<Int32StringCreateSiteApiKeyVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        if (requestParameters.siteId !== undefined) {
+            queryParameters['siteId'] = requestParameters.siteId;
         }
 
-        const response = await this.request({
-            path: `/api/ApiKey/CreateApiKey`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: CreateSiteApiKeyDtoToJSON(requestParameters.createSiteApiKeyDto),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => Int32StringEntityCreatedCompositeVmFromJSON(jsonValue));
-    }
-
-    /**
-     * This is the only implemented api key creation endpoint
-     */
-    async createApiKey(requestParameters: CreateApiKeyRequest): Promise<Int32StringEntityCreatedCompositeVm> {
-        const response = await this.createApiKeyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Returns the id of the entity upon success
-     * Creates an entity
-     */
-    async createApiKey_1Raw(requestParameters: CreateApiKey0Request): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -125,102 +67,26 @@ export class ApiKeyApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateSiteApiKeyDtoToJSON(requestParameters.createSiteApiKeyDto),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => Int32EntityCreatedVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => Int32StringCreateSiteApiKeyVmFromJSON(jsonValue));
     }
 
     /**
-     * Returns the id of the entity upon success
-     * Creates an entity
+     * Returns the new Api Key
+     * Creates an Api Key for a site
      */
-    async createApiKey_1(requestParameters: CreateApiKey0Request): Promise<Int32EntityCreatedVm> {
-        const response = await this.createApiKey_1Raw(requestParameters);
+    async createApiKey(requestParameters: CreateApiKeyRequest): Promise<Int32StringCreateSiteApiKeyVm> {
+        const response = await this.createApiKeyRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Deletes an entity with Id of \"id\"
-     * Deletes an entity
-     */
-    async deleteApiKeyRaw(requestParameters: DeleteApiKeyRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteApiKey.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/ApiKey/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Deletes an entity with Id of \"id\"
-     * Deletes an entity
-     */
-    async deleteApiKey(requestParameters: DeleteApiKeyRequest): Promise<void> {
-        await this.deleteApiKeyRaw(requestParameters);
-    }
-
-    /**
-     * Returns the entity with the specified Id upon success
-     * Gets an entity by Id
-     */
-    async getApiKeyRaw(requestParameters: GetApiKeyRequest): Promise<runtime.ApiResponse<SiteApiKeyVm>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getApiKey.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/ApiKey/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => SiteApiKeyVmFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the entity with the specified Id upon success
-     * Gets an entity by Id
-     */
-    async getApiKey(requestParameters: GetApiKeyRequest): Promise<SiteApiKeyVm> {
-        const response = await this.getApiKeyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Returns the entity list with the specified filters applied
-     * Gets an entity list sorted and filtered
+     * No Api Key included in the query
+     * Returns the already created Sites with Api Keys
      */
     async listApiKeyRaw(requestParameters: ListApiKeyRequest): Promise<runtime.ApiResponse<SiteApiKeyVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.siteId !== undefined) {
-            queryParameters['siteId'] = requestParameters.siteId;
-        }
 
         if (requestParameters.page !== undefined) {
             queryParameters['page'] = requestParameters.page;
@@ -255,50 +121,12 @@ export class ApiKeyApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the entity list with the specified filters applied
-     * Gets an entity list sorted and filtered
+     * No Api Key included in the query
+     * Returns the already created Sites with Api Keys
      */
     async listApiKey(requestParameters: ListApiKeyRequest): Promise<SiteApiKeyVmPaginatedResponse> {
         const response = await this.listApiKeyRaw(requestParameters);
         return await response.value();
-    }
-
-    /**
-     * Updates an entity with Id of \"id\" to entity \"dto\"
-     * Updates an entity
-     */
-    async updateApiKeyRaw(requestParameters: UpdateApiKeyRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateApiKey.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/ApiKey/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PUT',
-            headers: headerParameters,
-            query: queryParameters,
-            body: CreateSiteApiKeyDtoToJSON(requestParameters.createSiteApiKeyDto),
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Updates an entity with Id of \"id\" to entity \"dto\"
-     * Updates an entity
-     */
-    async updateApiKey(requestParameters: UpdateApiKeyRequest): Promise<void> {
-        await this.updateApiKeyRaw(requestParameters);
     }
 
 }

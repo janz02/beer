@@ -10,26 +10,18 @@ export const getJwtUserdata = (token?: string | null): UserData => {
   const decodedJwt: any = jwt && JwtDecode(jwt)
 
   const user: UserData = {
-    userName: decodedJwt?.email ?? '',
-    email: decodedJwt?.email ?? '',
+    email: decodedJwt?.email,
     roles: formatRoles(decodedJwt?.roles),
-    partnerId: decodedJwt?.partnerId,
-    partnerContactId: decodedJwt?.partnerContactId
+    exp: decodedJwt?.exp
   }
   return user
 }
 
 export const hasPermission = (roles?: Role[]): boolean => {
-  if (!roles || roles.length < 1) {
+  if (!roles || !roles.length) {
     return true
   }
+
   const jwtRoles = getJwtUserdata().roles ?? []
-  if (jwtRoles.length > 0) {
-    for (const role of roles) {
-      if (jwtRoles.indexOf(role) >= 0) {
-        return true
-      }
-    }
-  }
-  return false
+  return roles.every(x => jwtRoles.includes(x))
 }

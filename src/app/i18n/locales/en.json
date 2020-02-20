@@ -8,24 +8,20 @@
     },
     "field": {
       "code": "Partner registration code",
-      "company": "Company name",
       "email": "E-mail address",
       "name": "Full Name",
       "password": "Password",
       "password-again": "Password again",
       "phone": "Phone number",
-      "remember-me": "Remember me!",
-      "username": "Username"
+      "remember-me": "Remember me!"
     },
     "forgot-password": "Forgot password",
     "login": "Login",
     "logout": "Logout",
-    "profile": "Profile",
     "send-email": "Send email",
     "signup": "Sign up",
     "text": {
       "accept-prefix": "I accept the ",
-      "client-code-info": "Provided in the contract.",
       "new-password-email": "Get an email with the new password.",
       "terms-and-services": "Terms & Services"
     }
@@ -42,13 +38,14 @@
       "save-success": "Successful saving"
     },
     "ok": "OK",
+    "password-format-help": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space.",
     "popup": {
       "delete-text": "Are you sure about deleting this data?"
     },
     "rule-error": {
       "field-number": "This field must be a number.",
       "field-required": "This field is required.",
-      "password-format": "Password format is invalid."
+      "password-format": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space."
     },
     "save": "Save"
   },
@@ -123,9 +120,9 @@
     "coupon-categories": "Categories",
     "coupons": "Coupons",
     "dashboard": "Dashboard",
+    "news-letter": "News letter",
     "partner-data": "Partner data",
-    "sites": "Sites",
-    "news-letter": "News letter"
+    "sites": "Sites"
   },
   "notification": {
     "empty-list": "Empty",
@@ -147,15 +144,15 @@
   },
   "profile": {
     "editor-title": "Profile",
-    "error": {
-      "email-required": "Email field is required."
-    },
     "field": {
+      "code": "Partner registration code",
       "email": "Email",
-      "name": "Name",
+      "name": "Full name",
+      "password": "Password",
+      "password-again": "Password again",
       "phone": "Phone"
     },
-    "save": "Save",
+    "save": "Save changes",
     "save-profile-success": "Saving profile was successful."
   },
   "site": {
@@ -173,6 +170,8 @@
       "copy-api-key-title": "Api key",
       "expire-date": "Expire date"
     },
+    "editor-title-create": "Site create",
+    "editor-title-edit": "Site edit",
     "field": {
       "address": "Address",
       "name": "Site name"
