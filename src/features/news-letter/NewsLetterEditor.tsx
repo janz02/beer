@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import './NewsLetterEditor.scss'
 import { useTranslation } from 'react-i18next'
 import locale from './locale/'
@@ -17,32 +17,18 @@ enum CMD {
   SaveTemplate = 'pkm-save-template'
 }
 
-export interface NewsLetterTemplate {
-  html?: string | null
-  css?: string | null
-  components?: string | null
-  style?: string | null
-}
-
-const defaultTemplate: NewsLetterTemplate = {
-  html: `<div>...</div>`,
-  css: null,
-  components: null,
-  style: null
-}
-
 export interface NewsLetterEditorProps {
-  template?: NewsLetterTemplate
+  template?: string
 }
 
 export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
-  const template = props?.template ?? defaultTemplate
+  const template = props?.template ?? ''
 
   const { t, i18n } = useTranslation()
 
   const editor = useRef<any>()
 
-  const saveTemplate = (newTemplate: NewsLetterTemplate): void => {
+  const saveTemplate = (newTemplate: any): void => {
     console.log({
       newTemplate,
       editor: editor.current,
@@ -60,7 +46,8 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
       container: '#grapesjs',
       storageManager: {
         type: 'indexeddb',
-        id: `${storagePrefix}-`
+        id: `${storagePrefix}-`,
+        autoload: true
       },
       height: '100%',
       plugins: [grapesjsNewsLetter, grapesjsIndexxeddb],
@@ -97,16 +84,36 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
         command: (editor: any, sender: any) => {
           editor.runCommand(CMD.SaveTemplate)
         }
+      },
+      {
+        id: 'pkm-download-as-html',
+        className: 'fa fa-file-text',
+        command: (editor: any, sender: any) => {
+          const ee = editor.runCommand('gjs-get-inlined-html')
+          const download = (filename: string, text: string): void => {
+            const pom = document.createElement('a')
+            pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text))
+            pom.setAttribute('download', filename)
+
+            if (document.createEvent) {
+              const event = document.createEvent('MouseEvents')
+              event.initEvent('click', true, true)
+              pom.dispatchEvent(event)
+            } else {
+              pom.click()
+            }
+          }
+          download('template.html', ee)
+        }
       }
     ])
-  }, [i18n.language, t])
+  }, [i18n.language, t, template])
 
   useEffect(() => {
     if (editor.current) {
-      editor.current.setComponents(template?.components || template?.html)
-      editor.current.setStyle(template?.style || template?.css)
+      editor.current.setComponents(template)
     }
-  }, [template])
+  }, [template, i18n.language])
 
   return (
     <div className="newsletter-editor-containter">

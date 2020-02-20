@@ -42,7 +42,8 @@ export default {
   domComponents: {
     names: {
       '': 'Elem',
-      body: 'test',
+      // TODO: body is still english, the line bellow doesn't work
+      // body: 'test',
       wrapper: 'Burkoló',
       text: 'Szöveg',
       comment: 'Megjegyzés',
@@ -74,7 +75,8 @@ export default {
         deviceTablet: 'Táblagép',
         deviceMobile: 'Telefon',
         deviceDesktop: 'Asztali gép',
-        'pkm-save-template': 'Sablon mentése'
+        'pkm-save-template': 'Sablon mentése',
+        'pkm-download-as-html': 'Sablon fájl letöltése'
       }
     }
   },

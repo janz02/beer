@@ -4,5 +4,13 @@ import en from 'grapesjs/src/i18n/locale/en'
 
 export default {
   ...(en as Record<string, any>),
-  preset: {}
+  preset: {},
+  panels: {
+    buttons: {
+      titles: {
+        'pkm-save-template': 'Save template',
+        'pkm-download-as-html': 'Download template file'
+      }
+    }
+  }
 }
