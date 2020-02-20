@@ -38,13 +38,14 @@
       "save-success": "Successful saving"
     },
     "ok": "OK",
+    "password-format-help": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space.",
     "popup": {
       "delete-text": "Are you sure about deleting this data?"
     },
     "rule-error": {
       "field-number": "This field must be a number.",
       "field-required": "This field is required.",
-      "password-format": "Password format is invalid."
+      "password-format": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space."
     },
     "save": "Save"
   },

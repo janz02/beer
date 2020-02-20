@@ -38,13 +38,14 @@
       "save-success": "Sikeres mentés"
     },
     "ok": "OK",
+    "password-format-help": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
     "popup": {
       "delete-text": "Biztos, hogy törölni szeretnéd?"
     },
     "rule-error": {
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitö kötelező.",
-      "password-format": "A jelszó formátuma nem megfelelő."
+      "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt."
     },
     "save": "Mentés"
   },

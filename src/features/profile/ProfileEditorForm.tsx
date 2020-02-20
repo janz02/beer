@@ -17,6 +17,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
 
   const { t } = useTranslation()
   const [submitable, setSubmitable] = useState(false)
+  const [passwordHelpVisible, setPasswordHelpVisible] = useState(false)
   const [form] = Form.useForm()
   const rule = useCommonFormRules()
 
@@ -66,12 +67,18 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
+          extra={passwordHelpVisible ? t('common.password-format-help') : ''}
           name="password"
           hasFeedback
           label={t('profile.field.password')}
           rules={[rule.password()]}
         >
-          <Input.Password disabled={!editable} />
+          <Input.Password
+            disabled={!editable}
+            onClick={() => {
+              setPasswordHelpVisible(true)
+            }}
+          />
         </Form.Item>
 
         <Form.Item
