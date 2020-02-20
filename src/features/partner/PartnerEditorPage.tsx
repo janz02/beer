@@ -24,9 +24,5 @@ export const PartnerEditorPage: React.FC = () => {
     partner
   }
 
-  return (
-    <>
-      <PartnerEditorForm {...props} />
-    </>
-  )
+  return <PartnerEditorForm {...props} />
 }
