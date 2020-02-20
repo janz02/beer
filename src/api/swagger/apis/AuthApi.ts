@@ -18,6 +18,9 @@ import {
     AuthRegistrationFailedException,
     AuthRegistrationFailedExceptionFromJSON,
     AuthRegistrationFailedExceptionToJSON,
+    HttpStatusCode,
+    HttpStatusCodeFromJSON,
+    HttpStatusCodeToJSON,
     LoginDto,
     LoginDtoFromJSON,
     LoginDtoToJSON,
@@ -133,7 +136,7 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns nothing, but registers a contact for the partner
      * Registers a contact for a partner
      */
-    async registerPartnerRaw(requestParameters: RegisterPartnerRequest): Promise<runtime.ApiResponse<void>> {
+    async registerPartnerRaw(requestParameters: RegisterPartnerRequest): Promise<runtime.ApiResponse<HttpStatusCode>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -152,15 +155,16 @@ export class AuthApi extends runtime.BaseAPI {
             body: RegisterPartnerDtoToJSON(requestParameters.registerPartnerDto),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => HttpStatusCodeFromJSON(jsonValue));
     }
 
     /**
      * Returns nothing, but registers a contact for the partner
      * Registers a contact for a partner
      */
-    async registerPartner(requestParameters: RegisterPartnerRequest): Promise<void> {
-        await this.registerPartnerRaw(requestParameters);
+    async registerPartner(requestParameters: RegisterPartnerRequest): Promise<HttpStatusCode> {
+        const response = await this.registerPartnerRaw(requestParameters);
+        return await response.value();
     }
 
     /**
