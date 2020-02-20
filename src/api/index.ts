@@ -1,3 +1,4 @@
+import { ApiKeyApi } from './swagger/apis/ApiKeyApi'
 import { Configuration } from './swagger/runtime'
 import {
   CouponsApi,
@@ -65,5 +66,6 @@ export const api = {
   auth: new AuthApi(config),
   sites: new SitesApi(config),
   partner: new PartnersApi(config),
-  partnerContacts: new PartnerContactsApi(config)
+  partnerContacts: new PartnerContactsApi(config),
+  apiKey: new ApiKeyApi(config)
 }
