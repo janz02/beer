@@ -24,7 +24,7 @@ export interface NewsLetterEditorProps {
 export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
   const template = props?.template ?? ''
 
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
 
   const editor = useRef<any>()
 
@@ -63,6 +63,7 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
       },
       i18n: {
         // bugfix: The editor.current.I18n.setLocale function is not switching the languege.
+        // tried alse ..setLocale + editor.render() -> causes problems in the template
         // The locale is kept always as `en` but the translations are switched,
         // and the the editor is reinitialized.
         locale: 'en',
@@ -107,7 +108,7 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
         }
       }
     ])
-  }, [i18n.language, t, template])
+  }, [i18n.language, template])
 
   useEffect(() => {
     if (editor.current) {

@@ -4,7 +4,7 @@ import ErrorBoundary from 'antd/lib/alert/ErrorBoundary'
 
 export const NewsLetterEditorPage: FC = () => {
   const [template] = useState(
-    `<div id="ighh" style="box-sizing: border-box; text-align: center; text-decoration: underline; font-style: italic;">...template...</div>`
+    `<div style="box-sizing: border-box; text-align: center; text-decoration: underline; font-style: italic;">...template...</div>`
   )
   return (
     <ErrorBoundary>
