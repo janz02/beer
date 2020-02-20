@@ -49,7 +49,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   }, [profile])
 
   return (
-    <ResponsiveCard className="profile-editor-form">
+    <ResponsiveCard responsiveCardTitle={t('profile.editor-title')}>
       <Form
         name="profile-editor-form"
         onFinish={handleSubmit}
