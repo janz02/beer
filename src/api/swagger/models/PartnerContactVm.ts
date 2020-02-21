@@ -45,10 +45,10 @@ export interface PartnerContactVm {
     email?: string | null;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof PartnerContactVm
      */
-    phone?: number;
+    phone?: string | null;
 }
 
 export function PartnerContactVmFromJSON(json: any): PartnerContactVm {

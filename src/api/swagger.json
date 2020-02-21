@@ -5,19 +5,20 @@
     "version": "v1"
   },
   "paths": {
-    "/api/ApiKey": {
-      "post": {
+    "/api/ApiKey/{id}": {
+      "get": {
         "tags": [
           "ApiKey"
         ],
-        "summary": "Creates an Api Key for a site",
-        "description": "Returns the new Api Key",
-        "operationId": "createApiKey",
+        "summary": "Gets an entity by Id",
+        "description": "Returns the entity with the specified Id upon success",
+        "operationId": "getApiKey",
         "parameters": [
           {
-            "name": "siteId",
-            "in": "query",
-            "description": "Id of the site",
+            "name": "id",
+            "in": "path",
+            "description": "Id of the entity",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -26,64 +27,144 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful creation",
+            "description": "Successful query: entity details",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Int32StringCreateSiteApiKeyVm"
+                  "$ref": "#/components/schemas/SiteApiKeyVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Int32StringCreateSiteApiKeyVm"
+                  "$ref": "#/components/schemas/SiteApiKeyVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Int32StringCreateSiteApiKeyVm"
+                  "$ref": "#/components/schemas/SiteApiKeyVm"
                 }
               }
             }
           },
           "400": {
-            "description": "Error occured while sending the Api Key to the store: siteApiKey.error.cant-send-to-store",
+            "description": "Validation error occurred: validation.error"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Updates an entity",
+        "description": "Updates an entity with Id of \"id\" to entity \"dto\"",
+        "operationId": "updateApiKey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "New entity details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSiteApiKeyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update"
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Deletes an entity",
+        "description": "Deletes an entity with Id of \"id\"",
+        "operationId": "deleteApiKey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful deletion"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/ApiKey": {
+      "post": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Creates an entity",
+        "description": "Returns the id of the entity upon success",
+        "operationId": "createApiKey",
+        "requestBody": {
+          "description": "Details of the entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSiteApiKeyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation: Id of the new entity",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Int32StringEntityCreatedCompositeVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Int32StringEntityCreatedCompositeVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Int32StringEntityCreatedCompositeVm"
                 }
               }
             }
           },
-          "404": {
-            "description": "Site with that Id not found: error.not-found;",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+          "400": {
+            "description": "Validation error occurred: validation.error"
           }
         }
       },
@@ -91,10 +172,18 @@
         "tags": [
           "ApiKey"
         ],
-        "summary": "Returns the already created Sites with Api Keys",
-        "description": "No Api Key included in the query",
+        "summary": "Gets an entity list sorted and filtered",
+        "description": "Returns the entity list with the specified filters applied",
         "operationId": "listApiKey",
         "parameters": [
+          {
+            "name": "siteId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "page",
             "in": "query",
@@ -128,7 +217,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful query: List of sites that have Api Keys",
+            "description": "Successful query: List of entities",
             "content": {
               "text/plain": {
                 "schema": {
@@ -146,51 +235,37 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
           }
         }
       }
     },
-    "/api/Auth/RegisterPartner": {
+    "/api/Auth/RegisterPartnerContact": {
       "post": {
         "tags": [
           "Auth"
         ],
         "summary": "Registers a contact for a partner",
         "description": "Returns nothing, but registers a contact for the partner",
-        "operationId": "RegisterPartner",
+        "operationId": "registerPartnerContact",
         "requestBody": {
           "description": "Data of the contact",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterPartnerDto"
+                "$ref": "#/components/schemas/RegisterPartnerContactDto"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Successful registration",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/HttpStatusCode"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HttpStatusCode"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HttpStatusCode"
-                }
-              }
-            }
+            "description": "Successful registration"
           },
           "400": {
-            "description": "Invalid e-mail: auth.error.invalid-email; \r\n                Invalid password: auth.error.password-format; \r\n                Error occured in registration: auth.error.registration-failed;\r\n                User already exists: auth.error.user-exists",
+            "description": "Invalid e-mail: auth.error.invalid-email; \r\n                Invalid password: auth.error.password-format; \r\n                Error occured in registration: auth.error.registration-failed;\r\n                Invalid partner code: auth.error.invalid-partner-code; \r\n                User already exists: auth.error.user-exists",
             "content": {
               "text/plain": {
                 "schema": {
@@ -219,7 +294,7 @@
         ],
         "summary": "Registers a user",
         "description": "Returns nothing, but registers a user",
-        "operationId": "RegisterUser",
+        "operationId": "registerUser",
         "requestBody": {
           "description": "Data of the user",
           "content": {
@@ -264,7 +339,7 @@
         ],
         "summary": "Logs in a user",
         "description": "Returns user info about the logged in user",
-        "operationId": "Login",
+        "operationId": "login",
         "requestBody": {
           "description": "Login data of the user",
           "content": {
@@ -678,7 +753,7 @@
         ],
         "summary": "Adds a comment to a coupon",
         "description": "Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"",
-        "operationId": "createCouponComments",
+        "operationId": "addCouponComments",
         "parameters": [
           {
             "name": "couponId",
@@ -807,7 +882,7 @@
         ],
         "summary": "Gets a Coupon entity list sorted and filtered",
         "description": "Returns the Coupon list with the specified filters applied",
-        "operationId": "GetCoupons",
+        "operationId": "listCoupons",
         "parameters": [
           {
             "name": "name",
@@ -895,7 +970,7 @@
         ],
         "summary": "Gets a Coupon entity by Id",
         "description": "Returns the Coupon with the specified Id upon success",
-        "operationId": "GetOneCoupon",
+        "operationId": "getCoupons",
         "parameters": [
           {
             "name": "id",
@@ -943,7 +1018,7 @@
         ],
         "summary": "Updates a Coupon entity",
         "description": "Updates a Coupon entity with Id of \"id\" to entity \"item\"",
-        "operationId": "updateCoupon",
+        "operationId": "updateCoupons",
         "parameters": [
           {
             "name": "id",
@@ -1014,7 +1089,7 @@
         ],
         "summary": "Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state",
         "description": "Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state",
-        "operationId": "GetWaitingCoupons",
+        "operationId": "getWaitingCoupons",
         "parameters": [
           {
             "name": "name",
@@ -1220,7 +1295,7 @@
         ],
         "summary": "Returns the claimed couponcodes for a coupon",
         "description": "Returns a list of couponcodes that have been claimed for coupon with an Id of couponId",
-        "operationId": "GetClaimedCoupons",
+        "operationId": "getClaimedCoupons",
         "parameters": [
           {
             "name": "couponId",
@@ -1270,7 +1345,7 @@
         ],
         "summary": "Archives all couponcodes",
         "description": "Archives every couponcode in the database",
-        "operationId": "ArchiveCouponUserCodes",
+        "operationId": "archiveClaimedCoupons",
         "responses": {
           "200": {
             "description": "Successful archiving"
@@ -1283,7 +1358,7 @@
         "tags": [
           "CouponUserCodes"
         ],
-        "operationId": "GetMyClaimedCoupons",
+        "operationId": "getMyClaimedCoupons",
         "responses": {
           "200": {
             "description": "Success",
@@ -1324,7 +1399,7 @@
         ],
         "summary": "Generates pairs of users and coupons",
         "description": "Generates 8 pairs for every user or as many coupons are available",
-        "operationId": "GeneratePairs/",
+        "operationId": "generatePairs",
         "responses": {
           "200": {
             "description": "Successful generation"
@@ -1339,7 +1414,7 @@
         ],
         "summary": "Archives every pair of coupons and users",
         "description": "Archives every pair of coupons and users, used before generating new pairs",
-        "operationId": "ArchivePairs/",
+        "operationId": "archivePairs",
         "responses": {
           "200": {
             "description": "Successful archiving"
@@ -1354,7 +1429,7 @@
         ],
         "summary": "Returns the coupons generated for the user",
         "description": "Returns a coupon list that contains up to 8 coupons for the user for today",
-        "operationId": "GetMyCoupons",
+        "operationId": "getMyCoupons",
         "responses": {
           "200": {
             "description": "Successful query: list of coupons",
@@ -1393,7 +1468,7 @@
         "tags": [
           "EmailSender"
         ],
-        "operationId": "createEmailSender",
+        "operationId": "sendEmails",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1408,17 +1483,6 @@
             "description": "Success"
           }
         }
-      },
-      "get": {
-        "tags": [
-          "EmailSender"
-        ],
-        "operationId": "getEmailSender",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
       }
     },
     "/api/Information": {
@@ -1427,7 +1491,7 @@
           "Information"
         ],
         "summary": "Returns a list of all the exception errorkeys",
-        "operationId": "getInformation",
+        "operationId": "getExceptions",
         "responses": {
           "200": {
             "description": "Successful query: string list of exception errorkeys",
@@ -1466,7 +1530,7 @@
         "tags": [
           "PartnerContacts"
         ],
-        "operationId": "getPartnerContacts",
+        "operationId": "getMyPartnerContacts",
         "responses": {
           "200": {
             "description": "Success",
@@ -1494,7 +1558,7 @@
         "tags": [
           "PartnerContacts"
         ],
-        "operationId": "updatePartnerContacts",
+        "operationId": "updateMyPartnerContacts",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1511,15 +1575,16 @@
         }
       }
     },
-    "/api/Partners": {
+    "/api/Partners/GetSelf": {
       "get": {
         "tags": [
           "Partners"
         ],
-        "operationId": "getPartners",
+        "summary": "Returns the details about the logged in contact's partner",
+        "operationId": "getMyPartner",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successful query",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1539,13 +1604,17 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/Partners/UpdateSelf": {
       "put": {
         "tags": [
           "Partners"
         ],
-        "operationId": "updatePartners",
+        "summary": "Updates the logged in contact's partner",
+        "operationId": "updateMyPartner",
         "requestBody": {
+          "description": "New details of the partner to update",
           "content": {
             "application/json": {
               "schema": {
@@ -1556,7 +1625,246 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Successful update"
+          },
+          "400": {
+            "description": "Validation error occured: validation.error"
+          }
+        }
+      }
+    },
+    "/api/Partners": {
+      "post": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Creates an entity",
+        "description": "Returns the id of the entity upon success",
+        "operationId": "createPartners",
+        "requestBody": {
+          "description": "Details of the entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation: Id of the new entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Gets an entity list sorted and filtered",
+        "description": "Returns the entity list with the specified filters applied",
+        "operationId": "listPartners",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: List of entities",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVmPaginatedResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVmPaginatedResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVmPaginatedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          }
+        }
+      }
+    },
+    "/api/Partners/{id}": {
+      "get": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Gets an entity by Id",
+        "description": "Returns the entity with the specified Id upon success",
+        "operationId": "getPartners",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the entity",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: entity details",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerVm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Updates an entity",
+        "description": "Updates an entity with Id of \"id\" to entity \"dto\"",
+        "operationId": "updatePartners",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "New entity details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update"
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Deletes an entity",
+        "description": "Deletes an entity with Id of \"id\"",
+        "operationId": "deletePartners",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful deletion"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
           }
         }
       }
@@ -2301,16 +2609,113 @@
   },
   "components": {
     "schemas": {
-      "Int32StringCreateSiteApiKeyVm": {
+      "SiteApiKeyVm": {
         "type": "object",
         "properties": {
-          "apiKey": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "expireDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateSiteApiKeyDto": {
+        "type": "object",
+        "properties": {
+          "siteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Int32StringEntityCreatedCompositeVm": {
+        "type": "object",
+        "properties": {
+          "id2": {
             "type": "string",
             "nullable": true
           },
           "id": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderByType": {
+        "enum": [
+          "Ascending",
+          "Descending"
+        ],
+        "type": "string"
+      },
+      "SiteApiKeyVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SiteApiKeyVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterPartnerContactDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2350,164 +2755,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "OrderByType": {
-        "enum": [
-          "Ascending",
-          "Descending"
-        ],
-        "type": "string"
-      },
-      "SiteApiKeyVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "expireDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isActive": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SiteApiKeyVmPaginatedResponse": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SiteApiKeyVm"
-            },
-            "nullable": true
-          },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "from": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "to": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RegisterPartnerDto": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "partnerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "fullName": {
-            "type": "string",
-            "nullable": true
-          },
-          "phone": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "HttpStatusCode": {
-        "enum": [
-          "Continue",
-          "SwitchingProtocols",
-          "Processing",
-          "EarlyHints",
-          "OK",
-          "Created",
-          "Accepted",
-          "NonAuthoritativeInformation",
-          "NoContent",
-          "ResetContent",
-          "PartialContent",
-          "MultiStatus",
-          "AlreadyReported",
-          "IMUsed",
-          "MultipleChoices",
-          "Ambiguous",
-          "MovedPermanently",
-          "Moved",
-          "Found",
-          "Redirect",
-          "SeeOther",
-          "RedirectMethod",
-          "NotModified",
-          "UseProxy",
-          "Unused",
-          "TemporaryRedirect",
-          "RedirectKeepVerb",
-          "PermanentRedirect",
-          "BadRequest",
-          "Unauthorized",
-          "PaymentRequired",
-          "Forbidden",
-          "NotFound",
-          "MethodNotAllowed",
-          "NotAcceptable",
-          "ProxyAuthenticationRequired",
-          "RequestTimeout",
-          "Conflict",
-          "Gone",
-          "LengthRequired",
-          "PreconditionFailed",
-          "RequestEntityTooLarge",
-          "RequestUriTooLong",
-          "UnsupportedMediaType",
-          "RequestedRangeNotSatisfiable",
-          "ExpectationFailed",
-          "MisdirectedRequest",
-          "UnprocessableEntity",
-          "Locked",
-          "FailedDependency",
-          "UpgradeRequired",
-          "PreconditionRequired",
-          "TooManyRequests",
-          "RequestHeaderFieldsTooLarge",
-          "UnavailableForLegalReasons",
-          "InternalServerError",
-          "NotImplemented",
-          "BadGateway",
-          "ServiceUnavailable",
-          "GatewayTimeout",
-          "HttpVersionNotSupported",
-          "VariantAlsoNegotiates",
-          "InsufficientStorage",
-          "LoopDetected",
-          "NotExtended",
-          "NetworkAuthenticationRequired"
-        ],
-        "type": "string"
       },
       "RegisterUserDto": {
         "type": "object",
@@ -3145,8 +3392,8 @@
             "nullable": true
           },
           "phone": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3163,8 +3410,8 @@
             "nullable": true
           },
           "phone": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3275,6 +3522,41 @@
             "format": "int32"
           },
           "bankAccount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "majorPartner": {
+            "type": "boolean"
+          },
+          "partnerState": {
+            "$ref": "#/components/schemas/PartnerState"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PartnerVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PartnerVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
             "type": "integer",
             "format": "int32"
           }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { getPartners, updatePartners } from './partnerSlice'
+import { getMyPartner, updateMyPartner } from './partnerSlice'
 import { PartnerEditorFormProps, PartnerEditorForm } from './PartnerEditorForm'
 import { Partner } from 'models/partner'
 
@@ -11,11 +11,11 @@ export const PartnerEditorPage: React.FC = () => {
   const { partner, loading } = useSelector((state: RootState) => state.partner)
 
   useEffect(() => {
-    dispatch(getPartners())
+    dispatch(getMyPartner())
   }, [dispatch])
 
   const handlePartnerSave = (partner: Partner): void => {
-    dispatch(updatePartners({ ...partner }))
+    dispatch(updateMyPartner({ ...partner }))
   }
 
   const props: PartnerEditorFormProps = {

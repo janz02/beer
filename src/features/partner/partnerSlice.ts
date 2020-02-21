@@ -50,11 +50,11 @@ export const {
 
 export default partnerSlice.reducer
 
-export const getPartners = (): AppThunk => async dispatch => {
+export const getMyPartner = (): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const partner = await api.partner.getPartners()
+    const partner = await api.partner.getMyPartner()
     dispatch(
       getPartnersSuccess({
         ...partner
@@ -65,11 +65,11 @@ export const getPartners = (): AppThunk => async dispatch => {
   }
 }
 
-export const updatePartners = (partner: Partner): AppThunk => async (dispatch, getState) => {
+export const updateMyPartner = (partner: Partner): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
   try {
-    await api.partner.updatePartners({
+    await api.partner.updateMyPartner({
       partnerDto: {
         ...getState().partner.partner,
         ...partner

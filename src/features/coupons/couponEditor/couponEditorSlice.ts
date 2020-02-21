@@ -72,11 +72,11 @@ export const {
 
 export default couponEditorSlice.reducer
 
-export const getOneCoupon = (id: number): AppThunk => async dispatch => {
+export const getCoupons = (id: number): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const coupon = await api.coupons.getOneCoupon({ id: id })
+    const coupon = await api.coupons.getCoupons({ id })
     dispatch(
       getCouponsSuccess({
         ...coupon,
@@ -90,7 +90,7 @@ export const getOneCoupon = (id: number): AppThunk => async dispatch => {
   }
 }
 
-export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
+export const updateCoupons = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
@@ -98,7 +98,7 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const tagId = (tags && tags.result && tags.result[0].id!) || 0
 
-    await api.coupons.updateCoupon({
+    await api.coupons.updateCoupons({
       id: coupon.id!,
       couponDto: {
         ...coupon,
@@ -131,7 +131,7 @@ export const updateCouponStatus = (
     })
 
     dispatch(updateCouponStatusSuccess())
-    dispatch(getOneCoupon(id))
+    dispatch(getCoupons(id))
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }

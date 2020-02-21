@@ -20,7 +20,7 @@ import {
     SendEmailsDtoToJSON,
 } from '../models';
 
-export interface CreateEmailSenderRequest {
+export interface SendEmailsRequest {
     sendEmailsDto?: SendEmailsDto;
 }
 
@@ -31,7 +31,7 @@ export class EmailSenderApi extends runtime.BaseAPI {
 
     /**
      */
-    async createEmailSenderRaw(requestParameters: CreateEmailSenderRequest): Promise<runtime.ApiResponse<void>> {
+    async sendEmailsRaw(requestParameters: SendEmailsRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -55,35 +55,8 @@ export class EmailSenderApi extends runtime.BaseAPI {
 
     /**
      */
-    async createEmailSender(requestParameters: CreateEmailSenderRequest): Promise<void> {
-        await this.createEmailSenderRaw(requestParameters);
-    }
-
-    /**
-     */
-    async getEmailSenderRaw(): Promise<runtime.ApiResponse<void>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/EmailSender`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     */
-    async getEmailSender(): Promise<void> {
-        await this.getEmailSenderRaw();
+    async sendEmails(requestParameters: SendEmailsRequest): Promise<void> {
+        await this.sendEmailsRaw(requestParameters);
     }
 
 }

@@ -57,16 +57,6 @@ export interface DeleteCouponsRequest {
 }
 
 export interface GetCouponsRequest {
-    name?: string;
-    description?: string;
-    includeArchived?: boolean;
-    page?: number;
-    pageSize?: number;
-    orderBy?: string;
-    orderByType?: OrderByType;
-}
-
-export interface GetOneCouponRequest {
     id: number;
 }
 
@@ -83,14 +73,24 @@ export interface GetWaitingCouponsRequest {
     orderByType?: OrderByType;
 }
 
-export interface UpdateCouponRequest {
-    id: number;
-    couponDto?: CouponDto;
+export interface ListCouponsRequest {
+    name?: string;
+    description?: string;
+    includeArchived?: boolean;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string;
+    orderByType?: OrderByType;
 }
 
 export interface UpdateCouponStatusRequest {
     id: number;
     changeCouponStateDto?: ChangeCouponStateDto;
+}
+
+export interface UpdateCouponsRequest {
+    id: number;
+    couponDto?: CouponDto;
 }
 
 /**
@@ -205,72 +205,12 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the Coupon list with the specified filters applied
-     * Gets a Coupon entity list sorted and filtered
-     */
-    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<CouponVmPaginatedResponse>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.name !== undefined) {
-            queryParameters['name'] = requestParameters.name;
-        }
-
-        if (requestParameters.description !== undefined) {
-            queryParameters['description'] = requestParameters.description;
-        }
-
-        if (requestParameters.includeArchived !== undefined) {
-            queryParameters['includeArchived'] = requestParameters.includeArchived;
-        }
-
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
-        }
-
-        if (requestParameters.pageSize !== undefined) {
-            queryParameters['pageSize'] = requestParameters.pageSize;
-        }
-
-        if (requestParameters.orderBy !== undefined) {
-            queryParameters['orderBy'] = requestParameters.orderBy;
-        }
-
-        if (requestParameters.orderByType !== undefined) {
-            queryParameters['orderByType'] = requestParameters.orderByType;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Coupons`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmPaginatedResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the Coupon list with the specified filters applied
-     * Gets a Coupon entity list sorted and filtered
-     */
-    async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVmPaginatedResponse> {
-        const response = await this.getCouponsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * Returns the Coupon with the specified Id upon success
      * Gets a Coupon entity by Id
      */
-    async getOneCouponRaw(requestParameters: GetOneCouponRequest): Promise<runtime.ApiResponse<CouponVm>> {
+    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<CouponVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getOneCoupon.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCoupons.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -295,8 +235,8 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns the Coupon with the specified Id upon success
      * Gets a Coupon entity by Id
      */
-    async getOneCoupon(requestParameters: GetOneCouponRequest): Promise<CouponVm> {
-        const response = await this.getOneCouponRaw(requestParameters);
+    async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVm> {
+        const response = await this.getCouponsRaw(requestParameters);
         return await response.value();
     }
 
@@ -373,41 +313,63 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a Coupon entity with Id of \"id\" to entity \"item\"
-     * Updates a Coupon entity
+     * Returns the Coupon list with the specified filters applied
+     * Gets a Coupon entity list sorted and filtered
      */
-    async updateCouponRaw(requestParameters: UpdateCouponRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCoupon.');
-        }
-
+    async listCouponsRaw(requestParameters: ListCouponsRequest): Promise<runtime.ApiResponse<CouponVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        const headerParameters: runtime.HTTPHeaders = {};
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
 
-        headerParameters['Content-Type'] = 'application/json';
+        if (requestParameters.description !== undefined) {
+            queryParameters['description'] = requestParameters.description;
+        }
+
+        if (requestParameters.includeArchived !== undefined) {
+            queryParameters['includeArchived'] = requestParameters.includeArchived;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
 
         const response = await this.request({
-            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PUT',
+            path: `/api/Coupons`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-            body: CouponDtoToJSON(requestParameters.couponDto),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
-     * Updates a Coupon entity with Id of \"id\" to entity \"item\"
-     * Updates a Coupon entity
+     * Returns the Coupon list with the specified filters applied
+     * Gets a Coupon entity list sorted and filtered
      */
-    async updateCoupon(requestParameters: UpdateCouponRequest): Promise<void> {
-        await this.updateCouponRaw(requestParameters);
+    async listCoupons(requestParameters: ListCouponsRequest): Promise<CouponVmPaginatedResponse> {
+        const response = await this.listCouponsRaw(requestParameters);
+        return await response.value();
     }
 
     /**
@@ -446,6 +408,44 @@ export class CouponsApi extends runtime.BaseAPI {
      */
     async updateCouponStatus(requestParameters: UpdateCouponStatusRequest): Promise<void> {
         await this.updateCouponStatusRaw(requestParameters);
+    }
+
+    /**
+     * Updates a Coupon entity with Id of \"id\" to entity \"item\"
+     * Updates a Coupon entity
+     */
+    async updateCouponsRaw(requestParameters: UpdateCouponsRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCoupons.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CouponDtoToJSON(requestParameters.couponDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Updates a Coupon entity with Id of \"id\" to entity \"item\"
+     * Updates a Coupon entity
+     */
+    async updateCoupons(requestParameters: UpdateCouponsRequest): Promise<void> {
+        await this.updateCouponsRaw(requestParameters);
     }
 
 }

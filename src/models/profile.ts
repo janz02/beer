@@ -3,5 +3,5 @@ export interface Profile {
   partnerId?: number
   name?: string | null
   email?: string | null
-  phone?: number
+  phone?: string | null
 }
