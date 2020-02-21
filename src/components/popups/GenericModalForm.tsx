@@ -1,14 +1,36 @@
 import React, { useEffect, FC } from 'react'
-import { Form, Modal, Input, InputNumber } from 'antd'
+import { Form, Modal } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
+import { FormProps } from 'antd/lib/form'
 import { useTranslation } from 'react-i18next'
 
-export interface GenericModalFormProps extends ModalProps {
-  onCancel: () => void
+export interface GenericModalFormProps {
+  formProps: FormProps
+  modalProps: ModalProps
 }
 
+/**
+ For forms that are nested into modals.
+ @example 
+  <GenericModalForm
+    modalProps={{
+      ...,
+      visible: modalVisible,
+      okText: 'Save',
+      onCancel: () => {}
+    }}
+    formProps={{
+      ...,
+      onFinish: () => {}
+    }}
+  >
+    <Form.Item name="email" label="email">
+      <Input />
+    </Form.Item>
+  </GenericModalForm>
+ */
 export const GenericModalForm: FC<GenericModalFormProps> = props => {
-  const { children, onCancel, ...modalProps } = props
+  const { children, formProps, modalProps } = props
   const { t } = useTranslation()
 
   const [form] = Form.useForm()
@@ -22,21 +44,11 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
   }
 
   return (
-    <Modal
-      title="Basic Drawer"
-      cancelText={t(`common.cancel`)}
-      {...modalProps}
-      onOk={onOk}
-      onCancel={onCancel}
-    >
-      <Form form={form} layout="vertical" name="userForm">
+    // TODO: investigate warning -> forceRender should have resolved the issue according to antd docs, but it didn't
+    // https://next.ant.design/components/form/#Why-get-form-warning-when-used-in-Modal
+    <Modal forceRender cancelText={t(`common.cancel`)} {...modalProps} onOk={onOk}>
+      <Form name="generic-modal-form" layout="vertical" {...formProps} form={form}>
         {children}
-        {/* <Form.Item name="name" label="User Name" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item name="age" label="User Age" rules={[{ required: true }]}>
-          <InputNumber />
-        </Form.Item> */}
       </Form>
     </Modal>
   )

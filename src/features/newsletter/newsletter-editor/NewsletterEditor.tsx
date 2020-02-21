@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useRef, useCallback, useState } from 'react'
-import './NewsLetterEditor.scss'
+import React, { FC, useEffect, useRef } from 'react'
+import './NewsletterEditor.scss'
 import { useTranslation } from 'react-i18next'
-import locale from './locale/'
+import locale from './locale'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import grapesjs from 'grapesjs'
@@ -18,13 +18,13 @@ enum CMD {
   RevertTemplate = 'pkm-revert-template'
 }
 
-export interface NewsLetterEditorProps {
+export interface NewsletterEditorProps {
   template?: string
   handleSave?: (template: string) => void
   handleRevert?: () => void
 }
 
-export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
+export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
   const { handleSave, handleRevert } = props
   const template = props?.template ?? ''
 
