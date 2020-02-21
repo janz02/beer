@@ -3,10 +3,9 @@ import { SiteEditorForm } from './SiteEditorForm'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  getSite,
+  getSiteEditorData,
   resetSiteEditor,
   saveSite,
-  listApiKey,
   setAddNewApiKeyPopupVisible,
   createApiKey,
   closeApiKeyPopup
@@ -20,13 +19,16 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { Button, Modal, Form, Input, Popover } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { SiteApiKey } from 'models/siteApiKey'
-import { ColumnType } from 'antd/lib/table'
+import { ColumnType, TablePaginationConfig } from 'antd/lib/table'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { ApiKeyEditorForm } from './ApiKeyEditorForm'
 import { CopyOutlined } from '@ant-design/icons'
+import { basePaginationConfig, projectPage } from 'models/pagination'
+import { useIsMobile } from 'hooks'
 
 export const SiteEditorPage: FC = () => {
   const { id } = useParams()
+  const isMobile = useIsMobile()
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -42,12 +44,8 @@ export const SiteEditorPage: FC = () => {
   )
 
   useEffect(() => {
-    dispatch(listApiKey())
-  }, [dispatch])
-
-  useEffect(() => {
     if (id && !isNaN(+id)) {
-      dispatch(getSite(+id))
+      dispatch(getSiteEditorData(+id))
     }
   }, [dispatch, id])
 
@@ -80,6 +78,31 @@ export const SiteEditorPage: FC = () => {
     [t]
   )
 
+  const paginationConfig = useMemo((): TablePaginationConfig | false => {
+    const baseConfig = basePaginationConfig(
+      isMobile,
+      !!siteEditorState.error,
+      siteEditorState.pagination
+    )
+    return baseConfig.total
+      ? {
+          ...baseConfig,
+          onShowSizeChange: (current, size) => {
+            id &&
+              dispatch(
+                getSiteEditorData(+id, {
+                  page: projectPage(size, siteEditorState.pagination),
+                  pageSize: size
+                })
+              )
+          },
+          onChange: page => {
+            id && dispatch(getSiteEditorData(+id, { page }))
+          }
+        }
+      : false
+  }, [dispatch, id, isMobile, siteEditorState.error, siteEditorState.pagination])
+
   return (
     <ResponsivePage>
       <SiteEditorForm
@@ -99,7 +122,8 @@ export const SiteEditorPage: FC = () => {
           tableProps={{
             columns: columns,
             dataSource: siteEditorState.siteApiKeys,
-            rowKey: (x): string => x.id?.toString() ?? ''
+            rowKey: (x): string => x.id?.toString() ?? '',
+            pagination: paginationConfig
           }}
           error={siteEditorState.error}
         />

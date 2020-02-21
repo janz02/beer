@@ -52,31 +52,20 @@ const siteEditorSlice = createSlice({
       state.loadingSave = false
       state.error = ''
     },
-    getSiteRequest(state) {
+    getSiteEditorDataRequest(state) {
       state.loadingData = true
     },
-    getSiteSuccess(state, action: PayloadAction<{ site: Site }>) {
-      state.site = action.payload.site
-      state.loadingData = false
-      state.error = ''
-    },
-    getSiteFail(state, action: PayloadAction<string>) {
-      state.loadingData = false
-      state.error = action.payload
-    },
-    listApiKeyRequest(state) {
-      state.loadingData = true
-    },
-    listApiKeySuccess(
+    getSiteEditorDataSuccess(
       state,
-      action: PayloadAction<{ siteApiKeys?: SiteApiKey[]; pagination: Pagination }>
+      action: PayloadAction<{ site: Site; siteApiKeys?: SiteApiKey[]; pagination: Pagination }>
     ) {
+      state.site = action.payload.site
       state.siteApiKeys = action.payload.siteApiKeys
       state.pagination = action.payload.pagination
       state.loadingData = false
       state.error = ''
     },
-    listApiKeyFail(state, action: PayloadAction<string>) {
+    getSiteEditorDataFail(state, action: PayloadAction<string>) {
       state.loadingData = false
       state.error = action.payload
     },
@@ -109,9 +98,12 @@ const siteEditorSlice = createSlice({
   }
 })
 
-const { getSiteRequest, getSiteSuccess, getSiteFail } = siteEditorSlice.actions
+const {
+  getSiteEditorDataRequest,
+  getSiteEditorDataSuccess,
+  getSiteEditorDataFail
+} = siteEditorSlice.actions
 const { saveSiteRequest, saveSiteSuccess, saveSiteFail } = siteEditorSlice.actions
-const { listApiKeyRequest, listApiKeySuccess, listApiKeyFail } = siteEditorSlice.actions
 const { createApiKeyRequest, createApiKeySuccess, createApiKeyFail } = siteEditorSlice.actions
 
 export const {
@@ -122,19 +114,47 @@ export const {
 
 export default siteEditorSlice.reducer
 
-export const getSite = (id: number): AppThunk => async dispatch => {
-  dispatch(getSiteRequest())
+export const getSiteEditorData = (id: number, params: GetApiKeysRequest = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  dispatch(getSiteEditorDataRequest())
   try {
-    const response = await api.sites.getSite({ id })
-    dispatch(getSiteSuccess({ site: response }))
-    return ''
+    const site = await api.sites.getSite({ id })
+
+    const oldPagination = getState().siteList.pagination
+    const pagination = calculatePagination(params, oldPagination)
+
+    const apiKeysResponse = await api.apiKey.getApiKeys({
+      pageSize: pagination.pageSize,
+      page: pagination.page,
+      siteId: site.id
+    })
+
+    const siteApiKeys = apiKeysResponse.result?.map(
+      x =>
+        ({
+          ...x,
+          expireDate: moment(x.expireDate)
+        } as SiteApiKey)
+    )
+
+    dispatch(
+      getSiteEditorDataSuccess({
+        site,
+        siteApiKeys,
+        pagination: {
+          ...apiKeysResponse
+        }
+      })
+    )
   } catch (err) {
-    dispatch(getSiteFail(err.toString()))
+    dispatch(getSiteEditorDataFail(err.toString()))
     return err.toString()
   }
 }
 
-export const saveSite = (site: Site, id: number): AppThunk => async dispatch => {
+export const saveSite = (site: Site, id: number): AppThunk => async (dispatch, getState) => {
   dispatch(saveSiteRequest())
   try {
     // TODO: integrate, remove partner get because it will be on the JWT.
@@ -148,7 +168,7 @@ export const saveSite = (site: Site, id: number): AppThunk => async dispatch => 
           partnerId: partner.id
         }
       })
-      dispatch(getSite(id))
+      dispatch(getSiteEditorData(id, getState().siteEditor.pagination))
     } else {
       const newId = await api.sites.createSite({
         siteDto: {
@@ -156,47 +176,11 @@ export const saveSite = (site: Site, id: number): AppThunk => async dispatch => 
           partnerId: partner.id
         }
       })
-      newId.id && dispatch(getSite(newId.id))
+      newId.id && dispatch(getSiteEditorData(newId.id, getState().siteEditor.pagination))
     }
     dispatch(saveSiteSuccess())
   } catch (err) {
     dispatch(saveSiteFail(err.toString()))
-  }
-}
-
-export const listApiKey = (params: GetApiKeysRequest = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
-  dispatch(listApiKeyRequest())
-
-  try {
-    const oldPagination = getState().siteList.pagination
-    const pagination = calculatePagination(params, oldPagination)
-
-    const response = await api.apiKey.getApiKeys({
-      pageSize: pagination.pageSize,
-      page: pagination.page
-    })
-
-    const siteApiKeys = response.result?.map(
-      x =>
-        ({
-          ...x,
-          expireDate: moment(x.expireDate)
-        } as SiteApiKey)
-    )
-
-    dispatch(
-      listApiKeySuccess({
-        siteApiKeys,
-        pagination: {
-          ...response
-        }
-      })
-    )
-  } catch (err) {
-    dispatch(listApiKeyFail(err.toString()))
   }
 }
 
@@ -208,6 +192,9 @@ export const createApiKey = (name: string): AppThunk => async (dispatch, getStat
       createSiteApiKeyDto: { name, siteId: getState().siteEditor.site?.id }
     })
     dispatch(createApiKeySuccess(response.id2 ?? ''))
+    const siteEditorState = getState().siteEditor
+    siteEditorState.site?.id &&
+      dispatch(getSiteEditorData(siteEditorState.site?.id, siteEditorState.pagination))
   } catch (err) {
     dispatch(createApiKeyFail(err.toString()))
   }
