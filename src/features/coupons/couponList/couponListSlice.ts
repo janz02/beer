@@ -31,7 +31,7 @@ const couponListSlice = createSlice({
       state.loading = false
       state.error = null
     },
-    deleteCouponsSuccess(state, action: PayloadAction<number>) {
+    deleteCouponSuccess(state, action: PayloadAction<number>) {
       state.coupons = state.coupons && state.coupons.filter(x => x.id !== action.payload)
 
       state.loading = false
@@ -49,7 +49,7 @@ const couponListSlice = createSlice({
 
 export const {
   listCouponsSuccess,
-  deleteCouponsSuccess,
+  deleteCouponSuccess,
   setLoadingStart,
   setLoadingFailed
 } = couponListSlice.actions
@@ -88,12 +88,12 @@ export const getWaitingCoupons = (
   }
 }
 
-export const deleteCoupons = (id: number): AppThunk => async dispatch => {
+export const deleteCoupon = (id: number): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    await api.coupons.deleteCoupons({ id: id })
-    dispatch(deleteCouponsSuccess(id))
+    await api.coupons.deleteCoupon({ id: id })
+    dispatch(deleteCouponSuccess(id))
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }

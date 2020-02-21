@@ -44,7 +44,7 @@ export interface GetApiKeyRequest {
     id: number;
 }
 
-export interface ListApiKeyRequest {
+export interface GetApiKeysRequest {
     siteId?: number;
     page?: number;
     pageSize?: number;
@@ -60,7 +60,7 @@ export interface UpdateApiKeyRequest {
 /**
  * no description
  */
-export class ApiKeyApi extends runtime.BaseAPI {
+export class ApiKeysApi extends runtime.BaseAPI {
 
     /**
      * Returns the id of the entity upon success
@@ -78,7 +78,7 @@ export class ApiKeyApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/ApiKey`,
+            path: `/api/ApiKeys`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -115,7 +115,7 @@ export class ApiKeyApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/ApiKey/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/ApiKeys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -150,7 +150,7 @@ export class ApiKeyApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/ApiKey/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/ApiKeys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -172,7 +172,7 @@ export class ApiKeyApi extends runtime.BaseAPI {
      * Returns the entity list with the specified filters applied
      * Gets an entity list sorted and filtered
      */
-    async listApiKeyRaw(requestParameters: ListApiKeyRequest): Promise<runtime.ApiResponse<SiteApiKeyVmPaginatedResponse>> {
+    async getApiKeysRaw(requestParameters: GetApiKeysRequest): Promise<runtime.ApiResponse<SiteApiKeyVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.siteId !== undefined) {
@@ -202,7 +202,7 @@ export class ApiKeyApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/ApiKey`,
+            path: `/api/ApiKeys`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -215,8 +215,8 @@ export class ApiKeyApi extends runtime.BaseAPI {
      * Returns the entity list with the specified filters applied
      * Gets an entity list sorted and filtered
      */
-    async listApiKey(requestParameters: ListApiKeyRequest): Promise<SiteApiKeyVmPaginatedResponse> {
-        const response = await this.listApiKeyRaw(requestParameters);
+    async getApiKeys(requestParameters: GetApiKeysRequest): Promise<SiteApiKeyVmPaginatedResponse> {
+        const response = await this.getApiKeysRaw(requestParameters);
         return await response.value();
     }
 
@@ -240,7 +240,7 @@ export class ApiKeyApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/ApiKey/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/ApiKeys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,

@@ -125,7 +125,7 @@ export default siteEditorSlice.reducer
 export const getSite = (id: number): AppThunk => async dispatch => {
   dispatch(getSiteRequest())
   try {
-    const response = await api.sites.getSites({ id })
+    const response = await api.sites.getSite({ id })
     dispatch(getSiteSuccess({ site: response }))
     return ''
   } catch (err) {
@@ -141,7 +141,7 @@ export const saveSite = (site: Site, id: number): AppThunk => async dispatch => 
     const partner = await api.partner.getMyPartner()
 
     if (id > 0) {
-      await api.sites.updateSites({
+      await api.sites.updateSite({
         id,
         siteDto: {
           ...site,
@@ -150,7 +150,7 @@ export const saveSite = (site: Site, id: number): AppThunk => async dispatch => 
       })
       dispatch(getSite(id))
     } else {
-      const newId = await api.sites.createSites({
+      const newId = await api.sites.createSite({
         siteDto: {
           ...site,
           partnerId: partner.id

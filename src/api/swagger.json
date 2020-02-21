@@ -5,10 +5,10 @@
     "version": "v1"
   },
   "paths": {
-    "/api/ApiKey/{id}": {
+    "/api/ApiKeys/{id}": {
       "get": {
         "tags": [
-          "ApiKey"
+          "ApiKeys"
         ],
         "summary": "Gets an entity by Id",
         "description": "Returns the entity with the specified Id upon success",
@@ -56,7 +56,7 @@
       },
       "put": {
         "tags": [
-          "ApiKey"
+          "ApiKeys"
         ],
         "summary": "Updates an entity",
         "description": "Updates an entity with Id of \"id\" to entity \"dto\"",
@@ -97,7 +97,7 @@
       },
       "delete": {
         "tags": [
-          "ApiKey"
+          "ApiKeys"
         ],
         "summary": "Deletes an entity",
         "description": "Deletes an entity with Id of \"id\"",
@@ -124,10 +124,10 @@
         }
       }
     },
-    "/api/ApiKey": {
+    "/api/ApiKeys": {
       "post": {
         "tags": [
-          "ApiKey"
+          "ApiKeys"
         ],
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
@@ -170,11 +170,11 @@
       },
       "get": {
         "tags": [
-          "ApiKey"
+          "ApiKeys"
         ],
         "summary": "Gets an entity list sorted and filtered",
         "description": "Returns the entity list with the specified filters applied",
-        "operationId": "listApiKey",
+        "operationId": "getApiKeys",
         "parameters": [
           {
             "name": "siteId",
@@ -463,7 +463,7 @@
         ],
         "summary": "Creates a Category entity",
         "description": "Returns the id of the Category upon success",
-        "operationId": "createCategories",
+        "operationId": "createCategory",
         "requestBody": {
           "description": "Details of the Category",
           "content": {
@@ -506,7 +506,7 @@
         ],
         "summary": "Gets a Category entity list sorted and filtered",
         "description": "Returns the Category list with the specified filters applied",
-        "operationId": "listCategories",
+        "operationId": "getCategories",
         "parameters": [
           {
             "name": "name",
@@ -580,7 +580,7 @@
         ],
         "summary": "Gets a Category entity by Id",
         "description": "Returns the Category with the specified Id upon success",
-        "operationId": "getCategories",
+        "operationId": "getCategory",
         "parameters": [
           {
             "name": "id",
@@ -628,7 +628,7 @@
         ],
         "summary": "Updates a Category entity",
         "description": "Updates a Category entity with Id of \"id\" to entity \"category\"",
-        "operationId": "updateCategories",
+        "operationId": "updateCategory",
         "parameters": [
           {
             "name": "id",
@@ -669,7 +669,7 @@
         ],
         "summary": "Deletes a Category entity",
         "description": "Deletes the Category entity with Id of \"id\"",
-        "operationId": "deleteCategories",
+        "operationId": "deleteCategory",
         "parameters": [
           {
             "name": "id",
@@ -753,7 +753,7 @@
         ],
         "summary": "Adds a comment to a coupon",
         "description": "Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"",
-        "operationId": "addCouponComments",
+        "operationId": "addCouponComment",
         "parameters": [
           {
             "name": "couponId",
@@ -796,7 +796,7 @@
         ],
         "summary": "Deletes a comment from a coupon",
         "description": "Deletes the comment with an Id of \"commentId\" from a coupon with Id of \"couponId\"",
-        "operationId": "deleteCouponComments",
+        "operationId": "deleteCouponComment",
         "parameters": [
           {
             "name": "couponId",
@@ -839,7 +839,7 @@
         ],
         "summary": "Creates a Coupon entity",
         "description": "Returns the id of the new Coupon upon success",
-        "operationId": "createCoupons",
+        "operationId": "createCoupon",
         "requestBody": {
           "description": "Details of the Coupon",
           "content": {
@@ -882,7 +882,7 @@
         ],
         "summary": "Gets a Coupon entity list sorted and filtered",
         "description": "Returns the Coupon list with the specified filters applied",
-        "operationId": "listCoupons",
+        "operationId": "getCoupons",
         "parameters": [
           {
             "name": "name",
@@ -970,7 +970,7 @@
         ],
         "summary": "Gets a Coupon entity by Id",
         "description": "Returns the Coupon with the specified Id upon success",
-        "operationId": "getCoupons",
+        "operationId": "getCoupon",
         "parameters": [
           {
             "name": "id",
@@ -1018,7 +1018,7 @@
         ],
         "summary": "Updates a Coupon entity",
         "description": "Updates a Coupon entity with Id of \"id\" to entity \"item\"",
-        "operationId": "updateCoupons",
+        "operationId": "updateCoupon",
         "parameters": [
           {
             "name": "id",
@@ -1059,7 +1059,7 @@
         ],
         "summary": "Deletes a Coupon entity",
         "description": "Deletes the Coupon entity with Id of \"id\"",
-        "operationId": "deleteCoupons",
+        "operationId": "deleteCoupon",
         "parameters": [
           {
             "name": "id",
@@ -1530,7 +1530,7 @@
         "tags": [
           "PartnerContacts"
         ],
-        "operationId": "getMyPartnerContacts",
+        "operationId": "getMyPartnerContact",
         "responses": {
           "200": {
             "description": "Success",
@@ -1558,7 +1558,7 @@
         "tags": [
           "PartnerContacts"
         ],
-        "operationId": "updateMyPartnerContacts",
+        "operationId": "updateMyPartnerContact",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1640,7 +1640,7 @@
         ],
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
-        "operationId": "createPartners",
+        "operationId": "createPartner",
         "requestBody": {
           "description": "Details of the entity",
           "content": {
@@ -1683,7 +1683,7 @@
         ],
         "summary": "Gets an entity list sorted and filtered",
         "description": "Returns the entity list with the specified filters applied",
-        "operationId": "listPartners",
+        "operationId": "getPartners",
         "parameters": [
           {
             "name": "name",
@@ -1757,7 +1757,7 @@
         ],
         "summary": "Gets an entity by Id",
         "description": "Returns the entity with the specified Id upon success",
-        "operationId": "getPartners",
+        "operationId": "getPartner",
         "parameters": [
           {
             "name": "id",
@@ -1805,7 +1805,7 @@
         ],
         "summary": "Updates an entity",
         "description": "Updates an entity with Id of \"id\" to entity \"dto\"",
-        "operationId": "updatePartners",
+        "operationId": "updatePartner",
         "parameters": [
           {
             "name": "id",
@@ -1846,7 +1846,7 @@
         ],
         "summary": "Deletes an entity",
         "description": "Deletes an entity with Id of \"id\"",
-        "operationId": "deletePartners",
+        "operationId": "deletePartner",
         "parameters": [
           {
             "name": "id",
@@ -1876,7 +1876,7 @@
         ],
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
-        "operationId": "createSites",
+        "operationId": "createSite",
         "requestBody": {
           "description": "Details of the entity",
           "content": {
@@ -1919,7 +1919,7 @@
         ],
         "summary": "Gets an entity list sorted and filtered",
         "description": "Returns the entity list with the specified filters applied",
-        "operationId": "listSites",
+        "operationId": "getSites",
         "parameters": [
           {
             "name": "name",
@@ -2008,7 +2008,7 @@
         ],
         "summary": "Gets an entity by Id",
         "description": "Returns the entity with the specified Id upon success",
-        "operationId": "getSites",
+        "operationId": "getSite",
         "parameters": [
           {
             "name": "id",
@@ -2056,7 +2056,7 @@
         ],
         "summary": "Updates an entity",
         "description": "Updates an entity with Id of \"id\" to entity \"dto\"",
-        "operationId": "updateSites",
+        "operationId": "updateSite",
         "parameters": [
           {
             "name": "id",
@@ -2097,7 +2097,7 @@
         ],
         "summary": "Deletes an entity",
         "description": "Deletes an entity with Id of \"id\"",
-        "operationId": "deleteSites",
+        "operationId": "deleteSite",
         "parameters": [
           {
             "name": "id",
@@ -2127,7 +2127,7 @@
         ],
         "summary": "Creates a TagCategory entity",
         "description": "Returns the id of the TagCategory upon success",
-        "operationId": "createTagCategories",
+        "operationId": "createTagCategory",
         "requestBody": {
           "description": "Details of the TagCategory",
           "content": {
@@ -2170,7 +2170,7 @@
         ],
         "summary": "Gets a TagCategory entity list sorted and filtered",
         "description": "Returns the TagCategory list with the specified filters applied",
-        "operationId": "listTagCategories",
+        "operationId": "getTagCategories",
         "parameters": [
           {
             "name": "name",
@@ -2244,7 +2244,7 @@
         ],
         "summary": "Gets a TagCategory entity by Id",
         "description": "Returns the TagCategory with the specified Id upon success",
-        "operationId": "getTagCategories",
+        "operationId": "getTagCategory",
         "parameters": [
           {
             "name": "id",
@@ -2292,7 +2292,7 @@
         ],
         "summary": "Updates a TagCategory entity",
         "description": "Updates a TagCategory entity with Id of \"id\" to entity \"category\"",
-        "operationId": "updateTagCategories",
+        "operationId": "updateTagCategory",
         "parameters": [
           {
             "name": "id",
@@ -2333,7 +2333,7 @@
         ],
         "summary": "Deletes a TagCategory entity",
         "description": "Deletes the TagCategory entity with Id of \"id\"",
-        "operationId": "deleteTagCategories",
+        "operationId": "deleteTagCategory",
         "parameters": [
           {
             "name": "id",
@@ -2363,7 +2363,7 @@
         ],
         "summary": "Creates a Tag entity",
         "description": "Returns the id of the Tag upon success",
-        "operationId": "createTags",
+        "operationId": "createTag",
         "requestBody": {
           "description": "Details of the Tag",
           "content": {
@@ -2406,7 +2406,7 @@
         ],
         "summary": "Gets a Tag entity list sorted and filtered",
         "description": "Returns the Tag list with the specified filters applied",
-        "operationId": "listTags",
+        "operationId": "getTags",
         "parameters": [
           {
             "name": "value",
@@ -2494,7 +2494,7 @@
         ],
         "summary": "Gets a Tag entity by Id",
         "description": "Returns the Tag with the specified Id upon success",
-        "operationId": "getTags",
+        "operationId": "getTag",
         "parameters": [
           {
             "name": "id",
@@ -2542,7 +2542,7 @@
         ],
         "summary": "Updates a Tag entity",
         "description": "Updates a Tag entity with Id of \"id\" to entity \"category\"",
-        "operationId": "updateTags",
+        "operationId": "updateTag",
         "parameters": [
           {
             "name": "id",
@@ -2583,7 +2583,7 @@
         ],
         "summary": "Deletes a Tag entity",
         "description": "Deletes the Tag entity with Id of \"id\"",
-        "operationId": "deleteTags",
+        "operationId": "deleteTag",
         "parameters": [
           {
             "name": "id",

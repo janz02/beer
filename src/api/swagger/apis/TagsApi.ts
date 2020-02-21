@@ -32,19 +32,19 @@ import {
     TagVmPaginatedResponseToJSON,
 } from '../models';
 
-export interface CreateTagsRequest {
+export interface CreateTagRequest {
     tagDto?: TagDto;
 }
 
-export interface DeleteTagsRequest {
+export interface DeleteTagRequest {
+    id: number;
+}
+
+export interface GetTagRequest {
     id: number;
 }
 
 export interface GetTagsRequest {
-    id: number;
-}
-
-export interface ListTagsRequest {
     value?: string;
     tagCategory?: string;
     isActive?: boolean;
@@ -54,7 +54,7 @@ export interface ListTagsRequest {
     orderByType?: OrderByType;
 }
 
-export interface UpdateTagsRequest {
+export interface UpdateTagRequest {
     id: number;
     tagDto?: TagDto;
 }
@@ -68,7 +68,7 @@ export class TagsApi extends runtime.BaseAPI {
      * Returns the id of the Tag upon success
      * Creates a Tag entity
      */
-    async createTagsRaw(requestParameters: CreateTagsRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createTagRaw(requestParameters: CreateTagRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -94,8 +94,8 @@ export class TagsApi extends runtime.BaseAPI {
      * Returns the id of the Tag upon success
      * Creates a Tag entity
      */
-    async createTags(requestParameters: CreateTagsRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createTagsRaw(requestParameters);
+    async createTag(requestParameters: CreateTagRequest): Promise<Int32EntityCreatedVm> {
+        const response = await this.createTagRaw(requestParameters);
         return await response.value();
     }
 
@@ -103,9 +103,9 @@ export class TagsApi extends runtime.BaseAPI {
      * Deletes the Tag entity with Id of \"id\"
      * Deletes a Tag entity
      */
-    async deleteTagsRaw(requestParameters: DeleteTagsRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteTagRaw(requestParameters: DeleteTagRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTags.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTag.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -130,17 +130,17 @@ export class TagsApi extends runtime.BaseAPI {
      * Deletes the Tag entity with Id of \"id\"
      * Deletes a Tag entity
      */
-    async deleteTags(requestParameters: DeleteTagsRequest): Promise<void> {
-        await this.deleteTagsRaw(requestParameters);
+    async deleteTag(requestParameters: DeleteTagRequest): Promise<void> {
+        await this.deleteTagRaw(requestParameters);
     }
 
     /**
      * Returns the Tag with the specified Id upon success
      * Gets a Tag entity by Id
      */
-    async getTagsRaw(requestParameters: GetTagsRequest): Promise<runtime.ApiResponse<TagVm>> {
+    async getTagRaw(requestParameters: GetTagRequest): Promise<runtime.ApiResponse<TagVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTags.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTag.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -165,8 +165,8 @@ export class TagsApi extends runtime.BaseAPI {
      * Returns the Tag with the specified Id upon success
      * Gets a Tag entity by Id
      */
-    async getTags(requestParameters: GetTagsRequest): Promise<TagVm> {
-        const response = await this.getTagsRaw(requestParameters);
+    async getTag(requestParameters: GetTagRequest): Promise<TagVm> {
+        const response = await this.getTagRaw(requestParameters);
         return await response.value();
     }
 
@@ -174,7 +174,7 @@ export class TagsApi extends runtime.BaseAPI {
      * Returns the Tag list with the specified filters applied
      * Gets a Tag entity list sorted and filtered
      */
-    async listTagsRaw(requestParameters: ListTagsRequest): Promise<runtime.ApiResponse<TagVmPaginatedResponse>> {
+    async getTagsRaw(requestParameters: GetTagsRequest): Promise<runtime.ApiResponse<TagVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.value !== undefined) {
@@ -225,8 +225,8 @@ export class TagsApi extends runtime.BaseAPI {
      * Returns the Tag list with the specified filters applied
      * Gets a Tag entity list sorted and filtered
      */
-    async listTags(requestParameters: ListTagsRequest): Promise<TagVmPaginatedResponse> {
-        const response = await this.listTagsRaw(requestParameters);
+    async getTags(requestParameters: GetTagsRequest): Promise<TagVmPaginatedResponse> {
+        const response = await this.getTagsRaw(requestParameters);
         return await response.value();
     }
 
@@ -234,9 +234,9 @@ export class TagsApi extends runtime.BaseAPI {
      * Updates a Tag entity with Id of \"id\" to entity \"category\"
      * Updates a Tag entity
      */
-    async updateTagsRaw(requestParameters: UpdateTagsRequest): Promise<runtime.ApiResponse<void>> {
+    async updateTagRaw(requestParameters: UpdateTagRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTags.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTag.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -264,8 +264,8 @@ export class TagsApi extends runtime.BaseAPI {
      * Updates a Tag entity with Id of \"id\" to entity \"category\"
      * Updates a Tag entity
      */
-    async updateTags(requestParameters: UpdateTagsRequest): Promise<void> {
-        await this.updateTagsRaw(requestParameters);
+    async updateTag(requestParameters: UpdateTagRequest): Promise<void> {
+        await this.updateTagRaw(requestParameters);
     }
 
 }
