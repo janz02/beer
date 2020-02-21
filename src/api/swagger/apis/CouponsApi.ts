@@ -48,11 +48,15 @@ export interface ClaimCouponRequest {
     id: number;
 }
 
-export interface CreateCouponsRequest {
+export interface CreateCouponRequest {
     couponDto?: CouponDto;
 }
 
-export interface DeleteCouponsRequest {
+export interface DeleteCouponRequest {
+    id: number;
+}
+
+export interface GetCouponRequest {
     id: number;
 }
 
@@ -64,10 +68,6 @@ export interface GetCouponsRequest {
     pageSize?: number;
     orderBy?: string;
     orderByType?: OrderByType;
-}
-
-export interface GetOneCouponRequest {
-    id: number;
 }
 
 export interface GetWaitingCouponsRequest {
@@ -138,7 +138,7 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns the id of the new Coupon upon success
      * Creates a Coupon entity
      */
-    async createCouponsRaw(requestParameters: CreateCouponsRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createCouponRaw(requestParameters: CreateCouponRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -164,8 +164,8 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns the id of the new Coupon upon success
      * Creates a Coupon entity
      */
-    async createCoupons(requestParameters: CreateCouponsRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createCouponsRaw(requestParameters);
+    async createCoupon(requestParameters: CreateCouponRequest): Promise<Int32EntityCreatedVm> {
+        const response = await this.createCouponRaw(requestParameters);
         return await response.value();
     }
 
@@ -173,9 +173,9 @@ export class CouponsApi extends runtime.BaseAPI {
      * Deletes the Coupon entity with Id of \"id\"
      * Deletes a Coupon entity
      */
-    async deleteCouponsRaw(requestParameters: DeleteCouponsRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCouponRaw(requestParameters: DeleteCouponRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCoupons.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCoupon.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -200,8 +200,44 @@ export class CouponsApi extends runtime.BaseAPI {
      * Deletes the Coupon entity with Id of \"id\"
      * Deletes a Coupon entity
      */
-    async deleteCoupons(requestParameters: DeleteCouponsRequest): Promise<void> {
-        await this.deleteCouponsRaw(requestParameters);
+    async deleteCoupon(requestParameters: DeleteCouponRequest): Promise<void> {
+        await this.deleteCouponRaw(requestParameters);
+    }
+
+    /**
+     * Returns the Coupon with the specified Id upon success
+     * Gets a Coupon entity by Id
+     */
+    async getCouponRaw(requestParameters: GetCouponRequest): Promise<runtime.ApiResponse<CouponVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCoupon.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns the Coupon with the specified Id upon success
+     * Gets a Coupon entity by Id
+     */
+    async getCoupon(requestParameters: GetCouponRequest): Promise<CouponVm> {
+        const response = await this.getCouponRaw(requestParameters);
+        return await response.value();
     }
 
     /**
@@ -261,42 +297,6 @@ export class CouponsApi extends runtime.BaseAPI {
      */
     async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVmPaginatedResponse> {
         const response = await this.getCouponsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Returns the Coupon with the specified Id upon success
-     * Gets a Coupon entity by Id
-     */
-    async getOneCouponRaw(requestParameters: GetOneCouponRequest): Promise<runtime.ApiResponse<CouponVm>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getOneCoupon.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Coupons/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the Coupon with the specified Id upon success
-     * Gets a Coupon entity by Id
-     */
-    async getOneCoupon(requestParameters: GetOneCouponRequest): Promise<CouponVm> {
-        const response = await this.getOneCouponRaw(requestParameters);
         return await response.value();
     }
 

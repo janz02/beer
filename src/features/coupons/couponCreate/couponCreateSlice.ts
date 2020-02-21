@@ -20,7 +20,7 @@ const couponCreateSlice = createSlice({
   name: 'coupon-create',
   initialState,
   reducers: {
-    createCouponsSuccess(state) {
+    createCouponSuccess(state) {
       message.success(i18n.t('coupon-create.create-coupon-success'), 10)
       state.loading = false
       state.error = null
@@ -35,19 +35,19 @@ const couponCreateSlice = createSlice({
   }
 })
 
-export const { createCouponsSuccess, setLoadingStart, setLoadingFailed } = couponCreateSlice.actions
+export const { createCouponSuccess, setLoadingStart, setLoadingFailed } = couponCreateSlice.actions
 
 export default couponCreateSlice.reducer
 
-export const createCoupons = (coupon: Coupon): AppThunk => async dispatch => {
+export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const tags = await api.tags.listTags({})
+    const tags = await api.tags.getTags({})
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const tagId = (tags && tags.result && tags.result[0].id!) || 0
 
-    await api.coupons.createCoupons({
+    await api.coupons.createCoupon({
       couponDto: {
         ...coupon,
         startDate: coupon.startDate && coupon.startDate.toDate(),
@@ -60,7 +60,7 @@ export const createCoupons = (coupon: Coupon): AppThunk => async dispatch => {
       }
     })
 
-    dispatch(createCouponsSuccess())
+    dispatch(createCouponSuccess())
     history.push('/coupons')
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))

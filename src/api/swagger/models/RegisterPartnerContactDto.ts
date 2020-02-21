@@ -16,67 +16,60 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface RegisterPartnerDto
+ * @interface RegisterPartnerContactDto
  */
-export interface RegisterPartnerDto {
+export interface RegisterPartnerContactDto {
     /**
      * 
      * @type {string}
-     * @memberof RegisterPartnerDto
+     * @memberof RegisterPartnerContactDto
+     */
+    fullName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof RegisterPartnerContactDto
      */
     email?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof RegisterPartnerDto
+     * @memberof RegisterPartnerContactDto
      */
     password?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof RegisterPartnerDto
+     * @memberof RegisterPartnerContactDto
      */
-    partnerName?: string | null;
+    phone?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof RegisterPartnerDto
-     */
-    fullName?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RegisterPartnerDto
-     */
-    phone?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof RegisterPartnerDto
+     * @memberof RegisterPartnerContactDto
      */
     code?: string | null;
 }
 
-export function RegisterPartnerDtoFromJSON(json: any): RegisterPartnerDto {
-    return RegisterPartnerDtoFromJSONTyped(json, false);
+export function RegisterPartnerContactDtoFromJSON(json: any): RegisterPartnerContactDto {
+    return RegisterPartnerContactDtoFromJSONTyped(json, false);
 }
 
-export function RegisterPartnerDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegisterPartnerDto {
+export function RegisterPartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegisterPartnerContactDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
+        'fullName': !exists(json, 'fullName') ? undefined : json['fullName'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'password': !exists(json, 'password') ? undefined : json['password'],
-        'partnerName': !exists(json, 'partnerName') ? undefined : json['partnerName'],
-        'fullName': !exists(json, 'fullName') ? undefined : json['fullName'],
         'phone': !exists(json, 'phone') ? undefined : json['phone'],
         'code': !exists(json, 'code') ? undefined : json['code'],
     };
 }
 
-export function RegisterPartnerDtoToJSON(value?: RegisterPartnerDto | null): any {
+export function RegisterPartnerContactDtoToJSON(value?: RegisterPartnerContactDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -85,10 +78,9 @@ export function RegisterPartnerDtoToJSON(value?: RegisterPartnerDto | null): any
     }
     return {
         
+        'fullName': value.fullName,
         'email': value.email,
         'password': value.password,
-        'partnerName': value.partnerName,
-        'fullName': value.fullName,
         'phone': value.phone,
         'code': value.code,
     };

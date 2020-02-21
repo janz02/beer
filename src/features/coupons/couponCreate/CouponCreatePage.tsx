@@ -1,8 +1,8 @@
 import React from 'react'
 import { CouponEditorForm } from 'features/coupons/components/CouponEditorForm'
 import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'hooks/react-redux-hooks';
-import { createCoupons } from './couponCreateSlice'
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
+import { createCoupon } from './couponCreateSlice'
 import { Coupon } from 'models/coupon'
 
 export const CouponCreatePage: React.FC = () => {
@@ -10,7 +10,7 @@ export const CouponCreatePage: React.FC = () => {
   const { loading } = useSelector((state: RootState) => state.couponCreate)
 
   const handleCouponSave = (coupon: Coupon): void => {
-    dispatch(createCoupons(coupon))
+    dispatch(createCoupon(coupon))
   }
 
   const props = {

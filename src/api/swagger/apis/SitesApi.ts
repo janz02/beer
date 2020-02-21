@@ -32,19 +32,19 @@ import {
     SiteVmPaginatedResponseToJSON,
 } from '../models';
 
-export interface CreateSitesRequest {
+export interface CreateSiteRequest {
     siteDto?: SiteDto;
 }
 
-export interface DeleteSitesRequest {
+export interface DeleteSiteRequest {
+    id: number;
+}
+
+export interface GetSiteRequest {
     id: number;
 }
 
 export interface GetSitesRequest {
-    id: number;
-}
-
-export interface ListSitesRequest {
     name?: string;
     address?: string;
     partnerId?: number;
@@ -54,7 +54,7 @@ export interface ListSitesRequest {
     orderByType?: OrderByType;
 }
 
-export interface UpdateSitesRequest {
+export interface UpdateSiteRequest {
     id: number;
     siteDto?: SiteDto;
 }
@@ -68,7 +68,7 @@ export class SitesApi extends runtime.BaseAPI {
      * Returns the id of the entity upon success
      * Creates an entity
      */
-    async createSitesRaw(requestParameters: CreateSitesRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createSiteRaw(requestParameters: CreateSiteRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -94,8 +94,8 @@ export class SitesApi extends runtime.BaseAPI {
      * Returns the id of the entity upon success
      * Creates an entity
      */
-    async createSites(requestParameters: CreateSitesRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createSitesRaw(requestParameters);
+    async createSite(requestParameters: CreateSiteRequest): Promise<Int32EntityCreatedVm> {
+        const response = await this.createSiteRaw(requestParameters);
         return await response.value();
     }
 
@@ -103,9 +103,9 @@ export class SitesApi extends runtime.BaseAPI {
      * Deletes an entity with Id of \"id\"
      * Deletes an entity
      */
-    async deleteSitesRaw(requestParameters: DeleteSitesRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteSiteRaw(requestParameters: DeleteSiteRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteSites.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteSite.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -130,17 +130,17 @@ export class SitesApi extends runtime.BaseAPI {
      * Deletes an entity with Id of \"id\"
      * Deletes an entity
      */
-    async deleteSites(requestParameters: DeleteSitesRequest): Promise<void> {
-        await this.deleteSitesRaw(requestParameters);
+    async deleteSite(requestParameters: DeleteSiteRequest): Promise<void> {
+        await this.deleteSiteRaw(requestParameters);
     }
 
     /**
      * Returns the entity with the specified Id upon success
      * Gets an entity by Id
      */
-    async getSitesRaw(requestParameters: GetSitesRequest): Promise<runtime.ApiResponse<SiteVm>> {
+    async getSiteRaw(requestParameters: GetSiteRequest): Promise<runtime.ApiResponse<SiteVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSites.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSite.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -165,8 +165,8 @@ export class SitesApi extends runtime.BaseAPI {
      * Returns the entity with the specified Id upon success
      * Gets an entity by Id
      */
-    async getSites(requestParameters: GetSitesRequest): Promise<SiteVm> {
-        const response = await this.getSitesRaw(requestParameters);
+    async getSite(requestParameters: GetSiteRequest): Promise<SiteVm> {
+        const response = await this.getSiteRaw(requestParameters);
         return await response.value();
     }
 
@@ -174,7 +174,7 @@ export class SitesApi extends runtime.BaseAPI {
      * Returns the entity list with the specified filters applied
      * Gets an entity list sorted and filtered
      */
-    async listSitesRaw(requestParameters: ListSitesRequest): Promise<runtime.ApiResponse<SiteVmPaginatedResponse>> {
+    async getSitesRaw(requestParameters: GetSitesRequest): Promise<runtime.ApiResponse<SiteVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -225,8 +225,8 @@ export class SitesApi extends runtime.BaseAPI {
      * Returns the entity list with the specified filters applied
      * Gets an entity list sorted and filtered
      */
-    async listSites(requestParameters: ListSitesRequest): Promise<SiteVmPaginatedResponse> {
-        const response = await this.listSitesRaw(requestParameters);
+    async getSites(requestParameters: GetSitesRequest): Promise<SiteVmPaginatedResponse> {
+        const response = await this.getSitesRaw(requestParameters);
         return await response.value();
     }
 
@@ -234,9 +234,9 @@ export class SitesApi extends runtime.BaseAPI {
      * Updates an entity with Id of \"id\" to entity \"dto\"
      * Updates an entity
      */
-    async updateSitesRaw(requestParameters: UpdateSitesRequest): Promise<runtime.ApiResponse<void>> {
+    async updateSiteRaw(requestParameters: UpdateSiteRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateSites.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateSite.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -264,8 +264,8 @@ export class SitesApi extends runtime.BaseAPI {
      * Updates an entity with Id of \"id\" to entity \"dto\"
      * Updates an entity
      */
-    async updateSites(requestParameters: UpdateSitesRequest): Promise<void> {
-        await this.updateSitesRaw(requestParameters);
+    async updateSite(requestParameters: UpdateSiteRequest): Promise<void> {
+        await this.updateSiteRaw(requestParameters);
     }
 
 }

@@ -72,11 +72,11 @@ export const {
 
 export default couponEditorSlice.reducer
 
-export const getOneCoupon = (id: number): AppThunk => async dispatch => {
+export const getCoupon = (id: number): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const coupon = await api.coupons.getOneCoupon({ id: id })
+    const coupon = await api.coupons.getCoupon({ id })
     dispatch(
       getCouponsSuccess({
         ...coupon,
@@ -94,7 +94,7 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const tags = await api.tags.listTags({})
+    const tags = await api.tags.getTags({})
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const tagId = (tags && tags.result && tags.result[0].id!) || 0
 
@@ -131,7 +131,7 @@ export const updateCouponStatus = (
     })
 
     dispatch(updateCouponStatusSuccess())
-    dispatch(getOneCoupon(id))
+    dispatch(getCoupon(id))
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }
@@ -149,14 +149,14 @@ export const getCouponComments = (couponId: number): AppThunk => async dispatch 
   }
 }
 
-export const deleteCouponComments = (
+export const deleteCouponComment = (
   couponId: number,
   commentId: number
 ): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    await api.couponComments.deleteCouponComments({
+    await api.couponComments.deleteCouponComment({
       commentId,
       couponId
     })

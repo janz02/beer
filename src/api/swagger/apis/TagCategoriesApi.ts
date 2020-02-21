@@ -32,19 +32,15 @@ import {
     TagCategoryVmPaginatedResponseToJSON,
 } from '../models';
 
-export interface CreateTagCategoriesRequest {
+export interface CreateTagCategoryRequest {
     tagCategoryDto?: TagCategoryDto;
 }
 
-export interface DeleteTagCategoriesRequest {
+export interface DeleteTagCategoryRequest {
     id: number;
 }
 
 export interface GetTagCategoriesRequest {
-    id: number;
-}
-
-export interface ListTagCategoriesRequest {
     name?: string;
     page?: number;
     pageSize?: number;
@@ -52,7 +48,11 @@ export interface ListTagCategoriesRequest {
     orderByType?: OrderByType;
 }
 
-export interface UpdateTagCategoriesRequest {
+export interface GetTagCategoryRequest {
+    id: number;
+}
+
+export interface UpdateTagCategoryRequest {
     id: number;
     tagCategoryDto?: TagCategoryDto;
 }
@@ -66,7 +66,7 @@ export class TagCategoriesApi extends runtime.BaseAPI {
      * Returns the id of the TagCategory upon success
      * Creates a TagCategory entity
      */
-    async createTagCategoriesRaw(requestParameters: CreateTagCategoriesRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createTagCategoryRaw(requestParameters: CreateTagCategoryRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -92,8 +92,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
      * Returns the id of the TagCategory upon success
      * Creates a TagCategory entity
      */
-    async createTagCategories(requestParameters: CreateTagCategoriesRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createTagCategoriesRaw(requestParameters);
+    async createTagCategory(requestParameters: CreateTagCategoryRequest): Promise<Int32EntityCreatedVm> {
+        const response = await this.createTagCategoryRaw(requestParameters);
         return await response.value();
     }
 
@@ -101,9 +101,9 @@ export class TagCategoriesApi extends runtime.BaseAPI {
      * Deletes the TagCategory entity with Id of \"id\"
      * Deletes a TagCategory entity
      */
-    async deleteTagCategoriesRaw(requestParameters: DeleteTagCategoriesRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteTagCategoryRaw(requestParameters: DeleteTagCategoryRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTagCategories.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTagCategory.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -128,51 +128,15 @@ export class TagCategoriesApi extends runtime.BaseAPI {
      * Deletes the TagCategory entity with Id of \"id\"
      * Deletes a TagCategory entity
      */
-    async deleteTagCategories(requestParameters: DeleteTagCategoriesRequest): Promise<void> {
-        await this.deleteTagCategoriesRaw(requestParameters);
-    }
-
-    /**
-     * Returns the TagCategory with the specified Id upon success
-     * Gets a TagCategory entity by Id
-     */
-    async getTagCategoriesRaw(requestParameters: GetTagCategoriesRequest): Promise<runtime.ApiResponse<TagCategoryVm>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTagCategories.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/TagCategories/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => TagCategoryVmFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the TagCategory with the specified Id upon success
-     * Gets a TagCategory entity by Id
-     */
-    async getTagCategories(requestParameters: GetTagCategoriesRequest): Promise<TagCategoryVm> {
-        const response = await this.getTagCategoriesRaw(requestParameters);
-        return await response.value();
+    async deleteTagCategory(requestParameters: DeleteTagCategoryRequest): Promise<void> {
+        await this.deleteTagCategoryRaw(requestParameters);
     }
 
     /**
      * Returns the TagCategory list with the specified filters applied
      * Gets a TagCategory entity list sorted and filtered
      */
-    async listTagCategoriesRaw(requestParameters: ListTagCategoriesRequest): Promise<runtime.ApiResponse<TagCategoryVmPaginatedResponse>> {
+    async getTagCategoriesRaw(requestParameters: GetTagCategoriesRequest): Promise<runtime.ApiResponse<TagCategoryVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -215,8 +179,44 @@ export class TagCategoriesApi extends runtime.BaseAPI {
      * Returns the TagCategory list with the specified filters applied
      * Gets a TagCategory entity list sorted and filtered
      */
-    async listTagCategories(requestParameters: ListTagCategoriesRequest): Promise<TagCategoryVmPaginatedResponse> {
-        const response = await this.listTagCategoriesRaw(requestParameters);
+    async getTagCategories(requestParameters: GetTagCategoriesRequest): Promise<TagCategoryVmPaginatedResponse> {
+        const response = await this.getTagCategoriesRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Returns the TagCategory with the specified Id upon success
+     * Gets a TagCategory entity by Id
+     */
+    async getTagCategoryRaw(requestParameters: GetTagCategoryRequest): Promise<runtime.ApiResponse<TagCategoryVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTagCategory.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/TagCategories/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TagCategoryVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns the TagCategory with the specified Id upon success
+     * Gets a TagCategory entity by Id
+     */
+    async getTagCategory(requestParameters: GetTagCategoryRequest): Promise<TagCategoryVm> {
+        const response = await this.getTagCategoryRaw(requestParameters);
         return await response.value();
     }
 
@@ -224,9 +224,9 @@ export class TagCategoriesApi extends runtime.BaseAPI {
      * Updates a TagCategory entity with Id of \"id\" to entity \"category\"
      * Updates a TagCategory entity
      */
-    async updateTagCategoriesRaw(requestParameters: UpdateTagCategoriesRequest): Promise<runtime.ApiResponse<void>> {
+    async updateTagCategoryRaw(requestParameters: UpdateTagCategoryRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTagCategories.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTagCategory.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -254,8 +254,8 @@ export class TagCategoriesApi extends runtime.BaseAPI {
      * Updates a TagCategory entity with Id of \"id\" to entity \"category\"
      * Updates a TagCategory entity
      */
-    async updateTagCategories(requestParameters: UpdateTagCategoriesRequest): Promise<void> {
-        await this.updateTagCategoriesRaw(requestParameters);
+    async updateTagCategory(requestParameters: UpdateTagCategoryRequest): Promise<void> {
+        await this.updateTagCategoryRaw(requestParameters);
     }
 
 }

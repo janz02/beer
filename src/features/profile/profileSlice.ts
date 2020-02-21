@@ -65,7 +65,7 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
   try {
     const userData = getState().auth.userData
     if (userData.roles?.includes(Role.PARTNER)) {
-      const profile = await api.partnerContacts.getPartnerContacts()
+      const profile = await api.partnerContacts.getMyPartnerContact()
       dispatch(getProfileSuccess(profile))
     } else {
       dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
@@ -81,7 +81,7 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
   try {
     const userData = getState().auth.userData
     if (userData.roles?.includes(Role.PARTNER)) {
-      await api.partnerContacts.updatePartnerContacts({
+      await api.partnerContacts.updateMyPartnerContact({
         partnerContactDto: { ...getState().profile.profile, ...profile }
       })
       dispatch(updateProfileSuccess())

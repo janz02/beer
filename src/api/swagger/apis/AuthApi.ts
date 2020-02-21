@@ -18,9 +18,6 @@ import {
     AuthRegistrationFailedException,
     AuthRegistrationFailedExceptionFromJSON,
     AuthRegistrationFailedExceptionToJSON,
-    HttpStatusCode,
-    HttpStatusCodeFromJSON,
-    HttpStatusCodeToJSON,
     LoginDto,
     LoginDtoFromJSON,
     LoginDtoToJSON,
@@ -30,9 +27,9 @@ import {
     RefreshDto,
     RefreshDtoFromJSON,
     RefreshDtoToJSON,
-    RegisterPartnerDto,
-    RegisterPartnerDtoFromJSON,
-    RegisterPartnerDtoToJSON,
+    RegisterPartnerContactDto,
+    RegisterPartnerContactDtoFromJSON,
+    RegisterPartnerContactDtoToJSON,
     RegisterUserDto,
     RegisterUserDtoFromJSON,
     RegisterUserDtoToJSON,
@@ -49,8 +46,8 @@ export interface RefreshRequest {
     refreshDto?: RefreshDto;
 }
 
-export interface RegisterPartnerRequest {
-    registerPartnerDto?: RegisterPartnerDto;
+export interface RegisterPartnerContactRequest {
+    registerPartnerContactDto?: RegisterPartnerContactDto;
 }
 
 export interface RegisterUserRequest {
@@ -136,7 +133,7 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns nothing, but registers a contact for the partner
      * Registers a contact for a partner
      */
-    async registerPartnerRaw(requestParameters: RegisterPartnerRequest): Promise<runtime.ApiResponse<HttpStatusCode>> {
+    async registerPartnerContactRaw(requestParameters: RegisterPartnerContactRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -148,23 +145,22 @@ export class AuthApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Auth/RegisterPartner`,
+            path: `/api/Auth/RegisterPartnerContact`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: RegisterPartnerDtoToJSON(requestParameters.registerPartnerDto),
+            body: RegisterPartnerContactDtoToJSON(requestParameters.registerPartnerContactDto),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => HttpStatusCodeFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      * Returns nothing, but registers a contact for the partner
      * Registers a contact for a partner
      */
-    async registerPartner(requestParameters: RegisterPartnerRequest): Promise<HttpStatusCode> {
-        const response = await this.registerPartnerRaw(requestParameters);
-        return await response.value();
+    async registerPartnerContact(requestParameters: RegisterPartnerContactRequest): Promise<void> {
+        await this.registerPartnerContactRaw(requestParameters);
     }
 
     /**
