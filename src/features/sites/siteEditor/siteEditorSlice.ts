@@ -104,18 +104,23 @@ export const getSite = (id: number): AppThunk => async dispatch => {
 export const saveSite = (site: Site, id: number): AppThunk => async dispatch => {
   dispatch(saveSiteRequest())
   try {
+    // TODO: integrate, remove partner get because it will be on the JWT.
+    const partner = await api.partner.getMyPartner()
+
     if (id > 0) {
       await api.sites.updateSites({
         id,
         siteDto: {
-          ...site
+          ...site,
+          partnerId: partner.id
         }
       })
       dispatch(getSite(id))
     } else {
       const newId = await api.sites.createSites({
         siteDto: {
-          ...site
+          ...site,
+          partnerId: partner.id
         }
       })
       newId.id && dispatch(getSite(newId.id))
