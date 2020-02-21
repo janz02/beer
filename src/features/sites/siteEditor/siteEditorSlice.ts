@@ -12,19 +12,26 @@ import { ListApiKeyRequest } from 'api/swagger'
 interface SiteEditorState {
   site?: Site
   siteApiKeys?: SiteApiKey[]
+  generatedApiKey?: string
+  addNewApiKeyPopupVisible: boolean
+  copyApiKeyPopupVisible: boolean
   pagination: Pagination
   loadingData: boolean
   loadingSave: boolean
+  loadingApiKeyCreate: boolean
   error: string
 }
 
 const initialState: SiteEditorState = {
   siteApiKeys: [],
+  addNewApiKeyPopupVisible: false,
+  copyApiKeyPopupVisible: false,
   pagination: {
     pageSize: 10
   },
   loadingData: false,
   loadingSave: false,
+  loadingApiKeyCreate: false,
   error: ''
 }
 
@@ -32,6 +39,13 @@ const siteEditorSlice = createSlice({
   name: '@site-editor',
   initialState,
   reducers: {
+    setAddNewApiKeyPopupVisible(state, action: PayloadAction<boolean>) {
+      state.addNewApiKeyPopupVisible = action.payload
+    },
+    closeApiKeyPopup(state) {
+      state.copyApiKeyPopupVisible = false
+      state.generatedApiKey = ''
+    },
     resetSiteEditor(state) {
       state.site = undefined
       state.loadingData = false
@@ -77,6 +91,20 @@ const siteEditorSlice = createSlice({
     saveSiteFail(state, action: PayloadAction<string>) {
       state.loadingSave = false
       state.error = action.payload
+    },
+    createApiKeyRequest(state) {
+      state.loadingApiKeyCreate = true
+    },
+    createApiKeySuccess(state, action: PayloadAction<string>) {
+      state.generatedApiKey = action.payload
+      state.loadingApiKeyCreate = false
+      state.addNewApiKeyPopupVisible = false
+      state.copyApiKeyPopupVisible = true
+      state.error = ''
+    },
+    createApiKeyFail(state, action: PayloadAction<string>) {
+      state.loadingApiKeyCreate = false
+      state.error = action.payload
     }
   }
 })
@@ -84,8 +112,13 @@ const siteEditorSlice = createSlice({
 const { getSiteRequest, getSiteSuccess, getSiteFail } = siteEditorSlice.actions
 const { saveSiteRequest, saveSiteSuccess, saveSiteFail } = siteEditorSlice.actions
 const { listApiKeyRequest, listApiKeySuccess, listApiKeyFail } = siteEditorSlice.actions
+const { createApiKeyRequest, createApiKeySuccess, createApiKeyFail } = siteEditorSlice.actions
 
-export const { resetSiteEditor } = siteEditorSlice.actions
+export const {
+  resetSiteEditor,
+  setAddNewApiKeyPopupVisible,
+  closeApiKeyPopup
+} = siteEditorSlice.actions
 
 export default siteEditorSlice.reducer
 
@@ -164,5 +197,18 @@ export const listApiKey = (params: ListApiKeyRequest = {}): AppThunk => async (
     )
   } catch (err) {
     dispatch(listApiKeyFail(err.toString()))
+  }
+}
+
+export const createApiKey = (name: string): AppThunk => async (dispatch, getState) => {
+  dispatch(createApiKeyRequest())
+
+  try {
+    const response = await api.apiKey.createApiKey({
+      createSiteApiKeyDto: { name, siteId: getState().siteEditor.site?.id }
+    })
+    dispatch(createApiKeySuccess(response.id2 ?? ''))
+  } catch (err) {
+    dispatch(createApiKeyFail(err.toString()))
   }
 }

@@ -2,7 +2,15 @@ import React, { FC, useEffect, useMemo, useState, useRef } from 'react'
 import { SiteEditorForm } from './SiteEditorForm'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSite, resetSiteEditor, saveSite, listApiKey } from './siteEditorSlice'
+import {
+  getSite,
+  resetSiteEditor,
+  saveSite,
+  listApiKey,
+  setAddNewApiKeyPopupVisible,
+  createApiKey,
+  closeApiKeyPopup
+} from './siteEditorSlice'
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
 import { history } from 'router/router'
@@ -19,18 +27,11 @@ import { CopyOutlined } from '@ant-design/icons'
 
 export const SiteEditorPage: FC = () => {
   const { id } = useParams()
-
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const [addNewPopupVisible, setAddNewPopupVisible] = useState(false)
-  const [copyPopupVisible, setCopyPopupVisible] = useState(false)
   const [copyPopoverText, setCopyPopoverText] = useState(t('site.editor.copy-api-key'))
-  const [generatedApiKey, setGeneratedApiKey] = useState('')
-  const site = useSelector((state: RootState) => state.siteEditor.site)
-  const loading = useSelector((state: RootState) => state.siteEditor.loadingSave)
-  const siteApiKeys = useSelector((state: RootState) => state.siteEditor.siteApiKeys)
-  const error = useSelector((state: RootState) => state.siteEditor.error)
+  const siteEditorState = useSelector((state: RootState) => state.siteEditor)
   const inputToCopyRef = useRef(null)
 
   useEffect(
@@ -55,7 +56,7 @@ export const SiteEditorPage: FC = () => {
   }
 
   const headerOptions = (): JSX.Element => (
-    <Button type="primary" onClick={() => setAddNewPopupVisible(true)}>
+    <Button type="primary" onClick={() => dispatch(setAddNewApiKeyPopupVisible(true))}>
       {t('site.editor.add-new-api-key')}
     </Button>
   )
@@ -82,12 +83,12 @@ export const SiteEditorPage: FC = () => {
   return (
     <ResponsivePage>
       <SiteEditorForm
-        loading={loading}
+        loading={siteEditorState.loadingSave}
         onSave={onSave}
         onExit={() => {
           history.push('/sites/')
         }}
-        site={site}
+        site={siteEditorState.site}
         id={+id!}
       />
 
@@ -97,50 +98,45 @@ export const SiteEditorPage: FC = () => {
           headerOptions={headerOptions}
           tableProps={{
             columns: columns,
-            dataSource: siteApiKeys,
+            dataSource: siteEditorState.siteApiKeys,
             rowKey: (x): string => x.id?.toString() ?? ''
           }}
-          error={error}
+          error={siteEditorState.error}
         />
       </ResponsiveCard>
 
       <Modal
         title={t('site.editor.add-new-api-key-title')}
-        visible={addNewPopupVisible}
+        visible={siteEditorState.addNewApiKeyPopupVisible}
         onCancel={() => {
-          setAddNewPopupVisible(false)
+          dispatch(setAddNewApiKeyPopupVisible(false))
         }}
         footer={null}
         destroyOnClose
       >
         <ApiKeyEditorForm
-          loading={loading}
-          onSave={siteApiKey => {
-            // TODO: integrate.
-            console.log(siteApiKey)
-            setAddNewPopupVisible(false)
-            setGeneratedApiKey('wfwesvsdggawegwegwq')
-            setCopyPopupVisible(true)
+          loading={siteEditorState.loadingApiKeyCreate}
+          onSave={name => {
+            dispatch(createApiKey(name))
           }}
           onCancel={() => {
-            setAddNewPopupVisible(false)
+            dispatch(setAddNewApiKeyPopupVisible(false))
           }}
         />
       </Modal>
 
       <Modal
         title={t('site.editor.copy-api-key-title')}
-        visible={copyPopupVisible}
+        visible={siteEditorState.copyApiKeyPopupVisible}
         onCancel={() => {
-          setCopyPopupVisible(false)
-          setGeneratedApiKey('')
+          dispatch(closeApiKeyPopup())
         }}
         footer={null}
         destroyOnClose
       >
         <Form name="copy-api-key-form" layout="inline">
           <Form.Item>
-            <Input defaultValue={generatedApiKey} readOnly ref={inputToCopyRef} />
+            <Input defaultValue={siteEditorState.generatedApiKey} readOnly ref={inputToCopyRef} />
           </Form.Item>
           <Form.Item>
             <Popover content={copyPopoverText} trigger="hover">
