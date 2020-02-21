@@ -117,7 +117,6 @@ export const SitesListPage: FC = () => {
         onOkAction={deleteSite(siteToDelete?.site?.id!)}
         afterClose={() => setSiteToDelete(null)}
       >
-        <p>{t(`common.popup.delete-text`)}</p>
         <h4>{siteToDelete?.site?.name}</h4>
         <p>{siteToDelete?.site?.address}</p>
       </GenericPopup>

@@ -2,7 +2,15 @@ import React, { FC, useEffect, useMemo, useState, useRef } from 'react'
 import { SiteEditorForm } from './SiteEditorForm'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSite, resetSiteEditor, saveSite, getSiteApiKeys } from './siteEditorSlice'
+import {
+  getSiteEditorData,
+  resetSiteEditor,
+  saveSite,
+  setAddNewApiKeyPopupVisible,
+  createApiKey,
+  closeApiKeyPopup,
+  deleteApiKey
+} from './siteEditorSlice'
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
 import { history } from 'router/router'
@@ -12,25 +20,25 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { Button, Modal, Form, Input, Popover } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { SiteApiKey } from 'models/siteApiKey'
-import { ColumnType } from 'antd/lib/table'
+import { ColumnType, TablePaginationConfig } from 'antd/lib/table'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { ApiKeyEditorForm } from './ApiKeyEditorForm'
 import { CopyOutlined } from '@ant-design/icons'
+import { basePaginationConfig, projectPage } from 'models/pagination'
+import { useIsMobile } from 'hooks'
+import { CrudButtons } from 'components/buttons/CrudButtons'
+import { GenericPopup } from 'components/popups/GenericPopup'
 
 export const SiteEditorPage: FC = () => {
   const { id } = useParams()
-
+  const isMobile = useIsMobile()
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const [addNewPopupVisible, setAddNewPopupVisible] = useState(false)
-  const [copyPopupVisible, setCopyPopupVisible] = useState(false)
   const [copyPopoverText, setCopyPopoverText] = useState(t('site.editor.copy-api-key'))
-  const [generatedApiKey, setGeneratedApiKey] = useState('')
-  const site = useSelector((state: RootState) => state.siteEditor.site)
-  const loading = useSelector((state: RootState) => state.siteEditor.loadingSave)
-  const siteApiKeys = useSelector((state: RootState) => state.siteEditor.siteApiKeys)
-  const error = useSelector((state: RootState) => state.siteEditor.error)
+  const [apiKeyToDelete, setApiKeyToDelete] = useState<SiteApiKey | null>(null)
+  const [apiKeyDeletePopupVisible, setApiKeyDeletePopupVisible] = useState(false)
+  const siteEditorState = useSelector((state: RootState) => state.siteEditor)
   const inputToCopyRef = useRef(null)
 
   useEffect(
@@ -41,12 +49,8 @@ export const SiteEditorPage: FC = () => {
   )
 
   useEffect(() => {
-    dispatch(getSiteApiKeys())
-  }, [dispatch])
-
-  useEffect(() => {
     if (id && !isNaN(+id)) {
-      dispatch(getSite(+id))
+      dispatch(getSiteEditorData(+id))
     }
   }, [dispatch, id])
 
@@ -55,7 +59,7 @@ export const SiteEditorPage: FC = () => {
   }
 
   const headerOptions = (): JSX.Element => (
-    <Button type="primary" onClick={() => setAddNewPopupVisible(true)}>
+    <Button type="primary" onClick={() => dispatch(setAddNewApiKeyPopupVisible(true))}>
       {t('site.editor.add-new-api-key')}
     </Button>
   )
@@ -74,20 +78,58 @@ export const SiteEditorPage: FC = () => {
         render(value) {
           return <MomentDisplay date={value} />
         }
+      },
+      {
+        key: 'actions',
+        render(siteApiKey: SiteApiKey) {
+          return (
+            <CrudButtons
+              onDelete={() => {
+                setApiKeyToDelete(siteApiKey)
+                setApiKeyDeletePopupVisible(true)
+              }}
+            />
+          )
+        }
       }
     ],
     [t]
   )
 
+  const paginationConfig = useMemo((): TablePaginationConfig | false => {
+    const baseConfig = basePaginationConfig(
+      isMobile,
+      !!siteEditorState.error,
+      siteEditorState.pagination
+    )
+    return baseConfig.total
+      ? {
+          ...baseConfig,
+          onShowSizeChange: (current, size) => {
+            id &&
+              dispatch(
+                getSiteEditorData(+id, {
+                  page: projectPage(size, siteEditorState.pagination),
+                  pageSize: size
+                })
+              )
+          },
+          onChange: page => {
+            id && dispatch(getSiteEditorData(+id, { page }))
+          }
+        }
+      : false
+  }, [dispatch, id, isMobile, siteEditorState.error, siteEditorState.pagination])
+
   return (
     <ResponsivePage>
       <SiteEditorForm
-        loading={loading}
+        loading={siteEditorState.loadingSave}
         onSave={onSave}
         onExit={() => {
           history.push('/sites/')
         }}
-        site={site}
+        site={siteEditorState.site}
         id={+id!}
       />
 
@@ -97,50 +139,46 @@ export const SiteEditorPage: FC = () => {
           headerOptions={headerOptions}
           tableProps={{
             columns: columns,
-            dataSource: siteApiKeys,
-            rowKey: (x): string => x.id?.toString() ?? ''
+            dataSource: siteEditorState.siteApiKeys,
+            rowKey: (x): string => x.id?.toString() ?? '',
+            pagination: paginationConfig
           }}
-          error={error}
+          error={siteEditorState.error}
         />
       </ResponsiveCard>
 
       <Modal
         title={t('site.editor.add-new-api-key-title')}
-        visible={addNewPopupVisible}
+        visible={siteEditorState.addNewApiKeyPopupVisible}
         onCancel={() => {
-          setAddNewPopupVisible(false)
+          dispatch(setAddNewApiKeyPopupVisible(false))
         }}
         footer={null}
         destroyOnClose
       >
         <ApiKeyEditorForm
-          loading={loading}
-          onSave={siteApiKey => {
-            // TODO: integrate.
-            console.log(siteApiKey)
-            setAddNewPopupVisible(false)
-            setGeneratedApiKey('wfwesvsdggawegwegwq')
-            setCopyPopupVisible(true)
+          loading={siteEditorState.loadingApiKeyCreate}
+          onSave={name => {
+            dispatch(createApiKey(name))
           }}
           onCancel={() => {
-            setAddNewPopupVisible(false)
+            dispatch(setAddNewApiKeyPopupVisible(false))
           }}
         />
       </Modal>
 
       <Modal
         title={t('site.editor.copy-api-key-title')}
-        visible={copyPopupVisible}
+        visible={siteEditorState.copyApiKeyPopupVisible}
         onCancel={() => {
-          setCopyPopupVisible(false)
-          setGeneratedApiKey('')
+          dispatch(closeApiKeyPopup())
         }}
         footer={null}
         destroyOnClose
       >
         <Form name="copy-api-key-form" layout="inline">
           <Form.Item>
-            <Input defaultValue={generatedApiKey} readOnly ref={inputToCopyRef} />
+            <Input defaultValue={siteEditorState.generatedApiKey} readOnly ref={inputToCopyRef} />
           </Form.Item>
           <Form.Item>
             <Popover content={copyPopoverText} trigger="hover">
@@ -159,6 +197,26 @@ export const SiteEditorPage: FC = () => {
           </Form.Item>
         </Form>
       </Modal>
+
+      <GenericPopup
+        type="delete"
+        id={apiKeyToDelete?.id}
+        visible={apiKeyDeletePopupVisible}
+        onCancel={() => {
+          setApiKeyToDelete(null)
+          setApiKeyDeletePopupVisible(false)
+        }}
+        onOkAction={() => {
+          apiKeyToDelete && apiKeyToDelete.id && dispatch(deleteApiKey(apiKeyToDelete.id))
+          setApiKeyDeletePopupVisible(false)
+        }}
+        afterClose={() => {
+          setApiKeyToDelete(null)
+          setApiKeyDeletePopupVisible(false)
+        }}
+      >
+        <h4>{apiKeyToDelete?.name}</h4>
+      </GenericPopup>
     </ResponsivePage>
   )
 }

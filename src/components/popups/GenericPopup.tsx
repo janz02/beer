@@ -49,16 +49,21 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
   }, [id])
 
   const okButtonProps: NativeButtonProps = { loading }
+  let title = ''
   if (type === 'delete') {
     okButtonProps.danger = true
     okButtonProps.icon = <DeleteFilled />
+    title = t(`common.popup.delete-title`)
   } else if (type === 'discard') {
     okButtonProps.danger = true
     okButtonProps.icon = <CloseOutlined />
+    title = t(`common.popup.discard-title`)
   } else if (type === 'save') {
     okButtonProps.icon = <SaveFilled />
+    title = t(`common.popup.save-title`)
   } else if (type === 'confirm') {
     okButtonProps.icon = <CheckOutlined />
+    title = t(`common.popup.confirm-title`)
   }
 
   const handleOk = async (e: React.MouseEvent<HTMLElement>): Promise<void> => {
@@ -80,7 +85,7 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
   return (
     <Modal
       className="generic-popup"
-      title={t(`common.popup.${type}-title`)}
+      title={title}
       okText={t(`common.${type}`)}
       cancelText={t(`common.cancel`)}
       onOk={handleOk}

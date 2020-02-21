@@ -2,10 +2,9 @@ import React, { FC, useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { useTranslation } from 'react-i18next'
-import { SiteApiKey } from 'models/siteApiKey'
 
 export interface ApiKeyEditorFormProps {
-  onSave: (siteApiKey: SiteApiKey) => void
+  onSave: (name: string) => void
   onCancel: () => void
   loading: boolean
 }
@@ -18,8 +17,8 @@ export const ApiKeyEditorForm: FC<ApiKeyEditorFormProps> = props => {
   const [submitable, setSubmitable] = useState(false)
   const rule = useCommonFormRules()
 
-  const onSubmit = (values: SiteApiKey): void => {
-    onSave({ ...values })
+  const onSubmit = (values: any): void => {
+    onSave(values.name)
     setSubmitable(false)
   }
 

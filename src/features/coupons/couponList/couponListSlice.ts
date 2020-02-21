@@ -67,17 +67,15 @@ export const getWaitingCoupons = (
       page: listingOptions.current
     })
 
-    const coupons = response.result
-      ? response.result.map(
-          x =>
-            ({
-              ...x,
-              startDate: moment(x.startDate),
-              endDate: moment(x.endDate),
-              expireDate: moment(x.expireDate)
-            } as Coupon)
-        )
-      : undefined
+    const coupons = response.result?.map(
+      x =>
+        ({
+          ...x,
+          startDate: moment(x.startDate),
+          endDate: moment(x.endDate),
+          expireDate: moment(x.expireDate)
+        } as Coupon)
+    )
 
     dispatch(
       listCouponsSuccess({

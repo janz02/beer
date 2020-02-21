@@ -35,12 +35,17 @@
     "edit": "Edit",
     "go-back": "Go back",
     "message": {
+      "delete-success": "Successful deleting",
       "save-success": "Successful saving"
     },
     "ok": "OK",
     "password-format-help": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space.",
     "popup": {
-      "delete-text": "Are you sure about deleting this data?"
+      "confirm-title": "Are you sure about doing this?",
+      "delete-text": "Are you sure about deleting this data?",
+      "delete-title": "Are you sure about deleting this data?",
+      "discard-title": "Are you sure about discarding this?",
+      "save-title": "Are you sure about saving this data?"
     },
     "rule-error": {
       "field-number": "This field must be a number.",
