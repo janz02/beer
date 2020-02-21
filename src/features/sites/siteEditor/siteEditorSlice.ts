@@ -7,7 +7,7 @@ import i18n from 'app/i18n'
 import { SiteApiKey } from 'models/siteApiKey'
 import moment from 'moment'
 import { Pagination, calculatePagination } from 'models/pagination'
-import { ListApiKeyRequest } from 'api/swagger'
+import { GetApiKeysRequest } from 'api/swagger'
 
 interface SiteEditorState {
   site?: Site
@@ -164,7 +164,7 @@ export const saveSite = (site: Site, id: number): AppThunk => async dispatch => 
   }
 }
 
-export const listApiKey = (params: ListApiKeyRequest = {}): AppThunk => async (
+export const listApiKey = (params: GetApiKeysRequest = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
@@ -174,7 +174,7 @@ export const listApiKey = (params: ListApiKeyRequest = {}): AppThunk => async (
     const oldPagination = getState().siteList.pagination
     const pagination = calculatePagination(params, oldPagination)
 
-    const response = await api.apiKey.listApiKey({
+    const response = await api.apiKey.getApiKeys({
       pageSize: pagination.pageSize,
       page: pagination.page
     })

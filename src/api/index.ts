@@ -1,4 +1,3 @@
-import { ApiKeyApi } from './swagger/apis/ApiKeyApi'
 import { Configuration } from './swagger/runtime'
 import {
   CouponsApi,
@@ -8,7 +7,8 @@ import {
   PartnersApi,
   TagsApi,
   CouponCommentsApi,
-  PartnerContactsApi
+  PartnerContactsApi,
+  ApiKeysApi
 } from './swagger/apis'
 import { notification } from 'antd'
 import i18n from 'app/i18n'
@@ -67,5 +67,5 @@ export const api = {
   sites: new SitesApi(config),
   partner: new PartnersApi(config),
   partnerContacts: new PartnerContactsApi(config),
-  apiKey: new ApiKeyApi(config)
+  apiKey: new ApiKeysApi(config)
 }
