@@ -23,7 +23,7 @@ import {
     CouponCommentVmToJSON,
 } from '../models';
 
-export interface CreateCouponCommentsRequest {
+export interface AddCouponCommentsRequest {
     couponId: number;
     couponCommentDto?: CouponCommentDto;
 }
@@ -46,9 +46,9 @@ export class CouponCommentsApi extends runtime.BaseAPI {
      * Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"
      * Adds a comment to a coupon
      */
-    async createCouponCommentsRaw(requestParameters: CreateCouponCommentsRequest): Promise<runtime.ApiResponse<void>> {
+    async addCouponCommentsRaw(requestParameters: AddCouponCommentsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
-            throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling createCouponComments.');
+            throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling addCouponComments.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -76,8 +76,8 @@ export class CouponCommentsApi extends runtime.BaseAPI {
      * Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"
      * Adds a comment to a coupon
      */
-    async createCouponComments(requestParameters: CreateCouponCommentsRequest): Promise<void> {
-        await this.createCouponCommentsRaw(requestParameters);
+    async addCouponComments(requestParameters: AddCouponCommentsRequest): Promise<void> {
+        await this.addCouponCommentsRaw(requestParameters);
     }
 
     /**

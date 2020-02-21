@@ -56,7 +56,9 @@ export const {
 
 export default couponListSlice.reducer
 
-export const getCoupons = (listingOptions: CouponListingOptions): AppThunk => async dispatch => {
+export const getWaitingCoupons = (
+  listingOptions: CouponListingOptions
+): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {

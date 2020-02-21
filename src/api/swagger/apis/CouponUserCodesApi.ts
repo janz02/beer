@@ -36,7 +36,7 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
      * Archives every couponcode in the database
      * Archives all couponcodes
      */
-    async archiveCouponUserCodesRaw(): Promise<runtime.ApiResponse<void>> {
+    async archiveClaimedCouponsRaw(): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -59,8 +59,8 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
      * Archives every couponcode in the database
      * Archives all couponcodes
      */
-    async archiveCouponUserCodes(): Promise<void> {
-        await this.archiveCouponUserCodesRaw();
+    async archiveClaimedCoupons(): Promise<void> {
+        await this.archiveClaimedCouponsRaw();
     }
 
     /**

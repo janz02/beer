@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { history } from 'router/router'
-import { LoginRequest, RegisterPartnerRequest } from 'api/swagger/apis'
+import { LoginRequest, RegisterPartnerContactRequest } from 'api/swagger/apis'
 import { UserVm } from 'api/swagger'
 import { getJwtUserdata } from 'services/jwt-reader'
 import { api } from 'api'
@@ -124,30 +124,23 @@ export const recoverPassword = (params: any): AppThunk => async dispatch => {
   }
 }
 
-// TODO: integration, use proper typing instead of any.
 export const signUp = (params: any): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
-  const requestRequest: RegisterPartnerRequest = {
-    registerPartnerDto: {
+  const requestRequest: RegisterPartnerContactRequest = {
+    registerPartnerContactDto: {
       email: params.username,
       password: params.password,
-      // TODO: integration, remove partnerName field.
-      partnerName: 'remove',
       fullName: params.name,
-      // TODO: integration, move number conversion to component.
-      phone: +params.phone,
+      phone: params.phone,
       code: params.code
     }
   }
 
   try {
-    // Register
-    await api.auth.registerPartner(requestRequest)
+    await api.auth.registerPartnerContact(requestRequest)
 
     dispatch(signupSuccess())
-
-    // Login after it
     dispatch(login(params))
   } catch (err) {
     dispatch(signupFail(err.toString()))
