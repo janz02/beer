@@ -9,7 +9,8 @@ export default {
     buttons: {
       titles: {
         'pkm-save-template': 'Save template',
-        'pkm-download-as-html': 'Download template file'
+        'pkm-download-as-html': 'Download template file',
+        'pkm-revert-template': 'Revert template'
       }
     }
   }

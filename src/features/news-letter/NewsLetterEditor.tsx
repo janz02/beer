@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef, useCallback, useState } from 'react'
 import './NewsLetterEditor.scss'
 import { useTranslation } from 'react-i18next'
 import locale from './locale/'
@@ -14,32 +14,29 @@ import grapesjsIndexxeddb from 'grapesjs-indexeddb'
 
 enum CMD {
   // used as locale key and cmd string
-  SaveTemplate = 'pkm-save-template'
+  SaveTemplate = 'pkm-save-template',
+  RevertTemplate = 'pkm-revert-template'
 }
 
 export interface NewsLetterEditorProps {
   template?: string
+  handleSave?: (template: string) => void
+  handleRevert?: () => void
 }
 
 export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
+  const { handleSave, handleRevert } = props
   const template = props?.template ?? ''
 
   const { i18n } = useTranslation()
 
   const editor = useRef<any>()
 
-  const saveTemplate = (newTemplate: any): void => {
-    console.log({
-      newTemplate,
-      editor: editor.current,
-      cmd: editor.current.Commands.getAll(),
-      I18n: editor.current.I18n
-    })
-  }
-
   useEffect(() => {
     const storagePrefix = 'gjs-pkm'
     const translations = { en: (locale as any)[i18n.language] }
+
+    console.log('RENDER')
 
     editor.current = grapesjs.init({
       // TODO: consider removing db, giving db id
@@ -72,10 +69,13 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
       }
     })
     editor.current.Commands.add(CMD.SaveTemplate, {
-      run: (editor: any, sender: any) => {
-        const html = editor.getHtml()
-        const css = editor.getCss()
-        saveTemplate({ html, css })
+      run: (editor: any) => {
+        handleSave && handleSave(editor.runCommand('gjs-get-inlined-html'))
+      }
+    })
+    editor.current.Commands.add(CMD.RevertTemplate, {
+      run: () => {
+        handleRevert && handleRevert()
       }
     })
     editor.current.Panels.addButton('options', [
@@ -84,6 +84,13 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
         className: 'fa fa-save',
         command: (editor: any, sender: any) => {
           editor.runCommand(CMD.SaveTemplate)
+        }
+      },
+      {
+        id: CMD.RevertTemplate,
+        className: 'fa fa-history',
+        command: (editor: any, sender: any) => {
+          editor.runCommand(CMD.RevertTemplate)
         }
       },
       {
@@ -108,7 +115,7 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
         }
       }
     ])
-  }, [i18n.language, template])
+  }, [handleRevert, handleSave, i18n.language, template])
 
   useEffect(() => {
     if (editor.current) {
@@ -117,8 +124,10 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
   }, [template, i18n.language])
 
   return (
-    <div className="newsletter-editor-containter">
-      <div id="grapesjs" />
-    </div>
+    <>
+      <div className="newsletter-editor-containter">
+        <div id="grapesjs" />
+      </div>
+    </>
   )
 }

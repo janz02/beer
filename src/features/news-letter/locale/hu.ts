@@ -76,7 +76,8 @@ export default {
         deviceMobile: 'Telefon',
         deviceDesktop: 'Asztali gép',
         'pkm-save-template': 'Sablon mentése',
-        'pkm-download-as-html': 'Sablon fájl letöltése'
+        'pkm-download-as-html': 'Sablon fájl letöltése',
+        'pkm-revert-template': 'Sablon visszaállítása',
       }
     }
   },

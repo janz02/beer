@@ -12,7 +12,7 @@ type PopupType = 'discard' | 'confirm' | 'save' | 'delete'
 
 // TODO: the async actions are not canceled, introduce sagas if needed
 
-interface GenericPopupProps extends ModalProps {
+export interface GenericPopupProps extends ModalProps {
   type: PopupType
 
   /**
