@@ -15,60 +15,58 @@
 
 import * as runtime from '../runtime';
 import {
-    Int32EntityCreatedVm,
-    Int32EntityCreatedVmFromJSON,
-    Int32EntityCreatedVmToJSON,
+    CreateSiteApiKeyDto,
+    CreateSiteApiKeyDtoFromJSON,
+    CreateSiteApiKeyDtoToJSON,
+    Int32StringEntityCreatedCompositeVm,
+    Int32StringEntityCreatedCompositeVmFromJSON,
+    Int32StringEntityCreatedCompositeVmToJSON,
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
-    TagDto,
-    TagDtoFromJSON,
-    TagDtoToJSON,
-    TagVm,
-    TagVmFromJSON,
-    TagVmToJSON,
-    TagVmPaginatedResponse,
-    TagVmPaginatedResponseFromJSON,
-    TagVmPaginatedResponseToJSON,
+    SiteApiKeyVm,
+    SiteApiKeyVmFromJSON,
+    SiteApiKeyVmToJSON,
+    SiteApiKeyVmPaginatedResponse,
+    SiteApiKeyVmPaginatedResponseFromJSON,
+    SiteApiKeyVmPaginatedResponseToJSON,
 } from '../models';
 
-export interface CreateTagRequest {
-    tagDto?: TagDto;
+export interface CreateApiKeyRequest {
+    createSiteApiKeyDto?: CreateSiteApiKeyDto;
 }
 
-export interface DeleteTagRequest {
+export interface DeleteApiKeyRequest {
     id: number;
 }
 
-export interface GetTagRequest {
+export interface GetApiKeyRequest {
     id: number;
 }
 
-export interface GetTagsRequest {
-    value?: string;
-    tagCategory?: string;
-    isActive?: boolean;
+export interface GetApiKeysRequest {
+    siteId?: number;
     page?: number;
     pageSize?: number;
     orderBy?: string;
     orderByType?: OrderByType;
 }
 
-export interface UpdateTagRequest {
+export interface UpdateApiKeyRequest {
     id: number;
-    tagDto?: TagDto;
+    createSiteApiKeyDto?: CreateSiteApiKeyDto;
 }
 
 /**
  * no description
  */
-export class TagsApi extends runtime.BaseAPI {
+export class ApiKeysApi extends runtime.BaseAPI {
 
     /**
-     * Returns the id of the Tag upon success
-     * Creates a Tag entity
+     * Returns the id of the entity upon success
+     * Creates an entity
      */
-    async createTagRaw(requestParameters: CreateTagRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createApiKeyRaw(requestParameters: CreateApiKeyRequest): Promise<runtime.ApiResponse<Int32StringEntityCreatedCompositeVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -80,32 +78,32 @@ export class TagsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Tags`,
+            path: `/api/ApiKeys`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TagDtoToJSON(requestParameters.tagDto),
+            body: CreateSiteApiKeyDtoToJSON(requestParameters.createSiteApiKeyDto),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => Int32EntityCreatedVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => Int32StringEntityCreatedCompositeVmFromJSON(jsonValue));
     }
 
     /**
-     * Returns the id of the Tag upon success
-     * Creates a Tag entity
+     * Returns the id of the entity upon success
+     * Creates an entity
      */
-    async createTag(requestParameters: CreateTagRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createTagRaw(requestParameters);
+    async createApiKey(requestParameters: CreateApiKeyRequest): Promise<Int32StringEntityCreatedCompositeVm> {
+        const response = await this.createApiKeyRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Deletes the Tag entity with Id of \"id\"
-     * Deletes a Tag entity
+     * Deletes an entity with Id of \"id\"
+     * Deletes an entity
      */
-    async deleteTagRaw(requestParameters: DeleteTagRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteApiKeyRaw(requestParameters: DeleteApiKeyRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTag.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteApiKey.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -117,7 +115,7 @@ export class TagsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Tags/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/ApiKeys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -127,20 +125,20 @@ export class TagsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deletes the Tag entity with Id of \"id\"
-     * Deletes a Tag entity
+     * Deletes an entity with Id of \"id\"
+     * Deletes an entity
      */
-    async deleteTag(requestParameters: DeleteTagRequest): Promise<void> {
-        await this.deleteTagRaw(requestParameters);
+    async deleteApiKey(requestParameters: DeleteApiKeyRequest): Promise<void> {
+        await this.deleteApiKeyRaw(requestParameters);
     }
 
     /**
-     * Returns the Tag with the specified Id upon success
-     * Gets a Tag entity by Id
+     * Returns the entity with the specified Id upon success
+     * Gets an entity by Id
      */
-    async getTagRaw(requestParameters: GetTagRequest): Promise<runtime.ApiResponse<TagVm>> {
+    async getApiKeyRaw(requestParameters: GetApiKeyRequest): Promise<runtime.ApiResponse<SiteApiKeyVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTag.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getApiKey.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -152,41 +150,33 @@ export class TagsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Tags/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/ApiKeys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TagVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SiteApiKeyVmFromJSON(jsonValue));
     }
 
     /**
-     * Returns the Tag with the specified Id upon success
-     * Gets a Tag entity by Id
+     * Returns the entity with the specified Id upon success
+     * Gets an entity by Id
      */
-    async getTag(requestParameters: GetTagRequest): Promise<TagVm> {
-        const response = await this.getTagRaw(requestParameters);
+    async getApiKey(requestParameters: GetApiKeyRequest): Promise<SiteApiKeyVm> {
+        const response = await this.getApiKeyRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Returns the Tag list with the specified filters applied
-     * Gets a Tag entity list sorted and filtered
+     * Returns the entity list with the specified filters applied
+     * Gets an entity list sorted and filtered
      */
-    async getTagsRaw(requestParameters: GetTagsRequest): Promise<runtime.ApiResponse<TagVmPaginatedResponse>> {
+    async getApiKeysRaw(requestParameters: GetApiKeysRequest): Promise<runtime.ApiResponse<SiteApiKeyVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters.value !== undefined) {
-            queryParameters['value'] = requestParameters.value;
-        }
-
-        if (requestParameters.tagCategory !== undefined) {
-            queryParameters['tagCategory'] = requestParameters.tagCategory;
-        }
-
-        if (requestParameters.isActive !== undefined) {
-            queryParameters['isActive'] = requestParameters.isActive;
+        if (requestParameters.siteId !== undefined) {
+            queryParameters['siteId'] = requestParameters.siteId;
         }
 
         if (requestParameters.page !== undefined) {
@@ -212,31 +202,31 @@ export class TagsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Tags`,
+            path: `/api/ApiKeys`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TagVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SiteApiKeyVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
-     * Returns the Tag list with the specified filters applied
-     * Gets a Tag entity list sorted and filtered
+     * Returns the entity list with the specified filters applied
+     * Gets an entity list sorted and filtered
      */
-    async getTags(requestParameters: GetTagsRequest): Promise<TagVmPaginatedResponse> {
-        const response = await this.getTagsRaw(requestParameters);
+    async getApiKeys(requestParameters: GetApiKeysRequest): Promise<SiteApiKeyVmPaginatedResponse> {
+        const response = await this.getApiKeysRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Updates a Tag entity with Id of \"id\" to entity \"category\"
-     * Updates a Tag entity
+     * Updates an entity with Id of \"id\" to entity \"dto\"
+     * Updates an entity
      */
-    async updateTagRaw(requestParameters: UpdateTagRequest): Promise<runtime.ApiResponse<void>> {
+    async updateApiKeyRaw(requestParameters: UpdateApiKeyRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTag.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateApiKey.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -250,22 +240,22 @@ export class TagsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Tags/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/ApiKeys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: TagDtoToJSON(requestParameters.tagDto),
+            body: CreateSiteApiKeyDtoToJSON(requestParameters.createSiteApiKeyDto),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * Updates a Tag entity with Id of \"id\" to entity \"category\"
-     * Updates a Tag entity
+     * Updates an entity with Id of \"id\" to entity \"dto\"
+     * Updates an entity
      */
-    async updateTag(requestParameters: UpdateTagRequest): Promise<void> {
-        await this.updateTagRaw(requestParameters);
+    async updateApiKey(requestParameters: UpdateApiKeyRequest): Promise<void> {
+        await this.updateApiKeyRaw(requestParameters);
     }
 
 }

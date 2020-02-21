@@ -16,39 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Int32StringCreateSiteApiKeyVm
+ * @interface Int32StringEntityCreatedCompositeVm
  */
-export interface Int32StringCreateSiteApiKeyVm {
+export interface Int32StringEntityCreatedCompositeVm {
     /**
      * 
      * @type {string}
-     * @memberof Int32StringCreateSiteApiKeyVm
+     * @memberof Int32StringEntityCreatedCompositeVm
      */
-    apiKey?: string | null;
+    id2?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof Int32StringCreateSiteApiKeyVm
+     * @memberof Int32StringEntityCreatedCompositeVm
      */
     id?: number;
 }
 
-export function Int32StringCreateSiteApiKeyVmFromJSON(json: any): Int32StringCreateSiteApiKeyVm {
-    return Int32StringCreateSiteApiKeyVmFromJSONTyped(json, false);
+export function Int32StringEntityCreatedCompositeVmFromJSON(json: any): Int32StringEntityCreatedCompositeVm {
+    return Int32StringEntityCreatedCompositeVmFromJSONTyped(json, false);
 }
 
-export function Int32StringCreateSiteApiKeyVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): Int32StringCreateSiteApiKeyVm {
+export function Int32StringEntityCreatedCompositeVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): Int32StringEntityCreatedCompositeVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'apiKey': !exists(json, 'apiKey') ? undefined : json['apiKey'],
+        'id2': !exists(json, 'id2') ? undefined : json['id2'],
         'id': !exists(json, 'id') ? undefined : json['id'],
     };
 }
 
-export function Int32StringCreateSiteApiKeyVmToJSON(value?: Int32StringCreateSiteApiKeyVm | null): any {
+export function Int32StringEntityCreatedCompositeVmToJSON(value?: Int32StringEntityCreatedCompositeVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,7 +57,7 @@ export function Int32StringCreateSiteApiKeyVmToJSON(value?: Int32StringCreateSit
     }
     return {
         
-        'apiKey': value.apiKey,
+        'id2': value.id2,
         'id': value.id,
     };
 }

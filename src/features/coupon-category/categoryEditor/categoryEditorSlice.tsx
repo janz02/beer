@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
 import { api } from 'api'
-import { GetCategoriesRequest } from 'api/swagger'
+import { GetCategoryRequest } from 'api/swagger'
 import { getCategories } from '../categoryList/categoryListSlice'
 
 interface CouponCategoryEditorState {
@@ -67,10 +67,10 @@ export const {
 
 export default couponCategoryEditorSlice.reducer
 
-export const getCategory = (params: GetCategoriesRequest): AppThunk => async dispatch => {
+export const getCategory = (params: GetCategoryRequest): AppThunk => async dispatch => {
   dispatch(getCategoryRequest())
   try {
-    const response = await api.categories.getCategories(params)
+    const response = await api.categories.getCategory(params)
     dispatch(getCategorySuccess(response as Category))
   } catch (err) {
     dispatch(getCategoryFail(err.toString()))
@@ -82,14 +82,14 @@ export const saveCategory = (category: Category): AppThunk => async dispatch => 
   let id = category.id!
   try {
     if (category?.id && !isNaN(category?.id)) {
-      await api.categories.updateCategories({
+      await api.categories.updateCategory({
         id,
         categoryDto: {
           name: category.name
         }
       })
     } else {
-      const response = await api.categories.createCategories({
+      const response = await api.categories.createCategory({
         categoryDto: {
           name: category.name
         }

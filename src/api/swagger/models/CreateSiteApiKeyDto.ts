@@ -16,46 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PartnerContactDto
+ * @interface CreateSiteApiKeyDto
  */
-export interface PartnerContactDto {
+export interface CreateSiteApiKeyDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateSiteApiKeyDto
+     */
+    siteId?: number;
     /**
      * 
      * @type {string}
-     * @memberof PartnerContactDto
+     * @memberof CreateSiteApiKeyDto
      */
     name?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartnerContactDto
-     */
-    email?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartnerContactDto
-     */
-    phone?: string | null;
 }
 
-export function PartnerContactDtoFromJSON(json: any): PartnerContactDto {
-    return PartnerContactDtoFromJSONTyped(json, false);
+export function CreateSiteApiKeyDtoFromJSON(json: any): CreateSiteApiKeyDto {
+    return CreateSiteApiKeyDtoFromJSONTyped(json, false);
 }
 
-export function PartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerContactDto {
+export function CreateSiteApiKeyDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateSiteApiKeyDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
+        'siteId': !exists(json, 'siteId') ? undefined : json['siteId'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'phone': !exists(json, 'phone') ? undefined : json['phone'],
     };
 }
 
-export function PartnerContactDtoToJSON(value?: PartnerContactDto | null): any {
+export function CreateSiteApiKeyDtoToJSON(value?: CreateSiteApiKeyDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -64,9 +57,8 @@ export function PartnerContactDtoToJSON(value?: PartnerContactDto | null): any {
     }
     return {
         
+        'siteId': value.siteId,
         'name': value.name,
-        'email': value.email,
-        'phone': value.phone,
     };
 }
 

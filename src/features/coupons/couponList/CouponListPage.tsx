@@ -7,14 +7,14 @@ import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
 import { useIsMobile } from 'hooks'
-import { getCoupons, deleteCoupons } from './couponListSlice'
+import { getWaitingCoupons, deleteCoupon } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import { CouponListingOptions } from 'models/couponListingOptions'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { OrderByType, CouponState } from 'api/swagger/models'
 import { ColumnType, SorterResult, ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
-import { listCategories } from '../couponsSlice'
+import { getCategories } from '../couponsSlice'
 
 export const CouponListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -29,11 +29,11 @@ export const CouponListPage: React.FC = () => {
   })
 
   useEffect(() => {
-    dispatch(listCategories())
+    dispatch(getCategories())
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(getCoupons(listingOptions))
+    dispatch(getWaitingCoupons(listingOptions))
   }, [dispatch, listingOptions])
 
   const notActionCellProps = {
@@ -121,7 +121,7 @@ export const CouponListPage: React.FC = () => {
             <Popconfirm
               title={t('coupon-list.delete-confirm-message')}
               onConfirm={() => {
-                record.id && dispatch(deleteCoupons(record.id))
+                record.id && dispatch(deleteCoupon(record.id))
               }}
               okText={t('common.ok')}
               cancelText={t('common.cancel')}
