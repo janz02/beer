@@ -8,7 +8,8 @@ import {
   saveSite,
   setAddNewApiKeyPopupVisible,
   createApiKey,
-  closeApiKeyPopup
+  closeApiKeyPopup,
+  deleteApiKey
 } from './siteEditorSlice'
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
@@ -25,6 +26,8 @@ import { ApiKeyEditorForm } from './ApiKeyEditorForm'
 import { CopyOutlined } from '@ant-design/icons'
 import { basePaginationConfig, projectPage } from 'models/pagination'
 import { useIsMobile } from 'hooks'
+import { CrudButtons } from 'components/buttons/CrudButtons'
+import { GenericPopup } from 'components/popups/GenericPopup'
 
 export const SiteEditorPage: FC = () => {
   const { id } = useParams()
@@ -33,6 +36,8 @@ export const SiteEditorPage: FC = () => {
   const { t } = useTranslation()
 
   const [copyPopoverText, setCopyPopoverText] = useState(t('site.editor.copy-api-key'))
+  const [apiKeyToDelete, setApiKeyToDelete] = useState<SiteApiKey | null>(null)
+  const [apiKeyDeletePopupVisible, setApiKeyDeletePopupVisible] = useState(false)
   const siteEditorState = useSelector((state: RootState) => state.siteEditor)
   const inputToCopyRef = useRef(null)
 
@@ -72,6 +77,19 @@ export const SiteEditorPage: FC = () => {
         key: 'expireDate',
         render(value) {
           return <MomentDisplay date={value} />
+        }
+      },
+      {
+        key: 'actions',
+        render(siteApiKey: SiteApiKey) {
+          return (
+            <CrudButtons
+              onDelete={() => {
+                setApiKeyToDelete(siteApiKey)
+                setApiKeyDeletePopupVisible(true)
+              }}
+            />
+          )
         }
       }
     ],
@@ -179,6 +197,26 @@ export const SiteEditorPage: FC = () => {
           </Form.Item>
         </Form>
       </Modal>
+
+      <GenericPopup
+        type="delete"
+        id={apiKeyToDelete?.id}
+        visible={apiKeyDeletePopupVisible}
+        onCancel={() => {
+          setApiKeyToDelete(null)
+          setApiKeyDeletePopupVisible(false)
+        }}
+        onOkAction={() => {
+          apiKeyToDelete && apiKeyToDelete.id && dispatch(deleteApiKey(apiKeyToDelete.id))
+          setApiKeyDeletePopupVisible(false)
+        }}
+        afterClose={() => {
+          setApiKeyToDelete(null)
+          setApiKeyDeletePopupVisible(false)
+        }}
+      >
+        <h4>{apiKeyToDelete?.name}</h4>
+      </GenericPopup>
     </ResponsivePage>
   )
 }

@@ -35,12 +35,17 @@
     "edit": "Szerkesztés",
     "go-back": "Vissza",
     "message": {
+      "delete-success": "Sikeres törlés",
       "save-success": "Sikeres mentés"
     },
     "ok": "OK",
     "password-format-help": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
     "popup": {
-      "delete-text": "Biztos, hogy törölni szeretnéd?"
+      "confirm-title": "Biztos, hogy ezt szeretnéd tenni?",
+      "delete-text": "Biztos, hogy törölni szeretnéd?",
+      "delete-title": "Biztos, hogy törölni szeretnéd?",
+      "discard-title": "Biztos, hogy el szeretnéd vetni?",
+      "save-title": "Biztos, hogy menteni szeretnéd?"
     },
     "rule-error": {
       "field-number": "Ebbe a mezőbe számot kell megadni.",

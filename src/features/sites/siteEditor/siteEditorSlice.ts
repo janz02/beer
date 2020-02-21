@@ -18,6 +18,7 @@ interface SiteEditorState {
   pagination: Pagination
   loadingData: boolean
   loadingSave: boolean
+  loadingDelete: boolean
   loadingApiKeyCreate: boolean
   error: string
 }
@@ -31,6 +32,7 @@ const initialState: SiteEditorState = {
   },
   loadingData: false,
   loadingSave: false,
+  loadingDelete: false,
   loadingApiKeyCreate: false,
   error: ''
 }
@@ -81,6 +83,18 @@ const siteEditorSlice = createSlice({
       state.loadingSave = false
       state.error = action.payload
     },
+    deleteApiKeyRequest(state) {
+      state.loadingDelete = true
+    },
+    deleteApiKeySuccess(state) {
+      message.success(i18n.t('common.message.delete-success'), 5)
+      state.loadingDelete = false
+      state.error = ''
+    },
+    deleteApiKeyFail(state, action: PayloadAction<string>) {
+      state.loadingDelete = false
+      state.error = action.payload
+    },
     createApiKeyRequest(state) {
       state.loadingApiKeyCreate = true
     },
@@ -105,6 +119,7 @@ const {
 } = siteEditorSlice.actions
 const { saveSiteRequest, saveSiteSuccess, saveSiteFail } = siteEditorSlice.actions
 const { createApiKeyRequest, createApiKeySuccess, createApiKeyFail } = siteEditorSlice.actions
+const { deleteApiKeyRequest, deleteApiKeySuccess, deleteApiKeyFail } = siteEditorSlice.actions
 
 export const {
   resetSiteEditor,
@@ -192,10 +207,26 @@ export const createApiKey = (name: string): AppThunk => async (dispatch, getStat
       createSiteApiKeyDto: { name, siteId: getState().siteEditor.site?.id }
     })
     dispatch(createApiKeySuccess(response.id2 ?? ''))
+
     const siteEditorState = getState().siteEditor
     siteEditorState.site?.id &&
       dispatch(getSiteEditorData(siteEditorState.site?.id, siteEditorState.pagination))
   } catch (err) {
     dispatch(createApiKeyFail(err.toString()))
+  }
+}
+
+export const deleteApiKey = (id: number): AppThunk => async (dispatch, getState) => {
+  dispatch(deleteApiKeyRequest())
+
+  try {
+    await api.apiKey.deleteApiKey({ id })
+    dispatch(deleteApiKeySuccess())
+
+    const siteEditorState = getState().siteEditor
+    siteEditorState.site?.id &&
+      dispatch(getSiteEditorData(siteEditorState.site?.id, siteEditorState.pagination))
+  } catch (err) {
+    dispatch(deleteApiKeyFail(err.toString()))
   }
 }
