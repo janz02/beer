@@ -1,4 +1,4 @@
-export * from './ApiKeyApi';
+export * from './ApiKeysApi';
 export * from './AuthApi';
 export * from './CategoriesApi';
 export * from './CouponCommentsApi';

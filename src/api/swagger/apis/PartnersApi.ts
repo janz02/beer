@@ -32,19 +32,19 @@ import {
     PartnerVmPaginatedResponseToJSON,
 } from '../models';
 
-export interface CreatePartnersRequest {
+export interface CreatePartnerRequest {
     partnerDto?: PartnerDto;
 }
 
-export interface DeletePartnersRequest {
+export interface DeletePartnerRequest {
+    id: number;
+}
+
+export interface GetPartnerRequest {
     id: number;
 }
 
 export interface GetPartnersRequest {
-    id: number;
-}
-
-export interface ListPartnersRequest {
     name?: string;
     page?: number;
     pageSize?: number;
@@ -56,7 +56,7 @@ export interface UpdateMyPartnerRequest {
     partnerDto?: PartnerDto;
 }
 
-export interface UpdatePartnersRequest {
+export interface UpdatePartnerRequest {
     id: number;
     partnerDto?: PartnerDto;
 }
@@ -70,7 +70,7 @@ export class PartnersApi extends runtime.BaseAPI {
      * Returns the id of the entity upon success
      * Creates an entity
      */
-    async createPartnersRaw(requestParameters: CreatePartnersRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createPartnerRaw(requestParameters: CreatePartnerRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -96,8 +96,8 @@ export class PartnersApi extends runtime.BaseAPI {
      * Returns the id of the entity upon success
      * Creates an entity
      */
-    async createPartners(requestParameters: CreatePartnersRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createPartnersRaw(requestParameters);
+    async createPartner(requestParameters: CreatePartnerRequest): Promise<Int32EntityCreatedVm> {
+        const response = await this.createPartnerRaw(requestParameters);
         return await response.value();
     }
 
@@ -105,9 +105,9 @@ export class PartnersApi extends runtime.BaseAPI {
      * Deletes an entity with Id of \"id\"
      * Deletes an entity
      */
-    async deletePartnersRaw(requestParameters: DeletePartnersRequest): Promise<runtime.ApiResponse<void>> {
+    async deletePartnerRaw(requestParameters: DeletePartnerRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePartners.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePartner.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -132,8 +132,8 @@ export class PartnersApi extends runtime.BaseAPI {
      * Deletes an entity with Id of \"id\"
      * Deletes an entity
      */
-    async deletePartners(requestParameters: DeletePartnersRequest): Promise<void> {
-        await this.deletePartnersRaw(requestParameters);
+    async deletePartner(requestParameters: DeletePartnerRequest): Promise<void> {
+        await this.deletePartnerRaw(requestParameters);
     }
 
     /**
@@ -170,9 +170,9 @@ export class PartnersApi extends runtime.BaseAPI {
      * Returns the entity with the specified Id upon success
      * Gets an entity by Id
      */
-    async getPartnersRaw(requestParameters: GetPartnersRequest): Promise<runtime.ApiResponse<PartnerVm>> {
+    async getPartnerRaw(requestParameters: GetPartnerRequest): Promise<runtime.ApiResponse<PartnerVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPartners.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPartner.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -197,8 +197,8 @@ export class PartnersApi extends runtime.BaseAPI {
      * Returns the entity with the specified Id upon success
      * Gets an entity by Id
      */
-    async getPartners(requestParameters: GetPartnersRequest): Promise<PartnerVm> {
-        const response = await this.getPartnersRaw(requestParameters);
+    async getPartner(requestParameters: GetPartnerRequest): Promise<PartnerVm> {
+        const response = await this.getPartnerRaw(requestParameters);
         return await response.value();
     }
 
@@ -206,7 +206,7 @@ export class PartnersApi extends runtime.BaseAPI {
      * Returns the entity list with the specified filters applied
      * Gets an entity list sorted and filtered
      */
-    async listPartnersRaw(requestParameters: ListPartnersRequest): Promise<runtime.ApiResponse<PartnerVmPaginatedResponse>> {
+    async getPartnersRaw(requestParameters: GetPartnersRequest): Promise<runtime.ApiResponse<PartnerVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -249,8 +249,8 @@ export class PartnersApi extends runtime.BaseAPI {
      * Returns the entity list with the specified filters applied
      * Gets an entity list sorted and filtered
      */
-    async listPartners(requestParameters: ListPartnersRequest): Promise<PartnerVmPaginatedResponse> {
-        const response = await this.listPartnersRaw(requestParameters);
+    async getPartners(requestParameters: GetPartnersRequest): Promise<PartnerVmPaginatedResponse> {
+        const response = await this.getPartnersRaw(requestParameters);
         return await response.value();
     }
 
@@ -290,9 +290,9 @@ export class PartnersApi extends runtime.BaseAPI {
      * Updates an entity with Id of \"id\" to entity \"dto\"
      * Updates an entity
      */
-    async updatePartnersRaw(requestParameters: UpdatePartnersRequest): Promise<runtime.ApiResponse<void>> {
+    async updatePartnerRaw(requestParameters: UpdatePartnerRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePartners.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePartner.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -320,8 +320,8 @@ export class PartnersApi extends runtime.BaseAPI {
      * Updates an entity with Id of \"id\" to entity \"dto\"
      * Updates an entity
      */
-    async updatePartners(requestParameters: UpdatePartnersRequest): Promise<void> {
-        await this.updatePartnersRaw(requestParameters);
+    async updatePartner(requestParameters: UpdatePartnerRequest): Promise<void> {
+        await this.updatePartnerRaw(requestParameters);
     }
 
 }

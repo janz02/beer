@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
 import { api } from 'api'
-import { ListCategoriesRequest } from 'api/swagger'
 import { Pagination, recalculatePagination, calculatePagination } from 'models/pagination'
+import { GetCategoriesRequest } from 'api/swagger'
 
 interface CouponCategoryListState {
   categories: Category[]
@@ -68,7 +68,7 @@ export const {
 
 export default couponCategoryListSlice.reducer
 
-export const getCategories = (params: ListCategoriesRequest = {}): AppThunk => async (
+export const getCategories = (params: GetCategoriesRequest = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
@@ -77,7 +77,7 @@ export const getCategories = (params: ListCategoriesRequest = {}): AppThunk => a
     const oldPagination = getState().categoryList.pagination
     const pagination = calculatePagination(params, oldPagination)
 
-    const response = await api.categories.listCategories({
+    const response = await api.categories.getCategories({
       pageSize: pagination.pageSize,
       page: pagination.page
     })
@@ -105,7 +105,7 @@ export const deleteCategory = (id: number, refreshList = true): AppThunk => asyn
 ) => {
   dispatch(deleteRequest())
   try {
-    await api.categories.deleteCategories({ id })
+    await api.categories.deleteCategory({ id })
     if (refreshList) {
       const oldPagination = getState().categoryList.pagination
       const newPage = recalculatePagination(oldPagination)

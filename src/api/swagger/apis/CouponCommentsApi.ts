@@ -23,12 +23,12 @@ import {
     CouponCommentVmToJSON,
 } from '../models';
 
-export interface AddCouponCommentsRequest {
+export interface AddCouponCommentRequest {
     couponId: number;
     couponCommentDto?: CouponCommentDto;
 }
 
-export interface DeleteCouponCommentsRequest {
+export interface DeleteCouponCommentRequest {
     couponId: number;
     commentId: number;
 }
@@ -46,9 +46,9 @@ export class CouponCommentsApi extends runtime.BaseAPI {
      * Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"
      * Adds a comment to a coupon
      */
-    async addCouponCommentsRaw(requestParameters: AddCouponCommentsRequest): Promise<runtime.ApiResponse<void>> {
+    async addCouponCommentRaw(requestParameters: AddCouponCommentRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
-            throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling addCouponComments.');
+            throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling addCouponComment.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -76,21 +76,21 @@ export class CouponCommentsApi extends runtime.BaseAPI {
      * Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"
      * Adds a comment to a coupon
      */
-    async addCouponComments(requestParameters: AddCouponCommentsRequest): Promise<void> {
-        await this.addCouponCommentsRaw(requestParameters);
+    async addCouponComment(requestParameters: AddCouponCommentRequest): Promise<void> {
+        await this.addCouponCommentRaw(requestParameters);
     }
 
     /**
      * Deletes the comment with an Id of \"commentId\" from a coupon with Id of \"couponId\"
      * Deletes a comment from a coupon
      */
-    async deleteCouponCommentsRaw(requestParameters: DeleteCouponCommentsRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCouponCommentRaw(requestParameters: DeleteCouponCommentRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
-            throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling deleteCouponComments.');
+            throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling deleteCouponComment.');
         }
 
         if (requestParameters.commentId === null || requestParameters.commentId === undefined) {
-            throw new runtime.RequiredError('commentId','Required parameter requestParameters.commentId was null or undefined when calling deleteCouponComments.');
+            throw new runtime.RequiredError('commentId','Required parameter requestParameters.commentId was null or undefined when calling deleteCouponComment.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -115,8 +115,8 @@ export class CouponCommentsApi extends runtime.BaseAPI {
      * Deletes the comment with an Id of \"commentId\" from a coupon with Id of \"couponId\"
      * Deletes a comment from a coupon
      */
-    async deleteCouponComments(requestParameters: DeleteCouponCommentsRequest): Promise<void> {
-        await this.deleteCouponCommentsRaw(requestParameters);
+    async deleteCouponComment(requestParameters: DeleteCouponCommentRequest): Promise<void> {
+        await this.deleteCouponCommentRaw(requestParameters);
     }
 
     /**

@@ -19,10 +19,10 @@ import { useTranslation } from 'react-i18next'
 import { useIsMobile, useCommonFormRules } from 'hooks'
 import { Coupon } from 'models/coupon'
 import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
-import { listCategories } from '../couponsSlice'
+import { getCategories } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteOutlined } from '@ant-design/icons'
-import { updateCouponStatus, deleteCouponComments } from '../couponEditor/couponEditorSlice'
+import { updateCouponStatus, deleteCouponComment } from '../couponEditor/couponEditorSlice'
 import { useParams } from 'hooks/react-router-dom-hooks'
 
 export interface CouponEditorFormProps {
@@ -47,7 +47,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const rule = useCommonFormRules()
 
   useEffect(() => {
-    dispatch(listCategories())
+    dispatch(getCategories())
   }, [dispatch])
 
   const displayEditor =
@@ -326,7 +326,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Popconfirm
                     title={t('coupon-editor.comment-delete-confirm-message')}
                     onConfirm={() => {
-                      coupon && coupon.id && x.id && dispatch(deleteCouponComments(coupon.id, x.id))
+                      coupon && coupon.id && x.id && dispatch(deleteCouponComment(coupon.id, x.id))
                     }}
                     okText={t('common.ok')}
                     cancelText={t('common.cancel')}
