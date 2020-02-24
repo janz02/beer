@@ -45,7 +45,7 @@ export const NewsletterEditorPage: FC = () => {
 
   return (
     <>
-      <ErrorBoundary message="hello">
+      <ErrorBoundary>
         <NewsletterEditor
           template={template?.html}
           handleSave={onSave}
