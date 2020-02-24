@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { FC, useState, useRef, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { NewsletterEditor } from './NewsletterEditor'
 import ErrorBoundary from 'antd/lib/alert/ErrorBoundary'
 import { Form, Input, Select } from 'antd'
@@ -35,21 +35,21 @@ export const NewsletterEditorPage: FC = () => {
 
   const template = useSelector((state: RootState) => state.newsletterEditor.template)
 
-  const onSave = useRef((newTemplate: string, afterSaveCb: () => void) => {
+  const onSave = (newTemplate: string, afterSaveCb: () => void): void => {
     setSavePopup({ ...savePopup, visible: true, afterSave: afterSaveCb })
-  })
+  }
 
-  const onRevert = useRef(() => {
+  const onRevert = (): void => {
     setRevertPopup({ ...revertPopup, visible: true })
-  })
+  }
 
   return (
     <>
       <ErrorBoundary message="hello">
         <NewsletterEditor
           template={template?.html}
-          handleSave={onSave.current}
-          handleRevert={onRevert.current}
+          handleSave={onSave}
+          handleRevert={onRevert}
           handleExit={() => history.push('/newsletter')}
         />
       </ErrorBoundary>
