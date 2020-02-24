@@ -72,6 +72,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
 
   return (
     <Modal
+      forceRender
       title={t(`coupon-category.editor-${mode}`)}
       visible={visible}
       okText={t('common.save')}

@@ -46,14 +46,16 @@
       "discard-title": "Biztos, hogy el szeretnéd vetni?",
       "save-title": "Biztos, hogy menteni szeretnéd?"
     },
+    "revert": "Visszállítás",
     "rule-error": {
       "email": "Ebbe a mezőbe helyes e-mail címet kell megadni.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
-      "field-required": "A mező kitö kötelező.",
+      "field-required": "A mező kitöltése kötelező.",
       "max-length": "A mező nem lehet {{max}} karakternél hosszabb.",
       "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt."
     },
-    "save": "Mentés"
+    "save": "Mentés",
+    "send": "Küldés"
   },
   "coupon-category": {
     "delete-popup": {
@@ -126,9 +128,22 @@
     "coupon-categories": "Kategóriák",
     "coupons": "Kuponok",
     "dashboard": "Irányítópult",
-    "news-letter": "Hírlevél",
+    "newsletter": "Hírlevél",
     "partner-data": "Partner adatok",
     "sites": "Telephelyek"
+  },
+  "newsletter": {
+    "available-templates": "Hírlevél sablonok",
+    "field": {
+      "template-name": "Sablon név",
+      "template-version": "Sablon verzió"
+    },
+    "popup": {
+      "target-segment": "Cél szegmens",
+      "title-revert": "Sablon visszaállítása",
+      "title-save": "Sablon mentése",
+      "title-send": "Sablon küldése"
+    }
   },
   "notification": {
     "empty-list": "Üres",

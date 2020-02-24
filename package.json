@@ -34,7 +34,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
     "redux": "^4.0.4",
-    "typescript": "3.7.2"
+    "typescript": "3.7.2",
+    "value-or-function": "^3.0.0"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^1.0.8-4.2.2",
@@ -75,7 +76,7 @@
     "build": "env-cmd -e prod react-app-rewired build",
     "eject": "react-app-rewired eject",
     "generate-client": "node ./config/generate-client.js",
-    "i18n:generate": "i18next-scanner --config config/i18next-scanner.config.js"
+    "i18n:generate": "i18next-scanner --config ./config/i18next-scanner.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"

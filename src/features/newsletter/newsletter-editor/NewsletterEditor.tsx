@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useRef } from 'react'
-import './NewsLetterEditor.scss'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import './NewsletterEditor.scss'
 import { useTranslation } from 'react-i18next'
-import locale from './locale/'
+import locale from './locale'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import grapesjs from 'grapesjs'
@@ -11,49 +11,48 @@ import grapesjsNewsLetter from 'grapesjs-preset-newsletter'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import grapesjsIndexxeddb from 'grapesjs-indexeddb'
+import { GenericPopup } from 'components/popups/GenericPopup'
 
 enum CMD {
   // used as locale key and cmd string
-  SaveTemplate = 'pkm-save-template'
+  SaveTemplate = 'pkm-save-template',
+  RevertTemplate = 'pkm-revert-template'
 }
 
-export interface NewsLetterEditorProps {
+export interface NewsletterEditorProps {
+  id?: string
   template?: string
+  handleSave?: (template: string, afterSave: () => void) => void
+  handleRevert?: () => void
+  handleExit?: () => void
 }
 
-export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
+export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
+  const { id, handleSave, handleRevert, handleExit } = props
   const template = props?.template ?? ''
 
   const { i18n } = useTranslation()
+  const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
+  const [templateModified, setTemplateModified] = useState(false)
+  const storageId = `gjs-pkm-${id ?? ''}`
 
   const editor = useRef<any>()
 
-  const saveTemplate = (newTemplate: any): void => {
-    console.log({
-      newTemplate,
-      editor: editor.current,
-      cmd: editor.current.Commands.getAll(),
-      I18n: editor.current.I18n
-    })
-  }
-
   useEffect(() => {
-    const storagePrefix = 'gjs-pkm'
     const translations = { en: (locale as any)[i18n.language] }
-
     editor.current = grapesjs.init({
       // TODO: consider removing db, giving db id
       container: '#grapesjs',
       storageManager: {
         type: 'indexeddb',
-        id: `${storagePrefix}-`,
+        id: storageId,
         autoload: true
       },
       height: '100%',
       plugins: [grapesjsNewsLetter, grapesjsIndexxeddb],
       pluginsOpts: {
         [grapesjsIndexxeddb]: {
-          dbName: storagePrefix
+          dbName: storageId
         },
         [grapesjsNewsLetter]: {
           // Translations that are not handled by the news letter preset.
@@ -71,25 +70,39 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
         messages: translations
       }
     })
+    editor.current.on('update', () => {
+      setTemplateModified(true)
+    })
     editor.current.Commands.add(CMD.SaveTemplate, {
-      run: (editor: any, sender: any) => {
-        const html = editor.getHtml()
-        const css = editor.getCss()
-        saveTemplate({ html, css })
+      run: (editor: any) => {
+        handleSave &&
+          handleSave(editor.runCommand('gjs-get-inlined-html'), () => setTemplateModified(false))
+      }
+    })
+    editor.current.Commands.add(CMD.RevertTemplate, {
+      run: () => {
+        handleRevert && handleRevert()
       }
     })
     editor.current.Panels.addButton('options', [
       {
         id: CMD.SaveTemplate,
         className: 'fa fa-save',
-        command: (editor: any, sender: any) => {
+        command: (editor: any) => {
           editor.runCommand(CMD.SaveTemplate)
+        }
+      },
+      {
+        id: CMD.RevertTemplate,
+        className: 'fa fa-history',
+        command: (editor: any, sender: any) => {
+          editor.runCommand(CMD.RevertTemplate)
         }
       },
       {
         id: 'pkm-download-as-html',
         className: 'fa fa-file-text',
-        command: (editor: any, sender: any) => {
+        command: (editor: any) => {
           const ee = editor.runCommand('gjs-get-inlined-html')
           const download = (filename: string, text: string): void => {
             const pom = document.createElement('a')
@@ -106,9 +119,20 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
           }
           download('template.html', ee)
         }
+      },
+      {
+        id: 'close-editor',
+        className: 'fa fa-close',
+        command: () => {
+          if (templateModified) {
+            setVisibleDiscardPopup(true)
+          } else {
+            handleExit && handleExit()
+          }
+        }
       }
     ])
-  }, [i18n.language, template])
+  }, [handleRevert, handleSave, i18n.language, template, storageId, templateModified, handleExit])
 
   useEffect(() => {
     if (editor.current) {
@@ -117,8 +141,17 @@ export const NewsLetterEditor: FC<NewsLetterEditorProps> = props => {
   }, [template, i18n.language])
 
   return (
-    <div className="newsletter-editor-containter">
-      <div id="grapesjs" />
-    </div>
+    <>
+      <div className="newsletter-editor-containter">
+        <div id="grapesjs" />
+      </div>
+      <GenericPopup type="discard" />
+      <GenericPopup
+        type="discard"
+        visible={visibleDiscardPopup}
+        onOk={handleExit}
+        onCancel={() => setVisibleDiscardPopup(false)}
+      />
+    </>
   )
 }
