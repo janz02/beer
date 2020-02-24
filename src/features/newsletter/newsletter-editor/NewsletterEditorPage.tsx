@@ -20,7 +20,6 @@ export const NewsletterEditorPage: FC = () => {
   const { id } = useParams()
 
   useEffect(() => {
-    console.log({ id })
     dispatch(getNewsletterTemplate(id))
   }, [dispatch, id])
 
@@ -88,7 +87,6 @@ export const NewsletterEditorPage: FC = () => {
         formProps={{
           onFinish: (values: any) => {
             // TODO: integrate
-            console.log({ values })
             setRevertPopup({ ...revertPopup, visible: false })
           }
         }}

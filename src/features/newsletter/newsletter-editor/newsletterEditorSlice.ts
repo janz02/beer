@@ -47,10 +47,8 @@ export const getNewsletterTemplate = (id: string | undefined): AppThunk => async
   getState
 ) => {
   // TODO: integration
-  console.log('get one', id)
 }
 
 export const saveNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
   // TODO: integration
-  console.log('save one', id)
 }

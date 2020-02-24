@@ -40,9 +40,6 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
 
   useEffect(() => {
     const translations = { en: (locale as any)[i18n.language] }
-
-    console.log('RENDER')
-
     editor.current = grapesjs.init({
       // TODO: consider removing db, giving db id
       container: '#grapesjs',
