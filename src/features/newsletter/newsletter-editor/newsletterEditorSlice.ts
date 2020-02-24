@@ -42,7 +42,10 @@ const newsletterEditorSlice = createSlice({
 
 export default newsletterEditorSlice.reducer
 
-export const getNewsletterTemplate = (id: string): AppThunk => async (dispatch, getState) => {
+export const getNewsletterTemplate = (id: string | undefined): AppThunk => async (
+  dispatch,
+  getState
+) => {
   // TODO: integration
   console.log('get one', id)
 }

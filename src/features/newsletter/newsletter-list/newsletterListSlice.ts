@@ -55,14 +55,12 @@ export const getNewsletterTemplates = (params: any = {}): AppThunk => async (
   getState
 ) => {
   // TODO: integration
-  console.log('GET list', params)
 }
 
-export const deleteNewsletterTemplate = (id: number, refreshList = true): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const deleteNewsletterTemplate = (
+  id: number | undefined,
+  refreshList = true
+): AppThunk => async (dispatch, getState) => {
   // TODO: integration
-  console.log('DELETE', id)
   return { id }
 }

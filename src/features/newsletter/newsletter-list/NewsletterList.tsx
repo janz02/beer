@@ -114,7 +114,7 @@ export const NewsletterList: FC = () => {
         id={templateToDelete?.template?.id}
         type="delete"
         visible={!!templateToDelete?.popupVisible}
-        onOkAction={deleteNewsletterTemplate(templateToDelete?.template?.id!)}
+        onOkAction={deleteNewsletterTemplate(templateToDelete?.template?.id)}
         onCancel={() => setTemplateToDelete({ ...templateToDelete, popupVisible: false })}
         afterClose={() => setTemplateToDelete(null)}
       />
@@ -137,7 +137,9 @@ export const NewsletterList: FC = () => {
         >
           <Select>
             {segments?.map(s => (
-              <Select.Option value={s.id}>{s.name}</Select.Option>
+              <Select.Option key={s.id} value={s.id}>
+                {s.name}
+              </Select.Option>
             ))}
           </Select>
         </Form.Item>

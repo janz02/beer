@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { FC, useState, useRef, useEffect } from 'react'
 import { NewsletterEditor } from './NewsletterEditor'
 import ErrorBoundary from 'antd/lib/alert/ErrorBoundary'
@@ -9,6 +10,7 @@ import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { useParams } from 'react-router-dom'
 import { getNewsletterTemplate } from './newsletterEditorSlice'
 import { RootState } from 'app/rootReducer'
+import { history } from 'router/router'
 
 export const NewsletterEditorPage: FC = () => {
   const dispatch = useDispatch()
@@ -19,11 +21,12 @@ export const NewsletterEditorPage: FC = () => {
 
   useEffect(() => {
     console.log({ id })
-    dispatch(getNewsletterTemplate(id!))
+    dispatch(getNewsletterTemplate(id))
   }, [dispatch, id])
 
   const [savePopup, setSavePopup] = useState({
-    visible: false
+    visible: false,
+    afterSave: () => {}
   })
 
   const [revertPopup, setRevertPopup] = useState({
@@ -32,13 +35,14 @@ export const NewsletterEditorPage: FC = () => {
 
   const template = useSelector((state: RootState) => state.newsletterEditor.template)
 
-  const onSave = useRef((newTemplate: string) => {
-    setSavePopup({ ...savePopup, visible: true })
+  const onSave = useRef((newTemplate: string, afterSaveCb: () => void) => {
+    setSavePopup({ ...savePopup, visible: true, afterSave: afterSaveCb })
   })
 
   const onRevert = useRef(() => {
     setRevertPopup({ ...revertPopup, visible: true })
   })
+
   return (
     <>
       <ErrorBoundary message="hello">
@@ -46,6 +50,7 @@ export const NewsletterEditorPage: FC = () => {
           template={template?.html}
           handleSave={onSave.current}
           handleRevert={onRevert.current}
+          handleExit={() => history.push('/newsletter')}
         />
       </ErrorBoundary>
       <GenericModalForm
@@ -56,7 +61,13 @@ export const NewsletterEditorPage: FC = () => {
           okText: t('common.save'),
           onCancel: () => setSavePopup({ ...savePopup, visible: false })
         }}
-        formProps={{}}
+        formProps={{
+          onFinish: (values: any) => {
+            // TODO: integrate
+            savePopup.afterSave()
+            setSavePopup({ ...savePopup, visible: false })
+          }
+        }}
       >
         <Form.Item
           name="templateName"
@@ -74,16 +85,20 @@ export const NewsletterEditorPage: FC = () => {
           okText: t('common.revert'),
           onCancel: () => setRevertPopup({ ...revertPopup, visible: false })
         }}
-        formProps={{}}
+        formProps={{
+          onFinish: (values: any) => {
+            // TODO: integrate
+            console.log({ values })
+            setRevertPopup({ ...revertPopup, visible: false })
+          }
+        }}
       >
-        <Form.Item
-          name="templateName"
-          label={t('newsletter.field.template-version')}
-          rules={[rule.required()]}
-        >
+        <Form.Item name="templateName" label={t('newsletter.field.template-version')}>
           <Select defaultValue={template?.version?.id} style={{ width: 150 }}>
             {template?.versions?.map(v => (
-              <Select.Option value={v.id}>{v.version}</Select.Option>
+              <Select.Option key={v.id} value={v.id}>
+                {v.version}
+              </Select.Option>
             ))}
           </Select>
         </Form.Item>
