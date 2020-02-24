@@ -19,11 +19,19 @@ export const SignupPage: React.FC = () => {
     <AuthLayout className="signup" title={t(`auth.signup`)}>
       {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
       <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
-        <Form.Item name="name" label={t('auth.field.name')} rules={[rule.required()]}>
+        <Form.Item
+          name="name"
+          label={t('auth.field.name')}
+          rules={[rule.required(), rule.max(100)]}
+        >
           <Input />
         </Form.Item>
 
-        <Form.Item name="username" label={t('auth.field.email')} rules={[rule.required()]}>
+        <Form.Item
+          name="username"
+          label={t('auth.field.email')}
+          rules={[rule.required(), rule.email(), rule.max(50)]}
+        >
           <Input />
         </Form.Item>
 
@@ -56,15 +64,11 @@ export const SignupPage: React.FC = () => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item
-          name="phone"
-          label={t('auth.field.phone')}
-          rules={[rule.required(), rule.number()]}
-        >
+        <Form.Item name="phone" label={t('auth.field.phone')} rules={[rule.max(20)]}>
           <Input type="tel" />
         </Form.Item>
 
-        <Form.Item name="code" label={t('auth.field.code')} rules={[rule.required()]}>
+        <Form.Item name="code" label={t('auth.field.code')} rules={[rule.required(), rule.max(30)]}>
           <Input />
         </Form.Item>
 
