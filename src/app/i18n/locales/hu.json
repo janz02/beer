@@ -42,14 +42,15 @@
     "password-format-help": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
     "popup": {
       "confirm-title": "Biztos, hogy ezt szeretnéd tenni?",
-      "delete-text": "Biztos, hogy törölni szeretnéd?",
       "delete-title": "Biztos, hogy törölni szeretnéd?",
       "discard-title": "Biztos, hogy el szeretnéd vetni?",
       "save-title": "Biztos, hogy menteni szeretnéd?"
     },
     "rule-error": {
+      "email": "Ebbe a mezőbe helyes e-mail címet kell megadni.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitö kötelező.",
+      "max-length": "A mező nem lehet {{max}} karakternél hosszabb.",
       "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt."
     },
     "save": "Mentés"

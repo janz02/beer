@@ -7,8 +7,8 @@ export function useCommonFormRules() {
   const { t } = useTranslation()
 
   /**
-   * no white space
-   * @param message (optional) i18n key
+   * Reuired
+   * @param message (optional) string
    * @param other (optional) extra rule parameters
    */
   const required = useCallback(
@@ -22,12 +22,13 @@ export function useCommonFormRules() {
   )
 
   /**
+   * Password
    * letter, number, spec char, min 8 char
-   * @param message (optional) i18n key
+   * @param message (optional) string
    */
   const password = useCallback(
     (message?: string): Rule => ({
-      pattern: new RegExp('^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'),
+      pattern: new RegExp('^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,64}$'),
       message: message || t('common.rule-error.password-format')
     }),
     [t]
@@ -35,7 +36,7 @@ export function useCommonFormRules() {
 
   /**
    * Number
-   * @param message (optional) i18n key
+   * @param message (optional) string
    */
   const number = useCallback(
     (message?: string): Rule => ({
@@ -45,5 +46,29 @@ export function useCommonFormRules() {
     [t]
   )
 
-  return { required, password, number }
+  /**
+   * Email (https://emailregex.com/)
+   * @param message (optional) string
+   */
+  const email = useCallback(
+    (message?: string): Rule => ({
+      pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      message: message || t('common.rule-error.email')
+    }),
+    [t]
+  )
+
+  /**
+   * Max
+   * @param message (optional) string
+   */
+  const max = useCallback(
+    (max: number, message?: string): Rule => ({
+      max,
+      message: message || t('common.rule-error.max-length', { max })
+    }),
+    [t]
+  )
+
+  return { required, password, number, email, max }
 }
