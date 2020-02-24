@@ -7,7 +7,7 @@ export function useCommonFormRules() {
   const { t } = useTranslation()
 
   /**
-   * Reuired
+   * Required
    * @param message (optional) string
    * @param other (optional) extra rule parameters
    */
