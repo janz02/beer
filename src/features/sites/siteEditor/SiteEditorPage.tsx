@@ -43,17 +43,12 @@ export const SiteEditorPage: FC = () => {
 
   const siteId = id ? +id : undefined
 
-  useEffect(
-    () => () => {
-      dispatch(resetSiteEditor())
-    },
-    [dispatch]
-  )
+  useEffect(() => {
+    dispatch(resetSiteEditor())
+  }, [dispatch])
 
   useEffect(() => {
-    if (siteId) {
-      dispatch(getSiteEditorData(siteId))
-    }
+    siteId && dispatch(getSiteEditorData(siteId))
   }, [dispatch, siteId])
 
   const onSave = (site: Site): void => {
