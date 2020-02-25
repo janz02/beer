@@ -42,7 +42,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
     ref.current = form
   }, [form])
   useEffect(() => {
-    ref.current.setFieldsValue({ ...site })
+    site ? ref.current.setFieldsValue({ ...site }) : ref.current.resetFields()
   }, [site])
 
   const onSubmit = (values: Site): void => {

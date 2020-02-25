@@ -49,12 +49,7 @@ const siteEditorSlice = createSlice({
       state.copyApiKeyPopupVisible = false
       state.generatedApiKey = ''
     },
-    resetSiteEditor(state) {
-      state.site = undefined
-      state.loadingData = false
-      state.loadingSave = false
-      state.error = ''
-    },
+    resetSiteEditor: () => initialState,
     getSiteEditorDataRequest(state) {
       state.loadingData = true
     },
