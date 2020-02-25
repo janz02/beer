@@ -99,20 +99,18 @@ export const getCategories = (params: GetCategoriesRequest = {}): AppThunk => as
   }
 }
 
-export const deleteCategory = (id: number, refreshList = true): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   dispatch(deleteRequest())
   try {
     await api.categories.deleteCategory({ id })
-    if (refreshList) {
-      const oldPagination = getState().categoryList.pagination
-      const newPage = recalculatePagination(oldPagination)
-      dispatch(getCategories({ page: newPage }))
-      return { id }
-    }
+
+    const oldPagination = getState().categoryList.pagination
+    const newPage = recalculatePagination(oldPagination)
+    dispatch(getCategories({ page: newPage }))
+
     dispatch(deleteSuccess())
+
+    return { id }
   } catch (err) {
     dispatch(deleteFail(err.toString()))
     return { id, error: err.toString() }
