@@ -36,6 +36,8 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
   const rule = useCommonFormRules()
 
   const mode = isNew || id === ('undefined' as any) ? EditorMode.CREATE : EditorMode.EDIT
+  const modalTitle =
+    mode === EditorMode.EDIT ? t('coupon-category.editor-edit') : t('coupon-category.editor-create')
 
   const formLayout: FormLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout: Partial<FormProps> = isMobile
@@ -73,7 +75,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
   return (
     <Modal
       forceRender
-      title={t(`coupon-category.editor-${mode}`)}
+      title={modalTitle}
       visible={visible}
       okText={t('common.save')}
       onOk={() => form.submit()}

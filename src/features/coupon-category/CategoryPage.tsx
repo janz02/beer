@@ -21,10 +21,12 @@ export const CategoryPage: React.FC = () => {
   )
 
   const openEditor = useCallback((id?: number, createNew?: boolean) => {
-    if (id || createNew) {
-      setEditorParams({ visible: true, isNew: createNew, categoryId: id })
-      history.push(`/categories/?id=${id}`)
+    if (!id && !createNew) {
+      return
     }
+
+    setEditorParams({ visible: true, isNew: createNew, categoryId: id })
+    history.push(`/categories/?id=${id}`)
   }, [])
 
   useEffect(() => {
