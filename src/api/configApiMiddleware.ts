@@ -12,34 +12,40 @@ export const configApiMiddleware = (): void => {
     {
       pre: async ctx => {
         const refreshRequest = ctx.url.endsWith('Auth/Refresh')
-        if (!tokenPromise && !refreshRequest && sessionStorage.getItem('jwt')) {
-          const jwtExpiration = sessionStorage.getItem('jwtExpiration')
-          if (jwtExpiration && +jwtExpiration < new Date().getTime()) {
-            let refreshToken = sessionStorage.getItem('refreshToken')
-            if (refreshToken) {
-              tokenPromise = new Promise(resolve => {
-                tokenPromiseResolver = resolve
-              })
+        let refreshToken = sessionStorage.getItem('refreshToken')
+        const jwtExpiration = sessionStorage.getItem('jwtExpiration')
+        const jwt = sessionStorage.getItem('jwt')
 
-              try {
-                const user = await api.auth.refresh({ refreshDto: { refreshToken: refreshToken } })
-                const jwt = user.jwtToken
-                refreshToken = user.refreshToken || ''
-                const decodedJwt: any = jwt && JwtDecode(jwt)
-                const jwtExpiration = decodedJwt?.exp
+        if (
+          tokenPromise ||
+          refreshRequest ||
+          !jwt ||
+          !jwtExpiration ||
+          !refreshToken ||
+          +jwtExpiration >= new Date().getTime()
+        ) {
+          return tokenPromise && !refreshRequest ? tokenPromise : Promise.resolve()
+        }
 
-                jwt && sessionStorage.setItem('jwt', jwt)
-                refreshToken && sessionStorage.setItem('refreshToken', refreshToken)
-                // Also correcting precision.
-                jwtExpiration && sessionStorage.setItem('jwtExpiration', `${jwtExpiration}000`)
+        try {
+          tokenPromise = new Promise(resolve => {
+            tokenPromiseResolver = resolve
+          })
+          const user = await api.auth.refresh({ refreshDto: { refreshToken: refreshToken } })
+          const jwt = user.jwtToken
+          refreshToken = user.refreshToken || ''
+          const decodedJwt: any = jwt && JwtDecode(jwt)
+          const jwtExpiration = decodedJwt?.exp
 
-                tokenPromiseResolver()
-                tokenPromise = null
-              } catch (error) {
-                store.dispatch(logout())
-              }
-            }
-          }
+          jwt && sessionStorage.setItem('jwt', jwt)
+          refreshToken && sessionStorage.setItem('refreshToken', refreshToken)
+          // Also correcting precision.
+          jwtExpiration && sessionStorage.setItem('jwtExpiration', `${jwtExpiration}000`)
+
+          tokenPromiseResolver()
+          tokenPromise = null
+        } catch (error) {
+          store.dispatch(logout())
         }
 
         return tokenPromise && !refreshRequest ? tokenPromise : Promise.resolve()

@@ -58,10 +58,8 @@
     "send": "Send"
   },
   "coupon-category": {
-    "delete-popup": {
-      "text": "Text",
-      "title": "Title"
-    },
+    "editor-create": "Create",
+    "editor-edit": "Edit",
     "field": {
       "name": "Category name"
     },

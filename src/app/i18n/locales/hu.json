@@ -58,10 +58,8 @@
     "send": "Küldés"
   },
   "coupon-category": {
-    "delete-popup": {
-      "text": "Szöveg",
-      "title": "Cím"
-    },
+    "editor-create": "Létrehozás",
+    "editor-edit": "Szerkesztés",
     "field": {
       "name": "Kategória neve"
     },

@@ -21,10 +21,12 @@ export const CategoryPage: React.FC = () => {
   )
 
   const openEditor = useCallback((id?: number, createNew?: boolean) => {
-    if (id || createNew) {
-      setEditorParams({ visible: true, isNew: createNew, categoryId: id })
-      history.push(`/categories/?id=${id}`)
+    if (!id && !createNew) {
+      return
     }
+
+    setEditorParams({ visible: true, isNew: createNew, categoryId: id })
+    history.push(`/categories/?id=${id}`)
   }, [])
 
   useEffect(() => {
@@ -33,12 +35,12 @@ export const CategoryPage: React.FC = () => {
 
   useEffect(() => {
     // open the editor on first load, if is specified in the url
-    if (selectedId && firstLoad) {
-      setFirstLoad(false)
-      if (!isNaN(selectedId)) {
-        openEditor(selectedId)
-      }
+    if (!selectedId || !firstLoad) {
+      return
     }
+
+    setFirstLoad(false)
+    !isNaN(selectedId) && openEditor(selectedId)
   }, [selectedId, openEditor, dispatch, firstLoad])
 
   return (
