@@ -27,10 +27,10 @@ export interface SendEmailsDto {
     recipients?: Array<string> | null;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof SendEmailsDto
      */
-    content?: string | null;
+    emailTemplateId?: number;
 }
 
 export function SendEmailsDtoFromJSON(json: any): SendEmailsDto {
@@ -44,7 +44,7 @@ export function SendEmailsDtoFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'recipients': !exists(json, 'recipients') ? undefined : json['recipients'],
-        'content': !exists(json, 'content') ? undefined : json['content'],
+        'emailTemplateId': !exists(json, 'emailTemplateId') ? undefined : json['emailTemplateId'],
     };
 }
 
@@ -58,7 +58,7 @@ export function SendEmailsDtoToJSON(value?: SendEmailsDto | null): any {
     return {
         
         'recipients': value.recipients,
-        'content': value.content,
+        'emailTemplateId': value.emailTemplateId,
     };
 }
 

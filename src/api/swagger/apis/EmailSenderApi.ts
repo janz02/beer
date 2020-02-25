@@ -30,6 +30,7 @@ export interface SendEmailsRequest {
 export class EmailSenderApi extends runtime.BaseAPI {
 
     /**
+     * Sends the email template out to the recipients
      */
     async sendEmailsRaw(requestParameters: SendEmailsRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -54,6 +55,7 @@ export class EmailSenderApi extends runtime.BaseAPI {
     }
 
     /**
+     * Sends the email template out to the recipients
      */
     async sendEmails(requestParameters: SendEmailsRequest): Promise<void> {
         await this.sendEmailsRaw(requestParameters);
