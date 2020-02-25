@@ -41,6 +41,8 @@ export const SiteEditorPage: FC = () => {
   const siteEditorState = useSelector((state: RootState) => state.siteEditor)
   const inputToCopyRef = useRef(null)
 
+  const siteId = id ? +id : undefined
+
   useEffect(
     () => () => {
       dispatch(resetSiteEditor())
@@ -49,19 +51,23 @@ export const SiteEditorPage: FC = () => {
   )
 
   useEffect(() => {
-    if (id && !isNaN(+id)) {
-      dispatch(getSiteEditorData(+id))
+    if (siteId) {
+      dispatch(getSiteEditorData(siteId))
     }
-  }, [dispatch, id])
+  }, [dispatch, siteId])
 
   const onSave = (site: Site): void => {
-    dispatch(saveSite({ ...site }, +id!))
+    dispatch(saveSite({ ...site }, siteId))
   }
 
   const headerOptions = (): JSX.Element => (
-    <Button type="primary" onClick={() => dispatch(setAddNewApiKeyPopupVisible(true))}>
-      {t('site.editor.add-new-api-key')}
-    </Button>
+    <>
+      {siteId && (
+        <Button type="primary" onClick={() => dispatch(setAddNewApiKeyPopupVisible(true))}>
+          {t('site.editor.add-new-api-key')}
+        </Button>
+      )}
+    </>
   )
 
   const columns: ColumnType<SiteApiKey>[] = useMemo(
@@ -106,20 +112,20 @@ export const SiteEditorPage: FC = () => {
       ? {
           ...baseConfig,
           onShowSizeChange: (current, size) => {
-            id &&
+            siteId &&
               dispatch(
-                getSiteEditorData(+id, {
+                getSiteEditorData(siteId, {
                   page: projectPage(size, siteEditorState.pagination),
                   pageSize: size
                 })
               )
           },
           onChange: page => {
-            id && dispatch(getSiteEditorData(+id, { page }))
+            siteId && dispatch(getSiteEditorData(siteId, { page }))
           }
         }
       : false
-  }, [dispatch, id, isMobile, siteEditorState.error, siteEditorState.pagination])
+  }, [dispatch, siteId, isMobile, siteEditorState.error, siteEditorState.pagination])
 
   return (
     <ResponsivePage>
@@ -130,7 +136,7 @@ export const SiteEditorPage: FC = () => {
           history.push('/sites/')
         }}
         site={siteEditorState.site}
-        id={+id!}
+        id={siteId}
       />
 
       <ResponsiveCard>
