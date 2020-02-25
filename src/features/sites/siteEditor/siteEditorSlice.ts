@@ -8,6 +8,7 @@ import { SiteApiKey } from 'models/siteApiKey'
 import moment from 'moment'
 import { Pagination, calculatePagination } from 'models/pagination'
 import { GetApiKeysRequest } from 'api/swagger'
+import { history } from 'router/router'
 
 interface SiteEditorState {
   site?: Site
@@ -74,7 +75,12 @@ const siteEditorSlice = createSlice({
     saveSiteRequest(state) {
       state.loadingSave = true
     },
-    saveSiteSuccess(state) {
+    createSiteSuccess(state) {
+      message.success(i18n.t('common.message.save-success'), 5)
+      state.loadingSave = false
+      state.error = ''
+    },
+    updateSiteSuccess(state) {
       message.success(i18n.t('common.message.save-success'), 5)
       state.loadingSave = false
       state.error = ''
@@ -117,7 +123,12 @@ const {
   getSiteEditorDataSuccess,
   getSiteEditorDataFail
 } = siteEditorSlice.actions
-const { saveSiteRequest, saveSiteSuccess, saveSiteFail } = siteEditorSlice.actions
+const {
+  saveSiteRequest,
+  createSiteSuccess,
+  updateSiteSuccess,
+  saveSiteFail
+} = siteEditorSlice.actions
 const { createApiKeyRequest, createApiKeySuccess, createApiKeyFail } = siteEditorSlice.actions
 const { deleteApiKeyRequest, deleteApiKeySuccess, deleteApiKeyFail } = siteEditorSlice.actions
 
@@ -169,13 +180,13 @@ export const getSiteEditorData = (id: number, params: GetApiKeysRequest = {}): A
   }
 }
 
-export const saveSite = (site: Site, id: number): AppThunk => async (dispatch, getState) => {
+export const saveSite = (site: Site, id?: number): AppThunk => async (dispatch, getState) => {
   dispatch(saveSiteRequest())
   try {
     // TODO: integrate, remove partner get because it will be on the JWT.
     const partner = await api.partner.getMyPartner()
 
-    if (id > 0) {
+    if (id) {
       await api.sites.updateSite({
         id,
         siteDto: {
@@ -184,6 +195,7 @@ export const saveSite = (site: Site, id: number): AppThunk => async (dispatch, g
         }
       })
       dispatch(getSiteEditorData(id, getState().siteEditor.pagination))
+      dispatch(updateSiteSuccess())
     } else {
       const newId = await api.sites.createSite({
         siteDto: {
@@ -191,9 +203,9 @@ export const saveSite = (site: Site, id: number): AppThunk => async (dispatch, g
           partnerId: partner.id
         }
       })
-      newId.id && dispatch(getSiteEditorData(newId.id, getState().siteEditor.pagination))
+      dispatch(createSiteSuccess())
+      newId.id && history.push(`/sites/editor/${newId.id}`)
     }
-    dispatch(saveSiteSuccess())
   } catch (err) {
     dispatch(saveSiteFail(err.toString()))
   }
