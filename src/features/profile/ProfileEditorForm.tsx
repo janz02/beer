@@ -4,16 +4,19 @@ import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { Profile } from 'models/profile'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { Partner } from 'models/partner'
+import { history } from 'router/router'
 
 export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
   loading: boolean
   profile?: Profile
   editable?: boolean
+  partner?: Partner
 }
 
 export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
-  const { handleProfileSave, loading, profile, editable } = props
+  const { handleProfileSave, loading, profile, editable, partner } = props
 
   const { t } = useTranslation()
   const [submitable, setSubmitable] = useState(false)
@@ -42,9 +45,11 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   }, [form])
   useEffect(() => {
     formRef.current.setFieldsValue({
-      ...profile
+      ...profile,
+      registerCode: partner?.registerCode
     })
-  }, [profile])
+    formRef.current.resetFields(['password', 'passwordAgain', 'oldPassword'])
+  }, [partner, profile])
 
   return (
     <ResponsiveCard responsiveCardTitle={t('profile.editor-title')}>
@@ -98,6 +103,10 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           <Input.Password disabled={!editable} />
         </Form.Item>
 
+        <Form.Item label={t('auth.field.oldPassword')} name="oldPassword">
+          <Input.Password />
+        </Form.Item>
+
         <Form.Item name="phone" label={t('profile.field.phone')}>
           <Input disabled={!editable} type="tel" />
         </Form.Item>
@@ -106,12 +115,18 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           <Input disabled />
         </Form.Item>
 
-        <Form.Item name="code" label={t('profile.field.code')}>
+        <Form.Item name="registerCode" label={t('profile.field.code')}>
           <Input disabled />
         </Form.Item>
 
         <div className="form-actions">
-          <Button>{t('common.cancel')}</Button>
+          <Button
+            onClick={() => {
+              history.goBack()
+            }}
+          >
+            {t('common.cancel')}
+          </Button>
           <Button
             hidden={!editable}
             type="primary"

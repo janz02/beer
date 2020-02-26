@@ -1,5 +1,6 @@
 {
   "auth": {
+    "change-password-success": "Jelszóváltoztatás sikeres",
     "error": {
       "login-failed": "Sikertelen autentikáció.",
       "password-inconsistent": "A két jelszó nem egyezik meg.",
@@ -10,6 +11,7 @@
       "code": "Partner regisztrációs kód",
       "email": "E-mail cím",
       "name": "Teljes név",
+      "oldPassword": "Régi jelszó",
       "password": "Jelszó",
       "password-again": "Jelszó ismét",
       "phone": "Telefonszám",

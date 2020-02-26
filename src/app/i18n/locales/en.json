@@ -1,5 +1,6 @@
 {
   "auth": {
+    "change-password-success": "Change password success.",
     "error": {
       "login-failed": "Authentication failed.",
       "password-inconsistent": "The two passwords are not matching.",
@@ -10,6 +11,7 @@
       "code": "Partner registration code",
       "email": "E-mail address",
       "name": "Full Name",
+      "oldPassword": "Old password",
       "password": "Password",
       "password-again": "Password again",
       "phone": "Phone number",
