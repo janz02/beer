@@ -73,7 +73,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           extra={passwordHelpVisible ? t('common.password-format-help') : ''}
           name="password"
           hasFeedback
-          label={t('profile.field.password')}
+          label={t('profile.field.new-password')}
           rules={[rule.password()]}
         >
           <Input.Password
@@ -87,7 +87,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           name="passwordAgain"
           hasFeedback
-          label={t('profile.field.password-again')}
+          label={t('profile.field.new-password-again')}
           dependencies={['password']}
           rules={[
             ({ getFieldValue }) => ({
@@ -103,7 +103,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           <Input.Password disabled={!editable} />
         </Form.Item>
 
-        <Form.Item label={t('auth.field.oldPassword')} name="oldPassword">
+        <Form.Item label={t('profile.field.old-password')} name="oldPassword">
           <Input.Password />
         </Form.Item>
 
