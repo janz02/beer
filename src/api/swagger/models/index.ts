@@ -3,6 +3,7 @@ export * from './CategoryDto';
 export * from './CategoryVm';
 export * from './CategoryVmPaginatedResponse';
 export * from './ChangeCouponStateDto';
+export * from './ChangePasswordDto';
 export * from './CouponCodeVm';
 export * from './CouponCommentDto';
 export * from './CouponCommentVm';

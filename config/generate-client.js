@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const shell = require("shelljs");
+const fs = require("fs-extra");
 
 // TODO: Use final DNS, lookout for prod - staging differences
 shell
@@ -9,6 +10,8 @@ shell
     )
   )
   .to("src/api/swagger.json");
+
+fs.removeSync("src/api/swagger");
 
 shell.exec(
   "openapi-generator generate -i src/api/swagger.json -g typescript-fetch -p typescriptThreePlus=true -o src/api/swagger"

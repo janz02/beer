@@ -18,6 +18,9 @@ import {
     AuthRegistrationFailedException,
     AuthRegistrationFailedExceptionFromJSON,
     AuthRegistrationFailedExceptionToJSON,
+    ChangePasswordDto,
+    ChangePasswordDtoFromJSON,
+    ChangePasswordDtoToJSON,
     LoginDto,
     LoginDtoFromJSON,
     LoginDtoToJSON,
@@ -37,6 +40,10 @@ import {
     UserVmFromJSON,
     UserVmToJSON,
 } from '../models';
+
+export interface ChangePasswordRequest {
+    changePasswordDto?: ChangePasswordDto;
+}
 
 export interface LoginRequest {
     loginDto?: LoginDto;
@@ -58,6 +65,40 @@ export interface RegisterUserRequest {
  * no description
  */
 export class AuthApi extends runtime.BaseAPI {
+
+    /**
+     * Returns nothing
+     * Changes the password for the logged in User
+     */
+    async changePasswordRaw(requestParameters: ChangePasswordRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/ChangePassword`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ChangePasswordDtoToJSON(requestParameters.changePasswordDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Returns nothing
+     * Changes the password for the logged in User
+     */
+    async changePassword(requestParameters: ChangePasswordRequest): Promise<void> {
+        await this.changePasswordRaw(requestParameters);
+    }
 
     /**
      * Returns user info about the logged in user

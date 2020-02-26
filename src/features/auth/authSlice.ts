@@ -6,6 +6,8 @@ import { UserVm } from 'api/swagger'
 import { getJwtUserdata } from 'services/jwt-reader'
 import { api } from 'api'
 import JwtDecode from 'jwt-decode'
+import { message } from 'antd'
+import i18n from 'app/i18n'
 
 const clearJwtData = (): void => {
   sessionStorage.removeItem('jwt')
@@ -21,6 +23,7 @@ const authSlice = createSlice({
     loading: false,
     errorSignup: '',
     errorLogin: '',
+    errorChangePassword: '',
     errorPasswordRecovery: ''
   },
   reducers: {
@@ -67,6 +70,15 @@ const authSlice = createSlice({
       state.loggedIn = false
       state.userData = {}
       clearJwtData()
+    },
+    changePasswordSuccess(state) {
+      message.success(i18n.t('auth.change-password-success'), 10)
+      state.loading = false
+      state.errorChangePassword = ''
+    },
+    changePasswordFail(state, action: PayloadAction<string>) {
+      state.loading = false
+      state.errorChangePassword = action.payload
     }
   }
 })
@@ -79,7 +91,9 @@ export const {
   passwordRecoveryFail,
   signupSuccess,
   signupFail,
-  logout
+  logout,
+  changePasswordSuccess,
+  changePasswordFail
 } = authSlice.actions
 
 export default authSlice.reducer
@@ -144,5 +158,19 @@ export const signUp = (params: any): AppThunk => async dispatch => {
     dispatch(login(params))
   } catch (err) {
     dispatch(signupFail(err.toString()))
+  }
+}
+
+export const changePassword = (
+  newPassword: string,
+  oldPassword: string
+): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+  try {
+    await api.auth.changePassword({ changePasswordDto: { newPassword, oldPassword } })
+
+    dispatch(changePasswordSuccess())
+  } catch (err) {
+    dispatch(changePasswordFail(err.toString()))
   }
 }
