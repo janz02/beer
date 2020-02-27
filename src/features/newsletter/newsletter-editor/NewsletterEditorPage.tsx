@@ -9,7 +9,8 @@ import {
   saveNewsletterTemplateVersion,
   clearNewsletterTemplate,
   switchNewsletterVersion,
-  restoreNewsletterTemplateVersion
+  restoreNewsletterTemplateVersion,
+  sendNewsletterEmailExample
 } from './newsletterEditorSlice'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
@@ -42,6 +43,11 @@ export const NewsletterEditorPage: FC = () => {
     dispatch(saveNewsletterTemplateVersion(template))
   }
 
+  const onSendSample: any = async (email: string) => {
+    const sent = await dispatch(sendNewsletterEmailExample(email))
+    return sent
+  }
+
   return (
     <>
       <ErrorBoundary>
@@ -51,6 +57,7 @@ export const NewsletterEditorPage: FC = () => {
           handleSaveVersion={onSaveVersion}
           handleRevert={onRevert}
           handleExit={onExit}
+          handleSendSample={onSendSample}
           handleVersionPreviewSwitch={(id: number) => dispatch(switchNewsletterVersion(+id))}
         />
       </ErrorBoundary>

@@ -1,7 +1,7 @@
 // import { createSlice } from '@reduxjs/toolkit'
 
 import { AppThunk } from 'app/store'
-import { NewsletterData } from 'models/newsletter'
+import { Newsletter } from 'models/newsletter'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { api } from 'api'
 import moment from 'moment'
@@ -9,7 +9,7 @@ import moment from 'moment'
 interface NewsletterEditorState {
   error: string
   currentTemplateVersionId?: number
-  template?: NewsletterData
+  template?: Newsletter
 }
 
 const initialState: NewsletterEditorState = {
@@ -27,7 +27,7 @@ const newsletterEditorSlice = createSlice({
     restoreTemplateVersionSuccess() {},
     restoreTemplateVersionFail(state, action: PayloadAction<string>) {},
     getTemplateRequest() {},
-    getTemplateSuccess(state, action: PayloadAction<NewsletterData>) {
+    getTemplateSuccess(state, action: PayloadAction<Newsletter>) {
       state.template = action.payload
       state.currentTemplateVersionId = action.payload.history?.[0]?.id
     },
@@ -64,7 +64,7 @@ export const getNewsletterTemplate = (id: number): AppThunk => async (dispatch, 
     const response = await api.emailTemplates.getTemplate({
       id
     })
-    const data: NewsletterData = {
+    const data: Newsletter = {
       id: response.id,
       name: response.name,
       history: response.history
@@ -118,5 +118,23 @@ export const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch,
     dispatch(getNewsletterTemplate(id!))
   } catch (err) {
     dispatch(restoreTemplateVersionFail(err.toString()))
+  }
+}
+
+export const sendNewsletterEmailExample = (email: string): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  try {
+    const templateId = getState().newsletterEditor.template?.id
+    await api.emailSender.sendEmails({
+      sendEmailsDto: {
+        recipients: [email],
+        emailTemplateId: templateId
+      }
+    })
+    return true
+  } catch (err) {
+    return false
   }
 }

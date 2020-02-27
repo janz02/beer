@@ -2,17 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { Pagination, calculatePagination, recalculatePagination } from 'models/pagination'
 import { AppThunk } from 'app/store'
-import { NewsletterPreviewData } from 'models/newsletter'
+import { NewsletterPreview } from 'models/newsletter'
 import { api } from 'api'
 import { history } from 'router/router'
+import moment from 'moment'
+import { Segment } from 'models/segment'
 
 interface NewsletterListState {
-  templates: NewsletterPreviewData[]
+  templates: NewsletterPreview[]
   error: string
   loading: boolean
   pagination: Pagination
-  // TODO: integrate segments
-  segments: any[]
+  segments: Segment[]
 }
 
 const initialState: NewsletterListState = {
@@ -22,16 +23,7 @@ const initialState: NewsletterListState = {
   pagination: {
     pageSize: 10
   },
-  segments: [
-    {
-      id: '1',
-      name: 'Old people with dogs'
-    },
-    {
-      id: '2',
-      name: 'Young people with cats'
-    }
-  ]
+  segments: []
 }
 
 const newsletterListSlice = createSlice({
@@ -59,7 +51,12 @@ const newsletterListSlice = createSlice({
     getTemplatesFail(state, action: PayloadAction<string>) {
       state.loading = false
       state.error = action.payload
-    }
+    },
+    getSegmentsRequest() {},
+    getSegmentsSuccess(state, action: PayloadAction<Segment[]>) {
+      state.segments = action.payload
+    },
+    getSegmentsFail(state, action: PayloadAction<string>) {}
   }
 })
 
@@ -74,17 +71,24 @@ const {
   deleteTemplateSuccess,
   deleteTemplateFail
 } = newsletterListSlice.actions
+const { getSegmentsRequest, getSegmentsSuccess, getSegmentsFail } = newsletterListSlice.actions
 
 export default newsletterListSlice.reducer
 
-export const sendNewsletterEmail = (email: string, templateId: number): AppThunk => async () => {
+export const sendNewsletterEmailToSegment = (
+  segmentId: string,
+  templateId: number
+): AppThunk => async () => {
   try {
-    await api.emailSender.sendEmails({
-      sendEmailsDto: {
-        recipients: [email],
-        emailTemplateId: templateId
-      }
-    })
+    console.log({ segmentId, templateId })
+
+    // TODO: segments should be instead of email
+    // await api.emailSender.sendEmails({
+    //   sendEmailsDto: {
+    //     recipients: [email],
+    //     emailTemplateId: templateId
+    //   }
+    // })
     return true
   } catch (err) {
     return false
@@ -103,9 +107,11 @@ export const getNewsletterTemplates = (params: any = {}): AppThunk => async (
       pageSize: pagination.pageSize,
       page: pagination.page
     })
+
+    const templates = response.result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
     dispatch(
       getTemplatesSuccess({
-        templates: response.result as any,
+        templates: templates as NewsletterPreview[],
         pagination: {
           page: response.page,
           from: response.from,
@@ -134,7 +140,7 @@ export const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatc
   }
 }
 
-export const createNewsletterTemplate = (name: string): AppThunk => async (dispatch, getState) => {
+export const createNewsletterTemplate = (name: string): AppThunk => async dispatch => {
   try {
     dispatch(createTemplateRequest())
     const id = await api.emailTemplates.createTemplate({
@@ -147,5 +153,19 @@ export const createNewsletterTemplate = (name: string): AppThunk => async (dispa
     history.push(`newsletter/editor/${id.id}`)
   } catch (err) {
     dispatch(createTemplateFail(err.toString()))
+  }
+}
+
+// TODO: consider lazy loading
+export const getSegmentsForEmail = (): AppThunk => async dispatch => {
+  try {
+    dispatch(getSegmentsRequest())
+    const response = await api.segments.getSegments({
+      pageSize: 10000
+    })
+    const segments: any = response.result?.map(s => ({ ...s, id: '' + s.id }))
+    dispatch(getSegmentsSuccess(segments ?? []))
+  } catch (err) {
+    dispatch(getSegmentsFail(err.toString()))
   }
 }

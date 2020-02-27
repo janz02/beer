@@ -1,13 +1,20 @@
 import React, { FC } from 'react'
 import { Select, Button, Tooltip } from 'antd'
-import { CloseOutlined, EditOutlined, EyeOutlined, SaveOutlined } from '@ant-design/icons'
+import {
+  CloseOutlined,
+  EditOutlined,
+  EyeOutlined,
+  SaveOutlined,
+  SendOutlined
+} from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
-import { NewsletterData } from 'models/newsletter'
+import { Newsletter } from 'models/newsletter'
 import './NewsletterEditorHeader.scss'
+import { MomentDisplay } from 'components/MomentDisplay'
 
 export interface NewsLetterEditorHeaderProps {
   className?: string
-  template: NewsletterData | null | undefined
+  template: Newsletter | null | undefined
   currentTemplateVersionId?: number
   isNewTemplate: boolean
   isTemplateModified: boolean
@@ -16,6 +23,7 @@ export interface NewsLetterEditorHeaderProps {
   handleRevert: () => void
   handleVersionPreviewSwitch: (id: number) => void
   handleExit: () => void
+  handleSendSample: () => void
 }
 
 export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => {
@@ -29,7 +37,8 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
     handleVersionPreviewSwitch,
     handleRevert,
     handleExit,
-    handleSaveVersion
+    handleSaveVersion,
+    handleSendSample
   } = props
 
   const { t } = useTranslation()
@@ -49,7 +58,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
                 <Select.Option key={h.version} value={h.id!}>
                   {i ? <EyeOutlined /> : <EditOutlined />}
                   <span className="nleh__version-number">{h.version}</span>
-                  {h.modifiedAt?.format('YYYY.MM.DD HH:mm')}
+                  <MomentDisplay date={h.modifiedAt} mode="date time" />
                 </Select.Option>
               ))}
             </Select>
@@ -63,15 +72,26 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
           </span>
         )}
         {isLatestTemplate && (
-          <span>
-            <Button
-              disabled={!isTemplateModified}
-              icon={<SaveOutlined />}
-              onClick={handleSaveVersion}
-            >
-              {t('common.save')}
-            </Button>
-          </span>
+          <>
+            <span>
+              <Button
+                disabled={!isTemplateModified}
+                icon={<SaveOutlined />}
+                onClick={handleSaveVersion}
+              >
+                {t('common.save')}
+              </Button>
+            </span>
+            <span>
+              <Button
+                disabled={isTemplateModified}
+                icon={<SendOutlined />}
+                onClick={handleSendSample}
+              >
+                {t('newsletter.send-sample')}
+              </Button>
+            </span>
+          </>
         )}
       </span>
       <Tooltip mouseEnterDelay={0.65} placement="bottomRight" title={t('newsletter.close-editor')}>

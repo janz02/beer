@@ -6,14 +6,13 @@ import grapesjs from 'grapesjs'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import grapesjsNewsLetter from 'grapesjs-preset-newsletter'
-
-import { NewsletterData } from 'models/newsletter'
+import { Newsletter } from 'models/newsletter'
 import locale from './locale'
 
 export interface UseNewsletterEditorProps {
   // id of the div element, which will hold the editor
   gjsEditorId: string
-  template: NewsletterData | undefined | null
+  template: Newsletter | undefined | null
   currentTemplateVersionId?: number
   onEditorLoaded: () => void
 }
@@ -107,17 +106,22 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
   useEffect(() => {
     // register eventlisteners on the new editor
     if (!editor) return
-    addStyledTooltips()
+    editor.on('load', () => {
+      addStyledTooltips()
+      onEditorLoaded()
+    })
+  }, [addStyledTooltips, editor, onEditorLoaded])
+
+  useEffect(() => {
+    // register eventlisteners on the new editor
+    if (!editor) return
     editor.on('update', () => {
       updateCount.current++
-      if (updateCount.current === 3) {
+      if (updateCount.current === 2) {
         setIsTemplateModified(true)
       }
     })
-    editor.on('load', () => {
-      onEditorLoaded()
-    })
-  }, [addStyledTooltips, editor, onEditorLoaded, updateCount])
+  }, [editor])
 
   useEffect(() => {
     // register buttons

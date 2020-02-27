@@ -10,7 +10,8 @@ import {
   PartnerContactsApi,
   ApiKeysApi,
   EmailSenderApi,
-  EmailTemplatesApi
+  EmailTemplatesApi,
+  SegmentsApi
 } from './swagger/apis'
 import { notification } from 'antd'
 import i18n from 'app/i18n'
@@ -71,5 +72,6 @@ export const api = {
   partnerContacts: new PartnerContactsApi(config),
   emailSender: new EmailSenderApi(config),
   emailTemplates: new EmailTemplatesApi(config),
+  segments: new SegmentsApi(config),
   apiKey: new ApiKeysApi(config)
 }

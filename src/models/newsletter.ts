@@ -4,11 +4,6 @@ export interface NewsletterVersion {
   version: number
 }
 
-export interface NewsletterPreviewData {
-  id?: number
-  name?: string | null
-}
-
 export interface NewsletterHistoryItem {
   id?: number
   content?: string | null
@@ -17,9 +12,10 @@ export interface NewsletterHistoryItem {
   version?: number
 }
 
-export interface NewsletterData extends NewsletterPreviewData {
-  version?: NewsletterVersion
-  content?: string
-  versions?: NewsletterVersion[]
+export interface NewsletterPreview extends NewsletterHistoryItem {
+  name?: string | null
+}
+
+export interface Newsletter extends NewsletterPreview {
   history?: NewsletterHistoryItem[]
 }

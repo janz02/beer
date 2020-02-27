@@ -3,18 +3,21 @@ import 'grapesjs-preset-newsletter/style/tooltip.css'
 import './NewsletterEditor.scss'
 import { useTranslation } from 'react-i18next'
 import { GenericPopup } from 'components/popups/GenericPopup'
-import { NewsletterData } from 'models/newsletter'
-import { Spin } from 'antd'
+import { Newsletter } from 'models/newsletter'
+import { Spin, Form, Input } from 'antd'
 import { useNewsletterEditor } from './useNewsletterEditor'
 import { NewsLetterEditorHeader, NewsLetterEditorHeaderProps } from './NewsLetterEditorHeader'
+import { GenericModalForm } from 'components/popups/GenericModalForm'
+import { useCommonFormRules } from 'hooks'
 const EDITOR_SELECTOR = 'pkm-grapesjs'
 
 export interface NewsletterEditorProps {
-  template: NewsletterData | null | undefined
+  template: Newsletter | null | undefined
   currentTemplateVersionId?: number
   handleSaveVersion: (template: string) => void
   handleRevert: () => void
   handleVersionPreviewSwitch: (id: number) => void
+  handleSendSample: (email: string) => void
   handleExit: () => void
 }
 
@@ -25,13 +28,24 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     template,
     handleRevert,
     handleSaveVersion,
-    handleExit
+    handleExit,
+    handleSendSample
   } = props
 
   const { t } = useTranslation()
+  const rule = useCommonFormRules()
 
   const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
   const [visibleRevertPopup, setVisibleRevertPopup] = useState(false)
+  const [sendPopup, setSendPopup] = useState<{
+    visible?: boolean
+    sending?: boolean
+  } | null>()
+  const [switchPopup, setSwitchPopup] = useState<{
+    visible: boolean
+    versionId: number
+  } | null>()
+
   const [loading, setLoading] = useState(true)
 
   const {
@@ -52,16 +66,23 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     isTemplateModified,
     template,
     currentTemplateVersionId,
-    handleVersionPreviewSwitch,
+    handleVersionPreviewSwitch: (id: number) => {
+      if (isTemplateModified) {
+        setSwitchPopup({ visible: true, versionId: id })
+      } else {
+        handleVersionPreviewSwitch(id)
+      }
+    },
     handleRevert: () => setVisibleRevertPopup(true),
     handleSaveVersion: () => handleSaveVersion(getEditorContent()),
     handleExit: () => {
       if (isTemplateModified) {
         setVisibleDiscardPopup(true)
-      } else if (handleExit) {
+      } else {
         handleExit()
       }
-    }
+    },
+    handleSendSample: () => setSendPopup({ ...sendPopup, visible: true })
   }
 
   return (
@@ -83,6 +104,17 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
           {t('newsletter.popup.discard-msg')}
         </GenericPopup>
         <GenericPopup
+          type="discard"
+          visible={switchPopup?.visible}
+          onOk={() => {
+            switchPopup?.versionId && handleVersionPreviewSwitch(switchPopup.versionId)
+            setSwitchPopup(null)
+          }}
+          onCancel={() => setSwitchPopup(null)}
+        >
+          {t('newsletter.popup.preview-discard-msg')}
+        </GenericPopup>
+        <GenericPopup
           type="restore"
           visible={visibleRevertPopup}
           onOk={() => {
@@ -93,6 +125,28 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
         >
           {t('newsletter.popup.restore-msg')}
         </GenericPopup>
+        <GenericModalForm
+          modalProps={{
+            ...sendPopup,
+            title: t('newsletter.popup.title-send-sample'),
+            okText: t('common.send'),
+            okButtonProps: {
+              disabled: sendPopup?.sending
+            },
+            onCancel: () => setSendPopup({ ...sendPopup, visible: false })
+          }}
+          formProps={{
+            onFinish: async (values: any) => {
+              setSendPopup({ ...sendPopup, sending: true })
+              const sent: any = await handleSendSample(values.email)
+              setSendPopup(sent ? null : { ...sendPopup, sending: false })
+            }
+          }}
+        >
+          <Form.Item name="email" label={t('newsletter.field.email')} rules={[rule.required()]}>
+            <Input />
+          </Form.Item>
+        </GenericModalForm>
       </div>
     </>
   )

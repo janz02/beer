@@ -138,15 +138,21 @@
     "available-templates": "Available templates",
     "close-editor": "Close editor",
     "field": {
-      "template-name": "Template name"
+      "email": "Email address",
+      "template-modified-at": "Modified at",
+      "template-name": "Template name",
+      "template-version": "Version"
     },
     "popup": {
       "discard-msg": "All your current modifications will be lost.",
+      "preview-discard-msg": "You have modified the current version of the template. By previewing the previous version you will lose all changes.",
       "restore-msg": "By restoring, you will copy this template on the top of the version history, as the latest saved version.",
       "target-segment": "Target segment",
       "title-save": "Save template",
-      "title-send": "Send newsletter"
-    }
+      "title-send-sample": "Send sample email",
+      "title-send-segment": "Send newsletter to segment"
+    },
+    "send-sample": "Send sample"
   },
   "notification": {
     "empty-list": "Empty",

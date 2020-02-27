@@ -138,15 +138,21 @@
     "available-templates": "Hírlevél sablonok",
     "close-editor": "Szerkesztő bezárása",
     "field": {
-      "template-name": "Sablon név"
+      "email": "E-mail cím",
+      "template-modified-at": "Változtatva",
+      "template-name": "Sablon név",
+      "template-version": "Verzió"
     },
     "popup": {
       "discard-msg": "Minden aktuális változtatás el fog veszni.",
+      "preview-discard-msg": "Az aktuális sablon verzióban vannak változtatások. Az előző verzió megtekintésekor a változtatások el fognak veszni.",
       "restore-msg": "Ez a sablon verzió, visszamásolódik a verzió történet tetejére, mint a legfrissebb sablon.",
       "target-segment": "Cél szegmens",
       "title-save": "Sablon mentése",
-      "title-send": "Sablon küldése"
-    }
+      "title-send-sample": "Minta e-mail küldése",
+      "title-send-segment": "Hírlevél kiküldése szegmensnek"
+    },
+    "send-sample": "Minta küldése"
   },
   "notification": {
     "empty-list": "Üres",

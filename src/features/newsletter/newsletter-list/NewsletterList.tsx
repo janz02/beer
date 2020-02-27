@@ -13,13 +13,15 @@ import { history } from 'router/router'
 import {
   deleteNewsletterTemplate,
   getNewsletterTemplates,
-  sendNewsletterEmail,
-  createNewsletterTemplate
+  sendNewsletterEmailToSegment,
+  createNewsletterTemplate,
+  getSegmentsForEmail
 } from './newsletterListSlice'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { useDispatch } from 'hooks/react-redux-hooks'
-import { NewsletterPreviewData } from 'models/newsletter'
+import { NewsletterPreview } from 'models/newsletter'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
+import { MomentDisplay } from 'components/MomentDisplay'
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
@@ -33,12 +35,12 @@ export const NewsletterList: FC = () => {
 
   const [visibleSaveNewPopup, setVisibleSaveNewPopup] = useState(false)
   const [sendPopup, setSendPopup] = useState<{
-    template?: NewsletterPreviewData
+    template?: NewsletterPreview
     visible?: boolean
     sending?: boolean
   } | null>()
   const [deletePopup, setDeletePopup] = useState<{
-    template?: NewsletterPreviewData
+    template?: NewsletterPreview
     visible?: boolean
   } | null>()
 
@@ -58,13 +60,28 @@ export const NewsletterList: FC = () => {
         dataIndex: 'name'
       },
       {
+        title: t('newsletter.field.template-version'),
+        key: 'version',
+        dataIndex: 'version'
+      },
+      {
+        title: t('newsletter.field.template-modified-at'),
+        key: 'modifiedAt',
+        render(record: NewsletterPreview) {
+          return <MomentDisplay date={record.modifiedAt} mode="date/time" />
+        }
+      },
+      {
         title: t('common.actions'),
         key: 'actions',
         colSpan: 1,
-        render(record: NewsletterPreviewData) {
+        render(record: NewsletterPreview) {
           return (
             <CrudButtons
-              onSend={() => setSendPopup({ visible: true, template: record })}
+              onSend={() => {
+                dispatch(getSegmentsForEmail())
+                setSendPopup({ visible: true, template: record })
+              }}
               onEdit={() => editTemplate(record.id)}
               onDelete={() => {
                 setDeletePopup({
@@ -77,7 +94,7 @@ export const NewsletterList: FC = () => {
         }
       }
     ],
-    [editTemplate, t]
+    [dispatch, editTemplate, t]
   )
 
   const paginationConfig = useMemo((): TablePaginationConfig | false => {
@@ -131,7 +148,7 @@ export const NewsletterList: FC = () => {
       <GenericModalForm
         modalProps={{
           ...sendPopup,
-          title: t('newsletter.popup.title-send'),
+          title: t('newsletter.popup.title-send-segment'),
           okText: t('common.send'),
           okButtonProps: {
             disabled: sendPopup?.sending
@@ -142,17 +159,14 @@ export const NewsletterList: FC = () => {
           onFinish: async (values: any) => {
             setSendPopup({ ...sendPopup, sending: true })
             const sent: any = await dispatch(
-              sendNewsletterEmail(values.email, sendPopup?.template?.id!)
+              sendNewsletterEmailToSegment(values.segment, sendPopup?.template?.id!)
             )
             setSendPopup(sent ? null : { ...sendPopup, sending: false })
           }
         }}
       >
-        <Form.Item name="email" label="TEMP field: email" rules={[rule.required()]}>
-          <Input />
-        </Form.Item>
         <Form.Item
-          name="templateName"
+          name="segment"
           label={t('newsletter.popup.target-segment')}
           rules={[rule.required()]}
         >
