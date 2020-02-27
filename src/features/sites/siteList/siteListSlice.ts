@@ -24,7 +24,7 @@ const initialState: SiteListState = {
 }
 
 const siteListSlice = createSlice({
-  name: '@site-list',
+  name: 'siteList',
   initialState,
   reducers: {
     getSitesRequest(state) {

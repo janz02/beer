@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 
 export const ErrorPage: FC = () => {
   const { type } = useParams()
-
   const { t } = useTranslation()
 
   const content = useMemo(() => {

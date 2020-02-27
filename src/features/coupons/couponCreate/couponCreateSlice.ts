@@ -17,7 +17,7 @@ const initialState: CouponEditorState = {
 }
 
 const couponCreateSlice = createSlice({
-  name: 'coupon-create',
+  name: 'couponCreate',
   initialState,
   reducers: {
     createCouponSuccess(state) {

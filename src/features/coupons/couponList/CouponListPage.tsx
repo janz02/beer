@@ -17,16 +17,15 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { getCategories } from '../couponsSlice'
 
 export const CouponListPage: React.FC = () => {
-  const { t } = useTranslation()
   const dispatch = useDispatch()
-  const isMobile = useIsMobile()
-  const { coupons, loading, allCouponsCount } = useSelector((state: RootState) => state.couponList)
+  const { t } = useTranslation()
   const { categories } = useSelector((state: RootState) => state.coupons)
-
+  const { coupons, loading, allCouponsCount } = useSelector((state: RootState) => state.couponList)
   const [listingOptions, setListingOptions] = useState<CouponListingOptions>({
     pageSize: 10,
     current: 1
   })
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     dispatch(getCategories())
@@ -136,19 +135,17 @@ export const CouponListPage: React.FC = () => {
     }
   ]
 
-  const cardHeader = (): JSX.Element => (
-    <div className="coupons-list__header">
-      <h3>{t('coupon-list.coupons')}</h3>
-      <Button type="primary">
-        <Link to="/coupons/create">{t('coupon-list.create')}</Link>
-      </Button>
-    </div>
-  )
-
   return (
     <div className="coupons-list-page">
       <Table
-        title={() => cardHeader()}
+        title={() => (
+          <div className="coupons-list__header">
+            <h3>{t('coupon-list.coupons')}</h3>
+            <Button type="primary">
+              <Link to="/coupons/create">{t('coupon-list.create')}</Link>
+            </Button>
+          </div>
+        )}
         dataSource={coupons}
         columns={columns}
         rowKey={(x): string => x.id?.toString() ?? ''}

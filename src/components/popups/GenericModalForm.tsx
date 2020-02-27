@@ -32,7 +32,6 @@ export interface GenericModalFormProps {
 export const GenericModalForm: FC<GenericModalFormProps> = props => {
   const { children, formProps, modalProps } = props
   const { t } = useTranslation()
-
   const [form] = Form.useForm()
 
   useEffect(() => {

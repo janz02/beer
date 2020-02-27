@@ -14,13 +14,9 @@ interface NotificationListProps {
 
 export const NotificationList: FC<NotificationListProps> = props => {
   const { onClick } = props
-
-  const { t } = useTranslation()
   const dispatch = useDispatch()
-
-  const notifications = useSelector((state: RootState) => state.notification.notifications)
-  const hasMoreNotifications = useSelector((state: RootState) => state.notification.hasMore)
-  const loading = useSelector((state: RootState) => state.notification.loading)
+  const { t } = useTranslation()
+  const { notifications, hasMore, loading } = useSelector((state: RootState) => state.notification)
 
   useEffect(() => {
     dispatch(getNotifications())
@@ -30,7 +26,7 @@ export const NotificationList: FC<NotificationListProps> = props => {
     dispatch(getNotifications())
   }
 
-  const canLoadMore = (): boolean => !loading && hasMoreNotifications
+  const canLoadMore = (): boolean => !loading && hasMore
 
   const loadMoreButton = canLoadMore() && (
     <Button className="notification-list__load-more-btn" type="dashed" onClick={loadMore}>

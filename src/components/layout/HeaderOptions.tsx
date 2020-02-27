@@ -15,10 +15,8 @@ interface HeaderOptionsProps {
 
 export const HeaderOptions: FC<HeaderOptionsProps> = props => {
   const { openNotifications } = props
-  const { t } = useTranslation()
-
   const dispatch = useDispatch()
-
+  const { t } = useTranslation()
   const unreadCount = useSelector((state: RootState) => state.notification.unreadCount)
   const profile = useSelector((state: RootState) => state.profile.profile)
 

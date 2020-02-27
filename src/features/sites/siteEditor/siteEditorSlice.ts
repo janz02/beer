@@ -39,7 +39,7 @@ const initialState: SiteEditorState = {
 }
 
 const siteEditorSlice = createSlice({
-  name: '@site-editor',
+  name: 'siteEditor',
   initialState,
   reducers: {
     setAddNewApiKeyPopupVisible(state, action: PayloadAction<boolean>) {

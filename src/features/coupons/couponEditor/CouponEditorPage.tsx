@@ -7,9 +7,8 @@ import { getCoupon, updateCoupon } from './couponEditorSlice'
 import { Coupon } from 'models/coupon'
 
 export const CouponEditorPage: React.FC = () => {
-  const dispatch = useDispatch()
   const { id } = useParams()
-
+  const dispatch = useDispatch()
   const { coupon, loading } = useSelector((state: RootState) => state.couponEditor)
 
   useEffect(() => {

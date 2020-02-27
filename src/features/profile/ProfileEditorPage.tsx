@@ -8,9 +8,8 @@ import { changePassword } from 'features/auth/authSlice'
 
 export const ProfileEditorPage: React.FC = () => {
   const dispatch = useDispatch()
-
-  const { profile, loading, editable } = useSelector((state: RootState) => state.profile)
   const { partner } = useSelector((state: RootState) => state.partner)
+  const { profile, loading, editable } = useSelector((state: RootState) => state.profile)
 
   useEffect(() => {
     dispatch(getProfile())

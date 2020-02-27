@@ -10,15 +10,13 @@ import { ResponsivePage } from 'components/responsive/ResponsivePage'
 
 export const CategoryPage: React.FC = () => {
   const dispatch = useDispatch()
-
+  const selectedId: number = useSelector(
+    (state: RootState) => (state.router.location as any)?.query?.id
+  )
   const [firstLoad, setFirstLoad] = useState(true)
   const [editorParams, setEditorParams] = useState<CategoryEditorParams>({
     visible: false
   })
-
-  const selectedId: number = useSelector(
-    (state: RootState) => (state.router.location as any)?.query?.id
-  )
 
   const openEditor = useCallback((id?: number, createNew?: boolean) => {
     if (!id && !createNew) {

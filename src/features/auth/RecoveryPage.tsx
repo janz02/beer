@@ -12,9 +12,8 @@ import { useCommonFormRules } from 'hooks'
 export const RecoveryPage: React.FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const rule = useCommonFormRules()
-
   const { loading, errorPasswordRecovery: error } = useSelector((state: RootState) => state.auth)
+  const rule = useCommonFormRules()
 
   return (
     <AuthLayout className="recovery" title={t(`auth.forgot-password`)}>

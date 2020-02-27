@@ -16,18 +16,14 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
 
 export const SitesListPage: FC = () => {
-  const isMobile = useIsMobile()
   const dispatch = useDispatch()
   const { t } = useTranslation()
-
-  const sites = useSelector((state: RootState) => state.siteList.sites)
-  const pagination = useSelector((state: RootState) => state.siteList.pagination)
-  const error = useSelector((state: RootState) => state.siteList.errorList)
-
+  const { sites, pagination, errorList } = useSelector((state: RootState) => state.siteList)
   const [siteToDelete, setSiteToDelete] = useState<{
     site?: Site
     popupVisible?: boolean
   } | null>()
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     dispatch(getSites())
@@ -72,7 +68,7 @@ export const SitesListPage: FC = () => {
   )
 
   const paginationConfig = useMemo((): TablePaginationConfig | false => {
-    const baseConfig = basePaginationConfig(isMobile, !!error, pagination)
+    const baseConfig = basePaginationConfig(isMobile, !!errorList, pagination)
     return baseConfig.total
       ? {
           ...baseConfig,
@@ -84,7 +80,7 @@ export const SitesListPage: FC = () => {
           }
         }
       : false
-  }, [dispatch, error, isMobile, pagination])
+  }, [dispatch, errorList, isMobile, pagination])
 
   const headerOptions = (): JSX.Element => (
     <Button type="primary" onClick={() => history.push(`/sites/editor`)}>
@@ -104,7 +100,7 @@ export const SitesListPage: FC = () => {
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
               pagination: paginationConfig
             }}
-            error={error}
+            error={errorList}
           />
         </ResponsiveCard>
       </ResponsivePage>
