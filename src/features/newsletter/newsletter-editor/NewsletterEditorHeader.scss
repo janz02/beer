@@ -1,0 +1,29 @@
+.nleh {
+  display: grid;
+  grid-template-columns: auto min-content;
+
+  &__title {
+    padding: 0 2rem;
+    font-size: 1rem;
+  }
+
+  &__toolbar {
+    display: inline-flex;
+    overflow-y: auto;
+
+    & > * {
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    width: 3.5rem;
+    height: 100%;
+    padding: 0 1rem;
+    border-radius: 0;
+    font-size: 1.3rem;
+    text-align: center;
+  }
+}

@@ -30,9 +30,11 @@
   "common": {
     "actions": "Actions",
     "cancel": "Cancel",
+    "confirm": "Ok",
     "create": "Create",
     "data": "Data",
     "delete": "Delete",
+    "discard": "Discard",
     "edit": "Edit",
     "go-back": "Go back",
     "message": {
@@ -45,9 +47,10 @@
       "confirm-title": "Are you sure about doing this?",
       "delete-title": "Are you sure about deleting this data?",
       "discard-title": "Are you sure about discarding this?",
+      "restore-title": "Are you sure about restoring this?",
       "save-title": "Are you sure about saving this data?"
     },
-    "revert": "Revert",
+    "restore": "Restore",
     "rule-error": {
       "email": "This field must be a valid e-mail.",
       "field-number": "This field must be a number.",
@@ -133,13 +136,14 @@
   },
   "newsletter": {
     "available-templates": "Available templates",
+    "close-editor": "Close editor",
     "field": {
-      "template-name": "Template name",
-      "template-version": "Template version"
+      "template-name": "Template name"
     },
     "popup": {
+      "discard-msg": "All your current modifications will be lost.",
+      "restore-msg": "By restoring, you will copy this template on the top of the version history, as the latest saved version.",
       "target-segment": "Target segment",
-      "title-revert": "Revert template",
       "title-save": "Save template",
       "title-send": "Send newsletter"
     }

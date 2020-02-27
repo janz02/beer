@@ -1,157 +1,99 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useState } from 'react'
+import 'grapesjs-preset-newsletter/style/tooltip.css'
 import './NewsletterEditor.scss'
 import { useTranslation } from 'react-i18next'
-import locale from './locale'
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import grapesjs from 'grapesjs'
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import grapesjsNewsLetter from 'grapesjs-preset-newsletter'
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import grapesjsIndexxeddb from 'grapesjs-indexeddb'
 import { GenericPopup } from 'components/popups/GenericPopup'
-
-enum CMD {
-  // used as locale key and cmd string
-  SaveTemplate = 'pkm-save-template',
-  RevertTemplate = 'pkm-revert-template'
-}
+import { NewsletterData } from 'models/newsletter'
+import { Spin } from 'antd'
+import { useNewsletterEditor } from './useNewsletterEditor'
+import { NewsLetterEditorHeader, NewsLetterEditorHeaderProps } from './NewsLetterEditorHeader'
+const EDITOR_SELECTOR = 'pkm-grapesjs'
 
 export interface NewsletterEditorProps {
-  id?: string
-  template?: string
-  handleSave?: (template: string, afterSave: () => void) => void
-  handleRevert?: () => void
-  handleExit?: () => void
+  template: NewsletterData | null | undefined
+  currentTemplateVersionId?: number
+  handleSaveVersion: (template: string) => void
+  handleRevert: () => void
+  handleVersionPreviewSwitch: (id: number) => void
+  handleExit: () => void
 }
 
 export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
-  const { id, handleSave, handleRevert, handleExit } = props
-  const template = props?.template ?? ''
+  const {
+    handleVersionPreviewSwitch,
+    currentTemplateVersionId,
+    template,
+    handleRevert,
+    handleSaveVersion,
+    handleExit
+  } = props
 
-  const { i18n } = useTranslation()
+  const { t } = useTranslation()
+
   const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
-  const [templateModified, setTemplateModified] = useState(false)
-  const storageId = `gjs-pkm-${id ?? ''}`
+  const [visibleRevertPopup, setVisibleRevertPopup] = useState(false)
+  const [loading, setLoading] = useState(true)
 
-  const editor = useRef<any>()
+  const {
+    getEditorContent,
+    isLatestTemplate,
+    isNewTemplate,
+    isTemplateModified
+  } = useNewsletterEditor({
+    gjsEditorId: EDITOR_SELECTOR,
+    currentTemplateVersionId,
+    template,
+    onEditorLoaded: () => setLoading(false)
+  })
 
-  useEffect(() => {
-    const translations = { en: (locale as any)[i18n.language] }
-    editor.current = grapesjs.init({
-      // TODO: consider removing db, giving db id
-      container: '#grapesjs',
-      storageManager: {
-        type: 'indexeddb',
-        id: storageId,
-        autoload: true
-      },
-      height: '100%',
-      plugins: [grapesjsNewsLetter, grapesjsIndexxeddb],
-      pluginsOpts: {
-        [grapesjsIndexxeddb]: {
-          dbName: storageId
-        },
-        [grapesjsNewsLetter]: {
-          // Translations that are not handled by the news letter preset.
-          // Update only the locale files, the `en` is a placeholder for all translations.
-          ...translations.en?.preset
-        }
-      },
-      i18n: {
-        // bugfix: The editor.current.I18n.setLocale function is not switching the languege.
-        // tried alse ..setLocale + editor.render() -> causes problems in the template
-        // The locale is kept always as `en` but the translations are switched,
-        // and the the editor is reinitialized.
-        locale: 'en',
-        localeFallback: 'en',
-        messages: translations
+  const headerProps: NewsLetterEditorHeaderProps = {
+    isLatestTemplate,
+    isNewTemplate,
+    isTemplateModified,
+    template,
+    currentTemplateVersionId,
+    handleVersionPreviewSwitch,
+    handleRevert: () => setVisibleRevertPopup(true),
+    handleSaveVersion: () => handleSaveVersion(getEditorContent()),
+    handleExit: () => {
+      if (isTemplateModified) {
+        setVisibleDiscardPopup(true)
+      } else if (handleExit) {
+        handleExit()
       }
-    })
-    editor.current.on('update', () => {
-      setTemplateModified(true)
-    })
-    editor.current.Commands.add(CMD.SaveTemplate, {
-      run: (editor: any) => {
-        handleSave &&
-          handleSave(editor.runCommand('gjs-get-inlined-html'), () => setTemplateModified(false))
-      }
-    })
-    editor.current.Commands.add(CMD.RevertTemplate, {
-      run: () => {
-        handleRevert && handleRevert()
-      }
-    })
-    editor.current.Panels.addButton('options', [
-      {
-        id: CMD.SaveTemplate,
-        className: 'fa fa-save',
-        command: (editor: any) => {
-          editor.runCommand(CMD.SaveTemplate)
-        }
-      },
-      {
-        id: CMD.RevertTemplate,
-        className: 'fa fa-history',
-        command: (editor: any, sender: any) => {
-          editor.runCommand(CMD.RevertTemplate)
-        }
-      },
-      {
-        id: 'pkm-download-as-html',
-        className: 'fa fa-file-text',
-        command: (editor: any) => {
-          const ee = editor.runCommand('gjs-get-inlined-html')
-          const download = (filename: string, text: string): void => {
-            const pom = document.createElement('a')
-            pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text))
-            pom.setAttribute('download', filename)
-
-            if (document.createEvent) {
-              const event = document.createEvent('MouseEvents')
-              event.initEvent('click', true, true)
-              pom.dispatchEvent(event)
-            } else {
-              pom.click()
-            }
-          }
-          download('template.html', ee)
-        }
-      },
-      {
-        id: 'close-editor',
-        className: 'fa fa-close',
-        command: () => {
-          if (templateModified) {
-            setVisibleDiscardPopup(true)
-          } else {
-            handleExit && handleExit()
-          }
-        }
-      }
-    ])
-  }, [handleRevert, handleSave, i18n.language, template, storageId, templateModified, handleExit])
-
-  useEffect(() => {
-    if (editor.current) {
-      editor.current.setComponents(template)
     }
-  }, [template, i18n.language])
+  }
 
   return (
     <>
-      <div className="newsletter-editor-containter">
-        <div id="grapesjs" />
+      <Spin className="nle-spinner" spinning={loading} size="large" />
+      <div hidden={loading} className="nle">
+        <NewsLetterEditorHeader className="nle__header" {...headerProps} />
+
+        <div className="nle__containter">
+          <div id={EDITOR_SELECTOR} />
+        </div>
+
+        <GenericPopup
+          type="discard"
+          visible={visibleDiscardPopup}
+          onOk={handleExit}
+          onCancel={() => setVisibleDiscardPopup(false)}
+        >
+          {t('newsletter.popup.discard-msg')}
+        </GenericPopup>
+        <GenericPopup
+          type="restore"
+          visible={visibleRevertPopup}
+          onOk={() => {
+            handleRevert()
+            setVisibleRevertPopup(false)
+          }}
+          onCancel={() => setVisibleRevertPopup(false)}
+        >
+          {t('newsletter.popup.restore-msg')}
+        </GenericPopup>
       </div>
-      <GenericPopup type="discard" />
-      <GenericPopup
-        type="discard"
-        visible={visibleDiscardPopup}
-        onOk={handleExit}
-        onCancel={() => setVisibleDiscardPopup(false)}
-      />
     </>
   )
 }

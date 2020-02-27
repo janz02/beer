@@ -10,7 +10,12 @@ import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { history } from 'router/router'
-import { deleteNewsletterTemplate, getNewsletterTemplates } from './newsletterListSlice'
+import {
+  deleteNewsletterTemplate,
+  getNewsletterTemplates,
+  sendNewsletterEmail,
+  createNewsletterTemplate
+} from './newsletterListSlice'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { NewsletterPreviewData } from 'models/newsletter'
@@ -23,21 +28,24 @@ export const NewsletterList: FC = () => {
 
   const isMobile = useIsMobile()
 
-  const { templates, pagination, error, segments } = useSelector(
+  const { templates, pagination, error, segments, loading } = useSelector(
     (state: RootState) => state.newsletterList
   )
+  const [visibleSaveNewPopup, setVisibleSaveNewPopup] = useState(false)
 
-  const [sendPopup, setSendPopup] = useState({
-    visible: false
-  })
-
-  const [templateToDelete, setTemplateToDelete] = useState<{
+  const [sendPopup, setSendPopup] = useState<{
     template?: NewsletterPreviewData
-    popupVisible?: boolean
+    visible?: boolean
+    sending?: boolean
+  } | null>()
+
+  const [deletePopup, setDeletePopup] = useState<{
+    template?: NewsletterPreviewData
+    visible?: boolean
   } | null>()
 
   const editTemplate = useCallback((id?: number) => {
-    history.push(`/newsletter/editor/${id ?? ''}`)
+    history.push(`/newsletter/editor/${id}`)
   }, [])
 
   useEffect(() => {
@@ -58,12 +66,12 @@ export const NewsletterList: FC = () => {
         render(record: NewsletterPreviewData) {
           return (
             <CrudButtons
-              onSend={() => setSendPopup({ visible: true })}
+              onSend={() => setSendPopup({ visible: true, template: record })}
               onEdit={() => editTemplate(record.id)}
               onDelete={() => {
-                setTemplateToDelete({
+                setDeletePopup({
                   template: record,
-                  popupVisible: true
+                  visible: true
                 })
               }}
             />
@@ -92,10 +100,11 @@ export const NewsletterList: FC = () => {
   }, [dispatch, error, isMobile, pagination])
 
   const headerOptions = (): JSX.Element => (
-    <Button type="primary" onClick={() => editTemplate()}>
+    <Button type="primary" onClick={() => setVisibleSaveNewPopup(true)}>
       {t('common.create')}
     </Button>
   )
+
   return (
     <div>
       <ResponsiveCard>
@@ -103,6 +112,7 @@ export const NewsletterList: FC = () => {
           headerTitle={t('newsletter.available-templates')}
           headerOptions={headerOptions}
           tableProps={{
+            loading,
             columns: columnsConfig,
             dataSource: templates.map((t, i) => ({ ...t, key: '' + i + t.id })),
             pagination: paginationConfig
@@ -111,21 +121,32 @@ export const NewsletterList: FC = () => {
         />
       </ResponsiveCard>
       <GenericPopup
-        id={templateToDelete?.template?.id}
+        id={deletePopup?.template?.id}
         type="delete"
-        visible={!!templateToDelete?.popupVisible}
-        onOkAction={deleteNewsletterTemplate(templateToDelete?.template?.id)}
-        onCancel={() => setTemplateToDelete({ ...templateToDelete, popupVisible: false })}
-        afterClose={() => setTemplateToDelete(null)}
+        visible={!!deletePopup?.visible}
+        onOkAction={deleteNewsletterTemplate(deletePopup?.template?.id!)}
+        onCancel={() => setDeletePopup({ ...deletePopup, visible: false })}
+        afterClose={() => setDeletePopup(null)}
       />
       <GenericModalForm
         modalProps={{
           ...sendPopup,
           title: t('newsletter.popup.title-send'),
           okText: t('common.send'),
+          okButtonProps: {
+            disabled: sendPopup?.sending
+          },
           onCancel: () => setSendPopup({ ...sendPopup, visible: false })
         }}
-        formProps={{}}
+        formProps={{
+          onFinish: async (values: any) => {
+            setSendPopup({ ...sendPopup, sending: true })
+            const sent: any = await dispatch(
+              sendNewsletterEmail(values.email, sendPopup?.template?.id!)
+            )
+            setSendPopup(sent ? null : { ...sendPopup, sending: false })
+          }
+        }}
       >
         <Form.Item name="email" label="TEMP field: email" rules={[rule.required()]}>
           <Input />
@@ -135,13 +156,38 @@ export const NewsletterList: FC = () => {
           label={t('newsletter.popup.target-segment')}
           rules={[rule.required()]}
         >
-          <Select>
+          <Select onChange={(e: any) => console.log(e)}>
             {segments?.map(s => (
               <Select.Option key={s.id} value={s.id}>
                 {s.name}
               </Select.Option>
             ))}
           </Select>
+        </Form.Item>
+      </GenericModalForm>
+      <GenericModalForm
+        modalProps={{
+          visible: visibleSaveNewPopup,
+          title: t('newsletter.popup.title-save'),
+          okText: t('common.save'),
+          onCancel: () => {
+            setVisibleSaveNewPopup(false)
+          }
+        }}
+        formProps={{
+          onFinish: (values: any) => {
+            const { templateName } = values
+            dispatch(createNewsletterTemplate(templateName))
+            setVisibleSaveNewPopup(false)
+          }
+        }}
+      >
+        <Form.Item
+          name="templateName"
+          label={t('newsletter.field.template-name')}
+          rules={[rule.required()]}
+        >
+          <Input />
         </Form.Item>
       </GenericModalForm>
     </div>
