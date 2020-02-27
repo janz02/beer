@@ -11,7 +11,6 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = props => {
   const { children, onMenuClick, open } = props
-
   const isMobile = useIsMobile()
 
   return (

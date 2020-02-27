@@ -11,9 +11,8 @@ import { useCommonFormRules } from 'hooks/useCommonFormRules'
 export const SignupPage: React.FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const rule = useCommonFormRules()
-
   const { loading, errorSignup: error } = useSelector((state: RootState) => state.auth)
+  const rule = useCommonFormRules()
 
   return (
     <AuthLayout className="signup" title={t(`auth.signup`)}>

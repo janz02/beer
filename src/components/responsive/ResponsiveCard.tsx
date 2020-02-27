@@ -10,7 +10,6 @@ export interface ResponsiveCardProps extends CardProps {
 
 export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
   const { responsiveCardTitle, children, ...rest } = props
-
   const isMobile = useIsMobile()
 
   return (

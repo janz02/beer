@@ -16,7 +16,7 @@ const clearJwtData = (): void => {
 }
 
 const authSlice = createSlice({
-  name: '@auth',
+  name: 'auth',
   initialState: {
     loggedIn: !!sessionStorage.getItem('jwt'),
     userData: getJwtUserdata(),

@@ -20,7 +20,7 @@ const initialState: CouponEditorState = {
 }
 
 const couponEditorSlice = createSlice({
-  name: 'coupon-editor',
+  name: 'couponEditor',
   initialState,
   reducers: {
     getCouponsSuccess(state, action: PayloadAction<Coupon>) {

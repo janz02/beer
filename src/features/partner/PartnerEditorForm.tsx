@@ -12,12 +12,11 @@ export interface PartnerEditorFormProps {
 
 export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const { handlePartnerSave, loading, partner } = props
-
   const { t } = useTranslation()
-  const isMobile = useIsMobile()
-  const [submitable, setSubmitable] = useState(false)
   const [form] = Form.useForm()
+  const [submitable, setSubmitable] = useState(false)
   const rule = useCommonFormRules()
+  const isMobile = useIsMobile()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =

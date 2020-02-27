@@ -34,46 +34,20 @@ export interface CouponEditorFormProps {
 
 export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { handleCouponSave, loading, couponIsNew, coupon } = props
-
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const isMobile = useIsMobile()
-  const { categories } = useSelector((state: RootState) => state.coupons)
-  const [submitable, setSubmitable] = useState(false)
   const { editing } = useParams()
-  const [formEditing, setFormEditing] = useState(editing === 'true')
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [form] = Form.useForm()
   const [commentForm] = Form.useForm()
+  const { categories } = useSelector((state: RootState) => state.coupons)
+  const [submitable, setSubmitable] = useState(false)
+  const [formEditing, setFormEditing] = useState(editing === 'true')
   const rule = useCommonFormRules()
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     dispatch(getCategories())
   }, [dispatch])
-
-  const displayEditor =
-    couponIsNew ||
-    (formEditing &&
-      coupon &&
-      coupon.state !== CouponState.Closed &&
-      coupon.state !== CouponState.Archived)
-
-  const formLayout = isMobile ? 'vertical' : 'horizontal'
-  const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: { span: 4 },
-          wrapperCol: { span: 14 }
-        }
-      : null
-
-  const handleSubmit = (values: any): void => {
-    handleCouponSave({
-      ...values,
-      // TODO: integrate tags and isDrawable.
-      tags: [],
-      isDrawable: false
-    })
-  }
 
   // TODO: revisit this problem after upgrading andt package.
   // https://github.com/ant-design/ant-design/issues/18983
@@ -113,6 +87,30 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       comment: ''
     })
   }, [coupon])
+
+  const displayEditor =
+    couponIsNew ||
+    (formEditing &&
+      coupon &&
+      coupon.state !== CouponState.Closed &&
+      coupon.state !== CouponState.Archived)
+  const formLayout = isMobile ? 'vertical' : 'horizontal'
+  const formItemLayout =
+    formLayout === 'horizontal'
+      ? {
+          labelCol: { span: 4 },
+          wrapperCol: { span: 14 }
+        }
+      : null
+
+  const handleSubmit = (values: any): void => {
+    handleCouponSave({
+      ...values,
+      // TODO: integrate tags and isDrawable.
+      tags: [],
+      isDrawable: false
+    })
+  }
 
   const actionButton = (couponState: CouponState, buttonText: string): JSX.Element => (
     <Popconfirm

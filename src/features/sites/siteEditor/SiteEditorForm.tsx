@@ -16,13 +16,12 @@ export interface SiteEditorFormProps {
 
 export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
   const { onSave, loading, site, onExit, id } = props
-
-  const [form] = Form.useForm()
   const { t } = useTranslation()
-  const isMobile = useIsMobile()
+  const [form] = Form.useForm()
   const [submitable, setSubmitable] = useState(false)
   const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
   const rule = useCommonFormRules()
+  const isMobile = useIsMobile()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =

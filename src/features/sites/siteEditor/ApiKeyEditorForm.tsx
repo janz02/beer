@@ -11,9 +11,8 @@ export interface ApiKeyEditorFormProps {
 
 export const ApiKeyEditorForm: FC<ApiKeyEditorFormProps> = props => {
   const { onSave, onCancel, loading } = props
-
-  const [form] = Form.useForm()
   const { t } = useTranslation()
+  const [form] = Form.useForm()
   const [submitable, setSubmitable] = useState(false)
   const rule = useCommonFormRules()
 

@@ -28,27 +28,14 @@ interface CategoryEditorProps {
 export const CategoryEditor: FC<CategoryEditorProps> = props => {
   const { params, onExit, afterClose } = props
   const { visible, categoryId: id, isNew } = params
-
-  const isMobile = useIsMobile()
-  const [form] = Form.useForm()
-  const { t } = useTranslation()
   const dispatch = useDispatch()
+  const { t } = useTranslation()
+  const [form] = Form.useForm()
+  const { category, error } = useSelector((state: RootState) => state.categoryEditor)
+  const isMobile = useIsMobile()
   const rule = useCommonFormRules()
 
   const mode = isNew || id === ('undefined' as any) ? EditorMode.CREATE : EditorMode.EDIT
-  const modalTitle =
-    mode === EditorMode.EDIT ? t('coupon-category.editor-edit') : t('coupon-category.editor-create')
-
-  const formLayout: FormLayout = isMobile ? 'vertical' : 'horizontal'
-  const formItemLayout: Partial<FormProps> = isMobile
-    ? {}
-    : {
-        wrapperCol: { span: 16 }
-      }
-
-  const category = useSelector((state: RootState) => state.categoryEditor.category)
-
-  const error = useSelector((state: RootState) => state.categoryEditor.error)
 
   useEffect(() => {
     if (id && mode === EditorMode.EDIT) {
@@ -65,6 +52,16 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
     afterClose()
     dispatch(clearCategoryEditor())
   }
+
+  const modalTitle =
+    mode === EditorMode.EDIT ? t('coupon-category.editor-edit') : t('coupon-category.editor-create')
+
+  const formLayout: FormLayout = isMobile ? 'vertical' : 'horizontal'
+  const formItemLayout: Partial<FormProps> = isMobile
+    ? {}
+    : {
+        wrapperCol: { span: 16 }
+      }
 
   const onSave = async (values: Category): Promise<void> => {
     const newCategory: Category = { id, name: values.name }

@@ -17,11 +17,10 @@ export interface ProfileEditorFormProps {
 
 export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   const { handleProfileSave, loading, profile, editable, partner } = props
-
   const { t } = useTranslation()
+  const [form] = Form.useForm()
   const [submitable, setSubmitable] = useState(false)
   const [passwordHelpVisible, setPasswordHelpVisible] = useState(false)
-  const [form] = Form.useForm()
   const rule = useCommonFormRules()
 
   const handleSubmit = (values: any): void => {
@@ -104,7 +103,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item label={t('profile.field.old-password')} name="oldPassword">
-          <Input.Password />
+          <Input.Password disabled={!editable} />
         </Form.Item>
 
         <Form.Item name="phone" label={t('profile.field.phone')}>

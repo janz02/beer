@@ -11,9 +11,8 @@ import { useCommonFormRules } from 'hooks/useCommonFormRules'
 export const LoginPage: React.FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const rule = useCommonFormRules()
-
   const { loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
+  const rule = useCommonFormRules()
 
   return (
     <AuthLayout title={t(`auth.login`)}>

@@ -18,7 +18,7 @@ const initialState: CouponListState = {
 }
 
 const couponListSlice = createSlice({
-  name: 'coupon-list',
+  name: 'couponList',
   initialState,
   reducers: {
     listCouponsSuccess(

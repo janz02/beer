@@ -7,7 +7,6 @@ import { Partner } from 'models/partner'
 
 export const PartnerEditorPage: React.FC = () => {
   const dispatch = useDispatch()
-
   const { partner, loading } = useSelector((state: RootState) => state.partner)
 
   useEffect(() => {

@@ -11,9 +11,8 @@ import { getProfile } from 'features/profile/profileSlice'
 import { useDispatch } from 'react-redux'
 
 export const PrivateLayout: React.FC = ({ children }) => {
-  const isMobile = useIsMobile()
   const dispatch = useDispatch()
-
+  const isMobile = useIsMobile()
   const [menuOpened, setMenuOpened] = useState(!isMobile)
   const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false)
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile)
@@ -27,15 +26,15 @@ export const PrivateLayout: React.FC = ({ children }) => {
     setLastMediaQuery(isMobile)
   }, [isMobile, lastMediaQuery])
 
+  useEffect(() => {
+    dispatch(getProfile())
+  }, [dispatch])
+
   const closeDrawer = (): void => {
     if (isMobile) {
       setMenuOpened(false)
     }
   }
-
-  useEffect(() => {
-    dispatch(getProfile())
-  }, [dispatch])
 
   return (
     <Layout className="layout">

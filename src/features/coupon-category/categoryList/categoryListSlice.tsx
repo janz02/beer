@@ -23,8 +23,8 @@ const initialState: CouponCategoryListState = {
   errorDeletion: ''
 }
 
-const couponCategoryListSlice = createSlice({
-  name: '@category-list',
+const categoryListSlice = createSlice({
+  name: 'categoryList',
   initialState,
   reducers: {
     getCategoriesRequest(state) {
@@ -64,9 +64,9 @@ export const {
   deleteRequest,
   deleteSuccess,
   deleteFail
-} = couponCategoryListSlice.actions
+} = categoryListSlice.actions
 
-export default couponCategoryListSlice.reducer
+export default categoryListSlice.reducer
 
 export const getCategories = (params: GetCategoriesRequest = {}): AppThunk => async (
   dispatch,

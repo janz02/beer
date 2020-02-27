@@ -31,15 +31,14 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 
 export const SiteEditorPage: FC = () => {
   const { id } = useParams()
-  const isMobile = useIsMobile()
   const dispatch = useDispatch()
   const { t } = useTranslation()
-
+  const inputToCopyRef = useRef(null)
+  const siteEditorState = useSelector((state: RootState) => state.siteEditor)
   const [copyPopoverText, setCopyPopoverText] = useState(t('site.editor.copy-api-key'))
   const [apiKeyToDelete, setApiKeyToDelete] = useState<SiteApiKey | null>(null)
   const [apiKeyDeletePopupVisible, setApiKeyDeletePopupVisible] = useState(false)
-  const siteEditorState = useSelector((state: RootState) => state.siteEditor)
-  const inputToCopyRef = useRef(null)
+  const isMobile = useIsMobile()
 
   const siteId = id ? +id : undefined
 

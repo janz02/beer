@@ -31,15 +31,13 @@ export interface GenericPopupProps extends ModalProps {
 
 export const GenericPopup: FC<GenericPopupProps> = props => {
   const { type, children, onOkAction, id, ...modalProps } = props
-
   const dispatch = useDispatch()
   const { t } = useTranslation()
-
+  // With this we can neglect the return of old/delayed async actions of other items.
+  const refId = useRef(id)
   const [error, setError] = useState<string>()
   const [loading, setLoading] = useState(false)
 
-  // With this we can neglect the return of old/delayed async actions of other items.
-  const refId = useRef(id)
   useEffect(() => {
     if (id && id !== refId.current) {
       setError('')

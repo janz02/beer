@@ -17,8 +17,8 @@ const initialState: CouponCategoryEditorState = {
   error: ''
 }
 
-const couponCategoryEditorSlice = createSlice({
-  name: '@category-editor',
+const categoryEditorSlice = createSlice({
+  name: 'categoryEditor',
   initialState,
   reducers: {
     getCategoryRequest(state) {
@@ -63,9 +63,9 @@ export const {
   saveCategoryRequest,
   saveCategorySuccess,
   saveCategoryFail
-} = couponCategoryEditorSlice.actions
+} = categoryEditorSlice.actions
 
-export default couponCategoryEditorSlice.reducer
+export default categoryEditorSlice.reducer
 
 export const getCategory = (params: GetCategoryRequest): AppThunk => async dispatch => {
   dispatch(getCategoryRequest())
