@@ -28,7 +28,9 @@ export function useCommonFormRules() {
    */
   const password = useCallback(
     (message?: string): Rule => ({
-      pattern: new RegExp('^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,64}$'),
+      pattern: new RegExp(
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,64}$'
+      ),
       message: message || t('common.rule-error.password-format')
     }),
     [t]
