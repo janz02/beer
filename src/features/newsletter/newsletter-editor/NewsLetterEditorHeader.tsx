@@ -75,7 +75,13 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
         )}
       </span>
       <Tooltip mouseEnterDelay={0.65} placement="bottomRight" title={t('newsletter.close-editor')}>
-        <Button className="nleh__close" type="link" icon={<CloseOutlined />} onClick={handleExit} />
+        <Button
+          danger={isTemplateModified}
+          className="nleh__close"
+          type="link"
+          icon={<CloseOutlined />}
+          onClick={handleExit}
+        />
       </Tooltip>
     </div>
   )
