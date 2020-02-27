@@ -79,16 +79,6 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
     return editor.runCommand('gjs-get-inlined-html')
   }, [editor])
 
-  useEffect((): void => {
-    // deleteDb.current = () => {
-    //   if (!editor) return
-    //   const storages = editor.StorageManager?.getStorages()
-    //   const idb: IDBDatabase = storages?.indexeddb?.getDb()
-    //   idb && idb.close()
-    //   indexedDB.deleteDatabase(storageId)
-    // }
-  }, [editor])
-
   const addStyledTooltips = useCallback(() => {
     // add styled tooltip to titled elements
     // TODO: bug - the block elements are still with title tooltip, remove it

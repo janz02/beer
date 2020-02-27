@@ -38,8 +38,12 @@ const newsletterListSlice = createSlice({
   name: 'newsLetterList',
   initialState,
   reducers: {
-    createTemplateSuccess(state) {},
+    createTemplateRequest() {},
+    createTemplateSuccess() {},
     createTemplateFail(state, action: PayloadAction<string>) {},
+    deleteTemplateRequest() {},
+    deleteTemplateSuccess() {},
+    deleteTemplateFail(state, action: PayloadAction<string>) {},
     getTemplatesRequest(state) {
       state.loading = true
     },
@@ -55,15 +59,21 @@ const newsletterListSlice = createSlice({
     getTemplatesFail(state, action: PayloadAction<string>) {
       state.loading = false
       state.error = action.payload
-    },
-    deleteTemplateSuccess(state) {},
-    deleteTemplateFail(state, action: PayloadAction<string>) {}
+    }
   }
 })
 
-const { createTemplateSuccess, createTemplateFail } = newsletterListSlice.actions
+const {
+  createTemplateRequest,
+  createTemplateSuccess,
+  createTemplateFail
+} = newsletterListSlice.actions
 const { getTemplatesRequest, getTemplatesSuccess, getTemplatesFail } = newsletterListSlice.actions
-const { deleteTemplateSuccess, deleteTemplateFail } = newsletterListSlice.actions
+const {
+  deleteTemplateRequest,
+  deleteTemplateSuccess,
+  deleteTemplateFail
+} = newsletterListSlice.actions
 
 export default newsletterListSlice.reducer
 
@@ -85,8 +95,8 @@ export const getNewsletterTemplates = (params: any = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
-  dispatch(getTemplatesRequest())
   try {
+    dispatch(getTemplatesRequest())
     const oldPagination = getState().newsletterList.pagination
     const pagination = calculatePagination(params, oldPagination)
     const response = await api.emailTemplates.getTemplates({
@@ -112,6 +122,7 @@ export const getNewsletterTemplates = (params: any = {}): AppThunk => async (
 
 export const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
   try {
+    dispatch(deleteTemplateRequest())
     await api.emailTemplates.deleteTemplate({ id })
     dispatch(deleteTemplateSuccess())
     const oldPagination = getState().newsletterList.pagination
@@ -125,6 +136,7 @@ export const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatc
 
 export const createNewsletterTemplate = (name: string): AppThunk => async (dispatch, getState) => {
   try {
+    dispatch(createTemplateRequest())
     const id = await api.emailTemplates.createTemplate({
       createEmailTemplateDto: {
         name,

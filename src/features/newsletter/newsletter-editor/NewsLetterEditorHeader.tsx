@@ -47,8 +47,8 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
             >
               {template?.history?.map((h, i) => (
                 <Select.Option key={h.version} value={h.id!}>
-                  {i ? <EyeOutlined /> : <EditOutlined />} &nbsp;
-                  {h.version} &nbsp;
+                  {i ? <EyeOutlined /> : <EditOutlined />}
+                  <span className="nleh__version-number">{h.version}</span>
                   {h.modifiedAt?.format('YYYY.MM.DD HH:mm')}
                 </Select.Option>
               ))}

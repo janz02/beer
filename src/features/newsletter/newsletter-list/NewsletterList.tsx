@@ -25,20 +25,18 @@ export const NewsletterList: FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
-
   const isMobile = useIsMobile()
 
   const { templates, pagination, error, segments, loading } = useSelector(
     (state: RootState) => state.newsletterList
   )
-  const [visibleSaveNewPopup, setVisibleSaveNewPopup] = useState(false)
 
+  const [visibleSaveNewPopup, setVisibleSaveNewPopup] = useState(false)
   const [sendPopup, setSendPopup] = useState<{
     template?: NewsletterPreviewData
     visible?: boolean
     sending?: boolean
   } | null>()
-
   const [deletePopup, setDeletePopup] = useState<{
     template?: NewsletterPreviewData
     visible?: boolean
@@ -120,6 +118,7 @@ export const NewsletterList: FC = () => {
           error={error}
         />
       </ResponsiveCard>
+
       <GenericPopup
         id={deletePopup?.template?.id}
         type="delete"
@@ -128,6 +127,7 @@ export const NewsletterList: FC = () => {
         onCancel={() => setDeletePopup({ ...deletePopup, visible: false })}
         afterClose={() => setDeletePopup(null)}
       />
+
       <GenericModalForm
         modalProps={{
           ...sendPopup,
@@ -165,6 +165,7 @@ export const NewsletterList: FC = () => {
           </Select>
         </Form.Item>
       </GenericModalForm>
+
       <GenericModalForm
         modalProps={{
           visible: visibleSaveNewPopup,

@@ -20,11 +20,13 @@ const newsletterEditorSlice = createSlice({
   name: 'newsletterEditor',
   initialState,
   reducers: {
-    saveTemplateVersionRequest(state) {},
-    saveTemplateVersionSuccess(state) {},
+    saveTemplateVersionRequest() {},
+    saveTemplateVersionSuccess() {},
     saveTemplateVersionFail(state, action: PayloadAction<string>) {},
-    restoreTemplateVersionSuccess(state) {},
+    restoreTemplateVersionRequest() {},
+    restoreTemplateVersionSuccess() {},
     restoreTemplateVersionFail(state, action: PayloadAction<string>) {},
+    getTemplateRequest() {},
     getTemplateSuccess(state, action: PayloadAction<NewsletterData>) {
       state.template = action.payload
       state.currentTemplateVersionId = action.payload.history?.[0]?.id
@@ -41,15 +43,24 @@ const newsletterEditorSlice = createSlice({
   }
 })
 
-const { saveTemplateVersionSuccess, saveTemplateVersionFail } = newsletterEditorSlice.actions
-const { restoreTemplateVersionSuccess, restoreTemplateVersionFail } = newsletterEditorSlice.actions
-const { getTemplateSuccess, getTemplateFail } = newsletterEditorSlice.actions
+const {
+  saveTemplateVersionRequest,
+  saveTemplateVersionSuccess,
+  saveTemplateVersionFail
+} = newsletterEditorSlice.actions
+const {
+  restoreTemplateVersionRequest,
+  restoreTemplateVersionSuccess,
+  restoreTemplateVersionFail
+} = newsletterEditorSlice.actions
+const { getTemplateRequest, getTemplateSuccess, getTemplateFail } = newsletterEditorSlice.actions
 export const { clearNewsletterTemplate, switchNewsletterVersion } = newsletterEditorSlice.actions
 
 export default newsletterEditorSlice.reducer
 
 export const getNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
   try {
+    dispatch(getTemplateRequest())
     const response = await api.emailTemplates.getTemplate({
       id
     })
@@ -74,6 +85,7 @@ export const saveNewsletterTemplateVersion = (content: string): AppThunk => asyn
   getState
 ) => {
   try {
+    dispatch(saveTemplateVersionRequest())
     const id = getState().newsletterEditor.template?.id
     if (!id) {
       return
@@ -86,15 +98,14 @@ export const saveNewsletterTemplateVersion = (content: string): AppThunk => asyn
     })
     dispatch(saveTemplateVersionSuccess())
     dispatch(getNewsletterTemplate(id))
-    return true
   } catch (err) {
     dispatch(saveTemplateVersionFail(err.toString()))
-    return false
   }
 }
 
 export const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch, getState) => {
   try {
+    dispatch(restoreTemplateVersionRequest())
     const { template, currentTemplateVersionId } = getState().newsletterEditor
     const id = template?.id
     const version = template?.history?.find(h => h.id === currentTemplateVersionId)?.version

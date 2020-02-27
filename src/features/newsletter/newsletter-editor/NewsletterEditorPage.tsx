@@ -15,8 +15,12 @@ import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 
 export const NewsletterEditorPage: FC = () => {
-  const dispatch = useDispatch()
   const { id } = useParams()
+  const dispatch = useDispatch()
+
+  const { template, currentTemplateVersionId } = useSelector(
+    (state: RootState) => state.newsletterEditor
+  )
 
   useEffect(() => {
     dispatch(clearNewsletterTemplate())
@@ -24,10 +28,6 @@ export const NewsletterEditorPage: FC = () => {
       dispatch(getNewsletterTemplate(+id))
     }
   }, [dispatch, id])
-
-  const { template, currentTemplateVersionId } = useSelector(
-    (state: RootState) => state.newsletterEditor
-  )
 
   const onRevert = (): void => {
     dispatch(restoreNewsletterTemplateVersion())
