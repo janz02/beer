@@ -23,12 +23,15 @@ export function useCommonFormRules() {
 
   /**
    * Password
-   * letter, number, spec char, min 8 char
+   * The password must be 8-64 characters long, include at least one number, lower and uppercase
+   * letter, special character (https://owasp.org/www-community/password-special-characters) and doesn't includes non-english letters and space.
    * @param message (optional) string
    */
   const password = useCallback(
     (message?: string): Rule => ({
-      pattern: new RegExp('^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,64}$'),
+      pattern: new RegExp(
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~])[A-Za-z\\d!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~]{8,64}$'
+      ),
       message: message || t('common.rule-error.password-format')
     }),
     [t]
