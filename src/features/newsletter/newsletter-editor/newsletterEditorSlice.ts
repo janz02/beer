@@ -28,6 +28,9 @@ const newsletterEditorSlice = createSlice({
     restoreTemplateVersionRequest() {},
     restoreTemplateVersionSuccess() {},
     restoreTemplateVersionFail(state, action: PayloadAction<string>) {},
+    sendEmailRequest() {},
+    sendEmailSuccess() {},
+    sendEmailFail(state, action: PayloadAction<string>) {},
     getTemplateRequest() {},
     getTemplateSuccess(state, action: PayloadAction<Newsletter>) {
       state.template = action.payload
@@ -56,6 +59,8 @@ const {
   restoreTemplateVersionFail
 } = newsletterEditorSlice.actions
 const { getTemplateRequest, getTemplateSuccess, getTemplateFail } = newsletterEditorSlice.actions
+const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterEditorSlice.actions
+
 export const { clearNewsletterTemplate, switchNewsletterVersion } = newsletterEditorSlice.actions
 
 export default newsletterEditorSlice.reducer
@@ -128,6 +133,7 @@ export const sendNewsletterEmailExample = (email: string): AppThunk => async (
   getState
 ) => {
   try {
+    dispatch(sendEmailRequest())
     const templateId = getState().newsletterEditor.template?.id
     await api.emailSender.sendEmails({
       sendEmailsDto: {
@@ -135,9 +141,11 @@ export const sendNewsletterEmailExample = (email: string): AppThunk => async (
         emailTemplateId: templateId
       }
     })
+    dispatch(sendEmailSuccess())
     message.success(i18n.t('common.message.email-sent'), 5)
     return true
   } catch (err) {
+    dispatch(sendEmailFail(err.toString()))
     return false
   }
 }

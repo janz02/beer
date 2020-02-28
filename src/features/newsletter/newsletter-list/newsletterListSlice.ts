@@ -35,6 +35,9 @@ const newsletterListSlice = createSlice({
     createTemplateRequest() {},
     createTemplateSuccess() {},
     createTemplateFail(state, action: PayloadAction<string>) {},
+    sendEmailRequest() {},
+    sendEmailSuccess() {},
+    sendEmailFail(state, action: PayloadAction<string>) {},
     deleteTemplateRequest() {},
     deleteTemplateSuccess() {},
     deleteTemplateFail(state, action: PayloadAction<string>) {},
@@ -73,6 +76,7 @@ const {
   deleteTemplateSuccess,
   deleteTemplateFail
 } = newsletterListSlice.actions
+const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterListSlice.actions
 const { getSegmentsRequest, getSegmentsSuccess, getSegmentsFail } = newsletterListSlice.actions
 
 export default newsletterListSlice.reducer
@@ -80,8 +84,9 @@ export default newsletterListSlice.reducer
 export const sendNewsletterEmailToSegment = (
   segmentId: string,
   templateId: number
-): AppThunk => async () => {
+): AppThunk => async dispatch => {
   try {
+    dispatch(sendEmailRequest())
     // TODO: segments should be instead of recipients, the api only works with email now
     await api.emailSender.sendEmails({
       sendEmailsDto: {
@@ -89,9 +94,11 @@ export const sendNewsletterEmailToSegment = (
         emailTemplateId: templateId
       }
     })
+    dispatch(sendEmailSuccess())
     message.success(i18n.t('common.message.email-sent'), 5)
     return true
   } catch (err) {
+    dispatch(sendEmailFail(err.toString()))
     return false
   }
 }
