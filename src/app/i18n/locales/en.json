@@ -119,6 +119,43 @@
     "startDate": "Start datre",
     "state": "State"
   },
+  "error": {
+    "auth": {
+      "expired-refresh-token": "Refresh token expired.",
+      "invalid-email": "Invalid e-mail.",
+      "invalid-partner-code": "Invalid partner code.",
+      "invalid-password": "Invalid password.",
+      "invalid-refresh-token": "Invalid refresh token.",
+      "ldap": "Ldap error.",
+      "ldap-password-change": "Ldap password change error.",
+      "login-failed": "Login failed.",
+      "password-format": "Invalid password format.",
+      "registration-failed": "Registration failed.",
+      "user-exists": "User exists."
+    },
+    "common": {
+      "validation": "Validation error."
+    },
+    "coupon": {
+      "already-claimed": "Coupon already claimed.",
+      "cannot-claim": "Cannot claim coupon.",
+      "cant-change-state": "Can't change coupon state."
+    },
+    "coupon-user-code": {
+      "cant-save": "Can't save user coupon code."
+    },
+    "email-template": {
+      "not-found-version": "E-mail template version not found."
+    },
+    "not-found": "Not found.",
+    "partner": {
+      "cant-change-state": "Can't change partner state."
+    },
+    "site-api-key": {
+      "cant-delete": "Can't delete API key.",
+      "cant-save": "Can't save API key."
+    }
+  },
   "error-page": {
     "back": "Back to home"
   },

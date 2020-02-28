@@ -119,6 +119,43 @@
     "startDate": "Kezdő dátum",
     "state": "Státusz"
   },
+  "error": {
+    "auth": {
+      "expired-refresh-token": "Lejárt refresh token.",
+      "invalid-email": "Invalid e-mail.",
+      "invalid-partner-code": "Invalid partner kód.",
+      "invalid-password": "Invalid partner jelszó.",
+      "invalid-refresh-token": "Invalid refresh token.",
+      "ldap": "Ldap hiba.",
+      "ldap-password-change": "Ldap jelszó változtatási hiba.",
+      "login-failed": "Bejelentkezés sikertelen.",
+      "password-format": "Invalid jelszó formátum.",
+      "registration-failed": "Regsztráció sikertelen.",
+      "user-exists": "Felhasználó már létezik."
+    },
+    "common": {
+      "validation": "Validációs hiba."
+    },
+    "coupon": {
+      "already-claimed": "Kupon már kiváltva.",
+      "cannot-claim": "Nem lehet kiváltani a kupont.",
+      "cant-change-state": "Kupon státusz változtatása sikertelen."
+    },
+    "coupon-user-code": {
+      "cant-save": "Kupon felhasználó kód mentése sikertelen."
+    },
+    "email-template": {
+      "not-found-version": "Nem található ilyen verziójú e-mail sablon."
+    },
+    "not-found": "Nem található.",
+    "partner": {
+      "cant-change-state": "Partner státusz változtatása sikertelen."
+    },
+    "site-api-key": {
+      "cant-delete": "API kulcs törlése sikertelen.",
+      "cant-save": "API kulcs mentése sikertelen."
+    }
+  },
   "error-page": {
     "back": "Vissza a főoldalra"
   },
