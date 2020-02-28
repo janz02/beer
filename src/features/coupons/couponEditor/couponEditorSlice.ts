@@ -6,7 +6,7 @@ import { message } from 'antd'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import moment from 'moment'
-import { CouponState, CouponCommentVm } from 'api/swagger'
+import { CouponCommentVm } from 'api/swagger'
 
 interface CouponEditorState {
   coupon?: Coupon
@@ -34,11 +34,6 @@ const couponEditorSlice = createSlice({
       state.loading = false
       state.error = null
     },
-    updateCouponStatusSuccess(state) {
-      message.success(i18n.t('coupon-editor.save-coupon-status-success'), 10)
-      state.loading = false
-      state.error = null
-    },
     deleteCouponCommentsSuccess(state) {
       state.loading = false
       state.error = null
@@ -63,7 +58,6 @@ const couponEditorSlice = createSlice({
 export const {
   getCouponsSuccess,
   updateCouponSuccess,
-  updateCouponStatusSuccess,
   deleteCouponCommentsSuccess,
   getCouponCommentsSuccess,
   setLoadingStart,
@@ -112,26 +106,6 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
 
     dispatch(updateCouponSuccess())
     history.push('/coupons')
-  } catch (err) {
-    dispatch(setLoadingFailed(err.toString()))
-  }
-}
-
-export const updateCouponStatus = (
-  id: number,
-  couponState: CouponState,
-  comment: string
-): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
-
-  try {
-    await api.coupons.updateCouponStatus({
-      id: id,
-      changeCouponStateDto: { state: couponState, comment }
-    })
-
-    dispatch(updateCouponStatusSuccess())
-    dispatch(getCoupon(id))
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }

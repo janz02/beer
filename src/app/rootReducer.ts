@@ -5,6 +5,7 @@ import { routerHistoryStore } from '../router/routerHistoryStore'
 import authReducer from 'features/auth/authSlice'
 import couponListReducer from 'features/coupons/couponList/couponListSlice'
 import couponEditorReducer from 'features/coupons/couponEditor/couponEditorSlice'
+import couponViewReducer from 'features/coupons/couponView/couponViewSlice'
 import couponCreateReducer from 'features/coupons/couponCreate/couponCreateSlice'
 import couponsReducer from 'features/coupons/couponsSlice'
 import notificationReducer from 'features/notification/notificationSlice'
@@ -23,6 +24,7 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   couponList: couponListReducer,
   couponEditor: couponEditorReducer,
+  couponView: couponViewReducer,
   couponCreate: couponCreateReducer,
   coupons: couponsReducer,
   categoryList: categoryListReducer,
