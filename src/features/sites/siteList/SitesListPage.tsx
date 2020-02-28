@@ -1,19 +1,18 @@
 import React, { FC, useEffect, useMemo, useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
-import { useIsMobile } from 'hooks'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSites, deleteSite } from './siteListSlice'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
-import { TablePaginationConfig } from 'antd/lib/table/Table'
-import { basePaginationConfig, projectPage } from 'models/pagination'
+
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { history } from 'router/router'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
+import { useTableUtils } from 'hooks/useTableUtils'
 
 export const SitesListPage: FC = () => {
   const dispatch = useDispatch()
@@ -23,17 +22,24 @@ export const SitesListPage: FC = () => {
     site?: Site
     popupVisible?: boolean
   } | null>()
-  const isMobile = useIsMobile()
 
   useEffect(() => {
     dispatch(getSites())
   }, [dispatch])
 
+  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
+    error: errorList,
+    pagination,
+    getDataAction: getSites
+  })
+
   const columnsConfig = useMemo(
     () => [
       {
         title: t('common.data'),
-        key: 'data',
+        key: 'name',
+        dataIndex: 'name',
+        ...sorterConfig,
         render(value: unknown, record: Site) {
           return (
             <>
@@ -64,23 +70,8 @@ export const SitesListPage: FC = () => {
         }
       }
     ],
-    [t]
+    [sorterConfig, t]
   )
-
-  const paginationConfig = useMemo((): TablePaginationConfig | false => {
-    const baseConfig = basePaginationConfig(isMobile, !!errorList, pagination)
-    return baseConfig.total
-      ? {
-          ...baseConfig,
-          onShowSizeChange: (current, size) => {
-            dispatch(getSites({ page: projectPage(size, pagination), pageSize: size }))
-          },
-          onChange: page => {
-            dispatch(getSites({ page }))
-          }
-        }
-      : false
-  }, [dispatch, errorList, isMobile, pagination])
 
   const headerOptions = (): JSX.Element => (
     <Button type="primary" onClick={() => history.push(`/sites/editor`)}>
@@ -98,7 +89,8 @@ export const SitesListPage: FC = () => {
             tableProps={{
               columns: columnsConfig,
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
-              pagination: paginationConfig
+              pagination: paginationConfig,
+              onChange: handleTableChange
             }}
             error={errorList}
           />

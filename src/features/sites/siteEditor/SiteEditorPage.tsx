@@ -20,25 +20,34 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { Button, Modal, Form, Input, Popover } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { SiteApiKey } from 'models/siteApiKey'
-import { ColumnType, TablePaginationConfig } from 'antd/lib/table'
+import { ColumnType } from 'antd/lib/table'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { ApiKeyEditorForm } from './ApiKeyEditorForm'
 import { CopyOutlined } from '@ant-design/icons'
-import { basePaginationConfig, projectPage } from 'models/pagination'
-import { useIsMobile } from 'hooks'
+
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { GenericPopup } from 'components/popups/GenericPopup'
+import { useTableUtils, ListRequestParams } from 'hooks/useTableUtils'
 
 export const SiteEditorPage: FC = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const inputToCopyRef = useRef(null)
-  const siteEditorState = useSelector((state: RootState) => state.siteEditor)
+  const {
+    pagination,
+    error,
+    loadingSave,
+    siteApiKeys,
+    site,
+    generatedApiKey,
+    copyApiKeyPopupVisible,
+    loadingApiKeyCreate,
+    addNewApiKeyPopupVisible
+  } = useSelector((state: RootState) => state.siteEditor)
   const [copyPopoverText, setCopyPopoverText] = useState(t('site.editor.copy-api-key'))
   const [apiKeyToDelete, setApiKeyToDelete] = useState<SiteApiKey | null>(null)
   const [apiKeyDeletePopupVisible, setApiKeyDeletePopupVisible] = useState(false)
-  const isMobile = useIsMobile()
 
   const siteId = id ? +id : undefined
 
@@ -64,12 +73,19 @@ export const SiteEditorPage: FC = () => {
     </>
   )
 
+  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
+    error,
+    pagination,
+    getDataAction: (params: ListRequestParams) => getSiteEditorData(siteId!, params)
+  })
+
   const columns: ColumnType<SiteApiKey>[] = useMemo(
     () => [
       {
         title: t('site.editor.api-key-name'),
         dataIndex: 'name',
-        key: 'name'
+        key: 'name',
+        ...sorterConfig
       },
       {
         title: t('site.editor.expire-date'),
@@ -93,43 +109,18 @@ export const SiteEditorPage: FC = () => {
         }
       }
     ],
-    [t]
+    [sorterConfig, t]
   )
-
-  const paginationConfig = useMemo((): TablePaginationConfig | false => {
-    const baseConfig = basePaginationConfig(
-      isMobile,
-      !!siteEditorState.error,
-      siteEditorState.pagination
-    )
-    return baseConfig.total
-      ? {
-          ...baseConfig,
-          onShowSizeChange: (current, size) => {
-            siteId &&
-              dispatch(
-                getSiteEditorData(siteId, {
-                  page: projectPage(size, siteEditorState.pagination),
-                  pageSize: size
-                })
-              )
-          },
-          onChange: page => {
-            siteId && dispatch(getSiteEditorData(siteId, { page }))
-          }
-        }
-      : false
-  }, [dispatch, siteId, isMobile, siteEditorState.error, siteEditorState.pagination])
 
   return (
     <ResponsivePage>
       <SiteEditorForm
-        loading={siteEditorState.loadingSave}
+        loading={loadingSave}
         onSave={onSave}
         onExit={() => {
           history.push('/sites/')
         }}
-        site={siteEditorState.site}
+        site={site}
         id={siteId}
       />
 
@@ -139,17 +130,18 @@ export const SiteEditorPage: FC = () => {
           headerOptions={headerOptions}
           tableProps={{
             columns: columns,
-            dataSource: siteEditorState.siteApiKeys,
+            dataSource: siteApiKeys,
             rowKey: (x): string => x.id?.toString() ?? '',
-            pagination: paginationConfig
+            pagination: paginationConfig,
+            onChange: handleTableChange
           }}
-          error={siteEditorState.error}
+          error={error}
         />
       </ResponsiveCard>
 
       <Modal
         title={t('site.editor.add-new-api-key-title')}
-        visible={siteEditorState.addNewApiKeyPopupVisible}
+        visible={addNewApiKeyPopupVisible}
         onCancel={() => {
           dispatch(setAddNewApiKeyPopupVisible(false))
         }}
@@ -157,7 +149,7 @@ export const SiteEditorPage: FC = () => {
         destroyOnClose
       >
         <ApiKeyEditorForm
-          loading={siteEditorState.loadingApiKeyCreate}
+          loading={loadingApiKeyCreate}
           onSave={name => {
             dispatch(createApiKey(name))
           }}
@@ -169,7 +161,7 @@ export const SiteEditorPage: FC = () => {
 
       <Modal
         title={t('site.editor.copy-api-key-title')}
-        visible={siteEditorState.copyApiKeyPopupVisible}
+        visible={copyApiKeyPopupVisible}
         onCancel={() => {
           dispatch(closeApiKeyPopup())
         }}
@@ -178,7 +170,7 @@ export const SiteEditorPage: FC = () => {
       >
         <Form name="copy-api-key-form" layout="inline">
           <Form.Item>
-            <Input defaultValue={siteEditorState.generatedApiKey} readOnly ref={inputToCopyRef} />
+            <Input defaultValue={generatedApiKey} readOnly ref={inputToCopyRef} />
           </Form.Item>
           <Form.Item>
             <Popover content={copyPopoverText} trigger="hover">
