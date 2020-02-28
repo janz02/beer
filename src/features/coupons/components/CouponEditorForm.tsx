@@ -22,26 +22,26 @@ import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
 import { getCategories } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteOutlined } from '@ant-design/icons'
-import { updateCouponStatus, deleteCouponComment } from '../couponEditor/couponEditorSlice'
-import { useParams } from 'hooks/react-router-dom-hooks'
+import { deleteCouponComment } from '../couponEditor/couponEditorSlice'
+import { Link } from 'react-router-dom'
+import { updateCouponStatus } from '../couponView/couponViewSlice'
 
 export interface CouponEditorFormProps {
-  handleCouponSave: (values: any) => void
+  handleCouponSave?: (values: any) => void
   loading: boolean
   couponIsNew: boolean
   coupon?: Coupon
+  editing: boolean
 }
 
 export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
-  const { handleCouponSave, loading, couponIsNew, coupon } = props
-  const { editing } = useParams()
+  const { handleCouponSave, loading, couponIsNew, coupon, editing } = props
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [commentForm] = Form.useForm()
   const { categories } = useSelector((state: RootState) => state.coupons)
   const [submitable, setSubmitable] = useState(false)
-  const [formEditing, setFormEditing] = useState(editing === 'true')
   const rule = useCommonFormRules()
   const isMobile = useIsMobile()
 
@@ -90,7 +90,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   const displayEditor =
     couponIsNew ||
-    (formEditing &&
+    (editing &&
       coupon &&
       coupon.state !== CouponState.Closed &&
       coupon.state !== CouponState.Archived)
@@ -104,12 +104,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       : null
 
   const handleSubmit = (values: any): void => {
-    handleCouponSave({
-      ...values,
-      // TODO: integrate tags and isDrawable.
-      tags: [],
-      isDrawable: false
-    })
+    handleCouponSave &&
+      handleCouponSave({
+        ...values,
+        // TODO: integrate tags and isDrawable.
+        tags: [],
+        isDrawable: false
+      })
   }
 
   const actionButton = (couponState: CouponState, buttonText: string): JSX.Element => (
@@ -158,8 +159,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             {coupon &&
               coupon.state !== CouponState.Closed &&
               coupon.state !== CouponState.Archived && (
-                <Button type="primary" htmlType="button" onClick={() => setFormEditing(true)}>
-                  {t('coupon-create.edit')}
+                <Button type="primary" htmlType="button">
+                  <Link to={`/coupon/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
                 </Button>
               )}
           </div>

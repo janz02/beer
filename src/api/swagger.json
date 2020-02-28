@@ -1789,7 +1789,7 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The id of the template",
+            "description": "The version of the template",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2190,6 +2190,73 @@
           },
           "404": {
             "description": "Entity not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/Scoring": {
+      "get": {
+        "tags": [
+          "Scoring"
+        ],
+        "summary": "Gets a scoreEvent entity list sorted and filtered",
+        "description": "Returns the scoreEvent list with the specified filters applied",
+        "operationId": "getMyScores",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: List of scoreEvent Entities",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScoringEventPaginatedResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScoringEventPaginatedResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScoringEventPaginatedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
           }
         }
       }
@@ -4116,6 +4183,62 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PartnerVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoringEventType": {
+        "enum": [
+          "Login"
+        ],
+        "type": "string"
+      },
+      "ScoreEventVm": {
+        "type": "object",
+        "properties": {
+          "evenType": {
+            "$ref": "#/components/schemas/ScoringEventType"
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoringEventPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScoreEventVm"
             },
             "nullable": true
           },

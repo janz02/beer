@@ -10,6 +10,7 @@ export * from './EmailTemplatesApi';
 export * from './InformationApi';
 export * from './PartnerContactsApi';
 export * from './PartnersApi';
+export * from './ScoringApi';
 export * from './SegmentsApi';
 export * from './SitesApi';
 export * from './TagCategoriesApi';

@@ -40,7 +40,7 @@ export const CouponListPage: React.FC = () => {
     onCell: (record: Coupon) => {
       return {
         onClick: () => {
-          history.push(`/coupons/${record.id}/${false}`)
+          history.push(`/coupon/${record.id}`)
         }
       }
     }
@@ -112,7 +112,7 @@ export const CouponListPage: React.FC = () => {
         return (
           <span>
             <Button>
-              <Link to={`/coupons/${record.id}/${true}`}>
+              <Link to={`/coupon/${record.id}/edit`}>
                 <EditOutlined />
               </Link>
             </Button>
@@ -142,7 +142,7 @@ export const CouponListPage: React.FC = () => {
           <div className="coupons-list__header">
             <h3>{t('coupon-list.coupons')}</h3>
             <Button type="primary">
-              <Link to="/coupons/create">{t('coupon-list.create')}</Link>
+              <Link to="/coupon">{t('coupon-list.create')}</Link>
             </Button>
           </div>
         )}

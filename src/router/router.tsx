@@ -18,6 +18,7 @@ import { SitesListPage } from 'features/sites/siteList/SitesListPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { NewsletterListPage } from 'features/newsletter/newsletter-list/NewsletterListPage'
+import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
 
 const Routes = (): JSX.Element => (
   <Switch>
@@ -26,11 +27,11 @@ const Routes = (): JSX.Element => (
     <PublicRoute onlyPublic exact path="/auth/recovery" component={RecoveryPage} />
     <PublicRoute exact path="/error" component={ErrorPage} />
     <PublicRoute exact path="/error/:type" component={ErrorPage} />
-    <PrivateRoute exact path="/" component={DashboardPage} />
     <PrivateRoute exact path="/coupons" component={CouponListPage} />
-    <PrivateRoute exact path="/coupons/create" component={CouponCreatePage} />
+    <PrivateRoute exact path="/coupon" component={CouponCreatePage} />
+    <PrivateRoute exact path="/coupon/:id" component={CouponViewPage} />
+    <PrivateRoute exact path="/coupon/:id/edit" component={CouponEditorPage} />
     <PrivateRoute exact path="/categories" component={CategoryPage} />
-    <PrivateRoute exact path="/coupons/:id/:editing" component={CouponEditorPage} />
     <PrivateRoute exact path="/partner" component={PartnerEditorPage} />
     <PrivateRoute exact path="/profile" component={ProfileEditorPage} />
     <PrivateRoute exact path="/sites" component={SitesListPage} />
@@ -39,6 +40,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/newsletter" component={NewsletterListPage} />
     <PrivateRoute exact path="/newsletter/editor/" component={NewsletterEditorPage} />
     <PrivateRoute exact path="/newsletter/editor/:id" component={NewsletterEditorPage} />
+    <PrivateRoute exact path="/" component={DashboardPage} />
     <Route path="*" render={() => <Redirect to="/" />} />
   </Switch>
 )
