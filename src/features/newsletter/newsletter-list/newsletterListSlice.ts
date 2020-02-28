@@ -160,7 +160,7 @@ export const createNewsletterTemplate = (name: string): AppThunk => async dispat
       }
     })
     dispatch(createTemplateSuccess())
-    history.push(`newsletter/editor/${id.id}`)
+    history.push(`newsletter/${id.id}`)
   } catch (err) {
     dispatch(createTemplateFail(err.toString()))
   }

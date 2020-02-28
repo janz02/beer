@@ -43,7 +43,7 @@ export const NewsletterList: FC = () => {
   } | null>()
 
   const editTemplate = useCallback((id?: number) => {
-    history.push(`/newsletter/editor/${id}`)
+    history.push(`/newsletter/${id}`)
   }, [])
 
   useEffect(() => {
