@@ -57,7 +57,7 @@ export const {
   setLoadingFailed
 } = profileSlice.actions
 
-export default profileSlice.reducer
+export const profileReducer = profileSlice.reducer
 
 export const getProfile = (): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())

@@ -48,7 +48,7 @@ export const {
   setLoadingFailed
 } = partnerSlice.actions
 
-export default partnerSlice.reducer
+export const partnerReducer = partnerSlice.reducer
 
 export const getMyPartner = (): AppThunk => async dispatch => {
   dispatch(setLoadingStart())

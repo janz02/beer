@@ -136,7 +136,7 @@ export const {
   closeApiKeyPopup
 } = siteEditorSlice.actions
 
-export default siteEditorSlice.reducer
+export const siteEditorReducer = siteEditorSlice.reducer
 
 export const getSiteEditorData = (id: number, params: ListRequestParams = {}): AppThunk => async (
   dispatch,

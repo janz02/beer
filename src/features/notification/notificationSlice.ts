@@ -133,7 +133,7 @@ export const {
   getNotificationsSuccess
 } = notificationSlice.actions
 
-export default notificationSlice.reducer
+export const notificationReducer = notificationSlice.reducer
 
 // TODO: Only for simulating async actions, remove after API is connected
 const delay = (p: any): Promise<unknown> =>

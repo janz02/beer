@@ -19,6 +19,7 @@ import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { NewsletterListPage } from 'features/newsletter/newsletter-list/NewsletterListPage'
 import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
+import { UserListPage } from 'features/users/UserListPage'
 
 const Routes = (): JSX.Element => (
   <Switch>
@@ -39,6 +40,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/sites/editor/:id" component={SiteEditorPage} />
     <PrivateRoute exact path="/newsletter" component={NewsletterListPage} />
     <PrivateRoute exact path="/newsletter/:id" component={NewsletterEditorPage} />
+    <PrivateRoute exact path="/users" component={UserListPage} />
     <PrivateRoute exact path="/" component={DashboardPage} />
     <Route path="*" render={() => <Redirect to="/" />} />
   </Switch>

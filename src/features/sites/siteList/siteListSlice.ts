@@ -60,7 +60,7 @@ const siteListSlice = createSlice({
 const { getSitesRequest, getSitesSuccess, getSitesFail } = siteListSlice.actions
 const { deleteSiteRequest, deleteSiteSuccess, deleteSiteFail } = siteListSlice.actions
 
-export default siteListSlice.reducer
+export const siteListReducer = siteListSlice.reducer
 
 export const getSites = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,

@@ -50,7 +50,7 @@ export const {
   updateCouponStatusSuccess
 } = couponViewSlice.actions
 
-export default couponViewSlice.reducer
+export const couponViewReducer = couponViewSlice.reducer
 
 export const getCoupon = (id: number): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
