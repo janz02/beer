@@ -9,6 +9,7 @@ import moment from 'moment'
 import { Segment } from 'models/segment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
+import { ListRequestParams } from 'hooks/useTableUtils'
 
 interface NewsletterListState {
   templates: NewsletterPreview[]
@@ -103,7 +104,7 @@ export const sendNewsletterEmailToSegment = (
   }
 }
 
-export const getNewsletterTemplates = (params: any = {}): AppThunk => async (
+export const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
@@ -112,6 +113,7 @@ export const getNewsletterTemplates = (params: any = {}): AppThunk => async (
     const oldPagination = getState().newsletterList.pagination
     const pagination = calculatePagination(params, oldPagination)
     const response = await api.emailTemplates.getTemplates({
+      ...params,
       pageSize: pagination.pageSize,
       page: pagination.page
     })
@@ -158,7 +160,7 @@ export const createNewsletterTemplate = (name: string): AppThunk => async dispat
       }
     })
     dispatch(createTemplateSuccess())
-    history.push(`newsletter/editor/${id.id}`)
+    history.push(`newsletter/${id.id}`)
   } catch (err) {
     dispatch(createTemplateFail(err.toString()))
   }

@@ -3,7 +3,7 @@ import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
 import { api } from 'api'
 import { Pagination, recalculatePagination, calculatePagination } from 'models/pagination'
-import { GetCategoriesRequest } from 'api/swagger'
+import { ListRequestParams } from 'hooks/useTableUtils'
 
 interface CouponCategoryListState {
   categories: Category[]
@@ -68,7 +68,7 @@ export const {
 
 export default categoryListSlice.reducer
 
-export const getCategories = (params: GetCategoriesRequest = {}): AppThunk => async (
+export const getCategories = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
@@ -78,6 +78,7 @@ export const getCategories = (params: GetCategoriesRequest = {}): AppThunk => as
     const pagination = calculatePagination(params, oldPagination)
 
     const response = await api.categories.getCategories({
+      ...params,
       pageSize: pagination.pageSize,
       page: pagination.page
     })

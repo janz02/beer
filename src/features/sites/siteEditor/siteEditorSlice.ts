@@ -7,8 +7,8 @@ import i18n from 'app/i18n'
 import { SiteApiKey } from 'models/siteApiKey'
 import moment from 'moment'
 import { Pagination, calculatePagination } from 'models/pagination'
-import { GetApiKeysRequest } from 'api/swagger'
 import { history } from 'router/router'
+import { ListRequestParams } from 'hooks/useTableUtils'
 
 interface SiteEditorState {
   site?: Site
@@ -135,7 +135,7 @@ export const {
 
 export default siteEditorSlice.reducer
 
-export const getSiteEditorData = (id: number, params: GetApiKeysRequest = {}): AppThunk => async (
+export const getSiteEditorData = (id: number, params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
@@ -143,20 +143,21 @@ export const getSiteEditorData = (id: number, params: GetApiKeysRequest = {}): A
   try {
     const site = await api.sites.getSite({ id })
 
-    const oldPagination = getState().siteList.pagination
+    const oldPagination = getState().siteEditor.pagination
     const pagination = calculatePagination(params, oldPagination)
 
-    const apiKeysResponse = await api.apiKey.getApiKeys({
+    const response = await api.apiKey.getApiKeys({
+      ...params,
       pageSize: pagination.pageSize,
       page: pagination.page,
       siteId: site.id
     })
 
-    const siteApiKeys = apiKeysResponse.result?.map(
-      x =>
+    const siteApiKeys = response.result?.map(
+      key =>
         ({
-          ...x,
-          expireDate: moment(x.expireDate)
+          ...key,
+          expireDate: moment(key.expireDate)
         } as SiteApiKey)
     )
 
@@ -165,7 +166,11 @@ export const getSiteEditorData = (id: number, params: GetApiKeysRequest = {}): A
         site,
         siteApiKeys,
         pagination: {
-          ...apiKeysResponse
+          page: response.page,
+          from: response.from,
+          size: response.size,
+          to: response.to,
+          pageSize: pagination.pageSize
         }
       })
     )

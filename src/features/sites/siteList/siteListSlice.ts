@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { GetSitesRequest } from 'api/swagger'
 import { Pagination, calculatePagination, recalculatePagination } from 'models/pagination'
 import { Site } from 'models/site'
+import { ListRequestParams } from 'hooks/useTableUtils'
 
 interface SiteListState {
   sites: Site[]
@@ -59,7 +59,10 @@ const { deleteSiteRequest, deleteSiteSuccess, deleteSiteFail } = siteListSlice.a
 
 export default siteListSlice.reducer
 
-export const getSites = (params: GetSitesRequest = {}): AppThunk => async (dispatch, getState) => {
+export const getSites = (params: ListRequestParams = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
   dispatch(getSitesRequest())
   try {
     const oldPagination = getState().siteList.pagination
@@ -68,6 +71,7 @@ export const getSites = (params: GetSitesRequest = {}): AppThunk => async (dispa
     // TODO: integrate, remove partner get because it will be on the JWT.
     const partner = await api.partner.getMyPartner()
     const response = await api.sites.getSites({
+      ...params,
       pageSize: pagination.pageSize,
       page: pagination.page,
       partnerId: partner.id

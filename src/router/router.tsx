@@ -38,8 +38,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/sites/editor/" component={SiteEditorPage} />
     <PrivateRoute exact path="/sites/editor/:id" component={SiteEditorPage} />
     <PrivateRoute exact path="/newsletter" component={NewsletterListPage} />
-    <PrivateRoute exact path="/newsletter/editor/" component={NewsletterEditorPage} />
-    <PrivateRoute exact path="/newsletter/editor/:id" component={NewsletterEditorPage} />
+    <PrivateRoute exact path="/newsletter/:id" component={NewsletterEditorPage} />
     <PrivateRoute exact path="/" component={DashboardPage} />
     <Route path="*" render={() => <Redirect to="/" />} />
   </Switch>

@@ -3,9 +3,7 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
 import { Button, Form, Select, Input } from 'antd'
-import { basePaginationConfig, projectPage } from 'models/pagination'
-import { TablePaginationConfig } from 'antd/lib/table'
-import { useIsMobile, useCommonFormRules } from 'hooks'
+import { useCommonFormRules } from 'hooks'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
@@ -22,12 +20,12 @@ import { useDispatch } from 'hooks/react-redux-hooks'
 import { NewsletterPreview } from 'models/newsletter'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { MomentDisplay } from 'components/MomentDisplay'
+import { useTableUtils } from 'hooks/useTableUtils'
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
-  const isMobile = useIsMobile()
 
   const { templates, pagination, error, segments, loading } = useSelector(
     (state: RootState) => state.newsletterList
@@ -45,19 +43,26 @@ export const NewsletterList: FC = () => {
   } | null>()
 
   const editTemplate = useCallback((id?: number) => {
-    history.push(`/newsletter/editor/${id}`)
+    history.push(`/newsletter/${id}`)
   }, [])
 
   useEffect(() => {
     dispatch(getNewsletterTemplates())
   }, [dispatch])
 
+  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
+    error,
+    pagination,
+    getDataAction: getNewsletterTemplates
+  })
+
   const columnsConfig = useMemo(
     () => [
       {
         title: t('newsletter.field.template-name'),
         key: 'name',
-        dataIndex: 'name'
+        dataIndex: 'name',
+        ...sorterConfig
       },
       {
         title: t('newsletter.field.template-version'),
@@ -94,25 +99,8 @@ export const NewsletterList: FC = () => {
         }
       }
     ],
-    [dispatch, editTemplate, t]
+    [dispatch, editTemplate, sorterConfig, t]
   )
-
-  const paginationConfig = useMemo((): TablePaginationConfig | false => {
-    const baseConfig = basePaginationConfig(isMobile, !!error, pagination)
-    return baseConfig.total
-      ? {
-          ...baseConfig,
-          onShowSizeChange: (current, size) => {
-            dispatch(
-              getNewsletterTemplates({ page: projectPage(size, pagination), pageSize: size })
-            )
-          },
-          onChange: page => {
-            dispatch(getNewsletterTemplates({ page }))
-          }
-        }
-      : false
-  }, [dispatch, error, isMobile, pagination])
 
   const headerOptions = (): JSX.Element => (
     <Button type="primary" onClick={() => setVisibleSaveNewPopup(true)}>
@@ -130,7 +118,8 @@ export const NewsletterList: FC = () => {
             loading,
             columns: columnsConfig,
             dataSource: templates.map((t, i) => ({ ...t, key: '' + i + t.id })),
-            pagination: paginationConfig
+            pagination: paginationConfig,
+            onChange: handleTableChange
           }}
           error={error}
         />
