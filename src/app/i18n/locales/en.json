@@ -39,6 +39,7 @@
     "go-back": "Go back",
     "message": {
       "delete-success": "Successful deleting",
+      "email-sent": "The email was sent successfully",
       "save-success": "Successful saving"
     },
     "ok": "OK",

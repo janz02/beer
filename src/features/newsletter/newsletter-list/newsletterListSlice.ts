@@ -7,6 +7,8 @@ import { api } from 'api'
 import { history } from 'router/router'
 import moment from 'moment'
 import { Segment } from 'models/segment'
+import { message } from 'antd'
+import i18n from 'app/i18n'
 
 interface NewsletterListState {
   templates: NewsletterPreview[]
@@ -80,15 +82,14 @@ export const sendNewsletterEmailToSegment = (
   templateId: number
 ): AppThunk => async () => {
   try {
-    console.log({ segmentId, templateId })
-
-    // TODO: segments should be instead of email
-    // await api.emailSender.sendEmails({
-    //   sendEmailsDto: {
-    //     recipients: [email],
-    //     emailTemplateId: templateId
-    //   }
-    // })
+    // TODO: segments should be instead of recipients, the api only works with email now
+    await api.emailSender.sendEmails({
+      sendEmailsDto: {
+        recipients: [segmentId],
+        emailTemplateId: templateId
+      }
+    })
+    message.success(i18n.t('common.message.email-sent'), 5)
     return true
   } catch (err) {
     return false

@@ -5,6 +5,8 @@ import { Newsletter } from 'models/newsletter'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { api } from 'api'
 import moment from 'moment'
+import { message } from 'antd'
+import i18n from 'app/i18n'
 
 interface NewsletterEditorState {
   error: string
@@ -133,6 +135,7 @@ export const sendNewsletterEmailExample = (email: string): AppThunk => async (
         emailTemplateId: templateId
       }
     })
+    message.success(i18n.t('common.message.email-sent'), 5)
     return true
   } catch (err) {
     return false
