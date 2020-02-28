@@ -10,7 +10,7 @@ let tokenPromiseResolver: (value?: void | PromiseLike<void>) => void
 export const configApiMiddleware = (): void => {
   config.middleware.push(
     {
-      pre: async ctx => {
+      pre: async (ctx: any) => {
         const refreshRequest = ctx.url.endsWith('Auth/Refresh')
         let refreshToken = sessionStorage.getItem('refreshToken')
         const jwtExpiration = sessionStorage.getItem('jwtExpiration')
@@ -52,7 +52,7 @@ export const configApiMiddleware = (): void => {
       }
     },
     {
-      pre: async ctx => {
+      pre: async (ctx: any) => {
         ctx.init.headers = {
           ...ctx.init.headers,
           Authorization: `Bearer ${sessionStorage.getItem('jwt')}`

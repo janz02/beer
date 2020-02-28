@@ -30,13 +30,16 @@
   "common": {
     "actions": "Műveletek",
     "cancel": "Mégsem",
+    "confirm": "Rendben",
     "create": "Létrehozás",
     "data": "Adatok",
     "delete": "Törlés",
+    "discard": "Elvetés",
     "edit": "Szerkesztés",
     "go-back": "Vissza",
     "message": {
       "delete-success": "Sikeres törlés",
+      "email-sent": "Az e-mail sikeresen el lett küldve",
       "save-success": "Sikeres mentés"
     },
     "ok": "OK",
@@ -45,9 +48,10 @@
       "confirm-title": "Biztos, hogy ezt szeretnéd tenni?",
       "delete-title": "Biztos, hogy törölni szeretnéd?",
       "discard-title": "Biztos, hogy el szeretnéd vetni?",
+      "restore-title": "Biztos, hogy vissza szeretnéd állítani?",
       "save-title": "Biztos, hogy menteni szeretnéd?"
     },
-    "revert": "Visszállítás",
+    "restore": "Visszállítás",
     "rule-error": {
       "email": "Ebbe a mezőbe helyes e-mail címet kell megadni.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
@@ -133,16 +137,23 @@
   },
   "newsletter": {
     "available-templates": "Hírlevél sablonok",
+    "close-editor": "Szerkesztő bezárása",
     "field": {
+      "email": "E-mail cím",
+      "template-modified-at": "Változtatva",
       "template-name": "Sablon név",
-      "template-version": "Sablon verzió"
+      "template-version": "Verzió"
     },
     "popup": {
+      "discard-msg": "Minden aktuális változtatás el fog veszni.",
+      "preview-discard-msg": "Az aktuális sablon verzióban vannak változtatások. Az előző verzió megtekintésekor a változtatások el fognak veszni.",
+      "restore-msg": "Ez a sablon verzió, visszamásolódik a verzió történet tetejére, mint a legfrissebb sablon.",
       "target-segment": "Cél szegmens",
-      "title-revert": "Sablon visszaállítása",
       "title-save": "Sablon mentése",
-      "title-send": "Sablon küldése"
-    }
+      "title-send-sample": "Minta e-mail küldése",
+      "title-send-segment": "Hírlevél kiküldése szegmensnek"
+    },
+    "send-sample": "Minta küldése"
   },
   "notification": {
     "empty-list": "Üres",

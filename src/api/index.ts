@@ -8,7 +8,10 @@ import {
   TagsApi,
   CouponCommentsApi,
   PartnerContactsApi,
-  ApiKeysApi
+  ApiKeysApi,
+  EmailSenderApi,
+  EmailTemplatesApi,
+  SegmentsApi
 } from './swagger/apis'
 import { notification } from 'antd'
 import i18n from 'app/i18n'
@@ -67,5 +70,8 @@ export const api = {
   sites: new SitesApi(config),
   partner: new PartnersApi(config),
   partnerContacts: new PartnerContactsApi(config),
+  emailSender: new EmailSenderApi(config),
+  emailTemplates: new EmailTemplatesApi(config),
+  segments: new SegmentsApi(config),
   apiKey: new ApiKeysApi(config)
 }

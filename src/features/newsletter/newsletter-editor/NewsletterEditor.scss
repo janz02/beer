@@ -6,6 +6,27 @@ $active-color: $primary-color !default;
 @import "grapesjs/src/styles/scss/main.scss";
 @import "grapesjs-preset-newsletter/src/style/main.scss";
 
-.newsletter-editor-containter {
+.nle {
   height: 100%;
+
+  $nle-header-height: 48px;
+
+  &__header {
+    height: $nle-header-height;
+    line-height: $nle-header-height;
+  }
+
+  &__containter {
+    height: calc(100% - #{$nle-header-height});
+  }
+}
+
+.nle-spinner {
+  width: 100%;
+  margin-top: 25vh;
+}
+
+//removes the toggle btn from preview mode
+.gjs-off-prv {
+  display: none !important;
 }
