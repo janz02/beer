@@ -111,8 +111,10 @@ export const NewsletterList: FC = () => {
   return (
     <>
       <ResponsiveCard
+        style={{ height: '70vh' }}
         floatingTitle={t('newsletter.available-templates')}
         floatingOptions={headerOptions}
+        forTable
       >
         <ResponsiveTable
           tableProps={{
@@ -122,7 +124,6 @@ export const NewsletterList: FC = () => {
             pagination: paginationConfig,
             onChange: handleTableChange
           }}
-          error={error}
         />
       </ResponsiveCard>
 

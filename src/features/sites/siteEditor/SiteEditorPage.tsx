@@ -63,7 +63,7 @@ export const SiteEditorPage: FC = () => {
     dispatch(saveSite({ ...site }, siteId))
   }
 
-  const headerOptions = (): JSX.Element => (
+  const headerOptions = (
     <>
       {siteId && (
         <Button type="primary" onClick={() => dispatch(setAddNewApiKeyPopupVisible(true))}>
@@ -124,10 +124,14 @@ export const SiteEditorPage: FC = () => {
         id={siteId}
       />
 
-      <ResponsiveCard>
+      <ResponsiveCard
+        style={{ height: '70vh' }}
+        forTable
+        innerTitle={t('site.editor.api-keys-title')}
+        innerOptions={headerOptions}
+      >
         <ResponsiveTable
-          headerTitle={t('site.editor.api-keys-title')}
-          headerOptions={headerOptions}
+          hasHeaderOffset
           tableProps={{
             columns: columns,
             dataSource: siteApiKeys,
@@ -135,7 +139,6 @@ export const SiteEditorPage: FC = () => {
             pagination: paginationConfig,
             onChange: handleTableChange
           }}
-          error={error}
         />
       </ResponsiveCard>
 

@@ -9,6 +9,7 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTableUtils } from 'hooks/useTableUtils'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 
 interface CategoryListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
@@ -59,7 +60,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
     [t, sorterConfig, onOpenEditor]
   )
 
-  const headerOptions = (): JSX.Element => (
+  const headerOptions = (
     <Button type="primary" onClick={() => onOpenEditor(undefined, true)}>
       {t('common.create')}
     </Button>
@@ -67,17 +68,21 @@ export const CategoryList: FC<CategoryListProps> = props => {
 
   return (
     <>
-      <ResponsiveTable
-        headerTitle={t('coupon-category.list-title')}
-        headerOptions={headerOptions}
-        tableProps={{
-          columns: columnsConfig,
-          dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
-          pagination: paginationConfig,
-          onChange: handleTableChange
-        }}
-        error={error}
-      />
+      <ResponsiveCard
+        style={{ height: '70vh' }}
+        forTable
+        floatingTitle={t('coupon-category.list-title')}
+        floatingOptions={headerOptions}
+      >
+        <ResponsiveTable
+          tableProps={{
+            columns: columnsConfig,
+            dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
+            pagination: paginationConfig,
+            onChange: handleTableChange
+          }}
+        />
+      </ResponsiveCard>
 
       <GenericPopup
         id={categoryToDelete?.category?.id}

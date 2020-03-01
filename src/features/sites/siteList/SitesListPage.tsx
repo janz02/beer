@@ -73,7 +73,7 @@ export const SitesListPage: FC = () => {
     [sorterConfig, t]
   )
 
-  const headerOptions = (): JSX.Element => (
+  const headerOptions = (
     <Button type="primary" onClick={() => history.push(`/sites/editor`)}>
       {t('common.create')}
     </Button>
@@ -82,17 +82,19 @@ export const SitesListPage: FC = () => {
   return (
     <>
       <ResponsivePage>
-        <ResponsiveCard>
+        <ResponsiveCard
+          style={{ height: '70vh' }}
+          forTable
+          floatingTitle={t('site.list-title')}
+          floatingOptions={headerOptions}
+        >
           <ResponsiveTable
-            headerTitle={t('site.list-title')}
-            headerOptions={headerOptions}
             tableProps={{
               columns: columnsConfig,
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
               pagination: paginationConfig,
               onChange: handleTableChange
             }}
-            error={errorList}
           />
         </ResponsiveCard>
       </ResponsivePage>
