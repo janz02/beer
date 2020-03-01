@@ -102,18 +102,19 @@ export const NewsletterList: FC = () => {
     [dispatch, editTemplate, sorterConfig, t]
   )
 
-  const headerOptions = (): JSX.Element => (
+  const headerOptions = (
     <Button type="primary" onClick={() => setVisibleSaveNewPopup(true)}>
       {t('common.create')}
     </Button>
   )
 
   return (
-    <div>
-      <ResponsiveCard>
+    <>
+      <ResponsiveCard
+        floatingTitle={t('newsletter.available-templates')}
+        floatingOptions={headerOptions}
+      >
         <ResponsiveTable
-          headerTitle={t('newsletter.available-templates')}
-          headerOptions={headerOptions}
           tableProps={{
             loading,
             columns: columnsConfig,
@@ -194,6 +195,6 @@ export const NewsletterList: FC = () => {
           <Input />
         </Form.Item>
       </GenericModalForm>
-    </div>
+    </>
   )
 }

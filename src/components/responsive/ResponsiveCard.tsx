@@ -5,20 +5,22 @@ import { Card } from 'antd'
 import { CardProps } from 'antd/lib/card'
 
 export interface ResponsiveCardProps extends CardProps {
-  responsiveCardTitle?: string
+  floatingTitle?: string
+  floatingOptions?: JSX.Element
 }
 
 export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
-  const { responsiveCardTitle, children, ...rest } = props
+  const { floatingTitle, floatingOptions, children, ...rest } = props
   const isMobile = useIsMobile()
 
   return (
-    <div
-      className={`responsive-card-container ${isMobile ? 'responsive-card-container--mobile' : ''}`}
-    >
-      <div className="responsive-card-title">{responsiveCardTitle}</div>
+    <div className={`r-card-container ${isMobile ? 'r-card-container--mobile' : ''}`}>
+      <div className="r-card-header">
+        <div className="r-card-header__title">{floatingTitle}</div>
+        <div className="r-card-header__options">{floatingOptions}</div>
+      </div>
 
-      <Card {...rest} className={`responsive-card ${isMobile ? 'responsive-card--mobile' : ''}`}>
+      <Card {...rest} className={`r-card ${isMobile ? 'r-card--mobile' : ''}`}>
         {children}
       </Card>
     </div>

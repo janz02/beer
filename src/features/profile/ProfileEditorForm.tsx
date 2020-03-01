@@ -51,7 +51,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   }, [partner, profile])
 
   return (
-    <ResponsiveCard responsiveCardTitle={t('profile.editor-title')}>
+    <ResponsiveCard floatingTitle={t('profile.editor-title')}>
       <Form
         name="profile-editor-form"
         onFinish={handleSubmit}

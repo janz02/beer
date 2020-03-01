@@ -1,37 +1,58 @@
 @import "../../assets/scss/variables";
 
-.responsive-card-container {
-  height: inherit;
-  padding: 2rem;
-
-  &--mobile {
-    padding: 0;
-  }
-}
-
-.responsive-card {
-  max-width: 650px;
+.r-card-container {
+  max-width: 700px;
   height: inherit;
   margin: auto;
-  overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
 
-  .ant-card-body {
-    // for making the table responsive
+  .r-card-header {
+    &__title {
+      // max-width: 650px;
+      margin: 0 auto 15px auto;
+      color: $primary-color;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    &__options {
+      // max-width: 650px;
+      margin: 0 auto 15px auto;
+      color: $primary-color;
+      font-size: 25px;
+      font-weight: bold;
+    }
+  }
+
+  padding: 2rem;
+
+  .r-card {
+    // max-width: 650px;
     height: inherit;
-    padding: 35px 60px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
 
-    & > * {
+    .ant-card-body {
+      // for making the table responsive
       height: inherit;
+      padding: 35px 60px;
 
       & > * {
         height: inherit;
 
-        & > .ant-spin-container {
+        & > * {
           height: inherit;
+
+          & > .ant-spin-container {
+            height: inherit;
+          }
         }
       }
+    }
+
+    &--mobile {
+      padding: 0;
     }
   }
 
@@ -39,12 +60,4 @@
     border-radius: unset;
     box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
   }
-}
-
-.responsive-card-title {
-  max-width: 650px;
-  margin: 0 auto 15px auto;
-  color: $primary-color;
-  font-size: 25px;
-  font-weight: bold;
 }
