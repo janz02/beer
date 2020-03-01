@@ -52,7 +52,7 @@ export const NewsletterList: FC = () => {
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
     error,
-    pagination,
+    paginationState: pagination,
     getDataAction: getNewsletterTemplates
   })
 

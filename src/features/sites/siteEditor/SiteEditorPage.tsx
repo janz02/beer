@@ -75,7 +75,7 @@ export const SiteEditorPage: FC = () => {
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
     error,
-    pagination,
+    paginationState: pagination,
     getDataAction: (params: ListRequestParams) => getSiteEditorData(siteId!, params)
   })
 

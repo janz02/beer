@@ -25,7 +25,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
     error,
-    pagination,
+    paginationState: pagination,
     getDataAction: getCategories
   })
 

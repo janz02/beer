@@ -1,6 +1,5 @@
 import { useCallback, useMemo } from 'react'
 import { TablePaginationConfig } from 'antd/lib/table'
-import { basePaginationConfig, Pagination } from 'models/pagination'
 import { useIsMobile } from './isMobileHook'
 import { useDispatch } from './react-redux-hooks'
 import { PaginationConfig } from 'antd/lib/pagination'
@@ -11,24 +10,67 @@ export enum OrderByType {
   Descending = 'Descending'
 }
 
-export interface ListRequestParams {
-  [filterKey: string]: any
+export interface Pagination {
   page?: number
-  pageSize?: number
   from?: number
-  size?: number
-  total?: number
   to?: number
+  size?: number
+  pageSize?: number
+}
+export interface ListRequestParams extends Pagination {
+  [filterKey: string]: any
+  total?: number
   orderBy?: string
   orderByType?: OrderByType
 }
 
 export interface UseTableUtilsProps {
-  pagination: Pagination
+  paginationState: Pagination
   error: string
   filterKeys?: string[]
   getDataAction: (params: ListRequestParams) => any
 }
+
+const showTotalText = (total: number, range: number[]): string =>
+  `${range[1] - range[0] + +!!range[1]} / ${total}`
+
+/** Combine the old and new pagination values. */
+const calculatePagination = (newPagination: Pagination, oldPagination: Pagination): Pagination => ({
+  ...oldPagination,
+  ...newPagination,
+  // page must be atleast 1 in all case
+  page: Math.max(newPagination?.page ?? oldPagination?.page ?? 1, 1)
+})
+
+/** When the last item is deleted on the table page, the pagination page must be reduced. */
+const recalculatePaginationAfterDeletion = (oldPagination?: Pagination): number => {
+  if (oldPagination?.page === undefined) {
+    return 1
+  }
+  const reductPage = oldPagination.to === oldPagination.from
+  const page = oldPagination.page - +reductPage
+  return page
+}
+
+/** When the page size is changed, this will keep the previous top element on the new (resized) page. */
+const projectPageToNewPageSize = (newSize: number, pagination?: Pagination): number => {
+  return typeof pagination?.from === 'number' ? Math.ceil(pagination.from / newSize) : 1
+}
+
+/** The common pagination config. */
+export const basePaginationConfig = (
+  isMobile: boolean,
+  tableHasError: boolean,
+  pagination?: Pagination
+): TablePaginationConfig => ({
+  showTotal: showTotalText,
+  pageSize: pagination?.pageSize ?? 10,
+  current: pagination?.page ?? 1,
+  total: pagination?.size ?? 0,
+  simple: isMobile,
+  pageSizeOptions: ['5', '10', '25', '50'],
+  showSizeChanger: !tableHasError
+})
 
 /**
  * 
@@ -72,37 +114,40 @@ export interface UseTableUtilsProps {
  @example 
  // How you should use pagination in your getDataThunkAction(params: ListRequestParams)
     const oldPagination = getState().dataList.pagination
-    const pagination = calculatePagination(params, oldPagination)
-    const response = await api.data.getData({
+    const {result, ...pagination} = await api.data.getData({
+      pageSize: oldPagination.pageSize,
+      page: oldPagination.page,
       ...params,
-      pageSize: pagination.pageSize,
-      page: pagination.page
     })
 
     dispatch(
       getDataSuccess({
         data: response.result as Data[],
         pagination: {
-          page: response.page,
-          from: response.from,
-          size: response.size,
-          to: response.to,
-          pageSize: pagination.pageSize // From pagination state of the list
+          ...pagination,
+          pageSize: params.pageSize ?? oldPagination.pageSize
         }
       })
     )
+ @example 
+ // How you should use pagination in your deleteTableItemThunkAction(id)
+    dispatch(deleteItemRequest())
+    await api.data.deleteItem({ id })
+    dispatch(deleteItemSuccess())
+    const newPage = recalculatePaginationAfterDeletion(getState().data.pagination)
+    dispatch(getDataList({ page: newPage }))
  */
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const useTableUtils = <T = any>(props: UseTableUtilsProps) => {
-  const { pagination, error, getDataAction, filterKeys } = props
+const useTableUtils = <T = any>(props: UseTableUtilsProps) => {
+  const { paginationState, error, getDataAction, filterKeys } = props
 
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
 
   const paginationConfig = useMemo((): TablePaginationConfig | false => {
-    const baseConfig = basePaginationConfig(isMobile, !!error, pagination)
+    const baseConfig = basePaginationConfig(isMobile, !!error, paginationState)
     return baseConfig.total ? baseConfig : false
-  }, [error, isMobile, pagination])
+  }, [error, isMobile, paginationState])
 
   const sorterConfig = useMemo(
     () => ({
@@ -117,9 +162,21 @@ export const useTableUtils = <T = any>(props: UseTableUtilsProps) => {
       filters: Record<string, React.ReactText[] | null>,
       sorter: SorterResult<T>
     ) => {
+      const correctedPagination = calculatePagination(
+        {
+          page: pagination.current,
+          pageSize: pagination.pageSize
+        },
+        paginationState
+      )
+
       const requestParams: ListRequestParams = {
-        page: pagination.current,
-        pageSize: pagination.pageSize
+        page: correctedPagination.page,
+        pageSize: correctedPagination.pageSize
+      }
+
+      if (pagination.pageSize && paginationState.pageSize !== pagination.pageSize) {
+        requestParams.page = projectPageToNewPageSize(pagination.pageSize, paginationState)
       }
 
       if (sorter.order) {
@@ -138,8 +195,10 @@ export const useTableUtils = <T = any>(props: UseTableUtilsProps) => {
 
       dispatch(getDataAction(requestParams))
     },
-    [dispatch, filterKeys, getDataAction]
+    [dispatch, filterKeys, getDataAction, paginationState]
   )
 
   return { paginationConfig, handleTableChange, sorterConfig }
 }
+
+export { useTableUtils, recalculatePaginationAfterDeletion }

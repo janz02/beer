@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { Pagination, calculatePagination, recalculatePagination } from 'models/pagination'
 import { Site } from 'models/site'
-import { ListRequestParams } from 'hooks/useTableUtils'
+import {
+  ListRequestParams,
+  recalculatePaginationAfterDeletion,
+  Pagination
+} from 'hooks/useTableUtils'
 
 interface SiteListState {
   sites: Site[]
@@ -66,25 +69,20 @@ export const getSites = (params: ListRequestParams = {}): AppThunk => async (
   dispatch(getSitesRequest())
   try {
     const oldPagination = getState().siteList.pagination
-    const pagination = calculatePagination(params, oldPagination)
-
     // TODO: integrate, remove partner get because it will be on the JWT.
     const partner = await api.partner.getMyPartner()
-    const response = await api.sites.getSites({
+    const { result, ...pagination } = await api.sites.getSites({
+      pageSize: oldPagination.pageSize,
+      page: oldPagination.page,
       ...params,
-      pageSize: pagination.pageSize,
-      page: pagination.page,
       partnerId: partner.id
     })
     dispatch(
       getSitesSuccess({
-        sites: response.result as Site[],
+        sites: result as Site[],
         pagination: {
-          page: response.page,
-          from: response.from,
-          size: response.size,
-          to: response.to,
-          pageSize: pagination.pageSize
+          ...pagination,
+          pageSize: params.pageSize ?? oldPagination.pageSize
         }
       })
     )
@@ -100,12 +98,11 @@ export const deleteSite = (id: number, refreshList = true): AppThunk => async (
   dispatch(deleteSiteRequest())
   try {
     await api.sites.deleteSite({ id })
+    dispatch(deleteSiteSuccess())
     if (refreshList) {
-      const oldPagination = getState().siteList.pagination
-      const newPage = recalculatePagination(oldPagination)
+      const newPage = recalculatePaginationAfterDeletion(getState().siteList.pagination)
       dispatch(getSites({ page: newPage }))
     }
-    dispatch(deleteSiteSuccess())
     return { id }
   } catch (err) {
     dispatch(deleteSiteFail(err.toString()))

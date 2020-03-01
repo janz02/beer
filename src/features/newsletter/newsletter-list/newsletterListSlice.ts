@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Pagination, calculatePagination, recalculatePagination } from 'models/pagination'
 import { AppThunk } from 'app/store'
 import { NewsletterPreview } from 'models/newsletter'
 import { api } from 'api'
@@ -9,7 +8,11 @@ import moment from 'moment'
 import { Segment } from 'models/segment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
-import { ListRequestParams } from 'hooks/useTableUtils'
+import {
+  ListRequestParams,
+  recalculatePaginationAfterDeletion,
+  Pagination
+} from 'hooks/useTableUtils'
 
 interface NewsletterListState {
   templates: NewsletterPreview[]
@@ -111,23 +114,18 @@ export const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk
   try {
     dispatch(getTemplatesRequest())
     const oldPagination = getState().newsletterList.pagination
-    const pagination = calculatePagination(params, oldPagination)
-    const response = await api.emailTemplates.getTemplates({
-      ...params,
-      pageSize: pagination.pageSize,
-      page: pagination.page
+    const { result, ...pagination } = await api.emailTemplates.getTemplates({
+      page: oldPagination.page,
+      pageSize: oldPagination.pageSize,
+      ...params
     })
-
-    const templates = response.result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
+    const templates = result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
     dispatch(
       getTemplatesSuccess({
         templates: templates as NewsletterPreview[],
         pagination: {
-          page: response.page,
-          from: response.from,
-          size: response.size,
-          to: response.to,
-          pageSize: pagination.pageSize
+          ...pagination,
+          pageSize: params.pageSize ?? oldPagination.pageSize
         }
       })
     )
@@ -141,8 +139,7 @@ export const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatc
     dispatch(deleteTemplateRequest())
     await api.emailTemplates.deleteTemplate({ id })
     dispatch(deleteTemplateSuccess())
-    const oldPagination = getState().newsletterList.pagination
-    const newPage = recalculatePagination(oldPagination)
+    const newPage = recalculatePaginationAfterDeletion(getState().newsletterList.pagination)
     dispatch(getNewsletterTemplates({ page: newPage }))
     return { id }
   } catch (err) {

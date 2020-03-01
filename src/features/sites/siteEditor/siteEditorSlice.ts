@@ -6,9 +6,12 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { SiteApiKey } from 'models/siteApiKey'
 import moment from 'moment'
-import { Pagination, calculatePagination } from 'models/pagination'
 import { history } from 'router/router'
-import { ListRequestParams } from 'hooks/useTableUtils'
+import {
+  ListRequestParams,
+  Pagination,
+  recalculatePaginationAfterDeletion
+} from 'hooks/useTableUtils'
 
 interface SiteEditorState {
   site?: Site
@@ -142,18 +145,15 @@ export const getSiteEditorData = (id: number, params: ListRequestParams = {}): A
   dispatch(getSiteEditorDataRequest())
   try {
     const site = await api.sites.getSite({ id })
-
     const oldPagination = getState().siteEditor.pagination
-    const pagination = calculatePagination(params, oldPagination)
-
-    const response = await api.apiKey.getApiKeys({
+    const { result, ...pagination } = await api.apiKey.getApiKeys({
+      pageSize: oldPagination.pageSize,
+      page: oldPagination.page,
       ...params,
-      pageSize: pagination.pageSize,
-      page: pagination.page,
       siteId: site.id
     })
 
-    const siteApiKeys = response.result?.map(
+    const siteApiKeys = result?.map(
       key =>
         ({
           ...key,
@@ -166,11 +166,8 @@ export const getSiteEditorData = (id: number, params: ListRequestParams = {}): A
         site,
         siteApiKeys,
         pagination: {
-          page: response.page,
-          from: response.from,
-          size: response.size,
-          to: response.to,
-          pageSize: pagination.pageSize
+          ...pagination,
+          pageSize: params.pageSize ?? oldPagination.pageSize
         }
       })
     )
@@ -236,8 +233,10 @@ export const deleteApiKey = (id: number): AppThunk => async (dispatch, getState)
     dispatch(deleteApiKeySuccess())
 
     const siteEditorState = getState().siteEditor
-    siteEditorState.site?.id &&
-      dispatch(getSiteEditorData(siteEditorState.site?.id, siteEditorState.pagination))
+    if (siteEditorState.site?.id) {
+      const newPage = recalculatePaginationAfterDeletion(getState().siteList.pagination)
+      dispatch(getSiteEditorData(siteEditorState.site?.id, { page: newPage }))
+    }
   } catch (err) {
     dispatch(deleteApiKeyFail(err.toString()))
   }
