@@ -64,7 +64,11 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           }
         }}
       >
-        <Form.Item name="name" label={t('profile.field.name')} rules={[rule.required()]}>
+        <Form.Item
+          name="name"
+          label={t('profile.field.name')}
+          rules={[rule.required(), rule.max(100)]}
+        >
           <Input disabled={!editable} />
         </Form.Item>
 
