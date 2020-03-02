@@ -2,8 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
 import { api } from 'api'
-import { Pagination, recalculatePagination, calculatePagination } from 'models/pagination'
-import { ListRequestParams } from 'hooks/useTableUtils'
+import {
+  ListRequestParams,
+  recalculatePaginationAfterDeletion,
+  Pagination
+} from 'hooks/useTableUtils'
 
 interface CouponCategoryListState {
   categories: Category[]
@@ -75,23 +78,17 @@ export const getCategories = (params: ListRequestParams = {}): AppThunk => async
   dispatch(getCategoriesRequest())
   try {
     const oldPagination = getState().categoryList.pagination
-    const pagination = calculatePagination(params, oldPagination)
-
-    const response = await api.categories.getCategories({
-      ...params,
-      pageSize: pagination.pageSize,
-      page: pagination.page
+    const { result, ...pagination } = await api.categories.getCategories({
+      pageSize: oldPagination.pageSize,
+      page: oldPagination.page,
+      ...params
     })
-
     dispatch(
       getCategoriesSuccess({
-        categories: response.result as Category[],
+        categories: result as Category[],
         pagination: {
-          page: response.page,
-          from: response.from,
-          size: response.size,
-          to: response.to,
-          pageSize: pagination.pageSize
+          ...pagination,
+          pageSize: params.pageSize ?? oldPagination.pageSize
         }
       })
     )
@@ -104,13 +101,9 @@ export const deleteCategory = (id: number): AppThunk => async (dispatch, getStat
   dispatch(deleteRequest())
   try {
     await api.categories.deleteCategory({ id })
-
-    const oldPagination = getState().categoryList.pagination
-    const newPage = recalculatePagination(oldPagination)
-    dispatch(getCategories({ page: newPage }))
-
     dispatch(deleteSuccess())
-
+    const newPage = recalculatePaginationAfterDeletion(getState().categoryList.pagination)
+    dispatch(getCategories({ page: newPage }))
     return { id }
   } catch (err) {
     dispatch(deleteFail(err.toString()))

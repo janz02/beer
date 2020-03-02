@@ -29,7 +29,7 @@ export const SitesListPage: FC = () => {
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
     error: errorList,
-    pagination,
+    paginationState: pagination,
     getDataAction: getSites
   })
 

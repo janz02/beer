@@ -38,7 +38,7 @@
     "edit": "Edit",
     "go-back": "Go back",
     "message": {
-      "delete-success": "Successful deleting",
+      "delete-success": "Successful deletion",
       "email-sent": "The email was sent successfully",
       "save-success": "Successful saving"
     },
