@@ -106,7 +106,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           <Input.Password disabled={!editable} />
         </Form.Item>
 
-        <Form.Item name="phone" label={t('profile.field.phone')}>
+        <Form.Item name="phone" label={t('profile.field.phone')} rules={[rule.max(20)]}>
           <Input disabled={!editable} type="tel" />
         </Form.Item>
 
