@@ -3,6 +3,7 @@ import './ResponsiveCard.scss'
 import { useIsMobile } from 'hooks'
 import { Card } from 'antd'
 import { CardProps } from 'antd/lib/card'
+import { ResponsiveHeader } from './ResponsiveHeader'
 
 export interface ResponsiveCardProps extends CardProps {
   floatingTitle?: string
@@ -10,18 +11,11 @@ export interface ResponsiveCardProps extends CardProps {
   innerTitle?: string
   innerOptions?: JSX.Element
   forTable?: boolean
+  paddedTop?: boolean
+  paddedBottom?: boolean
+  wide?: boolean
+  extraWide?: boolean
 }
-
-const headerFactory = (
-  type: 'inner' | 'floating',
-  title: string | undefined,
-  options: JSX.Element | undefined
-): JSX.Element => (
-  <div className={`r-card-header r-card-header--${type}`}>
-    <span className="title">{title}</span>
-    <span className="options">{options}</span>
-  </div>
-)
 
 export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
   const {
@@ -31,18 +25,39 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
     innerOptions,
     children,
     forTable,
+    paddedTop,
+    paddedBottom,
+    wide,
+    extraWide,
     ...rest
   } = props
   const isMobile = useIsMobile()
 
-  const hasInnerHeader = innerTitle || innerOptions
+  const hasFloatingHeader = !!floatingTitle || !!floatingOptions
+  const hasInnerHeader = (!!innerTitle || !!innerOptions) ?? undefined
+
+  const innerHeader = hasInnerHeader && (
+    <ResponsiveHeader type="inner" title={innerTitle} options={innerOptions} />
+  )
+
+  const floatingHeader = hasFloatingHeader && (
+    <ResponsiveHeader type="floating" title={floatingTitle} options={floatingOptions} />
+  )
 
   return (
-    <div className={`r-card-container ${isMobile ? 'r-card-container--mobile' : ''}`}>
-      {headerFactory('floating', floatingTitle, floatingOptions)}
+    <div
+      className={`r-card-container 
+        ${isMobile ? 'r-card-container--mobile' : ''} 
+        ${paddedTop ? 'r-card-container--padded-top' : ''}
+        ${paddedBottom ? 'r-card-container--padded-bottom' : ''}
+        ${wide ? 'r-card-container--wide' : ''}
+        ${extraWide ? 'r-card-container--extra-wide' : ''}
+      `}
+    >
+      {floatingHeader}
       <Card
         {...rest}
-        title={hasInnerHeader ? headerFactory('inner', innerTitle, innerOptions) : undefined}
+        title={innerHeader}
         className={`r-card 
           ${isMobile ? 'r-card--mobile' : ''} 
           ${forTable ? 'as-table-wrapper' : ''}`}

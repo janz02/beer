@@ -17,7 +17,7 @@ import { useTableUtils } from 'hooks/useTableUtils'
 export const SitesListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { sites, pagination, errorList } = useSelector((state: RootState) => state.siteList)
+  const { sites, pagination } = useSelector((state: RootState) => state.siteList)
   const [siteToDelete, setSiteToDelete] = useState<{
     site?: Site
     popupVisible?: boolean
@@ -28,7 +28,6 @@ export const SitesListPage: FC = () => {
   }, [dispatch])
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    error: errorList,
     paginationState: pagination,
     getDataAction: getSites
   })
@@ -89,7 +88,7 @@ export const SitesListPage: FC = () => {
           floatingOptions={headerOptions}
         >
           <ResponsiveTable
-            tableProps={{
+            {...{
               columns: columnsConfig,
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
               pagination: paginationConfig,

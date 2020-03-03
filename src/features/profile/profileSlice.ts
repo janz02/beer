@@ -64,12 +64,13 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
 
   try {
     const userData = getState().auth.userData
-    if (userData.roles?.includes(Role.PARTNER)) {
-      const profile = await api.partnerContacts.getMyPartnerContact()
-      dispatch(getProfileSuccess(profile))
-    } else {
-      dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
-    }
+    // TODO: The roles have changed, no more Partner contact. Do we need this check, still?
+    // if (!userData.roles?.includes(Role.Partner)) {
+    const profile = await api.partnerContacts.getMyPartnerContact()
+    dispatch(getProfileSuccess(profile))
+    // } else {
+    // dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
+    // }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }
@@ -80,13 +81,14 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
 
   try {
     const userData = getState().auth.userData
-    if (userData.roles?.includes(Role.PARTNER)) {
-      await api.partnerContacts.updateMyPartnerContact({
-        partnerContactDto: { ...getState().profile.profile, ...profile }
-      })
-      dispatch(updateProfileSuccess())
-      dispatch(getProfile())
-    }
+    // TODO: The roles have changed, no more Partner contact.
+    // if (!userData.roles?.includes(Role.Partner)) {
+    await api.partnerContacts.updateMyPartnerContact({
+      partnerContactDto: { ...getState().profile.profile, ...profile }
+    })
+    dispatch(updateProfileSuccess())
+    dispatch(getProfile())
+    // }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }

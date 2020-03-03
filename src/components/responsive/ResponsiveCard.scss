@@ -4,44 +4,9 @@
   max-width: 700px;
   height: inherit;
   margin: auto;
+  padding: 0 2rem;
 
-  .r-card-header {
-    display: flex;
-    justify-content: space-between;
-    line-height: 2rem;
-
-    & > .title {
-      color: $primary-color;
-      line-height: unset;
-    }
-
-    &--floating {
-      margin-bottom: 1rem;
-
-      & > .title {
-        font-size: 1.75rem;
-        font-weight: bold;
-      }
-    }
-
-    &--inner {
-      & > .title {
-        font-size: 1.4rem;
-        font-weight: 400;
-      }
-    }
-
-    & > .options > .ant-btn {
-      height: inherit;
-      margin-left: 0.5rem;
-      padding: 0 1rem 0.2rem 1rem;
-      font-size: large;
-      font-weight: 400;
-      line-height: 2rem;
-    }
-  }
-
-  padding: 2rem;
+  --r-card-vertical-padding: 15px;
 
   .r-card {
     height: inherit;
@@ -55,13 +20,12 @@
     }
 
     .ant-card-body {
-      padding: 30px 60px;
+      padding: var(--r-card-vertical-padding) 60px;
     }
 
     &.as-table-wrapper {
       .ant-card-body {
-        // for making the table responsive
-        height: inherit;
+        height: calc(100% - 0.5rem);
         padding: 0;
 
         & > * {
@@ -71,7 +35,7 @@
             height: inherit;
 
             & > .ant-spin-container {
-              height: inherit;
+              height: calc(100% - 0.5 * var(--r-card-vertical-padding));
             }
           }
         }
@@ -82,5 +46,21 @@
   &--mobile {
     border-radius: unset;
     box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
+  }
+
+  &--padded-top {
+    padding-top: 2rem;
+  }
+
+  &--padded-bottom {
+    padding-bottom: 2rem;
+  }
+
+  &--wide {
+    max-width: 900px;
+  }
+
+  &--extra-wide {
+    max-width: 1100px;
   }
 }

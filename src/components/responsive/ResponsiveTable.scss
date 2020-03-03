@@ -1,22 +1,18 @@
 %shared-responsive-table-varibales {
   --table-footer-height: 80px;
   --table-header-height: 80px;
-  --table-margin-top: 2rem;
 }
 
 .responsive-table {
-  height: calc(100% - var(--table-footer-height) - var(--table-margin-top));
-  margin: var(--table-margin-top) 2rem;
-  margin-right: 1.5rem;
-  margin-bottom: 0;
+  height: calc(100% - var(--table-footer-height));
+  margin: 2rem 1.5rem 0 2rem;
 
   @extend %shared-responsive-table-varibales;
 
   &.has-header-offset {
     height:
       calc(
-        100% - var(--table-footer-height) - var(--table-margin-top) -
-        var(--table-header-height)
+        100% - var(--table-footer-height) + 10px - var(--table-header-height)
       );
   }
 
@@ -25,10 +21,8 @@
 
     .ant-table-content {
       height: 100%;
-      overflow-x: hidden;
       overflow-y: auto;
       border-bottom: 2px solid rgba(0, 0, 0, 0.068);
-      border-radius: 0.7rem 0.7rem 0 0;
 
       table {
         th {

@@ -36,7 +36,6 @@ export const SiteEditorPage: FC = () => {
   const inputToCopyRef = useRef(null)
   const {
     pagination,
-    error,
     loadingSave,
     siteApiKeys,
     site,
@@ -74,7 +73,6 @@ export const SiteEditorPage: FC = () => {
   )
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    error,
     paginationState: pagination,
     getDataAction: (params: ListRequestParams) => getSiteEditorData(siteId!, params)
   })
@@ -129,10 +127,12 @@ export const SiteEditorPage: FC = () => {
         forTable
         innerTitle={t('site.editor.api-keys-title')}
         innerOptions={headerOptions}
+        paddedTop
+        paddedBottom
       >
         <ResponsiveTable
           hasHeaderOffset
-          tableProps={{
+          {...{
             columns: columns,
             dataSource: siteApiKeys,
             rowKey: (x): string => x.id?.toString() ?? '',

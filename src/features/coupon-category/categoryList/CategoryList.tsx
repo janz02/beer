@@ -18,14 +18,13 @@ interface CategoryListProps {
 export const CategoryList: FC<CategoryListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { error, pagination, categories } = useSelector((state: RootState) => state.categoryList)
+  const { pagination, categories } = useSelector((state: RootState) => state.categoryList)
   const [categoryToDelete, setCategoryToDelete] = useState<{
     category?: Category
     popupVisible?: boolean
   } | null>()
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    error,
     paginationState: pagination,
     getDataAction: getCategories
   })
@@ -75,7 +74,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
         floatingOptions={headerOptions}
       >
         <ResponsiveTable
-          tableProps={{
+          {...{
             columns: columnsConfig,
             dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
             pagination: paginationConfig,

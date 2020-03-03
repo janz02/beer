@@ -2,7 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import { connectRouter } from 'connected-react-router'
 import { history } from '../router/router'
 import { routerHistoryStore } from '../router/routerHistoryStore'
-import { userListReducer } from 'features/users/userListSlice'
+import { userAccessListReducer } from 'features/userAccess/userAccessListSlice'
 import { newsletterEditorReducer } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { authReducer } from 'features/auth/authSlice'
 import { couponListReducer } from 'features/coupons/couponList/couponListSlice'
@@ -37,7 +37,7 @@ export const rootReducer = combineReducers({
   siteEditor: siteEditorReducer,
   newsletterList: newsletterListReducer,
   newsletterEditor: newsletterEditorReducer,
-  userList: userListReducer
+  userAccessList: userAccessListReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

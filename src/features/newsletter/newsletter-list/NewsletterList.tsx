@@ -27,7 +27,7 @@ export const NewsletterList: FC = () => {
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { templates, pagination, error, segments, loading } = useSelector(
+  const { templates, pagination, segments, loading } = useSelector(
     (state: RootState) => state.newsletterList
   )
 
@@ -51,7 +51,6 @@ export const NewsletterList: FC = () => {
   }, [dispatch])
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    error,
     paginationState: pagination,
     getDataAction: getNewsletterTemplates
   })
@@ -117,7 +116,7 @@ export const NewsletterList: FC = () => {
         forTable
       >
         <ResponsiveTable
-          tableProps={{
+          {...{
             loading,
             columns: columnsConfig,
             dataSource: templates.map((t, i) => ({ ...t, key: '' + i + t.id })),
