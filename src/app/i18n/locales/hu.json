@@ -39,7 +39,7 @@
     "go-back": "Vissza",
     "message": {
       "delete-success": "Sikeres törlés",
-      "email-sent": "Az e-mail sikeresen el lett küldve",
+      "email-sent": "A kérés sikeresen fel lett dolgozva",
       "save-success": "Sikeres mentés"
     },
     "ok": "OK",

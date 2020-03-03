@@ -92,12 +92,12 @@ export const sendNewsletterEmailToSegment = (
   try {
     dispatch(sendEmailRequest())
     // TODO: segments should be instead of recipients, the api only works with email now
-    await api.emailSender.sendEmails({
-      sendEmailsDto: {
-        recipients: [segmentId],
-        emailTemplateId: templateId
-      }
-    })
+    // await api.emailSender.sendEmails({
+    //   sendEmailsDto: {
+    //     recipients: [segmentId],
+    //     emailTemplateId: templateId
+    //   }
+    // })
     dispatch(sendEmailSuccess())
     message.success(i18n.t('common.message.email-sent'), 5)
     return true
