@@ -178,7 +178,7 @@ export const getUserAccess = (id: number): AppThunk => async (dispatch, getState
   try {
     dispatch(getUserRequest())
     // TODO: integrate the good api
-    const response = await api.sites.getSite({ id })
+    // const response = await api.sites.getSite({ id })
     dispatch(
       getUserSuccess({
         id: id,

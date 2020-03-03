@@ -4,7 +4,6 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Profile } from 'models/profile'
 import { api } from 'api'
-import { Role } from 'models/user'
 
 interface ProfileState {
   editable?: boolean
@@ -63,7 +62,7 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
   try {
-    const userData = getState().auth.userData
+    // const userData = getState().auth.userData
     // TODO: The roles have changed, no more Partner contact. Do we need this check, still?
     // if (!userData.roles?.includes(Role.Partner)) {
     const profile = await api.partnerContacts.getMyPartnerContact()
@@ -80,7 +79,7 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
   dispatch(setLoadingStart())
 
   try {
-    const userData = getState().auth.userData
+    // const userData = getState().auth.userData
     // TODO: The roles have changed, no more Partner contact.
     // if (!userData.roles?.includes(Role.Partner)) {
     await api.partnerContacts.updateMyPartnerContact({
