@@ -268,13 +268,15 @@
       "status-active": "Aktív",
       "status-inactive": "Inaktív"
     },
+    "msg": {
+      "change-succesful": "Felhasználó jogosultsága megváltoztatva"
+    },
     "nkm-users": "NKM Felhasználó",
     "partner-users": "Partner Kapcsolattartó",
     "role": {
       "administrator": "Adminisztrátor",
       "businesspartnermanager": "Ügyfél menedzser",
       "campaignmanager": "Kampány menedzser",
-      "none": "Nincs",
       "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
       "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
       "partnermanager": "Partner menedzser"

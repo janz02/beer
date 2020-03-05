@@ -81,12 +81,13 @@ export const CashierList: FC<CashierListProps> = props => {
       <ResponsiveCard
         style={{ height: '70vh' }}
         forTable
+        floatingTitle={t('cashier-list.table-title')}
         innerTitle={t('cashier-list.table-title')}
         innerOptions={headerOptions}
-        paddedTop
         paddedBottom
       >
         <ResponsiveTable
+          hasHeaderOffset
           {...{
             columns: columnsConfig,
             dataSource: cashiers?.map((c, i) => ({ ...c, key: '' + i + c.id })),

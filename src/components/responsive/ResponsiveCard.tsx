@@ -44,23 +44,28 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
     <ResponsiveHeader type="floating" title={floatingTitle} options={floatingOptions} />
   )
 
+  console.log({ hasInnerHeader, hasFloatingHeader })
+
   return (
     <div
-      className={`r-card-container 
-        ${isMobile ? 'r-card-container--mobile' : ''} 
-        ${paddedTop ? 'r-card-container--padded-top' : ''}
-        ${paddedBottom ? 'r-card-container--padded-bottom' : ''}
-        ${wide ? 'r-card-container--wide' : ''}
-        ${extraWide ? 'r-card-container--extra-wide' : ''}
-      `}
+      className={
+        `r-card-container ` +
+        `${isMobile ? 'r-card-container--mobile ' : ''}` +
+        `${paddedTop ? 'r-card-container--padded-top ' : ''}` +
+        `${paddedBottom ? 'r-card-container--padded-bottom ' : ''}` +
+        `${wide ? 'r-card-container--wide ' : ''}` +
+        `${extraWide ? 'r-card-container--extra-wide ' : ''}`
+      }
     >
       {floatingHeader}
       <Card
         {...rest}
         title={innerHeader}
-        className={`r-card 
-          ${isMobile ? 'r-card--mobile' : ''} 
-          ${forTable ? 'as-table-wrapper' : ''}`}
+        className={
+          `r-card ` +
+          `${isMobile ? 'r-card--mobile ' : ''}` +
+          `${forTable ? 'as-table-wrapper ' : ''}`
+        }
       >
         {children}
       </Card>

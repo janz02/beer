@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { getNkmUsers, getPartnerUsers } from './userAccessListSlice'
+import { getNkmUsers, getPartnerUsers, UserType } from './userAccessListSlice'
 import { useTableUtils, UseTableUtilsTools } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess } from 'models/user'
@@ -49,20 +49,29 @@ export const useUserListPage = (): UseUserListPageUtils => {
         title: t('user-access.field.status'),
         dataIndex: 'active',
         key: 'active',
-        ...nkmUsersTableUtils.sorterConfig
+        ...nkmUsersTableUtils.sorterConfig,
+        render: (value: unknown, user: UserAccess) =>
+          t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
       },
       {
         title: t('user-access.field.role'),
         dataIndex: 'role',
         key: 'role',
-        ...nkmUsersTableUtils.sorterConfig
+        render: (value: unknown, user: UserAccess) =>
+          t(`user-access.role.${user.role?.toLowerCase()}`)
       },
       {
         title: t('common.actions'),
         key: 'actions',
         colSpan: 1,
         render(user: UserAccess) {
-          return <CrudButtons onEdit={() => setEditorModal({ visible: true, userId: user.id })} />
+          return (
+            <CrudButtons
+              onEdit={() =>
+                setEditorModal({ visible: true, userId: user.id, userType: UserType.NKM })
+              }
+            />
+          )
         }
       }
     ],
@@ -98,32 +107,38 @@ export const useUserListPage = (): UseUserListPageUtils => {
         title: t('user-access.field.status'),
         dataIndex: 'active',
         key: 'active',
-        ...partnerUsersTableUtils.sorterConfig
+        ...partnerUsersTableUtils.sorterConfig,
+        render: (value: unknown, user: UserAccess) =>
+          t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
       },
       {
         title: t('user-access.field.partner-name'),
         dataIndex: 'partnerName',
-        key: 'partnerName',
-        ...partnerUsersTableUtils.sorterConfig
+        key: 'partnerName'
       },
       {
         title: t('user-access.field.partner-type'),
         dataIndex: 'partnerType',
-        key: 'partnerType',
-        ...partnerUsersTableUtils.sorterConfig
+        key: 'partnerType'
       },
       {
         title: t('user-access.field.role'),
         dataIndex: 'role',
         key: 'role',
-        ...partnerUsersTableUtils.sorterConfig
+        render: (value: unknown, user: UserAccess) =>
+          t(`user-access.role.${user.role?.toLowerCase()}`)
       },
       {
         title: t('common.actions'),
         key: 'actions',
         colSpan: 1,
         render(user: UserAccess) {
-          return <CrudButtons onEdit={() => setEditorModal({ visible: true, userId: user.id })} />
+          return (
+            <CrudButtons
+              onEdit={() =>
+                setEditorModal({ visible: true, userId: user.id, userType: UserType.PARTNER })}
+            />
+          )
         }
       }
     ],

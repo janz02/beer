@@ -1,13 +1,4 @@
-export enum Role {
-  NONE = 'None',
-  ADMINISTRATOR = 'Administrator',
-  CAMPAIGNMANAGER = 'CampaignManager',
-  PARTNERMANAGER = 'PartnerManager',
-  BUSINESSPARTNERMANAGER = 'BusinessPartnerManager',
-  PARTNERCONTACTAPPROVER = 'PartnerContactApprover',
-  PARTNERCONTACTEDITOR = 'PartnerContactEditor',
-  USER = 'User'
-}
+import { Roles } from 'api/swagger/models'
 
 export enum Status {
   ACTIVE = 'active',
@@ -16,7 +7,7 @@ export enum Status {
 
 export interface UserData {
   email?: string
-  roles?: Role[]
+  roles?: Roles[]
   exp?: number
 }
 
@@ -28,6 +19,6 @@ export interface UserAccess {
   partnerType?: boolean
   email?: number
   phone?: number
-  role?: Role | null
+  role?: Roles | null
   active?: boolean
 }

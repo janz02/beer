@@ -2,9 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { ListRequestParams, Pagination } from 'hooks/useTableUtils'
-import { UserAccess, Role } from 'models/user'
+import { UserAccess } from 'models/user'
 import { message } from 'antd'
 import i18n from 'app/i18n'
+import { Roles } from 'api/swagger/models'
+
+export enum UserType {
+  NKM = 'nkm',
+  PARTNER = 'partner'
+}
 
 interface UserAccessListState {
   nkmUsers: UserAccess[]
@@ -127,8 +133,7 @@ export const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (
   try {
     dispatch(getNkmUsersRequest())
     const oldPagination = getState().userAccessList.nkmPagination
-    // TODO: integrate the good api
-    const { result, ...pagination } = await api.sites.getSites({
+    const { result, ...pagination } = await api.auth.getNkmPartnerContacts({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params
@@ -154,8 +159,7 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
   try {
     dispatch(getPartnerUsersRequest())
     const oldPagination = getState().userAccessList.partnerPagination
-    // TODO: integrate the good api
-    const { result, ...pagination } = await api.sites.getSites({
+    const { result, ...pagination } = await api.auth.getPartnerContacts({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params
@@ -174,19 +178,11 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
   }
 }
 
-export const getUserAccess = (id: number): AppThunk => async (dispatch, getState) => {
+export const getUserAccess = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(getUserRequest())
-    // TODO: integrate the good api
-    // const response = await api.sites.getSite({ id })
-    dispatch(
-      getUserSuccess({
-        id: id,
-        name: 'kjkfsgj sdkjflksd' + Date.now(),
-        role: Role.ADMINISTRATOR,
-        active: !(id % 2)
-      } as UserAccess)
-    )
+    const response = await api.auth.getOnePartnerContact({ id })
+    dispatch(getUserSuccess({ ...response } as UserAccess))
   } catch (err) {
     dispatch(getUserFail(err.toString()))
   }
@@ -194,15 +190,21 @@ export const getUserAccess = (id: number): AppThunk => async (dispatch, getState
 
 export const saveUserAccess = (
   id: number,
-  role: Role,
-  active: boolean
+  role: Roles,
+  active: boolean,
+  type?: UserType
 ): AppThunk => async dispatch => {
   try {
     dispatch(saveUserRequest())
     // TODO: integrate the good api
-    // const response = await api.sites.getSite({ id })
+    await api.auth.updatePartnerContact({ id, partnerContactStateDto: { role, active } })
     message.success(i18n.t('user-access.msg.change-succesful'))
     dispatch(saveUserSuccess())
+    if (type === UserType.NKM) {
+      dispatch(getNkmUsers())
+    } else if (type === UserType.PARTNER) {
+      dispatch(getPartnerUsers())
+    }
   } catch (err) {
     dispatch(saveUserFail(err.toString()))
   }

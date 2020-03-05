@@ -268,13 +268,15 @@
       "status-active": "Active",
       "status-inactive": "Inactive"
     },
+    "msg": {
+      "change-succesful": "User access successfully changed"
+    },
     "nkm-users": "NKM User",
     "partner-users": "Partner Contact",
     "role": {
       "administrator": "Administrator",
       "businesspartnermanager": "Business Partner Manager",
       "campaignmanager": "Campaign Manager",
-      "none": "None",
       "partnercontactapprover": "Partner Contact - Approver",
       "partnercontacteditor": "Partner Contact - Editor",
       "partnermanager": "Partner Manager"

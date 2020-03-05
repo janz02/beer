@@ -1,30 +1,37 @@
 import React, { FC, useMemo, useEffect } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'hooks/react-redux-hooks'
-import { Role, Status } from 'models/user'
+import { Status } from 'models/user'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { Form, Select, Radio } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { getUserAccess, saveUserAccess, clearUserAccessEditor } from './userAccessListSlice'
+import {
+  getUserAccess,
+  saveUserAccess,
+  clearUserAccessEditor,
+  UserType
+} from './userAccessListSlice'
 import Typography from 'antd/lib/typography'
+import { Roles } from 'api/swagger/models'
 
 const { Text } = Typography
 
 interface UserAccessFormValues {
-  role?: Role | null
+  role?: Roles | null
   status?: Status | null
 }
 
 export interface UserAccessEditorProps {
   visible?: boolean
   userId?: number | undefined
+  userType?: UserType
   handleClose?: () => void
 }
 
 export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
-  const { visible, userId, handleClose } = props
+  const { visible, userId, handleClose, userType } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
@@ -39,32 +46,28 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
   const roleOptions = useMemo(
     () => [
       {
-        name: t('user-access.role.none'),
-        value: Role.NONE
-      },
-      {
         name: t('user-access.role.administrator'),
-        value: Role.ADMINISTRATOR
+        value: Roles.Administrator
       },
       {
         name: t('user-access.role.campaignmanager'),
-        value: Role.CAMPAIGNMANAGER
+        value: Roles.CampaignManager
       },
       {
         name: t('user-access.role.businesspartnermanager'),
-        value: Role.BUSINESSPARTNERMANAGER
+        value: Roles.BusinessPartnerManager
       },
       {
         name: t('user-access.role.partnercontactapprover'),
-        value: Role.PARTNERCONTACTAPPROVER
+        value: Roles.PartnerContactApprover
       },
       {
         name: t('user-access.role.partnercontacteditor'),
-        value: Role.PARTNERCONTACTEDITOR
+        value: Roles.PartnerContactEditor
       },
       {
         name: t('user-access.role.partnermanager'),
-        value: Role.PARTNERMANAGER
+        value: Roles.PartnerManager
       }
     ],
     [t]
@@ -100,7 +103,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
         onFinish: (values: UserAccessFormValues) => {
           const { role, status } = values
           if (userId !== undefined && role && status) {
-            dispatch(saveUserAccess(userId, role, status === Status.ACTIVE))
+            dispatch(saveUserAccess(userId, role, status === Status.ACTIVE, userType))
           }
           handleClose && handleClose()
         }
