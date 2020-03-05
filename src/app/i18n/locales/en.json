@@ -27,6 +27,21 @@
       "terms-and-services": "Terms & Services"
     }
   },
+  "cashier-editor": {
+    "editor-create": "Create cashier",
+    "editor-edit": "Edit cashier",
+    "field": {
+      "cashier-id": "Online cashier ID",
+      "digital-stamp-id": "Digital stamp ID"
+    }
+  },
+  "cashier-list": {
+    "table": {
+      "cashier-id": "Online cashier ID",
+      "digital-stamp-id": "Digital stamp ID"
+    },
+    "table-title": "Cashiers"
+  },
   "common": {
     "actions": "Actions",
     "cancel": "Cancel",
@@ -133,6 +148,10 @@
       "registration-failed": "Registration failed.",
       "user-exists": "User exists."
     },
+    "cashier": {
+      "cashier-id-not-unique": "Online cashier ID must be unique",
+      "stamp-not-unique": "Digital stamp ID must be unique"
+    },
     "common": {
       "validation": "Validation error."
     },
@@ -226,20 +245,6 @@
     "save-profile-success": "Saving profile was successful."
   },
   "site": {
-    "editor": {
-      "add-api-key": {
-        "generate": "Generate",
-        "name": "Api key owner name"
-      },
-      "add-new-api-key": "Add new api key",
-      "add-new-api-key-title": "Add api key",
-      "api-key-name": "Name",
-      "api-keys-title": "Api keys",
-      "copy-api-key": "Copy key",
-      "copy-api-key-success": "Copied!",
-      "copy-api-key-title": "Api key",
-      "expire-date": "Expire date"
-    },
     "editor-title-create": "Site create",
     "editor-title-edit": "Site edit",
     "field": {

@@ -27,6 +27,21 @@
       "terms-and-services": "felhasználási feltételeket."
     }
   },
+  "cashier-editor": {
+    "editor-create": "Pénztár létrehozás",
+    "editor-edit": "Pénztár szerkesztés",
+    "field": {
+      "cashier-id": "Online pénztár azonosító (AP)",
+      "digital-stamp-id": "Digitális pecsét azonosító"
+    }
+  },
+  "cashier-list": {
+    "table": {
+      "cashier-id": "Online pénztár azonosító (AP)",
+      "digital-stamp-id": "Digitális pecsét azonosító"
+    },
+    "table-title": "Pénztárak"
+  },
   "common": {
     "actions": "Műveletek",
     "cancel": "Mégsem",
@@ -133,6 +148,10 @@
       "registration-failed": "Regsztráció sikertelen.",
       "user-exists": "Felhasználó már létezik."
     },
+    "cashier": {
+      "cashier-id-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
+      "stamp-not-unique": "Digitális pecsét azonosító nem egyedi"
+    },
     "common": {
       "validation": "Validációs hiba."
     },
@@ -226,20 +245,6 @@
     "save-profile-success": "Profile mentése sikeres."
   },
   "site": {
-    "editor": {
-      "add-api-key": {
-        "generate": "Generálás",
-        "name": "Api kulcs tulajdonos neve"
-      },
-      "add-new-api-key": "Új kulcs hozzáadása",
-      "add-new-api-key-title": "Api kulcs hozzáadása",
-      "api-key-name": "Név",
-      "api-keys-title": "Api kulcsok",
-      "copy-api-key": "Kód másolása",
-      "copy-api-key-success": "Másolva!",
-      "copy-api-key-title": "Api kulcs",
-      "expire-date": "Lejárati dátum"
-    },
     "editor-title-create": "Telephely létrehozása",
     "editor-title-edit": "Telephely szerkesztése",
     "field": {

@@ -16,34 +16,34 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PartnerContactDto
+ * @interface SelfPartnerContactDto
  */
-export interface PartnerContactDto {
+export interface SelfPartnerContactDto {
     /**
      * 
      * @type {string}
-     * @memberof PartnerContactDto
+     * @memberof SelfPartnerContactDto
      */
     name?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PartnerContactDto
+     * @memberof SelfPartnerContactDto
      */
     email?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PartnerContactDto
+     * @memberof SelfPartnerContactDto
      */
     phone?: string | null;
 }
 
-export function PartnerContactDtoFromJSON(json: any): PartnerContactDto {
-    return PartnerContactDtoFromJSONTyped(json, false);
+export function SelfPartnerContactDtoFromJSON(json: any): SelfPartnerContactDto {
+    return SelfPartnerContactDtoFromJSONTyped(json, false);
 }
 
-export function PartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerContactDto {
+export function SelfPartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): SelfPartnerContactDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -55,7 +55,7 @@ export function PartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function PartnerContactDtoToJSON(value?: PartnerContactDto | null): any {
+export function SelfPartnerContactDtoToJSON(value?: SelfPartnerContactDto | null): any {
     if (value === undefined) {
         return undefined;
     }

@@ -15,16 +15,16 @@
 
 import * as runtime from '../runtime';
 import {
-    PartnerContactDto,
-    PartnerContactDtoFromJSON,
-    PartnerContactDtoToJSON,
     PartnerContactVm,
     PartnerContactVmFromJSON,
     PartnerContactVmToJSON,
+    SelfPartnerContactDto,
+    SelfPartnerContactDtoFromJSON,
+    SelfPartnerContactDtoToJSON,
 } from '../models';
 
 export interface UpdateMyPartnerContactRequest {
-    partnerContactDto?: PartnerContactDto;
+    selfPartnerContactDto?: SelfPartnerContactDto;
 }
 
 /**
@@ -78,7 +78,7 @@ export class PartnerContactsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: PartnerContactDtoToJSON(requestParameters.partnerContactDto),
+            body: SelfPartnerContactDtoToJSON(requestParameters.selfPartnerContactDto),
         });
 
         return new runtime.VoidApiResponse(response);

@@ -64,7 +64,7 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
   try {
     // const userData = getState().auth.userData
     // TODO: The roles have changed, no more Partner contact. Do we need this check, still?
-    // if (!userData.roles?.includes(Role.Partner)) {
+    // if (!userData.roles?.includes(Roles.Partner)) {
     const profile = await api.partnerContacts.getMyPartnerContact()
     dispatch(getProfileSuccess(profile))
     // } else {
@@ -80,10 +80,9 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
 
   try {
     // const userData = getState().auth.userData
-    // TODO: The roles have changed, no more Partner contact.
-    // if (!userData.roles?.includes(Role.Partner)) {
+    // if (userData.roles?.includes(Roles.PARTNER)) {
     await api.partnerContacts.updateMyPartnerContact({
-      partnerContactDto: { ...getState().profile.profile, ...profile }
+      selfPartnerContactDto: { ...getState().profile.profile, ...profile }
     })
     dispatch(updateProfileSuccess())
     dispatch(getProfile())

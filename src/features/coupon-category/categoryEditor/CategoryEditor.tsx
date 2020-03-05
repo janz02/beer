@@ -44,8 +44,9 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
   }, [dispatch, id, mode])
 
   useEffect(() => {
+    if (!visible) return
     form.setFieldsValue({ name: category?.name })
-  }, [category, form])
+  }, [category, form, visible])
 
   const afterCloseExtended = (): void => {
     // clear the editor after the exit animation has finished

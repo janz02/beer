@@ -33,7 +33,6 @@ const categoryEditorSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
-
     clearCategoryEditor(state) {
       state.category = null
       state.error = ''
