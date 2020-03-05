@@ -57,18 +57,7 @@ export interface ChangePasswordRequest {
     changePasswordDto?: ChangePasswordDto;
 }
 
-export interface GetAuthRequest {
-    name?: string;
-    phone?: string;
-    email?: string;
-    partnerName?: string;
-    page?: number;
-    pageSize?: number;
-    orderBy?: string;
-    orderByType?: OrderByType;
-}
-
-export interface GetNkmAuthRequest {
+export interface GetNkmPartnerContactsRequest {
     name?: string;
     phone?: string;
     email?: string;
@@ -81,6 +70,17 @@ export interface GetNkmAuthRequest {
 
 export interface GetOnePartnerContactRequest {
     id: number;
+}
+
+export interface GetPartnerContactsRequest {
+    name?: string;
+    phone?: string;
+    email?: string;
+    partnerName?: string;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string;
+    orderByType?: OrderByType;
 }
 
 export interface LoginRequest {
@@ -99,7 +99,7 @@ export interface RegisterUserRequest {
     registerUserDto?: RegisterUserDto;
 }
 
-export interface UpdateAuthRequest {
+export interface UpdatePartnerContactRequest {
     id: number;
     partnerContactStateDto?: PartnerContactStateDto;
 }
@@ -144,74 +144,10 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the details of partner contacts in paginated form
-     * Returns the details of partner contacts
-     */
-    async getAuthRaw(requestParameters: GetAuthRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.name !== undefined) {
-            queryParameters['name'] = requestParameters.name;
-        }
-
-        if (requestParameters.phone !== undefined) {
-            queryParameters['phone'] = requestParameters.phone;
-        }
-
-        if (requestParameters.email !== undefined) {
-            queryParameters['email'] = requestParameters.email;
-        }
-
-        if (requestParameters.partnerName !== undefined) {
-            queryParameters['partnerName'] = requestParameters.partnerName;
-        }
-
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
-        }
-
-        if (requestParameters.pageSize !== undefined) {
-            queryParameters['pageSize'] = requestParameters.pageSize;
-        }
-
-        if (requestParameters.orderBy !== undefined) {
-            queryParameters['orderBy'] = requestParameters.orderBy;
-        }
-
-        if (requestParameters.orderByType !== undefined) {
-            queryParameters['orderByType'] = requestParameters.orderByType;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Auth/getPartnerContacts`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerContactVmPaginatedResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the details of partner contacts in paginated form
-     * Returns the details of partner contacts
-     */
-    async getAuth(requestParameters: GetAuthRequest): Promise<PartnerContactVmPaginatedResponse> {
-        const response = await this.getAuthRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * Returns the details of elevated users in paginated form
      * Returns the details of elevated users
      */
-    async getNkmAuthRaw(requestParameters: GetNkmAuthRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
+    async getNkmPartnerContactsRaw(requestParameters: GetNkmPartnerContactsRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -266,8 +202,8 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns the details of elevated users in paginated form
      * Returns the details of elevated users
      */
-    async getNkmAuth(requestParameters: GetNkmAuthRequest): Promise<PartnerContactVmPaginatedResponse> {
-        const response = await this.getNkmAuthRaw(requestParameters);
+    async getNkmPartnerContacts(requestParameters: GetNkmPartnerContactsRequest): Promise<PartnerContactVmPaginatedResponse> {
+        const response = await this.getNkmPartnerContactsRaw(requestParameters);
         return await response.value();
     }
 
@@ -304,6 +240,70 @@ export class AuthApi extends runtime.BaseAPI {
      */
     async getOnePartnerContact(requestParameters: GetOnePartnerContactRequest): Promise<PartnerContactStateVm> {
         const response = await this.getOnePartnerContactRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Returns the details of partner contacts in paginated form
+     * Returns the details of partner contacts
+     */
+    async getPartnerContactsRaw(requestParameters: GetPartnerContactsRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.phone !== undefined) {
+            queryParameters['phone'] = requestParameters.phone;
+        }
+
+        if (requestParameters.email !== undefined) {
+            queryParameters['email'] = requestParameters.email;
+        }
+
+        if (requestParameters.partnerName !== undefined) {
+            queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/getPartnerContacts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerContactVmPaginatedResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns the details of partner contacts in paginated form
+     * Returns the details of partner contacts
+     */
+    async getPartnerContacts(requestParameters: GetPartnerContactsRequest): Promise<PartnerContactVmPaginatedResponse> {
+        const response = await this.getPartnerContactsRaw(requestParameters);
         return await response.value();
     }
 
@@ -449,9 +449,9 @@ export class AuthApi extends runtime.BaseAPI {
      * Updates the details of an elevated user or partner contact
      * Updates the details of an elevated user or partner contact
      */
-    async updateAuthRaw(requestParameters: UpdateAuthRequest): Promise<runtime.ApiResponse<void>> {
+    async updatePartnerContactRaw(requestParameters: UpdatePartnerContactRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateAuth.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePartnerContact.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -479,8 +479,8 @@ export class AuthApi extends runtime.BaseAPI {
      * Updates the details of an elevated user or partner contact
      * Updates the details of an elevated user or partner contact
      */
-    async updateAuth(requestParameters: UpdateAuthRequest): Promise<void> {
-        await this.updateAuthRaw(requestParameters);
+    async updatePartnerContact(requestParameters: UpdatePartnerContactRequest): Promise<void> {
+        await this.updatePartnerContactRaw(requestParameters);
     }
 
 }

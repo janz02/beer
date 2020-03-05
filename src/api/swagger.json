@@ -338,7 +338,7 @@
         ],
         "summary": "Returns the details of partner contacts",
         "description": "Returns the details of partner contacts in paginated form",
-        "operationId": "getAuth",
+        "operationId": "getPartnerContacts",
         "parameters": [
           {
             "name": "name",
@@ -450,7 +450,7 @@
         ],
         "summary": "Returns the details of elevated users",
         "description": "Returns the details of elevated users in paginated form",
-        "operationId": "getNkmAuth",
+        "operationId": "getNkmPartnerContacts",
         "parameters": [
           {
             "name": "name",
@@ -545,7 +545,7 @@
         ],
         "summary": "Updates the details of an elevated user or partner contact",
         "description": "Updates the details of an elevated user or partner contact",
-        "operationId": "updateAuth",
+        "operationId": "updatePartnerContact",
         "parameters": [
           {
             "name": "id",
