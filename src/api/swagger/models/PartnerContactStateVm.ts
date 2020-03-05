@@ -13,43 +13,50 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Roles,
+    RolesFromJSON,
+    RolesFromJSONTyped,
+    RolesToJSON,
+} from './';
+
 /**
  * 
  * @export
- * @interface SiteApiKeyVm
+ * @interface PartnerContactStateVm
  */
-export interface SiteApiKeyVm {
+export interface PartnerContactStateVm {
     /**
      * 
      * @type {number}
-     * @memberof SiteApiKeyVm
+     * @memberof PartnerContactStateVm
      */
     id?: number;
     /**
      * 
      * @type {string}
-     * @memberof SiteApiKeyVm
+     * @memberof PartnerContactStateVm
      */
     name?: string | null;
     /**
      * 
-     * @type {Date}
-     * @memberof SiteApiKeyVm
+     * @type {Roles}
+     * @memberof PartnerContactStateVm
      */
-    expireDate?: Date;
+    role?: Roles;
     /**
      * 
      * @type {boolean}
-     * @memberof SiteApiKeyVm
+     * @memberof PartnerContactStateVm
      */
-    isActive?: boolean;
+    active?: boolean;
 }
 
-export function SiteApiKeyVmFromJSON(json: any): SiteApiKeyVm {
-    return SiteApiKeyVmFromJSONTyped(json, false);
+export function PartnerContactStateVmFromJSON(json: any): PartnerContactStateVm {
+    return PartnerContactStateVmFromJSONTyped(json, false);
 }
 
-export function SiteApiKeyVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): SiteApiKeyVm {
+export function PartnerContactStateVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerContactStateVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -57,12 +64,12 @@ export function SiteApiKeyVmFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
-        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
+        'role': !exists(json, 'role') ? undefined : RolesFromJSON(json['role']),
+        'active': !exists(json, 'active') ? undefined : json['active'],
     };
 }
 
-export function SiteApiKeyVmToJSON(value?: SiteApiKeyVm | null): any {
+export function PartnerContactStateVmToJSON(value?: PartnerContactStateVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -73,8 +80,8 @@ export function SiteApiKeyVmToJSON(value?: SiteApiKeyVm | null): any {
         
         'id': value.id,
         'name': value.name,
-        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
-        'isActive': value.isActive,
+        'role': RolesToJSON(value.role),
+        'active': value.active,
     };
 }
 

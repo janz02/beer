@@ -14,61 +14,61 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    SiteApiKeyVm,
-    SiteApiKeyVmFromJSON,
-    SiteApiKeyVmFromJSONTyped,
-    SiteApiKeyVmToJSON,
+    PartnerContactVm,
+    PartnerContactVmFromJSON,
+    PartnerContactVmFromJSONTyped,
+    PartnerContactVmToJSON,
 } from './';
 
 /**
  * 
  * @export
- * @interface SiteApiKeyVmPaginatedResponse
+ * @interface PartnerContactVmPaginatedResponse
  */
-export interface SiteApiKeyVmPaginatedResponse {
+export interface PartnerContactVmPaginatedResponse {
     /**
      * 
-     * @type {Array<SiteApiKeyVm>}
-     * @memberof SiteApiKeyVmPaginatedResponse
+     * @type {Array<PartnerContactVm>}
+     * @memberof PartnerContactVmPaginatedResponse
      */
-    result?: Array<SiteApiKeyVm> | null;
+    result?: Array<PartnerContactVm> | null;
     /**
      * 
      * @type {number}
-     * @memberof SiteApiKeyVmPaginatedResponse
+     * @memberof PartnerContactVmPaginatedResponse
      */
     page?: number;
     /**
      * 
      * @type {number}
-     * @memberof SiteApiKeyVmPaginatedResponse
+     * @memberof PartnerContactVmPaginatedResponse
      */
     from?: number;
     /**
      * 
      * @type {number}
-     * @memberof SiteApiKeyVmPaginatedResponse
+     * @memberof PartnerContactVmPaginatedResponse
      */
     to?: number;
     /**
      * 
      * @type {number}
-     * @memberof SiteApiKeyVmPaginatedResponse
+     * @memberof PartnerContactVmPaginatedResponse
      */
     size?: number;
 }
 
-export function SiteApiKeyVmPaginatedResponseFromJSON(json: any): SiteApiKeyVmPaginatedResponse {
-    return SiteApiKeyVmPaginatedResponseFromJSONTyped(json, false);
+export function PartnerContactVmPaginatedResponseFromJSON(json: any): PartnerContactVmPaginatedResponse {
+    return PartnerContactVmPaginatedResponseFromJSONTyped(json, false);
 }
 
-export function SiteApiKeyVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): SiteApiKeyVmPaginatedResponse {
+export function PartnerContactVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerContactVmPaginatedResponse {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(SiteApiKeyVmFromJSON)),
+        'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(PartnerContactVmFromJSON)),
         'page': !exists(json, 'page') ? undefined : json['page'],
         'from': !exists(json, 'from') ? undefined : json['from'],
         'to': !exists(json, 'to') ? undefined : json['to'],
@@ -76,7 +76,7 @@ export function SiteApiKeyVmPaginatedResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function SiteApiKeyVmPaginatedResponseToJSON(value?: SiteApiKeyVmPaginatedResponse | null): any {
+export function PartnerContactVmPaginatedResponseToJSON(value?: PartnerContactVmPaginatedResponse | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -85,7 +85,7 @@ export function SiteApiKeyVmPaginatedResponseToJSON(value?: SiteApiKeyVmPaginate
     }
     return {
         
-        'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(SiteApiKeyVmToJSON)),
+        'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(PartnerContactVmToJSON)),
         'page': value.page,
         'from': value.from,
         'to': value.to,

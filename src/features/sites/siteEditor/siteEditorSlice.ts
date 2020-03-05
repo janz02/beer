@@ -4,8 +4,7 @@ import { api } from 'api'
 import { Site } from 'models/site'
 import { message } from 'antd'
 import i18n from 'app/i18n'
-import { SiteApiKey } from 'models/siteApiKey'
-import moment from 'moment'
+import { Cashier } from 'models/cashier'
 import { history } from 'router/router'
 import {
   ListRequestParams,
@@ -15,29 +14,27 @@ import {
 
 interface SiteEditorState {
   site?: Site
-  siteApiKeys?: SiteApiKey[]
-  generatedApiKey?: string
-  addNewApiKeyPopupVisible: boolean
-  copyApiKeyPopupVisible: boolean
+  cashiers?: Cashier[]
   pagination: Pagination
+  cashier?: Cashier
   loadingData: boolean
   loadingSave: boolean
   loadingDelete: boolean
-  loadingApiKeyCreate: boolean
+  loadingCashierSave: boolean
+  loadingCashierGet: boolean
   error: string
 }
 
 const initialState: SiteEditorState = {
-  siteApiKeys: [],
-  addNewApiKeyPopupVisible: false,
-  copyApiKeyPopupVisible: false,
+  cashiers: [],
   pagination: {
     pageSize: 10
   },
   loadingData: false,
   loadingSave: false,
   loadingDelete: false,
-  loadingApiKeyCreate: false,
+  loadingCashierSave: false,
+  loadingCashierGet: false,
   error: ''
 }
 
@@ -45,28 +42,37 @@ const siteEditorSlice = createSlice({
   name: 'siteEditor',
   initialState,
   reducers: {
-    setAddNewApiKeyPopupVisible(state, action: PayloadAction<boolean>) {
-      state.addNewApiKeyPopupVisible = action.payload
-    },
-    closeApiKeyPopup(state) {
-      state.copyApiKeyPopupVisible = false
-      state.generatedApiKey = ''
-    },
     resetSiteEditor: () => initialState,
     getSiteEditorDataRequest(state) {
       state.loadingData = true
     },
     getSiteEditorDataSuccess(
       state,
-      action: PayloadAction<{ site: Site; siteApiKeys?: SiteApiKey[]; pagination: Pagination }>
+      action: PayloadAction<{ site: Site; cashiers?: Cashier[]; pagination: Pagination }>
     ) {
       state.site = action.payload.site
-      state.siteApiKeys = action.payload.siteApiKeys
+      state.cashiers = action.payload.cashiers
       state.pagination = action.payload.pagination
       state.loadingData = false
       state.error = ''
     },
     getSiteEditorDataFail(state, action: PayloadAction<string>) {
+      state.loadingData = false
+      state.error = action.payload
+    },
+    updateCashiersRequest(state) {
+      state.loadingData = true
+    },
+    updateCashiersSuccess(
+      state,
+      action: PayloadAction<{ cashiers?: Cashier[]; pagination: Pagination }>
+    ) {
+      state.cashiers = action.payload.cashiers
+      state.pagination = action.payload.pagination
+      state.loadingData = false
+      state.error = ''
+    },
+    updateCashiersFail(state, action: PayloadAction<string>) {
       state.loadingData = false
       state.error = action.payload
     },
@@ -87,31 +93,46 @@ const siteEditorSlice = createSlice({
       state.loadingSave = false
       state.error = action.payload
     },
-    deleteApiKeyRequest(state) {
+    deleteCashierRequest(state) {
       state.loadingDelete = true
     },
-    deleteApiKeySuccess(state) {
+    deleteCashierSuccess(state) {
       message.success(i18n.t('common.message.delete-success'), 5)
       state.loadingDelete = false
       state.error = ''
     },
-    deleteApiKeyFail(state, action: PayloadAction<string>) {
+    deleteCashierFail(state, action: PayloadAction<string>) {
       state.loadingDelete = false
       state.error = action.payload
     },
-    createApiKeyRequest(state) {
-      state.loadingApiKeyCreate = true
+    saveCashierRequest(state) {
+      state.loadingCashierSave = true
     },
-    createApiKeySuccess(state, action: PayloadAction<string>) {
-      state.generatedApiKey = action.payload
-      state.loadingApiKeyCreate = false
-      state.addNewApiKeyPopupVisible = false
-      state.copyApiKeyPopupVisible = true
+    saveCashierSuccess(state) {
+      state.loadingCashierSave = false
       state.error = ''
     },
-    createApiKeyFail(state, action: PayloadAction<string>) {
-      state.loadingApiKeyCreate = false
+    saveCashierFail(state, action: PayloadAction<string>) {
+      state.loadingCashierSave = false
       state.error = action.payload
+    },
+    getCashierRequest(state) {
+      state.loadingCashierGet = true
+    },
+    getCashierSuccess(state, action: PayloadAction<Cashier>) {
+      state.cashier = action.payload
+      state.loadingCashierGet = false
+      state.error = ''
+    },
+    getCashierFail(state, action: PayloadAction<string>) {
+      state.loadingCashierGet = false
+      state.error = action.payload
+    },
+    clearCashierEditor(state) {
+      state.cashier = undefined
+      state.error = ''
+      state.loadingCashierSave = false
+      state.loadingCashierGet = false
     }
   }
 })
@@ -119,22 +140,26 @@ const siteEditorSlice = createSlice({
 const {
   getSiteEditorDataRequest,
   getSiteEditorDataSuccess,
-  getSiteEditorDataFail
-} = siteEditorSlice.actions
-const {
+  getSiteEditorDataFail,
   saveSiteRequest,
   createSiteSuccess,
   updateSiteSuccess,
-  saveSiteFail
+  saveSiteFail,
+  saveCashierRequest,
+  saveCashierSuccess,
+  saveCashierFail,
+  deleteCashierRequest,
+  deleteCashierSuccess,
+  deleteCashierFail,
+  updateCashiersRequest,
+  updateCashiersSuccess,
+  updateCashiersFail,
+  getCashierRequest,
+  getCashierSuccess,
+  getCashierFail
 } = siteEditorSlice.actions
-const { createApiKeyRequest, createApiKeySuccess, createApiKeyFail } = siteEditorSlice.actions
-const { deleteApiKeyRequest, deleteApiKeySuccess, deleteApiKeyFail } = siteEditorSlice.actions
 
-export const {
-  resetSiteEditor,
-  setAddNewApiKeyPopupVisible,
-  closeApiKeyPopup
-} = siteEditorSlice.actions
+export const { resetSiteEditor, clearCashierEditor } = siteEditorSlice.actions
 
 export default siteEditorSlice.reducer
 
@@ -146,25 +171,17 @@ export const getSiteEditorData = (id: number, params: ListRequestParams = {}): A
   try {
     const site = await api.sites.getSite({ id })
     const oldPagination = getState().siteEditor.pagination
-    const { result, ...pagination } = await api.apiKey.getApiKeys({
+    const { result, ...pagination } = await api.cashier.getAllCashier({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params,
       siteId: site.id
     })
 
-    const siteApiKeys = result?.map(
-      key =>
-        ({
-          ...key,
-          expireDate: moment(key.expireDate)
-        } as SiteApiKey)
-    )
-
     dispatch(
       getSiteEditorDataSuccess({
         site,
-        siteApiKeys,
+        cashiers: result ?? undefined,
         pagination: {
           ...pagination,
           pageSize: params.pageSize ?? oldPagination.pageSize
@@ -173,6 +190,37 @@ export const getSiteEditorData = (id: number, params: ListRequestParams = {}): A
     )
   } catch (err) {
     dispatch(getSiteEditorDataFail(err.toString()))
+    return err.toString()
+  }
+}
+
+export const updateCashiers = (params: ListRequestParams = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  const { pagination: oldPagination, site } = getState().siteEditor
+  if (!site?.id) return
+
+  dispatch(updateCashiersRequest())
+  try {
+    const { result, ...pagination } = await api.cashier.getAllCashier({
+      pageSize: oldPagination.pageSize,
+      page: oldPagination.page,
+      ...params,
+      siteId: site.id
+    })
+
+    dispatch(
+      updateCashiersSuccess({
+        result,
+        pagination: {
+          ...pagination,
+          pageSize: params.pageSize ?? oldPagination.pageSize
+        }
+      })
+    )
+  } catch (err) {
+    dispatch(updateCashiersFail(err.toString()))
     return err.toString()
   }
 }
@@ -208,36 +256,53 @@ export const saveSite = (site: Site, id?: number): AppThunk => async (dispatch, 
   }
 }
 
-export const createApiKey = (name: string): AppThunk => async (dispatch, getState) => {
-  dispatch(createApiKeyRequest())
+export const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getState) => {
+  dispatch(saveCashierRequest())
 
   try {
-    const response = await api.apiKey.createApiKey({
-      createSiteApiKeyDto: { name, siteId: getState().siteEditor.site?.id }
-    })
-    dispatch(createApiKeySuccess(response.id2 ?? ''))
+    if (cashier.id) {
+      await api.cashier.updateCashier({ id: cashier.id, cashierDto: cashier })
+    } else {
+      await api.cashier.createCashier({
+        createCashierDto: { ...cashier, siteId: getState().siteEditor.site?.id }
+      })
+    }
+
+    dispatch(saveCashierSuccess())
 
     const siteEditorState = getState().siteEditor
     siteEditorState.site?.id &&
       dispatch(getSiteEditorData(siteEditorState.site?.id, siteEditorState.pagination))
   } catch (err) {
-    dispatch(createApiKeyFail(err.toString()))
+    dispatch(saveCashierFail(err.toString()))
   }
 }
 
-export const deleteApiKey = (id: number): AppThunk => async (dispatch, getState) => {
-  dispatch(deleteApiKeyRequest())
+export const deleteCashier = (id: number): AppThunk => async (dispatch, getState) => {
+  dispatch(deleteCashierRequest())
 
   try {
-    await api.apiKey.deleteApiKey({ id })
-    dispatch(deleteApiKeySuccess())
+    await api.cashier.deleteCashier({ id })
+    dispatch(deleteCashierSuccess())
 
     const siteEditorState = getState().siteEditor
     if (siteEditorState.site?.id) {
       const newPage = recalculatePaginationAfterDeletion(getState().siteList.pagination)
       dispatch(getSiteEditorData(siteEditorState.site?.id, { page: newPage }))
     }
+    return { id }
   } catch (err) {
-    dispatch(deleteApiKeyFail(err.toString()))
+    dispatch(deleteCashierFail(err.toString()))
+    return { id, error: err.toString() }
+  }
+}
+
+export const getCashier = (id: number): AppThunk => async dispatch => {
+  dispatch(getCashierRequest())
+  try {
+    const cashier = await api.cashier.getCashier({ id })
+    dispatch(getCashierSuccess(cashier))
+  } catch (err) {
+    dispatch(getCashierFail(err.toString()))
   }
 }
