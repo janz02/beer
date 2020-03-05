@@ -16,39 +16,46 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Int32StringEntityCreatedCompositeVm
+ * @interface CashierVm
  */
-export interface Int32StringEntityCreatedCompositeVm {
-    /**
-     * 
-     * @type {string}
-     * @memberof Int32StringEntityCreatedCompositeVm
-     */
-    id2?: string | null;
+export interface CashierVm {
     /**
      * 
      * @type {number}
-     * @memberof Int32StringEntityCreatedCompositeVm
+     * @memberof CashierVm
      */
     id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CashierVm
+     */
+    cashierId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CashierVm
+     */
+    digitalStampId?: string | null;
 }
 
-export function Int32StringEntityCreatedCompositeVmFromJSON(json: any): Int32StringEntityCreatedCompositeVm {
-    return Int32StringEntityCreatedCompositeVmFromJSONTyped(json, false);
+export function CashierVmFromJSON(json: any): CashierVm {
+    return CashierVmFromJSONTyped(json, false);
 }
 
-export function Int32StringEntityCreatedCompositeVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): Int32StringEntityCreatedCompositeVm {
+export function CashierVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): CashierVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id2': !exists(json, 'id2') ? undefined : json['id2'],
         'id': !exists(json, 'id') ? undefined : json['id'],
+        'cashierId': !exists(json, 'cashierId') ? undefined : json['cashierId'],
+        'digitalStampId': !exists(json, 'digitalStampId') ? undefined : json['digitalStampId'],
     };
 }
 
-export function Int32StringEntityCreatedCompositeVmToJSON(value?: Int32StringEntityCreatedCompositeVm | null): any {
+export function CashierVmToJSON(value?: CashierVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +64,9 @@ export function Int32StringEntityCreatedCompositeVmToJSON(value?: Int32StringEnt
     }
     return {
         
-        'id2': value.id2,
         'id': value.id,
+        'cashierId': value.cashierId,
+        'digitalStampId': value.digitalStampId,
     };
 }
 

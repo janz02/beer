@@ -16,39 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CreateSiteApiKeyDto
+ * @interface CashierDto
  */
-export interface CreateSiteApiKeyDto {
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateSiteApiKeyDto
-     */
-    siteId?: number;
+export interface CashierDto {
     /**
      * 
      * @type {string}
-     * @memberof CreateSiteApiKeyDto
+     * @memberof CashierDto
      */
-    name?: string | null;
+    cashierId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CashierDto
+     */
+    digitalStampId?: string | null;
 }
 
-export function CreateSiteApiKeyDtoFromJSON(json: any): CreateSiteApiKeyDto {
-    return CreateSiteApiKeyDtoFromJSONTyped(json, false);
+export function CashierDtoFromJSON(json: any): CashierDto {
+    return CashierDtoFromJSONTyped(json, false);
 }
 
-export function CreateSiteApiKeyDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateSiteApiKeyDto {
+export function CashierDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): CashierDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'siteId': !exists(json, 'siteId') ? undefined : json['siteId'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'cashierId': !exists(json, 'cashierId') ? undefined : json['cashierId'],
+        'digitalStampId': !exists(json, 'digitalStampId') ? undefined : json['digitalStampId'],
     };
 }
 
-export function CreateSiteApiKeyDtoToJSON(value?: CreateSiteApiKeyDto | null): any {
+export function CashierDtoToJSON(value?: CashierDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +57,8 @@ export function CreateSiteApiKeyDtoToJSON(value?: CreateSiteApiKeyDto | null): a
     }
     return {
         
-        'siteId': value.siteId,
-        'name': value.name,
+        'cashierId': value.cashierId,
+        'digitalStampId': value.digitalStampId,
     };
 }
 

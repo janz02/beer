@@ -82,19 +82,19 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
           <Form.Item
             name="name"
             label={t('site.field.name')}
-            rules={[rule.required()]}
+            rules={[rule.required(), rule.max(100)]}
             {...formItemLayout}
           >
-            <Input />
+            <Input maxLength={100} />
           </Form.Item>
 
           <Form.Item
             name="address"
             label={t('site.field.address')}
-            rules={[rule.required()]}
+            rules={[rule.required(), rule.max(100)]}
             {...formItemLayout}
           >
-            <Input />
+            <Input maxLength={100} />
           </Form.Item>
 
           <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>

@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    SiteApiKeyVm,
-    SiteApiKeyVmFromJSON,
-    SiteApiKeyVmFromJSONTyped,
-    SiteApiKeyVmToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -44,12 +37,6 @@ export interface SiteVm {
      * @memberof SiteVm
      */
     address?: string | null;
-    /**
-     * 
-     * @type {Array<SiteApiKeyVm>}
-     * @memberof SiteVm
-     */
-    apiKeys?: Array<SiteApiKeyVm> | null;
 }
 
 export function SiteVmFromJSON(json: any): SiteVm {
@@ -65,7 +52,6 @@ export function SiteVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): Si
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'address': !exists(json, 'address') ? undefined : json['address'],
-        'apiKeys': !exists(json, 'apiKeys') ? undefined : (json['apiKeys'] === null ? null : (json['apiKeys'] as Array<any>).map(SiteApiKeyVmFromJSON)),
     };
 }
 
@@ -81,7 +67,6 @@ export function SiteVmToJSON(value?: SiteVm | null): any {
         'id': value.id,
         'name': value.name,
         'address': value.address,
-        'apiKeys': value.apiKeys === undefined ? undefined : (value.apiKeys === null ? null : (value.apiKeys as Array<any>).map(SiteApiKeyVmToJSON)),
     };
 }
 

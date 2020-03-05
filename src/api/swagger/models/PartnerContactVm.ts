@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Roles,
+    RolesFromJSON,
+    RolesFromJSONTyped,
+    RolesToJSON,
+} from './';
+
 /**
  * 
  * @export
@@ -25,12 +32,6 @@ export interface PartnerContactVm {
      * @memberof PartnerContactVm
      */
     id?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartnerContactVm
-     */
-    partnerId?: number;
     /**
      * 
      * @type {string}
@@ -49,6 +50,30 @@ export interface PartnerContactVm {
      * @memberof PartnerContactVm
      */
     phone?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartnerContactVm
+     */
+    partnerName?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PartnerContactVm
+     */
+    active?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PartnerContactVm
+     */
+    majorPartner?: boolean | null;
+    /**
+     * 
+     * @type {Roles}
+     * @memberof PartnerContactVm
+     */
+    role?: Roles;
 }
 
 export function PartnerContactVmFromJSON(json: any): PartnerContactVm {
@@ -62,10 +87,13 @@ export function PartnerContactVmFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'phone': !exists(json, 'phone') ? undefined : json['phone'],
+        'partnerName': !exists(json, 'partnerName') ? undefined : json['partnerName'],
+        'active': !exists(json, 'active') ? undefined : json['active'],
+        'majorPartner': !exists(json, 'majorPartner') ? undefined : json['majorPartner'],
+        'role': !exists(json, 'role') ? undefined : RolesFromJSON(json['role']),
     };
 }
 
@@ -79,10 +107,13 @@ export function PartnerContactVmToJSON(value?: PartnerContactVm | null): any {
     return {
         
         'id': value.id,
-        'partnerId': value.partnerId,
         'name': value.name,
         'email': value.email,
         'phone': value.phone,
+        'partnerName': value.partnerName,
+        'active': value.active,
+        'majorPartner': value.majorPartner,
+        'role': RolesToJSON(value.role),
     };
 }
 
