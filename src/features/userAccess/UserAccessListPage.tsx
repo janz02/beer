@@ -7,14 +7,15 @@ import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
 import { RootState } from 'app/rootReducer'
 import { getNkmUsers, getPartnerUsers } from './userAccessListSlice'
-import { useUserListPageLogic } from './useAccessUserListPageLogic'
+import { useUserListPage } from './useAccessUserListPage'
 
 export const UserAccessListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const { nkmUsers, nkmLoading } = useSelector((state: RootState) => state.userAccessList)
-  const { partnerUsers, partnerLoading } = useSelector((state: RootState) => state.userAccessList)
+  const { nkmUsers, nkmLoading, partnerUsers, partnerLoading } = useSelector(
+    (state: RootState) => state.userAccessList
+  )
 
   const {
     partnerUsersColumnsConfig,
@@ -23,7 +24,7 @@ export const UserAccessListPage: FC = () => {
     partnerUsersTableUtils,
     setEditorModal,
     editorModal
-  } = useUserListPageLogic()
+  } = useUserListPage()
 
   useEffect(() => {
     dispatch(getNkmUsers())

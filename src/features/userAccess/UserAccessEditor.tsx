@@ -32,10 +32,8 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
   const { editedUser, editorLoading } = useSelector((state: RootState) => state.userAccessList)
 
   useEffect(() => {
-    if (!visible) return
-    if (userId !== undefined) {
-      dispatch(getUserAccess(userId))
-    }
+    if (!visible || userId === undefined) return
+    dispatch(getUserAccess(userId))
   }, [dispatch, userId, visible])
 
   const roleOptions = useMemo(

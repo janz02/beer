@@ -3,16 +3,26 @@ import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { getNkmUsers, getPartnerUsers } from './userAccessListSlice'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, UseTableUtilsTools } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess } from 'models/user'
 import { UserAccessEditorProps } from './UserAccessEditor'
+import { ColumnsType } from 'antd/lib/table'
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const useUserListPageLogic = () => {
+interface UseUserListPageUtils {
+  partnerUsersColumnsConfig: ColumnsType<UserAccess>
+  nkmUsersColumnsConfig: ColumnsType<UserAccess>
+  nkmUsersTableUtils: UseTableUtilsTools
+  partnerUsersTableUtils: UseTableUtilsTools
+  editorModal: UserAccessEditorProps | null | undefined
+  setEditorModal: React.Dispatch<React.SetStateAction<UserAccessEditorProps | null | undefined>>
+}
+
+export const useUserListPage = (): UseUserListPageUtils => {
   const { t } = useTranslation()
-  const { nkmPagination } = useSelector((state: RootState) => state.userAccessList)
-  const { partnerPagination } = useSelector((state: RootState) => state.userAccessList)
+  const { nkmPagination, partnerPagination } = useSelector(
+    (state: RootState) => state.userAccessList
+  )
 
   const [editorModal, setEditorModal] = useState<UserAccessEditorProps | null>()
 
@@ -21,7 +31,7 @@ export const useUserListPageLogic = () => {
     getDataAction: getNkmUsers
   })
 
-  const nkmUsersColumnsConfig = useMemo(
+  const nkmUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
       {
         title: t('user-access.field.name'),
@@ -64,7 +74,7 @@ export const useUserListPageLogic = () => {
     getDataAction: getPartnerUsers
   })
 
-  const partnerUsersColumnsConfig = useMemo(
+  const partnerUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
       {
         title: t('user-access.field.name'),
