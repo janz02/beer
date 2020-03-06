@@ -202,7 +202,7 @@
       "template-version": "Verzió"
     },
     "popup": {
-      "discard-msg": "Minden aktuális változtatás el fog veszni.",
+      "discard-msg": "Nincs minden módosítás mentve, biztos benne, hogy mentés nélkül bezárja a sablont?",
       "preview-discard-msg": "Az aktuális sablon verzióban vannak változtatások. Az előző verzió megtekintésekor a változtatások el fognak veszni.",
       "restore-msg": "Ez a sablon verzió, visszamásolódik a verzió történet tetejére, mint a legfrissebb sablon.",
       "target-segment": "Cél szegmens",
