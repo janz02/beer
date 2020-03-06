@@ -3,19 +3,14 @@ import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { UserAccessEditor } from './UserAccessEditor'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
+import { useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
-import { RootState } from 'app/rootReducer'
 import { getNkmUsers, getPartnerUsers } from './userAccessListSlice'
-import { useUserListPage } from './useAccessUserListPage'
+import { useUserAccessListPage } from './useUserAccessListPage'
 
 export const UserAccessListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-
-  const { nkmUsers, nkmLoading, partnerUsers, partnerLoading } = useSelector(
-    (state: RootState) => state.userAccessList
-  )
 
   const {
     partnerUsersColumnsConfig,
@@ -23,8 +18,12 @@ export const UserAccessListPage: FC = () => {
     nkmUsersTableUtils,
     partnerUsersTableUtils,
     setEditorModal,
-    editorModal
-  } = useUserListPage()
+    editorModal,
+    nkmUsers,
+    nkmLoading,
+    partnerUsers,
+    partnerLoading
+  } = useUserAccessListPage()
 
   useEffect(() => {
     dispatch(getNkmUsers())
@@ -35,7 +34,6 @@ export const UserAccessListPage: FC = () => {
     <>
       <ResponsivePage>
         <ResponsiveCard
-          style={{ height: '70vh' }}
           forTable
           floatingTitle={t('user-access.user-access')}
           innerTitle={t('user-access.nkm-users')}
@@ -53,13 +51,7 @@ export const UserAccessListPage: FC = () => {
             }}
           />
         </ResponsiveCard>
-        <ResponsiveCard
-          style={{ height: '70vh' }}
-          forTable
-          innerTitle={t('user-access.partner-users')}
-          paddedBottom
-          extraWide
-        >
+        <ResponsiveCard forTable innerTitle={t('user-access.partner-users')} paddedBottom extraWide>
           <ResponsiveTable
             hasHeaderOffset
             {...{

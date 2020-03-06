@@ -68,7 +68,6 @@ export const CategoryList: FC<CategoryListProps> = props => {
   return (
     <>
       <ResponsiveCard
-        style={{ height: '70vh' }}
         forTable
         floatingTitle={t('coupon-category.list-title')}
         floatingOptions={headerOptions}

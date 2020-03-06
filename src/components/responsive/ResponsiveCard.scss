@@ -6,10 +6,10 @@
   margin: auto;
   padding: 0 2rem;
 
-  --r-card-vertical-padding: 15px;
+  $r-card-vertical-padding: 15px;
 
   .r-card {
-    height: inherit;
+    height: 70vh;
     margin: auto;
     overflow: hidden;
     border-radius: 1rem;
@@ -20,7 +20,7 @@
     }
 
     .ant-card-body {
-      padding: var(--r-card-vertical-padding) 60px;
+      padding: $r-card-vertical-padding 60px;
     }
 
     &.as-table-wrapper {
@@ -35,7 +35,7 @@
             height: inherit;
 
             & > .ant-spin-container {
-              height: calc(100% - 0.5 * var(--r-card-vertical-padding));
+              height: calc(100% - 0.5 * #{$r-card-vertical-padding});
             }
           }
         }

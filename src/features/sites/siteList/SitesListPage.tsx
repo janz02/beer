@@ -82,7 +82,6 @@ export const SitesListPage: FC = () => {
     <>
       <ResponsivePage>
         <ResponsiveCard
-          style={{ height: '70vh' }}
           forTable
           floatingTitle={t('site.list-title')}
           floatingOptions={headerOptions}

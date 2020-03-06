@@ -7,7 +7,7 @@ export enum Status {
 
 export interface UserData {
   email?: string
-  roles?: Roles[]
+  roles?: Roles
   exp?: number
 }
 

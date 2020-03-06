@@ -9,20 +9,29 @@ import { UserAccess } from 'models/user'
 import { UserAccessEditorProps } from './UserAccessEditor'
 import { ColumnsType } from 'antd/lib/table'
 
-interface UseUserListPageUtils {
+interface UseUserAccessListPageUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersTableUtils: UseTableUtilsTools
   partnerUsersTableUtils: UseTableUtilsTools
   editorModal: UserAccessEditorProps | null | undefined
   setEditorModal: React.Dispatch<React.SetStateAction<UserAccessEditorProps | null | undefined>>
+  nkmUsers: UserAccess[]
+  nkmLoading: boolean
+  partnerUsers: UserAccess[]
+  partnerLoading: boolean
 }
 
-export const useUserListPage = (): UseUserListPageUtils => {
+export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
   const { t } = useTranslation()
-  const { nkmPagination, partnerPagination } = useSelector(
-    (state: RootState) => state.userAccessList
-  )
+  const {
+    nkmPagination,
+    partnerPagination,
+    nkmUsers,
+    nkmLoading,
+    partnerUsers,
+    partnerLoading
+  } = useSelector((state: RootState) => state.userAccessList)
 
   const [editorModal, setEditorModal] = useState<UserAccessEditorProps | null>()
 
@@ -68,8 +77,7 @@ export const useUserListPage = (): UseUserListPageUtils => {
           return (
             <CrudButtons
               onEdit={() =>
-                setEditorModal({ visible: true, userId: user.id, userType: UserType.NKM })
-              }
+                setEditorModal({ visible: true, userId: user.id, userType: UserType.NKM })}
             />
           )
         }
@@ -136,7 +144,8 @@ export const useUserListPage = (): UseUserListPageUtils => {
           return (
             <CrudButtons
               onEdit={() =>
-                setEditorModal({ visible: true, userId: user.id, userType: UserType.PARTNER })}
+                setEditorModal({ visible: true, userId: user.id, userType: UserType.PARTNER })
+              }
             />
           )
         }
@@ -151,6 +160,10 @@ export const useUserListPage = (): UseUserListPageUtils => {
     nkmUsersTableUtils,
     partnerUsersTableUtils,
     editorModal,
-    setEditorModal
+    setEditorModal,
+    nkmUsers,
+    nkmLoading,
+    partnerUsers,
+    partnerLoading
   }
 }

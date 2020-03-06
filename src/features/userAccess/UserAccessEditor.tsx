@@ -39,8 +39,8 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
   const { editedUser, editorLoading } = useSelector((state: RootState) => state.userAccessList)
 
   useEffect(() => {
-    if (!visible || userId === undefined) return
-    dispatch(getUserAccess(userId))
+    if (!visible) return
+    dispatch(getUserAccess(userId!))
   }, [dispatch, userId, visible])
 
   const roleOptions = useMemo(
@@ -73,15 +73,13 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
     [t]
   )
 
-  const initialValues = useMemo(() => {
-    const values: UserAccessFormValues = {
-      role: editedUser?.role
-    }
-    if (editedUser?.active !== undefined) {
-      values.status = editedUser?.active ? Status.ACTIVE : Status.INACTIVE
-    }
-    return values
-  }, [editedUser])
+  const initialValues: UserAccessFormValues = useMemo(
+    () => ({
+      role: editedUser?.role,
+      status: editedUser?.active ? Status.ACTIVE : Status.INACTIVE
+    }),
+    [editedUser]
+  )
 
   return (
     <GenericModalForm
@@ -102,8 +100,8 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
       formProps={{
         onFinish: (values: UserAccessFormValues) => {
           const { role, status } = values
-          if (userId !== undefined && role && status) {
-            dispatch(saveUserAccess(userId, role, status === Status.ACTIVE, userType))
+          if (role && status) {
+            dispatch(saveUserAccess(userId!, role, status === Status.ACTIVE, userType))
           }
           handleClose && handleClose()
         }

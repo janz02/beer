@@ -1,18 +1,14 @@
-%shared-responsive-table-varibales {
-  --table-footer-height: 80px;
-  --table-header-height: 80px;
-}
+$table-footer-height: 80px;
+$table-header-height: 80px;
 
 .responsive-table {
-  height: calc(100% - var(--table-footer-height));
+  height: calc(100% - #{$table-footer-height});
   margin: 2rem 2rem 0 2rem;
-
-  @extend %shared-responsive-table-varibales;
 
   &.has-header-offset {
     height:
       calc(
-        100% - var(--table-footer-height) + 10px - var(--table-header-height)
+        100% - #{$table-footer-height} + 10px - #{$table-header-height}
       );
   }
 
@@ -40,13 +36,12 @@
   }
 
   & + .ant-pagination.ant-table-pagination {
-    @extend %shared-responsive-table-varibales;
-
     display: flex;
     align-items: center;
     justify-content: center;
-    height: var(--table-footer-height);
+    height: $table-footer-height;
     margin: 0;
+    padding-bottom: 1rem;
     float: unset;
     text-align: center;
 

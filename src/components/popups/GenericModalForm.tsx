@@ -1,4 +1,4 @@
-import React, { useEffect, FC, useRef } from 'react'
+import React, { useEffect, FC } from 'react'
 import { Form, Modal, Spin } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
 import { FormProps } from 'antd/lib/form'
@@ -36,30 +36,28 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
   const { t } = useTranslation()
   const [form] = Form.useForm()
 
-  const ref = useRef(form)
   useEffect(() => {
-    ref.current = form
-    ref.current.resetFields()
-  }, [form])
-  useEffect(() => {
-    initialValues ? ref.current.setFieldsValue({ ...initialValues }) : ref.current.resetFields()
-  }, [initialValues])
+    if (!modalProps.visible) return
+    initialValues ? form.setFieldsValue({ ...initialValues }) : form.resetFields()
+  }, [form, initialValues, modalProps.visible])
 
   useEffect(() => {
     if (!modalProps.visible) return
     return () => {
-      ref.current.resetFields()
+      form.resetFields()
     }
-  }, [modalProps.visible])
+  }, [form, modalProps.visible])
 
   const onOk = (): void => {
     form.submit()
   }
+
   return (
     // TODO: investigate warning -> forceRender should have resolved the issue according to antd docs, but it didn't
     // https://next.ant.design/components/form/#Why-get-form-warning-when-used-in-Modal
     <Modal forceRender cancelText={t(`common.cancel`)} {...modalProps} onOk={onOk}>
-      <Spin spinning={loadingContent === true}>
+      {/* fix: for some reason spinning={undefined} is the same as spinning={true} */}
+      <Spin spinning={!!loadingContent}>
         <Form name="generic-modal-form" layout="vertical" {...formProps} form={form}>
           {children}
         </Form>

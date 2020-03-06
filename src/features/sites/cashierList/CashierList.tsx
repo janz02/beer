@@ -79,7 +79,6 @@ export const CashierList: FC<CashierListProps> = props => {
   return (
     <>
       <ResponsiveCard
-        style={{ height: '70vh' }}
         forTable
         floatingTitle={t('cashier-list.table-title')}
         innerTitle={t('cashier-list.table-title')}

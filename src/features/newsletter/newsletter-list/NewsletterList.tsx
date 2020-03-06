@@ -110,7 +110,6 @@ export const NewsletterList: FC = () => {
   return (
     <>
       <ResponsiveCard
-        style={{ height: '70vh' }}
         floatingTitle={t('newsletter.available-templates')}
         floatingOptions={headerOptions}
         forTable
