@@ -6,16 +6,17 @@ export default {
     modalTitleExport: 'Sablon kódja',
     modalLabelImport: '',
     modalLabelExport: '',
-    modalBtnImport: 'Importálás'
+    modalBtnImport: 'Importálás',
+    assetsModalTitle: 'Kép kiválasztása'
   },
 
   // Only the used labels are translated.
   // example: https://github.com/artf/grapesjs/blob/dev/src/i18n/locale/es.js
   assetManager: {
-    addButton: 'Kép hozzáadás',
+    addButton: 'Betöltés',
     inputPlh: 'kép url-je',
     modalTitle: 'Válasz egy képet',
-    uploadTitle: 'Húzz ide egy képet!'
+    uploadTitle: 'Kép feltöltése vagy behúzása'
   },
   modal: {
     'Import template': 'hello'

@@ -12,6 +12,7 @@ interface NewsletterEditorState {
   error: string
   currentTemplateVersionId?: number
   template?: Newsletter
+  log?: any
 }
 
 const initialState: NewsletterEditorState = {
@@ -44,6 +45,10 @@ const newsletterEditorSlice = createSlice({
     },
     switchNewsletterVersion(state, action: PayloadAction<number>) {
       state.currentTemplateVersionId = action.payload
+    },
+    // For finding the bug in grapes.js
+    logGrapesjsEvent(state, action: PayloadAction<any>) {
+      state.log = action.payload
     }
   }
 })
@@ -62,10 +67,11 @@ const { getTemplateRequest, getTemplateSuccess, getTemplateFail } = newsletterEd
 const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterEditorSlice.actions
 
 export const { clearNewsletterTemplate, switchNewsletterVersion } = newsletterEditorSlice.actions
+export const { logGrapesjsEvent } = newsletterEditorSlice.actions
 
 export const newsletterEditorReducer = newsletterEditorSlice.reducer
 
-export const getNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
+export const getNewsletterTemplate = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(getTemplateRequest())
     const response = await api.emailTemplates.getTemplate({

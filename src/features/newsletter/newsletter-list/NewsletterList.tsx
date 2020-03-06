@@ -61,11 +61,14 @@ export const NewsletterList: FC = () => {
         title: t('newsletter.field.template-name'),
         key: 'name',
         dataIndex: 'name',
+        ellipsis: true,
+        width: '40%',
         ...sorterConfig
       },
       {
         title: t('newsletter.field.template-version'),
         key: 'version',
+        width: '12%',
         dataIndex: 'version'
       },
       {
@@ -76,7 +79,7 @@ export const NewsletterList: FC = () => {
         }
       },
       {
-        title: t('common.actions'),
+        width: '12rem',
         key: 'actions',
         colSpan: 1,
         render(record: NewsletterPreview) {
@@ -113,6 +116,7 @@ export const NewsletterList: FC = () => {
         floatingTitle={t('newsletter.available-templates')}
         floatingOptions={headerOptions}
         forTable
+        wide
       >
         <ResponsiveTable
           {...{
@@ -189,7 +193,7 @@ export const NewsletterList: FC = () => {
         <Form.Item
           name="templateName"
           label={t('newsletter.field.template-name')}
-          rules={[rule.required()]}
+          rules={[rule.required(), rule.max(35)]}
         >
           <Input />
         </Form.Item>
