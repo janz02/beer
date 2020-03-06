@@ -197,7 +197,9 @@
     "close-editor": "Szerkesztő bezárása",
     "field": {
       "email": "E-mail cím",
+      "subject": "Tárgy",
       "template-modified-at": "Változtatva",
+      "template-modified-by": "Változtató",
       "template-name": "Sablon név",
       "template-version": "Verzió"
     },
@@ -210,7 +212,8 @@
       "title-send-sample": "Minta e-mail küldése",
       "title-send-segment": "Hírlevél kiküldése szegmensnek"
     },
-    "send-sample": "Minta küldése"
+    "send-sample": "Minta küldése",
+    "send-segment": "Küldés szegmensnek"
   },
   "notification": {
     "empty-list": "Üres",

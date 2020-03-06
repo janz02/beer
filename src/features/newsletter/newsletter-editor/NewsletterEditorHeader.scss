@@ -3,8 +3,11 @@
   grid-template-columns: auto min-content;
 
   &__title {
-    padding: 0 2rem;
+    max-width: 30%;
+    padding: 0 1rem;
+    overflow: hidden;
     font-size: 1rem;
+    text-overflow: ellipsis;
   }
 
   &__version-number {
@@ -16,7 +19,7 @@
 
   &__toolbar {
     display: inline-flex;
-    overflow-y: auto;
+    overflow: hidden;
 
     & > * {
       margin: 0 0.5rem;

@@ -24,6 +24,7 @@ export interface NewsLetterEditorHeaderProps {
   handleVersionPreviewSwitch: (id: number) => void
   handleExit: () => void
   handleSendSample: () => void
+  handleSendSegment: () => void
 }
 
 export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => {
@@ -38,7 +39,8 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
     handleRevert,
     handleExit,
     handleSaveVersion,
-    handleSendSample
+    handleSendSample,
+    handleSendSegment
   } = props
 
   const { t } = useTranslation()
@@ -46,7 +48,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
   return (
     <div className={`${className} nleh`}>
       <span className="nleh__toolbar">
-        {template?.name && <span className="nleh__title">{template.name}</span>}
+        {template?.name && <div className="nleh__title">{template.name}</div>}
         {!isNewTemplate && (
           <span>
             <Select
@@ -89,6 +91,15 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
                 onClick={handleSendSample}
               >
                 {t('newsletter.send-sample')}
+              </Button>
+            </span>
+            <span>
+              <Button
+                disabled={isTemplateModified}
+                icon={<SendOutlined />}
+                onClick={handleSendSegment}
+              >
+                {t('newsletter.send-segment')}
               </Button>
             </span>
           </>

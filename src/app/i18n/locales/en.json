@@ -197,7 +197,9 @@
     "close-editor": "Close editor",
     "field": {
       "email": "Email address",
+      "subject": "Subject",
       "template-modified-at": "Modified at",
+      "template-modified-by": "Modified by",
       "template-name": "Template name",
       "template-version": "Version"
     },
@@ -210,7 +212,8 @@
       "title-send-sample": "Send sample email",
       "title-send-segment": "Send newsletter to segment"
     },
-    "send-sample": "Send sample"
+    "send-sample": "Send sample",
+    "send-segment": "Send to Segment"
   },
   "notification": {
     "empty-list": "Empty",

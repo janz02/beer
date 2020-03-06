@@ -171,7 +171,7 @@ export const getSiteEditorData = (id: number, params: ListRequestParams = {}): A
   try {
     const site = await api.sites.getSite({ id })
     const oldPagination = getState().siteEditor.pagination
-    const { result, ...pagination } = await api.cashier.getAllCashier({
+    const { result, ...pagination } = await api.cashier.getCashiers({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params,
@@ -203,7 +203,7 @@ export const updateCashiers = (params: ListRequestParams = {}): AppThunk => asyn
 
   dispatch(updateCashiersRequest())
   try {
-    const { result, ...pagination } = await api.cashier.getAllCashier({
+    const { result, ...pagination } = await api.cashier.getCashiers({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params,

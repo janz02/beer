@@ -51,6 +51,7 @@ export * from './ScoringEventType';
 export * from './SegmentVm';
 export * from './SegmentVmPaginatedResponse';
 export * from './SelfPartnerContactDto';
+export * from './SendEmailToSegmentDto';
 export * from './SendEmailsDto';
 export * from './SiteDto';
 export * from './SiteVm';
