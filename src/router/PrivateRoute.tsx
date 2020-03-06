@@ -7,7 +7,7 @@ import { hasPermission } from '../services/jwt-reader'
 import { Roles } from 'api/swagger/models'
 
 interface PrivateRouteProps extends RouteProps {
-  roles?: Roles
+  roles?: Roles[]
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = props => {
