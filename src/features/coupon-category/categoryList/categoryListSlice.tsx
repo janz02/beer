@@ -69,7 +69,7 @@ export const {
   deleteFail
 } = categoryListSlice.actions
 
-export default categoryListSlice.reducer
+export const categoryListReducer = categoryListSlice.reducer
 
 export const getCategories = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,

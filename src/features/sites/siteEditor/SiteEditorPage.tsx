@@ -7,18 +7,13 @@ import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
 import { history } from 'router/router'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
-import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { CashierList } from '../cashierList/CashierList'
 import { CashierEditor, CashierEditorParams } from '../cashierEditor/CashierEditor'
 
 export const SiteEditorPage: FC = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const {
-    loadingSave,
-
-    site
-  } = useSelector((state: RootState) => state.siteEditor)
+  const { loadingSave, site } = useSelector((state: RootState) => state.siteEditor)
   const [editorParams, setEditorParams] = useState<CashierEditorParams>({
     visible: false
   })
@@ -60,10 +55,7 @@ export const SiteEditorPage: FC = () => {
         site={site}
         id={siteId}
       />
-
-      <ResponsiveCard>
-        <CashierList onOpenEditor={openEditor} />
-      </ResponsiveCard>
+      <CashierList onOpenEditor={openEditor} />
       <CashierEditor
         params={editorParams}
         onExit={() => setEditorParams({ ...editorParams, visible: false })}

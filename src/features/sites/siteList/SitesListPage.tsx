@@ -17,7 +17,7 @@ import { useTableUtils } from 'hooks/useTableUtils'
 export const SitesListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { sites, pagination, errorList } = useSelector((state: RootState) => state.siteList)
+  const { sites, pagination } = useSelector((state: RootState) => state.siteList)
   const [siteToDelete, setSiteToDelete] = useState<{
     site?: Site
     popupVisible?: boolean
@@ -28,7 +28,6 @@ export const SitesListPage: FC = () => {
   }, [dispatch])
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    error: errorList,
     paginationState: pagination,
     getDataAction: getSites
   })
@@ -73,7 +72,7 @@ export const SitesListPage: FC = () => {
     [sorterConfig, t]
   )
 
-  const headerOptions = (): JSX.Element => (
+  const headerOptions = (
     <Button type="primary" onClick={() => history.push(`/sites/editor`)}>
       {t('common.create')}
     </Button>
@@ -82,17 +81,18 @@ export const SitesListPage: FC = () => {
   return (
     <>
       <ResponsivePage>
-        <ResponsiveCard>
+        <ResponsiveCard
+          forTable
+          floatingTitle={t('site.list-title')}
+          floatingOptions={headerOptions}
+        >
           <ResponsiveTable
-            headerTitle={t('site.list-title')}
-            headerOptions={headerOptions}
-            tableProps={{
+            {...{
               columns: columnsConfig,
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
               pagination: paginationConfig,
               onChange: handleTableChange
             }}
-            error={errorList}
           />
         </ResponsiveCard>
       </ResponsivePage>

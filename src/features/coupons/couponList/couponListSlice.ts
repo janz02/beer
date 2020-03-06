@@ -54,7 +54,7 @@ export const {
   setLoadingFailed
 } = couponListSlice.actions
 
-export default couponListSlice.reducer
+export const couponListReducer = couponListSlice.reducer
 
 export const getWaitingCoupons = (
   listingOptions: CouponListingOptions

@@ -1,0 +1,51 @@
+@import "../../assets/scss/variables";
+
+.r-header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  line-height: 4rem;
+
+  & > .title {
+    color: $primary-color;
+    line-height: unset;
+  }
+
+  &--floating {
+    margin-top: 1rem;
+
+    & > .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+
+  &--inner {
+    line-height: unset;
+
+    & > .title {
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+  }
+
+  &--standalone {
+    max-width: 700px;
+    margin-top: 1rem;
+    padding: 0 2rem;
+
+    & > .title {
+      font-size: 1.75rem;
+      font-weight: bold;
+    }
+  }
+
+  & > .options > .ant-btn {
+    height: inherit;
+    margin-left: 0.5rem;
+    padding: 0 1rem 0.2rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2rem;
+  }
+}

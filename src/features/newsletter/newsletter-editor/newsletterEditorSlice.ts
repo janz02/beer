@@ -63,7 +63,7 @@ const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterEditorSl
 
 export const { clearNewsletterTemplate, switchNewsletterVersion } = newsletterEditorSlice.actions
 
-export default newsletterEditorSlice.reducer
+export const newsletterEditorReducer = newsletterEditorSlice.reducer
 
 export const getNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
   try {

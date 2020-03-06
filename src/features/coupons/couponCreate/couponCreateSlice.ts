@@ -37,7 +37,7 @@ const couponCreateSlice = createSlice({
 
 export const { createCouponSuccess, setLoadingStart, setLoadingFailed } = couponCreateSlice.actions
 
-export default couponCreateSlice.reducer
+export const couponCreateReducer = couponCreateSlice.reducer
 
 export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setLoadingStart())

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { getCategories } from './categoryList/categoryListSlice'
-import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
 
 export const CategoryPage: React.FC = () => {
@@ -43,9 +42,7 @@ export const CategoryPage: React.FC = () => {
 
   return (
     <ResponsivePage>
-      <ResponsiveCard>
-        <CategoryList onOpenEditor={openEditor} />
-      </ResponsiveCard>
+      <CategoryList onOpenEditor={openEditor} />
       <CategoryEditor
         params={editorParams}
         onExit={() => setEditorParams({ ...editorParams, visible: false })}

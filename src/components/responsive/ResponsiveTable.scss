@@ -1,50 +1,24 @@
-%shared-responsive-table-varibales {
-  --table-title-height: 60px;
-  --table-footer-height: 60px;
-}
+$table-footer-height: 80px;
+$table-header-height: 80px;
 
 .responsive-table {
-  @extend %shared-responsive-table-varibales;
+  height: calc(100% - #{$table-footer-height});
+  margin: 2rem 2rem 0 2rem;
 
-  height: calc(100% - var(--table-footer-height));
-
-  &__error {
-    color: rgb(255, 0, 0);
-    font-weight: 500;
-    text-align: center;
-  }
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-
-    & > h3 {
-      display: inline-flex;
-      padding-top: 0.1rem;
-      padding-bottom: 0;
-    }
-
-    .ant-btn {
-      margin-left: 1rem;
-    }
-  }
-
-  .ant-table-title {
-    height: var(--table-title-height);
-  }
-
-  .ant-table-footer {
-    height: var(--table-footer-height);
-    margin-top: 2px;
+  &.has-header-offset {
+    height:
+      calc(
+        100% - #{$table-footer-height} + 10px - #{$table-header-height}
+      );
   }
 
   .ant-table-container {
-    height: calc(100% - var(--table-title-height));
+    height: 100%;
 
     .ant-table-content {
       height: 100%;
-      overflow-x: hidden;
       overflow-y: auto;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.068);
 
       table {
         th {
@@ -62,15 +36,13 @@
   }
 
   & + .ant-pagination.ant-table-pagination {
-    @extend %shared-responsive-table-varibales;
-
     display: flex;
     align-items: center;
     justify-content: center;
-    height: var(--table-footer-height);
+    height: $table-footer-height;
     margin: 0;
+    padding-bottom: 1rem;
     float: unset;
-    border-top: 2px solid rgba(0, 0, 0, 0.068);
     text-align: center;
 
     .ant-pagination-options {

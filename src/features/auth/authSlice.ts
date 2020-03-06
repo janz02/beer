@@ -96,7 +96,7 @@ export const {
   changePasswordFail
 } = authSlice.actions
 
-export default authSlice.reducer
+export const authReducer = authSlice.reducer
 
 // TODO: Only for simulating async actions, remove after API is connected
 const delay = (p: any): Promise<unknown> =>

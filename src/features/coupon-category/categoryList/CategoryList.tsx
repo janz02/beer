@@ -9,6 +9,7 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTableUtils } from 'hooks/useTableUtils'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 
 interface CategoryListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
@@ -17,14 +18,13 @@ interface CategoryListProps {
 export const CategoryList: FC<CategoryListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { error, pagination, categories } = useSelector((state: RootState) => state.categoryList)
+  const { pagination, categories } = useSelector((state: RootState) => state.categoryList)
   const [categoryToDelete, setCategoryToDelete] = useState<{
     category?: Category
     popupVisible?: boolean
   } | null>()
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    error,
     paginationState: pagination,
     getDataAction: getCategories
   })
@@ -59,7 +59,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
     [t, sorterConfig, onOpenEditor]
   )
 
-  const headerOptions = (): JSX.Element => (
+  const headerOptions = (
     <Button type="primary" onClick={() => onOpenEditor(undefined, true)}>
       {t('common.create')}
     </Button>
@@ -67,17 +67,20 @@ export const CategoryList: FC<CategoryListProps> = props => {
 
   return (
     <>
-      <ResponsiveTable
-        headerTitle={t('coupon-category.list-title')}
-        headerOptions={headerOptions}
-        tableProps={{
-          columns: columnsConfig,
-          dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
-          pagination: paginationConfig,
-          onChange: handleTableChange
-        }}
-        error={error}
-      />
+      <ResponsiveCard
+        forTable
+        floatingTitle={t('coupon-category.list-title')}
+        floatingOptions={headerOptions}
+      >
+        <ResponsiveTable
+          {...{
+            columns: columnsConfig,
+            dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
+            pagination: paginationConfig,
+            onChange: handleTableChange
+          }}
+        />
+      </ResponsiveCard>
 
       <GenericPopup
         id={categoryToDelete?.category?.id}

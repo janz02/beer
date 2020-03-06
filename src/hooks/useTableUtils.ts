@@ -26,9 +26,15 @@ export interface ListRequestParams extends Pagination {
 
 export interface UseTableUtilsProps {
   paginationState: Pagination
-  error: string
   filterKeys?: string[]
   getDataAction: (params: ListRequestParams) => any
+}
+export interface UseTableUtilsTools {
+  paginationConfig: false | TablePaginationConfig
+  handleTableChange: any
+  sorterConfig: {
+    sorter: boolean
+  }
 }
 
 const showTotalText = (total: number, range: number[]): string =>
@@ -60,7 +66,6 @@ const projectPageToNewPageSize = (newSize: number, pagination?: Pagination): num
 /** The common pagination config. */
 export const basePaginationConfig = (
   isMobile: boolean,
-  tableHasError: boolean,
   pagination?: Pagination
 ): TablePaginationConfig => ({
   showTotal: showTotalText,
@@ -69,7 +74,7 @@ export const basePaginationConfig = (
   total: pagination?.size ?? 0,
   simple: isMobile,
   pageSizeOptions: ['5', '10', '25', '50'],
-  showSizeChanger: !tableHasError
+  showSizeChanger: true
 })
 
 /**
@@ -137,17 +142,16 @@ export const basePaginationConfig = (
     const newPage = recalculatePaginationAfterDeletion(getState().data.pagination)
     dispatch(getDataList({ page: newPage }))
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const useTableUtils = <T = any>(props: UseTableUtilsProps) => {
-  const { paginationState, error, getDataAction, filterKeys } = props
+const useTableUtils = <T = any>(props: UseTableUtilsProps): UseTableUtilsTools => {
+  const { paginationState, getDataAction, filterKeys } = props
 
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
 
   const paginationConfig = useMemo((): TablePaginationConfig | false => {
-    const baseConfig = basePaginationConfig(isMobile, !!error, paginationState)
+    const baseConfig = basePaginationConfig(isMobile, paginationState)
     return baseConfig.total ? baseConfig : false
-  }, [error, isMobile, paginationState])
+  }, [isMobile, paginationState])
 
   const sorterConfig = useMemo(
     () => ({

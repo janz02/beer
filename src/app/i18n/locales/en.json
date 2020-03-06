@@ -189,7 +189,8 @@
     "dashboard": "Dashboard",
     "newsletter": "News letter",
     "partner-data": "Partner data",
-    "sites": "Sites"
+    "sites": "Sites",
+    "users": "Users"
   },
   "newsletter": {
     "available-templates": "Available templates",
@@ -251,5 +252,35 @@
       "name": "Site name"
     },
     "list-title": "Sites"
+  },
+  "user-access": {
+    "access-editor": {
+      "title": "Access Rights"
+    },
+    "field": {
+      "email": "Email",
+      "name": "Name",
+      "partner-name": "Partner",
+      "partner-type": "Type",
+      "phone": "Phone",
+      "role": "Role",
+      "status": "Status",
+      "status-active": "Active",
+      "status-inactive": "Inactive"
+    },
+    "msg": {
+      "change-succesful": "User access successfully changed"
+    },
+    "nkm-users": "NKM User",
+    "partner-users": "Partner Contact",
+    "role": {
+      "administrator": "Administrator",
+      "businesspartnermanager": "Business Partner Manager",
+      "campaignmanager": "Campaign Manager",
+      "partnercontactapprover": "Partner Contact - Approver",
+      "partnercontacteditor": "Partner Contact - Editor",
+      "partnermanager": "Partner Manager"
+    },
+    "user-access": "Users and Access Rights"
   }
 }

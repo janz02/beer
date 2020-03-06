@@ -64,7 +64,7 @@ export const {
   setLoadingFailed
 } = couponEditorSlice.actions
 
-export default couponEditorSlice.reducer
+export const couponEditorReducer = couponEditorSlice.reducer
 
 export const getCoupon = (id: number): AppThunk => async dispatch => {
   dispatch(setLoadingStart())

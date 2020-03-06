@@ -4,10 +4,10 @@ import { PrivateLayout } from 'components/layout/PrivateLayout'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { hasPermission } from '../services/jwt-reader'
-import { Role } from 'models/user'
+import { Roles } from 'api/swagger/models'
 
 interface PrivateRouteProps extends RouteProps {
-  roles?: Role[]
+  roles?: Roles[]
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = props => {

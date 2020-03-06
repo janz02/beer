@@ -83,7 +83,7 @@ const {
 const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterListSlice.actions
 const { getSegmentsRequest, getSegmentsSuccess, getSegmentsFail } = newsletterListSlice.actions
 
-export default newsletterListSlice.reducer
+export const newsletterListReducer = newsletterListSlice.reducer
 
 export const sendNewsletterEmailToSegment = (
   segmentId: string,

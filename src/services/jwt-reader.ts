@@ -1,8 +1,9 @@
 import JwtDecode from 'jwt-decode'
-import { UserData, Role } from 'models/user'
+import { UserData } from 'models/user'
+import { Roles } from 'api/swagger/models'
 
-const formatRoles = (rawRules: string): Role[] => {
-  return rawRules ? (rawRules.split(';') as Role[]) : []
+const formatRoles = (rawRules: string): Roles[] => {
+  return rawRules ? (rawRules.split(',') as Roles[]) : []
 }
 
 export const getJwtUserdata = (token?: string | null): UserData => {
@@ -17,11 +18,10 @@ export const getJwtUserdata = (token?: string | null): UserData => {
   return user
 }
 
-export const hasPermission = (roles?: Role[]): boolean => {
+export const hasPermission = (roles?: Roles[]): boolean => {
   if (!roles || !roles.length) {
     return true
   }
-
   const jwtRoles = getJwtUserdata().roles ?? []
   return roles.every(x => jwtRoles.includes(x))
 }

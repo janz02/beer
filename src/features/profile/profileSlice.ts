@@ -4,7 +4,6 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Profile } from 'models/profile'
 import { api } from 'api'
-import { Role } from 'models/user'
 
 interface ProfileState {
   editable?: boolean
@@ -57,19 +56,20 @@ export const {
   setLoadingFailed
 } = profileSlice.actions
 
-export default profileSlice.reducer
+export const profileReducer = profileSlice.reducer
 
 export const getProfile = (): AppThunk => async (dispatch, getState) => {
   dispatch(setLoadingStart())
 
   try {
-    const userData = getState().auth.userData
-    if (userData.roles?.includes(Role.PARTNER)) {
-      const profile = await api.partnerContacts.getMyPartnerContact()
-      dispatch(getProfileSuccess(profile))
-    } else {
-      dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
-    }
+    // const userData = getState().auth.userData
+    // TODO: The roles have changed, no more Partner contact. Do we need this check, still?
+    // if (!userData.roles?.includes(Roles.Partner)) {
+    const profile = await api.partnerContacts.getMyPartnerContact()
+    dispatch(getProfileSuccess(profile))
+    // } else {
+    // dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
+    // }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }
@@ -79,14 +79,14 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
   dispatch(setLoadingStart())
 
   try {
-    const userData = getState().auth.userData
-    if (userData.roles?.includes(Role.PARTNER)) {
-      await api.partnerContacts.updateMyPartnerContact({
-        selfPartnerContactDto: { ...getState().profile.profile, ...profile }
-      })
-      dispatch(updateProfileSuccess())
-      dispatch(getProfile())
-    }
+    // const userData = getState().auth.userData
+    // if (userData.roles?.includes(Roles.PARTNER)) {
+    await api.partnerContacts.updateMyPartnerContact({
+      selfPartnerContactDto: { ...getState().profile.profile, ...profile }
+    })
+    dispatch(updateProfileSuccess())
+    dispatch(getProfile())
+    // }
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }

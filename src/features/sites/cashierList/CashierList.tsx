@@ -9,6 +9,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTableUtils } from 'hooks/useTableUtils'
 import { updateCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 
 interface CashierListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
@@ -17,7 +18,7 @@ interface CashierListProps {
 export const CashierList: FC<CashierListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { error, pagination, cashiers, site } = useSelector((state: RootState) => state.siteEditor)
+  const { pagination, cashiers, site } = useSelector((state: RootState) => state.siteEditor)
 
   const [cashierToDelete, setCashierToDelete] = useState<{
     cashier?: Cashier
@@ -25,7 +26,6 @@ export const CashierList: FC<CashierListProps> = props => {
   } | null>()
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    error,
     paginationState: pagination,
     getDataAction: updateCashiers
   })
@@ -66,7 +66,7 @@ export const CashierList: FC<CashierListProps> = props => {
     [t, sorterConfig, onOpenEditor]
   )
 
-  const headerOptions = (): JSX.Element => (
+  const headerOptions = (
     <>
       {site?.id && (
         <Button type="primary" onClick={() => onOpenEditor(undefined, true)}>
@@ -78,17 +78,23 @@ export const CashierList: FC<CashierListProps> = props => {
 
   return (
     <>
-      <ResponsiveTable
-        headerTitle={t('cashier-list.table-title')}
-        headerOptions={headerOptions}
-        tableProps={{
-          columns: columnsConfig,
-          dataSource: cashiers?.map((c, i) => ({ ...c, key: '' + i + c.id })),
-          pagination: paginationConfig,
-          onChange: handleTableChange
-        }}
-        error={error}
-      />
+      <ResponsiveCard
+        forTable
+        floatingTitle={t('cashier-list.table-title')}
+        innerTitle={t('cashier-list.table-title')}
+        innerOptions={headerOptions}
+        paddedBottom
+      >
+        <ResponsiveTable
+          hasHeaderOffset
+          {...{
+            columns: columnsConfig,
+            dataSource: cashiers?.map((c, i) => ({ ...c, key: '' + i + c.id })),
+            pagination: paginationConfig,
+            onChange: handleTableChange
+          }}
+        />
+      </ResponsiveCard>
 
       <GenericPopup
         id={cashierToDelete?.cashier?.id}

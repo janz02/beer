@@ -27,7 +27,7 @@ export const NewsletterList: FC = () => {
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { templates, pagination, error, segments, loading } = useSelector(
+  const { templates, pagination, segments, loading } = useSelector(
     (state: RootState) => state.newsletterList
   )
 
@@ -51,7 +51,6 @@ export const NewsletterList: FC = () => {
   }, [dispatch])
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    error,
     paginationState: pagination,
     getDataAction: getNewsletterTemplates
   })
@@ -102,26 +101,27 @@ export const NewsletterList: FC = () => {
     [dispatch, editTemplate, sorterConfig, t]
   )
 
-  const headerOptions = (): JSX.Element => (
+  const headerOptions = (
     <Button type="primary" onClick={() => setVisibleSaveNewPopup(true)}>
       {t('common.create')}
     </Button>
   )
 
   return (
-    <div>
-      <ResponsiveCard>
+    <>
+      <ResponsiveCard
+        floatingTitle={t('newsletter.available-templates')}
+        floatingOptions={headerOptions}
+        forTable
+      >
         <ResponsiveTable
-          headerTitle={t('newsletter.available-templates')}
-          headerOptions={headerOptions}
-          tableProps={{
+          {...{
             loading,
             columns: columnsConfig,
             dataSource: templates.map((t, i) => ({ ...t, key: '' + i + t.id })),
             pagination: paginationConfig,
             onChange: handleTableChange
           }}
-          error={error}
         />
       </ResponsiveCard>
 
@@ -194,6 +194,6 @@ export const NewsletterList: FC = () => {
           <Input />
         </Form.Item>
       </GenericModalForm>
-    </div>
+    </>
   )
 }

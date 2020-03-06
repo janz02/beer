@@ -189,7 +189,8 @@
     "dashboard": "Irányítópult",
     "newsletter": "Hírlevél",
     "partner-data": "Partner adatok",
-    "sites": "Telephelyek"
+    "sites": "Telephelyek",
+    "users": "Felhasználók"
   },
   "newsletter": {
     "available-templates": "Hírlevél sablonok",
@@ -251,5 +252,35 @@
       "name": "Telephely név"
     },
     "list-title": "Telephelyek"
+  },
+  "user-access": {
+    "access-editor": {
+      "title": "Felhasználók és Jogosultságok"
+    },
+    "field": {
+      "email": "Email",
+      "name": "Név",
+      "partner-name": "Partner",
+      "partner-type": "Típus",
+      "phone": "Telefon",
+      "role": "Szerepkör",
+      "status": "Státusz",
+      "status-active": "Aktív",
+      "status-inactive": "Inaktív"
+    },
+    "msg": {
+      "change-succesful": "Felhasználó jogosultsága megváltoztatva"
+    },
+    "nkm-users": "NKM Felhasználó",
+    "partner-users": "Partner Kapcsolattartó",
+    "role": {
+      "administrator": "Adminisztrátor",
+      "businesspartnermanager": "Ügyfél menedzser",
+      "campaignmanager": "Kampány menedzser",
+      "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
+      "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
+      "partnermanager": "Partner menedzser"
+    },
+    "user-access": "Felhasználók és Jogosultságok"
   }
 }

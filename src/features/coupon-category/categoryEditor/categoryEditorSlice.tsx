@@ -64,7 +64,7 @@ export const {
   saveCategoryFail
 } = categoryEditorSlice.actions
 
-export default categoryEditorSlice.reducer
+export const categoryEditorReducer = categoryEditorSlice.reducer
 
 export const getCategory = (params: GetCategoryRequest): AppThunk => async dispatch => {
   dispatch(getCategoryRequest())
