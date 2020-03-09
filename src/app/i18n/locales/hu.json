@@ -198,8 +198,8 @@
     "field": {
       "email": "E-mail cím",
       "subject": "Tárgy",
-      "template-modified-at": "Változtatva",
-      "template-modified-by": "Változtató",
+      "template-modified-at": "Módosítva",
+      "template-modified-by": "Módosító",
       "template-name": "Sablon név",
       "template-version": "Verzió"
     },
@@ -213,7 +213,9 @@
       "title-send-segment": "Hírlevél kiküldése szegmensnek"
     },
     "send-sample": "Minta küldése",
-    "send-segment": "Küldés szegmensnek"
+    "send-segment": "Küldés szegmensnek",
+    "template": "Sablon",
+    "version": "Verzió"
   },
   "notification": {
     "empty-list": "Üres",

@@ -199,7 +199,7 @@
       "email": "Email address",
       "subject": "Subject",
       "template-modified-at": "Modified at",
-      "template-modified-by": "Modified by",
+      "template-modified-by": "Modifier",
       "template-name": "Template name",
       "template-version": "Version"
     },
@@ -213,7 +213,9 @@
       "title-send-segment": "Send newsletter to segment"
     },
     "send-sample": "Send sample",
-    "send-segment": "Send to Segment"
+    "send-segment": "Send to Segment",
+    "template": "Template",
+    "version": "Version"
   },
   "notification": {
     "empty-list": "Empty",

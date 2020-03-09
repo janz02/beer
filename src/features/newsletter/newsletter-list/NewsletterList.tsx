@@ -55,20 +55,20 @@ export const NewsletterList: FC = () => {
         key: 'name',
         dataIndex: 'name',
         ellipsis: true,
-        width: '40%',
+        width: '35%',
         ...sorterConfig
       },
       {
         title: t('newsletter.field.template-version'),
         key: 'version',
-        width: '12%',
+        width: '6rem',
         dataIndex: 'version'
       },
       {
         title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
         render(record: NewsletterPreview) {
-          return <MomentDisplay date={record.modifiedAt} mode="date/time" />
+          return <MomentDisplay date={record.modifiedAt} mode="date time" />
         }
       },
       {

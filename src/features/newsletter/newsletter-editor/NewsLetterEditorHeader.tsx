@@ -48,9 +48,15 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
   return (
     <div className={`${className} nleh`}>
       <span className="nleh__toolbar">
-        {template?.name && <div className="nleh__title">{template.name}</div>}
+        {template?.name && (
+          <div className="nleh__title">
+            <span className="nleh--label">{t('newsletter.template')}</span>
+            <span className="nleh__title--name">{template.name}</span>
+          </div>
+        )}
         {!isNewTemplate && (
-          <span>
+          <span className="nleh__version">
+            <span className="nleh--label">{t('newsletter.version')}</span>
             <Select
               onSelect={handleVersionPreviewSwitch}
               value={currentTemplateVersionId}
@@ -59,7 +65,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
               {template?.history?.map((h, i) => (
                 <Select.Option key={h.version} value={h.id!}>
                   {i ? <EyeOutlined /> : <EditOutlined />}
-                  <span className="nleh__version-number">{h.version}</span>
+                  <span className="nleh__version--number">{h.version}</span>
                   <MomentDisplay date={h.modifiedAt} mode="date time" />
                 </Select.Option>
               ))}
