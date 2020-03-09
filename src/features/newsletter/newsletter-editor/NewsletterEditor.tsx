@@ -20,7 +20,7 @@ export interface NewsletterEditorProps {
   handleRevert: () => void
   handleVersionPreviewSwitch: (id: number) => void
   handleSendSample: (email: string, subject: string) => void
-  handleSendSegment: (segmentId: string, subject: string) => void
+  handleSendSegment: (segmentId: number, subject: string) => void
   handleGetSegments: () => void
   handleExit: () => void
 }
@@ -190,7 +190,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
           formProps={{
             onFinish: async (values: any) => {
               setSendSegmentPopup({ ...sendSegmentPopup, sending: true })
-              const sent: any = await handleSendSegment(values.segment, values.subject)
+              const sent: any = await handleSendSegment(+values.segment, values.subject)
               setSendSegmentPopup(sent ? null : { ...sendSegmentPopup, sending: false })
             }
           }}
@@ -207,7 +207,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
             label={t('newsletter.popup.target-segment')}
             rules={[rule.required()]}
           >
-            <Select loading onChange={(e: any) => console.log(e)}>
+            <Select>
               {segments?.map(s => (
                 <Select.Option key={s.id} value={s.id}>
                   {s.name}
