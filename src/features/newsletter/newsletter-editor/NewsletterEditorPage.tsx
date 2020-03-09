@@ -10,7 +10,9 @@ import {
   clearNewsletterTemplate,
   switchNewsletterVersion,
   restoreNewsletterTemplateVersion,
-  sendNewsletterEmailExample
+  sendNewsletterEmailExample,
+  sendNewsletterEmailToSegment,
+  getSegmentsForEmail
 } from './newsletterEditorSlice'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
@@ -19,7 +21,7 @@ export const NewsletterEditorPage: FC = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  const { template, currentTemplateVersionId } = useSelector(
+  const { template, currentTemplateVersionId, segments } = useSelector(
     (state: RootState) => state.newsletterEditor
   )
 
@@ -43,9 +45,18 @@ export const NewsletterEditorPage: FC = () => {
     dispatch(saveNewsletterTemplateVersion(template))
   }
 
-  const onSendSample: any = async (email: string) => {
-    const sent = await dispatch(sendNewsletterEmailExample(email))
+  const onSendSample: any = async (email: string, subject: string) => {
+    const sent = await dispatch(sendNewsletterEmailExample(email, subject))
     return sent
+  }
+
+  const onSendSegment: any = async (segmentId: number, subject: string) => {
+    const sent = await dispatch(sendNewsletterEmailToSegment(segmentId, subject))
+    return sent
+  }
+
+  const onGetSegments = (): void => {
+    dispatch(getSegmentsForEmail())
   }
 
   return (
@@ -53,11 +64,14 @@ export const NewsletterEditorPage: FC = () => {
       <ErrorBoundary>
         <NewsletterEditor
           template={template}
+          segments={segments}
           currentTemplateVersionId={currentTemplateVersionId}
           handleSaveVersion={onSaveVersion}
           handleRevert={onRevert}
           handleExit={onExit}
           handleSendSample={onSendSample}
+          handleSendSegment={onSendSegment}
+          handleGetSegments={onGetSegments}
           handleVersionPreviewSwitch={(id: number) => dispatch(switchNewsletterVersion(+id))}
         />
       </ErrorBoundary>

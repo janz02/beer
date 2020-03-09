@@ -15,12 +15,19 @@
 
 import * as runtime from '../runtime';
 import {
+    SendEmailToSegmentDto,
+    SendEmailToSegmentDtoFromJSON,
+    SendEmailToSegmentDtoToJSON,
     SendEmailsDto,
     SendEmailsDtoFromJSON,
     SendEmailsDtoToJSON,
 } from '../models';
 
-export interface SendEmailsRequest {
+export interface SendEmailToSegmentRequest {
+    sendEmailToSegmentDto?: SendEmailToSegmentDto;
+}
+
+export interface SendTestEmailRequest {
     sendEmailsDto?: SendEmailsDto;
 }
 
@@ -30,9 +37,9 @@ export interface SendEmailsRequest {
 export class EmailSenderApi extends runtime.BaseAPI {
 
     /**
-     * Sends the email template out to the recipients
+     * Sends the email template to the selected segment defined in RTD
      */
-    async sendEmailsRaw(requestParameters: SendEmailsRequest): Promise<runtime.ApiResponse<void>> {
+    async sendEmailToSegmentRaw(requestParameters: SendEmailToSegmentRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -44,7 +51,39 @@ export class EmailSenderApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/EmailSender`,
+            path: `/api/EmailSender/Segment`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: SendEmailToSegmentDtoToJSON(requestParameters.sendEmailToSegmentDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Sends the email template to the selected segment defined in RTD
+     */
+    async sendEmailToSegment(requestParameters: SendEmailToSegmentRequest): Promise<void> {
+        await this.sendEmailToSegmentRaw(requestParameters);
+    }
+
+    /**
+     * Sends the email template out to the test recipients
+     */
+    async sendTestEmailRaw(requestParameters: SendTestEmailRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/EmailSender/Test`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -55,10 +94,10 @@ export class EmailSenderApi extends runtime.BaseAPI {
     }
 
     /**
-     * Sends the email template out to the recipients
+     * Sends the email template out to the test recipients
      */
-    async sendEmails(requestParameters: SendEmailsRequest): Promise<void> {
-        await this.sendEmailsRaw(requestParameters);
+    async sendTestEmail(requestParameters: SendTestEmailRequest): Promise<void> {
+        await this.sendTestEmailRaw(requestParameters);
     }
 
 }
