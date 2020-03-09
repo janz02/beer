@@ -89,7 +89,7 @@
     "create": "Create",
     "create-coupon-success": "Creating a coupon was successful.",
     "edit": "Edit",
-    "editor": "Coupon editor",
+    "editor-title": "Coupon editor",
     "error": {
       "percentage-max-100": "The percentage value cannot exceed 100."
     },
@@ -107,20 +107,20 @@
       "name": "Name",
       "rank": "Rank"
     },
-    "save": "Save",
-    "state-action-confirm-message": "Are you sure?",
     "states": {
       "accept": "Accept",
       "archive": "Archive",
       "close": "Close",
       "reject": "Reject",
       "wait": "Wait"
-    }
+    },
+    "status-title": "Modify state"
   },
   "coupon-editor": {
     "comment-delete-confirm-message": "Are you sure you want to delete this comment?",
     "save-coupon-status-success": "Saving coupon status was successful.",
-    "save-coupon-success": "Saving coupon was successful."
+    "save-coupon-success": "Saving coupon was successful.",
+    "timeline-title": "Timeline"
   },
   "coupon-list": {
     "action": "Action",
@@ -250,8 +250,7 @@
     "save-profile-success": "Saving profile was successful."
   },
   "site": {
-    "editor-title-create": "Site create",
-    "editor-title-edit": "Site edit",
+    "editor-title": "Site",
     "field": {
       "address": "Address",
       "name": "Site name"

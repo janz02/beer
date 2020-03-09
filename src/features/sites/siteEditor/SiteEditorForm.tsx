@@ -1,10 +1,11 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
-import { Form, Input, Button, Card } from 'antd'
-import { useIsMobile, useCommonFormRules } from 'hooks'
+import { Form, Input, Button } from 'antd'
+import { useCommonFormRules } from 'hooks'
 import { useTranslation } from 'react-i18next'
 import { Site } from 'models/site'
 import { BackButton } from 'components/buttons/BackButton'
 import { GenericPopup } from 'components/popups/GenericPopup'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 
 export interface SiteEditorFormProps {
   onSave: (values: Site) => void
@@ -15,22 +16,12 @@ export interface SiteEditorFormProps {
 }
 
 export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
-  const { onSave, loading, site, onExit, id } = props
+  const { onSave, loading, site, onExit } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [submitable, setSubmitable] = useState(false)
   const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
   const rule = useCommonFormRules()
-  const isMobile = useIsMobile()
-
-  const formLayout = isMobile ? 'vertical' : 'horizontal'
-  const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: { span: 4 },
-          wrapperCol: { span: 14 }
-        }
-      : null
 
   // TODO: revert to this after antd upgrade
   // useEffect(() => {
@@ -57,21 +48,20 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
     }
   }
 
-  const header = (): JSX.Element => (
-    <div>
-      <BackButton onClick={onLeave} primary={!submitable} />
-      {id ? t('site.editor-title-edit') : t('site.editor-title-create')}
-    </div>
-  )
+  const headerOptions = <BackButton onClick={onLeave} primary={!submitable} />
 
   return (
     <>
-      <Card title={header()}>
+      <ResponsiveCard
+        floatingTitle={t('site.editor-title')}
+        innerOptions={headerOptions}
+        paddedBottom
+      >
         <Form
           name="site-editor-form"
           onFinish={onSubmit}
           form={form}
-          layout={formLayout}
+          layout="vertical"
           onFieldsChange={() => {
             const hasErrors = form.getFieldsError().some(field => field.errors.length)
             if (submitable === hasErrors) {
@@ -83,7 +73,6 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
             name="name"
             label={t('site.field.name')}
             rules={[rule.required(), rule.max(100)]}
-            {...formItemLayout}
           >
             <Input maxLength={100} />
           </Form.Item>
@@ -92,7 +81,6 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
             name="address"
             label={t('site.field.address')}
             rules={[rule.required(), rule.max(100)]}
-            {...formItemLayout}
           >
             <Input maxLength={100} />
           </Form.Item>
@@ -101,7 +89,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
             {t('partner.save')}
           </Button>
         </Form>
-      </Card>
+      </ResponsiveCard>
 
       <GenericPopup
         type="discard"

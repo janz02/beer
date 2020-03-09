@@ -89,7 +89,7 @@
     "create": "Létrehozás",
     "create-coupon-success": "Sikeres kupon létrehozás.",
     "edit": "Szerkesztés",
-    "editor": "Kupon szerkesztő",
+    "editor-title": "Kupon szerkesztő",
     "error": {
       "percentage-max-100": "A százalék érték maximum 100 lehet."
     },
@@ -107,20 +107,20 @@
       "name": "Név",
       "rank": "Rang"
     },
-    "save": "Mentés",
-    "state-action-confirm-message": "Biztos benne?",
     "states": {
       "accept": "Elfogadás",
       "archive": "Archiválás",
       "close": "Lezárás",
       "reject": "Elutasítás",
       "wait": "Várakozás"
-    }
+    },
+    "status-title": "Státusz módosítás"
   },
   "coupon-editor": {
     "comment-delete-confirm-message": "Biztos benne, hogy törölni szeretné ezt a kommentet?",
     "save-coupon-status-success": "Kupon státusz mentése sikeres.",
-    "save-coupon-success": "Sikeres kupon mentés."
+    "save-coupon-success": "Sikeres kupon mentés.",
+    "timeline-title": "Előzmények"
   },
   "coupon-list": {
     "action": "Műveletek",
@@ -250,8 +250,7 @@
     "save-profile-success": "Profile mentése sikeres."
   },
   "site": {
-    "editor-title-create": "Telephely létrehozása",
-    "editor-title-edit": "Telephely szerkesztése",
+    "editor-title": "Telephely",
     "field": {
       "address": "Cím",
       "name": "Telephely név"
