@@ -270,7 +270,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
             {displayEditor && (
               <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>
-                {couponIsNew ? t('coupon-create.create') : t('coupon-create.save')}
+                {couponIsNew ? t('coupon-create.create') : t('common.save')}
               </Button>
             )}
           </Form>
@@ -294,7 +294,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
               <Form.Item className="actions">
                 <Button type="primary" htmlType="submit">
-                  {t('coupon-create.comment.save')}
+                  {t('common.save')}
                 </Button>
               </Form.Item>
             </Form>

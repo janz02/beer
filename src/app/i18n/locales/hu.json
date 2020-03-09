@@ -86,9 +86,6 @@
     "list-title": "Kupon kategóriák"
   },
   "coupon-create": {
-    "comment": {
-      "save": "Mentés"
-    },
     "create": "Létrehozás",
     "create-coupon-success": "Sikeres kupon létrehozás.",
     "edit": "Szerkesztés",
@@ -110,7 +107,6 @@
       "name": "Név",
       "rank": "Rang"
     },
-    "save": "Mentés",
     "states": {
       "accept": "Elfogadás",
       "archive": "Archiválás",
