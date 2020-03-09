@@ -2,7 +2,7 @@ import React, { FC, useMemo, useCallback, useState, useEffect } from 'react'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
-import { Button, Form, Select, Input } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
@@ -25,9 +25,7 @@ export const NewsletterList: FC = () => {
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { templates, pagination, segments, loading } = useSelector(
-    (state: RootState) => state.newsletterList
-  )
+  const { templates, pagination, loading } = useSelector((state: RootState) => state.newsletterList)
 
   const [visibleSaveNewPopup, setVisibleSaveNewPopup] = useState(false)
   const [deletePopup, setDeletePopup] = useState<{

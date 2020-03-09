@@ -6,8 +6,7 @@ import { api } from 'api'
 import { history } from 'router/router'
 import moment from 'moment'
 import { Segment } from 'models/segment'
-import { message } from 'antd'
-import i18n from 'app/i18n'
+
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
