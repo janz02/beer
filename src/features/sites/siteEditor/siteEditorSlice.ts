@@ -171,7 +171,7 @@ export const getSiteEditorData = (id: number, params: ListRequestParams = {}): A
   try {
     const site = await api.sites.getSite({ id })
     const oldPagination = getState().siteEditor.pagination
-    const { result, ...pagination } = await api.cashier.getCashiers({
+    const { result, ...pagination } = await api.cashiers.getCashiers({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params,
@@ -203,7 +203,7 @@ export const updateCashiers = (params: ListRequestParams = {}): AppThunk => asyn
 
   dispatch(updateCashiersRequest())
   try {
-    const { result, ...pagination } = await api.cashier.getCashiers({
+    const { result, ...pagination } = await api.cashiers.getCashiers({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params,
@@ -261,9 +261,9 @@ export const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getS
 
   try {
     if (cashier.id) {
-      await api.cashier.updateCashier({ id: cashier.id, cashierDto: cashier })
+      await api.cashiers.updateCashier({ id: cashier.id, cashierDto: cashier })
     } else {
-      await api.cashier.createCashier({
+      await api.cashiers.createCashier({
         createCashierDto: { ...cashier, siteId: getState().siteEditor.site?.id }
       })
     }
@@ -282,7 +282,7 @@ export const deleteCashier = (id: number): AppThunk => async (dispatch, getState
   dispatch(deleteCashierRequest())
 
   try {
-    await api.cashier.deleteCashier({ id })
+    await api.cashiers.deleteCashier({ id })
     dispatch(deleteCashierSuccess())
 
     const siteEditorState = getState().siteEditor
@@ -300,7 +300,7 @@ export const deleteCashier = (id: number): AppThunk => async (dispatch, getState
 export const getCashier = (id: number): AppThunk => async dispatch => {
   dispatch(getCashierRequest())
   try {
-    const cashier = await api.cashier.getCashier({ id })
+    const cashier = await api.cashiers.getCashier({ id })
     dispatch(getCashierSuccess(cashier))
   } catch (err) {
     dispatch(getCashierFail(err.toString()))

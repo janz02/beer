@@ -19,6 +19,10 @@
       padding: 0;
     }
 
+    &--flexible-height {
+      height: inherit;
+    }
+
     .ant-card-body {
       padding: $r-card-vertical-padding 60px;
     }
@@ -62,5 +66,10 @@
 
   &--extra-wide {
     max-width: 1100px;
+  }
+
+  &--full-width {
+    width: 100%;
+    max-width: none;
   }
 }
