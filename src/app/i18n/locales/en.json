@@ -197,12 +197,14 @@
     "close-editor": "Close editor",
     "field": {
       "email": "Email address",
+      "subject": "Subject",
       "template-modified-at": "Modified at",
+      "template-modified-by": "Modifier",
       "template-name": "Template name",
       "template-version": "Version"
     },
     "popup": {
-      "discard-msg": "All your current modifications will be lost.",
+      "discard-msg": "Your changes are not saved, do you want to discard them, by closing the editor?",
       "preview-discard-msg": "You have modified the current version of the template. By previewing the previous version you will lose all changes.",
       "restore-msg": "By restoring, you will copy this template on the top of the version history, as the latest saved version.",
       "target-segment": "Target segment",
@@ -210,7 +212,10 @@
       "title-send-sample": "Send sample email",
       "title-send-segment": "Send newsletter to segment"
     },
-    "send-sample": "Send sample"
+    "send-sample": "Send sample",
+    "send-segment": "Send to Segment",
+    "template": "Template",
+    "version": "Version"
   },
   "notification": {
     "empty-list": "Empty",

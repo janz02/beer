@@ -1,5 +1,5 @@
 export * from './AuthApi';
-export * from './CashierApi';
+export * from './CashiersApi';
 export * from './CategoriesApi';
 export * from './CouponCommentsApi';
 export * from './CouponUserCodesApi';

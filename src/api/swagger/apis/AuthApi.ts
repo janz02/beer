@@ -57,7 +57,7 @@ export interface ChangePasswordRequest {
     changePasswordDto?: ChangePasswordDto;
 }
 
-export interface GetNkmPartnerContactsRequest {
+export interface GetNkmPartnerContactsInfoRequest {
     name?: string;
     phone?: string;
     email?: string;
@@ -68,11 +68,11 @@ export interface GetNkmPartnerContactsRequest {
     orderByType?: OrderByType;
 }
 
-export interface GetOnePartnerContactRequest {
+export interface GetPartnerContactInfoRequest {
     id: number;
 }
 
-export interface GetPartnerContactsRequest {
+export interface GetPartnerContactsInfoRequest {
     name?: string;
     phone?: string;
     email?: string;
@@ -99,7 +99,7 @@ export interface RegisterUserRequest {
     registerUserDto?: RegisterUserDto;
 }
 
-export interface UpdatePartnerContactRequest {
+export interface UpdatePartnerContactInfoRequest {
     id: number;
     partnerContactStateDto?: PartnerContactStateDto;
 }
@@ -147,7 +147,7 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns the details of elevated users in paginated form
      * Returns the details of elevated users
      */
-    async getNkmPartnerContactsRaw(requestParameters: GetNkmPartnerContactsRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
+    async getNkmPartnerContactsInfoRaw(requestParameters: GetNkmPartnerContactsInfoRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -189,7 +189,7 @@ export class AuthApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Auth/getNkmPartnerContacts`,
+            path: `/api/Auth/GetNkmPartnerContacts`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -202,8 +202,8 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns the details of elevated users in paginated form
      * Returns the details of elevated users
      */
-    async getNkmPartnerContacts(requestParameters: GetNkmPartnerContactsRequest): Promise<PartnerContactVmPaginatedResponse> {
-        const response = await this.getNkmPartnerContactsRaw(requestParameters);
+    async getNkmPartnerContactsInfo(requestParameters: GetNkmPartnerContactsInfoRequest): Promise<PartnerContactVmPaginatedResponse> {
+        const response = await this.getNkmPartnerContactsInfoRaw(requestParameters);
         return await response.value();
     }
 
@@ -211,9 +211,9 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns the details of a partner contact
      * Returns the details of a partner contact
      */
-    async getOnePartnerContactRaw(requestParameters: GetOnePartnerContactRequest): Promise<runtime.ApiResponse<PartnerContactStateVm>> {
+    async getPartnerContactInfoRaw(requestParameters: GetPartnerContactInfoRequest): Promise<runtime.ApiResponse<PartnerContactStateVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getOnePartnerContact.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPartnerContactInfo.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -225,7 +225,7 @@ export class AuthApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Auth/getOnePartnerContact/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Auth/GetOnePartnerContact/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -238,8 +238,8 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns the details of a partner contact
      * Returns the details of a partner contact
      */
-    async getOnePartnerContact(requestParameters: GetOnePartnerContactRequest): Promise<PartnerContactStateVm> {
-        const response = await this.getOnePartnerContactRaw(requestParameters);
+    async getPartnerContactInfo(requestParameters: GetPartnerContactInfoRequest): Promise<PartnerContactStateVm> {
+        const response = await this.getPartnerContactInfoRaw(requestParameters);
         return await response.value();
     }
 
@@ -247,7 +247,7 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns the details of partner contacts in paginated form
      * Returns the details of partner contacts
      */
-    async getPartnerContactsRaw(requestParameters: GetPartnerContactsRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
+    async getPartnerContactsInfoRaw(requestParameters: GetPartnerContactsInfoRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -289,7 +289,7 @@ export class AuthApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Auth/getPartnerContacts`,
+            path: `/api/Auth/GetPartnerContacts`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -302,8 +302,8 @@ export class AuthApi extends runtime.BaseAPI {
      * Returns the details of partner contacts in paginated form
      * Returns the details of partner contacts
      */
-    async getPartnerContacts(requestParameters: GetPartnerContactsRequest): Promise<PartnerContactVmPaginatedResponse> {
-        const response = await this.getPartnerContactsRaw(requestParameters);
+    async getPartnerContactsInfo(requestParameters: GetPartnerContactsInfoRequest): Promise<PartnerContactVmPaginatedResponse> {
+        const response = await this.getPartnerContactsInfoRaw(requestParameters);
         return await response.value();
     }
 
@@ -449,9 +449,9 @@ export class AuthApi extends runtime.BaseAPI {
      * Updates the details of an elevated user or partner contact
      * Updates the details of an elevated user or partner contact
      */
-    async updatePartnerContactRaw(requestParameters: UpdatePartnerContactRequest): Promise<runtime.ApiResponse<void>> {
+    async updatePartnerContactInfoRaw(requestParameters: UpdatePartnerContactInfoRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePartnerContact.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePartnerContactInfo.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -465,7 +465,7 @@ export class AuthApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Auth/updatePartnerContact/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Auth/UpdatePartnerContact/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -479,8 +479,8 @@ export class AuthApi extends runtime.BaseAPI {
      * Updates the details of an elevated user or partner contact
      * Updates the details of an elevated user or partner contact
      */
-    async updatePartnerContact(requestParameters: UpdatePartnerContactRequest): Promise<void> {
-        await this.updatePartnerContactRaw(requestParameters);
+    async updatePartnerContactInfo(requestParameters: UpdatePartnerContactInfoRequest): Promise<void> {
+        await this.updatePartnerContactInfoRaw(requestParameters);
     }
 
 }

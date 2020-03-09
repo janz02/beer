@@ -264,14 +264,14 @@
         }
       }
     },
-    "/api/Auth/getOnePartnerContact/{id}": {
+    "/api/Auth/GetOnePartnerContact/{id}": {
       "get": {
         "tags": [
           "Auth"
         ],
         "summary": "Returns the details of a partner contact",
         "description": "Returns the details of a partner contact",
-        "operationId": "getOnePartnerContact",
+        "operationId": "getPartnerContactInfo",
         "parameters": [
           {
             "name": "id",
@@ -331,14 +331,14 @@
         }
       }
     },
-    "/api/Auth/getPartnerContacts": {
+    "/api/Auth/GetPartnerContacts": {
       "get": {
         "tags": [
           "Auth"
         ],
         "summary": "Returns the details of partner contacts",
         "description": "Returns the details of partner contacts in paginated form",
-        "operationId": "getPartnerContacts",
+        "operationId": "getPartnerContactsInfo",
         "parameters": [
           {
             "name": "name",
@@ -443,14 +443,14 @@
         }
       }
     },
-    "/api/Auth/getNkmPartnerContacts": {
+    "/api/Auth/GetNkmPartnerContacts": {
       "get": {
         "tags": [
           "Auth"
         ],
         "summary": "Returns the details of elevated users",
         "description": "Returns the details of elevated users in paginated form",
-        "operationId": "getNkmPartnerContacts",
+        "operationId": "getNkmPartnerContactsInfo",
         "parameters": [
           {
             "name": "name",
@@ -538,14 +538,14 @@
         }
       }
     },
-    "/api/Auth/updatePartnerContact/{id}": {
+    "/api/Auth/UpdatePartnerContact/{id}": {
       "put": {
         "tags": [
           "Auth"
         ],
         "summary": "Updates the details of an elevated user or partner contact",
         "description": "Updates the details of an elevated user or partner contact",
-        "operationId": "updatePartnerContact",
+        "operationId": "updatePartnerContactInfo",
         "parameters": [
           {
             "name": "id",
@@ -581,10 +581,10 @@
         }
       }
     },
-    "/api/Cashier": {
+    "/api/Cashiers": {
       "post": {
         "tags": [
-          "Cashier"
+          "Cashiers"
         ],
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
@@ -627,11 +627,11 @@
       },
       "get": {
         "tags": [
-          "Cashier"
+          "Cashiers"
         ],
         "summary": "Gets a list of cashiers",
         "description": "Returns the cashier list with the specified filters applied",
-        "operationId": "getAllCashier",
+        "operationId": "getCashiers",
         "parameters": [
           {
             "name": "siteId",
@@ -699,10 +699,10 @@
         }
       }
     },
-    "/api/Cashier/{id}": {
+    "/api/Cashiers/{id}": {
       "get": {
         "tags": [
-          "Cashier"
+          "Cashiers"
         ],
         "summary": "Gets a cashier by Id",
         "description": "Returns the cashier with the specified Id upon success",
@@ -750,7 +750,7 @@
       },
       "put": {
         "tags": [
-          "Cashier"
+          "Cashiers"
         ],
         "summary": "Updates a cashier",
         "description": "Updates a cashier with the given id",
@@ -790,7 +790,7 @@
       },
       "delete": {
         "tags": [
-          "Cashier"
+          "Cashiers"
         ],
         "summary": "Deletes a cashier",
         "description": "Deletes a cashier with the given id",
@@ -1824,15 +1824,15 @@
         }
       }
     },
-    "/api/EmailSender": {
+    "/api/EmailSender/Test": {
       "post": {
         "tags": [
           "EmailSender"
         ],
-        "summary": "Sends the email template out to the recipients",
-        "operationId": "sendEmails",
+        "summary": "Sends the email template out to the test recipients",
+        "operationId": "sendTestEmail",
         "requestBody": {
-          "description": "The list of the recipents and the email template id",
+          "description": "The list of the recipients and the email template id",
           "content": {
             "application/json": {
               "schema": {
@@ -1847,6 +1847,29 @@
           },
           "404": {
             "description": "EmailTemplate not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/EmailSender/Segment": {
+      "post": {
+        "tags": [
+          "EmailSender"
+        ],
+        "summary": "Sends the email template to the selected segment defined in RTD",
+        "operationId": "sendEmailToSegment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendEmailToSegmentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The server accepted the command"
           }
         }
       }
@@ -4310,6 +4333,28 @@
           "emailTemplateId": {
             "type": "integer",
             "format": "int32"
+          },
+          "emailSubject": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SendEmailToSegmentDto": {
+        "type": "object",
+        "properties": {
+          "segmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emailTemplateId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emailSubject": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

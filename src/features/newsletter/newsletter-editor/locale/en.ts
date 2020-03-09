@@ -13,5 +13,11 @@ export default {
         'pkm-restore-template': 'Restore template'
       }
     }
+  },
+  assetManager: {
+    addButton: 'Load',
+    modalTitle: 'Select image',
+    inputPlh: 'URL of the image',
+    uploadTitle: 'Drag or import a picture here'
   }
 }

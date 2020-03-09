@@ -24,6 +24,7 @@ export interface NewsLetterEditorHeaderProps {
   handleVersionPreviewSwitch: (id: number) => void
   handleExit: () => void
   handleSendSample: () => void
+  handleSendSegment: () => void
 }
 
 export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => {
@@ -38,7 +39,8 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
     handleRevert,
     handleExit,
     handleSaveVersion,
-    handleSendSample
+    handleSendSample,
+    handleSendSegment
   } = props
 
   const { t } = useTranslation()
@@ -46,9 +48,15 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
   return (
     <div className={`${className} nleh`}>
       <span className="nleh__toolbar">
-        {template?.name && <span className="nleh__title">{template.name}</span>}
+        {template?.name && (
+          <div className="nleh__title">
+            <span className="nleh--label">{t('newsletter.template')}</span>
+            <span className="nleh__title--name">{template.name}</span>
+          </div>
+        )}
         {!isNewTemplate && (
-          <span>
+          <span className="nleh__version">
+            <span className="nleh--label">{t('newsletter.version')}</span>
             <Select
               onSelect={handleVersionPreviewSwitch}
               value={currentTemplateVersionId}
@@ -57,7 +65,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
               {template?.history?.map((h, i) => (
                 <Select.Option key={h.version} value={h.id!}>
                   {i ? <EyeOutlined /> : <EditOutlined />}
-                  <span className="nleh__version-number">{h.version}</span>
+                  <span className="nleh__version--number">{h.version}</span>
                   <MomentDisplay date={h.modifiedAt} mode="date time" />
                 </Select.Option>
               ))}
@@ -89,6 +97,15 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
                 onClick={handleSendSample}
               >
                 {t('newsletter.send-sample')}
+              </Button>
+            </span>
+            <span>
+              <Button
+                disabled={isTemplateModified}
+                icon={<SendOutlined />}
+                onClick={handleSendSegment}
+              >
+                {t('newsletter.send-segment')}
               </Button>
             </span>
           </>

@@ -1,4 +1,3 @@
-import { CashierApi } from './swagger/apis/CashierApi'
 import { Configuration } from './swagger/runtime'
 import {
   CouponsApi,
@@ -11,7 +10,8 @@ import {
   PartnerContactsApi,
   EmailSenderApi,
   EmailTemplatesApi,
-  SegmentsApi
+  SegmentsApi,
+  CashiersApi
 } from './swagger/apis'
 import { notification } from 'antd'
 import i18n from 'app/i18n'
@@ -73,5 +73,5 @@ export const api = {
   emailSender: new EmailSenderApi(config),
   emailTemplates: new EmailTemplatesApi(config),
   segments: new SegmentsApi(config),
-  cashier: new CashierApi(config)
+  cashier: new CashiersApi(config)
 }
