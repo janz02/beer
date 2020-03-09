@@ -16,46 +16,46 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface SendEmailsDto
+ * @interface SendEmailToSegmentDto
  */
-export interface SendEmailsDto {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof SendEmailsDto
-     */
-    recipients?: Array<string> | null;
+export interface SendEmailToSegmentDto {
     /**
      * 
      * @type {number}
-     * @memberof SendEmailsDto
+     * @memberof SendEmailToSegmentDto
+     */
+    segmentId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SendEmailToSegmentDto
      */
     emailTemplateId?: number;
     /**
      * 
      * @type {string}
-     * @memberof SendEmailsDto
+     * @memberof SendEmailToSegmentDto
      */
     emailSubject?: string | null;
 }
 
-export function SendEmailsDtoFromJSON(json: any): SendEmailsDto {
-    return SendEmailsDtoFromJSONTyped(json, false);
+export function SendEmailToSegmentDtoFromJSON(json: any): SendEmailToSegmentDto {
+    return SendEmailToSegmentDtoFromJSONTyped(json, false);
 }
 
-export function SendEmailsDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): SendEmailsDto {
+export function SendEmailToSegmentDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): SendEmailToSegmentDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'recipients': !exists(json, 'recipients') ? undefined : json['recipients'],
+        'segmentId': !exists(json, 'segmentId') ? undefined : json['segmentId'],
         'emailTemplateId': !exists(json, 'emailTemplateId') ? undefined : json['emailTemplateId'],
         'emailSubject': !exists(json, 'emailSubject') ? undefined : json['emailSubject'],
     };
 }
 
-export function SendEmailsDtoToJSON(value?: SendEmailsDto | null): any {
+export function SendEmailToSegmentDtoToJSON(value?: SendEmailToSegmentDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -64,7 +64,7 @@ export function SendEmailsDtoToJSON(value?: SendEmailsDto | null): any {
     }
     return {
         
-        'recipients': value.recipients,
+        'segmentId': value.segmentId,
         'emailTemplateId': value.emailTemplateId,
         'emailSubject': value.emailSubject,
     };

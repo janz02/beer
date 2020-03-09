@@ -133,7 +133,7 @@ export const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (
   try {
     dispatch(getNkmUsersRequest())
     const oldPagination = getState().userAccessList.nkmPagination
-    const { result, ...pagination } = await api.auth.getNkmPartnerContacts({
+    const { result, ...pagination } = await api.auth.getNkmPartnerContactsInfo({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params
@@ -159,7 +159,7 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
   try {
     dispatch(getPartnerUsersRequest())
     const oldPagination = getState().userAccessList.partnerPagination
-    const { result, ...pagination } = await api.auth.getPartnerContacts({
+    const { result, ...pagination } = await api.auth.getPartnerContactsInfo({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,
       ...params
@@ -181,7 +181,7 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
 export const getUserAccess = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(getUserRequest())
-    const response = await api.auth.getOnePartnerContact({ id })
+    const response = await api.auth.getPartnerContactInfo({ id })
     dispatch(getUserSuccess({ ...response } as UserAccess))
   } catch (err) {
     dispatch(getUserFail(err.toString()))
@@ -197,7 +197,7 @@ export const saveUserAccess = (
   try {
     dispatch(saveUserRequest())
     // TODO: integrate the good api
-    await api.auth.updatePartnerContact({ id, partnerContactStateDto: { role, active } })
+    await api.auth.updatePartnerContactInfo({ id, partnerContactStateDto: { role, active } })
     message.success(i18n.t('user-access.msg.change-succesful'))
     dispatch(saveUserSuccess())
     if (type === UserType.NKM) {

@@ -43,16 +43,16 @@ export interface DeleteCashierRequest {
     id: number;
 }
 
-export interface GetAllCashierRequest {
+export interface GetCashierRequest {
+    id: number;
+}
+
+export interface GetCashiersRequest {
     siteId?: number;
     page?: number;
     pageSize?: number;
     orderBy?: string;
     orderByType?: OrderByType;
-}
-
-export interface GetCashierRequest {
-    id: number;
 }
 
 export interface UpdateCashierRequest {
@@ -63,7 +63,7 @@ export interface UpdateCashierRequest {
 /**
  * no description
  */
-export class CashierApi extends runtime.BaseAPI {
+export class CashiersApi extends runtime.BaseAPI {
 
     /**
      * Returns the id of the entity upon success
@@ -81,7 +81,7 @@ export class CashierApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Cashier`,
+            path: `/api/Cashiers`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -118,7 +118,7 @@ export class CashierApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Cashier/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Cashiers/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -136,10 +136,46 @@ export class CashierApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the cashier with the specified Id upon success
+     * Gets a cashier by Id
+     */
+    async getCashierRaw(requestParameters: GetCashierRequest): Promise<runtime.ApiResponse<CashierVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCashier.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Cashiers/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CashierVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns the cashier with the specified Id upon success
+     * Gets a cashier by Id
+     */
+    async getCashier(requestParameters: GetCashierRequest): Promise<CashierVm> {
+        const response = await this.getCashierRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Returns the cashier list with the specified filters applied
      * Gets a list of cashiers
      */
-    async getAllCashierRaw(requestParameters: GetAllCashierRequest): Promise<runtime.ApiResponse<CashierVmPaginatedResponse>> {
+    async getCashiersRaw(requestParameters: GetCashiersRequest): Promise<runtime.ApiResponse<CashierVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.siteId !== undefined) {
@@ -169,7 +205,7 @@ export class CashierApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Cashier`,
+            path: `/api/Cashiers`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -182,44 +218,8 @@ export class CashierApi extends runtime.BaseAPI {
      * Returns the cashier list with the specified filters applied
      * Gets a list of cashiers
      */
-    async getAllCashier(requestParameters: GetAllCashierRequest): Promise<CashierVmPaginatedResponse> {
-        const response = await this.getAllCashierRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Returns the cashier with the specified Id upon success
-     * Gets a cashier by Id
-     */
-    async getCashierRaw(requestParameters: GetCashierRequest): Promise<runtime.ApiResponse<CashierVm>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCashier.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Cashier/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CashierVmFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the cashier with the specified Id upon success
-     * Gets a cashier by Id
-     */
-    async getCashier(requestParameters: GetCashierRequest): Promise<CashierVm> {
-        const response = await this.getCashierRaw(requestParameters);
+    async getCashiers(requestParameters: GetCashiersRequest): Promise<CashierVmPaginatedResponse> {
+        const response = await this.getCashiersRaw(requestParameters);
         return await response.value();
     }
 
@@ -243,7 +243,7 @@ export class CashierApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Cashier/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Cashiers/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,

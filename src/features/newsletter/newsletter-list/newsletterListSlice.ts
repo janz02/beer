@@ -6,8 +6,7 @@ import { api } from 'api'
 import { history } from 'router/router'
 import moment from 'moment'
 import { Segment } from 'models/segment'
-import { message } from 'antd'
-import i18n from 'app/i18n'
+
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
@@ -60,12 +59,7 @@ const newsletterListSlice = createSlice({
     getTemplatesFail(state, action: PayloadAction<string>) {
       state.loading = false
       state.error = action.payload
-    },
-    getSegmentsRequest() {},
-    getSegmentsSuccess(state, action: PayloadAction<Segment[]>) {
-      state.segments = action.payload
-    },
-    getSegmentsFail(state, action: PayloadAction<string>) {}
+    }
   }
 })
 
@@ -80,32 +74,8 @@ const {
   deleteTemplateSuccess,
   deleteTemplateFail
 } = newsletterListSlice.actions
-const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterListSlice.actions
-const { getSegmentsRequest, getSegmentsSuccess, getSegmentsFail } = newsletterListSlice.actions
 
 export const newsletterListReducer = newsletterListSlice.reducer
-
-export const sendNewsletterEmailToSegment = (
-  segmentId: string,
-  templateId: number
-): AppThunk => async dispatch => {
-  try {
-    dispatch(sendEmailRequest())
-    // TODO: segments should be instead of recipients, the api only works with email now
-    // await api.emailSender.sendEmails({
-    //   sendEmailsDto: {
-    //     recipients: [segmentId],
-    //     emailTemplateId: templateId
-    //   }
-    // })
-    dispatch(sendEmailSuccess())
-    message.success(i18n.t('common.message.email-sent'), 5)
-    return true
-  } catch (err) {
-    dispatch(sendEmailFail(err.toString()))
-    return false
-  }
-}
 
 export const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
@@ -160,19 +130,5 @@ export const createNewsletterTemplate = (name: string): AppThunk => async dispat
     history.push(`newsletter/${id.id}`)
   } catch (err) {
     dispatch(createTemplateFail(err.toString()))
-  }
-}
-
-// TODO: consider lazy loading
-export const getSegmentsForEmail = (): AppThunk => async dispatch => {
-  try {
-    dispatch(getSegmentsRequest())
-    const response = await api.segments.getSegments({
-      pageSize: 10000
-    })
-    const segments: any = response.result?.map(s => ({ ...s, id: '' + s.id }))
-    dispatch(getSegmentsSuccess(segments ?? []))
-  } catch (err) {
-    dispatch(getSegmentsFail(err.toString()))
   }
 }

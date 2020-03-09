@@ -8,6 +8,15 @@ import grapesjs from 'grapesjs'
 import grapesjsNewsLetter from 'grapesjs-preset-newsletter'
 import { Newsletter } from 'models/newsletter'
 import locale from './locale'
+import { useDispatch } from 'react-redux'
+import { logGrapesjsEvent } from './newsletterEditorSlice'
+
+interface GjsLogger {
+  at: string
+  event: string
+  count: number
+  info?: any
+}
 
 export interface UseNewsletterEditorProps {
   // id of the div element, which will hold the editor
@@ -21,6 +30,7 @@ export interface UseNewsletterEditorProps {
 export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
   const { gjsEditorId, template, currentTemplateVersionId, onEditorLoaded } = props
   const { i18n } = useTranslation()
+  const dispatch = useDispatch()
 
   const currentTemplateVersion = useMemo(() => {
     const version = template?.history?.find(h => h?.id === currentTemplateVersionId)
@@ -39,6 +49,27 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
   const [isTemplateModified, setIsTemplateModified] = useState(false)
 
   const updateCount = useRef(0)
+
+  // Logger for finding bugs
+  const logged = useRef<GjsLogger>({
+    count: 0,
+    at: '',
+    event: ''
+  })
+  const logger = useCallback(
+    (log: GjsLogger) => {
+      if (log?.event === logged.current.event) {
+        logged.current.count++
+      } else {
+        if (logged.current.count > 1) {
+          dispatch(logGrapesjsEvent(logged.current))
+        }
+        dispatch(logGrapesjsEvent(log))
+        logged.current = { ...log }
+      }
+    },
+    [dispatch]
+  )
 
   const translations = useMemo(
     () => ({
@@ -104,24 +135,32 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
   }, [translations])
 
   useEffect(() => {
-    // register eventlisteners on the new editor
     if (!editor) return
     editor.on('load', () => {
       addStyledTooltips()
       onEditorLoaded()
+      logger({ at: 'load', event: '', count: 1 })
     })
-  }, [addStyledTooltips, editor, onEditorLoaded])
+  }, [addStyledTooltips, dispatch, editor, logger, onEditorLoaded])
 
   useEffect(() => {
-    // register eventlisteners on the new editor
     if (!editor) return
-    editor.on('update', () => {
+    editor.on('update', (event: any) => {
       updateCount.current++
       if (updateCount.current === 2) {
         setIsTemplateModified(true)
       }
+      logger({
+        at: 'update',
+        event: event ?? '',
+        count: 1,
+        info: { updateCount: updateCount.current }
+      })
     })
-  }, [editor])
+    editor.on('run', (event: any, b: any) => {
+      logger({ at: 'run', event, count: 1 })
+    })
+  }, [dispatch, editor, logger])
 
   useEffect(() => {
     // register buttons

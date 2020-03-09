@@ -7,15 +7,19 @@ import { api } from 'api'
 import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
+import { Segment } from 'models/segment'
 
 interface NewsletterEditorState {
   error: string
   currentTemplateVersionId?: number
   template?: Newsletter
+  log?: any
+  segments: Segment[]
 }
 
 const initialState: NewsletterEditorState = {
-  error: ''
+  error: '',
+  segments: []
 }
 
 const newsletterEditorSlice = createSlice({
@@ -44,6 +48,15 @@ const newsletterEditorSlice = createSlice({
     },
     switchNewsletterVersion(state, action: PayloadAction<number>) {
       state.currentTemplateVersionId = action.payload
+    },
+    getSegmentsRequest() {},
+    getSegmentsSuccess(state, action: PayloadAction<Segment[]>) {
+      state.segments = action.payload
+    },
+    getSegmentsFail(state, action: PayloadAction<string>) {},
+    // For finding the bug in grapes.js
+    logGrapesjsEvent(state, action: PayloadAction<any>) {
+      state.log = action.payload
     }
   }
 })
@@ -60,12 +73,14 @@ const {
 } = newsletterEditorSlice.actions
 const { getTemplateRequest, getTemplateSuccess, getTemplateFail } = newsletterEditorSlice.actions
 const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterEditorSlice.actions
+const { getSegmentsRequest, getSegmentsSuccess, getSegmentsFail } = newsletterEditorSlice.actions
 
 export const { clearNewsletterTemplate, switchNewsletterVersion } = newsletterEditorSlice.actions
+export const { logGrapesjsEvent } = newsletterEditorSlice.actions
 
 export const newsletterEditorReducer = newsletterEditorSlice.reducer
 
-export const getNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
+export const getNewsletterTemplate = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(getTemplateRequest())
     const response = await api.emailTemplates.getTemplate({
@@ -128,17 +143,55 @@ export const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch,
   }
 }
 
-export const sendNewsletterEmailExample = (email: string): AppThunk => async (
+export const sendNewsletterEmailExample = (email: string, subject: string): AppThunk => async (
   dispatch,
   getState
 ) => {
   try {
     dispatch(sendEmailRequest())
     const templateId = getState().newsletterEditor.template?.id
-    await api.emailSender.sendEmails({
+    await api.emailSender.sendTestEmail({
       sendEmailsDto: {
         recipients: [email],
-        emailTemplateId: templateId
+        emailTemplateId: templateId,
+        emailSubject: subject
+      }
+    })
+    dispatch(sendEmailSuccess())
+    message.success(i18n.t('common.message.email-sent'), 5)
+    return true
+  } catch (err) {
+    dispatch(sendEmailFail(err.toString()))
+    return false
+  }
+}
+
+// TODO: consider lazy loading
+export const getSegmentsForEmail = (): AppThunk => async dispatch => {
+  try {
+    dispatch(getSegmentsRequest())
+    const response = await api.segments.getSegments({
+      pageSize: 10000
+    })
+    const segments: any = response.result?.map(s => ({ ...s, id: '' + s.id }))
+    dispatch(getSegmentsSuccess(segments ?? []))
+  } catch (err) {
+    dispatch(getSegmentsFail(err.toString()))
+  }
+}
+
+export const sendNewsletterEmailToSegment = (
+  segmentId: number,
+  subject: string
+): AppThunk => async (dispatch, getState) => {
+  try {
+    const templateId = getState().newsletterEditor.template?.id
+    dispatch(sendEmailRequest())
+    await api.emailSender.sendEmailToSegment({
+      sendEmailToSegmentDto: {
+        emailSubject: subject,
+        emailTemplateId: templateId,
+        segmentId: segmentId
       }
     })
     dispatch(sendEmailSuccess())
