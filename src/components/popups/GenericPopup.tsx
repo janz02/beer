@@ -49,28 +49,34 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
   const okButtonProps: NativeButtonProps = { loading }
   let title = ''
   let okText = ''
-  if (type === 'delete') {
-    okButtonProps.danger = true
-    okButtonProps.icon = <DeleteFilled />
-    title = t(`common.popup.delete-title`)
-    okText = t(`common.delete`)
-  } else if (type === 'discard') {
-    okButtonProps.danger = true
-    okButtonProps.icon = <CloseOutlined />
-    title = t(`common.popup.discard-title`)
-    okText = t(`common.discard`)
-  } else if (type === 'save') {
-    okButtonProps.icon = <SaveFilled />
-    title = t(`common.popup.save-title`)
-    okText = t(`common.save`)
-  } else if (type === 'confirm') {
-    okButtonProps.icon = <CheckOutlined />
-    title = t(`common.popup.confirm-title`)
-    okText = t(`common.confirm`)
-  } else if (type === 'restore') {
-    okButtonProps.icon = <CheckOutlined />
-    title = t(`common.popup.restore-title`)
-    okText = t(`common.restore`)
+  switch (type) {
+    case 'delete':
+      okButtonProps.danger = true
+      okButtonProps.icon = <DeleteFilled />
+      title = t(`common.popup.delete-title`)
+      okText = t(`common.delete`)
+      break
+    case 'discard':
+      okButtonProps.danger = true
+      okButtonProps.icon = <CloseOutlined />
+      title = t(`common.popup.discard-title`)
+      okText = t(`common.discard`)
+      break
+    case 'save':
+      okButtonProps.icon = <SaveFilled />
+      title = t(`common.popup.save-title`)
+      okText = t(`common.save`)
+      break
+    case 'confirm':
+      okButtonProps.icon = <CheckOutlined />
+      title = t(`common.popup.confirm-title`)
+      okText = t(`common.confirm`)
+      break
+    case 'restore':
+      okButtonProps.icon = <CheckOutlined />
+      title = t(`common.popup.restore-title`)
+      okText = t(`common.restore`)
+      break
   }
 
   const handleOk = async (e: React.MouseEvent<HTMLElement>): Promise<void> => {
