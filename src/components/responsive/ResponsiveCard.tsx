@@ -16,7 +16,6 @@ export interface ResponsiveCardProps extends CardProps {
   wide?: boolean
   extraWide?: boolean
   fullWidth?: boolean
-  flexibleHeight?: boolean
 }
 
 export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
@@ -32,7 +31,6 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
     wide,
     extraWide,
     fullWidth,
-    flexibleHeight,
     ...rest
   } = props
   const isMobile = useIsMobile()
@@ -67,7 +65,6 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
         className={
           `r-card ` +
           `${isMobile ? 'r-card--mobile ' : ''}` +
-          `${flexibleHeight ? 'r-card--flexible-height ' : ''}` +
           `${forTable ? 'as-table-wrapper ' : ''}`
         }
       >

@@ -189,10 +189,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       <Col span={18}>
         <ResponsiveCard
           floatingTitle={t('coupon-create.editor-title')}
-          extra={couponActionButtons}
+          innerOptions={couponActionButtons}
           paddedBottom
           fullWidth
-          flexibleHeight
         >
           <Form
             name="coupon-editor-form"
@@ -297,7 +296,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
       <Col span={6} className="comment-col">
         {!displayEditor && (
-          <ResponsiveCard innerTitle={t('coupon-create.status-title')} paddedBottom flexibleHeight>
+          <ResponsiveCard innerTitle={t('coupon-create.status-title')} paddedBottom>
             <Form
               name="coupon-editor-comment-form"
               form={commentForm}
