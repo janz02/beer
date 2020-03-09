@@ -44,7 +44,9 @@ export const config: Configuration = new Configuration({
           })
           console.error('The server is currently unavailable')
           console.table(ctx.response)
-        } else if (ctx.response.status >= 400) {
+        }
+        // In case of the refresh endpoint don't display errors.
+        else if (ctx.response.status >= 400 && !ctx.url.endsWith('Auth/Refresh')) {
           ctx.response.json().then((x: RequestError) => {
             notification.error({
               message: x.ErrorKey ? i18n.t(x.ErrorKey) : x.Message,
