@@ -1,3 +1,4 @@
+import { InformationApi } from './swagger/apis/InformationApi'
 import { CashierApi } from './swagger/apis/CashierApi'
 import { Configuration } from './swagger/runtime'
 import {
@@ -73,5 +74,6 @@ export const api = {
   emailSender: new EmailSenderApi(config),
   emailTemplates: new EmailTemplatesApi(config),
   segments: new SegmentsApi(config),
-  cashier: new CashierApi(config)
+  cashier: new CashierApi(config),
+  information: new InformationApi(config)
 }

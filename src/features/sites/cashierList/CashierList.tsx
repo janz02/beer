@@ -80,7 +80,6 @@ export const CashierList: FC<CashierListProps> = props => {
     <>
       <ResponsiveCard
         forTable
-        floatingTitle={t('cashier-list.table-title')}
         innerTitle={t('cashier-list.table-title')}
         innerOptions={headerOptions}
         paddedBottom

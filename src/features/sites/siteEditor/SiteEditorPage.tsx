@@ -55,7 +55,9 @@ export const SiteEditorPage: FC = () => {
         site={site}
         id={siteId}
       />
+
       <CashierList onOpenEditor={openEditor} />
+
       <CashierEditor
         params={editorParams}
         onExit={() => setEditorParams({ ...editorParams, visible: false })}

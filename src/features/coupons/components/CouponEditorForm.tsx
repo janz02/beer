@@ -4,7 +4,6 @@ import {
   Form,
   Input,
   Button,
-  Card,
   Select,
   InputNumber,
   DatePicker,
@@ -16,15 +15,17 @@ import {
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
-import { useIsMobile, useCommonFormRules } from 'hooks'
+import { useCommonFormRules } from 'hooks'
 import { Coupon } from 'models/coupon'
 import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
 import { getCategories } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
-import { DeleteOutlined } from '@ant-design/icons'
+import { DeleteFilled, CheckOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import { deleteCouponComment } from '../couponEditor/couponEditorSlice'
 import { Link } from 'react-router-dom'
 import { updateCouponStatus } from '../couponView/couponViewSlice'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import Title from 'antd/lib/typography/Title'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -43,7 +44,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { categories } = useSelector((state: RootState) => state.coupons)
   const [submitable, setSubmitable] = useState(false)
   const rule = useCommonFormRules()
-  const isMobile = useIsMobile()
 
   useEffect(() => {
     dispatch(getCategories())
@@ -94,14 +94,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       coupon &&
       coupon.state !== CouponState.Closed &&
       coupon.state !== CouponState.Archived)
-  const formLayout = isMobile ? 'vertical' : 'horizontal'
-  const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: { span: 4 },
-          wrapperCol: { span: 14 }
-        }
-      : null
 
   const handleSubmit = (values: any): void => {
     handleCouponSave &&
@@ -113,71 +105,82 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       })
   }
 
-  const actionButton = (couponState: CouponState, buttonText: string): JSX.Element => (
-    <Popconfirm
-      title={t('coupon-create.state-action-confirm-message')}
-      onConfirm={() => {
-        coupon &&
-          coupon.id &&
-          dispatch(updateCouponStatus(coupon.id, couponState, commentForm.getFieldsValue().comment))
-      }}
-      okText={t('common.ok')}
-      cancelText={t('common.cancel')}
-    >
-      <Button>{buttonText}</Button>
-    </Popconfirm>
+  const handleStatusSubmit = (values: any): void => {
+    // TODO: integrate
+    console.log(values)
+    // coupon &&
+    //   coupon.id &&
+    //   dispatch(updateCouponStatus(coupon.id, values.couponState, values.comment))
+  }
+
+  const couponEditButton = (
+    <>
+      {!displayEditor && (
+        <div className="coupon-editor-form__actions">
+          {coupon && coupon.state !== CouponState.Closed && coupon.state !== CouponState.Archived && (
+            <Button type="primary" htmlType="button">
+              <Link to={`/coupon/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
+            </Button>
+          )}
+        </div>
+      )}
+    </>
   )
-  const couponActions = (): JSX.Element => {
-    let statusButtons = <></>
+
+  const couponStatusDropdown = (): JSX.Element => {
     switch (coupon?.state) {
       case CouponState.Created:
-        statusButtons = (
-          <>
-            {actionButton(CouponState.Accepted, t('coupon-create.states.accept'))}
-            {actionButton(CouponState.Rejected, t('coupon-create.states.reject'))}
-            {actionButton(CouponState.Waiting, t('coupon-create.states.wait'))}
-          </>
+        return (
+          <Select>
+            <Select.Option key={CouponState.Accepted} value={CouponState.Accepted}>
+              {t('coupon-create.states.accept')}
+            </Select.Option>
+            <Select.Option key={CouponState.Rejected} value={CouponState.Rejected}>
+              {t('coupon-create.states.reject')}
+            </Select.Option>
+            <Select.Option key={CouponState.Waiting} value={CouponState.Waiting}>
+              {t('coupon-create.states.wait')}
+            </Select.Option>
+          </Select>
         )
-        break
       case CouponState.Accepted:
       case CouponState.Rejected:
       case CouponState.Waiting:
-        statusButtons = actionButton(CouponState.Closed, t('coupon-create.states.close'))
-        break
+        return (
+          <Select>
+            <Select.Option key={CouponState.Closed} value={CouponState.Closed}>
+              {t('coupon-create.states.close')}
+            </Select.Option>
+          </Select>
+        )
       case CouponState.Closed:
-        statusButtons = actionButton(CouponState.Archived, t('coupon-create.states.archive'))
-        break
+        return (
+          <Select>
+            <Select.Option key={CouponState.Archived} value={CouponState.Archived}>
+              {t('coupon-create.states.archive')}
+            </Select.Option>
+          </Select>
+        )
       default:
-        break
+        return <Select />
     }
-
-    return (
-      <>
-        {!displayEditor && (
-          <div className="coupon-editor-form__actions">
-            {statusButtons}
-            {coupon &&
-              coupon.state !== CouponState.Closed &&
-              coupon.state !== CouponState.Archived && (
-                <Button type="primary" htmlType="button">
-                  <Link to={`/coupon/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
-                </Button>
-              )}
-          </div>
-        )}
-      </>
-    )
   }
 
   return (
-    <Card className="coupon-editor-form" title={t('coupon-create.editor')} extra={couponActions()}>
-      <Row>
-        <Col span={18}>
+    <Row className="coupon-editor-form">
+      <Col span={18}>
+        <ResponsiveCard
+          floatingTitle={t('coupon-create.editor-title')}
+          extra={couponEditButton}
+          paddedBottom
+          fullWidth
+          flexibleHeight
+        >
           <Form
             name="coupon-editor-form"
             onFinish={handleSubmit}
             form={form}
-            layout={formLayout}
+            layout="vertical"
             onFieldsChange={() => {
               const hasErrors = form.getFieldsError().some(field => field.errors.length)
               if (submitable === hasErrors) {
@@ -185,24 +188,15 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               }
             }}
           >
-            <Form.Item
-              name="name"
-              label={t('coupon-create.field.name')}
-              rules={[rule.required()]}
-              {...formItemLayout}
-            >
+            <Form.Item name="name" label={t('coupon-create.field.name')} rules={[rule.required()]}>
               <Input disabled={!displayEditor} />
             </Form.Item>
 
-            <Form.Item
-              name="description"
-              label={t('coupon-create.field.description')}
-              {...formItemLayout}
-            >
+            <Form.Item name="description" label={t('coupon-create.field.description')}>
               <TextArea disabled={!displayEditor} />
             </Form.Item>
 
-            <Form.Item name="rank" label={t('coupon-create.field.rank')} {...formItemLayout}>
+            <Form.Item name="rank" label={t('coupon-create.field.rank')}>
               <Select disabled={!displayEditor}>
                 {Object.keys(CouponRank).map(x => (
                   <Select.Option key={x} value={x}>
@@ -212,11 +206,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               </Select>
             </Form.Item>
 
-            <Form.Item
-              name="categoryId"
-              label={t('coupon-create.field.category')}
-              {...formItemLayout}
-            >
+            <Form.Item name="categoryId" label={t('coupon-create.field.category')}>
               <Select disabled={!displayEditor}>
                 {categories &&
                   categories.map(x => (
@@ -227,11 +217,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               </Select>
             </Form.Item>
 
-            <Form.Item
-              name="type"
-              label={t('coupon-create.field.discount-type')}
-              {...formItemLayout}
-            >
+            <Form.Item name="type" label={t('coupon-create.field.discount-type')}>
               <Select disabled={!displayEditor}>
                 {Object.keys(CouponType).map(x => (
                   <Select.Option key={x} value={x}>
@@ -255,47 +241,29 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   }
                 })
               ]}
-              {...formItemLayout}
             >
               <InputNumber disabled={!displayEditor} min={1} />
             </Form.Item>
 
-            <Form.Item
-              name="startDate"
-              label={t('coupon-create.field.distribution-start-date')}
-              {...formItemLayout}
-            >
+            <Form.Item name="startDate" label={t('coupon-create.field.distribution-start-date')}>
               <DatePicker disabled={!displayEditor} />
             </Form.Item>
 
-            <Form.Item
-              name="endDate"
-              label={t('coupon-create.field.distribution-end-date')}
-              {...formItemLayout}
-            >
+            <Form.Item name="endDate" label={t('coupon-create.field.distribution-end-date')}>
               <DatePicker disabled={!displayEditor} />
             </Form.Item>
 
-            <Form.Item
-              name="expireDate"
-              label={t('coupon-create.field.expiration-date')}
-              {...formItemLayout}
-            >
+            <Form.Item name="expireDate" label={t('coupon-create.field.expiration-date')}>
               <DatePicker disabled={!displayEditor} />
             </Form.Item>
 
-            <Form.Item
-              name="couponCount"
-              label={t('coupon-create.field.coupon-count')}
-              {...formItemLayout}
-            >
+            <Form.Item name="couponCount" label={t('coupon-create.field.coupon-count')}>
               <InputNumber disabled={!displayEditor} min={1} />
             </Form.Item>
 
             <Form.Item
               name="minimumShoppingValue"
               label={t('coupon-create.field.minimum-shopping-value')}
-              {...formItemLayout}
             >
               <InputNumber disabled={!displayEditor} min={1} />
             </Form.Item>
@@ -306,22 +274,48 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               </Button>
             )}
           </Form>
-        </Col>
-        <Col span={6}>
-          {!displayEditor && (
-            <Form name="coupon-editor-comment-form" form={commentForm}>
+        </ResponsiveCard>
+      </Col>
+
+      <Col span={6} className="comment-col">
+        {!displayEditor && (
+          <ResponsiveCard innerTitle={t('coupon-create.status-title')} paddedBottom flexibleHeight>
+            <Form
+              name="coupon-editor-comment-form"
+              form={commentForm}
+              layout="vertical"
+              onFinish={handleStatusSubmit}
+            >
+              <Form.Item name="couponState">{couponStatusDropdown()}</Form.Item>
+
               <Form.Item name="comment" label={t('coupon-create.field.comment')}>
                 <TextArea />
               </Form.Item>
+
+              <Form.Item className="actions">
+                <Button type="primary" htmlType="submit">
+                  {t('coupon-create.comment.save')}
+                </Button>
+              </Form.Item>
             </Form>
-          )}
+          </ResponsiveCard>
+        )}
+
+        <div className="comment-col__comments">
+          <Title level={3}>{t('coupon-editor.timeline-title')}</Title>
           <Timeline>
             {coupon &&
               coupon.comments &&
               coupon.comments.map(x => (
-                <Timeline.Item key={x.id}>
-                  {x.comment}
-                  &nbsp;
+                <Timeline.Item
+                  key={x.id}
+                  color="#08979C"
+                  dot={
+                    <div className="time-line-dot-check">
+                      <CheckOutlined />
+                    </div>
+                  }
+                >
                   <Popconfirm
                     title={t('coupon-editor.comment-delete-confirm-message')}
                     onConfirm={() => {
@@ -330,15 +324,24 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     okText={t('common.ok')}
                     cancelText={t('common.cancel')}
                   >
-                    <Button danger size="small">
-                      <DeleteOutlined />
-                    </Button>
+                    <div className="timeline-item__title">
+                      2020.01.30 &nbsp;
+                      <strong>
+                        Waiting <ArrowRightOutlined /> Approved
+                      </strong>
+                    </div>
+                    <div className="timeline-item__body text-faded">
+                      {x.comment} - Lugosi Boglárka
+                      <Button size="small" type="link">
+                        <DeleteFilled />
+                      </Button>
+                    </div>
                   </Popconfirm>
                 </Timeline.Item>
               ))}
           </Timeline>
-        </Col>
-      </Row>
-    </Card>
+        </div>
+      </Col>
+    </Row>
   )
 }
