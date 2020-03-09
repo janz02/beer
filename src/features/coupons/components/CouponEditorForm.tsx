@@ -44,6 +44,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { categories } = useSelector((state: RootState) => state.coupons)
   const [submitable, setSubmitable] = useState(false)
   const rule = useCommonFormRules()
+  // TODO: integrate, use property of the coupon.
+  const [couponActive, setCouponActive] = useState(true)
 
   useEffect(() => {
     dispatch(getCategories())
@@ -113,13 +115,29 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     //   dispatch(updateCouponStatus(coupon.id, values.couponState, values.comment))
   }
 
-  const couponEditButton = (
+  const handleCouponActivate = (): void => {
+    // TODO: integrate
+    setCouponActive(!couponActive)
+  }
+
+  const couponActionButtons = (
     <>
       {!displayEditor && (
         <div className="coupon-editor-form__actions">
           {coupon && coupon.state !== CouponState.Closed && coupon.state !== CouponState.Archived && (
             <Button type="primary" htmlType="button">
               <Link to={`/coupon/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
+            </Button>
+          )}
+          {coupon && coupon.state === CouponState.Accepted && (
+            <Button
+              type="primary"
+              htmlType="button"
+              onClick={() => {
+                handleCouponActivate()
+              }}
+            >
+              {couponActive ? t('coupon-create.inactivate') : t('coupon-create.activate')}
             </Button>
           )}
         </div>
@@ -171,7 +189,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       <Col span={18}>
         <ResponsiveCard
           floatingTitle={t('coupon-create.editor-title')}
-          extra={couponEditButton}
+          extra={couponActionButtons}
           paddedBottom
           fullWidth
           flexibleHeight

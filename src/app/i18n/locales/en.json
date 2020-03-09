@@ -86,6 +86,7 @@
     "list-title": "Coupon categories"
   },
   "coupon-create": {
+    "activate": "Activate",
     "create": "Create",
     "create-coupon-success": "Creating a coupon was successful.",
     "edit": "Edit",
@@ -107,6 +108,7 @@
       "name": "Name",
       "rank": "Rank"
     },
+    "inactivate": "Inactivate",
     "states": {
       "accept": "Accept",
       "archive": "Archive",

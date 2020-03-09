@@ -86,6 +86,7 @@
     "list-title": "Kupon kategóriák"
   },
   "coupon-create": {
+    "activate": "Aktiválás",
     "create": "Létrehozás",
     "create-coupon-success": "Sikeres kupon létrehozás.",
     "edit": "Szerkesztés",
@@ -107,6 +108,7 @@
       "name": "Név",
       "rank": "Rang"
     },
+    "inactivate": "Inaktiválás",
     "states": {
       "accept": "Elfogadás",
       "archive": "Archiválás",
