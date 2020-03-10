@@ -6,6 +6,7 @@ import { Profile } from 'models/profile'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { Partner } from 'models/partner'
 import { history } from 'router/router'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
 
 export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
@@ -19,6 +20,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   const { handleProfileSave, loading, profile, editable, partner } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
+  const [modified, setModified] = useState(false)
   const [submitable, setSubmitable] = useState(false)
   const [passwordHelpVisible, setPasswordHelpVisible] = useState(false)
   const rule = useCommonFormRules()
@@ -27,6 +29,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
     handleProfileSave({
       ...values
     })
+    setModified(false)
   }
 
   // TODO: revisit this problem after upgrading andt package.
@@ -52,6 +55,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
 
   return (
     <ResponsiveCard floatingTitle={t('profile.editor-title')}>
+      <NavigationAlert when={modified} />
       <Form
         name="profile-editor-form"
         onFinish={handleSubmit}
@@ -59,6 +63,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         layout="vertical"
         onFieldsChange={() => {
           const hasErrors = form.getFieldsError().some(field => field.errors.length)
+          setModified(true)
           if (submitable === hasErrors) {
             setSubmitable(!submitable)
           }
