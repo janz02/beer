@@ -1,17 +1,12 @@
-import React, { FC, useEffect } from 'react'
-import { Modal, Form, Input } from 'antd'
+import React, { FC, useEffect, useMemo } from 'react'
+import { Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { getCategory, clearCategoryEditor, saveCategory } from './categoryEditorSlice'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
-import { FormProps, FormLayout } from 'antd/lib/form/Form'
-import { useIsMobile, useCommonFormRules } from 'hooks'
+import { useCommonFormRules } from 'hooks'
 import { Category } from 'models/category'
-
-enum EditorMode {
-  EDIT = 'edit',
-  CREATE = 'create'
-}
+import { GenericModalForm } from 'components/popups/GenericModalForm'
 
 export interface CategoryEditorParams {
   visible?: boolean
@@ -30,39 +25,19 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
   const { visible, categoryId: id, isNew } = params
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const [form] = Form.useForm()
-  const { category, error } = useSelector((state: RootState) => state.categoryEditor)
-  const isMobile = useIsMobile()
+  const { category } = useSelector((state: RootState) => state.categoryEditor)
   const rule = useCommonFormRules()
 
-  const mode = isNew || id === ('undefined' as any) ? EditorMode.CREATE : EditorMode.EDIT
+  const initialValues = useMemo(() => ({ name: category?.name }), [category])
 
   useEffect(() => {
-    if (id && mode === EditorMode.EDIT) {
-      dispatch(getCategory({ id }))
-    }
-  }, [dispatch, id, mode])
-
-  useEffect(() => {
-    if (!visible) return
-    form.setFieldsValue({ name: category?.name })
-  }, [category, form, visible])
+    id && dispatch(getCategory({ id }))
+  }, [dispatch, id])
 
   const afterCloseExtended = (): void => {
-    // clear the editor after the exit animation has finished
     afterClose()
     dispatch(clearCategoryEditor())
   }
-
-  const modalTitle =
-    mode === EditorMode.EDIT ? t('coupon-category.editor-edit') : t('coupon-category.editor-create')
-
-  const formLayout: FormLayout = isMobile ? 'vertical' : 'horizontal'
-  const formItemLayout: Partial<FormProps> = isMobile
-    ? {}
-    : {
-        wrapperCol: { span: 16 }
-      }
 
   const onSave = async (values: Category): Promise<void> => {
     const newCategory: Category = { id, name: values.name }
@@ -70,29 +45,30 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
     onExit()
   }
 
+  const modalTitle = isNew ? t('coupon-category.editor-create') : t('coupon-category.editor-edit')
+
   return (
-    <Modal
-      forceRender
-      title={modalTitle}
-      visible={visible}
-      okText={t('common.save')}
-      onOk={() => form.submit()}
-      onCancel={onExit}
-      afterClose={afterCloseExtended}
-      destroyOnClose
+    <GenericModalForm
+      modalProps={{
+        visible: visible,
+        title: modalTitle,
+        okText: t('common.save'),
+        afterClose: afterCloseExtended,
+        onCancel: onExit
+      }}
+      formProps={{
+        name: 'category-editor',
+        onFinish: onSave
+      }}
+      initialValues={initialValues}
     >
-      <Form
-        form={form}
-        name="category-editor"
-        {...formItemLayout}
-        layout={formLayout}
-        onFinish={onSave}
+      <Form.Item
+        label={t('coupon-category.field.name')}
+        name="name"
+        rules={[rule.required(), rule.max(20)]}
       >
-        <Form.Item label={t('coupon-category.field.name')} name="name" rules={[rule.required()]}>
-          <Input maxLength={20} />
-        </Form.Item>
-      </Form>
-      <div className="category-modal__error-msg">{error}</div>
-    </Modal>
+        <Input />
+      </Form.Item>
+    </GenericModalForm>
   )
 }

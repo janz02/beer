@@ -33,6 +33,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/coupon/:id" component={CouponViewPage} />
     <PrivateRoute exact path="/coupon/:id/edit" component={CouponEditorPage} />
     <PrivateRoute exact path="/categories" component={CategoryPage} />
+    <PrivateRoute exact path="/categories/:id" component={CategoryPage} />
     <PrivateRoute exact path="/partner" component={PartnerEditorPage} />
     <PrivateRoute exact path="/profile" component={ProfileEditorPage} />
     <PrivateRoute exact path="/sites" component={SitesListPage} />
