@@ -10,6 +10,7 @@ import { NewsLetterEditorHeader, NewsLetterEditorHeaderProps } from './NewsLette
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { useCommonFormRules } from 'hooks'
 import { Segment } from 'models/segment'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
 const EDITOR_SELECTOR = 'pkm-grapesjs'
 
 export interface NewsletterEditorProps {
@@ -42,7 +43,6 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
-  const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
   const [visibleRevertPopup, setVisibleRevertPopup] = useState(false)
   const [sendSamplePopup, setSendSamplePopup] = useState<{
     visible?: boolean
@@ -77,6 +77,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     isTemplateModified,
     template,
     currentTemplateVersionId,
+    handleExit,
     handleVersionPreviewSwitch: (id: number) => {
       if (isTemplateModified) {
         setSwitchPopup({ visible: true, versionId: id })
@@ -86,13 +87,6 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     },
     handleRevert: () => setVisibleRevertPopup(true),
     handleSaveVersion: () => handleSaveVersion(getEditorContent()),
-    handleExit: () => {
-      if (isTemplateModified) {
-        setVisibleDiscardPopup(true)
-      } else {
-        handleExit()
-      }
-    },
     handleSendSample: () => setSendSamplePopup({ ...sendSamplePopup, visible: true }),
     handleSendSegment: () => {
       handleGetSegments()
@@ -102,22 +96,16 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
 
   return (
     <>
+      <NavigationAlert when={isTemplateModified} />
+
       <Spin className="nle-spinner" spinning={loading} size="large" />
+
       <div hidden={loading} className="nle">
         <NewsLetterEditorHeader className="nle__header" {...headerProps} />
 
         <div className="nle__containter">
           <div id={EDITOR_SELECTOR} />
         </div>
-
-        <GenericPopup
-          type="discard"
-          visible={visibleDiscardPopup}
-          onOk={handleExit}
-          onCancel={() => setVisibleDiscardPopup(false)}
-        >
-          {t('newsletter.popup.discard-msg')}
-        </GenericPopup>
 
         <GenericPopup
           type="discard"
