@@ -9,7 +9,7 @@
   $r-card-vertical-padding: 15px;
 
   .r-card {
-    height: 77.5vh;
+    height: inherit;
     margin: auto;
     overflow: hidden;
     border-radius: 1rem;
@@ -19,15 +19,13 @@
       padding: 0;
     }
 
-    &--flexible-height {
-      height: inherit;
-    }
-
     .ant-card-body {
       padding: $r-card-vertical-padding 60px;
     }
 
     &.as-table-wrapper {
+      height: 77.5vh;
+
       .ant-card-body {
         height: calc(100% - 0.5rem);
         padding: 0;
