@@ -3,6 +3,8 @@ import { Form, Input, Button, Card, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Partner } from 'models/partner'
 import { useIsMobile, useCommonFormRules } from 'hooks'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
 
 export interface PartnerEditorFormProps {
   handlePartnerSave: (values: any) => void
@@ -14,6 +16,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const { handlePartnerSave, loading, partner } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
+  const [modified, setModified] = useState(false)
   const [submitable, setSubmitable] = useState(false)
   const rule = useCommonFormRules()
   const isMobile = useIsMobile()
@@ -22,7 +25,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const formItemLayout =
     formLayout === 'horizontal'
       ? {
-          labelCol: { span: 4 },
+          labelCol: { span: 6 },
           wrapperCol: { span: 14 }
         }
       : null
@@ -34,6 +37,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       taxNumber: +values.taxNumber,
       bankAccount: +values.bankAccount
     })
+    setModified(false)
   }
 
   // TODO: revisit this problem after upgrading andt package.
@@ -56,10 +60,11 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       taxNumber: partner?.taxNumber?.toString(),
       bankAccount: partner?.bankAccount?.toString()
     })
-  }, [partner])
+  }, [form, partner])
 
   return (
-    <Card className="partner-editor-form" title={t('partner.editor-title')}>
+    <ResponsiveCard wide floatingTitle={t('partner.editor-title')}>
+      <NavigationAlert when={modified} />
       <Form
         name="partner-editor-form"
         onFinish={handleSubmit}
@@ -67,6 +72,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         layout={formLayout}
         onFieldsChange={() => {
           const hasErrors = form.getFieldsError().some(field => field.errors.length)
+          setModified(true)
           if (submitable === hasErrors) {
             setSubmitable(!submitable)
           }
@@ -130,6 +136,6 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
           {t('partner.save')}
         </Button>
       </Form>
-    </Card>
+    </ResponsiveCard>
   )
 }
