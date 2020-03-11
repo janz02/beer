@@ -21,7 +21,6 @@ export const BackButton: FC<BackButtonProps> = props => {
         type={primary ? 'primary' : 'default'}
         icon={<ArrowLeftOutlined />}
         shape="circle"
-        style={{ marginRight: '1rem', marginLeft: '0.5rem' }}
         {...btnProps}
       />
     </Tooltip>
