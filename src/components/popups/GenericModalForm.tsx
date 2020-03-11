@@ -56,9 +56,7 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
 
   useEffect(() => {
     if (!modalProps.visible) return
-    if (initialValues) {
-      setInitialFieldsValue({ ...initialValues })
-    }
+    setInitialFieldsValue({ ...initialValues })
   }, [initialValues, modalProps.visible, setInitialFieldsValue])
 
   useEffect(() => {
@@ -72,7 +70,7 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
   }
 
   return (
-    // TODO: investigate warning -> forceRender should have resolved the issue according to antd docs, but it didn't
+    // TODO: investigate warning -> forceRender should have resolved the issue according to antddocs, but it didn't
     // https://next.ant.design/components/form/#Why-get-form-warning-when-used-in-Modal
     <Modal
       forceRender

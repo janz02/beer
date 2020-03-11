@@ -70,7 +70,7 @@ export const getSites = (params: ListRequestParams = {}): AppThunk => async (
   try {
     const oldPagination = getState().siteList.pagination
     // TODO: integrate, remove partner get because it will be on the JWT.
-    const partner = await api.partner.getMyPartner()
+    const partner = await api.partner.getSelfPartner()
     const { result, ...pagination } = await api.sites.getSites({
       pageSize: oldPagination.pageSize,
       page: oldPagination.page,

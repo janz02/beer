@@ -65,7 +65,7 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
     // const userData = getState().auth.userData
     // TODO: The roles have changed, no more Partner contact. Do we need this check, still?
     // if (!userData.roles?.includes(Roles.Partner)) {
-    const profile = await api.partnerContacts.getMyPartnerContact()
+    const profile = await api.partnerContacts.getSelfPartnerContact()
     dispatch(getProfileSuccess(profile))
     // } else {
     // dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
@@ -81,7 +81,7 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
   try {
     // const userData = getState().auth.userData
     // if (userData.roles?.includes(Roles.PARTNER)) {
-    await api.partnerContacts.updateMyPartnerContact({
+    await api.partnerContacts.updateSelfPartnerContact({
       selfPartnerContactDto: { ...getState().profile.profile, ...profile }
     })
     dispatch(updateProfileSuccess())

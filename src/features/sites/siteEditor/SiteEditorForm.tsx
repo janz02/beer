@@ -33,7 +33,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
   } = useFormUtils()
 
   useEffect(() => {
-    site ? setInitialFieldsValue({ ...site }) : resetFormFields()
+    setInitialFieldsValue({ ...site })
   }, [resetFormFields, setInitialFieldsValue, site])
 
   const onSubmit = (values: Site): void => {

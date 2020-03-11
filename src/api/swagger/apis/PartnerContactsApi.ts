@@ -23,7 +23,7 @@ import {
     SelfPartnerContactDtoToJSON,
 } from '../models';
 
-export interface UpdateMyPartnerContactRequest {
+export interface UpdateSelfPartnerContactRequest {
     selfPartnerContactDto?: SelfPartnerContactDto;
 }
 
@@ -34,7 +34,7 @@ export class PartnerContactsApi extends runtime.BaseAPI {
 
     /**
      */
-    async getMyPartnerContactRaw(): Promise<runtime.ApiResponse<PartnerContactVm>> {
+    async getSelfPartnerContactRaw(): Promise<runtime.ApiResponse<PartnerContactVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -55,14 +55,14 @@ export class PartnerContactsApi extends runtime.BaseAPI {
 
     /**
      */
-    async getMyPartnerContact(): Promise<PartnerContactVm> {
-        const response = await this.getMyPartnerContactRaw();
+    async getSelfPartnerContact(): Promise<PartnerContactVm> {
+        const response = await this.getSelfPartnerContactRaw();
         return await response.value();
     }
 
     /**
      */
-    async updateMyPartnerContactRaw(requestParameters: UpdateMyPartnerContactRequest): Promise<runtime.ApiResponse<void>> {
+    async updateSelfPartnerContactRaw(requestParameters: UpdateSelfPartnerContactRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -86,8 +86,8 @@ export class PartnerContactsApi extends runtime.BaseAPI {
 
     /**
      */
-    async updateMyPartnerContact(requestParameters: UpdateMyPartnerContactRequest): Promise<void> {
-        await this.updateMyPartnerContactRaw(requestParameters);
+    async updateSelfPartnerContact(requestParameters: UpdateSelfPartnerContactRequest): Promise<void> {
+        await this.updateSelfPartnerContactRaw(requestParameters);
     }
 
 }

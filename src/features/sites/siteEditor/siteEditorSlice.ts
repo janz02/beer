@@ -229,7 +229,7 @@ export const saveSite = (site: Site, id?: number): AppThunk => async (dispatch, 
   dispatch(saveSiteRequest())
   try {
     // TODO: integrate, remove partner get because it will be on the JWT.
-    const partner = await api.partner.getMyPartner()
+    const partner = await api.partner.getSelfPartner()
 
     if (id) {
       await api.sites.updateSite({

@@ -60,7 +60,7 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
         onCancel: onExit
       }}
       formProps={{
-        name: 'category-editor',
+        name: 'cashier-editor',
         onFinish: onSave
       }}
       initialValues={cashier}

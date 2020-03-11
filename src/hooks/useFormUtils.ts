@@ -41,7 +41,7 @@ export const useFormUtils = (): UseFormUtils => {
   }, [form])
 
   const setInitialFieldsValue = useCallback((fields: any) => {
-    formRef.current.setFieldsValue(fields)
+    fields ? formRef.current.setFieldsValue(fields) : formRef.current.resetFields()
   }, [])
 
   const resetFormFields = useCallback((fields: any) => {

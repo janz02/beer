@@ -1675,17 +1675,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponUserCodeVmPaginatedResponse"
+                  "$ref": "#/components/schemas/ClaimedCouponCodeVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponUserCodeVmPaginatedResponse"
+                  "$ref": "#/components/schemas/ClaimedCouponCodeVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponUserCodeVmPaginatedResponse"
+                  "$ref": "#/components/schemas/ClaimedCouponCodeVm"
                 }
               }
             }
@@ -1719,6 +1719,7 @@
         "tags": [
           "CouponUserCodes"
         ],
+        "summary": "Returns claimed coupon codes",
         "operationId": "getMyClaimedCoupons",
         "responses": {
           "200": {
@@ -2194,7 +2195,7 @@
         "tags": [
           "PartnerContacts"
         ],
-        "operationId": "getMyPartnerContact",
+        "operationId": "getSelfPartnerContact",
         "responses": {
           "200": {
             "description": "Success",
@@ -2222,7 +2223,7 @@
         "tags": [
           "PartnerContacts"
         ],
-        "operationId": "updateMyPartnerContact",
+        "operationId": "updateSelfPartnerContact",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2245,7 +2246,7 @@
           "Partners"
         ],
         "summary": "Returns the details about the logged in contact's partner",
-        "operationId": "getMyPartner",
+        "operationId": "getSelfPartner",
         "responses": {
           "200": {
             "description": "Successful query",
@@ -2276,7 +2277,7 @@
           "Partners"
         ],
         "summary": "Updates the logged in contact's partner",
-        "operationId": "updateMyPartner",
+        "operationId": "updateSelfPartner",
         "requestBody": {
           "description": "New details of the partner to update",
           "content": {
@@ -3653,7 +3654,8 @@
           "BusinessPartnerManager",
           "PartnerContactApprover",
           "PartnerContactEditor",
-          "User"
+          "User",
+          "ServiceAccount"
         ],
         "type": "string"
       },
@@ -4217,53 +4219,15 @@
         },
         "additionalProperties": false
       },
-      "CouponUserCodeVm": {
+      "ClaimedCouponCodeVm": {
         "type": "object",
         "properties": {
-          "couponId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "userId": {
-            "type": "string",
-            "nullable": true
-          },
-          "couponCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "claimDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CouponUserCodeVmPaginatedResponse": {
-        "type": "object",
-        "properties": {
-          "result": {
+          "couponCodes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CouponUserCodeVm"
+              "type": "string"
             },
             "nullable": true
-          },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "from": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "to": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false

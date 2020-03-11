@@ -15,9 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
-    CouponUserCodeVmPaginatedResponse,
-    CouponUserCodeVmPaginatedResponseFromJSON,
-    CouponUserCodeVmPaginatedResponseToJSON,
+    ClaimedCouponCodeVm,
+    ClaimedCouponCodeVmFromJSON,
+    ClaimedCouponCodeVmToJSON,
     MyClaimedCouponVm,
     MyClaimedCouponVmFromJSON,
     MyClaimedCouponVmToJSON,
@@ -67,7 +67,7 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
      * Returns a list of couponcodes that have been claimed for coupon with an Id of couponId
      * Returns the claimed couponcodes for a coupon
      */
-    async getClaimedCouponsRaw(requestParameters: GetClaimedCouponsRequest): Promise<runtime.ApiResponse<CouponUserCodeVmPaginatedResponse>> {
+    async getClaimedCouponsRaw(requestParameters: GetClaimedCouponsRequest): Promise<runtime.ApiResponse<ClaimedCouponCodeVm>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
             throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling getClaimedCoupons.');
         }
@@ -87,19 +87,20 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CouponUserCodeVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ClaimedCouponCodeVmFromJSON(jsonValue));
     }
 
     /**
      * Returns a list of couponcodes that have been claimed for coupon with an Id of couponId
      * Returns the claimed couponcodes for a coupon
      */
-    async getClaimedCoupons(requestParameters: GetClaimedCouponsRequest): Promise<CouponUserCodeVmPaginatedResponse> {
+    async getClaimedCoupons(requestParameters: GetClaimedCouponsRequest): Promise<ClaimedCouponCodeVm> {
         const response = await this.getClaimedCouponsRaw(requestParameters);
         return await response.value();
     }
 
     /**
+     * Returns claimed coupon codes
      */
     async getMyClaimedCouponsRaw(): Promise<runtime.ApiResponse<Array<MyClaimedCouponVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -121,6 +122,7 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns claimed coupon codes
      */
     async getMyClaimedCoupons(): Promise<Array<MyClaimedCouponVm>> {
         const response = await this.getMyClaimedCouponsRaw();
