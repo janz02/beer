@@ -29,12 +29,12 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
     checkFieldsChange,
     resetFormFlags,
     setInitialFieldsValue,
-    resetFormFileds
+    resetFormFields
   } = useFormUtils()
 
   useEffect(() => {
-    site ? setInitialFieldsValue({ ...site }) : resetFormFileds()
-  }, [resetFormFileds, setInitialFieldsValue, site])
+    site ? setInitialFieldsValue({ ...site }) : resetFormFields()
+  }, [resetFormFields, setInitialFieldsValue, site])
 
   const onSubmit = (values: Site): void => {
     onSave({ ...values })

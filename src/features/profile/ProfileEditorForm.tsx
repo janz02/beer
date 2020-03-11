@@ -30,7 +30,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
     checkFieldsChange,
     resetFormFlags,
     setInitialFieldsValue,
-    resetFormFileds
+    resetFormFields
   } = useFormUtils()
 
   const handleSubmit = (values: any): void => {
@@ -45,8 +45,8 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
       ...profile,
       registerCode: partner?.registerCode
     })
-    resetFormFileds(['password', 'passwordAgain', 'oldPassword'])
-  }, [partner, profile, resetFormFileds, setInitialFieldsValue])
+    resetFormFields(['password', 'passwordAgain', 'oldPassword'])
+  }, [partner, profile, resetFormFields, setInitialFieldsValue])
 
   return (
     <ResponsiveCard floatingTitle={t('profile.editor-title')}>

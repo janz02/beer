@@ -10,7 +10,7 @@ export interface UseFormUtils {
   checkFieldsChange: () => void
   resetFormFlags: () => void
   setInitialFieldsValue: (fields: any) => void
-  resetFormFileds: (fields?: any) => void
+  resetFormFields: (fields?: any) => void
 }
 
 export const useFormUtils = (): UseFormUtils => {
@@ -44,7 +44,7 @@ export const useFormUtils = (): UseFormUtils => {
     formRef.current.setFieldsValue(fields)
   }, [])
 
-  const resetFormFileds = useCallback((fields: any) => {
+  const resetFormFields = useCallback((fields: any) => {
     formRef.current.resetFields(fields)
   }, [])
 
@@ -55,6 +55,6 @@ export const useFormUtils = (): UseFormUtils => {
     setInitialFieldsValue,
     checkFieldsChange,
     resetFormFlags,
-    resetFormFileds
+    resetFormFields
   }
 }
