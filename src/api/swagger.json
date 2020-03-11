@@ -3907,7 +3907,6 @@
         "enum": [
           "Created",
           "Accepted",
-          "Rejected",
           "Waiting",
           "Closed",
           "Archived"
