@@ -21,8 +21,10 @@
     overflow: hidden;
 
     &--name {
+      overflow: hidden;
       font-size: 1.1rem;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
