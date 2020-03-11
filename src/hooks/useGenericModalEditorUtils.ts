@@ -14,7 +14,7 @@ export interface UseGenericModalFormEditorProps {
 
 export interface UseGenericModalFormEditorUtils {
   editorParams: GenericModalFormEditorParams
-  routeToEditor: (id?: number) => void
+  routeToEditor: (requestDataId?: number) => void
   handleExit: () => void
   handleAfterClose: () => void
 }
@@ -29,8 +29,8 @@ export const useGenericModalFormEditorUtils = (
   })
 
   const routeToEditor = useCallback(
-    (id?: number): void => {
-      history.push(`${rootRoute}/${id ?? 'new'}`)
+    (requestDataId?: number): void => {
+      history.push(`${rootRoute}/${requestDataId ?? 'new'}`)
     },
     [rootRoute]
   )
