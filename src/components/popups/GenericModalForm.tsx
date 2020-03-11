@@ -1,9 +1,10 @@
-import React, { useEffect, FC, useState, useRef } from 'react'
+import React, { useEffect, FC } from 'react'
 import { Form, Modal, Spin } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
 import { FormProps } from 'antd/lib/form'
 import { useTranslation } from 'react-i18next'
 import { NavigationAlert } from './NavigationAlert'
+import { useFormUtils } from 'hooks/useFormUtils'
 
 export interface GenericModalFormProps {
   formProps: FormProps
@@ -43,29 +44,28 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
     disabledNavPrompt
   } = props
   const { t } = useTranslation()
-  const [form] = Form.useForm()
 
-  const [modified, setModified] = useState(false)
-  const [submitable, setSubmitable] = useState(false)
-
-  const formRef = useRef(form)
-  useEffect(() => {
-    formRef.current = form
-  }, [form])
+  const {
+    form,
+    submitable,
+    modified,
+    checkFieldsChange,
+    resetFormFlags,
+    setInitialFieldsValue
+  } = useFormUtils()
 
   useEffect(() => {
     if (!modalProps.visible) return
     if (initialValues) {
-      formRef.current.setFieldsValue({ ...initialValues })
+      setInitialFieldsValue({ ...initialValues })
     }
-  }, [initialValues, modalProps.visible])
+  }, [initialValues, modalProps.visible, setInitialFieldsValue])
 
   useEffect(() => {
     return () => {
-      setModified(false)
-      setSubmitable(false)
+      resetFormFlags()
     }
-  }, [modalProps.visible])
+  }, [modalProps.visible, resetFormFlags])
 
   const onOk = (): void => {
     form.submit()
@@ -82,8 +82,7 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
       okButtonProps={{ disabled: !submitable || !modified }}
       afterClose={() => {
         form.resetFields()
-        setModified(false)
-        setSubmitable(false)
+        resetFormFlags()
         modalProps?.afterClose?.()
       }}
     >
@@ -96,12 +95,7 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
           {...formProps}
           form={form}
           onFieldsChange={() => {
-            const hasErrors = form.getFieldsError().some(field => field.errors.length)
-            const hasModifications = Object.entries(form.getFieldsValue()).some(
-              ([key, value]) => initialValues[key] !== value
-            )
-            setModified(hasModifications)
-            setSubmitable(!hasErrors)
+            checkFieldsChange()
           }}
         >
           {children}

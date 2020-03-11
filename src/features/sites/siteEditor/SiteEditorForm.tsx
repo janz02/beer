@@ -1,11 +1,12 @@
-import React, { FC, useState, useEffect, useRef } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { useTranslation } from 'react-i18next'
 import { Site } from 'models/site'
 import { BackButton } from 'components/buttons/BackButton'
-import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
+import { useFormUtils } from 'hooks/useFormUtils'
 
 export interface SiteEditorFormProps {
   onSave: (values: Site) => void
@@ -18,37 +19,29 @@ export interface SiteEditorFormProps {
 export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
   const { onSave, loading, site, onExit } = props
   const { t } = useTranslation()
-  const [form] = Form.useForm()
-  const [submitable, setSubmitable] = useState(false)
-  const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
+
   const rule = useCommonFormRules()
 
-  // TODO: revert to this after antd upgrade
-  // useEffect(() => {
-  //   form.setFieldsValue({ ...site })
-  // }, [site, form])
-  const ref = useRef(form)
+  const {
+    form,
+    submitable,
+    modified,
+    checkFieldsChange,
+    resetFormFlags,
+    setInitialFieldsValue,
+    resetFormFileds
+  } = useFormUtils()
+
   useEffect(() => {
-    ref.current = form
-  }, [form])
-  useEffect(() => {
-    site ? ref.current.setFieldsValue({ ...site }) : ref.current.resetFields()
-  }, [site])
+    site ? setInitialFieldsValue({ ...site }) : resetFormFileds()
+  }, [resetFormFileds, setInitialFieldsValue, site])
 
   const onSubmit = (values: Site): void => {
     onSave({ ...values })
-    setSubmitable(false)
+    resetFormFlags()
   }
 
-  const onLeave = (): void => {
-    if (submitable) {
-      setVisibleDiscardPopup(true)
-    } else {
-      onExit()
-    }
-  }
-
-  const headerOptions = <BackButton onClick={onLeave} primary={!submitable} />
+  const headerOptions = <BackButton onClick={onExit} primary={!modified} />
 
   return (
     <>
@@ -57,16 +50,14 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
         innerOptions={headerOptions}
         paddedBottom
       >
+        <NavigationAlert when={modified} />
         <Form
           name="site-editor-form"
           onFinish={onSubmit}
           form={form}
           layout="vertical"
           onFieldsChange={() => {
-            const hasErrors = form.getFieldsError().some(field => field.errors.length)
-            if (submitable === hasErrors) {
-              setSubmitable(!submitable)
-            }
+            checkFieldsChange()
           }}
         >
           <Form.Item
@@ -74,7 +65,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
             label={t('site.field.name')}
             rules={[rule.required(), rule.max(100)]}
           >
-            <Input maxLength={100} />
+            <Input />
           </Form.Item>
 
           <Form.Item
@@ -90,13 +81,6 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
           </Button>
         </Form>
       </ResponsiveCard>
-
-      <GenericPopup
-        type="discard"
-        visible={visibleDiscardPopup}
-        onOk={onExit}
-        onCancel={() => setVisibleDiscardPopup(false)}
-      />
     </>
   )
 }

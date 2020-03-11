@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Form, Input, Button, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Partner } from 'models/partner'
 import { useIsMobile, useCommonFormRules } from 'hooks'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
+import { useFormUtils } from 'hooks/useFormUtils'
 
 export interface PartnerEditorFormProps {
   handlePartnerSave: (values: any) => void
@@ -15,11 +16,17 @@ export interface PartnerEditorFormProps {
 export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const { handlePartnerSave, loading, partner } = props
   const { t } = useTranslation()
-  const [form] = Form.useForm()
-  const [modified, setModified] = useState(false)
-  const [submitable, setSubmitable] = useState(false)
   const rule = useCommonFormRules()
   const isMobile = useIsMobile()
+
+  const {
+    form,
+    submitable,
+    modified,
+    checkFieldsChange,
+    resetFormFlags,
+    setInitialFieldsValue
+  } = useFormUtils()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
   const formItemLayout =
@@ -37,30 +44,17 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       taxNumber: +values.taxNumber,
       bankAccount: +values.bankAccount
     })
-    setModified(false)
+    resetFormFlags()
   }
 
-  // TODO: revisit this problem after upgrading andt package.
-  // https://github.com/ant-design/ant-design/issues/18983
-  // https://github.com/ant-design/ant-design/issues/20987
-  // This should work instead of the workaround below.
-  // useEffect(() => {
-  //   form.setFieldsValue({
-  //     ...partner
-  //   })
-  // }, [form, partner])
-  const formRef = useRef(form)
   useEffect(() => {
-    formRef.current = form
-  }, [form])
-  useEffect(() => {
-    formRef.current.setFieldsValue({
+    setInitialFieldsValue({
       ...partner,
       registrationNumber: partner?.registrationNumber?.toString(),
       taxNumber: partner?.taxNumber?.toString(),
       bankAccount: partner?.bankAccount?.toString()
     })
-  }, [form, partner])
+  }, [form, partner, setInitialFieldsValue])
 
   return (
     <ResponsiveCard wide floatingTitle={t('partner.editor-title')}>
@@ -71,11 +65,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         form={form}
         layout={formLayout}
         onFieldsChange={() => {
-          const hasErrors = form.getFieldsError().some(field => field.errors.length)
-          setModified(true)
-          if (submitable === hasErrors) {
-            setSubmitable(!submitable)
-          }
+          checkFieldsChange()
         }}
       >
         <Form.Item

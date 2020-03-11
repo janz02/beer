@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useCallback } from 'react'
+import React, { FC, useEffect } from 'react'
 import { SiteEditorForm } from './SiteEditorForm'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,15 +8,13 @@ import { Site } from 'models/site'
 import { history } from 'router/router'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { CashierList } from '../cashierList/CashierList'
-import { CashierEditor, CashierEditorParams } from '../cashierEditor/CashierEditor'
+import { CashierEditor } from '../cashierEditor/CashierEditor'
+import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 
 export const SiteEditorPage: FC = () => {
-  const { id } = useParams()
+  const { id, cashierId } = useParams()
   const dispatch = useDispatch()
   const { loadingSave, site } = useSelector((state: RootState) => state.siteEditor)
-  const [editorParams, setEditorParams] = useState<CashierEditorParams>({
-    visible: false
-  })
 
   const siteId = id ? +id : undefined
 
@@ -28,21 +26,19 @@ export const SiteEditorPage: FC = () => {
     siteId && dispatch(getSiteEditorData(siteId))
   }, [dispatch, siteId])
 
+  const {
+    editorParams,
+    routeToEditor,
+    handleExit,
+    handleAfterClose
+  } = useGenericModalFormEditorUtils({
+    dataId: cashierId,
+    rootRoute: `/sites/editor/${id}`
+  })
+
   const onSave = (site: Site): void => {
     dispatch(saveSite({ ...site }, siteId))
   }
-
-  const openEditor = useCallback(
-    (cashierId?: number, createNew?: boolean) => {
-      if (!cashierId && !createNew) {
-        return
-      }
-
-      setEditorParams({ visible: true, isNew: createNew, cashierId })
-      history.push(`/sites/editor/${id}/?cashierId=${cashierId}`)
-    },
-    [id]
-  )
 
   return (
     <ResponsivePage>
@@ -56,15 +52,9 @@ export const SiteEditorPage: FC = () => {
         id={siteId}
       />
 
-      <CashierList onOpenEditor={openEditor} />
+      <CashierList onOpenEditor={routeToEditor} />
 
-      <CashierEditor
-        params={editorParams}
-        onExit={() => setEditorParams({ ...editorParams, visible: false })}
-        afterClose={() => {
-          setEditorParams({ visible: false })
-        }}
-      />
+      <CashierEditor params={editorParams} onExit={handleExit} afterClose={handleAfterClose} />
     </ResponsivePage>
   )
 }

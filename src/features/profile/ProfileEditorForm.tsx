@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
@@ -7,6 +7,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { Partner } from 'models/partner'
 import { history } from 'router/router'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
+import { useFormUtils } from 'hooks/useFormUtils'
 
 export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
@@ -19,39 +20,33 @@ export interface ProfileEditorFormProps {
 export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   const { handleProfileSave, loading, profile, editable, partner } = props
   const { t } = useTranslation()
-  const [form] = Form.useForm()
-  const [modified, setModified] = useState(false)
-  const [submitable, setSubmitable] = useState(false)
   const [passwordHelpVisible, setPasswordHelpVisible] = useState(false)
   const rule = useCommonFormRules()
+
+  const {
+    form,
+    submitable,
+    modified,
+    checkFieldsChange,
+    resetFormFlags,
+    setInitialFieldsValue,
+    resetFormFileds
+  } = useFormUtils()
 
   const handleSubmit = (values: any): void => {
     handleProfileSave({
       ...values
     })
-    setModified(false)
+    resetFormFlags()
   }
 
-  // TODO: revisit this problem after upgrading andt package.
-  // https://github.com/ant-design/ant-design/issues/18983
-  // https://github.com/ant-design/ant-design/issues/20987
-  // This should work instead of the workaround below.
-  // useEffect(() => {
-  //   form.setFieldsValue({
-  //     ...profile
-  //   })
-  // }, [form, profile])
-  const formRef = useRef(form)
   useEffect(() => {
-    formRef.current = form
-  }, [form])
-  useEffect(() => {
-    formRef.current.setFieldsValue({
+    setInitialFieldsValue({
       ...profile,
       registerCode: partner?.registerCode
     })
-    formRef.current.resetFields(['password', 'passwordAgain', 'oldPassword'])
-  }, [partner, profile])
+    resetFormFileds(['password', 'passwordAgain', 'oldPassword'])
+  }, [partner, profile, resetFormFileds, setInitialFieldsValue])
 
   return (
     <ResponsiveCard floatingTitle={t('profile.editor-title')}>
@@ -62,11 +57,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         form={form}
         layout="vertical"
         onFieldsChange={() => {
-          const hasErrors = form.getFieldsError().some(field => field.errors.length)
-          setModified(true)
-          if (submitable === hasErrors) {
-            setSubmitable(!submitable)
-          }
+          checkFieldsChange()
         }}
       >
         <Form.Item

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { useCommonFormRules } from 'hooks'
 import { Category } from 'models/category'
+import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 
 export interface CategoryEditorParams {
@@ -15,14 +16,15 @@ export interface CategoryEditorParams {
 }
 
 interface CategoryEditorProps {
-  params: CategoryEditorParams
+  params: GenericModalFormEditorParams
   onExit: () => void
   afterClose: () => void
 }
 
 export const CategoryEditor: FC<CategoryEditorProps> = props => {
   const { params, onExit, afterClose } = props
-  const { visible, categoryId: id, isNew } = params
+  const { visible, id, isNew } = params
+
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { category } = useSelector((state: RootState) => state.categoryEditor)
