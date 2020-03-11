@@ -41,8 +41,8 @@ export const NewsletterEditorPage: FC = () => {
     dispatch(clearNewsletterTemplate())
   }
 
-  const onSaveVersion = (template: string): void => {
-    dispatch(saveNewsletterTemplateVersion(template))
+  const onSaveVersion = async (template: string): Promise<any> => {
+    await dispatch(saveNewsletterTemplateVersion(template))
   }
 
   const onSendSample: any = async (email: string, subject: string) => {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Select, Button, Tooltip } from 'antd'
 import {
   CloseOutlined,
@@ -20,7 +20,7 @@ export interface NewsLetterEditorHeaderProps {
   isTemplateModified: boolean
   isLatestTemplate: boolean
   handleSaveVersion: () => void
-  handleRevert: () => void
+  handleRestoreVersion: () => void
   handleVersionPreviewSwitch: (id: number) => void
   handleExit: () => void
   handleSendSample: () => void
@@ -36,7 +36,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
     isLatestTemplate,
     isTemplateModified,
     handleVersionPreviewSwitch,
-    handleRevert,
+    handleRestoreVersion,
     handleExit,
     handleSaveVersion,
     handleSendSample,
@@ -44,6 +44,14 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
   } = props
 
   const { t } = useTranslation()
+
+  const [saving, setSaving] = useState(false)
+
+  const handleSave = async (): Promise<any> => {
+    setSaving(true)
+    await handleSaveVersion()
+    setSaving(false)
+  }
 
   return (
     <div className={`${className} nleh`}>
@@ -74,7 +82,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
         )}
         {!isLatestTemplate && (
           <span>
-            <Button icon={<EditOutlined />} onClick={handleRevert}>
+            <Button icon={<EditOutlined />} onClick={handleRestoreVersion}>
               {t('common.restore')}
             </Button>
           </span>
@@ -83,28 +91,22 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
           <>
             <span>
               <Button
-                disabled={!isTemplateModified}
+                loading={saving}
+                disabled={saving}
                 icon={<SaveOutlined />}
-                onClick={handleSaveVersion}
+                onClick={handleSave}
+                type={isTemplateModified ? 'primary' : 'default'}
               >
                 {t('common.save')}
               </Button>
             </span>
             <span>
-              <Button
-                disabled={isTemplateModified}
-                icon={<SendOutlined />}
-                onClick={handleSendSample}
-              >
+              <Button icon={<SendOutlined />} onClick={handleSendSample}>
                 {t('newsletter.send-sample')}
               </Button>
             </span>
             <span>
-              <Button
-                disabled={isTemplateModified}
-                icon={<SendOutlined />}
-                onClick={handleSendSegment}
-              >
+              <Button icon={<SendOutlined />} onClick={handleSendSegment}>
                 {t('newsletter.send-segment')}
               </Button>
             </span>

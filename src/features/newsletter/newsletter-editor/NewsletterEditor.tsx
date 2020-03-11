@@ -84,8 +84,8 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
         handleVersionPreviewSwitch(id)
       }
     },
-    handleRevert: () => setVisibleRevertPopup(true),
-    handleSaveVersion: () => handleSaveVersion(getEditorContent()),
+    handleRestoreVersion: () => setVisibleRevertPopup(true),
+    handleSaveVersion: async () => handleSaveVersion(getEditorContent()),
     handleExit: () => {
       if (isTemplateModified) {
         setVisibleDiscardPopup(true)
