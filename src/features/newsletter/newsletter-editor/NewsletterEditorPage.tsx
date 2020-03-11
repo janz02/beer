@@ -40,8 +40,8 @@ export const NewsletterEditorPage: FC = () => {
     history.push('/newsletter')
   }
 
-  const onSaveVersion = (template: string): void => {
-    dispatch(saveNewsletterTemplateVersion(template))
+  const onSaveVersion = async (template: string): Promise<any> => {
+    await dispatch(saveNewsletterTemplateVersion(template))
   }
 
   const onSendSample: any = async (email: string, subject: string) => {

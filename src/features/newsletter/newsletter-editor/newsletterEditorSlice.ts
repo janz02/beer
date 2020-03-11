@@ -118,8 +118,8 @@ export const saveNewsletterTemplateVersion = (content: string): AppThunk => asyn
         content
       }
     })
-    dispatch(saveTemplateVersionSuccess())
-    dispatch(getNewsletterTemplate(id))
+    await dispatch(saveTemplateVersionSuccess())
+    await dispatch(getNewsletterTemplate(id))
   } catch (err) {
     dispatch(saveTemplateVersionFail(err.toString()))
   }

@@ -85,7 +85,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
         handleVersionPreviewSwitch(id)
       }
     },
-    handleRevert: () => setVisibleRevertPopup(true),
+    handleRestoreVersion: () => setVisibleRevertPopup(true),
     handleSaveVersion: () => handleSaveVersion(getEditorContent()),
     handleSendSample: () => setSendSamplePopup({ ...sendSamplePopup, visible: true }),
     handleSendSegment: () => {
