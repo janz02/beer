@@ -153,16 +153,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             <Select.Option key={CouponState.Accepted} value={CouponState.Accepted}>
               {t('coupon-create.states.accept')}
             </Select.Option>
-            <Select.Option key={CouponState.Rejected} value={CouponState.Rejected}>
-              {t('coupon-create.states.reject')}
-            </Select.Option>
             <Select.Option key={CouponState.Waiting} value={CouponState.Waiting}>
               {t('coupon-create.states.wait')}
             </Select.Option>
           </Select>
         )
       case CouponState.Accepted:
-      case CouponState.Rejected:
       case CouponState.Waiting:
         return (
           <Select>
