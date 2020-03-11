@@ -113,7 +113,6 @@
       "accept": "Accept",
       "archive": "Archive",
       "close": "Close",
-      "reject": "Reject",
       "wait": "Wait"
     },
     "status-title": "Modify state"
