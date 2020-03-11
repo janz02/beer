@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import './CouponEditorForm.scss'
 import {
   Form,
@@ -23,9 +23,10 @@ import { RootState } from 'app/rootReducer'
 import { DeleteFilled, CheckOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import { deleteCouponComment } from '../couponEditor/couponEditorSlice'
 import { Link } from 'react-router-dom'
-import { updateCouponStatus } from '../couponView/couponViewSlice'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
+import { useFormUtils } from 'hooks/useFormUtils'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -39,13 +40,26 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { handleCouponSave, loading, couponIsNew, coupon, editing } = props
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const [form] = Form.useForm()
-  const [commentForm] = Form.useForm()
+
   const { categories } = useSelector((state: RootState) => state.coupons)
-  const [submitable, setSubmitable] = useState(false)
   const rule = useCommonFormRules()
   // TODO: integrate, use property of the coupon.
   const [couponActive, setCouponActive] = useState(true)
+
+  const {
+    form,
+    submitable,
+    modified,
+    checkFieldsChange,
+    resetFormFlags,
+    setInitialFieldsValue
+  } = useFormUtils()
+
+  const {
+    form: commentForm,
+    resetFormFlags: resetFormFlagsComment,
+    setInitialFieldsValue: setInitialFieldsValueComment
+  } = useFormUtils()
 
   useEffect(() => {
     dispatch(getCategories())
@@ -68,27 +82,19 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   //   })
   // }, [coupon, commentForm])
 
-  const formRef = useRef(form)
   useEffect(() => {
-    formRef.current = form
-  }, [form])
-  useEffect(() => {
-    formRef.current.setFieldsValue({
+    setInitialFieldsValue({
       rank: CouponRank.Bronze,
       type: CouponType.FixValue,
       ...coupon
     })
-  }, [coupon])
+  }, [coupon, setInitialFieldsValue])
 
-  const commentFormRef = useRef(commentForm)
   useEffect(() => {
-    commentFormRef.current = commentForm
-  }, [commentForm])
-  useEffect(() => {
-    commentFormRef.current.setFieldsValue({
+    setInitialFieldsValueComment({
       comment: ''
     })
-  }, [coupon])
+  }, [coupon, setInitialFieldsValueComment])
 
   const displayEditor =
     couponIsNew ||
@@ -105,6 +111,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         tags: [],
         isDrawable: false
       })
+    resetFormFlags()
   }
 
   const handleStatusSubmit = (values: any): void => {
@@ -113,6 +120,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     // coupon &&
     //   coupon.id &&
     //   dispatch(updateCouponStatus(coupon.id, values.couponState, values.comment))
+    resetFormFlagsComment()
   }
 
   const handleCouponActivate = (): void => {
@@ -189,16 +197,14 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
           paddedBottom
           fullWidth
         >
+          <NavigationAlert when={modified} />
           <Form
             name="coupon-editor-form"
             onFinish={handleSubmit}
             form={form}
             layout="vertical"
             onFieldsChange={() => {
-              const hasErrors = form.getFieldsError().some(field => field.errors.length)
-              if (submitable === hasErrors) {
-                setSubmitable(!submitable)
-              }
+              checkFieldsChange()
             }}
           >
             <Form.Item name="name" label={t('coupon-create.field.name')} rules={[rule.required()]}>

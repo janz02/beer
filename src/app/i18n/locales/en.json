@@ -287,5 +287,8 @@
       "partnermanager": "Partner Manager"
     },
     "user-access": "Users and Access Rights"
+  },
+  "warning-prompt": {
+    "nav-unsaved-changes": "There are unsaved changes, do you really wish to navigate away?"
   }
 }

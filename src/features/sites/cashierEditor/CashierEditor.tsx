@@ -1,49 +1,36 @@
 import React, { FC, useEffect } from 'react'
-import { Modal, Form, Input } from 'antd'
+import { Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
-import { FormProps, FormLayout } from 'antd/lib/form/Form'
-import { useIsMobile, useCommonFormRules } from 'hooks'
+import { useCommonFormRules } from 'hooks'
 import { getCashier, saveCashier, clearCashierEditor } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
-
-enum EditorMode {
-  EDIT = 'edit',
-  CREATE = 'create'
-}
-
-export interface CashierEditorParams {
-  visible?: boolean
-  isNew?: boolean
-  cashierId?: number
-}
+import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
+import { GenericModalForm } from 'components/popups/GenericModalForm'
 
 interface CashierEditorProps {
-  params: CashierEditorParams
+  params: GenericModalFormEditorParams
   onExit: () => void
   afterClose: () => void
 }
 
 export const CashierEditor: FC<CashierEditorProps> = props => {
   const { params, onExit, afterClose } = props
-  const { visible, cashierId, isNew } = params
+  const { visible, id, isNew } = params
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [form] = Form.useForm()
-  const { cashier, error } = useSelector((state: RootState) => state.siteEditor)
-  const isMobile = useIsMobile()
+  const { cashier } = useSelector((state: RootState) => state.siteEditor)
   const rule = useCommonFormRules()
 
-  const mode = isNew || cashierId === ('undefined' as any) ? EditorMode.CREATE : EditorMode.EDIT
-
   useEffect(() => {
-    if (!cashierId || mode !== EditorMode.EDIT) {
+    if (!id || isNew) {
       return
     }
 
-    dispatch(getCashier(cashierId))
-  }, [dispatch, cashierId, mode])
+    dispatch(getCashier(id))
+  }, [dispatch, isNew, id])
 
   useEffect(() => {
     if (!visible) return
@@ -51,18 +38,10 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
     cashier ? form.setFieldsValue({ ...cashier }) : form.resetFields()
   }, [cashier, form, visible])
 
-  const modalTitle =
-    mode === EditorMode.EDIT ? t('cashier-editor.editor-edit') : t('cashier-editor.editor-create')
-
-  const formLayout: FormLayout = isMobile ? 'vertical' : 'horizontal'
-  const formItemLayout: Partial<FormProps> = isMobile
-    ? {}
-    : {
-        wrapperCol: { span: 16 }
-      }
+  const modalTitle = isNew ? t('cashier-editor.editor-create') : t('cashier-editor.editor-edit')
 
   const onSave = async (cashier: Cashier): Promise<void> => {
-    dispatch(saveCashier({ ...cashier, id: cashierId }))
+    dispatch(saveCashier({ ...cashier, id }))
     onExit()
   }
 
@@ -72,40 +51,35 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
   }
 
   return (
-    <Modal
-      forceRender
-      title={modalTitle}
-      visible={visible}
-      okText={t('common.save')}
-      onOk={() => form.submit()}
-      onCancel={onExit}
-      afterClose={afterCloseExtended}
-      destroyOnClose
+    <GenericModalForm
+      modalProps={{
+        visible: visible,
+        title: modalTitle,
+        okText: t('common.save'),
+        afterClose: afterCloseExtended,
+        onCancel: onExit
+      }}
+      formProps={{
+        name: 'cashier-editor',
+        onFinish: onSave
+      }}
+      initialValues={cashier}
     >
-      <Form
-        form={form}
-        name="cashier-editor"
-        {...formItemLayout}
-        layout={formLayout}
-        onFinish={onSave}
+      <Form.Item
+        label={t('cashier-editor.field.cashier-id')}
+        name="cashierId"
+        rules={[rule.required(), rule.max(30)]}
       >
-        <Form.Item
-          label={t('cashier-editor.field.cashier-id')}
-          name="cashierId"
-          rules={[rule.required(), rule.max(30)]}
-        >
-          <Input maxLength={30} />
-        </Form.Item>
+        <Input maxLength={30} />
+      </Form.Item>
 
-        <Form.Item
-          label={t('cashier-editor.field.digital-stamp-id')}
-          name="digitalStampId"
-          rules={[rule.required(), rule.max(30)]}
-        >
-          <Input maxLength={30} />
-        </Form.Item>
-        <div>{error}</div>
-      </Form>
-    </Modal>
+      <Form.Item
+        label={t('cashier-editor.field.digital-stamp-id')}
+        name="digitalStampId"
+        rules={[rule.required(), rule.max(30)]}
+      >
+        <Input maxLength={30} />
+      </Form.Item>
+    </GenericModalForm>
   )
 }

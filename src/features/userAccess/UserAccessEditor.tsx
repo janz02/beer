@@ -110,7 +110,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
       <Text>{editedUser?.name}</Text>
 
       <Form.Item name="role" label={t('user-access.field.role')} rules={[rule.required()]}>
-        <Select onChange={(e: any) => console.log(e)}>
+        <Select>
           {roleOptions?.map((r, i) => (
             <Select.Option key={i} value={r.value}>
               {r.name}

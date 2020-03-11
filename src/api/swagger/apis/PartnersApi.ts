@@ -52,12 +52,12 @@ export interface GetPartnersRequest {
     orderByType?: OrderByType;
 }
 
-export interface UpdateMyPartnerRequest {
+export interface UpdatePartnerRequest {
+    id: number;
     partnerDto?: PartnerDto;
 }
 
-export interface UpdatePartnerRequest {
-    id: number;
+export interface UpdateSelfPartnerRequest {
     partnerDto?: PartnerDto;
 }
 
@@ -134,36 +134,6 @@ export class PartnersApi extends runtime.BaseAPI {
      */
     async deletePartner(requestParameters: DeletePartnerRequest): Promise<void> {
         await this.deletePartnerRaw(requestParameters);
-    }
-
-    /**
-     * Returns the details about the logged in contact\'s partner
-     */
-    async getMyPartnerRaw(): Promise<runtime.ApiResponse<PartnerVm>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Partners/GetSelf`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerVmFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the details about the logged in contact\'s partner
-     */
-    async getMyPartner(): Promise<PartnerVm> {
-        const response = await this.getMyPartnerRaw();
-        return await response.value();
     }
 
     /**
@@ -255,35 +225,33 @@ export class PartnersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates the logged in contact\'s partner
+     * Returns the details about the logged in contact\'s partner
      */
-    async updateMyPartnerRaw(requestParameters: UpdateMyPartnerRequest): Promise<runtime.ApiResponse<void>> {
+    async getSelfPartnerRaw(): Promise<runtime.ApiResponse<PartnerVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
 
         const response = await this.request({
-            path: `/api/Partners/UpdateSelf`,
-            method: 'PUT',
+            path: `/api/Partners/GetSelf`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-            body: PartnerDtoToJSON(requestParameters.partnerDto),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerVmFromJSON(jsonValue));
     }
 
     /**
-     * Updates the logged in contact\'s partner
+     * Returns the details about the logged in contact\'s partner
      */
-    async updateMyPartner(requestParameters: UpdateMyPartnerRequest): Promise<void> {
-        await this.updateMyPartnerRaw(requestParameters);
+    async getSelfPartner(): Promise<PartnerVm> {
+        const response = await this.getSelfPartnerRaw();
+        return await response.value();
     }
 
     /**
@@ -322,6 +290,38 @@ export class PartnersApi extends runtime.BaseAPI {
      */
     async updatePartner(requestParameters: UpdatePartnerRequest): Promise<void> {
         await this.updatePartnerRaw(requestParameters);
+    }
+
+    /**
+     * Updates the logged in contact\'s partner
+     */
+    async updateSelfPartnerRaw(requestParameters: UpdateSelfPartnerRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Partners/UpdateSelf`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PartnerDtoToJSON(requestParameters.partnerDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Updates the logged in contact\'s partner
+     */
+    async updateSelfPartner(requestParameters: UpdateSelfPartnerRequest): Promise<void> {
+        await this.updateSelfPartnerRaw(requestParameters);
     }
 
 }

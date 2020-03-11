@@ -38,7 +38,6 @@ export const NewsletterEditorPage: FC = () => {
 
   const onExit = (): void => {
     history.push('/newsletter')
-    dispatch(clearNewsletterTemplate())
   }
 
   const onSaveVersion = async (template: string): Promise<any> => {

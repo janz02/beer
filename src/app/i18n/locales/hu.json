@@ -287,5 +287,8 @@
       "partnermanager": "Partner menedzser"
     },
     "user-access": "Felhasználók és Jogosultságok"
+  },
+  "warning-prompt": {
+    "nav-unsaved-changes": "Vannak mentetlen módosítások, biztos hogy el szeretné hagyni az oldalt?"
   }
 }

@@ -3,12 +3,15 @@ import { Form, Modal, Spin } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
 import { FormProps } from 'antd/lib/form'
 import { useTranslation } from 'react-i18next'
+import { NavigationAlert } from './NavigationAlert'
+import { useFormUtils } from 'hooks/useFormUtils'
 
 export interface GenericModalFormProps {
   formProps: FormProps
   modalProps: ModalProps
   initialValues?: any
   loadingContent?: boolean
+  disabledNavPrompt?: boolean
 }
 
 /**
@@ -32,33 +35,67 @@ export interface GenericModalFormProps {
   </GenericModalForm>
  */
 export const GenericModalForm: FC<GenericModalFormProps> = props => {
-  const { children, formProps, modalProps, initialValues, loadingContent } = props
+  const {
+    children,
+    formProps,
+    modalProps,
+    initialValues,
+    loadingContent,
+    disabledNavPrompt
+  } = props
   const { t } = useTranslation()
-  const [form] = Form.useForm()
+
+  const {
+    form,
+    submitable,
+    modified,
+    checkFieldsChange,
+    resetFormFlags,
+    setInitialFieldsValue
+  } = useFormUtils()
 
   useEffect(() => {
     if (!modalProps.visible) return
-    initialValues ? form.setFieldsValue({ ...initialValues }) : form.resetFields()
-  }, [form, initialValues, modalProps.visible])
+    setInitialFieldsValue({ ...initialValues })
+  }, [initialValues, modalProps.visible, setInitialFieldsValue])
 
   useEffect(() => {
-    if (!modalProps.visible) return
     return () => {
-      form.resetFields()
+      resetFormFlags()
     }
-  }, [form, modalProps.visible])
+  }, [modalProps.visible, resetFormFlags])
 
   const onOk = (): void => {
     form.submit()
   }
 
   return (
-    // TODO: investigate warning -> forceRender should have resolved the issue according to antd docs, but it didn't
+    // TODO: investigate warning -> forceRender should have resolved the issue according to antddocs, but it didn't
     // https://next.ant.design/components/form/#Why-get-form-warning-when-used-in-Modal
-    <Modal forceRender cancelText={t(`common.cancel`)} {...modalProps} onOk={onOk}>
+    <Modal
+      forceRender
+      cancelText={t(`common.cancel`)}
+      {...modalProps}
+      onOk={onOk}
+      okButtonProps={{ disabled: !submitable || !modified }}
+      afterClose={() => {
+        form.resetFields()
+        resetFormFlags()
+        modalProps?.afterClose?.()
+      }}
+    >
+      <NavigationAlert when={!disabledNavPrompt && modified} />
       {/* fix: for some reason spinning={undefined} is the same as spinning={true} */}
       <Spin spinning={!!loadingContent}>
-        <Form name="generic-modal-form" layout="vertical" {...formProps} form={form}>
+        <Form
+          name="generic-modal-form"
+          layout="vertical"
+          {...formProps}
+          form={form}
+          onFieldsChange={() => {
+            checkFieldsChange()
+          }}
+        >
           {children}
         </Form>
       </Spin>

@@ -12,7 +12,7 @@ import { useTableUtils } from 'hooks/useTableUtils'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 
 interface CategoryListProps {
-  onOpenEditor: (id?: number, createNew?: boolean) => void
+  onOpenEditor: (id?: number) => void
 }
 
 export const CategoryList: FC<CategoryListProps> = props => {
@@ -60,7 +60,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
   )
 
   const headerOptions = (
-    <Button type="primary" onClick={() => onOpenEditor(undefined, true)}>
+    <Button type="primary" onClick={() => onOpenEditor()}>
       {t('common.create')}
     </Button>
   )
