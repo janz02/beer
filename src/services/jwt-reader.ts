@@ -20,10 +20,18 @@ export const getJwtUserdata = (token?: string[] | string | null): UserData => {
   return user
 }
 
-export const hasPermission = (roles?: Roles[]): boolean => {
+export const hasAllPermissions = (roles?: Roles[]): boolean => {
   if (!roles || !roles.length) {
     return true
   }
   const jwtRoles = getJwtUserdata().roles ?? []
   return roles.every(x => jwtRoles.includes(x))
+}
+
+export const hasPermission = (roles?: Roles[]): boolean => {
+  if (!roles || !roles.length) {
+    return true
+  }
+  const jwtRoles = getJwtUserdata().roles ?? []
+  return roles.some(x => jwtRoles.includes(x))
 }

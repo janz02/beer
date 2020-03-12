@@ -25,7 +25,7 @@ export const ErrorPage: FC = () => {
 
   return (
     <Card className="error-card" title={t(content.title)}>
-      <Button onClick={() => history.push('/')}>{t('error-page.back')}</Button>
+      <Button onClick={() => history.push('/dashboard')}>{t('error-page.back')}</Button>
     </Card>
   )
 }
