@@ -19,7 +19,7 @@ import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { NewsletterListPage } from 'features/newsletter/newsletter-list/NewsletterListPage'
 import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
-import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
+import { UserAccessListPage } from 'features/user-access/UserAccessListPage'
 import { Roles } from 'api/swagger/models'
 
 const comboRoles = {
