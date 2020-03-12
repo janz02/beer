@@ -77,6 +77,7 @@
     "build": "env-cmd -e prod react-app-rewired build",
     "eject": "react-app-rewired eject",
     "generate-client": "node ./config/generate-client.js",
+    "generate-backend-translation-keys": "node ./config/generate-backend-translation-keys.js",
     "i18n:generate": "i18next-scanner --config ./config/i18next-scanner.config.js"
   },
   "eslintConfig": {
