@@ -47,14 +47,23 @@ export const config: Configuration = new Configuration({
         }
         // In case of the refresh endpoint don't display errors.
         else if (ctx.response.status >= 400 && !ctx.url.endsWith('Auth/Refresh')) {
-          ctx.response.json().then((x: RequestError) => {
+          if (ctx.response.status === 403) {
+            console.log('403', { ctx })
             notification.error({
-              message: x.ErrorKey ? i18n.t(x.ErrorKey) : x.Message,
-              description: x.Guid,
-              duration: null
+              message: 'Quick fix',
+              description: '403 error',
+              duration: 2
             })
-            console.table({ ...x, url: ctx.url })
-          })
+          } else {
+            ctx.response.json().then((x: RequestError) => {
+              notification.error({
+                message: x.ErrorKey ? i18n.t(x.ErrorKey) : x.Message,
+                description: x.Guid,
+                duration: null
+              })
+              console.table({ ...x, url: ctx.url })
+            })
+          }
         }
 
         return Promise.resolve()
