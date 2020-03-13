@@ -34,6 +34,7 @@ export const SideMenu: FC<SideMenuProps> = props => {
         </Drawer>
       ) : (
         <Layout.Sider
+          className="side-menu"
           trigger={null}
           collapsible
           collapsed={!open}

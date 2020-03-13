@@ -2,17 +2,26 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Coupon } from 'models/coupon'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { CouponListingOptions } from 'models/couponListingOptions'
 import moment from 'moment'
+import {
+  ListRequestParams,
+  Pagination,
+  recalculatePaginationAfterDeletion
+} from 'hooks/useTableUtils'
 
 interface CouponListState {
-  coupons?: Coupon[]
+  coupons: Coupon[]
+  pagination: Pagination
   allCouponsCount?: number
   error: string | null
   loading: boolean
 }
 
 const initialState: CouponListState = {
+  coupons: [],
+  pagination: {
+    pageSize: 10
+  },
   error: null,
   loading: false
 }
@@ -21,80 +30,85 @@ const couponListSlice = createSlice({
   name: 'couponList',
   initialState,
   reducers: {
-    listCouponsSuccess(
-      state,
-      action: PayloadAction<{ coupons?: Coupon[]; allCouponsCount: number }>
-    ) {
-      state.coupons = action.payload.coupons
-      state.allCouponsCount = action.payload.allCouponsCount
-
-      state.loading = false
-      state.error = null
-    },
-    deleteCouponSuccess(state, action: PayloadAction<number>) {
-      state.coupons = state.coupons && state.coupons.filter(x => x.id !== action.payload)
-
-      state.loading = false
-      state.error = null
-    },
-    setLoadingStart(state) {
+    getCouponsRequest(state) {
       state.loading = true
     },
-    setLoadingFailed(state, action: PayloadAction<string>) {
+    getCouponsSuccess(state, action: PayloadAction<{ coupons: Coupon[]; pagination: Pagination }>) {
+      state.coupons = action.payload.coupons
+      state.pagination = action.payload.pagination
+      state.loading = false
+      state.error = ''
+    },
+    getCouponsFail(state, action: PayloadAction<string>) {
       state.loading = false
       state.error = action.payload
+    },
+    deleteRequest(state) {
+      state.loading = true
+    },
+    deleteSuccess(state) {
+      state.loading = false
+    },
+    deleteFail(state, action: PayloadAction<string>) {
+      state.loading = false
     }
   }
 })
 
-export const {
-  listCouponsSuccess,
-  deleteCouponSuccess,
-  setLoadingStart,
-  setLoadingFailed
+const {
+  getCouponsRequest,
+  getCouponsSuccess,
+  getCouponsFail,
+  deleteRequest,
+  deleteSuccess,
+  deleteFail
 } = couponListSlice.actions
 
 export const couponListReducer = couponListSlice.reducer
 
-export const getWaitingCoupons = (
-  listingOptions: CouponListingOptions
-): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
-
+export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
   try {
-    const response = await api.coupons.getWaitingCoupons({
-      ...listingOptions,
-      page: listingOptions.current
+    dispatch(getCouponsRequest())
+    const oldPagination = getState().couponList.pagination
+    const { result, ...pagination } = await api.coupons.getWaitingCoupons({
+      pageSize: oldPagination.pageSize,
+      page: oldPagination.page,
+      ...params
     })
-
-    const coupons = response.result?.map(
-      x =>
-        ({
-          ...x,
-          startDate: moment(x.startDate),
-          endDate: moment(x.endDate),
-          expireDate: moment(x.expireDate)
-        } as Coupon)
-    )
-
+    const coupons =
+      result?.map<Coupon>(c => ({
+        ...(c as any),
+        startDate: moment(c.startDate),
+        endDate: moment(c.endDate),
+        expireDate: moment(c.expireDate)
+      })) ?? []
     dispatch(
-      listCouponsSuccess({
+      getCouponsSuccess({
         coupons,
-        allCouponsCount: response.size || 0
+        pagination: {
+          ...pagination,
+          pageSize: params.pageSize ?? oldPagination.pageSize
+        }
       })
     )
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()))
+    dispatch(getCouponsFail(err.toString()))
   }
 }
 
-export const deleteCoupon = (id: number): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
-
+export const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
+  dispatch(deleteRequest())
   try {
-    await api.coupons.deleteCoupon({ id: id })
-    dispatch(deleteCouponSuccess(id))
+    await await api.coupons.deleteCoupon({ id })
+    dispatch(deleteSuccess())
+    const newPage = recalculatePaginationAfterDeletion(getState().couponList.pagination)
+    dispatch(getWaitingCoupons({ page: newPage }))
+    return { id }
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()))
+    dispatch(deleteFail(err.toString()))
+    return { id, error: err.toString() }
   }
 }

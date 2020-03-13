@@ -27,6 +27,8 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
+import { BackButton } from 'components/buttons/BackButton'
+import { history } from 'router/router'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -64,23 +66,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   useEffect(() => {
     dispatch(getCategories())
   }, [dispatch])
-
-  // TODO: revisit this problem after upgrading andt package.
-  // https://github.com/ant-design/ant-design/issues/18983
-  // https://github.com/ant-design/ant-design/issues/20987
-  // This should work instead of the workaround below.
-  // useEffect(() => {
-  //   form.setFieldsValue({
-  //     rank: CouponRank.Bronze,
-  //     type: CouponType.FixValue,
-  //     ...coupon
-  //   })
-  // }, [coupon, form])
-  // useEffect(() => {
-  //   commentForm.setFieldsValue({
-  //     comment: ''
-  //   })
-  // }, [coupon, commentForm])
 
   useEffect(() => {
     setInitialFieldsValue({
@@ -128,29 +113,27 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     setCouponActive(!couponActive)
   }
 
-  const couponActionButtons = (
-    <>
-      {!displayEditor && (
-        <div className="coupon-editor-form__actions">
-          {coupon && coupon.state !== CouponState.Closed && coupon.state !== CouponState.Archived && (
-            <Button type="primary" htmlType="button">
-              <Link to={`/coupon/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
-            </Button>
-          )}
-          {coupon && coupon.state === CouponState.Accepted && (
-            <Button
-              type="primary"
-              htmlType="button"
-              onClick={() => {
-                handleCouponActivate()
-              }}
-            >
-              {couponActive ? t('coupon-create.inactivate') : t('coupon-create.activate')}
-            </Button>
-          )}
-        </div>
+  const couponActionButtons = !displayEditor ? (
+    <div className="coupon-editor-form__actions">
+      {coupon && coupon.state !== CouponState.Closed && coupon.state !== CouponState.Archived && (
+        <Button type="primary" htmlType="button">
+          <Link to={`/coupon/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
+        </Button>
       )}
-    </>
+      {coupon && coupon.state === CouponState.Accepted && (
+        <Button
+          type="primary"
+          htmlType="button"
+          onClick={() => {
+            handleCouponActivate()
+          }}
+        >
+          {couponActive ? t('coupon-create.inactivate') : t('coupon-create.activate')}
+        </Button>
+      )}
+    </div>
+  ) : (
+    undefined
   )
 
   const couponStatusDropdown = (): JSX.Element => {
@@ -188,12 +171,15 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     }
   }
 
+  const backButton = <BackButton onClick={() => history.push('/coupons/')} primary={!modified} />
+
   return (
     <Row className="coupon-editor-form">
       <Col span={18}>
         <ResponsiveCard
           floatingTitle={t('coupon-create.editor-title')}
           innerOptions={couponActionButtons}
+          floatingOptions={backButton}
           paddedBottom
           fullWidth
         >

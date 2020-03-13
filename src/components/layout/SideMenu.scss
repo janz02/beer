@@ -1,6 +1,8 @@
 @import "assets/scss/_variables";
 
 .side-menu {
+  overflow: hidden;
+
   &__header {
     margin: 0.75rem;
   }

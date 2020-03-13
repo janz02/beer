@@ -62,7 +62,17 @@
     },
     "restore": "Restore",
     "save": "Save",
-    "send": "Send"
+    "send": "Send",
+    "view": "View"
+  },
+  "coupon": {
+    "state": {
+      "accepted": "Accepted",
+      "archived": "Archived",
+      "closed": "Closed",
+      "created": "Created",
+      "waiting": "Waiting"
+    }
   },
   "coupon-category": {
     "editor-create": "Create",
@@ -108,11 +118,9 @@
     "timeline-title": "Timeline"
   },
   "coupon-list": {
-    "action": "Action",
     "categoryId": "Category",
     "coupons": "Coupons",
     "create": "Create",
-    "delete-confirm-message": "Are you sure you want to delete this coupon?",
     "endDate": "End date",
     "expireDate": "Expire date",
     "name": "Name",
@@ -194,9 +202,9 @@
   "menu": {
     "coupon-categories": "Categories",
     "coupons": "Coupons",
-    "dashboard": "Dashboard",
     "newsletter": "News letter",
     "partner-data": "Partner data",
+    "profile": "Profile",
     "sites": "Sites",
     "users": "Users"
   },

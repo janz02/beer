@@ -19,6 +19,7 @@
     "jsx-quotes": ["error", "prefer-double"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-curly-newline": "off",
     "no-unused-expressions": "off",
     "prettier/prettier": [
       "error",

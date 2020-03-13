@@ -19,7 +19,40 @@ import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { NewsletterListPage } from 'features/newsletter/newsletter-list/NewsletterListPage'
 import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
-import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
+import { UserAccessListPage } from 'features/user-access/UserAccessListPage'
+import { Roles } from 'api/swagger/models'
+
+const comboRoles = {
+  forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
+  forNkm: [
+    Roles.Administrator,
+    Roles.CampaignManager,
+    Roles.PartnerManager,
+    Roles.BusinessPartnerManager
+  ],
+  forAll: [
+    Roles.Administrator,
+    Roles.CampaignManager,
+    Roles.PartnerManager,
+    Roles.BusinessPartnerManager,
+    Roles.PartnerContactApprover,
+    Roles.PartnerContactEditor
+  ]
+}
+
+export const pageViewRoles = {
+  users: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
+  newsletters: [Roles.Administrator, Roles.CampaignManager],
+  coupons: comboRoles.forAll,
+  couponEditor: [Roles.Administrator, Roles.CampaignManager, ...comboRoles.forPartner],
+  sites: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
+  categories: comboRoles.forNkm,
+  categoryEditor: [Roles.Administrator],
+  segments: comboRoles.forNkm,
+  profile: comboRoles.forAll,
+  partner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
+  tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
+}
 
 const Routes = (): JSX.Element => (
   <Switch>
@@ -28,23 +61,83 @@ const Routes = (): JSX.Element => (
     <PublicRoute onlyPublic exact path="/auth/recovery" component={RecoveryPage} />
     <PublicRoute exact path="/error" component={ErrorPage} />
     <PublicRoute exact path="/error/:type" component={ErrorPage} />
-    <PrivateRoute exact path="/coupons" component={CouponListPage} />
-    <PrivateRoute exact path="/coupon" component={CouponCreatePage} />
-    <PrivateRoute exact path="/coupon/:id" component={CouponViewPage} />
-    <PrivateRoute exact path="/coupon/:id/edit" component={CouponEditorPage} />
-    <PrivateRoute exact path="/categories" component={CategoryPage} />
-    <PrivateRoute exact path="/categories/:id" component={CategoryPage} />
-    <PrivateRoute exact path="/partner" component={PartnerEditorPage} />
-    <PrivateRoute exact path="/profile" component={ProfileEditorPage} />
-    <PrivateRoute exact path="/sites" component={SitesListPage} />
-    <PrivateRoute exact path="/sites/editor/" component={SiteEditorPage} />
-    <PrivateRoute exact path="/sites/editor/:id" component={SiteEditorPage} />
-    <PrivateRoute exact path="/sites/editor/:id/:cashierId" component={SiteEditorPage} />
-    <PrivateRoute exact path="/newsletter" component={NewsletterListPage} />
-    <PrivateRoute exact path="/newsletter/:id" component={NewsletterEditorPage} />
-    <PrivateRoute exact path="/users" component={UserAccessListPage} />
-    <PrivateRoute exact path="/" component={DashboardPage} />
-    <Route path="*" render={() => <Redirect to="/" />} />
+    <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+    <PrivateRoute
+      exact
+      path="/partner"
+      roles={pageViewRoles.partner}
+      component={PartnerEditorPage}
+    />
+    <PrivateRoute exact path="/coupons" roles={pageViewRoles.coupons} component={CouponListPage} />
+    <PrivateRoute
+      exact
+      path="/coupon"
+      roles={pageViewRoles.couponEditor}
+      component={CouponCreatePage}
+    />
+    <PrivateRoute
+      exact
+      path="/coupon/:id"
+      roles={pageViewRoles.coupons}
+      component={CouponViewPage}
+    />
+    <PrivateRoute
+      exact
+      path="/coupon/:id/edit"
+      roles={pageViewRoles.couponEditor}
+      component={CouponEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/categories"
+      roles={pageViewRoles.categories}
+      component={CategoryPage}
+    />
+    <PrivateRoute
+      exact
+      path="/categories/:id"
+      roles={pageViewRoles.categoryEditor}
+      component={CategoryPage}
+    />
+    <PrivateRoute
+      exact
+      path="/profile"
+      roles={pageViewRoles.profile}
+      component={ProfileEditorPage}
+    />
+    <PrivateRoute exact path="/sites" roles={pageViewRoles.sites} component={SitesListPage} />
+    <PrivateRoute
+      exact
+      path="/sites/editor/"
+      roles={pageViewRoles.sites}
+      component={SiteEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/sites/editor/:id"
+      roles={pageViewRoles.sites}
+      component={SiteEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/sites/editor/:id/:cashierId"
+      roles={pageViewRoles.sites}
+      component={SiteEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/newsletter"
+      roles={pageViewRoles.newsletters}
+      component={NewsletterListPage}
+    />
+    <PrivateRoute
+      exact
+      path="/newsletter/:id"
+      roles={pageViewRoles.newsletters}
+      component={NewsletterEditorPage}
+    />
+    <PrivateRoute exact path="/users" roles={pageViewRoles.users} component={UserAccessListPage} />
+    <Route path="*" render={() => <Redirect to="/coupons" />} />
   </Switch>
 )
 

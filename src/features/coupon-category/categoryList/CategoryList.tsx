@@ -10,6 +10,9 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTableUtils } from 'hooks/useTableUtils'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { hasPermission } from 'services/jwt-reader'
+import { Roles } from 'api/swagger/models'
+import { ColumnType } from 'antd/lib/table'
 
 interface CategoryListProps {
   onOpenEditor: (id?: number) => void
@@ -29,7 +32,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
     getDataAction: getCategories
   })
 
-  const columnsConfig = useMemo(
+  const columnsConfig: ColumnType<Category>[] = useMemo(
     () => [
       {
         title: t('coupon-category.field.name'),
@@ -37,32 +40,36 @@ export const CategoryList: FC<CategoryListProps> = props => {
         dataIndex: 'name',
         ...sorterConfig
       },
-      {
-        title: t('common.actions'),
-        key: 'actions',
-        colSpan: 1,
-        render(record: Category) {
-          return (
-            <CrudButtons
-              onEdit={() => onOpenEditor(record.id)}
-              onDelete={() => {
-                setCategoryToDelete({
-                  category: record,
-                  popupVisible: true
-                })
-              }}
-            />
-          )
-        }
-      }
+      hasPermission([Roles.Administrator])
+        ? {
+            title: t('common.actions'),
+            key: 'actions',
+            colSpan: 1,
+            render(record: Category) {
+              return (
+                <CrudButtons
+                  onEdit={() => onOpenEditor(record.id)}
+                  onDelete={() => {
+                    setCategoryToDelete({
+                      category: record,
+                      popupVisible: true
+                    })
+                  }}
+                />
+              )
+            }
+          }
+        : {}
     ],
     [t, sorterConfig, onOpenEditor]
   )
 
-  const headerOptions = (
+  const headerOptions = hasPermission([Roles.Administrator]) ? (
     <Button type="primary" onClick={() => onOpenEditor()}>
       {t('common.create')}
     </Button>
+  ) : (
+    undefined
   )
 
   return (

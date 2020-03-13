@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next'
 import { UserAccess } from 'models/user'
 import { UserAccessEditorProps } from './UserAccessEditor'
 import { ColumnsType } from 'antd/lib/table'
+import { hasPermission } from 'services/jwt-reader'
+import { Roles } from 'api/swagger/models'
 
 interface UseUserAccessListPageUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
@@ -69,19 +71,22 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.role.${user.role?.toLowerCase()}`)
       },
-      {
-        title: t('common.actions'),
-        key: 'actions',
-        colSpan: 1,
-        render(user: UserAccess) {
-          return (
-            <CrudButtons
-              onEdit={() =>
-                setEditorModal({ visible: true, userId: user.id, userType: UserType.NKM })}
-            />
-          )
-        }
-      }
+      hasPermission([Roles.Administrator])
+        ? {
+            title: t('common.actions'),
+            key: 'actions',
+            colSpan: 1,
+            render(user: UserAccess) {
+              return (
+                <CrudButtons
+                  onEdit={() =>
+                    setEditorModal({ visible: true, userId: user.id, userType: UserType.NKM })
+                  }
+                />
+              )
+            }
+          }
+        : {}
     ],
     [nkmUsersTableUtils.sorterConfig, t]
   )
@@ -136,20 +141,22 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.role.${user.role?.toLowerCase()}`)
       },
-      {
-        title: t('common.actions'),
-        key: 'actions',
-        colSpan: 1,
-        render(user: UserAccess) {
-          return (
-            <CrudButtons
-              onEdit={() =>
-                setEditorModal({ visible: true, userId: user.id, userType: UserType.PARTNER })
-              }
-            />
-          )
-        }
-      }
+      hasPermission([Roles.Administrator])
+        ? {
+            title: t('common.actions'),
+            key: 'actions',
+            colSpan: 1,
+            render(user: UserAccess) {
+              return (
+                <CrudButtons
+                  onEdit={() =>
+                    setEditorModal({ visible: true, userId: user.id, userType: UserType.PARTNER })
+                  }
+                />
+              )
+            }
+          }
+        : {}
     ],
     [partnerUsersTableUtils.sorterConfig, t]
   )
