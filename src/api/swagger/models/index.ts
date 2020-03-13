@@ -1,3 +1,4 @@
+export * from './ActivateCouponDto';
 export * from './AuthRegistrationFailedException';
 export * from './CashierDto';
 export * from './CashierVm';

@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    ActivateCouponDto,
+    ActivateCouponDtoFromJSON,
+    ActivateCouponDtoToJSON,
     ChangeCouponStateDto,
     ChangeCouponStateDtoFromJSON,
     ChangeCouponStateDtoToJSON,
@@ -43,6 +46,11 @@ import {
     WaitingCouponVmPaginatedResponseFromJSON,
     WaitingCouponVmPaginatedResponseToJSON,
 } from '../models';
+
+export interface ActivateCouponRequest {
+    id: number;
+    activateCouponDto?: ActivateCouponDto;
+}
 
 export interface ClaimCouponRequest {
     id: number;
@@ -99,6 +107,44 @@ export interface UpdateCouponStatusRequest {
 export class CouponsApi extends runtime.BaseAPI {
 
     /**
+     * Changes the active status of a coupon to the given value
+     * Changes the active status of a coupon
+     */
+    async activateCouponRaw(requestParameters: ActivateCouponRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling activateCoupon.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/{id}/Activate`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ActivateCouponDtoToJSON(requestParameters.activateCouponDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Changes the active status of a coupon to the given value
+     * Changes the active status of a coupon
+     */
+    async activateCoupon(requestParameters: ActivateCouponRequest): Promise<void> {
+        await this.activateCouponRaw(requestParameters);
+    }
+
+    /**
      * Claims a coupon to put it in the used up coupons for the user
      * Claims a coupon for the logged in user
      */
@@ -131,6 +177,38 @@ export class CouponsApi extends runtime.BaseAPI {
      */
     async claimCoupon(requestParameters: ClaimCouponRequest): Promise<CouponCodeVm> {
         const response = await this.claimCouponRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Closes coupons when its accepted and either end date is passed or every coupon is claimed.
+     * Closes coupons
+     */
+    async closeCouponsRaw(): Promise<runtime.ApiResponse<CouponCodeVm>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/CloseCoupons`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponCodeVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Closes coupons when its accepted and either end date is passed or every coupon is claimed.
+     * Closes coupons
+     */
+    async closeCoupons(): Promise<CouponCodeVm> {
+        const response = await this.closeCouponsRaw();
         return await response.value();
     }
 

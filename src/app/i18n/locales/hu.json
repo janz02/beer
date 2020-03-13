@@ -146,6 +146,7 @@
   "error": {
     "auth": {
       "expired-refresh-token": "Lejárt refresh token.",
+      "forbidden": "Hozzáférés nem engedélyezett.",
       "invalid-email": "Invalid e-mail.",
       "invalid-partner-code": "Invalid partner kód.",
       "invalid-password": "Invalid partner jelszó.",
@@ -155,33 +156,48 @@
       "login-failed": "Bejelentkezés sikertelen.",
       "password-format": "Invalid jelszó formátum.",
       "registration-failed": "Regsztráció sikertelen.",
-      "user-exists": "Felhasználó már létezik."
+      "user-exists": "Felhasználó már létezik.",
+      "user-inactive": "Felhasználó inaktív.",
+      "user-not-found": "Felhasználó nem található."
     },
     "cashier": {
-      "cashier-id-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
-      "stamp-not-unique": "Digitális pecsét azonosító nem egyedi"
+      "cashier-couponId-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
+      "stamp-couponId-not-unique": "Digitális pecsét azonosító nem egyedi."
     },
     "common": {
-      "validation": "Validációs hiba."
+      "cant-modify": "Nem módosítható.",
+      "email-format": "Helytelen e-mail formátum.",
+      "field-required": "Kötelező mező.",
+      "internal": "Internal.",
+      "invalid-value": "Helytelen érték.",
+      "max-length": "Túl hosszú szöveg.",
+      "password-format": "Jelszó formátum nem megfelelő."
     },
     "coupon": {
       "already-claimed": "Kupon már kiváltva.",
       "cannot-claim": "Nem lehet kiváltani a kupont.",
-      "cant-change-state": "Kupon státusz változtatása sikertelen."
+      "cant-be-deleted": "Kupon nem törölhető.",
+      "cant-change-state": "Kupon státusz változtatása sikertelen.",
+      "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható."
     },
     "coupon-user-code": {
       "cant-save": "Kupon felhasználó kód mentése sikertelen."
     },
     "email-template": {
+      "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie.",
       "not-found-version": "Nem található ilyen verziójú e-mail sablon."
     },
-    "not-found": "Nem található.",
+    "not-found;": "Nem található",
+    "paginate": {
+      "order-by": "Lapozó sorrend.",
+      "page": "Lapozó lap.",
+      "page-size": "Lapozó lap méret."
+    },
     "partner": {
       "cant-change-state": "Partner státusz változtatása sikertelen."
     },
-    "site-api-key": {
-      "cant-delete": "API kulcs törlése sikertelen.",
-      "cant-save": "API kulcs mentése sikertelen."
+    "partner-contact": {
+      "invalid-type": "Nem megfelelő partner típus."
     }
   },
   "error-page": {
