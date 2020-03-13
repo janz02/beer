@@ -163,7 +163,8 @@
       "internal": "Internal.",
       "invalid-value": "Helytelen érték.",
       "max-length": "Túl hosszú szöveg.",
-      "password-format": "Jelszó formátum nem megfelelő."
+      "password-format": "Jelszó formátum nem megfelelő.",
+      "server-unavailable": "Szerver nem elérhető."
     },
     "coupon": {
       "already-claimed": "Kupon már kiváltva.",

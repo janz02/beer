@@ -163,7 +163,8 @@
       "internal": "Internal.",
       "invalid-value": "Invalid value.",
       "max-length": "Max length exceeded.",
-      "password-format": "Invalid password format."
+      "password-format": "Invalid password format.",
+      "server-unavailable": "Server unavailable."
     },
     "coupon": {
       "already-claimed": "Coupon already claimed.",
