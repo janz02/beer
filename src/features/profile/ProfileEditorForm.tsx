@@ -94,7 +94,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve()
                 }
-                return Promise.reject(t('auth.error.password-inconsistent'))
+                return Promise.reject(t('error.auth.password-inconsistent'))
               }
             })
           ]}

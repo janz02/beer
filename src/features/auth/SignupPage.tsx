@@ -16,7 +16,7 @@ export const SignupPage: React.FC = () => {
 
   return (
     <AuthLayout className="signup" title={t(`auth.signup`)}>
-      {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
+      {error && <Alert message={t('error.auth.signup-failed')} type="error" />}
       <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
         <Form.Item
           name="name"
@@ -55,7 +55,7 @@ export const SignupPage: React.FC = () => {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve()
                 }
-                return Promise.reject(t('auth.error.password-inconsistent'))
+                return Promise.reject(t('error.auth.password-inconsistent'))
               }
             })
           ]}

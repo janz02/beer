@@ -16,7 +16,7 @@ export function useCommonFormRules() {
       ...other,
       required: true,
       whitespace: true,
-      message: message || t('common.rule-error.field-required')
+      message: message || t('error.common.field-required')
     }),
     [t]
   )
@@ -32,7 +32,7 @@ export function useCommonFormRules() {
       pattern: new RegExp(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~])[A-Za-z\\d!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~]{8,64}$'
       ),
-      message: message || t('common.rule-error.password-format')
+      message: message || t('error.common.password-format')
     }),
     [t]
   )
@@ -44,7 +44,7 @@ export function useCommonFormRules() {
   const number = useCallback(
     (message?: string): Rule => ({
       pattern: new RegExp('^\\d+$'),
-      message: message || t('common.rule-error.field-number')
+      message: message || t('error.common.field-number')
     }),
     [t]
   )
@@ -56,7 +56,7 @@ export function useCommonFormRules() {
   const email = useCallback(
     (message?: string): Rule => ({
       pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: message || t('common.rule-error.email')
+      message: message || t('error.common.email-format')
     }),
     [t]
   )
@@ -68,7 +68,7 @@ export function useCommonFormRules() {
   const max = useCallback(
     (max: number, message?: string): Rule => ({
       max,
-      message: message || t('common.rule-error.max-length', { max })
+      message: message || t('error.common.max-length-exact', { max })
     }),
     [t]
   )

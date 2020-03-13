@@ -16,7 +16,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <AuthLayout title={t(`auth.login`)}>
-      {error && <Alert message={t('auth.error.login-failed')} type="error" />}
+      {error && <Alert message={t('error.auth.login-failed')} type="error" />}
       <Form
         name="login"
         layout="vertical"

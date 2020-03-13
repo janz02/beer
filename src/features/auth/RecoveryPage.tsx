@@ -17,7 +17,7 @@ export const RecoveryPage: React.FC = () => {
 
   return (
     <AuthLayout className="recovery" title={t(`auth.forgot-password`)}>
-      {error && <Alert message={t('auth.error.recovery-failed')} type="error" />}
+      {error && <Alert message={t('error.auth.recovery-failed')} type="error" />}
 
       <Form
         name="recovery"

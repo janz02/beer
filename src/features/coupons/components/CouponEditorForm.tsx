@@ -254,7 +254,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 ({ getFieldValue }) => ({
                   validator(rule, value) {
                     if (value > 100 && getFieldValue('type') === CouponType.PercentValue) {
-                      return Promise.reject(t('coupon-create.error.percentage-max-100'))
+                      return Promise.reject(t('error.coupon.percentage-max-100'))
                     }
                     return Promise.resolve()
                   }
