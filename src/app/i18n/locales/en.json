@@ -138,6 +138,7 @@
   "error": {
     "auth": {
       "expired-refresh-token": "Refresh token expired.",
+      "forbidden": "Access forbidden.",
       "invalid-email": "Invalid e-mail.",
       "invalid-partner-code": "Invalid partner code.",
       "invalid-password": "Invalid password.",
@@ -147,33 +148,48 @@
       "login-failed": "Login failed.",
       "password-format": "Invalid password format.",
       "registration-failed": "Registration failed.",
-      "user-exists": "User exists."
+      "user-exists": "User exists.",
+      "user-inactive": "User inactive.",
+      "user-not-found": "User not found."
     },
     "cashier": {
-      "cashier-id-not-unique": "Online cashier ID must be unique",
-      "stamp-not-unique": "Digital stamp ID must be unique"
+      "cashier-couponId-not-unique": "Online cashier ID must be unique.",
+      "stamp-couponId-not-unique": "Digital stamp ID must be unique."
     },
     "common": {
-      "validation": "Validation error."
+      "cant-modify": "Nem módosítható.",
+      "email-format": "Invalid e-mail format.",
+      "field-required": "Field required.",
+      "internal": "Internal.",
+      "invalid-value": "Invalid value.",
+      "max-length": "Max length exceeded.",
+      "password-format": "Invalid password format."
     },
     "coupon": {
       "already-claimed": "Coupon already claimed.",
       "cannot-claim": "Cannot claim coupon.",
-      "cant-change-state": "Can't change coupon state."
+      "cant-be-deleted": "Coupon can't be deleted.",
+      "cant-change-state": "Can't change coupon state.",
+      "only-accepted-can-be-changed": "Only accepted coupon can be changed."
     },
     "coupon-user-code": {
       "cant-save": "Can't save user coupon code."
     },
     "email-template": {
+      "name-must-be-unique": "E-mail template name must be unique.",
       "not-found-version": "E-mail template version not found."
     },
-    "not-found": "Not found.",
+    "not-found;": "Not found.",
+    "paginate": {
+      "order-by": "Paginate order by.",
+      "page": "Paginate page.",
+      "page-size": "Paginate page size."
+    },
     "partner": {
       "cant-change-state": "Can't change partner state."
     },
-    "site-api-key": {
-      "cant-delete": "Can't delete API key.",
-      "cant-save": "Can't save API key."
+    "partner-contact": {
+      "invalid-type": "Invalid partner contact type."
     }
   },
   "error-page": {
@@ -205,7 +221,6 @@
       "template-version": "Version"
     },
     "popup": {
-      "discard-msg": "Your changes are not saved, do you want to discard them, by closing the editor?",
       "preview-discard-msg": "You have modified the current version of the template. By previewing the previous version you will lose all changes.",
       "restore-msg": "By restoring, you will copy this template on the top of the version history, as the latest saved version.",
       "target-segment": "Target segment",
