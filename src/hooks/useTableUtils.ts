@@ -55,7 +55,7 @@ const recalculatePaginationAfterDeletion = (oldPagination?: Pagination): number 
   }
   const reductPage = oldPagination.to === oldPagination.from
   const page = oldPagination.page - +reductPage
-  return page
+  return Math.max(page, 1)
 }
 
 /** When the page size is changed, this will keep the previous top element on the new (resized) page. */

@@ -10,6 +10,7 @@ import { useTableUtils } from 'hooks/useTableUtils'
 import { updateCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { ColumnType } from 'antd/lib/table'
 
 interface CashierListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
@@ -30,7 +31,7 @@ export const CashierList: FC<CashierListProps> = props => {
     getDataAction: updateCashiers
   })
 
-  const columnsConfig = useMemo(
+  const columnsConfig: ColumnType<Cashier>[] = useMemo(
     () => [
       {
         title: t('cashier-list.table.cashier-id'),

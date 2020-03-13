@@ -19,6 +19,7 @@ import { NewsletterPreview } from 'models/newsletter'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useTableUtils } from 'hooks/useTableUtils'
+import { ColumnType } from 'antd/lib/table'
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
@@ -46,7 +47,7 @@ export const NewsletterList: FC = () => {
     getDataAction: getNewsletterTemplates
   })
 
-  const columnsConfig = useMemo(
+  const columnsConfig: ColumnType<NewsletterPreview>[] = useMemo(
     () => [
       {
         title: t('newsletter.field.template-name'),

@@ -1,195 +1,190 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import './CouponListPage.scss'
-import { Button, Table, Popconfirm } from 'antd'
+import { Button } from 'antd'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
-import { useIsMobile } from 'hooks'
 import { getWaitingCoupons, deleteCoupon } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
-import { CouponListingOptions } from 'models/couponListingOptions'
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import { OrderByType, CouponState } from 'api/swagger/models'
-import { ColumnType, SorterResult, ColumnFilterItem } from 'antd/lib/table/interface'
+import { CouponState, Roles } from 'api/swagger/models'
+import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { getCategories } from '../couponsSlice'
+import { hasPermission } from 'services/jwt-reader'
+import { CrudButtons } from 'components/buttons/CrudButtons'
+import { ResponsivePage } from 'components/responsive/ResponsivePage'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
+import { useTableUtils } from 'hooks/useTableUtils'
+import { GenericPopup } from 'components/popups/GenericPopup'
+
+const couponEditorRoles = [
+  Roles.Administrator,
+  Roles.CampaignManager,
+  Roles.PartnerContactApprover,
+  Roles.PartnerContactEditor
+]
 
 export const CouponListPage: React.FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
+
   const { categories } = useSelector((state: RootState) => state.coupons)
-  const { coupons, loading, allCouponsCount } = useSelector((state: RootState) => state.couponList)
-  const [listingOptions, setListingOptions] = useState<CouponListingOptions>({
-    pageSize: 10,
-    current: 1
-  })
-  const isMobile = useIsMobile()
+  const { coupons, loading, pagination } = useSelector((state: RootState) => state.couponList)
+
+  const [couponToDelete, setCouponToDelete] = useState<{
+    coupon?: Coupon
+    popupVisible?: boolean
+  } | null>()
 
   useEffect(() => {
     dispatch(getCategories())
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(getWaitingCoupons(listingOptions))
-  }, [dispatch, listingOptions])
+    dispatch(getWaitingCoupons())
+  }, [dispatch])
 
-  const notActionCellProps = {
-    sorter: true,
-    onCell: (record: Coupon) => {
-      return {
-        onClick: () => {
-          history.push(`/coupon/${record.id}`)
+  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
+    paginationState: pagination,
+    filterKeys: ['state', 'categoryId'],
+    getDataAction: getWaitingCoupons
+  })
+
+  const columnsConfig: ColumnType<Coupon>[] = useMemo(
+    () => [
+      {
+        title: t('coupon-list.name'),
+        dataIndex: 'name',
+        key: 'name',
+        ...sorterConfig
+      },
+      {
+        title: t('coupon-list.state'),
+        dataIndex: 'state',
+        key: 'state',
+        filters: Object.keys(CouponState).map(f => {
+          return { text: t(`coupon.state.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
+        }),
+        filterMultiple: false,
+        render(value) {
+          return t(`coupon.state.${value?.toLowerCase()}`)
+        },
+        ...sorterConfig
+      },
+      {
+        title: t('coupon-list.categoryId'),
+        dataIndex: 'categoryId',
+        key: 'categoryId',
+        render(value) {
+          return categories && categories.find(x => x.id === +value)?.name
+        },
+        filters:
+          categories?.map(x => {
+            return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
+          }) ?? [],
+        filterMultiple: false,
+        ...sorterConfig
+      },
+      {
+        title: t('coupon-list.startDate'),
+        dataIndex: 'startDate',
+        key: 'startDate',
+        render(value) {
+          return <MomentDisplay date={value} />
+        },
+        ...sorterConfig
+      },
+      {
+        title: t('coupon-list.endDate'),
+        dataIndex: 'endDate',
+        key: 'endDate',
+        render(value) {
+          return <MomentDisplay date={value} />
+        },
+        ...sorterConfig
+      },
+      {
+        title: t('coupon-list.expireDate'),
+        dataIndex: 'expireDate',
+        key: 'expireDate',
+        render(value) {
+          return <MomentDisplay date={value} />
+        },
+        ...sorterConfig
+      },
+
+      {
+        title: t('common.actions'),
+        key: 'action',
+        render(record: Coupon) {
+          return (
+            <CrudButtons
+              onView={() => history.push(`/coupon/${record.id}`)}
+              onEdit={
+                hasPermission(couponEditorRoles)
+                  ? () => history.push(`/coupon/${record.id}/edit`)
+                  : undefined
+              }
+              onDelete={
+                hasPermission(couponEditorRoles) &&
+                (record.state === CouponState.Created || record.state === CouponState.Waiting)
+                  ? () => {
+                      setCouponToDelete({
+                        coupon: record,
+                        popupVisible: true
+                      })
+                    }
+                  : undefined
+              }
+            />
+          )
         }
       }
-    }
-  }
+    ],
+    [categories, sorterConfig, t]
+  )
 
-  const columns: ColumnType<Coupon>[] = [
-    {
-      title: t('coupon-list.name'),
-      dataIndex: 'name',
-      key: 'name',
-      ...notActionCellProps
-    },
-    {
-      title: t('coupon-list.state'),
-      dataIndex: 'state',
-      key: 'state',
-      ...notActionCellProps,
-      filters: Object.keys(CouponState).map(x => {
-        return { text: x, value: x } as ColumnFilterItem
-      }),
-      filterMultiple: false
-    },
-    {
-      title: t('coupon-list.categoryId'),
-      dataIndex: 'categoryId',
-      key: 'categoryId',
-      ...notActionCellProps,
-      render(value) {
-        return categories && categories.find(x => x.id === +value)?.name
-      },
-      filters: categories
-        ? categories.map(x => {
-            return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-          })
-        : [],
-      filterMultiple: false
-    },
-    {
-      title: t('coupon-list.startDate'),
-      dataIndex: 'startDate',
-      key: 'startDate',
-      ...notActionCellProps,
-      render(value) {
-        return <MomentDisplay date={value} />
-      }
-    },
-    {
-      title: t('coupon-list.endDate'),
-      dataIndex: 'endDate',
-      key: 'endDate',
-      ...notActionCellProps,
-      render(value) {
-        return <MomentDisplay date={value} />
-      }
-    },
-    {
-      title: t('coupon-list.expireDate'),
-      dataIndex: 'expireDate',
-      key: 'expireDate',
-      ...notActionCellProps,
-      render(value) {
-        return <MomentDisplay date={value} />
-      }
-    },
-    {
-      title: t('coupon-list.action'),
-      key: 'action',
-      render(_text, record) {
-        return (
-          <span>
-            <Button>
-              <Link to={`/coupon/${record.id}/edit`}>
-                <EditOutlined />
-              </Link>
-            </Button>
-            &nbsp;
-            <Popconfirm
-              title={t('coupon-list.delete-confirm-message')}
-              onConfirm={() => {
-                record.id && dispatch(deleteCoupon(record.id))
-              }}
-              okText={t('common.ok')}
-              cancelText={t('common.cancel')}
-            >
-              <Button danger>
-                <DeleteOutlined />
-              </Button>
-            </Popconfirm>
-          </span>
-        )
-      }
-    }
-  ]
+  const headerOptions = hasPermission(couponEditorRoles) ? (
+    <Button type="primary">
+      <Link to="/coupon">{t('coupon-list.create')}</Link>
+    </Button>
+  ) : (
+    undefined
+  )
 
   return (
-    <div className="coupons-list-page">
-      <Table
-        title={() => (
-          <div className="coupons-list__header">
-            <h3>{t('coupon-list.coupons')}</h3>
-            <Button type="primary">
-              <Link to="/coupon">{t('coupon-list.create')}</Link>
-            </Button>
-          </div>
-        )}
-        dataSource={coupons}
-        columns={columns}
-        rowKey={(x): string => x.id?.toString() ?? ''}
-        pagination={{
-          pageSizeOptions: ['10', '20', '50', '100'],
-          showSizeChanger: true,
-          simple: isMobile,
-          total: allCouponsCount
-        }}
-        loading={loading}
-        onChange={(pagination, filters, sorter) => {
-          const couponListingOptions: CouponListingOptions = {
-            pageSize: pagination.pageSize,
-            current: pagination.current
-          }
+    <>
+      <ResponsivePage>
+        <ResponsiveCard
+          forTable
+          floatingTitle={t('coupon-list.coupons')}
+          floatingOptions={headerOptions}
+          paddedBottom
+          extraWide
+        >
+          <ResponsiveTable
+            {...{
+              loading: loading,
+              columns: columnsConfig,
+              dataSource: coupons.map((u, i) => ({ ...u, key: i })),
+              pagination: paginationConfig,
+              onChange: handleTableChange
+            }}
+          />
+        </ResponsiveCard>
+      </ResponsivePage>
 
-          const couponSorter = sorter as SorterResult<Coupon>
-          if (couponSorter.order) {
-            switch (couponSorter.order) {
-              case 'descend':
-                couponListingOptions.orderByType = OrderByType.Descending
-                if (couponSorter.columnKey) {
-                  couponListingOptions.orderBy = couponSorter.columnKey.toString()
-                }
-                break
-              case 'ascend':
-                couponListingOptions.orderByType = OrderByType.Ascending
-                if (couponSorter.columnKey) {
-                  couponListingOptions.orderBy = couponSorter.columnKey.toString()
-                }
-                break
-            }
-          }
-
-          if (filters.state) {
-            couponListingOptions.state = filters.state[0] as CouponState
-          }
-          if (filters.categoryId) {
-            couponListingOptions.categoryId = filters.categoryId[0] as number
-          }
-
-          setListingOptions(couponListingOptions)
-        }}
+      <GenericPopup
+        id={couponToDelete?.coupon?.id}
+        type="delete"
+        visible={!!couponToDelete?.popupVisible}
+        onOkAction={deleteCoupon(couponToDelete?.coupon?.id!)}
+        onCancel={() => setCouponToDelete({ ...couponToDelete, popupVisible: false })}
+        afterClose={() => setCouponToDelete(null)}
       />
-    </div>
+    </>
   )
 }

@@ -44,8 +44,10 @@ export const pageViewRoles = {
   users: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   newsletters: [Roles.Administrator, Roles.CampaignManager],
   coupons: comboRoles.forAll,
+  couponEditor: [Roles.Administrator, Roles.CampaignManager, ...comboRoles.forPartner],
   sites: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
   categories: comboRoles.forNkm,
+  categoryEditor: [Roles.Administrator],
   segments: comboRoles.forNkm,
   profile: comboRoles.forAll,
   partner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
@@ -59,8 +61,20 @@ const Routes = (): JSX.Element => (
     <PublicRoute onlyPublic exact path="/auth/recovery" component={RecoveryPage} />
     <PublicRoute exact path="/error" component={ErrorPage} />
     <PublicRoute exact path="/error/:type" component={ErrorPage} />
+    <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+    <PrivateRoute
+      exact
+      path="/partner"
+      roles={pageViewRoles.partner}
+      component={PartnerEditorPage}
+    />
     <PrivateRoute exact path="/coupons" roles={pageViewRoles.coupons} component={CouponListPage} />
-    <PrivateRoute exact path="/coupon" roles={pageViewRoles.coupons} component={CouponCreatePage} />
+    <PrivateRoute
+      exact
+      path="/coupon"
+      roles={pageViewRoles.couponEditor}
+      component={CouponCreatePage}
+    />
     <PrivateRoute
       exact
       path="/coupon/:id"
@@ -70,12 +84,21 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/coupon/:id/edit"
-      roles={pageViewRoles.coupons}
+      roles={pageViewRoles.couponEditor}
       component={CouponEditorPage}
     />
-    <PrivateRoute exact path="/categories" component={CategoryPage} />
-    <PrivateRoute exact path="/categories/:id" component={CategoryPage} />
-    <PrivateRoute exact path="/partner" roles={[]} component={PartnerEditorPage} />
+    <PrivateRoute
+      exact
+      path="/categories"
+      roles={pageViewRoles.categories}
+      component={CategoryPage}
+    />
+    <PrivateRoute
+      exact
+      path="/categories/:id"
+      roles={pageViewRoles.categoryEditor}
+      component={CategoryPage}
+    />
     <PrivateRoute
       exact
       path="/profile"
@@ -114,7 +137,6 @@ const Routes = (): JSX.Element => (
       component={NewsletterEditorPage}
     />
     <PrivateRoute exact path="/users" roles={pageViewRoles.users} component={UserAccessListPage} />
-    <PrivateRoute exact path="/dashboard" component={DashboardPage} />
     <Route path="*" render={() => <Redirect to="/coupons" />} />
   </Switch>
 )

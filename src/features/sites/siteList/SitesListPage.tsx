@@ -13,6 +13,7 @@ import { history } from 'router/router'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { useTableUtils } from 'hooks/useTableUtils'
+import { ColumnType } from 'antd/lib/table'
 
 export const SitesListPage: FC = () => {
   const dispatch = useDispatch()
@@ -32,7 +33,7 @@ export const SitesListPage: FC = () => {
     getDataAction: getSites
   })
 
-  const columnsConfig = useMemo(
+  const columnsConfig: ColumnType<Site>[] = useMemo(
     () => [
       {
         title: t('common.data'),

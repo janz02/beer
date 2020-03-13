@@ -75,7 +75,17 @@
       "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt."
     },
     "save": "Mentés",
-    "send": "Küldés"
+    "send": "Küldés",
+    "view": "Megtekintés"
+  },
+  "coupon": {
+    "state": {
+      "accepted": "Elfogadva",
+      "archived": "Archiválva",
+      "closed": "Lezárva",
+      "created": "Létrehozva",
+      "waiting": "Várakozik"
+    }
   },
   "coupon-category": {
     "editor-create": "Létrehozás",
@@ -124,11 +134,9 @@
     "timeline-title": "Előzmények"
   },
   "coupon-list": {
-    "action": "Műveletek",
     "categoryId": "Kategória",
     "coupons": "Kuponok",
     "create": "Létrehozás",
-    "delete-confirm-message": "Biztosan törölni akarja ezt a kupont?",
     "endDate": "Vég dátum",
     "expireDate": "Lejárati dátum",
     "name": "Név",
@@ -187,9 +195,9 @@
   "menu": {
     "coupon-categories": "Kategóriák",
     "coupons": "Kuponok",
-    "dashboard": "Irányítópult",
     "newsletter": "Hírlevél",
     "partner-data": "Partner adatok",
+    "profile": "Profil",
     "sites": "Telephelyek",
     "users": "Felhasználók"
   },
@@ -205,7 +213,6 @@
       "template-version": "Verzió"
     },
     "popup": {
-      "discard-msg": "Nincs minden módosítás mentve, biztos benne, hogy mentés nélkül bezárja a sablont?",
       "preview-discard-msg": "Az aktuális sablon verzióban vannak változtatások. Az előző verzió megtekintésekor a változtatások el fognak veszni.",
       "restore-msg": "Ez a sablon verzió, visszamásolódik a verzió történet tetejére, mint a legfrissebb sablon.",
       "target-segment": "Cél szegmens",

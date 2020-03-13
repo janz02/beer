@@ -11,10 +11,13 @@ import { getProfile } from 'features/profile/profileSlice'
 import { useDispatch } from 'react-redux'
 import {
   UserOutlined,
-  FileOutlined,
   BarcodeOutlined,
   HomeFilled,
-  LogoutOutlined
+  LogoutOutlined,
+  UsergroupAddOutlined,
+  SendOutlined,
+  AppstoreAddOutlined,
+  ContactsOutlined
 } from '@ant-design/icons'
 import { pageViewRoles } from 'router/router'
 import { useSelector } from 'hooks/react-redux-hooks'
@@ -68,25 +71,25 @@ export const PrivateLayout: React.FC = ({ children }) => {
       {
         label: t('menu.partner-data'),
         link: '/partner',
-        icon: <FileOutlined />,
+        icon: <ContactsOutlined />,
         roles: pageViewRoles.partner
       },
       {
         label: t('menu.coupon-categories'),
         link: '/categories',
-        icon: <FileOutlined />,
+        icon: <AppstoreAddOutlined />,
         roles: pageViewRoles.categories
       },
       {
         label: t('menu.newsletter'),
         link: '/newsletter',
-        icon: <FileOutlined />,
+        icon: <SendOutlined />,
         roles: pageViewRoles.newsletters
       },
       {
         label: t('menu.users'),
         link: '/users',
-        icon: <FileOutlined />,
+        icon: <UsergroupAddOutlined />,
         roles: pageViewRoles.users
       }
     ],
