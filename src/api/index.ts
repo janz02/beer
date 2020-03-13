@@ -39,7 +39,7 @@ export const config: Configuration = new Configuration({
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: [
     {
-      post: ctx => {
+      post: async ctx => {
         if (ctx.response.status === 503) {
           notification.error({
             message: i18n.t('error.common.server-unavailable'),
@@ -50,36 +50,30 @@ export const config: Configuration = new Configuration({
         }
         // In case of the refresh endpoint don't display errors.
         else if (ctx.response.status >= 400 && !ctx.url.endsWith('Auth/Refresh')) {
-          // TODO: remove quick fix after the BE is ready.
-          if (ctx.response.status === 403) {
-            console.log('403', { ctx })
+          const error: RequestError = await ctx.response.json()
+          let errorForLog = {}
+          let i = 0
+          error.errors?.forEach(errorItem => {
+            i++
+            let message = errorItem.errorkey ? i18n.t(errorItem.errorkey) : errorItem.message
+            // In case it has errorkey but it isn't translated yet use the english message.
+            if (message === errorItem.errorkey && errorItem.message) {
+              message = errorItem.message
+            }
+            errorForLog = { ...errorForLog, [i]: message }
             notification.error({
-              message: 'Quick fix',
+              message,
               duration: null
             })
-          } else {
-            ctx.response.json().then((error: RequestError) => {
-              let errorForLog = {}
-              let i = 0
-              error.errors?.forEach(errorItem => {
-                i++
-                const message = errorItem.errorkey ? i18n.t(errorItem.errorkey) : errorItem.message
-                errorForLog = { ...errorForLog, [i]: message }
-                notification.error({
-                  message,
-                  duration: null
-                })
-              })
+          })
 
-              console.table({
-                url: ctx.url,
-                code: error.code,
-                guid: error.guid,
-                stacktrace: error.stacktrace,
-                ...errorForLog
-              })
-            })
-          }
+          console.table({
+            url: ctx.url,
+            code: error.code,
+            guid: error.guid,
+            stacktrace: error.stacktrace,
+            ...errorForLog
+          })
         }
 
         return Promise.resolve()
