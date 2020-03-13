@@ -1621,7 +1621,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful claim: couponcode returned",
+            "description": "Successful claim: coupon code returned",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1645,6 +1645,81 @@
           },
           "404": {
             "description": "Entity not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/Coupons/{id}/Activate": {
+      "put": {
+        "tags": [
+          "Coupons"
+        ],
+        "summary": "Changes the active status of a coupon",
+        "description": "Changes the active status of a coupon to the given value",
+        "operationId": "activateCoupon",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of coupon to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Active status of the coupon to change",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivateCouponDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful claim: coupon code returned"
+          },
+          "400": {
+            "description": "Saving error: couponUserCode.error.cant-sav"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/Coupons/CloseCoupons": {
+      "post": {
+        "tags": [
+          "Coupons"
+        ],
+        "summary": "Closes coupons",
+        "description": "Closes coupons when its accepted and either end date is passed or every coupon is claimed.",
+        "operationId": "closeCoupons",
+        "responses": {
+          "200": {
+            "description": "Successful closed coupons",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponCodeVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponCodeVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponCodeVm"
+                }
+              }
+            }
           }
         }
       }
@@ -2156,7 +2231,7 @@
           "Information"
         ],
         "summary": "Returns a list of all the exception errorkeys",
-        "operationId": "getExceptions",
+        "operationId": "getErrorKeys",
         "responses": {
           "200": {
             "description": "Successful query: string list of exception errorkeys",
@@ -4215,6 +4290,15 @@
           "couponCode": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActivateCouponDto": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
