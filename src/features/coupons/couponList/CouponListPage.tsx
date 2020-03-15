@@ -117,7 +117,7 @@ export const CouponListPage: React.FC = () => {
       },
 
       {
-        title: t('common.actions'),
+        title: '',
         key: 'action',
         render(record: Coupon) {
           return (

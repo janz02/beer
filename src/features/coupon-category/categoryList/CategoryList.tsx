@@ -42,7 +42,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
       },
       hasPermission([Roles.Administrator])
         ? {
-            title: t('common.actions'),
+            title: '',
             key: 'actions',
             colSpan: 1,
             render(record: Category) {

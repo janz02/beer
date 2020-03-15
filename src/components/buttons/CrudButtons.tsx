@@ -1,3 +1,4 @@
+import './CrudButtons.scss'
 import React, { FC } from 'react'
 import { Tooltip, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
@@ -25,7 +26,7 @@ export const CrudButtons: FC<CrudButtonsProps> = props => {
   const { t } = useTranslation()
 
   return (
-    <>
+    <div className="crudButtons">
       {onSend && (
         <Tooltip {...tooltipConfig} title={t('common.send')}>
           <Button onClick={onSend}>
@@ -54,6 +55,6 @@ export const CrudButtons: FC<CrudButtonsProps> = props => {
           </Button>
         </Tooltip>
       )}
-    </>
+    </div>
   )
 }

@@ -50,7 +50,7 @@ export const SitesListPage: FC = () => {
         }
       },
       {
-        title: t('common.actions'),
+        title: '',
         key: 'actions',
         colSpan: 1,
         render(value: unknown, record: Site) {
