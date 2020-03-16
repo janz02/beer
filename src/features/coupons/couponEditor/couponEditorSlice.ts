@@ -6,7 +6,7 @@ import { message } from 'antd'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import moment from 'moment'
-import { CouponCommentVm } from 'api/swagger'
+import { CouponComment } from 'models/couponComment'
 
 interface CouponEditorState {
   coupon?: Coupon
@@ -23,7 +23,7 @@ const couponEditorSlice = createSlice({
   name: 'couponEditor',
   initialState,
   reducers: {
-    getCouponsSuccess(state, action: PayloadAction<Coupon>) {
+    getCouponSuccess(state, action: PayloadAction<Coupon>) {
       state.coupon = action.payload
 
       state.loading = false
@@ -38,7 +38,7 @@ const couponEditorSlice = createSlice({
       state.loading = false
       state.error = null
     },
-    getCouponCommentsSuccess(state, action: PayloadAction<CouponCommentVm[]>) {
+    getCouponCommentsSuccess(state, action: PayloadAction<CouponComment[]>) {
       if (state.coupon) {
         state.coupon.comments = action.payload
       }
@@ -56,7 +56,7 @@ const couponEditorSlice = createSlice({
 })
 
 export const {
-  getCouponsSuccess,
+  getCouponSuccess,
   updateCouponSuccess,
   deleteCouponCommentsSuccess,
   getCouponCommentsSuccess,
@@ -72,11 +72,14 @@ export const getCoupon = (id: number): AppThunk => async dispatch => {
   try {
     const coupon = await api.coupons.getCoupon({ id })
     dispatch(
-      getCouponsSuccess({
+      getCouponSuccess({
         ...coupon,
         startDate: coupon.startDate && moment(coupon.startDate),
         endDate: coupon.endDate && moment(coupon.endDate),
-        expireDate: coupon.expireDate && moment(coupon.expireDate)
+        expireDate: coupon.expireDate && moment(coupon.expireDate),
+        comments: coupon.comments?.map(x => {
+          return { ...x, dateTime: moment(x.dateTime) }
+        })
       } as Coupon)
     )
   } catch (err) {
@@ -117,7 +120,13 @@ export const getCouponComments = (couponId: number): AppThunk => async dispatch 
   try {
     const comments = await api.couponComments.getCouponComments({ couponId })
 
-    dispatch(getCouponCommentsSuccess(comments))
+    dispatch(
+      getCouponCommentsSuccess(
+        comments.map(x => {
+          return { ...x, dateTime: moment(x.dateTime) }
+        })
+      )
+    )
   } catch (err) {
     dispatch(setLoadingFailed(err.toString()))
   }

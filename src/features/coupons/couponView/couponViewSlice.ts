@@ -9,12 +9,12 @@ import { CouponState } from 'api/swagger'
 
 interface CouponEditorState {
   coupon?: Coupon
-  error: string | null
+  error: boolean
   loading: boolean
 }
 
 const initialState: CouponEditorState = {
-  error: null,
+  error: false,
   loading: false
 }
 
@@ -22,29 +22,29 @@ const couponViewSlice = createSlice({
   name: 'couponView',
   initialState,
   reducers: {
-    getCouponsSuccess(state, action: PayloadAction<Coupon>) {
+    getCouponSuccess(state, action: PayloadAction<Coupon>) {
       state.coupon = action.payload
 
       state.loading = false
-      state.error = null
+      state.error = false
     },
     setLoadingStart(state) {
       state.loading = true
     },
-    setLoadingFailed(state, action: PayloadAction<string>) {
+    setLoadingFailed(state) {
       state.loading = false
-      state.error = action.payload
+      state.error = true
     },
     updateCouponStatusSuccess(state) {
       message.success(i18n.t('coupon-editor.save-coupon-status-success'), 10)
       state.loading = false
-      state.error = null
+      state.error = false
     }
   }
 })
 
 export const {
-  getCouponsSuccess,
+  getCouponSuccess,
   setLoadingStart,
   setLoadingFailed,
   updateCouponStatusSuccess
@@ -59,15 +59,18 @@ export const getCoupon = (id: number): AppThunk => async dispatch => {
     const coupon = await api.coupons.getCoupon({ id })
 
     dispatch(
-      getCouponsSuccess({
+      getCouponSuccess({
         ...coupon,
         startDate: coupon.startDate && moment(coupon.startDate),
         endDate: coupon.endDate && moment(coupon.endDate),
-        expireDate: coupon.expireDate && moment(coupon.expireDate)
+        expireDate: coupon.expireDate && moment(coupon.expireDate),
+        comments: coupon.comments?.map(x => {
+          return { ...x, dateTime: moment(x.dateTime) }
+        })
       } as Coupon)
     )
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()))
+    dispatch(setLoadingFailed())
   }
 }
 
@@ -79,14 +82,24 @@ export const updateCouponStatus = (
   dispatch(setLoadingStart())
 
   try {
-    await api.coupons.updateCouponStatus({
-      id: id,
-      changeCouponStateDto: { state: couponState, comment }
-    })
+    if (couponState) {
+      await api.coupons.updateCouponStatus({
+        id: id,
+        changeCouponStateDto: {
+          comment,
+          state: couponState
+        }
+      })
+    } else {
+      await api.couponComments.addCouponComment({
+        couponId: id,
+        couponCommentDto: { comment: comment }
+      })
+    }
 
     dispatch(updateCouponStatusSuccess())
     dispatch(getCoupon(id))
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()))
+    dispatch(setLoadingFailed())
   }
 }

@@ -29,6 +29,8 @@ import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButton } from 'components/buttons/BackButton'
 import { history } from 'router/router'
+import { updateCouponStatus } from '../couponView/couponViewSlice'
+import { MomentDisplay } from 'components/MomentDisplay'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -77,6 +79,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   useEffect(() => {
     setInitialFieldsValueComment({
+      couponState: '',
       comment: ''
     })
   }, [coupon, setInitialFieldsValueComment])
@@ -100,11 +103,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }
 
   const handleStatusSubmit = (values: any): void => {
-    // TODO: integrate
-    console.log(values)
-    // coupon &&
-    //   coupon.id &&
-    //   dispatch(updateCouponStatus(coupon.id, values.couponState, values.comment))
+    coupon &&
+      coupon.id &&
+      dispatch(updateCouponStatus(coupon.id, values.couponState, values.comment))
     resetFormFlagsComment()
   }
 
@@ -136,25 +137,46 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     undefined
   )
 
+  const translateState = (state?: CouponState): string => {
+    switch (state) {
+      case CouponState.Created:
+        return t('coupon-create.states.create')
+      case CouponState.Accepted:
+        return t('coupon-create.states.accept')
+      case CouponState.Waiting:
+        return t('coupon-create.states.wait')
+      case CouponState.Closed:
+        return t('coupon-create.states.close')
+      case CouponState.Archived:
+        return t('coupon-create.states.archive')
+      default:
+        return ''
+    }
+  }
+
   const couponStatusDropdown = (): JSX.Element => {
     switch (coupon?.state) {
       case CouponState.Created:
         return (
           <Select>
-            <Select.Option key={CouponState.Accepted} value={CouponState.Accepted}>
-              {t('coupon-create.states.accept')}
-            </Select.Option>
             <Select.Option key={CouponState.Waiting} value={CouponState.Waiting}>
-              {t('coupon-create.states.wait')}
+              {translateState(CouponState.Waiting)}
+            </Select.Option>
+          </Select>
+        )
+      case CouponState.Waiting:
+        return (
+          <Select>
+            <Select.Option key={CouponState.Accepted} value={CouponState.Accepted}>
+              {translateState(CouponState.Accepted)}
             </Select.Option>
           </Select>
         )
       case CouponState.Accepted:
-      case CouponState.Waiting:
         return (
           <Select>
             <Select.Option key={CouponState.Closed} value={CouponState.Closed}>
-              {t('coupon-create.states.close')}
+              {translateState(CouponState.Closed)}
             </Select.Option>
           </Select>
         )
@@ -162,7 +184,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         return (
           <Select>
             <Select.Option key={CouponState.Archived} value={CouponState.Archived}>
-              {t('coupon-create.states.archive')}
+              {translateState(CouponState.Archived)}
             </Select.Option>
           </Select>
         )
@@ -209,7 +231,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               <TextArea disabled={!displayEditor} maxLength={255} />
             </Form.Item>
 
-            <Form.Item name="rank" label={t('coupon-create.field.rank')}>
+            <Form.Item name="rank" label={t('coupon-create.field.rank')} rules={[rule.required()]}>
               <Select disabled={!displayEditor}>
                 {Object.keys(CouponRank).map(x => (
                   <Select.Option key={x} value={x}>
@@ -219,7 +241,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               </Select>
             </Form.Item>
 
-            <Form.Item name="categoryId" label={t('coupon-create.field.category')}>
+            <Form.Item
+              name="categoryId"
+              label={t('coupon-create.field.category')}
+              rules={[rule.required()]}
+            >
               <Select disabled={!displayEditor}>
                 {categories &&
                   categories.map(x => (
@@ -230,7 +256,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               </Select>
             </Form.Item>
 
-            <Form.Item name="type" label={t('coupon-create.field.discount-type')}>
+            <Form.Item
+              name="type"
+              label={t('coupon-create.field.discount-type')}
+              rules={[rule.required()]}
+            >
               <Select disabled={!displayEditor}>
                 {Object.keys(CouponType).map(x => (
                   <Select.Option key={x} value={x}>
@@ -245,6 +275,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               label={t('coupon-create.field.discount-amount')}
               dependencies={['type']}
               rules={[
+                rule.required(),
                 ({ getFieldValue }) => ({
                   validator(rule, value) {
                     if (value > 100 && getFieldValue('type') === CouponType.PercentValue) {
@@ -258,19 +289,35 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               <InputNumber disabled={!displayEditor} min={1} />
             </Form.Item>
 
-            <Form.Item name="startDate" label={t('coupon-create.field.distribution-start-date')}>
+            <Form.Item
+              name="startDate"
+              label={t('coupon-create.field.distribution-start-date')}
+              rules={[rule.required()]}
+            >
               <DatePicker disabled={!displayEditor} />
             </Form.Item>
 
-            <Form.Item name="endDate" label={t('coupon-create.field.distribution-end-date')}>
+            <Form.Item
+              name="endDate"
+              label={t('coupon-create.field.distribution-end-date')}
+              rules={[rule.required()]}
+            >
               <DatePicker disabled={!displayEditor} />
             </Form.Item>
 
-            <Form.Item name="expireDate" label={t('coupon-create.field.expiration-date')}>
+            <Form.Item
+              name="expireDate"
+              label={t('coupon-create.field.expiration-date')}
+              rules={[rule.required()]}
+            >
               <DatePicker disabled={!displayEditor} />
             </Form.Item>
 
-            <Form.Item name="couponCount" label={t('coupon-create.field.coupon-count')}>
+            <Form.Item
+              name="couponCount"
+              label={t('coupon-create.field.coupon-count')}
+              rules={[rule.required()]}
+            >
               <InputNumber disabled={!displayEditor} min={1} />
             </Form.Item>
 
@@ -338,10 +385,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     cancelText={t('common.cancel')}
                   >
                     <div className="timeline-item__title">
-                      2020.01.30 &nbsp;
-                      <strong>
-                        Waiting <ArrowRightOutlined /> Approved
-                      </strong>
+                      <MomentDisplay date={x.dateTime} /> &nbsp;
+                      {x.stateFrom && x.stateTo && (
+                        <strong>
+                          {translateState(x.stateFrom)} <ArrowRightOutlined />{' '}
+                          {translateState(x.stateTo)}
+                        </strong>
+                      )}
                     </div>
                     <div className="timeline-item__body text-faded">
                       {x.comment} - Lugosi Boglárka
