@@ -46,7 +46,7 @@ export const CashierList: FC<CashierListProps> = props => {
         ...sorterConfig
       },
       {
-        title: t('common.actions'),
+        title: '',
         key: 'actions',
         colSpan: 1,
         render(record: Cashier) {
