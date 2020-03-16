@@ -107,6 +107,7 @@
       "accept": "Accept",
       "archive": "Archive",
       "close": "Close",
+      "create": "Create",
       "wait": "Wait"
     },
     "status-title": "Modify state"

@@ -107,6 +107,7 @@
       "accept": "Elfogadás",
       "archive": "Archiválás",
       "close": "Lezárás",
+      "create": "Rögzített",
       "wait": "Várakozás"
     },
     "status-title": "Státusz módosítás"

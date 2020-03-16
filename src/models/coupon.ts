@@ -1,5 +1,6 @@
 import moment from 'moment'
-import { CouponRank, CouponType, CouponState, CouponCommentVm } from 'api/swagger/models'
+import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
+import { CouponComment } from './couponComment'
 
 export interface Coupon {
   id?: number
@@ -17,5 +18,5 @@ export interface Coupon {
   tags?: []
   isDrawable?: boolean
   state?: CouponState
-  comments?: CouponCommentVm[]
+  comments?: CouponComment[]
 }
