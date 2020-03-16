@@ -160,7 +160,7 @@
       "invalid-value": "Helytelen érték.",
       "max-length": "Túl hosszú szöveg.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
-      "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
+      "password-format": "Invalid jelszó formátum.",
       "server-unavailable": "Szerver nem elérhető."
     },
     "coupon": {

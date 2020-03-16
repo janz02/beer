@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Alert } from 'antd'
+import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -11,12 +11,11 @@ import { useCommonFormRules } from 'hooks/useCommonFormRules'
 export const LoginPage: React.FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { loading, errorLogin: error } = useSelector((state: RootState) => state.auth)
+  const { loading } = useSelector((state: RootState) => state.auth)
   const rule = useCommonFormRules()
 
   return (
     <AuthLayout title={t(`auth.login`)}>
-      {error && <Alert message={t('error.auth.login-failed')} type="error" />}
       <Form
         name="login"
         layout="vertical"
