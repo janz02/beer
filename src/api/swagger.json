@@ -1729,8 +1729,8 @@
         "tags": [
           "CouponUserCodes"
         ],
-        "summary": "Returns the claimed couponcodes for a coupon",
-        "description": "Returns a list of couponcodes that have been claimed for coupon with an Id of couponId",
+        "summary": "Returns the claimed coupon codes for a coupon",
+        "description": "Returns a list of coupon codes that have been claimed for coupon with an Id of couponId",
         "operationId": "getClaimedCoupons",
         "parameters": [
           {
@@ -1779,8 +1779,8 @@
         "tags": [
           "CouponUserCodes"
         ],
-        "summary": "Archives all couponcodes",
-        "description": "Archives every couponcode in the database",
+        "summary": "Archives all coupon codes",
+        "description": "Archives every coupon code in the database",
         "operationId": "archiveClaimedCoupons",
         "responses": {
           "200": {

@@ -176,8 +176,6 @@ export const getCashiers = (params: ListRequestParams = {}): AppThunk => async (
       siteId: site.id
     })
 
-    console.log('getCashiers', { result, pagination })
-
     dispatch(
       getCashiersSuccess({
         cashiers: result as Cashier[],
