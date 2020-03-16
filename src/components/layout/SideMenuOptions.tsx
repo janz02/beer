@@ -36,9 +36,9 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
     >
       {options
         .filter(option => hasPermission(option.roles ?? []))
-        .map(option => (
+        .map((option, i) => (
           <Menu.Item
-            key={option.link}
+            key={`option.link_${i}`}
             onClick={() => {
               option.onClick?.()
               handleClose()
