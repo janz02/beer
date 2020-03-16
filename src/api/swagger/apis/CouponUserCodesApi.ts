@@ -33,8 +33,8 @@ export interface GetClaimedCouponsRequest {
 export class CouponUserCodesApi extends runtime.BaseAPI {
 
     /**
-     * Archives every couponcode in the database
-     * Archives all couponcodes
+     * Archives every coupon code in the database
+     * Archives all coupon codes
      */
     async archiveClaimedCouponsRaw(): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -56,16 +56,16 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Archives every couponcode in the database
-     * Archives all couponcodes
+     * Archives every coupon code in the database
+     * Archives all coupon codes
      */
     async archiveClaimedCoupons(): Promise<void> {
         await this.archiveClaimedCouponsRaw();
     }
 
     /**
-     * Returns a list of couponcodes that have been claimed for coupon with an Id of couponId
-     * Returns the claimed couponcodes for a coupon
+     * Returns a list of coupon codes that have been claimed for coupon with an Id of couponId
+     * Returns the claimed coupon codes for a coupon
      */
     async getClaimedCouponsRaw(requestParameters: GetClaimedCouponsRequest): Promise<runtime.ApiResponse<ClaimedCouponCodeVm>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
@@ -91,8 +91,8 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns a list of couponcodes that have been claimed for coupon with an Id of couponId
-     * Returns the claimed couponcodes for a coupon
+     * Returns a list of coupon codes that have been claimed for coupon with an Id of couponId
+     * Returns the claimed coupon codes for a coupon
      */
     async getClaimedCoupons(requestParameters: GetClaimedCouponsRequest): Promise<ClaimedCouponCodeVm> {
         const response = await this.getClaimedCouponsRaw(requestParameters);

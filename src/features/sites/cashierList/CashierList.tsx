@@ -7,7 +7,7 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTableUtils } from 'hooks/useTableUtils'
-import { updateCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
+import { getCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ColumnType } from 'antd/lib/table'
@@ -19,7 +19,9 @@ interface CashierListProps {
 export const CashierList: FC<CashierListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { pagination, cashiers, site } = useSelector((state: RootState) => state.siteEditor)
+  const { pagination, cashiers, site, loadingCashiers } = useSelector(
+    (state: RootState) => state.siteEditor
+  )
 
   const [cashierToDelete, setCashierToDelete] = useState<{
     cashier?: Cashier
@@ -28,7 +30,7 @@ export const CashierList: FC<CashierListProps> = props => {
 
   const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
     paginationState: pagination,
-    getDataAction: updateCashiers
+    getDataAction: getCashiers
   })
 
   const columnsConfig: ColumnType<Cashier>[] = useMemo(
@@ -88,6 +90,7 @@ export const CashierList: FC<CashierListProps> = props => {
         <ResponsiveTable
           hasHeaderOffset
           {...{
+            loading: loadingCashiers,
             columns: columnsConfig,
             dataSource: cashiers?.map((c, i) => ({ ...c, key: '' + i + c.id })),
             pagination: paginationConfig,
