@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Alert, Checkbox } from 'antd'
+import { Form, Input, Button, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { signUp } from './authSlice'
@@ -11,12 +11,11 @@ import { useCommonFormRules } from 'hooks/useCommonFormRules'
 export const SignupPage: React.FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { loading, errorSignup: error } = useSelector((state: RootState) => state.auth)
+  const { loading } = useSelector((state: RootState) => state.auth)
   const rule = useCommonFormRules()
 
   return (
     <AuthLayout className="signup" title={t(`auth.signup`)}>
-      {error && <Alert message={t('error.auth.signup-failed')} type="error" />}
       <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
         <Form.Item
           name="name"
