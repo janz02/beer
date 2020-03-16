@@ -67,9 +67,9 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
       <Form.Item
         label={t('coupon-category.field.name')}
         name="name"
-        rules={[rule.required(), rule.max(20)]}
+        rules={[rule.required(), rule.max(50)]}
       >
-        <Input />
+        <Input maxLength={50} />
       </Form.Item>
     </GenericModalForm>
   )

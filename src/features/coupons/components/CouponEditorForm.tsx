@@ -193,12 +193,20 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               checkFieldsChange()
             }}
           >
-            <Form.Item name="name" label={t('coupon-create.field.name')} rules={[rule.required()]}>
-              <Input disabled={!displayEditor} />
+            <Form.Item
+              name="name"
+              label={t('coupon-create.field.name')}
+              rules={[rule.required(), rule.max(60)]}
+            >
+              <Input disabled={!displayEditor} maxLength={60} />
             </Form.Item>
 
-            <Form.Item name="description" label={t('coupon-create.field.description')}>
-              <TextArea disabled={!displayEditor} />
+            <Form.Item
+              name="description"
+              label={t('coupon-create.field.description')}
+              rules={[rule.max(255)]}
+            >
+              <TextArea disabled={!displayEditor} maxLength={255} />
             </Form.Item>
 
             <Form.Item name="rank" label={t('coupon-create.field.rank')}>

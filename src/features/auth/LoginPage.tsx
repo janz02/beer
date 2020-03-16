@@ -22,11 +22,19 @@ export const LoginPage: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={values => dispatch(login(values))}
       >
-        <Form.Item label={t('auth.field.email')} name="username" rules={[rule.required()]}>
-          <Input />
+        <Form.Item
+          label={t('auth.field.email')}
+          name="username"
+          rules={[rule.required(), rule.max(50)]}
+        >
+          <Input maxLength={50} />
         </Form.Item>
-        <Form.Item label={t('auth.field.password')} name="password" rules={[rule.required()]}>
-          <Input.Password />
+        <Form.Item
+          label={t('auth.field.password')}
+          name="password"
+          rules={[rule.required(), rule.max(64)]}
+        >
+          <Input.Password maxLength={64} />
         </Form.Item>
         {/* TODO: was commented out because there is no BE support yet -> see NRMRTDKPR-125 */}
         {/* <div className="login__options">

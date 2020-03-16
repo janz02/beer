@@ -22,15 +22,15 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.name')}
           rules={[rule.required(), rule.max(100)]}
         >
-          <Input />
+          <Input maxLength={100} />
         </Form.Item>
 
         <Form.Item
           name="username"
           label={t('auth.field.email')}
-          rules={[rule.required(), rule.email(), rule.max(50)]}
+          rules={[rule.required(), rule.email(), rule.max(100)]}
         >
-          <Input />
+          <Input maxLength={100} />
         </Form.Item>
 
         <Form.Item
@@ -39,7 +39,7 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.password')}
           rules={[rule.required(), rule.password()]}
         >
-          <Input.Password />
+          <Input.Password maxLength={64} />
         </Form.Item>
 
         <Form.Item
@@ -59,15 +59,20 @@ export const SignupPage: React.FC = () => {
             })
           ]}
         >
-          <Input.Password />
+          <Input.Password maxLength={64} />
         </Form.Item>
 
-        <Form.Item name="phone" label={t('auth.field.phone')} rules={[rule.max(20)]}>
-          <Input type="tel" />
+        <Form.Item
+          name="phone"
+          label={t('auth.field.phone')}
+          rules={[rule.max(20)]}
+          help={t('common.field.help.phone-format')}
+        >
+          <Input type="tel" maxLength={20} />
         </Form.Item>
 
-        <Form.Item name="code" label={t('auth.field.code')} rules={[rule.required(), rule.max(30)]}>
-          <Input />
+        <Form.Item name="code" label={t('auth.field.code')} rules={[rule.required(), rule.max(10)]}>
+          <Input maxLength={10} />
         </Form.Item>
 
         <Form.Item name="acceptTerms" valuePropName="checked">
