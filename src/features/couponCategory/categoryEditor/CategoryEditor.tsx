@@ -51,7 +51,6 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
 
   return (
     <GenericModalForm
-      // loadingContent={loading}
       loadingAction={loading}
       modalProps={{
         visible: visible,
