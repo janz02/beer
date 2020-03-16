@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react'
 import { SiteEditorForm } from './SiteEditorForm'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSiteEditorData, resetSiteEditor, saveSite } from './siteEditorSlice'
+import { resetSiteEditor, saveSite, getSite } from './siteEditorSlice'
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
 import { history } from 'router/router'
@@ -23,7 +23,7 @@ export const SiteEditorPage: FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    siteId && dispatch(getSiteEditorData(siteId))
+    siteId && dispatch(getSite(siteId))
   }, [dispatch, siteId])
 
   const {

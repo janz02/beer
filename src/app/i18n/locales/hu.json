@@ -199,7 +199,11 @@
     }
   },
   "error-page": {
-    "back": "Vissza a főoldalra"
+    "back": "Vissza a főoldalra",
+    "message": {
+      "403": "Sajnos nincs jogosultsága ehhez az oldalhoz.",
+      "default": "Hiba történt!"
+    }
   },
   "languages": {
     "en": "English",
