@@ -11,17 +11,19 @@ import { GenericModalForm } from 'components/popups/GenericModalForm'
 
 interface CashierEditorProps {
   params: GenericModalFormEditorParams
-  onExit: () => void
+  handleExit: () => void
   afterClose: () => void
 }
 
 export const CashierEditor: FC<CashierEditorProps> = props => {
-  const { params, onExit, afterClose } = props
+  const { params, handleExit, afterClose } = props
   const { visible, id, isNew } = params
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [form] = Form.useForm()
-  const { cashier } = useSelector((state: RootState) => state.siteEditor)
+  const { cashier, loadingCashierSave, loadingCashierGet } = useSelector(
+    (state: RootState) => state.siteEditor
+  )
   const rule = useCommonFormRules()
 
   useEffect(() => {
@@ -40,9 +42,9 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
 
   const modalTitle = isNew ? t('cashier-editor.editor-create') : t('cashier-editor.editor-edit')
 
-  const onSave = async (cashier: Cashier): Promise<void> => {
-    dispatch(saveCashier({ ...cashier, id }))
-    onExit()
+  const handleSave = async (cashier: Cashier): Promise<void> => {
+    const saved: any = await dispatch(saveCashier({ ...cashier, id }))
+    saved && handleExit()
   }
 
   const afterCloseExtended = (): void => {
@@ -52,16 +54,18 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
 
   return (
     <GenericModalForm
+      loadingAction={loadingCashierSave}
+      loadingContent={loadingCashierGet}
       modalProps={{
         visible: visible,
         title: modalTitle,
         okText: t('common.save'),
         afterClose: afterCloseExtended,
-        onCancel: onExit
+        onCancel: handleExit
       }}
       formProps={{
         name: 'cashier-editor',
-        onFinish: onSave
+        onFinish: handleSave
       }}
       initialValues={cashier}
     >

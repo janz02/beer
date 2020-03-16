@@ -109,6 +109,7 @@ const siteEditorSlice = createSlice({
       state.loadingCashierSave = true
     },
     saveCashierSuccess(state) {
+      message.success(i18n.t('common.message.save-success'), 5)
       state.loadingCashierSave = false
       state.error = ''
     },
@@ -273,8 +274,10 @@ export const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getS
     const siteEditorState = getState().siteEditor
     siteEditorState.site?.id &&
       dispatch(getSiteEditorData(siteEditorState.site?.id, siteEditorState.pagination))
+    return true
   } catch (err) {
     dispatch(saveCashierFail(err.toString()))
+    return false
   }
 }
 

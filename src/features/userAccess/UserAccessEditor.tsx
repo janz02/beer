@@ -36,7 +36,9 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { editedUser, editorLoading } = useSelector((state: RootState) => state.userAccessList)
+  const { editedUser, loadingEditor, loadingSave } = useSelector(
+    (state: RootState) => state.userAccessList
+  )
 
   useEffect(() => {
     if (!visible) return
@@ -81,30 +83,30 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
     [editedUser]
   )
 
+  const handleSave = async (values: UserAccessFormValues): Promise<void> => {
+    const { role, status } = values
+    if (userId && role && status) {
+      const saved = await dispatch(saveUserAccess(userId, role, status === Status.ACTIVE, userType))
+      saved && handleClose && handleClose()
+    }
+  }
+
   return (
     <GenericModalForm
       initialValues={initialValues}
-      loadingContent={editorLoading}
+      loadingContent={loadingEditor}
+      loadingAction={loadingSave}
       modalProps={{
         visible,
         title: t('user-access.access-editor.title'),
         okText: t('common.save'),
-        okButtonProps: {
-          disabled: editorLoading
-        },
         onCancel: handleClose,
         afterClose: () => {
           dispatch(clearUserAccessEditor())
         }
       }}
       formProps={{
-        onFinish: (values: UserAccessFormValues) => {
-          const { role, status } = values
-          if (role && status) {
-            dispatch(saveUserAccess(userId!, role, status === Status.ACTIVE, userType))
-          }
-          handleClose && handleClose()
-        }
+        onFinish: handleSave
       }}
     >
       <Text>{editedUser?.name}</Text>

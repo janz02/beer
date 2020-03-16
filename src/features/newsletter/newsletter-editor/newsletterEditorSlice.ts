@@ -13,11 +13,13 @@ interface NewsletterEditorState {
   error: string
   currentTemplateVersionId?: number
   template?: Newsletter
+  loadingEmail?: boolean
   log?: any
   segments: Segment[]
 }
 
 const initialState: NewsletterEditorState = {
+  loadingEmail: false,
   error: '',
   segments: []
 }
@@ -32,9 +34,15 @@ const newsletterEditorSlice = createSlice({
     restoreTemplateVersionRequest() {},
     restoreTemplateVersionSuccess() {},
     restoreTemplateVersionFail(state, action: PayloadAction<string>) {},
-    sendEmailRequest() {},
-    sendEmailSuccess() {},
-    sendEmailFail(state, action: PayloadAction<string>) {},
+    sendEmailRequest(state) {
+      state.loadingEmail = true
+    },
+    sendEmailSuccess(state) {
+      state.loadingEmail = false
+    },
+    sendEmailFail(state, action: PayloadAction<string>) {
+      state.loadingEmail = false
+    },
     getTemplateRequest() {},
     getTemplateSuccess(state, action: PayloadAction<Newsletter>) {
       state.template = action.payload
@@ -137,7 +145,7 @@ export const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch,
       version: version
     })
     dispatch(restoreTemplateVersionSuccess())
-    dispatch(getNewsletterTemplate(id!))
+    dispatch(getNewsletterTemplate(id))
   } catch (err) {
     dispatch(restoreTemplateVersionFail(err.toString()))
   }

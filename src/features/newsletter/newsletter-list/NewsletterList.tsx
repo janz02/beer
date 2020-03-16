@@ -26,7 +26,9 @@ export const NewsletterList: FC = () => {
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { templates, pagination, loading } = useSelector((state: RootState) => state.newsletterList)
+  const { templates, pagination, loading, loadingCreate } = useSelector(
+    (state: RootState) => state.newsletterList
+  )
 
   const [visibleSaveNewPopup, setVisibleSaveNewPopup] = useState(false)
   const [deletePopup, setDeletePopup] = useState<{
@@ -97,6 +99,12 @@ export const NewsletterList: FC = () => {
     [editTemplate, sorterConfig, t]
   )
 
+  const handleSave = async (values: any): Promise<void> => {
+    const { templateName } = values
+    const created = await dispatch(createNewsletterTemplate(templateName))
+    created && setVisibleSaveNewPopup(false)
+  }
+
   const headerOptions = (
     <Button type="primary" onClick={() => setVisibleSaveNewPopup(true)}>
       {t('common.create')}
@@ -132,6 +140,7 @@ export const NewsletterList: FC = () => {
       />
 
       <GenericModalForm
+        loadingAction={loadingCreate}
         modalProps={{
           visible: visibleSaveNewPopup,
           title: t('newsletter.popup.title-save'),
@@ -141,11 +150,7 @@ export const NewsletterList: FC = () => {
           }
         }}
         formProps={{
-          onFinish: (values: any) => {
-            const { templateName } = values
-            dispatch(createNewsletterTemplate(templateName))
-            setVisibleSaveNewPopup(false)
-          }
+          onFinish: handleSave
         }}
       >
         <Form.Item

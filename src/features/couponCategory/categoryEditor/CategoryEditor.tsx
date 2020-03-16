@@ -17,17 +17,17 @@ export interface CategoryEditorParams {
 
 interface CategoryEditorProps {
   params: GenericModalFormEditorParams
-  onExit: () => void
+  handleExit: () => void
   afterClose: () => void
 }
 
 export const CategoryEditor: FC<CategoryEditorProps> = props => {
-  const { params, onExit, afterClose } = props
+  const { params, handleExit, afterClose } = props
   const { visible, id, isNew } = params
 
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { category } = useSelector((state: RootState) => state.categoryEditor)
+  const { category, loading } = useSelector((state: RootState) => state.categoryEditor)
   const rule = useCommonFormRules()
 
   const initialValues = useMemo(() => ({ name: category?.name }), [category])
@@ -43,20 +43,28 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
 
   const onSave = async (values: Category): Promise<void> => {
     const newCategory: Category = { id, name: values.name }
-    dispatch(saveCategory(newCategory))
-    onExit()
+    const saved: any = await dispatch(saveCategory(newCategory))
+    saved && handleExit()
   }
 
   const modalTitle = isNew ? t('coupon-category.editor-create') : t('coupon-category.editor-edit')
 
+  console.log({ loading })
+
   return (
     <GenericModalForm
+      // loadingContent={loading}
+      loadingAction={loading}
       modalProps={{
         visible: visible,
         title: modalTitle,
         okText: t('common.save'),
+        okButtonProps: {
+          loading,
+          disabled: loading
+        },
         afterClose: afterCloseExtended,
-        onCancel: onExit
+        onCancel: handleExit
       }}
       formProps={{
         name: 'category-editor',

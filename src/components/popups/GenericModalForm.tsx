@@ -11,6 +11,7 @@ export interface GenericModalFormProps {
   modalProps: ModalProps
   initialValues?: any
   loadingContent?: boolean
+  loadingAction?: boolean
   disabledNavPrompt?: boolean
 }
 
@@ -41,6 +42,7 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
     modalProps,
     initialValues,
     loadingContent,
+    loadingAction,
     disabledNavPrompt
   } = props
   const { t } = useTranslation()
@@ -77,10 +79,12 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
       cancelText={t(`common.cancel`)}
       {...modalProps}
       onOk={onOk}
-      okButtonProps={{ disabled: !submitable || !modified }}
+      okButtonProps={{
+        disabled: !submitable || !modified || loadingAction,
+        loading: loadingAction
+      }}
       afterClose={() => {
         form.resetFields()
-        resetFormFlags()
         modalProps?.afterClose?.()
       }}
     >
@@ -94,6 +98,10 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
           form={form}
           onFieldsChange={() => {
             checkFieldsChange()
+          }}
+          onFinish={values => {
+            resetFormFlags()
+            formProps.onFinish?.(values)
           }}
         >
           {children}

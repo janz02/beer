@@ -19,7 +19,8 @@ interface UserAccessListState {
   partnerPagination: Pagination
   nkmLoading: boolean
   partnerLoading: boolean
-  editorLoading: boolean
+  loadingSave: boolean
+  loadingEditor: boolean
   editedUser?: UserAccess
   errorList: string
   errorDeletion: string
@@ -37,7 +38,8 @@ const initialState: UserAccessListState = {
   },
   nkmLoading: false,
   partnerLoading: false,
-  editorLoading: false,
+  loadingEditor: false,
+  loadingSave: false,
   errorList: '',
   errorDeletion: '',
   errorEditor: ''
@@ -82,11 +84,11 @@ const userAccessListSlice = createSlice({
     },
 
     getUserRequest(state) {
-      state.editorLoading = true
+      state.loadingEditor = true
     },
     getUserSuccess(state, action: PayloadAction<UserAccess>) {
       state.editedUser = action.payload
-      state.editorLoading = false
+      state.loadingEditor = false
       state.errorDeletion = ''
     },
     getUserFail(state, action: PayloadAction<string>) {
@@ -95,20 +97,22 @@ const userAccessListSlice = createSlice({
     },
 
     saveUserRequest(state) {
-      state.editorLoading = true
+      state.loadingSave = true
     },
     saveUserSuccess(state) {
-      state.editorLoading = false
+      state.loadingSave = false
       state.errorEditor = ''
     },
     saveUserFail(state, action: PayloadAction<string>) {
-      state.partnerLoading = false
+      state.loadingSave = false
       state.errorEditor = action.payload
     },
 
     clearUserAccessEditor(state) {
       state.editedUser = undefined
       state.errorEditor = ''
+      state.loadingEditor = false
+      state.loadingSave = false
     }
   }
 })
@@ -196,7 +200,6 @@ export const saveUserAccess = (
 ): AppThunk => async dispatch => {
   try {
     dispatch(saveUserRequest())
-    // TODO: integrate the good api
     await api.auth.updatePartnerContactInfo({ id, partnerContactStateDto: { role, active } })
     message.success(i18n.t('user-access.msg.change-succesful'))
     dispatch(saveUserSuccess())
@@ -205,7 +208,9 @@ export const saveUserAccess = (
     } else if (type === UserType.PARTNER) {
       dispatch(getPartnerUsers())
     }
+    return true
   } catch (err) {
     dispatch(saveUserFail(err.toString()))
+    return false
   }
 }

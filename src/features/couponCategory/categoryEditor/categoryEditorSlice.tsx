@@ -4,6 +4,8 @@ import { Category } from 'models/category'
 import { api } from 'api'
 import { GetCategoryRequest } from 'api/swagger'
 import { getCategories } from '../categoryList/categoryListSlice'
+import { message } from 'antd'
+import i18n from 'app/i18n'
 
 interface CouponCategoryEditorState {
   id?: number
@@ -43,6 +45,7 @@ const categoryEditorSlice = createSlice({
       state.loading = true
     },
     saveCategorySuccess(state, action: PayloadAction<Category>) {
+      message.success(i18n.t('common.message.save-success'), 5)
       state.loading = false
       state.category = action.payload
       state.error = ''
@@ -78,9 +81,9 @@ export const getCategory = (params: GetCategoryRequest): AppThunk => async dispa
 
 export const saveCategory = (category: Category): AppThunk => async dispatch => {
   dispatch(saveCategoryRequest(category))
-  let id = category.id!
+  let id = category?.id
   try {
-    if (category?.id && !isNaN(category?.id)) {
+    if (id && !isNaN(id)) {
       await api.categories.updateCategory({
         id,
         categoryDto: {
@@ -88,12 +91,12 @@ export const saveCategory = (category: Category): AppThunk => async dispatch => 
         }
       })
     } else {
-      const response = await api.categories.createCategory({
+      const { id: newId } = await api.categories.createCategory({
         categoryDto: {
           name: category.name
         }
       })
-      id = response.id!
+      id = newId
     }
     dispatch(saveCategorySuccess({ ...category, id }))
     dispatch(getCategories())
