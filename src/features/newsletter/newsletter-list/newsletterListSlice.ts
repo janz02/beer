@@ -17,6 +17,7 @@ interface NewsletterListState {
   templates: NewsletterPreview[]
   error: string
   loading: boolean
+  loadingCreate: boolean
   pagination: Pagination
   segments: Segment[]
 }
@@ -24,6 +25,7 @@ interface NewsletterListState {
 const initialState: NewsletterListState = {
   error: '',
   loading: false,
+  loadingCreate: false,
   templates: [],
   pagination: {
     pageSize: 10
@@ -35,9 +37,15 @@ const newsletterListSlice = createSlice({
   name: 'newsLetterList',
   initialState,
   reducers: {
-    createTemplateRequest() {},
-    createTemplateSuccess() {},
-    createTemplateFail(state, action: PayloadAction<string>) {},
+    createTemplateRequest(state) {
+      state.loadingCreate = true
+    },
+    createTemplateSuccess(state) {
+      state.loadingCreate = false
+    },
+    createTemplateFail(state, action: PayloadAction<string>) {
+      state.loadingCreate = false
+    },
     sendEmailRequest() {},
     sendEmailSuccess() {},
     sendEmailFail(state, action: PayloadAction<string>) {},
@@ -128,7 +136,9 @@ export const createNewsletterTemplate = (name: string): AppThunk => async dispat
     })
     dispatch(createTemplateSuccess())
     history.push(`newsletter/${id.id}`)
+    return true
   } catch (err) {
     dispatch(createTemplateFail(err.toString()))
+    return false
   }
 }

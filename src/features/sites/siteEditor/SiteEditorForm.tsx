@@ -47,7 +47,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
     <>
       <ResponsiveCard
         floatingTitle={t('site.editor-title')}
-        innerOptions={headerOptions}
+        floatingOptions={headerOptions}
         paddedBottom
       >
         <NavigationAlert when={modified} />

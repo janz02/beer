@@ -98,15 +98,6 @@ export const {
 
 export const authReducer = authSlice.reducer
 
-// TODO: Only for simulating async actions, remove after API is connected
-const delay = (p: any): Promise<unknown> =>
-  new Promise(resolve => {
-    console.log('mock api call', p)
-    setTimeout(() => {
-      resolve(p)
-    }, 1000)
-  })
-
 export const login = (params: any): AppThunk => async (dispatch, state) => {
   dispatch(setLoadingStart())
   try {
@@ -131,7 +122,6 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
 export const recoverPassword = (params: any): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
   try {
-    await delay(params)
     dispatch(passwordRecoverySuccess())
   } catch (err) {
     dispatch(passwordRecoveryFail(err.toString()))

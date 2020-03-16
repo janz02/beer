@@ -24,10 +24,12 @@ export interface NewsletterEditorProps {
   handleSendSegment: (segmentId: number, subject: string) => void
   handleGetSegments: () => void
   handleExit: () => void
+  loadingEmail?: boolean
 }
 
 export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
   const {
+    loadingEmail,
     template,
     currentTemplateVersionId,
     segments,
@@ -87,11 +89,25 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     },
     handleRestoreVersion: () => setVisibleRevertPopup(true),
     handleSaveVersion: () => handleSaveVersion(getEditorContent()),
-    handleSendSample: () => setSendSamplePopup({ ...sendSamplePopup, visible: true }),
-    handleSendSegment: () => {
-      handleGetSegments()
+    handleSendSample: async () => {
+      await setSendSamplePopup({ ...sendSamplePopup, visible: true })
+    },
+    handleSendSegment: async () => {
+      await handleGetSegments()
       setSendSegmentPopup({ ...sendSegmentPopup, visible: true })
     }
+  }
+
+  const sendSample = async (values: any): Promise<void> => {
+    setSendSamplePopup({ ...sendSamplePopup, sending: true })
+    const sent: any = await handleSendSample(values.email, values.subject)
+    setSendSamplePopup(sent ? null : { ...sendSamplePopup, sending: false })
+  }
+
+  const sendSegment = async (values: any): Promise<void> => {
+    setSendSegmentPopup({ ...sendSegmentPopup, sending: true })
+    const sent: any = await handleSendSegment(+values.segment, values.subject)
+    setSendSegmentPopup(sent ? null : { ...sendSegmentPopup, sending: false })
   }
 
   return (
@@ -132,6 +148,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
         </GenericPopup>
 
         <GenericModalForm
+          loadingAction={loadingEmail}
           modalProps={{
             ...sendSamplePopup,
             title: t('newsletter.popup.title-send-sample'),
@@ -142,11 +159,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
             onCancel: () => setSendSamplePopup({ ...sendSamplePopup, visible: false })
           }}
           formProps={{
-            onFinish: async (values: any) => {
-              setSendSamplePopup({ ...sendSamplePopup, sending: true })
-              const sent: any = await handleSendSample(values.email, values.subject)
-              setSendSamplePopup(sent ? null : { ...sendSamplePopup, sending: false })
-            }
+            onFinish: sendSample
           }}
         >
           <Form.Item
@@ -166,6 +179,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
         </GenericModalForm>
 
         <GenericModalForm
+          loadingAction={loadingEmail}
           modalProps={{
             ...sendSegmentPopup,
             title: t('newsletter.popup.title-send-segment'),
@@ -176,11 +190,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
             onCancel: () => setSendSegmentPopup({ ...sendSegmentPopup, visible: false })
           }}
           formProps={{
-            onFinish: async (values: any) => {
-              setSendSegmentPopup({ ...sendSegmentPopup, sending: true })
-              const sent: any = await handleSendSegment(+values.segment, values.subject)
-              setSendSegmentPopup(sent ? null : { ...sendSegmentPopup, sending: false })
-            }
+            onFinish: sendSegment
           }}
         >
           <Form.Item

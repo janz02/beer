@@ -29,7 +29,7 @@ export const CategoryPage: React.FC = () => {
   return (
     <ResponsivePage>
       <CategoryList onOpenEditor={routeToEditor} />
-      <CategoryEditor params={editorParams} onExit={handleExit} afterClose={handleAfterClose} />
+      <CategoryEditor params={editorParams} handleExit={handleExit} afterClose={handleAfterClose} />
     </ResponsivePage>
   )
 }

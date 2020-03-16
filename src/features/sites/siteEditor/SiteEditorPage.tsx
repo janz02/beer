@@ -54,7 +54,7 @@ export const SiteEditorPage: FC = () => {
 
       <CashierList onOpenEditor={routeToEditor} />
 
-      <CashierEditor params={editorParams} onExit={handleExit} afterClose={handleAfterClose} />
+      <CashierEditor params={editorParams} handleExit={handleExit} afterClose={handleAfterClose} />
     </ResponsivePage>
   )
 }
