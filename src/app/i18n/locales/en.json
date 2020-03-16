@@ -45,6 +45,16 @@
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
+    "field": {
+      "help": {
+        "phone-format": "+36 20 123 4567"
+      }
+    },
+    "filed": {
+      "help": {
+        "password-format": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space."
+      }
+    },
     "go-back": "Go back",
     "message": {
       "delete-success": "Successful deletion",
@@ -52,7 +62,6 @@
       "save-success": "Successful saving"
     },
     "ok": "OK",
-    "password-format-help": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space.",
     "popup": {
       "confirm-title": "Are you sure about doing this?",
       "delete-title": "Are you sure about deleting this data?",
@@ -140,9 +149,7 @@
       "login-failed": "Authentication failed.",
       "password-format": "Invalid password format.",
       "password-inconsistent": "The two passwords are not matching.",
-      "recovery-failed": "Failed to send the password recovery email.",
       "registration-failed": "Registration failed.",
-      "signup-failed": "Something went wrong, please try again.",
       "user-exists": "User exists.",
       "user-inactive": "User inactive.",
       "user-not-found": "User not found."
@@ -160,7 +167,7 @@
       "invalid-value": "Invalid value.",
       "max-length": "Max length exceeded.",
       "max-length-exact": "This field must be less then {{max}} characters.",
-      "password-format": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space.",
+      "password-format": "Invalid password format.",
       "server-unavailable": "Server unavailable."
     },
     "coupon": {
@@ -178,7 +185,7 @@
       "name-must-be-unique": "E-mail template name must be unique.",
       "not-found-version": "E-mail template version not found."
     },
-    "not-found;": "Not found.",
+    "not-found": "Not found.",
     "paginate": {
       "order-by": "Paginate order by.",
       "page": "Paginate page.",

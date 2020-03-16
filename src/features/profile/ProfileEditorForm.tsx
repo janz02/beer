@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
@@ -20,7 +20,6 @@ export interface ProfileEditorFormProps {
 export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   const { handleProfileSave, loading, profile, editable, partner } = props
   const { t } = useTranslation()
-  const [passwordHelpVisible, setPasswordHelpVisible] = useState(false)
   const rule = useCommonFormRules()
 
   const {
@@ -65,22 +64,17 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           label={t('profile.field.name')}
           rules={[rule.required(), rule.max(100)]}
         >
-          <Input disabled={!editable} />
+          <Input disabled={!editable} maxLength={100} />
         </Form.Item>
 
         <Form.Item
-          extra={passwordHelpVisible ? t('common.password-format-help') : ''}
+          help={t('common.filed.help.password-format')}
           name="password"
           hasFeedback
           label={t('profile.field.new-password')}
           rules={[rule.password()]}
         >
-          <Input.Password
-            disabled={!editable}
-            onClick={() => {
-              setPasswordHelpVisible(true)
-            }}
-          />
+          <Input.Password disabled={!editable} maxLength={64} />
         </Form.Item>
 
         <Form.Item
@@ -99,15 +93,20 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
             })
           ]}
         >
-          <Input.Password disabled={!editable} />
+          <Input.Password disabled={!editable} maxLength={64} />
         </Form.Item>
 
         <Form.Item label={t('profile.field.old-password')} name="oldPassword">
           <Input.Password disabled={!editable} />
         </Form.Item>
 
-        <Form.Item name="phone" label={t('profile.field.phone')} rules={[rule.max(20)]}>
-          <Input disabled={!editable} type="tel" />
+        <Form.Item
+          name="phone"
+          label={t('profile.field.phone')}
+          rules={[rule.max(20)]}
+          help={t('common.field.help.phone-format')}
+        >
+          <Input disabled={!editable} type="tel" maxLength={20} />
         </Form.Item>
 
         <Form.Item name="email" label={t('profile.field.email')}>

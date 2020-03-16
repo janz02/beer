@@ -45,6 +45,16 @@
     "delete": "Törlés",
     "discard": "Elvetés",
     "edit": "Szerkesztés",
+    "field": {
+      "help": {
+        "phone-format": "+36 20 123 4567"
+      }
+    },
+    "filed": {
+      "help": {
+        "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt."
+      }
+    },
     "go-back": "Vissza",
     "message": {
       "delete-success": "Sikeres törlés",
@@ -52,7 +62,6 @@
       "save-success": "Sikeres mentés"
     },
     "ok": "OK",
-    "password-format-help": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
     "popup": {
       "confirm-title": "Biztos, hogy ezt szeretnéd tenni?",
       "delete-title": "Biztos, hogy törölni szeretnéd?",
@@ -137,12 +146,10 @@
       "invalid-refresh-token": "Invalid refresh token.",
       "ldap": "Ldap hiba.",
       "ldap-password-change": "Ldap jelszó változtatási hiba.",
-      "login-failed": "Sikertelen autentikáció.",
+      "login-failed": "Hibás bejelentkezés.",
       "password-format": "Invalid jelszó formátum.",
       "password-inconsistent": "A két jelszó nem egyezik meg.",
-      "recovery-failed": "Sikertelen volt a jelszó visszaállító e-mail elküldése.",
       "registration-failed": "Regsztráció sikertelen.",
-      "signup-failed": "A regisztrálás sikertelen volt.",
       "user-exists": "Felhasználó már létezik.",
       "user-inactive": "Felhasználó inaktív.",
       "user-not-found": "Felhasználó nem található."
@@ -160,7 +167,7 @@
       "invalid-value": "Helytelen érték.",
       "max-length": "Túl hosszú szöveg.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
-      "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
+      "password-format": "Invalid jelszó formátum.",
       "server-unavailable": "Szerver nem elérhető."
     },
     "coupon": {
@@ -178,7 +185,7 @@
       "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie.",
       "not-found-version": "Nem található ilyen verziójú e-mail sablon."
     },
-    "not-found;": "Nem található",
+    "not-found": "Nem található.",
     "paginate": {
       "order-by": "Lapozó sorrend.",
       "page": "Lapozó lap.",

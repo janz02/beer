@@ -153,7 +153,7 @@ export const NewsletterList: FC = () => {
           label={t('newsletter.field.template-name')}
           rules={[rule.required(), rule.max(35)]}
         >
-          <Input />
+          <Input maxLength={35} />
         </Form.Item>
       </GenericModalForm>
     </>
