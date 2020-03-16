@@ -199,7 +199,11 @@
     }
   },
   "error-page": {
-    "back": "Back to home"
+    "back": "Back to home",
+    "message": {
+      "403": "Sorry, you are not authorized to access this page.",
+      "default": "Sorry, something went wrong."
+    }
   },
   "languages": {
     "en": "English",

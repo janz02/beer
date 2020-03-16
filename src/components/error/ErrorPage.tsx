@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { Card, Button } from 'antd'
-import './error.scss'
+import { Card, Button, Result } from 'antd'
+import './ErrorPage.scss'
 import { history } from 'router/router'
 import { useTranslation } from 'react-i18next'
 
@@ -11,21 +11,30 @@ export const ErrorPage: FC = () => {
 
   const content = useMemo(() => {
     switch (type) {
-      case '404':
+      case '403':
         return {
-          title: 'error-page.title404'
+          title: '403',
+          subtitle: t('error-page.message.403')
         }
-
       default:
         return {
-          title: 'error-page.title'
+          title: t('error-page.message.default')
         }
     }
-  }, [type])
+  }, [t, type])
 
   return (
-    <Card className="error-card" title={t(content.title)}>
-      <Button onClick={() => history.push('/dashboard')}>{t('error-page.back')}</Button>
+    <Card className="error-card">
+      <Result
+        status="error"
+        title={content.title}
+        subTitle={content.subtitle}
+        extra={
+          <Button type="primary" onClick={() => history.push('/dashboard')}>
+            {t('error-page.back')}
+          </Button>
+        }
+      />
     </Card>
   )
 }
