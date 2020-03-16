@@ -49,8 +49,6 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
 
   const modalTitle = isNew ? t('coupon-category.editor-create') : t('coupon-category.editor-edit')
 
-  console.log({ loading })
-
   return (
     <GenericModalForm
       // loadingContent={loading}
