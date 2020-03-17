@@ -9,9 +9,6 @@ import { resetCategoryEditor } from 'features/couponCategory/categoryEditor/cate
 import { resetCategoryList } from 'features/couponCategory/categoryList/categoryListSlice'
 import { resetCoupons } from 'features/coupons/couponsSlice'
 import { resetCouponList } from 'features/coupons/couponList/couponListSlice'
-import { resetCouponView } from 'features/coupons/couponView/couponViewSlice'
-import { resetCouponCreate } from 'features/coupons/couponCreate/couponCreateSlice'
-import { resetCouponEditor } from 'features/coupons/couponEditor/couponEditorSlice'
 import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
 import { resetNewsLetterList } from 'features/newsletter/newsletter-list/newsletterListSlice'
 import { resetNewsletterEditor } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
@@ -33,9 +30,6 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetCategoryList())
     dispatch(resetCoupons())
     dispatch(resetCouponList())
-    dispatch(resetCouponCreate())
-    dispatch(resetCouponEditor())
-    dispatch(resetCouponView())
     dispatch(resetUsersAccessList())
     dispatch(resetUsersAccessList())
     dispatch(resetNewsLetterList())
