@@ -45,35 +45,40 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
     dispatch(getUserAccess(userId!))
   }, [dispatch, userId, visible])
 
-  const roleOptions = useMemo(
-    () => [
-      {
-        name: t('user-access.role.administrator'),
-        value: Roles.Administrator
-      },
-      {
-        name: t('user-access.role.campaignmanager'),
-        value: Roles.CampaignManager
-      },
-      {
-        name: t('user-access.role.businesspartnermanager'),
-        value: Roles.BusinessPartnerManager
-      },
-      {
-        name: t('user-access.role.partnercontactapprover'),
-        value: Roles.PartnerContactApprover
-      },
-      {
-        name: t('user-access.role.partnercontacteditor'),
-        value: Roles.PartnerContactEditor
-      },
-      {
-        name: t('user-access.role.partnermanager'),
-        value: Roles.PartnerManager
-      }
-    ],
-    [t]
-  )
+  const roleOptions = useMemo(() => {
+    switch (userType) {
+      case UserType.NKM:
+        return [
+          {
+            name: t('user-access.role.administrator'),
+            value: Roles.Administrator
+          },
+          {
+            name: t('user-access.role.campaignmanager'),
+            value: Roles.CampaignManager
+          },
+          {
+            name: t('user-access.role.businesspartnermanager'),
+            value: Roles.BusinessPartnerManager
+          },
+          {
+            name: t('user-access.role.partnermanager'),
+            value: Roles.PartnerManager
+          }
+        ]
+      case UserType.PARTNER:
+        return [
+          {
+            name: t('user-access.role.partnercontactapprover'),
+            value: Roles.PartnerContactApprover
+          },
+          {
+            name: t('user-access.role.partnercontacteditor'),
+            value: Roles.PartnerContactEditor
+          }
+        ]
+    }
+  }, [t, userType])
 
   const initialValues: UserAccessFormValues = useMemo(
     () => ({
@@ -120,7 +125,11 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
           ))}
         </Select>
       </Form.Item>
-      <Form.Item name="status" label={t('user-access.field.status')} rules={[rule.requiredString()]}>
+      <Form.Item
+        name="status"
+        label={t('user-access.field.status')}
+        rules={[rule.requiredString()]}
+      >
         <Radio.Group buttonStyle="solid">
           <Radio.Button value={Status.INACTIVE}>
             {t('user-access.field.status-inactive')}
