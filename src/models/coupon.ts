@@ -18,5 +18,6 @@ export interface Coupon {
   tags?: []
   isDrawable?: boolean
   state?: CouponState
+  isActive?: boolean
   comments?: CouponComment[]
 }

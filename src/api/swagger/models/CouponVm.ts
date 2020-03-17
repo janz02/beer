@@ -134,6 +134,12 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     isDrawable?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CouponVm
+     */
+    isActive?: boolean;
 }
 
 export function CouponVmFromJSON(json: any): CouponVm {
@@ -162,6 +168,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'comments': !exists(json, 'comments') ? undefined : (json['comments'] === null ? null : (json['comments'] as Array<any>).map(CouponCommentVmFromJSON)),
         'isDrawable': !exists(json, 'isDrawable') ? undefined : json['isDrawable'],
+        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
     };
 }
 
@@ -190,6 +197,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'tags': value.tags,
         'comments': value.comments === undefined ? undefined : (value.comments === null ? null : (value.comments as Array<any>).map(CouponCommentVmToJSON)),
         'isDrawable': value.isDrawable,
+        'isActive': value.isActive,
     };
 }
 

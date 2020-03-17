@@ -71,18 +71,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   useEffect(() => {
     setInitialFieldsValue({
+      ...coupon,
       rank: CouponRank.Bronze,
-      type: CouponType.FixValue,
-      ...coupon
+      type: CouponType.FixValue
     })
   }, [coupon, setInitialFieldsValue])
-
-  useEffect(() => {
-    setInitialFieldsValueComment({
-      couponState: '',
-      comment: ''
-    })
-  }, [coupon, setInitialFieldsValueComment])
 
   const displayEditor =
     couponIsNew ||
@@ -90,6 +83,15 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       coupon &&
       coupon.state !== CouponState.Closed &&
       coupon.state !== CouponState.Archived)
+
+  useEffect(() => {
+    if (editing) return
+
+    setInitialFieldsValueComment({
+      couponState: '',
+      comment: ''
+    })
+  }, [coupon, editing, setInitialFieldsValueComment])
 
   const handleSubmit = (values: any): void => {
     handleCouponSave &&
@@ -218,7 +220,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             <Form.Item
               name="name"
               label={t('coupon-create.field.name')}
-              rules={[rule.required(), rule.max(60)]}
+              rules={[rule.requiredString(), rule.max(60)]}
             >
               <Input disabled={!displayEditor} maxLength={60} />
             </Form.Item>
@@ -226,12 +228,16 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             <Form.Item
               name="description"
               label={t('coupon-create.field.description')}
-              rules={[rule.max(255)]}
+              rules={[rule.requiredString(), rule.max(255)]}
             >
               <TextArea disabled={!displayEditor} maxLength={255} />
             </Form.Item>
 
-            <Form.Item name="rank" label={t('coupon-create.field.rank')} rules={[rule.required()]}>
+            <Form.Item
+              name="rank"
+              label={t('coupon-create.field.rank')}
+              rules={[rule.requiredString()]}
+            >
               <Select disabled={!displayEditor}>
                 {Object.keys(CouponRank).map(x => (
                   <Select.Option key={x} value={x}>
@@ -259,7 +265,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             <Form.Item
               name="type"
               label={t('coupon-create.field.discount-type')}
-              rules={[rule.required()]}
+              rules={[rule.requiredString()]}
             >
               <Select disabled={!displayEditor}>
                 {Object.keys(CouponType).map(x => (

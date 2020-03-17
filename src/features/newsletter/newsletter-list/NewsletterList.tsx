@@ -156,7 +156,7 @@ export const NewsletterList: FC = () => {
         <Form.Item
           name="templateName"
           label={t('newsletter.field.template-name')}
-          rules={[rule.required(), rule.max(35)]}
+          rules={[rule.requiredString(), rule.max(35)]}
         >
           <Input maxLength={35} />
         </Form.Item>

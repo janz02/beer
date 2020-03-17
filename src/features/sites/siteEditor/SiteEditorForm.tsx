@@ -63,7 +63,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
           <Form.Item
             name="name"
             label={t('site.field.name')}
-            rules={[rule.required(), rule.max(100)]}
+            rules={[rule.requiredString(), rule.max(100)]}
           >
             <Input maxLength={100} />
           </Form.Item>
@@ -71,7 +71,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
           <Form.Item
             name="address"
             label={t('site.field.address')}
-            rules={[rule.required(), rule.max(100)]}
+            rules={[rule.requiredString(), rule.max(100)]}
           >
             <Input maxLength={100} />
           </Form.Item>
