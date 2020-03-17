@@ -37,6 +37,7 @@ const newsletterListSlice = createSlice({
   name: 'newsLetterList',
   initialState,
   reducers: {
+    resetNewsLetterList: () => initialState,
     createTemplateRequest(state) {
       state.loadingCreate = true
     },
@@ -82,6 +83,8 @@ const {
   deleteTemplateSuccess,
   deleteTemplateFail
 } = newsletterListSlice.actions
+
+export const { resetNewsLetterList } = newsletterListSlice.actions
 
 export const newsletterListReducer = newsletterListSlice.reducer
 

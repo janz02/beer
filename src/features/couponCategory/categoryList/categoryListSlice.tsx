@@ -30,6 +30,7 @@ const categoryListSlice = createSlice({
   name: 'categoryList',
   initialState,
   reducers: {
+    resetCategoryList: () => initialState,
     getCategoriesRequest(state) {
       state.loading = true
     },
@@ -60,7 +61,7 @@ const categoryListSlice = createSlice({
   }
 })
 
-export const {
+const {
   getCategoriesRequest,
   getCategoriesSuccess,
   getCategoriesFail,
@@ -68,6 +69,8 @@ export const {
   deleteSuccess,
   deleteFail
 } = categoryListSlice.actions
+
+export const { resetCategoryList } = categoryListSlice.actions
 
 export const categoryListReducer = categoryListSlice.reducer
 

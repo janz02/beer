@@ -1,4 +1,5 @@
 import { notification } from 'antd'
+import { AppThunk } from 'app/store'
 
 const initialState = {
   cameFrom: '/'
@@ -15,7 +16,14 @@ export const routerHistoryStore = (state = { ...initialState }, action: any): Ro
         cameFrom: pathname.startsWith('/auth') ? state.cameFrom : pathname
       }
     }
+    case 'routerHistory/resetRouterHistory': {
+      return { ...initialState }
+    }
     default:
       return state
   }
+}
+
+export const resetRouterHistory = (): AppThunk => async dispatch => {
+  dispatch({ type: 'routerHistory/resetRouterHistory' })
 }

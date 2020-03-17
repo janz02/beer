@@ -20,6 +20,7 @@ const couponCreateSlice = createSlice({
   name: 'couponCreate',
   initialState,
   reducers: {
+    resetCouponCreate: () => initialState,
     createCouponSuccess(state) {
       message.success(i18n.t('coupon-create.create-coupon-success'), 10)
       state.loading = false
@@ -35,7 +36,9 @@ const couponCreateSlice = createSlice({
   }
 })
 
-export const { createCouponSuccess, setLoadingStart, setLoadingFailed } = couponCreateSlice.actions
+const { createCouponSuccess, setLoadingStart, setLoadingFailed } = couponCreateSlice.actions
+
+export const { resetCouponCreate } = couponCreateSlice.actions
 
 export const couponCreateReducer = couponCreateSlice.reducer
 

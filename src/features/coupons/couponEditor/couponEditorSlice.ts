@@ -23,6 +23,7 @@ const couponEditorSlice = createSlice({
   name: 'couponEditor',
   initialState,
   reducers: {
+    resetCouponEditor: () => initialState,
     getCouponSuccess(state, action: PayloadAction<Coupon>) {
       state.coupon = action.payload
 
@@ -55,7 +56,7 @@ const couponEditorSlice = createSlice({
   }
 })
 
-export const {
+const {
   getCouponSuccess,
   updateCouponSuccess,
   deleteCouponCommentsSuccess,
@@ -63,6 +64,8 @@ export const {
   setLoadingStart,
   setLoadingFailed
 } = couponEditorSlice.actions
+
+export const { resetCouponEditor } = couponEditorSlice.actions
 
 export const couponEditorReducer = couponEditorSlice.reducer
 

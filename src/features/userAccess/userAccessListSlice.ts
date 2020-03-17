@@ -49,6 +49,7 @@ const userAccessListSlice = createSlice({
   name: 'usersAccessList',
   initialState,
   reducers: {
+    resetUsersAccessList: () => initialState,
     getNkmUsersRequest(state) {
       state.nkmLoading = true
     },
@@ -126,7 +127,7 @@ const {
 const { getUserRequest, getUserSuccess, getUserFail } = userAccessListSlice.actions
 const { saveUserRequest, saveUserSuccess, saveUserFail } = userAccessListSlice.actions
 
-export const { clearUserAccessEditor } = userAccessListSlice.actions
+export const { clearUserAccessEditor, resetUsersAccessList } = userAccessListSlice.actions
 
 export const userAccessListReducer = userAccessListSlice.reducer
 

@@ -18,6 +18,7 @@ const couponsSlice = createSlice({
   name: 'coupons',
   initialState,
   reducers: {
+    resetCoupons: () => initialState,
     getCategoriesSuccess(state, action: PayloadAction<Category[]>) {
       state.categories = action.payload
 
@@ -34,7 +35,9 @@ const couponsSlice = createSlice({
   }
 })
 
-export const { getCategoriesSuccess, setLoadingStart, setLoadingFailed } = couponsSlice.actions
+const { getCategoriesSuccess, setLoadingStart, setLoadingFailed } = couponsSlice.actions
+
+export const { resetCoupons } = couponsSlice.actions
 
 export const couponsReducer = couponsSlice.reducer
 

@@ -92,6 +92,7 @@ const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
+    resetNotification: () => initialState,
     getNotificationsRequest(state) {
       state.loading = true
     },
@@ -128,6 +129,7 @@ const notificationSlice = createSlice({
 })
 
 export const {
+  resetNotification,
   inspectNotification,
   getNotificationsFail,
   getNotificationsRequest,

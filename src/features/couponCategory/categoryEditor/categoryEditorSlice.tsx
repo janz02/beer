@@ -23,6 +23,7 @@ const categoryEditorSlice = createSlice({
   name: 'categoryEditor',
   initialState,
   reducers: {
+    resetCategoryEditor: () => initialState,
     getCategoryRequest(state) {
       state.loading = true
     },
@@ -34,11 +35,6 @@ const categoryEditorSlice = createSlice({
     getCategoryFail(state, action: PayloadAction<string>) {
       state.loading = false
       state.error = action.payload
-    },
-    clearCategoryEditor(state) {
-      state.category = null
-      state.error = ''
-      state.loading = false
     },
     saveCategoryRequest(state, action: PayloadAction<Category>) {
       state.category = action.payload
@@ -57,8 +53,7 @@ const categoryEditorSlice = createSlice({
   }
 })
 
-export const {
-  clearCategoryEditor,
+const {
   getCategoryRequest,
   getCategorySuccess,
   getCategoryFail,
@@ -66,6 +61,8 @@ export const {
   saveCategorySuccess,
   saveCategoryFail
 } = categoryEditorSlice.actions
+
+export const { resetCategoryEditor } = categoryEditorSlice.actions
 
 export const categoryEditorReducer = categoryEditorSlice.reducer
 
