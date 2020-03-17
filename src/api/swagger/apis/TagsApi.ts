@@ -45,12 +45,12 @@ export interface GetTagRequest {
 }
 
 export interface GetTagsRequest {
-    value?: string;
-    tagCategory?: string;
-    isActive?: boolean;
+    value?: string | null;
+    tagCategory?: string | null;
+    isActive?: boolean | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 

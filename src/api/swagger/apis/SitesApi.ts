@@ -45,12 +45,12 @@ export interface GetSiteRequest {
 }
 
 export interface GetSitesRequest {
-    name?: string;
-    address?: string;
-    partnerId?: number;
+    name?: string | null;
+    address?: string | null;
+    partnerId?: number | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 

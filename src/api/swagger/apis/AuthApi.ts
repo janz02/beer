@@ -58,13 +58,13 @@ export interface ChangePasswordRequest {
 }
 
 export interface GetNkmPartnerContactsInfoRequest {
-    name?: string;
-    phone?: string;
-    email?: string;
-    partnerName?: string;
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    partnerName?: string | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 
@@ -73,13 +73,13 @@ export interface GetPartnerContactInfoRequest {
 }
 
 export interface GetPartnerContactsInfoRequest {
-    name?: string;
-    phone?: string;
-    email?: string;
-    partnerName?: string;
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    partnerName?: string | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 

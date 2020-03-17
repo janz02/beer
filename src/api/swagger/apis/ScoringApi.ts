@@ -26,7 +26,7 @@ import {
 export interface GetMyScoresRequest {
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 

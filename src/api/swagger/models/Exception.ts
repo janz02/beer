@@ -14,10 +14,6 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Exception,
-    ExceptionFromJSON,
-    ExceptionFromJSONTyped,
-    ExceptionToJSON,
     MethodBase,
     MethodBaseFromJSON,
     MethodBaseFromJSONTyped,
@@ -27,76 +23,69 @@ import {
 /**
  * 
  * @export
- * @interface AuthRegistrationFailedException
+ * @interface Exception
  */
-export interface AuthRegistrationFailedException {
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthRegistrationFailedException
-     */
-    readonly errorKey?: string | null;
+export interface Exception {
     /**
      * 
      * @type {MethodBase}
-     * @memberof AuthRegistrationFailedException
+     * @memberof Exception
      */
     targetSite?: MethodBase;
     /**
      * 
      * @type {string}
-     * @memberof AuthRegistrationFailedException
+     * @memberof Exception
      */
     readonly stackTrace?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof AuthRegistrationFailedException
+     * @memberof Exception
      */
     readonly message?: string | null;
     /**
      * 
      * @type {{ [key: string]: object; }}
-     * @memberof AuthRegistrationFailedException
+     * @memberof Exception
      */
     readonly data?: { [key: string]: object; } | null;
     /**
      * 
      * @type {Exception}
-     * @memberof AuthRegistrationFailedException
+     * @memberof Exception
      */
     innerException?: Exception;
     /**
      * 
      * @type {string}
-     * @memberof AuthRegistrationFailedException
+     * @memberof Exception
      */
     helpLink?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof AuthRegistrationFailedException
+     * @memberof Exception
      */
     source?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof AuthRegistrationFailedException
+     * @memberof Exception
      */
     hResult?: number;
 }
 
-export function AuthRegistrationFailedExceptionFromJSON(json: any): AuthRegistrationFailedException {
-    return AuthRegistrationFailedExceptionFromJSONTyped(json, false);
+export function ExceptionFromJSON(json: any): Exception {
+    return ExceptionFromJSONTyped(json, false);
 }
 
-export function AuthRegistrationFailedExceptionFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthRegistrationFailedException {
+export function ExceptionFromJSONTyped(json: any, ignoreDiscriminator: boolean): Exception {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'errorKey': !exists(json, 'errorKey') ? undefined : json['errorKey'],
         'targetSite': !exists(json, 'targetSite') ? undefined : MethodBaseFromJSON(json['targetSite']),
         'stackTrace': !exists(json, 'stackTrace') ? undefined : json['stackTrace'],
         'message': !exists(json, 'message') ? undefined : json['message'],
@@ -108,7 +97,7 @@ export function AuthRegistrationFailedExceptionFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function AuthRegistrationFailedExceptionToJSON(value?: AuthRegistrationFailedException | null): any {
+export function ExceptionToJSON(value?: Exception | null): any {
     if (value === undefined) {
         return undefined;
     }

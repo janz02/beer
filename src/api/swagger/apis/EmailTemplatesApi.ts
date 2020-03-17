@@ -48,10 +48,10 @@ export interface GetTemplateRequest {
 }
 
 export interface GetTemplatesRequest {
-    name?: string;
+    name?: string | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 
