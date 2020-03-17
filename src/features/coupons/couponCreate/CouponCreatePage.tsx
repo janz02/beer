@@ -5,12 +5,12 @@ import {
 } from 'features/coupons/components/CouponEditorForm'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { createCoupon } from './couponCreateSlice'
 import { Coupon } from 'models/coupon'
+import { createCoupon } from '../couponsSlice'
 
 export const CouponCreatePage: React.FC = () => {
   const dispatch = useDispatch()
-  const { loading } = useSelector((state: RootState) => state.couponCreate)
+  const { loading } = useSelector((state: RootState) => state.coupons)
 
   const handleCouponSave = (coupon: Coupon): void => {
     dispatch(createCoupon(coupon))

@@ -6,9 +6,6 @@ import { userAccessListReducer } from 'features/userAccess/userAccessListSlice'
 import { newsletterEditorReducer } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { authReducer } from 'features/auth/authSlice'
 import { couponListReducer } from 'features/coupons/couponList/couponListSlice'
-import { couponEditorReducer } from 'features/coupons/couponEditor/couponEditorSlice'
-import { couponViewReducer } from 'features/coupons/couponView/couponViewSlice'
-import { couponCreateReducer } from 'features/coupons/couponCreate/couponCreateSlice'
 import { couponsReducer } from 'features/coupons/couponsSlice'
 import { categoryListReducer } from 'features/couponCategory/categoryList/categoryListSlice'
 import { categoryEditorReducer } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
@@ -24,9 +21,6 @@ export const rootReducer = combineReducers({
   routerHistory: routerHistoryStore,
   auth: authReducer,
   couponList: couponListReducer,
-  couponEditor: couponEditorReducer,
-  couponView: couponViewReducer,
-  couponCreate: couponCreateReducer,
   coupons: couponsReducer,
   categoryList: categoryListReducer,
   categoryEditor: categoryEditorReducer,
