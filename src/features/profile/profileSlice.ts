@@ -21,6 +21,7 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
+    resetProfile: () => initialState,
     getProfileSuccess(state, action: PayloadAction<Profile>) {
       state.editable = true
       state.profile = action.payload
@@ -49,6 +50,7 @@ const profileSlice = createSlice({
 })
 
 export const {
+  resetProfile,
   getProfileSuccess,
   setProfileFromJWT,
   updateProfileSuccess,

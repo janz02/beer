@@ -28,6 +28,12 @@ const newsletterEditorSlice = createSlice({
   name: 'newsletterEditor',
   initialState,
   reducers: {
+    resetNewsletterEditor: () => initialState,
+    clearNewsletterTemplate(state) {
+      state.template = undefined
+      state.currentTemplateVersionId = undefined
+      state.error = ''
+    },
     saveTemplateVersionRequest() {},
     saveTemplateVersionSuccess() {},
     saveTemplateVersionFail(state, action: PayloadAction<string>) {},
@@ -49,11 +55,6 @@ const newsletterEditorSlice = createSlice({
       state.currentTemplateVersionId = action.payload.history?.[0]?.id
     },
     getTemplateFail(state, action: PayloadAction<string>) {},
-    clearNewsletterTemplate(state) {
-      state.template = undefined
-      state.currentTemplateVersionId = undefined
-      state.error = ''
-    },
     switchNewsletterVersion(state, action: PayloadAction<number>) {
       state.currentTemplateVersionId = action.payload
     },
@@ -83,7 +84,11 @@ const { getTemplateRequest, getTemplateSuccess, getTemplateFail } = newsletterEd
 const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterEditorSlice.actions
 const { getSegmentsRequest, getSegmentsSuccess, getSegmentsFail } = newsletterEditorSlice.actions
 
-export const { clearNewsletterTemplate, switchNewsletterVersion } = newsletterEditorSlice.actions
+export const {
+  clearNewsletterTemplate,
+  switchNewsletterVersion,
+  resetNewsletterEditor
+} = newsletterEditorSlice.actions
 export const { logGrapesjsEvent } = newsletterEditorSlice.actions
 
 export const newsletterEditorReducer = newsletterEditorSlice.reducer

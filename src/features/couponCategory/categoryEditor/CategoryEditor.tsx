@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo } from 'react'
 import { Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { getCategory, clearCategoryEditor, saveCategory } from './categoryEditorSlice'
+import { getCategory, resetCategoryEditor, saveCategory } from './categoryEditorSlice'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { useCommonFormRules } from 'hooks'
@@ -38,7 +38,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
 
   const afterCloseExtended = (): void => {
     afterClose()
-    dispatch(clearCategoryEditor())
+    dispatch(resetCategoryEditor())
   }
 
   const onSave = async (values: Category): Promise<void> => {

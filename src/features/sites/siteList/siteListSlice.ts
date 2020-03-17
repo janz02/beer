@@ -30,6 +30,7 @@ const siteListSlice = createSlice({
   name: 'siteList',
   initialState,
   reducers: {
+    resetSiteList: () => initialState,
     getSitesRequest(state) {
       state.loading = true
     },
@@ -59,6 +60,7 @@ const siteListSlice = createSlice({
 
 const { getSitesRequest, getSitesSuccess, getSitesFail } = siteListSlice.actions
 const { deleteSiteRequest, deleteSiteSuccess, deleteSiteFail } = siteListSlice.actions
+export const { resetSiteList } = siteListSlice.actions
 
 export const siteListReducer = siteListSlice.reducer
 

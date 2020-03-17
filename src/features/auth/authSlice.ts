@@ -8,6 +8,7 @@ import { api } from 'api'
 import JwtDecode from 'jwt-decode'
 import { message } from 'antd'
 import i18n from 'app/i18n'
+import { hardResetStore } from 'app/storeUtils'
 
 const clearJwtData = (): void => {
   sessionStorage.removeItem('jwt')
@@ -15,18 +16,21 @@ const clearJwtData = (): void => {
   sessionStorage.removeItem('jwtExpiration')
 }
 
+const initialState = {
+  loggedIn: !!sessionStorage.getItem('jwt'),
+  userData: getJwtUserdata(),
+  loading: false,
+  errorSignup: '',
+  errorLogin: '',
+  errorChangePassword: '',
+  errorPasswordRecovery: ''
+}
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    loggedIn: !!sessionStorage.getItem('jwt'),
-    userData: getJwtUserdata(),
-    loading: false,
-    errorSignup: '',
-    errorLogin: '',
-    errorChangePassword: '',
-    errorPasswordRecovery: ''
-  },
+  initialState,
   reducers: {
+    resetAuth: () => initialState,
     setLoadingStart(state) {
       state.loading = true
     },
@@ -66,7 +70,7 @@ const authSlice = createSlice({
       state.errorLogin = action.payload
       clearJwtData()
     },
-    logout(state) {
+    logoutUser(state) {
       state.loggedIn = false
       state.userData = {}
       clearJwtData()
@@ -83,7 +87,7 @@ const authSlice = createSlice({
   }
 })
 
-export const {
+const {
   setLoadingStart,
   loginSuccess,
   loginFail,
@@ -91,14 +95,17 @@ export const {
   passwordRecoveryFail,
   signupSuccess,
   signupFail,
-  logout,
+  logoutUser,
   changePasswordSuccess,
   changePasswordFail
 } = authSlice.actions
 
+export const { resetAuth } = authSlice.actions
+
 export const authReducer = authSlice.reducer
 
 export const login = (params: any): AppThunk => async (dispatch, state) => {
+  dispatch(hardResetStore())
   dispatch(setLoadingStart())
   try {
     const loginRequest: LoginRequest = {
@@ -117,6 +124,11 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
   } catch (err) {
     dispatch(loginFail(err.toString()))
   }
+}
+
+export const logout = (): AppThunk => async dispatch => {
+  dispatch(logoutUser())
+  dispatch(hardResetStore({ logout: true }))
 }
 
 export const recoverPassword = (params: any): AppThunk => async dispatch => {

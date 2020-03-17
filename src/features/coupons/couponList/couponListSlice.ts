@@ -30,6 +30,7 @@ const couponListSlice = createSlice({
   name: 'couponList',
   initialState,
   reducers: {
+    resetCouponList: () => initialState,
     getCouponsRequest(state) {
       state.loading = true
     },
@@ -63,6 +64,8 @@ const {
   deleteSuccess,
   deleteFail
 } = couponListSlice.actions
+
+export const { resetCouponList } = couponListSlice.actions
 
 export const couponListReducer = couponListSlice.reducer
 
