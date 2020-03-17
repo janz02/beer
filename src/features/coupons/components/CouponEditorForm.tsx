@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './CouponEditorForm.scss'
 import {
   Form,
@@ -17,11 +17,15 @@ import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { Coupon } from 'models/coupon'
-import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
-import { getCategories } from '../couponsSlice'
+import { CouponRank, CouponType, CouponState, Roles } from 'api/swagger/models'
+import {
+  getCategories,
+  activateCoupon,
+  updateCouponStatus,
+  deleteCouponComment
+} from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteFilled, CheckOutlined, ArrowRightOutlined } from '@ant-design/icons'
-import { deleteCouponComment } from '../couponEditor/couponEditorSlice'
 import { Link } from 'react-router-dom'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
@@ -29,8 +33,8 @@ import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButton } from 'components/buttons/BackButton'
 import { history } from 'router/router'
-import { updateCouponStatus } from '../couponView/couponViewSlice'
 import { MomentDisplay } from 'components/MomentDisplay'
+import { hasPermission } from 'services/jwt-reader'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -47,8 +51,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   const { categories } = useSelector((state: RootState) => state.coupons)
   const rule = useCommonFormRules()
-  // TODO: integrate, use property of the coupon.
-  const [couponActive, setCouponActive] = useState(true)
 
   const {
     form,
@@ -105,15 +107,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }
 
   const handleStatusSubmit = (values: any): void => {
-    coupon &&
-      coupon.id &&
-      dispatch(updateCouponStatus(coupon.id, values.couponState, values.comment))
+    coupon?.id && dispatch(updateCouponStatus(coupon.id, values.couponState, values.comment))
     resetFormFlagsComment()
   }
 
   const handleCouponActivate = (): void => {
-    // TODO: integrate
-    setCouponActive(!couponActive)
+    coupon?.id && dispatch(activateCoupon(coupon?.id, !coupon?.isActive))
   }
 
   const couponActionButtons = !displayEditor ? (
@@ -123,17 +122,24 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
           <Link to={`/coupon/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
         </Button>
       )}
-      {coupon && coupon.state === CouponState.Accepted && (
-        <Button
-          type="primary"
-          htmlType="button"
-          onClick={() => {
-            handleCouponActivate()
-          }}
-        >
-          {couponActive ? t('coupon-create.inactivate') : t('coupon-create.activate')}
-        </Button>
-      )}
+      {hasPermission([
+        Roles.Administrator,
+        Roles.CampaignManager,
+        Roles.PartnerContactEditor,
+        Roles.PartnerContactApprover
+      ]) &&
+        coupon &&
+        coupon.state === CouponState.Accepted && (
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={() => {
+              handleCouponActivate()
+            }}
+          >
+            {coupon.isActive ? t('coupon-create.inactivate') : t('coupon-create.activate')}
+          </Button>
+        )}
     </div>
   ) : (
     undefined
