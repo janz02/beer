@@ -68,6 +68,12 @@ export interface WaitingCouponVm {
      * @memberof WaitingCouponVm
      */
     expireDate?: Date;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof WaitingCouponVm
+     */
+    isActive?: boolean;
 }
 
 export function WaitingCouponVmFromJSON(json: any): WaitingCouponVm {
@@ -87,6 +93,7 @@ export function WaitingCouponVmFromJSONTyped(json: any, ignoreDiscriminator: boo
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
         'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
+        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
     };
 }
 
@@ -106,6 +113,7 @@ export function WaitingCouponVmToJSON(value?: WaitingCouponVm | null): any {
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
         'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
+        'isActive': value.isActive,
     };
 }
 

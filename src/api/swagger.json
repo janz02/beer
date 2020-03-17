@@ -4176,6 +4176,9 @@
           },
           "isDrawable": {
             "type": "boolean"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -4238,6 +4241,9 @@
           "expireDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
