@@ -15,6 +15,20 @@ export function useCommonFormRules() {
     (message?: string, other?: Rule): Rule => ({
       ...other,
       required: true,
+      message: message || t('error.common.field-required')
+    }),
+    [t]
+  )
+
+  /**
+   * Required string - it's the same as required but with whitespace: true.
+   * @param message (optional) string
+   * @param other (optional) extra rule parameters
+   */
+  const requiredString = useCallback(
+    (message?: string, other?: Rule): Rule => ({
+      ...other,
+      required: true,
       whitespace: true,
       message: message || t('error.common.field-required')
     }),
@@ -73,5 +87,5 @@ export function useCommonFormRules() {
     [t]
   )
 
-  return { required, password, number, email, max }
+  return { required, requiredString, password, number, email, max }
 }

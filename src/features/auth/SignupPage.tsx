@@ -20,7 +20,7 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="name"
           label={t('auth.field.name')}
-          rules={[rule.required(), rule.max(100)]}
+          rules={[rule.requiredString(), rule.max(100)]}
         >
           <Input maxLength={100} />
         </Form.Item>
@@ -28,7 +28,7 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="username"
           label={t('auth.field.email')}
-          rules={[rule.required(), rule.email(), rule.max(100)]}
+          rules={[rule.requiredString(), rule.email(), rule.max(100)]}
         >
           <Input maxLength={100} />
         </Form.Item>
@@ -37,7 +37,7 @@ export const SignupPage: React.FC = () => {
           name="password"
           hasFeedback
           label={t('auth.field.password')}
-          rules={[rule.required(), rule.password()]}
+          rules={[rule.requiredString(), rule.password()]}
         >
           <Input.Password maxLength={64} />
         </Form.Item>
@@ -48,7 +48,7 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.password-again')}
           dependencies={['password']}
           rules={[
-            rule.required(),
+            rule.requiredString(),
             ({ getFieldValue }) => ({
               validator(rule, value) {
                 if (!value || getFieldValue('password') === value) {
@@ -71,7 +71,7 @@ export const SignupPage: React.FC = () => {
           <Input type="tel" maxLength={20} />
         </Form.Item>
 
-        <Form.Item name="code" label={t('auth.field.code')} rules={[rule.required(), rule.max(10)]}>
+        <Form.Item name="code" label={t('auth.field.code')} rules={[rule.requiredString(), rule.max(10)]}>
           <Input maxLength={10} />
         </Form.Item>
 

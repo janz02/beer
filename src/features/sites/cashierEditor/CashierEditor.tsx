@@ -72,7 +72,7 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
       <Form.Item
         label={t('cashier-editor.field.cashier-id')}
         name="cashierId"
-        rules={[rule.required(), rule.max(30)]}
+        rules={[rule.requiredString(), rule.max(30)]}
       >
         <Input maxLength={30} />
       </Form.Item>
@@ -80,7 +80,7 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
       <Form.Item
         label={t('cashier-editor.field.digital-stamp-id')}
         name="digitalStampId"
-        rules={[rule.required(), rule.max(30)]}
+        rules={[rule.requiredString(), rule.max(30)]}
       >
         <Input maxLength={30} />
       </Form.Item>
