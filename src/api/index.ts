@@ -1,5 +1,6 @@
 import { InformationApi } from './swagger/apis/InformationApi'
 import { Configuration } from './swagger/runtime'
+import { Configuration as FileConfiguration } from './file/runtime'
 import {
   CouponsApi,
   CategoriesApi,
@@ -14,8 +15,14 @@ import {
   SegmentsApi,
   CashiersApi
 } from './swagger/apis'
+import {
+
+  
+}
+
 import { notification } from 'antd'
 import i18n from 'app/i18n'
+import { FilesApi } from './file/apis'
 
 interface RequestError {
   code?: number
@@ -82,6 +89,8 @@ export const config: Configuration = new Configuration({
   ]
 })
 
+export const filesConfig: FileConfiguration = new FileConfiguration({...config})
+
 export const api = {
   coupons: new CouponsApi(config),
   tags: new TagsApi(config),
@@ -95,5 +104,6 @@ export const api = {
   emailTemplates: new EmailTemplatesApi(config),
   segments: new SegmentsApi(config),
   cashiers: new CashiersApi(config),
-  information: new InformationApi(config)
+  information: new InformationApi(config),
+  files: new FilesApi(filesConfig)
 }
