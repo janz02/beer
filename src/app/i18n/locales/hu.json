@@ -34,7 +34,8 @@
       "cashier-id": "Online pénztár azonosító (AP)",
       "digital-stamp-id": "Digitális pecsét azonosító"
     },
-    "table-title": "Pénztárak"
+    "table-title": "Pénztárak",
+    "add": "Új pénztár hozzáadása"
   },
   "common": {
     "actions": "Műveletek",
@@ -89,7 +90,8 @@
     "field": {
       "name": "Kategória neve"
     },
-    "list-title": "Kupon kategóriák"
+    "list-title": "Kupon kategóriák",
+    "add": "Új kupon kategória hozzáadása"
   },
   "coupon-create": {
     "activate": "Aktiválás",
@@ -130,7 +132,7 @@
   "coupon-list": {
     "categoryId": "Kategória",
     "coupons": "Kuponok",
-    "create": "Létrehozás",
+    "add": "Új kupon hozzáadása",
     "endDate": "Vég dátum",
     "expireDate": "Lejárati dátum",
     "name": "Név",
@@ -242,7 +244,8 @@
     "send-sample": "Minta küldése",
     "send-segment": "Küldés szegmensnek",
     "template": "Sablon",
-    "version": "Verzió"
+    "version": "Verzió",
+    "add": "Új sablon hozzáadása"
   },
   "notification": {
     "empty-list": "Üres",
@@ -289,7 +292,7 @@
       "name": "Telephely név"
     },
     "list-title": "Telephelyek",
-    "create": "Új telephely hozzáadása"
+    "add": "Új telephely hozzáadása"
   },
   "user-access": {
     "access-editor": {

@@ -20,6 +20,7 @@ import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useTableUtils } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
+import { PlusOutlined } from '@ant-design/icons'
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
@@ -106,8 +107,13 @@ export const NewsletterList: FC = () => {
   }
 
   const headerOptions = (
-    <Button type="primary" onClick={() => setVisibleSaveNewPopup(true)}>
-      {t('common.create')}
+    <Button
+      type="primary"
+      onClick={() => setVisibleSaveNewPopup(true)}
+      icon={<PlusOutlined />}
+      size="large"
+    >
+      {t('newsletter.add')}
     </Button>
   )
 

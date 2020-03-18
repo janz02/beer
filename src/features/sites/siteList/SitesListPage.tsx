@@ -74,8 +74,13 @@ export const SitesListPage: FC = () => {
   )
 
   const headerOptions = (
-    <Button type="primary" onClick={() => history.push(`/sites/editor`)} icon={<PlusOutlined />}>
-      {t('site-list.create')}
+    <Button
+      type="primary"
+      onClick={() => history.push(`/sites/editor`)}
+      icon={<PlusOutlined />}
+      size="large"
+    >
+      {t('site-list.add')}
     </Button>
   )
 

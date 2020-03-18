@@ -13,6 +13,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
 import { ColumnType } from 'antd/lib/table'
+import { PlusOutlined } from '@ant-design/icons'
 
 interface CategoryListProps {
   onOpenEditor: (id?: number) => void
@@ -65,8 +66,8 @@ export const CategoryList: FC<CategoryListProps> = props => {
   )
 
   const headerOptions = hasPermission([Roles.Administrator]) ? (
-    <Button type="primary" onClick={() => onOpenEditor()}>
-      {t('common.create')}
+    <Button type="primary" onClick={() => onOpenEditor()} icon={<PlusOutlined />} size="large">
+      {t('coupon-category.add')}
     </Button>
   ) : (
     undefined

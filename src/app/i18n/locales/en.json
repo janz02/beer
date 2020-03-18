@@ -34,7 +34,8 @@
       "cashier-id": "Online cashier ID",
       "digital-stamp-id": "Digital stamp ID"
     },
-    "table-title": "Cashiers"
+    "table-title": "Cashiers",
+    "add": "Add new cashier"
   },
   "common": {
     "actions": "Actions",
@@ -89,7 +90,8 @@
     "field": {
       "name": "Category name"
     },
-    "list-title": "Coupon categories"
+    "list-title": "Coupon categories",
+    "add": "Add new coupon category"
   },
   "coupon-create": {
     "activate": "Activate",
@@ -135,7 +137,8 @@
     "expireDate": "Expire date",
     "name": "Name",
     "startDate": "Start datre",
-    "state": "State"
+    "state": "State",
+    "add": "Add new coupon"
   },
   "error": {
     "auth": {
@@ -242,7 +245,8 @@
     "send-sample": "Send sample",
     "send-segment": "Send to Segment",
     "template": "Template",
-    "version": "Version"
+    "version": "Version",
+    "add": "Add new template"
   },
   "notification": {
     "empty-list": "Empty",
@@ -289,7 +293,7 @@
       "name": "Site name"
     },
     "list-title": "Sites",
-    "create": "Create new site"
+    "add": "Add new site"
   },
   "user-access": {
     "access-editor": {
