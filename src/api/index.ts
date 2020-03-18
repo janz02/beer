@@ -12,7 +12,8 @@ import {
   EmailSenderApi,
   EmailTemplatesApi,
   SegmentsApi,
-  CashiersApi
+  CashiersApi,
+  FilesApi
 } from './swagger/apis'
 
 import { notification } from 'antd'
@@ -83,8 +84,6 @@ export const config: Configuration = new Configuration({
   ]
 })
 
-export const filesConfig: FileConfiguration = new FileConfiguration({ ...config })
-
 export const api = {
   coupons: new CouponsApi(config),
   tags: new TagsApi(config),
@@ -99,5 +98,5 @@ export const api = {
   segments: new SegmentsApi(config),
   cashiers: new CashiersApi(config),
   information: new InformationApi(config),
-  files: new FilesApi(filesConfig)
+  files: new FilesApi(config)
 }
