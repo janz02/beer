@@ -15,9 +15,6 @@
 
 import * as runtime from '../runtime';
 import {
-    AuthRegistrationFailedException,
-    AuthRegistrationFailedExceptionFromJSON,
-    AuthRegistrationFailedExceptionToJSON,
     ChangePasswordDto,
     ChangePasswordDtoFromJSON,
     ChangePasswordDtoToJSON,

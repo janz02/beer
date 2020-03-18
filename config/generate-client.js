@@ -14,21 +14,9 @@ shell
   )
   .to("src/api/swagger.json");
 
-shell
-  .ShellString(
-    shell.exec(
-      "curl https://pkm-coupon-dev.grapetest.xyz/swagger/file/swagger.json"
-    )
-  )
-  .to("src/api/file.json");
-
 fs.removeSync("src/api/swagger");
-fs.removeSync("src/api/file");
 
 // Generate clients
 shell.exec(
   "openapi-generator generate -i src/api/swagger.json -g typescript-fetch -p typescriptThreePlus=true -o src/api/swagger"
-);
-shell.exec(
-  "openapi-generator generate -i src/api/file.json -g typescript-fetch -p typescriptThreePlus=true -o src/api/file --skip-validate-spec"
 );
