@@ -31,10 +31,10 @@ export interface DeleteSegmentRequest {
 }
 
 export interface GetSegmentsRequest {
-    segmentName?: string;
+    segmentName?: string | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 

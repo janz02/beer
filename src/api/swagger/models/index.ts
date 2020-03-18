@@ -1,5 +1,4 @@
 export * from './ActivateCouponDto';
-export * from './AuthRegistrationFailedException';
 export * from './CashierDto';
 export * from './CashierVm';
 export * from './CashierVmPaginatedResponse';
@@ -27,6 +26,8 @@ export * from './EmailTemplateSummaryVm';
 export * from './EmailTemplateSummaryVmPaginatedResponse';
 export * from './EmailTemplateVersionDto';
 export * from './EmailTemplateVm';
+export * from './FileVm';
+export * from './InlineObject';
 export * from './Int32EntityCreatedVm';
 export * from './LoginDto';
 export * from './MyClaimedCouponVm';
