@@ -94,7 +94,8 @@ export const CashierList: FC<CashierListProps> = props => {
             columns: columnsConfig,
             dataSource: cashiers?.map((c, i) => ({ ...c, key: '' + i + c.id })),
             pagination: paginationConfig,
-            onChange: handleTableChange
+            onChange: handleTableChange,
+            size: 'small'
           }}
         />
       </ResponsiveCard>

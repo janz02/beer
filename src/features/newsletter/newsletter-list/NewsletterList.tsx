@@ -125,7 +125,8 @@ export const NewsletterList: FC = () => {
             columns: columnsConfig,
             dataSource: templates.map((t, i) => ({ ...t, key: '' + i + t.id })),
             pagination: paginationConfig,
-            onChange: handleTableChange
+            onChange: handleTableChange,
+            size: 'small'
           }}
         />
       </ResponsiveCard>

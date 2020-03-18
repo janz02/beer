@@ -78,13 +78,15 @@ export const CategoryList: FC<CategoryListProps> = props => {
         forTable
         floatingTitle={t('coupon-category.list-title')}
         floatingOptions={headerOptions}
+        extraWide
       >
         <ResponsiveTable
           {...{
             columns: columnsConfig,
             dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
             pagination: paginationConfig,
-            onChange: handleTableChange
+            onChange: handleTableChange,
+            size: 'small'
           }}
         />
       </ResponsiveCard>

@@ -86,13 +86,15 @@ export const SitesListPage: FC = () => {
           forTable
           floatingTitle={t('site.list-title')}
           floatingOptions={headerOptions}
+          extraWide
         >
           <ResponsiveTable
             {...{
               columns: columnsConfig,
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
               pagination: paginationConfig,
-              onChange: handleTableChange
+              onChange: handleTableChange,
+              size: 'small'
             }}
           />
         </ResponsiveCard>
