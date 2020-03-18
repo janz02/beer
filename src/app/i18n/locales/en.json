@@ -281,8 +281,15 @@
     "field": {
       "address": "Address",
       "name": "Site name"
+    }
+  },
+  "site-list": {
+    "table": {
+      "address": "Address",
+      "name": "Site name"
     },
-    "list-title": "Sites"
+    "list-title": "Sites",
+    "create": "Create new site"
   },
   "user-access": {
     "access-editor": {

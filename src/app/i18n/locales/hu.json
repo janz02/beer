@@ -281,8 +281,15 @@
     "field": {
       "address": "Cím",
       "name": "Telephely név"
+    }
+  },
+  "site-list": {
+    "table": {
+      "address": "Cím",
+      "name": "Telephely név"
     },
-    "list-title": "Telephelyek"
+    "list-title": "Telephelyek",
+    "create": "Új telephely hozzáadása"
   },
   "user-access": {
     "access-editor": {
