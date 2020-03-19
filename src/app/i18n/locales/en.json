@@ -183,6 +183,9 @@
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "percentage-max-100": "The percentage value cannot exceed 100."
     },
+    "coupon-categories": {
+      "name-must-be-unique": "Category name must be unique."
+    },
     "coupon-user-code": {
       "cant-save": "Can't save user coupon code."
     },
