@@ -21,6 +21,7 @@ import { NewsletterListPage } from 'features/newsletter/newsletter-list/Newslett
 import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
 import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
 import { Roles } from 'api/swagger/models'
+import { isLoggedIn } from 'services/jwt-reader'
 
 const comboRoles = {
   forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
@@ -52,6 +53,13 @@ export const pageViewRoles = {
   profile: comboRoles.forAll,
   partner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
+}
+
+const onDefaultRoute = (): JSX.Element => {
+  if (!isLoggedIn()) {
+    return <Redirect to="/auth" />
+  }
+  return <Redirect to="/coupons" />
 }
 
 const Routes = (): JSX.Element => (
@@ -137,7 +145,7 @@ const Routes = (): JSX.Element => (
       component={NewsletterEditorPage}
     />
     <PrivateRoute exact path="/users" roles={pageViewRoles.users} component={UserAccessListPage} />
-    <Route path="*" render={() => <Redirect to="/coupons" />} />
+    <Route path="*" render={onDefaultRoute} />
   </Switch>
 )
 

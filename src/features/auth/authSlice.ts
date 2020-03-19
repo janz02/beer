@@ -3,7 +3,7 @@ import { AppThunk } from 'app/store'
 import { history } from 'router/router'
 import { LoginRequest, RegisterPartnerContactRequest } from 'api/swagger/apis'
 import { UserVm } from 'api/swagger'
-import { getJwtUserdata } from 'services/jwt-reader'
+import { getJwtUserdata, isLoggedIn } from 'services/jwt-reader'
 import { api } from 'api'
 import JwtDecode from 'jwt-decode'
 import { message } from 'antd'
@@ -17,7 +17,7 @@ const clearJwtData = (): void => {
 }
 
 const initialState = {
-  loggedIn: !!sessionStorage.getItem('jwt'),
+  loggedIn: isLoggedIn(),
   userData: getJwtUserdata(),
   loading: false,
   errorSignup: '',
@@ -120,7 +120,12 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
 
     dispatch(loginSuccess(userVm))
 
-    history.push(cameFrom)
+    if (!cameFrom.includes('error')) {
+      history.push(cameFrom)
+      return
+    }
+
+    history.push('/')
   } catch (err) {
     dispatch(loginFail(err.toString()))
   }

@@ -9,6 +9,10 @@ const formatRoles = (jwt: any): Roles[] => {
   return rawRoles ? [].concat(rawRoles) : []
 }
 
+export const isLoggedIn = (): boolean => {
+  return !!sessionStorage.getItem('jwt')
+}
+
 export const getJwtUserdata = (token?: string[] | string | null): UserData => {
   const jwt: any = token ?? sessionStorage.getItem('jwt')
   const decodedJwt: any = jwt && JwtDecode(jwt)
@@ -31,6 +35,9 @@ export const hasAllPermissions = (roles?: Roles[]): boolean => {
 export const hasPermission = (roles?: Roles[]): boolean => {
   if (!roles || !roles.length) {
     return true
+  }
+  if (!isLoggedIn()) {
+    return false
   }
   const jwtRoles = getJwtUserdata().roles ?? []
   return roles.some(x => jwtRoles.includes(x))
