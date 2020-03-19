@@ -18,6 +18,10 @@ import {
     CouponRankFromJSON,
     CouponRankFromJSONTyped,
     CouponRankToJSON,
+    CouponState,
+    CouponStateFromJSON,
+    CouponStateFromJSONTyped,
+    CouponStateToJSON,
     CouponType,
     CouponTypeFromJSON,
     CouponTypeFromJSONTyped,
@@ -54,6 +58,12 @@ export interface CouponDto {
      * @memberof CouponDto
      */
     type?: CouponType;
+    /**
+     * 
+     * @type {CouponState}
+     * @memberof CouponDto
+     */
+    state?: CouponState;
     /**
      * 
      * @type {Date}
@@ -124,6 +134,7 @@ export function CouponDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'description': !exists(json, 'description') ? undefined : json['description'],
         'rank': !exists(json, 'rank') ? undefined : CouponRankFromJSON(json['rank']),
         'type': !exists(json, 'type') ? undefined : CouponTypeFromJSON(json['type']),
+        'state': !exists(json, 'state') ? undefined : CouponStateFromJSON(json['state']),
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
         'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
@@ -149,6 +160,7 @@ export function CouponDtoToJSON(value?: CouponDto | null): any {
         'description': value.description,
         'rank': CouponRankToJSON(value.rank),
         'type': CouponTypeToJSON(value.type),
+        'state': CouponStateToJSON(value.state),
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
         'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),

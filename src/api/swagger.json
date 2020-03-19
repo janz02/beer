@@ -2583,6 +2583,29 @@
             }
           },
           {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerState",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PartnerState"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -4167,6 +4190,9 @@
           "type": {
             "$ref": "#/components/schemas/CouponType"
           },
+          "state": {
+            "$ref": "#/components/schemas/CouponState"
+          },
           "startDate": {
             "type": "string",
             "format": "date-time"
@@ -4650,7 +4676,8 @@
       "PartnerState": {
         "enum": [
           "Inactive",
-          "Active"
+          "Active",
+          "Deleted"
         ],
         "type": "string"
       },
