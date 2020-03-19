@@ -6,7 +6,6 @@ import { PaginationConfig } from 'antd/lib/pagination'
 import { SorterResult, SortOrder, ColumnFilterItem, ColumnType } from 'antd/lib/table/interface'
 import { SearchOutlined, CalendarOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
-import { useTranslation } from 'react-i18next'
 import { SearchTableDropdown } from 'components/table-dropdowns/SearchTableDropdown'
 import { DatepickerTableDropdown } from 'components/table-dropdowns/DatepickerTableDropdown'
 import { MomentDisplay } from 'components/MomentDisplay'
@@ -118,7 +117,6 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
 
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
-  const { t } = useTranslation()
 
   const paginationConfig = useMemo((): TablePaginationConfig | false => {
     const baseConfig = basePaginationConfig(isMobile, paginationState)
@@ -243,8 +241,6 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
       filterKeys?.forEach((key: any) => {
         requestParams[key] = filters?.[key]?.[0]
       })
-
-      console.log({ filters })
 
       dispatch(getDataAction(requestParams))
     },

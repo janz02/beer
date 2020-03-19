@@ -5,7 +5,9 @@ import { api } from 'api'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
-  Pagination
+  Pagination,
+  reviseListRequestParams,
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 
 interface CouponCategoryListState {
@@ -80,21 +82,13 @@ export const getCategories = (params: ListRequestParams = {}): AppThunk => async
 ) => {
   dispatch(getCategoriesRequest())
   try {
-    const oldPagination = getState().categoryList.pagination
-    const { result, ...pagination } = await api.categories.getCategories({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params
-    })
+    const revisedParams = reviseListRequestParams(getState().couponList.pagination, params)
+    const { result, ...pagination } = await api.categories.getCategories(revisedParams)
 
     dispatch(
       getCategoriesSuccess({
         categories: result as Category[],
-        pagination: {
-          ...params,
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        pagination: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {

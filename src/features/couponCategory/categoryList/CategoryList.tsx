@@ -21,25 +21,27 @@ interface CategoryListProps {
 export const CategoryList: FC<CategoryListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { pagination, categories } = useSelector((state: RootState) => state.categoryList)
+  const { pagination, categories, loading } = useSelector((state: RootState) => state.categoryList)
   const [categoryToDelete, setCategoryToDelete] = useState<{
     category?: Category
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
+  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Category>({
     paginationState: pagination,
+    filterKeys: ['name'],
     getDataAction: getCategories
   })
 
   const columnsConfig: ColumnType<Category>[] = useMemo(
     () => [
-      {
+      columnConfig({
         title: t('coupon-category.field.name'),
         key: 'name',
-        dataIndex: 'name',
-        ...sorterConfig
-      },
+        sort: true,
+        search: true,
+        highlightSearch: true
+      }),
       hasPermission([Roles.Administrator])
         ? {
             title: '',
@@ -61,7 +63,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
           }
         : {}
     ],
-    [t, sorterConfig, onOpenEditor]
+    [columnConfig, t, onOpenEditor]
   )
 
   const headerOptions = hasPermission([Roles.Administrator]) ? (
@@ -81,6 +83,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
       >
         <ResponsiveTable
           {...{
+            loading,
             columns: columnsConfig,
             dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
             pagination: paginationConfig,
