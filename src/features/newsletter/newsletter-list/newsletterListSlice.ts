@@ -10,7 +10,9 @@ import { Segment } from 'models/segment'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
-  Pagination
+  Pagination,
+  reviseListRequestParams,
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 
 interface NewsletterListState {
@@ -94,20 +96,13 @@ export const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk
 ) => {
   try {
     dispatch(getTemplatesRequest())
-    const oldPagination = getState().newsletterList.pagination
-    const { result, ...pagination } = await api.emailTemplates.getTemplates({
-      page: oldPagination.page,
-      pageSize: oldPagination.pageSize,
-      ...params
-    })
+    const revisedParams = reviseListRequestParams(getState().couponList.pagination, params)
+    const { result, ...pagination } = await api.emailTemplates.getTemplates(revisedParams)
     const templates = result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
     dispatch(
       getTemplatesSuccess({
         templates: templates as NewsletterPreview[],
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        pagination: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {

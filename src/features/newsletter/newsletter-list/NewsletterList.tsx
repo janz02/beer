@@ -44,21 +44,23 @@ export const NewsletterList: FC = () => {
     dispatch(getNewsletterTemplates())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
+  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<NewsletterPreview>({
     paginationState: pagination,
+    filterKeys: ['name'],
     getDataAction: getNewsletterTemplates
   })
 
   const columnsConfig: ColumnType<NewsletterPreview>[] = useMemo(
     () => [
-      {
+      columnConfig({
         title: t('newsletter.field.template-name'),
         key: 'name',
-        dataIndex: 'name',
-        ellipsis: true,
+        sort: true,
+        search: true,
+        highlightSearch: true,
         width: '35%',
-        ...sorterConfig
-      },
+        ellipsis: true
+      }),
       {
         title: t('newsletter.field.template-version'),
         key: 'version',
@@ -96,7 +98,7 @@ export const NewsletterList: FC = () => {
         }
       }
     ],
-    [editTemplate, sorterConfig, t]
+    [columnConfig, editTemplate, t]
   )
 
   const handleSave = async (values: any): Promise<void> => {
