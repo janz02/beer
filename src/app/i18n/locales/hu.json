@@ -177,6 +177,7 @@
       "cannot-claim": "Nem lehet kiváltani a kupont.",
       "cant-be-deleted": "Kupon nem törölhető.",
       "cant-change-state": "Kupon státusz változtatása sikertelen.",
+      "invalid-initial-state": "Hibás kezdőállapot",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "percentage-max-100": "A százalék érték maximum 100 lehet."
     },
