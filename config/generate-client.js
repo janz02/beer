@@ -3,9 +3,6 @@
 const shell = require("shelljs");
 const fs = require("fs-extra");
 
-// Download v1 api, and file api
-// The file api needs to be downloaded separately, because the API documentation contains errors
-// And can only b used when validation is skipped on it
 shell
   .ShellString(
     shell.exec(
