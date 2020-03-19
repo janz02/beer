@@ -69,25 +69,25 @@ export interface GetCouponRequest {
 }
 
 export interface GetCouponsRequest {
-    name?: string;
-    description?: string;
+    name?: string | null;
+    description?: string | null;
     includeArchived?: boolean;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 
 export interface GetWaitingCouponsRequest {
-    name?: string;
+    name?: string | null;
     state?: CouponState;
-    categoryId?: number;
-    startDate?: Date;
-    endDate?: Date;
-    expireDate?: Date;
+    categoryId?: number | null;
+    startDate?: Date | null;
+    endDate?: Date | null;
+    expireDate?: Date | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 
