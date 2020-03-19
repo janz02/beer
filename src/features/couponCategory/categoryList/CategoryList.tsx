@@ -40,8 +40,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
         title: t('coupon-category.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        highlightSearch: true
+        filterMode: FilterMode.SEARCH
       }),
       hasPermission([Roles.Administrator])
         ? {

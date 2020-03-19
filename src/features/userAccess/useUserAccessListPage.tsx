@@ -49,15 +49,13 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         title: t('user-access.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        highlightSearch: true
+        filterMode: FilterMode.SEARCH
       }),
       nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.email'),
         key: 'email',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        highlightSearch: true
+        filterMode: FilterMode.SEARCH
       }),
       {
         title: t('user-access.field.status'),
@@ -105,15 +103,13 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         title: t('user-access.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        highlightSearch: true
+        filterMode: FilterMode.SEARCH
       }),
       partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.email'),
         key: 'email',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        highlightSearch: true
+        filterMode: FilterMode.SEARCH
       }),
       {
         title: t('user-access.field.phone'),

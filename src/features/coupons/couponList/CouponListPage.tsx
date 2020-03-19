@@ -59,8 +59,7 @@ export const CouponListPage: React.FC = () => {
         title: t('coupon-list.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        highlightSearch: true
+        filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('coupon-list.state'),

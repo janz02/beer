@@ -62,7 +62,7 @@ interface ColumnConfigParams extends ColumnType<any> {
   filterMode?: FilterMode
   filters?: ColumnFilterItem[]
   sort?: boolean
-  highlightSearch?: boolean
+  disableSearchHighlight?: boolean
 }
 
 export interface UseTableUtils {
@@ -170,7 +170,7 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
 
   const columnConfig = useCallback(
     (params: ColumnConfigParams): ColumnType<any> => {
-      const { key, filterMode, sort, filters, highlightSearch, ...rest } = params
+      const { key, filterMode, sort, filters, disableSearchHighlight, ...rest } = params
       const config: ColumnType<any> = {
         ...rest,
         key: key,
@@ -185,7 +185,7 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
         case FilterMode.SEARCH:
           config.filterDropdown = SearchTableDropdown
           config.filterIcon = () => <SearchOutlined />
-          if (highlightSearch) {
+          if (!disableSearchHighlight) {
             config.render = (text: string) => searchedTextHighlighter(key, text)
           }
           break
@@ -248,8 +248,6 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
       filterKeys?.forEach((key: any) => {
         requestParams[key] = filters?.[key]?.[0]
       })
-
-      console.log({ requestParams })
 
       dispatch(getDataAction(requestParams))
     },

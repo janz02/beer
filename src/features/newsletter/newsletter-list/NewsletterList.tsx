@@ -58,7 +58,6 @@ export const NewsletterList: FC = () => {
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH,
-        highlightSearch: true,
         width: '35%',
         ellipsis: true
       }),
