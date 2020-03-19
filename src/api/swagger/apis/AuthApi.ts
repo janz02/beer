@@ -443,6 +443,35 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Syncs in all the users from AD to be listed
+     */
+    async syncAdUsersRaw(): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/SyncAdUsers`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Syncs in all the users from AD to be listed
+     */
+    async syncAdUsers(): Promise<void> {
+        await this.syncAdUsersRaw();
+    }
+
+    /**
      * Updates the details of an elevated user or partner contact
      * Updates the details of an elevated user or partner contact
      */

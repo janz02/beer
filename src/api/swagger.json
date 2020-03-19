@@ -593,6 +593,23 @@
         }
       }
     },
+    "/api/Auth/SyncAdUsers": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Syncs in all the users from AD to be listed",
+        "operationId": "syncAdUsers",
+        "responses": {
+          "200": {
+            "description": "Successful syncing"
+          },
+          "400": {
+            "description": "Registration error occured"
+          }
+        }
+      }
+    },
     "/api/Cashiers": {
       "post": {
         "tags": [

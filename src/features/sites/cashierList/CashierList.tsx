@@ -11,6 +11,7 @@ import { getCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ColumnType } from 'antd/lib/table'
+import { PlusOutlined } from '@ant-design/icons'
 
 interface CashierListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
@@ -70,8 +71,13 @@ export const CashierList: FC<CashierListProps> = props => {
   const headerOptions = (
     <>
       {site?.id && (
-        <Button type="primary" onClick={() => onOpenEditor(undefined, true)}>
-          {t('common.create')}
+        <Button
+          type="primary"
+          onClick={() => onOpenEditor(undefined, true)}
+          icon={<PlusOutlined />}
+          size="large"
+        >
+          {t('cashier-list.add')}
         </Button>
       )}
     </>
