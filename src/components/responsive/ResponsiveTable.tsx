@@ -10,6 +10,7 @@ export const ResponsiveTable: FC<ResponsiveTableProps> = props => {
   const { hasHeaderOffset, ...tableProps } = props
   return (
     <Table
+      size="small"
       {...tableProps}
       className={` responsive-table ${hasHeaderOffset ? 'has-header-offset' : ''}`}
     />

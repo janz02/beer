@@ -14,6 +14,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { useTableUtils } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
+import { PlusOutlined } from '@ant-design/icons'
 
 export const SitesListPage: FC = () => {
   const dispatch = useDispatch()
@@ -36,19 +37,18 @@ export const SitesListPage: FC = () => {
   const columnsConfig: ColumnType<Site>[] = useMemo(
     () => [
       {
-        title: t('common.data'),
+        title: t('site-list.table.name'),
         key: 'name',
         dataIndex: 'name',
-        ...sorterConfig,
-        render(value: unknown, record: Site) {
-          return (
-            <>
-              <h4>{record.name}</h4>
-              <p>{record.address}</p>
-            </>
-          )
-        }
+        ...sorterConfig
       },
+      {
+        title: t('site-list.table.address'),
+        key: 'address',
+        dataIndex: 'address',
+        ...sorterConfig
+      },
+
       {
         title: '',
         key: 'actions',
@@ -74,8 +74,13 @@ export const SitesListPage: FC = () => {
   )
 
   const headerOptions = (
-    <Button type="primary" onClick={() => history.push(`/sites/editor`)}>
-      {t('common.create')}
+    <Button
+      type="primary"
+      onClick={() => history.push(`/sites/editor`)}
+      icon={<PlusOutlined />}
+      size="large"
+    >
+      {t('site-list.add')}
     </Button>
   )
 
@@ -84,8 +89,9 @@ export const SitesListPage: FC = () => {
       <ResponsivePage>
         <ResponsiveCard
           forTable
-          floatingTitle={t('site.list-title')}
+          floatingTitle={t('site-list.list-title')}
           floatingOptions={headerOptions}
+          extraWide
         >
           <ResponsiveTable
             {...{

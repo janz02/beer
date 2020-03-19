@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import './CouponListPage.scss'
 import { Button } from 'antd'
-import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
@@ -19,6 +18,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useTableUtils } from 'hooks/useTableUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
+import { PlusOutlined } from '@ant-design/icons'
 
 const couponEditorRoles = [
   Roles.Administrator,
@@ -148,8 +148,13 @@ export const CouponListPage: React.FC = () => {
   )
 
   const headerOptions = hasPermission(couponEditorRoles) ? (
-    <Button type="primary">
-      <Link to="/coupon">{t('coupon-list.create')}</Link>
+    <Button
+      type="primary"
+      onClick={() => history.push(`/coupon`)}
+      icon={<PlusOutlined />}
+      size="large"
+    >
+      {t('coupon-list.add')}
     </Button>
   ) : (
     undefined

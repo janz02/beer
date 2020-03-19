@@ -12,8 +12,10 @@ import {
   EmailSenderApi,
   EmailTemplatesApi,
   SegmentsApi,
-  CashiersApi
+  CashiersApi,
+  FilesApi
 } from './swagger/apis'
+
 import { notification } from 'antd'
 import i18n from 'app/i18n'
 
@@ -95,5 +97,6 @@ export const api = {
   emailTemplates: new EmailTemplatesApi(config),
   segments: new SegmentsApi(config),
   cashiers: new CashiersApi(config),
-  information: new InformationApi(config)
+  information: new InformationApi(config),
+  files: new FilesApi(config)
 }

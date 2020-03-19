@@ -30,6 +30,7 @@
     }
   },
   "cashier-list": {
+    "add": "Add new cashier",
     "table": {
       "cashier-id": "Online cashier ID",
       "digital-stamp-id": "Digital stamp ID"
@@ -40,8 +41,6 @@
     "actions": "Actions",
     "cancel": "Cancel",
     "confirm": "Ok",
-    "create": "Create",
-    "data": "Data",
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
@@ -90,6 +89,7 @@
     }
   },
   "coupon-category": {
+    "add": "Add new coupon category",
     "editor-create": "Create",
     "editor-edit": "Edit",
     "field": {
@@ -127,9 +127,9 @@
     "timeline-title": "Timeline"
   },
   "coupon-list": {
+    "add": "Add new coupon",
     "categoryId": "Category",
     "coupons": "Coupons",
-    "create": "Create",
     "endDate": "End date",
     "expireDate": "Expire date",
     "name": "Name",
@@ -150,6 +150,7 @@
       "password-format": "Invalid password format.",
       "password-inconsistent": "The two passwords are not matching.",
       "registration-failed": "Registration failed.",
+      "sync-failed": "User sync failed.",
       "user-exists": "User exists.",
       "user-inactive": "User inactive.",
       "user-not-found": "User not found."
@@ -220,6 +221,7 @@
     "users": "Users"
   },
   "newsletter": {
+    "add": "Add new template",
     "available-templates": "Available templates",
     "close-editor": "Close editor",
     "field": {
@@ -280,8 +282,15 @@
     "field": {
       "address": "Address",
       "name": "Site name"
-    },
-    "list-title": "Sites"
+    }
+  },
+  "site-list": {
+    "add": "Add new site",
+    "list-title": "Sites",
+    "table": {
+      "address": "Address",
+      "name": "Site name"
+    }
   },
   "user-access": {
     "access-editor": {

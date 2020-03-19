@@ -30,6 +30,7 @@
     }
   },
   "cashier-list": {
+    "add": "Új pénztár hozzáadása",
     "table": {
       "cashier-id": "Online pénztár azonosító (AP)",
       "digital-stamp-id": "Digitális pecsét azonosító"
@@ -40,8 +41,6 @@
     "actions": "Műveletek",
     "cancel": "Mégsem",
     "confirm": "Rendben",
-    "create": "Létrehozás",
-    "data": "Adatok",
     "delete": "Törlés",
     "discard": "Elvetés",
     "edit": "Szerkesztés",
@@ -90,6 +89,7 @@
     }
   },
   "coupon-category": {
+    "add": "Új kupon kategória hozzáadása",
     "editor-create": "Létrehozás",
     "editor-edit": "Szerkesztés",
     "field": {
@@ -127,9 +127,9 @@
     "timeline-title": "Előzmények"
   },
   "coupon-list": {
+    "add": "Új kupon hozzáadása",
     "categoryId": "Kategória",
     "coupons": "Kuponok",
-    "create": "Létrehozás",
     "endDate": "Vég dátum",
     "expireDate": "Lejárati dátum",
     "name": "Név",
@@ -150,6 +150,7 @@
       "password-format": "Invalid jelszó formátum.",
       "password-inconsistent": "A két jelszó nem egyezik meg.",
       "registration-failed": "Regsztráció sikertelen.",
+      "sync-failed": "Felhasználók szinkronizációja sikerleten.",
       "user-exists": "Felhasználó már létezik.",
       "user-inactive": "Felhasználó inaktív.",
       "user-not-found": "Felhasználó nem található."
@@ -220,6 +221,7 @@
     "users": "Felhasználók"
   },
   "newsletter": {
+    "add": "Új sablon hozzáadása",
     "available-templates": "Hírlevél sablonok",
     "close-editor": "Szerkesztő bezárása",
     "field": {
@@ -280,8 +282,15 @@
     "field": {
       "address": "Cím",
       "name": "Telephely név"
-    },
-    "list-title": "Telephelyek"
+    }
+  },
+  "site-list": {
+    "add": "Új telephely hozzáadása",
+    "list-title": "Telephelyek",
+    "table": {
+      "address": "Cím",
+      "name": "Telephely név"
+    }
   },
   "user-access": {
     "access-editor": {
