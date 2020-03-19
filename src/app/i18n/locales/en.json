@@ -102,6 +102,7 @@
   "coupon-create": {
     "activate": "Activate",
     "create": "Create",
+    "create-and-accept": "Send for accept",
     "create-coupon-success": "Creating a coupon was successful.",
     "edit": "Edit",
     "editor-title": "Coupon editor",
@@ -178,6 +179,7 @@
       "cannot-claim": "Cannot claim coupon.",
       "cant-be-deleted": "Coupon can't be deleted.",
       "cant-change-state": "Can't change coupon state.",
+      "invalid-initial-state": "Invalid initial state.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "percentage-max-100": "The percentage value cannot exceed 100."
     },
