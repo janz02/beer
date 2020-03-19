@@ -100,6 +100,7 @@
   "coupon-create": {
     "activate": "Activate",
     "create": "Create",
+    "create-and-accept": "Send for accept",
     "create-coupon-success": "Creating a coupon was successful.",
     "edit": "Edit",
     "editor-title": "Coupon editor",

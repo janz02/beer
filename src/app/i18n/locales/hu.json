@@ -100,6 +100,7 @@
   "coupon-create": {
     "activate": "Aktiválás",
     "create": "Létrehozás",
+    "create-and-accept": "Jóváhagyásra küldés",
     "create-coupon-success": "Sikeres kupon létrehozás.",
     "edit": "Szerkesztés",
     "editor-title": "Kupon szerkesztő",

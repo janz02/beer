@@ -24,6 +24,9 @@ import {
     PartnerDto,
     PartnerDtoFromJSON,
     PartnerDtoToJSON,
+    PartnerState,
+    PartnerStateFromJSON,
+    PartnerStateToJSON,
     PartnerVm,
     PartnerVmFromJSON,
     PartnerVmToJSON,
@@ -46,6 +49,9 @@ export interface GetPartnerRequest {
 
 export interface GetPartnersRequest {
     name?: string | null;
+    majorPartner?: boolean | null;
+    partnerState?: PartnerState;
+    address?: string | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -181,6 +187,18 @@ export class PartnersApi extends runtime.BaseAPI {
 
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.majorPartner !== undefined) {
+            queryParameters['majorPartner'] = requestParameters.majorPartner;
+        }
+
+        if (requestParameters.partnerState !== undefined) {
+            queryParameters['partnerState'] = requestParameters.partnerState;
+        }
+
+        if (requestParameters.address !== undefined) {
+            queryParameters['address'] = requestParameters.address;
         }
 
         if (requestParameters.page !== undefined) {

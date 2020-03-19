@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './CouponEditorForm.scss'
 import {
   Form,
@@ -48,8 +48,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { handleCouponSave, loading, couponIsNew, coupon, editing } = props
   const dispatch = useDispatch()
   const { t } = useTranslation()
-
   const { categories } = useSelector((state: RootState) => state.coupons)
+  const [stateForCreate, setStateForCreate] = useState(CouponState.Created)
   const rule = useCommonFormRules()
 
   const {
@@ -96,6 +96,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }, [coupon, editing, setInitialFieldsValueComment])
 
   const handleSubmit = (values: any): void => {
+    values.state = stateForCreate
+
     handleCouponSave &&
       handleCouponSave({
         ...values,
@@ -339,9 +341,28 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             </Form.Item>
 
             {displayEditor && (
-              <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>
-                {couponIsNew ? t('coupon-create.create') : t('common.save')}
-              </Button>
+              <div className="coupon-editor-form__actions">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  onClick={() => setStateForCreate(CouponState.Created)}
+                  disabled={!submitable}
+                  loading={loading}
+                >
+                  {couponIsNew ? t('coupon-create.create') : t('common.save')}
+                </Button>
+                {couponIsNew && (
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    onClick={() => setStateForCreate(CouponState.Waiting)}
+                    disabled={!submitable}
+                    loading={loading}
+                  >
+                    {t('coupon-create.create-and-accept')}
+                  </Button>
+                )}
+              </div>
             )}
           </Form>
         </ResponsiveCard>
