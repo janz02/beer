@@ -41,10 +41,10 @@ export interface DeleteCategoryRequest {
 }
 
 export interface GetCategoriesRequest {
-    name?: string;
+    name?: string | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 

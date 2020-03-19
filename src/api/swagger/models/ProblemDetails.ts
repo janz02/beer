@@ -19,6 +19,7 @@ import { exists, mapValues } from '../runtime';
  * @interface ProblemDetails
  */
 export interface ProblemDetails {
+    [key: string]: object | any;
     /**
      * 
      * @type {string}
@@ -49,12 +50,6 @@ export interface ProblemDetails {
      * @memberof ProblemDetails
      */
     instance?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof ProblemDetails
-     */
-    readonly extensions?: { [key: string]: object; } | null;
 }
 
 export function ProblemDetailsFromJSON(json: any): ProblemDetails {
@@ -67,12 +62,12 @@ export function ProblemDetailsFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
+            ...json,
         'type': !exists(json, 'type') ? undefined : json['type'],
         'title': !exists(json, 'title') ? undefined : json['title'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'detail': !exists(json, 'detail') ? undefined : json['detail'],
         'instance': !exists(json, 'instance') ? undefined : json['instance'],
-        'extensions': !exists(json, 'extensions') ? undefined : json['extensions'],
     };
 }
 
@@ -85,6 +80,7 @@ export function ProblemDetailsToJSON(value?: ProblemDetails | null): any {
     }
     return {
         
+            ...value,
         'type': value.type,
         'title': value.title,
         'status': value.status,

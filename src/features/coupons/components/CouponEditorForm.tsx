@@ -147,16 +147,14 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   const translateState = (state?: CouponState): string => {
     switch (state) {
-      case CouponState.Created:
-        return t('coupon-create.states.create')
       case CouponState.Accepted:
-        return t('coupon-create.states.accept')
+        return t('coupon.state.action.accept')
       case CouponState.Waiting:
-        return t('coupon-create.states.wait')
+        return t('coupon.state.action.wait')
       case CouponState.Closed:
-        return t('coupon-create.states.close')
+        return t('coupon.state.action.close')
       case CouponState.Archived:
-        return t('coupon-create.states.archive')
+        return t('coupon.state.action.archive')
       default:
         return ''
     }

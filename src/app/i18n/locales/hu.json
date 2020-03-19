@@ -76,11 +76,17 @@
   },
   "coupon": {
     "state": {
-      "accepted": "Elfogadva",
-      "archived": "Archiválva",
-      "closed": "Lezárva",
-      "created": "Létrehozva",
-      "waiting": "Várakozik"
+      "accepted": "Jóváhagyott",
+      "action": {
+        "accept": "Jóváhagyás",
+        "archive": "Archiválás",
+        "close": "Lezárás",
+        "wait": "Jóváhagyásra várakozás"
+      },
+      "archived": "Archivált",
+      "closed": "Lezárt",
+      "created": "Rögzített",
+      "waiting": "Jóváhagyásra várakozik"
     }
   },
   "coupon-category": {
@@ -112,13 +118,6 @@
       "rank": "Rang"
     },
     "inactivate": "Inaktiválás",
-    "states": {
-      "accept": "Elfogadás",
-      "archive": "Archiválás",
-      "close": "Lezárás",
-      "create": "Rögzített",
-      "wait": "Várakozás"
-    },
     "status-title": "Státusz módosítás"
   },
   "coupon-editor": {
