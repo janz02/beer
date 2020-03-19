@@ -16,7 +16,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { PlusOutlined } from '@ant-design/icons'
 
@@ -32,7 +32,7 @@ export const CouponListPage: React.FC = () => {
   const { t } = useTranslation()
 
   const { categories } = useSelector((state: RootState) => state.coupons)
-  const { coupons, loading, pagination } = useSelector((state: RootState) => state.couponList)
+  const { coupons, loading, listParams } = useSelector((state: RootState) => state.couponList)
 
   const [couponToDelete, setCouponToDelete] = useState<{
     coupon?: Coupon
@@ -47,77 +47,70 @@ export const CouponListPage: React.FC = () => {
     dispatch(getWaitingCoupons())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
-    filterKeys: ['state', 'categoryId'],
+  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Coupon>({
+    listParamsState: listParams,
+    filterKeys: ['name', 'state', 'categoryId', 'startDate', 'endDate', 'expireDate'],
     getDataAction: getWaitingCoupons
   })
 
-  const columnsConfig: ColumnType<Coupon>[] = useMemo(
-    () => [
-      {
+  const columnsConfig = useMemo(
+    (): ColumnType<Coupon>[] => [
+      columnConfig({
         title: t('coupon-list.name'),
-        dataIndex: 'name',
         key: 'name',
-        ...sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
         title: t('coupon-list.state'),
-        dataIndex: 'state',
         key: 'state',
+        sort: true,
+        filterMode: FilterMode.FILTER,
         filters: Object.keys(CouponState).map(f => {
           return { text: t(`coupon.state.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
-        filterMultiple: false,
         render(value) {
           return t(`coupon.state.${value?.toLowerCase()}`)
-        },
-        ...sorterConfig
-      },
-      {
+        }
+      }),
+      columnConfig({
         title: t('coupon-list.categoryId'),
-        dataIndex: 'categoryId',
         key: 'categoryId',
-        render(value) {
-          return categories && categories.find(x => x.id === +value)?.name
-        },
+        sort: true,
+        filterMode: FilterMode.FILTER,
         filters:
           categories?.map(x => {
             return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
           }) ?? [],
-        filterMultiple: false,
-        ...sorterConfig
-      },
-      {
+        render(value) {
+          return categories && categories.find(x => x.id === +value)?.name
+        }
+      }),
+      columnConfig({
         title: t('coupon-list.startDate'),
-        dataIndex: 'startDate',
         key: 'startDate',
-        render(value) {
-          return <MomentDisplay date={value} />
-        },
-        ...sorterConfig
-      },
-      {
+        filterMode: FilterMode.DATEPICKER,
+        sort: true
+      }),
+      columnConfig({
         title: t('coupon-list.endDate'),
-        dataIndex: 'endDate',
         key: 'endDate',
+        filterMode: FilterMode.DATEPICKER,
+        sort: true,
         render(value) {
           return <MomentDisplay date={value} />
-        },
-        ...sorterConfig
-      },
-      {
+        }
+      }),
+      columnConfig({
         title: t('coupon-list.expireDate'),
-        dataIndex: 'expireDate',
         key: 'expireDate',
+        filterMode: FilterMode.DATEPICKER,
+        sort: true,
         render(value) {
           return <MomentDisplay date={value} />
-        },
-        ...sorterConfig
-      },
-
+        }
+      }),
       {
-        title: '',
         key: 'action',
         render(record: Coupon) {
           return (
@@ -144,7 +137,7 @@ export const CouponListPage: React.FC = () => {
         }
       }
     ],
-    [categories, sorterConfig, t]
+    [categories, columnConfig, t]
   )
 
   const headerOptions = hasPermission(couponEditorRoles) ? (

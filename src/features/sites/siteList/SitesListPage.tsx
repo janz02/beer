@@ -12,14 +12,14 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { history } from 'router/router'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
 import { PlusOutlined } from '@ant-design/icons'
 
 export const SitesListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { sites, pagination } = useSelector((state: RootState) => state.siteList)
+  const { sites, listParams, loading } = useSelector((state: RootState) => state.siteList)
   const [siteToDelete, setSiteToDelete] = useState<{
     site?: Site
     popupVisible?: boolean
@@ -29,26 +29,26 @@ export const SitesListPage: FC = () => {
     dispatch(getSites())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
+  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Site>({
+    listParamsState: listParams,
+    filterKeys: ['name', 'address'],
     getDataAction: getSites
   })
 
   const columnsConfig: ColumnType<Site>[] = useMemo(
     () => [
-      {
+      columnConfig({
         title: t('site-list.table.name'),
         key: 'name',
-        dataIndex: 'name',
-        ...sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
         title: t('site-list.table.address'),
-        key: 'address',
-        dataIndex: 'address',
-        ...sorterConfig
-      },
-
+        key: 'name',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
       {
         title: '',
         key: 'actions',
@@ -70,7 +70,7 @@ export const SitesListPage: FC = () => {
         }
       }
     ],
-    [sorterConfig, t]
+    [columnConfig, t]
   )
 
   const headerOptions = (
@@ -95,6 +95,7 @@ export const SitesListPage: FC = () => {
         >
           <ResponsiveTable
             {...{
+              loading,
               columns: columnsConfig,
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
               pagination: paginationConfig,

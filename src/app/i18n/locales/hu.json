@@ -68,8 +68,10 @@
       "restore-title": "Biztos, hogy vissza szeretnéd állítani?",
       "save-title": "Biztos, hogy menteni szeretnéd?"
     },
+    "reset": "Visszállítás",
     "restore": "Visszállítás",
     "save": "Mentés",
+    "search": "Keresés",
     "send": "Küldés",
     "view": "Megtekintés"
   },
@@ -303,6 +305,10 @@
       "name": "Név",
       "partner-name": "Partner",
       "partner-type": "Típus",
+      "partnerType": {
+        "major": "Fő",
+        "normal": "Alap"
+      },
       "phone": "Telefon",
       "role": "Szerepkör",
       "status": "Státusz",

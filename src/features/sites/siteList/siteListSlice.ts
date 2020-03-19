@@ -5,12 +5,13 @@ import { Site } from 'models/site'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
-  Pagination
+  reviseListRequestParams,
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 
 interface SiteListState {
   sites: Site[]
-  pagination: Pagination
+  listParams: ListRequestParams
   loading: boolean
   errorList: string
   errorDeletion: string
@@ -18,7 +19,7 @@ interface SiteListState {
 
 const initialState: SiteListState = {
   sites: [],
-  pagination: {
+  listParams: {
     pageSize: 10
   },
   loading: false,
@@ -34,9 +35,12 @@ const siteListSlice = createSlice({
     getSitesRequest(state) {
       state.loading = true
     },
-    getSitesSuccess(state, action: PayloadAction<{ sites: Site[]; pagination: Pagination }>) {
+    getSitesSuccess(
+      state,
+      action: PayloadAction<{ sites: Site[]; listParams: ListRequestParams }>
+    ) {
       state.sites = action.payload.sites
-      state.pagination = action.payload.pagination
+      state.listParams = action.payload.listParams
       state.loading = false
       state.errorList = ''
     },
@@ -70,22 +74,18 @@ export const getSites = (params: ListRequestParams = {}): AppThunk => async (
 ) => {
   dispatch(getSitesRequest())
   try {
-    const oldPagination = getState().siteList.pagination
     // TODO: integrate, remove partner get because it will be on the JWT.
     const partner = await api.partner.getSelfPartner()
+
+    const revisedParams = reviseListRequestParams(getState().siteList.listParams, params)
     const { result, ...pagination } = await api.sites.getSites({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params,
+      ...revisedParams,
       partnerId: partner.id
     })
     dispatch(
       getSitesSuccess({
         sites: result as Site[],
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -102,7 +102,7 @@ export const deleteSite = (id: number, refreshList = true): AppThunk => async (
     await api.sites.deleteSite({ id })
     dispatch(deleteSiteSuccess())
     if (refreshList) {
-      const newPage = recalculatePaginationAfterDeletion(getState().siteList.pagination)
+      const newPage = recalculatePaginationAfterDeletion(getState().siteList.listParams)
       dispatch(getSites({ page: newPage }))
     }
     return { id }

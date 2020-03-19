@@ -3,7 +3,7 @@ import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { getNkmUsers, getPartnerUsers, UserType } from './userAccessListSlice'
-import { useTableUtils, UseTableUtilsTools } from 'hooks/useTableUtils'
+import { useTableUtils, UseTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess } from 'models/user'
 import { UserAccessEditorProps } from './UserAccessEditor'
@@ -14,8 +14,8 @@ import { Roles } from 'api/swagger/models'
 interface UseUserAccessListPageUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersColumnsConfig: ColumnsType<UserAccess>
-  nkmUsersTableUtils: UseTableUtilsTools
-  partnerUsersTableUtils: UseTableUtilsTools
+  nkmUsersTableUtils: UseTableUtils
+  partnerUsersTableUtils: UseTableUtils
   editorModal: UserAccessEditorProps | null | undefined
   setEditorModal: React.Dispatch<React.SetStateAction<UserAccessEditorProps | null | undefined>>
   nkmUsers: UserAccess[]
@@ -27,8 +27,8 @@ interface UseUserAccessListPageUtils {
 export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
   const { t } = useTranslation()
   const {
-    nkmPagination,
-    partnerPagination,
+    nkmListParams,
+    partnerListParams,
     nkmUsers,
     nkmLoading,
     partnerUsers,
@@ -37,40 +37,45 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
 
   const [editorModal, setEditorModal] = useState<UserAccessEditorProps | null>()
 
-  const nkmUsersTableUtils = useTableUtils({
-    paginationState: nkmPagination,
+  const nkmUsersTableUtils = useTableUtils<UserAccess>({
+    listParamsState: nkmListParams,
+    filterKeys: ['name', 'email', 'role'],
     getDataAction: getNkmUsers
   })
 
+  // TODO: Filter
+  // const nkmRoleOptions = useUserAccessRoleGenerator(UserType.NKM)
+
   const nkmUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
-      {
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.name'),
-        dataIndex: 'name',
         key: 'name',
-        ...nkmUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.email'),
-        dataIndex: 'email',
         key: 'email',
-        ...nkmUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
-        dataIndex: 'active',
         key: 'active',
-        ...nkmUsersTableUtils.sorterConfig,
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
-      },
-      {
+      }),
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
-        dataIndex: 'role',
         key: 'role',
+        // TODO: no BE support yet
+        // sort: true,
+        // filterMode: FilterMode.FILTER,
+        // filters: nkmRoleOptions,
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.role.${user.role?.toLowerCase()}`)
-      },
+      }),
       hasPermission([Roles.Administrator])
         ? {
             title: '',
@@ -88,59 +93,65 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           }
         : {}
     ],
-    [nkmUsersTableUtils.sorterConfig, t]
+    [nkmUsersTableUtils, t]
   )
 
-  const partnerUsersTableUtils = useTableUtils({
-    paginationState: partnerPagination,
+  const partnerUsersTableUtils = useTableUtils<UserAccess>({
+    listParamsState: partnerListParams,
+    filterKeys: ['name', 'email'],
     getDataAction: getPartnerUsers
   })
 
+  // TODO: Filter
+  // const partnerRoleOptions = useUserAccessRoleGenerator(UserType.PARTNER)
+
   const partnerUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
-      {
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.name'),
-        dataIndex: 'name',
         key: 'name',
-        ...partnerUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.email'),
-        dataIndex: 'email',
         key: 'email',
-        ...partnerUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.phone'),
-        dataIndex: 'phone',
         key: 'phone',
-        ...partnerUsersTableUtils.sorterConfig
-      },
-      {
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
+        title: t('user-access.field.partner-name'),
+        key: 'partnerName',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
+        title: t('user-access.field.partner-type'),
+        key: 'majorPartner',
+        render: (value: unknown, user: UserAccess) =>
+          t(`user-access.field.partnerType.${user.active ? 'major' : 'normal'}`)
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
-        dataIndex: 'active',
         key: 'active',
-        ...partnerUsersTableUtils.sorterConfig,
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
-      },
-      {
-        title: t('user-access.field.partner-name'),
-        dataIndex: 'partnerName',
-        key: 'partnerName'
-      },
-      {
-        title: t('user-access.field.partner-type'),
-        dataIndex: 'partnerType',
-        key: 'partnerType'
-      },
-      {
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
-        dataIndex: 'role',
         key: 'role',
+        // TODO: no BE support yet
+        // sort: true,
+        // filterMode: FilterMode.FILTER,
+        // filters: partnerRoleOptions,
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.role.${user.role?.toLowerCase()}`)
-      },
+      }),
       hasPermission([Roles.Administrator])
         ? {
             title: t('common.actions'),
@@ -158,7 +169,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           }
         : {}
     ],
-    [partnerUsersTableUtils.sorterConfig, t]
+    [partnerUsersTableUtils, t]
   )
 
   return {
