@@ -176,8 +176,7 @@ export const CouponListPage: React.FC = () => {
               columns: columnsConfig,
               dataSource: coupons.map((u, i) => ({ ...u, key: i })),
               pagination: paginationConfig,
-              onChange: handleTableChange,
-              size: 'small'
+              onChange: handleTableChange
             }}
           />
         </ResponsiveCard>

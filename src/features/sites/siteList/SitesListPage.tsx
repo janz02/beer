@@ -98,8 +98,7 @@ export const SitesListPage: FC = () => {
               columns: columnsConfig,
               dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
               pagination: paginationConfig,
-              onChange: handleTableChange,
-              size: 'small'
+              onChange: handleTableChange
             }}
           />
         </ResponsiveCard>

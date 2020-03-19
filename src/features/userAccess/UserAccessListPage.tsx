@@ -47,8 +47,7 @@ export const UserAccessListPage: FC = () => {
               columns: nkmUsersColumnsConfig,
               dataSource: nkmUsers.map((u, i) => ({ ...u, key: i })),
               pagination: nkmUsersTableUtils.paginationConfig,
-              onChange: nkmUsersTableUtils.handleTableChange,
-              size: 'small'
+              onChange: nkmUsersTableUtils.handleTableChange
             }}
           />
         </ResponsiveCard>
@@ -60,8 +59,7 @@ export const UserAccessListPage: FC = () => {
               columns: partnerUsersColumnsConfig,
               dataSource: partnerUsers.map((u, i) => ({ ...u, key: i })),
               pagination: partnerUsersTableUtils.paginationConfig,
-              onChange: partnerUsersTableUtils.handleTableChange,
-              size: 'small'
+              onChange: partnerUsersTableUtils.handleTableChange
             }}
           />
         </ResponsiveCard>
