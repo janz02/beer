@@ -69,8 +69,10 @@
       "restore-title": "Are you sure about restoring this?",
       "save-title": "Are you sure about saving this data?"
     },
+    "reset": "Reset",
     "restore": "Restore",
     "save": "Save",
+    "search": "Search",
     "send": "Send",
     "view": "View"
   },

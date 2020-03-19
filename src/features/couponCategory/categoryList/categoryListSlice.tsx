@@ -10,7 +10,7 @@ import {
 
 interface CouponCategoryListState {
   categories: Category[]
-  pagination: Pagination
+  pagination: ListRequestParams
   loading: boolean
   error: string
   errorDeletion: string
@@ -86,10 +86,12 @@ export const getCategories = (params: ListRequestParams = {}): AppThunk => async
       page: oldPagination.page,
       ...params
     })
+
     dispatch(
       getCategoriesSuccess({
         categories: result as Category[],
         pagination: {
+          ...params,
           ...pagination,
           pageSize: params.pageSize ?? oldPagination.pageSize
         }

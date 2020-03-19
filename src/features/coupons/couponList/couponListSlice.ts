@@ -6,12 +6,14 @@ import moment from 'moment'
 import {
   ListRequestParams,
   Pagination,
-  recalculatePaginationAfterDeletion
+  recalculatePaginationAfterDeletion,
+  reviseListRequestParams,
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 
 interface CouponListState {
   coupons: Coupon[]
-  pagination: Pagination
+  pagination: ListRequestParams
   allCouponsCount?: number
   error: string | null
   loading: boolean
@@ -75,12 +77,9 @@ export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => a
 ) => {
   try {
     dispatch(getCouponsRequest())
-    const oldPagination = getState().couponList.pagination
-    const { result, ...pagination } = await api.coupons.getWaitingCoupons({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params
-    })
+    const revisedParams = reviseListRequestParams(getState().couponList.pagination, params)
+    const { result, ...pagination } = await api.coupons.getWaitingCoupons(revisedParams)
+
     const coupons =
       result?.map<Coupon>(c => ({
         ...(c as any),
@@ -88,13 +87,11 @@ export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => a
         endDate: moment(c.endDate),
         expireDate: moment(c.expireDate)
       })) ?? []
+
     dispatch(
       getCouponsSuccess({
         coupons,
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        pagination: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {

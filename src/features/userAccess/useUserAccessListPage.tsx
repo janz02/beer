@@ -3,7 +3,7 @@ import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { getNkmUsers, getPartnerUsers, UserType } from './userAccessListSlice'
-import { useTableUtils, UseTableUtilsTools } from 'hooks/useTableUtils'
+import { useTableUtils, UseTableUtils } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess } from 'models/user'
 import { UserAccessEditorProps } from './UserAccessEditor'
@@ -14,8 +14,8 @@ import { Roles } from 'api/swagger/models'
 interface UseUserAccessListPageUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersColumnsConfig: ColumnsType<UserAccess>
-  nkmUsersTableUtils: UseTableUtilsTools
-  partnerUsersTableUtils: UseTableUtilsTools
+  nkmUsersTableUtils: UseTableUtils
+  partnerUsersTableUtils: UseTableUtils
   editorModal: UserAccessEditorProps | null | undefined
   setEditorModal: React.Dispatch<React.SetStateAction<UserAccessEditorProps | null | undefined>>
   nkmUsers: UserAccess[]

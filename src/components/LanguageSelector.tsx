@@ -5,13 +5,15 @@ import { Dropdown, Menu } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import './LanguageSelector.scss'
+import { setMomentLocale } from 'app/i18n/moment-locale'
 
-export const LanguageSelector: React.FC = props => {
+export const LanguageSelector: React.FC = () => {
   const { t, i18n } = useTranslation()
 
   const changeLanguage = (lng: string): void => {
     localStorage.setItem('selectedLanguage', lng)
     i18n.changeLanguage(lng)
+    setMomentLocale(lng)
   }
 
   const availableLanguages = [
