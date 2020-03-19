@@ -303,6 +303,10 @@
       "name": "Name",
       "partner-name": "Partner",
       "partner-type": "Type",
+      "partnerType": {
+        "major": "Major",
+        "normal": "Normal"
+      },
       "phone": "Phone",
       "role": "Role",
       "status": "Status",

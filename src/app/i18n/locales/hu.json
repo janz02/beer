@@ -303,6 +303,10 @@
       "name": "Név",
       "partner-name": "Partner",
       "partner-type": "Típus",
+      "partnerType": {
+        "major": "Fő",
+        "normal": "Alap"
+      },
       "phone": "Telefon",
       "role": "Szerepkör",
       "status": "Státusz",

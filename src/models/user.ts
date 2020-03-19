@@ -16,7 +16,8 @@ export interface UserAccess {
   name?: string | null
   partnerId?: number
   partnerName?: string | null
-  partnerType?: boolean
+  majorPartner?: boolean
+
   email?: number
   phone?: number
   role?: Roles | null

@@ -39,9 +39,12 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
 
   const nkmUsersTableUtils = useTableUtils<UserAccess>({
     listParamsState: nkmListParams,
-    filterKeys: ['name', 'email'],
+    filterKeys: ['name', 'email', 'role'],
     getDataAction: getNkmUsers
   })
+
+  // TODO: Filter
+  // const nkmRoleOptions = useUserAccessRoleGenerator(UserType.NKM)
 
   const nkmUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
@@ -57,20 +60,22 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
-      {
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
-        dataIndex: 'active',
         key: 'active',
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
-      },
-      {
+      }),
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
-        dataIndex: 'role',
         key: 'role',
+        // TODO: no BE support yet
+        // sort: true,
+        // filterMode: FilterMode.FILTER,
+        // filters: nkmRoleOptions,
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.role.${user.role?.toLowerCase()}`)
-      },
+      }),
       hasPermission([Roles.Administrator])
         ? {
             title: '',
@@ -97,6 +102,9 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
     getDataAction: getPartnerUsers
   })
 
+  // TODO: Filter
+  // const partnerRoleOptions = useUserAccessRoleGenerator(UserType.PARTNER)
+
   const partnerUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
       partnerUsersTableUtils.columnConfig({
@@ -111,35 +119,39 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
-      {
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.phone'),
-        dataIndex: 'phone',
-        key: 'phone'
-      },
-      {
+        key: 'phone',
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
+        title: t('user-access.field.partner-name'),
+        key: 'partnerName',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
+        title: t('user-access.field.partner-type'),
+        key: 'majorPartner',
+        render: (value: unknown, user: UserAccess) =>
+          t(`user-access.field.partnerType.${user.active ? 'major' : 'normal'}`)
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
-        dataIndex: 'active',
         key: 'active',
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
-      },
-      {
-        title: t('user-access.field.partner-name'),
-        dataIndex: 'partnerName',
-        key: 'partnerName'
-      },
-      {
-        title: t('user-access.field.partner-type'),
-        dataIndex: 'partnerType',
-        key: 'partnerType'
-      },
-      {
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
-        dataIndex: 'role',
         key: 'role',
+        // TODO: no BE support yet
+        // sort: true,
+        // filterMode: FilterMode.FILTER,
+        // filters: partnerRoleOptions,
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.role.${user.role?.toLowerCase()}`)
-      },
+      }),
       hasPermission([Roles.Administrator])
         ? {
             title: t('common.actions'),
