@@ -77,10 +77,16 @@
   "coupon": {
     "state": {
       "accepted": "Accepted",
+      "action": {
+        "accept": "Accept",
+        "archive": "Archive",
+        "close": "Close",
+        "wait": "Wait for accept"
+      },
       "archived": "Archived",
       "closed": "Closed",
       "created": "Created",
-      "waiting": "Waiting"
+      "waiting": "Waiting for accept"
     }
   },
   "coupon-category": {
@@ -112,13 +118,6 @@
       "rank": "Rank"
     },
     "inactivate": "Inactivate",
-    "states": {
-      "accept": "Accept",
-      "archive": "Archive",
-      "close": "Close",
-      "create": "Create",
-      "wait": "Wait"
-    },
     "status-title": "Modify state"
   },
   "coupon-editor": {
