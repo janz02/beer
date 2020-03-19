@@ -30,19 +30,17 @@
     }
   },
   "cashier-list": {
+    "add": "Add new cashier",
     "table": {
       "cashier-id": "Online cashier ID",
       "digital-stamp-id": "Digital stamp ID"
     },
-    "table-title": "Cashiers",
-    "add": "Add new cashier"
+    "table-title": "Cashiers"
   },
   "common": {
     "actions": "Actions",
     "cancel": "Cancel",
     "confirm": "Ok",
-    "create": "Create",
-    "data": "Data",
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
@@ -85,13 +83,13 @@
     }
   },
   "coupon-category": {
+    "add": "Add new coupon category",
     "editor-create": "Create",
     "editor-edit": "Edit",
     "field": {
       "name": "Category name"
     },
-    "list-title": "Coupon categories",
-    "add": "Add new coupon category"
+    "list-title": "Coupon categories"
   },
   "coupon-create": {
     "activate": "Activate",
@@ -130,15 +128,14 @@
     "timeline-title": "Timeline"
   },
   "coupon-list": {
+    "add": "Add new coupon",
     "categoryId": "Category",
     "coupons": "Coupons",
-    "create": "Create",
     "endDate": "End date",
     "expireDate": "Expire date",
     "name": "Name",
     "startDate": "Start datre",
-    "state": "State",
-    "add": "Add new coupon"
+    "state": "State"
   },
   "error": {
     "auth": {
@@ -154,6 +151,7 @@
       "password-format": "Invalid password format.",
       "password-inconsistent": "The two passwords are not matching.",
       "registration-failed": "Registration failed.",
+      "sync-failed": "User sync failed.",
       "user-exists": "User exists.",
       "user-inactive": "User inactive.",
       "user-not-found": "User not found."
@@ -224,6 +222,7 @@
     "users": "Users"
   },
   "newsletter": {
+    "add": "Add new template",
     "available-templates": "Available templates",
     "close-editor": "Close editor",
     "field": {
@@ -245,8 +244,7 @@
     "send-sample": "Send sample",
     "send-segment": "Send to Segment",
     "template": "Template",
-    "version": "Version",
-    "add": "Add new template"
+    "version": "Version"
   },
   "notification": {
     "empty-list": "Empty",
@@ -288,12 +286,12 @@
     }
   },
   "site-list": {
+    "add": "Add new site",
+    "list-title": "Sites",
     "table": {
       "address": "Address",
       "name": "Site name"
-    },
-    "list-title": "Sites",
-    "add": "Add new site"
+    }
   },
   "user-access": {
     "access-editor": {
