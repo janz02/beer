@@ -19,7 +19,7 @@ interface CashierListProps {
 export const CashierList: FC<CashierListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { pagination, cashiers, site, loadingCashiers } = useSelector(
+  const { listParams, cashiers, site, loadingCashiers } = useSelector(
     (state: RootState) => state.siteEditor
   )
 
@@ -28,8 +28,8 @@ export const CashierList: FC<CashierListProps> = props => {
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
+  const { paginationConfig, handleTableChange } = useTableUtils({
+    listParamsState: listParams,
     getDataAction: getCashiers
   })
 
@@ -38,14 +38,12 @@ export const CashierList: FC<CashierListProps> = props => {
       {
         title: t('cashier-list.table.cashier-id'),
         key: 'cashierId',
-        dataIndex: 'cashierId',
-        ...sorterConfig
+        dataIndex: 'cashierId'
       },
       {
         title: t('cashier-list.table.digital-stamp-id'),
         key: 'digitalStampId',
-        dataIndex: 'digitalStampId',
-        ...sorterConfig
+        dataIndex: 'digitalStampId'
       },
       {
         title: '',
@@ -66,7 +64,7 @@ export const CashierList: FC<CashierListProps> = props => {
         }
       }
     ],
-    [t, sorterConfig, onOpenEditor]
+    [t, onOpenEditor]
   )
 
   const headerOptions = (

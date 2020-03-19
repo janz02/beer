@@ -10,7 +10,6 @@ import { UserAccessEditorProps } from './UserAccessEditor'
 import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
-import { ColumnFilterItem } from 'antd/lib/table/interface'
 
 interface UseUserAccessListPageUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
@@ -28,8 +27,8 @@ interface UseUserAccessListPageUtils {
 export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
   const { t } = useTranslation()
   const {
-    nkmPagination,
-    partnerPagination,
+    nkmListParams,
+    partnerListParams,
     nkmUsers,
     nkmLoading,
     partnerUsers,
@@ -39,7 +38,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
   const [editorModal, setEditorModal] = useState<UserAccessEditorProps | null>()
 
   const nkmUsersTableUtils = useTableUtils<UserAccess>({
-    paginationState: nkmPagination,
+    listParamsState: nkmListParams,
     filterKeys: ['name', 'email'],
     getDataAction: getNkmUsers
   })
@@ -96,7 +95,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
   )
 
   const partnerUsersTableUtils = useTableUtils<UserAccess>({
-    paginationState: partnerPagination,
+    listParamsState: partnerListParams,
     filterKeys: ['name', 'email'],
     getDataAction: getPartnerUsers
   })

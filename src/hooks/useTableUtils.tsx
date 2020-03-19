@@ -36,7 +36,7 @@ export interface ListRequestParams extends Pagination {
 }
 
 export interface UseTableUtilsProps<T> {
-  paginationState: ListRequestParams
+  listParamsState: ListRequestParams
   filterKeys?: (keyof T)[]
   getDataAction: (params: ListRequestParams) => any
 }
@@ -120,15 +120,15 @@ export const basePaginationConfig = (
 
  */
 function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
-  const { paginationState, getDataAction, filterKeys } = props
+  const { listParamsState, getDataAction, filterKeys } = props
 
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
 
   const paginationConfig = useMemo((): TablePaginationConfig | false => {
-    const baseConfig = basePaginationConfig(isMobile, paginationState)
+    const baseConfig = basePaginationConfig(isMobile, listParamsState)
     return baseConfig.total ? baseConfig : false
-  }, [isMobile, paginationState])
+  }, [isMobile, listParamsState])
 
   const toSortOrder = useCallback((orderType?: OrderByType | null): SortOrder | undefined => {
     switch (orderType) {
@@ -156,14 +156,14 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
     (key: string) => ({
       sorter: true,
       sortOrder:
-        paginationState.orderBy === key ? toSortOrder(paginationState.orderByType) : undefined
+        listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
     }),
-    [paginationState.orderBy, paginationState.orderByType, toSortOrder]
+    [listParamsState.orderBy, listParamsState.orderByType, toSortOrder]
   )
 
   const searchedTextHighlighter = useCallback(
     (key: string, fieldText: string): any =>
-      paginationState?.[key] ? (
+      listParamsState?.[key] ? (
         <Highlighter
           autoEscape
           highlightStyle={{
@@ -171,13 +171,13 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
             padding: '0.05rem',
             borderRadius: '5px'
           }}
-          searchWords={[paginationState?.[key]]}
+          searchWords={[listParamsState?.[key]]}
           textToHighlight={fieldText.toString()}
         />
       ) : (
         fieldText
       ),
-    [paginationState]
+    [listParamsState]
   )
 
   const columnConfig = useCallback(
@@ -190,7 +190,7 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
       }
 
       if (filterMode) {
-        config.filteredValue = paginationState?.[key] ? [paginationState?.[key]] : undefined
+        config.filteredValue = listParamsState?.[key] ? [listParamsState?.[key]] : undefined
       }
 
       switch (filterMode) {
@@ -223,12 +223,12 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
       if (sort && !noNeedForSort) {
         config.sorter = true
         config.sortOrder =
-          paginationState.orderBy === key ? toSortOrder(paginationState.orderByType) : undefined
+          listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
       }
 
       return config
     },
-    [paginationState, searchedTextHighlighter, toSortOrder]
+    [listParamsState, searchedTextHighlighter, toSortOrder]
   )
 
   const handleTableChange: any = useCallback(
@@ -242,7 +242,7 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
           page: pagination.current,
           pageSize: pagination.pageSize
         },
-        paginationState
+        listParamsState
       )
 
       const requestParams: ListRequestParams = {
@@ -250,8 +250,8 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
         pageSize: correctedPagination.pageSize
       }
 
-      if (pagination.pageSize && paginationState.pageSize !== pagination.pageSize) {
-        requestParams.page = projectPageToNewPageSize(pagination.pageSize, paginationState)
+      if (pagination.pageSize && listParamsState.pageSize !== pagination.pageSize) {
+        requestParams.page = projectPageToNewPageSize(pagination.pageSize, listParamsState)
       }
 
       requestParams.orderByType = toOrderByType(sorter.order)
@@ -265,7 +265,7 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
 
       dispatch(getDataAction(requestParams))
     },
-    [dispatch, filterKeys, getDataAction, paginationState, toOrderByType]
+    [dispatch, filterKeys, getDataAction, listParamsState, toOrderByType]
   )
 
   return {

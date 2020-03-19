@@ -5,7 +5,6 @@ import { api } from 'api'
 import moment from 'moment'
 import {
   ListRequestParams,
-  Pagination,
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
   storableListRequestParams
@@ -13,7 +12,7 @@ import {
 
 interface CouponListState {
   coupons: Coupon[]
-  pagination: ListRequestParams
+  listParams: ListRequestParams
   allCouponsCount?: number
   error: string | null
   loading: boolean
@@ -21,7 +20,7 @@ interface CouponListState {
 
 const initialState: CouponListState = {
   coupons: [],
-  pagination: {
+  listParams: {
     pageSize: 10
   },
   error: null,
@@ -36,9 +35,12 @@ const couponListSlice = createSlice({
     getCouponsRequest(state) {
       state.loading = true
     },
-    getCouponsSuccess(state, action: PayloadAction<{ coupons: Coupon[]; pagination: Pagination }>) {
+    getCouponsSuccess(
+      state,
+      action: PayloadAction<{ coupons: Coupon[]; listParams: ListRequestParams }>
+    ) {
       state.coupons = action.payload.coupons
-      state.pagination = action.payload.pagination
+      state.listParams = action.payload.listParams
       state.loading = false
       state.error = ''
     },
@@ -77,7 +79,7 @@ export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => a
 ) => {
   try {
     dispatch(getCouponsRequest())
-    const revisedParams = reviseListRequestParams(getState().couponList.pagination, params)
+    const revisedParams = reviseListRequestParams(getState().couponList.listParams, params)
     const { result, ...pagination } = await api.coupons.getWaitingCoupons(revisedParams)
 
     const coupons =
@@ -91,7 +93,7 @@ export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => a
     dispatch(
       getCouponsSuccess({
         coupons,
-        pagination: storableListRequestParams(revisedParams, pagination)
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -104,7 +106,7 @@ export const deleteCoupon = (id: number): AppThunk => async (dispatch, getState)
   try {
     await await api.coupons.deleteCoupon({ id })
     dispatch(deleteSuccess())
-    const newPage = recalculatePaginationAfterDeletion(getState().couponList.pagination)
+    const newPage = recalculatePaginationAfterDeletion(getState().couponList.listParams)
     dispatch(getWaitingCoupons({ page: newPage }))
     return { id }
   } catch (err) {

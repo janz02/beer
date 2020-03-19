@@ -21,14 +21,14 @@ interface CategoryListProps {
 export const CategoryList: FC<CategoryListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { pagination, categories, loading } = useSelector((state: RootState) => state.categoryList)
+  const { listParams, categories, loading } = useSelector((state: RootState) => state.categoryList)
   const [categoryToDelete, setCategoryToDelete] = useState<{
     category?: Category
     popupVisible?: boolean
   } | null>()
 
   const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Category>({
-    paginationState: pagination,
+    listParamsState: listParams,
     filterKeys: ['name'],
     getDataAction: getCategories
   })

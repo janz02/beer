@@ -3,7 +3,6 @@ import { AppThunk } from 'app/store'
 import { api } from 'api'
 import {
   ListRequestParams,
-  Pagination,
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
@@ -20,8 +19,8 @@ export enum UserType {
 interface UserAccessListState {
   nkmUsers: UserAccess[]
   partnerUsers: UserAccess[]
-  nkmPagination: Pagination
-  partnerPagination: Pagination
+  nkmListParams: ListRequestParams
+  partnerListParams: ListRequestParams
   nkmLoading: boolean
   partnerLoading: boolean
   loadingSave: boolean
@@ -35,10 +34,10 @@ interface UserAccessListState {
 const initialState: UserAccessListState = {
   nkmUsers: [],
   partnerUsers: [],
-  nkmPagination: {
+  nkmListParams: {
     pageSize: 10
   },
-  partnerPagination: {
+  partnerListParams: {
     pageSize: 10
   },
   nkmLoading: false,
@@ -60,10 +59,10 @@ const userAccessListSlice = createSlice({
     },
     getNkmUsersSuccess(
       state,
-      action: PayloadAction<{ users: UserAccess[]; pagination: Pagination }>
+      action: PayloadAction<{ users: UserAccess[]; listParams: ListRequestParams }>
     ) {
       state.nkmUsers = action.payload.users
-      state.nkmPagination = action.payload.pagination
+      state.nkmListParams = action.payload.listParams
       state.nkmLoading = false
       state.errorList = ''
     },
@@ -77,10 +76,10 @@ const userAccessListSlice = createSlice({
     },
     getPartnerUsersSuccess(
       state,
-      action: PayloadAction<{ users: UserAccess[]; pagination: Pagination }>
+      action: PayloadAction<{ users: UserAccess[]; listParams: ListRequestParams }>
     ) {
       state.partnerUsers = action.payload.users
-      state.partnerPagination = action.payload.pagination
+      state.partnerListParams = action.payload.listParams
       state.partnerLoading = false
       state.errorList = ''
     },
@@ -142,12 +141,12 @@ export const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (
 ) => {
   try {
     dispatch(getNkmUsersRequest())
-    const revisedParams = reviseListRequestParams(getState().userAccessList.nkmPagination, params)
+    const revisedParams = reviseListRequestParams(getState().userAccessList.nkmListParams, params)
     const { result, ...pagination } = await api.auth.getNkmPartnerContactsInfo(revisedParams)
     dispatch(
       getNkmUsersSuccess({
         users: result as UserAccess[],
-        pagination: storableListRequestParams(revisedParams, pagination)
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -162,14 +161,14 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
   try {
     dispatch(getPartnerUsersRequest())
     const revisedParams = reviseListRequestParams(
-      getState().userAccessList.partnerPagination,
+      getState().userAccessList.partnerListParams,
       params
     )
     const { result, ...pagination } = await api.auth.getPartnerContactsInfo(revisedParams)
     dispatch(
       getPartnerUsersSuccess({
         users: result as UserAccess[],
-        pagination: storableListRequestParams(revisedParams, pagination)
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {

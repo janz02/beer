@@ -26,7 +26,7 @@ export const NewsletterList: FC = () => {
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { templates, pagination, loading, loadingCreate } = useSelector(
+  const { templates, listParams, loading, loadingCreate } = useSelector(
     (state: RootState) => state.newsletterList
   )
 
@@ -45,7 +45,7 @@ export const NewsletterList: FC = () => {
   }, [dispatch])
 
   const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<NewsletterPreview>({
-    paginationState: pagination,
+    listParamsState: listParams,
     filterKeys: ['name'],
     getDataAction: getNewsletterTemplates
   })

@@ -18,7 +18,7 @@ import { ColumnType } from 'antd/lib/table'
 export const SitesListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { sites, pagination } = useSelector((state: RootState) => state.siteList)
+  const { sites, listParams } = useSelector((state: RootState) => state.siteList)
   const [siteToDelete, setSiteToDelete] = useState<{
     site?: Site
     popupVisible?: boolean
@@ -28,8 +28,8 @@ export const SitesListPage: FC = () => {
     dispatch(getSites())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
+  const { paginationConfig, handleTableChange } = useTableUtils({
+    listParamsState: listParams,
     getDataAction: getSites
   })
 
@@ -39,7 +39,6 @@ export const SitesListPage: FC = () => {
         title: t('common.data'),
         key: 'name',
         dataIndex: 'name',
-        ...sorterConfig,
         render(value: unknown, record: Site) {
           return (
             <>
@@ -70,7 +69,7 @@ export const SitesListPage: FC = () => {
         }
       }
     ],
-    [sorterConfig, t]
+    [t]
   )
 
   const headerOptions = (

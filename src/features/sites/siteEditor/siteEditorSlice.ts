@@ -9,13 +9,15 @@ import { history } from 'router/router'
 import {
   ListRequestParams,
   Pagination,
-  recalculatePaginationAfterDeletion
+  recalculatePaginationAfterDeletion,
+  reviseListRequestParams,
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 
 interface SiteEditorState {
   site?: Site
   cashiers?: Cashier[]
-  pagination: Pagination
+  listParams: ListRequestParams
   cashier?: Cashier
   loadingSite: boolean
   loadingCashiers: boolean
@@ -28,7 +30,7 @@ interface SiteEditorState {
 
 const initialState: SiteEditorState = {
   cashiers: [],
-  pagination: {
+  listParams: {
     pageSize: 10
   },
   loadingSite: false,
@@ -62,10 +64,10 @@ const siteEditorSlice = createSlice({
     },
     getCashiersSuccess(
       state,
-      action: PayloadAction<{ cashiers?: Cashier[]; pagination: Pagination }>
+      action: PayloadAction<{ cashiers?: Cashier[]; listParams: ListRequestParams }>
     ) {
       state.cashiers = action.payload.cashiers
-      state.pagination = action.payload.pagination
+      state.listParams = action.payload.listParams
       state.loadingCashiers = false
       state.error = ''
     },
@@ -165,25 +167,20 @@ export const getCashiers = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
-  const { pagination: oldPagination, site } = getState().siteEditor
+  const { site } = getState().siteEditor
   if (!site?.id) return
 
   dispatch(getCashiersRequest())
   try {
+    const revisedParams = reviseListRequestParams(getState().siteEditor.listParams, params)
     const { result, ...pagination } = await api.cashiers.getCashiers({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params,
+      ...revisedParams,
       siteId: site.id
     })
-
     dispatch(
       getCashiersSuccess({
         cashiers: result as Cashier[],
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -266,7 +263,7 @@ export const deleteCashier = (id: number): AppThunk => async (dispatch, getState
 
     const siteEditorState = getState().siteEditor
     if (siteEditorState.site?.id) {
-      const newPage = recalculatePaginationAfterDeletion(getState().siteList.pagination)
+      const newPage = recalculatePaginationAfterDeletion(getState().siteList.listParams)
       dispatch(getCashiers({ page: newPage }))
     }
     return { id }

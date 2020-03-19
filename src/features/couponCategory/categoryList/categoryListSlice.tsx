@@ -5,14 +5,13 @@ import { api } from 'api'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
-  Pagination,
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
 
 interface CouponCategoryListState {
   categories: Category[]
-  pagination: ListRequestParams
+  listParams: ListRequestParams
   loading: boolean
   error: string
   errorDeletion: string
@@ -20,7 +19,7 @@ interface CouponCategoryListState {
 
 const initialState: CouponCategoryListState = {
   categories: [],
-  pagination: {
+  listParams: {
     pageSize: 10
   },
   loading: false,
@@ -38,10 +37,10 @@ const categoryListSlice = createSlice({
     },
     getCategoriesSuccess(
       state,
-      action: PayloadAction<{ categories: Category[]; pagination: Pagination }>
+      action: PayloadAction<{ categories: Category[]; listParams: ListRequestParams }>
     ) {
       state.categories = action.payload.categories
-      state.pagination = action.payload.pagination
+      state.listParams = action.payload.listParams
       state.loading = false
       state.error = ''
     },
@@ -82,13 +81,13 @@ export const getCategories = (params: ListRequestParams = {}): AppThunk => async
 ) => {
   dispatch(getCategoriesRequest())
   try {
-    const revisedParams = reviseListRequestParams(getState().categoryList.pagination, params)
+    const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
     const { result, ...pagination } = await api.categories.getCategories(revisedParams)
 
     dispatch(
       getCategoriesSuccess({
         categories: result as Category[],
-        pagination: storableListRequestParams(revisedParams, pagination)
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -101,7 +100,7 @@ export const deleteCategory = (id: number): AppThunk => async (dispatch, getStat
   try {
     await api.categories.deleteCategory({ id })
     dispatch(deleteSuccess())
-    const newPage = recalculatePaginationAfterDeletion(getState().categoryList.pagination)
+    const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
     dispatch(getCategories({ page: newPage }))
     return { id }
   } catch (err) {
