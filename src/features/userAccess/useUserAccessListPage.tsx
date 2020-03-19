@@ -63,7 +63,6 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         title: t('user-access.field.status'),
         dataIndex: 'active',
         key: 'active',
-        ...nkmUsersTableUtils.sorterConfig,
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
       },
@@ -119,14 +118,12 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
       {
         title: t('user-access.field.phone'),
         dataIndex: 'phone',
-        key: 'phone',
-        ...partnerUsersTableUtils.sorterConfig
+        key: 'phone'
       },
       {
         title: t('user-access.field.status'),
         dataIndex: 'active',
         key: 'active',
-        ...partnerUsersTableUtils.sorterConfig,
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
       },

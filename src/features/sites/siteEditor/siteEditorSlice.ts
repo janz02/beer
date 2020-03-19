@@ -8,7 +8,6 @@ import { Cashier } from 'models/cashier'
 import { history } from 'router/router'
 import {
   ListRequestParams,
-  Pagination,
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
   storableListRequestParams

@@ -62,15 +62,12 @@ interface ColumnConfigParams extends ColumnType<any> {
   filterMode?: FilterMode
   filters?: ColumnFilterItem[]
   sort?: boolean
-  // search?: boolean
   highlightSearch?: boolean
-  // datepicker?: boolean
 }
 
 export interface UseTableUtils {
   paginationConfig: false | TablePaginationConfig
   handleTableChange: any
-  sorterConfig: any
   columnConfig: (params: ColumnConfigParams) => ColumnType<any>
 }
 
@@ -151,15 +148,6 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
         return undefined
     }
   }, [])
-
-  const sorterConfig = useCallback(
-    (key: string) => ({
-      sorter: true,
-      sortOrder:
-        listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
-    }),
-    [listParamsState.orderBy, listParamsState.orderByType, toSortOrder]
-  )
 
   const searchedTextHighlighter = useCallback(
     (key: string, fieldText: string): any =>
@@ -271,7 +259,6 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
   return {
     paginationConfig,
     handleTableChange,
-    sorterConfig,
     columnConfig
   }
 }

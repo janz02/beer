@@ -5,7 +5,6 @@ import { Site } from 'models/site'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
-  Pagination,
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
