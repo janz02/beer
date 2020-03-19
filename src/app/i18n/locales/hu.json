@@ -183,6 +183,9 @@
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "percentage-max-100": "A százalék érték maximum 100 lehet."
     },
+    "coupon-categories": {
+      "name-must-be-unique": "Kategória nevének egyedinek kell lennie."
+    },
     "coupon-user-code": {
       "cant-save": "Kupon felhasználó kód mentése sikertelen."
     },

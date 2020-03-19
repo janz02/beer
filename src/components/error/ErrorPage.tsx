@@ -4,6 +4,7 @@ import { Card, Button, Result } from 'antd'
 import './ErrorPage.scss'
 import { history } from 'router/router'
 import { useTranslation } from 'react-i18next'
+import { isLoggedIn } from 'services/jwt-reader'
 
 export const ErrorPage: FC = () => {
   const { type } = useParams()
@@ -23,6 +24,14 @@ export const ErrorPage: FC = () => {
     }
   }, [t, type])
 
+  const onBack = (): void => {
+    if (!isLoggedIn()) {
+      history.replace('/auth')
+      return
+    }
+    history.replace('/')
+  }
+
   return (
     <Card className="error-card">
       <Result
@@ -30,7 +39,7 @@ export const ErrorPage: FC = () => {
         title={content.title}
         subTitle={content.subtitle}
         extra={
-          <Button type="primary" onClick={() => history.push('/dashboard')}>
+          <Button type="primary" onClick={onBack}>
             {t('error-page.back')}
           </Button>
         }

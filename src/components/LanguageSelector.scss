@@ -1,5 +1,6 @@
 .language-selector {
   max-width: 200px;
+  margin-right: 2em;
   cursor: pointer;
 
   .language-selector__image,
@@ -13,6 +14,7 @@
 }
 
 .language-selector-dropdown-content {
+
   .language-selector-dropdown-content__image,
   .language-selector-dropdown-content__text {
     margin-right: 10px;

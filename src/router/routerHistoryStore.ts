@@ -2,7 +2,7 @@ import { notification } from 'antd'
 import { AppThunk } from 'app/store'
 
 const initialState = {
-  cameFrom: '/'
+  cameFrom: '/auth'
 }
 
 type RouteHistory = typeof initialState

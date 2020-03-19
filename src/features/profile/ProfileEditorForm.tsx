@@ -67,6 +67,10 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           <Input disabled={!editable} maxLength={100} />
         </Form.Item>
 
+        <Form.Item label={t('profile.field.old-password')} name="oldPassword">
+          <Input.Password disabled={!editable} />
+        </Form.Item>
+
         <Form.Item
           help={t('common.filed.help.password-format')}
           name="password"
@@ -94,10 +98,6 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           ]}
         >
           <Input.Password disabled={!editable} maxLength={64} />
-        </Form.Item>
-
-        <Form.Item label={t('profile.field.old-password')} name="oldPassword">
-          <Input.Password disabled={!editable} />
         </Form.Item>
 
         <Form.Item
