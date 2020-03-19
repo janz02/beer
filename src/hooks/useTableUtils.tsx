@@ -206,9 +206,7 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
           break
       }
 
-      const noNeedForSort = filterMode && filterMode !== FilterMode.SEARCH && filters
-
-      if (sort && !noNeedForSort) {
+      if (sort) {
         config.sorter = true
         config.sortOrder =
           listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
