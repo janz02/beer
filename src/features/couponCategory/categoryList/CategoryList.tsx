@@ -8,7 +8,7 @@ import { Category } from 'models/category'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
@@ -39,7 +39,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
         title: t('coupon-category.field.name'),
         key: 'name',
         sort: true,
-        search: true,
+        filterMode: FilterMode.SEARCH,
         highlightSearch: true
       }),
       hasPermission([Roles.Administrator])

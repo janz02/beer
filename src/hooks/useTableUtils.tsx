@@ -15,6 +15,12 @@ export enum OrderByType {
   Descending = 'Descending'
 }
 
+export enum FilterMode {
+  FILTER = 'filter',
+  SEARCH = 'search',
+  DATEPICKER = 'datepicker'
+}
+
 export interface Pagination {
   page?: number
   from?: number
@@ -53,11 +59,12 @@ export const storableListRequestParams = (
 
 interface ColumnConfigParams extends ColumnType<any> {
   key: string
-  sort?: boolean
+  filterMode?: FilterMode
   filters?: ColumnFilterItem[]
-  search?: boolean
+  sort?: boolean
+  // search?: boolean
   highlightSearch?: boolean
-  datepicker?: boolean
+  // datepicker?: boolean
 }
 
 export interface UseTableUtils {
@@ -175,33 +182,45 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
 
   const columnConfig = useCallback(
     (params: ColumnConfigParams): ColumnType<any> => {
-      const { key, sort, filters, search, highlightSearch, datepicker, ...rest } = params
+      const { key, filterMode, sort, filters, highlightSearch, ...rest } = params
       const config: ColumnType<any> = {
         ...rest,
         key: key,
         dataIndex: key
       }
 
-      if (filters || search || datepicker) {
+      if (filterMode) {
         config.filteredValue = paginationState?.[key] ? [paginationState?.[key]] : undefined
       }
-      if (filters?.length) {
-        config.filterMultiple = false
-        config.filters = filters
+
+      switch (filterMode) {
+        case FilterMode.SEARCH:
+          config.filterDropdown = SearchTableDropdown
+          config.filterIcon = () => <SearchOutlined />
+          if (highlightSearch) {
+            config.render = (text: string) => searchedTextHighlighter(key, text)
+          }
+          break
+        case FilterMode.DATEPICKER:
+          config.filterDropdown = DatepickerTableDropdown
+          config.filterIcon = () => <CalendarOutlined />
+          config.render = (value: any) => <MomentDisplay date={value} />
+          break
+        case FilterMode.FILTER:
+          if (filters?.length) {
+            config.filterMultiple = false
+            config.filters = filters
+            config.filterMultiple = false
+            config.filters = filters
+          }
+          break
+        default:
+          break
       }
-      if (search) {
-        config.filterDropdown = SearchTableDropdown
-        config.filterIcon = () => <SearchOutlined />
-        if (highlightSearch) {
-          config.render = (text: string) => searchedTextHighlighter(key, text)
-        }
-      }
-      if (datepicker) {
-        config.filterDropdown = DatepickerTableDropdown
-        config.filterIcon = () => <CalendarOutlined />
-        config.render = (value: any) => <MomentDisplay date={value} />
-      }
-      if (!config.filteredValue && sort) {
+
+      const noNeedForSort = filterMode && filterMode !== FilterMode.SEARCH && filters
+
+      if (sort && !noNeedForSort) {
         config.sorter = true
         config.sortOrder =
           paginationState.orderBy === key ? toSortOrder(paginationState.orderByType) : undefined
@@ -241,6 +260,8 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
       filterKeys?.forEach((key: any) => {
         requestParams[key] = filters?.[key]?.[0]
       })
+
+      console.log({ requestParams })
 
       dispatch(getDataAction(requestParams))
     },

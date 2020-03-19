@@ -17,7 +17,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
 
 const couponEditorRoles = [
@@ -59,13 +59,14 @@ export const CouponListPage: React.FC = () => {
         title: t('coupon-list.name'),
         key: 'name',
         sort: true,
-        search: true,
+        filterMode: FilterMode.SEARCH,
         highlightSearch: true
       }),
       columnConfig({
         title: t('coupon-list.state'),
         key: 'state',
         sort: true,
+        filterMode: FilterMode.FILTER,
         filters: Object.keys(CouponState).map(f => {
           return { text: t(`coupon.state.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
@@ -77,6 +78,7 @@ export const CouponListPage: React.FC = () => {
         title: t('coupon-list.categoryId'),
         key: 'categoryId',
         sort: true,
+        filterMode: FilterMode.FILTER,
         filters:
           categories?.map(x => {
             return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
@@ -88,13 +90,13 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.startDate'),
         key: 'startDate',
-        datepicker: true,
+        filterMode: FilterMode.DATEPICKER,
         sort: true
       }),
       columnConfig({
         title: t('coupon-list.endDate'),
         key: 'endDate',
-        datepicker: true,
+        filterMode: FilterMode.DATEPICKER,
         sort: true,
         render(value) {
           return <MomentDisplay date={value} />
@@ -103,7 +105,7 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.expireDate'),
         key: 'expireDate',
-        datepicker: true,
+        filterMode: FilterMode.DATEPICKER,
         sort: true,
         render(value) {
           return <MomentDisplay date={value} />

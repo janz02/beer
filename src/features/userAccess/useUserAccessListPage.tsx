@@ -3,13 +3,14 @@ import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { getNkmUsers, getPartnerUsers, UserType } from './userAccessListSlice'
-import { useTableUtils, UseTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, UseTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess } from 'models/user'
 import { UserAccessEditorProps } from './UserAccessEditor'
 import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
+import { ColumnFilterItem } from 'antd/lib/table/interface'
 
 interface UseUserAccessListPageUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
@@ -37,25 +38,28 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
 
   const [editorModal, setEditorModal] = useState<UserAccessEditorProps | null>()
 
-  const nkmUsersTableUtils = useTableUtils({
+  const nkmUsersTableUtils = useTableUtils<UserAccess>({
     paginationState: nkmPagination,
+    filterKeys: ['name', 'email'],
     getDataAction: getNkmUsers
   })
 
   const nkmUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
-      {
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.name'),
-        dataIndex: 'name',
         key: 'name',
-        ...nkmUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH,
+        highlightSearch: true
+      }),
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.email'),
-        dataIndex: 'email',
         key: 'email',
-        ...nkmUsersTableUtils.sorterConfig
-      },
+        sort: true,
+        filterMode: FilterMode.SEARCH,
+        highlightSearch: true
+      }),
       {
         title: t('user-access.field.status'),
         dataIndex: 'active',
@@ -88,28 +92,31 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           }
         : {}
     ],
-    [nkmUsersTableUtils.sorterConfig, t]
+    [nkmUsersTableUtils, t]
   )
 
-  const partnerUsersTableUtils = useTableUtils({
+  const partnerUsersTableUtils = useTableUtils<UserAccess>({
     paginationState: partnerPagination,
+    filterKeys: ['name', 'email'],
     getDataAction: getPartnerUsers
   })
 
   const partnerUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
-      {
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.name'),
-        dataIndex: 'name',
         key: 'name',
-        ...partnerUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH,
+        highlightSearch: true
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.email'),
-        dataIndex: 'email',
         key: 'email',
-        ...partnerUsersTableUtils.sorterConfig
-      },
+        sort: true,
+        filterMode: FilterMode.SEARCH,
+        highlightSearch: true
+      }),
       {
         title: t('user-access.field.phone'),
         dataIndex: 'phone',
@@ -158,7 +165,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           }
         : {}
     ],
-    [partnerUsersTableUtils.sorterConfig, t]
+    [partnerUsersTableUtils, t]
   )
 
   return {

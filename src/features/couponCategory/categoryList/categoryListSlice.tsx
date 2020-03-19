@@ -82,7 +82,7 @@ export const getCategories = (params: ListRequestParams = {}): AppThunk => async
 ) => {
   dispatch(getCategoriesRequest())
   try {
-    const revisedParams = reviseListRequestParams(getState().couponList.pagination, params)
+    const revisedParams = reviseListRequestParams(getState().categoryList.pagination, params)
     const { result, ...pagination } = await api.categories.getCategories(revisedParams)
 
     dispatch(

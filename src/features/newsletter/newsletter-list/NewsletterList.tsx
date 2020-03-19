@@ -18,7 +18,7 @@ import { useDispatch } from 'hooks/react-redux-hooks'
 import { NewsletterPreview } from 'models/newsletter'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { MomentDisplay } from 'components/MomentDisplay'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
 
 export const NewsletterList: FC = () => {
@@ -56,7 +56,7 @@ export const NewsletterList: FC = () => {
         title: t('newsletter.field.template-name'),
         key: 'name',
         sort: true,
-        search: true,
+        filterMode: FilterMode.SEARCH,
         highlightSearch: true,
         width: '35%',
         ellipsis: true

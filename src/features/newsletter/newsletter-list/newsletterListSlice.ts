@@ -96,7 +96,7 @@ export const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk
 ) => {
   try {
     dispatch(getTemplatesRequest())
-    const revisedParams = reviseListRequestParams(getState().couponList.pagination, params)
+    const revisedParams = reviseListRequestParams(getState().newsletterList.pagination, params)
     const { result, ...pagination } = await api.emailTemplates.getTemplates(revisedParams)
     const templates = result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
     dispatch(

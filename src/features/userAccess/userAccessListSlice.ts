@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { ListRequestParams, Pagination } from 'hooks/useTableUtils'
+import {
+  ListRequestParams,
+  Pagination,
+  reviseListRequestParams,
+  storableListRequestParams
+} from 'hooks/useTableUtils'
 import { UserAccess } from 'models/user'
 import { message } from 'antd'
 import i18n from 'app/i18n'
@@ -137,19 +142,12 @@ export const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (
 ) => {
   try {
     dispatch(getNkmUsersRequest())
-    const oldPagination = getState().userAccessList.nkmPagination
-    const { result, ...pagination } = await api.auth.getNkmPartnerContactsInfo({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params
-    })
+    const revisedParams = reviseListRequestParams(getState().userAccessList.nkmPagination, params)
+    const { result, ...pagination } = await api.auth.getNkmPartnerContactsInfo(revisedParams)
     dispatch(
       getNkmUsersSuccess({
         users: result as UserAccess[],
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        pagination: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -163,19 +161,15 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
 ) => {
   try {
     dispatch(getPartnerUsersRequest())
-    const oldPagination = getState().userAccessList.partnerPagination
-    const { result, ...pagination } = await api.auth.getPartnerContactsInfo({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params
-    })
+    const revisedParams = reviseListRequestParams(
+      getState().userAccessList.partnerPagination,
+      params
+    )
+    const { result, ...pagination } = await api.auth.getPartnerContactsInfo(revisedParams)
     dispatch(
       getPartnerUsersSuccess({
         users: result as UserAccess[],
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        pagination: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
