@@ -18,7 +18,7 @@ import { useDispatch } from 'hooks/react-redux-hooks'
 import { NewsletterPreview } from 'models/newsletter'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { MomentDisplay } from 'components/MomentDisplay'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
 import { PlusOutlined } from '@ant-design/icons'
 
@@ -27,7 +27,7 @@ export const NewsletterList: FC = () => {
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { templates, pagination, loading, loadingCreate } = useSelector(
+  const { templates, listParams, loading, loadingCreate } = useSelector(
     (state: RootState) => state.newsletterList
   )
 
@@ -45,21 +45,22 @@ export const NewsletterList: FC = () => {
     dispatch(getNewsletterTemplates())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
+  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<NewsletterPreview>({
+    listParamsState: listParams,
+    filterKeys: ['name'],
     getDataAction: getNewsletterTemplates
   })
 
   const columnsConfig: ColumnType<NewsletterPreview>[] = useMemo(
     () => [
-      {
+      columnConfig({
         title: t('newsletter.field.template-name'),
         key: 'name',
-        dataIndex: 'name',
-        ellipsis: true,
+        sort: true,
+        filterMode: FilterMode.SEARCH,
         width: '35%',
-        ...sorterConfig
-      },
+        ellipsis: true
+      }),
       {
         title: t('newsletter.field.template-version'),
         key: 'version',
@@ -97,7 +98,7 @@ export const NewsletterList: FC = () => {
         }
       }
     ],
-    [editTemplate, sorterConfig, t]
+    [columnConfig, editTemplate, t]
   )
 
   const handleSave = async (values: any): Promise<void> => {

@@ -52,7 +52,8 @@
         }
       }
     ],
-    "react/prop-types": ["error", { "skipUndeclared": true }]
+    "react/prop-types": ["error", { "skipUndeclared": true }],
+    "react/display-name": "off"
   },
   "settings": {
     "react": {

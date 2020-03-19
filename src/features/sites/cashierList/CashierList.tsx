@@ -20,7 +20,7 @@ interface CashierListProps {
 export const CashierList: FC<CashierListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { pagination, cashiers, site, loadingCashiers } = useSelector(
+  const { listParams, cashiers, site, loadingCashiers } = useSelector(
     (state: RootState) => state.siteEditor
   )
 
@@ -29,27 +29,25 @@ export const CashierList: FC<CashierListProps> = props => {
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
+  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Cashier>({
+    listParamsState: listParams,
+    filterKeys: ['cashierId', 'digitalStampId'],
     getDataAction: getCashiers
   })
 
   const columnsConfig: ColumnType<Cashier>[] = useMemo(
     () => [
-      {
+      columnConfig({
         title: t('cashier-list.table.cashier-id'),
         key: 'cashierId',
-        dataIndex: 'cashierId',
-        ...sorterConfig
-      },
-      {
+        sort: true
+      }),
+      columnConfig({
         title: t('cashier-list.table.digital-stamp-id'),
         key: 'digitalStampId',
-        dataIndex: 'digitalStampId',
-        ...sorterConfig
-      },
+        sort: true
+      }),
       {
-        title: '',
         key: 'actions',
         colSpan: 1,
         render(record: Cashier) {
@@ -67,7 +65,7 @@ export const CashierList: FC<CashierListProps> = props => {
         }
       }
     ],
-    [t, sorterConfig, onOpenEditor]
+    [columnConfig, t, onOpenEditor]
   )
 
   const headerOptions = (

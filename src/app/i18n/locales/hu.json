@@ -68,8 +68,10 @@
       "restore-title": "Biztos, hogy vissza szeretnéd állítani?",
       "save-title": "Biztos, hogy menteni szeretnéd?"
     },
+    "reset": "Visszállítás",
     "restore": "Visszállítás",
     "save": "Mentés",
+    "search": "Keresés",
     "send": "Küldés",
     "view": "Megtekintés"
   },
@@ -100,6 +102,7 @@
   "coupon-create": {
     "activate": "Aktiválás",
     "create": "Létrehozás",
+    "create-and-accept": "Jóváhagyásra küldés",
     "create-coupon-success": "Sikeres kupon létrehozás.",
     "edit": "Szerkesztés",
     "editor-title": "Kupon szerkesztő",
@@ -176,6 +179,7 @@
       "cannot-claim": "Nem lehet kiváltani a kupont.",
       "cant-be-deleted": "Kupon nem törölhető.",
       "cant-change-state": "Kupon státusz változtatása sikertelen.",
+      "invalid-initial-state": "Hibás kezdőállapot",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "percentage-max-100": "A százalék érték maximum 100 lehet."
     },
@@ -301,6 +305,10 @@
       "name": "Név",
       "partner-name": "Partner",
       "partner-type": "Típus",
+      "partnerType": {
+        "major": "Fő",
+        "normal": "Alap"
+      },
       "phone": "Telefon",
       "role": "Szerepkör",
       "status": "Státusz",

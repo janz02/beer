@@ -8,7 +8,7 @@ import { Category } from 'models/category'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
@@ -22,25 +22,26 @@ interface CategoryListProps {
 export const CategoryList: FC<CategoryListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { pagination, categories } = useSelector((state: RootState) => state.categoryList)
+  const { listParams, categories, loading } = useSelector((state: RootState) => state.categoryList)
   const [categoryToDelete, setCategoryToDelete] = useState<{
     category?: Category
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
+  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Category>({
+    listParamsState: listParams,
+    filterKeys: ['name'],
     getDataAction: getCategories
   })
 
   const columnsConfig: ColumnType<Category>[] = useMemo(
     () => [
-      {
+      columnConfig({
         title: t('coupon-category.field.name'),
         key: 'name',
-        dataIndex: 'name',
-        ...sorterConfig
-      },
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
       hasPermission([Roles.Administrator])
         ? {
             title: '',
@@ -62,7 +63,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
           }
         : {}
     ],
-    [t, sorterConfig, onOpenEditor]
+    [columnConfig, t, onOpenEditor]
   )
 
   const headerOptions = hasPermission([Roles.Administrator]) ? (
@@ -83,6 +84,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
       >
         <ResponsiveTable
           {...{
+            loading,
             columns: columnsConfig,
             dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
             pagination: paginationConfig,
