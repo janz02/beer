@@ -130,14 +130,28 @@
     "timeline-title": "Timeline"
   },
   "coupon-list": {
-    "add": "Add new coupon",
-    "categoryId": "Category",
-    "coupons": "Coupons",
-    "endDate": "End date",
-    "expireDate": "Expire date",
-    "name": "Name",
-    "startDate": "Start datre",
-    "state": "State"
+    "add": "New campaign",
+    "campaign-type": "Campaign type",
+    "campaigns": "Campaigns",
+    "category": "Coupon category",
+    "click-count": "Click count",
+    "coupon-count": "Coupon count",
+    "discount-amount": "Discount amount",
+    "discount-type": "Dicount type",
+    "end-date": "Campaign end date",
+    "expire-date": "Coupon expire date",
+    "minimum-shopping-value": "Minimum shopping value",
+    "name": "Campaign hungarian name",
+    "partner": "Partner",
+    "preferred-position": "Preferred position",
+    "rank": "Rank",
+    "redee-mode": "Coupon mode",
+    "redeem-count": "Redeem count",
+    "small-image": "Coupon small image",
+    "start-date": "Campaign start date",
+    "state": "Campaign state",
+    "user": "Creator user",
+    "view-count": "View count"
   },
   "error": {
     "auth": {
@@ -200,7 +214,8 @@
       "page-size": "Paginate page size."
     },
     "partner": {
-      "cant-change-state": "Can't change partner state."
+      "cant-change-state": "Can't change partner state.",
+      "name-must-be-unique": "Partner name must be unique."
     },
     "partner-contact": {
       "invalid-type": "Invalid partner contact type."
@@ -219,8 +234,8 @@
     "language": "Language"
   },
   "menu": {
+    "campaigns": "Campaigns",
     "coupon-categories": "Categories",
-    "coupons": "Coupons",
     "newsletter": "News letter",
     "partner-data": "Partner data",
     "profile": "Profile",

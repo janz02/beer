@@ -139,7 +139,7 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
     })
 
     dispatch(createCouponSuccess())
-    history.push('/coupons')
+    history.push('/campaigns')
   } catch (err) {
     dispatch(setLoadingFailed())
   }
@@ -166,7 +166,7 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
     })
 
     dispatch(updateCouponSuccess())
-    history.push('/coupons')
+    history.push('/campaigns')
   } catch (err) {
     dispatch(setLoadingFailed())
   }

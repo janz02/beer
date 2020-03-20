@@ -56,6 +56,30 @@ export const CouponListPage: React.FC = () => {
   const columnsConfig = useMemo(
     (): ColumnType<Coupon>[] => [
       columnConfig({
+        title: t('coupon-list.campaign-type'),
+        key: '',
+        sort: true,
+        filterMode: FilterMode.FILTER
+      }),
+      columnConfig({
+        title: t('coupon-list.partner'),
+        key: '',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
+        title: t('coupon-list.view-count'),
+        key: ''
+      }),
+      columnConfig({
+        title: t('coupon-list.click-count'),
+        key: ''
+      }),
+      columnConfig({
+        title: t('coupon-list.redeem-count'),
+        key: ''
+      }),
+      columnConfig({
         title: t('coupon-list.name'),
         key: 'name',
         sort: true,
@@ -74,7 +98,7 @@ export const CouponListPage: React.FC = () => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.categoryId'),
+        title: t('coupon-list.category'),
         key: 'categoryId',
         sort: true,
         filterMode: FilterMode.FILTER,
@@ -87,38 +111,90 @@ export const CouponListPage: React.FC = () => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.startDate'),
+        title: t('coupon-list.rank'),
+        key: 'rank',
+        sort: true,
+        filterMode: FilterMode.FILTER
+      }),
+      columnConfig({
+        title: t('coupon-list.small-image'),
+        key: ''
+      }),
+      columnConfig({
+        title: t('coupon-list.start-date'),
         key: 'startDate',
-        filterMode: FilterMode.DATEPICKER,
-        sort: true
+        sort: true,
+        render(value) {
+          return <MomentDisplay date={value} />
+        }
       }),
       columnConfig({
-        title: t('coupon-list.endDate'),
+        title: t('coupon-list.end-date'),
         key: 'endDate',
-        filterMode: FilterMode.DATEPICKER,
         sort: true,
         render(value) {
           return <MomentDisplay date={value} />
         }
       }),
       columnConfig({
-        title: t('coupon-list.expireDate'),
+        title: t('coupon-list.expire-date'),
         key: 'expireDate',
-        filterMode: FilterMode.DATEPICKER,
         sort: true,
         render(value) {
           return <MomentDisplay date={value} />
         }
+      }),
+      columnConfig({
+        title: t('coupon-list.redee-mode'),
+        key: '',
+        sort: true,
+        filterMode: FilterMode.FILTER
+      }),
+      columnConfig({
+        title: t('coupon-list.discount-type'),
+        key: 'type',
+        sort: true,
+        filterMode: FilterMode.FILTER
+      }),
+      columnConfig({
+        title: t('coupon-list.discount-amount'),
+        key: 'discountValue',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
+        title: t('coupon-list.coupon-count'),
+        key: 'couponCount',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
+        title: t('coupon-list.minimum-shopping-value'),
+        key: 'minimumShoppingValue',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
+        title: t('coupon-list.preferred-position'),
+        key: '',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
+        title: t('coupon-list.user'),
+        key: '',
+        sort: true,
+        filterMode: FilterMode.SEARCH
       }),
       {
         key: 'action',
         render(record: Coupon) {
           return (
             <CrudButtons
-              onView={() => history.push(`/coupon/${record.id}`)}
+              onView={() => history.push(`/campaign/${record.id}`)}
               onEdit={
                 hasPermission(couponEditorRoles)
-                  ? () => history.push(`/coupon/${record.id}/edit`)
+                  ? () => history.push(`/campaign/${record.id}/edit`)
                   : undefined
               }
               onDelete={
@@ -143,7 +219,7 @@ export const CouponListPage: React.FC = () => {
   const headerOptions = hasPermission(couponEditorRoles) ? (
     <Button
       type="primary"
-      onClick={() => history.push(`/coupon`)}
+      onClick={() => history.push(`/campaign`)}
       icon={<PlusOutlined />}
       size="large"
     >
@@ -158,7 +234,7 @@ export const CouponListPage: React.FC = () => {
       <ResponsivePage>
         <ResponsiveCard
           forTable
-          floatingTitle={t('coupon-list.coupons')}
+          floatingTitle={t('coupon-list.campaigns')}
           floatingOptions={headerOptions}
           paddedBottom
           extraWide

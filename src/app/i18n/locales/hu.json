@@ -130,14 +130,28 @@
     "timeline-title": "Előzmények"
   },
   "coupon-list": {
-    "add": "Új kupon hozzáadása",
-    "categoryId": "Kategória",
-    "coupons": "Kuponok",
-    "endDate": "Vég dátum",
-    "expireDate": "Lejárati dátum",
-    "name": "Név",
-    "startDate": "Kezdő dátum",
-    "state": "Státusz"
+    "add": "Új kampány",
+    "campaign-type": "Kampány típus",
+    "campaigns": "Kampányok",
+    "category": "Kupon kategória",
+    "click-count": "Kattintások száma",
+    "coupon-count": "Kuponok száma",
+    "discount-amount": "Kedvezmény mérték",
+    "discount-type": "Kedvezmény típusa",
+    "end-date": "Kampány vége",
+    "expire-date": "Kupon lejárati dátum",
+    "minimum-shopping-value": "Minmális vásárlási érték",
+    "name": "Kampány magyar név",
+    "partner": "Partner",
+    "preferred-position": "Preferált pozíció",
+    "rank": "Rang",
+    "redee-mode": "Kupon mód",
+    "redeem-count": "Beváltások száma",
+    "small-image": "Kupon kis kép",
+    "start-date": "Kampány kezdete",
+    "state": "Kampány státusz",
+    "user": "Létrehozó felhasználó",
+    "view-count": "Megjelenések száma"
   },
   "error": {
     "auth": {
@@ -200,7 +214,8 @@
       "page-size": "Lapozó lap méret."
     },
     "partner": {
-      "cant-change-state": "Partner státusz változtatása sikertelen."
+      "cant-change-state": "Partner státusz változtatása sikertelen.",
+      "name-must-be-unique": "Partner névnek egyedinek kell lennie."
     },
     "partner-contact": {
       "invalid-type": "Nem megfelelő partner típus."
@@ -219,8 +234,8 @@
     "language": "Nyelv"
   },
   "menu": {
+    "campaigns": "Kampányok",
     "coupon-categories": "Kategóriák",
-    "coupons": "Kuponok",
     "newsletter": "Hírlevél",
     "partner-data": "Partner adatok",
     "profile": "Profil",
