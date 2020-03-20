@@ -1,7 +1,6 @@
 import React, { FC, useState, useMemo } from 'react'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
-import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
@@ -11,7 +10,7 @@ import { getCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ColumnType } from 'antd/lib/table'
-import { PlusOutlined } from '@ant-design/icons'
+import { AddButton } from 'components/buttons/AddButton'
 
 interface CashierListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
@@ -71,14 +70,7 @@ export const CashierList: FC<CashierListProps> = props => {
   const headerOptions = (
     <>
       {site?.id && (
-        <Button
-          type="primary"
-          onClick={() => onOpenEditor(undefined, true)}
-          icon={<PlusOutlined />}
-          size="large"
-        >
-          {t('cashier-list.add')}
-        </Button>
+        <AddButton onClick={() => onOpenEditor(undefined, true)}>{t('cashier-list.add')}</AddButton>
       )}
     </>
   )

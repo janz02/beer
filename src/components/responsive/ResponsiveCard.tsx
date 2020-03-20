@@ -4,9 +4,11 @@ import { useIsMobile } from 'hooks'
 import { Card } from 'antd'
 import { CardProps } from 'antd/lib/card'
 import { ResponsiveHeader } from './ResponsiveHeader'
+import { BackButtonProps } from 'components/buttons/BackButton'
 
 export interface ResponsiveCardProps extends CardProps {
   floatingTitle?: string
+  floatingBackButton?: BackButtonProps
   floatingOptions?: JSX.Element
   innerTitle?: string
   innerOptions?: JSX.Element
@@ -22,6 +24,7 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
   const {
     floatingTitle,
     floatingOptions,
+    floatingBackButton,
     innerTitle,
     innerOptions,
     children,
@@ -43,7 +46,12 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
   )
 
   const floatingHeader = hasFloatingHeader && (
-    <ResponsiveHeader type="floating" title={floatingTitle} options={floatingOptions} />
+    <ResponsiveHeader
+      type="floating"
+      title={floatingTitle}
+      options={floatingOptions}
+      backButton={floatingBackButton}
+    />
   )
 
   return (

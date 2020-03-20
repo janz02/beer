@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import './CouponListPage.scss'
-import { Button, Switch, Checkbox } from 'antd'
+import { Checkbox } from 'antd'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
@@ -18,7 +18,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
-import { PlusOutlined } from '@ant-design/icons'
+import { AddButton } from 'components/buttons/AddButton'
 
 const couponEditorRoles = [
   Roles.Administrator,
@@ -229,14 +229,7 @@ export const CouponListPage: React.FC = () => {
         {t('coupon-list.show-archived')}
       </Checkbox>
       {hasPermission(couponEditorRoles) && (
-        <Button
-          type="primary"
-          onClick={() => history.push(`/campaign`)}
-          icon={<PlusOutlined />}
-          size="large"
-        >
-          {t('coupon-list.add')}
-        </Button>
+        <AddButton onClick={() => history.push(`/campaign`)}>{t('coupon-list.add')}</AddButton>
       )}
     </>
   )
