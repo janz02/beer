@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import './CouponListPage.scss'
-import { Button } from 'antd'
+import { Button, Switch, Checkbox } from 'antd'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
-import { getWaitingCoupons, deleteCoupon } from './couponListSlice'
+import { getWaitingCoupons, deleteCoupon, setIncludeArchived } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import { CouponState, Roles } from 'api/swagger/models'
 import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
@@ -32,7 +32,9 @@ export const CouponListPage: React.FC = () => {
   const { t } = useTranslation()
 
   const { categories } = useSelector((state: RootState) => state.coupons)
-  const { coupons, loading, listParams } = useSelector((state: RootState) => state.couponList)
+  const { coupons, includeArchived, loading, listParams } = useSelector(
+    (state: RootState) => state.couponList
+  )
 
   const [couponToDelete, setCouponToDelete] = useState<{
     coupon?: Coupon
@@ -216,17 +218,27 @@ export const CouponListPage: React.FC = () => {
     [categories, columnConfig, t]
   )
 
-  const headerOptions = hasPermission(couponEditorRoles) ? (
-    <Button
-      type="primary"
-      onClick={() => history.push(`/campaign`)}
-      icon={<PlusOutlined />}
-      size="large"
-    >
-      {t('coupon-list.add')}
-    </Button>
-  ) : (
-    undefined
+  const headerOptions = (
+    <>
+      <Checkbox
+        onChange={e => {
+          dispatch(setIncludeArchived(e.target.checked))
+          dispatch(getWaitingCoupons())
+        }}
+      >
+        {t('coupon-list.show-archived')}
+      </Checkbox>
+      {hasPermission(couponEditorRoles) && (
+        <Button
+          type="primary"
+          onClick={() => history.push(`/campaign`)}
+          icon={<PlusOutlined />}
+          size="large"
+        >
+          {t('coupon-list.add')}
+        </Button>
+      )}
+    </>
   )
 
   return (
