@@ -14,6 +14,7 @@ interface CouponListState {
   coupons: Coupon[]
   listParams: ListRequestParams
   allCouponsCount?: number
+  includeArchived: boolean
   error: string | null
   loading: boolean
 }
@@ -23,6 +24,7 @@ const initialState: CouponListState = {
   listParams: {
     pageSize: 10
   },
+  includeArchived: false,
   error: null,
   loading: false
 }
@@ -56,6 +58,10 @@ const couponListSlice = createSlice({
     },
     deleteFail(state, action: PayloadAction<string>) {
       state.loading = false
+      state.error = action.payload
+    },
+    setIncludeArchived(state, action: PayloadAction<boolean>) {
+      state.includeArchived = action.payload
     }
   }
 })
@@ -69,7 +75,7 @@ const {
   deleteFail
 } = couponListSlice.actions
 
-export const { resetCouponList } = couponListSlice.actions
+export const { resetCouponList, setIncludeArchived } = couponListSlice.actions
 
 export const couponListReducer = couponListSlice.reducer
 
@@ -79,7 +85,11 @@ export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => a
 ) => {
   try {
     dispatch(getCouponsRequest())
-    const revisedParams = reviseListRequestParams(getState().couponList.listParams, params)
+
+    const { listParams, includeArchived } = getState().couponList
+    const revisedParams = reviseListRequestParams(listParams, params)
+    revisedParams.includeArchived = includeArchived
+
     const { result, ...pagination } = await api.coupons.getWaitingCoupons(revisedParams)
 
     const coupons =

@@ -121,7 +121,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     <div className="coupon-editor-form__actions">
       {coupon && coupon.state !== CouponState.Closed && coupon.state !== CouponState.Archived && (
         <Button type="primary" htmlType="button">
-          <Link to={`/coupon/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
+          <Link to={`/campaign/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
         </Button>
       )}
       {hasPermission([
@@ -201,7 +201,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     }
   }
 
-  const backButton = <BackButton onClick={() => history.push('/coupons/')} primary={!modified} />
+  const backButton = <BackButton onClick={() => history.push('/campaigns/')} primary={!modified} />
 
   return (
     <Row className="coupon-editor-form">

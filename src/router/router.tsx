@@ -63,7 +63,7 @@ const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
     return <Redirect to="/auth" />
   }
-  return <Redirect to="/coupons" />
+  return <Redirect to="/campaigns" />
 }
 
 const Routes = (): JSX.Element => (
@@ -104,22 +104,27 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.partnersEditor}
       component={PartnerEditorPage}
     />
-    <PrivateRoute exact path="/coupons" roles={pageViewRoles.coupons} component={CouponListPage} />
     <PrivateRoute
       exact
-      path="/coupon"
+      path="/campaigns"
+      roles={pageViewRoles.coupons}
+      component={CouponListPage}
+    />
+    <PrivateRoute
+      exact
+      path="/campaign"
       roles={pageViewRoles.couponEditor}
       component={CouponCreatePage}
     />
     <PrivateRoute
       exact
-      path="/coupon/:id"
+      path="/campaign/:id"
       roles={pageViewRoles.coupons}
       component={CouponViewPage}
     />
     <PrivateRoute
       exact
-      path="/coupon/:id/edit"
+      path="/campaign/:id/edit"
       roles={pageViewRoles.couponEditor}
       component={CouponEditorPage}
     />
