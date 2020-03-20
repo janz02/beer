@@ -200,7 +200,8 @@
       "page-size": "Paginate page size."
     },
     "partner": {
-      "cant-change-state": "Can't change partner state."
+      "cant-change-state": "Can't change partner state.",
+      "name-must-be-unique": "Partner name must be unique."
     },
     "partner-contact": {
       "invalid-type": "Invalid partner contact type."

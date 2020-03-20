@@ -4762,17 +4762,25 @@
             "type": "string",
             "nullable": true
           },
+          "mailingAddress": {
+            "type": "string",
+            "nullable": true
+          },
           "registrationNumber": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "taxNumber": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "bankAccount": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
+          },
+          "registrationAllowed": {
+            "type": "string",
+            "nullable": true
           },
           "majorPartner": {
             "type": "boolean"

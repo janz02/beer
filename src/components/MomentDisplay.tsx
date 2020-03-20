@@ -6,9 +6,9 @@ interface MomentDisplayProps {
   mode?: 'date' | 'time' | 'date time' | 'date/time'
 }
 
-export const DATE_FORMAT = 'YYYY.MM.DD'
-export const TIME_FORMAT = 'hh:mm'
-export const DATE_TIME_FORMAT = 'YYYY.MM.DD hh:mm'
+export const DATE_FORMAT = 'L'
+export const TIME_FORMAT = 'LT'
+export const DATE_TIME_FORMAT = 'LLL'
 
 export const MomentDisplay: React.FC<MomentDisplayProps> = props => {
   const { date, mode } = props

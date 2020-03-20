@@ -67,6 +67,10 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           <Input disabled={!editable} maxLength={100} />
         </Form.Item>
 
+        <Form.Item name="email" label={t('profile.field.email')}>
+          <Input disabled />
+        </Form.Item>
+
         <Form.Item label={t('profile.field.old-password')} name="oldPassword">
           <Input.Password disabled={!editable} />
         </Form.Item>
@@ -107,10 +111,6 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           help={t('common.field.help.phone-format')}
         >
           <Input disabled={!editable} type="tel" maxLength={20} />
-        </Form.Item>
-
-        <Form.Item name="email" label={t('profile.field.email')}>
-          <Input disabled />
         </Form.Item>
 
         <Form.Item name="registerCode" label={t('profile.field.code')}>
