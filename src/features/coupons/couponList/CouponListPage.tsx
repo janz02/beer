@@ -32,9 +32,7 @@ export const CouponListPage: React.FC = () => {
   const { t } = useTranslation()
 
   const { categories } = useSelector((state: RootState) => state.coupons)
-  const { coupons, includeArchived, loading, listParams } = useSelector(
-    (state: RootState) => state.couponList
-  )
+  const { coupons, loading, listParams } = useSelector((state: RootState) => state.couponList)
 
   const [couponToDelete, setCouponToDelete] = useState<{
     coupon?: Coupon
