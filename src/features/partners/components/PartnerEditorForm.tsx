@@ -58,8 +58,9 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         ...partner,
         differentMailingAddress: partner?.address !== partner?.mailingAddress
       })
+      resetFormFlags()
     }
-  }, [mode, partner, setFieldsValue])
+  }, [mode, partner, resetFormFlags, setFieldsValue])
 
   const backButtonProps: BackButtonProps | undefined = handleBack
     ? { primary: !modified, onClick: handleBack, label: t('common.go-back-to-list') }
@@ -197,7 +198,13 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
           <Input disabled />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>
+        <Button
+          hidden={mode === PartnerEditorMode.VIEW}
+          type="primary"
+          htmlType="submit"
+          disabled={!submitable}
+          loading={loading}
+        >
           {t('partner.save')}
         </Button>
       </Form>
