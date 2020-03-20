@@ -46,6 +46,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
             title: '',
             key: 'actions',
             colSpan: 1,
+            width: '100px',
             render(record: Category) {
               return (
                 <CrudButtons

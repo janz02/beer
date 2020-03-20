@@ -36,6 +36,7 @@ export const PartnerListPage: React.FC = () => {
       columnConfig({
         title: t('partner.field.name'),
         key: 'name',
+        width: '35%',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
@@ -43,6 +44,7 @@ export const PartnerListPage: React.FC = () => {
         title: t('partner.field.major-partner'),
         key: 'majorPartner',
         sort: true,
+        width: '11rem',
         filterMode: FilterMode.FILTER,
         filters: [
           { text: t('common.yes'), value: 'true' },
@@ -54,6 +56,7 @@ export const PartnerListPage: React.FC = () => {
         title: t('partner.field.partner-state'),
         key: 'partnerState',
         sort: true,
+        width: '8rem',
         filterMode: FilterMode.FILTER,
         filters: Object.keys(PartnerState).map(f => {
           return {
@@ -71,6 +74,7 @@ export const PartnerListPage: React.FC = () => {
       }),
       {
         key: 'action',
+        width: '100px',
         render(record: Partner) {
           return (
             <CrudButtons
