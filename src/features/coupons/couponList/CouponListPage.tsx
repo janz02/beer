@@ -111,6 +111,7 @@ export const CouponListPage: React.FC = () => {
       }),
       {
         key: 'action',
+        width: '150px',
         render(record: Coupon) {
           return (
             <CrudButtons

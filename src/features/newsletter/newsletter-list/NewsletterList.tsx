@@ -57,9 +57,8 @@ export const NewsletterList: FC = () => {
         title: t('newsletter.field.template-name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH,
         width: '35%',
-        ellipsis: true
+        filterMode: FilterMode.SEARCH
       }),
       {
         title: t('newsletter.field.template-version'),
@@ -70,6 +69,8 @@ export const NewsletterList: FC = () => {
       {
         title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
+        // needs to be set manually
+        ellipsis: true,
         render(record: NewsletterPreview) {
           return <MomentDisplay date={record.modifiedAt} mode="date time" />
         }
@@ -77,10 +78,12 @@ export const NewsletterList: FC = () => {
       {
         title: t('newsletter.field.template-modified-by'),
         key: 'modifiedBy',
+        // needs to be set manually
+        ellipsis: true,
         dataIndex: 'modifiedBy'
       },
       {
-        width: '12rem',
+        width: '100px',
         key: 'actions',
         colSpan: 1,
         render(record: NewsletterPreview) {

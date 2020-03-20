@@ -71,6 +71,7 @@ export const PartnerListPage: React.FC = () => {
       }),
       {
         key: 'action',
+        width: '100px',
         render(record: Partner) {
           return (
             <CrudButtons

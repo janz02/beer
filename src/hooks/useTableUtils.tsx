@@ -212,6 +212,8 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
           listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
       }
 
+      config.ellipsis = true
+
       return config
     },
     [listParamsState, searchedTextHighlighter, toSortOrder]

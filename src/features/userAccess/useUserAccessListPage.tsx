@@ -155,6 +155,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
       hasPermission([Roles.Administrator])
         ? {
             title: t('common.actions'),
+            width: '100px',
             key: 'actions',
             colSpan: 1,
             render(user: UserAccess) {

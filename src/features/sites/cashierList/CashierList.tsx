@@ -48,6 +48,7 @@ export const CashierList: FC<CashierListProps> = props => {
       }),
       {
         key: 'actions',
+        width: '100px',
         colSpan: 1,
         render(record: Cashier) {
           return (

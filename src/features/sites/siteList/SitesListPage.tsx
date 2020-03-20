@@ -50,6 +50,7 @@ export const SitesListPage: FC = () => {
       {
         title: '',
         key: 'actions',
+        width: '100px',
         colSpan: 1,
         render(value: unknown, record: Site) {
           return (
