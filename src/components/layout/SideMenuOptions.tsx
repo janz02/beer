@@ -43,6 +43,7 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
               option.onClick?.()
               handleClose()
             }}
+            className={!option.link && !option.onClick ? 'side-menu-nolink' : ''}
           >
             {option.icon}
             <span>{option.label}</span>

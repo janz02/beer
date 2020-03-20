@@ -53,6 +53,7 @@ export const pageViewRoles = {
   categoryEditor: [Roles.Administrator],
   segments: comboRoles.forNkm,
   profile: comboRoles.forPartner,
+  readonlyProfile: comboRoles.forNkm,
   partner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
   partners: comboRoles.forNkm,
   partnersEditor: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],

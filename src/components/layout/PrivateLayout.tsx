@@ -112,6 +112,11 @@ export const PrivateLayout: React.FC = ({ children }) => {
         roles: pageViewRoles.profile
       },
       {
+        label: profile?.name ?? t('menu.profile'),
+        icon: <UserOutlined />,
+        roles: pageViewRoles.readonlyProfile
+      },
+      {
         label: t('auth.logout'),
         icon: <LogoutOutlined />,
         onClick: () => dispatch(logout())
