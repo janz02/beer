@@ -2,7 +2,7 @@ import React, { FC, useMemo, useCallback, useState, useEffect } from 'react'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
-import { Button, Form, Input } from 'antd'
+import { Form, Input } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
@@ -20,7 +20,7 @@ import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
-import { PlusOutlined } from '@ant-design/icons'
+import { AddButton } from 'components/buttons/AddButton'
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
@@ -108,14 +108,7 @@ export const NewsletterList: FC = () => {
   }
 
   const headerOptions = (
-    <Button
-      type="primary"
-      onClick={() => setVisibleSaveNewPopup(true)}
-      icon={<PlusOutlined />}
-      size="large"
-    >
-      {t('newsletter.add')}
-    </Button>
+    <AddButton onClick={() => setVisibleSaveNewPopup(true)}>{t('newsletter.add')}</AddButton>
   )
 
   return (

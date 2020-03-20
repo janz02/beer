@@ -20,7 +20,6 @@ const partnerSlice = createSlice({
   name: 'partner',
   initialState,
   reducers: {
-    resetPartner: () => initialState,
     getPartnersSuccess(state, action: PayloadAction<Partner>) {
       state.partner = action.payload
 
@@ -42,14 +41,12 @@ const partnerSlice = createSlice({
   }
 })
 
-const {
+export const {
   getPartnersSuccess,
   updatePartnerSuccess,
   setLoadingStart,
   setLoadingFailed
 } = partnerSlice.actions
-
-export const { resetPartner } = partnerSlice.actions
 
 export const partnerReducer = partnerSlice.reducer
 
@@ -75,10 +72,7 @@ export const updateMyPartner = (partner: Partner): AppThunk => async (dispatch, 
     await api.partner.updateSelfPartner({
       partnerDto: {
         ...getState().partner.partner,
-        ...partner,
-        registrationNumber: 'todo',
-        taxNumber: 'todo',
-        bankAccount: 'todo'
+        ...partner
       }
     })
 

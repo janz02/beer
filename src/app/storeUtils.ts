@@ -13,6 +13,8 @@ import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
 import { resetNewsLetterList } from 'features/newsletter/newsletter-list/newsletterListSlice'
 import { resetNewsletterEditor } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { resetRouterHistory } from 'router/routerHistoryStore'
+import { resetPartnersList } from 'features/partners/partnerListSlice'
+import { resetPartner } from 'features/partner/partnerSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -34,6 +36,8 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetUsersAccessList())
     dispatch(resetNewsLetterList())
     dispatch(resetNewsletterEditor())
+    dispatch(resetPartnersList())
+    dispatch(resetPartner())
     logout && dispatch(resetRouterHistory())
   })
 }

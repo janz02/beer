@@ -15,6 +15,7 @@ import { profileReducer } from 'features/profile/profileSlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
 import { siteEditorReducer } from 'features/sites/siteEditor/siteEditorSlice'
 import { newsletterListReducer } from 'features/newsletter/newsletter-list/newsletterListSlice'
+import { partnersListReducer } from 'features/partners/partnerListSlice'
 
 export const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -26,6 +27,7 @@ export const rootReducer = combineReducers({
   categoryEditor: categoryEditorReducer,
   notification: notificationReducer,
   partner: partnerReducer,
+  partners: partnersListReducer,
   profile: profileReducer,
   siteList: siteListReducer,
   siteEditor: siteEditorReducer,

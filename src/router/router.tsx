@@ -22,6 +22,7 @@ import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
 import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
 import { Roles } from 'api/swagger/models'
 import { isLoggedIn } from 'services/jwt-reader'
+import { PartnerListPage } from 'features/partners/PartnerListPage'
 
 const comboRoles = {
   forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
@@ -52,6 +53,7 @@ export const pageViewRoles = {
   segments: comboRoles.forNkm,
   profile: comboRoles.forPartner,
   partner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
+  partners: comboRoles.forNkm, // union of forNkm and forPartner, fs overlap
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
 }
 
@@ -75,6 +77,12 @@ const Routes = (): JSX.Element => (
       path="/partner"
       roles={pageViewRoles.partner}
       component={PartnerEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/partners"
+      roles={pageViewRoles.partners}
+      component={PartnerListPage}
     />
     <PrivateRoute exact path="/coupons" roles={pageViewRoles.coupons} component={CouponListPage} />
     <PrivateRoute

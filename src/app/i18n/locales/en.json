@@ -60,6 +60,7 @@
       "email-sent": "Your request was processed succesfully",
       "save-success": "Successful saving"
     },
+    "no": "No",
     "ok": "OK",
     "popup": {
       "confirm-title": "Are you sure about doing this?",
@@ -73,7 +74,8 @@
     "save": "Save",
     "search": "Search",
     "send": "Send",
-    "view": "View"
+    "view": "View",
+    "yes": "Yes"
   },
   "coupon": {
     "state": {
@@ -224,6 +226,7 @@
     "coupons": "Coupons",
     "newsletter": "News letter",
     "partner-data": "Partner data",
+    "partners": "Partners",
     "profile": "Profile",
     "sites": "Sites",
     "users": "Users"
@@ -265,8 +268,18 @@
       "bankAccount": "Bank account",
       "major-partner": "Major partner",
       "name": "Company name",
+      "partner-state": "State",
       "registration-number": "Company register number",
       "tax-number": "VAT number"
+    },
+    "list": {
+      "add": "Add new partner",
+      "title": "Partners"
+    },
+    "partner-state": {
+      "active": "Active",
+      "deleted": "Deleted",
+      "inactive": "Inactive"
     },
     "save": "Save",
     "save-partner-success": "Saving partner was successful."
