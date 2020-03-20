@@ -72,7 +72,10 @@ export const updateMyPartner = (partner: Partner): AppThunk => async (dispatch, 
     await api.partner.updateSelfPartner({
       partnerDto: {
         ...getState().partner.partner,
-        ...partner
+        ...partner,
+        registrationNumber: 'todo',
+        taxNumber: 'todo',
+        bankAccount: 'todo'
       }
     })
 

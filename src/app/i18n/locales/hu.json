@@ -200,7 +200,8 @@
       "page-size": "Lapozó lap méret."
     },
     "partner": {
-      "cant-change-state": "Partner státusz változtatása sikertelen."
+      "cant-change-state": "Partner státusz változtatása sikertelen.",
+      "name-must-be-unique": "Partner nevének egyedinek kell lennie."
     },
     "partner-contact": {
       "invalid-type": "Nem megfelelő partner típus."
