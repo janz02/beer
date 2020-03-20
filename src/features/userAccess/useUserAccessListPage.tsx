@@ -51,6 +51,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
       nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.name'),
         key: 'name',
+        width: '35%',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
@@ -63,6 +64,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
       nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
         key: 'active',
+        width: '6rem',
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
       }),
@@ -121,11 +123,13 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
       }),
       partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.phone'),
+        width: '8rem',
         key: 'phone',
         filterMode: FilterMode.SEARCH
       }),
       partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.partner-name'),
+        width: '10rem',
         key: 'partnerName',
         sort: true,
         filterMode: FilterMode.SEARCH
@@ -133,12 +137,14 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
       partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.partner-type'),
         key: 'majorPartner',
+        width: '5rem',
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.partnerType.${user.active ? 'major' : 'normal'}`)
       }),
       partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
         key: 'active',
+        width: '5rem',
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
       }),
@@ -149,12 +155,14 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         // sort: true,
         // filterMode: FilterMode.FILTER,
         // filters: partnerRoleOptions,
+        width: '15rem',
         render: (value: unknown, user: UserAccess) =>
           t(`user-access.role.${user.role?.toLowerCase()}`)
       }),
       hasPermission([Roles.Administrator])
         ? {
-            title: t('common.actions'),
+            title: '',
+            width: '100px',
             key: 'actions',
             colSpan: 1,
             render(user: UserAccess) {
