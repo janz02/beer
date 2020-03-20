@@ -63,12 +63,13 @@ export const NewsletterList: FC = () => {
       {
         title: t('newsletter.field.template-version'),
         key: 'version',
-        width: '6rem',
+        width: '4rem',
         dataIndex: 'version'
       },
       {
         title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
+        width: '8rem',
         // needs to be set manually
         ellipsis: true,
         render(record: NewsletterPreview) {

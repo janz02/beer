@@ -38,6 +38,7 @@ export const SitesListPage: FC = () => {
       columnConfig({
         title: t('site-list.table.name'),
         key: 'name',
+        width: '35%',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
