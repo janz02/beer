@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Layout } from 'antd'
+import { Layout, Button } from 'antd'
 import { useIsMobile } from 'hooks'
-import { HeaderOptions } from './HeaderOptions'
-import { Header } from './Header'
 import './layout.scss'
 import { NotificationDrawer } from 'features/notification/NotificationDrawer'
 import { SideMenu } from './SideMenu'
@@ -18,7 +16,9 @@ import {
   UsergroupAddOutlined,
   SendOutlined,
   AppstoreAddOutlined,
-  ContactsOutlined
+  ContactsOutlined,
+  RightOutlined,
+  LeftOutlined
 } from '@ant-design/icons'
 import { pageViewRoles } from 'router/router'
 import { useSelector } from 'hooks/react-redux-hooks'
@@ -31,7 +31,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const { t } = useTranslation()
   const isMobile = useIsMobile()
   const [menuOpened, setMenuOpened] = useState(!isMobile)
-  const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false)
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile)
 
   const profile = useSelector((state: RootState) => state.profile.profile)
@@ -132,15 +131,18 @@ export const PrivateLayout: React.FC = ({ children }) => {
         <SideMenuOptions footer options={footerOptions} handleClose={closeDrawer} />
       </SideMenu>
 
-      <NotificationDrawer
+      {/* Removed until there are available notifications */}
+      {/* <NotificationDrawer
         open={notificationDrawerOpen}
         onClose={() => setNotificationDrawerOpen(false)}
-      />
+      /> */}
 
       <Layout>
-        <Header onMenuClick={() => setMenuOpened(!menuOpened)} open={menuOpened}>
-          <HeaderOptions openNotifications={() => setNotificationDrawerOpen(true)} />
-        </Header>
+        <Button
+          className={`header__menu-button ${isMobile ? ' mobile' : ''}`}
+          onClick={() => setMenuOpened(!menuOpened)}
+          icon={isMobile ? <RightOutlined /> : menuOpened ? <LeftOutlined /> : <RightOutlined />}
+        />
         <Layout.Content>{children}</Layout.Content>
       </Layout>
     </Layout>

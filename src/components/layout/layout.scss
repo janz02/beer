@@ -28,3 +28,14 @@
     }
   }
 }
+
+.header__menu-button {
+  position: relative;
+  top: 16px;
+  left: -16px;
+
+  &.mobile {
+    top: 5px;
+    left: 5px;
+  }
+}
