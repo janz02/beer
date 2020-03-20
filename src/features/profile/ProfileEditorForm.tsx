@@ -44,7 +44,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
       ...profile,
       registerCode: partner?.registerCode
     })
-    resetFormFields(['password', 'passwordAgain', 'oldPassword'])
+    resetFormFields(['oldPassword', 'password', 'passwordAgain'])
   }, [partner, profile, resetFormFields, setInitialFieldsValue])
 
   return (
@@ -78,9 +78,20 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         <Form.Item
           help={t('common.filed.help.password-format')}
           name="password"
+          dependencies={['oldPassword']}
           hasFeedback
           label={t('profile.field.new-password')}
-          rules={[rule.password()]}
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue('oldPassword') !== value) {
+                  return Promise.resolve()
+                }
+                return Promise.reject(t('error.auth.newpassword-sameasold'))
+              }
+            }),
+            rule.password()
+          ]}
         >
           <Input.Password disabled={!editable} maxLength={64} />
         </Form.Item>

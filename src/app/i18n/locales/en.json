@@ -150,6 +150,7 @@
       "ldap": "Ldap error.",
       "ldap-password-change": "Ldap password change error.",
       "login-failed": "Authentication failed.",
+      "newpassword-sameasold": "The new password cannot be the same as the old password.",
       "password-format": "Invalid password format.",
       "password-inconsistent": "The two passwords are not matching.",
       "registration-failed": "Registration failed.",

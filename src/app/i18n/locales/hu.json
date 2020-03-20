@@ -150,6 +150,7 @@
       "ldap": "Ldap hiba.",
       "ldap-password-change": "Ldap jelszó változtatási hiba.",
       "login-failed": "Hibás bejelentkezés.",
+      "newpassword-sameasold": "Az új jelszó nem egyezhet meg az előzővel.",
       "password-format": "Invalid jelszó formátum.",
       "password-inconsistent": "A két jelszó nem egyezik meg.",
       "registration-failed": "Regsztráció sikertelen.",
