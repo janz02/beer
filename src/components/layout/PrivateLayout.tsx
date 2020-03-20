@@ -90,13 +90,13 @@ export const PrivateLayout: React.FC = ({ children }) => {
         label: t('menu.partner-data'),
         link: '/selfpartner',
         icon: <ContactsOutlined />,
-        roles: pageViewRoles.partner
+        roles: pageViewRoles.selfpartner
       },
       {
         label: t('menu.partners'),
         link: '/partners',
         icon: <HomeFilled />,
-        roles: pageViewRoles.users
+        roles: pageViewRoles.partners
       }
     ],
     [t]

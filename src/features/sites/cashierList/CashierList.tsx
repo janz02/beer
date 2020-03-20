@@ -71,7 +71,9 @@ export const CashierList: FC<CashierListProps> = props => {
   const headerOptions = (
     <>
       {site?.id && (
-        <AddButton onClick={() => onOpenEditor(undefined, true)}>{t('cashier-list.add')}</AddButton>
+        <AddButton size="middle" onClick={() => onOpenEditor(undefined, true)}>
+          {t('cashier-list.add')}
+        </AddButton>
       )}
     </>
   )

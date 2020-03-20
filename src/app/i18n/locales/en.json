@@ -43,6 +43,8 @@
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
+    "escape": "Escape",
+    "escape-editor": "Escape editor mode",
     "field": {
       "help": {
         "phone-format": "+36 20 123 4567"
@@ -54,6 +56,7 @@
       }
     },
     "go-back": "Go back",
+    "go-back-to-list": "Bact to the list",
     "message": {
       "delete-success": "Successful deletion",
       "email-sent": "Your request was processed succesfully",
@@ -283,10 +286,14 @@
     "editor-title": "Partner",
     "field": {
       "address": "Address",
-      "bankAccount": "Bank account",
+      "bank-account": "Bank account",
+      "different-address": "Differen mailing address",
+      "mailing-address": "Mailing address",
       "major-partner": "Major partner",
       "name": "Company name",
       "partner-state": "State",
+      "register-code": "Registration code",
+      "registration-allowed": "Company register",
       "registration-number": "Company register number",
       "tax-number": "VAT number"
     },

@@ -9,8 +9,9 @@ export interface UseFormUtils {
   modified: boolean
   checkFieldsChange: () => void
   resetFormFlags: () => void
-  setInitialFieldsValue: (fields: any) => void
+  setFieldsValue: (fields: any) => void
   resetFormFields: (fields?: any) => void
+  getFieldValue: (field: any) => any
 }
 
 export const useFormUtils = (): UseFormUtils => {
@@ -40,8 +41,12 @@ export const useFormUtils = (): UseFormUtils => {
     formRef.current = form
   }, [form])
 
-  const setInitialFieldsValue = useCallback((fields: any) => {
+  const setFieldsValue = useCallback((fields: any) => {
     fields ? formRef.current.setFieldsValue(fields) : formRef.current.resetFields()
+  }, [])
+
+  const getFieldValue = useCallback((name: string) => {
+    return formRef.current.getFieldValue(name)
   }, [])
 
   const resetFormFields = useCallback((fields: any) => {
@@ -52,9 +57,10 @@ export const useFormUtils = (): UseFormUtils => {
     form,
     submitable,
     modified,
-    setInitialFieldsValue,
+    setFieldsValue,
     checkFieldsChange,
     resetFormFlags,
-    resetFormFields
+    resetFormFields,
+    getFieldValue
   }
 }

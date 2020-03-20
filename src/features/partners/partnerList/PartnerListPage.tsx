@@ -7,13 +7,14 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { getPartners } from './partnerListSlice'
+import { getPartners, deletePartner } from './partnerListSlice'
 import { ColumnType } from 'antd/lib/table'
 import { PartnerState } from 'api/swagger/models/PartnerState'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { hasPermission } from 'services/jwt-reader'
 import { history } from 'router/router'
+import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -78,20 +79,20 @@ export const PartnerListPage: React.FC = () => {
         render(record: Partner) {
           return (
             <CrudButtons
-              onView={() => history.push(`/partner/${record.id}`)}
-              onEdit={
-                hasPermission([]) ? () => history.push(`/partner/${record.id}/edit`) : undefined
-              }
+              onView={() => history.push(`/partners/${record.id}`)}
+              onDelete={hasPermission([]) ? () => dispatch(deletePartner(record.id!)) : undefined}
             />
           )
         }
       }
     ],
-    [columnConfig, t]
+    [columnConfig, dispatch, t]
   )
 
-  const headerOptions = (
-    <AddButton onClick={() => history.push(`/partner`)}>{t('partner.list.add')}</AddButton>
+  const headerOptions = hasPermission(partnersEditorRoles) ? (
+    <AddButton onClick={() => history.push(`/partners/new`)}>{t('partner.list.add')}</AddButton>
+  ) : (
+    undefined
   )
 
   return (
