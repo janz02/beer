@@ -23,7 +23,6 @@ import { Roles } from 'api/swagger/models'
 import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
-import { PartnerEditorForm } from 'features/partners/components/PartnerEditorForm'
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
 
 const comboRoles = {
