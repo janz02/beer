@@ -262,6 +262,9 @@
     "notifications": "Értesítések"
   },
   "partner": {
+    "editor": {
+      "title": "Partner szerkesztő"
+    },
     "editor-title": "Partner",
     "field": {
       "address": "Cím",

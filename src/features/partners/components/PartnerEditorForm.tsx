@@ -60,7 +60,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   }, [form, partner, setInitialFieldsValue])
 
   const backButtonProps: BackButtonProps | undefined = handleBack
-    ? { primary: modified, onClick: handleBack }
+    ? { primary: !modified, onClick: handleBack }
     : undefined
 
   return (

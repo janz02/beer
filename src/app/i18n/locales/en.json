@@ -262,6 +262,9 @@
     "notifications": "Notifications"
   },
   "partner": {
+    "editor": {
+      "title": "Partner editor"
+    },
     "editor-title": "Partner",
     "field": {
       "address": "Address",
