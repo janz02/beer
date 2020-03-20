@@ -29,15 +29,20 @@ export const SelfPartnerEditorPage: React.FC = () => {
       case PartnerEditorMode.VIEW:
         return <EditButton onClick={() => setMode(PartnerEditorMode.EDIT)} />
       case PartnerEditorMode.EDIT:
-        return <EscapeButton onClick={() => setMode(PartnerEditorMode.VIEW)} />
+        return (
+          <EscapeButton
+            onClick={() => setMode(PartnerEditorMode.VIEW)}
+            label={t('common.escape-editor')}
+          />
+        )
       default:
         return undefined
     }
-  }, [mode])
+  }, [mode, t])
 
   const props: PartnerEditorFormProps = {
     mode,
-    title: t('partner.editor-title') + '   ' + mode,
+    title: t('partner.editor-title'),
     handleSave,
     loading,
     options,
