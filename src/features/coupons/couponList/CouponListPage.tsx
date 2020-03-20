@@ -58,29 +58,36 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.campaign-type'),
         key: '',
+        ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER
       }),
       columnConfig({
         title: t('coupon-list.partner'),
+        ellipsis: false,
         key: '',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('coupon-list.view-count'),
+        ellipsis: false,
         key: ''
       }),
       columnConfig({
         title: t('coupon-list.click-count'),
+        ellipsis: false,
         key: ''
       }),
       columnConfig({
         title: t('coupon-list.redeem-count'),
+        ellipsis: false,
         key: ''
       }),
       columnConfig({
         title: t('coupon-list.name'),
+        ellipsis: false,
+        width: '10rem',
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH
@@ -88,6 +95,7 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.state'),
         key: 'state',
+        ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER,
         filters: Object.keys(CouponState).map(f => {
@@ -100,6 +108,7 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.category'),
         key: 'categoryId',
+        ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER,
         filters:
@@ -113,16 +122,19 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.rank'),
         key: 'rank',
+        ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER
       }),
       columnConfig({
         title: t('coupon-list.small-image'),
+        ellipsis: false,
         key: ''
       }),
       columnConfig({
         title: t('coupon-list.start-date'),
         key: 'startDate',
+        ellipsis: false,
         sort: true,
         render(value) {
           return <MomentDisplay date={value} />
@@ -130,6 +142,7 @@ export const CouponListPage: React.FC = () => {
       }),
       columnConfig({
         title: t('coupon-list.end-date'),
+        ellipsis: false,
         key: 'endDate',
         sort: true,
         render(value) {
@@ -139,6 +152,7 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.expire-date'),
         key: 'expireDate',
+        ellipsis: false,
         sort: true,
         render(value) {
           return <MomentDisplay date={value} />
@@ -147,23 +161,27 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.redee-mode'),
         key: '',
+        ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER
       }),
       columnConfig({
         title: t('coupon-list.discount-type'),
         key: 'type',
+        ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER
       }),
       columnConfig({
         title: t('coupon-list.discount-amount'),
+        ellipsis: false,
         key: 'discountValue',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('coupon-list.coupon-count'),
+        ellipsis: false,
         key: 'couponCount',
         sort: true,
         filterMode: FilterMode.SEARCH
@@ -171,17 +189,20 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.minimum-shopping-value'),
         key: 'minimumShoppingValue',
+        ellipsis: false,
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('coupon-list.preferred-position'),
+        ellipsis: false,
         key: '',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('coupon-list.user'),
+        ellipsis: false,
         key: '',
         sort: true,
         filterMode: FilterMode.SEARCH
@@ -189,6 +210,7 @@ export const CouponListPage: React.FC = () => {
       {
         key: 'action',
         width: '150px',
+        fixed: 'right',
         render(record: Coupon) {
           return (
             <CrudButtons

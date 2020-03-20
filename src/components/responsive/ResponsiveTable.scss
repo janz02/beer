@@ -48,6 +48,18 @@ $table-header-height: 80px;
   }
 }
 
+// Set hover color
 .ant-table-tbody>tr.ant-table-row-level-0:hover>td {
   background: #E6FFFB !important;
+}
+
+// Fix scroll issue overlap
+.ant-table-cell-fix-left,
+.ant-table-cell-fix-right {
+  z-index: unset;
+}
+
+// Always display drop shadow for fixed columns
+td.ant-table-cell-fix-right-first::after {
+  box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, 0.15);
 }

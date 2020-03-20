@@ -172,6 +172,7 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
     (params: ColumnConfigParams): ColumnType<any> => {
       const { key, filterMode, sort, filters, disableSearchHighlight, ...rest } = params
       const config: ColumnType<any> = {
+        ellipsis: true,
         ...rest,
         key: key,
         dataIndex: key
@@ -211,8 +212,6 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
         config.sortOrder =
           listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
       }
-
-      config.ellipsis = true
 
       return config
     },
