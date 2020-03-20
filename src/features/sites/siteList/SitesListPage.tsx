@@ -45,7 +45,7 @@ export const SitesListPage: FC = () => {
       }),
       columnConfig({
         title: t('site-list.table.address'),
-        key: 'name',
+        key: 'address',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
