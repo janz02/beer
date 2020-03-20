@@ -9,6 +9,10 @@ t('coupon.state.accepted')
 t('coupon.state.waiting')
 t('coupon.state.archived')
 
+t(`partner.partner-state.active`)
+t(`partner.partner-state.inactive`)
+t(`partner.partner-state.deleted`)
+
 // Boolean mappings
 t(`user-access.field.partnerType.major`)
 t(`user-access.field.partnerType.normal`)

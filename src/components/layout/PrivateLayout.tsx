@@ -13,6 +13,7 @@ import {
   UserOutlined,
   BarcodeOutlined,
   HomeFilled,
+  ShopOutlined,
   LogoutOutlined,
   UsergroupAddOutlined,
   SendOutlined,
@@ -65,14 +66,8 @@ export const PrivateLayout: React.FC = ({ children }) => {
       {
         label: t('menu.sites'),
         link: '/sites',
-        icon: <HomeFilled />,
+        icon: <ShopOutlined />,
         roles: pageViewRoles.sites
-      },
-      {
-        label: t('menu.partner-data'),
-        link: '/partner',
-        icon: <ContactsOutlined />,
-        roles: pageViewRoles.partner
       },
       {
         label: t('menu.coupon-categories'),
@@ -90,6 +85,18 @@ export const PrivateLayout: React.FC = ({ children }) => {
         label: t('menu.users'),
         link: '/users',
         icon: <UsergroupAddOutlined />,
+        roles: pageViewRoles.users
+      },
+      {
+        label: t('menu.partner-data'),
+        link: '/selfpartner',
+        icon: <ContactsOutlined />,
+        roles: pageViewRoles.partner
+      },
+      {
+        label: t('menu.partners'),
+        link: '/partners',
+        icon: <HomeFilled />,
         roles: pageViewRoles.users
       }
     ],

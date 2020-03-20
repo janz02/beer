@@ -3,7 +3,6 @@ import { Form, Input, Button } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { useTranslation } from 'react-i18next'
 import { Site } from 'models/site'
-import { BackButton } from 'components/buttons/BackButton'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
@@ -41,13 +40,11 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
     resetFormFlags()
   }
 
-  const headerOptions = <BackButton onClick={onExit} primary={!modified} />
-
   return (
     <>
       <ResponsiveCard
         floatingTitle={t('site.editor-title')}
-        floatingOptions={headerOptions}
+        floatingBackButton={{ onClick: onExit, primary: !modified }}
         paddedBottom
       >
         <NavigationAlert when={modified} />
