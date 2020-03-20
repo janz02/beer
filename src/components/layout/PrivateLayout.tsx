@@ -70,12 +70,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
         roles: pageViewRoles.sites
       },
       {
-        label: t('menu.partner-data'),
-        link: '/partner',
-        icon: <ContactsOutlined />,
-        roles: pageViewRoles.partner
-      },
-      {
         label: t('menu.coupon-categories'),
         link: '/categories',
         icon: <AppstoreAddOutlined />,
@@ -92,6 +86,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/users',
         icon: <UsergroupAddOutlined />,
         roles: pageViewRoles.users
+      },
+      {
+        label: t('menu.partner-data'),
+        link: '/selfpartner',
+        icon: <ContactsOutlined />,
+        roles: pageViewRoles.partner
       },
       {
         label: t('menu.partners'),

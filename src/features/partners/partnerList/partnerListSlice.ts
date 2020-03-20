@@ -41,7 +41,7 @@ const partnersListSlice = createSlice({
       state.loading = false
       state.error = false
     },
-    getPartnersFail(state, action: PayloadAction<string>) {
+    getPartnersFail(state) {
       state.loading = false
       state.error = true
     }
@@ -68,6 +68,6 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
       })
     )
   } catch (err) {
-    dispatch(getPartnersFail(err.toString()))
+    dispatch(getPartnersFail())
   }
 }

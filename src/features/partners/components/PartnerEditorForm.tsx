@@ -6,15 +6,18 @@ import { useIsMobile, useCommonFormRules } from 'hooks'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
+import { BackButtonProps } from 'components/buttons/BackButton'
 
 export interface PartnerEditorFormProps {
-  handlePartnerSave: (values: any) => void
   loading: boolean
+  title: string
   partner?: Partner
+  handleBack?: () => void
+  handleSave: (values: any) => void
 }
 
 export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
-  const { handlePartnerSave, loading, partner } = props
+  const { title, handleBack, handleSave, loading, partner } = props
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   const isMobile = useIsMobile()
@@ -38,7 +41,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       : null
 
   const handleSubmit = (values: any): void => {
-    handlePartnerSave({
+    handleSave({
       ...values,
       registrationNumber: +values.registrationNumber,
       taxNumber: +values.taxNumber,
@@ -56,8 +59,12 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
     })
   }, [form, partner, setInitialFieldsValue])
 
+  const backButtonProps: BackButtonProps | undefined = handleBack
+    ? { primary: modified, onClick: handleBack }
+    : undefined
+
   return (
-    <ResponsiveCard wide floatingTitle={t('partner.editor-title')}>
+    <ResponsiveCard wide floatingTitle={title} floatingBackButton={backButtonProps}>
       <NavigationAlert when={modified} />
       <Form
         name="partner-editor-form"

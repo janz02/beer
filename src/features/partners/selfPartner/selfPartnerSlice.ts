@@ -5,22 +5,22 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { api } from 'api'
 
-interface PartnerState {
+interface SelfPartnerState {
   partner?: Partner
   error: string | null
   loading: boolean
 }
 
-const initialState: PartnerState = {
+const initialState: SelfPartnerState = {
   error: null,
   loading: false
 }
 
-const partnerSlice = createSlice({
-  name: 'partner',
+const selfPartnerSlice = createSlice({
+  name: 'selfPartner',
   initialState,
   reducers: {
-    resetPartner: () => initialState,
+    resetSelfPartner: () => initialState,
     getPartnersSuccess(state, action: PayloadAction<Partner>) {
       state.partner = action.payload
 
@@ -47,11 +47,11 @@ const {
   updatePartnerSuccess,
   setLoadingStart,
   setLoadingFailed
-} = partnerSlice.actions
+} = selfPartnerSlice.actions
 
-export const { resetPartner } = partnerSlice.actions
+export const { resetSelfPartner } = selfPartnerSlice.actions
 
-export const partnerReducer = partnerSlice.reducer
+export const selfPartnerReducer = selfPartnerSlice.reducer
 
 export const getMyPartner = (): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
@@ -74,7 +74,7 @@ export const updateMyPartner = (partner: Partner): AppThunk => async (dispatch, 
   try {
     await api.partner.updateSelfPartner({
       partnerDto: {
-        ...getState().partner.partner,
+        ...getState().selfPartner.partner,
         ...partner,
         registrationNumber: 'todo',
         taxNumber: 'todo',

@@ -10,12 +10,13 @@ import { couponsReducer } from 'features/coupons/couponsSlice'
 import { categoryListReducer } from 'features/couponCategory/categoryList/categoryListSlice'
 import { categoryEditorReducer } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
 import { notificationReducer } from 'features/notification/notificationSlice'
-import { partnerReducer } from 'features/partner/partnerSlice'
 import { profileReducer } from 'features/profile/profileSlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
 import { siteEditorReducer } from 'features/sites/siteEditor/siteEditorSlice'
 import { newsletterListReducer } from 'features/newsletter/newsletter-list/newsletterListSlice'
-import { partnersListReducer } from 'features/partners/partnerListSlice'
+import { partnersListReducer } from 'features/partners/partnerList/partnerListSlice'
+import { selfPartnerReducer } from 'features/partners/selfPartner/selfPartnerSlice'
+import { partnerEditorReducer } from 'features/partners/partnerEditor/partnerEditorSlice'
 
 export const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -26,8 +27,9 @@ export const rootReducer = combineReducers({
   categoryList: categoryListReducer,
   categoryEditor: categoryEditorReducer,
   notification: notificationReducer,
-  partner: partnerReducer,
-  partners: partnersListReducer,
+  selfPartner: selfPartnerReducer,
+  partnerList: partnersListReducer,
+  partnerEditor: partnerEditorReducer,
   profile: profileReducer,
   siteList: siteListReducer,
   siteEditor: siteEditorReducer,

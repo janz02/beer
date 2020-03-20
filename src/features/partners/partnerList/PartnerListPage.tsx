@@ -12,12 +12,14 @@ import { ColumnType } from 'antd/lib/table'
 import { PartnerState } from 'api/swagger/models/PartnerState'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { CrudButtons } from 'components/buttons/CrudButtons'
+import { hasPermission } from 'services/jwt-reader'
+import { history } from 'router/router'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
 
   const dispatch = useDispatch()
-  const { partners, loading, listParams } = useSelector((state: RootState) => state.partners)
+  const { partners, loading, listParams } = useSelector((state: RootState) => state.partnerList)
 
   useEffect(() => {
     dispatch(getPartners())
@@ -70,14 +72,23 @@ export const PartnerListPage: React.FC = () => {
       {
         key: 'action',
         render(record: Partner) {
-          return <CrudButtons onEdit={() => {}} />
+          return (
+            <CrudButtons
+              onView={() => history.push(`/partner/${record.id}`)}
+              onEdit={
+                hasPermission([]) ? () => history.push(`/partner/${record.id}/edit`) : undefined
+              }
+            />
+          )
         }
       }
     ],
     [columnConfig, t]
   )
 
-  const headerOptions = <AddButton onClick={() => {}}>{t('partner.list.add')}</AddButton>
+  const headerOptions = (
+    <AddButton onClick={() => history.push(`/partner`)}>{t('partner.list.add')}</AddButton>
+  )
 
   return (
     <>

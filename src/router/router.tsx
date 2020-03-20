@@ -12,7 +12,6 @@ import { RecoveryPage } from 'features/auth/RecoveryPage'
 import { SignupPage } from 'features/auth/SignupPage'
 import { CategoryPage } from 'features/couponCategory/CategoryPage'
 import { ErrorPage } from '../components/error/ErrorPage'
-import { PartnerEditorPage } from 'features/partner/PartnerEditorPage'
 import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
 import { SitesListPage } from 'features/sites/siteList/SitesListPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
@@ -22,7 +21,10 @@ import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
 import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
 import { Roles } from 'api/swagger/models'
 import { isLoggedIn } from 'services/jwt-reader'
-import { PartnerListPage } from 'features/partners/PartnerListPage'
+import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
+import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
+import { PartnerEditorForm } from 'features/partners/components/PartnerEditorForm'
+import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
 
 const comboRoles = {
   forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
@@ -53,7 +55,8 @@ export const pageViewRoles = {
   segments: comboRoles.forNkm,
   profile: comboRoles.forPartner,
   partner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
-  partners: comboRoles.forNkm, // union of forNkm and forPartner, fs overlap
+  partners: comboRoles.forNkm,
+  partnersEditor: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
 }
 
@@ -74,15 +77,33 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/dashboard" component={DashboardPage} />
     <PrivateRoute
       exact
-      path="/partner"
+      path="/selfpartner"
       roles={pageViewRoles.partner}
-      component={PartnerEditorPage}
+      component={SelfPartnerEditorPage}
     />
     <PrivateRoute
       exact
       path="/partners"
       roles={pageViewRoles.partners}
       component={PartnerListPage}
+    />
+    <PrivateRoute
+      exact
+      path="/partner"
+      roles={pageViewRoles.partners}
+      component={PartnerEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/partner/:id"
+      roles={pageViewRoles.partnersEditor}
+      component={PartnerEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/partner/:id/edit"
+      roles={pageViewRoles.partnersEditor}
+      component={PartnerEditorPage}
     />
     <PrivateRoute exact path="/coupons" roles={pageViewRoles.coupons} component={CouponListPage} />
     <PrivateRoute
