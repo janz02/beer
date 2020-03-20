@@ -4,7 +4,7 @@ import { Button, Tooltip } from 'antd'
 import { ButtonProps } from 'antd/lib/button'
 import { useTranslation } from 'react-i18next'
 
-interface BackButtonProps extends ButtonProps {
+export interface BackButtonProps extends ButtonProps {
   primary?: boolean
 }
 
@@ -18,9 +18,10 @@ export const BackButton: FC<BackButtonProps> = props => {
   return (
     <Tooltip mouseEnterDelay={0.75} placement="bottomLeft" title={t('common.go-back')}>
       <Button
-        type={primary ? 'primary' : 'default'}
+        type={primary ? 'primary' : 'ghost'}
         icon={<ArrowLeftOutlined />}
         shape="circle"
+        style={{ marginRight: '1rem' }}
         {...btnProps}
       />
     </Tooltip>

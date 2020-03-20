@@ -60,6 +60,7 @@
       "email-sent": "A kérés sikeresen fel lett dolgozva",
       "save-success": "Sikeres mentés"
     },
+    "no": "Nem",
     "ok": "OK",
     "popup": {
       "confirm-title": "Biztos, hogy ezt szeretnéd tenni?",
@@ -73,7 +74,8 @@
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
-    "view": "Megtekintés"
+    "view": "Megtekintés",
+    "yes": "Igen"
   },
   "coupon": {
     "state": {
@@ -225,6 +227,7 @@
     "coupons": "Kuponok",
     "newsletter": "Hírlevél",
     "partner-data": "Partner adatok",
+    "partners": "Partnerek",
     "profile": "Profil",
     "sites": "Telephelyek",
     "users": "Felhasználók"
@@ -260,14 +263,27 @@
     "notifications": "Értesítések"
   },
   "partner": {
+    "editor": {
+      "title": "Partner szerkesztő"
+    },
     "editor-title": "Partner",
     "field": {
       "address": "Cím",
       "bankAccount": "Bankszámla szám",
       "major-partner": "Kiemelt partner",
       "name": "Cégnév",
+      "partner-state": "Státusz",
       "registration-number": "Cégjegyzék szám",
       "tax-number": "Adószám"
+    },
+    "list": {
+      "add": "Új partner hozzáadás",
+      "title": "Partnerek"
+    },
+    "partner-state": {
+      "active": "Aktív",
+      "deleted": "Törölt",
+      "inactive": "Inaktív"
     },
     "save": "Mentés",
     "save-partner-success": "Partner mentése sikeres."

@@ -4,8 +4,6 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSites, deleteSite } from './siteListSlice'
 import { useTranslation } from 'react-i18next'
-import { Button } from 'antd'
-
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
 import { GenericPopup } from 'components/popups/GenericPopup'
@@ -14,7 +12,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
-import { PlusOutlined } from '@ant-design/icons'
+import { AddButton } from 'components/buttons/AddButton'
 
 export const SitesListPage: FC = () => {
   const dispatch = useDispatch()
@@ -74,14 +72,7 @@ export const SitesListPage: FC = () => {
   )
 
   const headerOptions = (
-    <Button
-      type="primary"
-      onClick={() => history.push(`/sites/editor`)}
-      icon={<PlusOutlined />}
-      size="large"
-    >
-      {t('site-list.add')}
-    </Button>
+    <AddButton onClick={() => history.push(`/sites/editor`)}>{t('site-list.add')}</AddButton>
   )
 
   return (

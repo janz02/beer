@@ -1,7 +1,6 @@
 import React, { FC, useState, useMemo } from 'react'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
-import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { getCategories, deleteCategory } from './categoryListSlice'
 import { Category } from 'models/category'
@@ -13,7 +12,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
 import { ColumnType } from 'antd/lib/table'
-import { PlusOutlined } from '@ant-design/icons'
+import { AddButton } from 'components/buttons/AddButton'
 
 interface CategoryListProps {
   onOpenEditor: (id?: number) => void
@@ -67,9 +66,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
   )
 
   const headerOptions = hasPermission([Roles.Administrator]) ? (
-    <Button type="primary" onClick={() => onOpenEditor()} icon={<PlusOutlined />} size="large">
-      {t('coupon-category.add')}
-    </Button>
+    <AddButton onClick={() => onOpenEditor()}>{t('coupon-category.add')}</AddButton>
   ) : (
     undefined
   )

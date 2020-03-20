@@ -3,12 +3,12 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { getProfile, updateProfile } from './profileSlice'
 import { ProfileEditorFormProps, ProfileEditorForm } from './ProfileEditorForm'
-import { getMyPartner } from 'features/partner/partnerSlice'
+import { getMyPartner } from 'features/partners/selfPartner/selfPartnerSlice'
 import { changePassword } from 'features/auth/authSlice'
 
 export const ProfileEditorPage: React.FC = () => {
   const dispatch = useDispatch()
-  const { partner } = useSelector((state: RootState) => state.partner)
+  const { partner } = useSelector((state: RootState) => state.selfPartner)
   const { profile, loading, editable } = useSelector((state: RootState) => state.profile)
 
   useEffect(() => {
