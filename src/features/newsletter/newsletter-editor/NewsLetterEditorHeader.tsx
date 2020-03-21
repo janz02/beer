@@ -68,13 +68,16 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
             <Select
               onSelect={handleVersionPreviewSwitch}
               value={currentTemplateVersionId}
-              style={{ width: 200 }}
+              style={{ width: '25em' }}
             >
               {template?.history?.map((h, i) => (
                 <Select.Option key={h.version} value={h.id!}>
                   {i ? <EyeOutlined /> : <EditOutlined />}
-                  <span className="nleh__version--number">{h.version}</span>
-                  <MomentDisplay date={h.modifiedAt} mode="date time" />
+                  <span className="nleh__version--number">v{h.version}</span>
+                  <span className="nleh__version--date">
+                    <MomentDisplay date={h.modifiedAt} mode="date time" />
+                  </span>
+                  <span className="nleh__version--modified">[{h.modifiedBy}]</span>
                 </Select.Option>
               ))}
             </Select>
