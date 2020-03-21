@@ -22,12 +22,9 @@ export const useSiteDynamicRouting = (): UseSiteDynamicRoutingUtils => {
   const { t } = useTranslation()
   const { partnerId } = useParams()
   const { pathname } = useSelector((state: RootState) => state.router.location)
-  const { partner } = useSelector((state: RootState) => state.partnerEditor)
 
   const utils: UseSiteDynamicRoutingUtils = useMemo(() => {
     if (pathname.startsWith('/partners') && partnerId) {
-      console.log({ partner })
-
       return {
         route: {
           root: `/partners/${partnerId}/site`,
@@ -47,7 +44,7 @@ export const useSiteDynamicRouting = (): UseSiteDynamicRoutingUtils => {
         title: t('site.editor-title')
       }
     }
-  }, [partner, partnerId, pathname, t])
+  }, [partnerId, pathname, t])
 
   return utils
 }
