@@ -47,7 +47,9 @@ export const CouponListPage: React.FC = () => {
     dispatch(getWaitingCoupons())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Coupon>({
+  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
+    Coupon
+  >({
     listParamsState: listParams,
     filterKeys: ['name', 'state', 'categoryId', 'startDate', 'endDate', 'expireDate'],
     getDataAction: getWaitingCoupons
@@ -207,9 +209,7 @@ export const CouponListPage: React.FC = () => {
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
-      {
-        key: 'action',
-        width: '150px',
+      actionColumnConfig({
         fixed: 'right',
         render(record: Coupon) {
           return (
@@ -234,9 +234,9 @@ export const CouponListPage: React.FC = () => {
             />
           )
         }
-      }
+      })
     ],
-    [categories, columnConfig, t]
+    [actionColumnConfig, categories, columnConfig, t]
   )
 
   const headerOptions = (
@@ -259,11 +259,12 @@ export const CouponListPage: React.FC = () => {
     <>
       <ResponsivePage>
         <ResponsiveCard
+          style={{ height: 'unset' }}
           forTable
           floatingTitle={t('coupon-list.campaigns')}
           floatingOptions={headerOptions}
           paddedBottom
-          extraWide
+          width="full"
         >
           <ResponsiveTable
             {...{

@@ -68,7 +68,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
 
   return (
     <ResponsiveCard
-      wide
+      width="skinny"
       floatingTitle={title}
       floatingOptions={options}
       floatingBackButton={backButtonProps}

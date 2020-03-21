@@ -127,7 +127,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
     <Layout className="layout">
       <SideMenu open={menuOpened} onClose={(open: boolean) => setMenuOpened(open)}>
         <SideMenuOptions options={mainOptions} handleClose={closeDrawer} />
-        <SideMenuOptions footer options={footerOptions} handleClose={closeDrawer} />
+        <SideMenuOptions
+          collapsed={!menuOpened}
+          footer
+          options={footerOptions}
+          handleClose={closeDrawer}
+        />
       </SideMenu>
 
       {/* Removed until there are available notifications */}

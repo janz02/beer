@@ -15,9 +15,7 @@ export interface ResponsiveCardProps extends CardProps {
   forTable?: boolean
   paddedTop?: boolean
   paddedBottom?: boolean
-  wide?: boolean
-  extraWide?: boolean
-  fullWidth?: boolean
+  width?: 'skinny' | 'normal' | 'full'
 }
 
 export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
@@ -31,9 +29,7 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
     forTable,
     paddedTop,
     paddedBottom,
-    wide,
-    extraWide,
-    fullWidth,
+    width,
     ...rest
   } = props
   const isMobile = useIsMobile()
@@ -60,9 +56,7 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
         `r-card-container ` +
         `${paddedTop ? 'r-card-container--padded-top ' : ''}` +
         `${paddedBottom ? 'r-card-container--padded-bottom ' : ''}` +
-        `${wide ? 'r-card-container--wide ' : ''}` +
-        `${extraWide ? 'r-card-container--extra-wide ' : ''}` +
-        `${fullWidth ? 'r-card-container--full-width ' : ''}` +
+        `${`r-card-container--width-${width ?? 'normal'} `}` +
         `${isMobile ? 'r-card-container--mobile ' : ''}`
       }
     >

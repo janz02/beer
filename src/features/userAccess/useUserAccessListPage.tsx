@@ -79,10 +79,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           t(`user-access.role.${user.role?.toLowerCase()}`)
       }),
       hasPermission([Roles.Administrator])
-        ? {
-            title: '',
-            key: 'actions',
-            colSpan: 1,
+        ? nkmUsersTableUtils.actionColumnConfig({
             render(user: UserAccess) {
               return (
                 <CrudButtons
@@ -92,7 +89,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
                 />
               )
             }
-          }
+          })
         : {}
     ],
     [nkmUsersTableUtils, t]
@@ -160,11 +157,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           t(`user-access.role.${user.role?.toLowerCase()}`)
       }),
       hasPermission([Roles.Administrator])
-        ? {
-            title: '',
-            width: '100px',
-            key: 'actions',
-            colSpan: 1,
+        ? partnerUsersTableUtils.actionColumnConfig({
             render(user: UserAccess) {
               return (
                 <CrudButtons
@@ -174,7 +167,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
                 />
               )
             }
-          }
+          })
         : {}
     ],
     [partnerUsersTableUtils, t]

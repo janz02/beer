@@ -29,7 +29,9 @@ export const SitesList: FC<SitesListProps> = props => {
 
   const [siteToDelete, setSiteToDelete] = useState<DeletePopupState<Site>>()
 
-  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Site>({
+  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
+    Site
+  >({
     listParamsState,
     filterKeys: ['name', 'address'],
     getDataAction
@@ -50,11 +52,7 @@ export const SitesList: FC<SitesListProps> = props => {
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
-      {
-        title: '',
-        key: 'actions',
-        width: '100px',
-        colSpan: 1,
+      actionColumnConfig({
         render(value: unknown, record: Site) {
           return (
             <>
@@ -70,9 +68,9 @@ export const SitesList: FC<SitesListProps> = props => {
             </>
           )
         }
-      }
+      })
     ],
-    [columnConfig, handleEdit, t]
+    [actionColumnConfig, columnConfig, handleEdit, t]
   )
 
   const headerOptions = <AddButton onClick={handleAdd}>{t('site-list.add')}</AddButton>
@@ -82,11 +80,11 @@ export const SitesList: FC<SitesListProps> = props => {
       {!hidden && (
         <ResponsivePage>
           <ResponsiveCard
+            width="normal"
             forTable
             paddedBottom
             floatingTitle={t('site-list.list-title')}
             floatingOptions={headerOptions}
-            wide
           >
             <ResponsiveTable
               {...{

@@ -11,7 +11,11 @@ import { CashierList } from '../cashierList/CashierList'
 import { CashierEditor } from '../cashierEditor/CashierEditor'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { useSiteDynamicRouting } from '../useSiteDynamicRouting'
-import { EditorMode } from 'components/buttons/EditorModeOptions'
+import {
+  EditorMode,
+  EditorModeOptionsProps,
+  EditorModeOptions
+} from 'components/buttons/EditorModeOptions'
 
 export const SiteEditorPage: FC = () => {
   const { siteId: id, cashierId, partnerId } = useParams()
@@ -23,6 +27,10 @@ export const SiteEditorPage: FC = () => {
   const { route, label } = useSiteDynamicRouting()
 
   const siteId = id ? +id : undefined
+
+  useEffect(() => {
+    id && setMode(EditorMode.VIEW)
+  }, [id, site])
 
   useEffect(() => {
     siteId && dispatch(getSite(siteId))
@@ -45,9 +53,16 @@ export const SiteEditorPage: FC = () => {
     dispatch(saveSite({ ...site }, siteId, +partnerId!, route.root))
   }
 
+  const optionProps: EditorModeOptionsProps = {
+    mode,
+    handleEdit: () => setMode(EditorMode.EDIT),
+    handleEscapeEdit: () => setMode(EditorMode.VIEW)
+  }
   return (
     <ResponsivePage>
       <SiteEditorForm
+        mode={mode}
+        options={<EditorModeOptions {...optionProps} />}
         title={label.title}
         loading={loadingSave}
         onSave={onSave}
@@ -55,10 +70,16 @@ export const SiteEditorPage: FC = () => {
         site={site}
         id={siteId}
       />
-
-      <CashierList onOpenEditor={routeToEditor} />
-
-      <CashierEditor params={editorParams} handleExit={handleExit} afterClose={handleAfterClose} />
+      {mode !== EditorMode.NEW && (
+        <>
+          <CashierList onOpenEditor={routeToEditor} />
+          <CashierEditor
+            params={editorParams}
+            handleExit={handleExit}
+            afterClose={handleAfterClose}
+          />
+        </>
+      )}
     </ResponsivePage>
   )
 }

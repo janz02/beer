@@ -7,6 +7,7 @@ import './SideMenuOptions.scss'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { LanguageSelector } from 'components/LanguageSelector'
+import { useIsMobile } from 'hooks'
 
 export interface SideMenuOptionProps {
   label: string
@@ -17,13 +18,14 @@ export interface SideMenuOptionProps {
 }
 
 export interface SideMenuOptionsProps {
+  collapsed?: boolean
   options: SideMenuOptionProps[]
   footer?: boolean
   handleClose: () => void
 }
 
 export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
-  const { handleClose, options, footer } = props
+  const { handleClose, options, footer, collapsed } = props
 
   const path = useSelector((state: RootState) => state.router.location.pathname)
 
@@ -35,7 +37,7 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
       selectedKeys={[pathRoot]}
       className={`side-menu-options ${footer ? 'smo-footer' : ''}`}
     >
-      {footer && <LanguageSelector />}
+      {footer && <LanguageSelector collapsed={collapsed} />}
       {options
         .filter(option => hasPermission(option.roles ?? []))
         .map((option, i) => (

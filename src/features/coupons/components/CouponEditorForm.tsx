@@ -211,7 +211,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
           innerOptions={couponActionButtons}
           floatingOptions={backButton}
           paddedBottom
-          fullWidth
         >
           <NavigationAlert when={modified} />
           <Form
