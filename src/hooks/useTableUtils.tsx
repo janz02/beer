@@ -9,7 +9,6 @@ import Highlighter from 'react-highlight-words'
 import { SearchTableDropdown } from 'components/table-dropdowns/SearchTableDropdown'
 import { DatepickerTableDropdown } from 'components/table-dropdowns/DatepickerTableDropdown'
 import { MomentDisplay } from 'components/MomentDisplay'
-import { CrudButtons } from 'components/buttons/CrudButtons'
 
 export enum OrderByType {
   Ascending = 'Ascending',

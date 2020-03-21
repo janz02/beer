@@ -7,7 +7,6 @@ import './SideMenuOptions.scss'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { LanguageSelector } from 'components/LanguageSelector'
-import { useIsMobile } from 'hooks'
 
 export interface SideMenuOptionProps {
   label: string

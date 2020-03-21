@@ -23,8 +23,9 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
 
   useEffect(() => {
     dispatch(setSitesListConstraints(listConstraints))
+    if (partnerId && isNaN(+partnerId)) return
     dispatch(getSites({}))
-  }, [dispatch, listConstraints])
+  }, [dispatch, listConstraints, partnerId])
 
   const sitesListProps: SitesListProps = {
     hidden,
