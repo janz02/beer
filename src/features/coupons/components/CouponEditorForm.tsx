@@ -425,7 +425,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       )}
                     </div>
                     <div className="timeline-item__body text-faded">
-                      {x.comment} - Lugosi Boglárka
+                      {x.comment} - {x.from}
                       <Button size="small" type="link">
                         <DeleteFilled />
                       </Button>
