@@ -74,8 +74,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   useEffect(() => {
     setFieldsValue({
       ...coupon,
-      rank: CouponRank.Bronze,
-      type: CouponType.FixValue
+      rank: CouponRank.Bronze
+      // type: CouponType.Discount
     })
   }, [coupon, setFieldsValue])
 
@@ -288,9 +288,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               dependencies={['type']}
               rules={[
                 rule.required(),
-                ({ getFieldValue }) => ({
+                () => ({
                   validator(rule, value) {
-                    if (value > 100 && getFieldValue('type') === CouponType.PercentValue) {
+                    if (value > 100) {
                       return Promise.reject(t('error.coupon.percentage-max-100'))
                     }
                     return Promise.resolve()
@@ -425,7 +425,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       )}
                     </div>
                     <div className="timeline-item__body text-faded">
-                      {x.comment} - Lugosi Boglárka
+                      {x.comment} - {x.from}
                       <Button size="small" type="link">
                         <DeleteFilled />
                       </Button>

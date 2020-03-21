@@ -7,7 +7,7 @@ import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { history } from 'router/router'
-import { CouponState } from 'api/swagger/models'
+import { CouponState, CouponMode } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
 
 interface CouponsState {
@@ -133,8 +133,8 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
         // TODO fix this with tags
         tags: [tagId],
-        // TODO fix this with prize coupons
-        isDrawable: true
+        // TODO: fix with api
+        mode: CouponMode.Online
       }
     })
 

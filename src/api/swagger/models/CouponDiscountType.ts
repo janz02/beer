@@ -17,21 +17,20 @@
  * @export
  * @enum {string}
  */
-export enum CouponType {
-    Discount = 'Discount',
-    Prize = 'Prize',
-    Banner = 'Banner'
+export enum CouponDiscountType {
+    FixValue = 'FixValue',
+    PercentValue = 'PercentValue'
 }
 
-export function CouponTypeFromJSON(json: any): CouponType {
-    return CouponTypeFromJSONTyped(json, false);
+export function CouponDiscountTypeFromJSON(json: any): CouponDiscountType {
+    return CouponDiscountTypeFromJSONTyped(json, false);
 }
 
-export function CouponTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): CouponType {
-    return json as CouponType;
+export function CouponDiscountTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): CouponDiscountType {
+    return json as CouponDiscountType;
 }
 
-export function CouponTypeToJSON(value?: CouponType | null): any {
+export function CouponDiscountTypeToJSON(value?: CouponDiscountType | null): any {
     return value as any;
 }
 

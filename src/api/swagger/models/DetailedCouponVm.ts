@@ -14,10 +14,14 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    CouponCommentVm,
-    CouponCommentVmFromJSON,
-    CouponCommentVmFromJSONTyped,
-    CouponCommentVmToJSON,
+    CouponDiscountType,
+    CouponDiscountTypeFromJSON,
+    CouponDiscountTypeFromJSONTyped,
+    CouponDiscountTypeToJSON,
+    CouponMode,
+    CouponModeFromJSON,
+    CouponModeFromJSONTyped,
+    CouponModeToJSON,
     CouponRank,
     CouponRankFromJSON,
     CouponRankFromJSONTyped,
@@ -35,112 +39,148 @@ import {
 /**
  * 
  * @export
- * @interface CouponVm
+ * @interface DetailedCouponVm
  */
-export interface CouponVm {
+export interface DetailedCouponVm {
     /**
      * 
      * @type {number}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     id?: number;
     /**
      * 
      * @type {string}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     name?: string | null;
     /**
      * 
-     * @type {string}
-     * @memberof CouponVm
-     */
-    description?: string | null;
-    /**
-     * 
      * @type {CouponRank}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     rank?: CouponRank;
     /**
      * 
      * @type {CouponType}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     type?: CouponType;
     /**
      * 
      * @type {CouponState}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     state?: CouponState;
     /**
      * 
      * @type {Date}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     startDate?: Date;
     /**
      * 
      * @type {Date}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     endDate?: Date;
     /**
      * 
      * @type {Date}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     expireDate?: Date;
     /**
      * 
      * @type {number}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     couponCount?: number;
     /**
      * 
      * @type {number}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     minimumShoppingValue?: number;
     /**
      * 
      * @type {number}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     discountValue?: number;
     /**
      * 
      * @type {number}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     categoryId?: number;
     /**
      * 
-     * @type {Array<number>}
-     * @memberof CouponVm
-     */
-    tags?: Array<number> | null;
-    /**
-     * 
-     * @type {Array<CouponCommentVm>}
-     * @memberof CouponVm
-     */
-    comments?: Array<CouponCommentVm> | null;
-    /**
-     * 
      * @type {boolean}
-     * @memberof CouponVm
+     * @memberof DetailedCouponVm
      */
     isActive?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedCouponVm
+     */
+    partnerName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DetailedCouponVm
+     */
+    showCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DetailedCouponVm
+     */
+    clickCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DetailedCouponVm
+     */
+    claimCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DetailedCouponVm
+     */
+    smallPicture?: number;
+    /**
+     * 
+     * @type {CouponMode}
+     * @memberof DetailedCouponVm
+     */
+    mode?: CouponMode;
+    /**
+     * 
+     * @type {CouponDiscountType}
+     * @memberof DetailedCouponVm
+     */
+    discountType?: CouponDiscountType;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedCouponVm
+     */
+    createdBy?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DetailedCouponVm
+     */
+    preferredPosition?: number;
 }
 
-export function CouponVmFromJSON(json: any): CouponVm {
-    return CouponVmFromJSONTyped(json, false);
+export function DetailedCouponVmFromJSON(json: any): DetailedCouponVm {
+    return DetailedCouponVmFromJSONTyped(json, false);
 }
 
-export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): CouponVm {
+export function DetailedCouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): DetailedCouponVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -148,7 +188,6 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'description': !exists(json, 'description') ? undefined : json['description'],
         'rank': !exists(json, 'rank') ? undefined : CouponRankFromJSON(json['rank']),
         'type': !exists(json, 'type') ? undefined : CouponTypeFromJSON(json['type']),
         'state': !exists(json, 'state') ? undefined : CouponStateFromJSON(json['state']),
@@ -159,13 +198,20 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'minimumShoppingValue': !exists(json, 'minimumShoppingValue') ? undefined : json['minimumShoppingValue'],
         'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
-        'tags': !exists(json, 'tags') ? undefined : json['tags'],
-        'comments': !exists(json, 'comments') ? undefined : (json['comments'] === null ? null : (json['comments'] as Array<any>).map(CouponCommentVmFromJSON)),
         'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
+        'partnerName': !exists(json, 'partnerName') ? undefined : json['partnerName'],
+        'showCount': !exists(json, 'showCount') ? undefined : json['showCount'],
+        'clickCount': !exists(json, 'clickCount') ? undefined : json['clickCount'],
+        'claimCount': !exists(json, 'claimCount') ? undefined : json['claimCount'],
+        'smallPicture': !exists(json, 'smallPicture') ? undefined : json['smallPicture'],
+        'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
+        'discountType': !exists(json, 'discountType') ? undefined : CouponDiscountTypeFromJSON(json['discountType']),
+        'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
+        'preferredPosition': !exists(json, 'preferredPosition') ? undefined : json['preferredPosition'],
     };
 }
 
-export function CouponVmToJSON(value?: CouponVm | null): any {
+export function DetailedCouponVmToJSON(value?: DetailedCouponVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -176,7 +222,6 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         
         'id': value.id,
         'name': value.name,
-        'description': value.description,
         'rank': CouponRankToJSON(value.rank),
         'type': CouponTypeToJSON(value.type),
         'state': CouponStateToJSON(value.state),
@@ -187,9 +232,16 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'minimumShoppingValue': value.minimumShoppingValue,
         'discountValue': value.discountValue,
         'categoryId': value.categoryId,
-        'tags': value.tags,
-        'comments': value.comments === undefined ? undefined : (value.comments === null ? null : (value.comments as Array<any>).map(CouponCommentVmToJSON)),
         'isActive': value.isActive,
+        'partnerName': value.partnerName,
+        'showCount': value.showCount,
+        'clickCount': value.clickCount,
+        'claimCount': value.claimCount,
+        'smallPicture': value.smallPicture,
+        'mode': CouponModeToJSON(value.mode),
+        'discountType': CouponDiscountTypeToJSON(value.discountType),
+        'createdBy': value.createdBy,
+        'preferredPosition': value.preferredPosition,
     };
 }
 

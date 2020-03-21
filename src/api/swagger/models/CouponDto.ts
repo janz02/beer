@@ -14,6 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    CouponMode,
+    CouponModeFromJSON,
+    CouponModeFromJSONTyped,
+    CouponModeToJSON,
     CouponRank,
     CouponRankFromJSON,
     CouponRankFromJSONTyped,
@@ -114,10 +118,10 @@ export interface CouponDto {
     tags?: Array<number> | null;
     /**
      * 
-     * @type {boolean}
+     * @type {CouponMode}
      * @memberof CouponDto
      */
-    isDrawable?: boolean;
+    mode?: CouponMode;
 }
 
 export function CouponDtoFromJSON(json: any): CouponDto {
@@ -143,7 +147,7 @@ export function CouponDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
-        'isDrawable': !exists(json, 'isDrawable') ? undefined : json['isDrawable'],
+        'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
     };
 }
 
@@ -169,7 +173,7 @@ export function CouponDtoToJSON(value?: CouponDto | null): any {
         'discountValue': value.discountValue,
         'categoryId': value.categoryId,
         'tags': value.tags,
-        'isDrawable': value.isDrawable,
+        'mode': CouponModeToJSON(value.mode),
     };
 }
 

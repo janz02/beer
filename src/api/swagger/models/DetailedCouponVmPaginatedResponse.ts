@@ -14,61 +14,61 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    CouponVm,
-    CouponVmFromJSON,
-    CouponVmFromJSONTyped,
-    CouponVmToJSON,
+    DetailedCouponVm,
+    DetailedCouponVmFromJSON,
+    DetailedCouponVmFromJSONTyped,
+    DetailedCouponVmToJSON,
 } from './';
 
 /**
  * 
  * @export
- * @interface CouponVmPaginatedResponse
+ * @interface DetailedCouponVmPaginatedResponse
  */
-export interface CouponVmPaginatedResponse {
+export interface DetailedCouponVmPaginatedResponse {
     /**
      * 
-     * @type {Array<CouponVm>}
-     * @memberof CouponVmPaginatedResponse
+     * @type {Array<DetailedCouponVm>}
+     * @memberof DetailedCouponVmPaginatedResponse
      */
-    result?: Array<CouponVm> | null;
+    result?: Array<DetailedCouponVm> | null;
     /**
      * 
      * @type {number}
-     * @memberof CouponVmPaginatedResponse
+     * @memberof DetailedCouponVmPaginatedResponse
      */
     page?: number;
     /**
      * 
      * @type {number}
-     * @memberof CouponVmPaginatedResponse
+     * @memberof DetailedCouponVmPaginatedResponse
      */
     from?: number;
     /**
      * 
      * @type {number}
-     * @memberof CouponVmPaginatedResponse
+     * @memberof DetailedCouponVmPaginatedResponse
      */
     to?: number;
     /**
      * 
      * @type {number}
-     * @memberof CouponVmPaginatedResponse
+     * @memberof DetailedCouponVmPaginatedResponse
      */
     size?: number;
 }
 
-export function CouponVmPaginatedResponseFromJSON(json: any): CouponVmPaginatedResponse {
-    return CouponVmPaginatedResponseFromJSONTyped(json, false);
+export function DetailedCouponVmPaginatedResponseFromJSON(json: any): DetailedCouponVmPaginatedResponse {
+    return DetailedCouponVmPaginatedResponseFromJSONTyped(json, false);
 }
 
-export function CouponVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CouponVmPaginatedResponse {
+export function DetailedCouponVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DetailedCouponVmPaginatedResponse {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(CouponVmFromJSON)),
+        'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(DetailedCouponVmFromJSON)),
         'page': !exists(json, 'page') ? undefined : json['page'],
         'from': !exists(json, 'from') ? undefined : json['from'],
         'to': !exists(json, 'to') ? undefined : json['to'],
@@ -76,7 +76,7 @@ export function CouponVmPaginatedResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function CouponVmPaginatedResponseToJSON(value?: CouponVmPaginatedResponse | null): any {
+export function DetailedCouponVmPaginatedResponseToJSON(value?: DetailedCouponVmPaginatedResponse | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -85,7 +85,7 @@ export function CouponVmPaginatedResponseToJSON(value?: CouponVmPaginatedRespons
     }
     return {
         
-        'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(CouponVmToJSON)),
+        'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(DetailedCouponVmToJSON)),
         'page': value.page,
         'from': value.from,
         'to': value.to,
