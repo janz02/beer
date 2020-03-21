@@ -13,6 +13,12 @@
     right: 0;
     margin-top: 24px;
   }
+
+  .layout-content {
+    position: relative;
+    // The size of back button
+    top: -32px;
+  }
 }
 
 .content {
@@ -31,6 +37,7 @@
 
 .header__menu-button {
   position: relative;
+  z-index: 2;
   top: 16px;
   left: -16px;
 

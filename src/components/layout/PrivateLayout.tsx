@@ -143,7 +143,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
           onClick={() => setMenuOpened(!menuOpened)}
           icon={isMobile ? <RightOutlined /> : menuOpened ? <LeftOutlined /> : <RightOutlined />}
         />
-        <Layout.Content>{children}</Layout.Content>
+        <Layout.Content className="layout-content">{children}</Layout.Content>
       </Layout>
     </Layout>
   )
