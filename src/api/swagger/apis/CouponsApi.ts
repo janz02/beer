@@ -24,18 +24,30 @@ import {
     CouponCodeVm,
     CouponCodeVmFromJSON,
     CouponCodeVmToJSON,
+    CouponDiscountType,
+    CouponDiscountTypeFromJSON,
+    CouponDiscountTypeToJSON,
     CouponDto,
     CouponDtoFromJSON,
     CouponDtoToJSON,
+    CouponMode,
+    CouponModeFromJSON,
+    CouponModeToJSON,
+    CouponRank,
+    CouponRankFromJSON,
+    CouponRankToJSON,
     CouponState,
     CouponStateFromJSON,
     CouponStateToJSON,
+    CouponType,
+    CouponTypeFromJSON,
+    CouponTypeToJSON,
     CouponVm,
     CouponVmFromJSON,
     CouponVmToJSON,
-    CouponVmPaginatedResponse,
-    CouponVmPaginatedResponseFromJSON,
-    CouponVmPaginatedResponseToJSON,
+    DetailedCouponVmPaginatedResponse,
+    DetailedCouponVmPaginatedResponseFromJSON,
+    DetailedCouponVmPaginatedResponseToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
@@ -69,9 +81,24 @@ export interface GetCouponRequest {
 }
 
 export interface GetCouponsRequest {
-    name?: string | null;
-    description?: string | null;
     includeArchived?: boolean;
+    name?: string | null;
+    rank?: CouponRank;
+    type?: CouponType;
+    state?: CouponState;
+    startDate?: Date | null;
+    endDate?: Date | null;
+    expireDate?: Date | null;
+    couponCount?: number | null;
+    minimumShoppingValue?: number | null;
+    discountValue?: number | null;
+    categoryId?: number | null;
+    isActive?: boolean | null;
+    partnerName?: string | null;
+    mode?: CouponMode;
+    discountType?: CouponDiscountType;
+    createdBy?: string | null;
+    preferredPosition?: number | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -322,19 +349,79 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns the Coupon list with the specified filters applied
      * Gets a Coupon entity list sorted and filtered
      */
-    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<CouponVmPaginatedResponse>> {
+    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<DetailedCouponVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.includeArchived !== undefined) {
+            queryParameters['includeArchived'] = requestParameters.includeArchived;
+        }
 
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
         }
 
-        if (requestParameters.description !== undefined) {
-            queryParameters['description'] = requestParameters.description;
+        if (requestParameters.rank !== undefined) {
+            queryParameters['rank'] = requestParameters.rank;
         }
 
-        if (requestParameters.includeArchived !== undefined) {
-            queryParameters['includeArchived'] = requestParameters.includeArchived;
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        if (requestParameters.state !== undefined) {
+            queryParameters['state'] = requestParameters.state;
+        }
+
+        if (requestParameters.startDate !== undefined) {
+            queryParameters['startDate'] = (requestParameters.startDate as any).toISOString();
+        }
+
+        if (requestParameters.endDate !== undefined) {
+            queryParameters['endDate'] = (requestParameters.endDate as any).toISOString();
+        }
+
+        if (requestParameters.expireDate !== undefined) {
+            queryParameters['expireDate'] = (requestParameters.expireDate as any).toISOString();
+        }
+
+        if (requestParameters.couponCount !== undefined) {
+            queryParameters['couponCount'] = requestParameters.couponCount;
+        }
+
+        if (requestParameters.minimumShoppingValue !== undefined) {
+            queryParameters['minimumShoppingValue'] = requestParameters.minimumShoppingValue;
+        }
+
+        if (requestParameters.discountValue !== undefined) {
+            queryParameters['discountValue'] = requestParameters.discountValue;
+        }
+
+        if (requestParameters.categoryId !== undefined) {
+            queryParameters['categoryId'] = requestParameters.categoryId;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.partnerName !== undefined) {
+            queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.mode !== undefined) {
+            queryParameters['mode'] = requestParameters.mode;
+        }
+
+        if (requestParameters.discountType !== undefined) {
+            queryParameters['discountType'] = requestParameters.discountType;
+        }
+
+        if (requestParameters.createdBy !== undefined) {
+            queryParameters['createdBy'] = requestParameters.createdBy;
+        }
+
+        if (requestParameters.preferredPosition !== undefined) {
+            queryParameters['preferredPosition'] = requestParameters.preferredPosition;
         }
 
         if (requestParameters.page !== undefined) {
@@ -366,14 +453,14 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => DetailedCouponVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the Coupon list with the specified filters applied
      * Gets a Coupon entity list sorted and filtered
      */
-    async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVmPaginatedResponse> {
+    async getCoupons(requestParameters: GetCouponsRequest): Promise<DetailedCouponVmPaginatedResponse> {
         const response = await this.getCouponsRaw(requestParameters);
         return await response.value();
     }

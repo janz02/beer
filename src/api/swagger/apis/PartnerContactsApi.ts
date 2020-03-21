@@ -15,13 +15,30 @@
 
 import * as runtime from '../runtime';
 import {
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     PartnerContactVm,
     PartnerContactVmFromJSON,
     PartnerContactVmToJSON,
+    PartnerContactVmPaginatedResponse,
+    PartnerContactVmPaginatedResponseFromJSON,
+    PartnerContactVmPaginatedResponseToJSON,
     SelfPartnerContactDto,
     SelfPartnerContactDtoFromJSON,
     SelfPartnerContactDtoToJSON,
 } from '../models';
+
+export interface GetPartnerPartnerContactRequest {
+    partnerId?: number;
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
 
 export interface UpdateSelfPartnerContactRequest {
     selfPartnerContactDto?: SelfPartnerContactDto;
@@ -31,6 +48,66 @@ export interface UpdateSelfPartnerContactRequest {
  * no description
  */
 export class PartnerContactsApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async getPartnerPartnerContactRaw(requestParameters: GetPartnerPartnerContactRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.partnerId !== undefined) {
+            queryParameters['partnerId'] = requestParameters.partnerId;
+        }
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.phone !== undefined) {
+            queryParameters['phone'] = requestParameters.phone;
+        }
+
+        if (requestParameters.email !== undefined) {
+            queryParameters['email'] = requestParameters.email;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/PartnerContacts/GetPartnerPartnerContacts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerContactVmPaginatedResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getPartnerPartnerContact(requestParameters: GetPartnerPartnerContactRequest): Promise<PartnerContactVmPaginatedResponse> {
+        const response = await this.getPartnerPartnerContactRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      */
@@ -44,7 +121,7 @@ export class PartnerContactsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/PartnerContacts`,
+            path: `/api/PartnerContacts/GetSelf`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

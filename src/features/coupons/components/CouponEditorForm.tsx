@@ -74,8 +74,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   useEffect(() => {
     setInitialFieldsValue({
       ...coupon,
-      rank: CouponRank.Bronze,
-      type: CouponType.FixValue
+      rank: CouponRank.Bronze
+      // type: CouponType.Discount
     })
   }, [coupon, setInitialFieldsValue])
 
@@ -288,9 +288,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               dependencies={['type']}
               rules={[
                 rule.required(),
-                ({ getFieldValue }) => ({
+                () => ({
                   validator(rule, value) {
-                    if (value > 100 && getFieldValue('type') === CouponType.PercentValue) {
+                    if (value > 100) {
                       return Promise.reject(t('error.coupon.percentage-max-100'))
                     }
                     return Promise.resolve()
