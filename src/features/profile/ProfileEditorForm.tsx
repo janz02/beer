@@ -28,7 +28,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
     modified,
     checkFieldsChange,
     resetFormFlags,
-    setInitialFieldsValue,
+    setFieldsValue,
     resetFormFields
   } = useFormUtils()
 
@@ -40,12 +40,12 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   }
 
   useEffect(() => {
-    setInitialFieldsValue({
+    setFieldsValue({
       ...profile,
       registerCode: partner?.registerCode
     })
     resetFormFields(['oldPassword', 'password', 'passwordAgain'])
-  }, [partner, profile, resetFormFields, setInitialFieldsValue])
+  }, [partner, profile, resetFormFields, setFieldsValue])
 
   return (
     <ResponsiveCard floatingTitle={t('profile.editor-title')}>

@@ -54,9 +54,8 @@ export const pageViewRoles = {
   segments: comboRoles.forNkm,
   profile: comboRoles.forPartner,
   readonlyProfile: comboRoles.forNkm,
-  partner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
+  selfpartner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
   partners: comboRoles.forNkm,
-  partnersEditor: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
 }
 
@@ -78,7 +77,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/selfpartner"
-      roles={pageViewRoles.partner}
+      roles={pageViewRoles.selfpartner}
       component={SelfPartnerEditorPage}
     />
     <PrivateRoute
@@ -89,20 +88,14 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/partner"
+      path="/partners/new"
       roles={pageViewRoles.partners}
       component={PartnerEditorPage}
     />
     <PrivateRoute
       exact
-      path="/partner/:id"
-      roles={pageViewRoles.partnersEditor}
-      component={PartnerEditorPage}
-    />
-    <PrivateRoute
-      exact
-      path="/partner/:id/edit"
-      roles={pageViewRoles.partnersEditor}
+      path="/partners/:id"
+      roles={pageViewRoles.partners}
       component={PartnerEditorPage}
     />
     <PrivateRoute

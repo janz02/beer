@@ -58,13 +58,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     modified,
     checkFieldsChange,
     resetFormFlags,
-    setInitialFieldsValue
+    setFieldsValue
   } = useFormUtils()
 
   const {
     form: commentForm,
     resetFormFlags: resetFormFlagsComment,
-    setInitialFieldsValue: setInitialFieldsValueComment
+    setFieldsValue: setFieldsValueComment
   } = useFormUtils()
 
   useEffect(() => {
@@ -72,12 +72,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }, [dispatch])
 
   useEffect(() => {
-    setInitialFieldsValue({
+    setFieldsValue({
       ...coupon,
       rank: CouponRank.Bronze,
       type: CouponType.FixValue
     })
-  }, [coupon, setInitialFieldsValue])
+  }, [coupon, setFieldsValue])
 
   const displayEditor =
     couponIsNew ||
@@ -89,11 +89,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   useEffect(() => {
     if (editing) return
 
-    setInitialFieldsValueComment({
+    setFieldsValueComment({
       couponState: '',
       comment: ''
     })
-  }, [coupon, editing, setInitialFieldsValueComment])
+  }, [coupon, editing, setFieldsValueComment])
 
   const handleSubmit = (values: any): void => {
     values.state = stateForCreate

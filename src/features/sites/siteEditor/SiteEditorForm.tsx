@@ -27,13 +27,13 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
     modified,
     checkFieldsChange,
     resetFormFlags,
-    setInitialFieldsValue,
+    setFieldsValue,
     resetFormFields
   } = useFormUtils()
 
   useEffect(() => {
-    setInitialFieldsValue({ ...site })
-  }, [resetFormFields, setInitialFieldsValue, site])
+    setFieldsValue({ ...site })
+  }, [resetFormFields, setFieldsValue, site])
 
   const onSubmit = (values: Site): void => {
     onSave({ ...values })

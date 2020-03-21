@@ -53,13 +53,13 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
     modified,
     checkFieldsChange,
     resetFormFlags,
-    setInitialFieldsValue
+    setFieldsValue
   } = useFormUtils()
 
   useEffect(() => {
     if (!modalProps.visible) return
-    setInitialFieldsValue({ ...initialValues })
-  }, [initialValues, modalProps.visible, setInitialFieldsValue])
+    setFieldsValue({ ...initialValues })
+  }, [initialValues, modalProps.visible, setFieldsValue])
 
   useEffect(() => {
     return () => {

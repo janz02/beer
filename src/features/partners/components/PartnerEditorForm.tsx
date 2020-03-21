@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Form, Input, Button, Switch } from 'antd'
+import React, { useEffect, useMemo } from 'react'
+import { Form, Input, Button, Switch, Select } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Partner } from 'models/partner'
 import { useIsMobile, useCommonFormRules } from 'hooks'
@@ -7,20 +7,26 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButtonProps } from 'components/buttons/BackButton'
+import { PartnerState } from 'api/swagger/models'
+import { PartnerEditorMode } from '../partnerEditor/PartnerEditorPage'
 
 export interface PartnerEditorFormProps {
+  mode: PartnerEditorMode
   loading: boolean
   title: string
   partner?: Partner
   handleBack?: () => void
-  handleSave: (values: any) => void
+  options?: JSX.Element
+  handleSave: (values: Partner) => void
 }
 
 export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
-  const { title, handleBack, handleSave, loading, partner } = props
+  const { title, handleBack, handleSave, loading, partner, mode, options } = props
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   const isMobile = useIsMobile()
+
+  const view = useMemo(() => mode === PartnerEditorMode.VIEW, [mode])
 
   const {
     form,
@@ -28,7 +34,8 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
     modified,
     checkFieldsChange,
     resetFormFlags,
-    setInitialFieldsValue
+    setFieldsValue,
+    getFieldValue
   } = useFormUtils()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
@@ -41,31 +48,32 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       : null
 
   const handleSubmit = (values: any): void => {
-    handleSave({
-      ...values,
-      registrationNumber: +values.registrationNumber,
-      taxNumber: +values.taxNumber,
-      bankAccount: +values.bankAccount
-    })
+    handleSave(values)
     resetFormFlags()
   }
 
   useEffect(() => {
-    setInitialFieldsValue({
-      ...partner,
-      registrationNumber: partner?.registrationNumber?.toString(),
-      taxNumber: partner?.taxNumber?.toString(),
-      bankAccount: partner?.bankAccount?.toString()
-    })
-  }, [form, partner, setInitialFieldsValue])
+    if (mode === PartnerEditorMode.VIEW) {
+      setFieldsValue({
+        ...partner,
+        differentMailingAddress: partner?.address !== partner?.mailingAddress
+      })
+      resetFormFlags()
+    }
+  }, [mode, partner, resetFormFlags, setFieldsValue])
 
   const backButtonProps: BackButtonProps | undefined = handleBack
-    ? { primary: !modified, onClick: handleBack }
+    ? { primary: !modified, onClick: handleBack, label: t('common.go-back-to-list') }
     : undefined
 
   return (
-    <ResponsiveCard wide floatingTitle={title} floatingBackButton={backButtonProps}>
-      <NavigationAlert when={modified} />
+    <ResponsiveCard
+      wide
+      floatingTitle={title}
+      floatingOptions={options}
+      floatingBackButton={backButtonProps}
+    >
+      <NavigationAlert when={modified && mode === PartnerEditorMode.EDIT} />
       <Form
         name="partner-editor-form"
         onFinish={handleSubmit}
@@ -78,10 +86,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="name"
           label={t('partner.field.name')}
-          rules={[rule.requiredString()]}
+          rules={[rule.requiredString(), rule.max(150)]}
           {...formItemLayout}
         >
-          <Input />
+          <Input disabled={view} />
         </Form.Item>
 
         <Form.Item
@@ -90,46 +98,113 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
           label={t('partner.field.major-partner')}
           {...formItemLayout}
         >
-          <Switch />
+          <Switch disabled />
+        </Form.Item>
+
+        <Form.Item name="partnerState" label={t('partner.field.partner-state')} {...formItemLayout}>
+          <Select disabled>
+            {Object.keys(PartnerState).map(s => (
+              <Select.Option key={s} value={s}>
+                {t(`partner.partner-state.${s?.toLowerCase()}`)}
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
 
         <Form.Item
           name="address"
           label={t('partner.field.address')}
-          rules={[rule.requiredString()]}
+          rules={[rule.requiredString(), rule.max(150)]}
           {...formItemLayout}
         >
-          <Input />
+          <Input
+            disabled={view}
+            onChange={e => {
+              if (!getFieldValue('differentMailingAddress')) {
+                setFieldsValue({ mailingAddress: getFieldValue('address') })
+              }
+            }}
+          />
         </Form.Item>
 
         <Form.Item
-          name="bankAccount"
-          label={t('partner.field.bankAccount')}
-          rules={[rule.requiredString(), rule.number()]}
+          name="differentMailingAddress"
+          valuePropName="checked"
+          label={t('partner.field.different-address')}
           {...formItemLayout}
         >
-          <Input />
+          <Switch
+            disabled={view}
+            onChange={checked => {
+              setFieldsValue({ mailingAddress: checked ? '' : getFieldValue('address') })
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item
+          name="mailingAddress"
+          label={t('partner.field.mailing-address')}
+          rules={[rule.requiredString(), rule.max(150)]}
+          {...formItemLayout}
+        >
+          <Input
+            disabled={view}
+            onChange={() => {
+              setFieldsValue({
+                differentMailingAddress:
+                  getFieldValue('address') !== getFieldValue('mailingAddress')
+              })
+            }}
+          />
         </Form.Item>
 
         <Form.Item
           name="registrationNumber"
           label={t('partner.field.registration-number')}
-          rules={[rule.requiredString(), rule.number()]}
+          rules={[rule.requiredString(), rule.max(20)]}
           {...formItemLayout}
         >
-          <Input />
+          <Input disabled={view} placeholder="12345678" />
         </Form.Item>
 
         <Form.Item
           name="taxNumber"
           label={t('partner.field.tax-number')}
-          rules={[rule.requiredString(), rule.number()]}
+          rules={[rule.requiredString(), rule.max(20)]}
           {...formItemLayout}
         >
-          <Input />
+          <Input disabled={view} />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>
+        <Form.Item
+          name="bankAccount"
+          label={t('partner.field.bank-account')}
+          rules={[rule.requiredString(), rule.max(26)]}
+          {...formItemLayout}
+        >
+          <Input disabled={view} placeholder="12345678-12345678-12345678" />
+        </Form.Item>
+
+        <Form.Item
+          name="registrationAllowed"
+          label={t('partner.field.registration-allowed')}
+          rules={[rule.requiredString(), rule.max(30)]}
+          {...formItemLayout}
+        >
+          <Input disabled={view} />
+        </Form.Item>
+
+        <Form.Item name="registerCode" label={t('partner.field.register-code')} {...formItemLayout}>
+          <Input disabled />
+        </Form.Item>
+
+        <Button
+          hidden={mode === PartnerEditorMode.VIEW}
+          type="primary"
+          htmlType="submit"
+          disabled={!submitable}
+          loading={loading}
+        >
           {t('partner.save')}
         </Button>
       </Form>

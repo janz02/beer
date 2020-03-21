@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Layout, Button } from 'antd'
 import { useIsMobile } from 'hooks'
 import './layout.scss'
-import { NotificationDrawer } from 'features/notification/NotificationDrawer'
 import { SideMenu } from './SideMenu'
 import { SideMenuOptions, SideMenuOptionProps } from './SideMenuOptions'
 import { getProfile } from 'features/profile/profileSlice'
@@ -90,13 +89,13 @@ export const PrivateLayout: React.FC = ({ children }) => {
         label: t('menu.partner-data'),
         link: '/selfpartner',
         icon: <ContactsOutlined />,
-        roles: pageViewRoles.partner
+        roles: pageViewRoles.selfpartner
       },
       {
         label: t('menu.partners'),
         link: '/partners',
         icon: <HomeFilled />,
-        roles: pageViewRoles.users
+        roles: pageViewRoles.partners
       }
     ],
     [t]
