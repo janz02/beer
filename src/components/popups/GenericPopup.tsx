@@ -12,6 +12,11 @@ type PopupType = 'discard' | 'confirm' | 'save' | 'delete' | 'restore'
 
 // TODO: the async actions are not canceled, introduce sagas if needed
 
+export type DeletePopupState<T extends { id?: number }> = {
+  data?: T
+  popupVisible?: boolean
+} | null
+
 export interface GenericPopupProps extends ModalProps {
   type: PopupType
 
