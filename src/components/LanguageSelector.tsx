@@ -1,13 +1,18 @@
 import React from 'react'
 import EnLogo from 'assets/img/flags/en.svg'
 import HuLogo from 'assets/img/flags/hu.svg'
-import { Menu } from 'antd'
+import { Dropdown, Menu } from 'antd'
+import { DownOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import './LanguageSelector.scss'
 import { setMomentLocale } from 'app/i18n/moment-locale'
 import SubMenu from 'antd/lib/menu/SubMenu'
 
-export const LanguageSelector: React.FC = () => {
+export interface LanguageSelectorProps {
+  public?: boolean
+}
+
+export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
   const { t, i18n } = useTranslation()
 
   const changeLanguage = (lng: string): void => {
@@ -43,6 +48,12 @@ export const LanguageSelector: React.FC = () => {
     ))
   }
 
+  const languageOptionsDropDown = (
+    <Menu key="language" className="language-selector-dropdown-content">
+      {languageOptions()}
+    </Menu>
+  )
+
   const CurrentLanguageImg = (): JSX.Element | null => {
     const currentLanguage = availableLanguages.find(({ key }) => key === i18n.language)
 
@@ -60,6 +71,20 @@ export const LanguageSelector: React.FC = () => {
     )
   }
 
+  // If it is for public display, it should render a dropdown
+  if (props.public) {
+    return (
+      <Dropdown className="language-selector" overlay={languageOptionsDropDown} trigger={['click']}>
+        <div>
+          <CurrentLanguageImg />
+          <span className="language-selector__text">{t('languages.language')}</span>
+          <DownOutlined />
+        </div>
+      </Dropdown>
+    )
+  }
+
+  // Otherwise it will be in a menu, so display a menu
   return (
     <Menu
       theme="dark"
