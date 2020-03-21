@@ -63,3 +63,8 @@ $table-header-height: 80px;
 td.ant-table-cell-fix-right-first::after {
   box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, 0.15);
 }
+
+th.ant-table-cell-fix-right-first::after {
+  -webkit-box-shadow: unset !important;
+  box-shadow: unset !important;
+}

@@ -6,6 +6,7 @@ import { hasPermission } from 'services/jwt-reader'
 import './SideMenuOptions.scss'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
+import { LanguageSelector } from 'components/LanguageSelector'
 
 export interface SideMenuOptionProps {
   label: string
@@ -34,6 +35,7 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
       selectedKeys={[pathRoot]}
       className={`side-menu-options ${footer ? 'smo-footer' : ''}`}
     >
+      {footer && <LanguageSelector />}
       {options
         .filter(option => hasPermission(option.roles ?? []))
         .map((option, i) => (

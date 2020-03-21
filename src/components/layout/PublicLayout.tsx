@@ -7,7 +7,7 @@ export const PublicLayout: FC = ({ children }) => {
   return (
     <Layout className="layout public-layout">
       <div className="language-selector-container">
-        <LanguageSelector />
+        <LanguageSelector public />
       </div>
       <Layout>
         <Layout.Content>{children}</Layout.Content>
