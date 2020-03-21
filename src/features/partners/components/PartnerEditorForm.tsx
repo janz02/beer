@@ -8,10 +8,10 @@ import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButtonProps } from 'components/buttons/BackButton'
 import { PartnerState } from 'api/swagger/models'
-import { PartnerEditorMode } from '../partnerEditor/PartnerEditorPage'
+import { EditorMode } from 'components/buttons/EditorModeOptions'
 
 export interface PartnerEditorFormProps {
-  mode: PartnerEditorMode
+  mode: EditorMode
   loading: boolean
   title: string
   partner?: Partner
@@ -26,7 +26,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   const rule = useCommonFormRules()
   const isMobile = useIsMobile()
 
-  const view = useMemo(() => mode === PartnerEditorMode.VIEW, [mode])
+  const view = useMemo(() => mode === EditorMode.VIEW, [mode])
 
   const {
     form,
@@ -53,7 +53,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
   }
 
   useEffect(() => {
-    if (mode === PartnerEditorMode.VIEW) {
+    if (mode === EditorMode.VIEW) {
       setFieldsValue({
         ...partner,
         differentMailingAddress: partner?.address !== partner?.mailingAddress
@@ -73,7 +73,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       floatingOptions={options}
       floatingBackButton={backButtonProps}
     >
-      <NavigationAlert when={modified && mode === PartnerEditorMode.EDIT} />
+      <NavigationAlert when={modified && mode === EditorMode.EDIT} />
       <Form
         name="partner-editor-form"
         onFinish={handleSubmit}
@@ -119,7 +119,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         >
           <Input
             disabled={view}
-            onChange={e => {
+            onChange={() => {
               if (!getFieldValue('differentMailingAddress')) {
                 setFieldsValue({ mailingAddress: getFieldValue('address') })
               }
@@ -199,7 +199,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         </Form.Item>
 
         <Button
-          hidden={mode === PartnerEditorMode.VIEW}
+          hidden={mode === EditorMode.VIEW}
           type="primary"
           htmlType="submit"
           disabled={!submitable}

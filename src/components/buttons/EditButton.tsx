@@ -7,7 +7,13 @@ import { useTranslation } from 'react-i18next'
 export const EditButton: FC<ButtonProps> = ({ children, ...props }) => {
   const { t } = useTranslation()
   return (
-    <Button type="primary" icon={<EditOutlined />} size="large" {...props}>
+    <Button
+      type="primary"
+      icon={<EditOutlined />}
+      size="large"
+      style={{ marginLeft: '1rem' }}
+      {...props}
+    >
       {children ?? t('common.edit')}
     </Button>
   )

@@ -12,6 +12,7 @@ import {
 interface SiteListState {
   sites: Site[]
   listParams: ListRequestParams
+  listConstraintParams?: ListRequestParams
   loading: boolean
   errorList: string
   errorDeletion: string
@@ -32,6 +33,9 @@ const siteListSlice = createSlice({
   initialState,
   reducers: {
     resetSiteList: () => initialState,
+    setSitesListConstraints(state, action: PayloadAction<ListRequestParams>) {
+      state.listConstraintParams = action.payload
+    },
     getSitesRequest(state) {
       state.loading = true
     },
@@ -64,7 +68,7 @@ const siteListSlice = createSlice({
 
 const { getSitesRequest, getSitesSuccess, getSitesFail } = siteListSlice.actions
 const { deleteSiteRequest, deleteSiteSuccess, deleteSiteFail } = siteListSlice.actions
-export const { resetSiteList } = siteListSlice.actions
+export const { resetSiteList, setSitesListConstraints } = siteListSlice.actions
 
 export const siteListReducer = siteListSlice.reducer
 
@@ -72,15 +76,24 @@ export const getSites = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
-  dispatch(getSitesRequest())
   try {
-    // TODO: integrate, remove partner get because it will be on the JWT.
-    const partner = await api.partner.getSelfPartner()
+    dispatch(getSitesRequest())
+
+    const { listConstraintParams } = getState().siteList
+
+    let selfPartnerId
+    if (!listConstraintParams?.partnerId) {
+      // TODO: integrate, remove partner get because it will be on the JWT.
+      const partner = await api.partner.getSelfPartner()
+      selfPartnerId = partner.id
+    }
 
     const revisedParams = reviseListRequestParams(getState().siteList.listParams, params)
+
     const { result, ...pagination } = await api.sites.getSites({
       ...revisedParams,
-      partnerId: partner.id
+      partnerId: selfPartnerId,
+      ...listConstraintParams
     })
     dispatch(
       getSitesSuccess({
@@ -93,18 +106,13 @@ export const getSites = (params: ListRequestParams = {}): AppThunk => async (
   }
 }
 
-export const deleteSite = (id: number, refreshList = true): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   dispatch(deleteSiteRequest())
   try {
     await api.sites.deleteSite({ id })
     dispatch(deleteSiteSuccess())
-    if (refreshList) {
-      const newPage = recalculatePaginationAfterDeletion(getState().siteList.listParams)
-      dispatch(getSites({ page: newPage }))
-    }
+    const newPage = recalculatePaginationAfterDeletion(getState().siteList.listParams)
+    dispatch(getSites({ page: newPage }))
     return { id }
   } catch (err) {
     dispatch(deleteSiteFail(err.toString()))

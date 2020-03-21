@@ -307,7 +307,10 @@
       "inactive": "Inactive"
     },
     "save": "Save",
-    "save-partner-success": "Saving partner was successful."
+    "save-partner-success": "Saving partner was successful.",
+    "site": {
+      "editor-title": "Partner's site"
+    }
   },
   "profile": {
     "editor-title": "Profile",

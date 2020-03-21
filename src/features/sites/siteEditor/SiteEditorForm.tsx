@@ -8,6 +8,7 @@ import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 
 export interface SiteEditorFormProps {
+  title: string
   onSave: (values: Site) => void
   onExit: () => void
   loading: boolean
@@ -16,7 +17,7 @@ export interface SiteEditorFormProps {
 }
 
 export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
-  const { onSave, loading, site, onExit } = props
+  const { onSave, loading, site, onExit, title } = props
   const { t } = useTranslation()
 
   const rule = useCommonFormRules()
@@ -43,7 +44,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
   return (
     <>
       <ResponsiveCard
-        floatingTitle={t('site.editor-title')}
+        floatingTitle={title}
         floatingBackButton={{ onClick: onExit, primary: !modified }}
         paddedBottom
       >

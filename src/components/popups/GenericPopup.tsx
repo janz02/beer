@@ -40,12 +40,10 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
   const { t } = useTranslation()
   // With this we can neglect the return of old/delayed async actions of other items.
   const refId = useRef(id)
-  const [error, setError] = useState<string>()
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (id && id !== refId.current) {
-      setError('')
       setLoading(false)
       refId.current = id
     }
@@ -93,7 +91,6 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
           modalProps.onCancel && modalProps.onCancel(e)
           setLoading(false)
         } else {
-          setError(response?.error)
           setLoading(false)
         }
       }
@@ -111,7 +108,6 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
       {...modalProps}
     >
       {children}
-      {error && <div className="generic-popup__error"> {t(error)} </div>}
     </Modal>
   )
 }

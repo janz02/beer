@@ -12,17 +12,18 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AppThunk } from 'app/store'
 
 export interface SitesListProps {
-  sites: Site[]
+  hidden?: boolean
+  sites?: Site[]
   loading: boolean
   listParamsState: ListRequestParams
   getDataAction: (params: ListRequestParams) => any
   handleEdit: (id: number) => void
   handleAdd: () => void
-  deleteAction: (id: number) => AppThunk
+  deleteAction?: (id: number) => AppThunk
 }
 
 export const SitesList: FC<SitesListProps> = props => {
-  const { sites, loading, getDataAction, listParamsState } = props
+  const { sites, loading, getDataAction, listParamsState, hidden } = props
   const { handleAdd, handleEdit, deleteAction } = props
   const { t } = useTranslation()
 
@@ -78,31 +79,34 @@ export const SitesList: FC<SitesListProps> = props => {
 
   return (
     <>
-      <ResponsivePage>
-        <ResponsiveCard
-          forTable
-          floatingTitle={t('site-list.list-title')}
-          floatingOptions={headerOptions}
-          extraWide
-        >
-          <ResponsiveTable
-            {...{
-              loading,
-              columns: columnsConfig,
-              dataSource: sites.map((c, i) => ({ ...c, key: '' + i + c.id })),
-              pagination: paginationConfig,
-              onChange: handleTableChange
-            }}
-          />
-        </ResponsiveCard>
-      </ResponsivePage>
+      {!hidden && (
+        <ResponsivePage>
+          <ResponsiveCard
+            forTable
+            paddedBottom
+            floatingTitle={t('site-list.list-title')}
+            floatingOptions={headerOptions}
+            wide
+          >
+            <ResponsiveTable
+              {...{
+                loading,
+                columns: columnsConfig,
+                dataSource: sites?.map((c, i) => ({ ...c, key: '' + i + c.id })),
+                pagination: paginationConfig,
+                onChange: handleTableChange
+              }}
+            />
+          </ResponsiveCard>
+        </ResponsivePage>
+      )}
 
       <GenericPopup
         type="delete"
         id={siteToDelete?.data?.id!}
         visible={!!siteToDelete?.popupVisible}
         onCancel={() => setSiteToDelete({ ...siteToDelete, popupVisible: false })}
-        onOkAction={deleteAction(siteToDelete?.data?.id!)}
+        onOkAction={deleteAction?.(siteToDelete?.data?.id!)}
         afterClose={() => setSiteToDelete(null)}
       >
         <h4>{siteToDelete?.data?.name}</h4>
