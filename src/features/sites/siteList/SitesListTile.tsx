@@ -19,7 +19,7 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
 
   const { route } = useSiteDynamicRouting()
 
-  const listConstraints = useMemo(() => ({ partnerId: partnerId }), [partnerId])
+  const listConstraints = useMemo(() => (partnerId ? { partnerId } : {}), [partnerId])
 
   useEffect(() => {
     dispatch(setSitesListConstraints(listConstraints))

@@ -83,7 +83,6 @@ export const getSites = (params: ListRequestParams = {}): AppThunk => async (
 
     let selfPartnerId
     if (!listConstraintParams?.partnerId) {
-      // TODO: integrate, remove partner get because it will be on the JWT.
       const partner = await api.partner.getSelfPartner()
       selfPartnerId = partner.id
     }
