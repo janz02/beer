@@ -76,7 +76,7 @@ export const CashierList: FC<CashierListProps> = props => {
   return (
     <>
       <ResponsiveCard
-        style={{ height: 'unset' }}
+        disableAutoScale
         width="skinny"
         forTable
         innerTitle={t('cashier-list.table-title')}

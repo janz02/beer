@@ -69,4 +69,10 @@
   &--width-full {
     max-width: 82vw;
   }
+
+  &--no-auto-scale {
+    .r-card {
+      height: unset !important;
+    }
+  }
 }

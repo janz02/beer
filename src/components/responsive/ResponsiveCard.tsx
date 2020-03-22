@@ -15,6 +15,7 @@ export interface ResponsiveCardProps extends CardProps {
   forTable?: boolean
   paddedTop?: boolean
   paddedBottom?: boolean
+  disableAutoScale?: boolean
   width?: 'skinny' | 'normal' | 'full'
 }
 
@@ -29,6 +30,7 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
     forTable,
     paddedTop,
     paddedBottom,
+    disableAutoScale,
     width,
     ...rest
   } = props
@@ -57,7 +59,8 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
         `${paddedTop ? 'r-card-container--padded-top ' : ''}` +
         `${paddedBottom ? 'r-card-container--padded-bottom ' : ''}` +
         `${`r-card-container--width-${width ?? 'normal'} `}` +
-        `${isMobile ? 'r-card-container--mobile ' : ''}`
+        `${isMobile ? 'r-card-container--mobile ' : ''}` +
+        `${disableAutoScale ? 'r-card-container--no-auto-scale ' : ''}`
       }
     >
       {floatingHeader}

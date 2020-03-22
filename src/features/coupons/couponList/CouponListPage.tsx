@@ -259,7 +259,7 @@ export const CouponListPage: React.FC = () => {
     <>
       <ResponsivePage>
         <ResponsiveCard
-          style={{ height: 'unset' }}
+          disableAutoScale
           forTable
           floatingTitle={t('coupon-list.campaigns')}
           floatingOptions={headerOptions}
@@ -267,6 +267,7 @@ export const CouponListPage: React.FC = () => {
           width="full"
         >
           <ResponsiveTable
+            hasFixedColumn
             {...{
               loading: loading,
               columns: columnsConfig,
