@@ -67,7 +67,7 @@ export const NewsletterList: FC = () => {
         width: '4rem'
       }),
       columnConfig({
-        title: t('newsletter.field.template-version'),
+        title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
         width: '10rem',
         renderMode: 'date time'
