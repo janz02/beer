@@ -76,7 +76,6 @@ export const CategoryList: FC<CategoryListProps> = props => {
         forTable
         floatingTitle={t('coupon-category.list-title')}
         floatingOptions={headerOptions}
-        width="skinny"
       >
         <ResponsiveTable
           {...{
