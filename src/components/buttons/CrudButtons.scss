@@ -1,6 +1,7 @@
 @import "assets/scss/_variables";
 
-td>.crudButtons {
+td > .crudButtons {
+  padding: 0 5px;
   text-align: right;
   white-space: nowrap;
 }

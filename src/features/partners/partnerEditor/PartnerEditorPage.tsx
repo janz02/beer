@@ -1,23 +1,21 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 
 import { useTranslation } from 'react-i18next'
 import { PartnerEditorForm } from '../components/PartnerEditorForm'
 import { history } from 'router/router'
-import {
-  getPartner,
-  savePartner,
-  resetPartnerEditor,
-  getPartnerSites,
-  getPartnerContacts
-} from './partnerEditorSlice'
+import { getPartner, savePartner, resetPartnerEditor, deletePartner } from './partnerEditorSlice'
 import { useParams } from 'react-router-dom'
 import { Partner } from 'models/partner'
-import { EditButton } from 'components/buttons/EditButton'
-import { EscapeButton } from 'components/buttons/EscapeButton'
 import { Roles } from 'api/swagger/models'
-import { hasPermission } from 'services/jwt-reader'
+import { GenericPopup, DeletePopupState } from 'components/popups/GenericPopup'
+import { SitesListTile } from 'features/sites/siteList/SitesListTile'
+import {
+  EditorModeOptions,
+  EditorModeOptionsProps,
+  EditorMode
+} from 'components/buttons/EditorModeOptions'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -25,28 +23,17 @@ export const partnersEditorRoles = [
   Roles.PartnerManager
 ]
 
-export enum PartnerEditorMode {
-  NEW = 'new',
-  EDIT = 'edit',
-  VIEW = 'view'
-}
-
 export const PartnerEditorPage: React.FC = () => {
   const { t } = useTranslation()
-  const { id } = useParams()
+  const { partnerId: id } = useParams()
   const dispatch = useDispatch()
   const { partner, loading } = useSelector((state: RootState) => state.partnerEditor)
 
-  const [mode, setMode] = useState(id ? PartnerEditorMode.VIEW : PartnerEditorMode.NEW)
+  const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
+  const [partnerToDelete, setPartnerToDelete] = useState<DeletePopupState<Partner>>()
 
   useEffect(() => {
-    const fetch = async (): Promise<any> => {
-      if (!id) return
-      await dispatch(getPartner(+id))
-      dispatch(getPartnerSites())
-      dispatch(getPartnerContacts())
-    }
-    fetch()
+    id && dispatch(getPartner(+id))
 
     return () => {
       dispatch(resetPartnerEditor())
@@ -55,7 +42,7 @@ export const PartnerEditorPage: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      setMode(PartnerEditorMode.VIEW)
+      setMode(EditorMode.VIEW)
     }
   }, [id, partner])
 
@@ -63,30 +50,23 @@ export const PartnerEditorPage: React.FC = () => {
     dispatch(savePartner(values))
   }
 
-  const options = useMemo((): JSX.Element | undefined => {
-    switch (mode) {
-      case PartnerEditorMode.VIEW:
-        return hasPermission(partnersEditorRoles) ? (
-          <EditButton onClick={() => setMode(PartnerEditorMode.EDIT)} />
-        ) : (
-          undefined
-        )
-      case PartnerEditorMode.EDIT:
-        return (
-          <EscapeButton
-            onClick={() => setMode(PartnerEditorMode.VIEW)}
-            label={t('common.escape-editor')}
-          />
-        )
-      default:
-        return undefined
-    }
-  }, [mode, t])
+  const optionProps: EditorModeOptionsProps = {
+    mode,
+    editPermission: partnersEditorRoles,
+    handleDelete: () => {
+      setPartnerToDelete({
+        data: partner,
+        popupVisible: true
+      })
+    },
+    handleEdit: () => setMode(EditorMode.EDIT),
+    handleEscapeEdit: () => setMode(EditorMode.VIEW)
+  }
 
   return (
     <>
       <PartnerEditorForm
-        options={options}
+        options={<EditorModeOptions {...optionProps} />}
         mode={mode}
         handleSave={handleSave}
         loading={loading}
@@ -94,6 +74,17 @@ export const PartnerEditorPage: React.FC = () => {
         title={t('partner.editor.title')}
         handleBack={() => history.push('/partners')}
       />
+      <GenericPopup
+        type="delete"
+        id={partnerToDelete?.data?.id!}
+        visible={!!partnerToDelete?.popupVisible}
+        onCancel={() => setPartnerToDelete({ ...partnerToDelete, popupVisible: false })}
+        onOkAction={deletePartner?.(partnerToDelete?.data?.id!)}
+        afterClose={() => setPartnerToDelete(null)}
+      >
+        <p>{partnerToDelete?.data?.name}</p>
+      </GenericPopup>
+      {mode !== EditorMode.NEW && <SitesListTile hidden={mode !== EditorMode.VIEW} />}
     </>
   )
 }

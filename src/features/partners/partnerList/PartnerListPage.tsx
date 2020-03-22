@@ -7,7 +7,7 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { getPartners, deletePartner } from './partnerListSlice'
+import { getPartners } from './partnerListSlice'
 import { ColumnType } from 'antd/lib/table'
 import { PartnerState } from 'api/swagger/models/PartnerState'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
@@ -26,7 +26,9 @@ export const PartnerListPage: React.FC = () => {
     dispatch(getPartners())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Partner>({
+  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
+    Partner
+  >({
     listParamsState: listParams,
     filterKeys: ['name', 'majorPartner', 'partnerState', 'address'],
     getDataAction: getPartners
@@ -73,20 +75,13 @@ export const PartnerListPage: React.FC = () => {
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
-      {
-        key: 'action',
-        width: '100px',
+      actionColumnConfig({
         render(record: Partner) {
-          return (
-            <CrudButtons
-              onView={() => history.push(`/partners/${record.id}`)}
-              onDelete={hasPermission([]) ? () => dispatch(deletePartner(record.id!)) : undefined}
-            />
-          )
+          return <CrudButtons onView={() => history.push(`/partners/${record.id}`)} />
         }
-      }
+      })
     ],
-    [columnConfig, dispatch, t]
+    [actionColumnConfig, columnConfig, t]
   )
 
   const headerOptions = hasPermission(partnersEditorRoles) ? (
@@ -101,7 +96,6 @@ export const PartnerListPage: React.FC = () => {
         floatingTitle={t('partner.list.title')}
         floatingOptions={headerOptions}
         forTable
-        extraWide
       >
         <ResponsiveTable
           {...{

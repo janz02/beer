@@ -28,7 +28,9 @@ export const CashierList: FC<CashierListProps> = props => {
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Cashier>({
+  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
+    Cashier
+  >({
     listParamsState: listParams,
     filterKeys: ['cashierId', 'digitalStampId'],
     getDataAction: getCashiers
@@ -46,10 +48,7 @@ export const CashierList: FC<CashierListProps> = props => {
         key: 'digitalStampId',
         sort: true
       }),
-      {
-        key: 'actions',
-        width: '100px',
-        colSpan: 1,
+      actionColumnConfig({
         render(record: Cashier) {
           return (
             <CrudButtons
@@ -63,24 +62,22 @@ export const CashierList: FC<CashierListProps> = props => {
             />
           )
         }
-      }
+      })
     ],
-    [columnConfig, t, onOpenEditor]
+    [columnConfig, t, actionColumnConfig, onOpenEditor]
   )
 
   const headerOptions = (
-    <>
-      {site?.id && (
-        <AddButton size="middle" onClick={() => onOpenEditor(undefined, true)}>
-          {t('cashier-list.add')}
-        </AddButton>
-      )}
-    </>
+    <AddButton disabled={!site?.id} size="middle" onClick={() => onOpenEditor(undefined, true)}>
+      {t('cashier-list.add')}
+    </AddButton>
   )
 
   return (
     <>
       <ResponsiveCard
+        disableAutoScale
+        width="skinny"
         forTable
         innerTitle={t('cashier-list.table-title')}
         innerOptions={headerOptions}

@@ -17,7 +17,6 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { NewsletterPreview } from 'models/newsletter'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { MomentDisplay } from 'components/MomentDisplay'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
 import { AddButton } from 'components/buttons/AddButton'
@@ -45,7 +44,9 @@ export const NewsletterList: FC = () => {
     dispatch(getNewsletterTemplates())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<NewsletterPreview>({
+  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
+    NewsletterPreview
+  >({
     listParamsState: listParams,
     filterKeys: ['name'],
     getDataAction: getNewsletterTemplates
@@ -60,49 +61,36 @@ export const NewsletterList: FC = () => {
         width: '35%',
         filterMode: FilterMode.SEARCH
       }),
-      {
+      columnConfig({
         title: t('newsletter.field.template-version'),
         key: 'version',
-        width: '4rem',
-        dataIndex: 'version'
-      },
-      {
+        width: '4rem'
+      }),
+      columnConfig({
         title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
-        width: '8rem',
-        // needs to be set manually
-        ellipsis: true,
-        render(record: NewsletterPreview) {
-          return <MomentDisplay date={record.modifiedAt} mode="date time" />
-        }
-      },
-      {
+        width: '10rem',
+        renderMode: 'date time'
+      }),
+      columnConfig({
         title: t('newsletter.field.template-modified-by'),
-        key: 'modifiedBy',
-        // needs to be set manually
-        ellipsis: true,
-        dataIndex: 'modifiedBy'
-      },
-      {
-        width: '100px',
-        key: 'actions',
-        colSpan: 1,
-        render(record: NewsletterPreview) {
-          return (
-            <CrudButtons
-              onEdit={() => editTemplate(record.id)}
-              onDelete={() => {
-                setDeletePopup({
-                  template: record,
-                  visible: true
-                })
-              }}
-            />
-          )
-        }
-      }
+        key: 'modifiedBy'
+      }),
+      actionColumnConfig({
+        render: (record: NewsletterPreview) => (
+          <CrudButtons
+            onEdit={() => editTemplate(record.id)}
+            onDelete={() => {
+              setDeletePopup({
+                template: record,
+                visible: true
+              })
+            }}
+          />
+        )
+      })
     ],
-    [columnConfig, editTemplate, t]
+    [actionColumnConfig, columnConfig, editTemplate, t]
   )
 
   const handleSave = async (values: any): Promise<void> => {
@@ -121,7 +109,7 @@ export const NewsletterList: FC = () => {
         floatingTitle={t('newsletter.available-templates')}
         floatingOptions={headerOptions}
         forTable
-        extraWide
+        width="normal"
       >
         <ResponsiveTable
           {...{

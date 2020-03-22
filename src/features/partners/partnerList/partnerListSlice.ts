@@ -4,8 +4,7 @@ import { api } from 'api'
 import {
   ListRequestParams,
   reviseListRequestParams,
-  storableListRequestParams,
-  recalculatePaginationAfterDeletion
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 import { Partner } from 'models/partner'
 
@@ -45,15 +44,11 @@ const partnersListSlice = createSlice({
     getPartnersFail(state) {
       state.loading = false
       state.error = true
-    },
-    deletePartnerRequest() {},
-    deletePartnerSuccess() {},
-    deletePartnerFail() {}
+    }
   }
 })
 
 const { getPartnersRequest, getPartnersSuccess, getPartnersFail } = partnersListSlice.actions
-const { deletePartnerRequest, deletePartnerSuccess, deletePartnerFail } = partnersListSlice.actions
 export const { resetPartnersList } = partnersListSlice.actions
 
 export const partnersListReducer = partnersListSlice.reducer
@@ -74,18 +69,5 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
     )
   } catch (err) {
     dispatch(getPartnersFail())
-  }
-}
-
-export const deletePartner = (id: number): AppThunk => async (dispatch, getState) => {
-  try {
-    dispatch(deletePartnerRequest())
-    await api.partner.deletePartner({ id })
-    dispatch(deletePartnerSuccess())
-    const newPage = recalculatePaginationAfterDeletion(getState().partnerList.listParams)
-    dispatch(getPartners({ page: newPage }))
-    return { id }
-  } catch (err) {
-    dispatch(deletePartnerFail())
   }
 }

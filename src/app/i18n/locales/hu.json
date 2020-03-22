@@ -307,7 +307,10 @@
       "inactive": "Inaktív"
     },
     "save": "Mentés",
-    "save-partner-success": "Partner mentése sikeres."
+    "save-partner-success": "Partner mentése sikeres.",
+    "site": {
+      "editor-title": "Partner telephelye"
+    }
   },
   "profile": {
     "editor-title": "Profiladatok",

@@ -10,6 +10,7 @@ import SubMenu from 'antd/lib/menu/SubMenu'
 
 export interface LanguageSelectorProps {
   public?: boolean
+  collapsed?: boolean
 }
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
@@ -97,7 +98,10 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
         title={
           <div>
             <CurrentLanguageImg />
-            <span className="language-selector__text">{t('languages.language')}</span>
+
+            <span hidden={props.collapsed} className="language-selector__text">
+              {t('languages.language')}
+            </span>
           </div>
         }
       >

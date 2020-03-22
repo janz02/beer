@@ -11,7 +11,7 @@ const tooltipConfig: Partial<TooltipProps> = {
   style: { marginLeft: '0.5rem' }
 }
 
-interface CrudButtonsProps {
+export interface CrudButtonsProps {
   onDelete?: () => void
   onSend?: () => void
   onEdit?: () => void

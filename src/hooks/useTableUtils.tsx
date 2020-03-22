@@ -63,12 +63,14 @@ interface ColumnConfigParams extends ColumnType<any> {
   filters?: ColumnFilterItem[]
   sort?: boolean
   disableSearchHighlight?: boolean
+  renderMode?: 'date time' | null
 }
 
 export interface UseTableUtils {
   paginationConfig: false | TablePaginationConfig
   handleTableChange: any
   columnConfig: (params: ColumnConfigParams) => ColumnType<any>
+  actionColumnConfig: (params: Partial<ColumnConfigParams>) => ColumnType<any>
 }
 
 const showTotalText = (total: number, range: number[]): string =>
@@ -170,7 +172,7 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
 
   const columnConfig = useCallback(
     (params: ColumnConfigParams): ColumnType<any> => {
-      const { key, filterMode, sort, filters, disableSearchHighlight, ...rest } = params
+      const { key, filterMode, sort, filters, disableSearchHighlight, renderMode, ...rest } = params
       const config: ColumnType<any> = {
         ellipsis: true,
         ...rest,
@@ -207,6 +209,10 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
           break
       }
 
+      if (renderMode === 'date time') {
+        config.render = (value: any) => <MomentDisplay date={value} mode="date time" />
+      }
+
       if (sort) {
         config.sorter = true
         config.sortOrder =
@@ -217,6 +223,15 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
     },
     [listParamsState, searchedTextHighlighter, toSortOrder]
   )
+
+  const actionColumnConfig = useCallback((params: Partial<ColumnConfigParams>): ColumnType<any> => {
+    return {
+      key: 'actions',
+      colSpan: 1,
+      width: '130px',
+      ...params
+    }
+  }, [])
 
   const handleTableChange: any = useCallback(
     (
@@ -256,7 +271,8 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
   return {
     paginationConfig,
     handleTableChange,
-    columnConfig
+    columnConfig,
+    actionColumnConfig
   }
 }
 

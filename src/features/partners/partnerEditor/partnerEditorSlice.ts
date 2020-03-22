@@ -4,31 +4,22 @@ import { Partner } from 'models/partner'
 import { api } from 'api'
 import { PartnerDto } from 'api/swagger'
 import { history } from 'router/router'
-import {
-  ListRequestParams,
-  reviseListRequestParams,
-  storableListRequestParams
-} from 'hooks/useTableUtils'
-import { Site } from 'models/site'
+import { ListRequestParams } from 'hooks/useTableUtils'
+import i18n from 'app/i18n'
+import { message } from 'antd'
 
 interface PartnerEditorState {
   partner?: Partner
-  sites?: Site[]
   contacts?: any[]
-  siteListParams: ListRequestParams
   contactListParams: ListRequestParams
   error: boolean
   errorSites: boolean
   errorContact: boolean
   loading: boolean
-  loadingSites: boolean
   loadingContact: boolean
 }
 
 const initialState: PartnerEditorState = {
-  siteListParams: {
-    pageSize: 10
-  },
   contactListParams: {
     pageSize: 10
   },
@@ -36,7 +27,6 @@ const initialState: PartnerEditorState = {
   errorSites: false,
   errorContact: false,
   loading: false,
-  loadingSites: false,
   loadingContact: false
 }
 
@@ -68,30 +58,6 @@ const partnerEditorSlice = createSlice({
       state.loading = false
       state.error = true
     },
-    getPartnerSitesRequest(state) {
-      state.loadingSites = true
-    },
-    getPartnerSitesSuccess(
-      state,
-      action: PayloadAction<{ sites: Site[]; listParams: ListRequestParams }>
-    ) {
-      state.sites = action.payload.sites
-      state.siteListParams = action.payload.listParams
-      state.loadingSites = false
-      state.errorContact = false
-    },
-    getPartnerSitesFail(state) {
-      state.loadingSites = false
-      state.errorContact = true
-    },
-    resetPartnerSites(state) {
-      state.sites = []
-      state.siteListParams = {
-        pageSize: 10
-      }
-      state.loadingSites = false
-      state.errorSites = false
-    },
     getPartnerContactsRequest(state) {
       state.loadingContact = true
     },
@@ -115,18 +81,16 @@ const partnerEditorSlice = createSlice({
       }
       state.loadingContact = false
       state.errorContact = false
-    }
+    },
+    deletePartnerRequest() {},
+    deletePartnerSuccess() {},
+    deletePartnerFail() {}
   }
 })
 
 const { getPartnerSuccess, getParnterFail, getPartnerRequest } = partnerEditorSlice.actions
+const { deletePartnerRequest, deletePartnerSuccess, deletePartnerFail } = partnerEditorSlice.actions
 const { savePartnerSuccess, saveParnterFail, savePartnerRequest } = partnerEditorSlice.actions
-const {
-  getPartnerSitesRequest,
-  getPartnerSitesSuccess,
-  getPartnerSitesFail,
-  resetPartnerSites
-} = partnerEditorSlice.actions
 const {
   getPartnerContactsRequest,
   getPartnerContactsSuccess,
@@ -137,33 +101,6 @@ const {
 export const { resetPartnerEditor } = partnerEditorSlice.actions
 
 export const partnerEditorReducer = partnerEditorSlice.reducer
-
-export const getPartnerSites = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch(getPartnerSitesRequest())
-    const id = getState().partnerEditor.partner?.id
-    const revisedParams = reviseListRequestParams(getState().partnerEditor.siteListParams, params)
-    if (id) {
-      const { result, ...pagination } = await api.sites.getSites({
-        ...revisedParams,
-        partnerId: id
-      })
-      dispatch(
-        getPartnerSitesSuccess({
-          sites: result as Site[],
-          listParams: storableListRequestParams(revisedParams, pagination)
-        })
-      )
-    } else {
-      dispatch(resetPartnerSites())
-    }
-  } catch (err) {
-    dispatch(getPartnerSitesFail())
-  }
-}
 
 export const getPartnerContacts = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
@@ -231,7 +168,22 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
       history.push(`/partners/${response.id}`)
     }
     dispatch(savePartnerSuccess())
+    message.success(i18n.t('common.message.save-success'), 5)
   } catch (err) {
     dispatch(saveParnterFail())
+  }
+}
+
+export const deletePartner = (id: number): AppThunk => async (dispatch, getState) => {
+  try {
+    dispatch(deletePartnerRequest())
+    await api.partner.deletePartner({ id })
+    dispatch(deletePartnerSuccess())
+    message.success(i18n.t('common.message.delete-success'), 5)
+    history.push(`/partners`)
+    return { id }
+  } catch (err) {
+    dispatch(deletePartnerFail())
+    return { id, error: true }
   }
 }

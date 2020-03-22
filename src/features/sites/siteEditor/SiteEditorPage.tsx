@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { SiteEditorForm } from './SiteEditorForm'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,20 +10,33 @@ import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { CashierList } from '../cashierList/CashierList'
 import { CashierEditor } from '../cashierEditor/CashierEditor'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
+import { useSiteDynamicRouting } from '../useSiteDynamicRouting'
+import {
+  EditorMode,
+  EditorModeOptionsProps,
+  EditorModeOptions
+} from 'components/buttons/EditorModeOptions'
 
 export const SiteEditorPage: FC = () => {
-  const { id, cashierId } = useParams()
+  const { siteId: id, cashierId, partnerId } = useParams()
   const dispatch = useDispatch()
   const { loadingSave, site } = useSelector((state: RootState) => state.siteEditor)
+
+  const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
+
+  const { route, label } = useSiteDynamicRouting()
 
   const siteId = id ? +id : undefined
 
   useEffect(() => {
-    dispatch(resetSiteEditor())
-  }, [dispatch])
+    id && setMode(EditorMode.VIEW)
+  }, [id, site])
 
   useEffect(() => {
     siteId && dispatch(getSite(siteId))
+    return () => {
+      dispatch(resetSiteEditor())
+    }
   }, [dispatch, siteId])
 
   const {
@@ -33,28 +46,40 @@ export const SiteEditorPage: FC = () => {
     handleAfterClose
   } = useGenericModalFormEditorUtils({
     dataId: cashierId,
-    rootRoute: `/sites/editor/${id}`
+    rootRoute: `${route.root}/${id}`
   })
 
   const onSave = (site: Site): void => {
-    dispatch(saveSite({ ...site }, siteId))
+    dispatch(saveSite({ ...site }, siteId, +partnerId!, route.root))
   }
 
+  const optionProps: EditorModeOptionsProps = {
+    mode,
+    handleEdit: () => setMode(EditorMode.EDIT),
+    handleEscapeEdit: () => setMode(EditorMode.VIEW)
+  }
   return (
     <ResponsivePage>
       <SiteEditorForm
+        mode={mode}
+        options={<EditorModeOptions {...optionProps} />}
+        title={label.title}
         loading={loadingSave}
         onSave={onSave}
-        onExit={() => {
-          history.push('/sites/')
-        }}
+        onExit={() => history.push(route.exit)}
         site={site}
         id={siteId}
       />
-
-      <CashierList onOpenEditor={routeToEditor} />
-
-      <CashierEditor params={editorParams} handleExit={handleExit} afterClose={handleAfterClose} />
+      {mode !== EditorMode.NEW && (
+        <>
+          <CashierList onOpenEditor={routeToEditor} />
+          <CashierEditor
+            params={editorParams}
+            handleExit={handleExit}
+            afterClose={handleAfterClose}
+          />
+        </>
+      )}
     </ResponsivePage>
   )
 }

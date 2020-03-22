@@ -75,7 +75,6 @@ export const UserAccessListPage: FC = () => {
         <ResponsiveCard
           forTable
           floatingTitle={t('user-access.user-access')}
-          extraWide
           tabList={tableSelector}
           onTabChange={key => {
             setSelectedTab(key)

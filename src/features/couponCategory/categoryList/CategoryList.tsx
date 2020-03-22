@@ -27,7 +27,9 @@ export const CategoryList: FC<CategoryListProps> = props => {
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, columnConfig } = useTableUtils<Category>({
+  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
+    Category
+  >({
     listParamsState: listParams,
     filterKeys: ['name'],
     getDataAction: getCategories
@@ -42,11 +44,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
         filterMode: FilterMode.SEARCH
       }),
       hasPermission([Roles.Administrator])
-        ? {
-            title: '',
-            key: 'actions',
-            colSpan: 1,
-            width: '100px',
+        ? actionColumnConfig({
             render(record: Category) {
               return (
                 <CrudButtons
@@ -60,10 +58,10 @@ export const CategoryList: FC<CategoryListProps> = props => {
                 />
               )
             }
-          }
+          })
         : {}
     ],
-    [columnConfig, t, onOpenEditor]
+    [columnConfig, t, actionColumnConfig, onOpenEditor]
   )
 
   const headerOptions = hasPermission([Roles.Administrator]) ? (
@@ -78,7 +76,6 @@ export const CategoryList: FC<CategoryListProps> = props => {
         forTable
         floatingTitle={t('coupon-category.list-title')}
         floatingOptions={headerOptions}
-        extraWide
       >
         <ResponsiveTable
           {...{

@@ -201,18 +201,28 @@ export const getSite = (id: number): AppThunk => async dispatch => {
   }
 }
 
-export const saveSite = (site: Site, id?: number): AppThunk => async dispatch => {
-  dispatch(saveSiteRequest())
+export const saveSite = (
+  site: Site,
+  id?: number,
+  partnerId?: number,
+  editorRoute?: string
+): AppThunk => async dispatch => {
   try {
+    dispatch(saveSiteRequest())
     // TODO: integrate, remove partner get because it will be on the JWT.
-    const partner = await api.partner.getSelfPartner()
+
+    let sitePartnerId = partnerId
+    if (!sitePartnerId) {
+      const partner = await api.partner.getSelfPartner()
+      sitePartnerId = partner.id
+    }
 
     if (id) {
       await api.sites.updateSite({
         id,
         siteDto: {
           ...site,
-          partnerId: partner.id
+          partnerId: sitePartnerId
         }
       })
       dispatch(updateSiteSuccess())
@@ -221,11 +231,11 @@ export const saveSite = (site: Site, id?: number): AppThunk => async dispatch =>
       const newId = await api.sites.createSite({
         siteDto: {
           ...site,
-          partnerId: partner.id
+          partnerId: sitePartnerId
         }
       })
       dispatch(createSiteSuccess())
-      newId.id && history.push(`/sites/editor/${newId.id}`)
+      newId.id && editorRoute && history.push(`${editorRoute}/${newId.id}`)
     }
   } catch (err) {
     dispatch(saveSiteFail(err.toString()))

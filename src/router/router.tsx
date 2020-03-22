@@ -71,7 +71,7 @@ const Routes = (): JSX.Element => (
     <PublicRoute onlyPublic exact path="/auth" component={LoginPage} />
     <PublicRoute onlyPublic exact path="/auth/signup" component={SignupPage} />
     <PublicRoute onlyPublic exact path="/auth/recovery" component={RecoveryPage} />
-    <PublicRoute exact path="/error" component={ErrorPage} />
+    <PublicRoute exact path={['/error', '/error/:type']} component={ErrorPage} />
     <PublicRoute exact path="/error/:type" component={ErrorPage} />
     <PrivateRoute exact path="/dashboard" component={DashboardPage} />
     <PrivateRoute
@@ -88,15 +88,26 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/partners/new"
+      path={['/partners/new', '/partners/:partnerId']}
       roles={pageViewRoles.partners}
       component={PartnerEditorPage}
     />
     <PrivateRoute
       exact
-      path="/partners/:id"
+      path={[
+        '/partners/:partnerId/site',
+        '/partners/:partnerId/site/:siteId',
+        '/partners/:partnerId/site/:siteId/:cashierId'
+      ]}
       roles={pageViewRoles.partners}
-      component={PartnerEditorPage}
+      component={SiteEditorPage}
+    />
+    <PrivateRoute exact path="/sites" roles={pageViewRoles.sites} component={SitesListPage} />
+    <PrivateRoute
+      exact
+      path={['/sites/editor/', '/sites/editor/:siteId', '/sites/editor/:siteId/:cashierId']}
+      roles={pageViewRoles.sites}
+      component={SiteEditorPage}
     />
     <PrivateRoute
       exact
@@ -140,25 +151,7 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.profile}
       component={ProfileEditorPage}
     />
-    <PrivateRoute exact path="/sites" roles={pageViewRoles.sites} component={SitesListPage} />
-    <PrivateRoute
-      exact
-      path="/sites/editor/"
-      roles={pageViewRoles.sites}
-      component={SiteEditorPage}
-    />
-    <PrivateRoute
-      exact
-      path="/sites/editor/:id"
-      roles={pageViewRoles.sites}
-      component={SiteEditorPage}
-    />
-    <PrivateRoute
-      exact
-      path="/sites/editor/:id/:cashierId"
-      roles={pageViewRoles.sites}
-      component={SiteEditorPage}
-    />
+
     <PrivateRoute
       exact
       path="/newsletter"

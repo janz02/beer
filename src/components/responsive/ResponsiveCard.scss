@@ -24,7 +24,7 @@
     }
 
     &.as-table-wrapper {
-      height: 77.5vh;
+      height: calc(93.5vh - 70px);
 
       .ant-card-body {
         height: calc(100% - 0.5rem);
@@ -58,16 +58,21 @@
     padding-bottom: 2rem;
   }
 
-  &--wide {
-    max-width: 900px;
+  &--width-skinny {
+    max-width: 55vw;
   }
 
-  &--extra-wide {
-    max-width: 1400px;
+  &--width-normal {
+    max-width: 70vw;
   }
 
-  &--full-width {
-    width: 100%;
-    max-width: none;
+  &--width-full {
+    max-width: 82vw;
+  }
+
+  &--no-auto-scale {
+    .r-card {
+      height: unset !important;
+    }
   }
 }
