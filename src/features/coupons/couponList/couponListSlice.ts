@@ -90,7 +90,7 @@ export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => a
     const revisedParams = reviseListRequestParams(listParams, params)
     revisedParams.includeArchived = includeArchived
 
-    const { result, ...pagination } = await api.coupons.getWaitingCoupons(revisedParams)
+    const { result, ...pagination } = await api.coupons.getCoupons(revisedParams)
 
     const coupons =
       result?.map<Coupon>(c => ({
