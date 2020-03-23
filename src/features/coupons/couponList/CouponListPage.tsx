@@ -5,7 +5,12 @@ import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
-import { getWaitingCoupons, deleteCoupon, setIncludeArchived } from './couponListSlice'
+import {
+  getWaitingCoupons,
+  deleteCoupon,
+  setIncludeArchived,
+  setOnlyWaiting
+} from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import { CouponState, Roles } from 'api/swagger/models'
 import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
@@ -218,7 +223,7 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.user'),
         ellipsis: false,
-        key: 'createdBy ',
+        key: 'createdBy',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
@@ -268,6 +273,17 @@ export const CouponListPage: React.FC = () => {
     </>
   )
 
+  const tableSelector = [
+    {
+      key: 'all',
+      tab: t('coupon-list.all-tab')
+    },
+    {
+      key: 'waiting',
+      tab: t('coupon-list.pending-tab')
+    }
+  ]
+
   return (
     <>
       <ResponsivePage>
@@ -278,6 +294,11 @@ export const CouponListPage: React.FC = () => {
           floatingOptions={headerOptions}
           paddedBottom
           width="full"
+          tabList={tableSelector}
+          onTabChange={key => {
+            dispatch(setOnlyWaiting(key === 'waiting'))
+            dispatch(getWaitingCoupons())
+          }}
         >
           <ResponsiveTable
             hasFixedColumn

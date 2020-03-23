@@ -102,6 +102,10 @@
       "banner": "Banner",
       "discount": "Kedvezmény",
       "prize": "Nyeremény"
+    },
+    "mode": {
+      "online": "Online",
+      "physical": "Fizikai"
     }
   },
   "coupon-category": {
@@ -186,7 +190,9 @@
     "start-date": "Kampány kezdete",
     "state": "Kampány státusz",
     "user": "Létrehozó felhasználó",
-    "view-count": "Megjelenések száma"
+    "view-count": "Megjelenések száma",
+    "all-tab": "Összes",
+    "pending-tab": "Jóváhagyásra vár"
   },
   "error": {
     "auth": {

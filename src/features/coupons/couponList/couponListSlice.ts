@@ -15,6 +15,7 @@ interface CouponListState {
   listParams: ListRequestParams
   allCouponsCount?: number
   includeArchived: boolean
+  onlyWaiting: boolean
   error: string | null
   loading: boolean
 }
@@ -25,6 +26,7 @@ const initialState: CouponListState = {
     pageSize: 10
   },
   includeArchived: false,
+  onlyWaiting: false,
   error: null,
   loading: false
 }
@@ -62,6 +64,9 @@ const couponListSlice = createSlice({
     },
     setIncludeArchived(state, action: PayloadAction<boolean>) {
       state.includeArchived = action.payload
+    },
+    setOnlyWaiting(state, action: PayloadAction<boolean>) {
+      state.onlyWaiting = action.payload
     }
   }
 })
@@ -75,7 +80,7 @@ const {
   deleteFail
 } = couponListSlice.actions
 
-export const { resetCouponList, setIncludeArchived } = couponListSlice.actions
+export const { resetCouponList, setIncludeArchived, setOnlyWaiting } = couponListSlice.actions
 
 export const couponListReducer = couponListSlice.reducer
 

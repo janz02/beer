@@ -91,17 +91,21 @@
         "accept": "Accept",
         "archive": "Archive",
         "close": "Close",
-        "wait": "Wait for accept"
+        "wait": "Pending approve"
       },
       "archived": "Archived",
       "closed": "Closed",
       "created": "Created",
-      "waiting": "Waiting for accept"
+      "waiting": "Pending approve"
     },
     "type": {
       "banner": "Banner",
       "discount": "Discount",
       "prize": "Prize"
+    },
+    "mode": {
+      "online": "Online",
+      "physical": "Physical"
     }
   },
   "coupon-category": {
@@ -186,7 +190,9 @@
     "start-date": "Campaign start date",
     "state": "Campaign state",
     "user": "Creator user",
-    "view-count": "View count"
+    "view-count": "View count",
+    "all-tab": "All",
+    "pending-tab": "Pending approve"
   },
   "error": {
     "auth": {
