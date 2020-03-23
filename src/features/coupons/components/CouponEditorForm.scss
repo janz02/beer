@@ -1,6 +1,8 @@
 @import "assets/scss/_variables";
 
 .coupon-editor-form {
+  padding-bottom: 30px;
+
   &__actions {
     display: flex;
     align-items: center;
@@ -10,10 +12,20 @@
     }
   }
 
+  .ant-collapse {
+    margin-bottom: 30px;
+  }
+
+  .editor-col {
+    padding: 0 30px 0 40px;
+  }
+
   .comment-col {
     margin-top: 80px;
+    padding-right: 40px;
 
     .r-card-container {
+      padding-right: 0;
       padding-left: 0;
 
       .ant-card-head {
