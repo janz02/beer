@@ -13,6 +13,14 @@ t(`partner.partner-state.active`)
 t(`partner.partner-state.inactive`)
 t(`partner.partner-state.deleted`)
 
+t('coupon.type.discount')
+t('coupon.type.prize')
+t('coupon.type.banner')
+
+t('coupon.rank.bronze')
+t('coupon.rank.silver')
+t('coupon.rank.gold')
+
 // Boolean mappings
 t(`user-access.field.partnerType.major`)
 t(`user-access.field.partnerType.normal`)

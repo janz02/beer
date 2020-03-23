@@ -170,6 +170,36 @@ export interface DetailedCouponVm {
     createdBy?: string | null;
     /**
      * 
+     * @type {Date}
+     * @memberof DetailedCouponVm
+     */
+    createdDate?: Date | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedCouponVm
+     */
+    modifiedBy?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DetailedCouponVm
+     */
+    modifiedDate?: Date | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedCouponVm
+     */
+    approvedBy?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DetailedCouponVm
+     */
+    approvedDate?: Date | null;
+    /**
+     * 
      * @type {number}
      * @memberof DetailedCouponVm
      */
@@ -207,6 +237,11 @@ export function DetailedCouponVmFromJSONTyped(json: any, ignoreDiscriminator: bo
         'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
         'discountType': !exists(json, 'discountType') ? undefined : CouponDiscountTypeFromJSON(json['discountType']),
         'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
+        'createdDate': !exists(json, 'createdDate') ? undefined : (json['createdDate'] === null ? null : new Date(json['createdDate'])),
+        'modifiedBy': !exists(json, 'modifiedBy') ? undefined : json['modifiedBy'],
+        'modifiedDate': !exists(json, 'modifiedDate') ? undefined : (json['modifiedDate'] === null ? null : new Date(json['modifiedDate'])),
+        'approvedBy': !exists(json, 'approvedBy') ? undefined : json['approvedBy'],
+        'approvedDate': !exists(json, 'approvedDate') ? undefined : (json['approvedDate'] === null ? null : new Date(json['approvedDate'])),
         'preferredPosition': !exists(json, 'preferredPosition') ? undefined : json['preferredPosition'],
     };
 }
@@ -241,6 +276,11 @@ export function DetailedCouponVmToJSON(value?: DetailedCouponVm | null): any {
         'mode': CouponModeToJSON(value.mode),
         'discountType': CouponDiscountTypeToJSON(value.discountType),
         'createdBy': value.createdBy,
+        'createdDate': value.createdDate === undefined ? undefined : (value.createdDate === null ? null : value.createdDate.toISOString()),
+        'modifiedBy': value.modifiedBy,
+        'modifiedDate': value.modifiedDate === undefined ? undefined : (value.modifiedDate === null ? null : value.modifiedDate.toISOString()),
+        'approvedBy': value.approvedBy,
+        'approvedDate': value.approvedDate === undefined ? undefined : (value.approvedDate === null ? null : value.approvedDate.toISOString()),
         'preferredPosition': value.preferredPosition,
     };
 }
