@@ -1295,6 +1295,13 @@
             }
           },
           {
+            "name": "onlyWaiting",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "name",
             "in": "query",
             "schema": {
@@ -4686,6 +4693,9 @@
           "minimumShoppingValue": {
             "type": "integer",
             "format": "int32"
+          },
+          "discountType": {
+            "$ref": "#/components/schemas/CouponDiscountType"
           },
           "discountValue": {
             "type": "integer",

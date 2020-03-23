@@ -82,6 +82,7 @@ export interface GetCouponRequest {
 
 export interface GetCouponsRequest {
     includeArchived?: boolean;
+    onlyWaiting?: boolean;
     name?: string | null;
     rank?: CouponRank;
     type?: CouponType;
@@ -354,6 +355,10 @@ export class CouponsApi extends runtime.BaseAPI {
 
         if (requestParameters.includeArchived !== undefined) {
             queryParameters['includeArchived'] = requestParameters.includeArchived;
+        }
+
+        if (requestParameters.onlyWaiting !== undefined) {
+            queryParameters['onlyWaiting'] = requestParameters.onlyWaiting;
         }
 
         if (requestParameters.name !== undefined) {
