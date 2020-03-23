@@ -84,7 +84,7 @@ export const { resetCouponList, setIncludeArchived, setOnlyWaiting } = couponLis
 
 export const couponListReducer = couponListSlice.reducer
 
-export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => async (
+export const getCoupons = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
@@ -122,7 +122,7 @@ export const deleteCoupon = (id: number): AppThunk => async (dispatch, getState)
     await await api.coupons.deleteCoupon({ id })
     dispatch(deleteSuccess())
     const newPage = recalculatePaginationAfterDeletion(getState().couponList.listParams)
-    dispatch(getWaitingCoupons({ page: newPage }))
+    dispatch(getCoupons({ page: newPage }))
     return { id }
   } catch (err) {
     dispatch(deleteFail(err.toString()))

@@ -5,12 +5,7 @@ import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
-import {
-  getWaitingCoupons,
-  deleteCoupon,
-  setIncludeArchived,
-  setOnlyWaiting
-} from './couponListSlice'
+import { getCoupons, deleteCoupon, setIncludeArchived, setOnlyWaiting } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import { CouponState, Roles } from 'api/swagger/models'
 import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
@@ -50,7 +45,7 @@ export const CouponListPage: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(getWaitingCoupons())
+    dispatch(getCoupons())
   }, [dispatch])
 
   const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
@@ -58,7 +53,7 @@ export const CouponListPage: React.FC = () => {
   >({
     listParamsState: listParams,
     filterKeys: ['name', 'state', 'categoryId', 'startDate', 'endDate', 'expireDate'],
-    getDataAction: getWaitingCoupons
+    getDataAction: getCoupons
   })
 
   const columnsConfig = useMemo(
@@ -262,7 +257,7 @@ export const CouponListPage: React.FC = () => {
       <Checkbox
         onChange={e => {
           dispatch(setIncludeArchived(e.target.checked))
-          dispatch(getWaitingCoupons())
+          dispatch(getCoupons())
         }}
       >
         {t('coupon-list.show-archived')}
@@ -297,7 +292,7 @@ export const CouponListPage: React.FC = () => {
           tabList={tableSelector}
           onTabChange={key => {
             dispatch(setOnlyWaiting(key === 'waiting'))
-            dispatch(getWaitingCoupons())
+            dispatch(getCoupons())
           }}
         >
           <ResponsiveTable
