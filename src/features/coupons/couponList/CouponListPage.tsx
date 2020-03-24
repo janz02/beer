@@ -176,7 +176,7 @@ export const CouponListPage: React.FC = () => {
           return { text: t(`coupon.mode.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
         render(value) {
-          return t(`coupon.mode.${value?.toLowerCase()}`)
+          return t(`coupon-list.mode.${value?.toLowerCase()}`)
         }
       }),
       columnConfig({

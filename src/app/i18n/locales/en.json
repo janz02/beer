@@ -80,6 +80,10 @@
     "yes": "Yes"
   },
   "coupon": {
+    "mode": {
+      "online": "Online",
+      "physical": "Physical"
+    },
     "state": {
       "accepted": "Accepted",
       "action": {
@@ -92,6 +96,11 @@
       "closed": "Closed",
       "created": "Created",
       "waiting": "Pending approve"
+    },
+    "type": {
+      "banner": "Banner",
+      "discount": "Discount",
+      "prize": "Prize"
     }
   },
   "coupon-category": {

@@ -80,6 +80,10 @@
     "yes": "Igen"
   },
   "coupon": {
+    "mode": {
+      "online": "Online",
+      "physical": "Fizikai"
+    },
     "state": {
       "accepted": "Jóváhagyott",
       "action": {
@@ -92,6 +96,11 @@
       "closed": "Lezárt",
       "created": "Rögzített",
       "waiting": "Jóváhagyásra várakozik"
+    },
+    "type": {
+      "banner": "Banner",
+      "discount": "Kedvezmény",
+      "prize": "Nyeremény"
     }
   },
   "coupon-category": {
