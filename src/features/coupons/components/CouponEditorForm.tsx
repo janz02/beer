@@ -91,8 +91,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   useEffect(() => {
     setFieldsValue({
       ...coupon,
-      rank: CouponRank.Bronze,
-      redeemMode: RedeemMode.Online
+      rank: CouponRank.Bronze
     })
   }, [coupon, setFieldsValue])
 
@@ -356,248 +355,288 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
           <Collapse defaultActiveKey={['1']}>
             <Collapse.Panel header={t('coupon-create.campaign-details')} key="1">
-              <Form.Item
-                name="categoryId"
-                label={t('coupon-create.field.category')}
-                rules={[rule.required()]}
-              >
-                <Select disabled={!displayEditor}>
-                  {categories &&
-                    categories.map(x => (
-                      <Select.Option key={x.id} value={x.id!}>
-                        {x.name}
-                      </Select.Option>
-                    ))}
-                </Select>
-              </Form.Item>
-
-              <Form.Item
-                name="rank"
-                label={t('coupon-create.field.rank')}
-                rules={[rule.required()]}
-              >
-                <Select disabled={!displayEditor || !hasAllPermissions([Roles.CampaignManager])}>
-                  {Object.keys(CouponRank).map(x => (
-                    <Select.Option key={x} value={x}>
-                      {t(`coupon.rank.${x.toLowerCase()}`)}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-
-              {couponType === CouponType.Discount && (
-                <Form.Item
-                  name="redeemMode"
-                  label={t('coupon-create.field.redeem-mode')}
-                  rules={[rule.required()]}
-                >
-                  <Select
-                    disabled={!displayEditor}
-                    onChange={(value: RedeemMode) => {
-                      setRedeemMode(value)
-                    }}
+              <Row gutter={rowGutter}>
+                <Col span={8}>
+                  <Form.Item
+                    name="categoryId"
+                    label={t('coupon-create.field.category')}
+                    rules={[rule.required()]}
                   >
-                    {Object.keys(RedeemMode).map(x => (
-                      <Select.Option key={x} value={x}>
-                        {t(`coupon.redeem-mode.${x.toLowerCase()}`)}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              )}
+                    <Select disabled={!displayEditor}>
+                      {categories &&
+                        categories.map(x => (
+                          <Select.Option key={x.id} value={x.id!}>
+                            {x.name}
+                          </Select.Option>
+                        ))}
+                    </Select>
+                  </Form.Item>
+                </Col>
 
-              {couponType === CouponType.Discount && redeemMode === RedeemMode.Online && (
-                <Form.Item
-                  name="onlineRedeemLink"
-                  label={t('coupon-create.field.online-redeem-link')}
-                  rules={[rule.required(), rule.max(2000)]}
-                >
-                  <Input disabled={!displayEditor} maxLength={2000} />
-                </Form.Item>
-              )}
-
-              {couponType === CouponType.Discount && (
-                <Form.Item
-                  name="expireDate"
-                  label={t('coupon-create.field.expiration-date')}
-                  rules={[rule.required()]}
-                >
-                  <DatePicker disabled={!displayEditor} />
-                </Form.Item>
-              )}
-
-              {couponType === CouponType.Prize && (
-                <Form.Item
-                  name="lotDate"
-                  label={t('coupon-create.field.lot-date')}
-                  rules={[rule.required()]}
-                >
-                  <DatePicker disabled={!displayEditor} />
-                </Form.Item>
-              )}
-
-              {couponType === CouponType.Discount && (
-                <Form.Item
-                  name="discountType"
-                  label={t('coupon-create.field.discount-type')}
-                  rules={[rule.requiredString()]}
-                >
-                  <Select
-                    disabled={!displayEditor}
-                    onChange={(value: DiscountType) => {
-                      setDiscountType(value)
-                    }}
+                <Col span={8}>
+                  <Form.Item
+                    name="rank"
+                    label={t('coupon-create.field.rank')}
+                    rules={[rule.required()]}
                   >
-                    {Object.keys(DiscountType).map(x => (
-                      <Select.Option key={x} value={x}>
-                        {x}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              )}
+                    <Select
+                      disabled={!displayEditor || !hasAllPermissions([Roles.CampaignManager])}
+                    >
+                      {Object.keys(CouponRank).map(x => (
+                        <Select.Option key={x} value={x}>
+                          {t(`coupon.rank.${x.toLowerCase()}`)}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                </Col>
 
-              {(discountType === DiscountType.Fix || discountType === DiscountType.Percent) && (
-                <Form.Item
-                  name="discountValue"
-                  label={t('coupon-create.field.discount-amount')}
-                  dependencies={['discountType']}
-                  rules={[
-                    rule.required(),
-                    () => ({
-                      validator(rule, value) {
-                        const parsedAsFloat = parseFloat(value)
-                        if (discountType === DiscountType.Percent) {
-                          if (parsedAsFloat < 0 || parsedAsFloat > 100) {
+                {couponType === CouponType.Discount && (
+                  <Col span={8}>
+                    <Form.Item
+                      name="redeemMode"
+                      label={t('coupon-create.field.redeem-mode')}
+                      rules={[rule.required()]}
+                    >
+                      <Select
+                        disabled={!displayEditor}
+                        onChange={(value: RedeemMode) => {
+                          setRedeemMode(value)
+                        }}
+                      >
+                        {Object.keys(RedeemMode).map(x => (
+                          <Select.Option key={x} value={x}>
+                            {t(`coupon.redeem-mode.${x.toLowerCase()}`)}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                )}
+
+                {couponType === CouponType.Discount && redeemMode === RedeemMode.Online && (
+                  <Col span={24}>
+                    <Form.Item
+                      name="onlineRedeemLink"
+                      label={t('coupon-create.field.online-redeem-link')}
+                      rules={[rule.required(), rule.max(2000)]}
+                    >
+                      <Input disabled={!displayEditor} maxLength={2000} />
+                    </Form.Item>
+                  </Col>
+                )}
+
+                {couponType === CouponType.Discount && (
+                  <Col span={8}>
+                    <Form.Item
+                      name="expireDate"
+                      label={t('coupon-create.field.expiration-date')}
+                      rules={[rule.required()]}
+                    >
+                      <DatePicker disabled={!displayEditor} />
+                    </Form.Item>
+                  </Col>
+                )}
+
+                {couponType === CouponType.Banner && (
+                  <Col span={24}>
+                    <Form.Item
+                      name="banner-link"
+                      label={t('coupon-create.field.banner-link')}
+                      rules={[rule.required(), rule.max(2000)]}
+                      help={t('coupon-create.field.banner-link-help')}
+                    >
+                      <Input disabled={!displayEditor} maxLength={2000} />
+                    </Form.Item>
+                  </Col>
+                )}
+
+                {couponType === CouponType.Prize && (
+                  <Col span={8}>
+                    <Form.Item
+                      name="lotDate"
+                      label={t('coupon-create.field.lot-date')}
+                      rules={[rule.required()]}
+                    >
+                      <DatePicker disabled={!displayEditor} />
+                    </Form.Item>
+                  </Col>
+                )}
+
+                {couponType === CouponType.Discount && (
+                  <Col span={8}>
+                    <Form.Item
+                      name="discountType"
+                      label={t('coupon-create.field.discount-type')}
+                      rules={[rule.requiredString()]}
+                    >
+                      <Select
+                        disabled={!displayEditor}
+                        onChange={(value: DiscountType) => {
+                          setDiscountType(value)
+                        }}
+                      >
+                        {Object.keys(DiscountType).map(x => (
+                          <Select.Option key={x} value={x}>
+                            {x}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                )}
+
+                {(discountType === DiscountType.Fix || discountType === DiscountType.Percent) && (
+                  <Col span={8}>
+                    <Form.Item
+                      name="discountValue"
+                      label={t('coupon-create.field.discount-amount')}
+                      dependencies={['discountType']}
+                      rules={[
+                        rule.required(),
+                        () => ({
+                          validator(rule, value) {
+                            const parsedAsFloat = parseFloat(value)
+                            if (discountType === DiscountType.Percent) {
+                              if (parsedAsFloat < 0 || parsedAsFloat > 100) {
+                                return Promise.reject(
+                                  t('error.coupon.percentage-discount-out-of-range')
+                                )
+                              }
+                            } else if (discountType === DiscountType.Fix) {
+                              if (!Number.isInteger(parsedAsFloat)) {
+                                return Promise.reject(
+                                  t('error.coupon.fix-discount-must-be-integer')
+                                )
+                              }
+
+                              if (parsedAsFloat < 1 || parsedAsFloat > 1000000) {
+                                return Promise.reject(t('error.coupon.fix-discount-out-of-range'))
+                              }
+                            }
+
+                            return Promise.resolve()
+                          }
+                        })
+                      ]}
+                    >
+                      <Input disabled={!displayEditor} />
+                    </Form.Item>
+                  </Col>
+                )}
+
+                {couponType === CouponType.Discount && (
+                  <Col span={8}>
+                    <Form.Item
+                      name="minimumShoppingValue"
+                      label={t('coupon-create.field.minimum-shopping-value')}
+                      rules={[rule.positiveInteger()]}
+                    >
+                      <InputNumber disabled={!displayEditor} min={1} />
+                    </Form.Item>
+                  </Col>
+                )}
+
+                {couponType === CouponType.Prize && (
+                  <Col span={8}>
+                    <Form.Item name="prizeRules" label={t('coupon-create.field.prize-rules')}>
+                      <div>Upload pdf comes here</div>
+                    </Form.Item>
+                  </Col>
+                )}
+
+                <Col span={8}>
+                  <Form.Item
+                    name="productValue"
+                    label={t('coupon-create.field.product-value')}
+                    rules={[
+                      rule.positiveInteger(),
+                      () => ({
+                        validator(rule, value) {
+                          const averageBasketValue = form.getFieldValue('averageBasketValue')
+                          if (!averageBasketValue && !value) {
                             return Promise.reject(
-                              t('error.coupon.percentage-discount-out-of-range')
+                              t('error.coupon.product-value-required-if-average-basket-value-empty')
                             )
                           }
-                        } else if (discountType === DiscountType.Fix) {
-                          if (!Number.isInteger(parsedAsFloat)) {
-                            return Promise.reject(t('error.coupon.fix-discount-must-be-integer'))
-                          }
 
-                          if (parsedAsFloat < 1 || parsedAsFloat > 1000000) {
-                            return Promise.reject(t('error.coupon.fix-discount-out-of-range'))
-                          }
+                          return Promise.resolve()
                         }
+                      })
+                    ]}
+                    help={t('coupon-create.field.product-value-help')}
+                    dependencies={['averageBasketValue']}
+                  >
+                    <InputNumber disabled={!displayEditor} min={1} />
+                  </Form.Item>
+                </Col>
 
-                        return Promise.resolve()
-                      }
-                    })
-                  ]}
-                >
-                  <Input disabled={!displayEditor} />
-                </Form.Item>
-              )}
+                <Col span={8}>
+                  <Form.Item
+                    name="averageBasketValue"
+                    label={t('coupon-create.field.average-basket-value')}
+                    rules={[
+                      rule.positiveInteger(),
+                      () => ({
+                        validator(rule, value) {
+                          const productValue = form.getFieldValue('productValue')
+                          if (!productValue && !value) {
+                            return Promise.reject(
+                              t('error.coupon.average-basket-value-required-if-product-value-empty')
+                            )
+                          }
 
-              {couponType === CouponType.Discount && (
-                <Form.Item
-                  name="minimumShoppingValue"
-                  label={t('coupon-create.field.minimum-shopping-value')}
-                  rules={[rule.positiveInteger()]}
-                >
-                  <InputNumber disabled={!displayEditor} min={1} />
-                </Form.Item>
-              )}
+                          return Promise.resolve()
+                        }
+                      })
+                    ]}
+                    help={t('coupon-create.field.average-basket-value-help')}
+                    dependencies={['productValue']}
+                  >
+                    <InputNumber disabled={!displayEditor} min={1} />
+                  </Form.Item>
+                </Col>
 
-              {couponType === CouponType.Banner && (
-                <Form.Item
-                  name="banner-link"
-                  label={t('coupon-create.field.banner-link')}
-                  rules={[rule.required(), rule.max(2000)]}
-                  help={t('coupon-create.field.banner-link-help')}
-                >
-                  <Input disabled={!displayEditor} maxLength={2000} />
-                </Form.Item>
-              )}
+                {couponType === CouponType.Discount && (
+                  <Col span={24}>
+                    <Form.Item
+                      name="webshop-link"
+                      label={t('coupon-create.field.webshop-link')}
+                      rules={[rule.required(), rule.max(2000)]}
+                      help={t('coupon-create.field.webshop-link-help')}
+                    >
+                      <Input disabled={!displayEditor} maxLength={2000} />
+                    </Form.Item>
+                  </Col>
+                )}
 
-              {couponType === CouponType.Prize && (
-                <Form.Item
-                  name="prizeRules"
-                  label={t('coupon-create.field.prize-rules')}
-                  rules={[rule.required()]}
-                >
-                  <div>Upload pdf comes here</div>
-                </Form.Item>
-              )}
+                {couponType === CouponType.Banner && (
+                  <Col span={8}>
+                    <Form.Item
+                      name="emphasizedCampaign"
+                      label={t('coupon-create.field.emphasized-campaign')}
+                      valuePropName="checked"
+                    >
+                      <Checkbox />
+                    </Form.Item>
+                  </Col>
+                )}
+              </Row>
 
-              <Form.Item
-                name="productValue"
-                label={t('coupon-create.field.product-value')}
-                rules={[
-                  rule.positiveInteger(),
-                  () => ({
-                    validator(rule, value) {
-                      const averageBasketValue = form.getFieldValue('averageBasketValue')
-                      if (!averageBasketValue && !value) {
-                        return Promise.reject(
-                          t('error.coupon.product-value-required-if-average-basket-value-empty')
-                        )
-                      }
-
-                      return Promise.resolve()
-                    }
-                  })
-                ]}
-                help={t('coupon-create.field.product-value-help')}
-                dependencies={['averageBasketValue']}
-              >
-                <InputNumber disabled={!displayEditor} min={1} />
-              </Form.Item>
-
-              <Form.Item
-                name="averageBasketValue"
-                label={t('coupon-create.field.average-basket-value')}
-                rules={[
-                  rule.positiveInteger(),
-                  () => ({
-                    validator(rule, value) {
-                      const productValue = form.getFieldValue('productValue')
-                      if (!productValue && !value) {
-                        return Promise.reject(
-                          t('error.coupon.average-basket-value-required-if-product-value-empty')
-                        )
-                      }
-
-                      return Promise.resolve()
-                    }
-                  })
-                ]}
-                help={t('coupon-create.field.average-basket-value-help')}
-                dependencies={['productValue']}
-              >
-                <InputNumber disabled={!displayEditor} min={1} />
-              </Form.Item>
-
-              <Form.Item
-                name="smallImage"
-                label={t('coupon-create.field.small-image')}
-                // rules={[rule.required()]}
-              >
-                <div>Small image comes here</div>
-              </Form.Item>
-
-              {prizeOrDiscount && (
-                <Form.Item
-                  name="bigImage"
-                  label={t('coupon-create.field.big-image')}
-                  rules={[rule.required()]}
-                >
-                  <div>Big image comes here</div>
-                </Form.Item>
-              )}
-
-              {couponType === CouponType.Banner && (
-                <Form.Item
-                  name="emphasizedCampaign"
-                  label={t('coupon-create.field.emphasized-campaign')}
-                  valuePropName="checked"
-                >
-                  <Checkbox />
-                </Form.Item>
-              )}
+              <Row gutter={rowGutter}>
+                <Col span={12}>
+                  <Form.Item name="smallImage" label={t('coupon-create.field.small-image')}>
+                    <div>Small image comes here</div>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  {prizeOrDiscount && (
+                    <Form.Item name="bigImage" label={t('coupon-create.field.big-image')}>
+                      <div>Big image comes here</div>
+                    </Form.Item>
+                  )}
+                </Col>
+              </Row>
             </Collapse.Panel>
           </Collapse>
 

@@ -127,7 +127,7 @@
       "average-basket-value": "Average basket value",
       "average-basket-value-help": "Average basket value or product value is required.",
       "banner-link": "Banner link",
-      "banner-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com",
+      "banner-link-help": "The banner link leads to this website. Pl.http://google.com",
       "big-image": "Coupon big image",
       "category": "Category",
       "comment": "Comment",
@@ -142,7 +142,7 @@
       "lot-date": "Lot date",
       "minimum-shopping-value": "Minimum shopping value",
       "name": "Name",
-      "online-redeem-link": "Webshop link",
+      "online-redeem-link": "Online redeem link",
       "partner-name": "Partner name",
       "prize-rules": "Prize rules",
       "product-value": "Product value",
@@ -151,7 +151,9 @@
       "redeem-mode": "Redeem mode",
       "small-image": "Coupon small image",
       "state": "Status",
-      "type": "Campaign type"
+      "type": "Campaign type",
+      "webshop-link": "Webshop link",
+      "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com"
     },
     "inactivate": "Inactivate",
     "inactive": "Inactive",

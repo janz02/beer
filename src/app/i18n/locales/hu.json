@@ -127,7 +127,7 @@
       "average-basket-value": "Átlagos korár érték",
       "average-basket-value-help": "Tavalyi átlagos kosár érték vagy a termékkérték megadása kötelező.",
       "banner-link": "Banner link",
-      "banner-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com",
+      "banner-link-help": "A banner link erre a felületre fog mutatni. Pl.http://google.com",
       "big-image": "Kupon nagy képe",
       "category": "Kategória",
       "comment": "Komment",
@@ -142,7 +142,7 @@
       "lot-date": "Sorsolás dátuma",
       "minimum-shopping-value": "Minimális vásárlási érték",
       "name": "Név",
-      "online-redeem-link": "Webshop link",
+      "online-redeem-link": "Online beváltási link",
       "partner-name": "Partner neve",
       "prize-rules": "Nyereményjáték szabályzat",
       "product-value": "Termékérték",
@@ -151,7 +151,9 @@
       "redeem-mode": "Beváltás módja",
       "small-image": "Kupon kis képe",
       "state": "Státusz",
-      "type": "Kampány típusa"
+      "type": "Kampány típusa",
+      "webshop-link": "Webshop link",
+      "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com"
     },
     "inactivate": "Inaktiválás",
     "inactive": "Inaktív",
