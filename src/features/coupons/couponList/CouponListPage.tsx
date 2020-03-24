@@ -19,7 +19,6 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
-import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 
 const couponEditorRoles = [
   Roles.Administrator,
@@ -111,7 +110,7 @@ export const CouponListPage: React.FC = () => {
           return { text: t(`coupon.state.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
         render(value) {
-          return <CampaignStateDisplay state={value} />
+          return t(`coupon.state.${value?.toLowerCase()}`)
         }
       }),
       columnConfig({

@@ -122,12 +122,6 @@ export interface CouponDto {
      * @memberof CouponDto
      */
     mode?: CouponMode;
-    /**
-     * 
-     * @type {string}
-     * @memberof CouponDto
-     */
-    predefinedCodesFileId?: string | null;
 }
 
 export function CouponDtoFromJSON(json: any): CouponDto {
@@ -154,7 +148,6 @@ export function CouponDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
-        'predefinedCodesFileId': !exists(json, 'predefinedCodesFileId') ? undefined : json['predefinedCodesFileId'],
     };
 }
 
@@ -181,7 +174,6 @@ export function CouponDtoToJSON(value?: CouponDto | null): any {
         'categoryId': value.categoryId,
         'tags': value.tags,
         'mode': CouponModeToJSON(value.mode),
-        'predefinedCodesFileId': value.predefinedCodesFileId,
     };
 }
 
