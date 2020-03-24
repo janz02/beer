@@ -16,6 +16,7 @@ interface SiteDynamicLabel {
 interface UseSiteDynamicRoutingUtils {
   route: SiteDynamicRoute
   label: SiteDynamicLabel
+  alternativeMode: boolean
 }
 
 export const useSiteDynamicRouting = (): UseSiteDynamicRoutingUtils => {
@@ -32,7 +33,8 @@ export const useSiteDynamicRouting = (): UseSiteDynamicRoutingUtils => {
         },
         label: {
           title: t('partner.site.editor-title')
-        }
+        },
+        alternativeMode: true
       }
     }
     return {
@@ -42,7 +44,8 @@ export const useSiteDynamicRouting = (): UseSiteDynamicRoutingUtils => {
       },
       label: {
         title: t('site.editor-title')
-      }
+      },
+      alternativeMode: false
     }
   }, [partnerId, pathname, t])
 

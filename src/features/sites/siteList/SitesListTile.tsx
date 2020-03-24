@@ -17,7 +17,7 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
   const dispatch = useDispatch()
   const { sites, listParams, loading } = useSelector((state: RootState) => state.siteList)
 
-  const { route } = useSiteDynamicRouting()
+  const { route, alternativeMode } = useSiteDynamicRouting()
 
   const listConstraints = useMemo(() => (partnerId ? { partnerId } : {}), [partnerId])
 
@@ -28,6 +28,9 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
   }, [dispatch, listConstraints, partnerId])
 
   const sitesListProps: SitesListProps = {
+    cardProps: {
+      disableAutoScale: alternativeMode
+    },
     hidden,
     sites,
     loading,

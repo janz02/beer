@@ -209,14 +209,14 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
           break
       }
 
-      if (renderMode === 'date time') {
-        config.render = (value: any) => <MomentDisplay date={value} mode="date time" />
-      }
-
       if (sort) {
         config.sorter = true
         config.sortOrder =
           listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
+      }
+
+      if (renderMode === 'date time') {
+        config.render = (value: any) => <MomentDisplay date={value} mode="date time" />
       }
 
       return config

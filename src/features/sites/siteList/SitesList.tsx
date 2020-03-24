@@ -7,11 +7,12 @@ import { DeletePopupState, GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
-import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { ResponsiveCard, ResponsiveCardProps } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AppThunk } from 'app/store'
 
 export interface SitesListProps {
+  cardProps: Pick<ResponsiveCardProps, 'disableAutoScale'>
   hidden?: boolean
   sites?: Site[]
   loading: boolean
@@ -23,7 +24,7 @@ export interface SitesListProps {
 }
 
 export const SitesList: FC<SitesListProps> = props => {
-  const { sites, loading, getDataAction, listParamsState, hidden } = props
+  const { sites, loading, getDataAction, listParamsState, hidden, cardProps } = props
   const { handleAdd, handleEdit, deleteAction } = props
   const { t } = useTranslation()
 
@@ -80,6 +81,7 @@ export const SitesList: FC<SitesListProps> = props => {
       {!hidden && (
         <ResponsivePage>
           <ResponsiveCard
+            {...cardProps}
             width="normal"
             forTable
             paddedBottom
