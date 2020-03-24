@@ -161,7 +161,8 @@
       "state": "Status",
       "type": "Campaign type",
       "webshop-link": "Webshop link",
-      "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com"
+      "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com",
+      "coupon-count": "Number of coupons"
     },
     "inactivate": "Inactivate",
     "inactive": "Inactive",

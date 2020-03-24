@@ -27,7 +27,7 @@ import {
   deleteCouponComment
 } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
-import { DeleteFilled, CheckOutlined, ArrowRightOutlined } from '@ant-design/icons'
+import { DeleteFilled, CheckOutlined, ArrowRightOutlined, ExportOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
@@ -39,6 +39,7 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission, hasAllPermissions } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
+import { FileUploadButton } from 'components/buttons/FileUploadButton'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -67,6 +68,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const [couponType, setCouponType] = useState<CouponType>()
   const [redeemMode, setRedeemMode] = useState<RedeemMode>()
   const [discountType, setDiscountType] = useState<DiscountType>()
+  const [predefinedCodesFileId, setPredefinedCodesFileId] = useState<string>()
   const rule = useCommonFormRules()
 
   const {
@@ -93,6 +95,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       ...coupon,
       rank: CouponRank.Bronze
     })
+    setPredefinedCodesFileId(coupon?.predefinedCodesFileId)
   }, [coupon, setFieldsValue])
 
   const displayEditor =
@@ -118,6 +121,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       handleCouponSave({
         ...values,
         // TODO: integrate tags and isDrawable.
+        predefinedCodesFileId: predefinedCodesFileId,
         tags: [],
         isDrawable: false
       })
@@ -635,6 +639,72 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       <div>Big image comes here</div>
                     </Form.Item>
                   )}
+                </Col>
+              </Row>
+            </Collapse.Panel>
+          </Collapse>
+
+          <Collapse defaultActiveKey={['1']}>
+            <Collapse.Panel header={t('coupon-create.field.coupon-count')} key="1">
+              <Row gutter={rowGutter}>
+                <Col span={8}>
+                  <Form.Item
+                    name="couponCount"
+                    label={t('coupon-create.field.coupon-count')}
+                    rules={[rule.positiveInteger()]}
+                  >
+                    <InputNumber disabled={!displayEditor} min={1} />
+                  </Form.Item>
+                </Col>
+
+                <Col span={8}>
+                  <Form.Item name="predefinedCodesFileId" label="Feltoltes" rules={[]}>
+                    <FileUploadButton
+                      uploadProps={{}}
+                      onSuccess={fileId => {
+                        setPredefinedCodesFileId(fileId)
+                      }}
+                      onRemove={() => {
+                        setPredefinedCodesFileId('')
+                      }}
+                      fileId={predefinedCodesFileId}
+                    />
+                  </Form.Item>
+                </Col>
+
+                <Col span={8}>
+                  <Button type="primary" loading={loading} icon={<ExportOutlined />}>
+                    Kuponkodok export
+                  </Button>
+                </Col>
+              </Row>
+            </Collapse.Panel>
+          </Collapse>
+
+          <Collapse defaultActiveKey={['1']}>
+            <Collapse.Panel header="Ugyfel aktivitasok" key="1">
+              <Row gutter={rowGutter}>
+                <Col span={4}>
+                  <p style={{ float: 'left' }}>Megjelenesek szama</p>
+                  <p style={{ float: 'right' }}>{coupon?.showCount}</p>
+                </Col>
+
+                <Col span={4} offset={4}>
+                  <p style={{ float: 'left' }}>Kattintasok szama</p>
+                  <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
+                </Col>
+
+                <Col span={4} offset={4}>
+                  <p style={{ float: 'left' }}>Bevaltasok szama</p>
+                  <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
+                </Col>
+              </Row>
+
+              <Row gutter={rowGutter}>
+                <Col span={8}>
+                  <Button type="default" loading={loading} icon={<ExportOutlined />}>
+                    Bevaltott kuponkodok export
+                  </Button>
                 </Col>
               </Row>
             </Collapse.Panel>

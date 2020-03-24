@@ -20,4 +20,8 @@ export interface Coupon {
   state?: CouponState
   isActive?: boolean
   comments?: CouponComment[]
+  showCount?: number
+  clickCount?: number
+  claimCount?: number
+  predefinedCodesFileId?: string
 }

@@ -161,7 +161,8 @@
       "state": "Státusz",
       "type": "Kampány típusa",
       "webshop-link": "Webshop link",
-      "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com"
+      "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com",
+      "coupon-count": "Kuponok száma"
     },
     "inactivate": "Inaktiválás",
     "inactive": "Inaktív",
