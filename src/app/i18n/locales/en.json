@@ -88,6 +88,11 @@
       "online": "Online",
       "physical": "Physical"
     },
+    "rank": {
+      "bronze": "__STRING_NOT_TRANSLATED__",
+      "gold": "__STRING_NOT_TRANSLATED__",
+      "silver": "__STRING_NOT_TRANSLATED__"
+    },
     "state": {
       "accepted": "Accepted",
       "action": {
@@ -118,26 +123,48 @@
   },
   "coupon-create": {
     "activate": "Activate",
+    "active": "Active",
+    "campaign-basics": "Campaign basics",
+    "campaign-details": "Campaign details",
     "create": "Create",
     "create-and-accept": "Send for accept",
     "create-coupon-success": "Creating a coupon was successful.",
     "edit": "Edit",
     "editor-title": "Coupon editor",
     "field": {
+      "average-basket-value": "Average basket value",
+      "average-basket-value-help": "Average basket value or product value is required.",
+      "banner-link": "Banner link",
+      "banner-link-help": "The banner link leads to this website. Pl.http://google.com",
+      "big-image": "Coupon big image",
       "category": "Category",
       "comment": "Comment",
-      "coupon-count": "Coupon count",
       "description": "Description",
       "discount-amount": "Discount amount",
       "discount-type": "Discount type",
       "distribution-end-date": "Distribution end date",
       "distribution-start-date": "Distribution start date",
+      "emphasized-campaign": "Fix banner campaign display",
       "expiration-date": "Expiration date",
+      "is-active": "State",
+      "lot-date": "Lot date",
       "minimum-shopping-value": "Minimum shopping value",
       "name": "Name",
-      "rank": "Rank"
+      "online-redeem-link": "Online redeem link",
+      "partner-name": "Partner name",
+      "prize-rules": "Prize rules",
+      "product-value": "Product value",
+      "product-value-help": "Product value or average basket value is required.",
+      "rank": "Rank",
+      "redeem-mode": "Redeem mode",
+      "small-image": "Coupon small image",
+      "state": "Status",
+      "type": "Campaign type",
+      "webshop-link": "Webshop link",
+      "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com"
     },
     "inactivate": "Inactivate",
+    "inactive": "Inactive",
     "status-title": "Modify state"
   },
   "coupon-editor": {
@@ -151,7 +178,7 @@
     "all-tab": "All",
     "campaign-type": "Campaign type",
     "campaigns": "Campaigns",
-    "category": "Coupon category",
+    "category": "Campaign category",
     "click-count": "Click count",
     "coupon-count": "Coupon count",
     "discount-amount": "Discount amount",
@@ -208,21 +235,26 @@
       "invalid-value": "Invalid value.",
       "max-length": "Max length exceeded.",
       "max-length-exact": "This field must be less then {{max}} characters.",
+      "number-must-be-positive-integer": "Field must be a positive integer.",
       "password-format": "Invalid password format.",
       "server-unavailable": "Server unavailable."
     },
     "coupon": {
       "already-claimed": "Coupon already claimed.",
+      "average-basket-value-required-if-product-value-empty": "Average basket value can't be empty if product value is empty.",
       "cannot-claim": "Cannot claim coupon.",
       "cant-be-deleted": "Coupon can't be deleted.",
       "cant-change-state": "Can't change coupon state.",
+      "fix-discount-must-be-integer": "Field must be a positive integer.",
+      "fix-discount-out-of-range": "Fix discount must be between 1 and 1,000,000.",
       "invalid-initial-state": "Invalid initial state.",
       "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
       "name-cant-be-edited-after-accepted": "The coupon name cannot be changed after it has been accepted.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
-      "percentage-max-100": "The percentage value cannot exceed 100.",
-      "predefined-file-id-mismatch": "The file does not match with the previously uploaded one."
+      "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
+      "predefined-file-id-mismatch": "The file does not match with the previously uploaded one.",
+      "product-value-required-if-average-basket-value-empty": "Product value can't be empty if average basket value is empty."
     },
     "coupon-categories": {
       "name-must-be-unique": "Category name must be unique."

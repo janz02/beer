@@ -27,6 +27,10 @@ export interface CouponCodesCouponUserCodeRequest {
     couponId: number;
 }
 
+export interface CouponUserCodeRequest {
+    couponId: number;
+}
+
 export interface GetClaimedCouponsRequest {
     couponId: number;
 }
@@ -96,6 +100,38 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
      */
     async couponCodesCouponUserCode(requestParameters: CouponCodesCouponUserCodeRequest): Promise<Blob> {
         const response = await this.couponCodesCouponUserCodeRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async couponUserCodeRaw(requestParameters: CouponUserCodeRequest): Promise<runtime.ApiResponse<Blob>> {
+        if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
+            throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling couponUserCode.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/CouponUserCodes/{couponId}/RedeemedCouponCodes`.replace(`{${"couponId"}}`, encodeURIComponent(String(requestParameters.couponId))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     */
+    async couponUserCode(requestParameters: CouponUserCodeRequest): Promise<Blob> {
+        const response = await this.couponUserCodeRaw(requestParameters);
         return await response.value();
     }
 

@@ -1931,6 +1931,39 @@
         }
       }
     },
+    "/api/CouponUserCodes/{couponId}/RedeemedCouponCodes": {
+      "get": {
+        "tags": [
+          "CouponUserCodes"
+        ],
+        "summary": "",
+        "operationId": "CouponUserCode",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CouponUserPairs/GeneratePairs": {
       "post": {
         "tags": [
