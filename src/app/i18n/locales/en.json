@@ -38,6 +38,7 @@
     "table-title": "Cashiers"
   },
   "common": {
+    "activate": "Activate",
     "cancel": "Cancel",
     "confirm": "Ok",
     "delete": "Delete",
@@ -57,6 +58,7 @@
     },
     "go-back": "Go back",
     "go-back-to-list": "Bact to the list",
+    "inactivate": "Inactivate",
     "message": {
       "delete-success": "Successful deletion",
       "email-sent": "Your request was processed succesfully",
@@ -65,9 +67,11 @@
     "no": "No",
     "ok": "OK",
     "popup": {
+      "activate-title": "Are you sure about activating this?",
       "confirm-title": "Are you sure about doing this?",
       "delete-title": "Are you sure about deleting this data?",
       "discard-title": "Are you sure about discarding this?",
+      "inactivate-title": "Are you sure about inactivating this?",
       "restore-title": "Are you sure about restoring this?",
       "save-title": "Are you sure about saving this data?"
     },
@@ -80,10 +84,9 @@
     "yes": "Yes"
   },
   "coupon": {
-    "rank": {
-      "bronze": "Bronze",
-      "gold": "Gold",
-      "silver": "Silver"
+    "mode": {
+      "online": "Online",
+      "physical": "Physical"
     },
     "state": {
       "accepted": "Accepted",
@@ -91,12 +94,12 @@
         "accept": "Accept",
         "archive": "Archive",
         "close": "Close",
-        "wait": "Wait for accept"
+        "wait": "Pending approve"
       },
       "archived": "Archived",
       "closed": "Closed",
       "created": "Created",
-      "waiting": "Waiting for accept"
+      "waiting": "Pending approve"
     },
     "type": {
       "banner": "Banner",
@@ -167,6 +170,7 @@
   },
   "coupon-list": {
     "add": "New campaign",
+    "all-tab": "All",
     "campaign-type": "Campaign type",
     "campaigns": "Campaigns",
     "category": "Campaign category",
@@ -179,10 +183,11 @@
     "minimum-shopping-value": "Minimum shopping value",
     "name": "Campaign hungarian name",
     "partner": "Partner",
+    "pending-tab": "Pending approve",
     "preferred-position": "Preferred position",
     "rank": "Rank",
-    "redee-mode": "Coupon mode",
     "redeem-count": "Redeem count",
+    "redeem-mode": "Coupon mode",
     "show-archived": "Show archived campaigns",
     "small-image": "Coupon small image",
     "start-date": "Campaign start date",
@@ -211,8 +216,8 @@
       "user-not-found": "User not found."
     },
     "cashier": {
-      "cashier-cant-delete": "__STRING_NOT_TRANSLATED__",
-      "cashier-cant-save": "__STRING_NOT_TRANSLATED__",
+      "cashier-cant-delete": "Cashier cannot be deleted.",
+      "cashier-cant-save": "Cashier cannot be saved.",
       "cashier-couponId-not-unique": "Online cashier ID must be unique.",
       "stamp-couponId-not-unique": "Digital stamp ID must be unique."
     },
@@ -238,12 +243,12 @@
       "fix-discount-must-be-integer": "Field must be a positive integer.",
       "fix-discount-out-of-range": "Fix discount must be between 1 and 1,000,000.",
       "invalid-initial-state": "Invalid initial state.",
-      "invalid-predefined-code-count": "__STRING_NOT_TRANSLATED__",
-      "invalid-state-predefined-codes": "__STRING_NOT_TRANSLATED__",
-      "name-cant-be-edited-after-accepted": "__STRING_NOT_TRANSLATED__",
+      "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
+      "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
+      "name-cant-be-edited-after-accepted": "The coupon name cannot be changed after it has been accepted.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
-      "percentage-discount-out-of-range": "__STRING_NOT_TRANSLATED__",
-      "predefined-file-id-mismatch": "__STRING_NOT_TRANSLATED__",
+      "percentage-max-100": "The percentage value cannot exceed 100.",
+      "predefined-file-id-mismatch": "The file does not match with the previously uploaded one.",
       "product-value-required-if-average-basket-value-empty": "Product value can't be empty if average basket value is empty."
     },
     "coupon-categories": {
@@ -324,9 +329,8 @@
   },
   "partner": {
     "editor": {
-      "title": "Partner editor"
+      "title": "Partner"
     },
-    "editor-title": "Partner",
     "field": {
       "address": "Address",
       "bank-account": "Bank account",
@@ -349,10 +353,24 @@
       "deleted": "Deleted",
       "inactive": "Inactive"
     },
-    "save": "Save",
     "save-partner-success": "Saving partner was successful.",
     "site": {
       "editor-title": "Partner's site"
+    }
+  },
+  "partner-contact": {
+    "editor-create": "Add new partner contact",
+    "editor-edit": "Edit partner contact",
+    "field": {
+      "email": "E-mail address",
+      "major-partner": "Major Partner",
+      "name": "Name",
+      "phone": "Phone",
+      "role": "Role"
+    },
+    "list": {
+      "add": "Add new contact",
+      "title": "Partner contacts"
     }
   },
   "profile": {
@@ -384,6 +402,16 @@
       "name": "Site name"
     }
   },
+  "user": {
+    "role": {
+      "administrator": "Administrator",
+      "businesspartnermanager": "Business Partner Manager",
+      "campaignmanager": "Campaign Manager",
+      "partnercontactapprover": "Partner Contact - Approver",
+      "partnercontacteditor": "Partner Contact - Editor",
+      "partnermanager": "Partner Manager"
+    }
+  },
   "user-access": {
     "access-editor": {
       "title": "Access Rights"
@@ -408,14 +436,6 @@
     },
     "nkm-users": "NKM User",
     "partner-users": "Partner Contact",
-    "role": {
-      "administrator": "Administrator",
-      "businesspartnermanager": "Business Partner Manager",
-      "campaignmanager": "Campaign Manager",
-      "partnercontactapprover": "Partner Contact - Approver",
-      "partnercontacteditor": "Partner Contact - Editor",
-      "partnermanager": "Partner Manager"
-    },
     "user-access": "Users and Access Rights"
   },
   "warning-prompt": {

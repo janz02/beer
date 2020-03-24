@@ -58,7 +58,7 @@ $table-header-height: 80px;
 
     th.ant-table-cell-fix-right-first {
       right: -1px !important;
-      background: linear-gradient(to left, white 95%, transparent) !important;
+      background: linear-gradient(to left, #FFFFFF 95%, transparent) !important;
 
       &::after {
         -webkit-box-shadow: unset !important;
@@ -88,8 +88,8 @@ $table-header-height: 80px;
   background: #E6FFFB !important;
 }
 
-// // Fix scroll issue overlap
-// .ant-table-cell-fix-left,
-// .ant-table-cell-fix-right {
-//   z-index: unset;
-// }
+// Fix scroll issue overlap
+.ant-table-cell-fix-left,
+.ant-table-cell-fix-right {
+  z-index: unset;
+}

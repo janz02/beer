@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
-import { getWaitingCoupons, deleteCoupon, setIncludeArchived } from './couponListSlice'
+import { getCoupons, deleteCoupon, setIncludeArchived, setOnlyWaiting } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import { CouponState, Roles } from 'api/swagger/models'
 import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
@@ -45,47 +45,57 @@ export const CouponListPage: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(getWaitingCoupons())
+    dispatch(getCoupons())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
-    Coupon
-  >({
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<Coupon>({
     listParamsState: listParams,
     filterKeys: ['name', 'state', 'categoryId', 'startDate', 'endDate', 'expireDate'],
-    getDataAction: getWaitingCoupons
+    getDataAction: getCoupons
   })
 
   const columnsConfig = useMemo(
     (): ColumnType<Coupon>[] => [
       columnConfig({
         title: t('coupon-list.campaign-type'),
-        key: '',
+        key: 'type',
         ellipsis: false,
         sort: true,
-        filterMode: FilterMode.FILTER
+        filterMode: FilterMode.FILTER,
+        filters: Object.keys(CouponState).map(f => {
+          return { text: t(`coupon.type.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
+        }),
+        render(value) {
+          return t(`coupon.type.${value?.toLowerCase()}`)
+        }
       }),
       columnConfig({
         title: t('coupon-list.partner'),
         ellipsis: false,
-        key: '',
+        key: 'partnerName',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('coupon-list.view-count'),
         ellipsis: false,
-        key: ''
+        key: 'showCount'
       }),
       columnConfig({
         title: t('coupon-list.click-count'),
         ellipsis: false,
-        key: ''
+        key: 'clickCount'
       }),
       columnConfig({
         title: t('coupon-list.redeem-count'),
         ellipsis: false,
-        key: ''
+        key: 'claimCount'
       }),
       columnConfig({
         title: t('coupon-list.name'),
@@ -162,15 +172,21 @@ export const CouponListPage: React.FC = () => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.redee-mode'),
-        key: '',
+        title: t('coupon-list.redeem-mode'),
+        key: 'mode',
         ellipsis: false,
         sort: true,
-        filterMode: FilterMode.FILTER
+        filterMode: FilterMode.FILTER,
+        filters: Object.keys(CouponState).map(f => {
+          return { text: t(`coupon.mode.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
+        }),
+        render(value) {
+          return t(`coupon.mode.${value?.toLowerCase()}`)
+        }
       }),
       columnConfig({
         title: t('coupon-list.discount-type'),
-        key: 'type',
+        key: 'discountType',
         ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER
@@ -199,14 +215,14 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.preferred-position'),
         ellipsis: false,
-        key: '',
+        key: 'preferredPosition',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('coupon-list.user'),
         ellipsis: false,
-        key: '',
+        key: 'createdBy',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
@@ -245,7 +261,7 @@ export const CouponListPage: React.FC = () => {
       <Checkbox
         onChange={e => {
           dispatch(setIncludeArchived(e.target.checked))
-          dispatch(getWaitingCoupons())
+          dispatch(getCoupons())
         }}
       >
         {t('coupon-list.show-archived')}
@@ -255,6 +271,17 @@ export const CouponListPage: React.FC = () => {
       )}
     </>
   )
+
+  const tableSelector = [
+    {
+      key: 'all',
+      tab: t('coupon-list.all-tab')
+    },
+    {
+      key: 'waiting',
+      tab: t('coupon-list.pending-tab')
+    }
+  ]
 
   return (
     <>
@@ -266,13 +293,18 @@ export const CouponListPage: React.FC = () => {
           floatingOptions={headerOptions}
           paddedBottom
           width="full"
+          tabList={tableSelector}
+          onTabChange={key => {
+            dispatch(setOnlyWaiting(key === 'waiting'))
+            dispatch(getCoupons())
+          }}
         >
           <ResponsiveTable
             hasFixedColumn
             {...{
               loading: loading,
               columns: columnsConfig,
-              dataSource: coupons.map((u, i) => ({ ...u, key: i })),
+              dataSource: addKeyProp(coupons),
               pagination: paginationConfig,
               onChange: handleTableChange
             }}

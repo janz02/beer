@@ -3,15 +3,16 @@ import { ColumnType } from 'antd/lib/table'
 import { useTableUtils, ListRequestParams, FilterMode } from 'hooks/useTableUtils'
 import { Site } from 'models/site'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { DeletePopupState, GenericPopup } from 'components/popups/GenericPopup'
+import { PopupState, GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
-import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { ResponsiveCard, ResponsiveCardProps } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AppThunk } from 'app/store'
 
 export interface SitesListProps {
+  cardProps: Pick<ResponsiveCardProps, 'disableAutoScale'>
   hidden?: boolean
   sites?: Site[]
   loading: boolean
@@ -23,15 +24,19 @@ export interface SitesListProps {
 }
 
 export const SitesList: FC<SitesListProps> = props => {
-  const { sites, loading, getDataAction, listParamsState, hidden } = props
+  const { sites, loading, getDataAction, listParamsState, hidden, cardProps } = props
   const { handleAdd, handleEdit, deleteAction } = props
   const { t } = useTranslation()
 
-  const [siteToDelete, setSiteToDelete] = useState<DeletePopupState<Site>>()
+  const [siteToDelete, setSiteToDelete] = useState<PopupState<Site>>()
 
-  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
-    Site
-  >({
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<Site>({
     listParamsState,
     filterKeys: ['name', 'address'],
     getDataAction
@@ -80,9 +85,9 @@ export const SitesList: FC<SitesListProps> = props => {
       {!hidden && (
         <ResponsivePage>
           <ResponsiveCard
+            {...cardProps}
             width="normal"
             forTable
-            paddedBottom
             floatingTitle={t('site-list.list-title')}
             floatingOptions={headerOptions}
           >
@@ -90,7 +95,7 @@ export const SitesList: FC<SitesListProps> = props => {
               {...{
                 loading,
                 columns: columnsConfig,
-                dataSource: sites?.map((c, i) => ({ ...c, key: '' + i + c.id })),
+                dataSource: addKeyProp(sites),
                 pagination: paginationConfig,
                 onChange: handleTableChange
               }}

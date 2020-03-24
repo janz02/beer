@@ -10,7 +10,7 @@ import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { CashierList } from '../cashierList/CashierList'
 import { CashierEditor } from '../cashierEditor/CashierEditor'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
-import { useSiteDynamicRouting } from '../useSiteDynamicRouting'
+import { useReusableSites } from '../useReusableSites'
 import {
   EditorMode,
   EditorModeOptionsProps,
@@ -24,7 +24,7 @@ export const SiteEditorPage: FC = () => {
 
   const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
 
-  const { route, label } = useSiteDynamicRouting()
+  const { route, label } = useReusableSites()
 
   const siteId = id ? +id : undefined
 

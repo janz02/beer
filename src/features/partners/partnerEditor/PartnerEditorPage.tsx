@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-
 import { useTranslation } from 'react-i18next'
 import { PartnerEditorForm } from '../components/PartnerEditorForm'
 import { history } from 'router/router'
@@ -9,8 +8,10 @@ import { getPartner, savePartner, resetPartnerEditor, deletePartner } from './pa
 import { useParams } from 'react-router-dom'
 import { Partner } from 'models/partner'
 import { Roles } from 'api/swagger/models'
-import { GenericPopup, DeletePopupState } from 'components/popups/GenericPopup'
+import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 import { SitesListTile } from 'features/sites/siteList/SitesListTile'
+import { PartnerStateButton } from './PartnerStateButton'
+import { PartnerContactsTile } from '../../partnerContacts/PartnerContactsTile'
 import {
   EditorModeOptions,
   EditorModeOptionsProps,
@@ -30,7 +31,7 @@ export const PartnerEditorPage: React.FC = () => {
   const { partner, loading } = useSelector((state: RootState) => state.partnerEditor)
 
   const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
-  const [partnerToDelete, setPartnerToDelete] = useState<DeletePopupState<Partner>>()
+  const [partnerToDelete, setPartnerToDelete] = useState<PopupState<Partner>>()
 
   useEffect(() => {
     id && dispatch(getPartner(+id))
@@ -63,10 +64,19 @@ export const PartnerEditorPage: React.FC = () => {
     handleEscapeEdit: () => setMode(EditorMode.VIEW)
   }
 
+  const options = (
+    <>
+      <PartnerStateButton />
+      <EditorModeOptions {...optionProps} />
+    </>
+  )
+
+  const hideTables = mode !== EditorMode.VIEW
+
   return (
     <>
       <PartnerEditorForm
-        options={<EditorModeOptions {...optionProps} />}
+        options={options}
         mode={mode}
         handleSave={handleSave}
         loading={loading}
@@ -84,7 +94,12 @@ export const PartnerEditorPage: React.FC = () => {
       >
         <p>{partnerToDelete?.data?.name}</p>
       </GenericPopup>
-      {mode !== EditorMode.NEW && <SitesListTile hidden={mode !== EditorMode.VIEW} />}
+      {mode !== EditorMode.NEW && (
+        <>
+          <SitesListTile hidden={hideTables} />
+          <PartnerContactsTile hidden={hideTables} />
+        </>
+      )}
     </>
   )
 }

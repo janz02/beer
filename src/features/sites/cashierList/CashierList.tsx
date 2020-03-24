@@ -28,9 +28,13 @@ export const CashierList: FC<CashierListProps> = props => {
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
-    Cashier
-  >({
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<Cashier>({
     listParamsState: listParams,
     filterKeys: ['cashierId', 'digitalStampId'],
     getDataAction: getCashiers
@@ -77,7 +81,6 @@ export const CashierList: FC<CashierListProps> = props => {
     <>
       <ResponsiveCard
         disableAutoScale
-        width="skinny"
         forTable
         innerTitle={t('cashier-list.table-title')}
         innerOptions={headerOptions}
@@ -88,7 +91,7 @@ export const CashierList: FC<CashierListProps> = props => {
           {...{
             loading: loadingCashiers,
             columns: columnsConfig,
-            dataSource: cashiers?.map((c, i) => ({ ...c, key: '' + i + c.id })),
+            dataSource: addKeyProp(cashiers),
             pagination: paginationConfig,
             onChange: handleTableChange
           }}

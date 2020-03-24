@@ -2,32 +2,23 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Partner } from 'models/partner'
 import { api } from 'api'
-import { PartnerDto } from 'api/swagger'
+import { PartnerDto, PartnerState } from 'api/swagger'
 import { history } from 'router/router'
-import { ListRequestParams } from 'hooks/useTableUtils'
 import i18n from 'app/i18n'
 import { message } from 'antd'
+import { delay } from 'services/temp/delay'
 
 interface PartnerEditorState {
   partner?: Partner
-  contacts?: any[]
-  contactListParams: ListRequestParams
   error: boolean
-  errorSites: boolean
-  errorContact: boolean
   loading: boolean
-  loadingContact: boolean
+  loadingState: boolean
 }
 
 const initialState: PartnerEditorState = {
-  contactListParams: {
-    pageSize: 10
-  },
   error: false,
-  errorSites: false,
-  errorContact: false,
   loading: false,
-  loadingContact: false
+  loadingState: false
 }
 
 const partnerEditorSlice = createSlice({
@@ -47,91 +38,44 @@ const partnerEditorSlice = createSlice({
       state.loading = false
       state.error = true
     },
-    savePartnerRequest(state, action: PayloadAction<Partner>) {
+    savePartnerRequest(state) {
       state.loading = true
     },
     savePartnerSuccess(state) {
       state.loading = false
       state.error = false
     },
-    saveParnterFail(state) {
+    savePartnerFail(state) {
       state.loading = false
       state.error = true
     },
-    getPartnerContactsRequest(state) {
-      state.loadingContact = true
-    },
-    getPartnerContactsSuccess(
-      state,
-      action: PayloadAction<{ contacts: any[]; listParams: ListRequestParams }>
-    ) {
-      state.contacts = action.payload.contacts
-      state.contactListParams = action.payload.listParams
-      state.loadingContact = false
-      state.errorContact = false
-    },
-    getPartnerContactsFail(state) {
-      state.loadingContact = false
-      state.errorContact = true
-    },
-    resetPartnerContacts(state) {
-      state.contacts = []
-      state.contactListParams = {
-        pageSize: 10
-      }
-      state.loadingContact = false
-      state.errorContact = false
-    },
     deletePartnerRequest() {},
     deletePartnerSuccess() {},
-    deletePartnerFail() {}
+    deletePartnerFail() {},
+    setPartnerStateRequest(state) {
+      state.loadingState = true
+    },
+    setPartnerStateSuccess(state) {
+      state.loadingState = false
+    },
+    setPartnerStateFail(state) {
+      state.loadingState = false
+    }
   }
 })
 
 const { getPartnerSuccess, getParnterFail, getPartnerRequest } = partnerEditorSlice.actions
 const { deletePartnerRequest, deletePartnerSuccess, deletePartnerFail } = partnerEditorSlice.actions
-const { savePartnerSuccess, saveParnterFail, savePartnerRequest } = partnerEditorSlice.actions
+const { savePartnerSuccess, savePartnerFail, savePartnerRequest } = partnerEditorSlice.actions
 const {
-  getPartnerContactsRequest,
-  getPartnerContactsSuccess,
-  getPartnerContactsFail,
-  resetPartnerContacts
+  setPartnerStateRequest,
+  setPartnerStateSuccess,
+  setPartnerStateFail
 } = partnerEditorSlice.actions
 
 export const { resetPartnerEditor } = partnerEditorSlice.actions
 
 export const partnerEditorReducer = partnerEditorSlice.reducer
-
-export const getPartnerContacts = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch(getPartnerContactsRequest())
-    const id = getState().partnerEditor.partner?.id
-    // const revisedParams = reviseListRequestParams(
-    //   getState().partnerEditor.contactListParams,
-    //   params
-    // )
-    if (id) {
-      // TODO: integrrate
-      // const { result, ...pagination } = await api.sites.getSites({
-      //   ...revisedParams,
-      //   partnerId: id
-      // })
-      dispatch(
-        getPartnerContactsSuccess({
-          contacts: [] as any[],
-          listParams: {} // storableListRequestParams(revisedParams, pagination)
-        })
-      )
-    } else {
-      dispatch(resetPartnerContacts())
-    }
-  } catch (err) {
-    dispatch(getPartnerContactsFail())
-  }
-}
 
 export const getPartner = (id: number): AppThunk => async dispatch => {
   try {
@@ -146,13 +90,11 @@ export const getPartner = (id: number): AppThunk => async dispatch => {
 export const savePartner = (data: Partner): AppThunk => async (dispatch, getState) => {
   try {
     const partner = getState().partnerEditor.partner
-    dispatch(savePartnerRequest(data))
+    dispatch(savePartnerRequest())
 
     console.log({ data })
 
     if (partner?.id) {
-      console.log('UPDATE')
-
       await api.partner.updatePartner({
         id: partner.id,
         partnerDto: {
@@ -163,14 +105,13 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
       dispatch(getPartner(partner.id))
     } else {
       const response = await api.partner.createPartner({ partnerDto: data as PartnerDto })
-      console.log('CREATE')
 
       history.push(`/partners/${response.id}`)
     }
     dispatch(savePartnerSuccess())
     message.success(i18n.t('common.message.save-success'), 5)
   } catch (err) {
-    dispatch(saveParnterFail())
+    dispatch(savePartnerFail())
   }
 }
 
@@ -184,6 +125,24 @@ export const deletePartner = (id: number): AppThunk => async (dispatch, getState
     return { id }
   } catch (err) {
     dispatch(deletePartnerFail())
+    return { id, error: true }
+  }
+}
+
+export const setPartnerState = (id: number, state: PartnerState): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch(setPartnerStateRequest())
+    // TODO: integrate
+    // const partner = await api.??.??({ id, state })
+    await delay()
+    dispatch(setPartnerStateSuccess())
+    id && dispatch(getPartner(id))
+    return { id }
+  } catch (err) {
+    dispatch(setPartnerStateFail())
     return { id, error: true }
   }
 }

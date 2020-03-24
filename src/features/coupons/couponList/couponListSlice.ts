@@ -15,6 +15,7 @@ interface CouponListState {
   listParams: ListRequestParams
   allCouponsCount?: number
   includeArchived: boolean
+  onlyWaiting: boolean
   error: string | null
   loading: boolean
 }
@@ -25,6 +26,7 @@ const initialState: CouponListState = {
     pageSize: 10
   },
   includeArchived: false,
+  onlyWaiting: false,
   error: null,
   loading: false
 }
@@ -62,6 +64,9 @@ const couponListSlice = createSlice({
     },
     setIncludeArchived(state, action: PayloadAction<boolean>) {
       state.includeArchived = action.payload
+    },
+    setOnlyWaiting(state, action: PayloadAction<boolean>) {
+      state.onlyWaiting = action.payload
     }
   }
 })
@@ -75,22 +80,23 @@ const {
   deleteFail
 } = couponListSlice.actions
 
-export const { resetCouponList, setIncludeArchived } = couponListSlice.actions
+export const { resetCouponList, setIncludeArchived, setOnlyWaiting } = couponListSlice.actions
 
 export const couponListReducer = couponListSlice.reducer
 
-export const getWaitingCoupons = (params: ListRequestParams = {}): AppThunk => async (
+export const getCoupons = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
   try {
     dispatch(getCouponsRequest())
 
-    const { listParams, includeArchived } = getState().couponList
+    const { listParams, includeArchived, onlyWaiting } = getState().couponList
     const revisedParams = reviseListRequestParams(listParams, params)
     revisedParams.includeArchived = includeArchived
+    revisedParams.onlyWaiting = onlyWaiting
 
-    const { result, ...pagination } = await api.coupons.getWaitingCoupons(revisedParams)
+    const { result, ...pagination } = await api.coupons.getCoupons(revisedParams)
 
     const coupons =
       result?.map<Coupon>(c => ({
@@ -117,7 +123,7 @@ export const deleteCoupon = (id: number): AppThunk => async (dispatch, getState)
     await await api.coupons.deleteCoupon({ id })
     dispatch(deleteSuccess())
     const newPage = recalculatePaginationAfterDeletion(getState().couponList.listParams)
-    dispatch(getWaitingCoupons({ page: newPage }))
+    dispatch(getCoupons({ page: newPage }))
     return { id }
   } catch (err) {
     dispatch(deleteFail(err.toString()))

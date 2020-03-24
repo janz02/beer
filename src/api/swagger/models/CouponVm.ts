@@ -18,6 +18,10 @@ import {
     CouponCommentVmFromJSON,
     CouponCommentVmFromJSONTyped,
     CouponCommentVmToJSON,
+    CouponDiscountType,
+    CouponDiscountTypeFromJSON,
+    CouponDiscountTypeFromJSONTyped,
+    CouponDiscountTypeToJSON,
     CouponRank,
     CouponRankFromJSON,
     CouponRankFromJSONTyped,
@@ -104,6 +108,12 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     minimumShoppingValue?: number;
+    /**
+     * 
+     * @type {CouponDiscountType}
+     * @memberof CouponVm
+     */
+    discountType?: CouponDiscountType;
     /**
      * 
      * @type {number}
@@ -199,6 +209,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
         'couponCount': !exists(json, 'couponCount') ? undefined : json['couponCount'],
         'minimumShoppingValue': !exists(json, 'minimumShoppingValue') ? undefined : json['minimumShoppingValue'],
+        'discountType': !exists(json, 'discountType') ? undefined : CouponDiscountTypeFromJSON(json['discountType']),
         'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
@@ -234,6 +245,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
         'couponCount': value.couponCount,
         'minimumShoppingValue': value.minimumShoppingValue,
+        'discountType': CouponDiscountTypeToJSON(value.discountType),
         'discountValue': value.discountValue,
         'categoryId': value.categoryId,
         'tags': value.tags,

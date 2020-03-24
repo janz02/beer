@@ -2,10 +2,10 @@ import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { getNkmUsers, getPartnerUsers, UserType } from './userAccessListSlice'
+import { getNkmUsers, getPartnerUsers } from './userAccessListSlice'
 import { useTableUtils, UseTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
-import { UserAccess } from 'models/user'
+import { UserAccess, UserType } from 'models/user'
 import { UserAccessEditorProps } from './UserAccessEditor'
 import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
@@ -14,8 +14,8 @@ import { Roles } from 'api/swagger/models'
 interface UseUserAccessListPageUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersColumnsConfig: ColumnsType<UserAccess>
-  nkmUsersTableUtils: UseTableUtils
-  partnerUsersTableUtils: UseTableUtils
+  nkmUsersTableUtils: UseTableUtils<UserAccess>
+  partnerUsersTableUtils: UseTableUtils<UserAccess>
   editorModal: UserAccessEditorProps | null | undefined
   setEditorModal: React.Dispatch<React.SetStateAction<UserAccessEditorProps | null | undefined>>
   nkmUsers: UserAccess[]
@@ -75,8 +75,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         // sort: true,
         // filterMode: FilterMode.FILTER,
         // filters: nkmRoleOptions,
-        render: (value: unknown, user: UserAccess) =>
-          t(`user-access.role.${user.role?.toLowerCase()}`)
+        render: (value: unknown, user: UserAccess) => t(`user.role.${user.role?.toLowerCase()}`)
       }),
       hasPermission([Roles.Administrator])
         ? nkmUsersTableUtils.actionColumnConfig({
@@ -153,8 +152,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         // filterMode: FilterMode.FILTER,
         // filters: partnerRoleOptions,
         width: '15rem',
-        render: (value: unknown, user: UserAccess) =>
-          t(`user-access.role.${user.role?.toLowerCase()}`)
+        render: (value: unknown, user: UserAccess) => t(`user.role.${user.role?.toLowerCase()}`)
       }),
       hasPermission([Roles.Administrator])
         ? partnerUsersTableUtils.actionColumnConfig({

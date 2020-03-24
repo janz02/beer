@@ -66,11 +66,12 @@ interface ColumnConfigParams extends ColumnType<any> {
   renderMode?: 'date time' | null
 }
 
-export interface UseTableUtils {
+export interface UseTableUtils<T> {
   paginationConfig: false | TablePaginationConfig
   handleTableChange: any
-  columnConfig: (params: ColumnConfigParams) => ColumnType<any>
-  actionColumnConfig: (params: Partial<ColumnConfigParams>) => ColumnType<any>
+  columnConfig: (params: ColumnConfigParams) => ColumnType<T>
+  actionColumnConfig: (params: Partial<ColumnConfigParams>) => ColumnType<T>
+  addKeyProp: (data?: T[]) => T[]
 }
 
 const showTotalText = (total: number, range: number[]): string =>
@@ -118,11 +119,15 @@ export const basePaginationConfig = (
  // For filtering with dropdown select
 
  */
-function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
+function useTableUtils<T extends { [key: string]: any }>(
+  props: UseTableUtilsProps<T>
+): UseTableUtils<T> {
   const { listParamsState, getDataAction, filterKeys } = props
 
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
+
+  const addKeyProp = (data?: T[]): T[] => data?.map((t, i) => ({ ...t, key: '' + i + t?.id })) ?? []
 
   const paginationConfig = useMemo((): TablePaginationConfig | false => {
     const baseConfig = basePaginationConfig(isMobile, listParamsState)
@@ -173,10 +178,9 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
   const columnConfig = useCallback(
     (params: ColumnConfigParams): ColumnType<any> => {
       const { key, filterMode, sort, filters, disableSearchHighlight, renderMode, ...rest } = params
-      const config: ColumnType<any> = {
+      const config: ColumnType<T> = {
         ellipsis: true,
         ...rest,
-        key: key,
         dataIndex: key
       }
 
@@ -209,14 +213,14 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
           break
       }
 
-      if (renderMode === 'date time') {
-        config.render = (value: any) => <MomentDisplay date={value} mode="date time" />
-      }
-
       if (sort) {
         config.sorter = true
         config.sortOrder =
           listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
+      }
+
+      if (renderMode === 'date time') {
+        config.render = (value: any) => <MomentDisplay date={value} mode="date time" />
       }
 
       return config
@@ -272,7 +276,8 @@ function useTableUtils<T>(props: UseTableUtilsProps<T>): UseTableUtils {
     paginationConfig,
     handleTableChange,
     columnConfig,
-    actionColumnConfig
+    actionColumnConfig,
+    addKeyProp
   }
 }
 

@@ -38,6 +38,7 @@
     "table-title": "Pénztárak"
   },
   "common": {
+    "activate": "Aktiválás",
     "cancel": "Mégsem",
     "confirm": "Rendben",
     "delete": "Törlés",
@@ -57,6 +58,7 @@
     },
     "go-back": "Vissza",
     "go-back-to-list": "Vissza a listához",
+    "inactivate": "Inaktiválás",
     "message": {
       "delete-success": "Sikeres törlés",
       "email-sent": "A kérés sikeresen fel lett dolgozva",
@@ -65,9 +67,11 @@
     "no": "Nem",
     "ok": "OK",
     "popup": {
+      "activate-title": "Biztos, hogy aktiválni szeretnéd?",
       "confirm-title": "Biztos, hogy ezt szeretnéd tenni?",
       "delete-title": "Biztos, hogy törölni szeretnéd?",
       "discard-title": "Biztos, hogy el szeretnéd vetni?",
+      "inactivate-title": "Biztos, hogy inaktiválni szeretnéd?",
       "restore-title": "Biztos, hogy vissza szeretnéd állítani?",
       "save-title": "Biztos, hogy menteni szeretnéd?"
     },
@@ -80,10 +84,9 @@
     "yes": "Igen"
   },
   "coupon": {
-    "rank": {
-      "bronze": "Bronz",
-      "gold": "Arany",
-      "silver": "Ezüst"
+    "mode": {
+      "online": "Online",
+      "physical": "Fizikai"
     },
     "state": {
       "accepted": "Jóváhagyott",
@@ -167,6 +170,7 @@
   },
   "coupon-list": {
     "add": "Új kampány",
+    "all-tab": "Összes",
     "campaign-type": "Kampány típus",
     "campaigns": "Kampányok",
     "category": "Kampány kategória",
@@ -179,10 +183,11 @@
     "minimum-shopping-value": "Minmális vásárlási érték",
     "name": "Kampány magyar név",
     "partner": "Partner",
+    "pending-tab": "Jóváhagyásra vár",
     "preferred-position": "Preferált pozíció",
     "rank": "Rang",
-    "redee-mode": "Kupon mód",
     "redeem-count": "Beváltások száma",
+    "redeem-mode": "Kupon mód",
     "show-archived": "Archivált kampányok mutatása",
     "small-image": "Kupon kis kép",
     "start-date": "Kampány kezdete",
@@ -211,8 +216,8 @@
       "user-not-found": "Felhasználó nem található."
     },
     "cashier": {
-      "cashier-cant-delete": "__STRING_NOT_TRANSLATED__",
-      "cashier-cant-save": "__STRING_NOT_TRANSLATED__",
+      "cashier-cant-delete": "A pénztárat nem lehet törölni.",
+      "cashier-cant-save": "A pénztárat nem lehet módosítani.",
       "cashier-couponId-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
       "stamp-couponId-not-unique": "Digitális pecsét azonosító nem egyedi."
     },
@@ -238,12 +243,12 @@
       "fix-discount-must-be-integer": "Csak egész szám adható meg.",
       "fix-discount-out-of-range": "Csak 1 és 1.000.000 közötti érték adható meg.",
       "invalid-initial-state": "Hibás kezdőállapot",
-      "invalid-predefined-code-count": "__STRING_NOT_TRANSLATED__",
-      "invalid-state-predefined-codes": "__STRING_NOT_TRANSLATED__",
-      "name-cant-be-edited-after-accepted": "__STRING_NOT_TRANSLATED__",
+      "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek.",
+      "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben ay állapotban.",
+      "name-cant-be-edited-after-accepted": "A kupon neve nem módosítható, miután már el lett fogadva.",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
-      "percentage-discount-out-of-range": "__STRING_NOT_TRANSLATED__",
-      "predefined-file-id-mismatch": "__STRING_NOT_TRANSLATED__",
+      "percentage-max-100": "A százalék érték maximum 100 lehet.",
+      "predefined-file-id-mismatch": "A kuponkódok fájlja nem egyezik ay eddig felöltöttével.",
       "product-value-required-if-average-basket-value-empty": "A termék érték mező megadása kötelező, ha a tavalyi átlagos kosárérték mező üres."
     },
     "coupon-categories": {
@@ -324,9 +329,8 @@
   },
   "partner": {
     "editor": {
-      "title": "Partner szerkesztő"
+      "title": "Partner adatai"
     },
-    "editor-title": "Partner",
     "field": {
       "address": "Cím",
       "bank-account": "Bankszámla",
@@ -349,10 +353,24 @@
       "deleted": "Törölt",
       "inactive": "Inaktív"
     },
-    "save": "Mentés",
     "save-partner-success": "Partner mentése sikeres.",
     "site": {
       "editor-title": "Partner telephelye"
+    }
+  },
+  "partner-contact": {
+    "editor-create": "Kapcsolattartó hozzáadása",
+    "editor-edit": "Kapcsolattartó szerkesztése",
+    "field": {
+      "email": "E-mail cím",
+      "major-partner": "Kiemelt partner",
+      "name": "Név",
+      "phone": "Telefonszám",
+      "role": "Jogosultság"
+    },
+    "list": {
+      "add": "Kapcsolattartó hozzáadása",
+      "title": "Partner kapcsolattartói"
     }
   },
   "profile": {
@@ -384,6 +402,16 @@
       "name": "Telephely név"
     }
   },
+  "user": {
+    "role": {
+      "administrator": "Adminisztrátor",
+      "businesspartnermanager": "Ügyfél menedzser",
+      "campaignmanager": "Kampány menedzser",
+      "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
+      "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
+      "partnermanager": "Partner menedzser"
+    }
+  },
   "user-access": {
     "access-editor": {
       "title": "Felhasználók és Jogosultságok"
@@ -408,14 +436,6 @@
     },
     "nkm-users": "NKM Felhasználó",
     "partner-users": "Partner Kapcsolattartó",
-    "role": {
-      "administrator": "Adminisztrátor",
-      "businesspartnermanager": "Ügyfél menedzser",
-      "campaignmanager": "Kampány menedzser",
-      "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
-      "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
-      "partnermanager": "Partner menedzser"
-    },
     "user-access": "Felhasználók és Jogosultságok"
   },
   "warning-prompt": {
