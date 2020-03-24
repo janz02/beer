@@ -1,11 +1,8 @@
-import React, { FC, useEffect, useMemo } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSites, deleteSite, setSitesListConstraints, resetSiteList } from './siteListSlice'
-import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { SitesList, SitesListProps } from './SitesList'
-import { useParams } from 'react-router-dom'
-import { useSiteDynamicRouting } from '../useSiteDynamicRouting'
+import { useReusableSites } from '../useReusableSites'
 
 interface SitesListTileProps {
   hidden?: boolean
@@ -13,25 +10,16 @@ interface SitesListTileProps {
 
 export const SitesListTile: FC<SitesListTileProps> = props => {
   const { hidden } = props
-  const { partnerId } = useParams()
   const dispatch = useDispatch()
-  const { sites, listParams, loading } = useSelector((state: RootState) => state.siteList)
 
-  const { route, alternativeMode } = useSiteDynamicRouting()
+  const { route, alternativeMode, actions, selector } = useReusableSites()
+  const { getSites, deleteSite } = actions
 
-  const listConstraints = useMemo(() => (partnerId ? { partnerId } : {}), [partnerId])
+  const { sites, listParams, loading } = useSelector(selector)
 
   useEffect(() => {
-    dispatch(setSitesListConstraints(listConstraints))
-    if (partnerId && isNaN(+partnerId)) return
     dispatch(getSites({}))
-  }, [dispatch, listConstraints, partnerId])
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetSiteList())
-    }
-  }, [dispatch])
+  }, [dispatch, getSites])
 
   const sitesListProps: SitesListProps = {
     cardProps: {

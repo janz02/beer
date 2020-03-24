@@ -4,7 +4,6 @@ import { AppThunk } from './store'
 import { resetAuth } from 'features/auth/authSlice'
 import { resetProfile } from 'features/profile/profileSlice'
 import { resetSiteEditor } from 'features/sites/siteEditor/siteEditorSlice'
-import { resetSiteList } from 'features/sites/siteList/siteListSlice'
 import { resetCategoryEditor } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
 import { resetCategoryList } from 'features/couponCategory/categoryList/categoryListSlice'
 import { resetCoupons } from 'features/coupons/couponsSlice'
@@ -16,6 +15,7 @@ import { resetRouterHistory } from 'router/routerHistoryStore'
 import { resetPartnersList } from 'features/partners/partnerList/partnerListSlice'
 import { resetSelfPartner } from 'features/partners/selfPartner/selfPartnerSlice'
 import { resetPartnerEditor } from 'features/partners/partnerEditor/partnerEditorSlice'
+import { siteListSlice, partnerSiteListSlice } from 'features/sites/siteList/siteListSliceFactory'
 
 interface HardResetParams {
   logout?: boolean
@@ -27,7 +27,8 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetAuth())
     dispatch(resetProfile())
     dispatch(resetSiteEditor())
-    dispatch(resetSiteList())
+    dispatch(siteListSlice.actions.resetSiteList())
+    dispatch(partnerSiteListSlice.actions.resetSiteList())
     dispatch(resetNotification())
     dispatch(resetCategoryEditor())
     dispatch(resetCategoryList())

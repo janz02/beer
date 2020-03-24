@@ -36,7 +36,7 @@ const partnersContactsSlice = createSlice({
       state,
       action: PayloadAction<{ partners: Partner[]; listParams: ListRequestParams }>
     ) {
-      state.partners = action.payload.partners
+      // state.partners = action.payload.partners
       state.listParams = action.payload.listParams
       state.loading = false
       state.error = false
@@ -48,26 +48,26 @@ const partnersContactsSlice = createSlice({
   }
 })
 
-const { getPartnersRequest, getPartnersSuccess, getPartnersFail } = partnersListSlice.actions
-export const { resetPartnersList } = partnersListSlice.actions
+// const { getPartnersRequest, getPartnersSuccess, getPartnersFail } = partnersListSlice.actions
+// export const { resetPartnersList } = partnersListSlice.actions
 
-export const partnersListReducer = partnersListSlice.reducer
+// export const partnersListReducer = partnersListSlice.reducer
 
-export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch(getPartnersRequest())
-    const revisedParams = reviseListRequestParams(getState().newsletterList.listParams, params)
-    const { result, ...pagination } = await api.partner.getPartners(revisedParams)
-    dispatch(
-      getPartnersSuccess({
-        partners: result as any,
-        listParams: storableListRequestParams(revisedParams, pagination)
-      })
-    )
-  } catch (err) {
-    dispatch(getPartnersFail())
-  }
-}
+// export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
+//   dispatch,
+//   getState
+// ) => {
+//   try {
+//     dispatch(getPartnersRequest())
+//     const revisedParams = reviseListRequestParams(getState().newsletterList.listParams, params)
+//     const { result, ...pagination } = await api.partner.getPartners(revisedParams)
+//     dispatch(
+//       getPartnersSuccess({
+//         partners: result as any,
+//         listParams: storableListRequestParams(revisedParams, pagination)
+//       })
+//     )
+//   } catch (err) {
+//     dispatch(getPartnersFail())
+//   }
+// }
