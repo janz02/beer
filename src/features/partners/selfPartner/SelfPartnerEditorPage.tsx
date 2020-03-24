@@ -35,7 +35,7 @@ export const SelfPartnerEditorPage: React.FC = () => {
 
   const props: PartnerEditorFormProps = {
     mode,
-    title: t('partner.editor-title'),
+    title: t('partner.editor.title'),
     handleSave,
     loading,
     options: <EditorModeOptions {...optionProps} />,

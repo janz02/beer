@@ -2,11 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Partner } from 'models/partner'
 import { api } from 'api'
-import { PartnerDto } from 'api/swagger'
+import { PartnerDto, PartnerState } from 'api/swagger'
 import { history } from 'router/router'
 import { ListRequestParams } from 'hooks/useTableUtils'
 import i18n from 'app/i18n'
 import { message } from 'antd'
+import { delay } from 'services/temp/delay'
 
 interface PartnerEditorState {
   partner?: Partner
@@ -16,6 +17,7 @@ interface PartnerEditorState {
   errorSites: boolean
   errorContact: boolean
   loading: boolean
+  loadingState: boolean
   loadingContact: boolean
 }
 
@@ -27,7 +29,8 @@ const initialState: PartnerEditorState = {
   errorSites: false,
   errorContact: false,
   loading: false,
-  loadingContact: false
+  loadingContact: false,
+  loadingState: false
 }
 
 const partnerEditorSlice = createSlice({
@@ -84,13 +87,27 @@ const partnerEditorSlice = createSlice({
     },
     deletePartnerRequest() {},
     deletePartnerSuccess() {},
-    deletePartnerFail() {}
+    deletePartnerFail() {},
+    setPartnerStateRequest(state) {
+      state.loadingState = true
+    },
+    setPartnerStateSuccess(state) {
+      state.loadingState = false
+    },
+    setPartnerStateFail(state) {
+      state.loadingState = false
+    }
   }
 })
 
 const { getPartnerSuccess, getParnterFail, getPartnerRequest } = partnerEditorSlice.actions
 const { deletePartnerRequest, deletePartnerSuccess, deletePartnerFail } = partnerEditorSlice.actions
 const { savePartnerSuccess, saveParnterFail, savePartnerRequest } = partnerEditorSlice.actions
+const {
+  setPartnerStateRequest,
+  setPartnerStateSuccess,
+  setPartnerStateFail
+} = partnerEditorSlice.actions
 const {
   getPartnerContactsRequest,
   getPartnerContactsSuccess,
@@ -151,8 +168,6 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
     console.log({ data })
 
     if (partner?.id) {
-      console.log('UPDATE')
-
       await api.partner.updatePartner({
         id: partner.id,
         partnerDto: {
@@ -163,7 +178,6 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
       dispatch(getPartner(partner.id))
     } else {
       const response = await api.partner.createPartner({ partnerDto: data as PartnerDto })
-      console.log('CREATE')
 
       history.push(`/partners/${response.id}`)
     }
@@ -185,5 +199,19 @@ export const deletePartner = (id: number): AppThunk => async (dispatch, getState
   } catch (err) {
     dispatch(deletePartnerFail())
     return { id, error: true }
+  }
+}
+
+export const setPartnerState = (state: PartnerState): AppThunk => async (dispatch, getState) => {
+  try {
+    dispatch(setPartnerStateRequest())
+    // TODO: integrate
+    // const partner = await api.partner.getPartner({ id })
+    await delay()
+    dispatch(setPartnerStateSuccess())
+    const id = getState().partnerEditor.partner?.id
+    id && dispatch(getPartner(id))
+  } catch (err) {
+    dispatch(setPartnerStateFail())
   }
 }

@@ -38,6 +38,7 @@
     "table-title": "Cashiers"
   },
   "common": {
+    "activate": "Activate",
     "cancel": "Cancel",
     "confirm": "Ok",
     "delete": "Delete",
@@ -57,6 +58,7 @@
     },
     "go-back": "Go back",
     "go-back-to-list": "Bact to the list",
+    "inactivate": "Inactivate",
     "message": {
       "delete-success": "Successful deletion",
       "email-sent": "Your request was processed succesfully",
@@ -298,9 +300,8 @@
   },
   "partner": {
     "editor": {
-      "title": "Partner editor"
+      "title": "Partner"
     },
-    "editor-title": "Partner",
     "field": {
       "address": "Address",
       "bank-account": "Bank account",
@@ -323,7 +324,6 @@
       "deleted": "Deleted",
       "inactive": "Inactive"
     },
-    "save": "Save",
     "save-partner-success": "Saving partner was successful.",
     "site": {
       "editor-title": "Partner's site"

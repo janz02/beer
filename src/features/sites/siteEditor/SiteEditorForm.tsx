@@ -91,7 +91,7 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
             disabled={!submitable}
             loading={loading}
           >
-            {t('partner.save')}
+            {t('common.save')}
           </Button>
         </Form>
       </ResponsiveCard>

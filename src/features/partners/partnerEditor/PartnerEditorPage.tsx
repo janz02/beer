@@ -11,6 +11,7 @@ import { Partner } from 'models/partner'
 import { Roles } from 'api/swagger/models'
 import { GenericPopup, DeletePopupState } from 'components/popups/GenericPopup'
 import { SitesListTile } from 'features/sites/siteList/SitesListTile'
+import { PartnerStateButton } from './PartnerStateButton'
 import {
   EditorModeOptions,
   EditorModeOptionsProps,
@@ -63,10 +64,17 @@ export const PartnerEditorPage: React.FC = () => {
     handleEscapeEdit: () => setMode(EditorMode.VIEW)
   }
 
+  const options = (
+    <>
+      <PartnerStateButton />
+      <EditorModeOptions {...optionProps} />
+    </>
+  )
+
   return (
     <>
       <PartnerEditorForm
-        options={<EditorModeOptions {...optionProps} />}
+        options={options}
         mode={mode}
         handleSave={handleSave}
         loading={loading}
