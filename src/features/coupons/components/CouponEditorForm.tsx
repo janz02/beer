@@ -221,6 +221,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     }
   }
 
+  const rowGutter = 70
+  const prizeOrDiscount = couponType === CouponType.Discount || couponType === CouponType.Prize
+
   return (
     <Row className="coupon-editor-form">
       <Col span={18} className="editor-col">
@@ -242,36 +245,44 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         >
           <Collapse defaultActiveKey={['1']}>
             <Collapse.Panel header={t('coupon-create.campaign-basics')} key="1">
-              <Form.Item
-                name="type"
-                label={t('coupon-create.field.type')}
-                rules={[rule.required()]}
-              >
-                <Select
-                  disabled={!displayEditor || !couponIsNew}
-                  onChange={(value: CouponType) => {
-                    setCouponType(value)
-                  }}
-                >
-                  {Object.keys(CouponType).map(x => (
-                    <Select.Option key={x} value={x}>
-                      {t(`coupon.type.${x.toLowerCase()}`)}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
+              <Row gutter={rowGutter}>
+                <Col span={6}>
+                  <Form.Item
+                    name="type"
+                    label={t('coupon-create.field.type')}
+                    rules={[rule.required()]}
+                  >
+                    <Select
+                      disabled={!displayEditor || !couponIsNew}
+                      onChange={(value: CouponType) => {
+                        setCouponType(value)
+                      }}
+                    >
+                      {Object.keys(CouponType).map(x => (
+                        <Select.Option key={x} value={x}>
+                          {t(`coupon.type.${x.toLowerCase()}`)}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                </Col>
 
-              {!couponIsNew && (
-                <Form.Item name="state" label={t('coupon-create.field.state')}>
-                  <CampaignStateDisplay state={coupon?.state} />
-                </Form.Item>
-              )}
+                <Col span={12} offset={6}>
+                  {!couponIsNew && (
+                    <Form.Item name="state" label={t('coupon-create.field.state')}>
+                      <CampaignStateDisplay state={coupon?.state} />
+                    </Form.Item>
+                  )}
+                </Col>
+              </Row>
 
-              {hasPermission(comboRoles.forNkm) && (
-                <Form.Item name="partnerId" label={t('coupon-create.field.partner-name')}>
-                  {/* TODO: integrate. */}
-                  <div>Partner field comes here</div>
-                  {/* {hasPermission(comboRoles.forPartner) ? (
+              <Row gutter={rowGutter}>
+                <Col span={12}>
+                  {hasPermission(comboRoles.forNkm) && (
+                    <Form.Item name="partnerId" label={t('coupon-create.field.partner-name')}>
+                      {/* TODO: integrate. */}
+                      <div>Partner field comes here</div>
+                      {/* {hasPermission(comboRoles.forPartner) ? (
                     // TODO: display only its partner's name
                     <div />
                   ) : (
@@ -284,48 +295,62 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         ))}
                     </Select>
                   )} */}
-                </Form.Item>
-              )}
+                    </Form.Item>
+                  )}
+                </Col>
 
-              {!couponIsNew && (
-                <Form.Item name="isActive" label={t('coupon-create.field.is-active')}>
-                  {coupon?.isActive ? t('coupon-create.active') : t('coupon-create.inactive')}
-                </Form.Item>
-              )}
+                <Col span={12}>
+                  {!couponIsNew && (
+                    <Form.Item name="isActive" label={t('coupon-create.field.is-active')}>
+                      {coupon?.isActive ? t('coupon-create.active') : t('coupon-create.inactive')}
+                    </Form.Item>
+                  )}
+                </Col>
+              </Row>
 
-              <Form.Item
-                name="name"
-                label={t('coupon-create.field.name')}
-                rules={[rule.requiredString(), rule.max(60)]}
-              >
-                <Input disabled={!displayEditor} maxLength={60} />
-              </Form.Item>
+              <Row gutter={rowGutter}>
+                <Col span={12} order={1}>
+                  <Form.Item
+                    name="name"
+                    label={t('coupon-create.field.name')}
+                    rules={[rule.requiredString(), rule.max(60)]}
+                  >
+                    <Input disabled={!displayEditor} maxLength={60} />
+                  </Form.Item>
+                </Col>
 
-              <Form.Item
-                name="startDate"
-                label={t('coupon-create.field.distribution-start-date')}
-                rules={[rule.required()]}
-              >
-                <DatePicker disabled={!displayEditor} />
-              </Form.Item>
+                <Col span={12} order={prizeOrDiscount ? 2 : 3}>
+                  <Form.Item
+                    name="startDate"
+                    label={t('coupon-create.field.distribution-start-date')}
+                    rules={[rule.required()]}
+                  >
+                    <DatePicker disabled={!displayEditor} />
+                  </Form.Item>
+                </Col>
 
-              {(couponType === CouponType.Discount || couponType === CouponType.Prize) && (
-                <Form.Item
-                  name="description"
-                  label={t('coupon-create.field.description')}
-                  rules={[rule.requiredString(), rule.max(255)]}
-                >
-                  <TextArea disabled={!displayEditor} maxLength={255} />
-                </Form.Item>
-              )}
+                <Col span={12} order={prizeOrDiscount ? 3 : 2}>
+                  {prizeOrDiscount && (
+                    <Form.Item
+                      name="description"
+                      label={t('coupon-create.field.description')}
+                      rules={[rule.requiredString(), rule.max(255)]}
+                    >
+                      <TextArea disabled={!displayEditor} maxLength={255} />
+                    </Form.Item>
+                  )}
+                </Col>
 
-              <Form.Item
-                name="endDate"
-                label={t('coupon-create.field.distribution-end-date')}
-                rules={[rule.required()]}
-              >
-                <DatePicker disabled={!displayEditor} />
-              </Form.Item>
+                <Col span={12} order={4}>
+                  <Form.Item
+                    name="endDate"
+                    label={t('coupon-create.field.distribution-end-date')}
+                    rules={[rule.required()]}
+                  >
+                    <DatePicker disabled={!displayEditor} />
+                  </Form.Item>
+                </Col>
+              </Row>
             </Collapse.Panel>
           </Collapse>
 
@@ -549,12 +574,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               <Form.Item
                 name="smallImage"
                 label={t('coupon-create.field.small-image')}
-                rules={[rule.required()]}
+                // rules={[rule.required()]}
               >
                 <div>Small image comes here</div>
               </Form.Item>
 
-              {(couponType === CouponType.Discount || couponType === CouponType.Prize) && (
+              {prizeOrDiscount && (
                 <Form.Item
                   name="bigImage"
                   label={t('coupon-create.field.big-image')}
