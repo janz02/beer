@@ -87,5 +87,18 @@ export function useCommonFormRules() {
     [t]
   )
 
-  return { required, requiredString, password, number, email, max }
+  /**
+   * Integer
+   * @param message (optional) string
+   */
+  const positiveInteger = useCallback(
+    (message?: string): Rule => ({
+      min: 1,
+      type: 'integer',
+      message: message || t('error.common.number-must-be-positive-integer')
+    }),
+    [t]
+  )
+
+  return { required, requiredString, password, number, email, max, positiveInteger }
 }

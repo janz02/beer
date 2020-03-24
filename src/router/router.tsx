@@ -25,7 +25,7 @@ import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
 
-const comboRoles = {
+export const comboRoles = {
   forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
   forNkm: [
     Roles.Administrator,
