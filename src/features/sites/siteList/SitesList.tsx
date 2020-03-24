@@ -84,7 +84,6 @@ export const SitesList: FC<SitesListProps> = props => {
             {...cardProps}
             width="normal"
             forTable
-            paddedBottom
             floatingTitle={t('site-list.list-title')}
             floatingOptions={headerOptions}
           >

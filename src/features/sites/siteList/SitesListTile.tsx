@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSites, deleteSite, setSitesListConstraints } from './siteListSlice'
+import { getSites, deleteSite, setSitesListConstraints, resetSiteList } from './siteListSlice'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { SitesList, SitesListProps } from './SitesList'
@@ -26,6 +26,12 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
     if (partnerId && isNaN(+partnerId)) return
     dispatch(getSites({}))
   }, [dispatch, listConstraints, partnerId])
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetSiteList())
+    }
+  }, [dispatch])
 
   const sitesListProps: SitesListProps = {
     cardProps: {

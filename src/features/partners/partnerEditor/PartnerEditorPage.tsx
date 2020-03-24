@@ -17,6 +17,7 @@ import {
   EditorModeOptionsProps,
   EditorMode
 } from 'components/buttons/EditorModeOptions'
+import { PartnerContactsTile } from '../partnerContacts/PartnerContactsTile'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -92,7 +93,12 @@ export const PartnerEditorPage: React.FC = () => {
       >
         <p>{partnerToDelete?.data?.name}</p>
       </GenericPopup>
-      {mode !== EditorMode.NEW && <SitesListTile hidden={mode !== EditorMode.VIEW} />}
+      {mode !== EditorMode.NEW && (
+        <>
+          <SitesListTile hidden={mode !== EditorMode.VIEW} />
+          <PartnerContactsTile />
+        </>
+      )}
     </>
   )
 }
