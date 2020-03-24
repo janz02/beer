@@ -80,11 +80,6 @@
     "yes": "Yes"
   },
   "coupon": {
-    "rank": {
-      "bronze": "Bronze",
-      "gold": "Gold",
-      "silver": "Silver"
-    },
     "state": {
       "accepted": "Accepted",
       "action": {
@@ -97,15 +92,6 @@
       "closed": "Closed",
       "created": "Created",
       "waiting": "Pending approve"
-    },
-    "type": {
-      "banner": "Banner",
-      "discount": "Discount",
-      "prize": "Prize"
-    },
-    "mode": {
-      "online": "Online",
-      "physical": "Physical"
     }
   },
   "coupon-category": {
@@ -149,6 +135,7 @@
   },
   "coupon-list": {
     "add": "New campaign",
+    "all-tab": "All",
     "campaign-type": "Campaign type",
     "campaigns": "Campaigns",
     "category": "Coupon category",
@@ -161,18 +148,17 @@
     "minimum-shopping-value": "Minimum shopping value",
     "name": "Campaign hungarian name",
     "partner": "Partner",
+    "pending-tab": "Pending approve",
     "preferred-position": "Preferred position",
     "rank": "Rank",
-    "redeem-mode": "Coupon mode",
     "redeem-count": "Redeem count",
+    "redeem-mode": "Coupon mode",
     "show-archived": "Show archived campaigns",
     "small-image": "Coupon small image",
     "start-date": "Campaign start date",
     "state": "Campaign state",
     "user": "Creator user",
-    "view-count": "View count",
-    "all-tab": "All",
-    "pending-tab": "Pending approve"
+    "view-count": "View count"
   },
   "error": {
     "auth": {
@@ -195,6 +181,8 @@
       "user-not-found": "User not found."
     },
     "cashier": {
+      "cashier-cant-delete": "Cashier cannot be deleted.",
+      "cashier-cant-save": "Cashier cannot be saved.",
       "cashier-couponId-not-unique": "Online cashier ID must be unique.",
       "stamp-couponId-not-unique": "Digital stamp ID must be unique."
     },
@@ -216,8 +204,12 @@
       "cant-be-deleted": "Coupon can't be deleted.",
       "cant-change-state": "Can't change coupon state.",
       "invalid-initial-state": "Invalid initial state.",
+      "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
+      "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
+      "name-cant-be-edited-after-accepted": "The coupon name cannot be changed after it has been accepted.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
-      "percentage-max-100": "The percentage value cannot exceed 100."
+      "percentage-max-100": "The percentage value cannot exceed 100.",
+      "predefined-file-id-mismatch": "The file does not match with the previously uploaded one."
     },
     "coupon-categories": {
       "name-must-be-unique": "Category name must be unique."

@@ -67,5 +67,3 @@ export * from './TagDto';
 export * from './TagVm';
 export * from './TagVmPaginatedResponse';
 export * from './UserVm';
-export * from './WaitingCouponVm';
-export * from './WaitingCouponVmPaginatedResponse';

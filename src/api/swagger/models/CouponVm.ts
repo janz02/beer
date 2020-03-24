@@ -140,6 +140,48 @@ export interface CouponVm {
     comments?: Array<CouponCommentVm> | null;
     /**
      * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    predefinedCodesFileId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    createdBy?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponVm
+     */
+    createdDate?: Date | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    modifiedBy?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponVm
+     */
+    modifiedDate?: Date | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    approvedBy?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponVm
+     */
+    approvedDate?: Date | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof CouponVm
      */
@@ -172,6 +214,13 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'comments': !exists(json, 'comments') ? undefined : (json['comments'] === null ? null : (json['comments'] as Array<any>).map(CouponCommentVmFromJSON)),
+        'predefinedCodesFileId': !exists(json, 'predefinedCodesFileId') ? undefined : json['predefinedCodesFileId'],
+        'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
+        'createdDate': !exists(json, 'createdDate') ? undefined : (json['createdDate'] === null ? null : new Date(json['createdDate'])),
+        'modifiedBy': !exists(json, 'modifiedBy') ? undefined : json['modifiedBy'],
+        'modifiedDate': !exists(json, 'modifiedDate') ? undefined : (json['modifiedDate'] === null ? null : new Date(json['modifiedDate'])),
+        'approvedBy': !exists(json, 'approvedBy') ? undefined : json['approvedBy'],
+        'approvedDate': !exists(json, 'approvedDate') ? undefined : (json['approvedDate'] === null ? null : new Date(json['approvedDate'])),
         'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
     };
 }
@@ -201,6 +250,13 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'categoryId': value.categoryId,
         'tags': value.tags,
         'comments': value.comments === undefined ? undefined : (value.comments === null ? null : (value.comments as Array<any>).map(CouponCommentVmToJSON)),
+        'predefinedCodesFileId': value.predefinedCodesFileId,
+        'createdBy': value.createdBy,
+        'createdDate': value.createdDate === undefined ? undefined : (value.createdDate === null ? null : value.createdDate.toISOString()),
+        'modifiedBy': value.modifiedBy,
+        'modifiedDate': value.modifiedDate === undefined ? undefined : (value.modifiedDate === null ? null : value.modifiedDate.toISOString()),
+        'approvedBy': value.approvedBy,
+        'approvedDate': value.approvedDate === undefined ? undefined : (value.approvedDate === null ? null : value.approvedDate.toISOString()),
         'isActive': value.isActive,
     };
 }

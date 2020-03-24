@@ -54,9 +54,6 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
-    WaitingCouponVmPaginatedResponse,
-    WaitingCouponVmPaginatedResponseFromJSON,
-    WaitingCouponVmPaginatedResponseToJSON,
 } from '../models';
 
 export interface ActivateCouponRequest {
@@ -100,19 +97,6 @@ export interface GetCouponsRequest {
     discountType?: CouponDiscountType;
     createdBy?: string | null;
     preferredPosition?: number | null;
-    page?: number;
-    pageSize?: number;
-    orderBy?: string | null;
-    orderByType?: OrderByType;
-}
-
-export interface GetWaitingCouponsRequest {
-    name?: string | null;
-    state?: CouponState;
-    categoryId?: number | null;
-    startDate?: Date | null;
-    endDate?: Date | null;
-    expireDate?: Date | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -467,78 +451,6 @@ export class CouponsApi extends runtime.BaseAPI {
      */
     async getCoupons(requestParameters: GetCouponsRequest): Promise<DetailedCouponVmPaginatedResponse> {
         const response = await this.getCouponsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state
-     * Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state
-     */
-    async getWaitingCouponsRaw(requestParameters: GetWaitingCouponsRequest): Promise<runtime.ApiResponse<WaitingCouponVmPaginatedResponse>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.name !== undefined) {
-            queryParameters['name'] = requestParameters.name;
-        }
-
-        if (requestParameters.state !== undefined) {
-            queryParameters['state'] = requestParameters.state;
-        }
-
-        if (requestParameters.categoryId !== undefined) {
-            queryParameters['categoryId'] = requestParameters.categoryId;
-        }
-
-        if (requestParameters.startDate !== undefined) {
-            queryParameters['startDate'] = (requestParameters.startDate as any).toISOString();
-        }
-
-        if (requestParameters.endDate !== undefined) {
-            queryParameters['endDate'] = (requestParameters.endDate as any).toISOString();
-        }
-
-        if (requestParameters.expireDate !== undefined) {
-            queryParameters['expireDate'] = (requestParameters.expireDate as any).toISOString();
-        }
-
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
-        }
-
-        if (requestParameters.pageSize !== undefined) {
-            queryParameters['pageSize'] = requestParameters.pageSize;
-        }
-
-        if (requestParameters.orderBy !== undefined) {
-            queryParameters['orderBy'] = requestParameters.orderBy;
-        }
-
-        if (requestParameters.orderByType !== undefined) {
-            queryParameters['orderByType'] = requestParameters.orderByType;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Coupons/Waiting`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => WaitingCouponVmPaginatedResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state
-     * Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state
-     */
-    async getWaitingCoupons(requestParameters: GetWaitingCouponsRequest): Promise<WaitingCouponVmPaginatedResponse> {
-        const response = await this.getWaitingCouponsRaw(requestParameters);
         return await response.value();
     }
 
