@@ -88,6 +88,11 @@
       "online": "Online",
       "physical": "Fizikai"
     },
+    "rank": {
+      "bronze": "__STRING_NOT_TRANSLATED__",
+      "gold": "__STRING_NOT_TRANSLATED__",
+      "silver": "__STRING_NOT_TRANSLATED__"
+    },
     "state": {
       "accepted": "Jóváhagyott",
       "action": {
@@ -247,7 +252,7 @@
       "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben ay állapotban.",
       "name-cant-be-edited-after-accepted": "A kupon neve nem módosítható, miután már el lett fogadva.",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
-      "percentage-max-100": "A százalék érték maximum 100 lehet.",
+      "percentage-discount-out-of-range": "Csak 1 és 100 közötti érték adható meg.",
       "predefined-file-id-mismatch": "A kuponkódok fájlja nem egyezik ay eddig felöltöttével.",
       "product-value-required-if-average-basket-value-empty": "A termék érték mező megadása kötelező, ha a tavalyi átlagos kosárérték mező üres."
     },

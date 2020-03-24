@@ -88,6 +88,11 @@
       "online": "Online",
       "physical": "Physical"
     },
+    "rank": {
+      "bronze": "__STRING_NOT_TRANSLATED__",
+      "gold": "__STRING_NOT_TRANSLATED__",
+      "silver": "__STRING_NOT_TRANSLATED__"
+    },
     "state": {
       "accepted": "Accepted",
       "action": {
@@ -247,7 +252,7 @@
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
       "name-cant-be-edited-after-accepted": "The coupon name cannot be changed after it has been accepted.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
-      "percentage-max-100": "The percentage value cannot exceed 100.",
+      "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
       "predefined-file-id-mismatch": "The file does not match with the previously uploaded one.",
       "product-value-required-if-average-basket-value-empty": "Product value can't be empty if average basket value is empty."
     },

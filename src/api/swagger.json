@@ -1931,6 +1931,39 @@
         }
       }
     },
+    "/api/CouponUserCodes/{couponId}/RedeemedCouponCodes": {
+      "get": {
+        "tags": [
+          "CouponUserCodes"
+        ],
+        "summary": "",
+        "operationId": "CouponUserCode",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CouponUserPairs/GeneratePairs": {
       "post": {
         "tags": [
@@ -4599,37 +4632,6 @@
             "items": {
               "$ref": "#/components/schemas/CouponCommentVm"
             },
-            "nullable": true
-          },
-          "predefinedCodesFileId": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "approvedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "approvedDate": {
-            "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "predefinedCodesFileId": {
