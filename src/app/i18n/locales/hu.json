@@ -80,6 +80,10 @@
     "yes": "Igen"
   },
   "coupon": {
+    "mode": {
+      "online": "Online",
+      "physical": "Fizikai"
+    },
     "state": {
       "accepted": "Jóváhagyott",
       "action": {
@@ -92,6 +96,11 @@
       "closed": "Lezárt",
       "created": "Rögzített",
       "waiting": "Jóváhagyásra várakozik"
+    },
+    "type": {
+      "banner": "Banner",
+      "discount": "Kedvezmény",
+      "prize": "Nyeremény"
     }
   },
   "coupon-category": {
@@ -135,6 +144,7 @@
   },
   "coupon-list": {
     "add": "Új kampány",
+    "all-tab": "Összes",
     "campaign-type": "Kampány típus",
     "campaigns": "Kampányok",
     "category": "Kupon kategória",
@@ -147,10 +157,11 @@
     "minimum-shopping-value": "Minmális vásárlási érték",
     "name": "Kampány magyar név",
     "partner": "Partner",
+    "pending-tab": "Jóváhagyásra vár",
     "preferred-position": "Preferált pozíció",
     "rank": "Rang",
-    "redee-mode": "Kupon mód",
     "redeem-count": "Beváltások száma",
+    "redeem-mode": "Kupon mód",
     "show-archived": "Archivált kampányok mutatása",
     "small-image": "Kupon kis kép",
     "start-date": "Kampány kezdete",
@@ -179,6 +190,8 @@
       "user-not-found": "Felhasználó nem található."
     },
     "cashier": {
+      "cashier-cant-delete": "A pénztárat nem lehet törölni.",
+      "cashier-cant-save": "A pénztárat nem lehet módosítani.",
       "cashier-couponId-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
       "stamp-couponId-not-unique": "Digitális pecsét azonosító nem egyedi."
     },
@@ -200,8 +213,12 @@
       "cant-be-deleted": "Kupon nem törölhető.",
       "cant-change-state": "Kupon státusz változtatása sikertelen.",
       "invalid-initial-state": "Hibás kezdőállapot",
+      "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek.",
+      "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben ay állapotban.",
+      "name-cant-be-edited-after-accepted": "A kupon neve nem módosítható, miután már el lett fogadva.",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
-      "percentage-max-100": "A százalék érték maximum 100 lehet."
+      "percentage-max-100": "A százalék érték maximum 100 lehet.",
+      "predefined-file-id-mismatch": "A kuponkódok fájlja nem egyezik ay eddig felöltöttével."
     },
     "coupon-categories": {
       "name-must-be-unique": "Kategória nevének egyedinek kell lennie."

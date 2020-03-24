@@ -1295,6 +1295,13 @@
             }
           },
           {
+            "name": "onlyWaiting",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "name",
             "in": "query",
             "schema": {
@@ -1614,125 +1621,6 @@
         }
       }
     },
-    "/api/Coupons/Waiting": {
-      "get": {
-        "tags": [
-          "Coupons"
-        ],
-        "summary": "Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state",
-        "description": "Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state",
-        "operationId": "getWaitingCoupons",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "state",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/CouponState"
-            }
-          },
-          {
-            "name": "categoryId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            }
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "expireDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "nullable": true
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "orderByType",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/OrderByType"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful query: List of Coupon entities",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/WaitingCouponVmPaginatedResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WaitingCouponVmPaginatedResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WaitingCouponVmPaginatedResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation error occurred: error.common.validation"
-          }
-        }
-      }
-    },
     "/api/Coupons/{id}/Status": {
       "put": {
         "tags": [
@@ -2003,6 +1891,39 @@
                   "items": {
                     "$ref": "#/components/schemas/MyClaimedCouponVm"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CouponUserCodes/{couponId}/CouponCodes": {
+      "get": {
+        "tags": [
+          "CouponUserCodes"
+        ],
+        "summary": "",
+        "operationId": "couponCodesCouponUserCode",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -4458,6 +4379,10 @@
           },
           "mode": {
             "$ref": "#/components/schemas/CouponMode"
+          },
+          "predefinedCodesFileId": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -4549,6 +4474,29 @@
             "type": "string",
             "nullable": true
           },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "approvedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "preferredPosition": {
             "type": "integer",
             "format": "int32"
@@ -4627,6 +4575,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "discountType": {
+            "$ref": "#/components/schemas/CouponDiscountType"
+          },
           "discountValue": {
             "type": "integer",
             "format": "int32"
@@ -4650,71 +4601,39 @@
             },
             "nullable": true
           },
-          "isActive": {
-            "type": "boolean"
-          }
-        }
-      },
-      "WaitingCouponVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
+          "predefinedCodesFileId": {
             "type": "string",
             "nullable": true
           },
-          "state": {
-            "$ref": "#/components/schemas/CouponState"
-          },
-          "categoryId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "startDate": {
+          "createdBy": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
-          "endDate": {
+          "createdDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
-          "expireDate": {
+          "modifiedBy": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "approvedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "isActive": {
             "type": "boolean"
-          }
-        }
-      },
-      "WaitingCouponVmPaginatedResponse": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WaitingCouponVm"
-            },
-            "nullable": true
-          },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "from": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "to": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
