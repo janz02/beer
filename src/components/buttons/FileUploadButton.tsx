@@ -62,7 +62,10 @@ export const FileUploadButton: FC<UploadButtonProps> = ({ ...props }) => {
         setFileList(componentFileList)
       }}
       // There is only 1 file, so you know what to do...
-      onRemove={() => props.onRemove?.()}
+      onRemove={() => {
+        setFileList([])
+        props.onRemove?.()
+      }}
     >
       <Button style={{ borderRadius: '0.2rem' }}>
         <UploadOutlined /> Upload
