@@ -204,7 +204,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
           disabled={!submitable}
           loading={loading}
         >
-          {t('partner.save')}
+          {t('common.save')}
         </Button>
       </Form>
     </ResponsiveCard>

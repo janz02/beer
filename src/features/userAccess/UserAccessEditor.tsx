@@ -1,21 +1,16 @@
 import React, { FC, useMemo, useEffect } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'hooks/react-redux-hooks'
-import { Status } from 'models/user'
+import { Status, UserType } from 'models/user'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { Form, Select, Radio } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import {
-  getUserAccess,
-  saveUserAccess,
-  clearUserAccessEditor,
-  UserType
-} from './userAccessListSlice'
+import { getUserAccess, saveUserAccess, clearUserAccessEditor } from './userAccessListSlice'
 import Typography from 'antd/lib/typography'
 import { Roles } from 'api/swagger/models'
-import { useUserAccessRoleGenerator } from './useUserAccessRoleGenerator'
+import { useRoleGenerator } from '../../hooks/useRoleGenerator'
 
 const { Text } = Typography
 
@@ -46,7 +41,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
     dispatch(getUserAccess(userId!))
   }, [dispatch, userId, visible])
 
-  const roleOptions = useUserAccessRoleGenerator(userType)
+  const roleOptions = useRoleGenerator(userType)
 
   const initialValues: UserAccessFormValues = useMemo(
     () => ({

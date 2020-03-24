@@ -10,6 +10,7 @@ export interface GenericModalFormEditorParams {
 export interface UseGenericModalFormEditorProps {
   dataId: string | undefined
   rootRoute: string
+  detailRoute?: string
 }
 
 export interface UseGenericModalFormEditorUtils {
@@ -22,7 +23,7 @@ export interface UseGenericModalFormEditorUtils {
 export const useGenericModalFormEditorUtils = (
   props: UseGenericModalFormEditorProps
 ): UseGenericModalFormEditorUtils => {
-  const { dataId, rootRoute } = props
+  const { dataId, rootRoute, detailRoute } = props
 
   const [editorParams, setEditorParams] = useState<GenericModalFormEditorParams>({
     visible: false
@@ -30,9 +31,9 @@ export const useGenericModalFormEditorUtils = (
 
   const routeToEditor = useCallback(
     (requestDataId?: number): void => {
-      history.push(`${rootRoute}/${requestDataId ?? 'new'}`)
+      history.push(`${rootRoute}${detailRoute ?? ''}/${requestDataId ?? 'new'}`)
     },
-    [rootRoute]
+    [detailRoute, rootRoute]
   )
 
   const routeToRoot = useCallback((): void => {

@@ -27,9 +27,13 @@ export const CategoryList: FC<CategoryListProps> = props => {
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
-    Category
-  >({
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<Category>({
     listParamsState: listParams,
     filterKeys: ['name'],
     getDataAction: getCategories
@@ -81,7 +85,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
           {...{
             loading,
             columns: columnsConfig,
-            dataSource: categories.map((c, i) => ({ ...c, key: '' + i + c.id })),
+            dataSource: addKeyProp(categories),
             pagination: paginationConfig,
             onChange: handleTableChange
           }}

@@ -38,6 +38,7 @@
     "table-title": "Cashiers"
   },
   "common": {
+    "activate": "Activate",
     "cancel": "Cancel",
     "confirm": "Ok",
     "delete": "Delete",
@@ -57,6 +58,7 @@
     },
     "go-back": "Go back",
     "go-back-to-list": "Bact to the list",
+    "inactivate": "Inactivate",
     "message": {
       "delete-success": "Successful deletion",
       "email-sent": "Your request was processed succesfully",
@@ -65,9 +67,11 @@
     "no": "No",
     "ok": "OK",
     "popup": {
+      "activate-title": "Are you sure about activating this?",
       "confirm-title": "Are you sure about doing this?",
       "delete-title": "Are you sure about deleting this data?",
       "discard-title": "Are you sure about discarding this?",
+      "inactivate-title": "Are you sure about inactivating this?",
       "restore-title": "Are you sure about restoring this?",
       "save-title": "Are you sure about saving this data?"
     },
@@ -298,9 +302,8 @@
   },
   "partner": {
     "editor": {
-      "title": "Partner editor"
+      "title": "Partner"
     },
-    "editor-title": "Partner",
     "field": {
       "address": "Address",
       "bank-account": "Bank account",
@@ -323,10 +326,24 @@
       "deleted": "Deleted",
       "inactive": "Inactive"
     },
-    "save": "Save",
     "save-partner-success": "Saving partner was successful.",
     "site": {
       "editor-title": "Partner's site"
+    }
+  },
+  "partner-contact": {
+    "editor-create": "Add new partner contact",
+    "editor-edit": "Edit partner contact",
+    "field": {
+      "email": "E-mail address",
+      "major-partner": "Major Partner",
+      "name": "Name",
+      "phone": "Phone",
+      "role": "Role"
+    },
+    "list": {
+      "add": "Add new contact",
+      "title": "Partner contacts"
     }
   },
   "profile": {
@@ -358,6 +375,16 @@
       "name": "Site name"
     }
   },
+  "user": {
+    "role": {
+      "administrator": "Administrator",
+      "businesspartnermanager": "Business Partner Manager",
+      "campaignmanager": "Campaign Manager",
+      "partnercontactapprover": "Partner Contact - Approver",
+      "partnercontacteditor": "Partner Contact - Editor",
+      "partnermanager": "Partner Manager"
+    }
+  },
   "user-access": {
     "access-editor": {
       "title": "Access Rights"
@@ -382,14 +409,6 @@
     },
     "nkm-users": "NKM User",
     "partner-users": "Partner Contact",
-    "role": {
-      "administrator": "Administrator",
-      "businesspartnermanager": "Business Partner Manager",
-      "campaignmanager": "Campaign Manager",
-      "partnercontactapprover": "Partner Contact - Approver",
-      "partnercontacteditor": "Partner Contact - Editor",
-      "partnermanager": "Partner Manager"
-    },
     "user-access": "Users and Access Rights"
   },
   "warning-prompt": {

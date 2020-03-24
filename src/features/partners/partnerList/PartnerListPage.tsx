@@ -26,9 +26,13 @@ export const PartnerListPage: React.FC = () => {
     dispatch(getPartners())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
-    Partner
-  >({
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<Partner>({
     listParamsState: listParams,
     filterKeys: ['name', 'majorPartner', 'partnerState', 'address'],
     getDataAction: getPartners
@@ -101,7 +105,7 @@ export const PartnerListPage: React.FC = () => {
           {...{
             loading,
             columns: columnsConfig,
-            dataSource: partners.map((t, i) => ({ ...t, key: '' + i + t.id })),
+            dataSource: addKeyProp(partners),
             pagination: paginationConfig,
             onChange: handleTableChange
           }}

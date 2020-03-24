@@ -38,6 +38,7 @@
     "table-title": "Pénztárak"
   },
   "common": {
+    "activate": "Aktiválás",
     "cancel": "Mégsem",
     "confirm": "Rendben",
     "delete": "Törlés",
@@ -57,6 +58,7 @@
     },
     "go-back": "Vissza",
     "go-back-to-list": "Vissza a listához",
+    "inactivate": "Inaktiválás",
     "message": {
       "delete-success": "Sikeres törlés",
       "email-sent": "A kérés sikeresen fel lett dolgozva",
@@ -65,9 +67,11 @@
     "no": "Nem",
     "ok": "OK",
     "popup": {
+      "activate-title": "Biztos, hogy aktiválni szeretnéd?",
       "confirm-title": "Biztos, hogy ezt szeretnéd tenni?",
       "delete-title": "Biztos, hogy törölni szeretnéd?",
       "discard-title": "Biztos, hogy el szeretnéd vetni?",
+      "inactivate-title": "Biztos, hogy inaktiválni szeretnéd?",
       "restore-title": "Biztos, hogy vissza szeretnéd állítani?",
       "save-title": "Biztos, hogy menteni szeretnéd?"
     },
@@ -298,9 +302,8 @@
   },
   "partner": {
     "editor": {
-      "title": "Partner szerkesztő"
+      "title": "Partner adatai"
     },
-    "editor-title": "Partner",
     "field": {
       "address": "Cím",
       "bank-account": "Bankszámla",
@@ -323,10 +326,24 @@
       "deleted": "Törölt",
       "inactive": "Inaktív"
     },
-    "save": "Mentés",
     "save-partner-success": "Partner mentése sikeres.",
     "site": {
       "editor-title": "Partner telephelye"
+    }
+  },
+  "partner-contact": {
+    "editor-create": "Kapcsolattartó hozzáadása",
+    "editor-edit": "Kapcsolattartó szerkesztése",
+    "field": {
+      "email": "E-mail cím",
+      "major-partner": "Kiemelt partner",
+      "name": "Név",
+      "phone": "Telefonszám",
+      "role": "Jogosultság"
+    },
+    "list": {
+      "add": "Kapcsolattartó hozzáadása",
+      "title": "Partner kapcsolattartói"
     }
   },
   "profile": {
@@ -358,6 +375,16 @@
       "name": "Telephely név"
     }
   },
+  "user": {
+    "role": {
+      "administrator": "Adminisztrátor",
+      "businesspartnermanager": "Ügyfél menedzser",
+      "campaignmanager": "Kampány menedzser",
+      "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
+      "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
+      "partnermanager": "Partner menedzser"
+    }
+  },
   "user-access": {
     "access-editor": {
       "title": "Felhasználók és Jogosultságok"
@@ -382,14 +409,6 @@
     },
     "nkm-users": "NKM Felhasználó",
     "partner-users": "Partner Kapcsolattartó",
-    "role": {
-      "administrator": "Adminisztrátor",
-      "businesspartnermanager": "Ügyfél menedzser",
-      "campaignmanager": "Kampány menedzser",
-      "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
-      "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
-      "partnermanager": "Partner menedzser"
-    },
     "user-access": "Felhasználók és Jogosultságok"
   },
   "warning-prompt": {
