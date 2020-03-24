@@ -13,23 +13,23 @@ export const CampaignStateDisplay: React.FC<CampaignStateDisplayProps> = props =
 
   if (!state) return <></>
 
-  let color = 'magenta'
+  let color = 'orange'
 
   switch (state) {
     case CouponState.Created:
-      color = 'magenta'
-      break
-    case CouponState.Waiting:
-      color = 'red'
-      break
-    case CouponState.Accepted:
-      color = 'volcano'
-      break
-    case CouponState.Closed:
       color = 'orange'
       break
+    case CouponState.Waiting:
+      color = 'green'
+      break
+    case CouponState.Accepted:
+      color = 'cyan'
+      break
+    case CouponState.Closed:
+      color = 'geekblue'
+      break
     case CouponState.Archived:
-      color = 'gold'
+      color = 'default'
       break
   }
 
