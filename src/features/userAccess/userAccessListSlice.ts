@@ -6,15 +6,10 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
-import { UserAccess } from 'models/user'
+import { UserAccess, UserType } from 'models/user'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Roles } from 'api/swagger/models'
-
-export enum UserType {
-  NKM = 'nkm',
-  PARTNER = 'partner'
-}
 
 interface UserAccessListState {
   nkmUsers: UserAccess[]

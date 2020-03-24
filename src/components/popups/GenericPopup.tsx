@@ -4,15 +4,28 @@ import { Modal } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
 import { useTranslation } from 'react-i18next'
 import { NativeButtonProps } from 'antd/lib/button/button'
-import { DeleteFilled, SaveFilled, CheckOutlined, CloseOutlined } from '@ant-design/icons'
+import {
+  DeleteFilled,
+  SaveFilled,
+  CheckOutlined,
+  CloseOutlined,
+  StopOutlined
+} from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import { AppThunk } from 'app/store'
 
-type PopupType = 'discard' | 'confirm' | 'save' | 'delete' | 'restore'
+export type PopupType =
+  | 'discard'
+  | 'confirm'
+  | 'save'
+  | 'delete'
+  | 'restore'
+  | 'activate'
+  | 'inactivate'
 
 // TODO: the async actions are not canceled, introduce sagas if needed
 
-export type DeletePopupState<T extends { id?: number }> = {
+export type PopupState<T extends { id?: number }> = {
   data?: T
   popupVisible?: boolean
 } | null
@@ -79,6 +92,17 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
       okButtonProps.icon = <CheckOutlined />
       title = t(`common.popup.restore-title`)
       okText = t(`common.restore`)
+      break
+    case 'activate':
+      okButtonProps.icon = <CheckOutlined />
+      title = t(`common.popup.activate-title`)
+      okText = t(`common.activate`)
+      break
+    case 'inactivate':
+      okButtonProps.danger = true
+      okButtonProps.icon = <StopOutlined />
+      title = t(`common.popup.inactivate-title`)
+      okText = t(`common.inactivate`)
       break
   }
 

@@ -44,9 +44,13 @@ export const NewsletterList: FC = () => {
     dispatch(getNewsletterTemplates())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
-    NewsletterPreview
-  >({
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<NewsletterPreview>({
     listParamsState: listParams,
     filterKeys: ['name'],
     getDataAction: getNewsletterTemplates
@@ -115,7 +119,7 @@ export const NewsletterList: FC = () => {
           {...{
             loading,
             columns: columnsConfig,
-            dataSource: templates.map((t, i) => ({ ...t, key: '' + i + t.id })),
+            dataSource: addKeyProp(templates),
             pagination: paginationConfig,
             onChange: handleTableChange
           }}

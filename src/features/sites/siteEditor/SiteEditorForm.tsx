@@ -52,7 +52,6 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
   return (
     <>
       <ResponsiveCard
-        width="skinny"
         floatingTitle={title}
         floatingOptions={options}
         floatingBackButton={{ onClick: onExit, primary: !modified }}

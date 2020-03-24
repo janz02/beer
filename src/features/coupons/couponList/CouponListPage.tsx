@@ -47,9 +47,13 @@ export const CouponListPage: React.FC = () => {
     dispatch(getCoupons())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, columnConfig, actionColumnConfig } = useTableUtils<
-    Coupon
-  >({
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<Coupon>({
     listParamsState: listParams,
     filterKeys: ['name', 'state', 'categoryId', 'startDate', 'endDate', 'expireDate'],
     getDataAction: getCoupons
@@ -299,7 +303,7 @@ export const CouponListPage: React.FC = () => {
             {...{
               loading: loading,
               columns: columnsConfig,
-              dataSource: coupons.map((u, i) => ({ ...u, key: i })),
+              dataSource: addKeyProp(coupons),
               pagination: paginationConfig,
               onChange: handleTableChange
             }}

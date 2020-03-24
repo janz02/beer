@@ -13,13 +13,12 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
   const dispatch = useDispatch()
 
   const { route, alternativeMode, actions, selector } = useReusableSites()
-  const { getSites, deleteSite } = actions
-
+  const { getList, deleteItem } = actions
   const { sites, listParams, loading } = useSelector(selector)
 
   useEffect(() => {
-    dispatch(getSites({}))
-  }, [dispatch, getSites])
+    dispatch(getList({}))
+  }, [dispatch, getList])
 
   const sitesListProps: SitesListProps = {
     cardProps: {
@@ -29,10 +28,10 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
     sites,
     loading,
     listParamsState: listParams,
-    getDataAction: getSites,
+    getDataAction: getList,
     handleAdd: () => history.push(route.root),
     handleEdit: (id: number) => history.push(`${route.root}/${id}`),
-    deleteAction: deleteSite
+    deleteAction: deleteItem
   }
 
   return <SitesList {...sitesListProps} />

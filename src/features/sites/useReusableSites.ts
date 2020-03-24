@@ -36,7 +36,7 @@ export const useReusableSites = (): UseReusableSitesUtils => {
   const utils: UseReusableSitesUtils = useMemo(() => {
     if (pathname.startsWith('/partners') && partnerId) {
       const actions = partnerSiteListSlice.actions
-      dispatch(actions.setSitesListConstraints({ partnerId }))
+      dispatch(actions.setListConstraints({ partnerId: +partnerId }))
       return {
         alternativeMode: true,
         route: {

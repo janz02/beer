@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, Reducer, AnyAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { Site } from 'models/site'
@@ -8,6 +8,7 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
+import { SliceFactoryUtils, SliceFactoryProps, CommonSliceActions } from 'models/reusableFeature'
 
 export interface SiteListState {
   sites: Site[]
@@ -18,21 +19,10 @@ export interface SiteListState {
   errorDeletion: string
 }
 
-interface SliceFactoryProps {
-  name: string
-  getSliceState: () => AppThunk
-}
-
-interface SliceFactoryUtils<T> {
-  reducer: Reducer<T, AnyAction>
-}
-
-export interface SiteListSliceActions {
-  deleteSite: (id: number) => AppThunk
-  getSites: (params?: ListRequestParams) => AppThunk
-  resetSiteList: () => AppThunk
-  setSitesListConstraints: (params?: ListRequestParams) => AppThunk
-}
+export type SiteListSliceActions = Pick<
+  CommonSliceActions<Site>,
+  'getList' | 'reset' | 'deleteItem' | 'setListConstraints'
+>
 
 interface SiteListSliceFactoryUtils extends SliceFactoryUtils<SiteListState> {
   actions: SiteListSliceActions
@@ -54,14 +44,14 @@ const siteListSliceFactory = (props: SliceFactoryProps): SiteListSliceFactoryUti
     name,
     initialState,
     reducers: {
-      _resetSiteList: () => initialState,
-      _setSitesListConstraints(state, action: PayloadAction<ListRequestParams>) {
+      _reset: () => initialState,
+      _setListConstraints(state, action: PayloadAction<ListRequestParams>) {
         state.listConstraintParams = action.payload
       },
-      getSitesRequest(state) {
+      getListRequest(state) {
         state.loading = true
       },
-      getSitesSuccess(
+      getListSuccess(
         state,
         action: PayloadAction<{ sites: Site[]; listParams: ListRequestParams }>
       ) {
@@ -70,32 +60,32 @@ const siteListSliceFactory = (props: SliceFactoryProps): SiteListSliceFactoryUti
         state.loading = false
         state.errorList = ''
       },
-      getSitesFail(state, action: PayloadAction<string>) {
+      getListFail(state, action: PayloadAction<string>) {
         state.loading = false
         state.errorList = action.payload
       },
-      deleteSiteRequest(state) {
+      deleteItemRequest(state) {
         state.loading = true
       },
-      deleteSiteSuccess(state) {
+      deleteItemSuccess(state) {
         state.loading = false
         state.errorDeletion = ''
       },
-      deleteSiteFail(state, action: PayloadAction<string>) {
+      deleteItemFail(state, action: PayloadAction<string>) {
         state.loading = false
         state.errorDeletion = action.payload
       }
     }
   })
-  const { getSitesRequest, getSitesSuccess, getSitesFail } = slice.actions
-  const { deleteSiteRequest, deleteSiteSuccess, deleteSiteFail } = slice.actions
-  const { _resetSiteList, _setSitesListConstraints } = slice.actions
+  const { getListRequest, getListSuccess, getListFail } = slice.actions
+  const { deleteItemRequest, deleteItemSuccess, deleteItemFail } = slice.actions
+  const { _reset, _setListConstraints } = slice.actions
 
   const reducer = slice.reducer
 
-  const getSites = (params: ListRequestParams = {}): AppThunk => async dispatch => {
+  const getList = (params: ListRequestParams = {}): AppThunk => async dispatch => {
     try {
-      dispatch(getSitesRequest())
+      dispatch(getListRequest())
 
       const state = ((await dispatch(getSliceState())) as any) as SiteListState
 
@@ -107,52 +97,55 @@ const siteListSliceFactory = (props: SliceFactoryProps): SiteListSliceFactoryUti
         constraints.partnerId = partner.id
       }
 
+      if (isNaN(constraints.partnerId)) {
+        throw Error('Invalid partner id: ' + constraints.partnerId)
+      }
       const revisedParams = reviseListRequestParams(state.listParams, params)
       const { result, ...pagination } = await api.sites.getSites({
         ...revisedParams,
         ...constraints
       })
       dispatch(
-        getSitesSuccess({
+        getListSuccess({
           sites: result as Site[],
           listParams: storableListRequestParams(revisedParams, pagination)
         })
       )
     } catch (err) {
-      dispatch(getSitesFail(err.toString()))
+      dispatch(getListFail(err.toString()))
     }
   }
 
-  const deleteSite = (id: number): AppThunk => async dispatch => {
-    dispatch(deleteSiteRequest())
+  const deleteItem = (id: number): AppThunk => async dispatch => {
+    dispatch(deleteItemRequest())
     try {
       await api.sites.deleteSite({ id })
-      dispatch(deleteSiteSuccess())
+      dispatch(deleteItemSuccess())
       const state = ((await dispatch(getSliceState())) as any) as SiteListState
       const newPage = recalculatePaginationAfterDeletion(state.listParams)
-      dispatch(getSites({ page: newPage }))
+      dispatch(getList({ page: newPage }))
       return { id }
     } catch (err) {
-      dispatch(deleteSiteFail(err.toString()))
+      dispatch(deleteItemFail(err.toString()))
       return { id, error: err.toString() }
     }
   }
 
-  const resetSiteList = (): AppThunk => async dispatch => {
-    dispatch(_resetSiteList())
+  const reset = (): AppThunk => async dispatch => {
+    dispatch(_reset())
   }
 
-  const setSitesListConstraints = (params: ListRequestParams = {}): AppThunk => async dispatch => {
-    dispatch(_setSitesListConstraints(params))
+  const setListConstraints = (params: ListRequestParams = {}): AppThunk => async dispatch => {
+    dispatch(_setListConstraints(params))
   }
 
   return {
     reducer,
     actions: {
-      deleteSite,
-      getSites,
-      resetSiteList,
-      setSitesListConstraints
+      deleteItem,
+      getList,
+      reset,
+      setListConstraints
     }
   }
 }
