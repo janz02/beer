@@ -1964,39 +1964,6 @@
         }
       }
     },
-    "/api/CouponUserCodes/{couponId}/RedeemedCouponCodes": {
-      "get": {
-        "tags": [
-          "CouponUserCodes"
-        ],
-        "summary": "",
-        "operationId": "CouponUserCode",
-        "parameters": [
-          {
-            "name": "couponId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested file.",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/CouponUserPairs/GeneratePairs": {
       "post": {
         "tags": [
@@ -4407,9 +4374,10 @@
       },
       "CouponRank": {
         "enum": [
-          "Bronze",
-          "Silver",
-          "Gold"
+          "Basic",
+          "Standard",
+          "Super",
+          "Premium"
         ],
         "type": "string"
       },
@@ -4418,6 +4386,13 @@
           "Discount",
           "Prize",
           "Banner"
+        ],
+        "type": "string"
+      },
+      "CouponDiscountType": {
+        "enum": [
+          "FixValue",
+          "PercentValue"
         ],
         "type": "string"
       },
@@ -4458,7 +4433,11 @@
           },
           "expireDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
+          },
+          "discountType": {
+            "$ref": "#/components/schemas/CouponDiscountType"
           },
           "couponCount": {
             "type": "integer",
@@ -4466,11 +4445,13 @@
           },
           "minimumShoppingValue": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "discountValue": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float",
+            "nullable": true
           },
           "categoryId": {
             "type": "integer",
@@ -4490,15 +4471,49 @@
           "predefinedCodesFileId": {
             "type": "string",
             "nullable": true
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "smallPicture": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigPicture": {
+            "type": "string",
+            "nullable": true
+          },
+          "onlineClaimLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "link": {
+            "type": "string",
+            "nullable": true
+          },
+          "drawDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "prizeRulesFileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousYearAverageBasketValue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awardedCampaign": {
+            "type": "boolean"
           }
         }
-      },
-      "CouponDiscountType": {
-        "enum": [
-          "FixValue",
-          "PercentValue"
-        ],
-        "type": "string"
       },
       "DetailedCouponVm": {
         "type": "object",
@@ -4672,7 +4687,8 @@
           },
           "expireDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "couponCount": {
             "type": "integer",
@@ -4680,14 +4696,16 @@
           },
           "minimumShoppingValue": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "discountType": {
             "$ref": "#/components/schemas/CouponDiscountType"
           },
           "discountValue": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float",
+            "nullable": true
           },
           "categoryId": {
             "type": "integer",
@@ -4741,6 +4759,45 @@
           },
           "isActive": {
             "type": "boolean"
+          },
+          "smallPicture": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigPicture": {
+            "type": "string",
+            "nullable": true
+          },
+          "onlineClaimLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "link": {
+            "type": "string",
+            "nullable": true
+          },
+          "drawDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "prizeRulesFileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousYearAverageBasketValue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awardedCampaign": {
+            "type": "boolean"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/CouponMode"
           }
         }
       },
