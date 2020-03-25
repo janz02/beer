@@ -62,6 +62,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { categories, majorPartners } = useSelector((state: RootState) => state.coupons)
+  const { userData } = useSelector((state: RootState) => state.auth)
   const [stateForCreate, setStateForCreate] = useState(CouponState.Created)
   const [couponType, setCouponType] = useState<CouponType>()
   const [couponMode, setCouponMode] = useState<CouponMode>()
@@ -292,8 +293,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       </Select>
                     </Form.Item>
                   ) : (
-                    // TODO: integrate name from auth slice
-                    <div>Partner name</div>
+                    <div>{userData.partnerName}</div>
                   )}
                 </Col>
 
@@ -641,28 +641,42 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
           </Collapse>
 
           {displayEditor && (
-            <div className="coupon-editor-form__actions">
-              <Button
-                type="primary"
-                htmlType="submit"
-                onClick={() => setStateForCreate(CouponState.Created)}
-                disabled={!submitable}
-                loading={loading}
-              >
-                {couponIsNew ? t('coupon-create.create') : t('common.save')}
-              </Button>
-              {couponIsNew && (
+            <Row justify="space-between">
+              <Col span={12}>
+                <Button
+                  type="ghost"
+                  htmlType="submit"
+                  onClick={() => history.push('/campaigns/')}
+                  disabled={!submitable}
+                >
+                  {t('common.cancel')}
+                </Button>
+              </Col>
+
+              <Col span={12} className="actions-right">
+                {couponIsNew && (
+                  <Button
+                    type="ghost"
+                    htmlType="submit"
+                    onClick={() => setStateForCreate(CouponState.Waiting)}
+                    disabled={!submitable}
+                    loading={loading}
+                  >
+                    {t('coupon-create.create-and-accept')}
+                  </Button>
+                )}
+
                 <Button
                   type="primary"
                   htmlType="submit"
-                  onClick={() => setStateForCreate(CouponState.Waiting)}
+                  onClick={() => setStateForCreate(CouponState.Created)}
                   disabled={!submitable}
                   loading={loading}
                 >
-                  {t('coupon-create.create-and-accept')}
+                  {couponIsNew ? t('coupon-create.create') : t('common.save')}
                 </Button>
-              )}
-            </div>
+              </Col>
+            </Row>
           )}
         </Form>
       </Col>
