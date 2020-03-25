@@ -28,6 +28,11 @@ t(`partner.partner-state.active`)
 t(`partner.partner-state.inactive`)
 t(`partner.partner-state.deleted`)
 
+t('coupon.rank.basic')
+t('coupon.rank.standard')
+t('coupon.rank.super')
+t('coupon.rank.premium')
+
 // Boolean mappings
 t(`user-access.field.partnerType.major`)
 t(`user-access.field.partnerType.normal`)

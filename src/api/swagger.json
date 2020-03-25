@@ -7,9 +7,7 @@
   "paths": {
     "/api/Auth/RegisterPartnerContact": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Registers a contact for a partner",
         "description": "Returns nothing, but registers a contact for the partner",
         "operationId": "registerPartnerContact",
@@ -52,9 +50,7 @@
     },
     "/api/Auth/RegisterUser": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Registers a user",
         "description": "Returns nothing, but registers a user",
         "operationId": "registerUser",
@@ -97,9 +93,7 @@
     },
     "/api/Auth/Login": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Logs in a user",
         "description": "Returns user info about the logged in user",
         "operationId": "login",
@@ -159,9 +153,7 @@
     },
     "/api/Auth/Refresh": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Refreshes the JWT token",
         "description": "Returns user info about the logged in user",
         "operationId": "refresh",
@@ -221,9 +213,7 @@
     },
     "/api/Auth/ChangePassword": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Changes the password for the logged in User",
         "description": "Returns nothing",
         "operationId": "changePassword",
@@ -266,9 +256,7 @@
     },
     "/api/Auth/GetOnePartnerContact/{id}": {
       "get": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Returns the details of a partner contact",
         "description": "Returns the details of a partner contact",
         "operationId": "getPartnerContactInfo",
@@ -334,9 +322,7 @@
     },
     "/api/Auth/GetPartnerContacts": {
       "get": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Returns the details of partner contacts",
         "description": "Returns the details of partner contacts in paginated form",
         "operationId": "getPartnerContactsInfo",
@@ -451,9 +437,7 @@
     },
     "/api/Auth/GetNkmPartnerContacts": {
       "get": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Returns the details of elevated users",
         "description": "Returns the details of elevated users in paginated form",
         "operationId": "getNkmPartnerContactsInfo",
@@ -551,9 +535,7 @@
     },
     "/api/Auth/UpdatePartnerContact/{id}": {
       "put": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Updates the details of an elevated user or partner contact",
         "description": "Updates the details of an elevated user or partner contact",
         "operationId": "updatePartnerContactInfo",
@@ -595,9 +577,7 @@
     },
     "/api/Auth/SyncAdUsers": {
       "put": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Syncs in all the users from AD to be listed",
         "operationId": "syncAdUsers",
         "responses": {
@@ -612,9 +592,7 @@
     },
     "/api/Cashiers": {
       "post": {
-        "tags": [
-          "Cashiers"
-        ],
+        "tags": ["Cashiers"],
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
         "operationId": "createCashier",
@@ -655,9 +633,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Cashiers"
-        ],
+        "tags": ["Cashiers"],
         "summary": "Gets a list of cashiers",
         "description": "Returns the cashier list with the specified filters applied",
         "operationId": "getCashiers",
@@ -731,9 +707,7 @@
     },
     "/api/Cashiers/{id}": {
       "get": {
-        "tags": [
-          "Cashiers"
-        ],
+        "tags": ["Cashiers"],
         "summary": "Gets a cashier by Id",
         "description": "Returns the cashier with the specified Id upon success",
         "operationId": "getCashier",
@@ -780,9 +754,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Cashiers"
-        ],
+        "tags": ["Cashiers"],
         "summary": "Updates a cashier",
         "description": "Updates a cashier with the given id",
         "operationId": "updateCashier",
@@ -821,9 +793,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Cashiers"
-        ],
+        "tags": ["Cashiers"],
         "summary": "Deletes a cashier",
         "description": "Deletes a cashier with the given id",
         "operationId": "deleteCashier",
@@ -852,9 +822,7 @@
     },
     "/api/Categories": {
       "post": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Creates a Category entity",
         "description": "Returns the id of the Category upon success",
         "operationId": "createCategory",
@@ -895,9 +863,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Gets a Category entity list sorted and filtered",
         "description": "Returns the Category list with the specified filters applied",
         "operationId": "getCategories",
@@ -971,9 +937,7 @@
     },
     "/api/Categories/{id}": {
       "get": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Gets a Category entity by Id",
         "description": "Returns the Category with the specified Id upon success",
         "operationId": "getCategory",
@@ -1020,9 +984,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Updates a Category entity",
         "description": "Updates a Category entity with Id of \"id\" to entity \"category\"",
         "operationId": "updateCategory",
@@ -1062,9 +1024,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Deletes a Category entity",
         "description": "Deletes the Category entity with Id of \"id\"",
         "operationId": "deleteCategory",
@@ -1093,9 +1053,7 @@
     },
     "/api/Coupon/{couponId}/Comment": {
       "get": {
-        "tags": [
-          "CouponComments"
-        ],
+        "tags": ["CouponComments"],
         "summary": "Gets the comments on a coupon",
         "description": "Returns the comment list on the coupon with an Id of \"couponId\"",
         "operationId": "getCouponComments",
@@ -1148,9 +1106,7 @@
         }
       },
       "post": {
-        "tags": [
-          "CouponComments"
-        ],
+        "tags": ["CouponComments"],
         "summary": "Adds a comment to a coupon",
         "description": "Appends a comment with details of \"comment\" to a coupon with an Id of \"couponId\"",
         "operationId": "addCouponComment",
@@ -1192,9 +1148,7 @@
     },
     "/api/Coupon/{couponId}/Comment/{commentId}": {
       "delete": {
-        "tags": [
-          "CouponComments"
-        ],
+        "tags": ["CouponComments"],
         "summary": "Deletes a comment from a coupon",
         "description": "Deletes the comment with an Id of \"commentId\" from a coupon with Id of \"couponId\"",
         "operationId": "deleteCouponComment",
@@ -1237,9 +1191,7 @@
     },
     "/api/Coupons": {
       "post": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Creates a Coupon entity",
         "description": "Returns the id of the new Coupon upon success",
         "operationId": "createCoupon",
@@ -1280,9 +1232,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Gets a Coupon entity list sorted and filtered",
         "description": "Returns the Coupon list with the specified filters applied",
         "operationId": "getCoupons",
@@ -1501,9 +1451,7 @@
     },
     "/api/Coupons/{id}": {
       "get": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Gets a Coupon entity by Id",
         "description": "Returns the Coupon with the specified Id upon success",
         "operationId": "getCoupon",
@@ -1550,9 +1498,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Updates a Coupon entity",
         "description": "Updates a Coupon entity with Id of \"id\" to entity \"item\"",
         "operationId": "updateCoupon",
@@ -1592,9 +1538,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Deletes a Coupon entity",
         "description": "Deletes the Coupon entity with Id of \"id\"",
         "operationId": "deleteCoupon",
@@ -1623,9 +1567,7 @@
     },
     "/api/Coupons/{id}/Status": {
       "put": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Updates a Coupon entity status only",
         "description": "Updates a Coupon entity status only with Id of \"id\" to entity \"changeCouponStateDto\"",
         "operationId": "updateCouponStatus",
@@ -1667,9 +1609,7 @@
     },
     "/api/Coupons/{id}/Claim": {
       "post": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Claims a coupon for the logged in user",
         "description": "Claims a coupon to put it in the used up coupons for the user",
         "operationId": "claimCoupon",
@@ -1718,9 +1658,7 @@
     },
     "/api/Coupons/{id}/Activate": {
       "put": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Changes the active status of a coupon",
         "description": "Changes the active status of a coupon to the given value",
         "operationId": "activateCoupon",
@@ -1762,9 +1700,7 @@
     },
     "/api/Coupons/CloseCoupons": {
       "post": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Closes coupons",
         "description": "Closes coupons when its accepted and either end date is passed or every coupon is claimed.",
         "operationId": "closeCoupons",
@@ -1794,9 +1730,7 @@
     },
     "/api/CouponUserCodes/Coupon/{couponId}": {
       "get": {
-        "tags": [
-          "CouponUserCodes"
-        ],
+        "tags": ["CouponUserCodes"],
         "summary": "Returns the claimed coupon codes for a coupon",
         "description": "Returns a list of coupon codes that have been claimed for coupon with an Id of couponId",
         "operationId": "getClaimedCoupons",
@@ -1845,9 +1779,7 @@
     },
     "/api/CouponUserCodes/Archive": {
       "post": {
-        "tags": [
-          "CouponUserCodes"
-        ],
+        "tags": ["CouponUserCodes"],
         "summary": "Archives all coupon codes",
         "description": "Archives every coupon code in the database",
         "operationId": "archiveClaimedCoupons",
@@ -1860,9 +1792,7 @@
     },
     "/api/CouponUserCodes/MyClaimedCoupons": {
       "get": {
-        "tags": [
-          "CouponUserCodes"
-        ],
+        "tags": ["CouponUserCodes"],
         "summary": "Returns claimed coupon codes",
         "operationId": "getMyClaimedCoupons",
         "responses": {
@@ -1900,9 +1830,7 @@
     },
     "/api/CouponUserCodes/{couponId}/CouponCodes": {
       "get": {
-        "tags": [
-          "CouponUserCodes"
-        ],
+        "tags": ["CouponUserCodes"],
         "summary": "",
         "operationId": "couponCodesCouponUserCode",
         "parameters": [
@@ -1933,9 +1861,7 @@
     },
     "/api/CouponUserCodes/{couponId}/RedeemedCouponCodes": {
       "get": {
-        "tags": [
-          "CouponUserCodes"
-        ],
+        "tags": ["CouponUserCodes"],
         "summary": "",
         "operationId": "CouponUserCode",
         "parameters": [
@@ -1966,9 +1892,7 @@
     },
     "/api/CouponUserPairs/GeneratePairs": {
       "post": {
-        "tags": [
-          "CouponUserPairs"
-        ],
+        "tags": ["CouponUserPairs"],
         "summary": "Generates pairs of users and coupons",
         "description": "Generates 8 pairs for every user or as many coupons are available",
         "operationId": "generatePairs",
@@ -1981,9 +1905,7 @@
     },
     "/api/CouponUserPairs/ArchivePairs": {
       "post": {
-        "tags": [
-          "CouponUserPairs"
-        ],
+        "tags": ["CouponUserPairs"],
         "summary": "Archives every pair of coupons and users",
         "description": "Archives every pair of coupons and users, used before generating new pairs",
         "operationId": "archivePairs",
@@ -1996,9 +1918,7 @@
     },
     "/api/CouponUserPairs/MyCoupons": {
       "get": {
-        "tags": [
-          "CouponUserPairs"
-        ],
+        "tags": ["CouponUserPairs"],
         "summary": "Returns the coupons generated for the user",
         "description": "Returns a coupon list that contains up to 8 coupons for the user for today",
         "operationId": "getMyCoupons",
@@ -2037,9 +1957,7 @@
     },
     "/api/EmailSender/Test": {
       "post": {
-        "tags": [
-          "EmailSender"
-        ],
+        "tags": ["EmailSender"],
         "summary": "Sends the email template out to the test recipients",
         "operationId": "sendTestEmail",
         "requestBody": {
@@ -2064,9 +1982,7 @@
     },
     "/api/EmailSender/Segment": {
       "post": {
-        "tags": [
-          "EmailSender"
-        ],
+        "tags": ["EmailSender"],
         "summary": "Sends the email template to the selected segment defined in RTD",
         "operationId": "sendEmailToSegment",
         "requestBody": {
@@ -2087,9 +2003,7 @@
     },
     "/api/EmailTemplates": {
       "post": {
-        "tags": [
-          "EmailTemplates"
-        ],
+        "tags": ["EmailTemplates"],
         "summary": "Creates an email template",
         "description": "Returns the id of the new template",
         "operationId": "createTemplate",
@@ -2130,9 +2044,7 @@
         }
       },
       "get": {
-        "tags": [
-          "EmailTemplates"
-        ],
+        "tags": ["EmailTemplates"],
         "summary": "Gets all the available Email Temmplates",
         "operationId": "getTemplates",
         "parameters": [
@@ -2202,9 +2114,7 @@
     },
     "/api/EmailTemplates/{id}": {
       "get": {
-        "tags": [
-          "EmailTemplates"
-        ],
+        "tags": ["EmailTemplates"],
         "summary": "Gets an email template",
         "operationId": "getTemplate",
         "parameters": [
@@ -2250,9 +2160,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "EmailTemplates"
-        ],
+        "tags": ["EmailTemplates"],
         "summary": "Deletes an email template",
         "operationId": "deleteTemplate",
         "parameters": [
@@ -2280,9 +2188,7 @@
     },
     "/api/EmailTemplates/{id}/Version": {
       "post": {
-        "tags": [
-          "EmailTemplates"
-        ],
+        "tags": ["EmailTemplates"],
         "summary": "Creates an email template",
         "description": "Returns the id of the new template",
         "operationId": "saveTemplateVersion",
@@ -2324,9 +2230,7 @@
     },
     "/api/EmailTemplates/{id}/Version/{version}/Restore": {
       "post": {
-        "tags": [
-          "EmailTemplates"
-        ],
+        "tags": ["EmailTemplates"],
         "summary": "Creates an email template",
         "description": "Returns the id of the new template",
         "operationId": "restoreTemplateVersion",
@@ -2369,9 +2273,7 @@
     },
     "/api/Files": {
       "post": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "operationId": "uploadFile",
         "requestBody": {
           "content": {
@@ -2421,9 +2323,7 @@
     },
     "/api/Files/{id}": {
       "get": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "operationId": "downloadFile",
         "parameters": [
           {
@@ -2453,9 +2353,7 @@
     },
     "/api/Information": {
       "get": {
-        "tags": [
-          "Information"
-        ],
+        "tags": ["Information"],
         "summary": "Returns a list of all the exception errorkeys",
         "operationId": "getErrorKeys",
         "responses": {
@@ -2493,9 +2391,7 @@
     },
     "/api/PartnerContacts/GetSelf": {
       "get": {
-        "tags": [
-          "PartnerContacts"
-        ],
+        "tags": ["PartnerContacts"],
         "operationId": "getSelfPartnerContact",
         "responses": {
           "200": {
@@ -2523,9 +2419,7 @@
     },
     "/api/PartnerContacts": {
       "put": {
-        "tags": [
-          "PartnerContacts"
-        ],
+        "tags": ["PartnerContacts"],
         "operationId": "updateSelfPartnerContact",
         "requestBody": {
           "content": {
@@ -2545,9 +2439,7 @@
     },
     "/api/PartnerContacts/GetPartnerPartnerContacts": {
       "get": {
-        "tags": [
-          "PartnerContacts"
-        ],
+        "tags": ["PartnerContacts"],
         "operationId": "getPartnerPartnerContact",
         "parameters": [
           {
@@ -2640,9 +2532,7 @@
     },
     "/api/Partners/GetSelf": {
       "get": {
-        "tags": [
-          "Partners"
-        ],
+        "tags": ["Partners"],
         "summary": "Returns the details about the logged in contact's partner",
         "operationId": "getSelfPartner",
         "responses": {
@@ -2671,9 +2561,7 @@
     },
     "/api/Partners/UpdateSelf": {
       "put": {
-        "tags": [
-          "Partners"
-        ],
+        "tags": ["Partners"],
         "summary": "Updates the logged in contact's partner",
         "operationId": "updateSelfPartner",
         "requestBody": {
@@ -2698,9 +2586,7 @@
     },
     "/api/Partners": {
       "post": {
-        "tags": [
-          "Partners"
-        ],
+        "tags": ["Partners"],
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
         "operationId": "createPartner",
@@ -2741,9 +2627,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Partners"
-        ],
+        "tags": ["Partners"],
         "summary": "Gets an entity list sorted and filtered",
         "description": "Returns the entity list with the specified filters applied",
         "operationId": "getPartners",
@@ -2840,9 +2724,7 @@
     },
     "/api/Partners/{id}": {
       "get": {
-        "tags": [
-          "Partners"
-        ],
+        "tags": ["Partners"],
         "summary": "Gets an entity by Id",
         "description": "Returns the entity with the specified Id upon success",
         "operationId": "getPartner",
@@ -2889,9 +2771,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Partners"
-        ],
+        "tags": ["Partners"],
         "summary": "Updates an entity",
         "description": "Updates an entity with Id of \"id\" to entity \"dto\"",
         "operationId": "updatePartner",
@@ -2931,9 +2811,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Partners"
-        ],
+        "tags": ["Partners"],
         "summary": "Deletes an entity",
         "description": "Deletes an entity with Id of \"id\"",
         "operationId": "deletePartner",
@@ -2962,9 +2840,7 @@
     },
     "/api/Partners/Activate/{id}": {
       "put": {
-        "tags": [
-          "Partners"
-        ],
+        "tags": ["Partners"],
         "summary": "Activates or inactivates a partner",
         "description": "Activates or inactivates a partner with Id of \"id\"",
         "operationId": "activatePartner",
@@ -3003,9 +2879,7 @@
     },
     "/api/Scoring": {
       "get": {
-        "tags": [
-          "Scoring"
-        ],
+        "tags": ["Scoring"],
         "summary": "Gets a scoreEvent entity list sorted and filtered",
         "description": "Returns the scoreEvent list with the specified filters applied",
         "operationId": "getMyScores",
@@ -3071,9 +2945,7 @@
     },
     "/api/Segments": {
       "get": {
-        "tags": [
-          "Segments"
-        ],
+        "tags": ["Segments"],
         "operationId": "getSegments",
         "parameters": [
           {
@@ -3140,9 +3012,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Segments"
-        ],
+        "tags": ["Segments"],
         "operationId": "upsertSegments",
         "requestBody": {
           "content": {
@@ -3160,9 +3030,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Segments"
-        ],
+        "tags": ["Segments"],
         "operationId": "deleteSegment",
         "parameters": [
           {
@@ -3183,9 +3051,7 @@
     },
     "/api/Sites": {
       "post": {
-        "tags": [
-          "Sites"
-        ],
+        "tags": ["Sites"],
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
         "operationId": "createSite",
@@ -3226,9 +3092,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Sites"
-        ],
+        "tags": ["Sites"],
         "summary": "Gets an entity list sorted and filtered",
         "description": "Returns the entity list with the specified filters applied",
         "operationId": "getSites",
@@ -3319,9 +3183,7 @@
     },
     "/api/Sites/{id}": {
       "get": {
-        "tags": [
-          "Sites"
-        ],
+        "tags": ["Sites"],
         "summary": "Gets an entity by Id",
         "description": "Returns the entity with the specified Id upon success",
         "operationId": "getSite",
@@ -3368,9 +3230,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Sites"
-        ],
+        "tags": ["Sites"],
         "summary": "Updates an entity",
         "description": "Updates an entity with Id of \"id\" to entity \"dto\"",
         "operationId": "updateSite",
@@ -3410,9 +3270,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Sites"
-        ],
+        "tags": ["Sites"],
         "summary": "Deletes an entity",
         "description": "Deletes an entity with Id of \"id\"",
         "operationId": "deleteSite",
@@ -3441,9 +3299,7 @@
     },
     "/api/TagCategories": {
       "post": {
-        "tags": [
-          "TagCategories"
-        ],
+        "tags": ["TagCategories"],
         "summary": "Creates a TagCategory entity",
         "description": "Returns the id of the TagCategory upon success",
         "operationId": "createTagCategory",
@@ -3484,9 +3340,7 @@
         }
       },
       "get": {
-        "tags": [
-          "TagCategories"
-        ],
+        "tags": ["TagCategories"],
         "summary": "Gets a TagCategory entity list sorted and filtered",
         "description": "Returns the TagCategory list with the specified filters applied",
         "operationId": "getTagCategories",
@@ -3560,9 +3414,7 @@
     },
     "/api/TagCategories/{id}": {
       "get": {
-        "tags": [
-          "TagCategories"
-        ],
+        "tags": ["TagCategories"],
         "summary": "Gets a TagCategory entity by Id",
         "description": "Returns the TagCategory with the specified Id upon success",
         "operationId": "getTagCategory",
@@ -3609,9 +3461,7 @@
         }
       },
       "put": {
-        "tags": [
-          "TagCategories"
-        ],
+        "tags": ["TagCategories"],
         "summary": "Updates a TagCategory entity",
         "description": "Updates a TagCategory entity with Id of \"id\" to entity \"category\"",
         "operationId": "updateTagCategory",
@@ -3651,9 +3501,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "TagCategories"
-        ],
+        "tags": ["TagCategories"],
         "summary": "Deletes a TagCategory entity",
         "description": "Deletes the TagCategory entity with Id of \"id\"",
         "operationId": "deleteTagCategory",
@@ -3682,9 +3530,7 @@
     },
     "/api/Tags": {
       "post": {
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "summary": "Creates a Tag entity",
         "description": "Returns the id of the Tag upon success",
         "operationId": "createTag",
@@ -3725,9 +3571,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "summary": "Gets a Tag entity list sorted and filtered",
         "description": "Returns the Tag list with the specified filters applied",
         "operationId": "getTags",
@@ -3817,9 +3661,7 @@
     },
     "/api/Tags/{id}": {
       "get": {
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "summary": "Gets a Tag entity by Id",
         "description": "Returns the Tag with the specified Id upon success",
         "operationId": "getTag",
@@ -3866,9 +3708,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "summary": "Updates a Tag entity",
         "description": "Updates a Tag entity with Id of \"id\" to entity \"category\"",
         "operationId": "updateTag",
@@ -3908,9 +3748,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "summary": "Deletes a Tag entity",
         "description": "Deletes the Tag entity with Id of \"id\"",
         "operationId": "deleteTag",
@@ -4108,10 +3946,7 @@
         }
       },
       "OrderByType": {
-        "enum": [
-          "Ascending",
-          "Descending"
-        ],
+        "enum": ["Ascending", "Descending"],
         "type": "string"
       },
       "PartnerContactVm": {
@@ -4323,13 +4158,7 @@
         }
       },
       "CouponState": {
-        "enum": [
-          "Created",
-          "Accepted",
-          "Waiting",
-          "Closed",
-          "Archived"
-        ],
+        "enum": ["Created", "Accepted", "Waiting", "Closed", "Archived"],
         "type": "string"
       },
       "CouponCommentVm": {
@@ -4373,34 +4202,19 @@
         }
       },
       "CouponRank": {
-        "enum": [
-          "Basic",
-          "Standard",
-          "Super",
-          "Premium"
-        ],
+        "enum": ["Basic", "Standard", "Super", "Premium"],
         "type": "string"
       },
       "CouponType": {
-        "enum": [
-          "Discount",
-          "Prize",
-          "Banner"
-        ],
+        "enum": ["Discount", "Prize", "Banner"],
         "type": "string"
       },
       "CouponDiscountType": {
-        "enum": [
-          "FixValue",
-          "PercentValue"
-        ],
+        "enum": ["FixValue", "PercentValue"],
         "type": "string"
       },
       "CouponMode": {
-        "enum": [
-          "Physical",
-          "Online"
-        ],
+        "enum": ["Physical", "Online"],
         "type": "string"
       },
       "CouponDto": {
@@ -4798,6 +4612,10 @@
           },
           "mode": {
             "$ref": "#/components/schemas/CouponMode"
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -5075,11 +4893,7 @@
         }
       },
       "PartnerState": {
-        "enum": [
-          "Inactive",
-          "Active",
-          "Deleted"
-        ],
+        "enum": ["Inactive", "Active", "Deleted"],
         "type": "string"
       },
       "PartnerVm": {
@@ -5205,9 +5019,7 @@
         }
       },
       "ScoringEventType": {
-        "enum": [
-          "Login"
-        ],
+        "enum": ["Login"],
         "type": "string"
       },
       "ScoreEventVm": {
@@ -5519,7 +5331,7 @@
   },
   "security": [
     {
-      "Bearer": [ ]
+      "Bearer": []
     }
   ]
 }

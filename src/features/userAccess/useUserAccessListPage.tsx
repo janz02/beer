@@ -63,10 +63,10 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
       }),
       nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
-        key: 'active',
+        key: 'isActive',
         width: '6rem',
         render: (value: unknown, user: UserAccess) =>
-          t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
+          t(`user-access.field.status-${user.isActive ? 'active' : 'inactive'}`)
       }),
       nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
@@ -135,14 +135,14 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         key: 'majorPartner',
         width: '5rem',
         render: (value: unknown, user: UserAccess) =>
-          t(`user-access.field.partnerType.${user.active ? 'major' : 'normal'}`)
+          t(`user-access.field.partnerType.${user.isActive ? 'major' : 'normal'}`)
       }),
       partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
-        key: 'active',
+        key: 'isActive',
         width: '5rem',
         render: (value: unknown, user: UserAccess) =>
-          t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
+          t(`user-access.field.status-${user.isActive ? 'active' : 'inactive'}`)
       }),
       partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),

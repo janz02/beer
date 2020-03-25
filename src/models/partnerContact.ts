@@ -7,6 +7,6 @@ export interface PartnerContact {
   phone?: string | null
   partnerName?: string | null
   role?: Roles | null
-  active?: boolean
+  isActive?: boolean
   majorPartner?: boolean
 }

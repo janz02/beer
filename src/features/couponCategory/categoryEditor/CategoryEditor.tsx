@@ -52,14 +52,11 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
   return (
     <GenericModalForm
       loadingAction={loading}
+      loadingContent={loading}
       modalProps={{
         visible: visible,
         title: modalTitle,
         okText: t('common.save'),
-        okButtonProps: {
-          loading,
-          disabled: loading
-        },
         afterClose: afterCloseExtended,
         onCancel: handleExit
       }}
