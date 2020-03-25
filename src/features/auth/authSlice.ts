@@ -72,9 +72,14 @@ const authSlice = createSlice({
       state.errorLogin = action.payload
       clearJwtData()
     },
-    setSelfPartnerId(state, action: PayloadAction<Partner>) {
+    setSelfPartner(state, action: PayloadAction<Partner>) {
       sessionStorage.setItem('partnerId', `${action.payload.id}`)
-      state.userData = { ...state.userData, partnerId: action.payload.id }
+      sessionStorage.setItem('partnerName', `${action.payload.name}`)
+      state.userData = {
+        ...state.userData,
+        partnerId: action.payload.id,
+        partnerName: action.payload.name
+      }
     },
     logoutUser(state) {
       state.loggedIn = false
@@ -104,7 +109,7 @@ const {
   logoutUser,
   changePasswordSuccess,
   changePasswordFail,
-  setSelfPartnerId
+  setSelfPartner
 } = authSlice.actions
 
 export const { resetAuth } = authSlice.actions
@@ -127,7 +132,7 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
     dispatch(loginSuccess(userVm))
 
     const partner = await api.partner.getSelfPartner()
-    dispatch(setSelfPartnerId(partner))
+    dispatch(setSelfPartner(partner))
 
     if (!cameFrom.includes('error')) {
       history.push(cameFrom)
