@@ -275,7 +275,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       loading={loading}
                       icon={<ExportOutlined />}
                       onClick={() => {
-                        dispatch(downloadClaimedCoupons(coupon?.id!))
+                        dispatch(downloadClaimedCoupons(coupon!))
                       }}
                     >
                       {t('coupon-create.download-redeemed-coupons')}
@@ -723,7 +723,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       loading={loading}
                       icon={<ExportOutlined />}
                       onClick={() => {
-                        dispatch(downloadCoupons(coupon?.id!))
+                        dispatch(downloadCoupons(coupon!))
                       }}
                     >
                       {t('coupon-create.download-coupons')}

@@ -9,6 +9,7 @@ import i18n from 'app/i18n'
 import { history } from 'router/router'
 import { CouponState, CouponMode } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
+import { saveAs } from 'file-saver'
 
 interface CouponsState {
   coupon?: Coupon
@@ -289,26 +290,26 @@ export const getCategories = (): AppThunk => async dispatch => {
   }
 }
 
-export const downloadCoupons = (id: number): AppThunk => async dispatch => {
+export const downloadCoupons = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
     // TODO fix names
-    const blob: Blob = await api.couponUserCodes.couponCodesCouponUserCode({ couponId: id })
-    console.log(blob)
+    const blob: Blob = await api.couponUserCodes.couponCodesCouponUserCode({ couponId: coupon.id! })
+    saveAs(blob, `${coupon.id} - ${coupon.name} CouponCodes.csv`)
     dispatch(downloadCouponsSuccess())
   } catch (err) {
     dispatch(downloadCouponsFailed())
   }
 }
 
-export const downloadClaimedCoupons = (id: number): AppThunk => async dispatch => {
+export const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
     // TODO fix names
-    const blob: Blob = await api.couponUserCodes.couponUserCode({ couponId: id })
-    console.log(blob)
+    const blob: Blob = await api.couponUserCodes.couponUserCode({ couponId: coupon.id! })
+    saveAs(blob, `${coupon.id} - ${coupon.name} ClaimedCouponCodes.csv`)
     dispatch(downloadClaimedCouponsSuccess())
   } catch (err) {
     dispatch(downloadClaimedCouponsFailed())
