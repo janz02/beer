@@ -251,7 +251,7 @@
     },
     "coupon": {
       "already-claimed": "Kupon már kiváltva.",
-      "big-picture-required": "Nagz kép megadása kötelező.",
+      "big-picture-required": "Nagy kép megadása kötelező.",
       "cannot-claim": "Nem lehet kiváltani a kupont.",
       "cant-be-deleted": "Kupon nem törölhető.",
       "cant-change-state": "Kupon státusz változtatása sikertelen.",
