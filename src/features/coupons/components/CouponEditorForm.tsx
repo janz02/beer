@@ -24,7 +24,9 @@ import {
   getCategories,
   activateCoupon,
   updateCouponStatus,
-  deleteCouponComment
+  deleteCouponComment,
+  downloadClaimedCoupons,
+  downloadCoupons
 } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteFilled, CheckOutlined, ArrowRightOutlined, ExportOutlined } from '@ant-design/icons'
@@ -268,7 +270,14 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Row gutter={rowGutter}>
                   <Col span={8}>
-                    <Button type="default" loading={loading} icon={<ExportOutlined />}>
+                    <Button
+                      type="default"
+                      loading={loading}
+                      icon={<ExportOutlined />}
+                      onClick={() => {
+                        dispatch(downloadClaimedCoupons(coupon?.id!))
+                      }}
+                    >
                       {t('coupon-create.download-redeemed-coupons')}
                     </Button>
                   </Col>
@@ -709,7 +718,14 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Col span={8}>
                   <Form.Item name="download" label={t('coupon-create.download')} rules={[]}>
-                    <Button type="primary" loading={loading} icon={<ExportOutlined />}>
+                    <Button
+                      type="primary"
+                      loading={loading}
+                      icon={<ExportOutlined />}
+                      onClick={() => {
+                        dispatch(downloadCoupons(coupon?.id!))
+                      }}
+                    >
                       {t('coupon-create.download-coupons')}
                     </Button>
                   </Form.Item>

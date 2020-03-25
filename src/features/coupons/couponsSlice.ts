@@ -75,6 +75,22 @@ const couponsSlice = createSlice({
     setLoadingFailed(state) {
       state.loading = false
       state.error = true
+    },
+    downloadCouponsSuccess(state) {
+      state.loading = false
+      state.error = false
+    },
+    downloadCouponsFailed(state) {
+      state.loading = false
+      state.error = true
+    },
+    downloadClaimedCouponsSuccess(state) {
+      state.loading = false
+      state.error = false
+    },
+    downloadClaimedCouponsFailed(state) {
+      state.loading = false
+      state.error = true
     }
   }
 })
@@ -89,7 +105,11 @@ const {
   updateCouponStatusSuccess,
   getCategoriesSuccess,
   setLoadingStart,
-  setLoadingFailed
+  setLoadingFailed,
+  downloadCouponsSuccess,
+  downloadCouponsFailed,
+  downloadClaimedCouponsSuccess,
+  downloadClaimedCouponsFailed
 } = couponsSlice.actions
 
 export const { resetCoupons } = couponsSlice.actions
@@ -266,5 +286,31 @@ export const getCategories = (): AppThunk => async dispatch => {
     )
   } catch (err) {
     dispatch(setLoadingFailed())
+  }
+}
+
+export const downloadCoupons = (id: number): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    // TODO fix names
+    const blob: Blob = await api.couponUserCodes.couponCodesCouponUserCode({ couponId: id })
+    console.log(blob)
+    dispatch(downloadCouponsSuccess())
+  } catch (err) {
+    dispatch(downloadCouponsFailed())
+  }
+}
+
+export const downloadClaimedCoupons = (id: number): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    // TODO fix names
+    const blob: Blob = await api.couponUserCodes.couponUserCode({ couponId: id })
+    console.log(blob)
+    dispatch(downloadClaimedCouponsSuccess())
+  } catch (err) {
+    dispatch(downloadClaimedCouponsFailed())
   }
 }
