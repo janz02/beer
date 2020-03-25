@@ -89,10 +89,10 @@
       "physical": "Physical"
     },
     "rank": {
-      "basic": "__STRING_NOT_TRANSLATED__",
-      "premium": "__STRING_NOT_TRANSLATED__",
-      "standard": "__STRING_NOT_TRANSLATED__",
-      "super": "__STRING_NOT_TRANSLATED__"
+      "basic": "Basic",
+      "premium": "Premium",
+      "standard": "Standard",
+      "super": "Super"
     },
     "state": {
       "accepted": "Accepted",
@@ -305,6 +305,7 @@
     "campaigns": "Campaigns",
     "coupon-categories": "Categories",
     "newsletter": "News letter",
+    "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
     "profile": "Profile",
@@ -342,6 +343,9 @@
     "notifications": "Notifications"
   },
   "partner": {
+    "contacts": {
+      "list-title": "Contacts"
+    },
     "editor": {
       "title": "Partner"
     },
@@ -383,9 +387,9 @@
       "role": "Role"
     },
     "list": {
-      "add": "Add new contact",
-      "title": "Partner contacts"
-    }
+      "add": "Add new contact"
+    },
+    "list-title": "Contacts"
   },
   "profile": {
     "editor-title": "Profile",

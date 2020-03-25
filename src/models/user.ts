@@ -14,6 +14,8 @@ export interface UserData {
   email?: string
   roles?: Roles[]
   exp?: number
+  partnerId?: number | null
+  partnerName?: string | null
 }
 
 export interface UserAccess {

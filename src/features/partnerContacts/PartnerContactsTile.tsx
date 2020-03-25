@@ -30,8 +30,12 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
   } = useGenericModalFormEditorUtils({
     dataId: contactId,
     rootRoute: route.root,
-    detailRoute: '/contact'
+    detailRoute: route.detail
   })
+
+  const handleGetItem = (id: number): void => {
+    dispatch(getItem(id))
+  }
 
   return (
     <>
@@ -41,7 +45,7 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
             contacts,
             loading: loadingList,
             listParams,
-            handleEdit: (id: number) => routeToEditor(id),
+            handleEdit: routeToEditor,
             handleCreate: () => routeToEditor(),
             deleteAction: deleteItem,
             getListAction: getList
@@ -51,11 +55,9 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
       <PartnerContactEditor
         {...{
           params: editorParams,
-          selector,
+          selector: selector,
           saveAction: saveItem,
-          getItem: (id: number) => {
-            dispatch(getItem(id))
-          },
+          getItem: handleGetItem,
           afterClose: () => {
             handleAfterClose()
             dispatch(clearEditor())

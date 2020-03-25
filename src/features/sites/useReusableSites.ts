@@ -22,7 +22,7 @@ interface SitesDynamicLabel {
 interface UseReusableSitesUtils {
   route: SitesDynamicRoute
   label: SitesDynamicLabel
-  alternativeMode: boolean
+  shrinks: boolean
   actions: SiteListSliceActions
   selector: (state: RootState) => SiteListState
 }
@@ -31,14 +31,14 @@ export const useReusableSites = (): UseReusableSitesUtils => {
   const { t } = useTranslation()
   const { partnerId } = useParams()
   const { pathname } = useSelector((state: RootState) => state.router.location)
+  const selfPartnerId = useSelector((state: RootState) => state.auth.userData.partnerId)
   const dispatch = useDispatch()
 
-  const utils: UseReusableSitesUtils = useMemo(() => {
+  const utils = useMemo((): UseReusableSitesUtils => {
     if (pathname.startsWith('/partners') && partnerId) {
-      const actions = partnerSiteListSlice.actions
-      dispatch(actions.setListConstraints({ partnerId: +partnerId }))
+      dispatch(partnerSiteListSlice.actions.setListConstraints({ partnerId: +partnerId }))
       return {
-        alternativeMode: true,
+        shrinks: true,
         route: {
           root: `/partners/${partnerId}/site`,
           exit: `/partners/${partnerId}`
@@ -46,12 +46,13 @@ export const useReusableSites = (): UseReusableSitesUtils => {
         label: {
           title: t('partner.site.editor-title')
         },
-        actions,
+        actions: partnerSiteListSlice.actions,
         selector: (s: RootState) => s.partnerSiteList
       }
     }
+    dispatch(siteListSlice.actions.setListConstraints({ partnerId: selfPartnerId }))
     return {
-      alternativeMode: false,
+      shrinks: false,
       route: {
         root: `/sites/editor`,
         exit: '/sites'
@@ -62,7 +63,7 @@ export const useReusableSites = (): UseReusableSitesUtils => {
       actions: siteListSlice.actions,
       selector: (s: RootState) => s.siteList
     }
-  }, [dispatch, partnerId, pathname, t])
+  }, [dispatch, partnerId, pathname, selfPartnerId, t])
 
   return utils
 }

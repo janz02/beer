@@ -250,6 +250,12 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     mode?: CouponMode;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    partnerId?: number;
 }
 
 export function CouponVmFromJSON(json: any): CouponVm {
@@ -296,6 +302,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'previousYearAverageBasketValue': !exists(json, 'previousYearAverageBasketValue') ? undefined : json['previousYearAverageBasketValue'],
         'awardedCampaign': !exists(json, 'awardedCampaign') ? undefined : json['awardedCampaign'],
         'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
+        'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
     };
 }
 
@@ -342,6 +349,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'previousYearAverageBasketValue': value.previousYearAverageBasketValue,
         'awardedCampaign': value.awardedCampaign,
         'mode': CouponModeToJSON(value.mode),
+        'partnerId': value.partnerId,
     };
 }
 

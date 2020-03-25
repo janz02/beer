@@ -88,23 +88,16 @@ const siteListSliceFactory = (props: SliceFactoryProps): SiteListSliceFactoryUti
       dispatch(getListRequest())
 
       const state = ((await dispatch(getSliceState())) as any) as SiteListState
-
-      let constraints: ListRequestParams = {}
-      if (state.listConstraintParams) {
-        constraints = { ...state.listConstraintParams }
-      } else {
-        const partner = await api.partner.getSelfPartner()
-        constraints.partnerId = partner.id
+      if (isNaN(state.listConstraintParams?.partnerId)) {
+        throw Error('Invalid partner id: ' + state.listConstraintParams?.partnerId)
       }
 
-      if (isNaN(constraints.partnerId)) {
-        throw Error('Invalid partner id: ' + constraints.partnerId)
-      }
       const revisedParams = reviseListRequestParams(state.listParams, params)
       const { result, ...pagination } = await api.sites.getSites({
         ...revisedParams,
-        ...constraints
+        ...state.listConstraintParams
       })
+
       dispatch(
         getListSuccess({
           sites: result as Site[],

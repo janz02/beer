@@ -89,10 +89,10 @@
       "physical": "Fizikai"
     },
     "rank": {
-      "basic": "__STRING_NOT_TRANSLATED__",
-      "premium": "__STRING_NOT_TRANSLATED__",
-      "standard": "__STRING_NOT_TRANSLATED__",
-      "super": "__STRING_NOT_TRANSLATED__"
+      "basic": "Alap",
+      "premium": "Prémium",
+      "standard": "Általános",
+      "super": "Szuper"
     },
     "state": {
       "accepted": "Jóváhagyott",
@@ -305,6 +305,7 @@
     "campaigns": "Kampányok",
     "coupon-categories": "Kategóriák",
     "newsletter": "Hírlevél",
+    "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "profile": "Profil",
@@ -342,6 +343,9 @@
     "notifications": "Értesítések"
   },
   "partner": {
+    "contacts": {
+      "list-title": "Kapcsolattartók"
+    },
     "editor": {
       "title": "Partner adatai"
     },
@@ -383,9 +387,9 @@
       "role": "Jogosultság"
     },
     "list": {
-      "add": "Kapcsolattartó hozzáadása",
-      "title": "Partner kapcsolattartói"
-    }
+      "add": "Kapcsolattartó hozzáadása"
+    },
+    "list-title": "Kapcsolattartók"
   },
   "profile": {
     "editor-title": "Profiladatok",
