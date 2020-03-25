@@ -691,7 +691,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="couponCount"
                     label={t('coupon-create.field.coupon-count')}
-                    rules={[rule.positiveInteger(), rule.max(100000000)]}
+                    rules={[rule.positiveInteger()]}
                   >
                     <InputNumber disabled={!displayEditor} min={1} max={100000000} />
                   </Form.Item>
