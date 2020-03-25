@@ -41,6 +41,9 @@
     "activate": "Aktiválás",
     "cancel": "Mégsem",
     "confirm": "Rendben",
+    "currency": {
+      "huf": "Ft"
+    },
     "delete": "Törlés",
     "discard": "Elvetés",
     "edit": "Szerkesztés",
@@ -84,6 +87,10 @@
     "yes": "Igen"
   },
   "coupon": {
+    "discount-type": {
+      "fixvalue": "Fix",
+      "percentvalue": "Százalékos"
+    },
     "mode": {
       "online": "Online",
       "physical": "Fizikai"
@@ -133,30 +140,30 @@
     "edit": "Szerkesztés",
     "editor-title": "Kupon szerkesztő",
     "field": {
-      "average-basket-value": "Átlagos korár érték",
+      "average-basket-value": "Tavalyi átlagos kosárérték",
       "average-basket-value-help": "Tavalyi átlagos kosár érték vagy a termékkérték megadása kötelező.",
       "banner-link": "Banner link",
       "banner-link-help": "A banner link erre a felületre fog mutatni. Pl.http://google.com",
       "big-image": "Kupon nagy képe",
-      "category": "Kategória",
+      "category": "Kupon kategória",
       "comment": "Komment",
-      "description": "Leírás",
-      "discount-amount": "Kedvezmény mennyisége",
-      "discount-type": "Kedvezmény típusa",
-      "distribution-end-date": "Kiosztási vég dátum",
-      "distribution-start-date": "Kiosztási kezdő dátum",
+      "description": "Kupon leírása",
+      "discount-amount": "Kedvezmény mértéke",
+      "discount-type": "Kedvezmény fajtája",
+      "distribution-end-date": "Kampány vége",
+      "distribution-start-date": "Kampány kezdete",
       "emphasized-campaign": "Fix banner kampány megjelenítése",
-      "expiration-date": "Lejárati dátum",
+      "expiration-date": "Kupon lejárati dátuma",
       "is-active": "Állapot",
       "lot-date": "Sorsolás dátuma",
       "minimum-shopping-value": "Minimális vásárlási érték",
-      "name": "Név",
+      "name": "Kupon neve",
       "online-redeem-link": "Online beváltási link",
       "partner-name": "Partner neve",
       "prize-rules": "Nyereményjáték szabályzat",
       "product-value": "Termékérték",
       "product-value-help": "Tavalyi átlagos kosár érték vagy a termékkérték megadása kötelező.",
-      "rank": "Rang",
+      "rank": "Kupon szintje",
       "redeem-mode": "Beváltás módja",
       "small-image": "Kupon kis képe",
       "state": "Státusz",

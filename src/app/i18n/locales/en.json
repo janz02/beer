@@ -41,6 +41,9 @@
     "activate": "Activate",
     "cancel": "Cancel",
     "confirm": "Ok",
+    "currency": {
+      "huf": "HUF"
+    },
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
@@ -84,6 +87,10 @@
     "yes": "Yes"
   },
   "coupon": {
+    "discount-type": {
+      "fixvalue": "Fix",
+      "percentvalue": "Percent"
+    },
     "mode": {
       "online": "Online",
       "physical": "Physical"
@@ -133,30 +140,30 @@
     "edit": "Edit",
     "editor-title": "Coupon editor",
     "field": {
-      "average-basket-value": "Average basket value",
+      "average-basket-value": "Last year average basket value",
       "average-basket-value-help": "Average basket value or product value is required.",
       "banner-link": "Banner link",
       "banner-link-help": "The banner link leads to this website. Pl.http://google.com",
       "big-image": "Coupon big image",
-      "category": "Category",
+      "category": "Coupon category",
       "comment": "Comment",
-      "description": "Description",
+      "description": "Coupon description",
       "discount-amount": "Discount amount",
       "discount-type": "Discount type",
-      "distribution-end-date": "Distribution end date",
-      "distribution-start-date": "Distribution start date",
+      "distribution-end-date": "Campaign end date",
+      "distribution-start-date": "Campaign start date",
       "emphasized-campaign": "Fix banner campaign display",
       "expiration-date": "Expiration date",
       "is-active": "State",
       "lot-date": "Lot date",
       "minimum-shopping-value": "Minimum shopping value",
-      "name": "Name",
+      "name": "Coupon name",
       "online-redeem-link": "Online redeem link",
       "partner-name": "Partner name",
       "prize-rules": "Prize rules",
       "product-value": "Product value",
       "product-value-help": "Product value or average basket value is required.",
-      "rank": "Rank",
+      "rank": "Coupon level",
       "redeem-mode": "Redeem mode",
       "small-image": "Coupon small image",
       "state": "Status",
@@ -183,7 +190,7 @@
     "click-count": "Click count",
     "coupon-count": "Coupon count",
     "discount-amount": "Discount amount",
-    "discount-type": "Dicount type",
+    "discount-type": "Discount type",
     "end-date": "Campaign end date",
     "expire-date": "Coupon expire date",
     "minimum-shopping-value": "Minimum shopping value",

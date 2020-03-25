@@ -405,7 +405,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       >
                         {Object.keys(CouponMode).map(x => (
                           <Select.Option key={x} value={x}>
-                            {t(`coupon.redeem-mode.${x.toLowerCase()}`)}
+                            {t(`coupon.mode.${x.toLowerCase()}`)}
                           </Select.Option>
                         ))}
                       </Select>
@@ -477,7 +477,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       >
                         {Object.keys(CouponDiscountType).map(x => (
                           <Select.Option key={x} value={x}>
-                            {x}
+                            {t(`coupon.discount-type.${x.toLowerCase()}`)}
                           </Select.Option>
                         ))}
                       </Select>
@@ -520,7 +520,14 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         })
                       ]}
                     >
-                      <Input disabled={!displayEditor} />
+                      <Input
+                        disabled={!displayEditor}
+                        suffix={
+                          couponDiscountType === CouponDiscountType.PercentValue
+                            ? '%'
+                            : t('common.currency.huf')
+                        }
+                      />
                     </Form.Item>
                   </Col>
                 )}
@@ -533,6 +540,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       rules={[rule.positiveInteger()]}
                     >
                       <InputNumber disabled={!displayEditor} min={1} />
+                      <span className="input-number-suffix">{t('common.currency.huf')}</span>
                     </Form.Item>
                   </Col>
                 )}
@@ -568,6 +576,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     dependencies={['averageBasketValue']}
                   >
                     <InputNumber disabled={!displayEditor} min={1} />
+                    <span className="input-number-suffix">{t('common.currency.huf')}</span>
                   </Form.Item>
                 </Col>
 
@@ -594,6 +603,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     dependencies={['productValue']}
                   >
                     <InputNumber disabled={!displayEditor} min={1} />
+                    <span className="input-number-suffix">{t('common.currency.huf')}</span>
                   </Form.Item>
                 </Col>
 
@@ -732,7 +742,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       <MomentDisplay date={x.dateTime} /> &nbsp;
                       {x.stateFrom && x.stateTo && (
                         <strong>
-                          {translateState(x.stateFrom)} <ArrowRightOutlined />{' '}
+                          {translateState(x.stateFrom)} <ArrowRightOutlined />
                           {translateState(x.stateTo)}
                         </strong>
                       )}
