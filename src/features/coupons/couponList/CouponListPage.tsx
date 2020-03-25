@@ -172,7 +172,7 @@ export const CouponListPage: React.FC = () => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.redeem-mode'),
+        title: t('coupon-list.mode'),
         key: 'mode',
         ellipsis: false,
         sort: true,

@@ -145,7 +145,10 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         endDate: coupon.endDate && coupon.endDate.toDate(),
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
         drawDate: coupon.drawDate && coupon.drawDate.toDate(),
-        // TODO fix this with tags
+        // TODO: integrate
+        smallPictureId: '1',
+        bigPictureId: '1',
+        couponCount: 1,
         tags: [tagId]
       }
     })
@@ -173,7 +176,10 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         endDate: coupon.endDate && coupon.endDate.toDate(),
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
         drawDate: coupon.drawDate && coupon.drawDate.toDate(),
-        // TODO fix this with tags
+        // TODO: integrate
+        smallPictureId: '1',
+        bigPictureId: '1',
+        couponCount: 1,
         tags: [tagId]
       }
     })

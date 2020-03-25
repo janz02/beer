@@ -149,13 +149,13 @@ export interface CouponDto {
      * @type {string}
      * @memberof CouponDto
      */
-    smallPicture?: string | null;
+    smallPictureId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CouponDto
      */
-    bigPicture?: string | null;
+    bigPictureId?: string | null;
     /**
      * 
      * @type {string}
@@ -227,8 +227,8 @@ export function CouponDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
         'predefinedCodesFileId': !exists(json, 'predefinedCodesFileId') ? undefined : json['predefinedCodesFileId'],
         'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
-        'smallPicture': !exists(json, 'smallPicture') ? undefined : json['smallPicture'],
-        'bigPicture': !exists(json, 'bigPicture') ? undefined : json['bigPicture'],
+        'smallPictureId': !exists(json, 'smallPictureId') ? undefined : json['smallPictureId'],
+        'bigPictureId': !exists(json, 'bigPictureId') ? undefined : json['bigPictureId'],
         'onlineClaimLink': !exists(json, 'onlineClaimLink') ? undefined : json['onlineClaimLink'],
         'link': !exists(json, 'link') ? undefined : json['link'],
         'drawDate': !exists(json, 'drawDate') ? undefined : (json['drawDate'] === null ? null : new Date(json['drawDate'])),
@@ -265,8 +265,8 @@ export function CouponDtoToJSON(value?: CouponDto | null): any {
         'mode': CouponModeToJSON(value.mode),
         'predefinedCodesFileId': value.predefinedCodesFileId,
         'partnerId': value.partnerId,
-        'smallPicture': value.smallPicture,
-        'bigPicture': value.bigPicture,
+        'smallPictureId': value.smallPictureId,
+        'bigPictureId': value.bigPictureId,
         'onlineClaimLink': value.onlineClaimLink,
         'link': value.link,
         'drawDate': value.drawDate === undefined ? undefined : (value.drawDate === null ? null : value.drawDate.toISOString()),

@@ -84,7 +84,7 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
     // const userData = getState().auth.userData
     // if (userData.roles?.includes(Roles.PARTNER)) {
     await api.partnerContacts.updateSelfPartnerContact({
-      selfPartnerContactDto: { ...getState().profile.profile, ...profile }
+      partnerContactDto: { ...getState().profile.profile, ...profile }
     })
     dispatch(updateProfileSuccess())
     dispatch(getProfile())

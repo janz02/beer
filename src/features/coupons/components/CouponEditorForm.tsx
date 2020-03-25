@@ -92,6 +92,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }, [dispatch])
 
   useEffect(() => {
+    setCouponType(coupon?.type)
+    setCouponMode(coupon?.mode)
+    setCouponDiscountType(coupon?.discountType)
+
     setFieldsValue({
       ...coupon,
       rank: CouponRank.Basic
@@ -119,9 +123,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     handleCouponSave &&
       handleCouponSave({
         ...values,
-        // TODO: integrate tags and isDrawable.
-        tags: [],
-        isDrawable: false
+        categoryId: +values.categoryId,
+        discountValue: +values.discountValue,
+        minimumShoppingValue: +values.minimumShoppingValue,
+        itemPrice: +values.itemPrice,
+        previousYearAverageBasketValue: +values.previousYearAverageBasketValue,
+        partnerId: +values.partnerId
       })
     resetFormFlags()
   }
@@ -271,7 +278,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Col span={12} offset={6}>
                   {!couponIsNew && (
-                    <Form.Item name="state" label={t('coupon-create.field.state')}>
+                    <Form.Item label={t('coupon-create.field.state')}>
                       <CampaignStateDisplay state={coupon?.state} />
                     </Form.Item>
                   )}
@@ -392,8 +399,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Discount && (
                   <Col span={8}>
                     <Form.Item
-                      name="redeemMode"
-                      label={t('coupon-create.field.redeem-mode')}
+                      name="mode"
+                      label={t('coupon-create.field.mode')}
                       rules={[rule.required()]}
                     >
                       <Select
@@ -415,8 +422,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Discount && couponMode === CouponMode.Online && (
                   <Col span={24}>
                     <Form.Item
-                      name="onlineRedeemLink"
-                      label={t('coupon-create.field.online-redeem-link')}
+                      name="onlineClaimLink"
+                      label={t('coupon-create.field.online-claim-link')}
                       rules={[rule.required(), rule.max(2000)]}
                     >
                       <Input disabled={!displayEditor} maxLength={2000} />
@@ -439,7 +446,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Banner && (
                   <Col span={24}>
                     <Form.Item
-                      name="banner-link"
+                      name="link"
                       label={t('coupon-create.field.banner-link')}
                       rules={[rule.required(), rule.max(2000)]}
                       extra={t('coupon-create.field.banner-link-help')}
@@ -452,8 +459,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Prize && (
                   <Col span={8}>
                     <Form.Item
-                      name="lotDate"
-                      label={t('coupon-create.field.lot-date')}
+                      name="drawDate"
+                      label={t('coupon-create.field.draw-date')}
                       rules={[rule.required()]}
                     >
                       <DatePicker disabled={!displayEditor} />
@@ -545,17 +552,21 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Col span={8}>
                   <Form.Item
-                    name="productValue"
-                    label={t('coupon-create.field.product-value')}
-                    dependencies={['averageBasketValue']}
+                    name="itemPrice"
+                    label={t('coupon-create.field.item-price')}
+                    dependencies={['previousYearAverageBasketValue']}
                     rules={[
                       rule.positiveInteger(),
                       ({ getFieldValue }) => ({
                         validator(rule, value) {
-                          const averageBasketValue = getFieldValue('averageBasketValue')
-                          if (!averageBasketValue && !value) {
+                          const previousYearAverageBasketValue = getFieldValue(
+                            'previousYearAverageBasketValue'
+                          )
+                          if (!previousYearAverageBasketValue && !value) {
                             return Promise.reject(
-                              t('error.coupon.product-value-required-if-average-basket-value-empty')
+                              t(
+                                'error.coupon.item-price-required-if-previous-year-average-basket-value-empty'
+                              )
                             )
                           }
 
@@ -563,7 +574,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         }
                       })
                     ]}
-                    extra={t('coupon-create.field.product-value-help')}
+                    extra={t('coupon-create.field.item-price-help')}
                   >
                     <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
                   </Form.Item>
@@ -571,17 +582,19 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Col span={8}>
                   <Form.Item
-                    name="averageBasketValue"
-                    label={t('coupon-create.field.average-basket-value')}
-                    dependencies={['productValue']}
+                    name="previousYearAverageBasketValue"
+                    label={t('coupon-create.field.previous-year-average-basket-value')}
+                    dependencies={['itemPrice']}
                     rules={[
                       rule.positiveInteger(),
                       ({ getFieldValue }) => ({
                         validator(rule, value) {
-                          const productValue = getFieldValue('productValue')
-                          if (!productValue && !value) {
+                          const itemPrice = getFieldValue('itemPrice')
+                          if (!itemPrice && !value) {
                             return Promise.reject(
-                              t('error.coupon.average-basket-value-required-if-product-value-empty')
+                              t(
+                                'error.coupon.previous-year-average-basket-value-required-if-item-price-empty'
+                              )
                             )
                           }
 
@@ -589,7 +602,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         }
                       })
                     ]}
-                    extra={t('coupon-create.field.average-basket-value-help')}
+                    extra={t('coupon-create.field.previous-year-average-basket-value-help')}
                   >
                     <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
                   </Form.Item>
@@ -597,7 +610,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 {couponType === CouponType.Prize && (
                   <Col span={8}>
-                    <Form.Item name="prizeRules" label={t('coupon-create.field.prize-rules')}>
+                    <Form.Item name="prizeRulesFileId" label={t('coupon-create.field.prize-rules')}>
                       <div>Upload pdf comes here</div>
                     </Form.Item>
                   </Col>
@@ -606,7 +619,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Discount && (
                   <Col span={24}>
                     <Form.Item
-                      name="webshop-link"
+                      name="link"
                       label={t('coupon-create.field.webshop-link')}
                       rules={[rule.required(), rule.max(2000)]}
                       extra={t('coupon-create.field.webshop-link-help')}
@@ -619,8 +632,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Banner && (
                   <Col span={8}>
                     <Form.Item
-                      name="emphasizedCampaign"
-                      label={t('coupon-create.field.emphasized-campaign')}
+                      name="awardedCampaign"
+                      label={t('coupon-create.field.awarded-campaign')}
                       valuePropName="checked"
                     >
                       <Checkbox>{t('coupon-create.field.display-fix-banner-campaign')}</Checkbox>
@@ -631,13 +644,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
               <Row gutter={rowGutter}>
                 <Col span={12}>
-                  <Form.Item name="smallImage" label={t('coupon-create.field.small-image')}>
+                  <Form.Item name="smallPicture" label={t('coupon-create.field.small-image')}>
                     <div>Small image comes here</div>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   {prizeOrDiscount && (
-                    <Form.Item name="bigImage" label={t('coupon-create.field.big-image')}>
+                    <Form.Item name="bigPicture" label={t('coupon-create.field.big-image')}>
                       <div>Big image comes here</div>
                     </Form.Item>
                   )}

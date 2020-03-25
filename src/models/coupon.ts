@@ -23,7 +23,6 @@ export interface Coupon {
   couponCount?: number
   minimumShoppingValue?: number
   tags?: []
-  isDrawable?: boolean
   state?: CouponState
   isActive?: boolean
   comments?: CouponComment[]
@@ -34,8 +33,8 @@ export interface Coupon {
   modifiedDate?: moment.Moment
   approvedBy?: string | null
   approvedDate?: moment.Moment
-  smallPicture?: string | null
-  bigPicture?: string | null
+  smallPictureId?: string | null
+  bigPictureId?: string | null
   onlineClaimLink?: string | null
   link?: string | null
   drawDate?: moment.Moment
