@@ -7,7 +7,7 @@ import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { history } from 'router/router'
-import { CouponState } from 'api/swagger/models'
+import { CouponState, CouponType } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
 import { Partner } from 'models/partner'
 
@@ -147,7 +147,8 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         drawDate: coupon.drawDate && coupon.drawDate.toDate(),
         // TODO: integrate
         smallPictureId: '1',
-        bigPictureId: '1',
+        bigPictureId: coupon.type === CouponType.Banner ? undefined : '1',
+        prizeRulesFileId: coupon.type === CouponType.Banner ? undefined : '1',
         couponCount: 1,
         tags: [tagId]
       }
@@ -178,7 +179,8 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         drawDate: coupon.drawDate && coupon.drawDate.toDate(),
         // TODO: integrate
         smallPictureId: '1',
-        bigPictureId: '1',
+        bigPictureId: coupon.type === CouponType.Banner ? undefined : '1',
+        prizeRulesFileId: coupon.type === CouponType.Banner ? undefined : '1',
         couponCount: 1,
         tags: [tagId]
       }
