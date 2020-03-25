@@ -31,12 +31,12 @@ export const useReusableSites = (): UseReusableSitesUtils => {
   const { t } = useTranslation()
   const { partnerId } = useParams()
   const { pathname } = useSelector((state: RootState) => state.router.location)
+  const selfPartnerId = useSelector((state: RootState) => state.auth.userData.partnerId)
   const dispatch = useDispatch()
 
   const utils: UseReusableSitesUtils = useMemo(() => {
     if (pathname.startsWith('/partners') && partnerId) {
-      const actions = partnerSiteListSlice.actions
-      dispatch(actions.setListConstraints({ partnerId: +partnerId }))
+      dispatch(partnerSiteListSlice.actions.setListConstraints({ partnerId: +partnerId }))
       return {
         alternativeMode: true,
         route: {
@@ -46,10 +46,11 @@ export const useReusableSites = (): UseReusableSitesUtils => {
         label: {
           title: t('partner.site.editor-title')
         },
-        actions,
+        actions: partnerSiteListSlice.actions,
         selector: (s: RootState) => s.partnerSiteList
       }
     }
+    dispatch(siteListSlice.actions.setListConstraints({ partnerId: selfPartnerId }))
     return {
       alternativeMode: false,
       route: {
@@ -62,7 +63,7 @@ export const useReusableSites = (): UseReusableSitesUtils => {
       actions: siteListSlice.actions,
       selector: (s: RootState) => s.siteList
     }
-  }, [dispatch, partnerId, pathname, t])
+  }, [dispatch, partnerId, pathname, selfPartnerId, t])
 
   return utils
 }

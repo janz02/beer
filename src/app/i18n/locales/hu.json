@@ -296,6 +296,7 @@
     "campaigns": "Kampányok",
     "coupon-categories": "Kategóriák",
     "newsletter": "Hírlevél",
+    "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "profile": "Profil",
@@ -333,6 +334,9 @@
     "notifications": "Értesítések"
   },
   "partner": {
+    "contacts": {
+      "list-title": "Kapcsolattartók"
+    },
     "editor": {
       "title": "Partner adatai"
     },
@@ -374,9 +378,9 @@
       "role": "Jogosultság"
     },
     "list": {
-      "add": "Kapcsolattartó hozzáadása",
-      "title": "Partner kapcsolattartói"
-    }
+      "add": "Kapcsolattartó hozzáadása"
+    },
+    "list-title": "Kapcsolattartók"
   },
   "profile": {
     "editor-title": "Profiladatok",

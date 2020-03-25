@@ -102,12 +102,11 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
       dispatch(getListRequest())
 
       const state = ((await dispatch(getSliceState())) as any) as PartnerContactsState
-
-      const revisedParams = reviseListRequestParams(state.listParams, params)
-
-      if (state.listConstraintParams?.partnerId && isNaN(state.listConstraintParams?.partnerId)) {
+      if (isNaN(state.listConstraintParams?.partnerId)) {
         throw Error('Invalid partner id: ' + state.listConstraintParams?.partnerId)
       }
+
+      const revisedParams = reviseListRequestParams(state.listParams, params)
       const { result, ...pagination } = await api.partnerContacts.getPartnerPartnerContact({
         ...revisedParams,
         ...state.listConstraintParams
@@ -186,5 +185,12 @@ export const partnerContactsSlice = sliceFactory({
   name: 'partnerContacts',
   getSliceState: (): AppThunk => async (_, getState) => {
     return getState().partnerContacts
+  }
+})
+
+export const contactsSlice = sliceFactory({
+  name: 'contacts',
+  getSliceState: (): AppThunk => async (_, getState) => {
+    return getState().contacts
   }
 })

@@ -86,6 +86,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         roles: pageViewRoles.users
       },
       {
+        label: t('menu.partner-contacts'),
+        link: '/contacts',
+        icon: <UsergroupAddOutlined />,
+        roles: pageViewRoles.contacts
+      },
+      {
         label: t('menu.partner-data'),
         link: '/selfpartner',
         icon: <ContactsOutlined />,

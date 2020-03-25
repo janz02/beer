@@ -296,6 +296,7 @@
     "campaigns": "Campaigns",
     "coupon-categories": "Categories",
     "newsletter": "News letter",
+    "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
     "profile": "Profile",
@@ -333,6 +334,9 @@
     "notifications": "Notifications"
   },
   "partner": {
+    "contacts": {
+      "list-title": "Contacts"
+    },
     "editor": {
       "title": "Partner"
     },
@@ -374,9 +378,9 @@
       "role": "Role"
     },
     "list": {
-      "add": "Add new contact",
-      "title": "Partner contacts"
-    }
+      "add": "Add new contact"
+    },
+    "list-title": "Contacts"
   },
   "profile": {
     "editor-title": "Profile",

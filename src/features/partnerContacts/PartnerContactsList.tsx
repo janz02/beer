@@ -9,6 +9,7 @@ import { AppThunk } from 'app/store'
 import { ColumnType } from 'antd/lib/table'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
+import { useReusablePartnerContacts } from './useReusablePartnerContacts'
 
 interface PartnerContactsListProps {
   loading: boolean
@@ -26,6 +27,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
 
   const [contactToDelete, setContanctToDelete] = useState<PopupState<PartnerContact>>()
 
+  const { label } = useReusablePartnerContacts()
   const headerOptions = (
     <AddButton onClick={handleCreate}>{t('partner-contact.list.add')}</AddButton>
   )
@@ -96,7 +98,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
       <ResponsiveCard
         disableAutoScale
         paddedBottom
-        floatingTitle={t('partner-contact.list.title')}
+        floatingTitle={label.listTitle}
         floatingOptions={headerOptions}
         forTable
       >

@@ -17,7 +17,10 @@ import { partnersListReducer } from 'features/partners/partnerList/partnerListSl
 import { selfPartnerReducer } from 'features/partners/selfPartner/selfPartnerSlice'
 import { partnerEditorReducer } from 'features/partners/partnerEditor/partnerEditorSlice'
 import { partnerSiteListSlice, siteListSlice } from 'features/sites/siteList/siteListSliceFactory'
-import { partnerContactsSlice } from 'features/partnerContacts/partnerContactsSliceFactory'
+import {
+  partnerContactsSlice,
+  contactsSlice
+} from 'features/partnerContacts/partnerContactsSliceFactory'
 
 export const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -31,14 +34,15 @@ export const rootReducer = combineReducers({
   selfPartner: selfPartnerReducer,
   partnerList: partnersListReducer,
   partnerEditor: partnerEditorReducer,
-  partnerSiteList: partnerSiteListSlice.reducer,
-  partnerContacts: partnerContactsSlice.reducer,
   profile: profileReducer,
-  siteList: siteListSlice.reducer,
   siteEditor: siteEditorReducer,
   newsletterList: newsletterListReducer,
   newsletterEditor: newsletterEditorReducer,
-  userAccessList: userAccessListReducer
+  userAccessList: userAccessListReducer,
+  contacts: contactsSlice.reducer,
+  siteList: siteListSlice.reducer,
+  partnerContacts: partnerContactsSlice.reducer,
+  partnerSiteList: partnerSiteListSlice.reducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

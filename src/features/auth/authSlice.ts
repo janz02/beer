@@ -9,6 +9,7 @@ import JwtDecode from 'jwt-decode'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { hardResetStore } from 'app/storeUtils'
+import { Partner } from 'models/partner'
 
 const clearJwtData = (): void => {
   sessionStorage.removeItem('jwt')
@@ -61,6 +62,7 @@ const authSlice = createSlice({
 
       jwt && sessionStorage.setItem('jwt', jwt)
       refreshToken && sessionStorage.setItem('refreshToken', refreshToken)
+
       // Also correcting precision.
       jwtExpiration && sessionStorage.setItem('jwtExpiration', `${jwtExpiration}000`)
       state.userData = getJwtUserdata(jwt)
@@ -69,6 +71,10 @@ const authSlice = createSlice({
       state.loading = false
       state.errorLogin = action.payload
       clearJwtData()
+    },
+    setSelfPartnerId(state, action: PayloadAction<Partner>) {
+      sessionStorage.setItem('partnerId', `${action.payload.id}`)
+      state.userData = { ...state.userData, partnerId: action.payload.id }
     },
     logoutUser(state) {
       state.loggedIn = false
@@ -97,7 +103,8 @@ const {
   signupFail,
   logoutUser,
   changePasswordSuccess,
-  changePasswordFail
+  changePasswordFail,
+  setSelfPartnerId
 } = authSlice.actions
 
 export const { resetAuth } = authSlice.actions
@@ -117,8 +124,10 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
 
     const userVm = await api.auth.login(loginRequest)
     const cameFrom = state().routerHistory.cameFrom
-
     dispatch(loginSuccess(userVm))
+
+    const partner = await api.partner.getSelfPartner()
+    dispatch(setSelfPartnerId(partner))
 
     if (!cameFrom.includes('error')) {
       history.push(cameFrom)
