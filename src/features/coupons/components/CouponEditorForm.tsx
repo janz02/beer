@@ -545,14 +545,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 )}
 
-                {couponType === CouponType.Prize && (
-                  <Col span={8}>
-                    <Form.Item name="prizeRules" label={t('coupon-create.field.prize-rules')}>
-                      <div>Upload pdf comes here</div>
-                    </Form.Item>
-                  </Col>
-                )}
-
                 <Col span={8}>
                   <Form.Item
                     name="productValue"
@@ -607,6 +599,14 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Form.Item>
                 </Col>
 
+                {couponType === CouponType.Prize && (
+                  <Col span={8}>
+                    <Form.Item name="prizeRules" label={t('coupon-create.field.prize-rules')}>
+                      <div>Upload pdf comes here</div>
+                    </Form.Item>
+                  </Col>
+                )}
+
                 {couponType === CouponType.Discount && (
                   <Col span={24}>
                     <Form.Item
@@ -627,7 +627,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       label={t('coupon-create.field.emphasized-campaign')}
                       valuePropName="checked"
                     >
-                      <Checkbox />
+                      <Checkbox>{t('coupon-create.field.display-fix-banner-campaign')}</Checkbox>
                     </Form.Item>
                   </Col>
                 )}
