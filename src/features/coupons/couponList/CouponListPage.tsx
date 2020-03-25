@@ -119,6 +119,14 @@ export const CouponListPage: React.FC = () => {
         }
       }),
       columnConfig({
+        title: t('coupon-list.status'),
+        key: 'isActive',
+        ellipsis: false,
+        width: '5rem',
+        render: (value: unknown, coupon: Coupon) =>
+          t(`coupon.status.${coupon.isActive ? 'active' : 'inactive'}`)
+      }),
+      columnConfig({
         title: t('coupon-list.category'),
         key: 'categoryId',
         ellipsis: false,

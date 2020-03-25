@@ -107,6 +107,10 @@
       "created": "Created",
       "waiting": "Pending approve"
     },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
     "type": {
       "banner": "Banner",
       "discount": "Discount",
@@ -127,11 +131,16 @@
     "active": "Active",
     "campaign-basics": "Campaign basics",
     "campaign-details": "Campaign details",
+    "coupon-count": "Number of coupons",
+    "client-activities": "Client activities",
     "create": "Create",
     "create-and-accept": "Send for accept",
     "create-coupon-success": "Creating a coupon was successful.",
     "edit": "Edit",
     "editor-title": "Coupon editor",
+    "upload": "Upload",
+    "download-coupons": "Download coupons",
+    "download-redeemed-coupons": "Download claimed coupons",
     "field": {
       "average-basket-value": "Average basket value",
       "average-basket-value-help": "Average basket value or product value is required.",
@@ -163,7 +172,10 @@
       "state": "Status",
       "type": "Campaign type",
       "webshop-link": "Webshop link",
-      "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com"
+      "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com",
+      "showCount": "Shown as offer",
+      "clickCount": "Clicked on offer",
+      "claimCount": "Claimed coupon"
     },
     "inactivate": "Inactivate",
     "inactive": "Inactive",

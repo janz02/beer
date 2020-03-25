@@ -107,6 +107,10 @@
       "created": "Rögzített",
       "waiting": "Jóváhagyásra várakozik"
     },
+    "status": {
+      "active": "Aktív",
+      "inactive": "Inaktív"
+    },
     "type": {
       "banner": "Banner",
       "discount": "Kedvezmény",
@@ -127,11 +131,16 @@
     "active": "Aktív",
     "campaign-basics": "Kampány alapadatok",
     "campaign-details": "Kampány részletek",
+    "coupon-count": "Kuponbok száma",
+    "client-activities": "Ügyfél aktivitások",
     "create": "Létrehozás",
     "create-and-accept": "Jóváhagyásra küldés",
     "create-coupon-success": "Sikeres kupon létrehozás.",
     "edit": "Szerkesztés",
     "editor-title": "Kupon szerkesztő",
+    "upload": "Feltöltés",
+    "download-coupons": "Kuponok letöltése",
+    "download-redeemed-coupons": "Beváltott kupokon letöltése",
     "field": {
       "average-basket-value": "Átlagos korár érték",
       "average-basket-value-help": "Tavalyi átlagos kosár érték vagy a termékkérték megadása kötelező.",
@@ -163,7 +172,10 @@
       "state": "Státusz",
       "type": "Kampány típusa",
       "webshop-link": "Webshop link",
-      "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com"
+      "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com",
+      "showCount": "Megjelenések száma",
+      "clickCount": "Kattintások száma",
+      "claimCount": "Beváltások száma"
     },
     "inactivate": "Inaktiválás",
     "inactive": "Inaktív",

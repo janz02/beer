@@ -256,6 +256,24 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     partnerId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    showCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    clickCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    claimCount?: number;
 }
 
 export function CouponVmFromJSON(json: any): CouponVm {
@@ -303,6 +321,9 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'awardedCampaign': !exists(json, 'awardedCampaign') ? undefined : json['awardedCampaign'],
         'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
         'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
+        'showCount': !exists(json, 'showCount') ? undefined : json['showCount'],
+        'clickCount': !exists(json, 'clickCount') ? undefined : json['clickCount'],
+        'claimCount': !exists(json, 'claimCount') ? undefined : json['claimCount'],
     };
 }
 
@@ -350,6 +371,9 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'awardedCampaign': value.awardedCampaign,
         'mode': CouponModeToJSON(value.mode),
         'partnerId': value.partnerId,
+        'showCount': value.showCount,
+        'clickCount': value.clickCount,
+        'claimCount': value.claimCount,
     };
 }
 

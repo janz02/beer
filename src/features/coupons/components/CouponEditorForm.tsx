@@ -246,6 +246,37 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             checkFieldsChange()
           }}
         >
+          {!displayEditor && (
+            <Collapse defaultActiveKey={['1']}>
+              <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
+                <Row gutter={rowGutter}>
+                  <Col span={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.showCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.showCount}</p>
+                  </Col>
+
+                  <Col span={4} offset={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.clickCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
+                  </Col>
+
+                  <Col span={4} offset={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.claimCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
+                  </Col>
+                </Row>
+
+                <Row gutter={rowGutter}>
+                  <Col span={8}>
+                    <Button type="default" loading={loading} icon={<ExportOutlined />}>
+                      {t('coupon-create.download-redeemed-coupons')}
+                    </Button>
+                  </Col>
+                </Row>
+              </Collapse.Panel>
+            </Collapse>
+          )}
+
           <Collapse defaultActiveKey={['1']}>
             <Collapse.Panel header={t('coupon-create.campaign-basics')} key="1">
               <Row gutter={rowGutter}>
@@ -651,14 +682,18 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="couponCount"
                     label={t('coupon-create.field.coupon-count')}
-                    rules={[rule.positiveInteger()]}
+                    rules={[rule.positiveInteger(), rule.max(100000000)]}
                   >
-                    <InputNumber disabled={!displayEditor} min={1} />
+                    <InputNumber disabled={!displayEditor} min={1} max={100000000} />
                   </Form.Item>
                 </Col>
 
                 <Col span={8}>
-                  <Form.Item name="predefinedCodesFileId" label="Feltoltes" rules={[]}>
+                  <Form.Item
+                    name="predefinedCodesFileId"
+                    label={t('coupon-create.upload')}
+                    rules={[]}
+                  >
                     <FileUploadButton
                       uploadProps={{}}
                       onSuccess={fileId => {
@@ -674,36 +709,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Col span={8}>
                   <Button type="primary" loading={loading} icon={<ExportOutlined />}>
-                    Kuponkodok export
-                  </Button>
-                </Col>
-              </Row>
-            </Collapse.Panel>
-          </Collapse>
-
-          <Collapse defaultActiveKey={['1']}>
-            <Collapse.Panel header="Ugyfel aktivitasok" key="1">
-              <Row gutter={rowGutter}>
-                <Col span={4}>
-                  <p style={{ float: 'left' }}>Megjelenesek szama</p>
-                  <p style={{ float: 'right' }}>{coupon?.showCount}</p>
-                </Col>
-
-                <Col span={4} offset={4}>
-                  <p style={{ float: 'left' }}>Kattintasok szama</p>
-                  <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
-                </Col>
-
-                <Col span={4} offset={4}>
-                  <p style={{ float: 'left' }}>Bevaltasok szama</p>
-                  <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
-                </Col>
-              </Row>
-
-              <Row gutter={rowGutter}>
-                <Col span={8}>
-                  <Button type="default" loading={loading} icon={<ExportOutlined />}>
-                    Bevaltott kuponkodok export
+                    {t('coupon-create.download-coupons')}
                   </Button>
                 </Col>
               </Row>

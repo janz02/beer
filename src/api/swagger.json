@@ -4583,8 +4583,8 @@
             "format": "int32"
           },
           "smallPicture": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "mode": {
             "$ref": "#/components/schemas/CouponMode"
@@ -4800,6 +4800,18 @@
             "$ref": "#/components/schemas/CouponMode"
           },
           "partnerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "showCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clickCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "claimCount": {
             "type": "integer",
             "format": "int32"
           }
