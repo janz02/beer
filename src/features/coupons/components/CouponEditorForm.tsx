@@ -32,7 +32,8 @@ import {
   getCategories,
   activateCoupon,
   updateCouponStatus,
-  deleteCouponComment
+  deleteCouponComment,
+  getMajorPartners
 } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteFilled, CheckOutlined, ArrowRightOutlined } from '@ant-design/icons'
@@ -60,7 +61,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { handleCouponSave, loading, couponIsNew, coupon, editing } = props
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { categories } = useSelector((state: RootState) => state.coupons)
+  const { categories, majorPartners } = useSelector((state: RootState) => state.coupons)
   const [stateForCreate, setStateForCreate] = useState(CouponState.Created)
   const [couponType, setCouponType] = useState<CouponType>()
   const [couponMode, setCouponMode] = useState<CouponMode>()
@@ -84,6 +85,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   useEffect(() => {
     dispatch(getCategories())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getMajorPartners())
   }, [dispatch])
 
   useEffect(() => {
@@ -275,12 +280,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
               <Row gutter={rowGutter}>
                 <Col span={12}>
-                  Partner dropdown comes here
-                  {/* {hasPermission(comboRoles.forNkm) ? (
+                  {hasPermission(comboRoles.forNkm) ? (
                     <Form.Item name="partnerId" label={t('coupon-create.field.partner-name')}>
                       <Select disabled={!displayEditor || !couponIsNew}>
-                        {partners &&
-                          partners.map(x => (
+                        {majorPartners &&
+                          majorPartners.map(x => (
                             <Select.Option key={x.id} value={x.id!}>
                               {x.name}
                             </Select.Option>
@@ -288,8 +292,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       </Select>
                     </Form.Item>
                   ) : (
+                    // TODO: integrate name from auth slice
                     <div>Partner name</div>
-                  )} */}
+                  )}
                 </Col>
 
                 <Col span={12}>

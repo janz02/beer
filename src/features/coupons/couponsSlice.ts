@@ -9,10 +9,12 @@ import i18n from 'app/i18n'
 import { history } from 'router/router'
 import { CouponState } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
+import { Partner } from 'models/partner'
 
 interface CouponsState {
   coupon?: Coupon
   categories?: Category[]
+  majorPartners?: Partner[]
   error: boolean
   loading: boolean
 }
@@ -69,6 +71,12 @@ const couponsSlice = createSlice({
       state.loading = false
       state.error = false
     },
+    getMajorPartnersSuccess(state, action: PayloadAction<Partner[]>) {
+      state.majorPartners = action.payload
+
+      state.loading = false
+      state.error = false
+    },
     setLoadingStart(state) {
       state.loading = true
     },
@@ -88,6 +96,7 @@ const {
   activateCouponSuccess,
   updateCouponStatusSuccess,
   getCategoriesSuccess,
+  getMajorPartnersSuccess,
   setLoadingStart,
   setLoadingFailed
 } = couponsSlice.actions
@@ -267,6 +276,26 @@ export const getCategories = (): AppThunk => async dispatch => {
     const categories = await api.categories.getCategories({ pageSize: 10000, orderBy: 'name' })
     dispatch(
       getCategoriesSuccess(categories.result!.map(x => ({ id: x.id, name: x.name } as Category)))
+    )
+  } catch (err) {
+    dispatch(setLoadingFailed())
+  }
+}
+
+export const getMajorPartners = (): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    // TODO: partners pageSize is hardcoded, consider to do a better form field with lazy loading and search
+    const partners = await api.partner.getPartners({
+      pageSize: 10000,
+      orderBy: 'name',
+      majorPartner: true
+    })
+    dispatch(
+      getMajorPartnersSuccess(
+        partners.result ? partners.result.map(x => ({ id: x.id, name: x.name } as Partner)) : []
+      )
     )
   } catch (err) {
     dispatch(setLoadingFailed())
