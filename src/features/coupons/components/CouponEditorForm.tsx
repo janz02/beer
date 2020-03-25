@@ -97,8 +97,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     couponIsNew ||
     (editing &&
       coupon &&
-      coupon.state !== CouponState.Closed &&
-      coupon.state !== CouponState.Archived)
+      (coupon.state === CouponState.Created || coupon.state === CouponState.Waiting))
 
   useEffect(() => {
     if (editing) return
@@ -135,11 +134,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     <div className="coupon-editor-form__actions">
       {!displayEditor && (
         <>
-          {coupon && coupon.state !== CouponState.Closed && coupon.state !== CouponState.Archived && (
-            <Button type="primary" htmlType="button">
-              <Link to={`/campaign/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
-            </Button>
-          )}
+          {coupon &&
+            (coupon.state === CouponState.Created || coupon.state === CouponState.Waiting) && (
+              <Button type="primary" htmlType="button">
+                <Link to={`/campaign/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
+              </Button>
+            )}
           {hasPermission([
             Roles.Administrator,
             Roles.CampaignManager,
