@@ -89,9 +89,10 @@
       "physical": "Fizikai"
     },
     "rank": {
-      "bronze": "__STRING_NOT_TRANSLATED__",
-      "gold": "__STRING_NOT_TRANSLATED__",
-      "silver": "__STRING_NOT_TRANSLATED__"
+      "basic": "__STRING_NOT_TRANSLATED__",
+      "premium": "__STRING_NOT_TRANSLATED__",
+      "standard": "__STRING_NOT_TRANSLATED__",
+      "super": "__STRING_NOT_TRANSLATED__"
     },
     "state": {
       "accepted": "Jóváhagyott",
@@ -139,6 +140,7 @@
       "big-image": "Kupon nagy képe",
       "category": "Kategória",
       "comment": "Komment",
+      "coupon-count": "Kuponok száma",
       "description": "Leírás",
       "discount-amount": "Kedvezmény mennyisége",
       "discount-type": "Kedvezmény típusa",
@@ -161,8 +163,7 @@
       "state": "Státusz",
       "type": "Kampány típusa",
       "webshop-link": "Webshop link",
-      "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com",
-      "coupon-count": "Kuponok száma"
+      "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com"
     },
     "inactivate": "Inaktiválás",
     "inactive": "Inaktív",
@@ -230,6 +231,7 @@
     "common": {
       "cant-modify": "Nem módosítható.",
       "email-format": "Ebbe a mezőbe helyes e-mail címet kell megadni.",
+      "field-must-be-null": "__STRING_NOT_TRANSLATED__",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitöltése kötelező.",
       "internal": "Internal.",
@@ -251,7 +253,7 @@
       "invalid-initial-state": "Hibás kezdőállapot",
       "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek.",
       "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben ay állapotban.",
-      "name-cant-be-edited-after-accepted": "A kupon neve nem módosítható, miután már el lett fogadva.",
+      "name-be-edited-after-accepted": "__STRING_NOT_TRANSLATED__",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "percentage-discount-out-of-range": "Csak 1 és 100 közötti érték adható meg.",
       "predefined-file-id-mismatch": "A kuponkódok fájlja nem egyezik ay eddig felöltöttével.",
@@ -259,6 +261,11 @@
     },
     "coupon-categories": {
       "name-must-be-unique": "Kategória nevének egyedinek kell lennie."
+    },
+    "coupon-partner": {
+      "must-be": {
+        "major": "__STRING_NOT_TRANSLATED__"
+      }
     },
     "coupon-user-code": {
       "cant-save": "Kupon felhasználó kód mentése sikertelen."
@@ -275,6 +282,7 @@
     },
     "partner": {
       "cant-change-state": "Partner státusz változtatása sikertelen.",
+      "inactive-or-deleted": "__STRING_NOT_TRANSLATED__",
       "name-must-be-unique": "Partner nevének egyedinek kell lennie."
     },
     "partner-contact": {

@@ -22,6 +22,10 @@ import {
     CouponDiscountTypeFromJSON,
     CouponDiscountTypeFromJSONTyped,
     CouponDiscountTypeToJSON,
+    CouponMode,
+    CouponModeFromJSON,
+    CouponModeFromJSONTyped,
+    CouponModeToJSON,
     CouponRank,
     CouponRankFromJSON,
     CouponRankFromJSONTyped,
@@ -95,7 +99,7 @@ export interface CouponVm {
      * @type {Date}
      * @memberof CouponVm
      */
-    expireDate?: Date;
+    expireDate?: Date | null;
     /**
      * 
      * @type {number}
@@ -107,7 +111,7 @@ export interface CouponVm {
      * @type {number}
      * @memberof CouponVm
      */
-    minimumShoppingValue?: number;
+    minimumShoppingValue?: number | null;
     /**
      * 
      * @type {CouponDiscountType}
@@ -119,7 +123,7 @@ export interface CouponVm {
      * @type {number}
      * @memberof CouponVm
      */
-    discountValue?: number;
+    discountValue?: number | null;
     /**
      * 
      * @type {number}
@@ -186,6 +190,66 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     isActive?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    smallPicture?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    bigPicture?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    onlineClaimLink?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    link?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponVm
+     */
+    drawDate?: Date | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    prizeRulesFileId?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    itemPrice?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    previousYearAverageBasketValue?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CouponVm
+     */
+    awardedCampaign?: boolean;
+    /**
+     * 
+     * @type {CouponMode}
+     * @memberof CouponVm
+     */
+    mode?: CouponMode;
 }
 
 export function CouponVmFromJSON(json: any): CouponVm {
@@ -206,7 +270,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'state': !exists(json, 'state') ? undefined : CouponStateFromJSON(json['state']),
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
-        'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
+        'expireDate': !exists(json, 'expireDate') ? undefined : (json['expireDate'] === null ? null : new Date(json['expireDate'])),
         'couponCount': !exists(json, 'couponCount') ? undefined : json['couponCount'],
         'minimumShoppingValue': !exists(json, 'minimumShoppingValue') ? undefined : json['minimumShoppingValue'],
         'discountType': !exists(json, 'discountType') ? undefined : CouponDiscountTypeFromJSON(json['discountType']),
@@ -222,6 +286,16 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'approvedBy': !exists(json, 'approvedBy') ? undefined : json['approvedBy'],
         'approvedDate': !exists(json, 'approvedDate') ? undefined : (json['approvedDate'] === null ? null : new Date(json['approvedDate'])),
         'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
+        'smallPicture': !exists(json, 'smallPicture') ? undefined : json['smallPicture'],
+        'bigPicture': !exists(json, 'bigPicture') ? undefined : json['bigPicture'],
+        'onlineClaimLink': !exists(json, 'onlineClaimLink') ? undefined : json['onlineClaimLink'],
+        'link': !exists(json, 'link') ? undefined : json['link'],
+        'drawDate': !exists(json, 'drawDate') ? undefined : (json['drawDate'] === null ? null : new Date(json['drawDate'])),
+        'prizeRulesFileId': !exists(json, 'prizeRulesFileId') ? undefined : json['prizeRulesFileId'],
+        'itemPrice': !exists(json, 'itemPrice') ? undefined : json['itemPrice'],
+        'previousYearAverageBasketValue': !exists(json, 'previousYearAverageBasketValue') ? undefined : json['previousYearAverageBasketValue'],
+        'awardedCampaign': !exists(json, 'awardedCampaign') ? undefined : json['awardedCampaign'],
+        'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
     };
 }
 
@@ -242,7 +316,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'state': CouponStateToJSON(value.state),
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
-        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
+        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate === null ? null : value.expireDate.toISOString()),
         'couponCount': value.couponCount,
         'minimumShoppingValue': value.minimumShoppingValue,
         'discountType': CouponDiscountTypeToJSON(value.discountType),
@@ -258,6 +332,16 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'approvedBy': value.approvedBy,
         'approvedDate': value.approvedDate === undefined ? undefined : (value.approvedDate === null ? null : value.approvedDate.toISOString()),
         'isActive': value.isActive,
+        'smallPicture': value.smallPicture,
+        'bigPicture': value.bigPicture,
+        'onlineClaimLink': value.onlineClaimLink,
+        'link': value.link,
+        'drawDate': value.drawDate === undefined ? undefined : (value.drawDate === null ? null : value.drawDate.toISOString()),
+        'prizeRulesFileId': value.prizeRulesFileId,
+        'itemPrice': value.itemPrice,
+        'previousYearAverageBasketValue': value.previousYearAverageBasketValue,
+        'awardedCampaign': value.awardedCampaign,
+        'mode': CouponModeToJSON(value.mode),
     };
 }
 

@@ -23,9 +23,10 @@ t('coupon.type.discount')
 t('coupon.type.prize')
 t('coupon.type.banner')
 
-t('coupon.rank.bronze')
-t('coupon.rank.silver')
-t('coupon.rank.gold')
+t('coupon.rank.basic')
+t('coupon.rank.standard')
+t('coupon.rank.super')
+t('coupon.rank.premium')
 
 // Boolean mappings
 t(`user-access.field.partnerType.major`)

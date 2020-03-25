@@ -25,5 +25,5 @@ export interface UserAccess {
   email?: string | null
   phone?: string | null
   role?: Roles | null
-  active?: boolean
+  isActive?: boolean
 }

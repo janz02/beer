@@ -61,7 +61,7 @@ export interface PartnerContactVm {
      * @type {boolean}
      * @memberof PartnerContactVm
      */
-    active?: boolean;
+    isActive?: boolean;
     /**
      * 
      * @type {boolean}
@@ -91,7 +91,7 @@ export function PartnerContactVmFromJSONTyped(json: any, ignoreDiscriminator: bo
         'email': !exists(json, 'email') ? undefined : json['email'],
         'phone': !exists(json, 'phone') ? undefined : json['phone'],
         'partnerName': !exists(json, 'partnerName') ? undefined : json['partnerName'],
-        'active': !exists(json, 'active') ? undefined : json['active'],
+        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
         'majorPartner': !exists(json, 'majorPartner') ? undefined : json['majorPartner'],
         'role': !exists(json, 'role') ? undefined : RolesFromJSON(json['role']),
     };
@@ -111,7 +111,7 @@ export function PartnerContactVmToJSON(value?: PartnerContactVm | null): any {
         'email': value.email,
         'phone': value.phone,
         'partnerName': value.partnerName,
-        'active': value.active,
+        'isActive': value.isActive,
         'majorPartner': value.majorPartner,
         'role': RolesToJSON(value.role),
     };
