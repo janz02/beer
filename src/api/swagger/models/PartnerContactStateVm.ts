@@ -49,7 +49,7 @@ export interface PartnerContactStateVm {
      * @type {boolean}
      * @memberof PartnerContactStateVm
      */
-    active?: boolean;
+    isActive?: boolean;
 }
 
 export function PartnerContactStateVmFromJSON(json: any): PartnerContactStateVm {
@@ -65,7 +65,7 @@ export function PartnerContactStateVmFromJSONTyped(json: any, ignoreDiscriminato
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'role': !exists(json, 'role') ? undefined : RolesFromJSON(json['role']),
-        'active': !exists(json, 'active') ? undefined : json['active'],
+        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
     };
 }
 
@@ -81,7 +81,7 @@ export function PartnerContactStateVmToJSON(value?: PartnerContactStateVm | null
         'id': value.id,
         'name': value.name,
         'role': RolesToJSON(value.role),
-        'active': value.active,
+        'isActive': value.isActive,
     };
 }
 

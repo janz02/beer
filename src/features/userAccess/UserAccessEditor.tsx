@@ -46,7 +46,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
   const initialValues: UserAccessFormValues = useMemo(
     () => ({
       role: editedUser?.role,
-      status: editedUser?.active ? Status.ACTIVE : Status.INACTIVE
+      status: editedUser?.isActive ? Status.ACTIVE : Status.INACTIVE
     }),
     [editedUser]
   )

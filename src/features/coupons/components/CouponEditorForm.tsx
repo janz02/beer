@@ -91,7 +91,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   useEffect(() => {
     setFieldsValue({
       ...coupon,
-      rank: CouponRank.Bronze
+      rank: CouponRank.Basic
     })
   }, [coupon, setFieldsValue])
 

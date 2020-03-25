@@ -12,7 +12,7 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
   const { hidden } = props
   const dispatch = useDispatch()
 
-  const { route, alternativeMode, actions, selector } = useReusableSites()
+  const { route, shrinks, actions, selector } = useReusableSites()
   const { getList, deleteItem } = actions
   const { sites, listParams, loading } = useSelector(selector)
 
@@ -22,7 +22,7 @@ export const SitesListTile: FC<SitesListTileProps> = props => {
 
   const sitesListProps: SitesListProps = {
     cardProps: {
-      disableAutoScale: alternativeMode
+      disableAutoScale: shrinks
     },
     hidden,
     sites,

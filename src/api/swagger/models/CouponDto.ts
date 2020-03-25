@@ -14,6 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    CouponDiscountType,
+    CouponDiscountTypeFromJSON,
+    CouponDiscountTypeFromJSONTyped,
+    CouponDiscountTypeToJSON,
     CouponMode,
     CouponModeFromJSON,
     CouponModeFromJSONTyped,
@@ -85,7 +89,13 @@ export interface CouponDto {
      * @type {Date}
      * @memberof CouponDto
      */
-    expireDate?: Date;
+    expireDate?: Date | null;
+    /**
+     * 
+     * @type {CouponDiscountType}
+     * @memberof CouponDto
+     */
+    discountType?: CouponDiscountType;
     /**
      * 
      * @type {number}
@@ -97,13 +107,13 @@ export interface CouponDto {
      * @type {number}
      * @memberof CouponDto
      */
-    minimumShoppingValue?: number;
+    minimumShoppingValue?: number | null;
     /**
      * 
      * @type {number}
      * @memberof CouponDto
      */
-    discountValue?: number;
+    discountValue?: number | null;
     /**
      * 
      * @type {number}
@@ -128,6 +138,66 @@ export interface CouponDto {
      * @memberof CouponDto
      */
     predefinedCodesFileId?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponDto
+     */
+    partnerId?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponDto
+     */
+    smallPicture?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponDto
+     */
+    bigPicture?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponDto
+     */
+    onlineClaimLink?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponDto
+     */
+    link?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CouponDto
+     */
+    drawDate?: Date | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponDto
+     */
+    prizeRulesFileId?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponDto
+     */
+    itemPrice?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponDto
+     */
+    previousYearAverageBasketValue?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CouponDto
+     */
+    awardedCampaign?: boolean;
 }
 
 export function CouponDtoFromJSON(json: any): CouponDto {
@@ -147,7 +217,8 @@ export function CouponDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'state': !exists(json, 'state') ? undefined : CouponStateFromJSON(json['state']),
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
-        'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
+        'expireDate': !exists(json, 'expireDate') ? undefined : (json['expireDate'] === null ? null : new Date(json['expireDate'])),
+        'discountType': !exists(json, 'discountType') ? undefined : CouponDiscountTypeFromJSON(json['discountType']),
         'couponCount': !exists(json, 'couponCount') ? undefined : json['couponCount'],
         'minimumShoppingValue': !exists(json, 'minimumShoppingValue') ? undefined : json['minimumShoppingValue'],
         'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
@@ -155,6 +226,16 @@ export function CouponDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
         'predefinedCodesFileId': !exists(json, 'predefinedCodesFileId') ? undefined : json['predefinedCodesFileId'],
+        'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
+        'smallPicture': !exists(json, 'smallPicture') ? undefined : json['smallPicture'],
+        'bigPicture': !exists(json, 'bigPicture') ? undefined : json['bigPicture'],
+        'onlineClaimLink': !exists(json, 'onlineClaimLink') ? undefined : json['onlineClaimLink'],
+        'link': !exists(json, 'link') ? undefined : json['link'],
+        'drawDate': !exists(json, 'drawDate') ? undefined : (json['drawDate'] === null ? null : new Date(json['drawDate'])),
+        'prizeRulesFileId': !exists(json, 'prizeRulesFileId') ? undefined : json['prizeRulesFileId'],
+        'itemPrice': !exists(json, 'itemPrice') ? undefined : json['itemPrice'],
+        'previousYearAverageBasketValue': !exists(json, 'previousYearAverageBasketValue') ? undefined : json['previousYearAverageBasketValue'],
+        'awardedCampaign': !exists(json, 'awardedCampaign') ? undefined : json['awardedCampaign'],
     };
 }
 
@@ -174,7 +255,8 @@ export function CouponDtoToJSON(value?: CouponDto | null): any {
         'state': CouponStateToJSON(value.state),
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
-        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
+        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate === null ? null : value.expireDate.toISOString()),
+        'discountType': CouponDiscountTypeToJSON(value.discountType),
         'couponCount': value.couponCount,
         'minimumShoppingValue': value.minimumShoppingValue,
         'discountValue': value.discountValue,
@@ -182,6 +264,16 @@ export function CouponDtoToJSON(value?: CouponDto | null): any {
         'tags': value.tags,
         'mode': CouponModeToJSON(value.mode),
         'predefinedCodesFileId': value.predefinedCodesFileId,
+        'partnerId': value.partnerId,
+        'smallPicture': value.smallPicture,
+        'bigPicture': value.bigPicture,
+        'onlineClaimLink': value.onlineClaimLink,
+        'link': value.link,
+        'drawDate': value.drawDate === undefined ? undefined : (value.drawDate === null ? null : value.drawDate.toISOString()),
+        'prizeRulesFileId': value.prizeRulesFileId,
+        'itemPrice': value.itemPrice,
+        'previousYearAverageBasketValue': value.previousYearAverageBasketValue,
+        'awardedCampaign': value.awardedCampaign,
     };
 }
 

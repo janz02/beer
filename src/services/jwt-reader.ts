@@ -15,11 +15,15 @@ export const isLoggedIn = (): boolean => {
 
 export const getJwtUserdata = (token?: string[] | string | null): UserData => {
   const jwt: any = token ?? sessionStorage.getItem('jwt')
+  const partnerId = sessionStorage.getItem('partnerId')
+  const partnerName = sessionStorage.getItem('partnerName')
   const decodedJwt: any = jwt && JwtDecode(jwt)
   const user: UserData = {
     email: decodedJwt?.email,
     roles: formatRoles(decodedJwt),
-    exp: decodedJwt?.exp
+    exp: decodedJwt?.exp,
+    partnerId: partnerId ? +partnerId : null,
+    partnerName: partnerName || null
   }
   return user
 }

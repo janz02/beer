@@ -89,9 +89,10 @@
       "physical": "Physical"
     },
     "rank": {
-      "bronze": "__STRING_NOT_TRANSLATED__",
-      "gold": "__STRING_NOT_TRANSLATED__",
-      "silver": "__STRING_NOT_TRANSLATED__"
+      "basic": "Basic",
+      "premium": "Premium",
+      "standard": "Standard",
+      "super": "Super"
     },
     "state": {
       "accepted": "Accepted",
@@ -229,6 +230,7 @@
     "common": {
       "cant-modify": "Nem módosítható.",
       "email-format": "This field must be a valid e-mail.",
+      "field-must-be-null": "__STRING_NOT_TRANSLATED__",
       "field-number": "This field must be a number.",
       "field-required": "This field is required.",
       "internal": "Internal.",
@@ -250,7 +252,7 @@
       "invalid-initial-state": "Invalid initial state.",
       "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
-      "name-cant-be-edited-after-accepted": "The coupon name cannot be changed after it has been accepted.",
+      "name-be-edited-after-accepted": "__STRING_NOT_TRANSLATED__",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
       "predefined-file-id-mismatch": "The file does not match with the previously uploaded one.",
@@ -258,6 +260,11 @@
     },
     "coupon-categories": {
       "name-must-be-unique": "Category name must be unique."
+    },
+    "coupon-partner": {
+      "must-be": {
+        "major": "__STRING_NOT_TRANSLATED__"
+      }
     },
     "coupon-user-code": {
       "cant-save": "Can't save user coupon code."
@@ -274,6 +281,7 @@
     },
     "partner": {
       "cant-change-state": "Can't change partner state.",
+      "inactive-or-deleted": "__STRING_NOT_TRANSLATED__",
       "name-must-be-unique": "Partner name must be unique."
     },
     "partner-contact": {
@@ -296,6 +304,7 @@
     "campaigns": "Campaigns",
     "coupon-categories": "Categories",
     "newsletter": "News letter",
+    "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
     "profile": "Profile",
@@ -333,6 +342,9 @@
     "notifications": "Notifications"
   },
   "partner": {
+    "contacts": {
+      "list-title": "Contacts"
+    },
     "editor": {
       "title": "Partner"
     },
@@ -374,9 +386,9 @@
       "role": "Role"
     },
     "list": {
-      "add": "Add new contact",
-      "title": "Partner contacts"
-    }
+      "add": "Add new contact"
+    },
+    "list-title": "Contacts"
   },
   "profile": {
     "editor-title": "Profile",

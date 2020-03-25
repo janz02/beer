@@ -24,6 +24,7 @@ import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
+import { PartnerContactsPage } from 'features/partnerContacts/PartnerContactsPage'
 
 export const comboRoles = {
   forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
@@ -56,6 +57,7 @@ export const pageViewRoles = {
   readonlyProfile: comboRoles.forNkm,
   selfpartner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
   partners: comboRoles.forNkm,
+  contacts: comboRoles.forAll,
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
 }
 
@@ -97,6 +99,7 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.partners}
       component={PartnerEditorPage}
     />
+
     <PrivateRoute
       exact
       path={[
@@ -113,6 +116,12 @@ const Routes = (): JSX.Element => (
       path={['/sites/editor/', '/sites/editor/:siteId', '/sites/editor/:siteId/:cashierId']}
       roles={pageViewRoles.sites}
       component={SiteEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path={['/contacts', '/contacts/new', '/contacts/:contactId']}
+      roles={pageViewRoles.contacts}
+      component={PartnerContactsPage}
     />
     <PrivateRoute
       exact

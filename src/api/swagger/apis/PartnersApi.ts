@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    ActivatePartnerDto,
+    ActivatePartnerDtoFromJSON,
+    ActivatePartnerDtoToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
@@ -34,6 +37,11 @@ import {
     PartnerVmPaginatedResponseFromJSON,
     PartnerVmPaginatedResponseToJSON,
 } from '../models';
+
+export interface ActivatePartnerRequest {
+    id: number;
+    activatePartnerDto?: ActivatePartnerDto;
+}
 
 export interface CreatePartnerRequest {
     partnerDto?: PartnerDto;
@@ -71,6 +79,44 @@ export interface UpdateSelfPartnerRequest {
  * no description
  */
 export class PartnersApi extends runtime.BaseAPI {
+
+    /**
+     * Activates or inactivates a partner with Id of \"id\"
+     * Activates or inactivates a partner
+     */
+    async activatePartnerRaw(requestParameters: ActivatePartnerRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling activatePartner.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Partners/Activate/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ActivatePartnerDtoToJSON(requestParameters.activatePartnerDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Activates or inactivates a partner with Id of \"id\"
+     * Activates or inactivates a partner
+     */
+    async activatePartner(requestParameters: ActivatePartnerRequest): Promise<void> {
+        await this.activatePartnerRaw(requestParameters);
+    }
 
     /**
      * Returns the id of the entity upon success
