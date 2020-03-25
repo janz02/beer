@@ -21,6 +21,7 @@ interface PartnerContactsLabel {
 }
 
 interface UseReusablePartnerContactsUtils {
+  shrinks: boolean
   route: PartnerContactsRoutes
   label: PartnerContactsLabel
   actions: PartnerContactsSliceActions
@@ -33,11 +34,12 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
   const { pathname } = useSelector((state: RootState) => state.router.location)
   const selfPartnerId = useSelector((state: RootState) => state.auth.userData.partnerId)
 
-  const utils: UseReusablePartnerContactsUtils = useMemo(() => {
+  const utils = useMemo((): UseReusablePartnerContactsUtils => {
     if (pathname.startsWith('/partners') && partnerId) {
       const actions = partnerContactsSlice.actions
       dispatch(actions.setListConstraints({ partnerId }))
       return {
+        shrinks: true,
         label: { listTitle: t('partner.contacts.list-title') },
         route: {
           root: `/partners/${partnerId}`,
@@ -50,6 +52,7 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
     const actions = contactsSlice.actions
     dispatch(actions.setListConstraints({ partnerId: selfPartnerId }))
     return {
+      shrinks: false,
       label: { listTitle: t('partner-contact.list-title') },
       route: {
         root: `/contacts`,

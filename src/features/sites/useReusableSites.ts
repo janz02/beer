@@ -22,7 +22,7 @@ interface SitesDynamicLabel {
 interface UseReusableSitesUtils {
   route: SitesDynamicRoute
   label: SitesDynamicLabel
-  alternativeMode: boolean
+  shrinks: boolean
   actions: SiteListSliceActions
   selector: (state: RootState) => SiteListState
 }
@@ -34,11 +34,11 @@ export const useReusableSites = (): UseReusableSitesUtils => {
   const selfPartnerId = useSelector((state: RootState) => state.auth.userData.partnerId)
   const dispatch = useDispatch()
 
-  const utils: UseReusableSitesUtils = useMemo(() => {
+  const utils = useMemo((): UseReusableSitesUtils => {
     if (pathname.startsWith('/partners') && partnerId) {
       dispatch(partnerSiteListSlice.actions.setListConstraints({ partnerId: +partnerId }))
       return {
-        alternativeMode: true,
+        shrinks: true,
         route: {
           root: `/partners/${partnerId}/site`,
           exit: `/partners/${partnerId}`
@@ -52,7 +52,7 @@ export const useReusableSites = (): UseReusableSitesUtils => {
     }
     dispatch(siteListSlice.actions.setListConstraints({ partnerId: selfPartnerId }))
     return {
-      alternativeMode: false,
+      shrinks: false,
       route: {
         root: `/sites/editor`,
         exit: '/sites'

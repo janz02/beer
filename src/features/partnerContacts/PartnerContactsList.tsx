@@ -27,7 +27,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
 
   const [contactToDelete, setContanctToDelete] = useState<PopupState<PartnerContact>>()
 
-  const { label } = useReusablePartnerContacts()
+  const { label, shrinks } = useReusablePartnerContacts()
   const headerOptions = (
     <AddButton onClick={handleCreate}>{t('partner-contact.list.add')}</AddButton>
   )
@@ -96,7 +96,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
   return (
     <>
       <ResponsiveCard
-        disableAutoScale
+        disableAutoScale={shrinks}
         paddedBottom
         floatingTitle={label.listTitle}
         floatingOptions={headerOptions}
