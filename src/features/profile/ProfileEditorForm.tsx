@@ -76,7 +76,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          help={t('common.filed.help.password-format')}
+          extra={t('common.filed.help.password-format')}
           name="password"
           dependencies={['oldPassword']}
           hasFeedback
@@ -119,7 +119,7 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
           name="phone"
           label={t('profile.field.phone')}
           rules={[rule.max(20)]}
-          help={t('common.field.help.phone-format')}
+          extra={t('common.field.help.phone-format')}
         >
           <Input disabled={!editable} type="tel" maxLength={20} />
         </Form.Item>

@@ -6,7 +6,6 @@ import {
   Input,
   Button,
   Select,
-  InputNumber,
   DatePicker,
   Popconfirm,
   Row,
@@ -443,7 +442,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       name="banner-link"
                       label={t('coupon-create.field.banner-link')}
                       rules={[rule.required(), rule.max(2000)]}
-                      help={t('coupon-create.field.banner-link-help')}
+                      extra={t('coupon-create.field.banner-link-help')}
                     >
                       <Input disabled={!displayEditor} maxLength={2000} />
                     </Form.Item>
@@ -539,10 +538,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       label={t('coupon-create.field.minimum-shopping-value')}
                       rules={[rule.positiveInteger()]}
                     >
-                      <>
-                        <InputNumber disabled={!displayEditor} min={1} />
-                        <span className="input-number-suffix">{t('common.currency.huf')}</span>
-                      </>
+                      <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
                     </Form.Item>
                   </Col>
                 )}
@@ -551,11 +547,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="productValue"
                     label={t('coupon-create.field.product-value')}
+                    dependencies={['averageBasketValue']}
                     rules={[
                       rule.positiveInteger(),
-                      () => ({
+                      ({ getFieldValue }) => ({
                         validator(rule, value) {
-                          const averageBasketValue = form.getFieldValue('averageBasketValue')
+                          const averageBasketValue = getFieldValue('averageBasketValue')
                           if (!averageBasketValue && !value) {
                             return Promise.reject(
                               t('error.coupon.product-value-required-if-average-basket-value-empty')
@@ -566,13 +563,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         }
                       })
                     ]}
-                    help={t('coupon-create.field.product-value-help')}
-                    dependencies={['averageBasketValue']}
+                    extra={t('coupon-create.field.product-value-help')}
                   >
-                    <>
-                      <InputNumber disabled={!displayEditor} min={1} />
-                      <span className="input-number-suffix">{t('common.currency.huf')}</span>
-                    </>
+                    <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
                   </Form.Item>
                 </Col>
 
@@ -580,11 +573,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="averageBasketValue"
                     label={t('coupon-create.field.average-basket-value')}
+                    dependencies={['productValue']}
                     rules={[
                       rule.positiveInteger(),
-                      () => ({
+                      ({ getFieldValue }) => ({
                         validator(rule, value) {
-                          const productValue = form.getFieldValue('productValue')
+                          const productValue = getFieldValue('productValue')
                           if (!productValue && !value) {
                             return Promise.reject(
                               t('error.coupon.average-basket-value-required-if-product-value-empty')
@@ -595,13 +589,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         }
                       })
                     ]}
-                    help={t('coupon-create.field.average-basket-value-help')}
-                    dependencies={['productValue']}
+                    extra={t('coupon-create.field.average-basket-value-help')}
                   >
-                    <>
-                      <InputNumber disabled={!displayEditor} min={1} />
-                      <span className="input-number-suffix">{t('common.currency.huf')}</span>
-                    </>
+                    <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
                   </Form.Item>
                 </Col>
 
@@ -619,7 +609,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       name="webshop-link"
                       label={t('coupon-create.field.webshop-link')}
                       rules={[rule.required(), rule.max(2000)]}
-                      help={t('coupon-create.field.webshop-link-help')}
+                      extra={t('coupon-create.field.webshop-link-help')}
                     >
                       <Input disabled={!displayEditor} maxLength={2000} />
                     </Form.Item>

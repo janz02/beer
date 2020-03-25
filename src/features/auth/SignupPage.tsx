@@ -66,7 +66,7 @@ export const SignupPage: React.FC = () => {
           name="phone"
           label={t('auth.field.phone')}
           rules={[rule.max(20)]}
-          help={t('common.field.help.phone-format')}
+          extra={t('common.field.help.phone-format')}
         >
           <Input type="tel" maxLength={20} />
         </Form.Item>
