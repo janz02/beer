@@ -114,6 +114,10 @@
       "created": "Rögzített",
       "waiting": "Jóváhagyásra várakozik"
     },
+    "status": {
+      "active": "Aktív",
+      "inactive": "Inaktív"
+    },
     "type": {
       "banner": "Banner",
       "discount": "Kedvezmény",
@@ -135,8 +139,12 @@
     "campaign-basics": "Kampány alapadatok",
     "campaign-details": "Kampány részletek",
     "create": "Rögzítés",
+    "client-activities": "Ügyfél aktivitások",
     "create-and-accept": "Rögzítése és jóváhagyásra küldés",
     "create-coupon-success": "Sikeres kupon létrehozás.",
+    "download": "Letöltés",
+    "download-coupons": "Kuponok letöltése",
+    "download-redeemed-coupons": "Beváltott kupokon letöltése",
     "edit": "Szerkesztés",
     "editor-title": "Kupon szerkesztő",
     "field": {
@@ -146,8 +154,11 @@
       "banner-link-help": "A banner link erre a felületre fog mutatni. Pl.http://google.com",
       "big-image": "Kupon nagy képe",
       "category": "Kupon kategória",
+      "claimCount": "Beváltások száma",
+      "clickCount": "Kattintások száma",
       "comment": "Komment",
       "description": "Kupon leírása",
+      "coupon-count": "Kuponok száma",
       "discount-amount": "Kedvezmény mértéke",
       "discount-type": "Kedvezmény fajtája",
       "display-fix-banner-campaign": "Fix banner kampány megjelenítése",
@@ -166,6 +177,7 @@
       "item-price-help": "Tavalyi átlagos kosár érték vagy a termékkérték megadása kötelező.",
       "rank": "Kupon szintje",
       "mode": "Beváltás módja",
+      "showCount": "Megjelenések száma",
       "small-image": "Kupon kis képe",
       "state": "Státusz",
       "type": "Kampány típusa",
@@ -174,7 +186,8 @@
     },
     "inactivate": "Inaktiválás",
     "inactive": "Inaktív",
-    "status-title": "Státusz módosítás"
+    "status-title": "Státusz módosítás",
+    "upload": "Feltöltés"
   },
   "coupon-editor": {
     "comment-delete-confirm-message": "Biztos benne, hogy törölni szeretné ezt a kommentet?",
@@ -206,6 +219,7 @@
     "small-image": "Kupon kis kép",
     "start-date": "Kampány kezdete",
     "state": "Kampány státusz",
+    "status": "Állapot",
     "user": "Létrehozó felhasználó",
     "view-count": "Megjelenések száma"
   },
@@ -238,7 +252,7 @@
     "common": {
       "cant-modify": "Nem módosítható.",
       "email-format": "Ebbe a mezőbe helyes e-mail címet kell megadni.",
-      "field-must-be-null": "__STRING_NOT_TRANSLATED__",
+      "field-must-be-null": "Ezt a mezőt nem lehet kitölteni.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitöltése kötelező.",
       "internal": "Internal.",
@@ -252,6 +266,7 @@
     "coupon": {
       "already-claimed": "Kupon már kiváltva.",
       "previous-year-average-basket-value-required-if-item-price-empty": "A tavalyi átlagos kosárérték mező megadása kötelező, ha a termék érték mező üres.",
+      "big-picture-required": "Nagy kép megadása köteletző.",
       "cannot-claim": "Nem lehet kiváltani a kupont.",
       "cant-be-deleted": "Kupon nem törölhető.",
       "cant-change-state": "Kupon státusz változtatása sikertelen.",
@@ -260,7 +275,7 @@
       "invalid-initial-state": "Hibás kezdőállapot",
       "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek.",
       "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben ay állapotban.",
-      "name-be-edited-after-accepted": "__STRING_NOT_TRANSLATED__",
+      "name-be-edited-after-accepted": "A kupon neve nem módosithaó elfogadás után.",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "percentage-discount-out-of-range": "Csak 1 és 100 közötti érték adható meg.",
       "predefined-file-id-mismatch": "A kuponkódok fájlja nem egyezik ay eddig felöltöttével.",
@@ -271,7 +286,7 @@
     },
     "coupon-partner": {
       "must-be": {
-        "major": "__STRING_NOT_TRANSLATED__"
+        "major": "A partnernek kiemelt partnernek kell lennie."
       }
     },
     "coupon-user-code": {
@@ -289,7 +304,7 @@
     },
     "partner": {
       "cant-change-state": "Partner státusz változtatása sikertelen.",
-      "inactive-or-deleted": "__STRING_NOT_TRANSLATED__",
+      "inactive-or-deleted": "Parnter inaktív vagy törölt.",
       "name-must-be-unique": "Partner nevének egyedinek kell lennie."
     },
     "partner-contact": {

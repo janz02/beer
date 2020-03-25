@@ -23,9 +23,13 @@ export interface Coupon {
   couponCount?: number
   minimumShoppingValue?: number
   tags?: []
+  mode?: CouponMode
   state?: CouponState
   isActive?: boolean
   comments?: CouponComment[]
+  showCount?: number
+  clickCount?: number
+  claimCount?: number
   predefinedCodesFileId?: string | null
   createdBy?: string | null
   createdDate?: moment.Moment
@@ -42,6 +46,5 @@ export interface Coupon {
   itemPrice?: number
   previousYearAverageBasketValue?: number
   awardedCampaign?: boolean
-  mode?: CouponMode
   partnerId?: number
 }

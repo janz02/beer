@@ -5,6 +5,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.0.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/file-saver": "^2.0.1",
     "@types/jest": "24.0.23",
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^13.1.4",
@@ -19,6 +20,7 @@
     "connected-react-router": "^6.6.1",
     "customize-cra": "^0.9.1",
     "env-cmd": "^10.0.1",
+    "file-saver": "^2.0.2",
     "grapesjs": "^0.15.10",
     "grapesjs-indexeddb": "^0.1.1",
     "grapesjs-preset-newsletter": "^0.2.20",

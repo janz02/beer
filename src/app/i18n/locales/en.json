@@ -114,6 +114,10 @@
       "created": "Created",
       "waiting": "Pending approve"
     },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
     "type": {
       "banner": "Banner",
       "discount": "Discount",
@@ -134,9 +138,13 @@
     "active": "Active",
     "campaign-basics": "Campaign basics",
     "campaign-details": "Campaign details",
+    "client-activities": "Client activities",
     "create": "Create",
     "create-and-accept": "Create and send for accept",
     "create-coupon-success": "Creating a coupon was successful.",
+    "download": "Download",
+    "download-coupons": "Download coupons",
+    "download-redeemed-coupons": "Download claimed coupons",
     "edit": "Edit",
     "editor-title": "Coupon editor",
     "field": {
@@ -146,8 +154,11 @@
       "banner-link-help": "The banner link leads to this website. Pl.http://google.com",
       "big-image": "Coupon big image",
       "category": "Coupon category",
+      "claimCount": "Claimed coupon",
+      "clickCount": "Clicked on offer",
       "comment": "Comment",
       "description": "Coupon description",
+      "coupon-count": "Number of coupons",
       "discount-amount": "Discount amount",
       "discount-type": "Discount type",
       "display-fix-banner-campaign": "Display fix banner campaign",
@@ -166,6 +177,7 @@
       "item-price-help": "Product value or average basket value is required.",
       "rank": "Coupon level",
       "mode": "Redeem mode",
+      "showCount": "Shown as offer",
       "small-image": "Coupon small image",
       "state": "Status",
       "type": "Campaign type",
@@ -174,7 +186,8 @@
     },
     "inactivate": "Inactivate",
     "inactive": "Inactive",
-    "status-title": "Modify state"
+    "status-title": "Modify state",
+    "upload": "Upload"
   },
   "coupon-editor": {
     "comment-delete-confirm-message": "Are you sure you want to delete this comment?",
@@ -206,6 +219,7 @@
     "small-image": "Coupon small image",
     "start-date": "Campaign start date",
     "state": "Campaign state",
+    "status": "Status",
     "user": "Creator user",
     "view-count": "View count"
   },
@@ -236,9 +250,9 @@
       "stamp-couponId-not-unique": "Digital stamp ID must be unique."
     },
     "common": {
-      "cant-modify": "Nem módosítható.",
+      "cant-modify": "Cannot be modified.",
       "email-format": "This field must be a valid e-mail.",
-      "field-must-be-null": "__STRING_NOT_TRANSLATED__",
+      "field-must-be-null": "This field must not be set.",
       "field-number": "This field must be a number.",
       "field-required": "This field is required.",
       "internal": "Internal.",
@@ -252,6 +266,7 @@
     "coupon": {
       "already-claimed": "Coupon already claimed.",
       "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty.",
+      "big-picture-required": "Big picture is required.",
       "cannot-claim": "Cannot claim coupon.",
       "cant-be-deleted": "Coupon can't be deleted.",
       "cant-change-state": "Can't change coupon state.",
@@ -260,7 +275,7 @@
       "invalid-initial-state": "Invalid initial state.",
       "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
-      "name-be-edited-after-accepted": "__STRING_NOT_TRANSLATED__",
+      "name-be-edited-after-accepted": "Coupon name cannot be edited after accepted.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
       "predefined-file-id-mismatch": "The file does not match with the previously uploaded one.",
@@ -271,7 +286,7 @@
     },
     "coupon-partner": {
       "must-be": {
-        "major": "__STRING_NOT_TRANSLATED__"
+        "major": "Partner must be major partner"
       }
     },
     "coupon-user-code": {
@@ -289,7 +304,7 @@
     },
     "partner": {
       "cant-change-state": "Can't change partner state.",
-      "inactive-or-deleted": "__STRING_NOT_TRANSLATED__",
+      "inactive-or-deleted": "Partner inactive ",
       "name-must-be-unique": "Partner name must be unique."
     },
     "partner-contact": {

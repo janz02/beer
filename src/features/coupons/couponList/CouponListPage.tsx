@@ -7,7 +7,7 @@ import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
 import { getCoupons, deleteCoupon, setIncludeArchived, setOnlyWaiting } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
-import { CouponState, Roles } from 'api/swagger/models'
+import { CouponState, Roles, CouponType, CouponMode } from 'api/swagger/models'
 import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { getCategories } from '../couponsSlice'
@@ -56,7 +56,17 @@ export const CouponListPage: React.FC = () => {
     addKeyProp
   } = useTableUtils<Coupon>({
     listParamsState: listParams,
-    filterKeys: ['name', 'state', 'categoryId', 'startDate', 'endDate', 'expireDate'],
+    filterKeys: [
+      'name',
+      'state',
+      'isActive',
+      'categoryId',
+      'startDate',
+      'endDate',
+      'expireDate',
+      'type',
+      'mode'
+    ],
     getDataAction: getCoupons
   })
 
@@ -68,7 +78,7 @@ export const CouponListPage: React.FC = () => {
         ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER,
-        filters: Object.keys(CouponState).map(f => {
+        filters: Object.keys(CouponType).map(f => {
           return { text: t(`coupon.type.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
         render(value) {
@@ -117,6 +127,19 @@ export const CouponListPage: React.FC = () => {
         render(value) {
           return <CampaignStateDisplay state={value} />
         }
+      }),
+      columnConfig({
+        title: t('coupon-list.status'),
+        key: 'isActive',
+        ellipsis: false,
+        width: '5rem',
+        filterMode: FilterMode.FILTER,
+        filters: [
+          { text: t(`coupon.status.active`), value: 'true' },
+          { text: t(`coupon.status.inactive`), value: 'false' }
+        ],
+        render: (value: unknown, coupon: Coupon) =>
+          t(`coupon.status.${coupon.isActive ? 'active' : 'inactive'}`)
       }),
       columnConfig({
         title: t('coupon-list.category'),
@@ -177,7 +200,7 @@ export const CouponListPage: React.FC = () => {
         ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER,
-        filters: Object.keys(CouponState).map(f => {
+        filters: Object.keys(CouponMode).map(f => {
           return { text: t(`coupon.mode.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
         render(value) {

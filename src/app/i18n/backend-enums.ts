@@ -33,6 +33,9 @@ t('coupon.rank.standard')
 t('coupon.rank.super')
 t('coupon.rank.premium')
 
+t('coupon.status.active')
+t('coupon.status.inactive')
+
 // Boolean mappings
 t(`user-access.field.partnerType.major`)
 t(`user-access.field.partnerType.normal`)
