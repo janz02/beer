@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
@@ -19,7 +19,7 @@ export interface PartnerContactsParams {
   partnerContactId?: number
 }
 
-interface PartnerContactsEditorProps {
+export interface PartnerContactsEditorProps {
   params: GenericModalFormEditorParams
   selector: (state: RootState) => PartnerContactsState
   afterClose: () => void
@@ -41,9 +41,16 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
 
   const roleOptions = useRoleGenerator(UserType.PARTNER)
 
+  // TODO: QUICK FIXED: render infinite loop, this fixes it but couldn't find the trigger
+  const handleGetItemRef = useRef<() => void | null>()
   useEffect(() => {
-    id && getItem(id)
-  }, [dispatch, getItem, id])
+    handleGetItemRef.current = () => {
+      id && getItem(id)
+    }
+  }, [getItem, id])
+  useEffect(() => {
+    visible && handleGetItemRef.current && handleGetItemRef.current()
+  }, [visible])
 
   const onSave = async (values: PartnerContact): Promise<void> => {
     const saved: any = await dispatch(saveAction(editedContact?.id!, values))
@@ -52,15 +59,12 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
 
   return (
     <GenericModalForm
-      loadingAction={loadingEditor}
+      loadingContent={loadingEditor}
       modalProps={{
+        destroyOnClose: true,
         visible: visible,
         title: modalTitle,
         okText: t('common.save'),
-        okButtonProps: {
-          loading: loadingEditor,
-          disabled: loadingEditor
-        },
         afterClose: afterClose,
         onCancel: handleExit
       }}

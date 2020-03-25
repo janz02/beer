@@ -47,6 +47,22 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
       _setListConstraints(state, action: PayloadAction<ListRequestParams>) {
         state.listConstraintParams = action.payload
       },
+      _clearEditor(state) {
+        state.editedContact = undefined
+        state.loadingEditor = false
+      },
+      getItemRequest(state) {
+        state.loadingEditor = true
+      },
+      getItemSuccess(state, action: PayloadAction<PartnerContact>) {
+        state.editedContact = action.payload
+        state.loadingEditor = false
+        state.error = ''
+      },
+      getItemFail(state, action: PayloadAction<string>) {
+        state.loadingEditor = false
+        state.error = action.payload
+      },
       getListRequest(state) {
         state.loadingList = true
       },
@@ -75,8 +91,9 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
     }
   })
   const { getListSuccess, getListRequest, getListFail } = slice.actions
+  const { getItemSuccess, getItemRequest, getItemFail } = slice.actions
   const { deleteItemRequest, deleteItemSuccess, deleteItemFail } = slice.actions
-  const { _reset, _setListConstraints } = slice.actions
+  const { _reset, _setListConstraints, _clearEditor } = slice.actions
 
   const reducer = slice.reducer
 
@@ -107,11 +124,19 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
   }
 
   const getItem = (id: number): AppThunk => async dispatch => {
-    // TODO: integrate
+    try {
+      dispatch(getItemRequest())
+      const contact = await api.auth.getPartnerContactInfo({ id })
+      dispatch(getItemSuccess(contact))
+    } catch (err) {
+      dispatch(getItemFail(err.toString()))
+    }
   }
+
   const clearEditor = (): AppThunk => async dispatch => {
-    // TODO
+    dispatch(_clearEditor())
   }
+
   const saveItem = (id: number, data: PartnerContact): AppThunk => async dispatch => {
     // TODO: integrate
     await delay()

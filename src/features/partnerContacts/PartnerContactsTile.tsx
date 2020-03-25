@@ -33,6 +33,10 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
     detailRoute: '/contact'
   })
 
+  const handleGetItem = (id: number): void => {
+    dispatch(getItem(id))
+  }
+
   return (
     <>
       {!hidden && (
@@ -41,7 +45,7 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
             contacts,
             loading: loadingList,
             listParams,
-            handleEdit: (id: number) => routeToEditor(id),
+            handleEdit: routeToEditor,
             handleCreate: () => routeToEditor(),
             deleteAction: deleteItem,
             getListAction: getList
@@ -51,11 +55,9 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
       <PartnerContactEditor
         {...{
           params: editorParams,
-          selector,
+          selector: selector,
           saveAction: saveItem,
-          getItem: (id: number) => {
-            dispatch(getItem(id))
-          },
+          getItem: handleGetItem,
           afterClose: () => {
             handleAfterClose()
             dispatch(clearEditor())
