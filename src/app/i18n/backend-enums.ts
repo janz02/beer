@@ -12,20 +12,21 @@ t('coupon.state.archived')
 t('coupon.type.banner')
 t('coupon.type.discount')
 t('coupon.type.prize')
-t('coupon.mode.online')
+
 t('coupon.mode.physical')
+t('coupon.mode.online')
+
+t('coupon.rank.basic')
+t('coupon.rank.standard')
+t('coupon.rank.super')
+t('coupon.rank.premium')
+
+t('coupon.discount-type.fixvalue')
+t('coupon.discount-type.percentvalue')
 
 t(`partner.partner-state.active`)
 t(`partner.partner-state.inactive`)
 t(`partner.partner-state.deleted`)
-
-t('coupon.type.discount')
-t('coupon.type.prize')
-t('coupon.type.banner')
-
-t('coupon.rank.bronze')
-t('coupon.rank.silver')
-t('coupon.rank.gold')
 
 // Boolean mappings
 t(`user-access.field.partnerType.major`)

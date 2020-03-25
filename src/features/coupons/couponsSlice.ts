@@ -7,7 +7,7 @@ import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { history } from 'router/router'
-import { CouponState, CouponMode } from 'api/swagger/models'
+import { CouponState } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
 
 interface CouponsState {
@@ -107,6 +107,10 @@ export const getCoupon = (id: number): AppThunk => async dispatch => {
         startDate: coupon.startDate && moment(coupon.startDate),
         endDate: coupon.endDate && moment(coupon.endDate),
         expireDate: coupon.expireDate && moment(coupon.expireDate),
+        createdDate: coupon.createdDate && moment(coupon.createdDate),
+        modifiedDate: coupon.modifiedDate && moment(coupon.modifiedDate),
+        approvedDate: coupon.approvedDate && moment(coupon.approvedDate),
+        drawDate: coupon.drawDate && moment(coupon.drawDate),
         comments: coupon.comments?.map(x => {
           return { ...x, dateTime: moment(x.dateTime) }
         })
@@ -131,10 +135,9 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         startDate: coupon.startDate && coupon.startDate.toDate(),
         endDate: coupon.endDate && coupon.endDate.toDate(),
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
+        drawDate: coupon.drawDate && coupon.drawDate.toDate(),
         // TODO fix this with tags
-        tags: [tagId],
-        // TODO: fix with api
-        mode: CouponMode.Online
+        tags: [tagId]
       }
     })
 
@@ -160,6 +163,7 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         startDate: coupon.startDate && coupon.startDate.toDate(),
         endDate: coupon.endDate && coupon.endDate.toDate(),
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
+        drawDate: coupon.drawDate && coupon.drawDate.toDate(),
         // TODO fix this with tags
         tags: [tagId]
       }

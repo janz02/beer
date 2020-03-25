@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 import React, { useEffect, useState } from 'react'
 import './CouponEditorForm.scss'
 import {
@@ -19,7 +20,14 @@ import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { Coupon } from 'models/coupon'
-import { CouponRank, CouponType, CouponState, Roles } from 'api/swagger/models'
+import {
+  CouponRank,
+  CouponType,
+  CouponState,
+  Roles,
+  CouponMode,
+  CouponDiscountType
+} from 'api/swagger/models'
 import {
   getCategories,
   activateCoupon,
@@ -48,16 +56,6 @@ export interface CouponEditorFormProps {
   editing: boolean
 }
 
-enum RedeemMode {
-  Online = 'Online',
-  Phisical = 'Phisical'
-}
-
-enum DiscountType {
-  Fix = 'Fix',
-  Percent = 'Percent'
-}
-
 export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { handleCouponSave, loading, couponIsNew, coupon, editing } = props
   const dispatch = useDispatch()
@@ -65,8 +63,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const { categories } = useSelector((state: RootState) => state.coupons)
   const [stateForCreate, setStateForCreate] = useState(CouponState.Created)
   const [couponType, setCouponType] = useState<CouponType>()
-  const [redeemMode, setRedeemMode] = useState<RedeemMode>()
-  const [discountType, setDiscountType] = useState<DiscountType>()
+  const [couponMode, setCouponMode] = useState<CouponMode>()
+  const [couponDiscountType, setCouponDiscountType] = useState<CouponDiscountType>()
   const rule = useCommonFormRules()
 
   const {
@@ -91,7 +89,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   useEffect(() => {
     setFieldsValue({
       ...coupon,
-      rank: CouponRank.Bronze
+      rank: CouponRank.Basic
     })
   }, [coupon, setFieldsValue])
 
@@ -277,25 +275,21 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
               <Row gutter={rowGutter}>
                 <Col span={12}>
-                  {hasPermission(comboRoles.forNkm) && (
+                  Partner dropdown comes here
+                  {/* {hasPermission(comboRoles.forNkm) ? (
                     <Form.Item name="partnerId" label={t('coupon-create.field.partner-name')}>
-                      {/* TODO: integrate. */}
-                      <div>Partner field comes here</div>
-                      {/* {hasPermission(comboRoles.forPartner) ? (
-                    // TODO: display only its partner's name
-                    <div />
-                  ) : (
-                    <Select disabled={!displayEditor || !couponIsNew}>
-                      {partners &&
-                        partners.map(x => (
-                          <Select.Option key={x.id} value={x.id!}>
-                            {x.name}
-                          </Select.Option>
-                        ))}
-                    </Select>
-                  )} */}
+                      <Select disabled={!displayEditor || !couponIsNew}>
+                        {partners &&
+                          partners.map(x => (
+                            <Select.Option key={x.id} value={x.id!}>
+                              {x.name}
+                            </Select.Option>
+                          ))}
+                      </Select>
                     </Form.Item>
-                  )}
+                  ) : (
+                    <div>Partner name</div>
+                  )} */}
                 </Col>
 
                 <Col span={12}>
@@ -400,11 +394,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     >
                       <Select
                         disabled={!displayEditor}
-                        onChange={(value: RedeemMode) => {
-                          setRedeemMode(value)
+                        onChange={(value: CouponMode) => {
+                          setCouponMode(value)
                         }}
                       >
-                        {Object.keys(RedeemMode).map(x => (
+                        {Object.keys(CouponMode).map(x => (
                           <Select.Option key={x} value={x}>
                             {t(`coupon.redeem-mode.${x.toLowerCase()}`)}
                           </Select.Option>
@@ -414,7 +408,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 )}
 
-                {couponType === CouponType.Discount && redeemMode === RedeemMode.Online && (
+                {couponType === CouponType.Discount && couponMode === CouponMode.Online && (
                   <Col span={24}>
                     <Form.Item
                       name="onlineRedeemLink"
@@ -472,11 +466,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     >
                       <Select
                         disabled={!displayEditor}
-                        onChange={(value: DiscountType) => {
-                          setDiscountType(value)
+                        onChange={(value: CouponDiscountType) => {
+                          setCouponDiscountType(value)
                         }}
                       >
-                        {Object.keys(DiscountType).map(x => (
+                        {Object.keys(CouponDiscountType).map(x => (
                           <Select.Option key={x} value={x}>
                             {x}
                           </Select.Option>
@@ -486,7 +480,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 )}
 
-                {(discountType === DiscountType.Fix || discountType === DiscountType.Percent) && (
+                {(couponDiscountType === CouponDiscountType.FixValue ||
+                  couponDiscountType === CouponDiscountType.PercentValue) && (
                   <Col span={8}>
                     <Form.Item
                       name="discountValue"
@@ -497,13 +492,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         () => ({
                           validator(rule, value) {
                             const parsedAsFloat = parseFloat(value)
-                            if (discountType === DiscountType.Percent) {
+                            if (couponDiscountType === CouponDiscountType.PercentValue) {
                               if (parsedAsFloat < 0 || parsedAsFloat > 100) {
                                 return Promise.reject(
                                   t('error.coupon.percentage-discount-out-of-range')
                                 )
                               }
-                            } else if (discountType === DiscountType.Fix) {
+                            } else if (couponDiscountType === CouponDiscountType.FixValue) {
                               if (!Number.isInteger(parsedAsFloat)) {
                                 return Promise.reject(
                                   t('error.coupon.fix-discount-must-be-integer')

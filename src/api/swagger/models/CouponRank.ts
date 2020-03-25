@@ -18,9 +18,10 @@
  * @enum {string}
  */
 export enum CouponRank {
-    Bronze = 'Bronze',
-    Silver = 'Silver',
-    Gold = 'Gold'
+    Basic = 'Basic',
+    Standard = 'Standard',
+    Super = 'Super',
+    Premium = 'Premium'
 }
 
 export function CouponRankFromJSON(json: any): CouponRank {

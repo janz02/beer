@@ -1,4 +1,5 @@
 export * from './ActivateCouponDto';
+export * from './ActivatePartnerDto';
 export * from './CashierDto';
 export * from './CashierVm';
 export * from './CashierVmPaginatedResponse';
