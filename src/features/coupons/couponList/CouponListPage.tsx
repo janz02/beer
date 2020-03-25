@@ -7,7 +7,7 @@ import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
 import { getCoupons, deleteCoupon, setIncludeArchived, setOnlyWaiting } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
-import { CouponState, Roles, CouponType } from 'api/swagger/models'
+import { CouponState, Roles, CouponType, CouponMode } from 'api/swagger/models'
 import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { getCategories } from '../couponsSlice'
@@ -64,7 +64,8 @@ export const CouponListPage: React.FC = () => {
       'startDate',
       'endDate',
       'expireDate',
-      'type'
+      'type',
+      'mode'
     ],
     getDataAction: getCoupons
   })
@@ -199,7 +200,7 @@ export const CouponListPage: React.FC = () => {
         ellipsis: false,
         sort: true,
         filterMode: FilterMode.FILTER,
-        filters: Object.keys(CouponState).map(f => {
+        filters: Object.keys(CouponMode).map(f => {
           return { text: t(`coupon.mode.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
         render(value) {
