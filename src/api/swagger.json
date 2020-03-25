@@ -1964,6 +1964,39 @@
         }
       }
     },
+    "/api/CouponUserCodes/{couponId}/RedeemedCouponCodes": {
+      "get": {
+        "tags": [
+          "CouponUserCodes"
+        ],
+        "summary": "",
+        "operationId": "CouponUserCode",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CouponUserPairs/GeneratePairs": {
       "post": {
         "tags": [
@@ -2953,6 +2986,47 @@
         "responses": {
           "200": {
             "description": "Successful deletion"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/Partners/Activate/{id}": {
+      "put": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Activates or inactivates a partner",
+        "description": "Activates or inactivates a partner with Id of \"id\"",
+        "operationId": "activatePartner",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to activate/inactivate",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of entity to activate/inactivate",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dto containing the new value of the partner active status",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivatePartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful activation"
           },
           "404": {
             "description": "Entity not found: error.not-found"
@@ -4061,7 +4135,7 @@
           "role": {
             "$ref": "#/components/schemas/Roles"
           },
-          "active": {
+          "isActive": {
             "type": "boolean"
           }
         }
@@ -4096,7 +4170,7 @@
             "type": "string",
             "nullable": true
           },
-          "active": {
+          "isActive": {
             "type": "boolean"
           },
           "majorPartner": {
@@ -5062,6 +5136,14 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "ActivatePartnerDto": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/PartnerState"
           }
         }
       },
