@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { CouponRank, CouponType, CouponState } from 'api/swagger/models'
+import { CouponRank, CouponType, CouponState, CouponMode } from 'api/swagger/models'
 import { CouponComment } from './couponComment'
 
 export interface Coupon {
@@ -16,8 +16,13 @@ export interface Coupon {
   couponCount?: number
   minimumShoppingValue?: number
   tags?: []
+  mode?: CouponMode
   isDrawable?: boolean
   state?: CouponState
   isActive?: boolean
   comments?: CouponComment[]
+  showCount?: number
+  clickCount?: number
+  claimCount?: number
+  predefinedCodesFileId?: string
 }

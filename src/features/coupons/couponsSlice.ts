@@ -9,6 +9,7 @@ import i18n from 'app/i18n'
 import { history } from 'router/router'
 import { CouponState, CouponMode } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
+import { saveAs } from 'file-saver'
 
 interface CouponsState {
   coupon?: Coupon
@@ -75,6 +76,22 @@ const couponsSlice = createSlice({
     setLoadingFailed(state) {
       state.loading = false
       state.error = true
+    },
+    downloadCouponsSuccess(state) {
+      state.loading = false
+      state.error = false
+    },
+    downloadCouponsFailed(state) {
+      state.loading = false
+      state.error = true
+    },
+    downloadClaimedCouponsSuccess(state) {
+      state.loading = false
+      state.error = false
+    },
+    downloadClaimedCouponsFailed(state) {
+      state.loading = false
+      state.error = true
     }
   }
 })
@@ -89,7 +106,11 @@ const {
   updateCouponStatusSuccess,
   getCategoriesSuccess,
   setLoadingStart,
-  setLoadingFailed
+  setLoadingFailed,
+  downloadCouponsSuccess,
+  downloadCouponsFailed,
+  downloadClaimedCouponsSuccess,
+  downloadClaimedCouponsFailed
 } = couponsSlice.actions
 
 export const { resetCoupons } = couponsSlice.actions
@@ -266,5 +287,31 @@ export const getCategories = (): AppThunk => async dispatch => {
     )
   } catch (err) {
     dispatch(setLoadingFailed())
+  }
+}
+
+export const downloadCoupons = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    // TODO fix names
+    const blob: Blob = await api.couponUserCodes.couponCodesCouponUserCode({ couponId: coupon.id! })
+    saveAs(blob, `${coupon.id} - ${coupon.name} CouponCodes.csv`)
+    dispatch(downloadCouponsSuccess())
+  } catch (err) {
+    dispatch(downloadCouponsFailed())
+  }
+}
+
+export const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    // TODO fix names
+    const blob: Blob = await api.couponUserCodes.couponUserCode({ couponId: coupon.id! })
+    saveAs(blob, `${coupon.id} - ${coupon.name} ClaimedCouponCodes.csv`)
+    dispatch(downloadClaimedCouponsSuccess())
+  } catch (err) {
+    dispatch(downloadClaimedCouponsFailed())
   }
 }

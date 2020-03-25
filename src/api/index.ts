@@ -13,7 +13,8 @@ import {
   EmailTemplatesApi,
   SegmentsApi,
   CashiersApi,
-  FilesApi
+  FilesApi,
+  CouponUserCodesApi
 } from './swagger/apis'
 
 import { notification } from 'antd'
@@ -88,6 +89,7 @@ export const api = {
   coupons: new CouponsApi(config),
   tags: new TagsApi(config),
   couponComments: new CouponCommentsApi(config),
+  couponUserCodes: new CouponUserCodesApi(config),
   categories: new CategoriesApi(config),
   auth: new AuthApi(config),
   sites: new SitesApi(config),

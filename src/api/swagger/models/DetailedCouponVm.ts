@@ -146,10 +146,16 @@ export interface DetailedCouponVm {
     claimCount?: number;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof DetailedCouponVm
      */
-    smallPicture?: number;
+    smallPictureId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedCouponVm
+     */
+    bigPictureId?: string | null;
     /**
      * 
      * @type {CouponMode}
@@ -233,7 +239,8 @@ export function DetailedCouponVmFromJSONTyped(json: any, ignoreDiscriminator: bo
         'showCount': !exists(json, 'showCount') ? undefined : json['showCount'],
         'clickCount': !exists(json, 'clickCount') ? undefined : json['clickCount'],
         'claimCount': !exists(json, 'claimCount') ? undefined : json['claimCount'],
-        'smallPicture': !exists(json, 'smallPicture') ? undefined : json['smallPicture'],
+        'smallPictureId': !exists(json, 'smallPictureId') ? undefined : json['smallPictureId'],
+        'bigPictureId': !exists(json, 'bigPictureId') ? undefined : json['bigPictureId'],
         'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
         'discountType': !exists(json, 'discountType') ? undefined : CouponDiscountTypeFromJSON(json['discountType']),
         'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
@@ -272,7 +279,8 @@ export function DetailedCouponVmToJSON(value?: DetailedCouponVm | null): any {
         'showCount': value.showCount,
         'clickCount': value.clickCount,
         'claimCount': value.claimCount,
-        'smallPicture': value.smallPicture,
+        'smallPictureId': value.smallPictureId,
+        'bigPictureId': value.bigPictureId,
         'mode': CouponModeToJSON(value.mode),
         'discountType': CouponDiscountTypeToJSON(value.discountType),
         'createdBy': value.createdBy,

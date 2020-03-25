@@ -186,6 +186,18 @@ export interface CouponVm {
     approvedDate?: Date | null;
     /**
      * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    bigPictureId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    smallPictureId?: string | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof CouponVm
      */
@@ -256,6 +268,24 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     partnerId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    showCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    clickCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    claimCount?: number;
 }
 
 export function CouponVmFromJSON(json: any): CouponVm {
@@ -291,6 +321,8 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'modifiedDate': !exists(json, 'modifiedDate') ? undefined : (json['modifiedDate'] === null ? null : new Date(json['modifiedDate'])),
         'approvedBy': !exists(json, 'approvedBy') ? undefined : json['approvedBy'],
         'approvedDate': !exists(json, 'approvedDate') ? undefined : (json['approvedDate'] === null ? null : new Date(json['approvedDate'])),
+        'bigPictureId': !exists(json, 'bigPictureId') ? undefined : json['bigPictureId'],
+        'smallPictureId': !exists(json, 'smallPictureId') ? undefined : json['smallPictureId'],
         'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
         'smallPicture': !exists(json, 'smallPicture') ? undefined : json['smallPicture'],
         'bigPicture': !exists(json, 'bigPicture') ? undefined : json['bigPicture'],
@@ -303,6 +335,9 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'awardedCampaign': !exists(json, 'awardedCampaign') ? undefined : json['awardedCampaign'],
         'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
         'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
+        'showCount': !exists(json, 'showCount') ? undefined : json['showCount'],
+        'clickCount': !exists(json, 'clickCount') ? undefined : json['clickCount'],
+        'claimCount': !exists(json, 'claimCount') ? undefined : json['claimCount'],
     };
 }
 
@@ -338,6 +373,8 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'modifiedDate': value.modifiedDate === undefined ? undefined : (value.modifiedDate === null ? null : value.modifiedDate.toISOString()),
         'approvedBy': value.approvedBy,
         'approvedDate': value.approvedDate === undefined ? undefined : (value.approvedDate === null ? null : value.approvedDate.toISOString()),
+        'bigPictureId': value.bigPictureId,
+        'smallPictureId': value.smallPictureId,
         'isActive': value.isActive,
         'smallPicture': value.smallPicture,
         'bigPicture': value.bigPicture,
@@ -350,6 +387,9 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'awardedCampaign': value.awardedCampaign,
         'mode': CouponModeToJSON(value.mode),
         'partnerId': value.partnerId,
+        'showCount': value.showCount,
+        'clickCount': value.clickCount,
+        'claimCount': value.claimCount,
     };
 }
 

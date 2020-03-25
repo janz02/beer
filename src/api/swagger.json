@@ -2521,7 +2521,7 @@
         }
       }
     },
-    "/api/PartnerContacts": {
+    "/api/PartnerContacts/Self": {
       "put": {
         "tags": [
           "PartnerContacts"
@@ -2531,7 +2531,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SelfPartnerContactDto"
+                "$ref": "#/components/schemas/PartnerContactDto"
               }
             }
           }
@@ -2539,6 +2539,78 @@
         "responses": {
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/PartnerContacts/{id}": {
+      "put": {
+        "tags": [
+          "PartnerContacts"
+        ],
+        "operationId": "updatePartnerContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerContactDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PartnerContacts"
+        ],
+        "operationId": "getOnePartnerContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVm"
+                }
+              }
+            }
           }
         }
       }
@@ -4477,11 +4549,11 @@
             "format": "int32",
             "nullable": true
           },
-          "smallPicture": {
+          "smallPictureId": {
             "type": "string",
             "nullable": true
           },
-          "bigPicture": {
+          "bigPictureId": {
             "type": "string",
             "nullable": true
           },
@@ -4582,9 +4654,13 @@
             "type": "integer",
             "format": "int32"
           },
-          "smallPicture": {
-            "type": "integer",
-            "format": "int32"
+          "smallPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigPictureId": {
+            "type": "string",
+            "nullable": true
           },
           "mode": {
             "$ref": "#/components/schemas/CouponMode"
@@ -4757,6 +4833,14 @@
             "format": "date-time",
             "nullable": true
           },
+          "bigPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "smallPictureId": {
+            "type": "string",
+            "nullable": true
+          },
           "isActive": {
             "type": "boolean"
           },
@@ -4800,6 +4884,18 @@
             "$ref": "#/components/schemas/CouponMode"
           },
           "partnerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "showCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clickCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "claimCount": {
             "type": "integer",
             "format": "int32"
           }
@@ -5061,7 +5157,7 @@
           }
         }
       },
-      "SelfPartnerContactDto": {
+      "PartnerContactDto": {
         "type": "object",
         "properties": {
           "name": {

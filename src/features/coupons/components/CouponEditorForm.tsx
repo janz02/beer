@@ -24,10 +24,12 @@ import {
   getCategories,
   activateCoupon,
   updateCouponStatus,
-  deleteCouponComment
+  deleteCouponComment,
+  downloadClaimedCoupons,
+  downloadCoupons
 } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
-import { DeleteFilled, CheckOutlined, ArrowRightOutlined } from '@ant-design/icons'
+import { DeleteFilled, CheckOutlined, ArrowRightOutlined, ExportOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
@@ -39,6 +41,7 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission, hasAllPermissions } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
+import { FileUploadButton } from 'components/buttons/FileUploadButton'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -67,6 +70,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const [couponType, setCouponType] = useState<CouponType>()
   const [redeemMode, setRedeemMode] = useState<RedeemMode>()
   const [discountType, setDiscountType] = useState<DiscountType>()
+  const [predefinedCodesFileId, setPredefinedCodesFileId] = useState<string>()
   const rule = useCommonFormRules()
 
   const {
@@ -93,6 +97,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       ...coupon,
       rank: CouponRank.Basic
     })
+    setPredefinedCodesFileId(coupon?.predefinedCodesFileId)
   }, [coupon, setFieldsValue])
 
   const displayEditor =
@@ -118,6 +123,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       handleCouponSave({
         ...values,
         // TODO: integrate tags and isDrawable.
+        predefinedCodesFileId: predefinedCodesFileId,
         tags: [],
         isDrawable: false
       })
@@ -242,6 +248,44 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             checkFieldsChange()
           }}
         >
+          {!displayEditor && (
+            <Collapse defaultActiveKey={['1']}>
+              <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
+                <Row gutter={rowGutter}>
+                  <Col span={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.showCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.showCount}</p>
+                  </Col>
+
+                  <Col span={4} offset={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.clickCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
+                  </Col>
+
+                  <Col span={4} offset={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.claimCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
+                  </Col>
+                </Row>
+
+                <Row gutter={rowGutter}>
+                  <Col span={8}>
+                    <Button
+                      type="default"
+                      loading={loading}
+                      icon={<ExportOutlined />}
+                      onClick={() => {
+                        dispatch(downloadClaimedCoupons(coupon!))
+                      }}
+                    >
+                      {t('coupon-create.download-redeemed-coupons')}
+                    </Button>
+                  </Col>
+                </Row>
+              </Collapse.Panel>
+            </Collapse>
+          )}
+
           <Collapse defaultActiveKey={['1']}>
             <Collapse.Panel header={t('coupon-create.campaign-basics')} key="1">
               <Row gutter={rowGutter}>
@@ -636,6 +680,58 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     </Form.Item>
                   )}
                 </Col>
+              </Row>
+            </Collapse.Panel>
+          </Collapse>
+
+          <Collapse defaultActiveKey={['1']}>
+            <Collapse.Panel header={t('coupon-create.field.coupon-count')} key="1">
+              <Row gutter={rowGutter}>
+                <Col span={8}>
+                  <Form.Item
+                    name="couponCount"
+                    label={t('coupon-create.field.coupon-count')}
+                    rules={[rule.positiveInteger()]}
+                  >
+                    <InputNumber disabled={!displayEditor} min={1} max={100000000} />
+                  </Form.Item>
+                </Col>
+
+                <Col span={8}>
+                  <Form.Item
+                    name="predefinedCodesFileId"
+                    label={t('coupon-create.upload')}
+                    rules={[]}
+                  >
+                    <FileUploadButton
+                      uploadProps={{}}
+                      onSuccess={fileId => {
+                        setPredefinedCodesFileId(fileId)
+                      }}
+                      onRemove={() => {
+                        setPredefinedCodesFileId('')
+                      }}
+                      fileId={predefinedCodesFileId}
+                    />
+                  </Form.Item>
+                </Col>
+
+                {!!coupon?.id && (
+                  <Col span={8}>
+                    <Form.Item name="download" label={t('coupon-create.download')} rules={[]}>
+                      <Button
+                        type="primary"
+                        loading={loading}
+                        icon={<ExportOutlined />}
+                        onClick={() => {
+                          dispatch(downloadCoupons(coupon!))
+                        }}
+                      >
+                        {t('coupon-create.download-coupons')}
+                      </Button>
+                    </Form.Item>
+                  </Col>
+                )}
               </Row>
             </Collapse.Panel>
           </Collapse>
