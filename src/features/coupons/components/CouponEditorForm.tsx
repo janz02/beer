@@ -716,20 +716,22 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Form.Item>
                 </Col>
 
-                <Col span={8}>
-                  <Form.Item name="download" label={t('coupon-create.download')} rules={[]}>
-                    <Button
-                      type="primary"
-                      loading={loading}
-                      icon={<ExportOutlined />}
-                      onClick={() => {
-                        dispatch(downloadCoupons(coupon!))
-                      }}
-                    >
-                      {t('coupon-create.download-coupons')}
-                    </Button>
-                  </Form.Item>
-                </Col>
+                {!!coupon?.id && (
+                  <Col span={8}>
+                    <Form.Item name="download" label={t('coupon-create.download')} rules={[]}>
+                      <Button
+                        type="primary"
+                        loading={loading}
+                        icon={<ExportOutlined />}
+                        onClick={() => {
+                          dispatch(downloadCoupons(coupon!))
+                        }}
+                      >
+                        {t('coupon-create.download-coupons')}
+                      </Button>
+                    </Form.Item>
+                  </Col>
+                )}
               </Row>
             </Collapse.Panel>
           </Collapse>
