@@ -299,7 +299,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Col span={12}>
                   {!couponIsNew && (
-                    <Form.Item name="isActive" label={t('coupon-create.field.is-active')}>
+                    <Form.Item label={t('coupon-create.field.is-active')}>
                       {coupon?.isActive ? t('coupon-create.active') : t('coupon-create.inactive')}
                     </Form.Item>
                   )}
@@ -539,8 +539,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       label={t('coupon-create.field.minimum-shopping-value')}
                       rules={[rule.positiveInteger()]}
                     >
-                      <InputNumber disabled={!displayEditor} min={1} />
-                      <span className="input-number-suffix">{t('common.currency.huf')}</span>
+                      <>
+                        <InputNumber disabled={!displayEditor} min={1} />
+                        <span className="input-number-suffix">{t('common.currency.huf')}</span>
+                      </>
                     </Form.Item>
                   </Col>
                 )}
@@ -567,8 +569,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     help={t('coupon-create.field.product-value-help')}
                     dependencies={['averageBasketValue']}
                   >
-                    <InputNumber disabled={!displayEditor} min={1} />
-                    <span className="input-number-suffix">{t('common.currency.huf')}</span>
+                    <>
+                      <InputNumber disabled={!displayEditor} min={1} />
+                      <span className="input-number-suffix">{t('common.currency.huf')}</span>
+                    </>
                   </Form.Item>
                 </Col>
 
@@ -594,8 +598,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     help={t('coupon-create.field.average-basket-value-help')}
                     dependencies={['productValue']}
                   >
-                    <InputNumber disabled={!displayEditor} min={1} />
-                    <span className="input-number-suffix">{t('common.currency.huf')}</span>
+                    <>
+                      <InputNumber disabled={!displayEditor} min={1} />
+                      <span className="input-number-suffix">{t('common.currency.huf')}</span>
+                    </>
                   </Form.Item>
                 </Col>
 

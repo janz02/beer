@@ -11,6 +11,12 @@
     }
   }
 
+  .coupon-editor-form__actions {
+    & > *:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
   .ant-input-number {
     width: calc(100% - 30px);
   }
