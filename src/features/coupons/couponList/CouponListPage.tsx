@@ -195,7 +195,7 @@ export const CouponListPage: React.FC = () => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.redeem-mode'),
+        title: t('coupon-list.mode'),
         key: 'mode',
         ellipsis: false,
         sort: true,
@@ -204,7 +204,7 @@ export const CouponListPage: React.FC = () => {
           return { text: t(`coupon.mode.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
         render(value) {
-          return t(`coupon.mode.${value?.toLowerCase()}`)
+          return value ? t(`coupon.mode.${value.toLowerCase()}`) : ''
         }
       }),
       columnConfig({

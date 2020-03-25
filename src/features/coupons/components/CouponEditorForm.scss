@@ -3,13 +3,22 @@
 .coupon-editor-form {
   padding-bottom: 30px;
 
-  &__actions {
-    display: flex;
-    align-items: center;
+  .actions-right {
+    text-align: end;
 
     & > *:not(:last-child) {
-      margin-right: 5px;
+      margin-right: 15px;
     }
+  }
+
+  .coupon-editor-form__actions {
+    & > *:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  .ant-form-item-label {
+    font-weight: 600;
   }
 
   .ant-collapse {

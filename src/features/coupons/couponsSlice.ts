@@ -7,13 +7,15 @@ import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { history } from 'router/router'
-import { CouponState, CouponMode } from 'api/swagger/models'
+import { CouponState, CouponType } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
+import { Partner } from 'models/partner'
 import { saveAs } from 'file-saver'
 
 interface CouponsState {
   coupon?: Coupon
   categories?: Category[]
+  majorPartners?: Partner[]
   error: boolean
   loading: boolean
 }
@@ -70,6 +72,12 @@ const couponsSlice = createSlice({
       state.loading = false
       state.error = false
     },
+    getMajorPartnersSuccess(state, action: PayloadAction<Partner[]>) {
+      state.majorPartners = action.payload
+
+      state.loading = false
+      state.error = false
+    },
     setLoadingStart(state) {
       state.loading = true
     },
@@ -105,6 +113,7 @@ const {
   activateCouponSuccess,
   updateCouponStatusSuccess,
   getCategoriesSuccess,
+  getMajorPartnersSuccess,
   setLoadingStart,
   setLoadingFailed,
   downloadCouponsSuccess,
@@ -128,6 +137,10 @@ export const getCoupon = (id: number): AppThunk => async dispatch => {
         startDate: coupon.startDate && moment(coupon.startDate),
         endDate: coupon.endDate && moment(coupon.endDate),
         expireDate: coupon.expireDate && moment(coupon.expireDate),
+        createdDate: coupon.createdDate && moment(coupon.createdDate),
+        modifiedDate: coupon.modifiedDate && moment(coupon.modifiedDate),
+        approvedDate: coupon.approvedDate && moment(coupon.approvedDate),
+        drawDate: coupon.drawDate && moment(coupon.drawDate),
         comments: coupon.comments?.map(x => {
           return { ...x, dateTime: moment(x.dateTime) }
         })
@@ -152,10 +165,13 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         startDate: coupon.startDate && coupon.startDate.toDate(),
         endDate: coupon.endDate && coupon.endDate.toDate(),
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
-        // TODO fix this with tags
-        tags: [tagId],
-        // TODO: fix with api
-        mode: CouponMode.Online
+        drawDate: coupon.drawDate && coupon.drawDate.toDate(),
+        // TODO: integrate
+        smallPictureId: '1',
+        bigPictureId: coupon.type === CouponType.Banner ? undefined : '1',
+        prizeRulesFileId: coupon.type === CouponType.Prize ? '1' : undefined,
+        couponCount: 1,
+        tags: [tagId]
       }
     })
 
@@ -181,7 +197,12 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         startDate: coupon.startDate && coupon.startDate.toDate(),
         endDate: coupon.endDate && coupon.endDate.toDate(),
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
-        // TODO fix this with tags
+        drawDate: coupon.drawDate && coupon.drawDate.toDate(),
+        // TODO: integrate
+        smallPictureId: '1',
+        bigPictureId: coupon.type === CouponType.Banner ? undefined : '1',
+        prizeRulesFileId: coupon.type === CouponType.Prize ? '1' : undefined,
+        couponCount: 1,
         tags: [tagId]
       }
     })
@@ -284,6 +305,26 @@ export const getCategories = (): AppThunk => async dispatch => {
     const categories = await api.categories.getCategories({ pageSize: 10000, orderBy: 'name' })
     dispatch(
       getCategoriesSuccess(categories.result!.map(x => ({ id: x.id, name: x.name } as Category)))
+    )
+  } catch (err) {
+    dispatch(setLoadingFailed())
+  }
+}
+
+export const getMajorPartners = (): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    // TODO: partners pageSize is hardcoded, consider to do a better form field with lazy loading and search
+    const partners = await api.partner.getPartners({
+      pageSize: 10000,
+      orderBy: 'name',
+      majorPartner: true
+    })
+    dispatch(
+      getMajorPartnersSuccess(
+        partners.result ? partners.result.map(x => ({ id: x.id, name: x.name } as Partner)) : []
+      )
     )
   } catch (err) {
     dispatch(setLoadingFailed())

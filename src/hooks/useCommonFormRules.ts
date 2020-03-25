@@ -93,8 +93,14 @@ export function useCommonFormRules() {
    */
   const positiveInteger = useCallback(
     (message?: string): Rule => ({
-      min: 1,
+      transform: value => {
+        return value ? +value : 1
+      },
+
+      whitespace: true,
       type: 'integer',
+      min: 1,
+      required: false,
       message: message || t('error.common.number-must-be-positive-integer')
     }),
     [t]
