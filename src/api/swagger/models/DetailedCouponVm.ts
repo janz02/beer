@@ -146,10 +146,10 @@ export interface DetailedCouponVm {
     claimCount?: number;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof DetailedCouponVm
      */
-    smallPicture?: number;
+    smallPicture?: string | null;
     /**
      * 
      * @type {CouponMode}
