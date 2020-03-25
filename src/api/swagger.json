@@ -4798,6 +4798,10 @@
           },
           "mode": {
             "$ref": "#/components/schemas/CouponMode"
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
