@@ -169,7 +169,7 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         // TODO: integrate
         smallPictureId: '1',
         bigPictureId: coupon.type === CouponType.Banner ? undefined : '1',
-        prizeRulesFileId: coupon.type === CouponType.Banner ? undefined : '1',
+        prizeRulesFileId: coupon.type === CouponType.Prize ? '1' : undefined,
         couponCount: 1,
         tags: [tagId]
       }
@@ -201,7 +201,7 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         // TODO: integrate
         smallPictureId: '1',
         bigPictureId: coupon.type === CouponType.Banner ? undefined : '1',
-        prizeRulesFileId: coupon.type === CouponType.Banner ? undefined : '1',
+        prizeRulesFileId: coupon.type === CouponType.Prize ? '1' : undefined,
         couponCount: 1,
         tags: [tagId]
       }
