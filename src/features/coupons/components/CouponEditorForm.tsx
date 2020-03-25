@@ -708,9 +708,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 </Col>
 
                 <Col span={8}>
-                  <Button type="primary" loading={loading} icon={<ExportOutlined />}>
-                    {t('coupon-create.download-coupons')}
-                  </Button>
+                  <Form.Item name="download" label={t('coupon-create.download')} rules={[]}>
+                    <Button type="primary" loading={loading} icon={<ExportOutlined />}>
+                      {t('coupon-create.download-coupons')}
+                    </Button>
+                  </Form.Item>
                 </Col>
               </Row>
             </Collapse.Panel>
