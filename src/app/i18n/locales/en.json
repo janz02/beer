@@ -212,6 +212,7 @@
     "small-image": "Coupon small image",
     "start-date": "Campaign start date",
     "state": "Campaign state",
+    "status": "Status",
     "user": "Creator user",
     "view-count": "View count"
   },
