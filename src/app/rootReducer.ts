@@ -26,23 +26,23 @@ export const rootReducer = combineReducers({
   router: connectRouter(history),
   routerHistory: routerHistoryStore,
   auth: authReducer,
+  profile: profileReducer,
   couponList: couponListReducer,
   coupons: couponsReducer,
   categoryList: categoryListReducer,
   categoryEditor: categoryEditorReducer,
-  notification: notificationReducer,
   selfPartner: selfPartnerReducer,
   partnerList: partnersListReducer,
   partnerEditor: partnerEditorReducer,
-  profile: profileReducer,
+  partnerSiteList: partnerSiteListSlice.reducer,
+  partnerContacts: partnerContactsSlice.reducer,
+  siteList: siteListSlice.reducer,
   siteEditor: siteEditorReducer,
+  contacts: contactsSlice.reducer,
   newsletterList: newsletterListReducer,
   newsletterEditor: newsletterEditorReducer,
   userAccessList: userAccessListReducer,
-  contacts: contactsSlice.reducer,
-  siteList: siteListSlice.reducer,
-  partnerContacts: partnerContactsSlice.reducer,
-  partnerSiteList: partnerSiteListSlice.reducer
+  notification: notificationReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>
