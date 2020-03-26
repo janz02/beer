@@ -297,6 +297,11 @@
       "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie.",
       "not-found-version": "Nem található ilyen verziójú e-mail sablon."
     },
+    "file": {
+      "download-fail": "Sikertelen fájl lekérdezés.",
+      "image-type-not-supported": "Rossz fájl formátum.",
+      "invalid-image-size": "Rossz kép méret."
+    },
     "not-found": "Nem található.",
     "paginate": {
       "order-by": "Lapozó sorrend.",

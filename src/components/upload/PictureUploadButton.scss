@@ -44,8 +44,11 @@
       right: 1px;
       bottom: 0;
       left: 1px;
+      min-width: 90px;
 
       button {
+        position: relative;
+        right: 0;
         margin: 5px;
         margin-top: 20px;
       }
@@ -87,6 +90,10 @@
       background: $primary-color;
       color: #FFFFFF;
       line-height: 30px;
+
+      &:hover {
+        background: lighten($color: $primary-color, $amount: 3);
+      }
     }
   }
 }

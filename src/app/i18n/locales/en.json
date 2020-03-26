@@ -297,6 +297,11 @@
       "name-must-be-unique": "E-mail template name must be unique.",
       "not-found-version": "E-mail template version not found."
     },
+    "file": {
+      "download-fail": "Couldn't fetch your file.",
+      "image-type-not-supported": "Unsuppored image type.",
+      "invalid-image-size": "Invalid image dimensions."
+    },
     "not-found": "Not found.",
     "paginate": {
       "order-by": "Paginate order by.",

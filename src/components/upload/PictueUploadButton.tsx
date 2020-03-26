@@ -1,23 +1,27 @@
 import './PictureUploadButton.scss'
-import Upload from 'antd/lib/upload'
+import Upload, { RcFile } from 'antd/lib/upload'
 import Button from 'antd/lib/button'
 import { EyeOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useCallback } from 'react'
 import { Modal, Spin, Tooltip } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { usePictureUpload, UsePictureUploadProps } from './usePictureUpload'
+import { useFileUpload, UseFileUploadProps } from './useFileUpload'
 
-export type PictureUploadButtonProps = UsePictureUploadProps
+export type PictureUploadButtonProps = Pick<
+  UseFileUploadProps,
+  'initialFileId' | 'onRemove' | 'onSuccess'
+>
 
 export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
   const { t } = useTranslation()
 
   const {
     handleClear,
-    handlePictureUpload: handleSingleImageUpload,
+    handleFileUpload: handleSingleImageUpload,
     appendedUploadProps,
     thumbnail
-  } = usePictureUpload({
+  } = useFileUpload({
+    mode: 'image',
     ...props
   })
 

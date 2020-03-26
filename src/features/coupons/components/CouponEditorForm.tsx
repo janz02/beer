@@ -50,7 +50,8 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission, hasAllPermissions } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
-import { PictureUploadButton } from 'components/upload/PictureUploadButton'
+import { FileUploadButton } from 'components/upload/FileUploadButton'
+import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -70,7 +71,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const [couponType, setCouponType] = useState<CouponType>()
   const [couponMode, setCouponMode] = useState<CouponMode>()
   const [couponDiscountType, setCouponDiscountType] = useState<CouponDiscountType>()
-  const [predefinedCodesFileId, setPredefinedCodesFileId] = useState<string>()
   const rule = useCommonFormRules()
 
   const {
@@ -105,7 +105,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
       ...coupon,
       rank: CouponRank.Basic
     })
-    setPredefinedCodesFileId(coupon?.predefinedCodesFileId!)
   }, [coupon, setFieldsValue])
 
   const displayEditor =
@@ -131,7 +130,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         ...values,
         categoryId: +values.categoryId,
         discountValue: +values.discountValue,
-        predefinedCodesFileId: predefinedCodesFileId,
         minimumShoppingValue: +values.minimumShoppingValue,
         itemPrice: +values.itemPrice,
         previousYearAverageBasketValue: +values.previousYearAverageBasketValue,
@@ -690,13 +688,21 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               <Row gutter={rowGutter}>
                 <Col span={12}>
                   <Form.Item name="smallPicture" label={t('coupon-create.field.small-image')}>
-                    <div>Small image comes here</div>
+                    <PictureUploadButton
+                      onSuccess={fileId => setFieldsValue({ smallPictureId: fileId })}
+                      onRemove={() => setFieldsValue({ smallPictureId: undefined })}
+                      initialFileId={coupon?.smallPictureId}
+                    />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   {prizeOrDiscount && (
                     <Form.Item name="bigPicture" label={t('coupon-create.field.big-image')}>
-                      <div>Big image comes here</div>
+                      <PictureUploadButton
+                        onSuccess={fileId => setFieldsValue({ bigPictureId: fileId })}
+                        onRemove={() => setFieldsValue({ bigPictureId: undefined })}
+                        initialFileId={coupon?.bigPictureId}
+                      />
                     </Form.Item>
                   )}
                 </Col>
@@ -719,14 +725,14 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Col span={8}>
                   <Form.Item
-                    name="bigPictureId"
+                    name="predefinedCodesFileId"
                     label={t('coupon-create.upload')}
-                    rules={[rule.required()]}
+                    rules={[]}
                   >
-                    <PictureUploadButton
-                      onSuccess={fileId => setFieldsValue({ bigPictureId: fileId })}
-                      onRemove={() => setFieldsValue({ bigPictureId: undefined })}
-                      initialFileId={coupon?.bigPictureId}
+                    <FileUploadButton
+                      onSuccess={fileId => setFieldsValue({ predefinedCodesFileId: fileId })}
+                      onRemove={() => setFieldsValue({ predefinedCodesFileId: undefined })}
+                      initialFileId={coupon?.predefinedCodesFileId}
                     />
                   </Form.Item>
                 </Col>
