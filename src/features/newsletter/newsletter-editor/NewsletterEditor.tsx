@@ -10,6 +10,7 @@ import { NewsLetterEditorHeader, NewsLetterEditorHeaderProps } from './NewsLette
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { useCommonFormRules } from 'hooks'
 import { Segment } from 'models/segment'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
 const EDITOR_SELECTOR = 'pkm-grapesjs'
 
 export interface NewsletterEditorProps {
@@ -23,10 +24,12 @@ export interface NewsletterEditorProps {
   handleSendSegment: (segmentId: number, subject: string) => void
   handleGetSegments: () => void
   handleExit: () => void
+  loadingEmail?: boolean
 }
 
 export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
   const {
+    loadingEmail,
     template,
     currentTemplateVersionId,
     segments,
@@ -42,7 +45,6 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
-  const [visibleDiscardPopup, setVisibleDiscardPopup] = useState(false)
   const [visibleRevertPopup, setVisibleRevertPopup] = useState(false)
   const [sendSamplePopup, setSendSamplePopup] = useState<{
     visible?: boolean
@@ -77,6 +79,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     isTemplateModified,
     template,
     currentTemplateVersionId,
+    handleExit,
     handleVersionPreviewSwitch: (id: number) => {
       if (isTemplateModified) {
         setSwitchPopup({ visible: true, versionId: id })
@@ -84,40 +87,41 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
         handleVersionPreviewSwitch(id)
       }
     },
-    handleRevert: () => setVisibleRevertPopup(true),
+    handleRestoreVersion: () => setVisibleRevertPopup(true),
     handleSaveVersion: () => handleSaveVersion(getEditorContent()),
-    handleExit: () => {
-      if (isTemplateModified) {
-        setVisibleDiscardPopup(true)
-      } else {
-        handleExit()
-      }
+    handleSendSample: async () => {
+      await setSendSamplePopup({ ...sendSamplePopup, visible: true })
     },
-    handleSendSample: () => setSendSamplePopup({ ...sendSamplePopup, visible: true }),
-    handleSendSegment: () => {
-      handleGetSegments()
+    handleSendSegment: async () => {
+      await handleGetSegments()
       setSendSegmentPopup({ ...sendSegmentPopup, visible: true })
     }
   }
 
+  const sendSample = async (values: any): Promise<void> => {
+    setSendSamplePopup({ ...sendSamplePopup, sending: true })
+    const sent: any = await handleSendSample(values.email, values.subject)
+    setSendSamplePopup(sent ? null : { ...sendSamplePopup, sending: false })
+  }
+
+  const sendSegment = async (values: any): Promise<void> => {
+    setSendSegmentPopup({ ...sendSegmentPopup, sending: true })
+    const sent: any = await handleSendSegment(+values.segment, values.subject)
+    setSendSegmentPopup(sent ? null : { ...sendSegmentPopup, sending: false })
+  }
+
   return (
     <>
+      <NavigationAlert when={isTemplateModified} />
+
       <Spin className="nle-spinner" spinning={loading} size="large" />
+
       <div hidden={loading} className="nle">
         <NewsLetterEditorHeader className="nle__header" {...headerProps} />
 
         <div className="nle__containter">
           <div id={EDITOR_SELECTOR} />
         </div>
-
-        <GenericPopup
-          type="discard"
-          visible={visibleDiscardPopup}
-          onOk={handleExit}
-          onCancel={() => setVisibleDiscardPopup(false)}
-        >
-          {t('newsletter.popup.discard-msg')}
-        </GenericPopup>
 
         <GenericPopup
           type="discard"
@@ -144,6 +148,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
         </GenericPopup>
 
         <GenericModalForm
+          loadingAction={loadingEmail}
           modalProps={{
             ...sendSamplePopup,
             title: t('newsletter.popup.title-send-sample'),
@@ -154,30 +159,27 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
             onCancel: () => setSendSamplePopup({ ...sendSamplePopup, visible: false })
           }}
           formProps={{
-            onFinish: async (values: any) => {
-              setSendSamplePopup({ ...sendSamplePopup, sending: true })
-              const sent: any = await handleSendSample(values.email, values.subject)
-              setSendSamplePopup(sent ? null : { ...sendSamplePopup, sending: false })
-            }
+            onFinish: sendSample
           }}
         >
           <Form.Item
             name="subject"
             label={t('newsletter.field.subject')}
-            rules={[rule.required(), rule.max(45)]}
+            rules={[rule.requiredString(), rule.max(45)]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="email"
             label={t('newsletter.field.email')}
-            rules={[rule.required(), rule.email()]}
+            rules={[rule.requiredString(), rule.email()]}
           >
             <Input />
           </Form.Item>
         </GenericModalForm>
 
         <GenericModalForm
+          loadingAction={loadingEmail}
           modalProps={{
             ...sendSegmentPopup,
             title: t('newsletter.popup.title-send-segment'),
@@ -188,24 +190,20 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
             onCancel: () => setSendSegmentPopup({ ...sendSegmentPopup, visible: false })
           }}
           formProps={{
-            onFinish: async (values: any) => {
-              setSendSegmentPopup({ ...sendSegmentPopup, sending: true })
-              const sent: any = await handleSendSegment(+values.segment, values.subject)
-              setSendSegmentPopup(sent ? null : { ...sendSegmentPopup, sending: false })
-            }
+            onFinish: sendSegment
           }}
         >
           <Form.Item
             name="subject"
             label={t('newsletter.field.subject')}
-            rules={[rule.required(), rule.max(45)]}
+            rules={[rule.requiredString(), rule.max(45)]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="segment"
             label={t('newsletter.popup.target-segment')}
-            rules={[rule.required()]}
+            rules={[rule.requiredString()]}
           >
             <Select>
               {segments?.map(s => (

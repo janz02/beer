@@ -21,8 +21,10 @@
     overflow: hidden;
 
     &--name {
+      overflow: hidden;
       font-size: 1.1rem;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
@@ -30,10 +32,17 @@
     min-width: 18rem;
 
     &--number {
+      width: 15em;
       margin-top: 0.3rem;
       padding: 0 0.5rem;
       font-size: 1rem;
       font-weight: 500;
+    }
+
+    &--modified {
+      margin-top: 0.3rem;
+      padding: 0 0.5rem;
+      font-size: 1rem;
     }
   }
 
@@ -42,7 +51,7 @@
     overflow: hidden;
     overflow-y: auto;
 
-    & > * {
+    &>* {
       margin: 0 0.5rem;
     }
   }

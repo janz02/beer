@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Alert, Checkbox } from 'antd'
+import { Form, Input, Button, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { signUp } from './authSlice'
@@ -11,36 +11,35 @@ import { useCommonFormRules } from 'hooks/useCommonFormRules'
 export const SignupPage: React.FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { loading, errorSignup: error } = useSelector((state: RootState) => state.auth)
+  const { loading } = useSelector((state: RootState) => state.auth)
   const rule = useCommonFormRules()
 
   return (
     <AuthLayout className="signup" title={t(`auth.signup`)}>
-      {error && <Alert message={t('auth.error.signup-failed')} type="error" />}
       <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
         <Form.Item
           name="name"
           label={t('auth.field.name')}
-          rules={[rule.required(), rule.max(100)]}
+          rules={[rule.requiredString(), rule.max(100)]}
         >
-          <Input />
+          <Input maxLength={100} />
         </Form.Item>
 
         <Form.Item
           name="username"
           label={t('auth.field.email')}
-          rules={[rule.required(), rule.email(), rule.max(50)]}
+          rules={[rule.requiredString(), rule.email(), rule.max(100)]}
         >
-          <Input />
+          <Input maxLength={100} />
         </Form.Item>
 
         <Form.Item
           name="password"
           hasFeedback
           label={t('auth.field.password')}
-          rules={[rule.required(), rule.password()]}
+          rules={[rule.requiredString(), rule.password()]}
         >
-          <Input.Password />
+          <Input.Password maxLength={64} />
         </Form.Item>
 
         <Form.Item
@@ -49,26 +48,35 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.password-again')}
           dependencies={['password']}
           rules={[
-            rule.required(),
+            rule.requiredString(),
             ({ getFieldValue }) => ({
               validator(rule, value) {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve()
                 }
-                return Promise.reject(t('auth.error.password-inconsistent'))
+                return Promise.reject(t('error.auth.password-inconsistent'))
               }
             })
           ]}
         >
-          <Input.Password />
+          <Input.Password maxLength={64} />
         </Form.Item>
 
-        <Form.Item name="phone" label={t('auth.field.phone')} rules={[rule.max(20)]}>
-          <Input type="tel" />
+        <Form.Item
+          name="phone"
+          label={t('auth.field.phone')}
+          rules={[rule.max(20)]}
+          extra={t('common.field.help.phone-format')}
+        >
+          <Input type="tel" maxLength={20} />
         </Form.Item>
 
-        <Form.Item name="code" label={t('auth.field.code')} rules={[rule.required(), rule.max(30)]}>
-          <Input />
+        <Form.Item
+          name="code"
+          label={t('auth.field.code')}
+          rules={[rule.requiredString(), rule.max(10)]}
+        >
+          <Input maxLength={10} />
         </Form.Item>
 
         <Form.Item name="acceptTerms" valuePropName="checked">

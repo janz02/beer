@@ -5,10 +5,17 @@ export enum Status {
   INACTIVE = 'inactive'
 }
 
+export enum UserType {
+  NKM = 'nkm',
+  PARTNER = 'partner'
+}
+
 export interface UserData {
   email?: string
   roles?: Roles[]
   exp?: number
+  partnerId?: number | null
+  partnerName?: string | null
 }
 
 export interface UserAccess {
@@ -16,9 +23,9 @@ export interface UserAccess {
   name?: string | null
   partnerId?: number
   partnerName?: string | null
-  partnerType?: boolean
-  email?: number
-  phone?: number
+  majorPartner?: boolean
+  email?: string | null
+  phone?: string | null
   role?: Roles | null
-  active?: boolean
+  isActive?: boolean
 }

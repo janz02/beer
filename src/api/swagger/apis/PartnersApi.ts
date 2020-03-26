@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    ActivatePartnerDto,
+    ActivatePartnerDtoFromJSON,
+    ActivatePartnerDtoToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
@@ -24,6 +27,9 @@ import {
     PartnerDto,
     PartnerDtoFromJSON,
     PartnerDtoToJSON,
+    PartnerState,
+    PartnerStateFromJSON,
+    PartnerStateToJSON,
     PartnerVm,
     PartnerVmFromJSON,
     PartnerVmToJSON,
@@ -31,6 +37,11 @@ import {
     PartnerVmPaginatedResponseFromJSON,
     PartnerVmPaginatedResponseToJSON,
 } from '../models';
+
+export interface ActivatePartnerRequest {
+    id: number;
+    activatePartnerDto?: ActivatePartnerDto;
+}
 
 export interface CreatePartnerRequest {
     partnerDto?: PartnerDto;
@@ -45,15 +56,14 @@ export interface GetPartnerRequest {
 }
 
 export interface GetPartnersRequest {
-    name?: string;
+    name?: string | null;
+    majorPartner?: boolean | null;
+    partnerState?: PartnerState;
+    address?: string | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
-}
-
-export interface UpdateMyPartnerRequest {
-    partnerDto?: PartnerDto;
 }
 
 export interface UpdatePartnerRequest {
@@ -61,10 +71,52 @@ export interface UpdatePartnerRequest {
     partnerDto?: PartnerDto;
 }
 
+export interface UpdateSelfPartnerRequest {
+    partnerDto?: PartnerDto;
+}
+
 /**
  * no description
  */
 export class PartnersApi extends runtime.BaseAPI {
+
+    /**
+     * Activates or inactivates a partner with Id of \"id\"
+     * Activates or inactivates a partner
+     */
+    async activatePartnerRaw(requestParameters: ActivatePartnerRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling activatePartner.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Partners/Activate/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ActivatePartnerDtoToJSON(requestParameters.activatePartnerDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Activates or inactivates a partner with Id of \"id\"
+     * Activates or inactivates a partner
+     */
+    async activatePartner(requestParameters: ActivatePartnerRequest): Promise<void> {
+        await this.activatePartnerRaw(requestParameters);
+    }
 
     /**
      * Returns the id of the entity upon success
@@ -137,36 +189,6 @@ export class PartnersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the details about the logged in contact\'s partner
-     */
-    async getMyPartnerRaw(): Promise<runtime.ApiResponse<PartnerVm>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Partners/GetSelf`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerVmFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the details about the logged in contact\'s partner
-     */
-    async getMyPartner(): Promise<PartnerVm> {
-        const response = await this.getMyPartnerRaw();
-        return await response.value();
-    }
-
-    /**
      * Returns the entity with the specified Id upon success
      * Gets an entity by Id
      */
@@ -213,6 +235,18 @@ export class PartnersApi extends runtime.BaseAPI {
             queryParameters['name'] = requestParameters.name;
         }
 
+        if (requestParameters.majorPartner !== undefined) {
+            queryParameters['majorPartner'] = requestParameters.majorPartner;
+        }
+
+        if (requestParameters.partnerState !== undefined) {
+            queryParameters['partnerState'] = requestParameters.partnerState;
+        }
+
+        if (requestParameters.address !== undefined) {
+            queryParameters['address'] = requestParameters.address;
+        }
+
         if (requestParameters.page !== undefined) {
             queryParameters['page'] = requestParameters.page;
         }
@@ -255,35 +289,33 @@ export class PartnersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates the logged in contact\'s partner
+     * Returns the details about the logged in contact\'s partner
      */
-    async updateMyPartnerRaw(requestParameters: UpdateMyPartnerRequest): Promise<runtime.ApiResponse<void>> {
+    async getSelfPartnerRaw(): Promise<runtime.ApiResponse<PartnerVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
 
         const response = await this.request({
-            path: `/api/Partners/UpdateSelf`,
-            method: 'PUT',
+            path: `/api/Partners/GetSelf`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-            body: PartnerDtoToJSON(requestParameters.partnerDto),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerVmFromJSON(jsonValue));
     }
 
     /**
-     * Updates the logged in contact\'s partner
+     * Returns the details about the logged in contact\'s partner
      */
-    async updateMyPartner(requestParameters: UpdateMyPartnerRequest): Promise<void> {
-        await this.updateMyPartnerRaw(requestParameters);
+    async getSelfPartner(): Promise<PartnerVm> {
+        const response = await this.getSelfPartnerRaw();
+        return await response.value();
     }
 
     /**
@@ -322,6 +354,38 @@ export class PartnersApi extends runtime.BaseAPI {
      */
     async updatePartner(requestParameters: UpdatePartnerRequest): Promise<void> {
         await this.updatePartnerRaw(requestParameters);
+    }
+
+    /**
+     * Updates the logged in contact\'s partner
+     */
+    async updateSelfPartnerRaw(requestParameters: UpdateSelfPartnerRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Partners/UpdateSelf`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PartnerDtoToJSON(requestParameters.partnerDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Updates the logged in contact\'s partner
+     */
+    async updateSelfPartner(requestParameters: UpdateSelfPartnerRequest): Promise<void> {
+        await this.updateSelfPartnerRaw(requestParameters);
     }
 
 }

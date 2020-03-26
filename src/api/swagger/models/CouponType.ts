@@ -18,9 +18,9 @@
  * @enum {string}
  */
 export enum CouponType {
-    FixValue = 'FixValue',
-    PercentValue = 'PercentValue',
-    Gift = 'Gift'
+    Discount = 'Discount',
+    Prize = 'Prize',
+    Banner = 'Banner'
 }
 
 export function CouponTypeFromJSON(json: any): CouponType {

@@ -5,11 +5,13 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.0.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/file-saver": "^2.0.1",
     "@types/jest": "24.0.23",
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^13.1.4",
     "@types/react": "16.9.13",
     "@types/react-dom": "16.9.4",
+    "@types/react-highlight-words": "^0.16.1",
     "@types/react-infinite-scroller": "^1.2.1",
     "@types/react-redux": "^7.1.5",
     "@types/react-responsive": "^8.0.2",
@@ -18,6 +20,7 @@
     "connected-react-router": "^6.6.1",
     "customize-cra": "^0.9.1",
     "env-cmd": "^10.0.1",
+    "file-saver": "^2.0.2",
     "grapesjs": "^0.15.10",
     "grapesjs-indexeddb": "^0.1.1",
     "grapesjs-preset-newsletter": "^0.2.20",
@@ -27,6 +30,7 @@
     "react": "^16.12.0",
     "react-app-rewired": "^2.1.5",
     "react-dom": "^16.12.0",
+    "react-highlight-words": "^0.16.0",
     "react-i18next": "^11.2.5",
     "react-infinite-scroller": "^1.2.4",
     "react-redux": "^7.1.3",
@@ -77,6 +81,7 @@
     "build": "env-cmd -e prod react-app-rewired build",
     "eject": "react-app-rewired eject",
     "generate-client": "node ./config/generate-client.js",
+    "generate-backend-translation-keys": "node ./config/generate-backend-translation-keys.js",
     "i18n:generate": "i18next-scanner --config ./config/i18next-scanner.config.js"
   },
   "eslintConfig": {

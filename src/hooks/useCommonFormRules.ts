@@ -15,8 +15,22 @@ export function useCommonFormRules() {
     (message?: string, other?: Rule): Rule => ({
       ...other,
       required: true,
+      message: message || t('error.common.field-required')
+    }),
+    [t]
+  )
+
+  /**
+   * Required string - it's the same as required but with whitespace: true.
+   * @param message (optional) string
+   * @param other (optional) extra rule parameters
+   */
+  const requiredString = useCallback(
+    (message?: string, other?: Rule): Rule => ({
+      ...other,
+      required: true,
       whitespace: true,
-      message: message || t('common.rule-error.field-required')
+      message: message || t('error.common.field-required')
     }),
     [t]
   )
@@ -32,7 +46,7 @@ export function useCommonFormRules() {
       pattern: new RegExp(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~])[A-Za-z\\d!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~]{8,64}$'
       ),
-      message: message || t('common.rule-error.password-format')
+      message: message || t('error.common.password-format')
     }),
     [t]
   )
@@ -44,7 +58,7 @@ export function useCommonFormRules() {
   const number = useCallback(
     (message?: string): Rule => ({
       pattern: new RegExp('^\\d+$'),
-      message: message || t('common.rule-error.field-number')
+      message: message || t('error.common.field-number')
     }),
     [t]
   )
@@ -56,7 +70,7 @@ export function useCommonFormRules() {
   const email = useCallback(
     (message?: string): Rule => ({
       pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: message || t('common.rule-error.email')
+      message: message || t('error.common.email-format')
     }),
     [t]
   )
@@ -68,10 +82,29 @@ export function useCommonFormRules() {
   const max = useCallback(
     (max: number, message?: string): Rule => ({
       max,
-      message: message || t('common.rule-error.max-length', { max })
+      message: message || t('error.common.max-length-exact', { max })
     }),
     [t]
   )
 
-  return { required, password, number, email, max }
+  /**
+   * Integer
+   * @param message (optional) string
+   */
+  const positiveInteger = useCallback(
+    (message?: string): Rule => ({
+      transform: value => {
+        return value ? +value : 1
+      },
+
+      whitespace: true,
+      type: 'integer',
+      min: 1,
+      required: false,
+      message: message || t('error.common.number-must-be-positive-integer')
+    }),
+    [t]
+  )
+
+  return { required, requiredString, password, number, email, max, positiveInteger }
 }

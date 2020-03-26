@@ -15,34 +15,51 @@
 
 import * as runtime from '../runtime';
 import {
+    ActivateCouponDto,
+    ActivateCouponDtoFromJSON,
+    ActivateCouponDtoToJSON,
     ChangeCouponStateDto,
     ChangeCouponStateDtoFromJSON,
     ChangeCouponStateDtoToJSON,
     CouponCodeVm,
     CouponCodeVmFromJSON,
     CouponCodeVmToJSON,
+    CouponDiscountType,
+    CouponDiscountTypeFromJSON,
+    CouponDiscountTypeToJSON,
     CouponDto,
     CouponDtoFromJSON,
     CouponDtoToJSON,
+    CouponMode,
+    CouponModeFromJSON,
+    CouponModeToJSON,
+    CouponRank,
+    CouponRankFromJSON,
+    CouponRankToJSON,
     CouponState,
     CouponStateFromJSON,
     CouponStateToJSON,
+    CouponType,
+    CouponTypeFromJSON,
+    CouponTypeToJSON,
     CouponVm,
     CouponVmFromJSON,
     CouponVmToJSON,
-    CouponVmPaginatedResponse,
-    CouponVmPaginatedResponseFromJSON,
-    CouponVmPaginatedResponseToJSON,
+    DetailedCouponVmPaginatedResponse,
+    DetailedCouponVmPaginatedResponseFromJSON,
+    DetailedCouponVmPaginatedResponseToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
-    WaitingCouponVmPaginatedResponse,
-    WaitingCouponVmPaginatedResponseFromJSON,
-    WaitingCouponVmPaginatedResponseToJSON,
 } from '../models';
+
+export interface ActivateCouponRequest {
+    id: number;
+    activateCouponDto?: ActivateCouponDto;
+}
 
 export interface ClaimCouponRequest {
     id: number;
@@ -61,25 +78,28 @@ export interface GetCouponRequest {
 }
 
 export interface GetCouponsRequest {
-    name?: string;
-    description?: string;
     includeArchived?: boolean;
-    page?: number;
-    pageSize?: number;
-    orderBy?: string;
-    orderByType?: OrderByType;
-}
-
-export interface GetWaitingCouponsRequest {
-    name?: string;
+    onlyWaiting?: boolean;
+    name?: string | null;
+    rank?: CouponRank;
+    type?: CouponType;
     state?: CouponState;
-    categoryId?: number;
-    startDate?: Date;
-    endDate?: Date;
-    expireDate?: Date;
+    startDate?: Date | null;
+    endDate?: Date | null;
+    expireDate?: Date | null;
+    couponCount?: number | null;
+    minimumShoppingValue?: number | null;
+    discountValue?: number | null;
+    categoryId?: number | null;
+    isActive?: boolean | null;
+    partnerName?: string | null;
+    mode?: CouponMode;
+    discountType?: CouponDiscountType;
+    createdBy?: string | null;
+    preferredPosition?: number | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 
@@ -97,6 +117,44 @@ export interface UpdateCouponStatusRequest {
  * no description
  */
 export class CouponsApi extends runtime.BaseAPI {
+
+    /**
+     * Changes the active status of a coupon to the given value
+     * Changes the active status of a coupon
+     */
+    async activateCouponRaw(requestParameters: ActivateCouponRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling activateCoupon.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/{id}/Activate`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ActivateCouponDtoToJSON(requestParameters.activateCouponDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Changes the active status of a coupon to the given value
+     * Changes the active status of a coupon
+     */
+    async activateCoupon(requestParameters: ActivateCouponRequest): Promise<void> {
+        await this.activateCouponRaw(requestParameters);
+    }
 
     /**
      * Claims a coupon to put it in the used up coupons for the user
@@ -131,6 +189,38 @@ export class CouponsApi extends runtime.BaseAPI {
      */
     async claimCoupon(requestParameters: ClaimCouponRequest): Promise<CouponCodeVm> {
         const response = await this.claimCouponRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Closes coupons when its accepted and either end date is passed or every coupon is claimed.
+     * Closes coupons
+     */
+    async closeCouponsRaw(): Promise<runtime.ApiResponse<CouponCodeVm>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/CloseCoupons`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponCodeVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Closes coupons when its accepted and either end date is passed or every coupon is claimed.
+     * Closes coupons
+     */
+    async closeCoupons(): Promise<CouponCodeVm> {
+        const response = await this.closeCouponsRaw();
         return await response.value();
     }
 
@@ -244,19 +334,83 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns the Coupon list with the specified filters applied
      * Gets a Coupon entity list sorted and filtered
      */
-    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<CouponVmPaginatedResponse>> {
+    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<DetailedCouponVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.includeArchived !== undefined) {
+            queryParameters['includeArchived'] = requestParameters.includeArchived;
+        }
+
+        if (requestParameters.onlyWaiting !== undefined) {
+            queryParameters['onlyWaiting'] = requestParameters.onlyWaiting;
+        }
 
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
         }
 
-        if (requestParameters.description !== undefined) {
-            queryParameters['description'] = requestParameters.description;
+        if (requestParameters.rank !== undefined) {
+            queryParameters['rank'] = requestParameters.rank;
         }
 
-        if (requestParameters.includeArchived !== undefined) {
-            queryParameters['includeArchived'] = requestParameters.includeArchived;
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        if (requestParameters.state !== undefined) {
+            queryParameters['state'] = requestParameters.state;
+        }
+
+        if (requestParameters.startDate !== undefined) {
+            queryParameters['startDate'] = (requestParameters.startDate as any).toISOString();
+        }
+
+        if (requestParameters.endDate !== undefined) {
+            queryParameters['endDate'] = (requestParameters.endDate as any).toISOString();
+        }
+
+        if (requestParameters.expireDate !== undefined) {
+            queryParameters['expireDate'] = (requestParameters.expireDate as any).toISOString();
+        }
+
+        if (requestParameters.couponCount !== undefined) {
+            queryParameters['couponCount'] = requestParameters.couponCount;
+        }
+
+        if (requestParameters.minimumShoppingValue !== undefined) {
+            queryParameters['minimumShoppingValue'] = requestParameters.minimumShoppingValue;
+        }
+
+        if (requestParameters.discountValue !== undefined) {
+            queryParameters['discountValue'] = requestParameters.discountValue;
+        }
+
+        if (requestParameters.categoryId !== undefined) {
+            queryParameters['categoryId'] = requestParameters.categoryId;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.partnerName !== undefined) {
+            queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.mode !== undefined) {
+            queryParameters['mode'] = requestParameters.mode;
+        }
+
+        if (requestParameters.discountType !== undefined) {
+            queryParameters['discountType'] = requestParameters.discountType;
+        }
+
+        if (requestParameters.createdBy !== undefined) {
+            queryParameters['createdBy'] = requestParameters.createdBy;
+        }
+
+        if (requestParameters.preferredPosition !== undefined) {
+            queryParameters['preferredPosition'] = requestParameters.preferredPosition;
         }
 
         if (requestParameters.page !== undefined) {
@@ -288,87 +442,15 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => DetailedCouponVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the Coupon list with the specified filters applied
      * Gets a Coupon entity list sorted and filtered
      */
-    async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVmPaginatedResponse> {
+    async getCoupons(requestParameters: GetCouponsRequest): Promise<DetailedCouponVmPaginatedResponse> {
         const response = await this.getCouponsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state
-     * Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state
-     */
-    async getWaitingCouponsRaw(requestParameters: GetWaitingCouponsRequest): Promise<runtime.ApiResponse<WaitingCouponVmPaginatedResponse>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.name !== undefined) {
-            queryParameters['name'] = requestParameters.name;
-        }
-
-        if (requestParameters.state !== undefined) {
-            queryParameters['state'] = requestParameters.state;
-        }
-
-        if (requestParameters.categoryId !== undefined) {
-            queryParameters['categoryId'] = requestParameters.categoryId;
-        }
-
-        if (requestParameters.startDate !== undefined) {
-            queryParameters['startDate'] = (requestParameters.startDate as any).toISOString();
-        }
-
-        if (requestParameters.endDate !== undefined) {
-            queryParameters['endDate'] = (requestParameters.endDate as any).toISOString();
-        }
-
-        if (requestParameters.expireDate !== undefined) {
-            queryParameters['expireDate'] = (requestParameters.expireDate as any).toISOString();
-        }
-
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
-        }
-
-        if (requestParameters.pageSize !== undefined) {
-            queryParameters['pageSize'] = requestParameters.pageSize;
-        }
-
-        if (requestParameters.orderBy !== undefined) {
-            queryParameters['orderBy'] = requestParameters.orderBy;
-        }
-
-        if (requestParameters.orderByType !== undefined) {
-            queryParameters['orderByType'] = requestParameters.orderByType;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Coupons/Waiting`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => WaitingCouponVmPaginatedResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state
-     * Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state
-     */
-    async getWaitingCoupons(requestParameters: GetWaitingCouponsRequest): Promise<WaitingCouponVmPaginatedResponse> {
-        const response = await this.getWaitingCouponsRaw(requestParameters);
         return await response.value();
     }
 

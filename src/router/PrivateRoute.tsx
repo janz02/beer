@@ -25,7 +25,7 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = props => {
           <Route {...props} />
         </PrivateLayout>
       ) : (
-        <Redirect to="/error" />
+        <Redirect to="/error/403" />
       )}
     </>
   )

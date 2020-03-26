@@ -23,7 +23,7 @@ export class InformationApi extends runtime.BaseAPI {
     /**
      * Returns a list of all the exception errorkeys
      */
-    async getExceptionsRaw(): Promise<runtime.ApiResponse<Array<string>>> {
+    async getErrorKeysRaw(): Promise<runtime.ApiResponse<Array<string>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -45,8 +45,8 @@ export class InformationApi extends runtime.BaseAPI {
     /**
      * Returns a list of all the exception errorkeys
      */
-    async getExceptions(): Promise<Array<string>> {
-        const response = await this.getExceptionsRaw();
+    async getErrorKeys(): Promise<Array<string>> {
+        const response = await this.getErrorKeysRaw();
         return await response.value();
     }
 

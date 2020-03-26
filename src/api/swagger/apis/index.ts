@@ -7,6 +7,7 @@ export * from './CouponUserPairsApi';
 export * from './CouponsApi';
 export * from './EmailSenderApi';
 export * from './EmailTemplatesApi';
+export * from './FilesApi';
 export * from './InformationApi';
 export * from './PartnerContactsApi';
 export * from './PartnersApi';

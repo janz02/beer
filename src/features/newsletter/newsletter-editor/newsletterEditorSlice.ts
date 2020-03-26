@@ -13,11 +13,13 @@ interface NewsletterEditorState {
   error: string
   currentTemplateVersionId?: number
   template?: Newsletter
+  loadingEmail?: boolean
   log?: any
   segments: Segment[]
 }
 
 const initialState: NewsletterEditorState = {
+  loadingEmail: false,
   error: '',
   segments: []
 }
@@ -26,26 +28,33 @@ const newsletterEditorSlice = createSlice({
   name: 'newsletterEditor',
   initialState,
   reducers: {
+    resetNewsletterEditor: () => initialState,
+    clearNewsletterTemplate(state) {
+      state.template = undefined
+      state.currentTemplateVersionId = undefined
+      state.error = ''
+    },
     saveTemplateVersionRequest() {},
     saveTemplateVersionSuccess() {},
     saveTemplateVersionFail(state, action: PayloadAction<string>) {},
     restoreTemplateVersionRequest() {},
     restoreTemplateVersionSuccess() {},
     restoreTemplateVersionFail(state, action: PayloadAction<string>) {},
-    sendEmailRequest() {},
-    sendEmailSuccess() {},
-    sendEmailFail(state, action: PayloadAction<string>) {},
+    sendEmailRequest(state) {
+      state.loadingEmail = true
+    },
+    sendEmailSuccess(state) {
+      state.loadingEmail = false
+    },
+    sendEmailFail(state, action: PayloadAction<string>) {
+      state.loadingEmail = false
+    },
     getTemplateRequest() {},
     getTemplateSuccess(state, action: PayloadAction<Newsletter>) {
       state.template = action.payload
       state.currentTemplateVersionId = action.payload.history?.[0]?.id
     },
     getTemplateFail(state, action: PayloadAction<string>) {},
-    clearNewsletterTemplate(state) {
-      state.template = undefined
-      state.currentTemplateVersionId = undefined
-      state.error = ''
-    },
     switchNewsletterVersion(state, action: PayloadAction<number>) {
       state.currentTemplateVersionId = action.payload
     },
@@ -75,7 +84,11 @@ const { getTemplateRequest, getTemplateSuccess, getTemplateFail } = newsletterEd
 const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterEditorSlice.actions
 const { getSegmentsRequest, getSegmentsSuccess, getSegmentsFail } = newsletterEditorSlice.actions
 
-export const { clearNewsletterTemplate, switchNewsletterVersion } = newsletterEditorSlice.actions
+export const {
+  clearNewsletterTemplate,
+  switchNewsletterVersion,
+  resetNewsletterEditor
+} = newsletterEditorSlice.actions
 export const { logGrapesjsEvent } = newsletterEditorSlice.actions
 
 export const newsletterEditorReducer = newsletterEditorSlice.reducer
@@ -118,8 +131,8 @@ export const saveNewsletterTemplateVersion = (content: string): AppThunk => asyn
         content
       }
     })
-    dispatch(saveTemplateVersionSuccess())
-    dispatch(getNewsletterTemplate(id))
+    await dispatch(saveTemplateVersionSuccess())
+    await dispatch(getNewsletterTemplate(id))
   } catch (err) {
     dispatch(saveTemplateVersionFail(err.toString()))
   }
@@ -137,7 +150,7 @@ export const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch,
       version: version
     })
     dispatch(restoreTemplateVersionSuccess())
-    dispatch(getNewsletterTemplate(id!))
+    dispatch(getNewsletterTemplate(id))
   } catch (err) {
     dispatch(restoreTemplateVersionFail(err.toString()))
   }

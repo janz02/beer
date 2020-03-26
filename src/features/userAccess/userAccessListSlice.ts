@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { ListRequestParams, Pagination } from 'hooks/useTableUtils'
-import { UserAccess } from 'models/user'
+import {
+  ListRequestParams,
+  reviseListRequestParams,
+  storableListRequestParams
+} from 'hooks/useTableUtils'
+import { UserAccess, UserType } from 'models/user'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Roles } from 'api/swagger/models'
 
-export enum UserType {
-  NKM = 'nkm',
-  PARTNER = 'partner'
-}
-
 interface UserAccessListState {
   nkmUsers: UserAccess[]
   partnerUsers: UserAccess[]
-  nkmPagination: Pagination
-  partnerPagination: Pagination
+  nkmListParams: ListRequestParams
+  partnerListParams: ListRequestParams
   nkmLoading: boolean
   partnerLoading: boolean
-  editorLoading: boolean
+  loadingSave: boolean
+  loadingEditor: boolean
   editedUser?: UserAccess
   errorList: string
   errorDeletion: string
@@ -29,15 +29,16 @@ interface UserAccessListState {
 const initialState: UserAccessListState = {
   nkmUsers: [],
   partnerUsers: [],
-  nkmPagination: {
+  nkmListParams: {
     pageSize: 10
   },
-  partnerPagination: {
+  partnerListParams: {
     pageSize: 10
   },
   nkmLoading: false,
   partnerLoading: false,
-  editorLoading: false,
+  loadingEditor: false,
+  loadingSave: false,
   errorList: '',
   errorDeletion: '',
   errorEditor: ''
@@ -47,15 +48,16 @@ const userAccessListSlice = createSlice({
   name: 'usersAccessList',
   initialState,
   reducers: {
+    resetUsersAccessList: () => initialState,
     getNkmUsersRequest(state) {
       state.nkmLoading = true
     },
     getNkmUsersSuccess(
       state,
-      action: PayloadAction<{ users: UserAccess[]; pagination: Pagination }>
+      action: PayloadAction<{ users: UserAccess[]; listParams: ListRequestParams }>
     ) {
       state.nkmUsers = action.payload.users
-      state.nkmPagination = action.payload.pagination
+      state.nkmListParams = action.payload.listParams
       state.nkmLoading = false
       state.errorList = ''
     },
@@ -69,10 +71,10 @@ const userAccessListSlice = createSlice({
     },
     getPartnerUsersSuccess(
       state,
-      action: PayloadAction<{ users: UserAccess[]; pagination: Pagination }>
+      action: PayloadAction<{ users: UserAccess[]; listParams: ListRequestParams }>
     ) {
       state.partnerUsers = action.payload.users
-      state.partnerPagination = action.payload.pagination
+      state.partnerListParams = action.payload.listParams
       state.partnerLoading = false
       state.errorList = ''
     },
@@ -82,11 +84,11 @@ const userAccessListSlice = createSlice({
     },
 
     getUserRequest(state) {
-      state.editorLoading = true
+      state.loadingEditor = true
     },
     getUserSuccess(state, action: PayloadAction<UserAccess>) {
       state.editedUser = action.payload
-      state.editorLoading = false
+      state.loadingEditor = false
       state.errorDeletion = ''
     },
     getUserFail(state, action: PayloadAction<string>) {
@@ -95,20 +97,22 @@ const userAccessListSlice = createSlice({
     },
 
     saveUserRequest(state) {
-      state.editorLoading = true
+      state.loadingSave = true
     },
     saveUserSuccess(state) {
-      state.editorLoading = false
+      state.loadingSave = false
       state.errorEditor = ''
     },
     saveUserFail(state, action: PayloadAction<string>) {
-      state.partnerLoading = false
+      state.loadingSave = false
       state.errorEditor = action.payload
     },
 
     clearUserAccessEditor(state) {
       state.editedUser = undefined
       state.errorEditor = ''
+      state.loadingEditor = false
+      state.loadingSave = false
     }
   }
 })
@@ -122,7 +126,7 @@ const {
 const { getUserRequest, getUserSuccess, getUserFail } = userAccessListSlice.actions
 const { saveUserRequest, saveUserSuccess, saveUserFail } = userAccessListSlice.actions
 
-export const { clearUserAccessEditor } = userAccessListSlice.actions
+export const { clearUserAccessEditor, resetUsersAccessList } = userAccessListSlice.actions
 
 export const userAccessListReducer = userAccessListSlice.reducer
 
@@ -132,19 +136,12 @@ export const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (
 ) => {
   try {
     dispatch(getNkmUsersRequest())
-    const oldPagination = getState().userAccessList.nkmPagination
-    const { result, ...pagination } = await api.auth.getNkmPartnerContactsInfo({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params
-    })
+    const revisedParams = reviseListRequestParams(getState().userAccessList.nkmListParams, params)
+    const { result, ...pagination } = await api.auth.getNkmPartnerContactsInfo(revisedParams)
     dispatch(
       getNkmUsersSuccess({
         users: result as UserAccess[],
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -158,19 +155,15 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
 ) => {
   try {
     dispatch(getPartnerUsersRequest())
-    const oldPagination = getState().userAccessList.partnerPagination
-    const { result, ...pagination } = await api.auth.getPartnerContactsInfo({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params
-    })
+    const revisedParams = reviseListRequestParams(
+      getState().userAccessList.partnerListParams,
+      params
+    )
+    const { result, ...pagination } = await api.auth.getPartnerContactsInfo(revisedParams)
     dispatch(
       getPartnerUsersSuccess({
         users: result as UserAccess[],
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -196,7 +189,6 @@ export const saveUserAccess = (
 ): AppThunk => async dispatch => {
   try {
     dispatch(saveUserRequest())
-    // TODO: integrate the good api
     await api.auth.updatePartnerContactInfo({ id, partnerContactStateDto: { role, active } })
     message.success(i18n.t('user-access.msg.change-succesful'))
     dispatch(saveUserSuccess())
@@ -205,7 +197,9 @@ export const saveUserAccess = (
     } else if (type === UserType.PARTNER) {
       dispatch(getPartnerUsers())
     }
+    return true
   } catch (err) {
     dispatch(saveUserFail(err.toString()))
+    return false
   }
 }

@@ -13,6 +13,13 @@
     right: 0;
     margin-top: 24px;
   }
+
+  .layout-content {
+    position: relative;
+    // The size of back button
+    top: -32px;
+    min-height: 100vh;
+  }
 }
 
 .content {
@@ -26,5 +33,17 @@
     .ant-drawer-body {
       padding: 0;
     }
+  }
+}
+
+.header__menu-button {
+  position: relative;
+  z-index: 2;
+  top: 16px;
+  left: -16px;
+
+  &.mobile {
+    top: 5px;
+    left: 5px;
   }
 }

@@ -57,4 +57,43 @@
   .ant-layout-header {
     position: relative;
   }
+
+  .ant-table-filter-dropdown {
+    min-width: 200px;
+    max-width: 340px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+
+    .ant-picker-panel {
+      margin: 0 0.5rem;
+    }
+
+    .ant-picker-calendar-mini {
+      max-width: 300px;
+
+      .ant-picker-calendar-header {
+        .ant-picker-calendar-month-select {
+          min-width: 85px;
+        }
+
+        .ant-picker-calendar-mode-switch {
+          display: none;
+        }
+      }
+    }
+
+    .ant-table-filter-dropdown-btns {
+      margin: 0 0.5rem;
+      padding: 0.5rem;
+
+      .ant-btn-link {
+        width: unset;
+        padding: unset;
+      }
+    }
+
+    .ant-dropdown-menu {
+      max-height: 300px;
+    }
+  }
 }

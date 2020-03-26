@@ -5,9 +5,11 @@ export interface Partner {
   id?: number
   name?: string | null
   address?: string | null
-  registrationNumber?: number
-  taxNumber?: number
-  bankAccount?: number
+  mailingAddress?: string | null
+  registrationNumber?: string | null
+  registrationAllowed?: string | null
+  taxNumber?: string | null
+  bankAccount?: string | null
   registerCode?: string | null
   majorPartner?: boolean
   partnerState?: PartnerState

@@ -20,7 +20,6 @@
 export enum CouponState {
     Created = 'Created',
     Accepted = 'Accepted',
-    Rejected = 'Rejected',
     Waiting = 'Waiting',
     Closed = 'Closed',
     Archived = 'Archived'

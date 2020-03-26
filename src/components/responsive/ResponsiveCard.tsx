@@ -4,33 +4,34 @@ import { useIsMobile } from 'hooks'
 import { Card } from 'antd'
 import { CardProps } from 'antd/lib/card'
 import { ResponsiveHeader } from './ResponsiveHeader'
+import { BackButtonProps } from 'components/buttons/BackButton'
 
 export interface ResponsiveCardProps extends CardProps {
   floatingTitle?: string
+  floatingBackButton?: BackButtonProps
   floatingOptions?: JSX.Element
   innerTitle?: string
   innerOptions?: JSX.Element
   forTable?: boolean
   paddedTop?: boolean
   paddedBottom?: boolean
-  wide?: boolean
-  extraWide?: boolean
-  fullWidth?: boolean
+  disableAutoScale?: boolean
+  width?: 'skinny' | 'normal' | 'full'
 }
 
 export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
   const {
     floatingTitle,
     floatingOptions,
+    floatingBackButton,
     innerTitle,
     innerOptions,
     children,
     forTable,
     paddedTop,
     paddedBottom,
-    wide,
-    extraWide,
-    fullWidth,
+    disableAutoScale,
+    width,
     ...rest
   } = props
   const isMobile = useIsMobile()
@@ -43,7 +44,12 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
   )
 
   const floatingHeader = hasFloatingHeader && (
-    <ResponsiveHeader type="floating" title={floatingTitle} options={floatingOptions} />
+    <ResponsiveHeader
+      type="floating"
+      title={floatingTitle}
+      options={floatingOptions}
+      backButton={floatingBackButton}
+    />
   )
 
   return (
@@ -52,10 +58,9 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
         `r-card-container ` +
         `${paddedTop ? 'r-card-container--padded-top ' : ''}` +
         `${paddedBottom ? 'r-card-container--padded-bottom ' : ''}` +
-        `${wide ? 'r-card-container--wide ' : ''}` +
-        `${extraWide ? 'r-card-container--extra-wide ' : ''}` +
-        `${fullWidth ? 'r-card-container--full-width ' : ''}` +
-        `${isMobile ? 'r-card-container--mobile ' : ''}`
+        `${`r-card-container--width-${width ?? 'normal'} `}` +
+        `${isMobile ? 'r-card-container--mobile ' : ''}` +
+        `${disableAutoScale ? 'r-card-container--no-auto-scale ' : ''}`
       }
     >
       {floatingHeader}

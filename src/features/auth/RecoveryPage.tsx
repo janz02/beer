@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Alert } from 'antd'
+import { Form, Input, Button } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
@@ -12,13 +12,11 @@ import { useCommonFormRules } from 'hooks'
 export const RecoveryPage: React.FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { loading, errorPasswordRecovery: error } = useSelector((state: RootState) => state.auth)
+  const { loading } = useSelector((state: RootState) => state.auth)
   const rule = useCommonFormRules()
 
   return (
     <AuthLayout className="recovery" title={t(`auth.forgot-password`)}>
-      {error && <Alert message={t('auth.error.recovery-failed')} type="error" />}
-
       <Form
         name="recovery"
         onFinish={values => {
@@ -26,7 +24,7 @@ export const RecoveryPage: React.FC = () => {
         }}
       >
         <div className="instruction-text">{t('auth.text.new-password-email')}</div>
-        <Form.Item name="email" rules={[rule.required()]}>
+        <Form.Item name="email" rules={[rule.requiredString()]}>
           <Input prefix={<MailOutlined />} placeholder={t('auth.field.email')} />
         </Form.Item>
         <Button loading={loading} block size="large" type="primary" htmlType="submit">

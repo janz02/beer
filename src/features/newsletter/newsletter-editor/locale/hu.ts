@@ -15,7 +15,7 @@ export default {
   assetManager: {
     addButton: 'Betöltés',
     inputPlh: 'kép url-je',
-    modalTitle: 'Válasz egy képet',
+    modalTitle: 'Válasszon egy képet',
     uploadTitle: 'Kép feltöltése vagy behúzása'
   },
   modal: {
@@ -29,15 +29,15 @@ export default {
       sect30: '3 Szelet',
       sect37: '3/7 Szelet',
       button: 'Gomb',
-      divider: 'Osztó',
+      divider: 'Elosztó',
       text: 'Szöveg sor',
       'text-sect': 'Szöveg szakasz',
       image: 'Kép',
       quote: 'Idézet',
       link: 'Hivatkozás',
-      'link-block': 'Hivatkozás szakasz',
-      'grid-items': 'Rács elemek',
-      'list-items': 'Lista elemek'
+      'link-block': 'Hivatkozás blokk',
+      'grid-items': 'Grid elemek',
+      'list-items': 'List elemek'
     }
   },
   domComponents: {
@@ -45,7 +45,7 @@ export default {
       '': 'Elem',
       // TODO: body is still english, the line bellow doesn't work
       // body: 'test',
-      wrapper: 'Burkoló',
+      wrapper: 'Wrapper',
       text: 'Szöveg',
       comment: 'Megjegyzés',
       image: 'Kép',
@@ -54,7 +54,7 @@ export default {
       link: 'Hivatkozás',
       map: 'Térkép',
       tfoot: 'Táblázat lábjegyzék',
-      tbody: 'Táblázat test',
+      tbody: 'Táblázat body',
       thead: 'Táblázat fejléc',
       table: 'Táblázat',
       row: 'Táblázat sor',
@@ -75,7 +75,7 @@ export default {
         'gjs-toggle-images': 'Képek',
         deviceTablet: 'Táblagép',
         deviceMobile: 'Telefon',
-        deviceDesktop: 'Asztali gép',
+        deviceDesktop: 'Monitor',
         'pkm-save-template': 'Sablon mentése',
         'pkm-download-as-html': 'Sablon fájl letöltése',
         'pkm-restore-template': 'Sablon visszaállítása'
@@ -83,7 +83,7 @@ export default {
     }
   },
   styleManager: {
-    empty: 'Jelölj ki egy komponenst!',
+    empty: 'Jelöljön ki egy komponenst!',
     layer: 'Réteg',
     fileButton: 'Kép',
     sectors: {
@@ -93,7 +93,7 @@ export default {
       decorations: 'Dekorációk',
       extra: 'Extra',
       flex: 'Flex',
-      dimension: 'Méretek'
+      dimension: 'Dimenziók'
     },
 
     properties: {
@@ -102,12 +102,12 @@ export default {
       height: 'Magasság',
       'max-width': 'Max. Szélesség',
       'min-height': 'Min. Magasság',
-      margin: 'Margó',
+      margin: 'Margin',
       'margin-top': 'Felső',
       'margin-right': 'Jobb',
       'margin-left': 'Bal',
       'margin-bottom': 'Alsó',
-      padding: 'Kitöltés',
+      padding: 'Padding',
       'padding-top': 'Felső',
       'padding-right': 'Jobb',
       'padding-left': 'Bal',
@@ -148,7 +148,7 @@ export default {
     }
   },
   traitManager: {
-    empty: 'Válasz ki egy komponenst!',
+    empty: 'Válasszon ki egy komponenst!',
     label: 'Komponens beállítások',
     traits: {
       labels: {

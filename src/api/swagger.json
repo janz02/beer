@@ -77,17 +77,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthRegistrationFailedException"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthRegistrationFailedException"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthRegistrationFailedException"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -280,6 +280,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Query id",
               "format": "int32"
             }
           }
@@ -344,28 +345,32 @@
             "name": "name",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "phone",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "email",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "partnerName",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -388,7 +393,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -456,28 +462,32 @@
             "name": "name",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "phone",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "email",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "partnerName",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -500,7 +510,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -554,6 +565,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the user",
               "format": "int32"
             }
           }
@@ -577,6 +589,23 @@
           },
           "404": {
             "description": "User not found error: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/Auth/SyncAdUsers": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Syncs in all the users from AD to be listed",
+        "operationId": "syncAdUsers",
+        "responses": {
+          "200": {
+            "description": "Successful syncing"
+          },
+          "400": {
+            "description": "Registration error occured"
           }
         }
       }
@@ -661,7 +690,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -715,6 +745,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the cashier",
               "format": "int32"
             }
           }
@@ -763,6 +794,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the cashier to update",
               "format": "int32"
             }
           }
@@ -803,6 +835,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the cashier to delete",
               "format": "int32"
             }
           }
@@ -873,7 +906,8 @@
             "name": "name",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -896,7 +930,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -950,6 +985,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the Category",
               "format": "int32"
             }
           }
@@ -998,6 +1034,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to update",
               "format": "int32"
             }
           }
@@ -1039,6 +1076,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to delete",
               "format": "int32"
             }
           }
@@ -1069,6 +1107,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "CouponId for comments",
               "format": "int32"
             }
           }
@@ -1123,6 +1162,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of Coupon to add a comment to",
               "format": "int32"
             }
           }
@@ -1166,6 +1206,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of coupon to delete comment from",
               "format": "int32"
             }
           },
@@ -1176,6 +1217,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of comment to delete",
               "format": "int32"
             }
           }
@@ -1246,24 +1288,156 @@
         "operationId": "getCoupons",
         "parameters": [
           {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "description",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "includeArchived",
             "in": "query",
             "schema": {
               "type": "boolean"
+            }
+          },
+          {
+            "name": "onlyWaiting",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "rank",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponRank"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponType"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponState"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "expireDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "couponCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "minimumShoppingValue",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "discountValue",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponMode"
+            }
+          },
+          {
+            "name": "discountType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponDiscountType"
+            }
+          },
+          {
+            "name": "createdBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "preferredPosition",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -1286,7 +1460,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -1303,17 +1478,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
                 }
               }
             }
@@ -1340,6 +1515,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the Coupon",
               "format": "int32"
             }
           }
@@ -1388,6 +1564,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to update",
               "format": "int32"
             }
           }
@@ -1429,6 +1606,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to delete",
               "format": "int32"
             }
           }
@@ -1439,119 +1617,6 @@
           },
           "404": {
             "description": "Entity not found: error.not-found"
-          }
-        }
-      }
-    },
-    "/api/Coupons/Waiting": {
-      "get": {
-        "tags": [
-          "Coupons"
-        ],
-        "summary": "Gets a Coupon entity list sorted and filtered with only Coupons that are in waiting state",
-        "description": "Returns the Coupon list with the specified filters applied with only Coupons that are in waiting state",
-        "operationId": "getWaitingCoupons",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "state",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/CouponState"
-            }
-          },
-          {
-            "name": "categoryId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "expireDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "orderByType",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/OrderByType"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful query: List of Coupon entities",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/WaitingCouponVmPaginatedResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WaitingCouponVmPaginatedResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WaitingCouponVmPaginatedResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation error occurred: error.common.validation"
           }
         }
       }
@@ -1572,6 +1637,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to update",
               "format": "int32"
             }
           }
@@ -1615,13 +1681,14 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of coupon to claim coupon code for",
               "format": "int32"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful claim: couponcode returned",
+            "description": "Successful claim: coupon code returned",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1649,13 +1716,89 @@
         }
       }
     },
+    "/api/Coupons/{id}/Activate": {
+      "put": {
+        "tags": [
+          "Coupons"
+        ],
+        "summary": "Changes the active status of a coupon",
+        "description": "Changes the active status of a coupon to the given value",
+        "operationId": "activateCoupon",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of coupon to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of coupon to update",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Active status of the coupon to change",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivateCouponDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful claim: coupon code returned"
+          },
+          "400": {
+            "description": "Saving error: couponUserCode.error.cant-sav"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/Coupons/CloseCoupons": {
+      "post": {
+        "tags": [
+          "Coupons"
+        ],
+        "summary": "Closes coupons",
+        "description": "Closes coupons when its accepted and either end date is passed or every coupon is claimed.",
+        "operationId": "closeCoupons",
+        "responses": {
+          "200": {
+            "description": "Successful closed coupons",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponCodeVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponCodeVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponCodeVm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CouponUserCodes/Coupon/{couponId}": {
       "get": {
         "tags": [
           "CouponUserCodes"
         ],
-        "summary": "Returns the claimed couponcodes for a coupon",
-        "description": "Returns a list of couponcodes that have been claimed for coupon with an Id of couponId",
+        "summary": "Returns the claimed coupon codes for a coupon",
+        "description": "Returns a list of coupon codes that have been claimed for coupon with an Id of couponId",
         "operationId": "getClaimedCoupons",
         "parameters": [
           {
@@ -1665,6 +1808,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of coupon to get the codes for",
               "format": "int32"
             }
           }
@@ -1675,17 +1819,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponUserCodeVmPaginatedResponse"
+                  "$ref": "#/components/schemas/ClaimedCouponCodeVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponUserCodeVmPaginatedResponse"
+                  "$ref": "#/components/schemas/ClaimedCouponCodeVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CouponUserCodeVmPaginatedResponse"
+                  "$ref": "#/components/schemas/ClaimedCouponCodeVm"
                 }
               }
             }
@@ -1704,8 +1848,8 @@
         "tags": [
           "CouponUserCodes"
         ],
-        "summary": "Archives all couponcodes",
-        "description": "Archives every couponcode in the database",
+        "summary": "Archives all coupon codes",
+        "description": "Archives every coupon code in the database",
         "operationId": "archiveClaimedCoupons",
         "responses": {
           "200": {
@@ -1719,6 +1863,7 @@
         "tags": [
           "CouponUserCodes"
         ],
+        "summary": "Returns claimed coupon codes",
         "operationId": "getMyClaimedCoupons",
         "responses": {
           "200": {
@@ -1746,6 +1891,72 @@
                   "items": {
                     "$ref": "#/components/schemas/MyClaimedCouponVm"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CouponUserCodes/{couponId}/CouponCodes": {
+      "get": {
+        "tags": [
+          "CouponUserCodes"
+        ],
+        "summary": "",
+        "operationId": "couponCodesCouponUserCode",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CouponUserCodes/{couponId}/RedeemedCouponCodes": {
+      "get": {
+        "tags": [
+          "CouponUserCodes"
+        ],
+        "summary": "",
+        "operationId": "CouponUserCode",
+        "parameters": [
+          {
+            "name": "couponId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -1929,7 +2140,8 @@
             "name": "name",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -1952,7 +2164,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2002,6 +2215,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "The id of the template",
               "format": "int32"
             }
           }
@@ -2049,6 +2263,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "The id of the template",
               "format": "int32"
             }
           }
@@ -2079,6 +2294,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "The id of the template",
               "format": "int32"
             }
           }
@@ -2122,6 +2338,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "The id of the template",
               "format": "int32"
             }
           },
@@ -2132,6 +2349,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "The version of the template",
               "format": "int32"
             }
           }
@@ -2149,13 +2367,97 @@
         }
       }
     },
+    "/api/Files": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "operationId": "uploadFile",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "contentType": "multipart/form-data",
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Files/{id}": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "operationId": "downloadFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Information": {
       "get": {
         "tags": [
           "Information"
         ],
         "summary": "Returns a list of all the exception errorkeys",
-        "operationId": "getExceptions",
+        "operationId": "getErrorKeys",
         "responses": {
           "200": {
             "description": "Successful query: string list of exception errorkeys",
@@ -2189,12 +2491,12 @@
         }
       }
     },
-    "/api/PartnerContacts": {
+    "/api/PartnerContacts/GetSelf": {
       "get": {
         "tags": [
           "PartnerContacts"
         ],
-        "operationId": "getMyPartnerContact",
+        "operationId": "getSelfPartnerContact",
         "responses": {
           "200": {
             "description": "Success",
@@ -2217,17 +2519,19 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/PartnerContacts/Self": {
       "put": {
         "tags": [
           "PartnerContacts"
         ],
-        "operationId": "updateMyPartnerContact",
+        "operationId": "updateSelfPartnerContact",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SelfPartnerContactDto"
+                "$ref": "#/components/schemas/PartnerContactDto"
               }
             }
           }
@@ -2239,13 +2543,180 @@
         }
       }
     },
+    "/api/PartnerContacts/{id}": {
+      "put": {
+        "tags": [
+          "PartnerContacts"
+        ],
+        "operationId": "updatePartnerContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerContactDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PartnerContacts"
+        ],
+        "operationId": "getOnePartnerContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PartnerContacts/GetPartnerPartnerContacts": {
+      "get": {
+        "tags": [
+          "PartnerContacts"
+        ],
+        "operationId": "getPartnerPartnerContact",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVmPaginatedResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVmPaginatedResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerContactVmPaginatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Partners/GetSelf": {
       "get": {
         "tags": [
           "Partners"
         ],
         "summary": "Returns the details about the logged in contact's partner",
-        "operationId": "getMyPartner",
+        "operationId": "getSelfPartner",
         "responses": {
           "200": {
             "description": "Successful query",
@@ -2276,7 +2747,7 @@
           "Partners"
         ],
         "summary": "Updates the logged in contact's partner",
-        "operationId": "updateMyPartner",
+        "operationId": "updateSelfPartner",
         "requestBody": {
           "description": "New details of the partner to update",
           "content": {
@@ -2353,7 +2824,31 @@
             "name": "name",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerState",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PartnerState"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2376,7 +2871,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2430,6 +2926,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the entity",
               "format": "int32"
             }
           }
@@ -2478,6 +2975,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to update",
               "format": "int32"
             }
           }
@@ -2519,6 +3017,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to delete",
               "format": "int32"
             }
           }
@@ -2526,6 +3025,47 @@
         "responses": {
           "200": {
             "description": "Successful deletion"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/Partners/Activate/{id}": {
+      "put": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Activates or inactivates a partner",
+        "description": "Activates or inactivates a partner with Id of \"id\"",
+        "operationId": "activatePartner",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to activate/inactivate",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of entity to activate/inactivate",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dto containing the new value of the partner active status",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivatePartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful activation"
           },
           "404": {
             "description": "Entity not found: error.not-found"
@@ -2562,7 +3102,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2611,7 +3152,8 @@
             "name": "segmentName",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2634,7 +3176,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2766,14 +3309,16 @@
             "name": "name",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "address",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2781,7 +3326,8 @@
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "nullable": true
             }
           },
           {
@@ -2804,7 +3350,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2858,6 +3405,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the entity",
               "format": "int32"
             }
           }
@@ -2906,6 +3454,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to update",
               "format": "int32"
             }
           }
@@ -2947,6 +3496,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to delete",
               "format": "int32"
             }
           }
@@ -3017,7 +3567,8 @@
             "name": "name",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -3040,7 +3591,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -3094,6 +3646,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the TagCategory",
               "format": "int32"
             }
           }
@@ -3142,6 +3695,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to update",
               "format": "int32"
             }
           }
@@ -3183,6 +3737,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to delete",
               "format": "int32"
             }
           }
@@ -3253,21 +3808,24 @@
             "name": "value",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "tagCategory",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
             "name": "isActive",
             "in": "query",
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "nullable": true
             }
           },
           {
@@ -3290,7 +3848,8 @@
             "name": "orderBy",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -3344,6 +3903,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of the Tag",
               "format": "int32"
             }
           }
@@ -3392,6 +3952,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to update",
               "format": "int32"
             }
           }
@@ -3433,6 +3994,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of entity to delete",
               "format": "int32"
             }
           }
@@ -3473,8 +4035,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ProblemDetails": {
         "type": "object",
@@ -3499,18 +4060,11 @@
           "instance": {
             "type": "string",
             "nullable": true
-          },
-          "extensions": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "object",
-              "additionalProperties": false
-            },
-            "nullable": true,
-            "readOnly": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "RegisterUserDto": {
         "type": "object",
@@ -3543,55 +4097,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
-      },
-      "AuthRegistrationFailedException": {
-        "type": "object",
-        "properties": {
-          "errorKey": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "stackTrace": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "message": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "data": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "object",
-              "additionalProperties": false
-            },
-            "nullable": true,
-            "readOnly": true
-          },
-          "innerException": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "helpLink": {
-            "type": "string",
-            "nullable": true
-          },
-          "source": {
-            "type": "string",
-            "nullable": true
-          },
-          "hResult": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
+        }
       },
       "LoginDto": {
         "type": "object",
@@ -3604,8 +4110,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "UserVm": {
         "type": "object",
@@ -3618,8 +4123,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "RefreshDto": {
         "type": "object",
@@ -3628,8 +4132,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ChangePasswordDto": {
         "type": "object",
@@ -3642,8 +4145,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Roles": {
         "enum": [
@@ -3653,7 +4155,8 @@
           "BusinessPartnerManager",
           "PartnerContactApprover",
           "PartnerContactEditor",
-          "User"
+          "User",
+          "ServiceAccount"
         ],
         "type": "string"
       },
@@ -3671,11 +4174,10 @@
           "role": {
             "$ref": "#/components/schemas/Roles"
           },
-          "active": {
+          "isActive": {
             "type": "boolean"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "OrderByType": {
         "enum": [
@@ -3707,7 +4209,7 @@
             "type": "string",
             "nullable": true
           },
-          "active": {
+          "isActive": {
             "type": "boolean"
           },
           "majorPartner": {
@@ -3717,8 +4219,7 @@
           "role": {
             "$ref": "#/components/schemas/Roles"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PartnerContactVmPaginatedResponse": {
         "type": "object",
@@ -3746,8 +4247,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PartnerContactStateDto": {
         "type": "object",
@@ -3758,8 +4258,7 @@
           "active": {
             "type": "boolean"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CreateCashierDto": {
         "type": "object",
@@ -3776,8 +4275,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Int32EntityCreatedVm": {
         "type": "object",
@@ -3786,8 +4284,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CashierVm": {
         "type": "object",
@@ -3804,8 +4301,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CashierVmPaginatedResponse": {
         "type": "object",
@@ -3833,8 +4329,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CashierDto": {
         "type": "object",
@@ -3847,8 +4342,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CategoryDto": {
         "type": "object",
@@ -3857,8 +4351,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CategoryVm": {
         "type": "object",
@@ -3871,8 +4364,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CategoryVmPaginatedResponse": {
         "type": "object",
@@ -3900,14 +4392,12 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CouponState": {
         "enum": [
           "Created",
           "Accepted",
-          "Rejected",
           "Waiting",
           "Closed",
           "Archived"
@@ -3943,8 +4433,7 @@
           "stateTo": {
             "$ref": "#/components/schemas/CouponState"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CouponCommentDto": {
         "type": "object",
@@ -3953,22 +4442,36 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CouponRank": {
         "enum": [
-          "Bronze",
-          "Silver",
-          "Gold"
+          "Basic",
+          "Standard",
+          "Super",
+          "Premium"
         ],
         "type": "string"
       },
       "CouponType": {
         "enum": [
+          "Discount",
+          "Prize",
+          "Banner"
+        ],
+        "type": "string"
+      },
+      "CouponDiscountType": {
+        "enum": [
           "FixValue",
-          "PercentValue",
-          "Gift"
+          "PercentValue"
+        ],
+        "type": "string"
+      },
+      "CouponMode": {
+        "enum": [
+          "Physical",
+          "Online"
         ],
         "type": "string"
       },
@@ -3988,6 +4491,121 @@
           },
           "type": {
             "$ref": "#/components/schemas/CouponType"
+          },
+          "state": {
+            "$ref": "#/components/schemas/CouponState"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expireDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "discountType": {
+            "$ref": "#/components/schemas/CouponDiscountType"
+          },
+          "couponCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumShoppingValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "mode": {
+            "$ref": "#/components/schemas/CouponMode"
+          },
+          "predefinedCodesFileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "smallPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "onlineClaimLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "link": {
+            "type": "string",
+            "nullable": true
+          },
+          "drawDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "prizeRulesFileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousYearAverageBasketValue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awardedCampaign": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DetailedCouponVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "rank": {
+            "$ref": "#/components/schemas/CouponRank"
+          },
+          "type": {
+            "$ref": "#/components/schemas/CouponType"
+          },
+          "state": {
+            "$ref": "#/components/schemas/CouponState"
           },
           "startDate": {
             "type": "string",
@@ -4017,19 +4635,99 @@
             "type": "integer",
             "format": "int32"
           },
-          "tags": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "partnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "showCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clickCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "claimCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "smallPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "mode": {
+            "$ref": "#/components/schemas/CouponMode"
+          },
+          "discountType": {
+            "$ref": "#/components/schemas/CouponDiscountType"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "approvedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "preferredPosition": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DetailedCouponVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
             "type": "array",
             "items": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/DetailedCouponVm"
             },
             "nullable": true
           },
-          "isDrawable": {
-            "type": "boolean"
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CouponVm": {
         "type": "object",
@@ -4065,7 +4763,8 @@
           },
           "expireDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "couponCount": {
             "type": "integer",
@@ -4073,11 +4772,16 @@
           },
           "minimumShoppingValue": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
+          },
+          "discountType": {
+            "$ref": "#/components/schemas/CouponDiscountType"
           },
           "discountValue": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float",
+            "nullable": true
           },
           "categoryId": {
             "type": "integer",
@@ -4098,102 +4802,104 @@
             },
             "nullable": true
           },
-          "isDrawable": {
+          "predefinedCodesFileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "approvedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "bigPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "smallPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CouponVmPaginatedResponse": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CouponVm"
-            },
-            "nullable": true
           },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "from": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "to": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WaitingCouponVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
+          "smallPicture": {
             "type": "string",
             "nullable": true
           },
-          "state": {
-            "$ref": "#/components/schemas/CouponState"
-          },
-          "categoryId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "startDate": {
+          "bigPicture": {
             "type": "string",
-            "format": "date-time"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "expireDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WaitingCouponVmPaginatedResponse": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WaitingCouponVm"
-            },
             "nullable": true
           },
-          "page": {
+          "onlineClaimLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "link": {
+            "type": "string",
+            "nullable": true
+          },
+          "drawDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "prizeRulesFileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemPrice": {
             "type": "integer",
             "format": "int32"
           },
-          "from": {
+          "previousYearAverageBasketValue": {
             "type": "integer",
             "format": "int32"
           },
-          "to": {
+          "awardedCampaign": {
+            "type": "boolean"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/CouponMode"
+          },
+          "partnerId": {
             "type": "integer",
             "format": "int32"
           },
-          "size": {
+          "showCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clickCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "claimCount": {
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ChangeCouponStateDto": {
         "type": "object",
@@ -4205,8 +4911,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CouponCodeVm": {
         "type": "object",
@@ -4215,59 +4920,27 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
-      "CouponUserCodeVm": {
+      "ActivateCouponDto": {
         "type": "object",
         "properties": {
-          "couponId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "userId": {
-            "type": "string",
-            "nullable": true
-          },
-          "couponCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "claimDate": {
-            "type": "string",
-            "format": "date-time"
+          "isActive": {
+            "type": "boolean"
           }
-        },
-        "additionalProperties": false
+        }
       },
-      "CouponUserCodeVmPaginatedResponse": {
+      "ClaimedCouponCodeVm": {
         "type": "object",
         "properties": {
-          "result": {
+          "couponCodes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CouponUserCodeVm"
+              "type": "string"
             },
             "nullable": true
-          },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "from": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "to": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "MyClaimedCouponVm": {
         "type": "object",
@@ -4292,8 +4965,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "MyCouponVm": {
         "type": "object",
@@ -4317,8 +4989,7 @@
           "isClaimed": {
             "type": "boolean"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "SendEmailsDto": {
         "type": "object",
@@ -4338,8 +5009,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "SendEmailToSegmentDto": {
         "type": "object",
@@ -4356,8 +5026,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CreateEmailTemplateDto": {
         "type": "object",
@@ -4370,8 +5039,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "EmailTemplateSummaryVm": {
         "type": "object",
@@ -4396,8 +5064,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "EmailTemplateSummaryVmPaginatedResponse": {
         "type": "object",
@@ -4425,8 +5092,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "EmailTemplateHistoryVm": {
         "type": "object",
@@ -4451,8 +5117,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "EmailTemplateVm": {
         "type": "object",
@@ -4472,8 +5137,7 @@
             },
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "EmailTemplateVersionDto": {
         "type": "object",
@@ -4482,10 +5146,18 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
-      "SelfPartnerContactDto": {
+      "FileVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PartnerContactDto": {
         "type": "object",
         "properties": {
           "name": {
@@ -4500,33 +5172,15 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PartnerState": {
         "enum": [
           "Inactive",
-          "Active"
+          "Active",
+          "Deleted"
         ],
         "type": "string"
-      },
-      "SiteVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "PartnerVm": {
         "type": "object",
@@ -4543,17 +5197,25 @@
             "type": "string",
             "nullable": true
           },
+          "mailingAddress": {
+            "type": "string",
+            "nullable": true
+          },
           "registrationNumber": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "taxNumber": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "bankAccount": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
+          },
+          "registrationAllowed": {
+            "type": "string",
+            "nullable": true
           },
           "registerCode": {
             "type": "string",
@@ -4564,23 +5226,8 @@
           },
           "partnerState": {
             "$ref": "#/components/schemas/PartnerState"
-          },
-          "contacts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PartnerContactVm"
-            },
-            "nullable": true
-          },
-          "sites": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SiteVm"
-            },
-            "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PartnerDto": {
         "type": "object",
@@ -4593,17 +5240,25 @@
             "type": "string",
             "nullable": true
           },
+          "mailingAddress": {
+            "type": "string",
+            "nullable": true
+          },
           "registrationNumber": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "taxNumber": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "bankAccount": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
+          },
+          "registrationAllowed": {
+            "type": "string",
+            "nullable": true
           },
           "majorPartner": {
             "type": "boolean"
@@ -4611,8 +5266,7 @@
           "partnerState": {
             "$ref": "#/components/schemas/PartnerState"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PartnerVmPaginatedResponse": {
         "type": "object",
@@ -4640,8 +5294,15 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
+      },
+      "ActivatePartnerDto": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/PartnerState"
+          }
+        }
       },
       "ScoringEventType": {
         "enum": [
@@ -4663,8 +5324,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ScoringEventPaginatedResponse": {
         "type": "object",
@@ -4696,8 +5356,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "SegmentVm": {
         "type": "object",
@@ -4714,8 +5373,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "SegmentVmPaginatedResponse": {
         "type": "object",
@@ -4743,8 +5401,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "EmailSegmentDto": {
         "type": "object",
@@ -4760,8 +5417,7 @@
             },
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "CreateSegmentationCommand": {
         "type": "object",
@@ -4773,8 +5429,7 @@
             },
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "SiteDto": {
         "type": "object",
@@ -4791,8 +5446,24 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
+      },
+      "SiteVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "SiteVmPaginatedResponse": {
         "type": "object",
@@ -4820,8 +5491,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "TagCategoryDto": {
         "type": "object",
@@ -4830,8 +5500,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "TagCategoryVm": {
         "type": "object",
@@ -4844,8 +5513,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "TagCategoryVmPaginatedResponse": {
         "type": "object",
@@ -4873,8 +5541,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "TagDto": {
         "type": "object",
@@ -4890,8 +5557,7 @@
           "isActive": {
             "type": "boolean"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "TagVm": {
         "type": "object",
@@ -4911,8 +5577,7 @@
           "isActive": {
             "type": "boolean"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "TagVmPaginatedResponse": {
         "type": "object",
@@ -4940,8 +5605,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       }
     },
     "securitySchemes": {

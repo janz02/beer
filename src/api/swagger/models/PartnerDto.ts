@@ -40,22 +40,34 @@ export interface PartnerDto {
     address?: string | null;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof PartnerDto
      */
-    registrationNumber?: number;
+    mailingAddress?: string | null;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof PartnerDto
      */
-    taxNumber?: number;
+    registrationNumber?: string | null;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof PartnerDto
      */
-    bankAccount?: number;
+    taxNumber?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartnerDto
+     */
+    bankAccount?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartnerDto
+     */
+    registrationAllowed?: string | null;
     /**
      * 
      * @type {boolean}
@@ -82,9 +94,11 @@ export function PartnerDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'address': !exists(json, 'address') ? undefined : json['address'],
+        'mailingAddress': !exists(json, 'mailingAddress') ? undefined : json['mailingAddress'],
         'registrationNumber': !exists(json, 'registrationNumber') ? undefined : json['registrationNumber'],
         'taxNumber': !exists(json, 'taxNumber') ? undefined : json['taxNumber'],
         'bankAccount': !exists(json, 'bankAccount') ? undefined : json['bankAccount'],
+        'registrationAllowed': !exists(json, 'registrationAllowed') ? undefined : json['registrationAllowed'],
         'majorPartner': !exists(json, 'majorPartner') ? undefined : json['majorPartner'],
         'partnerState': !exists(json, 'partnerState') ? undefined : PartnerStateFromJSON(json['partnerState']),
     };
@@ -101,9 +115,11 @@ export function PartnerDtoToJSON(value?: PartnerDto | null): any {
         
         'name': value.name,
         'address': value.address,
+        'mailingAddress': value.mailingAddress,
         'registrationNumber': value.registrationNumber,
         'taxNumber': value.taxNumber,
         'bankAccount': value.bankAccount,
+        'registrationAllowed': value.registrationAllowed,
         'majorPartner': value.majorPartner,
         'partnerState': PartnerStateToJSON(value.partnerState),
     };

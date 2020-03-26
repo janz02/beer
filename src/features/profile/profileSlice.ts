@@ -21,6 +21,7 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
+    resetProfile: () => initialState,
     getProfileSuccess(state, action: PayloadAction<Profile>) {
       state.editable = true
       state.profile = action.payload
@@ -49,6 +50,7 @@ const profileSlice = createSlice({
 })
 
 export const {
+  resetProfile,
   getProfileSuccess,
   setProfileFromJWT,
   updateProfileSuccess,
@@ -65,7 +67,7 @@ export const getProfile = (): AppThunk => async (dispatch, getState) => {
     // const userData = getState().auth.userData
     // TODO: The roles have changed, no more Partner contact. Do we need this check, still?
     // if (!userData.roles?.includes(Roles.Partner)) {
-    const profile = await api.partnerContacts.getMyPartnerContact()
+    const profile = await api.partnerContacts.getSelfPartnerContact()
     dispatch(getProfileSuccess(profile))
     // } else {
     // dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
@@ -81,8 +83,8 @@ export const updateProfile = (profile: Profile): AppThunk => async (dispatch, ge
   try {
     // const userData = getState().auth.userData
     // if (userData.roles?.includes(Roles.PARTNER)) {
-    await api.partnerContacts.updateMyPartnerContact({
-      selfPartnerContactDto: { ...getState().profile.profile, ...profile }
+    await api.partnerContacts.updateSelfPartnerContact({
+      partnerContactDto: { ...getState().profile.profile, ...profile }
     })
     dispatch(updateProfileSuccess())
     dispatch(getProfile())

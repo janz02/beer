@@ -2,7 +2,7 @@ import React, { FC, useMemo, useCallback, useState, useEffect } from 'react'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
-import { Button, Form, Input } from 'antd'
+import { Form, Input } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
@@ -17,15 +17,18 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { NewsletterPreview } from 'models/newsletter'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { MomentDisplay } from 'components/MomentDisplay'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
+import { ColumnType } from 'antd/lib/table'
+import { AddButton } from 'components/buttons/AddButton'
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { templates, pagination, loading } = useSelector((state: RootState) => state.newsletterList)
+  const { templates, listParams, loading, loadingCreate } = useSelector(
+    (state: RootState) => state.newsletterList
+  )
 
   const [visibleSaveNewPopup, setVisibleSaveNewPopup] = useState(false)
   const [deletePopup, setDeletePopup] = useState<{
@@ -41,65 +44,67 @@ export const NewsletterList: FC = () => {
     dispatch(getNewsletterTemplates())
   }, [dispatch])
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<NewsletterPreview>({
+    listParamsState: listParams,
+    filterKeys: ['name'],
     getDataAction: getNewsletterTemplates
   })
 
-  const columnsConfig = useMemo(
+  const columnsConfig: ColumnType<NewsletterPreview>[] = useMemo(
     () => [
-      {
+      columnConfig({
         title: t('newsletter.field.template-name'),
         key: 'name',
-        dataIndex: 'name',
-        ellipsis: true,
+        sort: true,
         width: '35%',
-        ...sorterConfig
-      },
-      {
+        filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
         title: t('newsletter.field.template-version'),
         key: 'version',
-        width: '6rem',
-        dataIndex: 'version'
-      },
-      {
+        width: '4rem'
+      }),
+      columnConfig({
         title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
-        render(record: NewsletterPreview) {
-          return <MomentDisplay date={record.modifiedAt} mode="date time" />
-        }
-      },
-      {
+        width: '10rem',
+        renderMode: 'date time'
+      }),
+      columnConfig({
         title: t('newsletter.field.template-modified-by'),
-        key: 'modifiedBy',
-        dataIndex: 'modifiedBy'
-      },
-      {
-        width: '12rem',
-        key: 'actions',
-        colSpan: 1,
-        render(record: NewsletterPreview) {
-          return (
-            <CrudButtons
-              onEdit={() => editTemplate(record.id)}
-              onDelete={() => {
-                setDeletePopup({
-                  template: record,
-                  visible: true
-                })
-              }}
-            />
-          )
-        }
-      }
+        key: 'modifiedBy'
+      }),
+      actionColumnConfig({
+        render: (record: NewsletterPreview) => (
+          <CrudButtons
+            onEdit={() => editTemplate(record.id)}
+            onDelete={() => {
+              setDeletePopup({
+                template: record,
+                visible: true
+              })
+            }}
+          />
+        )
+      })
     ],
-    [editTemplate, sorterConfig, t]
+    [actionColumnConfig, columnConfig, editTemplate, t]
   )
 
+  const handleSave = async (values: any): Promise<void> => {
+    const { templateName } = values
+    const created = await dispatch(createNewsletterTemplate(templateName))
+    created && setVisibleSaveNewPopup(false)
+  }
+
   const headerOptions = (
-    <Button type="primary" onClick={() => setVisibleSaveNewPopup(true)}>
-      {t('common.create')}
-    </Button>
+    <AddButton onClick={() => setVisibleSaveNewPopup(true)}>{t('newsletter.add')}</AddButton>
   )
 
   return (
@@ -108,13 +113,13 @@ export const NewsletterList: FC = () => {
         floatingTitle={t('newsletter.available-templates')}
         floatingOptions={headerOptions}
         forTable
-        extraWide
+        width="normal"
       >
         <ResponsiveTable
           {...{
             loading,
             columns: columnsConfig,
-            dataSource: templates.map((t, i) => ({ ...t, key: '' + i + t.id })),
+            dataSource: addKeyProp(templates),
             pagination: paginationConfig,
             onChange: handleTableChange
           }}
@@ -131,6 +136,7 @@ export const NewsletterList: FC = () => {
       />
 
       <GenericModalForm
+        loadingAction={loadingCreate}
         modalProps={{
           visible: visibleSaveNewPopup,
           title: t('newsletter.popup.title-save'),
@@ -140,19 +146,15 @@ export const NewsletterList: FC = () => {
           }
         }}
         formProps={{
-          onFinish: (values: any) => {
-            const { templateName } = values
-            dispatch(createNewsletterTemplate(templateName))
-            setVisibleSaveNewPopup(false)
-          }
+          onFinish: handleSave
         }}
       >
         <Form.Item
           name="templateName"
           label={t('newsletter.field.template-name')}
-          rules={[rule.required(), rule.max(35)]}
+          rules={[rule.requiredString(), rule.max(35)]}
         >
-          <Input />
+          <Input maxLength={35} />
         </Form.Item>
       </GenericModalForm>
     </>

@@ -51,7 +51,7 @@ export interface GetCashiersRequest {
     siteId?: number;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 

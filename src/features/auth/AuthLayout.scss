@@ -3,7 +3,7 @@
 .auth {
   min-width: 300px;
   max-width: 350px;
-  margin: 2rem auto;
+  margin: 4rem auto;
 
   --minor-inset: 0.5rem;
 
@@ -22,7 +22,7 @@
   }
 
   &__logo {
-    fill: $primary-color;
+    pointer-events: none;
   }
 
   &__action-btn {

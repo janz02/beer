@@ -15,16 +15,42 @@
 
 import * as runtime from '../runtime';
 import {
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
+    PartnerContactDto,
+    PartnerContactDtoFromJSON,
+    PartnerContactDtoToJSON,
     PartnerContactVm,
     PartnerContactVmFromJSON,
     PartnerContactVmToJSON,
-    SelfPartnerContactDto,
-    SelfPartnerContactDtoFromJSON,
-    SelfPartnerContactDtoToJSON,
+    PartnerContactVmPaginatedResponse,
+    PartnerContactVmPaginatedResponseFromJSON,
+    PartnerContactVmPaginatedResponseToJSON,
 } from '../models';
 
-export interface UpdateMyPartnerContactRequest {
-    selfPartnerContactDto?: SelfPartnerContactDto;
+export interface GetOnePartnerContactRequest {
+    id: number;
+}
+
+export interface GetPartnerPartnerContactRequest {
+    partnerId?: number;
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
+export interface UpdatePartnerContactRequest {
+    id: number;
+    partnerContactDto?: PartnerContactDto;
+}
+
+export interface UpdateSelfPartnerContactRequest {
+    partnerContactDto?: PartnerContactDto;
 }
 
 /**
@@ -34,7 +60,11 @@ export class PartnerContactsApi extends runtime.BaseAPI {
 
     /**
      */
-    async getMyPartnerContactRaw(): Promise<runtime.ApiResponse<PartnerContactVm>> {
+    async getOnePartnerContactRaw(requestParameters: GetOnePartnerContactRequest): Promise<runtime.ApiResponse<PartnerContactVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getOnePartnerContact.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -44,7 +74,7 @@ export class PartnerContactsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/PartnerContacts`,
+            path: `/api/PartnerContacts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -55,14 +85,106 @@ export class PartnerContactsApi extends runtime.BaseAPI {
 
     /**
      */
-    async getMyPartnerContact(): Promise<PartnerContactVm> {
-        const response = await this.getMyPartnerContactRaw();
+    async getOnePartnerContact(requestParameters: GetOnePartnerContactRequest): Promise<PartnerContactVm> {
+        const response = await this.getOnePartnerContactRaw(requestParameters);
         return await response.value();
     }
 
     /**
      */
-    async updateMyPartnerContactRaw(requestParameters: UpdateMyPartnerContactRequest): Promise<runtime.ApiResponse<void>> {
+    async getPartnerPartnerContactRaw(requestParameters: GetPartnerPartnerContactRequest): Promise<runtime.ApiResponse<PartnerContactVmPaginatedResponse>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.partnerId !== undefined) {
+            queryParameters['partnerId'] = requestParameters.partnerId;
+        }
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.phone !== undefined) {
+            queryParameters['phone'] = requestParameters.phone;
+        }
+
+        if (requestParameters.email !== undefined) {
+            queryParameters['email'] = requestParameters.email;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/PartnerContacts/GetPartnerPartnerContacts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerContactVmPaginatedResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getPartnerPartnerContact(requestParameters: GetPartnerPartnerContactRequest): Promise<PartnerContactVmPaginatedResponse> {
+        const response = await this.getPartnerPartnerContactRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async getSelfPartnerContactRaw(): Promise<runtime.ApiResponse<PartnerContactVm>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/PartnerContacts/GetSelf`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PartnerContactVmFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getSelfPartnerContact(): Promise<PartnerContactVm> {
+        const response = await this.getSelfPartnerContactRaw();
+        return await response.value();
+    }
+
+    /**
+     */
+    async updatePartnerContactRaw(requestParameters: UpdatePartnerContactRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePartnerContact.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -74,11 +196,11 @@ export class PartnerContactsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/PartnerContacts`,
+            path: `/api/PartnerContacts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: SelfPartnerContactDtoToJSON(requestParameters.selfPartnerContactDto),
+            body: PartnerContactDtoToJSON(requestParameters.partnerContactDto),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -86,8 +208,38 @@ export class PartnerContactsApi extends runtime.BaseAPI {
 
     /**
      */
-    async updateMyPartnerContact(requestParameters: UpdateMyPartnerContactRequest): Promise<void> {
-        await this.updateMyPartnerContactRaw(requestParameters);
+    async updatePartnerContact(requestParameters: UpdatePartnerContactRequest): Promise<void> {
+        await this.updatePartnerContactRaw(requestParameters);
+    }
+
+    /**
+     */
+    async updateSelfPartnerContactRaw(requestParameters: UpdateSelfPartnerContactRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/PartnerContacts/Self`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PartnerContactDtoToJSON(requestParameters.partnerContactDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async updateSelfPartnerContact(requestParameters: UpdateSelfPartnerContactRequest): Promise<void> {
+        await this.updateSelfPartnerContactRaw(requestParameters);
     }
 
 }

@@ -3,11 +3,13 @@ import { AppThunk } from 'app/store'
 import { history } from 'router/router'
 import { LoginRequest, RegisterPartnerContactRequest } from 'api/swagger/apis'
 import { UserVm } from 'api/swagger'
-import { getJwtUserdata } from 'services/jwt-reader'
+import { getJwtUserdata, isLoggedIn } from 'services/jwt-reader'
 import { api } from 'api'
 import JwtDecode from 'jwt-decode'
 import { message } from 'antd'
 import i18n from 'app/i18n'
+import { hardResetStore } from 'app/storeUtils'
+import { Partner } from 'models/partner'
 
 const clearJwtData = (): void => {
   sessionStorage.removeItem('jwt')
@@ -15,18 +17,21 @@ const clearJwtData = (): void => {
   sessionStorage.removeItem('jwtExpiration')
 }
 
+const initialState = {
+  loggedIn: isLoggedIn(),
+  userData: getJwtUserdata(),
+  loading: false,
+  errorSignup: '',
+  errorLogin: '',
+  errorChangePassword: '',
+  errorPasswordRecovery: ''
+}
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    loggedIn: !!sessionStorage.getItem('jwt'),
-    userData: getJwtUserdata(),
-    loading: false,
-    errorSignup: '',
-    errorLogin: '',
-    errorChangePassword: '',
-    errorPasswordRecovery: ''
-  },
+  initialState,
   reducers: {
+    resetAuth: () => initialState,
     setLoadingStart(state) {
       state.loading = true
     },
@@ -57,6 +62,7 @@ const authSlice = createSlice({
 
       jwt && sessionStorage.setItem('jwt', jwt)
       refreshToken && sessionStorage.setItem('refreshToken', refreshToken)
+
       // Also correcting precision.
       jwtExpiration && sessionStorage.setItem('jwtExpiration', `${jwtExpiration}000`)
       state.userData = getJwtUserdata(jwt)
@@ -66,7 +72,16 @@ const authSlice = createSlice({
       state.errorLogin = action.payload
       clearJwtData()
     },
-    logout(state) {
+    setSelfPartner(state, action: PayloadAction<Partner>) {
+      sessionStorage.setItem('partnerId', `${action.payload.id}`)
+      sessionStorage.setItem('partnerName', `${action.payload.name}`)
+      state.userData = {
+        ...state.userData,
+        partnerId: action.payload.id,
+        partnerName: action.payload.name
+      }
+    },
+    logoutUser(state) {
       state.loggedIn = false
       state.userData = {}
       clearJwtData()
@@ -83,7 +98,7 @@ const authSlice = createSlice({
   }
 })
 
-export const {
+const {
   setLoadingStart,
   loginSuccess,
   loginFail,
@@ -91,23 +106,18 @@ export const {
   passwordRecoveryFail,
   signupSuccess,
   signupFail,
-  logout,
+  logoutUser,
   changePasswordSuccess,
-  changePasswordFail
+  changePasswordFail,
+  setSelfPartner
 } = authSlice.actions
+
+export const { resetAuth } = authSlice.actions
 
 export const authReducer = authSlice.reducer
 
-// TODO: Only for simulating async actions, remove after API is connected
-const delay = (p: any): Promise<unknown> =>
-  new Promise(resolve => {
-    console.log('mock api call', p)
-    setTimeout(() => {
-      resolve(p)
-    }, 1000)
-  })
-
 export const login = (params: any): AppThunk => async (dispatch, state) => {
+  dispatch(hardResetStore())
   dispatch(setLoadingStart())
   try {
     const loginRequest: LoginRequest = {
@@ -119,19 +129,30 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
 
     const userVm = await api.auth.login(loginRequest)
     const cameFrom = state().routerHistory.cameFrom
-
     dispatch(loginSuccess(userVm))
 
-    history.push(cameFrom)
+    const partner = await api.partner.getSelfPartner()
+    dispatch(setSelfPartner(partner))
+
+    if (!cameFrom.includes('error')) {
+      history.push(cameFrom)
+      return
+    }
+
+    history.push('/')
   } catch (err) {
     dispatch(loginFail(err.toString()))
   }
 }
 
+export const logout = (): AppThunk => async dispatch => {
+  dispatch(logoutUser())
+  dispatch(hardResetStore({ logout: true }))
+}
+
 export const recoverPassword = (params: any): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
   try {
-    await delay(params)
     dispatch(passwordRecoverySuccess())
   } catch (err) {
     dispatch(passwordRecoveryFail(err.toString()))

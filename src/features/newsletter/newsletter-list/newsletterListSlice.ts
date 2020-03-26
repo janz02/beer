@@ -10,22 +10,25 @@ import { Segment } from 'models/segment'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
-  Pagination
+  reviseListRequestParams,
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 
 interface NewsletterListState {
   templates: NewsletterPreview[]
   error: string
   loading: boolean
-  pagination: Pagination
+  loadingCreate: boolean
+  listParams: ListRequestParams
   segments: Segment[]
 }
 
 const initialState: NewsletterListState = {
   error: '',
   loading: false,
+  loadingCreate: false,
   templates: [],
-  pagination: {
+  listParams: {
     pageSize: 10
   },
   segments: []
@@ -35,9 +38,16 @@ const newsletterListSlice = createSlice({
   name: 'newsLetterList',
   initialState,
   reducers: {
-    createTemplateRequest() {},
-    createTemplateSuccess() {},
-    createTemplateFail(state, action: PayloadAction<string>) {},
+    resetNewsLetterList: () => initialState,
+    createTemplateRequest(state) {
+      state.loadingCreate = true
+    },
+    createTemplateSuccess(state) {
+      state.loadingCreate = false
+    },
+    createTemplateFail(state, action: PayloadAction<string>) {
+      state.loadingCreate = false
+    },
     sendEmailRequest() {},
     sendEmailSuccess() {},
     sendEmailFail(state, action: PayloadAction<string>) {},
@@ -49,10 +59,10 @@ const newsletterListSlice = createSlice({
     },
     getTemplatesSuccess(
       state,
-      action: PayloadAction<{ templates: any[]; pagination: Pagination }>
+      action: PayloadAction<{ templates: any[]; listParams: ListRequestParams }>
     ) {
       state.templates = action.payload.templates
-      state.pagination = action.payload.pagination
+      state.listParams = action.payload.listParams
       state.loading = false
       state.error = ''
     },
@@ -75,6 +85,8 @@ const {
   deleteTemplateFail
 } = newsletterListSlice.actions
 
+export const { resetNewsLetterList } = newsletterListSlice.actions
+
 export const newsletterListReducer = newsletterListSlice.reducer
 
 export const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => async (
@@ -83,20 +95,13 @@ export const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk
 ) => {
   try {
     dispatch(getTemplatesRequest())
-    const oldPagination = getState().newsletterList.pagination
-    const { result, ...pagination } = await api.emailTemplates.getTemplates({
-      page: oldPagination.page,
-      pageSize: oldPagination.pageSize,
-      ...params
-    })
+    const revisedParams = reviseListRequestParams(getState().newsletterList.listParams, params)
+    const { result, ...pagination } = await api.emailTemplates.getTemplates(revisedParams)
     const templates = result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
     dispatch(
       getTemplatesSuccess({
         templates: templates as NewsletterPreview[],
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -109,7 +114,7 @@ export const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatc
     dispatch(deleteTemplateRequest())
     await api.emailTemplates.deleteTemplate({ id })
     dispatch(deleteTemplateSuccess())
-    const newPage = recalculatePaginationAfterDeletion(getState().newsletterList.pagination)
+    const newPage = recalculatePaginationAfterDeletion(getState().newsletterList.listParams)
     dispatch(getNewsletterTemplates({ page: newPage }))
     return { id }
   } catch (err) {
@@ -128,7 +133,9 @@ export const createNewsletterTemplate = (name: string): AppThunk => async dispat
     })
     dispatch(createTemplateSuccess())
     history.push(`newsletter/${id.id}`)
+    return true
   } catch (err) {
     dispatch(createTemplateFail(err.toString()))
+    return false
   }
 }

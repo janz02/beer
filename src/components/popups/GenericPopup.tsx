@@ -4,13 +4,31 @@ import { Modal } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
 import { useTranslation } from 'react-i18next'
 import { NativeButtonProps } from 'antd/lib/button/button'
-import { DeleteFilled, SaveFilled, CheckOutlined, CloseOutlined } from '@ant-design/icons'
+import {
+  DeleteFilled,
+  SaveFilled,
+  CheckOutlined,
+  CloseOutlined,
+  StopOutlined
+} from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import { AppThunk } from 'app/store'
 
-type PopupType = 'discard' | 'confirm' | 'save' | 'delete' | 'restore'
+export type PopupType =
+  | 'discard'
+  | 'confirm'
+  | 'save'
+  | 'delete'
+  | 'restore'
+  | 'activate'
+  | 'inactivate'
 
 // TODO: the async actions are not canceled, introduce sagas if needed
+
+export type PopupState<T extends { id?: number }> = {
+  data?: T
+  popupVisible?: boolean
+} | null
 
 export interface GenericPopupProps extends ModalProps {
   type: PopupType
@@ -35,12 +53,10 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
   const { t } = useTranslation()
   // With this we can neglect the return of old/delayed async actions of other items.
   const refId = useRef(id)
-  const [error, setError] = useState<string>()
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (id && id !== refId.current) {
-      setError('')
       setLoading(false)
       refId.current = id
     }
@@ -77,6 +93,17 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
       title = t(`common.popup.restore-title`)
       okText = t(`common.restore`)
       break
+    case 'activate':
+      okButtonProps.icon = <CheckOutlined />
+      title = t(`common.popup.activate-title`)
+      okText = t(`common.activate`)
+      break
+    case 'inactivate':
+      okButtonProps.danger = true
+      okButtonProps.icon = <StopOutlined />
+      title = t(`common.popup.inactivate-title`)
+      okText = t(`common.inactivate`)
+      break
   }
 
   const handleOk = async (e: React.MouseEvent<HTMLElement>): Promise<void> => {
@@ -88,7 +115,6 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
           modalProps.onCancel && modalProps.onCancel(e)
           setLoading(false)
         } else {
-          setError(response?.error)
           setLoading(false)
         }
       }
@@ -106,7 +132,6 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
       {...modalProps}
     >
       {children}
-      {error && <div className="generic-popup__error"> {t(error)} </div>}
     </Modal>
   )
 }

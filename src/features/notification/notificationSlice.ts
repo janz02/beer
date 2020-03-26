@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import moment, { Moment } from 'moment'
 import { AppThunk } from 'app/store'
+import { delay } from 'services/temp/delay'
 
 // TODO: Remove
 const TEMP_DATA: NotificationData[] = [
@@ -91,6 +92,7 @@ const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
+    resetNotification: () => initialState,
     getNotificationsRequest(state) {
       state.loading = true
     },
@@ -127,6 +129,7 @@ const notificationSlice = createSlice({
 })
 
 export const {
+  resetNotification,
   inspectNotification,
   getNotificationsFail,
   getNotificationsRequest,
@@ -134,15 +137,6 @@ export const {
 } = notificationSlice.actions
 
 export const notificationReducer = notificationSlice.reducer
-
-// TODO: Only for simulating async actions, remove after API is connected
-const delay = (p: any): Promise<unknown> =>
-  new Promise(resolve => {
-    console.log('mock api call', p)
-    setTimeout(() => {
-      resolve(p)
-    }, 1000)
-  })
 
 export const getNotifications = (): AppThunk => async dispatch => {
   dispatch(getNotificationsRequest())

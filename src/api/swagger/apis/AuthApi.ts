@@ -15,9 +15,6 @@
 
 import * as runtime from '../runtime';
 import {
-    AuthRegistrationFailedException,
-    AuthRegistrationFailedExceptionFromJSON,
-    AuthRegistrationFailedExceptionToJSON,
     ChangePasswordDto,
     ChangePasswordDtoFromJSON,
     ChangePasswordDtoToJSON,
@@ -58,13 +55,13 @@ export interface ChangePasswordRequest {
 }
 
 export interface GetNkmPartnerContactsInfoRequest {
-    name?: string;
-    phone?: string;
-    email?: string;
-    partnerName?: string;
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    partnerName?: string | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 
@@ -73,13 +70,13 @@ export interface GetPartnerContactInfoRequest {
 }
 
 export interface GetPartnerContactsInfoRequest {
-    name?: string;
-    phone?: string;
-    email?: string;
-    partnerName?: string;
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    partnerName?: string | null;
     page?: number;
     pageSize?: number;
-    orderBy?: string;
+    orderBy?: string | null;
     orderByType?: OrderByType;
 }
 
@@ -443,6 +440,35 @@ export class AuthApi extends runtime.BaseAPI {
      */
     async registerUser(requestParameters: RegisterUserRequest): Promise<void> {
         await this.registerUserRaw(requestParameters);
+    }
+
+    /**
+     * Syncs in all the users from AD to be listed
+     */
+    async syncAdUsersRaw(): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/SyncAdUsers`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Syncs in all the users from AD to be listed
+     */
+    async syncAdUsers(): Promise<void> {
+        await this.syncAdUsersRaw();
     }
 
     /**

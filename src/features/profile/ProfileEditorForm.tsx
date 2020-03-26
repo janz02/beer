@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
@@ -6,6 +6,8 @@ import { Profile } from 'models/profile'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { Partner } from 'models/partner'
 import { history } from 'router/router'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
+import { useFormUtils } from 'hooks/useFormUtils'
 
 export interface ProfileEditorFormProps {
   handleProfileSave: (values: any) => void
@@ -18,73 +20,80 @@ export interface ProfileEditorFormProps {
 export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
   const { handleProfileSave, loading, profile, editable, partner } = props
   const { t } = useTranslation()
-  const [form] = Form.useForm()
-  const [submitable, setSubmitable] = useState(false)
-  const [passwordHelpVisible, setPasswordHelpVisible] = useState(false)
   const rule = useCommonFormRules()
+
+  const {
+    form,
+    submitable,
+    modified,
+    checkFieldsChange,
+    resetFormFlags,
+    setFieldsValue,
+    resetFormFields
+  } = useFormUtils()
 
   const handleSubmit = (values: any): void => {
     handleProfileSave({
       ...values
     })
+    resetFormFlags()
   }
 
-  // TODO: revisit this problem after upgrading andt package.
-  // https://github.com/ant-design/ant-design/issues/18983
-  // https://github.com/ant-design/ant-design/issues/20987
-  // This should work instead of the workaround below.
-  // useEffect(() => {
-  //   form.setFieldsValue({
-  //     ...profile
-  //   })
-  // }, [form, profile])
-  const formRef = useRef(form)
   useEffect(() => {
-    formRef.current = form
-  }, [form])
-  useEffect(() => {
-    formRef.current.setFieldsValue({
+    setFieldsValue({
       ...profile,
       registerCode: partner?.registerCode
     })
-    formRef.current.resetFields(['password', 'passwordAgain', 'oldPassword'])
-  }, [partner, profile])
+    resetFormFields(['oldPassword', 'password', 'passwordAgain'])
+  }, [partner, profile, resetFormFields, setFieldsValue])
 
   return (
     <ResponsiveCard floatingTitle={t('profile.editor-title')}>
+      <NavigationAlert when={modified} />
       <Form
         name="profile-editor-form"
         onFinish={handleSubmit}
         form={form}
         layout="vertical"
         onFieldsChange={() => {
-          const hasErrors = form.getFieldsError().some(field => field.errors.length)
-          if (submitable === hasErrors) {
-            setSubmitable(!submitable)
-          }
+          checkFieldsChange()
         }}
       >
         <Form.Item
           name="name"
           label={t('profile.field.name')}
-          rules={[rule.required(), rule.max(100)]}
+          rules={[rule.requiredString(), rule.max(100)]}
         >
-          <Input disabled={!editable} />
+          <Input disabled={!editable} maxLength={100} />
+        </Form.Item>
+
+        <Form.Item name="email" label={t('profile.field.email')}>
+          <Input disabled />
+        </Form.Item>
+
+        <Form.Item label={t('profile.field.old-password')} name="oldPassword">
+          <Input.Password disabled={!editable} />
         </Form.Item>
 
         <Form.Item
-          extra={passwordHelpVisible ? t('common.password-format-help') : ''}
+          extra={t('common.filed.help.password-format')}
           name="password"
+          dependencies={['oldPassword']}
           hasFeedback
           label={t('profile.field.new-password')}
-          rules={[rule.password()]}
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue('oldPassword') !== value) {
+                  return Promise.resolve()
+                }
+                return Promise.reject(t('error.auth.newpassword-sameasold'))
+              }
+            }),
+            rule.password()
+          ]}
         >
-          <Input.Password
-            disabled={!editable}
-            onClick={() => {
-              setPasswordHelpVisible(true)
-            }}
-          />
+          <Input.Password disabled={!editable} maxLength={64} />
         </Form.Item>
 
         <Form.Item
@@ -98,24 +107,21 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve()
                 }
-                return Promise.reject(t('auth.error.password-inconsistent'))
+                return Promise.reject(t('error.auth.password-inconsistent'))
               }
             })
           ]}
         >
-          <Input.Password disabled={!editable} />
+          <Input.Password disabled={!editable} maxLength={64} />
         </Form.Item>
 
-        <Form.Item label={t('profile.field.old-password')} name="oldPassword">
-          <Input.Password disabled={!editable} />
-        </Form.Item>
-
-        <Form.Item name="phone" label={t('profile.field.phone')} rules={[rule.max(20)]}>
-          <Input disabled={!editable} type="tel" />
-        </Form.Item>
-
-        <Form.Item name="email" label={t('profile.field.email')}>
-          <Input disabled />
+        <Form.Item
+          name="phone"
+          label={t('profile.field.phone')}
+          rules={[rule.max(20)]}
+          extra={t('common.field.help.phone-format')}
+        >
+          <Input disabled={!editable} type="tel" maxLength={20} />
         </Form.Item>
 
         <Form.Item name="registerCode" label={t('profile.field.code')}>

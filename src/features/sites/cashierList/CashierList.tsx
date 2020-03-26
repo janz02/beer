@@ -1,15 +1,16 @@
 import React, { FC, useState, useMemo } from 'react'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
-import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTableUtils } from 'hooks/useTableUtils'
-import { updateCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
+import { getCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { ColumnType } from 'antd/lib/table'
+import { AddButton } from 'components/buttons/AddButton'
 
 interface CashierListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
@@ -18,36 +19,40 @@ interface CashierListProps {
 export const CashierList: FC<CashierListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { pagination, cashiers, site } = useSelector((state: RootState) => state.siteEditor)
+  const { listParams, cashiers, site, loadingCashiers } = useSelector(
+    (state: RootState) => state.siteEditor
+  )
 
   const [cashierToDelete, setCashierToDelete] = useState<{
     cashier?: Cashier
     popupVisible?: boolean
   } | null>()
 
-  const { paginationConfig, handleTableChange, sorterConfig } = useTableUtils({
-    paginationState: pagination,
-    getDataAction: updateCashiers
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<Cashier>({
+    listParamsState: listParams,
+    filterKeys: ['cashierId', 'digitalStampId'],
+    getDataAction: getCashiers
   })
 
-  const columnsConfig = useMemo(
+  const columnsConfig: ColumnType<Cashier>[] = useMemo(
     () => [
-      {
+      columnConfig({
         title: t('cashier-list.table.cashier-id'),
         key: 'cashierId',
-        dataIndex: 'cashierId',
-        ...sorterConfig
-      },
-      {
+        sort: true
+      }),
+      columnConfig({
         title: t('cashier-list.table.digital-stamp-id'),
         key: 'digitalStampId',
-        dataIndex: 'digitalStampId',
-        ...sorterConfig
-      },
-      {
-        title: t('common.actions'),
-        key: 'actions',
-        colSpan: 1,
+        sort: true
+      }),
+      actionColumnConfig({
         render(record: Cashier) {
           return (
             <CrudButtons
@@ -61,24 +66,21 @@ export const CashierList: FC<CashierListProps> = props => {
             />
           )
         }
-      }
+      })
     ],
-    [t, sorterConfig, onOpenEditor]
+    [columnConfig, t, actionColumnConfig, onOpenEditor]
   )
 
   const headerOptions = (
-    <>
-      {site?.id && (
-        <Button type="primary" onClick={() => onOpenEditor(undefined, true)}>
-          {t('common.create')}
-        </Button>
-      )}
-    </>
+    <AddButton disabled={!site?.id} size="middle" onClick={() => onOpenEditor(undefined, true)}>
+      {t('cashier-list.add')}
+    </AddButton>
   )
 
   return (
     <>
       <ResponsiveCard
+        disableAutoScale
         forTable
         innerTitle={t('cashier-list.table-title')}
         innerOptions={headerOptions}
@@ -87,8 +89,9 @@ export const CashierList: FC<CashierListProps> = props => {
         <ResponsiveTable
           hasHeaderOffset
           {...{
+            loading: loadingCashiers,
             columns: columnsConfig,
-            dataSource: cashiers?.map((c, i) => ({ ...c, key: '' + i + c.id })),
+            dataSource: addKeyProp(cashiers),
             pagination: paginationConfig,
             onChange: handleTableChange
           }}

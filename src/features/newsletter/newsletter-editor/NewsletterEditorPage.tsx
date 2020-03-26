@@ -21,7 +21,7 @@ export const NewsletterEditorPage: FC = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  const { template, currentTemplateVersionId, segments } = useSelector(
+  const { template, currentTemplateVersionId, segments, loadingEmail } = useSelector(
     (state: RootState) => state.newsletterEditor
   )
 
@@ -38,31 +38,31 @@ export const NewsletterEditorPage: FC = () => {
 
   const onExit = (): void => {
     history.push('/newsletter')
-    dispatch(clearNewsletterTemplate())
   }
 
-  const onSaveVersion = (template: string): void => {
-    dispatch(saveNewsletterTemplateVersion(template))
+  const onSaveVersion = async (template: string): Promise<void> => {
+    await dispatch(saveNewsletterTemplateVersion(template))
   }
 
-  const onSendSample: any = async (email: string, subject: string) => {
-    const sent = await dispatch(sendNewsletterEmailExample(email, subject))
-    return sent
+  const onSendSample: any = async (email: string, subject: string): Promise<boolean> => {
+    const sent: any = await dispatch(sendNewsletterEmailExample(email, subject))
+    return sent as boolean
   }
 
-  const onSendSegment: any = async (segmentId: number, subject: string) => {
-    const sent = await dispatch(sendNewsletterEmailToSegment(segmentId, subject))
-    return sent
+  const onSendSegment = async (segmentId: number, subject: string): Promise<boolean> => {
+    const sent: any = await dispatch(sendNewsletterEmailToSegment(segmentId, subject))
+    return sent as boolean
   }
 
-  const onGetSegments = (): void => {
-    dispatch(getSegmentsForEmail())
+  const onGetSegments = async (): Promise<void> => {
+    await dispatch(getSegmentsForEmail())
   }
 
   return (
     <>
       <ErrorBoundary>
         <NewsletterEditor
+          loadingEmail={loadingEmail}
           template={template}
           segments={segments}
           currentTemplateVersionId={currentTemplateVersionId}

@@ -8,16 +8,18 @@ import { Cashier } from 'models/cashier'
 import { history } from 'router/router'
 import {
   ListRequestParams,
-  Pagination,
-  recalculatePaginationAfterDeletion
+  recalculatePaginationAfterDeletion,
+  reviseListRequestParams,
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 
 interface SiteEditorState {
   site?: Site
   cashiers?: Cashier[]
-  pagination: Pagination
+  listParams: ListRequestParams
   cashier?: Cashier
-  loadingData: boolean
+  loadingSite: boolean
+  loadingCashiers: boolean
   loadingSave: boolean
   loadingDelete: boolean
   loadingCashierSave: boolean
@@ -27,10 +29,11 @@ interface SiteEditorState {
 
 const initialState: SiteEditorState = {
   cashiers: [],
-  pagination: {
+  listParams: {
     pageSize: 10
   },
-  loadingData: false,
+  loadingSite: false,
+  loadingCashiers: false,
   loadingSave: false,
   loadingDelete: false,
   loadingCashierSave: false,
@@ -43,37 +46,32 @@ const siteEditorSlice = createSlice({
   initialState,
   reducers: {
     resetSiteEditor: () => initialState,
-    getSiteEditorDataRequest(state) {
-      state.loadingData = true
+    getSiteRequest(state) {
+      state.loadingSite = true
     },
-    getSiteEditorDataSuccess(
-      state,
-      action: PayloadAction<{ site: Site; cashiers?: Cashier[]; pagination: Pagination }>
-    ) {
-      state.site = action.payload.site
-      state.cashiers = action.payload.cashiers
-      state.pagination = action.payload.pagination
-      state.loadingData = false
+    getSiteSuccess(state, action: PayloadAction<Site>) {
+      state.site = action.payload
+      state.loadingSite = false
       state.error = ''
     },
-    getSiteEditorDataFail(state, action: PayloadAction<string>) {
-      state.loadingData = false
+    getSiteFail(state, action: PayloadAction<string>) {
+      state.loadingSite = false
       state.error = action.payload
     },
-    updateCashiersRequest(state) {
-      state.loadingData = true
+    getCashiersRequest(state) {
+      state.loadingCashiers = true
     },
-    updateCashiersSuccess(
+    getCashiersSuccess(
       state,
-      action: PayloadAction<{ cashiers?: Cashier[]; pagination: Pagination }>
+      action: PayloadAction<{ cashiers?: Cashier[]; listParams: ListRequestParams }>
     ) {
       state.cashiers = action.payload.cashiers
-      state.pagination = action.payload.pagination
-      state.loadingData = false
+      state.listParams = action.payload.listParams
+      state.loadingCashiers = false
       state.error = ''
     },
-    updateCashiersFail(state, action: PayloadAction<string>) {
-      state.loadingData = false
+    getCashiersFail(state, action: PayloadAction<string>) {
+      state.loadingCashiers = false
       state.error = action.payload
     },
     saveSiteRequest(state) {
@@ -109,6 +107,7 @@ const siteEditorSlice = createSlice({
       state.loadingCashierSave = true
     },
     saveCashierSuccess(state) {
+      message.success(i18n.t('common.message.save-success'), 5)
       state.loadingCashierSave = false
       state.error = ''
     },
@@ -138,9 +137,9 @@ const siteEditorSlice = createSlice({
 })
 
 const {
-  getSiteEditorDataRequest,
-  getSiteEditorDataSuccess,
-  getSiteEditorDataFail,
+  getSiteRequest,
+  getSiteSuccess,
+  getSiteFail,
   saveSiteRequest,
   createSiteSuccess,
   updateSiteSuccess,
@@ -151,9 +150,9 @@ const {
   deleteCashierRequest,
   deleteCashierSuccess,
   deleteCashierFail,
-  updateCashiersRequest,
-  updateCashiersSuccess,
-  updateCashiersFail,
+  getCashiersRequest,
+  getCashiersSuccess,
+  getCashiersFail,
   getCashierRequest,
   getCashierSuccess,
   getCashierFail
@@ -163,93 +162,80 @@ export const { resetSiteEditor, clearCashierEditor } = siteEditorSlice.actions
 
 export const siteEditorReducer = siteEditorSlice.reducer
 
-export const getSiteEditorData = (id: number, params: ListRequestParams = {}): AppThunk => async (
+export const getCashiers = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
-  dispatch(getSiteEditorDataRequest())
-  try {
-    const site = await api.sites.getSite({ id })
-    const oldPagination = getState().siteEditor.pagination
-    const { result, ...pagination } = await api.cashiers.getCashiers({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params,
-      siteId: site.id
-    })
-
-    dispatch(
-      getSiteEditorDataSuccess({
-        site,
-        cashiers: result ?? undefined,
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
-      })
-    )
-  } catch (err) {
-    dispatch(getSiteEditorDataFail(err.toString()))
-    return err.toString()
-  }
-}
-
-export const updateCashiers = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
-  const { pagination: oldPagination, site } = getState().siteEditor
+  const { site } = getState().siteEditor
   if (!site?.id) return
 
-  dispatch(updateCashiersRequest())
+  dispatch(getCashiersRequest())
   try {
+    const revisedParams = reviseListRequestParams(getState().siteEditor.listParams, params)
     const { result, ...pagination } = await api.cashiers.getCashiers({
-      pageSize: oldPagination.pageSize,
-      page: oldPagination.page,
-      ...params,
+      ...revisedParams,
       siteId: site.id
     })
-
     dispatch(
-      updateCashiersSuccess({
-        result,
-        pagination: {
-          ...pagination,
-          pageSize: params.pageSize ?? oldPagination.pageSize
-        }
+      getCashiersSuccess({
+        cashiers: result as Cashier[],
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
-    dispatch(updateCashiersFail(err.toString()))
+    dispatch(getCashiersFail(err.toString()))
     return err.toString()
   }
 }
 
-export const saveSite = (site: Site, id?: number): AppThunk => async (dispatch, getState) => {
-  dispatch(saveSiteRequest())
+export const getSite = (id: number): AppThunk => async dispatch => {
+  dispatch(getSiteRequest())
   try {
+    const site = await api.sites.getSite({ id })
+
+    dispatch(getSiteSuccess(site as Site))
+    dispatch(getCashiers())
+  } catch (err) {
+    dispatch(getSiteFail(err.toString()))
+    return err.toString()
+  }
+}
+
+export const saveSite = (
+  site: Site,
+  id?: number,
+  partnerId?: number,
+  editorRoute?: string
+): AppThunk => async dispatch => {
+  try {
+    dispatch(saveSiteRequest())
     // TODO: integrate, remove partner get because it will be on the JWT.
-    const partner = await api.partner.getMyPartner()
+
+    let sitePartnerId = partnerId
+    if (!sitePartnerId) {
+      const partner = await api.partner.getSelfPartner()
+      sitePartnerId = partner.id
+    }
 
     if (id) {
       await api.sites.updateSite({
         id,
         siteDto: {
           ...site,
-          partnerId: partner.id
+          partnerId: sitePartnerId
         }
       })
-      dispatch(getSiteEditorData(id, getState().siteEditor.pagination))
       dispatch(updateSiteSuccess())
+      dispatch(getCashiers())
     } else {
       const newId = await api.sites.createSite({
         siteDto: {
           ...site,
-          partnerId: partner.id
+          partnerId: sitePartnerId
         }
       })
       dispatch(createSiteSuccess())
-      newId.id && history.push(`/sites/editor/${newId.id}`)
+      newId.id && editorRoute && history.push(`${editorRoute}/${newId.id}`)
     }
   } catch (err) {
     dispatch(saveSiteFail(err.toString()))
@@ -269,12 +255,11 @@ export const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getS
     }
 
     dispatch(saveCashierSuccess())
-
-    const siteEditorState = getState().siteEditor
-    siteEditorState.site?.id &&
-      dispatch(getSiteEditorData(siteEditorState.site?.id, siteEditorState.pagination))
+    dispatch(getCashiers())
+    return true
   } catch (err) {
     dispatch(saveCashierFail(err.toString()))
+    return false
   }
 }
 
@@ -287,8 +272,8 @@ export const deleteCashier = (id: number): AppThunk => async (dispatch, getState
 
     const siteEditorState = getState().siteEditor
     if (siteEditorState.site?.id) {
-      const newPage = recalculatePaginationAfterDeletion(getState().siteList.pagination)
-      dispatch(getSiteEditorData(siteEditorState.site?.id, { page: newPage }))
+      const newPage = recalculatePaginationAfterDeletion(getState().siteList.listParams)
+      dispatch(getCashiers({ page: newPage }))
     }
     return { id }
   } catch (err) {

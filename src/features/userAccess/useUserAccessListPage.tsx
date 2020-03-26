@@ -2,18 +2,20 @@ import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { getNkmUsers, getPartnerUsers, UserType } from './userAccessListSlice'
-import { useTableUtils, UseTableUtilsTools } from 'hooks/useTableUtils'
+import { getNkmUsers, getPartnerUsers } from './userAccessListSlice'
+import { useTableUtils, UseTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
-import { UserAccess } from 'models/user'
+import { UserAccess, UserType } from 'models/user'
 import { UserAccessEditorProps } from './UserAccessEditor'
 import { ColumnsType } from 'antd/lib/table'
+import { hasPermission } from 'services/jwt-reader'
+import { Roles } from 'api/swagger/models'
 
 interface UseUserAccessListPageUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersColumnsConfig: ColumnsType<UserAccess>
-  nkmUsersTableUtils: UseTableUtilsTools
-  partnerUsersTableUtils: UseTableUtilsTools
+  nkmUsersTableUtils: UseTableUtils<UserAccess>
+  partnerUsersTableUtils: UseTableUtils<UserAccess>
   editorModal: UserAccessEditorProps | null | undefined
   setEditorModal: React.Dispatch<React.SetStateAction<UserAccessEditorProps | null | undefined>>
   nkmUsers: UserAccess[]
@@ -25,8 +27,8 @@ interface UseUserAccessListPageUtils {
 export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
   const { t } = useTranslation()
   const {
-    nkmPagination,
-    partnerPagination,
+    nkmListParams,
+    partnerListParams,
     nkmUsers,
     nkmLoading,
     partnerUsers,
@@ -35,123 +37,139 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
 
   const [editorModal, setEditorModal] = useState<UserAccessEditorProps | null>()
 
-  const nkmUsersTableUtils = useTableUtils({
-    paginationState: nkmPagination,
+  const nkmUsersTableUtils = useTableUtils<UserAccess>({
+    listParamsState: nkmListParams,
+    filterKeys: ['name', 'email', 'role'],
     getDataAction: getNkmUsers
   })
 
+  // TODO: Filter
+  // const nkmRoleOptions = useUserAccessRoleGenerator(UserType.NKM)
+
   const nkmUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
-      {
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.name'),
-        dataIndex: 'name',
         key: 'name',
-        ...nkmUsersTableUtils.sorterConfig
-      },
-      {
+        width: '35%',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.email'),
-        dataIndex: 'email',
         key: 'email',
-        ...nkmUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
-        dataIndex: 'active',
-        key: 'active',
-        ...nkmUsersTableUtils.sorterConfig,
+        key: 'isActive',
+        width: '6rem',
         render: (value: unknown, user: UserAccess) =>
-          t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
-      },
-      {
+          t(`user-access.field.status-${user.isActive ? 'active' : 'inactive'}`)
+      }),
+      nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
-        dataIndex: 'role',
         key: 'role',
+        // TODO: no BE support yet
+        // sort: true,
+        // filterMode: FilterMode.FILTER,
+        // filters: nkmRoleOptions,
         render: (value: unknown, user: UserAccess) =>
-          t(`user-access.role.${user.role?.toLowerCase()}`)
-      },
-      {
-        title: t('common.actions'),
-        key: 'actions',
-        colSpan: 1,
-        render(user: UserAccess) {
-          return (
-            <CrudButtons
-              onEdit={() =>
-                setEditorModal({ visible: true, userId: user.id, userType: UserType.NKM })}
-            />
-          )
-        }
-      }
+          user.role ? t(`user.role.${user.role?.toLowerCase()}`) : ''
+      }),
+      hasPermission([Roles.Administrator])
+        ? nkmUsersTableUtils.actionColumnConfig({
+            render(user: UserAccess) {
+              return (
+                <CrudButtons
+                  onEdit={() =>
+                    setEditorModal({ visible: true, userId: user.id, userType: UserType.NKM })
+                  }
+                />
+              )
+            }
+          })
+        : {}
     ],
-    [nkmUsersTableUtils.sorterConfig, t]
+    [nkmUsersTableUtils, t]
   )
 
-  const partnerUsersTableUtils = useTableUtils({
-    paginationState: partnerPagination,
+  const partnerUsersTableUtils = useTableUtils<UserAccess>({
+    listParamsState: partnerListParams,
+    filterKeys: ['name', 'email'],
     getDataAction: getPartnerUsers
   })
 
+  // TODO: Filter
+  // const partnerRoleOptions = useUserAccessRoleGenerator(UserType.PARTNER)
+
   const partnerUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
     () => [
-      {
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.name'),
-        dataIndex: 'name',
         key: 'name',
-        ...partnerUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.email'),
-        dataIndex: 'email',
         key: 'email',
-        ...partnerUsersTableUtils.sorterConfig
-      },
-      {
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.phone'),
-        dataIndex: 'phone',
+        width: '8rem',
         key: 'phone',
-        ...partnerUsersTableUtils.sorterConfig
-      },
-      {
-        title: t('user-access.field.status'),
-        dataIndex: 'active',
-        key: 'active',
-        ...partnerUsersTableUtils.sorterConfig,
-        render: (value: unknown, user: UserAccess) =>
-          t(`user-access.field.status-${user.active ? 'active' : 'inactive'}`)
-      },
-      {
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.partner-name'),
-        dataIndex: 'partnerName',
-        key: 'partnerName'
-      },
-      {
+        width: '10rem',
+        key: 'partnerName',
+        sort: true,
+        filterMode: FilterMode.SEARCH
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.partner-type'),
-        dataIndex: 'partnerType',
-        key: 'partnerType'
-      },
-      {
-        title: t('user-access.field.role'),
-        dataIndex: 'role',
-        key: 'role',
+        key: 'majorPartner',
+        width: '5rem',
         render: (value: unknown, user: UserAccess) =>
-          t(`user-access.role.${user.role?.toLowerCase()}`)
-      },
-      {
-        title: t('common.actions'),
-        key: 'actions',
-        colSpan: 1,
-        render(user: UserAccess) {
-          return (
-            <CrudButtons
-              onEdit={() =>
-                setEditorModal({ visible: true, userId: user.id, userType: UserType.PARTNER })
-              }
-            />
-          )
-        }
-      }
+          t(`user-access.field.partnerType.${user.isActive ? 'major' : 'normal'}`)
+      }),
+      partnerUsersTableUtils.columnConfig({
+        title: t('user-access.field.status'),
+        key: 'isActive',
+        width: '5rem',
+        render: (value: unknown, user: UserAccess) =>
+          t(`user-access.field.status-${user.isActive ? 'active' : 'inactive'}`)
+      }),
+      partnerUsersTableUtils.columnConfig({
+        title: t('user-access.field.role'),
+        key: 'role',
+        // TODO: no BE support yet
+        // sort: true,
+        // filterMode: FilterMode.FILTER,
+        // filters: partnerRoleOptions,
+        width: '15rem',
+        render: (value: unknown, user: UserAccess) => t(`user.role.${user.role?.toLowerCase()}`)
+      }),
+      hasPermission([Roles.Administrator])
+        ? partnerUsersTableUtils.actionColumnConfig({
+            render(user: UserAccess) {
+              return (
+                <CrudButtons
+                  onEdit={() =>
+                    setEditorModal({ visible: true, userId: user.id, userType: UserType.PARTNER })
+                  }
+                />
+              )
+            }
+          })
+        : {}
     ],
-    [partnerUsersTableUtils.sorterConfig, t]
+    [partnerUsersTableUtils, t]
   )
 
   return {
