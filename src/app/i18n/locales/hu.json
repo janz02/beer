@@ -147,7 +147,7 @@
     "download-coupons": "Kuponok letöltése",
     "download-redeemed-coupons": "Beváltott kupokon letöltése",
     "edit": "Szerkesztés",
-    "editor-title": "Kupon szerkesztő",
+    "editor-title": "Kampány szerkesztő",
     "field": {
       "awarded-campaign": "Kitüntett kampány jelölő",
       "banner-link": "Banner link",
@@ -249,6 +249,9 @@
       "cashier-cant-save": "A pénztárat nem lehet módosítani.",
       "cashier-couponId-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
       "stamp-couponId-not-unique": "Digitális pecsét azonosító nem egyedi."
+    },
+    "comment": {
+      "comment-or-state-required": "Kötelező státuszt választani vagy kommentet hagyni."
     },
     "common": {
       "cant-modify": "Nem módosítható.",

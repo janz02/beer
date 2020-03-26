@@ -323,7 +323,11 @@ export const getMajorPartners = (): AppThunk => async dispatch => {
     })
     dispatch(
       getMajorPartnersSuccess(
-        partners.result ? partners.result.map(x => ({ id: x.id, name: x.name } as Partner)) : []
+        partners.result
+          ? partners.result.map(
+              x => ({ id: x.id, name: x.name, partnerState: x.partnerState } as Partner)
+            )
+          : []
       )
     )
   } catch (err) {

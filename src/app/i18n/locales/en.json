@@ -147,7 +147,7 @@
     "download-coupons": "Download coupons",
     "download-redeemed-coupons": "Download claimed coupons",
     "edit": "Edit",
-    "editor-title": "Coupon editor",
+    "editor-title": "Campaign editor",
     "field": {
       "awarded-campaign": "Highlighted campaign sign",
       "banner-link": "Banner link",
@@ -249,6 +249,9 @@
       "cashier-cant-save": "Cashier cannot be saved.",
       "cashier-couponId-not-unique": "Online cashier ID must be unique.",
       "stamp-couponId-not-unique": "Digital stamp ID must be unique."
+    },
+    "comment": {
+      "comment-or-state-required": "You must select a state or comment something."
     },
     "common": {
       "cant-modify": "Cannot be modified.",
