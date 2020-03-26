@@ -128,7 +128,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   const handleSubmit = (values: any): void => {
     values.state = stateForCreate
-
+    console.log(values)
     handleCouponSave &&
       handleCouponSave({
         ...values,
@@ -137,7 +137,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         minimumShoppingValue: +values.minimumShoppingValue,
         itemPrice: +values.itemPrice,
         previousYearAverageBasketValue: +values.previousYearAverageBasketValue,
-        partnerId: +values.partnerId
+        partnerId: +values.partnerId,
+        couponCount: +values.couponCount
       })
     resetFormFlags()
   }
@@ -246,44 +247,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             checkFieldsChange()
           }}
         >
-          {!displayEditor && (
-            <Collapse defaultActiveKey={['1']}>
-              <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
-                <Row gutter={rowGutter}>
-                  <Col span={4}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.showCount')} </p>
-                    <p style={{ float: 'right' }}>{coupon?.showCount}</p>
-                  </Col>
-
-                  <Col span={4} offset={4}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.clickCount')} </p>
-                    <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
-                  </Col>
-
-                  <Col span={4} offset={4}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.claimCount')} </p>
-                    <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
-                  </Col>
-                </Row>
-
-                <Row gutter={rowGutter}>
-                  <Col span={8}>
-                    <Button
-                      type="default"
-                      loading={loading}
-                      icon={<ExportOutlined />}
-                      onClick={() => {
-                        dispatch(downloadClaimedCoupons(coupon!))
-                      }}
-                    >
-                      {t('coupon-create.download-redeemed-coupons')}
-                    </Button>
-                  </Col>
-                </Row>
-              </Collapse.Panel>
-            </Collapse>
-          )}
-
           <Collapse defaultActiveKey={['1']}>
             <Collapse.Panel header={t('coupon-create.campaign-basics')} key="1">
               <Row gutter={rowGutter}>
@@ -751,6 +714,44 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               </Row>
             </Collapse.Panel>
           </Collapse>
+
+          {!displayEditor && (
+            <Collapse defaultActiveKey={['1']}>
+              <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
+                <Row gutter={rowGutter}>
+                  <Col span={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.showCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.showCount}</p>
+                  </Col>
+
+                  <Col span={4} offset={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.clickCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
+                  </Col>
+
+                  <Col span={4} offset={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.claimCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
+                  </Col>
+                </Row>
+
+                <Row gutter={rowGutter}>
+                  <Col span={8}>
+                    <Button
+                      type="default"
+                      loading={loading}
+                      icon={<ExportOutlined />}
+                      onClick={() => {
+                        dispatch(downloadClaimedCoupons(coupon!))
+                      }}
+                    >
+                      {t('coupon-create.download-redeemed-coupons')}
+                    </Button>
+                  </Col>
+                </Row>
+              </Collapse.Panel>
+            </Collapse>
+          )}
 
           {displayEditor && (
             <Row justify="space-between">
