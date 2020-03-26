@@ -465,9 +465,9 @@
     },
     "field": {
       "email": "Email",
+      "major-parter": "Fő partner",
       "name": "Név",
       "partner-name": "Partner",
-      "partner-type": "Típus",
       "partnerType": {
         "major": "Fő",
         "normal": "Alap"
