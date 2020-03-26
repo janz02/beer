@@ -146,7 +146,7 @@
     "download-coupons": "Download coupons",
     "download-redeemed-coupons": "Download claimed coupons",
     "edit": "Edit",
-    "editor-title": "Coupon editor",
+    "editor-title": "Campaign editor",
     "field": {
       "awarded-campaign": "Highlighted campaign sign",
       "banner-link": "Banner link",
@@ -249,6 +249,9 @@
       "cashier-couponId-not-unique": "Online cashier ID must be unique.",
       "stamp-couponId-not-unique": "Digital stamp ID must be unique."
     },
+    "comment": {
+      "comment-or-state-required": "You must select a state or comment something."
+    },
     "common": {
       "cant-modify": "Cannot be modified.",
       "email-format": "This field must be a valid e-mail.",
@@ -295,6 +298,10 @@
     "email-template": {
       "name-must-be-unique": "E-mail template name must be unique.",
       "not-found-version": "E-mail template version not found."
+    },
+    "file": {
+      "image-type-not-supported": "__STRING_NOT_TRANSLATED__",
+      "invalid-image-size": "__STRING_NOT_TRANSLATED__"
     },
     "not-found": "Not found.",
     "paginate": {

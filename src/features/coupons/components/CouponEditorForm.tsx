@@ -84,6 +84,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   const {
     form: commentForm,
+    submitable: submitableComment,
+    checkFieldsChange: checkFieldsChangeComment,
     resetFormFlags: resetFormFlagsComment,
     setFieldsValue: setFieldsValueComment
   } = useFormUtils()
@@ -790,15 +792,51 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               form={commentForm}
               layout="vertical"
               onFinish={handleStatusSubmit}
+              onFieldsChange={() => {
+                checkFieldsChangeComment()
+              }}
             >
-              <Form.Item name="couponState">{couponStatusDropdown()}</Form.Item>
+              <Form.Item
+                name="couponState"
+                dependencies={['comment']}
+                rules={[
+                  ({ getFieldValue }) => ({
+                    validator(rule, value) {
+                      const comment = getFieldValue('comment')
+                      if (!comment && !value) {
+                        return Promise.reject(t('error.comment.comment-or-state-required'))
+                      }
 
-              <Form.Item name="comment" label={t('coupon-create.field.comment')}>
+                      return Promise.resolve()
+                    }
+                  })
+                ]}
+              >
+                {couponStatusDropdown()}
+              </Form.Item>
+
+              <Form.Item
+                name="comment"
+                label={t('coupon-create.field.comment')}
+                dependencies={['couponState']}
+                rules={[
+                  ({ getFieldValue }) => ({
+                    validator(rule, value) {
+                      const couponState = getFieldValue('couponState')
+                      if (!couponState && !value) {
+                        return Promise.reject(t('error.comment.comment-or-state-required'))
+                      }
+
+                      return Promise.resolve()
+                    }
+                  })
+                ]}
+              >
                 <TextArea />
               </Form.Item>
 
               <Form.Item className="actions">
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" disabled={!submitableComment}>
                   {t('common.save')}
                 </Button>
               </Form.Item>

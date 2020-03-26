@@ -5154,6 +5154,10 @@
           "id": {
             "type": "string",
             "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
