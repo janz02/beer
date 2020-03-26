@@ -83,6 +83,7 @@
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
+    "upload": "Feltöltés",
     "view": "Megtekintés",
     "yes": "Igen"
   },
@@ -309,7 +310,8 @@
     },
     "partner-contact": {
       "invalid-type": "Nem megfelelő partner típus."
-    }
+    },
+    "unknown-try-again": "Kérem, próbáld újra"
   },
   "error-page": {
     "back": "Vissza a főoldalra",

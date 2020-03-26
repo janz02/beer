@@ -25,8 +25,12 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
 
   const uploadButton = (
     <div hidden={!!thumbnail?.url} className="picture-upload-button">
-      <PlusOutlined />
-      <div className="ant-upload-text">{t('common.upload')}</div>
+      {!thumbnail?.loading && (
+        <>
+          <PlusOutlined />
+          <div className="ant-upload-text">{t('common.upload')}</div>
+        </>
+      )}
     </div>
   )
 
