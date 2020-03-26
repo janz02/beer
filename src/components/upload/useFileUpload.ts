@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { UploadFile, UploadProps, UploadChangeParam, RcFile } from 'antd/lib/upload/interface'
+import { UploadFile, UploadProps, UploadChangeParam } from 'antd/lib/upload/interface'
 import { useTranslation } from 'react-i18next'
 import { api } from 'api'
 
