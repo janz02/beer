@@ -406,8 +406,7 @@
     }
   },
   "partner-contact": {
-    "editor-create": "Add new partner contact",
-    "editor-edit": "Edit partner contact",
+    "editor": "Contact editor",
     "field": {
       "email": "E-mail address",
       "major-partner": "Major Partner",
@@ -415,10 +414,8 @@
       "phone": "Phone",
       "role": "Role"
     },
-    "list": {
-      "add": "Add new contact"
-    },
-    "list-title": "Contacts"
+    "list-title": "Contacts",
+    "viewer": "Contact"
   },
   "profile": {
     "editor-title": "Profile",

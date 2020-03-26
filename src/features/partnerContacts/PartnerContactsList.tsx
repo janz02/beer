@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState, useCallback } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
@@ -6,7 +6,7 @@ import { PartnerContact } from 'models/partnerContact'
 import { ListRequestParams, useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { AppThunk } from 'app/store'
 import { ColumnType } from 'antd/lib/table'
-import { CrudButtons } from 'components/buttons/CrudButtons'
+import { CrudButtons, CrudButtonsProps } from 'components/buttons/CrudButtons'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 import { useReusablePartnerContacts } from './useReusablePartnerContacts'
 import { Roles } from 'api/swagger'
@@ -26,7 +26,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
 
   const [contactToDelete, setContanctToDelete] = useState<PopupState<PartnerContact>>()
 
-  const { label, shrinks } = useReusablePartnerContacts()
+  const { label, shrinks, permission } = useReusablePartnerContacts()
 
   const {
     paginationConfig,
@@ -39,6 +39,25 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
     filterKeys: ['name', 'email', 'phone'],
     getDataAction: getListAction
   })
+
+  const crudOptions = useCallback(
+    (record: PartnerContact): CrudButtonsProps => {
+      const config: CrudButtonsProps = {}
+      if (permission.editor) {
+        config.onDelete = (): void => {
+          setContanctToDelete({
+            data: record,
+            popupVisible: true
+          })
+        }
+        config.onEdit = () => handleEdit(record.id!)
+      } else {
+        config.onView = () => handleEdit(record.id!)
+      }
+      return config
+    },
+    [handleEdit, permission.editor]
+  )
 
   const columnsConfig: ColumnType<PartnerContact>[] = useMemo(
     () => [
@@ -69,24 +88,12 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         filterMode: FilterMode.SEARCH
       }),
       actionColumnConfig({
-        render(value: unknown, record: PartnerContact) {
-          return (
-            <>
-              <CrudButtons
-                onEdit={() => record.id && handleEdit(record.id)}
-                onDelete={() => {
-                  setContanctToDelete({
-                    data: record,
-                    popupVisible: true
-                  })
-                }}
-              />
-            </>
-          )
+        render(_: unknown, record: PartnerContact) {
+          return <CrudButtons {...crudOptions(record)} />
         }
       })
     ],
-    [actionColumnConfig, columnConfig, handleEdit, t]
+    [actionColumnConfig, columnConfig, crudOptions, t]
   )
 
   return (

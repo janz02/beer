@@ -10,10 +10,16 @@ import { useDispatch } from 'react-redux'
 import { useMemo } from 'react'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
+import { hasPermission } from 'services/jwt-reader'
+import { Roles } from 'api/swagger/models'
 
 interface PartnerContactsRoutes {
   root: string
   detail: string
+}
+
+interface PartnerContactsPermissions {
+  editor: boolean
 }
 
 interface PartnerContactsLabel {
@@ -22,6 +28,7 @@ interface PartnerContactsLabel {
 
 interface UseReusablePartnerContactsUtils {
   shrinks: boolean
+  permission: PartnerContactsPermissions
   route: PartnerContactsRoutes
   label: PartnerContactsLabel
   actions: PartnerContactsSliceActions
@@ -40,6 +47,9 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
       dispatch(actions.setListConstraints({ partnerId }))
       return {
         shrinks: true,
+        permission: {
+          editor: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
+        },
         label: { listTitle: t('partner.contacts.list-title') },
         route: {
           root: `/partners/${partnerId}`,
@@ -54,6 +64,9 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
     return {
       shrinks: false,
       label: { listTitle: t('partner-contact.list-title') },
+      permission: {
+        editor: hasPermission([Roles.PartnerContactEditor])
+      },
       route: {
         root: `/contacts`,
         detail: ``

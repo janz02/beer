@@ -406,8 +406,7 @@
     }
   },
   "partner-contact": {
-    "editor-create": "Kapcsolattartó hozzáadása",
-    "editor-edit": "Kapcsolattartó szerkesztése",
+    "editor": "Kapcsolattartó szerkesztés",
     "field": {
       "email": "E-mail cím",
       "major-partner": "Kiemelt partner",
@@ -415,10 +414,8 @@
       "phone": "Telefonszám",
       "role": "Jogosultság"
     },
-    "list": {
-      "add": "Kapcsolattartó hozzáadása"
-    },
-    "list-title": "Kapcsolattartók"
+    "list-title": "Kapcsolattartók",
+    "viewer": "Kapcsolattartó"
   },
   "profile": {
     "editor-title": "Profiladatok",
