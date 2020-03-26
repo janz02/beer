@@ -125,7 +125,7 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
   const getItem = (id: number): AppThunk => async dispatch => {
     try {
       dispatch(getItemRequest())
-      const contact = await api.auth.getPartnerContactInfo({ id })
+      const contact = await api.partnerContacts.getOnePartnerContact({ id })
       dispatch(getItemSuccess(contact))
     } catch (err) {
       dispatch(getItemFail(err.toString()))
