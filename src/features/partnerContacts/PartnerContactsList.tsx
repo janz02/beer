@@ -9,6 +9,7 @@ import { ColumnType } from 'antd/lib/table'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 import { useReusablePartnerContacts } from './useReusablePartnerContacts'
+import { Roles } from 'api/swagger'
 
 interface PartnerContactsListProps {
   loading: boolean
@@ -16,7 +17,7 @@ interface PartnerContactsListProps {
   listParams: ListRequestParams
   getListAction: (params: ListRequestParams) => AppThunk
   handleEdit: (id: number) => void
-  deleteAction: (id: number) => AppThunk
+  deleteAction: (id: number, role: Roles) => AppThunk
 }
 export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
   const { loading, contacts, listParams } = props
@@ -111,7 +112,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         id={contactToDelete?.data?.id!}
         visible={!!contactToDelete?.popupVisible}
         onCancel={() => setContanctToDelete({ ...contactToDelete, popupVisible: false })}
-        onOkAction={deleteAction?.(contactToDelete?.data?.id!)}
+        onOkAction={deleteAction?.(contactToDelete?.data?.id!, contactToDelete?.data?.role!)}
         afterClose={() => setContanctToDelete(null)}
       >
         <h4>{contactToDelete?.data?.name}</h4>

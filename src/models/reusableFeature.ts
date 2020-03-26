@@ -2,7 +2,7 @@ import { AnyAction, Reducer } from 'redux'
 import { AppThunk } from 'app/store'
 import { ListRequestParams } from 'hooks/useTableUtils'
 
-export interface CommonSliceActions<D> {
+export interface CommonSliceActions<D = any> {
   deleteItem: (id: number) => AppThunk
   getItem: (id: number) => AppThunk
   saveItem: (id: number, data: D) => AppThunk

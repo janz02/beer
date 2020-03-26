@@ -4255,7 +4255,7 @@
           "role": {
             "$ref": "#/components/schemas/Roles"
           },
-          "active": {
+          "isActive": {
             "type": "boolean"
           }
         }

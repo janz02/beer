@@ -184,12 +184,12 @@ export const getUserAccess = (id: number): AppThunk => async dispatch => {
 export const saveUserAccess = (
   id: number,
   role: Roles,
-  active: boolean,
+  isActive: boolean,
   type?: UserType
 ): AppThunk => async dispatch => {
   try {
     dispatch(saveUserRequest())
-    await api.auth.updatePartnerContactInfo({ id, partnerContactStateDto: { role, active } })
+    await api.auth.updatePartnerContactInfo({ id, partnerContactStateDto: { role, isActive } })
     message.success(i18n.t('user-access.msg.change-succesful'))
     dispatch(saveUserSuccess())
     if (type === UserType.NKM) {

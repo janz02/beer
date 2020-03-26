@@ -9,7 +9,7 @@ import {
 } from 'hooks/useTableUtils'
 import { SliceFactoryUtils, SliceFactoryProps, CommonSliceActions } from 'models/reusableFeature'
 import { PartnerContact } from 'models/partnerContact'
-import { delay } from 'services/temp/delay'
+import { Roles } from 'api/swagger'
 
 export interface PartnerContactsState {
   contacts: PartnerContact[]
@@ -21,7 +21,13 @@ export interface PartnerContactsState {
   error: string
 }
 
-export type PartnerContactsSliceActions = CommonSliceActions<PartnerContact>
+type TakenCommonSliceActions<T> = Pick<
+  CommonSliceActions<T>,
+  'getList' | 'clearEditor' | 'reset' | 'saveItem' | 'getItem' | 'setListConstraints'
+>
+export interface PartnerContactsSliceActions extends TakenCommonSliceActions<PartnerContact> {
+  deleteItem: (id: number, role: Roles) => AppThunk
+}
 
 interface PartnerContactsSliceFactoryUtils extends SliceFactoryUtils<PartnerContactsState> {
   actions: PartnerContactsSliceActions
@@ -166,14 +172,13 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
           phone: data.phone
         }
       })
-      // TODO: Needs BE fix
-      // await api.auth.updatePartnerContactInfo({
-      //   id,
-      //   partnerContactStateDto: {
-      //     role: data.role,
-      //     isActive: state.editedContact?.isActive
-      //   }
-      // })
+      await api.auth.updatePartnerContactInfo({
+        id,
+        partnerContactStateDto: {
+          role: data.role!,
+          isActive: state.editedContact?.isActive
+        }
+      })
       dispatch(saveItemSuccess())
       dispatch(getList())
       return { id }
@@ -183,19 +188,17 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
     }
   }
 
-  const deleteItem = (id: number): AppThunk => async dispatch => {
+  const deleteItem = (id: number, role: Roles): AppThunk => async dispatch => {
     try {
       dispatch(deleteItemRequest())
       const state = ((await dispatch(getSliceState())) as any) as PartnerContactsState
-      // TODO: Needs BE fix
-      // await api.auth.updatePartnerContactInfo({
-      //   id,
-      //   partnerContactStateDto: {
-      //     role: state.editedContact?.role,
-      //     isActive: false
-      //   }
-      // })
-      await delay()
+      await api.auth.updatePartnerContactInfo({
+        id,
+        partnerContactStateDto: {
+          role: role,
+          isActive: false
+        }
+      })
       dispatch(deleteItemSuccess())
       const newPage = recalculatePaginationAfterDeletion(state.listParams)
       dispatch(getList({ page: newPage }))
