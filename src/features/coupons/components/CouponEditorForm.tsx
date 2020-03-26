@@ -50,7 +50,8 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission, hasAllPermissions } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
-import { FileUploadButton } from 'components/buttons/FileUploadButton'
+import { FileUploadButton } from 'components/upload/FileUploadButton'
+import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -70,7 +71,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const [couponType, setCouponType] = useState<CouponType>()
   const [couponMode, setCouponMode] = useState<CouponMode>()
   const [couponDiscountType, setCouponDiscountType] = useState<CouponDiscountType>()
-  const [predefinedCodesFileId, setPredefinedCodesFileId] = useState<string>()
+
+  const [bigPictureId, setBigPictureId] = useState<string | null>()
+  const [smallPictureId, setSmallPictureId] = useState<string | null>()
+  const [prizeFileId, setPrizeFileId] = useState<string | null>()
+  const [couponsFileId, setCouponsFileId] = useState<string | null>()
   const rule = useCommonFormRules()
 
   const {
@@ -80,7 +85,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     checkFieldsChange,
     resetFormFlags,
     setFieldsValue
-  } = useFormUtils()
+  } = useFormUtils<Coupon>()
 
   const {
     form: commentForm,
@@ -104,12 +109,15 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     setCouponType(coupon?.type)
     setCouponMode(coupon?.mode)
     setCouponDiscountType(coupon?.discountType)
+    setBigPictureId(coupon?.bigPictureId)
+    setSmallPictureId(coupon?.smallPictureId)
+    setPrizeFileId(coupon?.prizeRulesFileId)
+    setCouponsFileId(coupon?.predefinedCodesFileId)
 
     setFieldsValue({
       ...coupon,
       rank: CouponRank.Basic
     })
-    setPredefinedCodesFileId(coupon?.predefinedCodesFileId!)
   }, [coupon, setFieldsValue])
 
   const displayEditor =
@@ -129,17 +137,20 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   const handleSubmit = (values: any): void => {
     values.state = stateForCreate
-
     handleCouponSave &&
       handleCouponSave({
         ...values,
         categoryId: +values.categoryId,
         discountValue: +values.discountValue,
-        predefinedCodesFileId: predefinedCodesFileId,
         minimumShoppingValue: +values.minimumShoppingValue,
         itemPrice: +values.itemPrice,
         previousYearAverageBasketValue: +values.previousYearAverageBasketValue,
-        partnerId: +values.partnerId
+        partnerId: +values.partnerId,
+        couponCount: +values.couponCount,
+        bigPictureId: bigPictureId,
+        smallPictureId: smallPictureId,
+        prizeRulesFileId: prizeFileId,
+        predefinedCodesFileId: couponsFileId
       })
     resetFormFlags()
   }
@@ -248,44 +259,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             checkFieldsChange()
           }}
         >
-          {!displayEditor && (
-            <Collapse defaultActiveKey={['1']}>
-              <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
-                <Row gutter={rowGutter}>
-                  <Col span={4}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.showCount')} </p>
-                    <p style={{ float: 'right' }}>{coupon?.showCount}</p>
-                  </Col>
-
-                  <Col span={4} offset={4}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.clickCount')} </p>
-                    <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
-                  </Col>
-
-                  <Col span={4} offset={4}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.claimCount')} </p>
-                    <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
-                  </Col>
-                </Row>
-
-                <Row gutter={rowGutter}>
-                  <Col span={8}>
-                    <Button
-                      type="default"
-                      loading={loading}
-                      icon={<ExportOutlined />}
-                      onClick={() => {
-                        dispatch(downloadClaimedCoupons(coupon!))
-                      }}
-                    >
-                      {t('coupon-create.download-redeemed-coupons')}
-                    </Button>
-                  </Col>
-                </Row>
-              </Collapse.Panel>
-            </Collapse>
-          )}
-
           <Collapse defaultActiveKey={['1']}>
             <Collapse.Panel header={t('coupon-create.campaign-basics')} key="1">
               <Row gutter={rowGutter}>
@@ -651,7 +624,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Prize && (
                   <Col span={8}>
                     <Form.Item name="prizeRulesFileId" label={t('coupon-create.field.prize-rules')}>
-                      <div>Upload pdf comes here</div>
+                      <FileUploadButton
+                        disabled={!displayEditor}
+                        onSuccess={fileId => setPrizeFileId(fileId)}
+                        onRemove={() => setPrizeFileId(undefined)}
+                        initialFileId={coupon?.prizeRulesFileId}
+                      />
                     </Form.Item>
                   </Col>
                 )}
@@ -684,14 +662,24 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
               <Row gutter={rowGutter}>
                 <Col span={12}>
-                  <Form.Item name="smallPicture" label={t('coupon-create.field.small-image')}>
-                    <div>Small image comes here</div>
+                  <Form.Item name="smallPictureId" label={t('coupon-create.field.small-image')}>
+                    <PictureUploadButton
+                      disabled={!displayEditor}
+                      onSuccess={fileId => setSmallPictureId(fileId)}
+                      onRemove={() => setSmallPictureId(undefined)}
+                      initialFileId={coupon?.smallPictureId}
+                    />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   {prizeOrDiscount && (
-                    <Form.Item name="bigPicture" label={t('coupon-create.field.big-image')}>
-                      <div>Big image comes here</div>
+                    <Form.Item name="bigPictureId" label={t('coupon-create.field.big-image')}>
+                      <PictureUploadButton
+                        disabled={!displayEditor}
+                        onSuccess={fileId => setBigPictureId(fileId)}
+                        onRemove={() => setBigPictureId(undefined)}
+                        initialFileId={coupon?.bigPictureId}
+                      />
                     </Form.Item>
                   )}
                 </Col>
@@ -719,14 +707,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     rules={[]}
                   >
                     <FileUploadButton
-                      uploadProps={{}}
-                      onSuccess={fileId => {
-                        setPredefinedCodesFileId(fileId)
-                      }}
-                      onRemove={() => {
-                        setPredefinedCodesFileId('')
-                      }}
-                      fileId={predefinedCodesFileId}
+                      disabled={!displayEditor}
+                      onSuccess={fileId => setCouponsFileId(fileId)}
+                      onRemove={() => setCouponsFileId(undefined)}
+                      initialFileId={coupon?.predefinedCodesFileId}
                     />
                   </Form.Item>
                 </Col>
@@ -750,6 +734,44 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               </Row>
             </Collapse.Panel>
           </Collapse>
+
+          {!displayEditor && (
+            <Collapse defaultActiveKey={['1']}>
+              <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
+                <Row gutter={rowGutter}>
+                  <Col span={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.showCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.showCount}</p>
+                  </Col>
+
+                  <Col span={4} offset={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.clickCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
+                  </Col>
+
+                  <Col span={4} offset={4}>
+                    <p style={{ float: 'left' }}>{t('coupon-create.field.claimCount')} </p>
+                    <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
+                  </Col>
+                </Row>
+
+                <Row gutter={rowGutter}>
+                  <Col span={8}>
+                    <Button
+                      type="default"
+                      loading={loading}
+                      icon={<ExportOutlined />}
+                      onClick={() => {
+                        dispatch(downloadClaimedCoupons(coupon!))
+                      }}
+                    >
+                      {t('coupon-create.download-redeemed-coupons')}
+                    </Button>
+                  </Col>
+                </Row>
+              </Collapse.Panel>
+            </Collapse>
+          )}
 
           {displayEditor && (
             <Row justify="space-between">

@@ -1,0 +1,35 @@
+@import "../../assets/scss/variables";
+
+.file-upload {
+  &__button {
+    &.has-error {
+      border-color: $error-color;
+    }
+  }
+
+  &__current-file {
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid $border-color-base;
+    border-radius: 0.3rem;
+    // cursor: pointer;
+
+    &:hover {
+      background: #0000000A;
+    }
+
+    &__delete-button {
+      color: $error-color;
+
+      &:hover {
+        background: lighten($color: $error-color, $amount: 30);
+        color: darken($color: $error-color, $amount: 10);
+      }
+
+      &:active {
+        background: lighten($color: $error-color, $amount: 27);
+        color: darken($color: $error-color, $amount: 10);
+      }
+    }
+  }
+}

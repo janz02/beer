@@ -83,6 +83,7 @@
     "save": "Save",
     "search": "Search",
     "send": "Send",
+    "upload": "Upload",
     "view": "View",
     "yes": "Yes"
   },
@@ -300,8 +301,9 @@
       "not-found-version": "E-mail template version not found."
     },
     "file": {
-      "image-type-not-supported": "__STRING_NOT_TRANSLATED__",
-      "invalid-image-size": "__STRING_NOT_TRANSLATED__"
+      "download-fail": "Couldn't fetch your file.",
+      "image-type-not-supported": "Unsuppored image type.",
+      "invalid-image-size": "Invalid image dimensions."
     },
     "not-found": "Not found.",
     "paginate": {
@@ -316,7 +318,8 @@
     },
     "partner-contact": {
       "invalid-type": "Invalid partner contact type."
-    }
+    },
+    "unknown-try-again": "Please, try again!"
   },
   "error-page": {
     "back": "Back to home",

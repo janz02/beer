@@ -83,6 +83,7 @@
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
+    "upload": "Feltöltés",
     "view": "Megtekintés",
     "yes": "Igen"
   },
@@ -300,8 +301,9 @@
       "not-found-version": "Nem található ilyen verziójú e-mail sablon."
     },
     "file": {
-      "image-type-not-supported": "__STRING_NOT_TRANSLATED__",
-      "invalid-image-size": "__STRING_NOT_TRANSLATED__"
+      "download-fail": "Sikertelen fájl lekérdezés.",
+      "image-type-not-supported": "Rossz fájl formátum.",
+      "invalid-image-size": "Rossz kép méret."
     },
     "not-found": "Nem található.",
     "paginate": {
@@ -316,7 +318,8 @@
     },
     "partner-contact": {
       "invalid-type": "Nem megfelelő partner típus."
-    }
+    },
+    "unknown-try-again": "Kérem, próbáld újra"
   },
   "error-page": {
     "back": "Vissza a főoldalra",
