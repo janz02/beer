@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
 import { Drawer, Layout } from 'antd'
 import { useIsMobile } from 'hooks'
-import { ReactComponent as Logo } from 'assets/img/logo.svg'
+import { ReactComponent as LogoDark } from 'assets/img/logo_dark.svg'
+import { ReactComponent as LogoMini } from 'assets/img/logo_dark_mini.svg'
 import './SideMenu.scss'
 
 export interface SideMenuProps {
@@ -15,7 +16,11 @@ export const SideMenu: FC<SideMenuProps> = props => {
 
   const Header: FC = () => (
     <div className="side-menu__header">
-      <Logo className={`side-menu__logo ${!open && !isMobile ? 'side-menu__logo--mini' : ''}`} />
+      {!open && !isMobile ? (
+        <LogoMini className="side-menu__logo side-menu__logo--mini" />
+      ) : (
+        <LogoDark className="side-menu__logo" />
+      )}
     </div>
   )
 

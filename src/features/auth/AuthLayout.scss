@@ -22,7 +22,7 @@
   }
 
   &__logo {
-    fill: $primary-color;
+    pointer-events: none;
   }
 
   &__action-btn {

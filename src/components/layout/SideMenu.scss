@@ -8,16 +8,13 @@
   }
 
   &__logo {
-    margin: 0;
-    fill: $color-white;
+    margin-right: 10px;
+    pointer-events: none;
 
     &--mini {
-      margin-left: 0.55rem;
-
-      // last three letters (NKM)
-      path:nth-last-child(-n + 3) {
-        display: none;
-      }
+      // margin-left: 0.55rem;
+      width: 46px;
+      height: 45px;
     }
   }
 }

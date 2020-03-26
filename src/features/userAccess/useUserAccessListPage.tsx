@@ -75,7 +75,8 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         // sort: true,
         // filterMode: FilterMode.FILTER,
         // filters: nkmRoleOptions,
-        render: (value: unknown, user: UserAccess) => t(`user.role.${user.role?.toLowerCase()}`)
+        render: (value: unknown, user: UserAccess) =>
+          user.role ? t(`user.role.${user.role?.toLowerCase()}`) : ''
       }),
       hasPermission([Roles.Administrator])
         ? nkmUsersTableUtils.actionColumnConfig({
