@@ -30,7 +30,8 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
   } = useGenericModalFormEditorUtils({
     dataId: contactId,
     rootRoute: route.root,
-    detailRoute: route.detail
+    detailRoute: route.detail,
+    disableCreate: true
   })
 
   const handleGetItem = (id: number): void => {
@@ -46,7 +47,6 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
             loading: loadingList,
             listParams,
             handleEdit: routeToEditor,
-            handleCreate: () => routeToEditor(),
             deleteAction: deleteItem,
             getListAction: getList
           }}
