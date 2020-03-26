@@ -9,7 +9,9 @@ import {
 } from 'hooks/useTableUtils'
 import { SliceFactoryUtils, SliceFactoryProps, CommonSliceActions } from 'models/reusableFeature'
 import { PartnerContact } from 'models/partnerContact'
-import { delay } from 'services/temp/delay'
+import { Roles } from 'api/swagger'
+import { message } from 'antd'
+import i18n from 'app/i18n'
 
 export interface PartnerContactsState {
   contacts: PartnerContact[]
@@ -21,7 +23,13 @@ export interface PartnerContactsState {
   error: string
 }
 
-export type PartnerContactsSliceActions = CommonSliceActions<PartnerContact>
+type TakenCommonSliceActions<T> = Pick<
+  CommonSliceActions<T>,
+  'getList' | 'clearEditor' | 'reset' | 'saveItem' | 'getItem' | 'setListConstraints'
+>
+export interface PartnerContactsSliceActions extends TakenCommonSliceActions<PartnerContact> {
+  deleteItem: (id: number, role: Roles) => AppThunk
+}
 
 interface PartnerContactsSliceFactoryUtils extends SliceFactoryUtils<PartnerContactsState> {
   actions: PartnerContactsSliceActions
@@ -63,6 +71,18 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
         state.loadingEditor = false
         state.error = action.payload
       },
+      saveItemRequest(state) {
+        state.loadingEditor = true
+      },
+      saveItemSuccess(state) {
+        state.loadingEditor = false
+        state.error = ''
+        message.success(i18n.t('user-access.msg.change-succesful'), 5)
+      },
+      saveItemFail(state, action: PayloadAction<string>) {
+        state.loadingEditor = false
+        state.error = action.payload
+      },
       getListRequest(state) {
         state.loadingList = true
       },
@@ -84,6 +104,7 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
       },
       deleteItemSuccess(state) {
         state.loadingList = false
+        message.success(i18n.t('common.message.delete-success'), 5)
       },
       deleteItemFail(state) {
         state.loadingList = false
@@ -93,6 +114,7 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
   const { getListSuccess, getListRequest, getListFail } = slice.actions
   const { getItemSuccess, getItemRequest, getItemFail } = slice.actions
   const { deleteItemRequest, deleteItemSuccess, deleteItemFail } = slice.actions
+  const { saveItemRequest, saveItemSuccess, saveItemFail } = slice.actions
   const { _reset, _setListConstraints, _clearEditor } = slice.actions
 
   const reducer = slice.reducer
@@ -125,7 +147,11 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
   const getItem = (id: number): AppThunk => async dispatch => {
     try {
       dispatch(getItemRequest())
-      const contact = await api.auth.getPartnerContactInfo({ id })
+      const contact = await api.partnerContacts.getOnePartnerContact({ id })
+
+      // FIX: User without role can come with role: 0, caused by the AD sync according to the BE
+      if ((contact.role as any) === 0) delete contact.role
+
       dispatch(getItemSuccess(contact))
     } catch (err) {
       dispatch(getItemFail(err.toString()))
@@ -137,19 +163,47 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
   }
 
   const saveItem = (id: number, data: PartnerContact): AppThunk => async dispatch => {
-    // TODO: integrate
-    await delay()
-    console.log('save', { id, data })
+    try {
+      const state = ((await dispatch(getSliceState())) as any) as PartnerContactsState
+      dispatch(saveItemRequest())
+
+      // TODO: consider joning these updates into one endpoint
+      await api.partnerContacts.updatePartnerContact({
+        id,
+        partnerContactDto: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone
+        }
+      })
+      await api.auth.updatePartnerContactInfo({
+        id,
+        partnerContactStateDto: {
+          role: data.role!,
+          isActive: state.editedContact?.isActive
+        }
+      })
+      dispatch(saveItemSuccess())
+      dispatch(getList())
+      return { id }
+    } catch (err) {
+      dispatch(saveItemFail(err.toString()))
+      return { id, error: true }
+    }
   }
 
-  const deleteItem = (id: number): AppThunk => async dispatch => {
-    dispatch(deleteItemRequest())
+  const deleteItem = (id: number, role: Roles): AppThunk => async dispatch => {
     try {
-      // TODO: integrate
-      // await api.auth.updatePartnerContactInfo({ ?? })
-      await delay()
-      dispatch(deleteItemSuccess())
+      dispatch(deleteItemRequest())
       const state = ((await dispatch(getSliceState())) as any) as PartnerContactsState
+      await api.auth.updatePartnerContactInfo({
+        id,
+        partnerContactStateDto: {
+          role: role,
+          isActive: false
+        }
+      })
+      dispatch(deleteItemSuccess())
       const newPage = recalculatePaginationAfterDeletion(state.listParams)
       dispatch(getList({ page: newPage }))
       return { id }

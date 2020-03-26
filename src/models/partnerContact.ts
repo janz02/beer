@@ -8,5 +8,5 @@ export interface PartnerContact {
   partnerName?: string | null
   role?: Roles | null
   isActive?: boolean
-  majorPartner?: boolean
+  majorPartner?: boolean | null
 }

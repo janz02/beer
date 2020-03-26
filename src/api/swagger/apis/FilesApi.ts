@@ -24,6 +24,10 @@ export interface DownloadFileRequest {
     id: string | null;
 }
 
+export interface GetFileNameRequest {
+    id: string | null;
+}
+
 export interface UploadFileRequest {
     file?: Blob | null;
 }
@@ -62,6 +66,38 @@ export class FilesApi extends runtime.BaseAPI {
      */
     async downloadFile(requestParameters: DownloadFileRequest): Promise<Blob> {
         const response = await this.downloadFileRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async getFileNameRaw(requestParameters: GetFileNameRequest): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getFileName.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Files/{id}/Name`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.TextApiResponse(response) as any;
+    }
+
+    /**
+     */
+    async getFileName(requestParameters: GetFileNameRequest): Promise<string> {
+        const response = await this.getFileNameRaw(requestParameters);
         return await response.value();
     }
 
