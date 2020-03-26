@@ -325,7 +325,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         {majorPartners &&
                           majorPartners.map(x => (
                             <Select.Option key={x.id} value={x.id!}>
-                              {x.name}
+                              {x.name} - (
+                              {x.partnerState
+                                ? t(`partner.partner-state.${x.partnerState?.toLowerCase()}`)
+                                : t('partner.partner-state.inactive')}
+                              )
                             </Select.Option>
                           ))}
                       </Select>
