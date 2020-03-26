@@ -71,6 +71,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const [couponType, setCouponType] = useState<CouponType>()
   const [couponMode, setCouponMode] = useState<CouponMode>()
   const [couponDiscountType, setCouponDiscountType] = useState<CouponDiscountType>()
+
+  const [bigPictureId, setBigPictureId] = useState<string | null>()
+  const [smallPictureId, setSmallPictureId] = useState<string | null>()
+  const [prizeFileId, setPrizeFileId] = useState<string | null>()
+  const [couponsFileId, setCouponsFileId] = useState<string | null>()
   const rule = useCommonFormRules()
 
   const {
@@ -104,6 +109,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     setCouponType(coupon?.type)
     setCouponMode(coupon?.mode)
     setCouponDiscountType(coupon?.discountType)
+    setBigPictureId(coupon?.bigPictureId)
+    setSmallPictureId(coupon?.smallPictureId)
+    setPrizeFileId(coupon?.prizeRulesFileId)
+    setCouponsFileId(coupon?.predefinedCodesFileId)
 
     setFieldsValue({
       ...coupon,
@@ -137,7 +146,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         itemPrice: +values.itemPrice,
         previousYearAverageBasketValue: +values.previousYearAverageBasketValue,
         partnerId: +values.partnerId,
-        couponCount: +values.couponCount
+        couponCount: +values.couponCount,
+        bigPictureId: bigPictureId,
+        smallPictureId: smallPictureId,
+        prizeRulesFileId: prizeFileId,
+        predefinedCodesFileId: couponsFileId
       })
     resetFormFlags()
   }
@@ -611,7 +624,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Prize && (
                   <Col span={8}>
                     <Form.Item name="prizeRulesFileId" label={t('coupon-create.field.prize-rules')}>
-                      <div>Upload pdf comes here</div>
+                      <FileUploadButton
+                        disabled={!displayEditor}
+                        onSuccess={fileId => setPrizeFileId(fileId)}
+                        onRemove={() => setPrizeFileId(undefined)}
+                        initialFileId={coupon?.prizeRulesFileId}
+                      />
                     </Form.Item>
                   </Col>
                 )}
@@ -644,22 +662,22 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
               <Row gutter={rowGutter}>
                 <Col span={12}>
-                  <Form.Item name="smallPicture" label={t('coupon-create.field.small-image')}>
+                  <Form.Item name="smallPictureId" label={t('coupon-create.field.small-image')}>
                     <PictureUploadButton
                       disabled={!displayEditor}
-                      onSuccess={fileId => setFieldsValue({ smallPictureId: fileId })}
-                      onRemove={() => setFieldsValue({ smallPictureId: undefined })}
+                      onSuccess={fileId => setSmallPictureId(fileId)}
+                      onRemove={() => setSmallPictureId(undefined)}
                       initialFileId={coupon?.smallPictureId}
                     />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   {prizeOrDiscount && (
-                    <Form.Item name="bigPicture" label={t('coupon-create.field.big-image')}>
+                    <Form.Item name="bigPictureId" label={t('coupon-create.field.big-image')}>
                       <PictureUploadButton
                         disabled={!displayEditor}
-                        onSuccess={fileId => setFieldsValue({ bigPictureId: fileId })}
-                        onRemove={() => setFieldsValue({ bigPictureId: undefined })}
+                        onSuccess={fileId => setBigPictureId(fileId)}
+                        onRemove={() => setBigPictureId(undefined)}
                         initialFileId={coupon?.bigPictureId}
                       />
                     </Form.Item>
@@ -690,8 +708,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   >
                     <FileUploadButton
                       disabled={!displayEditor}
-                      onSuccess={fileId => setFieldsValue({ predefinedCodesFileId: fileId })}
-                      onRemove={() => setFieldsValue({ predefinedCodesFileId: undefined })}
+                      onSuccess={fileId => setCouponsFileId(fileId)}
+                      onRemove={() => setCouponsFileId(undefined)}
                       initialFileId={coupon?.predefinedCodesFileId}
                     />
                   </Form.Item>

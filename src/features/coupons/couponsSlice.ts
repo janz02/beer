@@ -166,12 +166,9 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         endDate: coupon.endDate && coupon.endDate.toDate(),
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
         drawDate: coupon.drawDate && coupon.drawDate.toDate(),
-        // TODO: integrate
-        smallPictureId: '36a0f121-0860-494a-8fe7-eadece98208e',
-        bigPictureId:
-          coupon.type === CouponType.Banner ? undefined : '36a0f121-0860-494a-8fe7-eadece98208e',
-        prizeRulesFileId:
-          coupon.type === CouponType.Prize ? '36a0f121-0860-494a-8fe7-eadece98208e' : undefined,
+        smallPictureId: coupon.smallPictureId,
+        bigPictureId: coupon.type === CouponType.Banner ? undefined : coupon.bigPictureId,
+        prizeRulesFileId: coupon.type === CouponType.Prize ? coupon.prizeRulesFileId : undefined,
         couponCount: coupon.couponCount,
         tags: [tagId]
       }
@@ -201,9 +198,9 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
         expireDate: coupon.expireDate && coupon.expireDate.toDate(),
         drawDate: coupon.drawDate && coupon.drawDate.toDate(),
         // TODO: integrate
-        smallPictureId: '1',
-        bigPictureId: coupon.type === CouponType.Banner ? undefined : '1',
-        prizeRulesFileId: coupon.type === CouponType.Prize ? '1' : undefined,
+        smallPictureId: coupon.smallPictureId,
+        bigPictureId: coupon.type === CouponType.Banner ? undefined : coupon.bigPictureId,
+        prizeRulesFileId: coupon.type === CouponType.Prize ? coupon.prizeRulesFileId : undefined,
         couponCount: coupon.couponCount,
         tags: [tagId]
       }
