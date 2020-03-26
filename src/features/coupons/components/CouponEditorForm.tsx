@@ -95,6 +95,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }, [dispatch])
 
   useEffect(() => {
+    if (!hasPermission(comboRoles.forNkm)) return
+
     dispatch(getMajorPartners())
   }, [dispatch])
 
@@ -335,7 +337,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       </Select>
                     </Form.Item>
                   ) : (
-                    <div>{userData.partnerName}</div>
+                    <Form.Item label={t('coupon-create.field.partner-name')}>
+                      <>{userData.partnerName}</>
+                    </Form.Item>
                   )}
                 </Col>
 
