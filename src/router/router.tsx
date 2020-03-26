@@ -119,7 +119,7 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path={['/contacts', '/contacts/new', '/contacts/:contactId']}
+      path={['/contacts', '/contacts/:contactId']}
       roles={pageViewRoles.contacts}
       component={PartnerContactsPage}
     />
