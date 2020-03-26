@@ -1379,8 +1379,8 @@
             "name": "discountValue",
             "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32",
+              "type": "number",
+              "format": "float",
               "nullable": true
             }
           },
@@ -4898,6 +4898,9 @@
           "claimCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "isPartnerActive": {
+            "type": "boolean"
           }
         }
       },
