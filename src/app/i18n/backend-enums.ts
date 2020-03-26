@@ -9,6 +9,11 @@ t('coupon.state.accepted')
 t('coupon.state.waiting')
 t('coupon.state.archived')
 
+t('coupon.state.action.accept')
+t('coupon.state.action.wait')
+t('coupon.state.action.close')
+t('coupon.state.action.archive')
+
 t('coupon.type.banner')
 t('coupon.type.discount')
 t('coupon.type.prize')
