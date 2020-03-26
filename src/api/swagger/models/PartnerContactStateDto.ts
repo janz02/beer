@@ -37,7 +37,7 @@ export interface PartnerContactStateDto {
      * @type {boolean}
      * @memberof PartnerContactStateDto
      */
-    active?: boolean;
+    isActive?: boolean;
 }
 
 export function PartnerContactStateDtoFromJSON(json: any): PartnerContactStateDto {
@@ -51,7 +51,7 @@ export function PartnerContactStateDtoFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'role': !exists(json, 'role') ? undefined : RolesFromJSON(json['role']),
-        'active': !exists(json, 'active') ? undefined : json['active'],
+        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
     };
 }
 
@@ -65,7 +65,7 @@ export function PartnerContactStateDtoToJSON(value?: PartnerContactStateDto | nu
     return {
         
         'role': RolesToJSON(value.role),
-        'active': value.active,
+        'isActive': value.isActive,
     };
 }
 

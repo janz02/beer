@@ -28,6 +28,7 @@ export interface UseFileUploadUtils {
   appendedUploadProps?: UploadProps
   handleClear: () => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
+  handleThumbnailDownload: () => void
 }
 
 export function getBase64(img: any, callback: (url: any) => any): any {
@@ -47,21 +48,6 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
 
   const [thumbnail, setThumbnail] = useState<FileThumbnail>()
 
-  const handleDownloadSuccess = useCallback(
-    (blob: Blob) => {
-      switch (mode) {
-        case 'image':
-          getBase64(blob, imageUrl => setThumbnail({ url: imageUrl, loading: false }))
-          break
-        default:
-          // TODO: where to get the file name?
-          setThumbnail({ label: 'TODO: get file name', loading: false })
-          break
-      }
-    },
-    [mode]
-  )
-
   const handleUploadSuccess = useCallback(
     (file: UploadFile<any>) => {
       switch (mode) {
@@ -69,7 +55,7 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
           getBase64(file.originFileObj, imageUrl => setThumbnail({ url: imageUrl, loading: false }))
           break
         default:
-          setThumbnail({ label: file.response.id, loading: false })
+          setThumbnail({ label: file.response.fileName, loading: false })
           break
       }
     },
@@ -82,13 +68,24 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
         setThumbnail({ loading: true })
       }, 0)
       try {
-        const blob: Blob = await api.files.downloadFile({ id: fileId })
-        handleDownloadSuccess(blob)
+        switch (mode) {
+          case 'image': {
+            const blob: Blob = await api.files.downloadFile({ id: fileId })
+            getBase64(blob, imageUrl => setThumbnail({ url: imageUrl, loading: false }))
+            break
+          }
+          default: {
+            // TODO : integrate api
+            const fileName = await api.files.getFileName({ id: fileId })
+            setThumbnail({ label: fileName, loading: false })
+            break
+          }
+        }
       } catch (e) {
         setThumbnail({ loading: false, error: t('error.file.download-fail') })
       }
     },
-    [handleDownloadSuccess, t]
+    [mode, t]
   )
 
   useEffect(() => {
@@ -103,7 +100,8 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
     (info: UploadChangeParam<UploadFile<any>>): void => {
       const file = info.file
       if (file.response) {
-        file.name = file.response.id
+        file.name = file.response.fileName
+        file.uid = file.response.id
       }
       switch (file.status) {
         case 'uploading':
@@ -136,10 +134,16 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
     [basePath, uploadProps]
   )
 
+  const handleThumbnailDownload = (): void => {
+    console.log('success')
+    // handleFileDownload()
+  }
+
   return {
     thumbnail,
     appendedUploadProps,
     handleFileUpload: handleFileUpload,
-    handleClear
+    handleClear,
+    handleThumbnailDownload
   }
 }

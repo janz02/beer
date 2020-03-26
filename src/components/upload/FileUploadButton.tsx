@@ -19,7 +19,8 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
     handleClear,
     handleFileUpload: handleSingleImageUpload,
     appendedUploadProps,
-    thumbnail
+    thumbnail,
+    handleThumbnailDownload
   } = useFileUpload({
     ...props
   })
@@ -38,7 +39,7 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
     <div
       hidden={!thumbnail?.label}
       className="file-upload__current-file"
-      onClick={() => console.log('TODO: download')}
+      onClick={handleThumbnailDownload}
     >
       <div>{thumbnail?.label}</div>
       <Button

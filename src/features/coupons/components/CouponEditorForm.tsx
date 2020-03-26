@@ -128,7 +128,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   const handleSubmit = (values: any): void => {
     values.state = stateForCreate
-    console.log(values)
     handleCouponSave &&
       handleCouponSave({
         ...values,
