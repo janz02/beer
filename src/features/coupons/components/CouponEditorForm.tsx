@@ -183,28 +183,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     </div>
   )
 
-  const translateState = (state?: CouponState): string => {
-    switch (state) {
-      case CouponState.Accepted:
-        return t('coupon.state.action.accept')
-      case CouponState.Waiting:
-        return t('coupon.state.action.wait')
-      case CouponState.Closed:
-        return t('coupon.state.action.close')
-      case CouponState.Archived:
-        return t('coupon.state.action.archive')
-      default:
-        return ''
-    }
-  }
-
   const couponStatusDropdown = (): JSX.Element => {
     switch (coupon?.state) {
       case CouponState.Created:
         return (
           <Select>
             <Select.Option key={CouponState.Waiting} value={CouponState.Waiting}>
-              {translateState(CouponState.Waiting)}
+              {t('coupon.state.action.wait')}
             </Select.Option>
           </Select>
         )
@@ -212,7 +197,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         return (
           <Select>
             <Select.Option key={CouponState.Accepted} value={CouponState.Accepted}>
-              {translateState(CouponState.Accepted)}
+              {t('coupon.state.action.accept')}
             </Select.Option>
           </Select>
         )
@@ -220,7 +205,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         return (
           <Select>
             <Select.Option key={CouponState.Closed} value={CouponState.Closed}>
-              {translateState(CouponState.Closed)}
+              {t('coupon.state.action.close')}
             </Select.Option>
           </Select>
         )
@@ -228,7 +213,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         return (
           <Select>
             <Select.Option key={CouponState.Archived} value={CouponState.Archived}>
-              {translateState(CouponState.Archived)}
+              {t('coupon.state.action.archive')}
             </Select.Option>
           </Select>
         )
@@ -846,10 +831,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   >
                     <div className="timeline-item__title">
                       <MomentDisplay date={x.dateTime} /> &nbsp;
-                      {x.stateFrom && x.stateTo && (
+                      {(x.stateFrom || x.stateTo) && (
                         <strong>
-                          {translateState(x.stateFrom)} <ArrowRightOutlined />
-                          {translateState(x.stateTo)}
+                          {x.stateFrom && t(`coupon.state.${x.stateFrom.toLowerCase()}`)}
+                          <ArrowRightOutlined />
+                          {x.stateTo && t(`coupon.state.${x.stateTo.toLowerCase()}`)}
                         </strong>
                       )}
                     </div>
