@@ -2,7 +2,6 @@ import React, { FC, useMemo, useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { AddButton } from 'components/buttons/AddButton'
 import { PartnerContact } from 'models/partnerContact'
 import { ListRequestParams, useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { AppThunk } from 'app/store'
@@ -17,20 +16,16 @@ interface PartnerContactsListProps {
   listParams: ListRequestParams
   getListAction: (params: ListRequestParams) => AppThunk
   handleEdit: (id: number) => void
-  handleCreate: () => void
   deleteAction: (id: number) => AppThunk
 }
 export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
   const { loading, contacts, listParams } = props
-  const { getListAction, handleEdit, handleCreate, deleteAction } = props
+  const { getListAction, handleEdit, deleteAction } = props
   const { t } = useTranslation()
 
   const [contactToDelete, setContanctToDelete] = useState<PopupState<PartnerContact>>()
 
   const { label, shrinks } = useReusablePartnerContacts()
-  const headerOptions = (
-    <AddButton onClick={handleCreate}>{t('partner-contact.list.add')}</AddButton>
-  )
 
   const {
     paginationConfig,
@@ -99,7 +94,6 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         disableAutoScale={shrinks}
         paddedBottom
         floatingTitle={label.listTitle}
-        floatingOptions={headerOptions}
         forTable
       >
         <ResponsiveTable

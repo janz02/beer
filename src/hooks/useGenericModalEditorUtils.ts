@@ -11,6 +11,7 @@ export interface UseGenericModalFormEditorProps {
   dataId: string | undefined
   rootRoute: string
   detailRoute?: string
+  disableCreate?: boolean
 }
 
 export interface UseGenericModalFormEditorUtils {
@@ -23,7 +24,7 @@ export interface UseGenericModalFormEditorUtils {
 export const useGenericModalFormEditorUtils = (
   props: UseGenericModalFormEditorProps
 ): UseGenericModalFormEditorUtils => {
-  const { dataId, rootRoute, detailRoute } = props
+  const { dataId, rootRoute, detailRoute, disableCreate } = props
 
   const [editorParams, setEditorParams] = useState<GenericModalFormEditorParams>({
     visible: false
@@ -54,7 +55,7 @@ export const useGenericModalFormEditorUtils = (
       setEditorParams({ visible: false, isNew: false, id: undefined })
     } else {
       setTimeout(() => {
-        if (dataId === 'new') {
+        if (!disableCreate && dataId === 'new') {
           setEditorParams({ visible: true, isNew: true, id: undefined })
         } else if (!isNaN(+dataId)) {
           setEditorParams({ visible: true, isNew: false, id: +dataId })
@@ -63,7 +64,7 @@ export const useGenericModalFormEditorUtils = (
         }
       }, 0)
     }
-  }, [dataId, rootRoute, routeToRoot])
+  }, [dataId, disableCreate, rootRoute, routeToRoot])
 
   return { editorParams, routeToEditor, handleExit, handleAfterClose }
 }
