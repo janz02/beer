@@ -9,7 +9,7 @@ import { useFileUpload, UseFileUploadProps } from './useFileUpload'
 
 export type FileUploadButtonProps = Pick<
   UseFileUploadProps,
-  'initialFileId' | 'onRemove' | 'onSuccess'
+  'disabled' | 'initialFileId' | 'onRemove' | 'onSuccess'
 >
 
 export const FileUploadButton: FC<FileUploadButtonProps> = props => {
@@ -28,6 +28,7 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
   const uploadButton = (
     <Button
       icon={<UploadOutlined />}
+      disabled={props.disabled}
       loading={thumbnail?.loading}
       className={`file-upload__button ${thumbnail?.error ? 'has-error' : ''}`}
     >
@@ -42,17 +43,19 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
       onClick={handleThumbnailDownload}
     >
       <div>{thumbnail?.label}</div>
-      <Button
-        className="file-upload__current-file__delete-button"
-        shape="circle"
-        type="link"
-        onClick={e => {
-          e.stopPropagation()
-          handleClear()
-        }}
-      >
-        <DeleteOutlined />
-      </Button>
+      {!props.disabled && (
+        <Button
+          className="file-upload__current-file__delete-button"
+          shape="circle"
+          type="link"
+          onClick={e => {
+            e.stopPropagation()
+            handleClear()
+          }}
+        >
+          <DeleteOutlined />
+        </Button>
+      )}
     </div>
   )
 
@@ -61,6 +64,7 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
       <Upload
         {...appendedUploadProps}
         onChange={handleSingleImageUpload}
+        disabled={props.disabled}
         showUploadList={false}
         listType="picture-card"
         className={`file-upload ${thumbnail?.error ? 'has-error' : ''}`}

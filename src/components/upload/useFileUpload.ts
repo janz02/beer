@@ -17,6 +17,7 @@ interface FileThumbnail {
 
 export interface UseFileUploadProps {
   uploadProps?: UploadProps
+  disabled?: boolean
   onSuccess?: (id: string) => void
   onRemove?: () => void
   initialFileId?: string | null
@@ -136,7 +137,6 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
 
   const handleThumbnailDownload = (): void => {
     // TODO Handle thumbnail click, not very important now, because it can be achieved with the same button next to it
-    console.log('success')
   }
 
   return {

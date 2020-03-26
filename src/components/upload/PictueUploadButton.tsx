@@ -2,14 +2,14 @@ import './PictureUploadButton.scss'
 import Upload from 'antd/lib/upload'
 import Button from 'antd/lib/button'
 import { EyeOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useMemo } from 'react'
 import { Modal, Spin, Tooltip } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useFileUpload, UseFileUploadProps } from './useFileUpload'
 
 export type PictureUploadButtonProps = Pick<
   UseFileUploadProps,
-  'initialFileId' | 'onRemove' | 'onSuccess'
+  'disabled' | 'initialFileId' | 'onRemove' | 'onSuccess'
 >
 
 export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
@@ -38,36 +38,41 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
     </div>
   )
 
-  const options = (
-    <div className="picture-upload-options">
-      <Button
-        hidden={!thumbnail?.url}
-        shape="circle"
-        onClick={e => {
-          e.stopPropagation()
-          setPreviewVisible(true)
-        }}
-      >
-        <EyeOutlined />
-      </Button>
-      <Button
-        hidden={!thumbnail?.url}
-        shape="circle"
-        type="danger"
-        onClick={e => {
-          e.stopPropagation()
-          handleClear()
-        }}
-      >
-        <DeleteOutlined />
-      </Button>
-    </div>
-  )
+  const options = useMemo(() => {
+    return (
+      <div className="picture-upload-options">
+        <Button
+          hidden={!thumbnail?.url}
+          shape="circle"
+          onClick={e => {
+            e.stopPropagation()
+            setPreviewVisible(true)
+          }}
+        >
+          <EyeOutlined />
+        </Button>
+        {!props.disabled && (
+          <Button
+            hidden={!thumbnail?.url}
+            shape="circle"
+            type="danger"
+            onClick={e => {
+              e.stopPropagation()
+              handleClear()
+            }}
+          >
+            <DeleteOutlined />
+          </Button>
+        )}
+      </div>
+    )
+  }, [handleClear, props.disabled, thumbnail])
 
-  return (
-    <>
+  const upload = useMemo(() => {
+    return (
       <Upload
         {...appendedUploadProps}
+        disabled={props.disabled}
         onChange={handleSingleImageUpload}
         showUploadList={false}
         listType="picture-card"
@@ -86,7 +91,19 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
           </Spin>
         </Tooltip>
       </Upload>
+    )
+  }, [
+    appendedUploadProps,
+    handleSingleImageUpload,
+    options,
+    props.disabled,
+    thumbnail,
+    uploadButton
+  ])
 
+  return (
+    <>
+      {upload}
       <Modal
         className="picture-upload-preview"
         visible={previewVisible}

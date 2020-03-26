@@ -80,6 +80,10 @@
   }
 }
 
+.ant-upload-disabled {
+  cursor: not-allowed;
+}
+
 .picture-upload-preview {
   .ant-modal-close {
     .ant-modal-close-x {

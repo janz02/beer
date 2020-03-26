@@ -646,6 +646,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 <Col span={12}>
                   <Form.Item name="smallPicture" label={t('coupon-create.field.small-image')}>
                     <PictureUploadButton
+                      disabled={!displayEditor}
                       onSuccess={fileId => setFieldsValue({ smallPictureId: fileId })}
                       onRemove={() => setFieldsValue({ smallPictureId: undefined })}
                       initialFileId={coupon?.smallPictureId}
@@ -656,6 +657,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   {prizeOrDiscount && (
                     <Form.Item name="bigPicture" label={t('coupon-create.field.big-image')}>
                       <PictureUploadButton
+                        disabled={!displayEditor}
                         onSuccess={fileId => setFieldsValue({ bigPictureId: fileId })}
                         onRemove={() => setFieldsValue({ bigPictureId: undefined })}
                         initialFileId={coupon?.bigPictureId}
@@ -687,6 +689,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     rules={[]}
                   >
                     <FileUploadButton
+                      disabled={!displayEditor}
                       onSuccess={fileId => setFieldsValue({ predefinedCodesFileId: fileId })}
                       onRemove={() => setFieldsValue({ predefinedCodesFileId: undefined })}
                       initialFileId={coupon?.predefinedCodesFileId}
