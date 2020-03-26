@@ -3,18 +3,18 @@ import { Form } from 'antd'
 
 import { FormInstance } from 'antd/lib/form'
 
-export interface UseFormUtils {
+export interface UseFormUtils<T = any> {
   form: FormInstance
   submitable: boolean
   modified: boolean
   checkFieldsChange: () => void
   resetFormFlags: () => void
-  setFieldsValue: (fields: any) => void
+  setFieldsValue: (fields: T) => void
   resetFormFields: (fields?: any) => void
   getFieldValue: (field: any) => any
 }
 
-export const useFormUtils = (): UseFormUtils => {
+export function useFormUtils<T = any>(): UseFormUtils<T> {
   const [form] = Form.useForm()
   const [submitable, setSubmitable] = useState(false)
   const [modified, setModified] = useState(false)
@@ -41,12 +41,12 @@ export const useFormUtils = (): UseFormUtils => {
     formRef.current = form
   }, [form])
 
-  const setFieldsValue = useCallback((fields: any) => {
+  const setFieldsValue = useCallback((fields: T) => {
     fields ? formRef.current.setFieldsValue(fields) : formRef.current.resetFields()
   }, [])
 
-  const getFieldValue = useCallback((name: string) => {
-    return formRef.current.getFieldValue(name)
+  const getFieldValue = useCallback((name: string | keyof T) => {
+    return formRef.current.getFieldValue(name as string)
   }, [])
 
   const resetFormFields = useCallback((fields: any) => {

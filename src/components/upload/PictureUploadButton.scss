@@ -1,0 +1,92 @@
+@import "../../assets/scss/variables";
+
+.picture-upload {
+  .ant-upload.ant-upload-select-picture-card {
+    display: table;
+    position: relative;
+    width: 120px;
+    max-height: 120px;
+    float: left;
+    -webkit-transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease;
+    border: 1px dashed #D9D9D9;
+    border-radius: 2px;
+    outline: unset;
+    background-color: #FAFAFA;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+
+    span.ant-upload {
+      display: table;
+      margin: 10px;
+      border-radius: 0.5rem;
+      outline: unset !important;
+
+      &:active {
+        background: #00000016;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.04);
+      }
+    }
+
+    img {
+      -webkit-transition: filter 0.3s ease;
+      transition: filter 0.3s ease;
+    }
+
+    .picture-upload-options {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 1px;
+      bottom: 0;
+      left: 1px;
+
+      button {
+        margin: 5px;
+        margin-top: 20px;
+      }
+    }
+
+    .picture-upload-button {
+      width: 100px;
+      height: 100px;
+      padding-top: 24px;
+    }
+
+    &:hover {
+      .picture-upload-options {
+        display: unset;
+      }
+
+      border-color: $primary-color;
+
+      img {
+        filter: grayscale(100%) brightness(80%);
+      }
+    }
+  }
+
+  &.has-error {
+    .ant-upload.ant-upload-select-picture-card {
+      border-color: $error-color;
+    }
+  }
+}
+
+.picture-upload-preview {
+  .ant-modal-close {
+    .ant-modal-close-x {
+      width: 30px;
+      height: 30px;
+      margin: 15px;
+      border-radius: 50%;
+      background: $primary-color;
+      color: #FFFFFF;
+      line-height: 30px;
+    }
+  }
+}

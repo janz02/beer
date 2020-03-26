@@ -50,7 +50,7 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission, hasAllPermissions } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
-import { FileUploadButton } from 'components/buttons/PictureUploadButton'
+import { PictureUploadButton } from 'components/upload/PictureUploadButton'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -80,7 +80,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     checkFieldsChange,
     resetFormFlags,
     setFieldsValue
-  } = useFormUtils()
+  } = useFormUtils<Coupon>()
 
   const {
     form: commentForm,
@@ -719,19 +719,14 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 <Col span={8}>
                   <Form.Item
-                    name="predefinedCodesFileId"
+                    name="bigPictureId"
                     label={t('coupon-create.upload')}
-                    rules={[]}
+                    rules={[rule.required()]}
                   >
-                    <FileUploadButton
-                      uploadProps={{}}
-                      onSuccess={fileId => {
-                        setPredefinedCodesFileId(fileId)
-                      }}
-                      onRemove={() => {
-                        setPredefinedCodesFileId('')
-                      }}
-                      fileId={predefinedCodesFileId}
+                    <PictureUploadButton
+                      onSuccess={fileId => setFieldsValue({ bigPictureId: fileId })}
+                      onRemove={() => setFieldsValue({ bigPictureId: undefined })}
+                      initialFileId={coupon?.bigPictureId}
                     />
                   </Form.Item>
                 </Col>
