@@ -249,6 +249,9 @@
       "cashier-couponId-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
       "stamp-couponId-not-unique": "Digitális pecsét azonosító nem egyedi."
     },
+    "comment": {
+      "comment-or-state-required": "Kötelező státuszt választani vagy kommentet hagyni."
+    },
     "common": {
       "cant-modify": "Nem módosítható.",
       "email-format": "Ebbe a mezőbe helyes e-mail címet kell megadni.",

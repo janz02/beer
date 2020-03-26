@@ -249,6 +249,9 @@
       "cashier-couponId-not-unique": "Online cashier ID must be unique.",
       "stamp-couponId-not-unique": "Digital stamp ID must be unique."
     },
+    "comment": {
+      "comment-or-state-required": "You must select a state or comment something."
+    },
     "common": {
       "cant-modify": "Cannot be modified.",
       "email-format": "This field must be a valid e-mail.",
