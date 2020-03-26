@@ -299,6 +299,10 @@
       "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie.",
       "not-found-version": "Nem található ilyen verziójú e-mail sablon."
     },
+    "file": {
+      "image-type-not-supported": "__STRING_NOT_TRANSLATED__",
+      "invalid-image-size": "__STRING_NOT_TRANSLATED__"
+    },
     "not-found": "Nem található.",
     "paginate": {
       "order-by": "Lapozó sorrend.",

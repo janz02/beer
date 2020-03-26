@@ -299,6 +299,10 @@
       "name-must-be-unique": "E-mail template name must be unique.",
       "not-found-version": "E-mail template version not found."
     },
+    "file": {
+      "image-type-not-supported": "__STRING_NOT_TRANSLATED__",
+      "invalid-image-size": "__STRING_NOT_TRANSLATED__"
+    },
     "not-found": "Not found.",
     "paginate": {
       "order-by": "Paginate order by.",
