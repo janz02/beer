@@ -4,9 +4,9 @@ import { UploadOutlined } from '@ant-design/icons'
 import React, { FC } from 'react'
 import { useFileUpload, UseFileUploadProps } from 'hooks/useFileUpload'
 
-export type UploadButtonProps = UseFileUploadProps
+export type PictureUploadButtonProps = UseFileUploadProps
 
-export const FileUploadButton: FC<UploadButtonProps> = props => {
+export const FileUploadButton: FC<PictureUploadButtonProps> = props => {
   const { appendedUploadProps, onChangeKeepOnlyLastFile, onRemoveAll } = useFileUpload(props)
 
   return (

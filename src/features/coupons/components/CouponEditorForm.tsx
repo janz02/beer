@@ -50,7 +50,7 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission, hasAllPermissions } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
-import { FileUploadButton } from 'components/buttons/FileUploadButton'
+import { FileUploadButton } from 'components/buttons/PictureUploadButton'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
