@@ -10,6 +10,8 @@ import {
 import { SliceFactoryUtils, SliceFactoryProps, CommonSliceActions } from 'models/reusableFeature'
 import { PartnerContact } from 'models/partnerContact'
 import { Roles } from 'api/swagger'
+import { message } from 'antd'
+import i18n from 'app/i18n'
 
 export interface PartnerContactsState {
   contacts: PartnerContact[]
@@ -75,6 +77,7 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
       saveItemSuccess(state) {
         state.loadingEditor = false
         state.error = ''
+        message.success(i18n.t('user-access.msg.change-succesful'), 5)
       },
       saveItemFail(state, action: PayloadAction<string>) {
         state.loadingEditor = false
@@ -101,6 +104,7 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
       },
       deleteItemSuccess(state) {
         state.loadingList = false
+        message.success(i18n.t('common.message.delete-success'), 5)
       },
       deleteItemFail(state) {
         state.loadingList = false
