@@ -175,7 +175,10 @@ export const CouponListPage: React.FC = () => {
         filterMode: FilterMode.FILTER,
         filters: Object.keys(CouponRank).map(f => {
           return { text: t(`coupon.rank.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
-        })
+        }),
+        render(value) {
+          return t(`coupon.rank.${value.toLowerCase()}`)
+        }
       }),
       columnConfig({
         title: t('coupon-list.small-image'),
@@ -233,7 +236,10 @@ export const CouponListPage: React.FC = () => {
             text: t(`coupon.discount-type.${f?.toLowerCase()}`),
             value: f
           } as ColumnFilterItem
-        })
+        }),
+        render(value) {
+          return value ? t(`coupon.discount-type.${value.toLowerCase()}`) : ''
+        }
       }),
       columnConfig({
         title: t('coupon-list.discount-amount'),
