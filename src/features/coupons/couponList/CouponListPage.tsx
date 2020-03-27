@@ -160,7 +160,10 @@ export const CouponListPage: React.FC = () => {
         key: 'rank',
         ellipsis: false,
         sort: true,
-        filterMode: FilterMode.FILTER
+        filterMode: FilterMode.FILTER,
+        render(value) {
+          return t(`coupon.rank.${value.toLowerCase()}`)
+        }
       }),
       columnConfig({
         title: t('coupon-list.small-image'),
@@ -212,7 +215,10 @@ export const CouponListPage: React.FC = () => {
         key: 'discountType',
         ellipsis: false,
         sort: true,
-        filterMode: FilterMode.FILTER
+        filterMode: FilterMode.FILTER,
+        render(value) {
+          return value ? t(`coupon.discount-type.${value.toLowerCase()}`) : ''
+        }
       }),
       columnConfig({
         title: t('coupon-list.discount-amount'),
