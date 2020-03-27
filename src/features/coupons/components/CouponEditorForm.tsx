@@ -71,7 +71,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   const [couponType, setCouponType] = useState<CouponType>()
   const [couponMode, setCouponMode] = useState<CouponMode>()
   const [couponDiscountType, setCouponDiscountType] = useState<CouponDiscountType>()
-  const [couponsFileId, setCouponsFileId] = useState<string | null>()
   const rule = useCommonFormRules()
 
   const {
@@ -105,7 +104,6 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
     setCouponType(coupon?.type)
     setCouponMode(coupon?.mode)
     setCouponDiscountType(coupon?.discountType)
-    setCouponsFileId(coupon?.predefinedCodesFileId)
 
     setFieldsValue({
       ...coupon,
@@ -139,8 +137,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         itemPrice: +values.itemPrice,
         previousYearAverageBasketValue: +values.previousYearAverageBasketValue,
         partnerId: +values.partnerId,
-        couponCount: +values.couponCount,
-        predefinedCodesFileId: couponsFileId
+        couponCount: +values.couponCount
       })
     resetFormFlags()
   }
@@ -747,15 +744,25 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 </Col>
 
                 <Col span={8}>
-                  <Form.Item
-                    name="predefinedCodesFileId"
-                    label={t('coupon-create.upload')}
-                    rules={[]}
-                  >
+                  <Form.Item name="predefinedCodesFileId" label={t('coupon-create.upload')}>
                     <FileUploadButton
                       disabled={!displayEditor}
-                      onSuccess={fileId => setCouponsFileId(fileId)}
-                      onRemove={() => setCouponsFileId(undefined)}
+                      onSuccess={fileId => {
+                        form.setFieldsValue({
+                          ...form.getFieldsValue(),
+                          predefinedCodesFileId: fileId
+                        })
+
+                        form.validateFields()
+                      }}
+                      onRemove={() => {
+                        form.setFieldsValue({
+                          ...form.getFieldsValue(),
+                          predefinedCodesFileId: undefined
+                        })
+
+                        form.validateFields()
+                      }}
                       initialFileId={coupon?.predefinedCodesFileId}
                     />
                   </Form.Item>
