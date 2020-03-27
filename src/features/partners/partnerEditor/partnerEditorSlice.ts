@@ -6,7 +6,6 @@ import { PartnerDto, PartnerState } from 'api/swagger'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
-import { delay } from 'services/temp/delay'
 
 interface PartnerEditorState {
   partner?: Partner
