@@ -96,7 +96,17 @@ export const getCoupons = (params: ListRequestParams = {}): AppThunk => async (
     revisedParams.includeArchived = includeArchived
     revisedParams.onlyWaiting = onlyWaiting
 
+    // This is an exception because the backend needs it this way.
+    if (revisedParams.orderBy === 'partnerName') {
+      revisedParams.orderBy = 'partner.name'
+    }
+
     const { result, ...pagination } = await api.coupons.getCoupons(revisedParams)
+
+    // Reverting exception because the frontend needs it this way.
+    if (revisedParams.orderBy === 'partner.name') {
+      revisedParams.orderBy = 'partnerName'
+    }
 
     const coupons =
       result?.map<Coupon>(c => ({
