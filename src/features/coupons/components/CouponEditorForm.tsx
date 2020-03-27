@@ -578,6 +578,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       })
                     ]}
                     extra={t('coupon-create.field.item-price-help')}
+                    className="mark-label-as-required"
                   >
                     <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
                   </Form.Item>
@@ -606,6 +607,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       })
                     ]}
                     extra={t('coupon-create.field.previous-year-average-basket-value-help')}
+                    className="mark-label-as-required"
                   >
                     <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
                   </Form.Item>
