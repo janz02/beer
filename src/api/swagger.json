@@ -374,6 +374,29 @@
             }
           },
           {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Roles"
+            }
+          },
+          {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -487,6 +510,29 @@
             "in": "query",
             "schema": {
               "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Roles"
+            }
+          },
+          {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
               "nullable": true
             }
           },
@@ -4075,6 +4121,9 @@
           "code": {
             "type": "string",
             "nullable": true
+          },
+          "acceptUserAgreements": {
+            "type": "boolean"
           }
         }
       },
