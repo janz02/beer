@@ -30,6 +30,8 @@ import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import moment from 'moment'
 import { Thumbnail } from 'components/thumbnail/Thumbnail'
 
+const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
+
 const couponEditorRoles = [
   Roles.Administrator,
   Roles.CampaignManager,
@@ -321,7 +323,7 @@ export const CouponListPage: React.FC = () => {
       >
         {t('coupon-list.show-archived')}
       </Checkbox>
-      {hasPermission(couponEditorRoles) && (
+      {hasPermission(couponCreateRoles) && (
         <AddButton onClick={() => history.push(`/campaign`)}>{t('coupon-list.add')}</AddButton>
       )}
     </>
