@@ -212,7 +212,7 @@ function useTableUtils<T extends { [key: string]: any }>(
           break
         case FilterMode.BOOLEAN:
           config.filterMultiple = false
-          config.filters = [
+          config.filters = filters ?? [
             { value: 'true', text: t('common.yes') },
             { value: 'false', text: t('common.no') }
           ]
