@@ -384,17 +384,18 @@
       "title": "Partner adatai"
     },
     "field": {
-      "address": "Cím",
+      "address": "Székhely",
       "bank-account": "Bankszámla",
       "different-address": "Külünböző levelezési cím",
       "mailing-address": "Levelezési cím",
       "major-partner": "Kiemelt partner",
-      "name": "Cégnév",
+      "name": "Partner név",
       "partner-state": "Státusz",
       "register-code": "Regisztációs kód",
       "registration-allowed": "Cégjegyző",
       "registration-number": "Cégjegyzék szám",
-      "tax-number": "Adószám"
+      "tax-number": "Adószám",
+      "type": "Partner típus"
     },
     "list": {
       "add": "Új partner hozzáadás",
@@ -404,6 +405,10 @@
       "active": "Aktív",
       "deleted": "Törölt",
       "inactive": "Inaktív"
+    },
+    "partner-type": {
+      "major": "Kiemelt",
+      "normal": "KKV"
     },
     "save-partner-success": "Partner mentése sikeres.",
     "site": {
@@ -459,6 +464,14 @@
       "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
       "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
       "partnermanager": "Partner menedzser"
+    },
+    "role-short": {
+      "administrator": "Admin",
+      "businesspartnermanager": "Ügyfél men.",
+      "campaignmanager": "Kampány men.",
+      "partnercontactapprover": "Jóváhagyó",
+      "partnercontacteditor": "Szerkesztő",
+      "partnermanager": "Partner men."
     }
   },
   "user-access": {
@@ -469,11 +482,11 @@
       "email": "Email",
       "name": "Név",
       "partner-name": "Partner",
-      "partner-type": "Típus",
       "partnerType": {
         "major": "Fő",
-        "normal": "Alap"
+        "normal": "Normál"
       },
+      "pc-type": "Kapcsolattartó típus",
       "phone": "Telefon",
       "role": "Szerepkör",
       "status": "Státusz",

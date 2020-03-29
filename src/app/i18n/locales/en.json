@@ -388,13 +388,14 @@
       "bank-account": "Bank account",
       "different-address": "Differen mailing address",
       "mailing-address": "Mailing address",
-      "major-partner": "Major partner",
-      "name": "Company name",
+      "major-partner": "Major Partner",
+      "name": "Partner name",
       "partner-state": "State",
       "register-code": "Registration code",
       "registration-allowed": "Company register",
       "registration-number": "Company register number",
-      "tax-number": "VAT number"
+      "tax-number": "VAT number",
+      "type": "Partner Type"
     },
     "list": {
       "add": "Add new partner",
@@ -404,6 +405,10 @@
       "active": "Active",
       "deleted": "Deleted",
       "inactive": "Inactive"
+    },
+    "partner-type": {
+      "major": "Major",
+      "normal": "KKV"
     },
     "save-partner-success": "Saving partner was successful.",
     "site": {
@@ -459,6 +464,14 @@
       "partnercontactapprover": "Partner Contact - Approver",
       "partnercontacteditor": "Partner Contact - Editor",
       "partnermanager": "Partner Manager"
+    },
+    "role-short": {
+      "administrator": "Admin",
+      "businesspartnermanager": "Business Man.",
+      "campaignmanager": "Campaign Man.",
+      "partnercontactapprover": "Approver",
+      "partnercontacteditor": "Editor",
+      "partnermanager": "Partner Man."
     }
   },
   "user-access": {
@@ -469,11 +482,11 @@
       "email": "Email",
       "name": "Name",
       "partner-name": "Partner",
-      "partner-type": "Type",
       "partnerType": {
         "major": "Major",
         "normal": "Normal"
       },
+      "pc-type": "Contact type",
       "phone": "Phone",
       "role": "Role",
       "status": "Status",

@@ -48,16 +48,17 @@ export const PartnerListPage: React.FC = () => {
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
-        title: t('partner.field.major-partner'),
+        title: t('partner.field.type'),
         key: 'majorPartner',
         sort: true,
         width: '11rem',
         filterMode: FilterMode.FILTER,
         filters: [
-          { text: t('common.yes'), value: 'true' },
-          { text: t('common.no'), value: 'false' }
+          { text: t('partner.partner-type.major'), value: 'true' },
+          { text: t('partner.partner-type.normal'), value: 'false' }
         ],
-        render: value => (value ? t('common.yes') : t('common.no'))
+        render: value =>
+          value ? t('partner.partner-type.major') : t('partner.partner-type.normal')
       }),
       columnConfig({
         title: t('partner.field.partner-state'),
