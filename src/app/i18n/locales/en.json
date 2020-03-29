@@ -388,13 +388,14 @@
       "bank-account": "Bank account",
       "different-address": "Differen mailing address",
       "mailing-address": "Mailing address",
-      "type": "Partner Type",
+      "major-partner": "Major Partner",
       "name": "Partner name",
       "partner-state": "State",
       "register-code": "Registration code",
       "registration-allowed": "Company register",
       "registration-number": "Company register number",
-      "tax-number": "VAT number"
+      "tax-number": "VAT number",
+      "type": "Partner Type"
     },
     "list": {
       "add": "Add new partner",
@@ -479,7 +480,6 @@
     },
     "field": {
       "email": "Email",
-      "major-parter": "Major Partner",
       "name": "Name",
       "partner-name": "Partner",
       "partnerType": {

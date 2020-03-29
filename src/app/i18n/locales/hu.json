@@ -389,13 +389,13 @@
       "different-address": "Külünböző levelezési cím",
       "mailing-address": "Levelezési cím",
       "major-partner": "Kiemelt partner",
-      "type": "Partner típus",
       "name": "Partner név",
       "partner-state": "Státusz",
       "register-code": "Regisztációs kód",
       "registration-allowed": "Cégjegyző",
       "registration-number": "Cégjegyzék szám",
-      "tax-number": "Adószám"
+      "tax-number": "Adószám",
+      "type": "Partner típus"
     },
     "list": {
       "add": "Új partner hozzáadás",
@@ -480,7 +480,6 @@
     },
     "field": {
       "email": "Email",
-      "major-parter": "Fő partner",
       "name": "Név",
       "partner-name": "Partner",
       "partnerType": {
