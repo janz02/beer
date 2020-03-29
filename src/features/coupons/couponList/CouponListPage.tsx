@@ -28,6 +28,7 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import moment from 'moment'
+import { Thumbnail } from 'components/thumbnail/Thumbnail'
 
 const couponEditorRoles = [
   Roles.Administrator,
@@ -183,7 +184,10 @@ export const CouponListPage: React.FC = () => {
       columnConfig({
         title: t('coupon-list.small-image'),
         ellipsis: false,
-        key: ''
+        key: 'smallPictureId',
+        render(value) {
+          return value && <Thumbnail fileId={value} />
+        }
       }),
       columnConfig({
         title: t('coupon-list.start-date'),
