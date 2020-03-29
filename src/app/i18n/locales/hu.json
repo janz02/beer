@@ -389,6 +389,7 @@
       "different-address": "Külünböző levelezési cím",
       "mailing-address": "Levelezési cím",
       "major-partner": "Kiemelt partner",
+      "type": "Partner típus",
       "name": "Partner név",
       "partner-state": "Státusz",
       "register-code": "Regisztációs kód",
@@ -404,6 +405,10 @@
       "active": "Aktív",
       "deleted": "Törölt",
       "inactive": "Inaktív"
+    },
+    "partner-type": {
+      "major": "Kiemelt",
+      "normal": "KKV"
     },
     "save-partner-success": "Partner mentése sikeres.",
     "site": {
@@ -459,6 +464,14 @@
       "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
       "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
       "partnermanager": "Partner menedzser"
+    },
+    "role-short": {
+      "administrator": "Admin",
+      "businesspartnermanager": "Ügyfél men.",
+      "campaignmanager": "Kampány men.",
+      "partnercontactapprover": "Jóváhagyó",
+      "partnercontacteditor": "Szerkesztő",
+      "partnermanager": "Partner men."
     }
   },
   "user-access": {
@@ -472,8 +485,9 @@
       "partner-name": "Partner",
       "partnerType": {
         "major": "Fő",
-        "normal": "Alap"
+        "normal": "Normál"
       },
+      "pc-type": "Kapcsolattartó típus",
       "phone": "Telefon",
       "role": "Szerepkör",
       "status": "Státusz",

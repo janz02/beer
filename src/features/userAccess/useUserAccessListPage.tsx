@@ -131,14 +131,6 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         filterMode: FilterMode.SEARCH
       }),
       partnerUsersTableUtils.columnConfig({
-        title: t('user-access.field.major-parter'),
-        key: 'majorPartner',
-        width: '7rem',
-        filterMode: FilterMode.BOOLEAN,
-        render: (value: unknown, user: UserAccess) =>
-          user.majorPartner ? t('common.yes') : t('common.no')
-      }),
-      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.status'),
         key: 'isActive',
         width: '7rem',
@@ -147,12 +139,27 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           t(`user-access.field.status-${user.isActive ? 'active' : 'inactive'}`)
       }),
       partnerUsersTableUtils.columnConfig({
+        title: t('user-access.field.pc-type'),
+        filterMode: FilterMode.BOOLEAN,
+        width: '12rem',
+        key: 'majorPartner',
+        filters: [
+          { text: t('user-access.field.partnerType.major'), value: 'true' },
+          { text: t('user-access.field.partnerType.normal'), value: 'false' }
+        ],
+        render: (value: unknown, user: UserAccess) =>
+          user.majorPartner
+            ? t('user-access.field.partnerType.major')
+            : t('user-access.field.partnerType.normal')
+      }),
+      partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
         key: 'role',
         filterMode: FilterMode.FILTER,
         filters: partnerRoleOptions,
-        width: '15rem',
-        render: (value: unknown, user: UserAccess) => t(`user.role.${user.role?.toLowerCase()}`)
+        width: '8rem',
+        render: (value: unknown, user: UserAccess) =>
+          t(`user.role-short.${user.role?.toLowerCase()}`)
       }),
       hasPermission([Roles.Administrator])
         ? partnerUsersTableUtils.actionColumnConfig({
