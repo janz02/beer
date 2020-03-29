@@ -389,7 +389,7 @@
       "different-address": "Differen mailing address",
       "mailing-address": "Mailing address",
       "major-partner": "Major partner",
-      "name": "Company name",
+      "name": "Partner name",
       "partner-state": "State",
       "register-code": "Registration code",
       "registration-allowed": "Company register",
@@ -467,9 +467,9 @@
     },
     "field": {
       "email": "Email",
+      "major-parter": "Major Partner",
       "name": "Name",
       "partner-name": "Partner",
-      "partner-type": "Type",
       "partnerType": {
         "major": "Major",
         "normal": "Normal"

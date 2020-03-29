@@ -384,12 +384,12 @@
       "title": "Partner adatai"
     },
     "field": {
-      "address": "Cím",
+      "address": "Székhely",
       "bank-account": "Bankszámla",
       "different-address": "Külünböző levelezési cím",
       "mailing-address": "Levelezési cím",
       "major-partner": "Kiemelt partner",
-      "name": "Cégnév",
+      "name": "Partner név",
       "partner-state": "Státusz",
       "register-code": "Regisztációs kód",
       "registration-allowed": "Cégjegyző",
@@ -467,9 +467,9 @@
     },
     "field": {
       "email": "Email",
+      "major-parter": "Fő partner",
       "name": "Név",
       "partner-name": "Partner",
-      "partner-type": "Típus",
       "partnerType": {
         "major": "Fő",
         "normal": "Alap"
