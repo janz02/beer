@@ -240,6 +240,7 @@
       "password-inconsistent": "The two passwords are not matching.",
       "registration-failed": "Registration failed.",
       "sync-failed": "User sync failed.",
+      "user-agreements-must-be-accepted": "User agreements must be accepted",
       "user-exists": "User exists.",
       "user-inactive": "User inactive.",
       "user-not-found": "User not found."
@@ -283,7 +284,8 @@
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
       "predefined-file-id-mismatch": "The file does not match with the previously uploaded one.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty."
+      "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty.",
+      "type-has-no-codes-": "Type has no codes."
     },
     "coupon-categories": {
       "name-must-be-unique": "Category name must be unique."

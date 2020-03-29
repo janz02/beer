@@ -45,6 +45,9 @@ import {
     RegisterUserDto,
     RegisterUserDtoFromJSON,
     RegisterUserDtoToJSON,
+    Roles,
+    RolesFromJSON,
+    RolesToJSON,
     UserVm,
     UserVmFromJSON,
     UserVmToJSON,
@@ -59,6 +62,9 @@ export interface GetNkmPartnerContactsInfoRequest {
     phone?: string | null;
     email?: string | null;
     partnerName?: string | null;
+    isActive?: boolean | null;
+    role?: Roles;
+    majorPartner?: boolean | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -74,6 +80,9 @@ export interface GetPartnerContactsInfoRequest {
     phone?: string | null;
     email?: string | null;
     partnerName?: string | null;
+    isActive?: boolean | null;
+    role?: Roles;
+    majorPartner?: boolean | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -161,6 +170,18 @@ export class AuthApi extends runtime.BaseAPI {
 
         if (requestParameters.partnerName !== undefined) {
             queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.role !== undefined) {
+            queryParameters['role'] = requestParameters.role;
+        }
+
+        if (requestParameters.majorPartner !== undefined) {
+            queryParameters['majorPartner'] = requestParameters.majorPartner;
         }
 
         if (requestParameters.page !== undefined) {
@@ -261,6 +282,18 @@ export class AuthApi extends runtime.BaseAPI {
 
         if (requestParameters.partnerName !== undefined) {
             queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.role !== undefined) {
+            queryParameters['role'] = requestParameters.role;
+        }
+
+        if (requestParameters.majorPartner !== undefined) {
+            queryParameters['majorPartner'] = requestParameters.majorPartner;
         }
 
         if (requestParameters.page !== undefined) {
