@@ -48,6 +48,7 @@ export const pageViewRoles = {
   users: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   newsletters: [Roles.Administrator, Roles.CampaignManager],
   coupons: comboRoles.forAll,
+  couponCreator: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor],
   couponEditor: [Roles.Administrator, Roles.CampaignManager, ...comboRoles.forPartner],
   sites: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
   categories: comboRoles.forNkm,
@@ -132,7 +133,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/campaign"
-      roles={pageViewRoles.couponEditor}
+      roles={pageViewRoles.couponCreator}
       component={CouponCreatePage}
     />
     <PrivateRoute
