@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react'
 import { UploadFile, UploadProps, UploadChangeParam } from 'antd/lib/upload/interface'
 import { useTranslation } from 'react-i18next'
 import { api } from 'api'
+import { getBase64 } from 'services/file-reader'
 
 function getUrl(): string {
   const getUrl = window.location
@@ -30,12 +31,6 @@ export interface UseFileUploadUtils {
   handleClear: () => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
   handleThumbnailDownload: () => void
-}
-
-export function getBase64(img: any, callback: (url: any) => any): any {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
 }
 
 export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
