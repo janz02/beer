@@ -97,7 +97,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
 
   const partnerUsersTableUtils = useTableUtils<UserAccess>({
     listParamsState: partnerListParams,
-    filterKeys: ['name', 'email', 'role', 'isActive', 'majorPartner'],
+    filterKeys: ['name', 'email', 'partnerName', 'role', 'isActive', 'majorPartner'],
     getDataAction: getPartnerUsers
   })
 
