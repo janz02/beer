@@ -84,6 +84,20 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
             : t('partner-contact.field.partner-type.normal')
       }),
       columnConfig({
+        title: t('partner-contact.field.active'),
+        filterMode: FilterMode.BOOLEAN,
+        key: 'isActive',
+        width: '10rem',
+        filters: [
+          { text: t('partner-contact.field.status-active'), value: 'true' },
+          { text: t('partner-contact.field.status-inactive'), value: 'false' }
+        ],
+        render: value =>
+          value
+            ? t(`partner-contact.field.status-active`)
+            : t(`partner-contact.field.status-inactive`)
+      }),
+      columnConfig({
         title: t('partner-contact.field.email'),
         key: 'email',
         sort: true,

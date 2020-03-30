@@ -418,6 +418,7 @@
   "partner-contact": {
     "editor": "Contact editor",
     "field": {
+      "active": "Status",
       "email": "E-mail address",
       "name": "Name",
       "partner-type": {
@@ -426,6 +427,8 @@
       },
       "phone": "Phone",
       "role": "Role",
+      "status-active": "Active",
+      "status-inactive": "Inactive",
       "type": "Contact type"
     },
     "list-title": "Contacts",
