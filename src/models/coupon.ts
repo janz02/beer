@@ -47,4 +47,6 @@ export interface Coupon {
   previousYearAverageBasketValue?: number
   awardedCampaign?: boolean
   partnerId?: number
+  partnerName?: string | null
+  isPartnerActive?: boolean
 }

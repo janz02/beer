@@ -9,6 +9,7 @@ import Highlighter from 'react-highlight-words'
 import { SearchTableDropdown } from 'components/table-dropdowns/SearchTableDropdown'
 import { DatepickerTableDropdown } from 'components/table-dropdowns/DatepickerTableDropdown'
 import { MomentDisplay } from 'components/MomentDisplay'
+import { useTranslation } from 'react-i18next'
 
 export enum OrderByType {
   Ascending = 'Ascending',
@@ -17,6 +18,7 @@ export enum OrderByType {
 
 export enum FilterMode {
   FILTER = 'filter',
+  BOOLEAN = 'boolean',
   SEARCH = 'search',
   DATEPICKER = 'datepicker'
 }
@@ -126,6 +128,7 @@ function useTableUtils<T extends { [key: string]: any }>(
 
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const addKeyProp = (data?: T[]): T[] => data?.map((t, i) => ({ ...t, key: '' + i + t?.id })) ?? []
 
@@ -205,9 +208,14 @@ function useTableUtils<T extends { [key: string]: any }>(
           if (filters?.length) {
             config.filterMultiple = false
             config.filters = filters
-            config.filterMultiple = false
-            config.filters = filters
           }
+          break
+        case FilterMode.BOOLEAN:
+          config.filterMultiple = false
+          config.filters = filters ?? [
+            { value: 'true', text: t('common.yes') },
+            { value: 'false', text: t('common.no') }
+          ]
           break
         default:
           break
@@ -225,7 +233,7 @@ function useTableUtils<T extends { [key: string]: any }>(
 
       return config
     },
-    [listParamsState, searchedTextHighlighter, toSortOrder]
+    [listParamsState, searchedTextHighlighter, t, toSortOrder]
   )
 
   const actionColumnConfig = useCallback((params: Partial<ColumnConfigParams>): ColumnType<any> => {

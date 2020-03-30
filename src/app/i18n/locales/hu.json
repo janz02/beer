@@ -83,6 +83,7 @@
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
+    "upload": "Feltöltés",
     "view": "Megtekintés",
     "yes": "Igen"
   },
@@ -135,7 +136,6 @@
   },
   "coupon-create": {
     "activate": "Aktiválás",
-    "active": "Aktív",
     "campaign-basics": "Kampány alapadatok",
     "campaign-details": "Kampány részletek",
     "client-activities": "Ügyfél aktivitások",
@@ -146,7 +146,7 @@
     "download-coupons": "Kuponok letöltése",
     "download-redeemed-coupons": "Beváltott kupokon letöltése",
     "edit": "Szerkesztés",
-    "editor-title": "Kupon szerkesztő",
+    "editor-title": "Kampány szerkesztő",
     "field": {
       "awarded-campaign": "Kitüntett kampány jelölő",
       "banner-link": "Banner link",
@@ -176,7 +176,7 @@
       "previous-year-average-basket-value": "Tavalyi átlagos kosárérték",
       "previous-year-average-basket-value-help": "Tavalyi átlagos kosár érték vagy a termékkérték megadása kötelező.",
       "prize-rules": "Nyereményjáték szabályzat",
-      "rank": "Kupon szintje",
+      "rank": "Kedvezmény szint",
       "showCount": "Megjelenések száma",
       "small-image": "Kupon kis képe",
       "state": "Státusz",
@@ -185,7 +185,6 @@
       "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com"
     },
     "inactivate": "Inaktiválás",
-    "inactive": "Inaktív",
     "status-title": "Státusz módosítás",
     "upload": "Feltöltés"
   },
@@ -203,17 +202,17 @@
     "category": "Kampány kategória",
     "click-count": "Kattintások száma",
     "coupon-count": "Kuponok száma",
-    "discount-amount": "Kedvezmény mérték",
-    "discount-type": "Kedvezmény típusa",
+    "discount-amount": "Kedvezmény mértéke",
+    "discount-type": "Kedvezmény típus",
     "end-date": "Kampány vége",
     "expire-date": "Kupon lejárati dátum",
-    "minimum-shopping-value": "Minmális vásárlási érték",
+    "minimum-shopping-value": "Minimális vásárlási érték",
     "mode": "Kupon mód",
-    "name": "Kampány magyar név",
+    "name": "Kampány név",
     "partner": "Partner",
     "pending-tab": "Jóváhagyásra vár",
     "preferred-position": "Preferált pozíció",
-    "rank": "Szint",
+    "rank": "Kedvezmény szint",
     "redeem-count": "Beváltások száma",
     "show-archived": "Archivált kampányok mutatása",
     "small-image": "Kupon kis kép",
@@ -239,6 +238,7 @@
       "password-inconsistent": "A két jelszó nem egyezik meg.",
       "registration-failed": "Regsztráció sikertelen.",
       "sync-failed": "Felhasználók szinkronizációja sikerleten.",
+      "user-agreements-must-be-accepted": "A szabályzat elfogadása kötelező.",
       "user-exists": "Felhasználó már létezik.",
       "user-inactive": "Felhasználó inaktív.",
       "user-not-found": "Felhasználó nem található."
@@ -248,6 +248,9 @@
       "cashier-cant-save": "A pénztárat nem lehet módosítani.",
       "cashier-couponId-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
       "stamp-couponId-not-unique": "Digitális pecsét azonosító nem egyedi."
+    },
+    "comment": {
+      "comment-or-state-required": "Kötelező státuszt választani vagy kommentet hagyni."
     },
     "common": {
       "cant-modify": "Nem módosítható.",
@@ -279,7 +282,8 @@
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "percentage-discount-out-of-range": "Csak 1 és 100 közötti érték adható meg.",
       "predefined-file-id-mismatch": "A kuponkódok fájlja nem egyezik ay eddig felöltöttével.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "A tavalyi átlagos kosárérték mező megadása kötelező, ha a termék érték mező üres."
+      "previous-year-average-basket-value-required-if-item-price-empty": "A tavalyi átlagos kosárérték mező megadása kötelező, ha a termék érték mező üres.",
+      "type-has-no-codes-": "Type has no codes."
     },
     "coupon-categories": {
       "name-must-be-unique": "Kategória nevének egyedinek kell lennie."
@@ -296,6 +300,11 @@
       "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie.",
       "not-found-version": "Nem található ilyen verziójú e-mail sablon."
     },
+    "file": {
+      "download-fail": "Sikertelen fájl lekérdezés.",
+      "image-type-not-supported": "Rossz fájl formátum.",
+      "invalid-image-size": "Rossz kép méret."
+    },
     "not-found": "Nem található.",
     "paginate": {
       "order-by": "Lapozó sorrend.",
@@ -309,7 +318,8 @@
     },
     "partner-contact": {
       "invalid-type": "Nem megfelelő partner típus."
-    }
+    },
+    "unknown-try-again": "Kérem, próbáld újra"
   },
   "error-page": {
     "back": "Vissza a főoldalra",
@@ -372,17 +382,18 @@
       "title": "Partner adatai"
     },
     "field": {
-      "address": "Cím",
+      "address": "Székhely",
       "bank-account": "Bankszámla",
       "different-address": "Külünböző levelezési cím",
       "mailing-address": "Levelezési cím",
       "major-partner": "Kiemelt partner",
-      "name": "Cégnév",
+      "name": "Partner név",
       "partner-state": "Státusz",
       "register-code": "Regisztációs kód",
       "registration-allowed": "Cégjegyző",
       "registration-number": "Cégjegyzék szám",
-      "tax-number": "Adószám"
+      "tax-number": "Adószám",
+      "type": "Partner típus"
     },
     "list": {
       "add": "Új partner hozzáadás",
@@ -393,14 +404,17 @@
       "deleted": "Törölt",
       "inactive": "Inaktív"
     },
+    "partner-type": {
+      "major": "Kiemelt",
+      "normal": "KKV"
+    },
     "save-partner-success": "Partner mentése sikeres.",
     "site": {
       "editor-title": "Partner telephelye"
     }
   },
   "partner-contact": {
-    "editor-create": "Kapcsolattartó hozzáadása",
-    "editor-edit": "Kapcsolattartó szerkesztése",
+    "editor": "Kapcsolattartó szerkesztés",
     "field": {
       "email": "E-mail cím",
       "major-partner": "Kiemelt partner",
@@ -408,10 +422,8 @@
       "phone": "Telefonszám",
       "role": "Jogosultság"
     },
-    "list": {
-      "add": "Kapcsolattartó hozzáadása"
-    },
-    "list-title": "Kapcsolattartók"
+    "list-title": "Kapcsolattartók",
+    "viewer": "Kapcsolattartó"
   },
   "profile": {
     "editor-title": "Profiladatok",
@@ -450,6 +462,14 @@
       "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
       "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
       "partnermanager": "Partner menedzser"
+    },
+    "role-short": {
+      "administrator": "Admin",
+      "businesspartnermanager": "Ügyfél men.",
+      "campaignmanager": "Kampány men.",
+      "partnercontactapprover": "Jóváhagyó",
+      "partnercontacteditor": "Szerkesztő",
+      "partnermanager": "Partner men."
     }
   },
   "user-access": {
@@ -460,11 +480,11 @@
       "email": "Email",
       "name": "Név",
       "partner-name": "Partner",
-      "partner-type": "Típus",
       "partnerType": {
         "major": "Fő",
-        "normal": "Alap"
+        "normal": "Normál"
       },
+      "pc-type": "Kapcsolattartó típus",
       "phone": "Telefon",
       "role": "Szerepkör",
       "status": "Státusz",

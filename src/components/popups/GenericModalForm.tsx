@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react'
+import React, { useEffect, FC, useMemo } from 'react'
 import { Form, Modal, Spin } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
 import { FormProps } from 'antd/lib/form'
@@ -13,6 +13,7 @@ export interface GenericModalFormProps {
   loadingContent?: boolean
   loadingAction?: boolean
   disabledNavPrompt?: boolean
+  hideFooter?: boolean
 }
 
 /**
@@ -43,7 +44,8 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
     initialValues,
     loadingContent,
     loadingAction,
-    disabledNavPrompt
+    disabledNavPrompt,
+    hideFooter
   } = props
   const { t } = useTranslation()
 
@@ -71,6 +73,12 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
     form.submit()
   }
 
+  const additiveModalConfig = useMemo((): ModalProps => {
+    const config: ModalProps = {}
+    if (hideFooter) config.footer = null
+    return config
+  }, [hideFooter])
+
   return (
     // TODO: investigate warning -> forceRender should have resolved the issue according to antddocs, but it didn't
     // https://next.ant.design/components/form/#Why-get-form-warning-when-used-in-Modal
@@ -78,6 +86,7 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
       forceRender
       cancelText={t(`common.cancel`)}
       {...modalProps}
+      {...additiveModalConfig}
       onOk={onOk}
       okButtonProps={{
         disabled: !submitable || !modified || loadingAction,

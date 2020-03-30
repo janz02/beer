@@ -48,6 +48,7 @@ export const pageViewRoles = {
   users: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   newsletters: [Roles.Administrator, Roles.CampaignManager],
   coupons: comboRoles.forAll,
+  couponCreator: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor],
   couponEditor: [Roles.Administrator, Roles.CampaignManager, ...comboRoles.forPartner],
   sites: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
   categories: comboRoles.forNkm,
@@ -57,7 +58,7 @@ export const pageViewRoles = {
   readonlyProfile: comboRoles.forNkm,
   selfpartner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
   partners: comboRoles.forNkm,
-  contacts: comboRoles.forAll,
+  contacts: comboRoles.forPartner,
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
 }
 
@@ -119,7 +120,7 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path={['/contacts', '/contacts/new', '/contacts/:contactId']}
+      path={['/contacts', '/contacts/:contactId']}
       roles={pageViewRoles.contacts}
       component={PartnerContactsPage}
     />
@@ -132,7 +133,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/campaign"
-      roles={pageViewRoles.couponEditor}
+      roles={pageViewRoles.couponCreator}
       component={CouponCreatePage}
     />
     <PrivateRoute

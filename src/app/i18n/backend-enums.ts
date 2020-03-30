@@ -9,6 +9,11 @@ t('coupon.state.accepted')
 t('coupon.state.waiting')
 t('coupon.state.archived')
 
+t('coupon.state.action.accept')
+t('coupon.state.action.wait')
+t('coupon.state.action.close')
+t('coupon.state.action.archive')
+
 t('coupon.type.banner')
 t('coupon.type.discount')
 t('coupon.type.prize')
@@ -28,6 +33,9 @@ t(`partner.partner-state.active`)
 t(`partner.partner-state.inactive`)
 t(`partner.partner-state.deleted`)
 
+t(`partner.partner-type.major`)
+t(`partner.partner-type.normal`)
+
 t('coupon.rank.basic')
 t('coupon.rank.standard')
 t('coupon.rank.super')
@@ -35,6 +43,13 @@ t('coupon.rank.premium')
 
 t('coupon.status.active')
 t('coupon.status.inactive')
+
+t('user.role-short.administrator')
+t('user.role-short.businesspartnermanager')
+t('user.role-short.campaignmanager')
+t('user.role-short.partnercontactapprover')
+t('user.role-short.partnercontacteditor')
+t('user.role-short.partnermanager')
 
 // Boolean mappings
 t(`user-access.field.partnerType.major`)

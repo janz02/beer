@@ -83,6 +83,7 @@
     "save": "Save",
     "search": "Search",
     "send": "Send",
+    "upload": "Upload",
     "view": "View",
     "yes": "Yes"
   },
@@ -135,7 +136,6 @@
   },
   "coupon-create": {
     "activate": "Activate",
-    "active": "Active",
     "campaign-basics": "Campaign basics",
     "campaign-details": "Campaign details",
     "client-activities": "Client activities",
@@ -146,7 +146,7 @@
     "download-coupons": "Download coupons",
     "download-redeemed-coupons": "Download claimed coupons",
     "edit": "Edit",
-    "editor-title": "Coupon editor",
+    "editor-title": "Campaign editor",
     "field": {
       "awarded-campaign": "Highlighted campaign sign",
       "banner-link": "Banner link",
@@ -176,7 +176,7 @@
       "previous-year-average-basket-value": "Last year average basket value",
       "previous-year-average-basket-value-help": "Average basket value or product value is required.",
       "prize-rules": "Prize rules",
-      "rank": "Coupon level",
+      "rank": "Discount level",
       "showCount": "Shown as offer",
       "small-image": "Coupon small image",
       "state": "Status",
@@ -185,7 +185,6 @@
       "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com"
     },
     "inactivate": "Inactivate",
-    "inactive": "Inactive",
     "status-title": "Modify state",
     "upload": "Upload"
   },
@@ -209,11 +208,11 @@
     "expire-date": "Coupon expire date",
     "minimum-shopping-value": "Minimum shopping value",
     "mode": "Coupon mode",
-    "name": "Campaign hungarian name",
+    "name": "Campaign name",
     "partner": "Partner",
     "pending-tab": "Pending approve",
     "preferred-position": "Preferred position",
-    "rank": "Level",
+    "rank": "Discount level",
     "redeem-count": "Redeem count",
     "show-archived": "Show archived campaigns",
     "small-image": "Coupon small image",
@@ -239,6 +238,7 @@
       "password-inconsistent": "The two passwords are not matching.",
       "registration-failed": "Registration failed.",
       "sync-failed": "User sync failed.",
+      "user-agreements-must-be-accepted": "User agreements must be accepted",
       "user-exists": "User exists.",
       "user-inactive": "User inactive.",
       "user-not-found": "User not found."
@@ -248,6 +248,9 @@
       "cashier-cant-save": "Cashier cannot be saved.",
       "cashier-couponId-not-unique": "Online cashier ID must be unique.",
       "stamp-couponId-not-unique": "Digital stamp ID must be unique."
+    },
+    "comment": {
+      "comment-or-state-required": "You must select a state or comment something."
     },
     "common": {
       "cant-modify": "Cannot be modified.",
@@ -279,7 +282,8 @@
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
       "predefined-file-id-mismatch": "The file does not match with the previously uploaded one.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty."
+      "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty.",
+      "type-has-no-codes-": "Type has no codes."
     },
     "coupon-categories": {
       "name-must-be-unique": "Category name must be unique."
@@ -296,6 +300,11 @@
       "name-must-be-unique": "E-mail template name must be unique.",
       "not-found-version": "E-mail template version not found."
     },
+    "file": {
+      "download-fail": "Couldn't fetch your file.",
+      "image-type-not-supported": "Unsuppored image type.",
+      "invalid-image-size": "Invalid image dimensions."
+    },
     "not-found": "Not found.",
     "paginate": {
       "order-by": "Paginate order by.",
@@ -309,7 +318,8 @@
     },
     "partner-contact": {
       "invalid-type": "Invalid partner contact type."
-    }
+    },
+    "unknown-try-again": "Please, try again!"
   },
   "error-page": {
     "back": "Back to home",
@@ -376,13 +386,14 @@
       "bank-account": "Bank account",
       "different-address": "Differen mailing address",
       "mailing-address": "Mailing address",
-      "major-partner": "Major partner",
-      "name": "Company name",
+      "major-partner": "Major Partner",
+      "name": "Partner name",
       "partner-state": "State",
       "register-code": "Registration code",
       "registration-allowed": "Company register",
       "registration-number": "Company register number",
-      "tax-number": "VAT number"
+      "tax-number": "VAT number",
+      "type": "Partner Type"
     },
     "list": {
       "add": "Add new partner",
@@ -393,14 +404,17 @@
       "deleted": "Deleted",
       "inactive": "Inactive"
     },
+    "partner-type": {
+      "major": "Major",
+      "normal": "KKV"
+    },
     "save-partner-success": "Saving partner was successful.",
     "site": {
       "editor-title": "Partner's site"
     }
   },
   "partner-contact": {
-    "editor-create": "Add new partner contact",
-    "editor-edit": "Edit partner contact",
+    "editor": "Contact editor",
     "field": {
       "email": "E-mail address",
       "major-partner": "Major Partner",
@@ -408,10 +422,8 @@
       "phone": "Phone",
       "role": "Role"
     },
-    "list": {
-      "add": "Add new contact"
-    },
-    "list-title": "Contacts"
+    "list-title": "Contacts",
+    "viewer": "Contact"
   },
   "profile": {
     "editor-title": "Profile",
@@ -450,6 +462,14 @@
       "partnercontactapprover": "Partner Contact - Approver",
       "partnercontacteditor": "Partner Contact - Editor",
       "partnermanager": "Partner Manager"
+    },
+    "role-short": {
+      "administrator": "Admin",
+      "businesspartnermanager": "Business Man.",
+      "campaignmanager": "Campaign Man.",
+      "partnercontactapprover": "Approver",
+      "partnercontacteditor": "Editor",
+      "partnermanager": "Partner Man."
     }
   },
   "user-access": {
@@ -460,11 +480,11 @@
       "email": "Email",
       "name": "Name",
       "partner-name": "Partner",
-      "partner-type": "Type",
       "partnerType": {
         "major": "Major",
         "normal": "Normal"
       },
+      "pc-type": "Contact type",
       "phone": "Phone",
       "role": "Role",
       "status": "Status",

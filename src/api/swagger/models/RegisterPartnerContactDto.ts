@@ -49,6 +49,12 @@ export interface RegisterPartnerContactDto {
      * @memberof RegisterPartnerContactDto
      */
     code?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RegisterPartnerContactDto
+     */
+    acceptUserAgreements?: boolean;
 }
 
 export function RegisterPartnerContactDtoFromJSON(json: any): RegisterPartnerContactDto {
@@ -66,6 +72,7 @@ export function RegisterPartnerContactDtoFromJSONTyped(json: any, ignoreDiscrimi
         'password': !exists(json, 'password') ? undefined : json['password'],
         'phone': !exists(json, 'phone') ? undefined : json['phone'],
         'code': !exists(json, 'code') ? undefined : json['code'],
+        'acceptUserAgreements': !exists(json, 'acceptUserAgreements') ? undefined : json['acceptUserAgreements'],
     };
 }
 
@@ -83,6 +90,7 @@ export function RegisterPartnerContactDtoToJSON(value?: RegisterPartnerContactDt
         'password': value.password,
         'phone': value.phone,
         'code': value.code,
+        'acceptUserAgreements': value.acceptUserAgreements,
     };
 }
 

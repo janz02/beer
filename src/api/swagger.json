@@ -374,6 +374,29 @@
             }
           },
           {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Roles"
+            }
+          },
+          {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -487,6 +510,29 @@
             "in": "query",
             "schema": {
               "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Roles"
+            }
+          },
+          {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
               "nullable": true
             }
           },
@@ -1379,8 +1425,8 @@
             "name": "discountValue",
             "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32",
+              "type": "number",
+              "format": "float",
               "nullable": true
             }
           },
@@ -2444,6 +2490,47 @@
                 "schema": {
                   "type": "string",
                   "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Files/{id}/Name": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "operationId": "getFileName",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -4034,6 +4121,9 @@
           "code": {
             "type": "string",
             "nullable": true
+          },
+          "acceptUserAgreements": {
+            "type": "boolean"
           }
         }
       },
@@ -4255,7 +4345,7 @@
           "role": {
             "$ref": "#/components/schemas/Roles"
           },
-          "active": {
+          "isActive": {
             "type": "boolean"
           }
         }
@@ -4898,6 +4988,9 @@
           "claimCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "isPartnerActive": {
+            "type": "boolean"
           }
         }
       },
@@ -5152,6 +5245,10 @@
         "type": "object",
         "properties": {
           "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
             "type": "string",
             "nullable": true
           }

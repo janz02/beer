@@ -6,7 +6,6 @@ import { PartnerDto, PartnerState } from 'api/swagger'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
-import { delay } from 'services/temp/delay'
 
 interface PartnerEditorState {
   partner?: Partner
@@ -115,7 +114,7 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
   }
 }
 
-export const deletePartner = (id: number): AppThunk => async (dispatch, getState) => {
+export const deletePartner = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(deletePartnerRequest())
     await api.partner.deletePartner({ id })
@@ -129,15 +128,15 @@ export const deletePartner = (id: number): AppThunk => async (dispatch, getState
   }
 }
 
-export const setPartnerState = (id: number, state: PartnerState): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const setPartnerState = (id: number, state: PartnerState): AppThunk => async dispatch => {
   try {
     dispatch(setPartnerStateRequest())
-    // TODO: integrate
-    // const partner = await api.??.??({ id, state })
-    await delay()
+    await api.partner.activatePartner({
+      id,
+      activatePartnerDto: {
+        state
+      }
+    })
     dispatch(setPartnerStateSuccess())
     id && dispatch(getPartner(id))
     return { id }

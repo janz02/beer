@@ -7,7 +7,14 @@ import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
 import { getCoupons, deleteCoupon, setIncludeArchived, setOnlyWaiting } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
-import { CouponState, Roles, CouponType, CouponMode } from 'api/swagger/models'
+import {
+  CouponState,
+  Roles,
+  CouponType,
+  CouponMode,
+  CouponRank,
+  CouponDiscountType
+} from 'api/swagger/models'
 import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { getCategories } from '../couponsSlice'
@@ -20,6 +27,11 @@ import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
+import moment from 'moment'
+import { Thumbnail } from 'components/thumbnail/Thumbnail'
+import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
+
+const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
 const couponEditorRoles = [
   Roles.Administrator,
@@ -57,15 +69,19 @@ export const CouponListPage: React.FC = () => {
   } = useTableUtils<Coupon>({
     listParamsState: listParams,
     filterKeys: [
+      'type',
+      'partnerName',
       'name',
       'state',
       'isActive',
       'categoryId',
-      'startDate',
-      'endDate',
-      'expireDate',
-      'type',
-      'mode'
+      'rank',
+      'mode',
+      'discountType',
+      'discountValue',
+      'couponCount',
+      'minimumShoppingValue',
+      'createdBy'
     ],
     getDataAction: getCoupons
   })
@@ -124,7 +140,7 @@ export const CouponListPage: React.FC = () => {
         filters: Object.keys(CouponState).map(f => {
           return { text: t(`coupon.state.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
-        render(value) {
+        render(value: CouponState) {
           return <CampaignStateDisplay state={value} />
         }
       }),
@@ -138,8 +154,7 @@ export const CouponListPage: React.FC = () => {
           { text: t(`coupon.status.active`), value: 'true' },
           { text: t(`coupon.status.inactive`), value: 'false' }
         ],
-        render: (value: unknown, coupon: Coupon) =>
-          t(`coupon.status.${coupon.isActive ? 'active' : 'inactive'}`)
+        render: (value: unknown, coupon: Coupon) => <CampaignActiveDisplay coupon={coupon} />
       }),
       columnConfig({
         title: t('coupon-list.category'),
@@ -151,7 +166,7 @@ export const CouponListPage: React.FC = () => {
           categories?.map(x => {
             return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
           }) ?? [],
-        render(value) {
+        render(value: string) {
           return categories && categories.find(x => x.id === +value)?.name
         }
       }),
@@ -160,19 +175,28 @@ export const CouponListPage: React.FC = () => {
         key: 'rank',
         ellipsis: false,
         sort: true,
-        filterMode: FilterMode.FILTER
+        filterMode: FilterMode.FILTER,
+        filters: Object.keys(CouponRank).map(f => {
+          return { text: t(`coupon.rank.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
+        }),
+        render(value) {
+          return t(`coupon.rank.${value.toLowerCase()}`)
+        }
       }),
       columnConfig({
         title: t('coupon-list.small-image'),
         ellipsis: false,
-        key: ''
+        key: 'smallPictureId',
+        render(value) {
+          return value && <Thumbnail fileId={value} />
+        }
       }),
       columnConfig({
         title: t('coupon-list.start-date'),
         key: 'startDate',
         ellipsis: false,
         sort: true,
-        render(value) {
+        render(value: moment.Moment) {
           return <MomentDisplay date={value} />
         }
       }),
@@ -181,7 +205,7 @@ export const CouponListPage: React.FC = () => {
         ellipsis: false,
         key: 'endDate',
         sort: true,
-        render(value) {
+        render(value: moment.Moment) {
           return <MomentDisplay date={value} />
         }
       }),
@@ -190,7 +214,7 @@ export const CouponListPage: React.FC = () => {
         key: 'expireDate',
         ellipsis: false,
         sort: true,
-        render(value) {
+        render(value: moment.Moment) {
           return <MomentDisplay date={value} />
         }
       }),
@@ -203,7 +227,7 @@ export const CouponListPage: React.FC = () => {
         filters: Object.keys(CouponMode).map(f => {
           return { text: t(`coupon.mode.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
-        render(value) {
+        render(value: CouponMode) {
           return value ? t(`coupon.mode.${value.toLowerCase()}`) : ''
         }
       }),
@@ -212,7 +236,16 @@ export const CouponListPage: React.FC = () => {
         key: 'discountType',
         ellipsis: false,
         sort: true,
-        filterMode: FilterMode.FILTER
+        filterMode: FilterMode.FILTER,
+        filters: Object.keys(CouponDiscountType).map(f => {
+          return {
+            text: t(`coupon.discount-type.${f?.toLowerCase()}`),
+            value: f
+          } as ColumnFilterItem
+        }),
+        render(value) {
+          return value ? t(`coupon.discount-type.${value.toLowerCase()}`) : ''
+        }
       }),
       columnConfig({
         title: t('coupon-list.discount-amount'),
@@ -235,13 +268,14 @@ export const CouponListPage: React.FC = () => {
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
-      columnConfig({
-        title: t('coupon-list.preferred-position'),
-        ellipsis: false,
-        key: 'preferredPosition',
-        sort: true,
-        filterMode: FilterMode.SEARCH
-      }),
+      // TODO: integrate
+      // columnConfig({
+      //   title: t('coupon-list.preferred-position'),
+      //   ellipsis: false,
+      //   key: 'preferredPosition',
+      //   sort: true,
+      //   filterMode: FilterMode.SEARCH
+      // }),
       columnConfig({
         title: t('coupon-list.user'),
         ellipsis: false,
@@ -289,7 +323,7 @@ export const CouponListPage: React.FC = () => {
       >
         {t('coupon-list.show-archived')}
       </Checkbox>
-      {hasPermission(couponEditorRoles) && (
+      {hasPermission(couponCreateRoles) && (
         <AddButton onClick={() => history.push(`/campaign`)}>{t('coupon-list.add')}</AddButton>
       )}
     </>

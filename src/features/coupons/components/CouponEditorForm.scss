@@ -11,6 +11,17 @@
     }
   }
 
+  .mark-label-as-required {
+    label::after {
+      content: "*";
+      display: inline-block;
+      margin-left: 4px;
+      font-family: SimSun, sans-serif;
+      font-size: 14px;
+      line-height: 1;
+    }
+  }
+
   .coupon-editor-form__actions {
     & > *:not(:last-child) {
       margin-right: 15px;

@@ -12,6 +12,7 @@ import { Form, Input, Select } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
 import { UserType } from 'models/user'
+import { useReusablePartnerContacts } from './useReusablePartnerContacts'
 
 export interface PartnerContactsParams {
   visible?: boolean
@@ -30,14 +31,16 @@ export interface PartnerContactsEditorProps {
 
 export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
   const { params, handleExit, afterClose, selector, saveAction, getItem } = props
-  const { visible, id, isNew } = params
+  const { visible, id } = params
   const { editedContact, loadingEditor } = useSelector(selector)
 
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
-  const modalTitle = isNew ? t('partner-contact.editor-create') : t('partner-contact.editor-edit')
+  const { permission } = useReusablePartnerContacts()
+
+  const modalTitle = permission.editor ? t('partner-contact.editor') : t('partner-contact.viewer')
 
   const roleOptions = useRoleGenerator(UserType.PARTNER)
 
@@ -60,8 +63,8 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
   return (
     <GenericModalForm
       loadingContent={loadingEditor}
+      hideFooter={!permission.editor}
       modalProps={{
-        destroyOnClose: true,
         visible: visible,
         title: modalTitle,
         okText: t('common.save'),
@@ -79,14 +82,14 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
         name="name"
         rules={[rule.requiredString(), rule.max(50)]}
       >
-        <Input maxLength={50} />
+        <Input disabled={!permission.editor} maxLength={50} />
       </Form.Item>
       <Form.Item
         label={t('partner-contact.field.email')}
         name="email"
         rules={[rule.requiredString(), rule.email(), rule.max(50)]}
       >
-        <Input maxLength={50} />
+        <Input disabled={!permission.editor} maxLength={50} />
       </Form.Item>
 
       <Form.Item
@@ -94,7 +97,7 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
         name="phone"
         rules={[rule.requiredString(), rule.number(), rule.max(50)]}
       >
-        <Input maxLength={50} />
+        <Input disabled={!permission.editor} maxLength={50} />
       </Form.Item>
 
       <Form.Item
@@ -102,7 +105,7 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
         label={t('partner-contact.field.role')}
         rules={[rule.requiredString()]}
       >
-        <Select>
+        <Select disabled={!permission.editor}>
           {roleOptions?.map((r, i) => (
             <Select.Option key={i} value={r.value}>
               {r.text}

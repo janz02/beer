@@ -1,15 +1,15 @@
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState, useCallback } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { AddButton } from 'components/buttons/AddButton'
 import { PartnerContact } from 'models/partnerContact'
 import { ListRequestParams, useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { AppThunk } from 'app/store'
 import { ColumnType } from 'antd/lib/table'
-import { CrudButtons } from 'components/buttons/CrudButtons'
+import { CrudButtons, CrudButtonsProps } from 'components/buttons/CrudButtons'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 import { useReusablePartnerContacts } from './useReusablePartnerContacts'
+import { Roles } from 'api/swagger'
 
 interface PartnerContactsListProps {
   loading: boolean
@@ -17,20 +17,16 @@ interface PartnerContactsListProps {
   listParams: ListRequestParams
   getListAction: (params: ListRequestParams) => AppThunk
   handleEdit: (id: number) => void
-  handleCreate: () => void
-  deleteAction: (id: number) => AppThunk
+  deleteAction: (id: number, role: Roles) => AppThunk
 }
 export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
   const { loading, contacts, listParams } = props
-  const { getListAction, handleEdit, handleCreate, deleteAction } = props
+  const { getListAction, handleEdit, deleteAction } = props
   const { t } = useTranslation()
 
   const [contactToDelete, setContanctToDelete] = useState<PopupState<PartnerContact>>()
 
-  const { label, shrinks } = useReusablePartnerContacts()
-  const headerOptions = (
-    <AddButton onClick={handleCreate}>{t('partner-contact.list.add')}</AddButton>
-  )
+  const { label, shrinks, permission } = useReusablePartnerContacts()
 
   const {
     paginationConfig,
@@ -43,6 +39,25 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
     filterKeys: ['name', 'email', 'phone'],
     getDataAction: getListAction
   })
+
+  const crudOptions = useCallback(
+    (record: PartnerContact): CrudButtonsProps => {
+      const config: CrudButtonsProps = {}
+      if (permission.editor) {
+        config.onDelete = (): void => {
+          setContanctToDelete({
+            data: record,
+            popupVisible: true
+          })
+        }
+        config.onEdit = () => handleEdit(record.id!)
+      } else {
+        config.onView = () => handleEdit(record.id!)
+      }
+      return config
+    },
+    [handleEdit, permission.editor]
+  )
 
   const columnsConfig: ColumnType<PartnerContact>[] = useMemo(
     () => [
@@ -73,24 +88,12 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         filterMode: FilterMode.SEARCH
       }),
       actionColumnConfig({
-        render(value: unknown, record: PartnerContact) {
-          return (
-            <>
-              <CrudButtons
-                onEdit={() => record.id && handleEdit(record.id)}
-                onDelete={() => {
-                  setContanctToDelete({
-                    data: record,
-                    popupVisible: true
-                  })
-                }}
-              />
-            </>
-          )
+        render(_: unknown, record: PartnerContact) {
+          return <CrudButtons {...crudOptions(record)} />
         }
       })
     ],
-    [actionColumnConfig, columnConfig, handleEdit, t]
+    [actionColumnConfig, columnConfig, crudOptions, t]
   )
 
   return (
@@ -99,7 +102,6 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         disableAutoScale={shrinks}
         paddedBottom
         floatingTitle={label.listTitle}
-        floatingOptions={headerOptions}
         forTable
       >
         <ResponsiveTable
@@ -117,7 +119,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         id={contactToDelete?.data?.id!}
         visible={!!contactToDelete?.popupVisible}
         onCancel={() => setContanctToDelete({ ...contactToDelete, popupVisible: false })}
-        onOkAction={deleteAction?.(contactToDelete?.data?.id!)}
+        onOkAction={deleteAction?.(contactToDelete?.data?.id!, contactToDelete?.data?.role!)}
         afterClose={() => setContanctToDelete(null)}
       >
         <h4>{contactToDelete?.data?.name}</h4>
