@@ -742,33 +742,34 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     <InputNumber disabled={!displayEditor} min={1} max={100000000} />
                   </Form.Item>
                 </Col>
+                {prizeOrDiscount && (
+                  <Col span={8}>
+                    <Form.Item name="predefinedCodesFileId" label={t('coupon-create.upload')}>
+                      <FileUploadButton
+                        disabled={!displayEditor}
+                        onSuccess={fileId => {
+                          form.setFieldsValue({
+                            ...form.getFieldsValue(),
+                            predefinedCodesFileId: fileId
+                          })
 
-                <Col span={8}>
-                  <Form.Item name="predefinedCodesFileId" label={t('coupon-create.upload')}>
-                    <FileUploadButton
-                      disabled={!displayEditor}
-                      onSuccess={fileId => {
-                        form.setFieldsValue({
-                          ...form.getFieldsValue(),
-                          predefinedCodesFileId: fileId
-                        })
+                          form.validateFields()
+                        }}
+                        onRemove={() => {
+                          form.setFieldsValue({
+                            ...form.getFieldsValue(),
+                            predefinedCodesFileId: undefined
+                          })
 
-                        form.validateFields()
-                      }}
-                      onRemove={() => {
-                        form.setFieldsValue({
-                          ...form.getFieldsValue(),
-                          predefinedCodesFileId: undefined
-                        })
+                          form.validateFields()
+                        }}
+                        initialFileId={coupon?.predefinedCodesFileId}
+                      />
+                    </Form.Item>
+                  </Col>
+                )}
 
-                        form.validateFields()
-                      }}
-                      initialFileId={coupon?.predefinedCodesFileId}
-                    />
-                  </Form.Item>
-                </Col>
-
-                {!!coupon?.id && (
+                {!!coupon?.id && prizeOrDiscount && (
                   <Col span={8}>
                     <Form.Item name="download" label={t('coupon-create.download')} rules={[]}>
                       <Button
@@ -808,20 +809,22 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 </Row>
 
-                <Row gutter={rowGutter}>
-                  <Col span={8}>
-                    <Button
-                      type="default"
-                      loading={loading}
-                      icon={<ExportOutlined />}
-                      onClick={() => {
-                        dispatch(downloadClaimedCoupons(coupon!))
-                      }}
-                    >
-                      {t('coupon-create.download-redeemed-coupons')}
-                    </Button>
-                  </Col>
-                </Row>
+                {prizeOrDiscount && (
+                  <Row gutter={rowGutter}>
+                    <Col span={8}>
+                      <Button
+                        type="default"
+                        loading={loading}
+                        icon={<ExportOutlined />}
+                        onClick={() => {
+                          dispatch(downloadClaimedCoupons(coupon!))
+                        }}
+                      >
+                        {t('coupon-create.download-redeemed-coupons')}
+                      </Button>
+                    </Col>
+                  </Row>
+                )}
               </Collapse.Panel>
             </Collapse>
           )}
