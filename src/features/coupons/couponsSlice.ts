@@ -100,6 +100,22 @@ const couponsSlice = createSlice({
     downloadClaimedCouponsFailed(state) {
       state.loading = false
       state.error = true
+    },
+    downloadPrizeFileSuccess(state) {
+      state.loading = false
+      state.error = false
+    },
+    downloadPrizeFileFailed(state) {
+      state.loading = false
+      state.error = true
+    },
+    downloadPredefinedCouponsFileSuccess(state) {
+      state.loading = false
+      state.error = false
+    },
+    downloadPredefinedCouponsFileFailed(state) {
+      state.loading = false
+      state.error = true
     }
   }
 })
@@ -119,7 +135,11 @@ const {
   downloadCouponsSuccess,
   downloadCouponsFailed,
   downloadClaimedCouponsSuccess,
-  downloadClaimedCouponsFailed
+  downloadClaimedCouponsFailed,
+  downloadPrizeFileSuccess,
+  downloadPrizeFileFailed,
+  downloadPredefinedCouponsFileSuccess,
+  downloadPredefinedCouponsFileFailed
 } = couponsSlice.actions
 
 export const { resetCoupons } = couponsSlice.actions
@@ -357,5 +377,30 @@ export const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispat
     dispatch(downloadClaimedCouponsSuccess())
   } catch (err) {
     dispatch(downloadClaimedCouponsFailed())
+  }
+}
+
+export const downloadPrizeFile = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+
+  try {
+    const fileName: string = await api.files.getFileName({ id: coupon.prizeRulesFileId! })
+    const blob: Blob = await api.files.downloadFile({ id: coupon.prizeRulesFileId! })
+    saveAs(blob, fileName)
+    dispatch(downloadPrizeFileSuccess())
+  } catch (err) {
+    dispatch(downloadPrizeFileFailed())
+  }
+}
+
+export const downloadPredefinedCodesFile = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setLoadingStart())
+  try {
+    const fileName: string = await api.files.getFileName({ id: coupon.predefinedCodesFileId! })
+    const blob: Blob = await api.files.downloadFile({ id: coupon.predefinedCodesFileId! })
+    saveAs(blob, fileName)
+    dispatch(downloadPredefinedCouponsFileSuccess())
+  } catch (err) {
+    dispatch(downloadPredefinedCouponsFileFailed())
   }
 }

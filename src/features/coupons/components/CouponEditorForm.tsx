@@ -35,7 +35,9 @@ import {
   deleteCouponComment,
   getMajorPartners,
   downloadClaimedCoupons,
-  downloadCoupons
+  downloadCoupons,
+  downloadPrizeFile,
+  downloadPredefinedCodesFile
 } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteFilled, CheckOutlined, ArrowRightOutlined, ExportOutlined } from '@ant-design/icons'
@@ -637,6 +639,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                           form.validateFields()
                         }}
+                        onClick={() => dispatch(downloadPrizeFile(coupon!))}
                         initialFileId={coupon?.prizeRulesFileId}
                       />
                     </Form.Item>
@@ -765,6 +768,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                           form.validateFields()
                         }}
+                        onClick={() => dispatch(downloadPredefinedCodesFile(coupon!))}
                         initialFileId={coupon?.predefinedCodesFileId}
                       />
                     </Form.Item>

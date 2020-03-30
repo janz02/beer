@@ -9,7 +9,7 @@ import { useFileUpload, UseFileUploadProps } from './useFileUpload'
 
 export type FileUploadButtonProps = Pick<
   UseFileUploadProps,
-  'disabled' | 'initialFileId' | 'onRemove' | 'onSuccess'
+  'disabled' | 'initialFileId' | 'onRemove' | 'onSuccess' | 'onClick'
 >
 
 export const FileUploadButton: FC<FileUploadButtonProps> = props => {
@@ -19,8 +19,7 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
     handleClear,
     handleFileUpload: handleSingleImageUpload,
     appendedUploadProps,
-    thumbnail,
-    handleThumbnailDownload
+    thumbnail
   } = useFileUpload({
     ...props
   })
@@ -40,7 +39,7 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
     <div
       hidden={!thumbnail?.label}
       className="file-upload__current-file"
-      onClick={handleThumbnailDownload}
+      onClick={() => props.onClick?.()}
     >
       <div>{thumbnail?.label}</div>
       {!props.disabled && (
