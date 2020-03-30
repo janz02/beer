@@ -66,8 +66,12 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         filterMode: FilterMode.BOOLEAN,
         key: 'isActive',
         width: '10rem',
-        render: (value: unknown, user: UserAccess) =>
-          t(`user-access.field.status-${user.isActive ? 'active' : 'inactive'}`)
+        filters: [
+          { text: t('user-access.field.status-active'), value: 'true' },
+          { text: t('user-access.field.status-inactive'), value: 'false' }
+        ],
+        render: value =>
+          value ? t(`user-access.field.status-active`) : t(`user-access.field.status-inactive`)
       }),
       nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
@@ -135,8 +139,12 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         key: 'isActive',
         width: '7rem',
         filterMode: FilterMode.BOOLEAN,
-        render: (value: unknown, user: UserAccess) =>
-          t(`user-access.field.status-${user.isActive ? 'active' : 'inactive'}`)
+        filters: [
+          { text: t('user-access.field.status-active'), value: 'true' },
+          { text: t('user-access.field.status-inactive'), value: 'false' }
+        ],
+        render: value =>
+          value ? t(`user-access.field.status-active`) : t(`user-access.field.status-inactive`)
       }),
       partnerUsersTableUtils.columnConfig({
         title: t('user-access.field.pc-type'),
