@@ -76,7 +76,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
       nkmUsersTableUtils.columnConfig({
         title: t('user-access.field.role'),
         key: 'role',
-        sort: true,
+        sort: false,
         filterMode: FilterMode.FILTER,
         filters: nkmRoleOptions,
         render: (value: unknown, user: UserAccess) =>
@@ -164,6 +164,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         title: t('user-access.field.role'),
         key: 'role',
         filterMode: FilterMode.FILTER,
+        sort: false,
         filters: partnerRoleOptions,
         width: '8rem',
         render: (value: unknown, user: UserAccess) =>
