@@ -466,9 +466,9 @@
       "administrator": "Administrator",
       "businesspartnermanager": "Business Partner Manager",
       "campaignmanager": "Campaign Manager",
-      "partnercontactapprover": "Partner Contact - Approver",
-      "partnercontacteditor": "Partner Contact - Editor",
-      "partnermanager": "Partner Manager"
+      "partnermanager": "Partner Manager",
+      "pc-major": "Major",
+      "pc-normal": "Normal"
     },
     "role-short": {
       "administrator": "Admin",

@@ -466,9 +466,9 @@
       "administrator": "Adminisztrátor",
       "businesspartnermanager": "Ügyfél menedzser",
       "campaignmanager": "Kampány menedzser",
-      "partnercontactapprover": "Partner kapcsolattartó - Jóváhagyó",
-      "partnercontacteditor": "Partner kapcsolattartó - Szerkesztő",
-      "partnermanager": "Partner menedzser"
+      "partnermanager": "Partner menedzser",
+      "pc-major": "Fő",
+      "pc-normal": "Normál"
     },
     "role-short": {
       "administrator": "Admin",
