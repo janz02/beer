@@ -214,8 +214,8 @@ export const CouponListPage: React.FC = () => {
         key: 'expireDate',
         ellipsis: false,
         sort: true,
-        render(value: moment.Moment) {
-          return <MomentDisplay date={value} />
+        render(value: moment.Moment, coupon: Coupon) {
+          return coupon.type === CouponType.Discount && <MomentDisplay date={value} />
         }
       }),
       columnConfig({
@@ -252,7 +252,11 @@ export const CouponListPage: React.FC = () => {
         ellipsis: false,
         key: 'discountValue',
         sort: true,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        disableSearchHighlight: true,
+        render(value) {
+          return !!value && value
+        }
       }),
       columnConfig({
         title: t('coupon-list.coupon-count'),
