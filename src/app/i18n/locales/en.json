@@ -416,11 +416,18 @@
   "partner-contact": {
     "editor": "Contact editor",
     "field": {
+      "active": "Status",
       "email": "E-mail address",
-      "major-partner": "Major Partner",
       "name": "Name",
+      "partner-type": {
+        "major": "Major",
+        "normal": "Normal"
+      },
       "phone": "Phone",
-      "role": "Role"
+      "role": "Role",
+      "status-active": "Active",
+      "status-inactive": "Inactive",
+      "type": "Contact type"
     },
     "list-title": "Contacts",
     "viewer": "Contact"
