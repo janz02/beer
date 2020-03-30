@@ -29,6 +29,7 @@ import { AddButton } from 'components/buttons/AddButton'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import moment from 'moment'
 import { Thumbnail } from 'components/thumbnail/Thumbnail'
+import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -153,8 +154,7 @@ export const CouponListPage: React.FC = () => {
           { text: t(`coupon.status.active`), value: 'true' },
           { text: t(`coupon.status.inactive`), value: 'false' }
         ],
-        render: (value: unknown, coupon: Coupon) =>
-          t(`coupon.status.${coupon.isActive ? 'active' : 'inactive'}`)
+        render: (value: unknown, coupon: Coupon) => <CampaignActiveDisplay coupon={coupon} />
       }),
       columnConfig({
         title: t('coupon-list.category'),
