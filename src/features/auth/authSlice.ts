@@ -168,7 +168,8 @@ export const signUp = (params: any): AppThunk => async dispatch => {
       password: params.password,
       fullName: params.name,
       phone: params.phone,
-      code: params.code
+      code: params.code,
+      acceptUserAgreements: !!params.acceptTerms
     }
   }
 
