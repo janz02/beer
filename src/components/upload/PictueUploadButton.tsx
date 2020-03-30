@@ -48,6 +48,7 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
             e.stopPropagation()
             setPreviewVisible(true)
           }}
+          className="picture-upload-options__button picture-upload-options__button--view"
         >
           <EyeOutlined />
         </Button>
@@ -60,6 +61,7 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
               e.stopPropagation()
               handleClear()
             }}
+            className="picture-upload-options__button picture-upload-options__button--delete"
           >
             <DeleteOutlined />
           </Button>
