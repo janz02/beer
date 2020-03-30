@@ -176,7 +176,7 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
           phone: data.phone
         }
       })
-      console.log(data)
+
       await api.auth.updatePartnerContactInfo({
         id,
         partnerContactStateDto: {
