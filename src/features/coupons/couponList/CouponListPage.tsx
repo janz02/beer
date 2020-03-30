@@ -270,7 +270,11 @@ export const CouponListPage: React.FC = () => {
         key: 'minimumShoppingValue',
         ellipsis: false,
         sort: true,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        disableSearchHighlight: true,
+        render(value) {
+          return !!value && value
+        }
       }),
       // TODO: integrate
       // columnConfig({
