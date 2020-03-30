@@ -50,13 +50,13 @@ export const pageViewRoles = {
   coupons: comboRoles.forAll,
   couponCreator: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor],
   couponEditor: [Roles.Administrator, Roles.CampaignManager, ...comboRoles.forPartner],
-  sites: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
+  sites: comboRoles.forPartner,
   categories: comboRoles.forNkm,
   categoryEditor: [Roles.Administrator],
   segments: comboRoles.forNkm,
   profile: comboRoles.forPartner,
   readonlyProfile: comboRoles.forNkm,
-  selfpartner: comboRoles.forAll, // union of forNkm and forPartner, fs overlap
+  selfpartner: comboRoles.forPartner,
   partners: comboRoles.forNkm,
   contacts: comboRoles.forPartner,
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
