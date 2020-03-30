@@ -52,6 +52,7 @@ import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import { FileUploadButton } from 'components/upload/FileUploadButton'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
+import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -306,7 +307,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 <Col span={12}>
                   {!couponIsNew && (
                     <Form.Item label={t('coupon-create.field.is-active')}>
-                      {coupon?.isActive ? t('coupon-create.active') : t('coupon-create.inactive')}
+                      <CampaignActiveDisplay coupon={coupon} />
                     </Form.Item>
                   )}
                 </Col>

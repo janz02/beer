@@ -136,7 +136,6 @@
   },
   "coupon-create": {
     "activate": "Activate",
-    "active": "Active",
     "campaign-basics": "Campaign basics",
     "campaign-details": "Campaign details",
     "client-activities": "Client activities",
@@ -186,7 +185,6 @@
       "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com"
     },
     "inactivate": "Inactivate",
-    "inactive": "Inactive",
     "status-title": "Modify state",
     "upload": "Upload"
   },

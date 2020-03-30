@@ -136,7 +136,6 @@
   },
   "coupon-create": {
     "activate": "Aktiválás",
-    "active": "Aktív",
     "campaign-basics": "Kampány alapadatok",
     "campaign-details": "Kampány részletek",
     "client-activities": "Ügyfél aktivitások",
@@ -186,7 +185,6 @@
       "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com"
     },
     "inactivate": "Inaktiválás",
-    "inactive": "Inaktív",
     "status-title": "Státusz módosítás",
     "upload": "Feltöltés"
   },
