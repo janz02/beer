@@ -4728,6 +4728,9 @@
           "isActive": {
             "type": "boolean"
           },
+          "isPartnerActive": {
+            "type": "boolean"
+          },
           "partnerName": {
             "type": "string",
             "nullable": true

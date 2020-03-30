@@ -64,7 +64,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
       columnConfig({
         title: t('partner-contact.field.name'),
         key: 'name',
-        width: '35%',
+        width: '25%',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
@@ -73,7 +73,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         key: 'majorPartner',
         filterMode: FilterMode.BOOLEAN,
         sort: true,
-        width: '14rem',
+        width: '12rem',
         filters: [
           { text: t('partner-contact.field.partner-type.major'), value: 'true' },
           { text: t('partner-contact.field.partner-type.normal'), value: 'false' }
@@ -87,7 +87,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         title: t('partner-contact.field.active'),
         filterMode: FilterMode.BOOLEAN,
         key: 'isActive',
-        width: '10rem',
+        width: '6rem',
         filters: [
           { text: t('partner-contact.field.status-active'), value: 'true' },
           { text: t('partner-contact.field.status-inactive'), value: 'false' }
@@ -125,6 +125,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         paddedBottom
         floatingTitle={label.listTitle}
         forTable
+        width="full"
       >
         <ResponsiveTable
           {...{

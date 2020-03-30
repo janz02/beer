@@ -122,6 +122,12 @@ export interface DetailedCouponVm {
     isActive?: boolean;
     /**
      * 
+     * @type {boolean}
+     * @memberof DetailedCouponVm
+     */
+    isPartnerActive?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof DetailedCouponVm
      */
@@ -235,6 +241,7 @@ export function DetailedCouponVmFromJSONTyped(json: any, ignoreDiscriminator: bo
         'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
         'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
+        'isPartnerActive': !exists(json, 'isPartnerActive') ? undefined : json['isPartnerActive'],
         'partnerName': !exists(json, 'partnerName') ? undefined : json['partnerName'],
         'showCount': !exists(json, 'showCount') ? undefined : json['showCount'],
         'clickCount': !exists(json, 'clickCount') ? undefined : json['clickCount'],
@@ -275,6 +282,7 @@ export function DetailedCouponVmToJSON(value?: DetailedCouponVm | null): any {
         'discountValue': value.discountValue,
         'categoryId': value.categoryId,
         'isActive': value.isActive,
+        'isPartnerActive': value.isPartnerActive,
         'partnerName': value.partnerName,
         'showCount': value.showCount,
         'clickCount': value.clickCount,
