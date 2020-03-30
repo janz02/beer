@@ -419,10 +419,14 @@
     "editor": "Kapcsolattartó szerkesztés",
     "field": {
       "email": "E-mail cím",
-      "major-partner": "Kiemelt partner",
       "name": "Név",
+      "partner-type": {
+        "major": "Fő",
+        "normal": "Normál"
+      },
       "phone": "Telefonszám",
-      "role": "Jogosultság"
+      "role": "Jogosultság",
+      "type": "Kapcsolattartó típus"
     },
     "list-title": "Kapcsolattartók",
     "viewer": "Kapcsolattartó"

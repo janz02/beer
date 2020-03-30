@@ -65,7 +65,8 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
       shrinks: false,
       label: { listTitle: t('partner-contact.list-title') },
       permission: {
-        editor: hasPermission([Roles.PartnerContactEditor])
+        // TODO Fix for PartnerContact.MajorPartner on JWT
+        editor: hasPermission([Roles.PartnerContactApprover])
       },
       route: {
         root: `/contacts`,

@@ -419,10 +419,14 @@
     "editor": "Contact editor",
     "field": {
       "email": "E-mail address",
-      "major-partner": "Major Partner",
       "name": "Name",
+      "partner-type": {
+        "major": "Major",
+        "normal": "Normal"
+      },
       "phone": "Phone",
-      "role": "Role"
+      "role": "Role",
+      "type": "Contact type"
     },
     "list-title": "Contacts",
     "viewer": "Contact"

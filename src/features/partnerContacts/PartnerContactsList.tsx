@@ -69,11 +69,19 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
-        title: t('partner-contact.field.major-partner'),
+        title: t('partner-contact.field.type'),
         key: 'majorPartner',
+        filterMode: FilterMode.BOOLEAN,
         sort: true,
-        width: '10rem',
-        render: value => (value ? t('common.yes') : t('common.no'))
+        width: '14rem',
+        filters: [
+          { text: t('partner-contact.field.partner-type.major'), value: 'true' },
+          { text: t('partner-contact.field.partner-type.normal'), value: 'false' }
+        ],
+        render: value =>
+          value
+            ? t('partner-contact.field.partner-type.major')
+            : t('partner-contact.field.partner-type.normal')
       }),
       columnConfig({
         title: t('partner-contact.field.email'),
