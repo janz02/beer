@@ -492,52 +492,53 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 )}
 
-                {(couponDiscountType === CouponDiscountType.FixValue ||
-                  couponDiscountType === CouponDiscountType.PercentValue) && (
-                  <Col span={8}>
-                    <Form.Item
-                      name="discountValue"
-                      label={t('coupon-create.field.discount-amount')}
-                      dependencies={['discountType']}
-                      rules={[
-                        rule.required(),
-                        () => ({
-                          validator(rule, value) {
-                            const parsedAsFloat = parseFloat(value)
-                            if (couponDiscountType === CouponDiscountType.PercentValue) {
-                              if (parsedAsFloat < 0 || parsedAsFloat > 100) {
-                                return Promise.reject(
-                                  t('error.coupon.percentage-discount-out-of-range')
-                                )
-                              }
-                            } else if (couponDiscountType === CouponDiscountType.FixValue) {
-                              if (!Number.isInteger(parsedAsFloat)) {
-                                return Promise.reject(
-                                  t('error.coupon.fix-discount-must-be-integer')
-                                )
+                {couponType === CouponType.Discount &&
+                  (couponDiscountType === CouponDiscountType.FixValue ||
+                    couponDiscountType === CouponDiscountType.PercentValue) && (
+                    <Col span={8}>
+                      <Form.Item
+                        name="discountValue"
+                        label={t('coupon-create.field.discount-amount')}
+                        dependencies={['discountType']}
+                        rules={[
+                          rule.required(),
+                          () => ({
+                            validator(rule, value) {
+                              const parsedAsFloat = parseFloat(value)
+                              if (couponDiscountType === CouponDiscountType.PercentValue) {
+                                if (parsedAsFloat < 0 || parsedAsFloat > 100) {
+                                  return Promise.reject(
+                                    t('error.coupon.percentage-discount-out-of-range')
+                                  )
+                                }
+                              } else if (couponDiscountType === CouponDiscountType.FixValue) {
+                                if (!Number.isInteger(parsedAsFloat)) {
+                                  return Promise.reject(
+                                    t('error.coupon.fix-discount-must-be-integer')
+                                  )
+                                }
+
+                                if (parsedAsFloat < 1 || parsedAsFloat > 1000000) {
+                                  return Promise.reject(t('error.coupon.fix-discount-out-of-range'))
+                                }
                               }
 
-                              if (parsedAsFloat < 1 || parsedAsFloat > 1000000) {
-                                return Promise.reject(t('error.coupon.fix-discount-out-of-range'))
-                              }
+                              return Promise.resolve()
                             }
-
-                            return Promise.resolve()
+                          })
+                        ]}
+                      >
+                        <Input
+                          disabled={!displayEditor}
+                          suffix={
+                            couponDiscountType === CouponDiscountType.PercentValue
+                              ? '%'
+                              : t('common.currency.huf')
                           }
-                        })
-                      ]}
-                    >
-                      <Input
-                        disabled={!displayEditor}
-                        suffix={
-                          couponDiscountType === CouponDiscountType.PercentValue
-                            ? '%'
-                            : t('common.currency.huf')
-                        }
-                      />
-                    </Form.Item>
-                  </Col>
-                )}
+                        />
+                      </Form.Item>
+                    </Col>
+                  )}
 
                 {couponType === CouponType.Discount && (
                   <Col span={8}>
