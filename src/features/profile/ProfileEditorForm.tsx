@@ -76,11 +76,11 @@ export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
         </Form.Item>
 
         <Form.Item
-          extra={t('common.filed.help.password-format')}
           name="password"
           dependencies={['oldPassword']}
           hasFeedback
           label={t('profile.field.new-password')}
+          extra={t('common.field.help.password-format')}
           rules={[
             ({ getFieldValue }) => ({
               validator(rule, value) {
