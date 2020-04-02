@@ -89,7 +89,7 @@ export interface DetailedCouponVm {
      * @type {Date}
      * @memberof DetailedCouponVm
      */
-    expireDate?: Date;
+    expireDate?: Date | null;
     /**
      * 
      * @type {number}
@@ -101,13 +101,13 @@ export interface DetailedCouponVm {
      * @type {number}
      * @memberof DetailedCouponVm
      */
-    minimumShoppingValue?: number;
+    minimumShoppingValue?: number | null;
     /**
      * 
      * @type {number}
      * @memberof DetailedCouponVm
      */
-    discountValue?: number;
+    discountValue?: number | null;
     /**
      * 
      * @type {number}
@@ -120,6 +120,12 @@ export interface DetailedCouponVm {
      * @memberof DetailedCouponVm
      */
     isActive?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DetailedCouponVm
+     */
+    isPartnerActive?: boolean;
     /**
      * 
      * @type {string}
@@ -229,12 +235,13 @@ export function DetailedCouponVmFromJSONTyped(json: any, ignoreDiscriminator: bo
         'state': !exists(json, 'state') ? undefined : CouponStateFromJSON(json['state']),
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
-        'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
+        'expireDate': !exists(json, 'expireDate') ? undefined : (json['expireDate'] === null ? null : new Date(json['expireDate'])),
         'couponCount': !exists(json, 'couponCount') ? undefined : json['couponCount'],
         'minimumShoppingValue': !exists(json, 'minimumShoppingValue') ? undefined : json['minimumShoppingValue'],
         'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
         'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
+        'isPartnerActive': !exists(json, 'isPartnerActive') ? undefined : json['isPartnerActive'],
         'partnerName': !exists(json, 'partnerName') ? undefined : json['partnerName'],
         'showCount': !exists(json, 'showCount') ? undefined : json['showCount'],
         'clickCount': !exists(json, 'clickCount') ? undefined : json['clickCount'],
@@ -269,12 +276,13 @@ export function DetailedCouponVmToJSON(value?: DetailedCouponVm | null): any {
         'state': CouponStateToJSON(value.state),
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
-        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
+        'expireDate': value.expireDate === undefined ? undefined : (value.expireDate === null ? null : value.expireDate.toISOString()),
         'couponCount': value.couponCount,
         'minimumShoppingValue': value.minimumShoppingValue,
         'discountValue': value.discountValue,
         'categoryId': value.categoryId,
         'isActive': value.isActive,
+        'isPartnerActive': value.isPartnerActive,
         'partnerName': value.partnerName,
         'showCount': value.showCount,
         'clickCount': value.clickCount,

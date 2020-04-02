@@ -21,6 +21,7 @@ export interface UseFileUploadProps {
   disabled?: boolean
   onSuccess?: (id: string) => void
   onRemove?: () => void
+  onClick?: () => void
   initialFileId?: string | null
   mode?: 'image' | 'file'
 }
@@ -30,7 +31,6 @@ export interface UseFileUploadUtils {
   appendedUploadProps?: UploadProps
   handleClear: () => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
-  handleThumbnailDownload: () => void
 }
 
 export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
@@ -130,15 +130,10 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
     [basePath, uploadProps]
   )
 
-  const handleThumbnailDownload = (): void => {
-    // TODO Handle thumbnail click, not very important now, because it can be achieved with the same button next to it
-  }
-
   return {
     thumbnail,
     appendedUploadProps,
     handleFileUpload: handleFileUpload,
-    handleClear,
-    handleThumbnailDownload
+    handleClear
   }
 }

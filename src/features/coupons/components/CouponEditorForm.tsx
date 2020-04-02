@@ -35,7 +35,9 @@ import {
   deleteCouponComment,
   getMajorPartners,
   downloadClaimedCoupons,
-  downloadCoupons
+  downloadCoupons,
+  downloadPrizeFile,
+  downloadPredefinedCodesFile
 } from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteFilled, CheckOutlined, ArrowRightOutlined, ExportOutlined } from '@ant-design/icons'
@@ -45,7 +47,7 @@ import Title from 'antd/lib/typography/Title'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButton } from 'components/buttons/BackButton'
-import { history, comboRoles } from 'router/router'
+import { history } from 'router/router'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission, hasAllPermissions } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
@@ -53,6 +55,7 @@ import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import { FileUploadButton } from 'components/upload/FileUploadButton'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
+import { comboRoles } from 'services/roleHelpers'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -492,52 +495,53 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 )}
 
-                {(couponDiscountType === CouponDiscountType.FixValue ||
-                  couponDiscountType === CouponDiscountType.PercentValue) && (
-                  <Col span={8}>
-                    <Form.Item
-                      name="discountValue"
-                      label={t('coupon-create.field.discount-amount')}
-                      dependencies={['discountType']}
-                      rules={[
-                        rule.required(),
-                        () => ({
-                          validator(rule, value) {
-                            const parsedAsFloat = parseFloat(value)
-                            if (couponDiscountType === CouponDiscountType.PercentValue) {
-                              if (parsedAsFloat < 0 || parsedAsFloat > 100) {
-                                return Promise.reject(
-                                  t('error.coupon.percentage-discount-out-of-range')
-                                )
-                              }
-                            } else if (couponDiscountType === CouponDiscountType.FixValue) {
-                              if (!Number.isInteger(parsedAsFloat)) {
-                                return Promise.reject(
-                                  t('error.coupon.fix-discount-must-be-integer')
-                                )
+                {couponType === CouponType.Discount &&
+                  (couponDiscountType === CouponDiscountType.FixValue ||
+                    couponDiscountType === CouponDiscountType.PercentValue) && (
+                    <Col span={8}>
+                      <Form.Item
+                        name="discountValue"
+                        label={t('coupon-create.field.discount-amount')}
+                        dependencies={['discountType']}
+                        rules={[
+                          rule.required(),
+                          () => ({
+                            validator(rule, value) {
+                              const parsedAsFloat = parseFloat(value)
+                              if (couponDiscountType === CouponDiscountType.PercentValue) {
+                                if (parsedAsFloat < 0 || parsedAsFloat > 100) {
+                                  return Promise.reject(
+                                    t('error.coupon.percentage-discount-out-of-range')
+                                  )
+                                }
+                              } else if (couponDiscountType === CouponDiscountType.FixValue) {
+                                if (!Number.isInteger(parsedAsFloat)) {
+                                  return Promise.reject(
+                                    t('error.coupon.fix-discount-must-be-integer')
+                                  )
+                                }
+
+                                if (parsedAsFloat < 1 || parsedAsFloat > 1000000) {
+                                  return Promise.reject(t('error.coupon.fix-discount-out-of-range'))
+                                }
                               }
 
-                              if (parsedAsFloat < 1 || parsedAsFloat > 1000000) {
-                                return Promise.reject(t('error.coupon.fix-discount-out-of-range'))
-                              }
+                              return Promise.resolve()
                             }
-
-                            return Promise.resolve()
+                          })
+                        ]}
+                      >
+                        <Input
+                          disabled={!displayEditor}
+                          suffix={
+                            couponDiscountType === CouponDiscountType.PercentValue
+                              ? '%'
+                              : t('common.currency.huf')
                           }
-                        })
-                      ]}
-                    >
-                      <Input
-                        disabled={!displayEditor}
-                        suffix={
-                          couponDiscountType === CouponDiscountType.PercentValue
-                            ? '%'
-                            : t('common.currency.huf')
-                        }
-                      />
-                    </Form.Item>
-                  </Col>
-                )}
+                        />
+                      </Form.Item>
+                    </Col>
+                  )}
 
                 {couponType === CouponType.Discount && (
                   <Col span={8}>
@@ -636,6 +640,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                           form.validateFields()
                         }}
+                        onClick={() => dispatch(downloadPrizeFile(coupon!))}
                         initialFileId={coupon?.prizeRulesFileId}
                       />
                     </Form.Item>
@@ -743,33 +748,35 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     <InputNumber disabled={!displayEditor} min={1} max={100000000} />
                   </Form.Item>
                 </Col>
+                {prizeOrDiscount && (
+                  <Col span={8}>
+                    <Form.Item name="predefinedCodesFileId" label={t('coupon-create.upload')}>
+                      <FileUploadButton
+                        disabled={!displayEditor}
+                        onSuccess={fileId => {
+                          form.setFieldsValue({
+                            ...form.getFieldsValue(),
+                            predefinedCodesFileId: fileId
+                          })
 
-                <Col span={8}>
-                  <Form.Item name="predefinedCodesFileId" label={t('coupon-create.upload')}>
-                    <FileUploadButton
-                      disabled={!displayEditor}
-                      onSuccess={fileId => {
-                        form.setFieldsValue({
-                          ...form.getFieldsValue(),
-                          predefinedCodesFileId: fileId
-                        })
+                          form.validateFields()
+                        }}
+                        onRemove={() => {
+                          form.setFieldsValue({
+                            ...form.getFieldsValue(),
+                            predefinedCodesFileId: undefined
+                          })
 
-                        form.validateFields()
-                      }}
-                      onRemove={() => {
-                        form.setFieldsValue({
-                          ...form.getFieldsValue(),
-                          predefinedCodesFileId: undefined
-                        })
+                          form.validateFields()
+                        }}
+                        onClick={() => dispatch(downloadPredefinedCodesFile(coupon!))}
+                        initialFileId={coupon?.predefinedCodesFileId}
+                      />
+                    </Form.Item>
+                  </Col>
+                )}
 
-                        form.validateFields()
-                      }}
-                      initialFileId={coupon?.predefinedCodesFileId}
-                    />
-                  </Form.Item>
-                </Col>
-
-                {!!coupon?.id && (
+                {!!coupon?.id && prizeOrDiscount && (
                   <Col span={8}>
                     <Form.Item name="download" label={t('coupon-create.download')} rules={[]}>
                       <Button
@@ -809,20 +816,22 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 </Row>
 
-                <Row gutter={rowGutter}>
-                  <Col span={8}>
-                    <Button
-                      type="default"
-                      loading={loading}
-                      icon={<ExportOutlined />}
-                      onClick={() => {
-                        dispatch(downloadClaimedCoupons(coupon!))
-                      }}
-                    >
-                      {t('coupon-create.download-redeemed-coupons')}
-                    </Button>
-                  </Col>
-                </Row>
+                {prizeOrDiscount && (
+                  <Row gutter={rowGutter}>
+                    <Col span={8}>
+                      <Button
+                        type="default"
+                        loading={loading}
+                        icon={<ExportOutlined />}
+                        onClick={() => {
+                          dispatch(downloadClaimedCoupons(coupon!))
+                        }}
+                      >
+                        {t('coupon-create.download-redeemed-coupons')}
+                      </Button>
+                    </Col>
+                  </Row>
+                )}
               </Collapse.Panel>
             </Collapse>
           )}

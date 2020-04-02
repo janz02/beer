@@ -2191,6 +2191,15 @@
             }
           },
           {
+            "name": "modifiedAt",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -4707,7 +4716,8 @@
           },
           "expireDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "couponCount": {
             "type": "integer",
@@ -4715,17 +4725,22 @@
           },
           "minimumShoppingValue": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "discountValue": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float",
+            "nullable": true
           },
           "categoryId": {
             "type": "integer",
             "format": "int32"
           },
           "isActive": {
+            "type": "boolean"
+          },
+          "isPartnerActive": {
             "type": "boolean"
           },
           "partnerName": {

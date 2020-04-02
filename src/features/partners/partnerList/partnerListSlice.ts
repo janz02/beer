@@ -59,8 +59,11 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
 ) => {
   try {
     dispatch(getPartnersRequest())
-    const revisedParams = reviseListRequestParams(getState().newsletterList.listParams, params)
+
+    const revisedParams = reviseListRequestParams(getState().partnerList.listParams, params)
+
     const { result, ...pagination } = await api.partner.getPartners(revisedParams)
+
     dispatch(
       getPartnersSuccess({
         partners: result as any,
