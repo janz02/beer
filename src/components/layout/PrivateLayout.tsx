@@ -68,7 +68,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
         roles: pageViewRoles.sites
       },
       {
-        label: t('menu.coupon-categories'),
+        label: t('menu.campaign-categories'),
         link: '/categories',
         icon: <AppstoreAddOutlined />,
         roles: pageViewRoles.categories
