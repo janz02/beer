@@ -47,7 +47,7 @@ import Title from 'antd/lib/typography/Title'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButton } from 'components/buttons/BackButton'
-import { history, comboRoles } from 'router/router'
+import { history } from 'router/router'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission, hasAllPermissions } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
@@ -61,6 +61,7 @@ import {
   formatterSeparator,
   parserSeparator
 } from 'services/numberInputHelpers'
+import { comboRoles } from 'services/roleHelpers'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void

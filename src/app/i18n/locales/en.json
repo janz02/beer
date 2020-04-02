@@ -126,7 +126,7 @@
     }
   },
   "coupon-category": {
-    "add": "Add new coupon category",
+    "add": "Add new campaign category",
     "editor-create": "Create",
     "editor-edit": "Edit",
     "field": {
@@ -195,7 +195,7 @@
     "timeline-title": "Timeline"
   },
   "coupon-list": {
-    "add": "New campaign",
+    "add": "Add new campaign",
     "all-tab": "All",
     "campaign-type": "Campaign type",
     "campaigns": "Campaigns",
@@ -303,7 +303,8 @@
     "file": {
       "download-fail": "Couldn't fetch your file.",
       "image-type-not-supported": "Unsuppored image type.",
-      "invalid-image-size": "Invalid image dimensions."
+      "invalid-image-size": "Invalid image dimensions.",
+      "invalid-prize-rule-type": "Invalid prize rule type."
     },
     "not-found": "Not found.",
     "paginate": {
@@ -334,8 +335,8 @@
     "language": "Language"
   },
   "menu": {
+    "campaign-categories": "Campaign categories",
     "campaigns": "Campaigns",
-    "coupon-categories": "Categories",
     "newsletter": "News letter",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
