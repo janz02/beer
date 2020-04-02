@@ -19,48 +19,12 @@ import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/News
 import { NewsletterListPage } from 'features/newsletter/newsletter-list/NewsletterListPage'
 import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
 import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
-import { Roles } from 'api/swagger/models'
 import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
 import { PartnerContactsPage } from 'features/partnerContacts/PartnerContactsPage'
-
-export const comboRoles = {
-  forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
-  forNkm: [
-    Roles.Administrator,
-    Roles.CampaignManager,
-    Roles.PartnerManager,
-    Roles.BusinessPartnerManager
-  ],
-  forAll: [
-    Roles.Administrator,
-    Roles.CampaignManager,
-    Roles.PartnerManager,
-    Roles.BusinessPartnerManager,
-    Roles.PartnerContactApprover,
-    Roles.PartnerContactEditor
-  ]
-}
-
-export const pageViewRoles = {
-  users: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
-  newsletters: [Roles.Administrator, Roles.CampaignManager],
-  coupons: comboRoles.forAll,
-  couponCreator: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor],
-  couponEditor: [Roles.Administrator, Roles.CampaignManager, ...comboRoles.forPartner],
-  sites: comboRoles.forPartner,
-  categories: comboRoles.forNkm,
-  categoryEditor: [Roles.Administrator],
-  segments: comboRoles.forNkm,
-  profile: comboRoles.forPartner,
-  readonlyProfile: comboRoles.forNkm,
-  selfpartner: comboRoles.forPartner,
-  partners: comboRoles.forNkm,
-  contacts: comboRoles.forPartner,
-  tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
-}
+import { pageViewRoles } from 'services/roleHelpers'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -127,7 +91,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/campaigns"
-      roles={pageViewRoles.coupons}
+      roles={pageViewRoles.campaigns}
       component={CouponListPage}
     />
     <PrivateRoute
@@ -139,7 +103,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/campaign/:id"
-      roles={pageViewRoles.coupons}
+      roles={pageViewRoles.campaigns}
       component={CouponViewPage}
     />
     <PrivateRoute

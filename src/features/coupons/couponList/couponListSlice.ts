@@ -113,7 +113,7 @@ export const getCoupons = (params: ListRequestParams = {}): AppThunk => async (
         ...(c as any),
         startDate: moment(c.startDate),
         endDate: moment(c.endDate),
-        expireDate: moment(c.expireDate)
+        expireDate: c.expireDate && moment(c.expireDate)
       })) ?? []
 
     dispatch(

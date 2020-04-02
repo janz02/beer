@@ -19,7 +19,7 @@ export interface Coupon {
   discountValue?: number | null
   startDate?: moment.Moment
   endDate?: moment.Moment
-  expireDate?: moment.Moment
+  expireDate?: moment.Moment | null
   couponCount?: number
   minimumShoppingValue?: number
   tags?: []

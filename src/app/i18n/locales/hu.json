@@ -126,7 +126,7 @@
     }
   },
   "coupon-category": {
-    "add": "Új kupon kategória hozzáadása",
+    "add": "Új kampány kategória hozzáadása",
     "editor-create": "Létrehozás",
     "editor-edit": "Szerkesztés",
     "field": {
@@ -195,7 +195,7 @@
     "timeline-title": "Előzmények"
   },
   "coupon-list": {
-    "add": "Új kampány",
+    "add": "Új kampány hozzáadása",
     "all-tab": "Összes",
     "campaign-type": "Kampány típus",
     "campaigns": "Kampányok",
@@ -303,7 +303,8 @@
     "file": {
       "download-fail": "Sikertelen fájl lekérdezés.",
       "image-type-not-supported": "Rossz fájl formátum.",
-      "invalid-image-size": "Rossz kép méret."
+      "invalid-image-size": "Rossz kép méret.",
+      "invalid-prize-rule-type": "Rossz nyeremény szabály típus."
     },
     "not-found": "Nem található.",
     "paginate": {
@@ -334,8 +335,8 @@
     "language": "Nyelv"
   },
   "menu": {
+    "campaign-categories": "Kampány kategóriák",
     "campaigns": "Kampányok",
-    "coupon-categories": "Kategóriák",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
