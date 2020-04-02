@@ -3,7 +3,7 @@
 import moment from 'moment'
 
 const setupMomentEn = (): any =>
-  moment.locale('en', {
+  moment.updateLocale('en', {
     months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
       '_'
     ),

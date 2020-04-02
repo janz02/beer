@@ -39,7 +39,7 @@ function week(this: any, isFuture: boolean): string {
 }
 
 const setupMomentHu = (): any =>
-  moment.locale('hu', {
+  moment.updateLocale('hu', {
     months: 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'.split(
       '_'
     ),
