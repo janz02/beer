@@ -4707,7 +4707,8 @@
           },
           "expireDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "couponCount": {
             "type": "integer",
@@ -4715,11 +4716,13 @@
           },
           "minimumShoppingValue": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "discountValue": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "float",
+            "nullable": true
           },
           "categoryId": {
             "type": "integer",
