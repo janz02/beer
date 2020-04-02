@@ -19,11 +19,11 @@ import {
   RightOutlined,
   LeftOutlined
 } from '@ant-design/icons'
-import { pageViewRoles } from 'router/router'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { useTranslation } from 'react-i18next'
 import { logout } from 'features/auth/authSlice'
+import { pageViewRoles } from 'services/roleHelpers'
 
 export const PrivateLayout: React.FC = ({ children }) => {
   const dispatch = useDispatch()

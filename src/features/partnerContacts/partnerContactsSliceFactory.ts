@@ -164,7 +164,6 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
 
   const saveItem = (id: number, data: PartnerContact): AppThunk => async dispatch => {
     try {
-      const state = ((await dispatch(getSliceState())) as any) as PartnerContactsState
       dispatch(saveItemRequest())
 
       // TODO: consider joning these updates into one endpoint
