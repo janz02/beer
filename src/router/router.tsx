@@ -91,7 +91,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/campaigns"
-      roles={pageViewRoles.coupons}
+      roles={pageViewRoles.campaigns}
       component={CouponListPage}
     />
     <PrivateRoute
@@ -103,7 +103,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/campaign/:id"
-      roles={pageViewRoles.coupons}
+      roles={pageViewRoles.campaigns}
       component={CouponViewPage}
     />
     <PrivateRoute

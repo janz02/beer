@@ -59,19 +59,19 @@ export const PrivateLayout: React.FC = ({ children }) => {
         label: t('menu.campaigns'),
         link: '/campaigns',
         icon: <BarcodeOutlined />,
-        roles: pageViewRoles.coupons
+        roles: pageViewRoles.campaigns
       },
       {
-        label: t('menu.sites'),
-        link: '/sites',
-        icon: <ShopOutlined />,
-        roles: pageViewRoles.sites
+        label: t('menu.partners'),
+        link: '/partners',
+        icon: <HomeFilled />,
+        roles: pageViewRoles.partners
       },
       {
-        label: t('menu.campaign-categories'),
-        link: '/categories',
-        icon: <AppstoreAddOutlined />,
-        roles: pageViewRoles.categories
+        label: t('menu.partner-data'),
+        link: '/selfpartner',
+        icon: <ContactsOutlined />,
+        roles: pageViewRoles.selfpartner
       },
       {
         label: t('menu.newsletter'),
@@ -86,22 +86,22 @@ export const PrivateLayout: React.FC = ({ children }) => {
         roles: pageViewRoles.users
       },
       {
+        label: t('menu.campaign-categories'),
+        link: '/categories',
+        icon: <AppstoreAddOutlined />,
+        roles: pageViewRoles.categories
+      },
+      {
+        label: t('menu.sites'),
+        link: '/sites',
+        icon: <ShopOutlined />,
+        roles: pageViewRoles.sites
+      },
+      {
         label: t('menu.partner-contacts'),
         link: '/contacts',
         icon: <UsergroupAddOutlined />,
         roles: pageViewRoles.contacts
-      },
-      {
-        label: t('menu.partner-data'),
-        link: '/selfpartner',
-        icon: <ContactsOutlined />,
-        roles: pageViewRoles.selfpartner
-      },
-      {
-        label: t('menu.partners'),
-        link: '/partners',
-        icon: <HomeFilled />,
-        roles: pageViewRoles.partners
       }
     ],
     [t]
