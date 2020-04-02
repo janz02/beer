@@ -45,6 +45,7 @@ export const configApiMiddleware = (): void => {
           tokenPromiseResolver()
           tokenPromise = null
         } catch (error) {
+          tokenPromise = null
           store.dispatch(logout())
         }
 
