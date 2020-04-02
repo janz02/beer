@@ -2191,6 +2191,15 @@
             }
           },
           {
+            "name": "modifiedAt",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {

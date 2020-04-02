@@ -49,6 +49,7 @@ export interface GetTemplateRequest {
 
 export interface GetTemplatesRequest {
     name?: string | null;
+    modifiedAt?: Date | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -180,6 +181,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
 
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.modifiedAt !== undefined) {
+            queryParameters['modifiedAt'] = (requestParameters.modifiedAt as any).toISOString();
         }
 
         if (requestParameters.page !== undefined) {
