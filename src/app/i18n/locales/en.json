@@ -303,7 +303,8 @@
     "file": {
       "download-fail": "Couldn't fetch your file.",
       "image-type-not-supported": "Unsuppored image type.",
-      "invalid-image-size": "Invalid image dimensions."
+      "invalid-image-size": "Invalid image dimensions.",
+      "invalid-prize-rule-type": "Invalid prize rule type."
     },
     "not-found": "Not found.",
     "paginate": {

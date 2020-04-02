@@ -303,7 +303,8 @@
     "file": {
       "download-fail": "Sikertelen fájl lekérdezés.",
       "image-type-not-supported": "Rossz fájl formátum.",
-      "invalid-image-size": "Rossz kép méret."
+      "invalid-image-size": "Rossz kép méret.",
+      "invalid-prize-rule-type": "Rossz nyeremény szabály típus."
     },
     "not-found": "Nem található.",
     "paginate": {
