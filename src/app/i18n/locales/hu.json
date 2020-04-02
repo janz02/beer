@@ -51,12 +51,8 @@
     "escape-editor": "Szerkesztés elhagyása",
     "field": {
       "help": {
+        "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
         "phone-format": "+36 20 123 4567"
-      }
-    },
-    "filed": {
-      "help": {
-        "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt."
       }
     },
     "go-back": "Vissza",

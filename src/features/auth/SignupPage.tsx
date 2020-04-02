@@ -37,6 +37,7 @@ export const SignupPage: React.FC = () => {
           name="password"
           hasFeedback
           label={t('auth.field.password')}
+          extra={t('common.field.help.password-format')}
           rules={[rule.requiredString(), rule.password()]}
         >
           <Input.Password maxLength={64} />
