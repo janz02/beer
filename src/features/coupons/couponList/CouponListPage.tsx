@@ -219,6 +219,15 @@ export const CouponListPage: React.FC = () => {
         }
       }),
       columnConfig({
+        title: t('coupon-list.draw-date'),
+        key: 'drawDate',
+        ellipsis: false,
+        sort: true,
+        render(value: moment.Moment, coupon: Coupon) {
+          return coupon.type === CouponType.Prize && <MomentDisplay date={value} />
+        }
+      }),
+      columnConfig({
         title: t('coupon-list.mode'),
         key: 'mode',
         ellipsis: false,
