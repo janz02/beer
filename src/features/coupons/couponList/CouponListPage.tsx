@@ -76,6 +76,7 @@ export const CouponListPage: React.FC = () => {
       'isActive',
       'categoryId',
       'rank',
+      'drawDate',
       'mode',
       'discountType',
       'discountValue',
@@ -223,6 +224,7 @@ export const CouponListPage: React.FC = () => {
         key: 'drawDate',
         ellipsis: false,
         sort: true,
+        filterMode: FilterMode.DATEPICKER,
         render(value: moment.Moment, coupon: Coupon) {
           return coupon.type === CouponType.Prize && <MomentDisplay date={value} />
         }
