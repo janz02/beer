@@ -12,7 +12,6 @@ import { PartnerContact } from 'models/partnerContact'
 import { Form, Input, Select, Radio } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
-import { UserType } from 'models/user'
 import { useReusablePartnerContacts } from './useReusablePartnerContacts'
 
 export interface PartnerContactsParams {
@@ -39,11 +38,11 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
-  const { permission } = useReusablePartnerContacts()
+  const { permission, userType } = useReusablePartnerContacts()
 
   const modalTitle = permission.editor ? t('partner-contact.editor') : t('partner-contact.viewer')
 
-  const roleOptions = useRoleGenerator(UserType.PARTNER)
+  const roleOptions = useRoleGenerator(userType)
 
   // TODO: QUICK FIXED: render infinite loop, this fixes it but couldn't find the trigger
   const handleGetItemRef = useRef<() => void | null>()

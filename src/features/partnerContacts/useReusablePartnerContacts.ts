@@ -12,6 +12,7 @@ import { useSelector } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
+import { UserType } from 'models/user'
 
 interface PartnerContactsRoutes {
   root: string
@@ -32,6 +33,7 @@ interface UseReusablePartnerContactsUtils {
   route: PartnerContactsRoutes
   label: PartnerContactsLabel
   actions: PartnerContactsSliceActions
+  userType: UserType
   selector: (state: RootState) => PartnerContactsState
 }
 export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils => {
@@ -46,6 +48,8 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
       const actions = partnerContactsSlice.actions
       dispatch(actions.setListConstraints({ partnerId }))
       return {
+        // TODO: remove this id checking
+        userType: +partnerId! === 1 ? UserType.NKM : UserType.PARTNER,
         shrinks: true,
         permission: {
           editor: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
@@ -62,6 +66,7 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
     const actions = contactsSlice.actions
     dispatch(actions.setListConstraints({ partnerId: selfPartnerId }))
     return {
+      userType: UserType.PARTNER,
       shrinks: false,
       label: { listTitle: t('partner-contact.list-title') },
       permission: {

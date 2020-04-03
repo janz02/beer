@@ -52,7 +52,7 @@ export const NewsletterList: FC = () => {
     addKeyProp
   } = useTableUtils<NewsletterPreview>({
     listParamsState: listParams,
-    filterKeys: ['name'],
+    filterKeys: ['name', 'modifiedAt'],
     getDataAction: getNewsletterTemplates
   })
 
@@ -74,7 +74,8 @@ export const NewsletterList: FC = () => {
         title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
         width: '10rem',
-        renderMode: 'date time'
+        renderMode: 'date time',
+        filterMode: FilterMode.DATEPICKER
       }),
       columnConfig({
         title: t('newsletter.field.template-modified-by'),
