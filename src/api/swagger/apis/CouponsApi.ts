@@ -97,6 +97,7 @@ export interface GetCouponsRequest {
     discountType?: CouponDiscountType;
     createdBy?: string | null;
     preferredPosition?: number | null;
+    drawDate?: Date | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -411,6 +412,10 @@ export class CouponsApi extends runtime.BaseAPI {
 
         if (requestParameters.preferredPosition !== undefined) {
             queryParameters['preferredPosition'] = requestParameters.preferredPosition;
+        }
+
+        if (requestParameters.drawDate !== undefined) {
+            queryParameters['drawDate'] = (requestParameters.drawDate as any).toISOString();
         }
 
         if (requestParameters.page !== undefined) {
