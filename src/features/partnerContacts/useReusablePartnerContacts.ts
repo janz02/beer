@@ -48,6 +48,7 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
       const actions = partnerContactsSlice.actions
       dispatch(actions.setListConstraints({ partnerId }))
       return {
+        // TODO: remove this id checking
         userType: +partnerId! === 1 ? UserType.NKM : UserType.PARTNER,
         shrinks: true,
         permission: {
