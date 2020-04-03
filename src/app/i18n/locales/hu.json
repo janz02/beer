@@ -51,12 +51,8 @@
     "escape-editor": "Szerkesztés elhagyása",
     "field": {
       "help": {
+        "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
         "phone-format": "+36 20 123 4567"
-      }
-    },
-    "filed": {
-      "help": {
-        "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt."
       }
     },
     "go-back": "Vissza",
@@ -204,10 +200,11 @@
     "coupon-count": "Kuponok száma",
     "discount-amount": "Kedvezmény mértéke",
     "discount-type": "Kedvezmény típus",
+    "draw-date": "Sorsolás dátuma",
     "end-date": "Kampány vége",
     "expire-date": "Kupon lejárati dátum",
     "minimum-shopping-value": "Minimális vásárlási érték",
-    "mode": "Kupon mód",
+    "mode": "Beváltás módja",
     "name": "Kampány név",
     "partner": "Partner",
     "pending-tab": "Jóváhagyásra vár",

@@ -55,6 +55,12 @@ import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import { FileUploadButton } from 'components/upload/FileUploadButton'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
+import {
+  formatterSeparatorAndFt,
+  parserSeparatorAndFt,
+  formatterSeparator,
+  parserSeparator
+} from 'services/numberInputHelpers'
 import { comboRoles } from 'services/roleHelpers'
 
 export interface CouponEditorFormProps {
@@ -582,7 +588,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     extra={t('coupon-create.field.item-price-help')}
                     className="mark-label-as-required"
                   >
-                    <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
+                    <InputNumber
+                      disabled={!displayEditor}
+                      formatter={formatterSeparatorAndFt}
+                      parser={parserSeparatorAndFt}
+                    />
                   </Form.Item>
                 </Col>
 
@@ -611,7 +621,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     extra={t('coupon-create.field.previous-year-average-basket-value-help')}
                     className="mark-label-as-required"
                   >
-                    <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
+                    <InputNumber
+                      disabled={!displayEditor}
+                      formatter={formatterSeparatorAndFt}
+                      parser={parserSeparatorAndFt}
+                    />
                   </Form.Item>
                 </Col>
 
@@ -745,7 +759,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     label={t('coupon-create.field.coupon-count')}
                     rules={[rule.required(), rule.positiveInteger()]}
                   >
-                    <InputNumber disabled={!displayEditor} min={1} max={100000000} />
+                    <InputNumber
+                      disabled={!displayEditor}
+                      formatter={formatterSeparator}
+                      parser={parserSeparator}
+                      min={1}
+                      max={100000000}
+                    />
                   </Form.Item>
                 </Col>
                 {prizeOrDiscount && (

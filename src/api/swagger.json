@@ -1487,6 +1487,15 @@
             }
           },
           {
+            "name": "drawDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -4803,6 +4812,11 @@
           "preferredPosition": {
             "type": "integer",
             "format": "int32"
+          },
+          "drawDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },

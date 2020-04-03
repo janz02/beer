@@ -51,12 +51,8 @@
     "escape-editor": "Escape editor mode",
     "field": {
       "help": {
+        "password-format": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space.",
         "phone-format": "+36 20 123 4567"
-      }
-    },
-    "filed": {
-      "help": {
-        "password-format": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space."
       }
     },
     "go-back": "Go back",
@@ -204,10 +200,11 @@
     "coupon-count": "Coupon count",
     "discount-amount": "Discount amount",
     "discount-type": "Discount type",
+    "draw-date": "Draw date",
     "end-date": "Campaign end date",
     "expire-date": "Coupon expire date",
     "minimum-shopping-value": "Minimum shopping value",
-    "mode": "Coupon mode",
+    "mode": "Claim mode",
     "name": "Campaign name",
     "partner": "Partner",
     "pending-tab": "Pending approve",
