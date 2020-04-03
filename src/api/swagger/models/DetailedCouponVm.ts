@@ -216,6 +216,12 @@ export interface DetailedCouponVm {
      * @memberof DetailedCouponVm
      */
     preferredPosition?: number;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DetailedCouponVm
+     */
+    drawDate?: Date | null;
 }
 
 export function DetailedCouponVmFromJSON(json: any): DetailedCouponVm {
@@ -257,6 +263,7 @@ export function DetailedCouponVmFromJSONTyped(json: any, ignoreDiscriminator: bo
         'approvedBy': !exists(json, 'approvedBy') ? undefined : json['approvedBy'],
         'approvedDate': !exists(json, 'approvedDate') ? undefined : (json['approvedDate'] === null ? null : new Date(json['approvedDate'])),
         'preferredPosition': !exists(json, 'preferredPosition') ? undefined : json['preferredPosition'],
+        'drawDate': !exists(json, 'drawDate') ? undefined : (json['drawDate'] === null ? null : new Date(json['drawDate'])),
     };
 }
 
@@ -298,6 +305,7 @@ export function DetailedCouponVmToJSON(value?: DetailedCouponVm | null): any {
         'approvedBy': value.approvedBy,
         'approvedDate': value.approvedDate === undefined ? undefined : (value.approvedDate === null ? null : value.approvedDate.toISOString()),
         'preferredPosition': value.preferredPosition,
+        'drawDate': value.drawDate === undefined ? undefined : (value.drawDate === null ? null : value.drawDate.toISOString()),
     };
 }
 
