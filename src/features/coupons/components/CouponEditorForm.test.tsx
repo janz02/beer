@@ -1,30 +1,26 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import { CouponEditorForm } from './CouponEditorForm'
+import { CouponEditorForm, CouponEditorFormProps } from './CouponEditorForm'
 import { Card } from 'antd'
 import { setupStore, setupUseParams } from '../../../../config/setupMocks'
 
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 describe('CouponEditorForm tests', () => {
   it('should not display button when not editing or not new', () => {
     // Arrange
-    const props = {
-      handleCouponSave: () => {
-        /* no implementation */
-      },
+    const props: CouponEditorFormProps = {
       loading: false,
-      couponIsNew: false
+      couponIsNew: false,
+      editing: false
     }
-
     setupStore({ coupons: { categories: [] } })
     setupUseParams({ editing: false })
 
     // Act
-    const sut = mount(<CouponEditorForm {...props} />)
+    const wrapper = shallow(<CouponEditorForm {...props} />)
 
     // Assert
-    expect(sut.find(Card)).toBeTruthy()
-    expect(sut.props().couponIsNew).toEqual(false)
+    expect(wrapper.find(Card)).toBeTruthy()
+    expect(wrapper.props().couponIsNew).toEqual(false)
   })
 })

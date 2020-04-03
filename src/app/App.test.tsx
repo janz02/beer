@@ -1,9 +1,15 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { App } from 'app/App'
+import { shallow } from 'enzyme'
 
-it('renders without crashing', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<App />, div)
-  ReactDOM.unmountComponentAtNode(div)
+describe('App tests', () => {
+  it('should render without crashing', () => {
+    // Arrange
+
+    // Act
+    const wrapper = shallow(<App />)
+
+    // Assert
+    expect(wrapper).toBeTruthy()
+  })
 })
