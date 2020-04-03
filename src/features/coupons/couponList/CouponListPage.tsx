@@ -76,6 +76,7 @@ export const CouponListPage: React.FC = () => {
       'isActive',
       'categoryId',
       'rank',
+      'drawDate',
       'startDate',
       'endDate',
       'expireDate',
@@ -222,6 +223,16 @@ export const CouponListPage: React.FC = () => {
         filterMode: FilterMode.DATEPICKER,
         render(value: moment.Moment, coupon: Coupon) {
           return coupon.type === CouponType.Discount && <MomentDisplay date={value} />
+        }
+      }),
+      columnConfig({
+        title: t('coupon-list.draw-date'),
+        key: 'drawDate',
+        ellipsis: false,
+        sort: true,
+        filterMode: FilterMode.DATEPICKER,
+        render(value: moment.Moment, coupon: Coupon) {
+          return coupon.type === CouponType.Prize && <MomentDisplay date={value} />
         }
       }),
       columnConfig({
