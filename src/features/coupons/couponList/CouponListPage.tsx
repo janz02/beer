@@ -76,6 +76,9 @@ export const CouponListPage: React.FC = () => {
       'isActive',
       'categoryId',
       'rank',
+      'startDate',
+      'endDate',
+      'expireDate',
       'mode',
       'discountType',
       'discountValue',
@@ -196,6 +199,7 @@ export const CouponListPage: React.FC = () => {
         key: 'startDate',
         ellipsis: false,
         sort: true,
+        filterMode: FilterMode.DATEPICKER,
         render(value: moment.Moment) {
           return <MomentDisplay date={value} />
         }
@@ -205,6 +209,7 @@ export const CouponListPage: React.FC = () => {
         ellipsis: false,
         key: 'endDate',
         sort: true,
+        filterMode: FilterMode.DATEPICKER,
         render(value: moment.Moment) {
           return <MomentDisplay date={value} />
         }
@@ -214,6 +219,7 @@ export const CouponListPage: React.FC = () => {
         key: 'expireDate',
         ellipsis: false,
         sort: true,
+        filterMode: FilterMode.DATEPICKER,
         render(value: moment.Moment, coupon: Coupon) {
           return coupon.type === CouponType.Discount && <MomentDisplay date={value} />
         }
