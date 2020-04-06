@@ -36,6 +36,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
   } = useTableUtils<Category>({
     listParamsState: listParams,
     filterKeys: ['name'],
+    sortWithoutDefaultOption: true,
     getDataAction: getCategories
   })
 
