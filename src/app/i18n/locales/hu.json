@@ -494,7 +494,8 @@
       "role": "Szerepkör",
       "status": "Státusz",
       "status-active": "Aktív",
-      "status-inactive": "Inaktív"
+      "status-inactive": "Inaktív",
+      "username": "Felhasználónév"
     },
     "msg": {
       "change-succesful": "Felhasználó jogosultsága megváltoztatva"

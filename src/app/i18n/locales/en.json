@@ -494,7 +494,8 @@
       "role": "Role",
       "status": "Status",
       "status-active": "Active",
-      "status-inactive": "Inactive"
+      "status-inactive": "Inactive",
+      "username": "Username"
     },
     "msg": {
       "change-succesful": "User access successfully changed"

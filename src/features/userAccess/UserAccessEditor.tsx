@@ -77,7 +77,9 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
         onFinish: handleSave
       }}
     >
-      <Text>{editedUser?.name}</Text>
+      <Form.Item label={t('user-access.field.username')}>
+        <Text>{editedUser?.name}</Text>
+      </Form.Item>
 
       <Form.Item name="role" label={t('user-access.field.role')} rules={[rule.requiredString()]}>
         <Select>
@@ -88,6 +90,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
           ))}
         </Select>
       </Form.Item>
+
       <Form.Item
         name="status"
         label={t('user-access.field.status')}
