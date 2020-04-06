@@ -56,10 +56,10 @@ import { FileUploadButton } from 'components/upload/FileUploadButton'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 import {
-  formatterSeparatorAndFt,
-  parserSeparatorAndFt,
-  formatterSeparator,
-  parserSeparator
+  getSeparatorAndSuffixFormatter,
+  getSeparatorAndSuffixParser,
+  separatorFormatter,
+  separatorParser
 } from 'services/numberInputHelpers'
 import { comboRoles } from 'services/roleHelpers'
 
@@ -537,14 +537,23 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                           })
                         ]}
                       >
-                        <Input
-                          disabled={!displayEditor}
-                          suffix={
-                            couponDiscountType === CouponDiscountType.PercentValue
-                              ? '%'
-                              : t('common.currency.huf')
-                          }
-                        />
+                        {couponDiscountType === CouponDiscountType.PercentValue ? (
+                          <InputNumber
+                            disabled={!displayEditor}
+                            formatter={getSeparatorAndSuffixFormatter('%')}
+                            parser={getSeparatorAndSuffixParser('%')}
+                            min={0}
+                            max={100}
+                          />
+                        ) : (
+                          <InputNumber
+                            disabled={!displayEditor}
+                            formatter={getSeparatorAndSuffixFormatter('Ft')}
+                            parser={getSeparatorAndSuffixParser('Ft')}
+                            min={1}
+                            max={1000000}
+                          />
+                        )}
                       </Form.Item>
                     </Col>
                   )}
@@ -556,7 +565,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       label={t('coupon-create.field.minimum-shopping-value')}
                       rules={[rule.positiveInteger()]}
                     >
-                      <Input disabled={!displayEditor} suffix={t('common.currency.huf')} />
+                      <InputNumber
+                        disabled={!displayEditor}
+                        formatter={getSeparatorAndSuffixFormatter('Ft')}
+                        parser={getSeparatorAndSuffixParser('Ft')}
+                      />
                     </Form.Item>
                   </Col>
                 )}
@@ -590,8 +603,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   >
                     <InputNumber
                       disabled={!displayEditor}
-                      formatter={formatterSeparatorAndFt}
-                      parser={parserSeparatorAndFt}
+                      formatter={getSeparatorAndSuffixFormatter('Ft')}
+                      parser={getSeparatorAndSuffixParser('Ft')}
                     />
                   </Form.Item>
                 </Col>
@@ -623,8 +636,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   >
                     <InputNumber
                       disabled={!displayEditor}
-                      formatter={formatterSeparatorAndFt}
-                      parser={parserSeparatorAndFt}
+                      formatter={getSeparatorAndSuffixFormatter('Ft')}
+                      parser={getSeparatorAndSuffixParser('Ft')}
                     />
                   </Form.Item>
                 </Col>
@@ -761,8 +774,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   >
                     <InputNumber
                       disabled={!displayEditor}
-                      formatter={formatterSeparator}
-                      parser={parserSeparator}
+                      formatter={separatorFormatter}
+                      parser={separatorParser}
                       min={1}
                       max={100000000}
                     />
