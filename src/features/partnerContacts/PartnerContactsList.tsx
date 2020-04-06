@@ -80,7 +80,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
             : t('partner-contact.field.type'),
         key: 'role',
         filterMode: FilterMode.FILTER,
-        width: '17rem',
+        width: '12rem',
         filters: roleOptions,
         render: (value: string, record: PartnerContact) =>
           userType === UserType.NKM

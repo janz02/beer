@@ -2760,6 +2760,13 @@
             }
           },
           {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Roles"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -5044,6 +5051,10 @@
             "format": "int32"
           },
           "claimCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "discardCount": {
             "type": "integer",
             "format": "int32"
           },
