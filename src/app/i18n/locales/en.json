@@ -41,9 +41,6 @@
     "activate": "Activate",
     "cancel": "Cancel",
     "confirm": "Ok",
-    "currency": {
-      "huf": "HUF"
-    },
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
