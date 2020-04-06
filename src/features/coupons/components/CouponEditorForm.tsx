@@ -350,7 +350,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       label={t('coupon-create.field.description')}
                       rules={[rule.requiredString(), rule.max(255)]}
                     >
-                      <TextArea disabled={!displayEditor} maxLength={255} />
+                      <TextArea disabled={!displayEditor} maxLength={255} rows={4} />
                     </Form.Item>
                   )}
                 </Col>
@@ -943,25 +943,29 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponStatusDropdown()}
               </Form.Item>
 
-              <Form.Item
-                name="comment"
-                label={t('coupon-create.field.comment')}
-                dependencies={['couponState']}
-                rules={[
-                  ({ getFieldValue }) => ({
-                    validator(rule, value) {
-                      const couponState = getFieldValue('couponState')
-                      if (!couponState && !value) {
-                        return Promise.reject(t('error.comment.comment-or-state-required'))
-                      }
+              {coupon &&
+                (coupon.state === CouponState.Created || coupon.state === CouponState.Waiting) && (
+                  <Form.Item
+                    name="comment"
+                    label={t('coupon-create.field.comment')}
+                    dependencies={['couponState']}
+                    rules={[
+                      rule.max(200),
+                      ({ getFieldValue }) => ({
+                        validator(rule, value) {
+                          const couponState = getFieldValue('couponState')
+                          if (!couponState && !value) {
+                            return Promise.reject(t('error.comment.comment-or-state-required'))
+                          }
 
-                      return Promise.resolve()
-                    }
-                  })
-                ]}
-              >
-                <TextArea />
-              </Form.Item>
+                          return Promise.resolve()
+                        }
+                      })
+                    ]}
+                  >
+                    <TextArea rows={3} maxLength={200} />
+                  </Form.Item>
+                )}
 
               <Form.Item className="actions">
                 <Button type="primary" htmlType="submit" disabled={!submitableComment}>
