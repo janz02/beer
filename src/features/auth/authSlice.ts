@@ -15,6 +15,8 @@ const clearJwtData = (): void => {
   sessionStorage.removeItem('jwt')
   sessionStorage.removeItem('refreshToken')
   sessionStorage.removeItem('jwtExpiration')
+  sessionStorage.removeItem('partnerId')
+  sessionStorage.removeItem('partnerName')
 }
 
 const initialState = {
