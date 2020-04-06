@@ -317,6 +317,9 @@
     "partner-contact": {
       "invalid-type": "Invalid partner contact type."
     },
+    "rtd": {
+      "communication": "RTD communication error."
+    },
     "unknown-try-again": "Please, try again!"
   },
   "error-page": {
@@ -494,7 +497,8 @@
       "role": "Role",
       "status": "Status",
       "status-active": "Active",
-      "status-inactive": "Inactive"
+      "status-inactive": "Inactive",
+      "username": "Username"
     },
     "msg": {
       "change-succesful": "User access successfully changed"

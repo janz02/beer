@@ -317,6 +317,9 @@
     "partner-contact": {
       "invalid-type": "Nem megfelelő partner típus."
     },
+    "rtd": {
+      "communication": "RTD kommunikációs hiba."
+    },
     "unknown-try-again": "Kérem, próbáld újra"
   },
   "error-page": {
@@ -494,7 +497,8 @@
       "role": "Szerepkör",
       "status": "Státusz",
       "status-active": "Aktív",
-      "status-inactive": "Inaktív"
+      "status-inactive": "Inaktív",
+      "username": "Felhasználónév"
     },
     "msg": {
       "change-succesful": "Felhasználó jogosultsága megváltoztatva"
