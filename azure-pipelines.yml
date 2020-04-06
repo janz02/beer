@@ -27,11 +27,6 @@ steps:
   displayName: 'Use GitVersion to add version'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
-
 - task: Npm@1
   inputs:
     command: 'ci'

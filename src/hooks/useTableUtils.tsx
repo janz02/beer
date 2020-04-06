@@ -40,6 +40,7 @@ export interface ListRequestParams extends Pagination {
 export interface UseTableUtilsProps<T> {
   listParamsState: ListRequestParams
   filterKeys?: (keyof T)[]
+  sortWithoutDefaultOption?: boolean
   getDataAction: (params: ListRequestParams) => any
 }
 
@@ -124,7 +125,7 @@ export const basePaginationConfig = (
 function useTableUtils<T extends { [key: string]: any }>(
   props: UseTableUtilsProps<T>
 ): UseTableUtils<T> {
-  const { listParamsState, getDataAction, filterKeys } = props
+  const { listParamsState, getDataAction, filterKeys, sortWithoutDefaultOption } = props
 
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
@@ -251,6 +252,10 @@ function useTableUtils<T extends { [key: string]: any }>(
       filters: Record<string, React.ReactText[] | null>,
       sorter: SorterResult<any>
     ) => {
+      // In case of no sort use 'ascend'. So instead of 'ascend' -> 'descent' -> undefined -> 'ascend'
+      // it will be 'ascend' -> 'descent' -> 'ascend'
+      if (sortWithoutDefaultOption && !sorter.order) sorter.order = 'ascend'
+
       const correctedPagination = calculatePagination(
         {
           page: pagination.current,
@@ -277,7 +282,7 @@ function useTableUtils<T extends { [key: string]: any }>(
 
       dispatch(getDataAction(requestParams))
     },
-    [dispatch, filterKeys, getDataAction, listParamsState, toOrderByType]
+    [dispatch, filterKeys, getDataAction, listParamsState, sortWithoutDefaultOption, toOrderByType]
   )
 
   return {

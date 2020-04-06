@@ -128,7 +128,7 @@ export class SegmentsApi extends runtime.BaseAPI {
 
     /**
      */
-    async upsertSegmentsRaw(requestParameters: UpsertSegmentsRequest): Promise<runtime.ApiResponse<void>> {
+    async upsertSegmentsRaw(requestParameters: UpsertSegmentsRequest): Promise<runtime.ApiResponse<Array<number>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -147,13 +147,14 @@ export class SegmentsApi extends runtime.BaseAPI {
             body: CreateSegmentationCommandToJSON(requestParameters.createSegmentationCommand),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse<any>(response);
     }
 
     /**
      */
-    async upsertSegments(requestParameters: UpsertSegmentsRequest): Promise<void> {
-        await this.upsertSegmentsRaw(requestParameters);
+    async upsertSegments(requestParameters: UpsertSegmentsRequest): Promise<Array<number>> {
+        const response = await this.upsertSegmentsRaw(requestParameters);
+        return await response.value();
     }
 
 }
