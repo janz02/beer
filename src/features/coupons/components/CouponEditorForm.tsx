@@ -605,6 +605,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       disabled={!displayEditor}
                       formatter={getSeparatorAndSuffixFormatter('Ft')}
                       parser={getSeparatorAndSuffixParser('Ft')}
+                      max={999999999}
                     />
                   </Form.Item>
                 </Col>
@@ -638,6 +639,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       disabled={!displayEditor}
                       formatter={getSeparatorAndSuffixFormatter('Ft')}
                       parser={getSeparatorAndSuffixParser('Ft')}
+                      max={999999999}
                     />
                   </Form.Item>
                 </Col>
