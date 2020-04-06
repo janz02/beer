@@ -39,6 +39,7 @@
   },
   "common": {
     "activate": "Aktiválás",
+    "active": "Aktív",
     "cancel": "Mégsem",
     "confirm": "Rendben",
     "delete": "Törlés",
@@ -55,6 +56,7 @@
     "go-back": "Vissza",
     "go-back-to-list": "Vissza a listához",
     "inactivate": "Inaktiválás",
+    "inactive": "Inaktív",
     "message": {
       "delete-success": "Sikeres törlés",
       "email-sent": "A kérés sikeresen fel lett dolgozva",

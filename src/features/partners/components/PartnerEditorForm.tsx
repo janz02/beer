@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { Form, Input, Button, Switch, Select } from 'antd'
+import { Form, Input, Button, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Partner } from 'models/partner'
 import { useIsMobile, useCommonFormRules } from 'hooks'

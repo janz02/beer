@@ -18,7 +18,8 @@ export enum OrderByType {
 
 export enum FilterMode {
   FILTER = 'filter',
-  BOOLEAN = 'boolean',
+  YES_NO = 'yes_no',
+  ACTIVE_INACTIVE = 'active_inactive',
   SEARCH = 'search',
   DATEPICKER = 'datepicker'
 }
@@ -211,12 +212,21 @@ function useTableUtils<T extends { [key: string]: any }>(
             config.filters = filters
           }
           break
-        case FilterMode.BOOLEAN:
+        case FilterMode.YES_NO:
           config.filterMultiple = false
           config.filters = filters ?? [
             { value: 'true', text: t('common.yes') },
             { value: 'false', text: t('common.no') }
           ]
+          config.render = (value: boolean) => (value ? t('common.yes') : t('common.no'))
+          break
+        case FilterMode.ACTIVE_INACTIVE:
+          config.filterMultiple = false
+          config.filters = filters ?? [
+            { value: 'true', text: t('common.active') },
+            { value: 'false', text: t('common.inactive') }
+          ]
+          config.render = (value: boolean) => (value ? t('common.active') : t('common.inactive'))
           break
         default:
           break
