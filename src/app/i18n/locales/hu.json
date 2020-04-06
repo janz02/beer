@@ -317,6 +317,9 @@
     "partner-contact": {
       "invalid-type": "Nem megfelelő partner típus."
     },
+    "rtd": {
+      "communication": "RTD kommunikációs hiba."
+    },
     "unknown-try-again": "Kérem, próbáld újra"
   },
   "error-page": {

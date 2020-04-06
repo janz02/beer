@@ -317,6 +317,9 @@
     "partner-contact": {
       "invalid-type": "Invalid partner contact type."
     },
+    "rtd": {
+      "communication": "RTD communication error."
+    },
     "unknown-try-again": "Please, try again!"
   },
   "error-page": {
