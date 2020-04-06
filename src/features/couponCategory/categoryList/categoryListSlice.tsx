@@ -6,7 +6,8 @@ import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
-  storableListRequestParams
+  storableListRequestParams,
+  OrderByType
 } from 'hooks/useTableUtils'
 
 interface CouponCategoryListState {
@@ -20,7 +21,9 @@ interface CouponCategoryListState {
 const initialState: CouponCategoryListState = {
   categories: [],
   listParams: {
-    pageSize: 10
+    pageSize: 10,
+    orderBy: 'name',
+    orderByType: OrderByType.Ascending
   },
   loading: false,
   error: '',
