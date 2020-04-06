@@ -10,6 +10,8 @@ export const CampaignActiveDisplay: React.FC<CampaignActiveDisplayProps> = props
   const { coupon } = props
   const { t } = useTranslation()
 
+  if (!coupon) return <></>
+
   const activeLabel = coupon?.isPartnerActive ? coupon?.isActive : false
 
   return <>{t(`coupon.status.${activeLabel ? 'active' : 'inactive'}`)}</>
