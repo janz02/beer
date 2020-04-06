@@ -288,6 +288,12 @@ export interface CouponVm {
     claimCount?: number;
     /**
      * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    discardCount?: number;
+    /**
+     * 
      * @type {boolean}
      * @memberof CouponVm
      */
@@ -344,6 +350,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'showCount': !exists(json, 'showCount') ? undefined : json['showCount'],
         'clickCount': !exists(json, 'clickCount') ? undefined : json['clickCount'],
         'claimCount': !exists(json, 'claimCount') ? undefined : json['claimCount'],
+        'discardCount': !exists(json, 'discardCount') ? undefined : json['discardCount'],
         'isPartnerActive': !exists(json, 'isPartnerActive') ? undefined : json['isPartnerActive'],
     };
 }
@@ -397,6 +404,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'showCount': value.showCount,
         'clickCount': value.clickCount,
         'claimCount': value.claimCount,
+        'discardCount': value.discardCount,
         'isPartnerActive': value.isPartnerActive,
     };
 }

@@ -13,6 +13,7 @@ import { Form, Input, Select, Radio } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
 import { useReusablePartnerContacts } from './useReusablePartnerContacts'
+import { UserType } from 'models/user'
 
 export interface PartnerContactsParams {
   visible?: boolean
@@ -112,7 +113,11 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
 
       <Form.Item
         name="role"
-        label={t('partner-contact.field.role')}
+        label={
+          userType === UserType.NKM
+            ? t('partner-contact.field.role')
+            : t('partner-contact.field.type')
+        }
         rules={[rule.requiredString()]}
       >
         <Select disabled={!permission.editor}>

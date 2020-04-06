@@ -10,6 +10,8 @@ import { CrudButtons, CrudButtonsProps } from 'components/buttons/CrudButtons'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 import { useReusablePartnerContacts } from './useReusablePartnerContacts'
 import { Roles } from 'api/swagger'
+import { useRoleGenerator } from 'hooks/useRoleGenerator'
+import { UserType } from 'models/user'
 
 interface PartnerContactsListProps {
   loading: boolean
@@ -26,7 +28,9 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
 
   const [contactToDelete, setContanctToDelete] = useState<PopupState<PartnerContact>>()
 
-  const { label, shrinks, permission } = useReusablePartnerContacts()
+  const { label, shrinks, permission, listWidth, userType } = useReusablePartnerContacts()
+
+  const roleOptions = useRoleGenerator(userType)
 
   const {
     paginationConfig,
@@ -36,7 +40,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
     addKeyProp
   } = useTableUtils<PartnerContact>({
     listParamsState: listParams,
-    filterKeys: ['name', 'email', 'phone'],
+    filterKeys: ['name', 'email', 'phone', 'role'],
     getDataAction: getListAction
   })
 
@@ -69,29 +73,26 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
-        title: t('partner-contact.field.type'),
-        key: 'majorPartner',
-        filterMode: FilterMode.BOOLEAN,
-        sort: true,
+        // TODO: Revisit this column after majorPartner and pca/pce roles are finalized.
+        title:
+          userType === UserType.NKM
+            ? t('partner-contact.field.role')
+            : t('partner-contact.field.type'),
+        key: 'role',
+        filterMode: FilterMode.FILTER,
         width: '12rem',
-        filters: [
-          { text: t('partner-contact.field.partner-type.major'), value: 'true' },
-          { text: t('partner-contact.field.partner-type.normal'), value: 'false' }
-        ],
-        render: value =>
-          value
+        filters: roleOptions,
+        render: (value: string, record: PartnerContact) =>
+          userType === UserType.NKM
+            ? t(`user.role.${value.toLowerCase()}`)
+            : record.majorPartner
             ? t('partner-contact.field.partner-type.major')
             : t('partner-contact.field.partner-type.normal')
       }),
       columnConfig({
         title: t('partner-contact.field.active'),
-        filterMode: FilterMode.BOOLEAN,
         key: 'isActive',
         width: '6rem',
-        filters: [
-          { text: t('partner-contact.field.status-active'), value: 'true' },
-          { text: t('partner-contact.field.status-inactive'), value: 'false' }
-        ],
         render: value =>
           value
             ? t(`partner-contact.field.status-active`)
@@ -115,7 +116,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         }
       })
     ],
-    [actionColumnConfig, columnConfig, crudOptions, t]
+    [actionColumnConfig, columnConfig, crudOptions, roleOptions, t, userType]
   )
 
   return (
@@ -125,7 +126,7 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         paddedBottom
         floatingTitle={label.listTitle}
         forTable
-        width="full"
+        width={listWidth}
       >
         <ResponsiveTable
           {...{

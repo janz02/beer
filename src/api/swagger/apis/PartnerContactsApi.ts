@@ -27,6 +27,9 @@ import {
     PartnerContactVmPaginatedResponse,
     PartnerContactVmPaginatedResponseFromJSON,
     PartnerContactVmPaginatedResponseToJSON,
+    Roles,
+    RolesFromJSON,
+    RolesToJSON,
 } from '../models';
 
 export interface GetOnePartnerContactRequest {
@@ -38,6 +41,7 @@ export interface GetPartnerPartnerContactRequest {
     name?: string | null;
     phone?: string | null;
     email?: string | null;
+    role?: Roles;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -109,6 +113,10 @@ export class PartnerContactsApi extends runtime.BaseAPI {
 
         if (requestParameters.email !== undefined) {
             queryParameters['email'] = requestParameters.email;
+        }
+
+        if (requestParameters.role !== undefined) {
+            queryParameters['role'] = requestParameters.role;
         }
 
         if (requestParameters.page !== undefined) {

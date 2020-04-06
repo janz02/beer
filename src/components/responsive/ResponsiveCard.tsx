@@ -6,6 +6,8 @@ import { CardProps } from 'antd/lib/card'
 import { ResponsiveHeader } from './ResponsiveHeader'
 import { BackButtonProps } from 'components/buttons/BackButton'
 
+export type ResponsiveCardWidth = 'skinny' | 'normal' | 'full'
+
 export interface ResponsiveCardProps extends CardProps {
   floatingTitle?: string
   floatingBackButton?: BackButtonProps
@@ -16,7 +18,7 @@ export interface ResponsiveCardProps extends CardProps {
   paddedTop?: boolean
   paddedBottom?: boolean
   disableAutoScale?: boolean
-  width?: 'skinny' | 'normal' | 'full'
+  width?: ResponsiveCardWidth
 }
 
 export const ResponsiveCard: FC<ResponsiveCardProps> = props => {

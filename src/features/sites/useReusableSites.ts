@@ -9,6 +9,7 @@ import {
   siteListSlice,
   SiteListState
 } from './siteList/siteListSliceFactory'
+import { ResponsiveCardWidth } from 'components/responsive/ResponsiveCard'
 
 interface SitesDynamicRoute {
   root: string
@@ -22,6 +23,7 @@ interface SitesDynamicLabel {
 interface UseReusableSitesUtils {
   route: SitesDynamicRoute
   label: SitesDynamicLabel
+  listWidth: ResponsiveCardWidth
   shrinks: boolean
   actions: SiteListSliceActions
   selector: (state: RootState) => SiteListState
@@ -39,6 +41,7 @@ export const useReusableSites = (): UseReusableSitesUtils => {
       dispatch(partnerSiteListSlice.actions.setListConstraints({ partnerId: +partnerId }))
       return {
         shrinks: true,
+        listWidth: 'normal',
         route: {
           root: `/partners/${partnerId}/site`,
           exit: `/partners/${partnerId}`
@@ -53,6 +56,7 @@ export const useReusableSites = (): UseReusableSitesUtils => {
     dispatch(siteListSlice.actions.setListConstraints({ partnerId: selfPartnerId }))
     return {
       shrinks: false,
+      listWidth: 'normal',
       route: {
         root: `/sites/editor`,
         exit: '/sites'

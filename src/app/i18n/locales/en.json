@@ -39,6 +39,7 @@
   },
   "common": {
     "activate": "Activate",
+    "active": "Active",
     "cancel": "Cancel",
     "confirm": "Ok",
     "delete": "Delete",
@@ -55,6 +56,7 @@
     "go-back": "Go back",
     "go-back-to-list": "Bact to the list",
     "inactivate": "Inactivate",
+    "inactive": "Inactive",
     "message": {
       "delete-success": "Successful deletion",
       "email-sent": "Your request was processed succesfully",
