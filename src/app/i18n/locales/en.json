@@ -84,7 +84,7 @@
   },
   "coupon": {
     "discount-type": {
-      "fixvalue": "Fix",
+      "fixvalue": "HUF value",
       "percentvalue": "Percent"
     },
     "mode": {
@@ -147,7 +147,7 @@
       "banner-link": "Banner link",
       "banner-link-help": "The banner link leads to this website. Pl.http://google.com",
       "big-image": "Coupon big image",
-      "category": "Coupon category",
+      "category": "Campaign category",
       "claimCount": "Claimed coupon",
       "clickCount": "Clicked on offer",
       "comment": "Comment",
@@ -173,10 +173,10 @@
       "prize-rules": "Prize rules",
       "rank": "Discount level",
       "showCount": "Shown as offer",
-      "small-image": "Coupon small image",
+      "small-image": "Small image (or logo)",
       "state": "Status",
       "type": "Campaign type",
-      "webshop-link": "Webshop link",
+      "webshop-link": "Product/service details",
       "webshop-link-help": "The discount coupon can be redeemed at this webshop link. Eg. http://google.com"
     },
     "inactivate": "Inactivate",

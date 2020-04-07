@@ -574,75 +574,79 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 )}
 
-                <Col span={8}>
-                  <Form.Item
-                    name="itemPrice"
-                    label={t('coupon-create.field.item-price')}
-                    dependencies={['previousYearAverageBasketValue']}
-                    rules={[
-                      rule.positiveInteger(),
-                      ({ getFieldValue }) => ({
-                        validator(rule, value) {
-                          const previousYearAverageBasketValue = getFieldValue(
-                            'previousYearAverageBasketValue'
-                          )
-                          if (!previousYearAverageBasketValue && !value) {
-                            return Promise.reject(
-                              t(
-                                'error.coupon.item-price-required-if-previous-year-average-basket-value-empty'
+                {couponType === CouponType.Discount && (
+                  <>
+                    <Col span={8}>
+                      <Form.Item
+                        name="itemPrice"
+                        label={t('coupon-create.field.item-price')}
+                        dependencies={['previousYearAverageBasketValue']}
+                        rules={[
+                          rule.positiveInteger(),
+                          ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                              const previousYearAverageBasketValue = getFieldValue(
+                                'previousYearAverageBasketValue'
                               )
-                            )
-                          }
+                              if (!previousYearAverageBasketValue && !value) {
+                                return Promise.reject(
+                                  t(
+                                    'error.coupon.item-price-required-if-previous-year-average-basket-value-empty'
+                                  )
+                                )
+                              }
 
-                          return Promise.resolve()
-                        }
-                      })
-                    ]}
-                    extra={t('coupon-create.field.item-price-help')}
-                    className="mark-label-as-required"
-                  >
-                    <InputNumber
-                      disabled={!displayEditor}
-                      formatter={getSeparatorAndSuffixFormatter('Ft')}
-                      parser={getSeparatorAndSuffixParser('Ft')}
-                      max={999999999}
-                    />
-                  </Form.Item>
-                </Col>
+                              return Promise.resolve()
+                            }
+                          })
+                        ]}
+                        extra={t('coupon-create.field.item-price-help')}
+                        className="mark-label-as-required"
+                      >
+                        <InputNumber
+                          disabled={!displayEditor}
+                          formatter={getSeparatorAndSuffixFormatter('Ft')}
+                          parser={getSeparatorAndSuffixParser('Ft')}
+                          max={999999999}
+                        />
+                      </Form.Item>
+                    </Col>
 
-                <Col span={8}>
-                  <Form.Item
-                    name="previousYearAverageBasketValue"
-                    label={t('coupon-create.field.previous-year-average-basket-value')}
-                    dependencies={['itemPrice']}
-                    rules={[
-                      rule.positiveInteger(),
-                      ({ getFieldValue }) => ({
-                        validator(rule, value) {
-                          const itemPrice = getFieldValue('itemPrice')
-                          if (!itemPrice && !value) {
-                            return Promise.reject(
-                              t(
-                                'error.coupon.previous-year-average-basket-value-required-if-item-price-empty'
-                              )
-                            )
-                          }
+                    <Col span={8}>
+                      <Form.Item
+                        name="previousYearAverageBasketValue"
+                        label={t('coupon-create.field.previous-year-average-basket-value')}
+                        dependencies={['itemPrice']}
+                        rules={[
+                          rule.positiveInteger(),
+                          ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                              const itemPrice = getFieldValue('itemPrice')
+                              if (!itemPrice && !value) {
+                                return Promise.reject(
+                                  t(
+                                    'error.coupon.previous-year-average-basket-value-required-if-item-price-empty'
+                                  )
+                                )
+                              }
 
-                          return Promise.resolve()
-                        }
-                      })
-                    ]}
-                    extra={t('coupon-create.field.previous-year-average-basket-value-help')}
-                    className="mark-label-as-required"
-                  >
-                    <InputNumber
-                      disabled={!displayEditor}
-                      formatter={getSeparatorAndSuffixFormatter('Ft')}
-                      parser={getSeparatorAndSuffixParser('Ft')}
-                      max={999999999}
-                    />
-                  </Form.Item>
-                </Col>
+                              return Promise.resolve()
+                            }
+                          })
+                        ]}
+                        extra={t('coupon-create.field.previous-year-average-basket-value-help')}
+                        className="mark-label-as-required"
+                      >
+                        <InputNumber
+                          disabled={!displayEditor}
+                          formatter={getSeparatorAndSuffixFormatter('Ft')}
+                          parser={getSeparatorAndSuffixParser('Ft')}
+                          max={999999999}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </>
+                )}
 
                 {couponType === CouponType.Prize && (
                   <Col span={8}>

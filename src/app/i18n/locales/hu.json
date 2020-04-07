@@ -84,7 +84,7 @@
   },
   "coupon": {
     "discount-type": {
-      "fixvalue": "Fix",
+      "fixvalue": "Forint érték",
       "percentvalue": "Százalékos"
     },
     "mode": {
@@ -147,7 +147,7 @@
       "banner-link": "Banner link",
       "banner-link-help": "A banner link erre a felületre fog mutatni. Pl.http://google.com",
       "big-image": "Kupon nagy képe",
-      "category": "Kupon kategória",
+      "category": "Kampány kategória",
       "claimCount": "Beváltások száma",
       "clickCount": "Kattintások száma",
       "comment": "Komment",
@@ -173,10 +173,10 @@
       "prize-rules": "Nyereményjáték szabályzat",
       "rank": "Kedvezmény szint",
       "showCount": "Megjelenések száma",
-      "small-image": "Kupon kis képe",
+      "small-image": "Kis kép (vagy logó)",
       "state": "Státusz",
       "type": "Kampány típusa",
-      "webshop-link": "Webshop link",
+      "webshop-link": "Termék /szolgáltatás részletek",
       "webshop-link-help": "A kedvezmény kupont ezen a webshop linken lehet beváltani. Pl. http://google.com"
     },
     "inactivate": "Inaktiválás",
