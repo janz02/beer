@@ -18,10 +18,18 @@ export enum OrderByType {
 
 export enum FilterMode {
   FILTER = 'filter',
-  YES_NO = 'yes_no',
-  ACTIVE_INACTIVE = 'active_inactive',
   SEARCH = 'search',
-  DATEPICKER = 'datepicker'
+  DATEPICKER = 'datepicker',
+  /**
+   * For filtering and renderindg YES or NO values, mapped to 'true' and 'fasle'.
+   * No need to populate filters and render prop with this option.
+   */
+  YES_NO = 'yes_no',
+  /**
+   * For filtering and rendering ACTIVE or INACTIVE values, mapped to 'true' and 'fasle'.
+   * No need to populate filters and render prop with this option.
+   */
+  ACTIVE_INACTIVE = 'active_inactive'
 }
 
 export interface Pagination {
