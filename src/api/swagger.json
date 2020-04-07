@@ -5126,6 +5126,14 @@
           "description": {
             "type": "string",
             "nullable": true
+          },
+          "smallPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigPictureId": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -5150,6 +5158,14 @@
           },
           "isClaimed": {
             "type": "boolean"
+          },
+          "smallPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigPictureId": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

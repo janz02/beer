@@ -49,6 +49,18 @@ export interface MyClaimedCouponVm {
      * @memberof MyClaimedCouponVm
      */
     description?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MyClaimedCouponVm
+     */
+    smallPictureId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MyClaimedCouponVm
+     */
+    bigPictureId?: string | null;
 }
 
 export function MyClaimedCouponVmFromJSON(json: any): MyClaimedCouponVm {
@@ -66,6 +78,8 @@ export function MyClaimedCouponVmFromJSONTyped(json: any, ignoreDiscriminator: b
         'expireDate': !exists(json, 'expireDate') ? undefined : (new Date(json['expireDate'])),
         'couponCode': !exists(json, 'couponCode') ? undefined : json['couponCode'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'smallPictureId': !exists(json, 'smallPictureId') ? undefined : json['smallPictureId'],
+        'bigPictureId': !exists(json, 'bigPictureId') ? undefined : json['bigPictureId'],
     };
 }
 
@@ -83,6 +97,8 @@ export function MyClaimedCouponVmToJSON(value?: MyClaimedCouponVm | null): any {
         'expireDate': value.expireDate === undefined ? undefined : (value.expireDate.toISOString()),
         'couponCode': value.couponCode,
         'description': value.description,
+        'smallPictureId': value.smallPictureId,
+        'bigPictureId': value.bigPictureId,
     };
 }
 
