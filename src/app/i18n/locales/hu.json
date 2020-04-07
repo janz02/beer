@@ -384,8 +384,8 @@
       "title-send-sample": "Minta e-mail küldése",
       "title-send-segment": "Hírlevél kiküldése szegmensnek"
     },
-    "send-sample": "Minta küldése",
-    "send-segment": "Küldés szegmensnek",
+    "send-sample": "E-mail címre",
+    "send-segment": "Szegmensnek",
     "template": "Sablon",
     "version": "Verzió"
   },
