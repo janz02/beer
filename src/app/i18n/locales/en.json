@@ -153,6 +153,7 @@
       "comment": "Comment",
       "coupon-count": "Number of coupons",
       "description": "Coupon description",
+      "discardCount": "Discard count",
       "discount-amount": "Discount amount",
       "discount-type": "Discount type",
       "display-fix-banner-campaign": "Display fix banner campaign",
