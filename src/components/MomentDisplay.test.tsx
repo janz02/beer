@@ -31,7 +31,7 @@ describe('MomentDisplay hu tests', () => {
 
     // Assert
     const text = wrapper.text()
-    expect(text).toEqual('2011. október 31. 10:30')
+    expect(text).toEqual('2011.10.31. 10:30')
   })
 
   it('should render a formatted time when mode is time', () => {
@@ -110,7 +110,7 @@ describe('MomentDisplay en tests', () => {
 
     // Assert
     const text = wrapper.text()
-    expect(text).toEqual('October 31, 2011 10:30 AM')
+    expect(text).toEqual('10/31/2011 10:30 AM')
   })
 
   it('should render a formatted time when mode is time', () => {
