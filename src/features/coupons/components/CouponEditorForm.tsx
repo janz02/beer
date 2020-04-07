@@ -147,7 +147,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         itemPrice: +values.itemPrice,
         previousYearAverageBasketValue: +values.previousYearAverageBasketValue,
         partnerId: +values.partnerId,
-        couponCount: +values.couponCount
+        couponCount: +values.couponCount,
+        prizeValue: +values.prizeValue
       })
     resetFormFlags()
   }
@@ -327,6 +328,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="name"
                     label={t('coupon-create.field.name')}
+                    extra={t('coupon-create.field.name-help')}
                     rules={[rule.requiredString(), rule.max(60)]}
                   >
                     <Input disabled={!displayEditor} maxLength={60} />
@@ -337,6 +339,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="startDate"
                     label={t('coupon-create.field.distribution-start-date')}
+                    extra={t('coupon-create.field.distribution-start-date-help')}
                     rules={[rule.required()]}
                   >
                     <DatePicker disabled={!displayEditor} />
@@ -348,6 +351,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     <Form.Item
                       name="description"
                       label={t('coupon-create.field.description')}
+                      extra={t('coupon-create.field.description-help')}
                       rules={[rule.requiredString(), rule.max(255)]}
                     >
                       <TextArea disabled={!displayEditor} maxLength={255} rows={4} />
@@ -359,6 +363,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="endDate"
                     label={t('coupon-create.field.distribution-end-date')}
+                    extra={t('coupon-create.field.distribution-end-date-help')}
                     rules={[rule.required()]}
                   >
                     <DatePicker disabled={!displayEditor} />
@@ -375,6 +380,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="categoryId"
                     label={t('coupon-create.field.category')}
+                    extra={t('coupon-create.field.category-help')}
                     rules={[rule.required()]}
                   >
                     <Select disabled={!displayEditor}>
@@ -392,6 +398,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="rank"
                     label={t('coupon-create.field.rank')}
+                    extra={t('coupon-create.field.rank-help')}
                     rules={[rule.required()]}
                   >
                     <Select
@@ -411,6 +418,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     <Form.Item
                       name="mode"
                       label={t('coupon-create.field.mode')}
+                      extra={t('coupon-create.field.mode-help')}
                       rules={[rule.required()]}
                     >
                       <Select
@@ -446,6 +454,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     <Form.Item
                       name="expireDate"
                       label={t('coupon-create.field.expiration-date')}
+                      extra={t('coupon-create.field.expiration-date-help')}
                       rules={[rule.required()]}
                     >
                       <DatePicker disabled={!displayEditor} />
@@ -456,10 +465,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Banner && (
                   <Col span={24}>
                     <Form.Item
-                      name="link"
+                      name="productDetails"
                       label={t('coupon-create.field.banner-link')}
-                      rules={[rule.required(), rule.max(2000)]}
                       extra={t('coupon-create.field.banner-link-help')}
+                      rules={[rule.required(), rule.max(2000)]}
                     >
                       <Input disabled={!displayEditor} maxLength={2000} />
                     </Form.Item>
@@ -483,6 +492,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     <Form.Item
                       name="discountType"
                       label={t('coupon-create.field.discount-type')}
+                      extra={t('coupon-create.field.discount-type-help')}
                       rules={[rule.requiredString()]}
                     >
                       <Select
@@ -508,6 +518,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       <Form.Item
                         name="discountValue"
                         label={t('coupon-create.field.discount-amount')}
+                        extra={
+                          couponDiscountType === CouponDiscountType.PercentValue
+                            ? t('coupon-create.field.discount-amount-percent-help')
+                            : t('coupon-create.field.discount-amount-fix-help')
+                        }
                         dependencies={['discountType']}
                         rules={[
                           rule.required(),
@@ -563,6 +578,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     <Form.Item
                       name="minimumShoppingValue"
                       label={t('coupon-create.field.minimum-shopping-value')}
+                      extra={t('coupon-create.field.minimum-shopping-value-help')}
                       rules={[rule.positiveInteger()]}
                     >
                       <InputNumber
@@ -574,115 +590,137 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   </Col>
                 )}
 
-                <Col span={8}>
-                  <Form.Item
-                    name="itemPrice"
-                    label={t('coupon-create.field.item-price')}
-                    dependencies={['previousYearAverageBasketValue']}
-                    rules={[
-                      rule.positiveInteger(),
-                      ({ getFieldValue }) => ({
-                        validator(rule, value) {
-                          const previousYearAverageBasketValue = getFieldValue(
-                            'previousYearAverageBasketValue'
-                          )
-                          if (!previousYearAverageBasketValue && !value) {
-                            return Promise.reject(
-                              t(
-                                'error.coupon.item-price-required-if-previous-year-average-basket-value-empty'
+                {couponType === CouponType.Discount && (
+                  <>
+                    <Col span={8}>
+                      <Form.Item
+                        name="itemPrice"
+                        label={t('coupon-create.field.item-price')}
+                        dependencies={['previousYearAverageBasketValue']}
+                        rules={[
+                          rule.positiveInteger(),
+                          ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                              const previousYearAverageBasketValue = getFieldValue(
+                                'previousYearAverageBasketValue'
                               )
-                            )
-                          }
+                              if (!previousYearAverageBasketValue && !value) {
+                                return Promise.reject(
+                                  t(
+                                    'error.coupon.item-price-required-if-previous-year-average-basket-value-empty'
+                                  )
+                                )
+                              }
 
-                          return Promise.resolve()
-                        }
-                      })
-                    ]}
-                    extra={t('coupon-create.field.item-price-help')}
-                    className="mark-label-as-required"
-                  >
-                    <InputNumber
-                      disabled={!displayEditor}
-                      formatter={getSeparatorAndSuffixFormatter('Ft')}
-                      parser={getSeparatorAndSuffixParser('Ft')}
-                      max={999999999}
-                    />
-                  </Form.Item>
-                </Col>
+                              return Promise.resolve()
+                            }
+                          })
+                        ]}
+                        extra={t('coupon-create.field.item-price-help')}
+                        className="mark-label-as-required"
+                      >
+                        <InputNumber
+                          disabled={!displayEditor}
+                          formatter={getSeparatorAndSuffixFormatter('Ft')}
+                          parser={getSeparatorAndSuffixParser('Ft')}
+                          max={999999999}
+                        />
+                      </Form.Item>
+                    </Col>
 
-                <Col span={8}>
-                  <Form.Item
-                    name="previousYearAverageBasketValue"
-                    label={t('coupon-create.field.previous-year-average-basket-value')}
-                    dependencies={['itemPrice']}
-                    rules={[
-                      rule.positiveInteger(),
-                      ({ getFieldValue }) => ({
-                        validator(rule, value) {
-                          const itemPrice = getFieldValue('itemPrice')
-                          if (!itemPrice && !value) {
-                            return Promise.reject(
-                              t(
-                                'error.coupon.previous-year-average-basket-value-required-if-item-price-empty'
-                              )
-                            )
-                          }
+                    <Col span={8}>
+                      <Form.Item
+                        name="previousYearAverageBasketValue"
+                        label={t('coupon-create.field.previous-year-average-basket-value')}
+                        extra={t('coupon-create.field.previous-year-average-basket-value-help')}
+                        dependencies={['itemPrice']}
+                        rules={[
+                          rule.positiveInteger(),
+                          ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                              const itemPrice = getFieldValue('itemPrice')
+                              if (!itemPrice && !value) {
+                                return Promise.reject(
+                                  t(
+                                    'error.coupon.previous-year-average-basket-value-required-if-item-price-empty'
+                                  )
+                                )
+                              }
 
-                          return Promise.resolve()
-                        }
-                      })
-                    ]}
-                    extra={t('coupon-create.field.previous-year-average-basket-value-help')}
-                    className="mark-label-as-required"
-                  >
-                    <InputNumber
-                      disabled={!displayEditor}
-                      formatter={getSeparatorAndSuffixFormatter('Ft')}
-                      parser={getSeparatorAndSuffixParser('Ft')}
-                      max={999999999}
-                    />
-                  </Form.Item>
-                </Col>
+                              return Promise.resolve()
+                            }
+                          })
+                        ]}
+                        className="mark-label-as-required"
+                      >
+                        <InputNumber
+                          disabled={!displayEditor}
+                          formatter={getSeparatorAndSuffixFormatter('Ft')}
+                          parser={getSeparatorAndSuffixParser('Ft')}
+                          max={999999999}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </>
+                )}
 
                 {couponType === CouponType.Prize && (
-                  <Col span={8}>
-                    <Form.Item
-                      name="prizeRulesFileId"
-                      label={t('coupon-create.field.prize-rules')}
-                      rules={[rule.required()]}
-                    >
-                      <FileUploadButton
-                        disabled={!displayEditor}
-                        onSuccess={fileId => {
-                          form.setFieldsValue({
-                            ...form.getFieldsValue(),
-                            prizeRulesFileId: fileId
-                          })
+                  <>
+                    <Col span={8}>
+                      <Form.Item
+                        name="prizeValue"
+                        label={t('coupon-create.field.prize-value')}
+                        rules={[rule.required(), rule.positiveInteger()]}
+                      >
+                        <InputNumber
+                          disabled={!displayEditor}
+                          formatter={getSeparatorAndSuffixFormatter('Ft')}
+                          parser={getSeparatorAndSuffixParser('Ft')}
+                          max={999999999}
+                        />
+                      </Form.Item>
+                    </Col>
 
-                          form.validateFields()
-                        }}
-                        onRemove={() => {
-                          form.setFieldsValue({
-                            ...form.getFieldsValue(),
-                            prizeRulesFileId: undefined
-                          })
+                    <Col span={8}>
+                      <Form.Item
+                        name="prizeRulesFileId"
+                        label={t('coupon-create.field.prize-rules')}
+                        extra={t('coupon-create.field.prize-rules-help')}
+                        rules={[rule.required()]}
+                      >
+                        <FileUploadButton
+                          disabled={!displayEditor}
+                          onSuccess={fileId => {
+                            form.setFieldsValue({
+                              ...form.getFieldsValue(),
+                              prizeRulesFileId: fileId
+                            })
 
-                          form.validateFields()
-                        }}
-                        onClick={() => dispatch(downloadPrizeFile(coupon!))}
-                        initialFileId={coupon?.prizeRulesFileId}
-                      />
-                    </Form.Item>
-                  </Col>
+                            form.validateFields()
+                          }}
+                          onRemove={() => {
+                            form.setFieldsValue({
+                              ...form.getFieldsValue(),
+                              prizeRulesFileId: undefined
+                            })
+
+                            form.validateFields()
+                          }}
+                          onClick={() => dispatch(downloadPrizeFile(coupon!))}
+                          initialFileId={coupon?.prizeRulesFileId}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </>
                 )}
 
                 {couponType === CouponType.Discount && (
                   <Col span={24}>
                     <Form.Item
-                      name="link"
+                      name="productDetails"
                       label={t('coupon-create.field.webshop-link')}
-                      rules={[rule.required(), rule.max(2000)]}
                       extra={t('coupon-create.field.webshop-link-help')}
+                      rules={[rule.required(), rule.max(2000)]}
                     >
                       <Input disabled={!displayEditor} maxLength={2000} />
                     </Form.Item>
@@ -707,6 +745,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="smallPictureId"
                     label={t('coupon-create.field.small-image')}
+                    extra={t('coupon-create.field.small-image-help')}
                     rules={[rule.required()]}
                   >
                     <PictureUploadButton
@@ -736,6 +775,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     <Form.Item
                       name="bigPictureId"
                       label={t('coupon-create.field.big-image')}
+                      extra={t('coupon-create.field.big-image-help')}
                       rules={[rule.required()]}
                     >
                       <PictureUploadButton
@@ -772,6 +812,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Form.Item
                     name="couponCount"
                     label={t('coupon-create.field.coupon-count')}
+                    extra={t('coupon-create.field.coupon-count-help')}
                     rules={[rule.required(), rule.positiveInteger()]}
                   >
                     <InputNumber
@@ -785,7 +826,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 </Col>
                 {prizeOrDiscount && (
                   <Col span={8}>
-                    <Form.Item name="predefinedCodesFileId" label={t('coupon-create.upload')}>
+                    <Form.Item
+                      name="predefinedCodesFileId"
+                      label={t('coupon-create.field.upload')}
+                      extra={t('coupon-create.field.upload-help')}
+                    >
                       <FileUploadButton
                         disabled={!displayEditor}
                         onSuccess={fileId => {
@@ -813,7 +858,11 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                 {!!coupon?.id && prizeOrDiscount && (
                   <Col span={8}>
-                    <Form.Item name="download" label={t('coupon-create.download')} rules={[]}>
+                    <Form.Item
+                      name="download"
+                      label={t('coupon-create.field.download')}
+                      extra={t('coupon-create.field.download-help')}
+                    >
                       <Button
                         type="primary"
                         loading={loading}
