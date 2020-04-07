@@ -225,7 +225,7 @@ export interface CouponVm {
      * @type {string}
      * @memberof CouponVm
      */
-    link?: string | null;
+    productDetails?: string | null;
     /**
      * 
      * @type {Date}
@@ -243,13 +243,13 @@ export interface CouponVm {
      * @type {number}
      * @memberof CouponVm
      */
-    itemPrice?: number;
+    itemPrice?: number | null;
     /**
      * 
      * @type {number}
      * @memberof CouponVm
      */
-    previousYearAverageBasketValue?: number;
+    previousYearAverageBasketValue?: number | null;
     /**
      * 
      * @type {boolean}
@@ -298,6 +298,12 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     isPartnerActive?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    prizeValue?: number | null;
 }
 
 export function CouponVmFromJSON(json: any): CouponVm {
@@ -339,7 +345,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'smallPicture': !exists(json, 'smallPicture') ? undefined : json['smallPicture'],
         'bigPicture': !exists(json, 'bigPicture') ? undefined : json['bigPicture'],
         'onlineClaimLink': !exists(json, 'onlineClaimLink') ? undefined : json['onlineClaimLink'],
-        'link': !exists(json, 'link') ? undefined : json['link'],
+        'productDetails': !exists(json, 'productDetails') ? undefined : json['productDetails'],
         'drawDate': !exists(json, 'drawDate') ? undefined : (json['drawDate'] === null ? null : new Date(json['drawDate'])),
         'prizeRulesFileId': !exists(json, 'prizeRulesFileId') ? undefined : json['prizeRulesFileId'],
         'itemPrice': !exists(json, 'itemPrice') ? undefined : json['itemPrice'],
@@ -352,6 +358,7 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'claimCount': !exists(json, 'claimCount') ? undefined : json['claimCount'],
         'discardCount': !exists(json, 'discardCount') ? undefined : json['discardCount'],
         'isPartnerActive': !exists(json, 'isPartnerActive') ? undefined : json['isPartnerActive'],
+        'prizeValue': !exists(json, 'prizeValue') ? undefined : json['prizeValue'],
     };
 }
 
@@ -393,7 +400,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'smallPicture': value.smallPicture,
         'bigPicture': value.bigPicture,
         'onlineClaimLink': value.onlineClaimLink,
-        'link': value.link,
+        'productDetails': value.productDetails,
         'drawDate': value.drawDate === undefined ? undefined : (value.drawDate === null ? null : value.drawDate.toISOString()),
         'prizeRulesFileId': value.prizeRulesFileId,
         'itemPrice': value.itemPrice,
@@ -406,6 +413,7 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'claimCount': value.claimCount,
         'discardCount': value.discardCount,
         'isPartnerActive': value.isPartnerActive,
+        'prizeValue': value.prizeValue,
     };
 }
 

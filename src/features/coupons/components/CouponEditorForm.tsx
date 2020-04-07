@@ -147,7 +147,8 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
         itemPrice: +values.itemPrice,
         previousYearAverageBasketValue: +values.previousYearAverageBasketValue,
         partnerId: +values.partnerId,
-        couponCount: +values.couponCount
+        couponCount: +values.couponCount,
+        prizeValue: +values.prizeValue
       })
     resetFormFlags()
   }
@@ -464,7 +465,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Banner && (
                   <Col span={24}>
                     <Form.Item
-                      name="link"
+                      name="productDetails"
                       label={t('coupon-create.field.banner-link')}
                       extra={t('coupon-create.field.banner-link-help')}
                       rules={[rule.required(), rule.max(2000)]}
@@ -716,7 +717,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 {couponType === CouponType.Discount && (
                   <Col span={24}>
                     <Form.Item
-                      name="link"
+                      name="productDetails"
                       label={t('coupon-create.field.webshop-link')}
                       extra={t('coupon-create.field.webshop-link-help')}
                       rules={[rule.required(), rule.max(2000)]}
