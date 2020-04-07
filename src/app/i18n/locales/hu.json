@@ -392,8 +392,7 @@
       "register-code": "Regisztációs kód",
       "registration-allowed": "Cégjegyző",
       "registration-number": "Cégjegyzék szám",
-      "tax-number": "Adószám",
-      "type": "Partner típus"
+      "tax-number": "Adószám"
     },
     "list": {
       "add": "Új partner hozzáadás",
