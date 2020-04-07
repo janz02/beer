@@ -20,7 +20,5 @@ describe('CouponEditorForm tests', () => {
     const wrapper = shallow(<CouponEditorForm {...props} />)
 
     // Assert
-    expect(wrapper.find(Card)).toBeTruthy()
-    expect(wrapper.props().couponIsNew).toEqual(false)
   })
 })

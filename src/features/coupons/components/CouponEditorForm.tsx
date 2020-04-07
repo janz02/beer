@@ -308,7 +308,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     </Form.Item>
                   ) : (
                     <Form.Item label={t('coupon-create.field.partner-name')}>
-                      <>{userData.partnerName}</>
+                      <>{userData?.partnerName}</>
                     </Form.Item>
                   )}
                 </Col>
