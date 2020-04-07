@@ -649,35 +649,52 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                 )}
 
                 {couponType === CouponType.Prize && (
-                  <Col span={8}>
-                    <Form.Item
-                      name="prizeRulesFileId"
-                      label={t('coupon-create.field.prize-rules')}
-                      rules={[rule.required()]}
-                    >
-                      <FileUploadButton
-                        disabled={!displayEditor}
-                        onSuccess={fileId => {
-                          form.setFieldsValue({
-                            ...form.getFieldsValue(),
-                            prizeRulesFileId: fileId
-                          })
+                  <>
+                    <Col span={8}>
+                      <Form.Item
+                        name="prizeValue"
+                        label={t('coupon-create.field.prize-value')}
+                        rules={[rule.required(), rule.positiveInteger()]}
+                      >
+                        <InputNumber
+                          disabled={!displayEditor}
+                          formatter={getSeparatorAndSuffixFormatter('Ft')}
+                          parser={getSeparatorAndSuffixParser('Ft')}
+                          max={999999999}
+                        />
+                      </Form.Item>
+                    </Col>
 
-                          form.validateFields()
-                        }}
-                        onRemove={() => {
-                          form.setFieldsValue({
-                            ...form.getFieldsValue(),
-                            prizeRulesFileId: undefined
-                          })
+                    <Col span={8}>
+                      <Form.Item
+                        name="prizeRulesFileId"
+                        label={t('coupon-create.field.prize-rules')}
+                        rules={[rule.required()]}
+                      >
+                        <FileUploadButton
+                          disabled={!displayEditor}
+                          onSuccess={fileId => {
+                            form.setFieldsValue({
+                              ...form.getFieldsValue(),
+                              prizeRulesFileId: fileId
+                            })
 
-                          form.validateFields()
-                        }}
-                        onClick={() => dispatch(downloadPrizeFile(coupon!))}
-                        initialFileId={coupon?.prizeRulesFileId}
-                      />
-                    </Form.Item>
-                  </Col>
+                            form.validateFields()
+                          }}
+                          onRemove={() => {
+                            form.setFieldsValue({
+                              ...form.getFieldsValue(),
+                              prizeRulesFileId: undefined
+                            })
+
+                            form.validateFields()
+                          }}
+                          onClick={() => dispatch(downloadPrizeFile(coupon!))}
+                          initialFileId={coupon?.prizeRulesFileId}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </>
                 )}
 
                 {couponType === CouponType.Discount && (
