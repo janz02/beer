@@ -10,7 +10,7 @@ export const DatepickerTableDropdown: FC<FilterDropdownProps> = props => {
     <div>
       <Calendar
         fullscreen={false}
-        onChange={(e: any) => setSelectedKeys([e])}
+        onSelect={(e: any) => setSelectedKeys([e])}
         value={selectedKeys[0] as any}
       />
       <TableDropdownFooter {...props} />
