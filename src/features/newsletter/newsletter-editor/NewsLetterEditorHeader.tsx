@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Select, Button, Tooltip } from 'antd'
+import { Select, Button, Tooltip, Dropdown, Menu } from 'antd'
 import {
   CloseOutlined,
   EditOutlined,
@@ -53,6 +53,13 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
     setSaving(false)
   }
 
+  const sendOptions = (
+    <Menu>
+      <Menu.Item onClick={handleSendSample}>{t('newsletter.send-sample')}</Menu.Item>
+      <Menu.Item onClick={handleSendSegment}>{t('newsletter.send-segment')}</Menu.Item>
+    </Menu>
+  )
+
   return (
     <div className={`${className} nleh`}>
       <span className="nleh__toolbar">
@@ -104,14 +111,9 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
               </Button>
             </span>
             <span>
-              <Button icon={<SendOutlined />} onClick={handleSendSample}>
-                {t('newsletter.send-sample')}
-              </Button>
-            </span>
-            <span>
-              <Button icon={<SendOutlined />} onClick={handleSendSegment}>
-                {t('newsletter.send-segment')}
-              </Button>
+              <Dropdown overlay={sendOptions} placement="bottomLeft">
+                <Button icon={<SendOutlined />}>{t('common.send')}</Button>
+              </Dropdown>
             </span>
           </>
         )}

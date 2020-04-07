@@ -337,7 +337,7 @@
   "menu": {
     "campaign-categories": "Campaign categories",
     "campaigns": "Campaigns",
-    "newsletter": "News letter",
+    "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
@@ -362,11 +362,11 @@
       "restore-msg": "By restoring, you will copy this template on the top of the version history, as the latest saved version.",
       "target-segment": "Target segment",
       "title-save": "Save template",
-      "title-send-sample": "Send sample email",
+      "title-send-sample": "Send a sample email",
       "title-send-segment": "Send newsletter to segment"
     },
-    "send-sample": "Send sample",
-    "send-segment": "Send to Segment",
+    "send-sample": "Sample email",
+    "send-segment": "Newsletter to Segment",
     "template": "Template",
     "version": "Version"
   },
