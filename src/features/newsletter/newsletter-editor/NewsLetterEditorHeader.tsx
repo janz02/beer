@@ -66,7 +66,13 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
         {template?.name && (
           <div className="nleh__title">
             <span className="nleh--label">{t('newsletter.template')}</span>
-            <span className="nleh__title--name">{template.name}</span>
+            <Tooltip
+              mouseEnterDelay={0.9}
+              placement="bottomLeft"
+              title={template.name.length < 24 ? '' : template.name}
+            >
+              <span className="nleh__title--name">{template.name}</span>
+            </Tooltip>
           </div>
         )}
         {!isNewTemplate && (
