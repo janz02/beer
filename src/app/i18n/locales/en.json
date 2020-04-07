@@ -156,6 +156,7 @@
       "coupon-count-help": "Only a positive integer can be accepted which is less than 1 000 000.",
       "description": "Coupon description",
       "description-help": "This text will be displayed as detailed information when the coupon is popped up.",
+      "discardCount": "Discard count",
       "discount-amount": "Discount amount",
       "discount-amount-fix-help": "Eg. 1 500.",
       "discount-amount-percent-help": "Eg. 7,5.",
