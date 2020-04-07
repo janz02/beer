@@ -69,15 +69,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
     </Menu>
   )
 
-  const templateName = (
-    <Tooltip
-      mouseEnterDelay={0.9}
-      placement="bottomLeft"
-      title={template?.name && template?.name?.length < 24 ? '' : template?.name}
-    >
-      <Text className="template-name">{template?.name}</Text>
-    </Tooltip>
-  )
+  const templateName = <Text className="template-name">{template?.name}</Text>
 
   const versionSelect = (
     <Select
@@ -139,9 +131,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
   return (
     <div className={`${className} nleh`}>
       <Form className="nleh__toolbar" name="newsletter-template-editor" layout="inline" form={form}>
-        <Form.Item name="name" label={t('newsletter.template')}>
-          {templateName}
-        </Form.Item>
+        <Form.Item label={t('newsletter.template')}>{templateName}</Form.Item>
         <Form.Item label={t('newsletter.version')} name="currentTemplateVersionId">
           {versionSelect}
         </Form.Item>
