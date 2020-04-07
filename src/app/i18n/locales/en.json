@@ -393,8 +393,7 @@
       "register-code": "Registration code",
       "registration-allowed": "Company register",
       "registration-number": "Company register number",
-      "tax-number": "VAT number",
-      "type": "Partner Type"
+      "tax-number": "VAT number"
     },
     "list": {
       "add": "Add new partner",
