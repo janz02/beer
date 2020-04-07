@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import { Menu } from 'antd'
+import { Menu, Tooltip } from 'antd'
 import { Link } from 'react-router-dom'
 import { Roles } from 'api/swagger/models'
 import { hasPermission } from 'services/jwt-reader'
@@ -10,6 +10,7 @@ import { LanguageSelector } from 'components/LanguageSelector'
 
 export interface SideMenuOptionProps {
   label: string
+  labelTooltip?: string
   icon: JSX.Element
   roles?: Roles[]
   link?: string
@@ -49,7 +50,9 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
             className={!option.link && !option.onClick ? 'side-menu-nolink' : ''}
           >
             {option.icon}
-            <span>{option.label}</span>
+            <Tooltip title={option.labelTooltip}>
+              <span>{option.label}</span>
+            </Tooltip>
             {option.link && <Link to={option.link} />}
           </Menu.Item>
         ))}

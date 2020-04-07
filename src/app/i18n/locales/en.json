@@ -39,6 +39,7 @@
   },
   "common": {
     "activate": "Activate",
+    "active": "Active",
     "cancel": "Cancel",
     "confirm": "Ok",
     "delete": "Delete",
@@ -55,6 +56,7 @@
     "go-back": "Go back",
     "go-back-to-list": "Bact to the list",
     "inactivate": "Inactivate",
+    "inactive": "Inactive",
     "message": {
       "delete-success": "Successful deletion",
       "email-sent": "Your request was processed succesfully",
@@ -151,6 +153,7 @@
       "comment": "Comment",
       "coupon-count": "Number of coupons",
       "description": "Coupon description",
+      "discardCount": "Discard count",
       "discount-amount": "Discount amount",
       "discount-type": "Discount type",
       "display-fix-banner-campaign": "Display fix banner campaign",
@@ -390,8 +393,7 @@
       "register-code": "Registration code",
       "registration-allowed": "Company register",
       "registration-number": "Company register number",
-      "tax-number": "VAT number",
-      "type": "Partner Type"
+      "tax-number": "VAT number"
     },
     "list": {
       "add": "Add new partner",

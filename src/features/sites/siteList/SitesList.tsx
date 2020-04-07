@@ -10,6 +10,7 @@ import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { ResponsiveCard, ResponsiveCardProps } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AppThunk } from 'app/store'
+import { useReusableSites } from '../useReusableSites'
 
 export interface SitesListProps {
   cardProps: Pick<ResponsiveCardProps, 'disableAutoScale'>
@@ -29,6 +30,8 @@ export const SitesList: FC<SitesListProps> = props => {
   const { t } = useTranslation()
 
   const [siteToDelete, setSiteToDelete] = useState<PopupState<Site>>()
+
+  const { listWidth } = useReusableSites()
 
   const {
     paginationConfig,
@@ -86,7 +89,7 @@ export const SitesList: FC<SitesListProps> = props => {
         <ResponsivePage>
           <ResponsiveCard
             {...cardProps}
-            width="normal"
+            width={listWidth}
             forTable
             floatingTitle={t('site-list.list-title')}
             floatingOptions={headerOptions}

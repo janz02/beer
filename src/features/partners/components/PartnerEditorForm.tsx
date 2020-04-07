@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { Form, Input, Button, Switch, Select } from 'antd'
+import { Form, Input, Button, Switch } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Partner } from 'models/partner'
 import { useIsMobile, useCommonFormRules } from 'hooks'
@@ -7,8 +7,10 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButtonProps } from 'components/buttons/BackButton'
-import { PartnerState } from 'api/swagger/models'
 import { EditorMode } from 'components/buttons/EditorModeOptions'
+import Typography from 'antd/lib/typography'
+
+const { Text } = Typography
 
 export interface PartnerEditorFormProps {
   mode: EditorMode
@@ -91,23 +93,20 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
           <Input disabled={view} />
         </Form.Item>
 
-        <Form.Item
-          name="majorPartner"
-          valuePropName="checked"
-          label={t('partner.field.major-partner')}
-          {...formItemLayout}
-        >
-          <Switch disabled />
+        <Form.Item name="majorPartner" label={t('partner.field.major-partner')} {...formItemLayout}>
+          <>
+            {partner?.majorPartner && (
+              <Text>{partner?.majorPartner ? t('common.yes') : t('common.no')}</Text>
+            )}
+          </>
         </Form.Item>
 
         <Form.Item name="partnerState" label={t('partner.field.partner-state')} {...formItemLayout}>
-          <Select disabled>
-            {Object.keys(PartnerState).map(s => (
-              <Select.Option key={s} value={s}>
-                {t(`partner.partner-state.${s?.toLowerCase()}`)}
-              </Select.Option>
-            ))}
-          </Select>
+          <>
+            {partner?.partnerState && (
+              <Text>{t(`partner.partner-state.${partner.partnerState?.toLowerCase()}`)}</Text>
+            )}
+          </>
         </Form.Item>
 
         <Form.Item

@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
 import { UserType } from 'models/user'
+import { ResponsiveCardWidth } from 'components/responsive/ResponsiveCard'
 
 interface PartnerContactsRoutes {
   root: string
@@ -33,6 +34,7 @@ interface UseReusablePartnerContactsUtils {
   route: PartnerContactsRoutes
   label: PartnerContactsLabel
   actions: PartnerContactsSliceActions
+  listWidth: ResponsiveCardWidth
   userType: UserType
   selector: (state: RootState) => PartnerContactsState
 }
@@ -51,6 +53,7 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
         // TODO: remove this id checking
         userType: +partnerId! === 1 ? UserType.NKM : UserType.PARTNER,
         shrinks: true,
+        listWidth: 'normal',
         permission: {
           editor: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
         },
@@ -68,6 +71,7 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
     return {
       userType: UserType.PARTNER,
       shrinks: false,
+      listWidth: 'normal',
       label: { listTitle: t('partner-contact.list-title') },
       permission: {
         // TODO Fix for PartnerContact.MajorPartner on JWT

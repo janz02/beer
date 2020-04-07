@@ -52,8 +52,8 @@ const setupMomentHu = (): any =>
       LTS: 'H:mm:ss',
       L: 'YYYY.MM.DD.',
       LL: 'YYYY.MM.DD.',
-      LLL: 'YYYY.MM.D. H:mm',
-      LLLL: 'YYYY. MMMM D., dddd H:mm'
+      LLL: 'YYYY.MM.DD. H:mm',
+      LLLL: 'YYYY. MMMM DD., dddd H:mm'
     },
     meridiemParse: /de|du/i,
     isPM: function(input) {

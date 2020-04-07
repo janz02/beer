@@ -18,9 +18,18 @@ export enum OrderByType {
 
 export enum FilterMode {
   FILTER = 'filter',
-  BOOLEAN = 'boolean',
   SEARCH = 'search',
-  DATEPICKER = 'datepicker'
+  DATEPICKER = 'datepicker',
+  /**
+   * For filtering and renderindg YES or NO values, mapped to 'true' and 'fasle'.
+   * No need to populate filters and render prop with this option.
+   */
+  YES_NO = 'yes_no',
+  /**
+   * For filtering and rendering ACTIVE or INACTIVE values, mapped to 'true' and 'fasle'.
+   * No need to populate filters and render prop with this option.
+   */
+  ACTIVE_INACTIVE = 'active_inactive'
 }
 
 export interface Pagination {
@@ -211,12 +220,21 @@ function useTableUtils<T extends { [key: string]: any }>(
             config.filters = filters
           }
           break
-        case FilterMode.BOOLEAN:
+        case FilterMode.YES_NO:
           config.filterMultiple = false
           config.filters = filters ?? [
             { value: 'true', text: t('common.yes') },
             { value: 'false', text: t('common.no') }
           ]
+          config.render = (value: boolean) => (value ? t('common.yes') : t('common.no'))
+          break
+        case FilterMode.ACTIVE_INACTIVE:
+          config.filterMultiple = false
+          config.filters = filters ?? [
+            { value: 'true', text: t('common.active') },
+            { value: 'false', text: t('common.inactive') }
+          ]
+          config.render = (value: boolean) => (value ? t('common.active') : t('common.inactive'))
           break
         default:
           break

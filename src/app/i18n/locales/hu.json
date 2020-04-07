@@ -39,6 +39,7 @@
   },
   "common": {
     "activate": "Aktiválás",
+    "active": "Aktív",
     "cancel": "Mégsem",
     "confirm": "Rendben",
     "delete": "Törlés",
@@ -55,6 +56,7 @@
     "go-back": "Vissza",
     "go-back-to-list": "Vissza a listához",
     "inactivate": "Inaktiválás",
+    "inactive": "Inaktív",
     "message": {
       "delete-success": "Sikeres törlés",
       "email-sent": "A kérés sikeresen fel lett dolgozva",
@@ -151,6 +153,7 @@
       "comment": "Komment",
       "coupon-count": "Kuponok száma",
       "description": "Kupon leírása",
+      "discardCount": "Eldobások száma",
       "discount-amount": "Kedvezmény mértéke",
       "discount-type": "Kedvezmény fajtája",
       "display-fix-banner-campaign": "Fix banner kampány megjelenítése",
@@ -390,8 +393,7 @@
       "register-code": "Regisztációs kód",
       "registration-allowed": "Cégjegyző",
       "registration-number": "Cégjegyzék szám",
-      "tax-number": "Adószám",
-      "type": "Partner típus"
+      "tax-number": "Adószám"
     },
     "list": {
       "add": "Új partner hozzáadás",
