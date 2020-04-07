@@ -10,6 +10,7 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { hardResetStore } from 'app/storeUtils'
 import { Partner } from 'models/partner'
+import { UserData } from 'models/user'
 
 const clearJwtData = (): void => {
   sessionStorage.removeItem('jwt')
@@ -19,7 +20,17 @@ const clearJwtData = (): void => {
   sessionStorage.removeItem('partnerName')
 }
 
-const initialState = {
+interface AuthState {
+  loggedIn: boolean
+  userData: UserData
+  loading: boolean
+  errorSignup: string
+  errorLogin: string
+  errorChangePassword: string
+  errorPasswordRecovery: string
+}
+
+const initialState = (): AuthState => ({
   loggedIn: isLoggedIn(),
   userData: getJwtUserdata(),
   loading: false,
@@ -27,13 +38,13 @@ const initialState = {
   errorLogin: '',
   errorChangePassword: '',
   errorPasswordRecovery: ''
-}
+})
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: initialState(),
   reducers: {
-    resetAuth: () => initialState,
+    resetAuth: () => initialState(),
     setLoadingStart(state) {
       state.loading = true
     },
