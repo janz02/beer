@@ -40,15 +40,16 @@ export interface Coupon {
   smallPictureId?: string | null
   bigPictureId?: string | null
   onlineClaimLink?: string | null
-  link?: string | null
+  productDetails?: string | null
   drawDate?: moment.Moment
   prizeRulesFileId?: string | null
-  itemPrice?: number
-  previousYearAverageBasketValue?: number
+  itemPrice?: number | null
+  previousYearAverageBasketValue?: number | null
   awardedCampaign?: boolean
   partnerId?: number
   partnerName?: string | null
   isPartnerActive?: boolean
   preferredPosition?: number
   discardCount?: number
+  prizeValue?: number | null
 }

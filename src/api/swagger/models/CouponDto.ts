@@ -167,7 +167,7 @@ export interface CouponDto {
      * @type {string}
      * @memberof CouponDto
      */
-    link?: string | null;
+    productDetails?: string | null;
     /**
      * 
      * @type {Date}
@@ -185,19 +185,25 @@ export interface CouponDto {
      * @type {number}
      * @memberof CouponDto
      */
-    itemPrice?: number;
+    itemPrice?: number | null;
     /**
      * 
      * @type {number}
      * @memberof CouponDto
      */
-    previousYearAverageBasketValue?: number;
+    previousYearAverageBasketValue?: number | null;
     /**
      * 
      * @type {boolean}
      * @memberof CouponDto
      */
     awardedCampaign?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponDto
+     */
+    prizeValue?: number | null;
 }
 
 export function CouponDtoFromJSON(json: any): CouponDto {
@@ -230,12 +236,13 @@ export function CouponDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'smallPictureId': !exists(json, 'smallPictureId') ? undefined : json['smallPictureId'],
         'bigPictureId': !exists(json, 'bigPictureId') ? undefined : json['bigPictureId'],
         'onlineClaimLink': !exists(json, 'onlineClaimLink') ? undefined : json['onlineClaimLink'],
-        'link': !exists(json, 'link') ? undefined : json['link'],
+        'productDetails': !exists(json, 'productDetails') ? undefined : json['productDetails'],
         'drawDate': !exists(json, 'drawDate') ? undefined : (json['drawDate'] === null ? null : new Date(json['drawDate'])),
         'prizeRulesFileId': !exists(json, 'prizeRulesFileId') ? undefined : json['prizeRulesFileId'],
         'itemPrice': !exists(json, 'itemPrice') ? undefined : json['itemPrice'],
         'previousYearAverageBasketValue': !exists(json, 'previousYearAverageBasketValue') ? undefined : json['previousYearAverageBasketValue'],
         'awardedCampaign': !exists(json, 'awardedCampaign') ? undefined : json['awardedCampaign'],
+        'prizeValue': !exists(json, 'prizeValue') ? undefined : json['prizeValue'],
     };
 }
 
@@ -268,12 +275,13 @@ export function CouponDtoToJSON(value?: CouponDto | null): any {
         'smallPictureId': value.smallPictureId,
         'bigPictureId': value.bigPictureId,
         'onlineClaimLink': value.onlineClaimLink,
-        'link': value.link,
+        'productDetails': value.productDetails,
         'drawDate': value.drawDate === undefined ? undefined : (value.drawDate === null ? null : value.drawDate.toISOString()),
         'prizeRulesFileId': value.prizeRulesFileId,
         'itemPrice': value.itemPrice,
         'previousYearAverageBasketValue': value.previousYearAverageBasketValue,
         'awardedCampaign': value.awardedCampaign,
+        'prizeValue': value.prizeValue,
     };
 }
 

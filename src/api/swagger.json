@@ -4705,7 +4705,7 @@
             "type": "string",
             "nullable": true
           },
-          "link": {
+          "productDetails": {
             "type": "string",
             "nullable": true
           },
@@ -4720,14 +4720,21 @@
           },
           "itemPrice": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "previousYearAverageBasketValue": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "awardedCampaign": {
             "type": "boolean"
+          },
+          "prizeValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -5011,7 +5018,7 @@
             "type": "string",
             "nullable": true
           },
-          "link": {
+          "productDetails": {
             "type": "string",
             "nullable": true
           },
@@ -5026,11 +5033,13 @@
           },
           "itemPrice": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "previousYearAverageBasketValue": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "awardedCampaign": {
             "type": "boolean"
@@ -5060,6 +5069,11 @@
           },
           "isPartnerActive": {
             "type": "boolean"
+          },
+          "prizeValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
