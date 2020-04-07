@@ -50,4 +50,5 @@ export interface Coupon {
   partnerName?: string | null
   isPartnerActive?: boolean
   preferredPosition?: number
+  discardCount?: number
 }
