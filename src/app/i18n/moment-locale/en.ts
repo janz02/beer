@@ -15,9 +15,9 @@ const setupMomentEn = (): any =>
       LT: 'HH:mm',
       LTS: 'HH:mm:ss',
       L: 'DD/MM/YY',
-      LL: 'D/MM/YYYY',
-      LLL: 'D/MM/YYYY HH:mm',
-      LLLL: 'dddd, D MMMM YYYY HH:mm'
+      LL: 'DD/MM/YYYY',
+      LLL: 'DD/MM/YYYY HH:mm',
+      LLLL: 'dddd, DD MMMM YYYY HH:mm'
     },
     calendar: {
       sameDay: '[Today at] LT',
