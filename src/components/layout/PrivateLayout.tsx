@@ -117,6 +117,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
       },
       {
         label: profile?.name ?? t('menu.profile'),
+        labelTooltip: profile?.name ?? t('menu.profile'),
         icon: <UserOutlined />,
         roles: pageViewRoles.readonlyProfile
       },
