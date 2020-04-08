@@ -886,22 +886,30 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
               <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
                 <Row gutter={rowGutter}>
                   <Col span={6}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.showCount')} </p>
+                    <p style={{ float: 'left', paddingRight: '5px' }}>
+                      {t('coupon-create.field.showCount')}
+                    </p>
                     <p style={{ float: 'right' }}>{coupon?.showCount}</p>
                   </Col>
 
                   <Col span={6}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.clickCount')} </p>
+                    <p style={{ float: 'left', paddingRight: '5px' }}>
+                      {t('coupon-create.field.clickCount')}
+                    </p>
                     <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
                   </Col>
 
                   <Col span={6}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.claimCount')} </p>
+                    <p style={{ float: 'left', paddingRight: '5px' }}>
+                      {t('coupon-create.field.claimCount')}
+                    </p>
                     <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
                   </Col>
 
                   <Col span={6}>
-                    <p style={{ float: 'left' }}>{t('coupon-create.field.discardCount')} </p>
+                    <p style={{ float: 'left', paddingRight: '5px' }}>
+                      {t('coupon-create.field.discardCount')}
+                    </p>
                     <p style={{ float: 'right' }}>{coupon?.discardCount}</p>
                   </Col>
                 </Row>
