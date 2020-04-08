@@ -53,7 +53,11 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
             <Tooltip title={option.labelTooltip}>
               <span>{option.label}</span>
             </Tooltip>
-            {option.link && <Link to={option.link} />}
+            {option.link && (
+              <Tooltip title={option.labelTooltip}>
+                <Link to={option.link} />
+              </Tooltip>
+            )}
           </Menu.Item>
         ))}
     </Menu>
