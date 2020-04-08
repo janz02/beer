@@ -11,6 +11,7 @@ export enum UserType {
 }
 
 export interface UserData {
+  id?: number | null
   email?: string
   roles?: Roles[]
   exp?: number

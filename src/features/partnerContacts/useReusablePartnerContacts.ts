@@ -29,6 +29,8 @@ interface PartnerContactsLabel {
 }
 
 interface UseReusablePartnerContactsUtils {
+  editedContactId: string | undefined
+  editingSelf: boolean
   shrinks: boolean
   permission: PartnerContactsPermissions
   route: PartnerContactsRoutes
@@ -41,15 +43,22 @@ interface UseReusablePartnerContactsUtils {
 export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { partnerId } = useParams()
+  const { partnerId, contactId } = useParams()
   const { pathname } = useSelector((state: RootState) => state.router.location)
-  const selfPartnerId = useSelector((state: RootState) => state.auth.userData.partnerId)
+  const { partnerId: selfPartnerId, id: selfUserId } = useSelector(
+    (state: RootState) => state.auth.userData
+  )
 
   const utils = useMemo((): UseReusablePartnerContactsUtils => {
+    const common = {
+      editedContactId: contactId,
+      editingSelf: contactId && selfUserId ? +contactId === selfUserId : false
+    }
     if (pathname.startsWith('/partners') && partnerId) {
       const actions = partnerContactsSlice.actions
       dispatch(actions.setListConstraints({ partnerId }))
       return {
+        ...common,
         // TODO: remove this id checking
         userType: +partnerId! === 1 ? UserType.NKM : UserType.PARTNER,
         shrinks: true,
@@ -69,6 +78,8 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
     const actions = contactsSlice.actions
     dispatch(actions.setListConstraints({ partnerId: selfPartnerId }))
     return {
+      ...common,
+      editedContactId: contactId,
       userType: UserType.PARTNER,
       shrinks: false,
       listWidth: 'normal',
@@ -84,7 +95,7 @@ export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils =>
       actions: contactsSlice.actions,
       selector: (s: RootState) => s.contacts
     }
-  }, [dispatch, partnerId, pathname, selfPartnerId, t])
+  }, [contactId, dispatch, partnerId, pathname, selfPartnerId, selfUserId, t])
 
   return utils
 }

@@ -27,7 +27,7 @@ export interface PartnerContactsEditorProps {
   afterClose: () => void
   getItem: (id: number) => void
   handleExit: () => void
-  saveAction: (id: number, contact: PartnerContact) => AppThunk
+  saveAction: (id: number, contact: PartnerContact, savingSelf: boolean) => AppThunk
 }
 
 export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
@@ -39,7 +39,7 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
-  const { permission, userType } = useReusablePartnerContacts()
+  const { permission, userType, editingSelf } = useReusablePartnerContacts()
 
   const modalTitle = permission.editor ? t('partner-contact.editor') : t('partner-contact.viewer')
 
@@ -58,7 +58,11 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
 
   const onSave = async (values: any): Promise<void> => {
     const saved: any = await dispatch(
-      saveAction(editedContact?.id!, { ...values, isActive: values.isActive === 'true' })
+      saveAction(
+        editedContact?.id!,
+        { ...values, isActive: values.isActive === 'true' },
+        editingSelf
+      )
     )
     saved && handleExit()
   }
@@ -88,12 +92,14 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
         <Input disabled={!permission.editor} maxLength={50} />
       </Form.Item>
 
-      <Form.Item name="isActive" label={t('user-access.field.status')} rules={[rule.required()]}>
-        <Radio.Group buttonStyle="solid">
-          <Radio.Button value="false">{t('user-access.field.status-inactive')}</Radio.Button>
-          <Radio.Button value="true">{t('user-access.field.status-active')}</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
+      {!editingSelf && (
+        <Form.Item name="isActive" label={t('user-access.field.status')} rules={[rule.required()]}>
+          <Radio.Group disabled={!permission.editor} buttonStyle="solid">
+            <Radio.Button value="false">{t('user-access.field.status-inactive')}</Radio.Button>
+            <Radio.Button value="true">{t('user-access.field.status-active')}</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+      )}
 
       <Form.Item
         label={t('partner-contact.field.email')}
@@ -111,23 +117,25 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
         <Input disabled={!permission.editor} maxLength={50} />
       </Form.Item>
 
-      <Form.Item
-        name="role"
-        label={
-          userType === UserType.NKM
-            ? t('partner-contact.field.role')
-            : t('partner-contact.field.type')
-        }
-        rules={[rule.requiredString()]}
-      >
-        <Select disabled={!permission.editor}>
-          {roleOptions?.map((r, i) => (
-            <Select.Option key={i} value={r.value.toString()}>
-              {r.text}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
+      {!editingSelf && (
+        <Form.Item
+          name="role"
+          label={
+            userType === UserType.NKM
+              ? t('partner-contact.field.role')
+              : t('partner-contact.field.type')
+          }
+          rules={[rule.requiredString()]}
+        >
+          <Select disabled={!permission.editor}>
+            {roleOptions?.map((r, i) => (
+              <Select.Option key={i} value={r.value as string | number}>
+                {r.text}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+      )}
     </GenericModalForm>
   )
 }

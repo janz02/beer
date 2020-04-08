@@ -2,7 +2,6 @@ import React, { FC, useEffect } from 'react'
 import { PartnerContactsList } from './PartnerContactsList'
 import { useReusablePartnerContacts } from './useReusablePartnerContacts'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { useParams } from 'hooks/react-router-dom-hooks'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { PartnerContactEditor } from './PartnerContactEditor'
 
@@ -12,9 +11,8 @@ interface PartnerContactsTileProps {
 export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
   const { hidden } = props
   const dispatch = useDispatch()
-  const { contactId } = useParams()
 
-  const { route, actions, selector } = useReusablePartnerContacts()
+  const { route, actions, selector, editedContactId } = useReusablePartnerContacts()
   const { getList, deleteItem, getItem, clearEditor, saveItem } = actions
   const { contacts, listParams, loadingList } = useSelector(selector)
 
@@ -28,7 +26,7 @@ export const PartnerContactsTile: FC<PartnerContactsTileProps> = props => {
     handleExit,
     handleAfterClose
   } = useGenericModalFormEditorUtils({
-    dataId: contactId,
+    dataId: editedContactId,
     rootRoute: route.root,
     detailRoute: route.detail,
     disableCreate: true

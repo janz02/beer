@@ -25,9 +25,10 @@ export interface PartnerContactsState {
 
 type TakenCommonSliceActions<T> = Pick<
   CommonSliceActions<T>,
-  'getList' | 'clearEditor' | 'reset' | 'saveItem' | 'getItem' | 'setListConstraints'
+  'getList' | 'clearEditor' | 'reset' | 'getItem' | 'setListConstraints'
 >
 export interface PartnerContactsSliceActions extends TakenCommonSliceActions<PartnerContact> {
+  saveItem: (id: number, data: PartnerContact, savingSelf: boolean) => AppThunk
   deleteItem: (id: number, role: Roles) => AppThunk
 }
 
@@ -77,7 +78,7 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
       saveItemSuccess(state) {
         state.loadingEditor = false
         state.error = ''
-        message.success(i18n.t('user-access.msg.change-succesful'), 5)
+        message.success(i18n.t('common.message.save-success'), 5)
       },
       saveItemFail(state, action: PayloadAction<string>) {
         state.loadingEditor = false
@@ -162,7 +163,11 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
     dispatch(_clearEditor())
   }
 
-  const saveItem = (id: number, data: PartnerContact): AppThunk => async dispatch => {
+  const saveItem = (
+    id: number,
+    data: PartnerContact,
+    savingSelf: boolean
+  ): AppThunk => async dispatch => {
     try {
       dispatch(saveItemRequest())
 
@@ -175,14 +180,15 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
           phone: data.phone
         }
       })
-
-      await api.auth.updatePartnerContactInfo({
-        id,
-        partnerContactStateDto: {
-          role: data.role!,
-          isActive: data.isActive
-        }
-      })
+      if (!savingSelf && typeof data.role === 'string') {
+        await api.auth.updatePartnerContactInfo({
+          id,
+          partnerContactStateDto: {
+            role: data.role!,
+            isActive: data.isActive
+          }
+        })
+      }
       dispatch(saveItemSuccess())
       dispatch(getList())
       return { id }

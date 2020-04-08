@@ -11,6 +11,7 @@ import i18n from 'app/i18n'
 import { hardResetStore } from 'app/storeUtils'
 import { Partner } from 'models/partner'
 import { UserData } from 'models/user'
+import { PartnerContact } from 'models/partnerContact'
 
 const clearJwtData = (): void => {
   sessionStorage.removeItem('jwt')
@@ -18,6 +19,7 @@ const clearJwtData = (): void => {
   sessionStorage.removeItem('jwtExpiration')
   sessionStorage.removeItem('partnerId')
   sessionStorage.removeItem('partnerName')
+  sessionStorage.removeItem('userId')
 }
 
 interface AuthState {
@@ -94,6 +96,13 @@ const authSlice = createSlice({
         partnerName: action.payload.name
       }
     },
+    setSelfPartnerContact(state, action: PayloadAction<PartnerContact>) {
+      sessionStorage.setItem('userId', `${action.payload.id}`)
+      state.userData = {
+        ...state.userData,
+        id: action.payload.id
+      }
+    },
     logoutUser(state) {
       state.loggedIn = false
       state.userData = {}
@@ -122,7 +131,8 @@ const {
   logoutUser,
   changePasswordSuccess,
   changePasswordFail,
-  setSelfPartner
+  setSelfPartner,
+  setSelfPartnerContact
 } = authSlice.actions
 
 export const { resetAuth } = authSlice.actions
@@ -145,7 +155,10 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
     dispatch(loginSuccess(userVm))
 
     const partner = await api.partner.getSelfPartner()
-    dispatch(setSelfPartner(partner))
+    dispatch(setSelfPartner({ id: partner.id, name: partner.name }))
+
+    const contact = await api.partnerContacts.getSelfPartnerContact()
+    dispatch(setSelfPartnerContact({ id: contact.id }))
 
     if (!cameFrom.includes('error')) {
       history.push(cameFrom)
