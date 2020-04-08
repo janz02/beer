@@ -15,6 +15,7 @@ export const isLoggedIn = (): boolean => {
 
 export const getJwtUserdata = (token?: string[] | string | null): UserData => {
   const jwt: any = token ?? sessionStorage.getItem('jwt')
+  const userId = sessionStorage.getItem('userId')
   const partnerId = sessionStorage.getItem('partnerId')
   const partnerName = sessionStorage.getItem('partnerName')
   const decodedJwt: any = jwt && JwtDecode(jwt)
@@ -22,6 +23,7 @@ export const getJwtUserdata = (token?: string[] | string | null): UserData => {
     email: decodedJwt?.email,
     roles: formatRoles(decodedJwt),
     exp: decodedJwt?.exp,
+    id: userId ? +userId : null,
     partnerId: partnerId ? +partnerId : null,
     partnerName: partnerName || null
   }

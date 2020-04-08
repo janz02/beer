@@ -91,8 +91,6 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
     const partner = getState().partnerEditor.partner
     dispatch(savePartnerRequest())
 
-    console.log({ data })
-
     if (partner?.id) {
       await api.partner.updatePartner({
         id: partner.id,
