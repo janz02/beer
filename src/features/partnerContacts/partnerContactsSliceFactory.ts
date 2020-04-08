@@ -180,7 +180,7 @@ const sliceFactory = (props: SliceFactoryProps): PartnerContactsSliceFactoryUtil
           phone: data.phone
         }
       })
-      if (!savingSelf) {
+      if (!savingSelf && typeof data.role === 'string') {
         await api.auth.updatePartnerContactInfo({
           id,
           partnerContactStateDto: {
