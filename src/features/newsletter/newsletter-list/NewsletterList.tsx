@@ -73,7 +73,7 @@ export const NewsletterList: FC = () => {
       columnConfig({
         title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
-        width: '10rem',
+        width: '13rem',
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
       }),

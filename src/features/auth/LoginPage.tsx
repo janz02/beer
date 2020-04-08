@@ -25,9 +25,9 @@ export const LoginPage: React.FC = () => {
         <Form.Item
           label={t('auth.field.email')}
           name="username"
-          rules={[rule.requiredString(), rule.max(50)]}
+          rules={[rule.requiredString(), rule.max(100)]}
         >
-          <Input maxLength={50} />
+          <Input maxLength={100} />
         </Form.Item>
         <Form.Item
           label={t('auth.field.password')}
