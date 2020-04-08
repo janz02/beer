@@ -110,13 +110,18 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const footerOptions = useMemo<SideMenuOptionProps[]>(
     () => [
       {
-        label: profile?.name ?? t('menu.profile'),
+        // Slice is necessary because this way the tooltip won't shoot off
+        // far right when the name is really long.
+        label: profile?.name?.slice(0, 20) ?? t('menu.profile'),
+        labelTooltip: profile?.name ?? t('menu.profile'),
         link: '/profile',
         icon: <UserOutlined />,
         roles: pageViewRoles.profile
       },
       {
-        label: profile?.name ?? t('menu.profile'),
+        // Slice is necessary because this way the tooltip won't shoot off
+        // far right when the name is really long.
+        label: profile?.name?.slice(0, 20) ?? t('menu.profile'),
         labelTooltip: profile?.name ?? t('menu.profile'),
         icon: <UserOutlined />,
         roles: pageViewRoles.readonlyProfile
