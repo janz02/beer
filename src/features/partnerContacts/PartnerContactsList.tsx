@@ -82,9 +82,9 @@ export const PartnerContactsList: FC<PartnerContactsListProps> = props => {
         filterMode: FilterMode.FILTER,
         width: '12rem',
         filters: roleOptions,
-        render: (value: string, record: PartnerContact) =>
+        render: (value, record: PartnerContact) =>
           userType === UserType.NKM
-            ? t(`user.role.${value.toLowerCase()}`)
+            ? value?.length && t(`user.role.${value.toLowerCase?.()}`)
             : record.majorPartner
             ? t('partner-contact.field.partner-type.major')
             : t('partner-contact.field.partner-type.normal')
