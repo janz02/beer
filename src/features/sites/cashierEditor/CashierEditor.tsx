@@ -71,6 +71,7 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
     >
       <Form.Item
         label={t('cashier-editor.field.cashier-id')}
+        extra={t('cashier-editor.field.cashier-id-help')}
         name="cashierId"
         rules={[rule.requiredString(), rule.max(30)]}
       >

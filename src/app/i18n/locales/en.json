@@ -26,6 +26,7 @@
     "editor-edit": "Edit cashier",
     "field": {
       "cashier-id": "Online cashier ID",
+      "cashier-id-help": "Please enter the AP code for that cashier where you will place our digital stamper.",
       "digital-stamp-id": "Digital stamp ID"
     }
   },
@@ -371,8 +372,8 @@
     "field": {
       "email": "Email address",
       "subject": "Subject",
-      "template-modified-at": "Modified at",
-      "template-modified-by": "Modifier",
+      "template-modified-at": "Time of the last modification",
+      "template-modified-by": "Last modifier",
       "template-name": "Template name",
       "template-version": "Version"
     },

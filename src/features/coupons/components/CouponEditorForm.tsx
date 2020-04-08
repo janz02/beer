@@ -1053,22 +1053,24 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                     okText={t('common.ok')}
                     cancelText={t('common.cancel')}
                   >
-                    <div className="timeline-item__title">
-                      <MomentDisplay date={x.dateTime} /> &nbsp;
-                      {(x.stateFrom || x.stateTo) && (
-                        <strong>
-                          {x.stateFrom && t(`coupon.state.${x.stateFrom.toLowerCase()}`)}
-                          <ArrowRightOutlined />
-                          {x.stateTo && t(`coupon.state.${x.stateTo.toLowerCase()}`)}
-                        </strong>
-                      )}
-                    </div>
-                    <div className="timeline-item__body text-faded">
-                      {x.comment} - {x.from}
-                      <Button size="small" type="link">
-                        <DeleteFilled />
-                      </Button>
-                    </div>
+                    <>
+                      <div className="timeline-item__title">
+                        <MomentDisplay date={x.dateTime} /> &nbsp;
+                        {(x.stateFrom || x.stateTo) && (
+                          <strong>
+                            {x.stateFrom && t(`coupon.state.${x.stateFrom.toLowerCase()}`)}
+                            <ArrowRightOutlined />
+                            {x.stateTo && t(`coupon.state.${x.stateTo.toLowerCase()}`)}
+                          </strong>
+                        )}
+                      </div>
+                      <div className="timeline-item__body text-faded">
+                        {x.comment} - {x.from}
+                        <Button size="small" type="link">
+                          <DeleteFilled />
+                        </Button>
+                      </div>
+                    </>
                   </Popconfirm>
                 </Timeline.Item>
               ))}

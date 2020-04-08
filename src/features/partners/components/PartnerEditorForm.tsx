@@ -171,7 +171,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
           rules={[rule.requiredString(), rule.max(20)]}
           {...formItemLayout}
         >
-          <Input disabled={view} />
+          <Input disabled={view} placeholder="11111111-1-11" />
         </Form.Item>
 
         <Form.Item

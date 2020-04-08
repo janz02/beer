@@ -122,7 +122,7 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
       >
         <Select disabled={!permission.editor}>
           {roleOptions?.map((r, i) => (
-            <Select.Option key={i} value={r.value}>
+            <Select.Option key={i} value={r.value.toString()}>
               {r.text}
             </Select.Option>
           ))}

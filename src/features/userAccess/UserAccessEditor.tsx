@@ -84,7 +84,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
       <Form.Item name="role" label={t('user-access.field.role')} rules={[rule.requiredString()]}>
         <Select>
           {roleOptions?.map((r, i) => (
-            <Select.Option key={i} value={r.value}>
+            <Select.Option key={i} value={r.value.toString()}>
               {r.text}
             </Select.Option>
           ))}

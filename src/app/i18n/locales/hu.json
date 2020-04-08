@@ -26,6 +26,7 @@
     "editor-edit": "Pénztár szerkesztés",
     "field": {
       "cashier-id": "Online pénztár azonosító (AP)",
+      "cashier-id-help": "Kérjük, adja meg annak a pénztárnak az AP kódját, ahol digitális pecsételőnket elhelyezi.",
       "digital-stamp-id": "Digitális pecsét azonosító"
     }
   },
@@ -371,8 +372,8 @@
     "field": {
       "email": "E-mail cím",
       "subject": "Tárgy",
-      "template-modified-at": "Módosítva",
-      "template-modified-by": "Módosító",
+      "template-modified-at": "Utolsó módosítás időpontja",
+      "template-modified-by": "Utolsó módosító",
       "template-name": "Sablon név",
       "template-version": "Verzió"
     },
