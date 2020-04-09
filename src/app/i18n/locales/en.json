@@ -128,7 +128,7 @@
     "field": {
       "name": "Category name"
     },
-    "list-title": "Coupon categories"
+    "list-title": "Campaign categories"
   },
   "coupon-create": {
     "activate": "Activate",
