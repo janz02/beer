@@ -122,7 +122,9 @@ export const basePaginationConfig = (
   total: pagination?.size ?? 0,
   simple: isMobile,
   pageSizeOptions: ['5', '10', '25', '50'],
-  showSizeChanger: true
+  showSizeChanger: true,
+  // TODO: this doesn't work but hopefully they will fix it.
+  position: 'bottomCenter'
 })
 
 /**
