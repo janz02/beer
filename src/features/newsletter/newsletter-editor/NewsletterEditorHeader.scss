@@ -2,9 +2,21 @@
   display: grid;
   grid-template-columns: auto 4rem;
 
+  &__version {
+    &--number {
+      margin: 0 5px;
+      font-weight: bold;
+    }
+
+    &--date {
+      margin-right: 5px;
+    }
+  }
+
   &__toolbar {
-    align-items: center;
     height: 100%;
+    // TODO:  check why align-items: center; didn't work in the builded version
+    margin-top: 12px;
     padding-left: 3rem;
 
     .ant-form-item-label {
@@ -12,6 +24,10 @@
         padding-top: 3px;
         font-size: small;
       }
+    }
+
+    button {
+      margin-left: 5px;
     }
 
     .template-name {
