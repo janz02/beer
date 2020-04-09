@@ -128,7 +128,7 @@
     "field": {
       "name": "Kategória neve"
     },
-    "list-title": "Kupon kategóriák"
+    "list-title": "Kampány kategóriák"
   },
   "coupon-create": {
     "activate": "Aktiválás",
@@ -175,7 +175,7 @@
       "expiration-date-help": "A beváltás utolsó lehetséges napja.",
       "is-active": "Állapot",
       "item-price": "Termékérték",
-      "item-price-help": "Tavalyi átlagos kosár érték vagy a termékkérték megadása kötelező.",
+      "item-price-help": "Tavalyi átlagos kosár érték vagy a termék érték megadása kötelező.",
       "minimum-shopping-value": "Minimális vásárlási érték",
       "minimum-shopping-value-help": "Csak akkor kell megadni, ha a beváltásnak van ilyen feltétele.",
       "mode": "Beváltás módja",
@@ -185,7 +185,7 @@
       "online-claim-link": "Online beváltási link",
       "partner-name": "Partner neve",
       "previous-year-average-basket-value": "Tavalyi átlagos kosárérték",
-      "previous-year-average-basket-value-help": "Tavalyi átlagos kosár érték vagy a termékkérték megadása kötelező.",
+      "previous-year-average-basket-value-help": "Tavalyi átlagos kosár érték vagy a termék érték megadása kötelező.",
       "prize-rules": "Nyereményjáték szabályzat",
       "prize-rules-help": "PDF.",
       "prize-value": "Nyeremény értéke",
