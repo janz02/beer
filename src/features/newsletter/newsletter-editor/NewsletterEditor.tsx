@@ -208,7 +208,7 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
             <Select>
               {segments?.map(s => (
                 <Select.Option key={s.id} value={s.id}>
-                  {s.name}
+                  {s.name} - ({s.segmentSize})
                 </Select.Option>
               ))}
             </Select>
