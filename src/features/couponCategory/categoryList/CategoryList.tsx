@@ -1,4 +1,5 @@
 import React, { FC, useState, useMemo } from 'react'
+import './CategoryList.scss'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { useTranslation } from 'react-i18next'
@@ -76,7 +77,7 @@ export const CategoryList: FC<CategoryListProps> = props => {
   )
 
   return (
-    <>
+    <div className="category-list">
       <ResponsiveCard
         forTable
         floatingTitle={t('coupon-category.list-title')}
@@ -101,6 +102,6 @@ export const CategoryList: FC<CategoryListProps> = props => {
         onCancel={() => setCategoryToDelete({ ...categoryToDelete, popupVisible: false })}
         afterClose={() => setCategoryToDelete(null)}
       />
-    </>
+    </div>
   )
 }
