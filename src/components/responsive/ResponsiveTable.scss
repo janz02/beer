@@ -81,6 +81,12 @@ $table-header-height: 80px;
       width: 120px;
     }
   }
+
+  // Temporary fix because pagination position: 'bottomCenter' doesn't work in antd 4.1.1.
+  .ant-pagination.ant-table-pagination {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 // Set hover color
