@@ -285,7 +285,7 @@
     },
     "coupon": {
       "already-claimed": "Kupon már kiváltva.",
-      "big-picture-required": "Nagy kép megadása köteletző.",
+      "big-picture-invalid": "Nagy kép formátuma vagy mérete nem megfelelő.",
       "cannot-claim": "Nem lehet kiváltani a kupont.",
       "cant-be-deleted": "Kupon nem törölhető.",
       "cant-change-state": "Kupon státusz változtatása sikertelen.",
@@ -299,7 +299,11 @@
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "percentage-discount-out-of-range": "Csak 1 és 100 közötti érték adható meg.",
       "predefined-file-id-mismatch": "A kuponkódok fájlja nem egyezik ay eddig felöltöttével.",
+      "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia.",
+      "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie.",
       "previous-year-average-basket-value-required-if-item-price-empty": "A tavalyi átlagos kosárérték mező megadása kötelező, ha a termék érték mező üres.",
+      "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie.",
+      "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő.",
       "type-has-no-codes-": "Type has no codes."
     },
     "coupon-categories": {
@@ -321,7 +325,8 @@
       "download-fail": "Sikertelen fájl lekérdezés.",
       "image-type-not-supported": "Rossz fájl formátum.",
       "invalid-image-size": "Rossz kép méret.",
-      "invalid-prize-rule-type": "Rossz nyeremény szabály típus."
+      "invalid-prize-rule-type": "Rossz nyeremény szabály típus.",
+      "not-supported-format": "Nem támogatott fájl formátum."
     },
     "not-found": "Nem található.",
     "paginate": {

@@ -285,7 +285,7 @@
     },
     "coupon": {
       "already-claimed": "Coupon already claimed.",
-      "big-picture-required": "Big picture is required.",
+      "big-picture-invalid": "Big picture file format or size is invalid.",
       "cannot-claim": "Cannot claim coupon.",
       "cant-be-deleted": "Coupon can't be deleted.",
       "cant-change-state": "Can't change coupon state.",
@@ -299,7 +299,11 @@
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
       "predefined-file-id-mismatch": "The file does not match with the previously uploaded one.",
+      "predefined-file-is-empty": "Predefined code file must not be empty.",
+      "predefinied-file-invalid": "Predefined code file must bne valid CSV file.",
       "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty.",
+      "prize-rules-invalid": "Prize rule file must be a PDF file.",
+      "small-picture-invalid": "Small picture file format or size is invalid.",
       "type-has-no-codes-": "Type has no codes."
     },
     "coupon-categories": {
@@ -321,7 +325,8 @@
       "download-fail": "Couldn't fetch your file.",
       "image-type-not-supported": "Unsuppored image type.",
       "invalid-image-size": "Invalid image dimensions.",
-      "invalid-prize-rule-type": "Invalid prize rule type."
+      "invalid-prize-rule-type": "Invalid prize rule type.",
+      "not-supported-format": "Unsupported file format."
     },
     "not-found": "Not found.",
     "paginate": {
