@@ -30,6 +30,9 @@ export const NewsletterEditorPage: FC = () => {
     if (id && !isNaN(+id)) {
       dispatch(getNewsletterTemplate(+id))
     }
+    return () => {
+      dispatch(clearNewsletterTemplate())
+    }
   }, [dispatch, id])
 
   const onRevert = (): void => {

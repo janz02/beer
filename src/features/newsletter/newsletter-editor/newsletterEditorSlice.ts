@@ -30,6 +30,9 @@ const newsletterEditorSlice = createSlice({
   reducers: {
     resetNewsletterEditor: () => initialState,
     clearNewsletterTemplate(state) {
+      const localStorageKeys = ['gjs-html', 'gjs-css', 'gjs-assets', 'gjs-styles']
+      localStorageKeys.forEach(key => localStorage.removeItem(key))
+
       state.template = undefined
       state.currentTemplateVersionId = undefined
       state.error = ''
