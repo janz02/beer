@@ -18,6 +18,11 @@ $active-color: $primary-color !default;
 
   &__containter {
     height: calc(100% - #{$nle-header-height});
+
+    // Fix: colorpicker was generated outside of the view, with position: absolute
+    .sp-container {
+      position: fixed !important;
+    }
   }
 }
 
