@@ -1,110 +1,132 @@
 trigger:
-- master
+  - master
 
 variables:
   DockerImageName: 'nkm-rtd-246410/couponmanager'
+  DockerRegistryServiceConnection: 'NKM-RTD-GCP-DockerRegistry'
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: GitVersion@5
-  inputs:
-    runtime: 'core'
-    updateAssemblyInfo: true
+  - task: GitVersion@5
+    inputs:
+      runtime: 'core'
+      updateAssemblyInfo: true
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      $major = $(GitVersion.Major)
-      $minor = $(GitVersion.Minor)
-      $pre = $(GitVersion.Patch)
-      Write-Host "$major.$minor.$pre"
-      $r = $(GitVersion.BuildMetaData)
-      $version = "$major.$minor.$pre.$r"
-      Write-Host "##vso[build.updatebuildnumber]$version"
-  displayName: 'Use GitVersion to add version'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        $major = $(GitVersion.Major)
+        $minor = $(GitVersion.Minor)
+        $pre = $(GitVersion.Patch)
+        Write-Host "$major.$minor.$pre"
+        $r = $(GitVersion.BuildMetaData)
+        $version = "$major.$minor.$pre-$r"
+        Write-Host "##vso[build.updatebuildnumber]$version"
+    displayName: 'Use GitVersion to add version'
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
-- task: Npm@1
-  inputs:
-    command: 'ci'
-  displayName: 'Install packages'
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        $buildNumber = "$(Build.BuildNumber)-rc"
+        Write-Host "##vso[build.updatebuildnumber]$buildNumber"
+    displayName: 'Add release candidate tag to BuildNumber on non-master branches'
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
-      npm run generate-client
-      $changed = git status -s
-      if( $changed ) {
-        Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
-        throw "Error"
-      } else {
-        Write-Host "The solution is using the latest API client."
-      }
-  displayName: 'Check for new version of the Backend API'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.x'
+    displayName: 'Install Node.js'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Error keys or not"; return; }
-      npm run generate-backend-translation-keys
-      $changed = git status -s
-      if( $changed ) {
-        Write-Host "##vso[task.LogIssue type=error;]There new error keys, please refresh the translation kesys by running npm run generate-backend-translation-keys, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
-        throw "Error"
-      } else {
-        Write-Host "The solution has the latest Translation Keys."
-      }
-  displayName: 'Check for new translation keys of the Backend API'
+  - task: Npm@1
+    inputs:
+      command: 'ci'
+    displayName: 'Install packages'
 
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run build'
-  displayName: 'Build solution'
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
+        npm run generate-client
+        $changed = git status -s
+        if( $changed ) {
+          Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
+          throw "Error"
+        } else {
+          Write-Host "The solution is using the latest API client."
+        }
+    displayName: 'Check for new version of the Backend API'
 
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'test -- --watchAll=false --passWithNoTests --reporters default --reporters jest-junit --coverage --coverageDirectory=output --coverageReporters cobertura'
-  displayName: 'Run Tests'
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Error keys or not"; return; }
+        npm run generate-backend-translation-keys
+        $changed = git status -s
+        if( $changed ) {
+          Write-Host "##vso[task.LogIssue type=error;]There new error keys, please refresh the translation kesys by running npm run generate-backend-translation-keys, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
+          throw "Error"
+        } else {
+          Write-Host "The solution has the latest Translation Keys."
+        }
+    displayName: 'Check for new translation keys of the Backend API'
 
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: JUnit
-    testResultsFiles: '**/junit.xml'
+  - task: Npm@1
+    inputs:
+      command: 'custom'
+      customCommand: 'run build'
+    displayName: 'Build solution'
 
-- task: reportgenerator@4
-  inputs:
-    reports: '$(Build.SourcesDirectory)/**/cobertura-coverage.xml'
-    targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+  - task: Npm@1
+    inputs:
+      command: 'custom'
+      customCommand: 'test -- --watchAll=false --passWithNoTests --reporters default --reporters jest-junit --coverage --coverageDirectory=output --coverageReporters cobertura'
+    displayName: 'Run Tests'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testRunner: JUnit
+      testResultsFiles: '**/junit.xml'
 
-- task: Docker@0
-  displayName: 'Build Docker image'
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
-    imageName: '$(DockerImageName):$(Build.BuildNumber).$(Build.BuildId)'
-    dockerfile: 'Dockerfile'
+  - task: reportgenerator@4
+    inputs:
+      reports: '$(Build.SourcesDirectory)/**/cobertura-coverage.xml'
+      targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
 
-- task: Docker@0
-  displayName: 'Publish Docker Image'
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryConnection: 'NKM-RTD-GCP-DockerRegistry'
-    action: 'Push an image'
-    imageName: '$(DockerImageName):$(Build.BuildNumber).$(Build.BuildId)'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage'
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+      reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+
+  - task: Docker@2
+    displayName: 'Build image'
+    inputs:
+      containerRegistry: '$(DockerRegistryServiceConnection)'
+      repository: '$(DockerImageName)'
+      command: 'build'
+      Dockerfile: 'Dockerfile'
+      tags: |
+        $(Build.BuildNumber).$(Build.BuildId)
+        latest
+      arguments: '--build-arg BUILD_VERSION=$(Build.BuildNumber)'
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+
+  - task: Docker@2
+    displayName: 'Publish image'
+    inputs:
+      containerRegistry: '$(DockerRegistryServiceConnection)'
+      repository: '$(DockerImageName)'
+      command: 'push'
+      tags: |
+        $(Build.BuildNumber).$(Build.BuildId)
+        latest
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
