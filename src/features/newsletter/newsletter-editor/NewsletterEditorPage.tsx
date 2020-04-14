@@ -1,39 +1,41 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useCallback } from 'react'
 import { NewsletterEditor } from './NewsletterEditor'
 import ErrorBoundary from 'antd/lib/alert/ErrorBoundary'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { RootState } from 'app/rootReducer'
+import { history } from 'router/router'
 import {
   getNewsletterTemplate,
   saveNewsletterTemplateVersion,
   clearNewsletterTemplate,
-  switchNewsletterVersion,
   restoreNewsletterTemplateVersion,
   sendNewsletterEmailExample,
   sendNewsletterEmailToSegment,
   getSegmentsForEmail
 } from './newsletterEditorSlice'
-import { RootState } from 'app/rootReducer'
-import { history } from 'router/router'
 
 export const NewsletterEditorPage: FC = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  const { template, currentTemplateVersionId, segments, loadingEmail } = useSelector(
+  const { template, currentTemplateVersionId, segments, loadingEmail, templateState } = useSelector(
     (state: RootState) => state.newsletterEditor
   )
 
-  useEffect(() => {
-    dispatch(clearNewsletterTemplate())
+  const handleGetTemplate = useCallback((): void => {
     if (id && !isNaN(+id)) {
       dispatch(getNewsletterTemplate(+id))
     }
+  }, [id, dispatch])
+
+  useEffect(() => {
+    dispatch(clearNewsletterTemplate())
+    handleGetTemplate()
     return () => {
       dispatch(clearNewsletterTemplate())
     }
-  }, [dispatch, id])
+  }, [dispatch, handleGetTemplate])
 
   const onRevert = (): void => {
     dispatch(restoreNewsletterTemplateVersion())
@@ -66,16 +68,18 @@ export const NewsletterEditorPage: FC = () => {
       <ErrorBoundary>
         <NewsletterEditor
           loadingEmail={loadingEmail}
+          templateState={templateState}
           template={template}
           segments={segments}
           currentTemplateVersionId={currentTemplateVersionId}
           handleSaveVersion={onSaveVersion}
+          handleTemplateReload={handleGetTemplate}
           handleRevert={onRevert}
           handleExit={onExit}
           handleSendSample={onSendSample}
           handleSendSegment={onSendSegment}
           handleGetSegments={onGetSegments}
-          handleVersionPreviewSwitch={(id: number) => dispatch(switchNewsletterVersion(+id))}
+          handleVersionPreviewSwitch={handleGetTemplate}
         />
       </ErrorBoundary>
     </>
