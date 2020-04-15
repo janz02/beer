@@ -281,6 +281,7 @@
       "max-length": "Túl hosszú szöveg.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
+      "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
       "password-format": "Invalid jelszó formátum.",
       "server-unavailable": "Szerver nem elérhető."
     },

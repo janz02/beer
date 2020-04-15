@@ -281,6 +281,7 @@
       "max-length": "Max length exceeded.",
       "max-length-exact": "This field must be less then {{max}} characters.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
+      "parameter-missing-or-invalid": "Parameter missing or is invalid.",
       "password-format": "Invalid password format.",
       "server-unavailable": "Server unavailable."
     },
