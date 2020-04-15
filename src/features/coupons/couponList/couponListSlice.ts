@@ -67,6 +67,7 @@ const couponListSlice = createSlice({
     },
     setOnlyWaiting(state, action: PayloadAction<boolean>) {
       state.onlyWaiting = action.payload
+      state.listParams.page = 1
     }
   }
 })
