@@ -6,7 +6,7 @@ import { FeatureState } from 'models/featureState'
 import { changePassword } from 'features/auth/authSlice'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { FormInstance } from 'antd/lib/form'
-import { useMemo } from 'react'
+import { useCallback } from 'react'
 
 interface UseProfileFeatures {
   editable?: boolean
@@ -49,16 +49,13 @@ export const useProfile = (): UseProfileFeatures => {
     resetFormFlags()
   }
 
-  const prepareFormFields = useMemo(
-    () => () => {
-      setFieldsValue({
-        ...profile,
-        registerCode: partner?.registerCode
-      })
-      resetFormFields(['oldPassword', 'password', 'passwordAgain'])
-    },
-    [setFieldsValue, resetFormFields, partner, profile]
-  )
+  const prepareFormFields = useCallback(() => {
+    setFieldsValue({
+      ...profile,
+      registerCode: partner?.registerCode
+    })
+    resetFormFields(['oldPassword', 'password', 'passwordAgain'])
+  }, [setFieldsValue, resetFormFields, partner, profile])
 
   return {
     editable,
