@@ -5,6 +5,36 @@
     "version": "v1"
   },
   "paths": {
+    "/api/ApplicationVersion": {
+      "get": {
+        "tags": [
+          "ApplicationVersion"
+        ],
+        "operationId": "get",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceInfo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceInfo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Auth/RegisterPartnerContact": {
       "post": {
         "tags": [
@@ -4153,6 +4183,26 @@
   },
   "components": {
     "schemas": {
+      "ServiceInfo": {
+        "type": "object",
+        "properties": {
+          "serviceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalServices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceInfo"
+            },
+            "nullable": true
+          }
+        }
+      },
       "RegisterPartnerContactDto": {
         "type": "object",
         "properties": {

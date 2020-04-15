@@ -79,6 +79,7 @@
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
+    "try-again": "Újra próbálkozás",
     "upload": "Feltöltés",
     "view": "Megtekintés",
     "yes": "Igen"
@@ -374,6 +375,7 @@
     "add": "Új sablon hozzáadása",
     "available-templates": "Hírlevél sablonok",
     "close-editor": "Szerkesztő bezárása",
+    "fail-msg": "Sajnos, nem sikerült betölteni a sablont.",
     "field": {
       "email": "E-mail cím",
       "subject": "Tárgy",

@@ -1,3 +1,4 @@
+export * from './ApplicationVersionApi';
 export * from './AuthApi';
 export * from './CashiersApi';
 export * from './CategoriesApi';

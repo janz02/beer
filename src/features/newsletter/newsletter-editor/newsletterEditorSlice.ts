@@ -1,5 +1,3 @@
-// import { createSlice } from '@reduxjs/toolkit'
-
 import { AppThunk } from 'app/store'
 import { Newsletter } from 'models/newsletter'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
@@ -9,8 +7,16 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Segment } from 'models/segment'
 
+export enum NewsletterTemplateState {
+  Undefined = 'undefined',
+  Loading = 'loading',
+  Loaded = 'loaded',
+  FailedToLoad = 'failedToLoad'
+}
+
 interface NewsletterEditorState {
   error: string
+  templateState?: NewsletterTemplateState
   currentTemplateVersionId?: number
   template?: Newsletter
   loadingEmail?: boolean
@@ -19,6 +25,7 @@ interface NewsletterEditorState {
 }
 
 const initialState: NewsletterEditorState = {
+  templateState: NewsletterTemplateState.Undefined,
   loadingEmail: false,
   error: '',
   segments: []
@@ -30,6 +37,9 @@ const newsletterEditorSlice = createSlice({
   reducers: {
     resetNewsletterEditor: () => initialState,
     clearNewsletterTemplate(state) {
+      const localStorageKeys = ['gjs-html', 'gjs-css', 'gjs-assets', 'gjs-styles']
+      localStorageKeys.forEach(key => localStorage.removeItem(key))
+      state.templateState = NewsletterTemplateState.Undefined
       state.template = undefined
       state.currentTemplateVersionId = undefined
       state.error = ''
@@ -46,15 +56,20 @@ const newsletterEditorSlice = createSlice({
     sendEmailSuccess(state) {
       state.loadingEmail = false
     },
-    sendEmailFail(state, action: PayloadAction<string>) {
+    sendEmailFail(state) {
       state.loadingEmail = false
     },
-    getTemplateRequest() {},
+    getTemplateRequest(state) {
+      state.templateState = NewsletterTemplateState.Loading
+    },
     getTemplateSuccess(state, action: PayloadAction<Newsletter>) {
       state.template = action.payload
       state.currentTemplateVersionId = action.payload.history?.[0]?.id
+      state.templateState = NewsletterTemplateState.Loaded
     },
-    getTemplateFail(state, action: PayloadAction<string>) {},
+    getTemplateFail(state) {
+      state.templateState = NewsletterTemplateState.FailedToLoad
+    },
     switchNewsletterVersion(state, action: PayloadAction<number>) {
       state.currentTemplateVersionId = action.payload
     },
@@ -111,7 +126,7 @@ export const getNewsletterTemplate = (id: number): AppThunk => async dispatch =>
     }
     dispatch(getTemplateSuccess(data))
   } catch (err) {
-    dispatch(getTemplateFail(err.toString()))
+    dispatch(getTemplateFail())
   }
 }
 
@@ -174,7 +189,7 @@ export const sendNewsletterEmailExample = (email: string, subject: string): AppT
     message.success(i18n.t('common.message.email-sent'), 5)
     return true
   } catch (err) {
-    dispatch(sendEmailFail(err.toString()))
+    dispatch(sendEmailFail())
     return false
   }
 }
@@ -211,7 +226,7 @@ export const sendNewsletterEmailToSegment = (
     message.success(i18n.t('common.message.email-sent'), 5)
     return true
   } catch (err) {
-    dispatch(sendEmailFail(err.toString()))
+    dispatch(sendEmailFail())
     return false
   }
 }

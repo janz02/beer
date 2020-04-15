@@ -79,6 +79,7 @@
     "save": "Save",
     "search": "Search",
     "send": "Send",
+    "try-again": "Try again",
     "upload": "Upload",
     "view": "View",
     "yes": "Yes"
@@ -374,6 +375,7 @@
     "add": "Add new template",
     "available-templates": "Available templates",
     "close-editor": "Close editor",
+    "fail-msg": "Unfortunatelly, couldn't load the template.",
     "field": {
       "email": "Email address",
       "subject": "Subject",
