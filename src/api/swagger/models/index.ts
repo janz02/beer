@@ -58,6 +58,7 @@ export * from './SegmentVm';
 export * from './SegmentVmPaginatedResponse';
 export * from './SendEmailToSegmentDto';
 export * from './SendEmailsDto';
+export * from './ServiceInfo';
 export * from './SiteDto';
 export * from './SiteVm';
 export * from './SiteVmPaginatedResponse';
