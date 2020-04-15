@@ -1,43 +1,28 @@
 import React, { useEffect, FC } from 'react'
-import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { ProfileEditorFormProps, ProfileEditorForm } from './ProfileEditorForm'
-import { getMyPartner } from 'features/partners/selfPartner/selfPartnerSlice'
-import { changePassword } from 'features/auth/authSlice'
-import { FeatureState } from 'models/featureState'
-import { profileActions } from './profileSlice'
+import { useDispatch } from 'hooks/react-redux-hooks'
+import { ProfileEditorForm } from './ProfileEditorForm'
+import { useProfile } from './useProfile'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { useTranslation } from 'react-i18next'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
 
 export const ProfileEditorPage: FC = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { partner } = useSelector((state: RootState) => state.selfPartner)
-  const { profile, featureState, editable } = useSelector((state: RootState) => state.profile)
-  const loading = featureState === FeatureState.Loading
+  const { modified, getProfile, getMyPartner } = useProfile()
 
   useEffect(() => {
-    dispatch(profileActions.getProfile())
-  }, [dispatch])
+    dispatch(getProfile())
+  }, [dispatch, getProfile])
 
   useEffect(() => {
     dispatch(getMyPartner())
-  }, [dispatch])
+  }, [dispatch, getMyPartner])
 
-  const handleProfileSave = (values: any): void => {
-    dispatch(profileActions.updateProfile({ ...values }))
-
-    const password = values.password
-    const oldPassword = values.oldPassword
-    if (password && oldPassword) {
-      dispatch(changePassword(password, oldPassword))
-    }
-  }
-
-  const props: ProfileEditorFormProps = {
-    handleProfileSave,
-    loading,
-    profile,
-    editable,
-    partner
-  }
-
-  return <ProfileEditorForm {...props} />
+  return (
+    <ResponsiveCard floatingTitle={t('profile.editor-title')}>
+      <NavigationAlert when={modified} />
+      <ProfileEditorForm />
+    </ResponsiveCard>
+  )
 }

@@ -1,6 +1,6 @@
 export enum FeatureState {
-  Initial,
-  Loading,
-  Success,
-  Error
+  Initial = 'Initial',
+  Loading = 'Loading',
+  Success = 'Success',
+  Error = 'Error'
 }
