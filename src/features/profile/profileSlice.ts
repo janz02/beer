@@ -4,17 +4,16 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Profile } from 'models/profile'
 import { api } from 'api'
+import { FeatureState } from 'models/featureState'
 
 interface ProfileState {
   editable?: boolean
   profile?: Profile
-  error: string | null
-  loading: boolean
+  featureState: FeatureState
 }
 
 const initialState: ProfileState = {
-  error: null,
-  loading: false
+  featureState: FeatureState.Initial
 }
 
 const profileSlice = createSlice({
@@ -22,74 +21,59 @@ const profileSlice = createSlice({
   initialState,
   reducers: {
     resetProfile: () => initialState,
+    setFeatureState(state, action: PayloadAction<FeatureState>) {
+      state.featureState = action.payload
+    },
     getProfileSuccess(state, action: PayloadAction<Profile>) {
       state.editable = true
       state.profile = action.payload
-      state.loading = false
-      state.error = null
-    },
-    setProfileFromJWT(state, action: PayloadAction<Profile>) {
-      state.editable = false
-      state.profile = action.payload
-      state.loading = false
-      state.error = null
+      state.featureState = FeatureState.Success
     },
     updateProfileSuccess(state) {
       message.success(i18n.t('profile.save-profile-success'), 10)
-      state.loading = false
-      state.error = null
-    },
-    setLoadingStart(state) {
-      state.loading = true
-    },
-    setLoadingFailed(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.error = action.payload
+      state.featureState = FeatureState.Success
     }
   }
 })
 
-export const {
+const {
   resetProfile,
   getProfileSuccess,
-  setProfileFromJWT,
   updateProfileSuccess,
-  setLoadingStart,
-  setLoadingFailed
+  setFeatureState
 } = profileSlice.actions
 
-export const profileReducer = profileSlice.reducer
-
-export const getProfile = (): AppThunk => async (dispatch, getState) => {
-  dispatch(setLoadingStart())
+const getProfile = (): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    // const userData = getState().auth.userData
-    // TODO: The roles have changed, no more Partner contact. Do we need this check, still?
-    // if (!userData.roles?.includes(Roles.Partner)) {
     const profile = await api.partnerContacts.getSelfPartnerContact()
+
     dispatch(getProfileSuccess(profile))
-    // } else {
-    // dispatch(setProfileFromJWT({ name: userData.email, email: userData.email }))
-    // }
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()))
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const updateProfile = (profile: Profile): AppThunk => async (dispatch, getState) => {
-  dispatch(setLoadingStart())
+const updateProfile = (profile: Profile): AppThunk => async (dispatch, getState) => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    // const userData = getState().auth.userData
-    // if (userData.roles?.includes(Roles.PARTNER)) {
     await api.partnerContacts.updateSelfPartnerContact({
       partnerContactDto: { ...getState().profile.profile, ...profile }
     })
+
     dispatch(updateProfileSuccess())
     dispatch(getProfile())
-    // }
   } catch (err) {
-    dispatch(setLoadingFailed(err.toString()))
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
+
+export const profileActions = {
+  resetProfile,
+  getProfile,
+  updateProfile
+}
+
+export const profileReducer = profileSlice.reducer

@@ -4,7 +4,6 @@ import { useIsMobile } from 'hooks'
 import './layout.scss'
 import { SideMenu } from './SideMenu'
 import { SideMenuOptions, SideMenuOptionProps } from './SideMenuOptions'
-import { getProfile } from 'features/profile/profileSlice'
 import { useDispatch } from 'react-redux'
 import {
   UserOutlined,
@@ -24,6 +23,7 @@ import { RootState } from 'app/rootReducer'
 import { useTranslation } from 'react-i18next'
 import { logout } from 'features/auth/authSlice'
 import { pageViewRoles } from 'services/roleHelpers'
+import { profileActions } from 'features/profile/profileSlice'
 
 export const PrivateLayout: React.FC = ({ children }) => {
   const dispatch = useDispatch()
@@ -44,7 +44,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
   }, [isMobile, lastMediaQuery])
 
   useEffect(() => {
-    dispatch(getProfile())
+    dispatch(profileActions.getProfile())
   }, [dispatch])
 
   const closeDrawer = (): void => {

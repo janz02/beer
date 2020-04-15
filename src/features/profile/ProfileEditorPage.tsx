@@ -1,18 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, FC } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { getProfile, updateProfile } from './profileSlice'
 import { ProfileEditorFormProps, ProfileEditorForm } from './ProfileEditorForm'
 import { getMyPartner } from 'features/partners/selfPartner/selfPartnerSlice'
 import { changePassword } from 'features/auth/authSlice'
+import { FeatureState } from 'models/featureState'
+import { profileActions } from './profileSlice'
 
-export const ProfileEditorPage: React.FC = () => {
+export const ProfileEditorPage: FC = () => {
   const dispatch = useDispatch()
   const { partner } = useSelector((state: RootState) => state.selfPartner)
-  const { profile, loading, editable } = useSelector((state: RootState) => state.profile)
+  const { profile, featureState, editable } = useSelector((state: RootState) => state.profile)
+  const loading = featureState === FeatureState.Loading
 
   useEffect(() => {
-    dispatch(getProfile())
+    dispatch(profileActions.getProfile())
   }, [dispatch])
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export const ProfileEditorPage: React.FC = () => {
   }, [dispatch])
 
   const handleProfileSave = (values: any): void => {
-    dispatch(updateProfile({ ...values }))
+    dispatch(profileActions.updateProfile({ ...values }))
 
     const password = values.password
     const oldPassword = values.oldPassword

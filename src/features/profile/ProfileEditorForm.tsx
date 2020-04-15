@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, FC } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
@@ -17,7 +17,7 @@ export interface ProfileEditorFormProps {
   partner?: Partner
 }
 
-export const ProfileEditorForm: React.FC<ProfileEditorFormProps> = props => {
+export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
   const { handleProfileSave, loading, profile, editable, partner } = props
   const { t } = useTranslation()
   const rule = useCommonFormRules()
