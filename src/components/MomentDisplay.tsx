@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import { useTranslation } from 'react-i18next'
 
 interface MomentDisplayProps {
   date?: moment.Moment
@@ -12,7 +13,11 @@ export const TIME_FORMAT = 'LT'
 export const MomentDisplay: React.FC<MomentDisplayProps> = props => {
   const { date, mode } = props
 
+  const { i18n } = useTranslation()
+
   if (!date) return <></>
+
+  date.locale(i18n.language)
 
   switch (mode) {
     case 'time':
