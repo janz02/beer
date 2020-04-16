@@ -1,5 +1,5 @@
 import { batch } from 'react-redux'
-import { resetNotification } from 'features/notification/notificationSlice'
+import { notificationActions } from 'features/notification/notificationSlice'
 import { AppThunk } from './store'
 import { resetAuth } from 'features/auth/authSlice'
 import { resetSiteEditor } from 'features/sites/siteEditor/siteEditorSlice'
@@ -31,7 +31,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetAuth())
     dispatch(profileActions.resetProfile())
     dispatch(resetSiteEditor())
-    dispatch(resetNotification())
+    dispatch(notificationActions.resetNotification())
     dispatch(resetCategoryEditor())
     dispatch(resetCategoryList())
     dispatch(resetCoupons())

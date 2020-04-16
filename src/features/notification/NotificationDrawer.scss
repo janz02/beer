@@ -1,0 +1,42 @@
+.notification-drawer {
+  --notification-drawer-header-height: 56px;
+  --notification-drawer-footer-height: 56px;
+  --notification-drawer-background: #FFFFFF;
+
+  .ant-drawer-body {
+    padding: 0;
+  }
+
+  &__header {
+    display: inline-flex;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    justify-content: space-between;
+    width: 100%;
+    height: var(--notification-drawer-header-height);
+    padding: 0;
+    background: var(--notification-drawer-background);
+    box-shadow: 3px 1px 9px 0 #0000004D;
+    line-height: var(--notification-drawer-header-height);
+
+    &__title {
+      margin-left: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    &__options {
+      margin-right: 3.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+  }
+
+  .infinite-list-container {
+    height: calc(100vh - var(--notification-drawer-header-height));
+    margin-top: var(--notification-drawer-header-height);
+    overflow: auto;
+  }
+}

@@ -1,0 +1,14 @@
+.notification-list {
+  .ant-spin-nested-loading {
+    min-height: 30vh;
+  }
+
+  &__load-more-btn {
+    display: block;
+    margin: 1.5rem auto;
+  }
+
+  &__footer {
+    height: 3rem;
+  }
+}

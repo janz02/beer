@@ -1,6 +1,7 @@
+import './NotificationItem.scss'
 import React, { FC, useState } from 'react'
 import moment from 'moment'
-import { NotificationData, inspectNotification } from './notificationSlice'
+import { NotificationData, notificationActions } from './notificationSlice'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { List, Avatar } from 'antd'
 import { BellFilled } from '@ant-design/icons'
@@ -12,6 +13,7 @@ interface NotificationItemProps {
 }
 
 export const ListItem: FC<NotificationItemProps> = ({ item, onClick }) => {
+  const { inspectNotification } = notificationActions
   const dispatch = useDispatch()
 
   const [hover, setHover] = useState(false)

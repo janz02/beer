@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import moment, { Moment } from 'moment'
 import { AppThunk } from 'app/store'
 import { delay } from 'services/temp/delay'
+import { ListRequestParams } from 'hooks/useTableUtils'
+import { FeatureState } from 'models/featureState'
 
 // TODO: Remove
 const TEMP_DATA: NotificationData[] = [
@@ -75,17 +77,21 @@ export interface NotificationData {
 interface NotificationState {
   unreadCount: number
   hasMore: boolean
+  listParams: ListRequestParams
   notifications: NotificationData[]
-  loading: boolean
-  error: string
+  listState: FeatureState
+  itemState: FeatureState
 }
 
 const initialState: NotificationState = {
   unreadCount: 0,
+  listState: FeatureState.Initial,
+  itemState: FeatureState.Initial,
   notifications: [],
   hasMore: true,
-  loading: false,
-  error: ''
+  listParams: {
+    pageSize: 10
+  }
 }
 
 const notificationSlice = createSlice({
@@ -93,28 +99,26 @@ const notificationSlice = createSlice({
   initialState,
   reducers: {
     resetNotification: () => initialState,
-    getNotificationsRequest(state) {
-      state.loading = true
+    setListState(state, action: PayloadAction<FeatureState>) {
+      state.listState = action.payload
     },
-    getNotificationsFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.error = action.payload
+    setItemState(state, action: PayloadAction<FeatureState>) {
+      state.itemState = action.payload
     },
     getNotificationsSuccess(state, action: PayloadAction<NotificationData[]>) {
       state.notifications.unshift(...action.payload)
       state.notifications = state.notifications.sort((a, b) =>
         (a.deliveryTime as Moment).isBefore(b.deliveryTime as Moment) ? 1 : -1
       )
-      state.loading = false
       // TODO - get this from api response
       state.unreadCount = 0
       state.notifications.forEach(noti => {
         state.unreadCount += +!noti.read
       })
-
+      state.listState = FeatureState.Success
       state.hasMore = state.notifications.length < 60
     },
-    inspectNotification(state, action: PayloadAction<string>) {
+    inspectNotificationSuccess(state, action: PayloadAction<string>) {
       // TODO: this is for simulation at this point
       const id = action.payload
       const idx = state.notifications.findIndex(noti => noti.id === id)
@@ -128,18 +132,16 @@ const notificationSlice = createSlice({
   }
 })
 
-export const {
+const {
   resetNotification,
-  inspectNotification,
-  getNotificationsFail,
-  getNotificationsRequest,
+  setListState,
+  setItemState,
+  inspectNotificationSuccess,
   getNotificationsSuccess
 } = notificationSlice.actions
 
-export const notificationReducer = notificationSlice.reducer
-
-export const getNotifications = (): AppThunk => async dispatch => {
-  dispatch(getNotificationsRequest())
+const getNotifications = (params: ListRequestParams = {}): AppThunk => async dispatch => {
+  dispatch(setListState(FeatureState.Loading))
   try {
     // TODO: needs real api connection
     const data = (await delay(
@@ -153,6 +155,23 @@ export const getNotifications = (): AppThunk => async dispatch => {
     )) as NotificationData[]
     dispatch(getNotificationsSuccess(data))
   } catch (err) {
-    dispatch(getNotificationsFail(err.toString()))
+    dispatch(setListState(FeatureState.Error))
   }
+}
+
+const inspectNotification = (id: string): AppThunk => async dispatch => {
+  dispatch(setItemState(FeatureState.Loading))
+  try {
+    dispatch(inspectNotificationSuccess(id))
+  } catch (err) {
+    dispatch(setItemState(FeatureState.Error))
+  }
+}
+
+export const notificationReducer = notificationSlice.reducer
+
+export const notificationActions = {
+  getNotifications,
+  resetNotification,
+  inspectNotification
 }
