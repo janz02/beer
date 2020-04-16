@@ -1,5 +1,5 @@
 $table-footer-height: 80px;
-$table-header-height: 80px;
+$table-header-height: 56px;
 
 .responsive-table {
   height: calc(100% - #{$table-footer-height});
@@ -33,22 +33,17 @@ $table-header-height: 80px;
   }
 
   &.has-header-offset {
-    height:
-      calc(
-        100% - #{$table-footer-height} + 10px - #{$table-header-height}
-      );
+    .ant-table {
+      height: calc(100% - #{$table-footer-height} - #{$table-header-height});
+    }
   }
 
   &.has-fixed-column {
-    // height: unset;
-    // Always display drop shadow for fixed columns
-
-    .ant-table-container {
-      // height: 100%;
-
-      .ant-table-content {
-        // height: 100%;
-        overflow-y: hidden;
+    .ant-table {
+      .ant-table-container {
+        .ant-table-content {
+          overflow-y: hidden;
+        }
       }
     }
 
