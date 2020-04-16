@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import moment from 'moment'
 import { NotificationData, inspectNotification } from './notificationSlice'
 import { useDispatch } from 'hooks/react-redux-hooks'
@@ -15,33 +15,23 @@ interface NotificationItemProps {
 export const ListItem: FC<NotificationItemProps> = ({ item, onClick }) => {
   const dispatch = useDispatch()
 
+  const [hover, setHover] = useState(false)
+
   const inspectItem = (id: string): void => {
     dispatch(inspectNotification(id))
     onClick()
   }
 
-  // console.log({
-  //   moment,
-  //   locales: moment.locales(),
-  //   locdata: moment.localeData(),
-  //   dur: moment.duration(1, 'minutes'),
-  //   loccc: moment(item.deliveryTime).locale()
-  // })
-
   return (
     <List.Item
+      onMouseLeave={() => setHover(false)}
+      onMouseEnter={() => setHover(true)}
       className={`notification-item ${item.read ? '' : 'notification-item--unread'}`}
       onClick={() => inspectItem(item.id)}
       actions={[
-        // TODO: Locale translation for moment
         // eslint-disable-next-line react/jsx-key
         <div className="notification-item__date">
-          {/* // formNow crashes */}
-          <div>
-            <MomentDisplay date={moment(item.deliveryTime)} />
-          </div>
-          {/* <MomentDisplay date={moment(item.deliveryTime)} mode="form now" /> */}
-          {/* {item.deliveryTime ? moment(item.deliveryTime).format() : ''} */}
+          <MomentDisplay date={moment(item.deliveryTime)} mode={hover ? 'date time' : 'from now'} />
         </div>
       ]}
     >
