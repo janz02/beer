@@ -934,6 +934,47 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
             </Collapse>
           )}
 
+          {!displayEditor && (
+            <Collapse defaultActiveKey={['1']}>
+              <Collapse.Panel header={t('coupon-create.audit')} key="1">
+                <Row gutter={rowGutter}>
+                  <Col span={8}>
+                    <Form.Item label={t('coupon-create.field.created')}>
+                      {coupon?.createdBy && (
+                        <div>
+                          {`${coupon?.createdBy}, `}
+                          <MomentDisplay date={coupon?.createdDate} />
+                        </div>
+                      )}
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={8}>
+                    <Form.Item label={t('coupon-create.field.modified')}>
+                      {coupon?.modifiedBy && (
+                        <div>
+                          {`${coupon?.modifiedBy}, `}
+                          <MomentDisplay date={coupon?.modifiedDate} />
+                        </div>
+                      )}
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={8}>
+                    <Form.Item label={t('coupon-create.field.approved')}>
+                      {coupon?.approvedBy && (
+                        <div>
+                          {`${coupon?.approvedBy}, `}
+                          <MomentDisplay date={coupon?.approvedDate} />
+                        </div>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Collapse.Panel>
+            </Collapse>
+          )}
+
           {displayEditor && (
             <Row justify="space-between">
               <Col span={12}>

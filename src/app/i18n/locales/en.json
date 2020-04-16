@@ -133,6 +133,7 @@
   },
   "coupon-create": {
     "activate": "Activate",
+    "audit": "Audit",
     "campaign-basics": "Campaign basics",
     "campaign-details": "Campaign details",
     "client-activities": "Client activities",
@@ -144,6 +145,7 @@
     "edit": "Edit",
     "editor-title": "Campaign editor",
     "field": {
+      "approved": "Approved",
       "awarded-campaign": "Highlighted campaign sign",
       "banner-link": "Banner link",
       "banner-link-help": "The banner link leads to this website. Campaign landing page (campaign code can be accepted).",
@@ -156,6 +158,7 @@
       "comment": "Comment",
       "coupon-count": "Number of coupons",
       "coupon-count-help": "Only a positive integer can be accepted which is less than 1 000 000.",
+      "created": "Created",
       "description": "Coupon description",
       "description-help": "This text will be displayed as detailed information when the coupon is popped up.",
       "discardCount": "Discard count",
@@ -181,6 +184,7 @@
       "minimum-shopping-value-help": "Optional if there's no such condition.",
       "mode": "Redeem mode",
       "mode-help": "A campaign can have only one claim mode.",
+      "modified": "Modified",
       "name": "Coupon name",
       "name-help": "This will be displayed on the first (collector) coupon image.",
       "online-claim-link": "Online redeem link",

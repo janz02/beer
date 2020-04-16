@@ -133,6 +133,7 @@
   },
   "coupon-create": {
     "activate": "Aktiválás",
+    "audit": "Audit",
     "campaign-basics": "Kampány alapadatok",
     "campaign-details": "Kampány részletek",
     "client-activities": "Ügyfél aktivitások",
@@ -144,6 +145,7 @@
     "edit": "Szerkesztés",
     "editor-title": "Kampány szerkesztő",
     "field": {
+      "approved": "Jóváhagyva",
       "awarded-campaign": "Kitüntett kampány jelölő",
       "banner-link": "Banner link",
       "banner-link-help": "A banner link erre a felületre fog mutatni. Kampány landing page (kampánykód befűzhető).",
@@ -156,6 +158,7 @@
       "comment": "Komment",
       "coupon-count": "Kuponok száma",
       "coupon-count-help": "Csak 1 000 000-nál kisebb egész szám adható meg.",
+      "created": "Létrehozva",
       "description": "Kupon leírása",
       "description-help": "Ez a szöveg fog részletes információként a kupon felnyitott (pop-up) állapotában látszani.",
       "discardCount": "Eldobások száma",
@@ -181,6 +184,7 @@
       "minimum-shopping-value-help": "Csak akkor kell megadni, ha a beváltásnak van ilyen feltétele.",
       "mode": "Beváltás módja",
       "mode-help": "Egy kampányhoz csak egyféle beváltási mód választható.",
+      "modified": "Módosítva",
       "name": "Kupon neve",
       "name-help": "Ez a szöveg fog az első (gyűjtő) kuponképen megjelenni.",
       "online-claim-link": "Online beváltási link",
