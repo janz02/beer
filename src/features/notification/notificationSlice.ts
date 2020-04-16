@@ -148,7 +148,8 @@ export const getNotifications = (): AppThunk => async dispatch => {
         id: Date.now() + `_${noti.id}_${Math.round(Math.random() * 2000)}`,
         deliveryTime: moment(noti.deliveryTime),
         description: noti.description + moment.now()
-      }))
+      })),
+      400
     )) as NotificationData[]
     dispatch(getNotificationsSuccess(data))
   } catch (err) {

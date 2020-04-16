@@ -1,0 +1,55 @@
+.fab {
+  $fab-offset: 25px;
+  $fab-size: 45px;
+  $fab-icon-size: 18px;
+  $fab-badge-inset: 4px;
+
+  position: fixed;
+  width: #{$fab-size};
+  height: #{$fab-size};
+  -webkit-box-shadow:
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+  &--v-top {
+    top: #{$fab-offset};
+  }
+
+  &--v-bottom {
+    bottom: #{$fab-offset};
+  }
+
+  &--h-left {
+    position: absolute;
+    left: #{$fab-offset};
+  }
+
+  &--h-right {
+    right: #{$fab-offset};
+  }
+
+  &__badge {
+    position: initial !important;
+
+    .ant-badge-count {
+      top: #{$fab-badge-inset};
+      right: #{$fab-badge-inset};
+    }
+
+    .ant-badge-multiple-words {
+      padding: 0 5px;
+    }
+  }
+
+  .anticon {
+    svg {
+      width: #{$fab-icon-size};
+      height: #{$fab-icon-size};
+    }
+  }
+}
