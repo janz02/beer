@@ -83,7 +83,7 @@
     "generate-client": "node ./config/generate-client.js",
     "generate-backend-translation-keys": "node ./config/generate-backend-translation-keys.js",
     "i18n:generate": "i18next-scanner --config ./config/i18next-scanner.config.js",
-    "g": "yarn generate-client && generate-backend-translation-keys && i18n:generate "
+    "adam": "yarn generate-client && yarn generate-backend-translation-keys && yarn i18n:generate && yarn start"
   },
   "eslintConfig": {
     "extends": "react-app"
