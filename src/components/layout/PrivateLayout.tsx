@@ -24,6 +24,8 @@ import { useTranslation } from 'react-i18next'
 import { logout } from 'features/auth/authSlice'
 import { pageViewRoles } from 'services/roleHelpers'
 import { profileActions } from 'features/profile/profileSlice'
+import { NotificationFab } from 'features/notification/NotificationFab'
+import { NotificationDrawer } from 'features/notification/NotificationDrawer'
 
 export const PrivateLayout: React.FC = ({ children }) => {
   const dispatch = useDispatch()
@@ -31,6 +33,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const isMobile = useIsMobile()
   const [menuOpened, setMenuOpened] = useState(!isMobile)
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile)
+  const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false)
 
   const profile = useSelector((state: RootState) => state.profile.profile)
 
@@ -147,11 +150,10 @@ export const PrivateLayout: React.FC = ({ children }) => {
         />
       </SideMenu>
 
-      {/* Removed until there are available notifications */}
-      {/* <NotificationDrawer
+      <NotificationDrawer
         open={notificationDrawerOpen}
         onClose={() => setNotificationDrawerOpen(false)}
-      /> */}
+      />
 
       <Layout>
         <Button
@@ -159,7 +161,10 @@ export const PrivateLayout: React.FC = ({ children }) => {
           onClick={() => setMenuOpened(!menuOpened)}
           icon={isMobile ? <RightOutlined /> : menuOpened ? <LeftOutlined /> : <RightOutlined />}
         />
-        <Layout.Content className="layout-content">{children}</Layout.Content>
+        <Layout.Content className="layout-content">
+          {children}
+          <NotificationFab onClick={() => setNotificationDrawerOpen(true)} />
+        </Layout.Content>
       </Layout>
     </Layout>
   )

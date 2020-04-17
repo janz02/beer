@@ -1,5 +1,5 @@
+import './NotificationDrawer.scss'
 import React, { FC } from 'react'
-import './notification.scss'
 import { Drawer } from 'antd'
 import { NotificationList } from './NotificationList'
 import { useTranslation } from 'react-i18next'
@@ -23,7 +23,12 @@ export const NotificationDrawer: FC<NotificationDrawerProps> = props => {
       closable
     >
       <div className="notification-drawer__header">
-        <div className="notification-drawer__header__title">{t('notification.notifications')}</div>
+        <span className="notification-drawer__header__title">
+          {t('notification.notifications')}
+        </span>
+        <span className="notification-drawer__header__options">
+          {/* // Header option buttons */}
+        </span>
       </div>
       <NotificationList onClick={onClose} />
     </Drawer>

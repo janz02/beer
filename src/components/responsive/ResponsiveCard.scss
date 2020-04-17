@@ -15,10 +15,6 @@
     border-radius: 1rem;
     box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
 
-    &--mobile {
-      padding: 0;
-    }
-
     .ant-card-body {
       padding: $r-card-vertical-padding 60px;
     }
@@ -45,11 +41,6 @@
     }
   }
 
-  &--mobile {
-    border-radius: unset;
-    box-shadow: 0 6px 12px -10px rgb(0, 0, 0);
-  }
-
   &--padded-top {
     padding-top: 2rem;
   }
@@ -74,5 +65,11 @@
     .r-card {
       height: unset !important;
     }
+  }
+
+  &--mobile {
+    max-width: 95vw;
+    padding: 0;
+    border-radius: unset;
   }
 }

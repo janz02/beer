@@ -6,7 +6,6 @@ import { resetSiteEditor, saveSite, getSite } from './siteEditorSlice'
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
 import { history } from 'router/router'
-import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { CashierList } from '../cashierList/CashierList'
 import { CashierEditor } from '../cashierEditor/CashierEditor'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
@@ -59,7 +58,7 @@ export const SiteEditorPage: FC = () => {
     handleEscapeEdit: () => setMode(EditorMode.VIEW)
   }
   return (
-    <ResponsivePage>
+    <>
       <SiteEditorForm
         mode={mode}
         options={<EditorModeOptions {...optionProps} />}
@@ -80,6 +79,6 @@ export const SiteEditorPage: FC = () => {
           />
         </>
       )}
-    </ResponsivePage>
+    </>
   )
 }
