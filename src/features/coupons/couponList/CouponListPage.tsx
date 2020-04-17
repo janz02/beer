@@ -17,7 +17,6 @@ import {
 } from 'api/swagger/models'
 import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
-import { getCategories } from '../couponsSlice'
 import { hasPermission } from 'services/jwt-reader'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsivePage } from 'components/responsive/ResponsivePage'
@@ -30,6 +29,7 @@ import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import moment from 'moment'
 import { Thumbnail } from 'components/thumbnail/Thumbnail'
 import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
+import { couponActions } from '../couponsSlice'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -53,7 +53,7 @@ export const CouponListPage: React.FC = () => {
   } | null>()
 
   useEffect(() => {
-    dispatch(getCategories())
+    dispatch(couponActions.getCategories())
   }, [dispatch])
 
   useEffect(() => {

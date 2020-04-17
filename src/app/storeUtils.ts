@@ -1,3 +1,4 @@
+import { couponActions } from './../features/coupons/couponsSlice'
 import { batch } from 'react-redux'
 import { resetNotification } from 'features/notification/notificationSlice'
 import { AppThunk } from './store'
@@ -5,7 +6,6 @@ import { resetAuth } from 'features/auth/authSlice'
 import { resetSiteEditor } from 'features/sites/siteEditor/siteEditorSlice'
 import { resetCategoryEditor } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
 import { resetCategoryList } from 'features/couponCategory/categoryList/categoryListSlice'
-import { resetCoupons } from 'features/coupons/couponsSlice'
 import { resetCouponList } from 'features/coupons/couponList/couponListSlice'
 import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
 import { resetNewsLetterList } from 'features/newsletter/newsletter-list/newsletterListSlice'
@@ -34,7 +34,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetNotification())
     dispatch(resetCategoryEditor())
     dispatch(resetCategoryList())
-    dispatch(resetCoupons())
+    dispatch(couponActions.resetCoupons())
     dispatch(resetCouponList())
     dispatch(resetUsersAccessList())
     dispatch(resetUsersAccessList())

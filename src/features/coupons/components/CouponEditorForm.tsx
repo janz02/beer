@@ -28,17 +28,6 @@ import {
   CouponMode,
   CouponDiscountType
 } from 'api/swagger/models'
-import {
-  getCategories,
-  activateCoupon,
-  updateCouponStatus,
-  deleteCouponComment,
-  getMajorPartners,
-  downloadClaimedCoupons,
-  downloadCoupons,
-  downloadPrizeFile,
-  downloadPredefinedCodesFile
-} from '../couponsSlice'
 import { RootState } from 'app/rootReducer'
 import { DeleteFilled, CheckOutlined, ArrowRightOutlined, ExportOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
@@ -62,6 +51,7 @@ import {
   separatorParser
 } from 'services/numberInputHelpers'
 import { comboRoles } from 'services/roleHelpers'
+import { couponActions } from '../couponsSlice'
 
 export interface CouponEditorFormProps {
   handleCouponSave?: (values: any) => void
@@ -101,13 +91,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   } = useFormUtils()
 
   useEffect(() => {
-    dispatch(getCategories())
+    dispatch(couponActions.getCategories())
   }, [dispatch])
 
   useEffect(() => {
     if (!hasPermission(comboRoles.forNkm)) return
 
-    dispatch(getMajorPartners())
+    dispatch(couponActions.getMajorPartners())
   }, [dispatch])
 
   useEffect(() => {
@@ -154,12 +144,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   }
 
   const handleStatusSubmit = (values: any): void => {
-    coupon?.id && dispatch(updateCouponStatus(coupon.id, values.couponState, values.comment))
+    coupon?.id &&
+      dispatch(couponActions.updateCouponStatus(coupon.id, values.couponState, values.comment))
     resetFormFlagsComment()
   }
 
   const handleCouponActivate = (): void => {
-    coupon?.id && dispatch(activateCoupon(coupon?.id, !coupon?.isActive))
+    coupon?.id && dispatch(couponActions.activateCoupon(coupon?.id, !coupon?.isActive))
   }
 
   const couponActionButtons = (
@@ -707,7 +698,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                             form.validateFields()
                           }}
-                          onClick={() => dispatch(downloadPrizeFile(coupon!))}
+                          onClick={() => dispatch(couponActions.downloadPrizeFile(coupon!))}
                           initialFileId={coupon?.prizeRulesFileId}
                         />
                       </Form.Item>
@@ -850,7 +841,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                           form.validateFields()
                         }}
-                        onClick={() => dispatch(downloadPredefinedCodesFile(coupon!))}
+                        onClick={() => dispatch(couponActions.downloadPredefinedCodesFile(coupon!))}
                         initialFileId={coupon?.predefinedCodesFileId}
                       />
                     </Form.Item>
@@ -869,7 +860,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         loading={loading}
                         icon={<ExportOutlined />}
                         onClick={() => {
-                          dispatch(downloadCoupons(coupon!))
+                          dispatch(couponActions.downloadCoupons(coupon!))
                         }}
                       >
                         {t('coupon-create.download-coupons')}
@@ -922,7 +913,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         loading={loading}
                         icon={<ExportOutlined />}
                         onClick={() => {
-                          dispatch(downloadClaimedCoupons(coupon!))
+                          dispatch(couponActions.downloadClaimedCoupons(coupon!))
                         }}
                       >
                         {t('coupon-create.download-redeemed-coupons')}
@@ -1098,7 +1089,10 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                   <Popconfirm
                     title={t('coupon-editor.comment-delete-confirm-message')}
                     onConfirm={() => {
-                      coupon && coupon.id && x.id && dispatch(deleteCouponComment(coupon.id, x.id))
+                      coupon &&
+                        coupon.id &&
+                        x.id &&
+                        dispatch(couponActions.deleteCouponComment(coupon.id, x.id))
                     }}
                     okText={t('common.ok')}
                     cancelText={t('common.cancel')}

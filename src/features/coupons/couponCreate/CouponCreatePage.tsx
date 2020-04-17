@@ -6,14 +6,16 @@ import {
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { Coupon } from 'models/coupon'
-import { createCoupon } from '../couponsSlice'
+import { FeatureState } from 'models/featureState'
+import { couponActions } from '../couponsSlice'
 
 export const CouponCreatePage: React.FC = () => {
   const dispatch = useDispatch()
-  const { loading } = useSelector((state: RootState) => state.coupons)
+  const { featureState } = useSelector((state: RootState) => state.coupons)
+  const loading = featureState === FeatureState.Loading
 
   const handleCouponSave = (coupon: Coupon): void => {
-    dispatch(createCoupon(coupon))
+    dispatch(couponActions.createCoupon(coupon))
   }
 
   const props: CouponEditorFormProps = {

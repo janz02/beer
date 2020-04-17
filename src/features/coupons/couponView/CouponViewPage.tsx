@@ -3,15 +3,17 @@ import { CouponEditorFormProps, CouponEditorForm } from '../components/CouponEdi
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { useParams } from 'react-router-dom'
 import { RootState } from 'app/rootReducer'
-import { getCoupon } from '../couponsSlice'
+import { FeatureState } from 'models/featureState'
+import { couponActions } from '../couponsSlice'
 
 export const CouponViewPage: React.FC = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const { coupon, loading } = useSelector((state: RootState) => state.coupons)
+  const { coupon, featureState } = useSelector((state: RootState) => state.coupons)
+  const loading = featureState === FeatureState.Loading
 
   useEffect(() => {
-    id && dispatch(getCoupon(+id))
+    id && dispatch(couponActions.getCoupon(+id))
   }, [id, dispatch])
 
   const props: CouponEditorFormProps = {
