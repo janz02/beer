@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-indent */
-import React, { useEffect, useState } from 'react'
-import './CouponEditorForm.scss'
+import React, { useEffect, useState, FC } from 'react'
+import './CampaignEditorForm.scss'
 import {
   Form,
   Input,
@@ -15,11 +15,9 @@ import {
   Checkbox,
   InputNumber
 } from 'antd'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
-import { Coupon } from 'models/coupon'
 import {
   CouponRank,
   CouponType,
@@ -28,7 +26,6 @@ import {
   CouponMode,
   CouponDiscountType
 } from 'api/swagger/models'
-import { RootState } from 'app/rootReducer'
 import { DeleteFilled, CheckOutlined, ArrowRightOutlined, ExportOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
@@ -51,9 +48,12 @@ import {
   separatorParser
 } from 'services/numberInputHelpers'
 import { comboRoles } from 'services/roleHelpers'
-import { couponActions } from '../couponsSlice'
+import { campaignActions } from '../campaignsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { Coupon } from 'models/coupon'
+import { RootState } from 'app/rootReducer'
 
-export interface CouponEditorFormProps {
+export interface CampaignEditorFormProps {
   handleCouponSave?: (values: any) => void
   loading: boolean
   couponIsNew: boolean
@@ -61,7 +61,7 @@ export interface CouponEditorFormProps {
   editing: boolean
 }
 
-export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
+export const CampaignEditorForm: FC<CampaignEditorFormProps> = props => {
   const { handleCouponSave, loading, couponIsNew, coupon, editing } = props
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -91,13 +91,13 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
   } = useFormUtils()
 
   useEffect(() => {
-    dispatch(couponActions.getCategories())
+    dispatch(campaignActions.getCategories())
   }, [dispatch])
 
   useEffect(() => {
     if (!hasPermission(comboRoles.forNkm)) return
 
-    dispatch(couponActions.getMajorPartners())
+    dispatch(campaignActions.getMajorPartners())
   }, [dispatch])
 
   useEffect(() => {
@@ -145,12 +145,12 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
   const handleStatusSubmit = (values: any): void => {
     coupon?.id &&
-      dispatch(couponActions.updateCouponStatus(coupon.id, values.couponState, values.comment))
+      dispatch(campaignActions.updateCouponStatus(coupon.id, values.couponState, values.comment))
     resetFormFlagsComment()
   }
 
   const handleCouponActivate = (): void => {
-    coupon?.id && dispatch(couponActions.activateCoupon(coupon?.id, !coupon?.isActive))
+    coupon?.id && dispatch(campaignActions.activateCoupon(coupon?.id, !coupon?.isActive))
   }
 
   const couponActionButtons = (
@@ -698,7 +698,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                             form.validateFields()
                           }}
-                          onClick={() => dispatch(couponActions.downloadPrizeFile(coupon!))}
+                          onClick={() => dispatch(campaignActions.downloadPrizeFile(coupon!))}
                           initialFileId={coupon?.prizeRulesFileId}
                         />
                       </Form.Item>
@@ -841,7 +841,9 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
 
                           form.validateFields()
                         }}
-                        onClick={() => dispatch(couponActions.downloadPredefinedCodesFile(coupon!))}
+                        onClick={() =>
+                          dispatch(campaignActions.downloadPredefinedCodesFile(coupon!))
+                        }
                         initialFileId={coupon?.predefinedCodesFileId}
                       />
                     </Form.Item>
@@ -860,7 +862,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         loading={loading}
                         icon={<ExportOutlined />}
                         onClick={() => {
-                          dispatch(couponActions.downloadCoupons(coupon!))
+                          dispatch(campaignActions.downloadCoupons(coupon!))
                         }}
                       >
                         {t('coupon-create.download-coupons')}
@@ -913,7 +915,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                         loading={loading}
                         icon={<ExportOutlined />}
                         onClick={() => {
-                          dispatch(couponActions.downloadClaimedCoupons(coupon!))
+                          dispatch(campaignActions.downloadClaimedCoupons(coupon!))
                         }}
                       >
                         {t('coupon-create.download-redeemed-coupons')}
@@ -1092,7 +1094,7 @@ export const CouponEditorForm: React.FC<CouponEditorFormProps> = props => {
                       coupon &&
                         coupon.id &&
                         x.id &&
-                        dispatch(couponActions.deleteCouponComment(coupon.id, x.id))
+                        dispatch(campaignActions.deleteCouponComment(coupon.id, x.id))
                     }}
                     okText={t('common.ok')}
                     cancelText={t('common.cancel')}

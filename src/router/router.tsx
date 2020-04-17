@@ -3,9 +3,9 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { PrivateRoute } from 'router/PrivateRoute'
 import { DashboardPage } from 'features/dashboard/DashboardPage'
-import { CouponCreatePage } from 'features/coupons/couponCreate/CouponCreatePage'
-import { CouponEditorPage } from 'features/coupons/couponEditor/CouponEditorPage'
-import { CouponListPage } from 'features/coupons/couponList/CouponListPage'
+import { CampaignCreatePage } from 'features/campaigns/campaign/CampaignCreatePage'
+import { CampaignEditorPage } from 'features/campaigns/campaign/CampaignEditorPage'
+import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
 import { PublicRoute } from 'router/PublicRoute'
 import { LoginPage } from 'features/auth/LoginPage'
 import { RecoveryPage } from 'features/auth/RecoveryPage'
@@ -17,7 +17,7 @@ import { SitesListPage } from 'features/sites/siteList/SitesListPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { NewsletterListPage } from 'features/newsletter/newsletter-list/NewsletterListPage'
-import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
+import { CampaignViewPage } from 'features/campaigns/campaign/CampaignViewPage'
 import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
 import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
@@ -92,25 +92,25 @@ const Routes = (): JSX.Element => (
       exact
       path="/campaigns"
       roles={pageViewRoles.campaigns}
-      component={CouponListPage}
+      component={CampaignListPage}
     />
     <PrivateRoute
       exact
       path="/campaign"
       roles={pageViewRoles.couponCreator}
-      component={CouponCreatePage}
+      component={CampaignCreatePage}
     />
     <PrivateRoute
       exact
       path="/campaign/:id"
       roles={pageViewRoles.campaigns}
-      component={CouponViewPage}
+      component={CampaignViewPage}
     />
     <PrivateRoute
       exact
       path="/campaign/:id/edit"
       roles={pageViewRoles.couponEditor}
-      component={CouponEditorPage}
+      component={CampaignEditorPage}
     />
     <PrivateRoute
       exact

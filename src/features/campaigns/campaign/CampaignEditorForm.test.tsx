@@ -1,14 +1,12 @@
 import React from 'react'
-import { CouponEditorForm, CouponEditorFormProps } from './CouponEditorForm'
-import { Card } from 'antd'
+import { CampaignEditorForm, CampaignEditorFormProps } from './CampaignEditorForm'
 import { setupStore, setupUseParams } from '../../../../config/setupMocks'
-
 import { shallow } from 'enzyme'
 
-describe('CouponEditorForm tests', () => {
+describe('CampaignEditorForm tests', () => {
   it('should not display button when not editing or not new', () => {
     // Arrange
-    const props: CouponEditorFormProps = {
+    const props: CampaignEditorFormProps = {
       loading: false,
       couponIsNew: false,
       editing: false
@@ -17,7 +15,7 @@ describe('CouponEditorForm tests', () => {
     setupUseParams({ editing: false })
 
     // Act
-    const wrapper = shallow(<CouponEditorForm {...props} />)
+    const wrapper = shallow(<CampaignEditorForm {...props} />)
 
     // Assert
   })

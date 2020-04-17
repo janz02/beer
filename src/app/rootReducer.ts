@@ -5,8 +5,8 @@ import { routerHistoryStore } from '../router/routerHistoryStore'
 import { userAccessListReducer } from 'features/userAccess/userAccessListSlice'
 import { newsletterEditorReducer } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { authReducer } from 'features/auth/authSlice'
-import { couponListReducer } from 'features/coupons/couponList/couponListSlice'
-import { couponsReducer } from 'features/coupons/couponsSlice'
+import { campaignListReducer } from 'features/campaigns/campaignList/campaignListSlice'
+import { campaignsReducer } from 'features/campaigns/campaignsSlice'
 import { categoryListReducer } from 'features/couponCategory/categoryList/categoryListSlice'
 import { categoryEditorReducer } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
 import { notificationReducer } from 'features/notification/notificationSlice'
@@ -27,8 +27,8 @@ export const rootReducer = combineReducers({
   routerHistory: routerHistoryStore,
   auth: authReducer,
   profile: profileReducer,
-  couponList: couponListReducer,
-  coupons: couponsReducer,
+  couponList: campaignListReducer,
+  coupons: campaignsReducer,
   categoryList: categoryListReducer,
   categoryEditor: categoryEditorReducer,
   selfPartner: selfPartnerReducer,

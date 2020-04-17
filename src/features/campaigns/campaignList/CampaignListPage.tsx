@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import './CouponListPage.scss'
+import React, { useState, useEffect, useMemo, FC } from 'react'
+import './CampaignListPage.scss'
 import { Checkbox } from 'antd'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { Coupon } from 'models/coupon'
-import { getCoupons, deleteCoupon, setIncludeArchived, setOnlyWaiting } from './couponListSlice'
 import { useTranslation } from 'react-i18next'
 import {
   CouponState,
@@ -29,7 +28,9 @@ import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import moment from 'moment'
 import { Thumbnail } from 'components/thumbnail/Thumbnail'
 import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
-import { couponActions } from '../couponsSlice'
+import { campaignActions } from '../campaignsSlice'
+import { FeatureState } from 'models/featureState'
+import { campaignListActions } from './campaignListSlice'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -40,12 +41,13 @@ const couponEditorRoles = [
   Roles.PartnerContactEditor
 ]
 
-export const CouponListPage: React.FC = () => {
+export const CampaignListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const { categories } = useSelector((state: RootState) => state.coupons)
-  const { coupons, loading, listParams } = useSelector((state: RootState) => state.couponList)
+  const { coupons, featureState, listParams } = useSelector((state: RootState) => state.couponList)
+  const loading = featureState === FeatureState.Loading
 
   const [couponToDelete, setCouponToDelete] = useState<{
     coupon?: Coupon
@@ -53,11 +55,11 @@ export const CouponListPage: React.FC = () => {
   } | null>()
 
   useEffect(() => {
-    dispatch(couponActions.getCategories())
+    dispatch(campaignActions.getCategories())
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(getCoupons())
+    dispatch(campaignListActions.getCoupons())
   }, [dispatch])
 
   const {
@@ -87,7 +89,7 @@ export const CouponListPage: React.FC = () => {
       'minimumShoppingValue',
       'createdBy'
     ],
-    getDataAction: getCoupons
+    getDataAction: campaignListActions.getCoupons
   })
 
   const columnsConfig = useMemo(
@@ -342,8 +344,8 @@ export const CouponListPage: React.FC = () => {
     <>
       <Checkbox
         onChange={e => {
-          dispatch(setIncludeArchived(e.target.checked))
-          dispatch(getCoupons())
+          dispatch(campaignListActions.setIncludeArchived(e.target.checked))
+          dispatch(campaignListActions.getCoupons())
         }}
       >
         {t('coupon-list.show-archived')}
@@ -377,8 +379,8 @@ export const CouponListPage: React.FC = () => {
           width="full"
           tabList={tableSelector}
           onTabChange={key => {
-            dispatch(setOnlyWaiting(key === 'waiting'))
-            dispatch(getCoupons())
+            dispatch(campaignListActions.setOnlyWaiting(key === 'waiting'))
+            dispatch(campaignListActions.getCoupons())
           }}
         >
           <ResponsiveTable
@@ -398,7 +400,7 @@ export const CouponListPage: React.FC = () => {
         id={couponToDelete?.coupon?.id}
         type="delete"
         visible={!!couponToDelete?.popupVisible}
-        onOkAction={deleteCoupon(couponToDelete?.coupon?.id!)}
+        onOkAction={campaignListActions.deleteCoupon(couponToDelete?.coupon?.id!)}
         onCancel={() => setCouponToDelete({ ...couponToDelete, popupVisible: false })}
         afterClose={() => setCouponToDelete(null)}
       />

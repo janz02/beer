@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
-import { CouponEditorFormProps, CouponEditorForm } from '../components/CouponEditorForm'
+import React, { useEffect, FC } from 'react'
+import { CampaignEditorFormProps, CampaignEditorForm } from './CampaignEditorForm'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { useParams } from 'react-router-dom'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
-import { couponActions } from '../couponsSlice'
+import { campaignActions } from '../campaignsSlice'
 
-export const CouponViewPage: React.FC = () => {
+export const CampaignViewPage: FC = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { coupon, featureState } = useSelector((state: RootState) => state.coupons)
   const loading = featureState === FeatureState.Loading
 
   useEffect(() => {
-    id && dispatch(couponActions.getCoupon(+id))
+    id && dispatch(campaignActions.getCoupon(+id))
   }, [id, dispatch])
 
-  const props: CouponEditorFormProps = {
+  const props: CampaignEditorFormProps = {
     loading,
     couponIsNew: false,
     coupon,
@@ -25,7 +25,7 @@ export const CouponViewPage: React.FC = () => {
 
   return (
     <>
-      <CouponEditorForm {...props} />
+      <CampaignEditorForm {...props} />
     </>
   )
 }

@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { Category } from 'models/category'
-import { Coupon } from 'models/coupon'
 import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
@@ -11,24 +10,25 @@ import { CouponState, CouponType } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
 import { Partner } from 'models/partner'
 import { saveAs } from 'file-saver'
+import { Coupon } from 'models/coupon'
 import { FeatureState } from 'models/featureState'
 
-interface CouponsState {
+interface CampaignsState {
   coupon?: Coupon
   categories?: Category[]
   majorPartners?: Partner[]
   featureState: FeatureState
 }
 
-const initialState: CouponsState = {
+const initialState: CampaignsState = {
   featureState: FeatureState.Initial
 }
 
-const couponsSlice = createSlice({
-  name: 'coupons',
+const campaignsSlice = createSlice({
+  name: 'campaigns',
   initialState,
   reducers: {
-    resetCoupons: () => initialState,
+    resetCampaigns: () => initialState,
     setFeatureState(state, action: PayloadAction<FeatureState>) {
       state.featureState = action.payload
     },
@@ -84,7 +84,7 @@ const couponsSlice = createSlice({
 })
 
 const {
-  resetCoupons,
+  resetCampaigns,
   setFeatureState,
   getCouponSuccess,
   createCouponSuccess,
@@ -99,7 +99,7 @@ const {
   downloadClaimedCouponsSuccess,
   downloadPrizeFileSuccess,
   downloadPredefinedCouponsFileSuccess
-} = couponsSlice.actions
+} = campaignsSlice.actions
 
 const getCoupon = (id: number): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
@@ -358,8 +358,8 @@ const downloadPredefinedCodesFile = (coupon: Coupon): AppThunk => async dispatch
   }
 }
 
-export const couponActions = {
-  resetCoupons,
+export const campaignActions = {
+  resetCampaigns,
   getCoupon,
   createCoupon,
   updateCoupon,
@@ -375,4 +375,4 @@ export const couponActions = {
   downloadPredefinedCodesFile
 }
 
-export const couponsReducer = couponsSlice.reducer
+export const campaignsReducer = campaignsSlice.reducer

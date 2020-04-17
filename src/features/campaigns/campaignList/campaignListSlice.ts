@@ -9,6 +9,7 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
+import { FeatureState } from 'models/featureState'
 
 interface CouponListState {
   coupons: Coupon[]
@@ -16,8 +17,7 @@ interface CouponListState {
   allCouponsCount?: number
   includeArchived: boolean
   onlyWaiting: boolean
-  error: string | null
-  loading: boolean
+  featureState: FeatureState
 }
 
 const initialState: CouponListState = {
@@ -27,17 +27,16 @@ const initialState: CouponListState = {
   },
   includeArchived: false,
   onlyWaiting: false,
-  error: null,
-  loading: false
+  featureState: FeatureState.Initial
 }
 
-const couponListSlice = createSlice({
-  name: 'couponList',
+const campaignListSlice = createSlice({
+  name: 'campaignList',
   initialState,
   reducers: {
-    resetCouponList: () => initialState,
-    getCouponsRequest(state) {
-      state.loading = true
+    resetCampaignList: () => initialState,
+    setFeatureState(state, action: PayloadAction<FeatureState>) {
+      state.featureState = action.payload
     },
     getCouponsSuccess(
       state,
@@ -45,22 +44,10 @@ const couponListSlice = createSlice({
     ) {
       state.coupons = action.payload.coupons
       state.listParams = action.payload.listParams
-      state.loading = false
-      state.error = ''
-    },
-    getCouponsFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.error = action.payload
-    },
-    deleteRequest(state) {
-      state.loading = true
+      state.featureState = FeatureState.Success
     },
     deleteSuccess(state) {
-      state.loading = false
-    },
-    deleteFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.error = action.payload
+      state.featureState = FeatureState.Success
     },
     setIncludeArchived(state, action: PayloadAction<boolean>) {
       state.includeArchived = action.payload
@@ -73,24 +60,17 @@ const couponListSlice = createSlice({
 })
 
 const {
-  getCouponsRequest,
+  resetCampaignList,
+  setFeatureState,
   getCouponsSuccess,
-  getCouponsFail,
-  deleteRequest,
   deleteSuccess,
-  deleteFail
-} = couponListSlice.actions
+  setIncludeArchived,
+  setOnlyWaiting
+} = campaignListSlice.actions
 
-export const { resetCouponList, setIncludeArchived, setOnlyWaiting } = couponListSlice.actions
-
-export const couponListReducer = couponListSlice.reducer
-
-export const getCoupons = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
+const getCoupons = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
-    dispatch(getCouponsRequest())
+    dispatch(setFeatureState(FeatureState.Loading))
 
     const { listParams, includeArchived, onlyWaiting } = getState().couponList
     const revisedParams = reviseListRequestParams(listParams, params)
@@ -125,12 +105,13 @@ export const getCoupons = (params: ListRequestParams = {}): AppThunk => async (
       })
     )
   } catch (err) {
-    dispatch(getCouponsFail(err.toString()))
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
-  dispatch(deleteRequest())
+const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
+  dispatch(setFeatureState(FeatureState.Loading))
+
   try {
     await await api.coupons.deleteCoupon({ id })
     dispatch(deleteSuccess())
@@ -138,7 +119,17 @@ export const deleteCoupon = (id: number): AppThunk => async (dispatch, getState)
     dispatch(getCoupons({ page: newPage }))
     return { id }
   } catch (err) {
-    dispatch(deleteFail(err.toString()))
+    dispatch(setFeatureState(FeatureState.Error))
     return { id, error: err.toString() }
   }
 }
+
+export const campaignListActions = {
+  resetCampaignList,
+  setIncludeArchived,
+  setOnlyWaiting,
+  getCoupons,
+  deleteCoupon
+}
+
+export const campaignListReducer = campaignListSlice.reducer
