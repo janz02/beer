@@ -1,6 +1,7 @@
 // Based on: https://github.com/moment/moment/blob/develop/locale/hu.js
 
 import moment from 'moment'
+import 'moment/locale/hu'
 
 const weekEndings = 'vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton'.split(' ')
 function translate(number: any, withoutSuffix: any, key: any, isFuture: any): string {

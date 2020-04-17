@@ -18,7 +18,6 @@ import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission } from 'services/jwt-reader'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
@@ -369,32 +368,19 @@ export const CampaignListPage: FC = () => {
 
   return (
     <>
-      <ResponsivePage>
-        <ResponsiveCard
-          disableAutoScale
-          forTable
-          floatingTitle={t('coupon-list.campaigns')}
-          floatingOptions={headerOptions}
-          paddedBottom
-          width="full"
-          tabList={tableSelector}
-          onTabChange={key => {
-            dispatch(campaignListActions.setOnlyWaiting(key === 'waiting'))
-            dispatch(campaignListActions.getCoupons())
-          }}
-        >
-          <ResponsiveTable
-            hasFixedColumn
-            {...{
-              loading: loading,
-              columns: columnsConfig,
-              dataSource: addKeyProp(coupons),
-              pagination: paginationConfig,
-              onChange: handleTableChange
-            }}
-          />
-        </ResponsiveCard>
-      </ResponsivePage>
+      <ResponsiveCard
+        disableAutoScale
+        forTable
+        floatingTitle={t('coupon-list.campaigns')}
+        floatingOptions={headerOptions}
+        paddedBottom
+        width="full"
+        tabList={tableSelector}
+        onTabChange={key => {
+          dispatch(campaignListActions.setOnlyWaiting(key === 'waiting'))
+          dispatch(campaignListActions.getCoupons())
+        }}
+      />
 
       <GenericPopup
         id={couponToDelete?.coupon?.id}
