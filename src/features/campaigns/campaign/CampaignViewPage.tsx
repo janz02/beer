@@ -9,7 +9,7 @@ import { campaignActions } from '../campaignsSlice'
 export const CampaignViewPage: FC = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const { coupon, featureState } = useSelector((state: RootState) => state.coupons)
+  const { coupon, featureState } = useSelector((state: RootState) => state.campaigns)
   const loading = featureState === FeatureState.Loading
 
   useEffect(() => {

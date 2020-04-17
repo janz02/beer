@@ -11,7 +11,7 @@ import { campaignActions } from '../campaignsSlice'
 
 export const CampaignCreatePage: FC = () => {
   const dispatch = useDispatch()
-  const { featureState } = useSelector((state: RootState) => state.coupons)
+  const { featureState } = useSelector((state: RootState) => state.campaigns)
   const loading = featureState === FeatureState.Loading
 
   const handleCouponSave = (coupon: Coupon): void => {

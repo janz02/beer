@@ -65,7 +65,7 @@ export const CampaignEditorForm: FC<CampaignEditorFormProps> = props => {
   const { handleCouponSave, loading, couponIsNew, coupon, editing } = props
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { categories, majorPartners } = useSelector((state: RootState) => state.coupons)
+  const { categories, majorPartners } = useSelector((state: RootState) => state.campaigns)
   const { userData } = useSelector((state: RootState) => state.auth)
   const [stateForCreate, setStateForCreate] = useState(CouponState.Created)
   const [couponType, setCouponType] = useState<CouponType>()

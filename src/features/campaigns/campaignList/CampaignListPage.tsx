@@ -19,7 +19,6 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { hasPermission } from 'services/jwt-reader'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
-import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
@@ -30,6 +29,7 @@ import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 import { campaignActions } from '../campaignsSlice'
 import { FeatureState } from 'models/featureState'
 import { campaignListActions } from './campaignListSlice'
+import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -44,8 +44,10 @@ export const CampaignListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const { categories } = useSelector((state: RootState) => state.coupons)
-  const { coupons, featureState, listParams } = useSelector((state: RootState) => state.couponList)
+  const { categories } = useSelector((state: RootState) => state.campaigns)
+  const { coupons, featureState, listParams } = useSelector(
+    (state: RootState) => state.campaignList
+  )
   const loading = featureState === FeatureState.Loading
 
   const [couponToDelete, setCouponToDelete] = useState<{
@@ -380,7 +382,18 @@ export const CampaignListPage: FC = () => {
           dispatch(campaignListActions.setOnlyWaiting(key === 'waiting'))
           dispatch(campaignListActions.getCoupons())
         }}
-      />
+      >
+        <ResponsiveTable
+          hasFixedColumn
+          {...{
+            loading: loading,
+            columns: columnsConfig,
+            dataSource: addKeyProp(coupons),
+            pagination: paginationConfig,
+            onChange: handleTableChange
+          }}
+        />
+      </ResponsiveCard>
 
       <GenericPopup
         id={couponToDelete?.coupon?.id}

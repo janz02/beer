@@ -72,7 +72,7 @@ const getCoupons = (params: ListRequestParams = {}): AppThunk => async (dispatch
   try {
     dispatch(setFeatureState(FeatureState.Loading))
 
-    const { listParams, includeArchived, onlyWaiting } = getState().couponList
+    const { listParams, includeArchived, onlyWaiting } = getState().campaignList
     const revisedParams = reviseListRequestParams(listParams, params)
     revisedParams.includeArchived = includeArchived
     revisedParams.onlyWaiting = onlyWaiting
@@ -115,7 +115,7 @@ const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     await await api.coupons.deleteCoupon({ id })
     dispatch(deleteSuccess())
-    const newPage = recalculatePaginationAfterDeletion(getState().couponList.listParams)
+    const newPage = recalculatePaginationAfterDeletion(getState().campaignList.listParams)
     dispatch(getCoupons({ page: newPage }))
     return { id }
   } catch (err) {
