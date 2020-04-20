@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { CategoryList } from './categoryList/CategoryList'
 import { CategoryEditor } from './categoryEditor/CategoryEditor'
 import { useDispatch } from 'hooks/react-redux-hooks'
-import { getCategories } from './categoryList/categoryListSlice'
+import { categoryListActions } from './categoryList/categoryListSlice'
 import { useParams } from 'hooks/react-router-dom-hooks'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 
@@ -22,7 +22,7 @@ export const CategoryPage: React.FC = () => {
   })
 
   useEffect(() => {
-    dispatch(getCategories())
+    dispatch(categoryListActions.getCategories())
   }, [dispatch])
 
   return (

@@ -7,8 +7,6 @@ import { newsletterEditorReducer } from 'features/newsletter/newsletter-editor/n
 import { authReducer } from 'features/auth/authSlice'
 import { couponListReducer } from 'features/coupons/couponList/couponListSlice'
 import { couponsReducer } from 'features/coupons/couponsSlice'
-import { categoryListReducer } from 'features/couponCategory/categoryList/categoryListSlice'
-import { categoryEditorReducer } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
 import { notificationReducer } from 'features/notification/notificationSlice'
 import { profileReducer } from 'features/profile/profileSlice'
 import { siteEditorReducer } from 'features/sites/siteEditor/siteEditorSlice'
@@ -21,6 +19,8 @@ import {
   partnerContactsSlice,
   contactsSlice
 } from 'features/partnerContacts/partnerContactsSliceFactory'
+import { categoryListReducer } from 'features/campaignCategory/categoryList/categoryListSlice'
+import { categoryEditorReducer } from 'features/campaignCategory/categoryEditor/categoryEditorSlice'
 
 export const rootReducer = combineReducers({
   router: connectRouter(history),

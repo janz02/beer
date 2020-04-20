@@ -3,20 +3,19 @@ import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
 import { api } from 'api'
 import { GetCategoryRequest } from 'api/swagger'
-import { getCategories } from '../categoryList/categoryListSlice'
+import { categoryListActions } from '../categoryList/categoryListSlice'
 import { message } from 'antd'
 import i18n from 'app/i18n'
+import { FeatureState } from 'models/featureState'
 
 interface CouponCategoryEditorState {
   id?: number
   category?: Category | null
-  loading: boolean
-  error: string
+  editorState: FeatureState
 }
 
 const initialState: CouponCategoryEditorState = {
-  loading: false,
-  error: ''
+  editorState: FeatureState.Initial
 }
 
 const categoryEditorSlice = createSlice({
@@ -24,60 +23,38 @@ const categoryEditorSlice = createSlice({
   initialState,
   reducers: {
     resetCategoryEditor: () => initialState,
-    getCategoryRequest(state) {
-      state.loading = true
+    setEditorState: (state, action: PayloadAction<FeatureState>) => {
+      state.editorState = action.payload
     },
     getCategorySuccess(state, action: PayloadAction<Category>) {
       state.category = action.payload
-      state.loading = false
-      state.error = ''
-    },
-    getCategoryFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.error = action.payload
-    },
-    saveCategoryRequest(state, action: PayloadAction<Category>) {
-      state.category = action.payload
-      state.loading = true
+      state.editorState = FeatureState.Success
     },
     saveCategorySuccess(state, action: PayloadAction<Category>) {
       message.success(i18n.t('common.message.save-success'), 5)
-      state.loading = false
       state.category = action.payload
-      state.error = ''
-    },
-    saveCategoryFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.error = action.payload
+      state.editorState = FeatureState.Success
     }
   }
 })
 
-const {
-  getCategoryRequest,
-  getCategorySuccess,
-  getCategoryFail,
-  saveCategoryRequest,
-  saveCategorySuccess,
-  saveCategoryFail
-} = categoryEditorSlice.actions
+const { setEditorState, getCategorySuccess, saveCategorySuccess } = categoryEditorSlice.actions
 
-export const { resetCategoryEditor } = categoryEditorSlice.actions
+const { resetCategoryEditor } = categoryEditorSlice.actions
 
-export const categoryEditorReducer = categoryEditorSlice.reducer
-
-export const getCategory = (params: GetCategoryRequest): AppThunk => async dispatch => {
-  dispatch(getCategoryRequest())
+const getCategory = (params: GetCategoryRequest): AppThunk => async dispatch => {
+  dispatch(setEditorState(FeatureState.Loading))
   try {
     const response = await api.categories.getCategory(params)
     dispatch(getCategorySuccess(response as Category))
   } catch (err) {
-    dispatch(getCategoryFail(err.toString()))
+    dispatch(setEditorState(FeatureState.Error))
   }
 }
 
-export const saveCategory = (category: Category): AppThunk => async dispatch => {
-  dispatch(saveCategoryRequest(category))
+const saveCategory = (category: Category): AppThunk => async dispatch => {
+  dispatch(setEditorState(FeatureState.Loading))
+
   let id = category?.id
   try {
     if (id && !isNaN(id)) {
@@ -96,10 +73,18 @@ export const saveCategory = (category: Category): AppThunk => async dispatch => 
       id = newId
     }
     dispatch(saveCategorySuccess({ ...category, id }))
-    dispatch(getCategories())
+    dispatch(categoryListActions.getCategories())
     return true
   } catch (err) {
-    dispatch(saveCategoryFail(err.toString()))
+    dispatch(setEditorState(FeatureState.Error))
     return false
   }
 }
+
+export const categoryEditorActions = {
+  resetCategoryEditor,
+  getCategory,
+  saveCategory
+}
+
+export const categoryEditorReducer = categoryEditorSlice.reducer
