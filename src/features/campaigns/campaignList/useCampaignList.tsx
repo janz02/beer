@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
@@ -53,12 +53,14 @@ export const useCampaignList = (): UseCampaignListFeatures => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const { coupons, featureState, listParams } = useSelector(
-    (state: RootState) => state.campaignList
-  )
+  const {
+    coupons,
+    listParams,
+    campaignToDelete: couponToDelete,
+    deletePopupVisible,
+    featureState
+  } = useSelector((state: RootState) => state.campaignList)
   const { categories } = useSelector((state: RootState) => state.campaigns)
-  const [couponToDelete, setCouponToDelete] = useState<Coupon>()
-  const [deletePopupVisible, setDeletePopupVisible] = useState<boolean>(false)
 
   const loading = featureState === FeatureState.Loading
 
@@ -323,8 +325,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
                 hasPermission(couponEditorRoles) &&
                 (record.state === CouponState.Created || record.state === CouponState.Waiting)
                   ? () => {
-                      setCouponToDelete(record)
-                      setDeletePopupVisible(true)
+                      dispatch(campaignListActions.prepareCampaignDelete(record))
                     }
                   : undefined
               }
@@ -333,7 +334,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         }
       })
     ],
-    [actionColumnConfig, categories, columnConfig, t]
+    [actionColumnConfig, categories, columnConfig, t, dispatch]
   )
 
   const handleIncludeArchivedChange = (checked: boolean): void => {
@@ -347,8 +348,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
   }
 
   const handleDeleteCancel = (): void => {
-    setCouponToDelete(undefined)
-    setDeletePopupVisible(false)
+    dispatch(campaignListActions.cancelCampaignDelete())
   }
 
   return {

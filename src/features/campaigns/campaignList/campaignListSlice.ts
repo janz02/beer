@@ -17,6 +17,8 @@ interface CouponListState {
   allCouponsCount?: number
   includeArchived: boolean
   onlyWaiting: boolean
+  campaignToDelete?: Coupon
+  deletePopupVisible: boolean
   featureState: FeatureState
 }
 
@@ -27,6 +29,7 @@ const initialState: CouponListState = {
   },
   includeArchived: false,
   onlyWaiting: false,
+  deletePopupVisible: false,
   featureState: FeatureState.Initial
 }
 
@@ -55,6 +58,14 @@ const campaignListSlice = createSlice({
     setOnlyWaiting(state, action: PayloadAction<boolean>) {
       state.onlyWaiting = action.payload
       state.listParams.page = 1
+    },
+    prepareCampaignDelete(state, action: PayloadAction<Coupon>) {
+      state.campaignToDelete = action.payload
+      state.deletePopupVisible = true
+    },
+    cancelCampaignDelete(state) {
+      state.campaignToDelete = undefined
+      state.deletePopupVisible = false
     }
   }
 })
@@ -65,7 +76,9 @@ const {
   getCouponsSuccess,
   deleteSuccess,
   setIncludeArchived,
-  setOnlyWaiting
+  setOnlyWaiting,
+  prepareCampaignDelete,
+  cancelCampaignDelete
 } = campaignListSlice.actions
 
 const getCoupons = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
@@ -128,6 +141,8 @@ export const campaignListActions = {
   resetCampaignList,
   setIncludeArchived,
   setOnlyWaiting,
+  prepareCampaignDelete,
+  cancelCampaignDelete,
   getCoupons,
   deleteCoupon
 }
