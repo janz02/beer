@@ -1,13 +1,11 @@
-import React, { FC, useEffect, useMemo } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { getCategory, resetCategoryEditor, saveCategory } from './categoryEditorSlice'
-import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { RootState } from 'app/rootReducer'
+import { useDispatch } from 'hooks/react-redux-hooks'
 import { useCommonFormRules } from 'hooks'
-import { Category } from 'models/category'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
+import { useCategoryEditor } from './useCategoryEditor'
 
 export interface CategoryEditorParams {
   visible?: boolean
@@ -22,30 +20,23 @@ interface CategoryEditorProps {
 }
 
 export const CategoryEditor: FC<CategoryEditorProps> = props => {
-  const { params, handleExit, afterClose } = props
-  const { visible, id, isNew } = params
+  const { params, handleExit } = props
+  const { visible, isNew } = params
 
-  const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { category, loading } = useSelector((state: RootState) => state.categoryEditor)
   const rule = useCommonFormRules()
 
-  const initialValues = useMemo(() => ({ name: category?.name }), [category])
+  const {
+    initialValues,
+    loading,
+    handleGetCategory,
+    handleSave,
+    afterCloseExtended
+  } = useCategoryEditor(props)
 
   useEffect(() => {
-    id && dispatch(getCategory({ id }))
-  }, [dispatch, id])
-
-  const afterCloseExtended = (): void => {
-    afterClose()
-    dispatch(resetCategoryEditor())
-  }
-
-  const onSave = async (values: Category): Promise<void> => {
-    const newCategory: Category = { id, name: values.name }
-    const saved: any = await dispatch(saveCategory(newCategory))
-    saved && handleExit()
-  }
+    handleGetCategory()
+  }, [handleGetCategory])
 
   const modalTitle = isNew ? t('coupon-category.editor-create') : t('coupon-category.editor-edit')
 
@@ -62,7 +53,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
       }}
       formProps={{
         name: 'category-editor',
-        onFinish: onSave
+        onFinish: handleSave
       }}
       initialValues={initialValues}
     >
