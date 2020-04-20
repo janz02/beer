@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "Plusz Kampány Motor"
+  },
   "auth": {
     "change-password-success": "Jelszóváltoztatás sikeres",
     "field": {

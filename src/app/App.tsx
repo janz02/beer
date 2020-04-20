@@ -9,6 +9,7 @@ import enGB from 'antd/lib/locale/en_GB'
 import { useTranslation } from 'react-i18next'
 import { Locale } from 'antd/lib/locale-provider'
 import { store } from './store'
+import { BaseLayout } from 'components/layout/BaseLayout'
 
 export const App: React.FC = () => {
   const { i18n } = useTranslation()
@@ -27,7 +28,9 @@ export const App: React.FC = () => {
       <ConfigProvider locale={antLocale()}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
-            <RouterView />
+            <BaseLayout>
+              <RouterView />
+            </BaseLayout>
           </ConnectedRouter>
         </Provider>
       </ConfigProvider>
