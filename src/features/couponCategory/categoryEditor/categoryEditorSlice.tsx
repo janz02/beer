@@ -3,7 +3,7 @@ import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
 import { api } from 'api'
 import { GetCategoryRequest } from 'api/swagger'
-import { getCategories } from '../categoryList/categoryListSlice'
+import { categoryListActions } from '../categoryList/categoryListSlice'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
@@ -73,7 +73,7 @@ const saveCategory = (category: Category): AppThunk => async dispatch => {
       id = newId
     }
     dispatch(saveCategorySuccess({ ...category, id }))
-    dispatch(getCategories())
+    dispatch(categoryListActions.getCategories())
     return true
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))

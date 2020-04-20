@@ -4,7 +4,7 @@ import { AppThunk } from './store'
 import { resetAuth } from 'features/auth/authSlice'
 import { resetSiteEditor } from 'features/sites/siteEditor/siteEditorSlice'
 import { categoryEditorActions } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
-import { resetCategoryList } from 'features/couponCategory/categoryList/categoryListSlice'
+import { categoryListActions } from 'features/couponCategory/categoryList/categoryListSlice'
 import { resetCoupons } from 'features/coupons/couponsSlice'
 import { resetCouponList } from 'features/coupons/couponList/couponListSlice'
 import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
@@ -33,7 +33,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetSiteEditor())
     dispatch(notificationActions.resetNotification())
     dispatch(categoryEditorActions.resetCategoryEditor())
-    dispatch(resetCategoryList())
+    dispatch(categoryListActions.resetCategoryList())
     dispatch(resetCoupons())
     dispatch(resetCouponList())
     dispatch(resetUsersAccessList())

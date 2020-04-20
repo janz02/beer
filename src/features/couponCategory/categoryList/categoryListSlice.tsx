@@ -9,13 +9,13 @@ import {
   storableListRequestParams,
   OrderByType
 } from 'hooks/useTableUtils'
+import { FeatureState } from 'models/featureState'
 
 interface CouponCategoryListState {
   categories: Category[]
   listParams: ListRequestParams
-  loading: boolean
-  error: string
-  errorDeletion: string
+  listState: FeatureState
+  deleteState: FeatureState
 }
 
 const initialState: CouponCategoryListState = {
@@ -25,9 +25,8 @@ const initialState: CouponCategoryListState = {
     orderBy: 'name',
     orderByType: OrderByType.Ascending
   },
-  loading: false,
-  error: '',
-  errorDeletion: ''
+  listState: FeatureState.Initial,
+  deleteState: FeatureState.Initial
 }
 
 const categoryListSlice = createSlice({
@@ -35,8 +34,11 @@ const categoryListSlice = createSlice({
   initialState,
   reducers: {
     resetCategoryList: () => initialState,
-    getCategoriesRequest(state) {
-      state.loading = true
+    setListState: (state, action: PayloadAction<FeatureState>) => {
+      state.listState = action.payload
+    },
+    setDeleteState: (state, action: PayloadAction<FeatureState>) => {
+      state.deleteState = action.payload
     },
     getCategoriesSuccess(
       state,
@@ -44,46 +46,21 @@ const categoryListSlice = createSlice({
     ) {
       state.categories = action.payload.categories
       state.listParams = action.payload.listParams
-      state.loading = false
-      state.error = ''
-    },
-    getCategoriesFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.error = action.payload
-    },
-    deleteRequest(state) {
-      state.loading = true
-    },
-    deleteSuccess(state) {
-      state.loading = false
-      state.errorDeletion = ''
-    },
-    deleteFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.errorDeletion = action.payload
+      state.listState = FeatureState.Success
     }
   }
 })
 
 const {
-  getCategoriesRequest,
+  setListState,
+  setDeleteState,
   getCategoriesSuccess,
-  getCategoriesFail,
-  deleteRequest,
-  deleteSuccess,
-  deleteFail
+  resetCategoryList
 } = categoryListSlice.actions
 
-export const { resetCategoryList } = categoryListSlice.actions
-
-export const categoryListReducer = categoryListSlice.reducer
-
-export const getCategories = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
-  dispatch(getCategoriesRequest())
+const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
+    dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
     const { result, ...pagination } = await api.categories.getCategories(revisedParams)
 
@@ -94,20 +71,28 @@ export const getCategories = (params: ListRequestParams = {}): AppThunk => async
       })
     )
   } catch (err) {
-    dispatch(getCategoriesFail(err.toString()))
+    dispatch(setListState(FeatureState.Error))
   }
 }
 
-export const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
-  dispatch(deleteRequest())
+const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
+    dispatch(setDeleteState(FeatureState.Loading))
     await api.categories.deleteCategory({ id })
-    dispatch(deleteSuccess())
+    dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
     dispatch(getCategories({ page: newPage }))
     return { id }
   } catch (err) {
-    dispatch(deleteFail(err.toString()))
+    dispatch(setDeleteState(FeatureState.Error))
     return { id, error: err.toString() }
   }
 }
+
+export const categoryListActions = {
+  resetCategoryList,
+  getCategories,
+  deleteCategory
+}
+
+export const categoryListReducer = categoryListSlice.reducer

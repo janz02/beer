@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'hooks/react-redux-hooks'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'

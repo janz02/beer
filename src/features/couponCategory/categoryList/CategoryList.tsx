@@ -3,7 +3,7 @@ import './CategoryList.scss'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { useTranslation } from 'react-i18next'
-import { getCategories, deleteCategory } from './categoryListSlice'
+import { categoryListActions } from './categoryListSlice'
 import { Category } from 'models/category'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
@@ -14,6 +14,7 @@ import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
 import { ColumnType } from 'antd/lib/table'
 import { AddButton } from 'components/buttons/AddButton'
+import { FeatureState } from 'models/featureState'
 
 interface CategoryListProps {
   onOpenEditor: (id?: number) => void
@@ -22,11 +23,17 @@ interface CategoryListProps {
 export const CategoryList: FC<CategoryListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { listParams, categories, loading } = useSelector((state: RootState) => state.categoryList)
+  const { listParams, categories, listState } = useSelector(
+    (state: RootState) => state.categoryList
+  )
   const [categoryToDelete, setCategoryToDelete] = useState<{
     category?: Category
     popupVisible?: boolean
   } | null>()
+
+  const loading = listState === FeatureState.Loading
+
+  const { getCategories, deleteCategory } = categoryListActions
 
   const {
     paginationConfig,
