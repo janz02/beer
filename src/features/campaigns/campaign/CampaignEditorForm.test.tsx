@@ -7,8 +7,6 @@ describe('CampaignEditorForm tests', () => {
   it('should not display button when not editing or not new', () => {
     // Arrange
     const props: CampaignEditorFormProps = {
-      loading: false,
-      couponIsNew: false,
       editing: false
     }
     setupStore({ coupons: { categories: [] } })

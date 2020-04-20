@@ -52,19 +52,17 @@ import { campaignActions } from '../campaignsSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { Coupon } from 'models/coupon'
 import { RootState } from 'app/rootReducer'
+import { useCampaign } from './useCampaign'
 
 export interface CampaignEditorFormProps {
-  handleCouponSave?: (values: any) => void
-  loading: boolean
-  couponIsNew: boolean
-  coupon?: Coupon
   editing: boolean
 }
 
 export const CampaignEditorForm: FC<CampaignEditorFormProps> = props => {
-  const { handleCouponSave, loading, couponIsNew, coupon, editing } = props
+  const { editing } = props
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const { loading, couponIsNew, coupon, handleCouponSave } = useCampaign()
   const { categories, majorPartners } = useSelector((state: RootState) => state.campaigns)
   const { userData } = useSelector((state: RootState) => state.auth)
   const [stateForCreate, setStateForCreate] = useState(CouponState.Created)

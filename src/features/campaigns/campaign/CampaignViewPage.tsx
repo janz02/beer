@@ -1,31 +1,11 @@
 import React, { useEffect, FC } from 'react'
-import { CampaignEditorFormProps, CampaignEditorForm } from './CampaignEditorForm'
-import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { useParams } from 'react-router-dom'
-import { RootState } from 'app/rootReducer'
-import { FeatureState } from 'models/featureState'
-import { campaignActions } from '../campaignsSlice'
+import { CampaignEditorForm } from './CampaignEditorForm'
+import { useCampaign } from './useCampaign'
 
 export const CampaignViewPage: FC = () => {
-  const { id } = useParams()
-  const dispatch = useDispatch()
-  const { coupon, featureState } = useSelector((state: RootState) => state.campaigns)
-  const loading = featureState === FeatureState.Loading
+  const { getCoupon } = useCampaign()
 
-  useEffect(() => {
-    id && dispatch(campaignActions.getCoupon(+id))
-  }, [id, dispatch])
+  useEffect(() => getCoupon(), [getCoupon])
 
-  const props: CampaignEditorFormProps = {
-    loading,
-    couponIsNew: false,
-    coupon,
-    editing: false
-  }
-
-  return (
-    <>
-      <CampaignEditorForm {...props} />
-    </>
-  )
+  return <CampaignEditorForm editing={false} />
 }
