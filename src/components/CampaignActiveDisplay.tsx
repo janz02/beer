@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Coupon } from 'models/coupon'
 
@@ -6,7 +6,7 @@ interface CampaignActiveDisplayProps {
   coupon?: Coupon
 }
 
-export const CampaignActiveDisplay: React.FC<CampaignActiveDisplayProps> = props => {
+export const CampaignActiveDisplay: FC<CampaignActiveDisplayProps> = props => {
   const { coupon } = props
   const { t } = useTranslation()
 
