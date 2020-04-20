@@ -3,8 +3,6 @@ import { notificationActions } from 'features/notification/notificationSlice'
 import { AppThunk } from './store'
 import { resetAuth } from 'features/auth/authSlice'
 import { resetSiteEditor } from 'features/sites/siteEditor/siteEditorSlice'
-import { categoryEditorActions } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
-import { categoryListActions } from 'features/couponCategory/categoryList/categoryListSlice'
 import { resetCoupons } from 'features/coupons/couponsSlice'
 import { resetCouponList } from 'features/coupons/couponList/couponListSlice'
 import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
@@ -20,6 +18,8 @@ import {
   partnerContactsSlice
 } from 'features/partnerContacts/partnerContactsSliceFactory'
 import { profileActions } from 'features/profile/profileSlice'
+import { categoryEditorActions } from 'features/campaignCategory/categoryEditor/categoryEditorSlice'
+import { categoryListActions } from 'features/campaignCategory/categoryList/categoryListSlice'
 
 interface HardResetParams {
   logout?: boolean

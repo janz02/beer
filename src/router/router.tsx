@@ -10,7 +10,6 @@ import { PublicRoute } from 'router/PublicRoute'
 import { LoginPage } from 'features/auth/LoginPage'
 import { RecoveryPage } from 'features/auth/RecoveryPage'
 import { SignupPage } from 'features/auth/SignupPage'
-import { CategoryPage } from 'features/couponCategory/CategoryPage'
 import { ErrorPage } from '../components/error/ErrorPage'
 import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
 import { SitesListPage } from 'features/sites/siteList/SitesListPage'
@@ -25,6 +24,7 @@ import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartner
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
 import { PartnerContactsPage } from 'features/partnerContacts/PartnerContactsPage'
 import { pageViewRoles } from 'services/roleHelpers'
+import { CategoryPage } from 'features/campaignCategory/CategoryPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
