@@ -8,11 +8,7 @@ import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { history } from 'router/router'
-import {
-  deleteNewsletterTemplate,
-  getNewsletterTemplates,
-  createNewsletterTemplate
-} from './newsletterListSlice'
+import { newsletterListActions } from './newsletterListSlice'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { NewsletterPreview } from 'models/newsletter'
@@ -20,15 +16,25 @@ import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
 import { AddButton } from 'components/buttons/AddButton'
+import { FeatureState } from 'models/featureState'
+
+const {
+  createNewsletterTemplate,
+  deleteNewsletterTemplate,
+  getNewsletterTemplates
+} = newsletterListActions
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
 
-  const { templates, listParams, loading, loadingCreate } = useSelector(
+  const { templateList, listParams, listState, createState } = useSelector(
     (state: RootState) => state.newsletterList
   )
+
+  const loadingList = listState === FeatureState.Loading
+  const loadingCreate = createState === FeatureState.Loading
 
   const [visibleSaveNewPopup, setVisibleSaveNewPopup] = useState(false)
   const [deletePopup, setDeletePopup] = useState<{
@@ -118,9 +124,9 @@ export const NewsletterList: FC = () => {
       >
         <ResponsiveTable
           {...{
-            loading,
+            loading: loadingList,
             columns: columnsConfig,
-            dataSource: addKeyProp(templates),
+            dataSource: addKeyProp(templateList),
             pagination: paginationConfig,
             onChange: handleTableChange
           }}

@@ -1,33 +1,32 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 import { AppThunk } from 'app/store'
 import { NewsletterPreview } from 'models/newsletter'
 import { api } from 'api'
 import { history } from 'router/router'
 import moment from 'moment'
 import { Segment } from 'models/segment'
-
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
+import { FeatureState } from 'models/featureState'
 
 interface NewsletterListState {
-  templates: NewsletterPreview[]
-  error: string
-  loading: boolean
-  loadingCreate: boolean
+  listState: FeatureState
+  createState: FeatureState
+  deleteState: FeatureState
+  templateList: NewsletterPreview[]
   listParams: ListRequestParams
   segments: Segment[]
 }
 
 const initialState: NewsletterListState = {
-  error: '',
-  loading: false,
-  loadingCreate: false,
-  templates: [],
+  listState: FeatureState.Initial,
+  createState: FeatureState.Initial,
+  deleteState: FeatureState.Initial,
+  templateList: [],
   listParams: {
     pageSize: 10
   },
@@ -38,104 +37,91 @@ const newsletterListSlice = createSlice({
   name: 'newsLetterList',
   initialState,
   reducers: {
-    resetNewsLetterList: () => initialState,
-    createTemplateRequest(state) {
-      state.loadingCreate = true
+    resetNewsletterList: () => initialState,
+    setListState: (state, action: PayloadAction<FeatureState>) => {
+      state.listState = action.payload
     },
-    createTemplateSuccess(state) {
-      state.loadingCreate = false
+    setCreateState: (state, action: PayloadAction<FeatureState>) => {
+      state.createState = action.payload
     },
-    createTemplateFail(state, action: PayloadAction<string>) {
-      state.loadingCreate = false
+    setDeleteState: (state, action: PayloadAction<FeatureState>) => {
+      state.deleteState = action.payload
     },
-    sendEmailRequest() {},
-    sendEmailSuccess() {},
-    sendEmailFail(state, action: PayloadAction<string>) {},
-    deleteTemplateRequest() {},
-    deleteTemplateSuccess() {},
-    deleteTemplateFail(state, action: PayloadAction<string>) {},
-    getTemplatesRequest(state) {
-      state.loading = true
-    },
-    getTemplatesSuccess(
+    getListSuccess(
       state,
-      action: PayloadAction<{ templates: any[]; listParams: ListRequestParams }>
+      action: PayloadAction<{ templates: NewsletterPreview[]; listParams: ListRequestParams }>
     ) {
-      state.templates = action.payload.templates
+      state.templateList = action.payload.templates
       state.listParams = action.payload.listParams
-      state.loading = false
-      state.error = ''
-    },
-    getTemplatesFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.error = action.payload
+      state.listState = FeatureState.Success
     }
   }
 })
 
 const {
-  createTemplateRequest,
-  createTemplateSuccess,
-  createTemplateFail
-} = newsletterListSlice.actions
-const { getTemplatesRequest, getTemplatesSuccess, getTemplatesFail } = newsletterListSlice.actions
-const {
-  deleteTemplateRequest,
-  deleteTemplateSuccess,
-  deleteTemplateFail
+  setCreateState,
+  setDeleteState,
+  setListState,
+  getListSuccess,
+  resetNewsletterList
 } = newsletterListSlice.actions
 
-export const { resetNewsLetterList } = newsletterListSlice.actions
-
-export const newsletterListReducer = newsletterListSlice.reducer
-
-export const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => async (
+const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
   try {
-    dispatch(getTemplatesRequest())
+    dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().newsletterList.listParams, params)
     const { result, ...pagination } = await api.emailTemplates.getTemplates(revisedParams)
     const templates = result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
     dispatch(
-      getTemplatesSuccess({
+      getListSuccess({
         templates: templates as NewsletterPreview[],
         listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
-    dispatch(getTemplatesFail(err.toString()))
+    dispatch(setListState(FeatureState.Error))
   }
 }
 
-export const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
+const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
   try {
-    dispatch(deleteTemplateRequest())
+    dispatch(setDeleteState(FeatureState.Loading))
     await api.emailTemplates.deleteTemplate({ id })
-    dispatch(deleteTemplateSuccess())
+    dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(getState().newsletterList.listParams)
     dispatch(getNewsletterTemplates({ page: newPage }))
     return { id }
   } catch (err) {
-    dispatch(deleteTemplateFail(err.toString()))
+    dispatch(setDeleteState(FeatureState.Error))
   }
 }
 
-export const createNewsletterTemplate = (name: string): AppThunk => async dispatch => {
+const createNewsletterTemplate = (name: string): AppThunk => async dispatch => {
   try {
-    dispatch(createTemplateRequest())
+    dispatch(setCreateState(FeatureState.Loading))
     const id = await api.emailTemplates.createTemplate({
       createEmailTemplateDto: {
         name,
         content: `<div style="height: 10%; text-align: center; padding: 1rem">${name}</div>`
       }
     })
-    dispatch(createTemplateSuccess())
+    dispatch(setCreateState(FeatureState.Success))
     history.push(`newsletter/${id.id}`)
     return true
   } catch (err) {
-    dispatch(createTemplateFail(err.toString()))
+    dispatch(setCreateState(FeatureState.Error))
     return false
   }
 }
+
+export const newsletterListActions = {
+  resetNewsletterList,
+  getNewsletterTemplates,
+  createNewsletterTemplate,
+  deleteNewsletterTemplate
+}
+
+export const newsletterListReducer = newsletterListSlice.reducer
