@@ -15,7 +15,6 @@ import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
 import { SitesListPage } from 'features/sites/siteList/SitesListPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
-import { NewsletterListPage } from 'features/newsletter/newsletter-list/NewsletterListPage'
 import { CouponViewPage } from 'features/coupons/couponView/CouponViewPage'
 import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
 import { isLoggedIn } from 'services/jwt-reader'
@@ -25,6 +24,7 @@ import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditor
 import { PartnerContactsPage } from 'features/partnerContacts/PartnerContactsPage'
 import { pageViewRoles } from 'services/roleHelpers'
 import { CategoryPage } from 'features/campaignCategory/CategoryPage'
+import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
