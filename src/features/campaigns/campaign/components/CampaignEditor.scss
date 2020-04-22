@@ -40,16 +40,18 @@
     margin-bottom: 30px;
     border-radius: 1rem;
 
-    .ant-collapse-header {
-      height: 65px;
-      padding-top: 22px;
-      padding-left: 64px;
-      color: $primary-color;
-      font-size: 20px;
-      line-height: 24px;
+    .ant-collapse-item {
+      .ant-collapse-header {
+        height: 65px;
+        padding-top: 22px;
+        padding-left: 64px;
+        color: $primary-color;
+        font-size: 20px;
+        line-height: 24px;
 
-      .ant-collapse-arrow {
-        left: 40px;
+        .ant-collapse-arrow {
+          left: 40px;
+        }
       }
     }
 
