@@ -1,6 +1,6 @@
 @import "assets/scss/_variables";
 
-.coupon-editor-form {
+.campaign-editor-form {
   padding-bottom: 30px;
 
   .actions-right {
@@ -26,7 +26,7 @@
     }
   }
 
-  .coupon-editor-form__actions {
+  .campaign-editor-form__actions {
     & > *:not(:last-child) {
       margin-right: 15px;
     }

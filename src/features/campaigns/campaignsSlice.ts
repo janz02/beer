@@ -6,7 +6,7 @@ import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { history } from 'router/router'
-import { CouponState, CouponType } from 'api/swagger/models'
+import { CouponState, CouponType, CouponMode, CouponDiscountType } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
 import { Partner } from 'models/partner'
 import { saveAs } from 'file-saver'
@@ -17,6 +17,11 @@ interface CampaignsState {
   coupon?: Coupon
   categories?: Category[]
   majorPartners?: Partner[]
+  editing?: boolean
+  stateForCreate?: CouponState
+  selectedCouponType?: CouponType
+  selectedCouponMode?: CouponMode
+  selectedCouponDiscountType?: CouponDiscountType
   featureState: FeatureState
 }
 
@@ -31,6 +36,24 @@ const campaignsSlice = createSlice({
     resetCampaigns: () => initialState,
     setFeatureState(state, action: PayloadAction<FeatureState>) {
       state.featureState = action.payload
+    },
+    setEditing(state, action: PayloadAction<boolean>) {
+      state.editing = action.payload
+    },
+    setSelectedCouponType(state, action: PayloadAction<CouponType | undefined>) {
+      state.selectedCouponType = action.payload
+    },
+    setSelectedCouponMode(state, action: PayloadAction<CouponMode | undefined>) {
+      state.selectedCouponMode = action.payload
+    },
+    setSelectedCouponDiscountType(state, action: PayloadAction<CouponDiscountType | undefined>) {
+      state.selectedCouponDiscountType = action.payload
+    },
+    setStateForCreate(state, action: PayloadAction<CouponState>) {
+      state.stateForCreate = action.payload
+    },
+    setCoupon(state, action: PayloadAction<Coupon | undefined>) {
+      state.coupon = action.payload
     },
     getCouponSuccess(state, action: PayloadAction<Coupon>) {
       state.coupon = action.payload
@@ -86,6 +109,12 @@ const campaignsSlice = createSlice({
 const {
   resetCampaigns,
   setFeatureState,
+  setEditing,
+  setSelectedCouponType,
+  setSelectedCouponMode,
+  setSelectedCouponDiscountType,
+  setStateForCreate,
+  setCoupon,
   getCouponSuccess,
   createCouponSuccess,
   updateCouponSuccess,
@@ -360,6 +389,12 @@ const downloadPredefinedCodesFile = (coupon: Coupon): AppThunk => async dispatch
 
 export const campaignActions = {
   resetCampaigns,
+  setEditing,
+  setSelectedCouponType,
+  setSelectedCouponMode,
+  setSelectedCouponDiscountType,
+  setStateForCreate,
+  setCoupon,
   getCoupon,
   createCoupon,
   updateCoupon,

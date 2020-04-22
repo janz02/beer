@@ -1,5 +1,5 @@
 import React, { useEffect, FC } from 'react'
-import { CampaignEditorForm } from './CampaignEditorForm'
+import { CampaignEditor } from './components/CampaignEditor'
 import { useCampaign } from './useCampaign'
 
 export const CampaignViewPage: FC = () => {
@@ -7,5 +7,5 @@ export const CampaignViewPage: FC = () => {
 
   useEffect(() => getCoupon(), [getCoupon])
 
-  return <CampaignEditorForm editing={false} />
+  return <CampaignEditor editing={false} />
 }

@@ -10,7 +10,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { useCampaignList } from './useCampaignList'
-import { CampaignListTable } from './CampaignListTable'
+import { CampaignListTable } from './components/CampaignListTable'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { CampaignEditorForm } from 'features/campaigns/campaign/CampaignEditorForm'
+import { CampaignEditor } from 'features/campaigns/campaign/components/CampaignEditor'
 
 export const CampaignCreatePage: FC = () => {
-  return <CampaignEditorForm editing />
+  return <CampaignEditor editing />
 }
