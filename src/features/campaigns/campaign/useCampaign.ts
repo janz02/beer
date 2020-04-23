@@ -134,15 +134,15 @@ export const useCampaign = (): UseCampaignFeatures => {
   }
 
   const handleCouponChange = useCallback(() => {
-    campaignActions.setSelectedCouponType(coupon?.type)
-    campaignActions.setSelectedCouponMode(coupon?.mode)
-    campaignActions.setSelectedCouponDiscountType(coupon?.discountType)
+    dispatch(campaignActions.setSelectedCouponType(coupon?.type))
+    dispatch(campaignActions.setSelectedCouponMode(coupon?.mode))
+    dispatch(campaignActions.setSelectedCouponDiscountType(coupon?.discountType))
 
     setFieldsValue({
       ...coupon,
       rank: CouponRank.Basic
     })
-  }, [setFieldsValue, coupon])
+  }, [setFieldsValue, coupon, dispatch])
 
   const handleCouponActivate = (): void => {
     coupon?.id && dispatch(campaignActions.activateCoupon(coupon?.id, !coupon?.isActive))
@@ -159,7 +159,7 @@ export const useCampaign = (): UseCampaignFeatures => {
   const handleDeleteCouponCommment = (coupon?: Coupon, couponComment?: CouponComment): void => {
     coupon?.id &&
       couponComment?.id &&
-      campaignActions.deleteCouponComment(coupon.id, couponComment.id)
+      dispatch(campaignActions.deleteCouponComment(coupon.id, couponComment.id))
   }
 
   const handleCommentSubmit = (values: any): void => {

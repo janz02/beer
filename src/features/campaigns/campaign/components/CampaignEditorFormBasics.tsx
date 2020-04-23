@@ -9,9 +9,11 @@ import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 import { comboRoles } from 'services/roleHelpers'
 import { useCampaign } from '../useCampaign'
 import { useCommonFormRules } from 'hooks'
+import { useDispatch } from 'react-redux'
 
 export const CampaignEditorFormBasics: FC = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const rule = useCommonFormRules()
   const {
     couponIsNew,
@@ -32,7 +34,7 @@ export const CampaignEditorFormBasics: FC = () => {
             <Select
               disabled={!displayEditor || !couponIsNew}
               onChange={(value: CouponType) => {
-                setSelectedCouponType(value)
+                dispatch(setSelectedCouponType(value))
               }}
             >
               {Object.keys(CouponType).map(x => (

@@ -10,9 +10,11 @@ import { CampaignEditorFormDetails } from './CampaignEditorFormDetails'
 import { CampaignEditorFormCouponCount } from './CampaignEditorFormCouponCount'
 import { CampaignEditorFormClientActivities } from './CampaignEditorFormClientActivities'
 import { CampaignEditorFormAudit } from './CampaignEditorFormAudit'
+import { useDispatch } from 'react-redux'
 
 export const CampaignEditorForm: FC = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const {
     loading,
     couponIsNew,
@@ -83,7 +85,7 @@ export const CampaignEditorForm: FC = () => {
               <Button
                 type="ghost"
                 htmlType="submit"
-                onClick={() => setStateForCreate(CouponState.Waiting)}
+                onClick={() => dispatch(setStateForCreate(CouponState.Waiting))}
                 disabled={!submitable}
                 loading={loading}
               >
@@ -94,7 +96,7 @@ export const CampaignEditorForm: FC = () => {
             <Button
               type="primary"
               htmlType="submit"
-              onClick={() => setStateForCreate(CouponState.Created)}
+              onClick={() => dispatch(setStateForCreate(CouponState.Created))}
               disabled={!submitable}
               loading={loading}
             >

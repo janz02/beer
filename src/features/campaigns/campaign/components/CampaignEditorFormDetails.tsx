@@ -89,7 +89,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               <Select
                 disabled={!displayEditor}
                 onChange={(value: CouponMode) => {
-                  setSelectedCouponMode(value)
+                  dispatch(setSelectedCouponMode(value))
                 }}
               >
                 {Object.keys(CouponMode).map(x => (
@@ -163,7 +163,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               <Select
                 disabled={!displayEditor}
                 onChange={(value: CouponDiscountType) => {
-                  setSelectedCouponDiscountType(value)
+                  dispatch(setSelectedCouponDiscountType(value))
                 }}
               >
                 {Object.keys(CouponDiscountType).map(x => (
