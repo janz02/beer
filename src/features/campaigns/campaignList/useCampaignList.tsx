@@ -1,36 +1,46 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import './CouponListPage.scss'
-import { Checkbox } from 'antd'
-import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
+import React, { useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
-import { history } from 'router/router'
+import { FeatureState } from 'models/featureState'
+import { campaignActions } from '../campaignsSlice'
 import { Coupon } from 'models/coupon'
-import { getCoupons, deleteCoupon, setIncludeArchived, setOnlyWaiting } from './couponListSlice'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
+import { campaignListActions } from './campaignListSlice'
+import { ColumnType } from 'antd/lib/table'
 import { useTranslation } from 'react-i18next'
+import { ColumnFilterItem, TablePaginationConfig } from 'antd/lib/table/interface'
+import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
+import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
+import { Thumbnail } from 'components/thumbnail/Thumbnail'
+import moment from 'moment'
+import { history } from 'router/router'
+import { MomentDisplay } from 'components/MomentDisplay'
+import { CrudButtons } from 'components/buttons/CrudButtons'
+import { hasPermission } from 'services/jwt-reader'
 import {
-  CouponState,
   Roles,
   CouponType,
-  CouponMode,
+  CouponState,
   CouponRank,
+  CouponMode,
   CouponDiscountType
 } from 'api/swagger/models'
-import { ColumnType, ColumnFilterItem } from 'antd/lib/table/interface'
-import { MomentDisplay } from 'components/MomentDisplay'
-import { getCategories } from '../couponsSlice'
-import { hasPermission } from 'services/jwt-reader'
-import { CrudButtons } from 'components/buttons/CrudButtons'
-import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
-import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { GenericPopup } from 'components/popups/GenericPopup'
-import { AddButton } from 'components/buttons/AddButton'
-import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
-import moment from 'moment'
-import { Thumbnail } from 'components/thumbnail/Thumbnail'
-import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 
-const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
+interface UseCampaignListFeatures {
+  loading: boolean
+  coupons?: Coupon[]
+  handleTableChange: any
+  columnsConfig: ColumnType<Coupon>[]
+  paginationConfig: false | TablePaginationConfig
+  couponToDelete?: Coupon
+  deletePopupVisible?: boolean
+  handleIncludeArchivedChange: (checked: boolean) => void
+  handleTabChange: (key: string) => void
+  handleDeleteCancel: () => void
+  getCategories: typeof campaignActions.getCategories
+  getCoupons: typeof campaignListActions.getCoupons
+  deleteCoupon: typeof campaignListActions.deleteCoupon
+}
 
 const couponEditorRoles = [
   Roles.Administrator,
@@ -39,25 +49,20 @@ const couponEditorRoles = [
   Roles.PartnerContactEditor
 ]
 
-export const CouponListPage: React.FC = () => {
+export const useCampaignList = (): UseCampaignListFeatures => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const { categories } = useSelector((state: RootState) => state.coupons)
-  const { coupons, loading, listParams } = useSelector((state: RootState) => state.couponList)
+  const {
+    coupons,
+    listParams,
+    campaignToDelete: couponToDelete,
+    deletePopupVisible,
+    featureState
+  } = useSelector((state: RootState) => state.campaignList)
+  const { categories } = useSelector((state: RootState) => state.campaigns)
 
-  const [couponToDelete, setCouponToDelete] = useState<{
-    coupon?: Coupon
-    popupVisible?: boolean
-  } | null>()
-
-  useEffect(() => {
-    dispatch(getCategories())
-  }, [dispatch])
-
-  useEffect(() => {
-    dispatch(getCoupons())
-  }, [dispatch])
+  const loading = featureState === FeatureState.Loading
 
   const {
     paginationConfig,
@@ -86,7 +91,7 @@ export const CouponListPage: React.FC = () => {
       'minimumShoppingValue',
       'createdBy'
     ],
-    getDataAction: getCoupons
+    getDataAction: campaignListActions.getCoupons
   })
 
   const columnsConfig = useMemo(
@@ -143,9 +148,7 @@ export const CouponListPage: React.FC = () => {
         filters: Object.keys(CouponState).map(f => {
           return { text: t(`coupon.state.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
-        render(value: CouponState) {
-          return <CampaignStateDisplay state={value} />
-        }
+        render: (value: CouponState) => <CampaignStateDisplay state={value} />
       }),
       columnConfig({
         title: t('coupon-list.status'),
@@ -322,10 +325,7 @@ export const CouponListPage: React.FC = () => {
                 hasPermission(couponEditorRoles) &&
                 (record.state === CouponState.Created || record.state === CouponState.Waiting)
                   ? () => {
-                      setCouponToDelete({
-                        coupon: record,
-                        popupVisible: true
-                      })
+                      dispatch(campaignListActions.prepareCampaignDelete(record))
                     }
                   : undefined
               }
@@ -334,71 +334,36 @@ export const CouponListPage: React.FC = () => {
         }
       })
     ],
-    [actionColumnConfig, categories, columnConfig, t]
+    [actionColumnConfig, categories, columnConfig, t, dispatch]
   )
 
-  const headerOptions = (
-    <>
-      <Checkbox
-        onChange={e => {
-          dispatch(setIncludeArchived(e.target.checked))
-          dispatch(getCoupons())
-        }}
-      >
-        {t('coupon-list.show-archived')}
-      </Checkbox>
-      {hasPermission(couponCreateRoles) && (
-        <AddButton onClick={() => history.push(`/campaign`)}>{t('coupon-list.add')}</AddButton>
-      )}
-    </>
-  )
+  const handleIncludeArchivedChange = (checked: boolean): void => {
+    dispatch(campaignListActions.setIncludeArchived(checked))
+    dispatch(campaignListActions.getCoupons())
+  }
 
-  const tableSelector = [
-    {
-      key: 'all',
-      tab: t('coupon-list.all-tab')
-    },
-    {
-      key: 'waiting',
-      tab: t('coupon-list.pending-tab')
-    }
-  ]
+  const handleTabChange = (key: string): void => {
+    dispatch(campaignListActions.setOnlyWaiting(key === 'waiting'))
+    dispatch(campaignListActions.getCoupons())
+  }
 
-  return (
-    <>
-      <ResponsiveCard
-        disableAutoScale
-        forTable
-        floatingTitle={t('coupon-list.campaigns')}
-        floatingOptions={headerOptions}
-        paddedBottom
-        width="full"
-        tabList={tableSelector}
-        onTabChange={key => {
-          dispatch(setOnlyWaiting(key === 'waiting'))
-          dispatch(getCoupons())
-        }}
-      >
-        <ResponsiveTable
-          hasFixedColumn
-          {...{
-            loading: loading,
-            columns: columnsConfig,
-            dataSource: addKeyProp(coupons),
-            pagination: paginationConfig,
-            onChange: handleTableChange
-          }}
-        />
-      </ResponsiveCard>
+  const handleDeleteCancel = (): void => {
+    dispatch(campaignListActions.cancelCampaignDelete())
+  }
 
-      <GenericPopup
-        id={couponToDelete?.coupon?.id}
-        type="delete"
-        visible={!!couponToDelete?.popupVisible}
-        onOkAction={deleteCoupon(couponToDelete?.coupon?.id!)}
-        onCancel={() => setCouponToDelete({ ...couponToDelete, popupVisible: false })}
-        afterClose={() => setCouponToDelete(null)}
-      />
-    </>
-  )
+  return {
+    loading,
+    coupons: addKeyProp(coupons),
+    handleTableChange,
+    columnsConfig,
+    paginationConfig,
+    couponToDelete,
+    deletePopupVisible,
+    handleIncludeArchivedChange,
+    handleTabChange,
+    handleDeleteCancel,
+    getCategories: campaignActions.getCategories,
+    getCoupons: campaignListActions.getCoupons,
+    deleteCoupon: campaignListActions.deleteCoupon
+  }
 }

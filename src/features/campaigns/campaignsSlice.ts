@@ -2,125 +2,119 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { Category } from 'models/category'
-import { Coupon } from 'models/coupon'
 import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { history } from 'router/router'
-import { CouponState, CouponType } from 'api/swagger/models'
+import { CouponState, CouponType, CouponMode, CouponDiscountType } from 'api/swagger/models'
 import { CouponComment } from 'models/couponComment'
 import { Partner } from 'models/partner'
 import { saveAs } from 'file-saver'
+import { Coupon } from 'models/coupon'
+import { FeatureState } from 'models/featureState'
 
-interface CouponsState {
+interface CampaignsState {
   coupon?: Coupon
   categories?: Category[]
   majorPartners?: Partner[]
-  error: boolean
-  loading: boolean
+  editing?: boolean
+  stateForCreate?: CouponState
+  selectedCouponType?: CouponType
+  selectedCouponMode?: CouponMode
+  selectedCouponDiscountType?: CouponDiscountType
+  featureState: FeatureState
 }
 
-const initialState: CouponsState = {
-  error: false,
-  loading: false
+const initialState: CampaignsState = {
+  featureState: FeatureState.Initial
 }
 
-const couponsSlice = createSlice({
-  name: 'coupons',
+const campaignsSlice = createSlice({
+  name: 'campaigns',
   initialState,
   reducers: {
-    resetCoupons: () => initialState,
+    resetCampaigns: () => initialState,
+    setFeatureState(state, action: PayloadAction<FeatureState>) {
+      state.featureState = action.payload
+    },
+    setEditing(state, action: PayloadAction<boolean>) {
+      state.editing = action.payload
+    },
+    setSelectedCouponType(state, action: PayloadAction<CouponType | undefined>) {
+      state.selectedCouponType = action.payload
+    },
+    setSelectedCouponMode(state, action: PayloadAction<CouponMode | undefined>) {
+      state.selectedCouponMode = action.payload
+    },
+    setSelectedCouponDiscountType(state, action: PayloadAction<CouponDiscountType | undefined>) {
+      state.selectedCouponDiscountType = action.payload
+    },
+    setStateForCreate(state, action: PayloadAction<CouponState>) {
+      state.stateForCreate = action.payload
+    },
+    setCoupon(state, action: PayloadAction<Coupon | undefined>) {
+      state.coupon = action.payload
+    },
     getCouponSuccess(state, action: PayloadAction<Coupon>) {
       state.coupon = action.payload
-
-      state.loading = false
-      state.error = false
+      state.featureState = FeatureState.Success
     },
     createCouponSuccess(state) {
       message.success(i18n.t('coupon-create.create-coupon-success'), 10)
-      state.loading = false
-      state.error = false
+      state.featureState = FeatureState.Success
     },
     updateCouponSuccess(state) {
       message.success(i18n.t('coupon-editor.save-coupon-success'), 10)
-      state.loading = false
-      state.error = false
+      state.featureState = FeatureState.Success
     },
     deleteCouponCommentsSuccess(state) {
-      state.loading = false
-      state.error = false
+      state.featureState = FeatureState.Success
     },
     getCouponCommentsSuccess(state, action: PayloadAction<CouponComment[]>) {
       if (state.coupon) {
         state.coupon.comments = action.payload
       }
-      state.loading = false
-      state.error = false
+      state.featureState = FeatureState.Success
     },
     activateCouponSuccess(state) {
-      state.loading = false
-      state.error = false
+      state.featureState = FeatureState.Success
     },
     updateCouponStatusSuccess(state) {
       message.success(i18n.t('coupon-editor.save-coupon-status-success'), 10)
-      state.loading = false
-      state.error = false
+      state.featureState = FeatureState.Success
     },
     getCategoriesSuccess(state, action: PayloadAction<Category[]>) {
       state.categories = action.payload
-
-      state.loading = false
-      state.error = false
+      state.featureState = FeatureState.Success
     },
     getMajorPartnersSuccess(state, action: PayloadAction<Partner[]>) {
       state.majorPartners = action.payload
-
-      state.loading = false
-      state.error = false
-    },
-    setLoadingStart(state) {
-      state.loading = true
-    },
-    setLoadingFailed(state) {
-      state.loading = false
-      state.error = true
+      state.featureState = FeatureState.Success
     },
     downloadCouponsSuccess(state) {
-      state.loading = false
-      state.error = false
-    },
-    downloadCouponsFailed(state) {
-      state.loading = false
-      state.error = true
+      state.featureState = FeatureState.Success
     },
     downloadClaimedCouponsSuccess(state) {
-      state.loading = false
-      state.error = false
-    },
-    downloadClaimedCouponsFailed(state) {
-      state.loading = false
-      state.error = true
+      state.featureState = FeatureState.Success
     },
     downloadPrizeFileSuccess(state) {
-      state.loading = false
-      state.error = false
-    },
-    downloadPrizeFileFailed(state) {
-      state.loading = false
-      state.error = true
+      state.featureState = FeatureState.Success
     },
     downloadPredefinedCouponsFileSuccess(state) {
-      state.loading = false
-      state.error = false
-    },
-    downloadPredefinedCouponsFileFailed(state) {
-      state.loading = false
-      state.error = true
+      state.featureState = FeatureState.Success
     }
   }
 })
 
 const {
+  resetCampaigns,
+  setFeatureState,
+  setEditing,
+  setSelectedCouponType,
+  setSelectedCouponMode,
+  setSelectedCouponDiscountType,
+  setStateForCreate,
+  setCoupon,
   getCouponSuccess,
   createCouponSuccess,
   updateCouponSuccess,
@@ -130,24 +124,14 @@ const {
   updateCouponStatusSuccess,
   getCategoriesSuccess,
   getMajorPartnersSuccess,
-  setLoadingStart,
-  setLoadingFailed,
   downloadCouponsSuccess,
-  downloadCouponsFailed,
   downloadClaimedCouponsSuccess,
-  downloadClaimedCouponsFailed,
   downloadPrizeFileSuccess,
-  downloadPrizeFileFailed,
-  downloadPredefinedCouponsFileSuccess,
-  downloadPredefinedCouponsFileFailed
-} = couponsSlice.actions
+  downloadPredefinedCouponsFileSuccess
+} = campaignsSlice.actions
 
-export const { resetCoupons } = couponsSlice.actions
-
-export const couponsReducer = couponsSlice.reducer
-
-export const getCoupon = (id: number): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const getCoupon = (id: number): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     const coupon = await api.coupons.getCoupon({ id })
@@ -167,12 +151,12 @@ export const getCoupon = (id: number): AppThunk => async dispatch => {
       } as Coupon)
     )
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     const tags = await api.tags.getTags({})
@@ -197,12 +181,12 @@ export const createCoupon = (coupon: Coupon): AppThunk => async dispatch => {
     dispatch(createCouponSuccess())
     history.push('/campaigns')
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     const tags = await api.tags.getTags({})
@@ -229,12 +213,12 @@ export const updateCoupon = (coupon: Coupon): AppThunk => async dispatch => {
     dispatch(updateCouponSuccess())
     history.push('/campaigns')
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const getCouponComments = (couponId: number): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const getCouponComments = (couponId: number): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     const comments = await api.couponComments.getCouponComments({ couponId })
@@ -247,15 +231,12 @@ export const getCouponComments = (couponId: number): AppThunk => async dispatch 
       )
     )
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const deleteCouponComment = (
-  couponId: number,
-  commentId: number
-): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const deleteCouponComment = (couponId: number, commentId: number): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     await api.couponComments.deleteCouponComment({
@@ -266,12 +247,12 @@ export const deleteCouponComment = (
     dispatch(deleteCouponCommentsSuccess())
     dispatch(getCouponComments(couponId))
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const activateCoupon = (id: number, isActive: boolean): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const activateCoupon = (id: number, isActive: boolean): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     await api.coupons.activateCoupon({
@@ -282,16 +263,16 @@ export const activateCoupon = (id: number, isActive: boolean): AppThunk => async
     dispatch(activateCouponSuccess())
     dispatch(getCoupon(id))
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const updateCouponStatus = (
+const updateCouponStatus = (
   id: number,
   couponState: CouponState,
   comment: string
 ): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     if (couponState) {
@@ -312,12 +293,12 @@ export const updateCouponStatus = (
     dispatch(updateCouponStatusSuccess())
     dispatch(getCoupon(id))
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const getCategories = (): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const getCategories = (): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     // TODO: categories pageSize is hardcoded, consider to do a better form field with lazy loading and search
@@ -326,12 +307,12 @@ export const getCategories = (): AppThunk => async dispatch => {
       getCategoriesSuccess(categories.result!.map(x => ({ id: x.id, name: x.name } as Category)))
     )
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const getMajorPartners = (): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const getMajorPartners = (): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     // TODO: partners pageSize is hardcoded, consider to do a better form field with lazy loading and search
@@ -350,12 +331,12 @@ export const getMajorPartners = (): AppThunk => async dispatch => {
       )
     )
   } catch (err) {
-    dispatch(setLoadingFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const downloadCoupons = (coupon: Coupon): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const downloadCoupons = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     // TODO fix names
@@ -363,12 +344,12 @@ export const downloadCoupons = (coupon: Coupon): AppThunk => async dispatch => {
     saveAs(blob, `${coupon.id} - ${coupon.name} CouponCodes.csv`)
     dispatch(downloadCouponsSuccess())
   } catch (err) {
-    dispatch(downloadCouponsFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     // TODO fix names
@@ -376,12 +357,12 @@ export const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispat
     saveAs(blob, `${coupon.id} - ${coupon.name} ClaimedCouponCodes.csv`)
     dispatch(downloadClaimedCouponsSuccess())
   } catch (err) {
-    dispatch(downloadClaimedCouponsFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const downloadPrizeFile = (coupon: Coupon): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const downloadPrizeFile = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     const fileName: string = await api.files.getFileName({ id: coupon.prizeRulesFileId! })
@@ -389,18 +370,44 @@ export const downloadPrizeFile = (coupon: Coupon): AppThunk => async dispatch =>
     saveAs(blob, fileName)
     dispatch(downloadPrizeFileSuccess())
   } catch (err) {
-    dispatch(downloadPrizeFileFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const downloadPredefinedCodesFile = (coupon: Coupon): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+const downloadPredefinedCodesFile = (coupon: Coupon): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
+
   try {
     const fileName: string = await api.files.getFileName({ id: coupon.predefinedCodesFileId! })
     const blob: Blob = await api.files.downloadFile({ id: coupon.predefinedCodesFileId! })
     saveAs(blob, fileName)
     dispatch(downloadPredefinedCouponsFileSuccess())
   } catch (err) {
-    dispatch(downloadPredefinedCouponsFileFailed())
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
+
+export const campaignActions = {
+  resetCampaigns,
+  setEditing,
+  setSelectedCouponType,
+  setSelectedCouponMode,
+  setSelectedCouponDiscountType,
+  setStateForCreate,
+  setCoupon,
+  getCoupon,
+  createCoupon,
+  updateCoupon,
+  getCouponComments,
+  deleteCouponComment,
+  activateCoupon,
+  updateCouponStatus,
+  getCategories,
+  getMajorPartners,
+  downloadCoupons,
+  downloadClaimedCoupons,
+  downloadPrizeFile,
+  downloadPredefinedCodesFile
+}
+
+export const campaignsReducer = campaignsSlice.reducer

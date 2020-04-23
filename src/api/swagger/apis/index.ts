@@ -10,6 +10,7 @@ export * from './EmailSenderApi';
 export * from './EmailTemplatesApi';
 export * from './FilesApi';
 export * from './InformationApi';
+export * from './NotificationHubApi';
 export * from './PartnerContactsApi';
 export * from './PartnersApi';
 export * from './ScoringApi';
