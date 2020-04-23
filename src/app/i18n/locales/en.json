@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "Plus Campaign Motor"
+  },
   "auth": {
     "change-password-success": "Change password success.",
     "field": {

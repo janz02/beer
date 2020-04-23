@@ -4,10 +4,8 @@ import { notificationActions } from 'features/notification/notificationSlice'
 import { AppThunk } from './store'
 import { resetAuth } from 'features/auth/authSlice'
 import { resetSiteEditor } from 'features/sites/siteEditor/siteEditorSlice'
-import { resetCategoryEditor } from 'features/couponCategory/categoryEditor/categoryEditorSlice'
-import { resetCategoryList } from 'features/couponCategory/categoryList/categoryListSlice'
 import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
-import { resetNewsLetterList } from 'features/newsletter/newsletter-list/newsletterListSlice'
+import { newsletterListActions } from 'features/newsletter/newsletterList/newsletterListSlice'
 import { resetNewsletterEditor } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { resetRouterHistory } from 'router/routerHistoryStore'
 import { resetPartnersList } from 'features/partners/partnerList/partnerListSlice'
@@ -20,6 +18,8 @@ import {
 } from 'features/partnerContacts/partnerContactsSliceFactory'
 import { profileActions } from 'features/profile/profileSlice'
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
+import { categoryEditorActions } from 'features/campaignCategory/categoryEditor/categoryEditorSlice'
+import { categoryListActions } from 'features/campaignCategory/categoryList/categoryListSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -32,13 +32,13 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(profileActions.resetProfile())
     dispatch(resetSiteEditor())
     dispatch(notificationActions.resetNotification())
-    dispatch(resetCategoryEditor())
-    dispatch(resetCategoryList())
     dispatch(campaignActions.resetCampaigns())
     dispatch(campaignListActions.resetCampaignList())
+    dispatch(categoryEditorActions.resetCategoryEditor())
+    dispatch(categoryListActions.resetCategoryList())
     dispatch(resetUsersAccessList())
     dispatch(resetUsersAccessList())
-    dispatch(resetNewsLetterList())
+    dispatch(newsletterListActions.resetNewsletterList())
     dispatch(resetNewsletterEditor())
     dispatch(resetPartnersList())
     dispatch(resetPartnerEditor())
