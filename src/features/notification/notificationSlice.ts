@@ -75,6 +75,7 @@ export interface NotificationData {
 }
 
 interface NotificationState {
+  opened: boolean
   unreadCount: number
   hasMore: boolean
   listParams: ListRequestParams
@@ -84,6 +85,7 @@ interface NotificationState {
 }
 
 const initialState: NotificationState = {
+  opened: false,
   unreadCount: 0,
   listState: FeatureState.Initial,
   itemState: FeatureState.Initial,
@@ -99,6 +101,12 @@ const notificationSlice = createSlice({
   initialState,
   reducers: {
     resetNotification: () => initialState,
+    open(state) {
+      state.opened = true
+    },
+    close(state) {
+      state.opened = false
+    },
     setListState(state, action: PayloadAction<FeatureState>) {
       state.listState = action.payload
     },
@@ -133,6 +141,8 @@ const notificationSlice = createSlice({
 })
 
 const {
+  open,
+  close,
   resetNotification,
   setListState,
   setItemState,
@@ -171,6 +181,8 @@ const inspectNotification = (id: string): AppThunk => async dispatch => {
 export const notificationReducer = notificationSlice.reducer
 
 export const notificationActions = {
+  open,
+  close,
   getNotifications,
   resetNotification,
   inspectNotification

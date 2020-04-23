@@ -1,24 +1,22 @@
 import React, { FC } from 'react'
 import { FloatingActionButton } from 'components/buttons/FloatingActionButton'
 import { BellFilled } from '@ant-design/icons'
-import { ButtonProps } from 'antd/lib/button'
-import { useSelector } from 'react-redux'
-import { RootState } from 'app/rootReducer'
+import { useNotification } from './useNotification'
 
-type NotificationFabProps = ButtonProps
-
-export const NotificationFab: FC<NotificationFabProps> = props => {
-  const { unreadCount } = useSelector((state: RootState) => state.notification)
+export const NotificationFab: FC = () => {
+  const { handleOpen, unreadCount } = useNotification()
 
   return (
-    <FloatingActionButton
-      count={unreadCount}
-      vertical="bottom"
-      horizontal="right"
-      type="primary"
-      {...props}
-    >
-      <BellFilled />
-    </FloatingActionButton>
+    <>
+      <FloatingActionButton
+        count={unreadCount}
+        vertical="bottom"
+        horizontal="right"
+        type="primary"
+        onClick={handleOpen}
+      >
+        <BellFilled />
+      </FloatingActionButton>
+    </>
   )
 }

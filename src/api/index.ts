@@ -14,7 +14,8 @@ import {
   SegmentsApi,
   CashiersApi,
   FilesApi,
-  CouponUserCodesApi
+  CouponUserCodesApi,
+  NotificationHubApi
 } from './swagger/apis'
 
 import { notification } from 'antd'
@@ -100,5 +101,6 @@ export const api = {
   segments: new SegmentsApi(config),
   cashiers: new CashiersApi(config),
   information: new InformationApi(config),
-  files: new FilesApi(config)
+  files: new FilesApi(config),
+  notification: new NotificationHubApi(config)
 }

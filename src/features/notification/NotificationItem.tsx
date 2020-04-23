@@ -1,27 +1,20 @@
 import './NotificationItem.scss'
 import React, { FC, useState } from 'react'
 import moment from 'moment'
-import { NotificationData, notificationActions } from './notificationSlice'
-import { useDispatch } from 'hooks/react-redux-hooks'
+import { NotificationData } from './notificationSlice'
 import { List, Avatar } from 'antd'
 import { BellFilled } from '@ant-design/icons'
 import { MomentDisplay } from 'components/MomentDisplay'
+import { useNotification } from './useNotification'
 
 interface NotificationItemProps {
   item: NotificationData
-  onClick: () => any
 }
 
-export const ListItem: FC<NotificationItemProps> = ({ item, onClick }) => {
-  const { inspectNotification } = notificationActions
-  const dispatch = useDispatch()
-
+export const NotificatonItem: FC<NotificationItemProps> = props => {
+  const { item } = props
+  const { inspectItem } = useNotification()
   const [hover, setHover] = useState(false)
-
-  const inspectItem = (id: string): void => {
-    dispatch(inspectNotification(id))
-    onClick()
-  }
 
   return (
     <List.Item

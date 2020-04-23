@@ -33,8 +33,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const isMobile = useIsMobile()
   const [menuOpened, setMenuOpened] = useState(!isMobile)
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile)
-  const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false)
-
   const profile = useSelector((state: RootState) => state.profile.profile)
 
   useEffect(() => {
@@ -150,10 +148,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
         />
       </SideMenu>
 
-      <NotificationDrawer
-        open={notificationDrawerOpen}
-        onClose={() => setNotificationDrawerOpen(false)}
-      />
+      <NotificationDrawer />
 
       <Layout>
         <Button
@@ -163,7 +158,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
         />
         <Layout.Content className="layout-content">
           {children}
-          <NotificationFab onClick={() => setNotificationDrawerOpen(true)} />
+          <NotificationFab />
         </Layout.Content>
       </Layout>
     </Layout>
