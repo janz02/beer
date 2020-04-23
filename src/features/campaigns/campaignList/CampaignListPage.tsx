@@ -1,5 +1,4 @@
 import React, { useEffect, FC } from 'react'
-import './CampaignListPage.scss'
 import { Checkbox } from 'antd'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { history } from 'router/router'
