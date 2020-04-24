@@ -1,3 +1,4 @@
+export * from './ApplicationVersionApi';
 export * from './AuthApi';
 export * from './CashiersApi';
 export * from './CategoriesApi';
@@ -9,6 +10,8 @@ export * from './EmailSenderApi';
 export * from './EmailTemplatesApi';
 export * from './FilesApi';
 export * from './InformationApi';
+export * from './NotificationHubApi';
+export * from './NotificationsApi';
 export * from './PartnerContactsApi';
 export * from './PartnersApi';
 export * from './ScoringApi';

@@ -1,41 +1,28 @@
-import React, { useEffect } from 'react'
-import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { getProfile, updateProfile } from './profileSlice'
-import { ProfileEditorFormProps, ProfileEditorForm } from './ProfileEditorForm'
-import { getMyPartner } from 'features/partners/selfPartner/selfPartnerSlice'
-import { changePassword } from 'features/auth/authSlice'
+import React, { useEffect, FC } from 'react'
+import { useDispatch } from 'hooks/react-redux-hooks'
+import { ProfileEditorForm } from './ProfileEditorForm'
+import { useProfile } from './useProfile'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { useTranslation } from 'react-i18next'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
 
-export const ProfileEditorPage: React.FC = () => {
+export const ProfileEditorPage: FC = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { partner } = useSelector((state: RootState) => state.selfPartner)
-  const { profile, loading, editable } = useSelector((state: RootState) => state.profile)
+  const { modified, getProfile, getMyPartner } = useProfile()
 
   useEffect(() => {
     dispatch(getProfile())
-  }, [dispatch])
+  }, [dispatch, getProfile])
 
   useEffect(() => {
     dispatch(getMyPartner())
-  }, [dispatch])
+  }, [dispatch, getMyPartner])
 
-  const handleProfileSave = (values: any): void => {
-    dispatch(updateProfile({ ...values }))
-
-    const password = values.password
-    const oldPassword = values.oldPassword
-    if (password && oldPassword) {
-      dispatch(changePassword(password, oldPassword))
-    }
-  }
-
-  const props: ProfileEditorFormProps = {
-    handleProfileSave,
-    loading,
-    profile,
-    editable,
-    partner
-  }
-
-  return <ProfileEditorForm {...props} />
+  return (
+    <ResponsiveCard floatingTitle={t('profile.editor-title')}>
+      <NavigationAlert when={modified} />
+      <ProfileEditorForm />
+    </ResponsiveCard>
+  )
 }

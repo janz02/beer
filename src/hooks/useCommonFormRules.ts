@@ -46,7 +46,7 @@ export function useCommonFormRules() {
       pattern: new RegExp(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~])[A-Za-z\\d!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~]{8,64}$'
       ),
-      message: message || t('error.common.password-format')
+      message: message || t('error.validation.common.password-invalid-format')
     }),
     [t]
   )
@@ -70,7 +70,7 @@ export function useCommonFormRules() {
   const email = useCallback(
     (message?: string): Rule => ({
       pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: message || t('error.common.email-format')
+      message: message || t('error.validation.common.email-invalid-format')
     }),
     [t]
   )

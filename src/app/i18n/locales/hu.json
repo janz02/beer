@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "Plusz Kampány Motor"
+  },
   "auth": {
     "change-password-success": "Jelszóváltoztatás sikeres",
     "field": {
@@ -79,6 +82,7 @@
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
+    "try-again": "Újra próbálkozás",
     "upload": "Feltöltés",
     "view": "Megtekintés",
     "yes": "Igen"
@@ -132,6 +136,7 @@
   },
   "coupon-create": {
     "activate": "Aktiválás",
+    "audit": "Audit",
     "campaign-basics": "Kampány alapadatok",
     "campaign-details": "Kampány részletek",
     "client-activities": "Ügyfél aktivitások",
@@ -143,6 +148,7 @@
     "edit": "Szerkesztés",
     "editor-title": "Kampány szerkesztő",
     "field": {
+      "approved": "Jóváhagyva",
       "awarded-campaign": "Kitüntett kampány jelölő",
       "banner-link": "Banner link",
       "banner-link-help": "A banner link erre a felületre fog mutatni. Kampány landing page (kampánykód befűzhető).",
@@ -155,6 +161,7 @@
       "comment": "Komment",
       "coupon-count": "Kuponok száma",
       "coupon-count-help": "Csak 1 000 000-nál kisebb egész szám adható meg.",
+      "created": "Létrehozva",
       "description": "Kupon leírása",
       "description-help": "Ez a szöveg fog részletes információként a kupon felnyitott (pop-up) állapotában látszani.",
       "discardCount": "Eldobások száma",
@@ -180,6 +187,7 @@
       "minimum-shopping-value-help": "Csak akkor kell megadni, ha a beváltásnak van ilyen feltétele.",
       "mode": "Beváltás módja",
       "mode-help": "Egy kampányhoz csak egyféle beváltási mód választható.",
+      "modified": "Módosítva",
       "name": "Kupon neve",
       "name-help": "Ez a szöveg fog az első (gyűjtő) kuponképen megjelenni.",
       "online-claim-link": "Online beváltási link",
@@ -251,7 +259,6 @@
       "ldap-password-change": "Ldap jelszó változtatási hiba.",
       "login-failed": "Hibás bejelentkezés.",
       "newpassword-sameasold": "Az új jelszó nem egyezhet meg az előzővel.",
-      "password-format": "Invalid jelszó formátum.",
       "password-inconsistent": "A két jelszó nem egyezik meg.",
       "registration-failed": "Regsztráció sikertelen.",
       "sync-failed": "Felhasználók szinkronizációja sikerleten.",
@@ -271,15 +278,12 @@
     },
     "common": {
       "cant-modify": "Nem módosítható.",
-      "email-format": "Ebbe a mezőbe helyes e-mail címet kell megadni.",
-      "field-must-be-null": "Ezt a mezőt nem lehet kitölteni.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitöltése kötelező.",
       "internal": "Internal.",
-      "invalid-value": "Helytelen érték.",
-      "max-length": "Túl hosszú szöveg.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
+      "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
       "password-format": "Invalid jelszó formátum.",
       "server-unavailable": "Szerver nem elérhető."
     },
@@ -297,25 +301,18 @@
       "item-price-required-if-previous-year-average-basket-value-empty": "A termék érték mező megadása kötelező, ha a tavalyi átlagos kosárérték mező üres.",
       "name-be-edited-after-accepted": "A kupon neve nem módosithaó elfogadás után.",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
+      "partner-must-be-major": "__STRING_NOT_TRANSLATED__",
       "percentage-discount-out-of-range": "Csak 1 és 100 közötti érték adható meg.",
-      "predefined-file-id-mismatch": "A kuponkódok fájlja nem egyezik ay eddig felöltöttével.",
       "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia.",
       "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie.",
       "previous-year-average-basket-value-required-if-item-price-empty": "A tavalyi átlagos kosárérték mező megadása kötelező, ha a termék érték mező üres.",
       "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie.",
       "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő.",
-      "type-has-no-codes-": "Type has no codes."
+      "type-has-no-codes": "__STRING_NOT_TRANSLATED__",
+      "user-code-cant-save": "__STRING_NOT_TRANSLATED__"
     },
     "coupon-categories": {
       "name-must-be-unique": "Kategória nevének egyedinek kell lennie."
-    },
-    "coupon-partner": {
-      "must-be": {
-        "major": "A partnernek kiemelt partnernek kell lennie."
-      }
-    },
-    "coupon-user-code": {
-      "cant-save": "Kupon felhasználó kód mentése sikertelen."
     },
     "email-template": {
       "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie.",
@@ -345,7 +342,197 @@
     "rtd": {
       "communication": "RTD kommunikációs hiba."
     },
-    "unknown-try-again": "Kérem, próbáld újra"
+    "unknown-try-again": "Kérem, próbáld újra",
+    "validation": {
+      "cashier": {
+        "digital-stamp-id-max-length-30": "__STRING_NOT_TRANSLATED__",
+        "digital-stamp-id-required": "__STRING_NOT_TRANSLATED__",
+        "id-max-length-30": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "category": {
+        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__",
+        "name-max-length-50": "__STRING_NOT_TRANSLATED__",
+        "name-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "change-password": {
+        "old-password-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "common": {
+        "dto-required": "__STRING_NOT_TRANSLATED__",
+        "email-invalid-format": "__STRING_NOT_TRANSLATED__",
+        "email-max-length-100": "__STRING_NOT_TRANSLATED__",
+        "email-required": "__STRING_NOT_TRANSLATED__",
+        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__",
+        "new-password-required": "__STRING_NOT_TRANSLATED__",
+        "password-invalid-format": "__STRING_NOT_TRANSLATED__",
+        "password-max-length-64": "__STRING_NOT_TRANSLATED__",
+        "password-required": "__STRING_NOT_TRANSLATED__",
+        "phone-max-length-20": "__STRING_NOT_TRANSLATED__",
+        "refresh-token-required": "__STRING_NOT_TRANSLATED__",
+        "user-id-required": "__STRING_NOT_TRANSLATED__",
+        "user-name-max-length-100": "__STRING_NOT_TRANSLATED__",
+        "user-name-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "coupon": {
+        "awarded-campaign-must-be-false": "__STRING_NOT_TRANSLATED__",
+        "big-picture-id-must-be-null-for-banner": "__STRING_NOT_TRANSLATED__",
+        "big-picture-id-required-non-banner": "__STRING_NOT_TRANSLATED__",
+        "comment": {
+          "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+          "id-required": "__STRING_NOT_TRANSLATED__",
+          "max-length-200": "__STRING_NOT_TRANSLATED__"
+        },
+        "count-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "count-less-than-100000000": "__STRING_NOT_TRANSLATED__",
+        "count-required": "__STRING_NOT_TRANSLATED__",
+        "description-max-length-255": "__STRING_NOT_TRANSLATED__",
+        "description-must-be-null-for-banner": "__STRING_NOT_TRANSLATED__",
+        "description-required-non-banner": "__STRING_NOT_TRANSLATED__",
+        "discount-fix-greater-than-or-equal-1": "__STRING_NOT_TRANSLATED__",
+        "discount-fix-less-than-or-equal-1000000": "__STRING_NOT_TRANSLATED__",
+        "discount-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
+        "discount-percent-greater-than-or-equal-0": "__STRING_NOT_TRANSLATED__",
+        "discount-percent-less-than-or-equal-100": "__STRING_NOT_TRANSLATED__",
+        "discount-required-for-discount": "__STRING_NOT_TRANSLATED__",
+        "discount-type-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
+        "discount-type-required-for-discount": "__STRING_NOT_TRANSLATED__",
+        "draw-date-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
+        "draw-date-required-for-prize": "__STRING_NOT_TRANSLATED__",
+        "end-date-required": "__STRING_NOT_TRANSLATED__",
+        "expire-date-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
+        "expire-date-required-for-discount": "__STRING_NOT_TRANSLATED__",
+        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__",
+        "item-price-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "item-price-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
+        "item-price-required-no-prev-year-average": "__STRING_NOT_TRANSLATED__",
+        "minimum-shopping-value-greater-than-or-equal-0": "__STRING_NOT_TRANSLATED__",
+        "minimum-shopping-value-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
+        "mode-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
+        "mode-required-for-discount": "__STRING_NOT_TRANSLATED__",
+        "name-max-length-60": "__STRING_NOT_TRANSLATED__",
+        "name-required": "__STRING_NOT_TRANSLATED__",
+        "online-claim-link-max-length-2000": "__STRING_NOT_TRANSLATED__",
+        "online-claim-link-must-be-null-for-physical": "__STRING_NOT_TRANSLATED__",
+        "online-claim-link-required-for-online": "__STRING_NOT_TRANSLATED__",
+        "previous-basket-value-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "previous-basket-value-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
+        "previous-basket-value-required-non-item-price": "__STRING_NOT_TRANSLATED__",
+        "prize-rules-file-id-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
+        "prize-rules-file-id-required-for-prize": "__STRING_NOT_TRANSLATED__",
+        "prize-value-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
+        "prize-value-required-for-prize": "__STRING_NOT_TRANSLATED__",
+        "product-details-max-length-2000": "__STRING_NOT_TRANSLATED__",
+        "product-details-must-be-null-for-prize": "__STRING_NOT_TRANSLATED__",
+        "product-details-required-non-prize": "__STRING_NOT_TRANSLATED__",
+        "rank-required": "__STRING_NOT_TRANSLATED__",
+        "small-picture-id-required": "__STRING_NOT_TRANSLATED__",
+        "start-date-required": "__STRING_NOT_TRANSLATED__",
+        "state-required": "__STRING_NOT_TRANSLATED__",
+        "tags-list-required": "__STRING_NOT_TRANSLATED__",
+        "type-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "coupon-user-code": {
+        "claim-date-required": "__STRING_NOT_TRANSLATED__",
+        "couponcode-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "email": {
+        "content-required": "__STRING_NOT_TRANSLATED__",
+        "recipient-required": "__STRING_NOT_TRANSLATED__",
+        "recipients-email-invalid-format": "__STRING_NOT_TRANSLATED__",
+        "recipients-email-required": "__STRING_NOT_TRANSLATED__",
+        "recipients-required": "__STRING_NOT_TRANSLATED__",
+        "subject-required": "__STRING_NOT_TRANSLATED__",
+        "template-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "template-id-required": "__STRING_NOT_TRANSLATED__",
+        "template-name-required": "__STRING_NOT_TRANSLATED__",
+        "template-version-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "template-version-id-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "file": {
+        "content-required": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "notification": {
+        "create-roles-cannot-be-empty": "__STRING_NOT_TRANSLATED__",
+        "to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
+        "type-invalid": "__STRING_NOT_TRANSLATED__",
+        "type-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "partner": {
+        "address-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "address-required": "__STRING_NOT_TRANSLATED__",
+        "bank-account-max-length-26": "__STRING_NOT_TRANSLATED__",
+        "bank-account-required": "__STRING_NOT_TRANSLATED__",
+        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-required": "__STRING_NOT_TRANSLATED__",
+        "name-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "name-required": "__STRING_NOT_TRANSLATED__",
+        "registration-allowed-max-length-30": "__STRING_NOT_TRANSLATED__",
+        "registration-allowed-required": "__STRING_NOT_TRANSLATED__",
+        "registration-number-max-length-20": "__STRING_NOT_TRANSLATED__",
+        "registration-number-required": "__STRING_NOT_TRANSLATED__",
+        "state-required": "__STRING_NOT_TRANSLATED__",
+        "tax-number-max-length-20": "__STRING_NOT_TRANSLATED__",
+        "tax-number-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "partner-contact": {
+        "is-active-required": "__STRING_NOT_TRANSLATED__",
+        "query-filters-required": "__STRING_NOT_TRANSLATED__",
+        "query-toggle-required": "__STRING_NOT_TRANSLATED__",
+        "role-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "register-partner-contact": {
+        "partner-code-max-length-10": "__STRING_NOT_TRANSLATED__",
+        "partner-code-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "register-user": {
+        "city-max-length-100": "__STRING_NOT_TRANSLATED__",
+        "city-required": "__STRING_NOT_TRANSLATED__",
+        "mothers-maiden-name-max-length-100": "__STRING_NOT_TRANSLATED__",
+        "mothers-maiden-name-required": "__STRING_NOT_TRANSLATED__",
+        "place-of-birth-max-length-100": "__STRING_NOT_TRANSLATED__",
+        "place-of-birth-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "scoring": {
+        "event-type-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "segment": {
+        "email-invalid-format": "__STRING_NOT_TRANSLATED__",
+        "email-required": "__STRING_NOT_TRANSLATED__",
+        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__",
+        "name-invalid-format": "__STRING_NOT_TRANSLATED__",
+        "name-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "segments": {
+        "list-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "site": {
+        "address-max-length-100": "__STRING_NOT_TRANSLATED__",
+        "address-required": "__STRING_NOT_TRANSLATED__",
+        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__",
+        "name-max-length-100": "__STRING_NOT_TRANSLATED__",
+        "name-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "tag": {
+        "category-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "category-id-required": "__STRING_NOT_TRANSLATED__",
+        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
+        "id-required": "__STRING_NOT_TRANSLATED__",
+        "value-max-length-50": "__STRING_NOT_TRANSLATED__",
+        "value-required": "__STRING_NOT_TRANSLATED__"
+      },
+      "tag-category": {
+        "name-required": "__STRING_NOT_TRANSLATED__"
+      }
+    }
   },
   "error-page": {
     "back": "Vissza a főoldalra",
@@ -374,6 +561,7 @@
     "add": "Új sablon hozzáadása",
     "available-templates": "Hírlevél sablonok",
     "close-editor": "Szerkesztő bezárása",
+    "fail-msg": "Sajnos, nem sikerült betölteni a sablont.",
     "field": {
       "email": "E-mail cím",
       "subject": "Tárgy",

@@ -87,13 +87,20 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
       <Form.Item
         label={t('partner-contact.field.name')}
         name="name"
-        rules={[rule.requiredString(), rule.max(50)]}
+        rules={[
+          rule.requiredString(t('error.validation.common.user-name-required')),
+          rule.max(100, t('error.validation.common.user-name-max-length-100'))
+        ]}
       >
-        <Input disabled={!permission.editor} maxLength={50} />
+        <Input disabled={!permission.editor} maxLength={100} />
       </Form.Item>
 
       {!editingSelf && (
-        <Form.Item name="isActive" label={t('user-access.field.status')} rules={[rule.required()]}>
+        <Form.Item
+          name="isActive"
+          label={t('user-access.field.status')}
+          rules={[rule.required(t('error.validation.partner-contact.is-active-required'))]}
+        >
           <Radio.Group disabled={!permission.editor} buttonStyle="solid">
             <Radio.Button value="false">{t('user-access.field.status-inactive')}</Radio.Button>
             <Radio.Button value="true">{t('user-access.field.status-active')}</Radio.Button>
@@ -104,17 +111,21 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
       <Form.Item
         label={t('partner-contact.field.email')}
         name="email"
-        rules={[rule.requiredString(), rule.email(), rule.max(50)]}
+        rules={[
+          rule.requiredString(t('error.validation.common.email-required')),
+          rule.email(),
+          rule.max(100, t('error.validation.common.email-max-length-100'))
+        ]}
       >
-        <Input disabled={!permission.editor} maxLength={50} />
+        <Input disabled={!permission.editor} maxLength={100} />
       </Form.Item>
 
       <Form.Item
         label={t('partner-contact.field.phone')}
         name="phone"
-        rules={[rule.requiredString(), rule.max(50)]}
+        rules={[rule.max(20, t('error.validation.common.phone-max-length-20'))]}
       >
-        <Input disabled={!permission.editor} maxLength={50} />
+        <Input disabled={!permission.editor} maxLength={20} />
       </Form.Item>
 
       {!editingSelf && (
@@ -125,7 +136,7 @@ export const PartnerContactEditor: FC<PartnerContactsEditorProps> = props => {
               ? t('partner-contact.field.role')
               : t('partner-contact.field.type')
           }
-          rules={[rule.requiredString()]}
+          rules={[rule.requiredString(t('error.validation.partner-contact.role-required'))]}
         >
           <Select disabled={!permission.editor}>
             {roleOptions?.map((r, i) => (

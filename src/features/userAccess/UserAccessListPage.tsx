@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react'
-import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { UserAccessEditor } from './UserAccessEditor'
@@ -71,19 +70,17 @@ export const UserAccessListPage: FC = () => {
 
   return (
     <>
-      <ResponsivePage>
-        <ResponsiveCard
-          width="full"
-          forTable
-          floatingTitle={t('user-access.user-access')}
-          tabList={tableSelector}
-          onTabChange={key => {
-            setSelectedTab(key)
-          }}
-        >
-          {contentTables[selectedTab]}
-        </ResponsiveCard>
-      </ResponsivePage>
+      <ResponsiveCard
+        width="full"
+        forTable
+        floatingTitle={t('user-access.user-access')}
+        tabList={tableSelector}
+        onTabChange={key => {
+          setSelectedTab(key)
+        }}
+      >
+        {contentTables[selectedTab]}
+      </ResponsiveCard>
 
       <UserAccessEditor {...editorModal} handleClose={() => setEditorModal(null)} />
     </>

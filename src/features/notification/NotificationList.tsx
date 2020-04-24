@@ -1,37 +1,50 @@
 import React, { FC, useEffect } from 'react'
-import './notification.scss'
+import './NotificationList.scss'
 import InfiniteScroll from 'react-infinite-scroller'
 import { List, Empty, Button } from 'antd'
-import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
-import { getNotifications } from './notificationSlice'
 import { useTranslation } from 'react-i18next'
 import { ListItem } from './NotificationItem'
+import { useNotificationList } from './useNotificationList'
 
 interface NotificationListProps {
-  onClick: () => any
+  onClick: () => void
 }
 
 export const NotificationList: FC<NotificationListProps> = props => {
   const { onClick } = props
-  const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { notifications, hasMore, loading } = useSelector((state: RootState) => state.notification)
+
+  const { notifications, loading, handeGetNotifications, canLoadMore } = useNotificationList()
 
   useEffect(() => {
-    dispatch(getNotifications())
-  }, [dispatch])
+    handeGetNotifications()
+  }, [handeGetNotifications])
 
-  const loadMore = (): void => {
-    dispatch(getNotifications())
-  }
-
-  const canLoadMore = (): boolean => !loading && hasMore
-
-  const loadMoreButton = canLoadMore() && (
-    <Button className="notification-list__load-more-btn" type="dashed" onClick={loadMore}>
+  const loadMoreButton = canLoadMore && (
+    <Button
+      className="notification-list__load-more-btn"
+      type="dashed"
+      onClick={handeGetNotifications}
+    >
       {t('notification.load-more')}
     </Button>
+  )
+
+  const notificationList = (
+    <List
+      className="notification-list"
+      itemLayout="vertical"
+      dataSource={notifications}
+      loadMore={loadMoreButton}
+      loading={loading}
+      rowKey={item => item.id}
+      locale={{
+        emptyText: (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('notification.empty-list')} />
+        )
+      }}
+      renderItem={item => <ListItem {...{ item, onClick }} />}
+    />
   )
 
   return (
@@ -39,27 +52,11 @@ export const NotificationList: FC<NotificationListProps> = props => {
       <InfiniteScroll
         initialLoad={false}
         pageStart={0}
-        loadMore={loadMore}
-        hasMore={canLoadMore()}
+        loadMore={handeGetNotifications}
+        hasMore={canLoadMore}
         useWindow={false}
       >
-        <List
-          className="notification-list"
-          itemLayout="vertical"
-          dataSource={notifications}
-          loadMore={loadMoreButton}
-          loading={loading}
-          rowKey={item => item.id}
-          locale={{
-            emptyText: (
-              <Empty
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description={t('notification.empty-list')}
-              />
-            )
-          }}
-          renderItem={item => <ListItem {...{ item, onClick }} />}
-        />
+        {notificationList}
       </InfiniteScroll>
     </div>
   )

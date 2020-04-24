@@ -6,7 +6,6 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { PopupState, GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
-import { ResponsivePage } from 'components/responsive/ResponsivePage'
 import { ResponsiveCard, ResponsiveCardProps } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AppThunk } from 'app/store'
@@ -86,25 +85,23 @@ export const SitesList: FC<SitesListProps> = props => {
   return (
     <>
       {!hidden && (
-        <ResponsivePage>
-          <ResponsiveCard
-            {...cardProps}
-            width={listWidth}
-            forTable
-            floatingTitle={t('site-list.list-title')}
-            floatingOptions={headerOptions}
-          >
-            <ResponsiveTable
-              {...{
-                loading,
-                columns: columnsConfig,
-                dataSource: addKeyProp(sites),
-                pagination: paginationConfig,
-                onChange: handleTableChange
-              }}
-            />
-          </ResponsiveCard>
-        </ResponsivePage>
+        <ResponsiveCard
+          {...cardProps}
+          width={listWidth}
+          forTable
+          floatingTitle={t('site-list.list-title')}
+          floatingOptions={headerOptions}
+        >
+          <ResponsiveTable
+            {...{
+              loading,
+              columns: columnsConfig,
+              dataSource: addKeyProp(sites),
+              pagination: paginationConfig,
+              onChange: handleTableChange
+            }}
+          />
+        </ResponsiveCard>
       )}
 
       <GenericPopup

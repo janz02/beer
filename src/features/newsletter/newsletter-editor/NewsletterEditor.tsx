@@ -4,19 +4,23 @@ import './NewsletterEditor.scss'
 import { useTranslation } from 'react-i18next'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { Newsletter } from 'models/newsletter'
-import { Spin, Form, Input, Select } from 'antd'
+import { Spin, Form, Input, Select, Button, Result } from 'antd'
 import { useNewsletterEditor } from './useNewsletterEditor'
 import { NewsLetterEditorHeader, NewsLetterEditorHeaderProps } from './NewsLetterEditorHeader'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { useCommonFormRules } from 'hooks'
 import { Segment } from 'models/segment'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
+import { NewsletterTemplateState } from './newsletterEditorSlice'
+import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
+import { history } from 'router/router'
 const EDITOR_SELECTOR = 'pkm-grapesjs'
 
 export interface NewsletterEditorProps {
   template: Newsletter | null | undefined
   segments: Segment[] | null | undefined
   currentTemplateVersionId?: number
+  handleTemplateReload: () => void
   handleSaveVersion: (template: string) => void
   handleRevert: () => void
   handleVersionPreviewSwitch: (id: number) => void
@@ -25,11 +29,13 @@ export interface NewsletterEditorProps {
   handleGetSegments: () => void
   handleExit: () => void
   loadingEmail?: boolean
+  templateState?: NewsletterTemplateState
 }
 
 export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
   const {
     loadingEmail,
+    templateState,
     template,
     currentTemplateVersionId,
     segments,
@@ -39,7 +45,8 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     handleExit,
     handleSendSample,
     handleSendSegment,
-    handleGetSegments
+    handleGetSegments,
+    handleTemplateReload
   } = props
 
   const { t } = useTranslation()
@@ -114,7 +121,30 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     <>
       <NavigationAlert when={isTemplateModified} />
 
-      <Spin className="nle-spinner" spinning={loading} size="large" />
+      <Spin
+        className="nle-spinner"
+        spinning={templateState !== NewsletterTemplateState.FailedToLoad && loading}
+        size="large"
+      />
+
+      <div hidden={templateState !== NewsletterTemplateState.FailedToLoad} className="nle">
+        <Result
+          status="warning"
+          title={t('newsletter.fail-msg')}
+          extra={
+            <>
+              <Button onClick={() => history.push('/newsletter')}>
+                <ArrowLeftOutlined />
+                {t('common.go-back-to-list')}
+              </Button>
+              <Button onClick={handleTemplateReload}>
+                <ReloadOutlined />
+                {t('common.try-again')}
+              </Button>
+            </>
+          }
+        />
+      </div>
 
       <div hidden={loading} className="nle">
         <NewsLetterEditorHeader className="nle__header" {...headerProps} />
@@ -165,14 +195,20 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
           <Form.Item
             name="subject"
             label={t('newsletter.field.subject')}
-            rules={[rule.requiredString(), rule.max(45)]}
+            rules={[
+              rule.requiredString(t('error.validation.email.subject-required')),
+              rule.max(45)
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="email"
             label={t('newsletter.field.email')}
-            rules={[rule.requiredString(), rule.email()]}
+            rules={[
+              rule.requiredString(t('error.validation.segment.email-required')),
+              rule.email()
+            ]}
           >
             <Input />
           </Form.Item>
@@ -196,14 +232,17 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
           <Form.Item
             name="subject"
             label={t('newsletter.field.subject')}
-            rules={[rule.requiredString(), rule.max(45)]}
+            rules={[
+              rule.requiredString(t('error.validation.email.subject-required')),
+              rule.max(45)
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="segment"
             label={t('newsletter.popup.target-segment')}
-            rules={[rule.requiredString()]}
+            rules={[rule.requiredString(t('error.validation.segment.id-required'))]}
           >
             <Select>
               {segments?.map(s => (

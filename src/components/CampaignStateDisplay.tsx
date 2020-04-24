@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Tag } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { CouponState } from 'api/swagger/models'
@@ -7,7 +7,7 @@ interface CampaignStateDisplayProps {
   state?: CouponState
 }
 
-export const CampaignStateDisplay: React.FC<CampaignStateDisplayProps> = props => {
+export const CampaignStateDisplay: FC<CampaignStateDisplayProps> = props => {
   const { state } = props
   const { t } = useTranslation()
 

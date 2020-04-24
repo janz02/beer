@@ -73,7 +73,10 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
         label={t('cashier-editor.field.cashier-id')}
         extra={t('cashier-editor.field.cashier-id-help')}
         name="cashierId"
-        rules={[rule.requiredString(), rule.max(30)]}
+        rules={[
+          rule.requiredString(t('error.validation.cashier.id-required')),
+          rule.max(30, t('error.validation.cashier.id-max-length-30'))
+        ]}
       >
         <Input maxLength={30} />
       </Form.Item>
@@ -81,7 +84,10 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
       <Form.Item
         label={t('cashier-editor.field.digital-stamp-id')}
         name="digitalStampId"
-        rules={[rule.requiredString(), rule.max(30)]}
+        rules={[
+          rule.requiredString(t('error.validation.cashier.digital-stamp-id-required')),
+          rule.max(30, t('error.validation.cashier.digital-stamp-id-max-length-30'))
+        ]}
       >
         <Input maxLength={30} />
       </Form.Item>

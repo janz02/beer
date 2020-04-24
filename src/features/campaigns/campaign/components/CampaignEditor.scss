@@ -1,0 +1,144 @@
+@import "assets/scss/_variables";
+
+.campaign-editor-form {
+  padding-bottom: 30px;
+
+  .actions-right {
+    text-align: end;
+
+    & > *:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  .ant-input-number {
+    width: 100%;
+  }
+
+  .mark-label-as-required {
+    label::after {
+      content: "*";
+      display: inline-block;
+      margin-left: 4px;
+      font-family: SimSun, sans-serif;
+      font-size: 14px;
+      line-height: 1;
+    }
+  }
+
+  .campaign-editor-form__actions {
+    & > *:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  .ant-form-item-label {
+    font-weight: 600;
+  }
+
+  .ant-collapse {
+    margin-bottom: 30px;
+    border-radius: 1rem;
+
+    .ant-collapse-item {
+      .ant-collapse-header {
+        height: 65px;
+        padding-top: 22px;
+        padding-left: 64px;
+        color: $primary-color;
+        font-size: 20px;
+        line-height: 24px;
+
+        .ant-collapse-arrow {
+          left: 40px;
+        }
+      }
+    }
+
+    .ant-collapse-content-box {
+      padding: 25px 40px;
+    }
+
+    .ant-collapse-item:last-child {
+      border-radius: 0 0 1rem 1rem;
+
+      .ant-collapse-content {
+        border-radius: 0 0 1rem 1rem;
+      }
+    }
+  }
+
+  .editor-col {
+    padding: 0 30px 0 40px;
+  }
+
+  .comment-col {
+    margin-top: 80px;
+    padding-right: 40px;
+
+    .r-card-container {
+      padding-right: 0;
+      padding-left: 0;
+
+      .ant-card-head {
+        border-bottom: none;
+      }
+
+      .ant-card-body {
+        padding-right: 24px;
+        padding-left: 24px;
+      }
+    }
+
+    .actions {
+      margin: 0;
+      text-align: center;
+    }
+
+    .ant-timeline {
+      margin-top: 32px;
+      padding-left: 10px;
+    }
+
+    .ant-timeline-item {
+      .ant-timeline-item-tail {
+        border-color: $primary-color;
+      }
+
+      .ant-timeline-item-head {
+        background: none;
+
+        .time-line-dot-check {
+          width: 31px;
+          height: 31px;
+          padding-top: 8px;
+          padding-left: 2px;
+          border-radius: 30px;
+          background-color: $primary-color;
+          color: $color-white;
+        }
+      }
+
+      .ant-timeline-item-content {
+        padding-left: 14px;
+
+        .timeline-item__title {
+          color: $primary-color;
+          font-size: 16px;
+        }
+
+        .timeline-item__body {
+          padding-left: 10px;
+        }
+
+        .ant-btn-link {
+          color: #595959;
+        }
+      }
+    }
+
+    &__comments {
+      padding-left: 20px;
+    }
+  }
+}
