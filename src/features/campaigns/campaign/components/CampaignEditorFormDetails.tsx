@@ -50,7 +50,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
             name="categoryId"
             label={t('coupon-create.field.category')}
             extra={t('coupon-create.field.category-help')}
-            rules={[rule.required()]}
+            rules={[rule.required(t('error.validation.category.id-required'))]}
           >
             <Select disabled={!displayEditor}>
               {categories &&
