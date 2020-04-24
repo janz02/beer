@@ -11,6 +11,7 @@ export * from './EmailTemplatesApi';
 export * from './FilesApi';
 export * from './InformationApi';
 export * from './NotificationHubApi';
+export * from './NotificationsApi';
 export * from './PartnerContactsApi';
 export * from './PartnersApi';
 export * from './ScoringApi';
