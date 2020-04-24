@@ -67,7 +67,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
             name="rank"
             label={t('coupon-create.field.rank')}
             extra={t('coupon-create.field.rank-help')}
-            rules={[rule.required()]}
+            rules={[rule.required(t('error.validation.coupon.rank-required'))]}
           >
             <Select disabled={!displayEditor || !hasAllPermissions([Roles.CampaignManager])}>
               {Object.keys(CouponRank).map(x => (
@@ -84,7 +84,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               name="mode"
               label={t('coupon-create.field.mode')}
               extra={t('coupon-create.field.mode-help')}
-              rules={[rule.required()]}
+              rules={[rule.required(t('error.validation.coupon.mode-required-for-discount'))]}
             >
               <Select
                 disabled={!displayEditor}
@@ -107,7 +107,10 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
             <Form.Item
               name="onlineClaimLink"
               label={t('coupon-create.field.online-claim-link')}
-              rules={[rule.required(), rule.max(2000)]}
+              rules={[
+                rule.required(t('error.validation.coupon.online-claim-link-required-for-online')),
+                rule.max(2000, t('error.validation.coupon.online-claim-link-max-length-2000'))
+              ]}
             >
               <Input disabled={!displayEditor} maxLength={2000} />
             </Form.Item>
@@ -120,7 +123,9 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               name="expireDate"
               label={t('coupon-create.field.expiration-date')}
               extra={t('coupon-create.field.expiration-date-help')}
-              rules={[rule.required()]}
+              rules={[
+                rule.required(t('error.validation.coupon.expire-date-required-for-discount'))
+              ]}
             >
               <DatePicker disabled={!displayEditor} />
             </Form.Item>
@@ -145,7 +150,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
             <Form.Item
               name="drawDate"
               label={t('coupon-create.field.draw-date')}
-              rules={[rule.required()]}
+              rules={[rule.required(t('error.validation.coupon.draw-date-required-for-prize'))]}
             >
               <DatePicker disabled={!displayEditor} />
             </Form.Item>
@@ -158,7 +163,11 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               name="discountType"
               label={t('coupon-create.field.discount-type')}
               extra={t('coupon-create.field.discount-type-help')}
-              rules={[rule.requiredString()]}
+              rules={[
+                rule.requiredString(
+                  t('error.validation.coupon.discount-type-required-for-discount')
+                )
+              ]}
             >
               <Select
                 disabled={!displayEditor}
@@ -188,7 +197,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               }
               dependencies={['discountType']}
               rules={[
-                rule.required(),
+                rule.required(t('error.validation.coupon.discount-required-for-discount')),
                 () => ({
                   validator(_rule, value) {
                     const parsedAsFloat = parseFloat(value)
@@ -330,7 +339,10 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               <Form.Item
                 name="prizeValue"
                 label={t('coupon-create.field.prize-value')}
-                rules={[rule.required(), rule.positiveInteger()]}
+                rules={[
+                  rule.required(t('error.validation.coupon.prize-value-required-for-prize')),
+                  rule.positiveInteger()
+                ]}
               >
                 <InputNumber
                   disabled={!displayEditor}
@@ -346,7 +358,9 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                 name="prizeRulesFileId"
                 label={t('coupon-create.field.prize-rules')}
                 extra={t('coupon-create.field.prize-rules-help')}
-                rules={[rule.required()]}
+                rules={[
+                  rule.required(t('error.validation.coupon.prize-rules-file-id-required-for-prize'))
+                ]}
               >
                 <FileUploadButton
                   disabled={!displayEditor}
@@ -406,7 +420,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
             name="smallPictureId"
             label={t('coupon-create.field.small-image')}
             extra={t('coupon-create.field.small-image-help')}
-            rules={[rule.required()]}
+            rules={[rule.required(t('error.validation.coupon.small-picture-id-required'))]}
           >
             <PictureUploadButton
               disabled={!displayEditor}
@@ -437,7 +451,9 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               name="bigPictureId"
               label={t('coupon-create.field.big-image')}
               extra={t('coupon-create.field.big-image-help')}
-              rules={[rule.required()]}
+              rules={[
+                rule.required(t('error.validation.coupon.big-picture-id-required-non-banner'))
+              ]}
             >
               <PictureUploadButton
                 disabled={!displayEditor}

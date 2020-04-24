@@ -87,7 +87,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="name"
           label={t('partner.field.name')}
-          rules={[rule.requiredString(), rule.max(150)]}
+          rules={[
+            rule.requiredString(t('error.validation.partner.name-required')),
+            rule.max(150, t('error.validation.partner.name-max-length-150'))
+          ]}
           {...formItemLayout}
         >
           <Input disabled={view} />
@@ -112,7 +115,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="address"
           label={t('partner.field.address')}
-          rules={[rule.requiredString(), rule.max(150)]}
+          rules={[
+            rule.requiredString(t('error.validation.partner.address-required')),
+            rule.max(150, t('error.validation.partner.address-max-length-150'))
+          ]}
           {...formItemLayout}
         >
           <Input
@@ -142,7 +148,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="mailingAddress"
           label={t('partner.field.mailing-address')}
-          rules={[rule.requiredString(), rule.max(150)]}
+          rules={[
+            rule.requiredString(t('error.validation.partner.mailing-address-required')),
+            rule.max(150, t('error.validation.partner.mailing-address-max-length-150'))
+          ]}
           {...formItemLayout}
         >
           <Input
@@ -159,7 +168,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="registrationNumber"
           label={t('partner.field.registration-number')}
-          rules={[rule.requiredString(), rule.max(20)]}
+          rules={[
+            rule.requiredString(t('error.validation.partner.registration-number-required')),
+            rule.max(20, t('error.validation.partner.registration-number-max-length-20'))
+          ]}
           {...formItemLayout}
         >
           <Input disabled={view} placeholder="12345678" />
@@ -168,7 +180,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="taxNumber"
           label={t('partner.field.tax-number')}
-          rules={[rule.requiredString(), rule.max(20)]}
+          rules={[
+            rule.requiredString(t('error.validation.partner.tax-number-required')),
+            rule.max(20, t('error.validation.partner.tax-number-max-length-20'))
+          ]}
           {...formItemLayout}
         >
           <Input disabled={view} placeholder="11111111-1-11" />
@@ -177,7 +192,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="bankAccount"
           label={t('partner.field.bank-account')}
-          rules={[rule.requiredString(), rule.max(26)]}
+          rules={[
+            rule.requiredString(t('error.validation.partner.bank-account-required')),
+            rule.max(26, t('error.validation.partner.bank-account-max-length-26'))
+          ]}
           {...formItemLayout}
         >
           <Input disabled={view} placeholder="12345678-12345678-12345678" />
@@ -186,7 +204,10 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
         <Form.Item
           name="registrationAllowed"
           label={t('partner.field.registration-allowed')}
-          rules={[rule.requiredString(), rule.max(30)]}
+          rules={[
+            rule.requiredString(t('error.validation.partner.registration-allowed-required')),
+            rule.max(30, t('error.validation.partner.registration-allowed-max-length-30'))
+          ]}
           {...formItemLayout}
         >
           <Input disabled={view} />

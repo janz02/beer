@@ -35,7 +35,10 @@ export const ProfileEditorForm: FC = () => {
       <Form.Item
         name="name"
         label={t('profile.field.name')}
-        rules={[rule.requiredString(), rule.max(100)]}
+        rules={[
+          rule.requiredString(t('error.validation.common.user-name-required')),
+          rule.max(100, t('error.validation.common.user-name-max-length-100'))
+        ]}
       >
         <Input disabled={!editable} maxLength={100} />
       </Form.Item>
@@ -91,7 +94,7 @@ export const ProfileEditorForm: FC = () => {
       <Form.Item
         name="phone"
         label={t('profile.field.phone')}
-        rules={[rule.max(20)]}
+        rules={[rule.max(20, t('error.validation.common.phone-max-length-20'))]}
         extra={t('common.field.help.phone-format')}
       >
         <Input disabled={!editable} type="tel" maxLength={20} />

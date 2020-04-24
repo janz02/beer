@@ -1,11 +1,4 @@
 {
-  " error": {
-    "validation": {
-      "common": {
-        "email-invalid-format": "__STRING_NOT_TRANSLATED__"
-      }
-    }
-  },
   "app": {
     "title": "Plusz Kampány Motor"
   },
@@ -285,7 +278,6 @@
     },
     "common": {
       "cant-modify": "Nem módosítható.",
-      "email-format": "Ebbe a mezőbe helyes e-mail címet kell megadni.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitöltése kötelező.",
       "internal": "Internal.",
@@ -369,6 +361,7 @@
       },
       "common": {
         "dto-required": "__STRING_NOT_TRANSLATED__",
+        "email-invalid-format": "__STRING_NOT_TRANSLATED__",
         "email-max-length-100": "__STRING_NOT_TRANSLATED__",
         "email-required": "__STRING_NOT_TRANSLATED__",
         "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
@@ -463,10 +456,12 @@
         "content-required": "__STRING_NOT_TRANSLATED__",
         "id-required": "__STRING_NOT_TRANSLATED__"
       },
-      "notification-create-roles-cannot-be-empty": "__STRING_NOT_TRANSLATED__",
-      "notification-to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
-      "notification-type-invalid": "__STRING_NOT_TRANSLATED__",
-      "notification-type-required": "__STRING_NOT_TRANSLATED__",
+      "notification": {
+        "create-roles-cannot-be-empty": "__STRING_NOT_TRANSLATED__",
+        "to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
+        "type-invalid": "__STRING_NOT_TRANSLATED__",
+        "type-required": "__STRING_NOT_TRANSLATED__"
+      },
       "partner": {
         "address-max-length-150": "__STRING_NOT_TRANSLATED__",
         "address-required": "__STRING_NOT_TRANSLATED__",

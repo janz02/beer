@@ -30,7 +30,11 @@ export const CampaignEditorFormBasics: FC = () => {
     <>
       <Row gutter={rowGutter}>
         <Col span={6}>
-          <Form.Item name="type" label={t('coupon-create.field.type')} rules={[rule.required()]}>
+          <Form.Item
+            name="type"
+            label={t('coupon-create.field.type')}
+            rules={[rule.required(t('error.validation.coupon.type-required'))]}
+          >
             <Select
               disabled={!displayEditor || !couponIsNew}
               onChange={(value: CouponType) => {
@@ -94,7 +98,10 @@ export const CampaignEditorFormBasics: FC = () => {
             name="name"
             label={t('coupon-create.field.name')}
             extra={t('coupon-create.field.name-help')}
-            rules={[rule.requiredString(), rule.max(60)]}
+            rules={[
+              rule.requiredString(t('error.validation.coupon.name-required')),
+              rule.max(60, t('error.validation.coupon.name-max-length-60'))
+            ]}
           >
             <Input disabled={!displayEditor} maxLength={60} />
           </Form.Item>
@@ -105,7 +112,7 @@ export const CampaignEditorFormBasics: FC = () => {
             name="startDate"
             label={t('coupon-create.field.distribution-start-date')}
             extra={t('coupon-create.field.distribution-start-date-help')}
-            rules={[rule.required()]}
+            rules={[rule.required(t('error.validation.coupon.start-date-required'))]}
           >
             <DatePicker disabled={!displayEditor} />
           </Form.Item>
@@ -117,7 +124,10 @@ export const CampaignEditorFormBasics: FC = () => {
               name="description"
               label={t('coupon-create.field.description')}
               extra={t('coupon-create.field.description-help')}
-              rules={[rule.requiredString(), rule.max(255)]}
+              rules={[
+                rule.requiredString(t('error.validation.coupon.description-required-non-banner')),
+                rule.max(255, t('error.validation.coupon.description-max-length-255'))
+              ]}
             >
               <TextArea disabled={!displayEditor} maxLength={255} rows={4} />
             </Form.Item>
@@ -129,7 +139,7 @@ export const CampaignEditorFormBasics: FC = () => {
             name="endDate"
             label={t('coupon-create.field.distribution-end-date')}
             extra={t('coupon-create.field.distribution-end-date-help')}
-            rules={[rule.required()]}
+            rules={[rule.required(t('error.validation.coupon.end-date-required'))]}
           >
             <DatePicker disabled={!displayEditor} />
           </Form.Item>
