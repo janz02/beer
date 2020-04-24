@@ -11,7 +11,7 @@ RUN npm run build
 # Stage 2 - the production environment
 FROM nginx:1.17-alpine
 ARG BUILD_VERSION
-ENV APP_VERSION=$BUILD_VERSION
+ENV REACT_APP_VERSION=$BUILD_VERSION
 COPY config/nginx.config /etc/nginx/conf.d/default.conf
 COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
 EXPOSE 80

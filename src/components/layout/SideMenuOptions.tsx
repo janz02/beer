@@ -7,6 +7,7 @@ import './SideMenuOptions.scss'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { LanguageSelector } from 'components/LanguageSelector'
+import { AppVersion } from 'components/layout/AppVersion'
 
 export interface SideMenuOptionProps {
   label: string
@@ -37,7 +38,9 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
       selectedKeys={[pathRoot]}
       className={`side-menu-options ${footer ? 'smo-footer' : ''}`}
     >
-      {footer && <LanguageSelector collapsed={collapsed} />}
+      {footer && (
+        <LanguageSelector className="side-menu-vertical-delimiter" collapsed={collapsed} />
+      )}
       {options
         .filter(option => hasPermission(option.roles ?? []))
         .map((option, i) => (
@@ -60,6 +63,7 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = props => {
             )}
           </Menu.Item>
         ))}
+      {footer && <AppVersion hide={collapsed} className="side-menu-vertical-delimiter" />}
     </Menu>
   )
 }
