@@ -4,6 +4,8 @@ import { AppThunk } from 'app/store'
 import { delay } from 'services/temp/delay'
 import { ListRequestParams } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
+import { SignalrStatusReport } from 'middlewares/signalrMiddleware'
+import { HubConnectionState } from '@microsoft/signalr'
 
 // TODO: Remove
 const TEMP_DATA: NotificationData[] = [
@@ -75,6 +77,7 @@ export interface NotificationData {
 }
 
 interface NotificationState {
+  rtConnectionState?: HubConnectionState
   opened: boolean
   unreadCount: number
   hasMore: boolean
@@ -113,6 +116,9 @@ const notificationSlice = createSlice({
     setItemState(state, action: PayloadAction<FeatureState>) {
       state.itemState = action.payload
     },
+    setRtConnectionState(state, action: PayloadAction<HubConnectionState | undefined>) {
+      state.rtConnectionState = action.payload
+    },
     getNotificationsSuccess(state, action: PayloadAction<NotificationData[]>) {
       state.notifications.unshift(...action.payload)
       state.notifications = state.notifications.sort((a, b) =>
@@ -147,7 +153,8 @@ const {
   setListState,
   setItemState,
   inspectNotificationSuccess,
-  getNotificationsSuccess
+  getNotificationsSuccess,
+  setRtConnectionState
 } = notificationSlice.actions
 
 const getNotifications = (params: ListRequestParams = {}): AppThunk => async dispatch => {
@@ -178,6 +185,10 @@ const inspectNotification = (id: string): AppThunk => async dispatch => {
   }
 }
 
+const setConnectionState = (report: SignalrStatusReport): AppThunk => async dispatch => {
+  dispatch(setRtConnectionState(report.connectionState))
+}
+
 export const notificationReducer = notificationSlice.reducer
 
 export const notificationActions = {
@@ -185,5 +196,10 @@ export const notificationActions = {
   close,
   getNotifications,
   resetNotification,
-  inspectNotification
+  inspectNotification,
+  setConnectionState
+}
+
+export const notificationActionType = {
+  open: notificationSlice.actions.open.toString()
 }

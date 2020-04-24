@@ -1,13 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { UploadFile, UploadProps, UploadChangeParam } from 'antd/lib/upload/interface'
 import { useTranslation } from 'react-i18next'
-import { api } from 'api'
+import { api, getUrl } from 'api'
 import { getBase64 } from 'services/file-reader'
-
-function getUrl(): string {
-  const getUrl = window.location
-  return getUrl.protocol + '//' + getUrl.host
-}
 
 interface FileThumbnail {
   label?: string
