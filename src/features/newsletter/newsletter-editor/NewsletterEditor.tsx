@@ -195,14 +195,20 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
           <Form.Item
             name="subject"
             label={t('newsletter.field.subject')}
-            rules={[rule.requiredString(), rule.max(45)]}
+            rules={[
+              rule.requiredString(t('error.validation.email.subject-required')),
+              rule.max(45)
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="email"
             label={t('newsletter.field.email')}
-            rules={[rule.requiredString(), rule.email()]}
+            rules={[
+              rule.requiredString(t('error.validation.segment.email-required')),
+              rule.email()
+            ]}
           >
             <Input />
           </Form.Item>
@@ -226,14 +232,17 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
           <Form.Item
             name="subject"
             label={t('newsletter.field.subject')}
-            rules={[rule.requiredString(), rule.max(45)]}
+            rules={[
+              rule.requiredString(t('error.validation.email.subject-required')),
+              rule.max(45)
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="segment"
             label={t('newsletter.popup.target-segment')}
-            rules={[rule.requiredString()]}
+            rules={[rule.requiredString(t('error.validation.segment.id-required'))]}
           >
             <Select>
               {segments?.map(s => (

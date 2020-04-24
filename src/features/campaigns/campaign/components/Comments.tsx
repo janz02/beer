@@ -97,7 +97,7 @@ export const Comments: FC = () => {
                   label={t('coupon-create.field.comment')}
                   dependencies={['couponState']}
                   rules={[
-                    rule.max(200),
+                    rule.max(200, t('error.validation.coupon.comment.max-length-200')),
                     ({ getFieldValue }) => ({
                       validator(_rule, value) {
                         const couponState = getFieldValue('couponState')

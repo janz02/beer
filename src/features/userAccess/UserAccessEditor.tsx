@@ -81,7 +81,11 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
         <Text>{editedUser?.name}</Text>
       </Form.Item>
 
-      <Form.Item name="role" label={t('user-access.field.role')} rules={[rule.requiredString()]}>
+      <Form.Item
+        name="role"
+        label={t('user-access.field.role')}
+        rules={[rule.requiredString(t('error.validation.partner-contact.role-required'))]}
+      >
         <Select>
           {roleOptions?.map((r, i) => (
             <Select.Option key={i} value={r.value.toString()}>
@@ -94,7 +98,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
       <Form.Item
         name="status"
         label={t('user-access.field.status')}
-        rules={[rule.requiredString()]}
+        rules={[rule.requiredString(t('error.validation.partner-contact.is-active-required'))]}
       >
         <Radio.Group buttonStyle="solid">
           <Radio.Button value={Status.INACTIVE}>

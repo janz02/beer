@@ -20,7 +20,10 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="name"
           label={t('auth.field.name')}
-          rules={[rule.requiredString(), rule.max(100)]}
+          rules={[
+            rule.requiredString(t('error.validation.common.user-name-required')),
+            rule.max(100, t('error.validation.common.user-name-max-length-100'))
+          ]}
         >
           <Input maxLength={100} />
         </Form.Item>
@@ -28,7 +31,11 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="username"
           label={t('auth.field.email')}
-          rules={[rule.requiredString(), rule.email(), rule.max(100)]}
+          rules={[
+            rule.requiredString(t('error.validation.common.email-required')),
+            rule.email(),
+            rule.max(100, t('error.validation.common.email-max-length-100'))
+          ]}
         >
           <Input maxLength={100} />
         </Form.Item>
@@ -38,7 +45,11 @@ export const SignupPage: React.FC = () => {
           hasFeedback
           label={t('auth.field.password')}
           extra={t('common.field.help.password-format')}
-          rules={[rule.requiredString(), rule.password()]}
+          rules={[
+            rule.requiredString(t('error.validation.common.password-required')),
+            rule.max(64, t('error.validation.common.password-max-length-64')),
+            rule.password()
+          ]}
         >
           <Input.Password maxLength={64} />
         </Form.Item>
@@ -49,9 +60,10 @@ export const SignupPage: React.FC = () => {
           label={t('auth.field.password-again')}
           dependencies={['password']}
           rules={[
-            rule.requiredString(),
+            rule.requiredString(t('error.validation.common.password-required')),
+            rule.max(64, t('error.validation.common.password-max-length-64')),
             ({ getFieldValue }) => ({
-              validator(rule, value) {
+              validator(_rule, value) {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve()
                 }
@@ -66,7 +78,7 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="phone"
           label={t('auth.field.phone')}
-          rules={[rule.max(20)]}
+          rules={[rule.max(20, t('error.validation.common.phone-max-length-20'))]}
           extra={t('common.field.help.phone-format')}
         >
           <Input type="tel" maxLength={20} />
@@ -75,7 +87,12 @@ export const SignupPage: React.FC = () => {
         <Form.Item
           name="code"
           label={t('auth.field.code')}
-          rules={[rule.requiredString(), rule.max(10)]}
+          rules={[
+            rule.requiredString(
+              t('error.validation.register-partner-contact.partner-code-required')
+            ),
+            rule.max(10, t('error.validation.register-partner-contact.partner-code-max-length-10'))
+          ]}
         >
           <Input maxLength={10} />
         </Form.Item>

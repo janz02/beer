@@ -28,7 +28,10 @@ export const CampaignEditorFormCouponCount: FC<CampaignEditorFormCouponCountProp
           name="couponCount"
           label={t('coupon-create.field.coupon-count')}
           extra={t('coupon-create.field.coupon-count-help')}
-          rules={[rule.required(), rule.positiveInteger()]}
+          rules={[
+            rule.required(t('error.validation.coupon.count-required')),
+            rule.positiveInteger()
+          ]}
         >
           <InputNumber
             disabled={!displayEditor}
