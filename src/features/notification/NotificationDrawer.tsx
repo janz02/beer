@@ -4,6 +4,7 @@ import { Drawer } from 'antd'
 import { NotificationList } from './NotificationList'
 import { useTranslation } from 'react-i18next'
 import { useNotification } from './useNotification'
+import { RtConnectionDot } from './RtConnectionDot'
 
 export const NotificationDrawer: FC = () => {
   const { t } = useTranslation()
@@ -21,6 +22,7 @@ export const NotificationDrawer: FC = () => {
     >
       <div className="notification-drawer__header">
         <span className="notification-drawer__header__title">
+          <RtConnectionDot />
           {t('notification.notifications')}
         </span>
         <span className="notification-drawer__header__options">

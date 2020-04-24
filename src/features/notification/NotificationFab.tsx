@@ -7,16 +7,14 @@ export const NotificationFab: FC = () => {
   const { handleOpen, unreadCount } = useNotification()
 
   return (
-    <>
-      <FloatingActionButton
-        count={unreadCount}
-        vertical="bottom"
-        horizontal="right"
-        type="primary"
-        onClick={handleOpen}
-      >
-        <BellFilled />
-      </FloatingActionButton>
-    </>
+    <FloatingActionButton
+      count={unreadCount}
+      vertical="bottom"
+      horizontal="right"
+      type="primary"
+      onClick={handleOpen}
+    >
+      <BellFilled />
+    </FloatingActionButton>
   )
 }

@@ -1,0 +1,19 @@
+@import "../../assets/scss/ant-variables";
+
+.rt-connection-dot {
+  .ant-badge-status-dot {
+    $rt-dot-size: 8px;
+
+    width: #{$rt-dot-size};
+    height: #{$rt-dot-size};
+    margin-bottom: 2px;
+
+    &.ant-badge-status-processing {
+      background-color: #{$warning-color};
+
+      &::after {
+        border-color: #{$error-color};
+      }
+    }
+  }
+}
