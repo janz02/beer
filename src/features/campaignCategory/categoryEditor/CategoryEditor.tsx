@@ -59,7 +59,10 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
       <Form.Item
         label={t('coupon-category.field.name')}
         name="name"
-        rules={[rule.requiredString(), rule.max(50)]}
+        rules={[
+          rule.requiredString(t('error.validation.category.name-required')),
+          rule.max(50, t('error.validation.category.name-max-length-50'))
+        ]}
       >
         <Input maxLength={50} />
       </Form.Item>

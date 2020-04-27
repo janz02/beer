@@ -1,10 +1,9 @@
+import { campaignActions } from '../features/campaigns/campaignsSlice'
 import { batch } from 'react-redux'
 import { notificationActions } from 'features/notification/notificationSlice'
 import { AppThunk } from './store'
 import { resetAuth } from 'features/auth/authSlice'
 import { resetSiteEditor } from 'features/sites/siteEditor/siteEditorSlice'
-import { resetCoupons } from 'features/coupons/couponsSlice'
-import { resetCouponList } from 'features/coupons/couponList/couponListSlice'
 import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
 import { newsletterListActions } from 'features/newsletter/newsletterList/newsletterListSlice'
 import { resetNewsletterEditor } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
@@ -18,6 +17,7 @@ import {
   partnerContactsSlice
 } from 'features/partnerContacts/partnerContactsSliceFactory'
 import { profileActions } from 'features/profile/profileSlice'
+import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
 import { categoryEditorActions } from 'features/campaignCategory/categoryEditor/categoryEditorSlice'
 import { categoryListActions } from 'features/campaignCategory/categoryList/categoryListSlice'
 
@@ -32,10 +32,10 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(profileActions.resetProfile())
     dispatch(resetSiteEditor())
     dispatch(notificationActions.resetNotification())
+    dispatch(campaignActions.resetCampaigns())
+    dispatch(campaignListActions.resetCampaignList())
     dispatch(categoryEditorActions.resetCategoryEditor())
     dispatch(categoryListActions.resetCategoryList())
-    dispatch(resetCoupons())
-    dispatch(resetCouponList())
     dispatch(resetUsersAccessList())
     dispatch(resetUsersAccessList())
     dispatch(newsletterListActions.resetNewsletterList())
