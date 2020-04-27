@@ -345,19 +345,19 @@
     "unknown-try-again": "Kérem, próbálja újra",
     "validation": {
       "cashier": {
-        "digital-stamp-id-max-length-30": "__STRING_NOT_TRANSLATED__",
-        "digital-stamp-id-required": "__STRING_NOT_TRANSLATED__",
-        "id-max-length-30": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__"
+        "digital-stamp-id-max-length-30": "Digitális pecsét azonosító maximum 30 karakter lehet, válasszon rövidebb nevet.",
+        "digital-stamp-id-required": "Digitális pecsét azonosítót kötelező megadni, adja meg a pecséten található számot.",
+        "id-max-length-30": "Pénztár azonosító maximum 30 karakter lehet, válasszon rövidebb nevet.",
+        "id-required": "Pénztár azonosító nevét kötelező megadni, adja meg a pénztáron található azonosítót."
       },
       "category": {
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-50": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "id-greater-than-0": "Kategória lekérdezéséhez azonosító megadása kötelező, adjon emg egy azonosítót.",
+        "id-required": "Kategória lekérdezéséhez azonosító megadása kötelező, adjon emg egy azonosítót.",
+        "name-max-length-50": "Kategória neve maximum 50 karakter lehet, válasszon rövidebb nevet.",
+        "name-required": "Kategória nevét kötelező megadni, adjon meg egy nevet."
       },
       "change-password": {
-        "old-password-required": "__STRING_NOT_TRANSLATED__"
+        "old-password-required": "Régi jelszó megadása kötelező a jelszóváltoztatáshoz."
       },
       "common": {
         "dto-required": "__STRING_NOT_TRANSLATED__",
