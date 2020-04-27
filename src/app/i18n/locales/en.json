@@ -1,9 +1,9 @@
 {
   "app": {
-    "title": "Plus Campaign Motor"
+    "title": "Plus Campaign Engine"
   },
   "auth": {
-    "change-password-success": "Change password success.",
+    "change-password-success": "Password successfully changed.",
     "field": {
       "code": "Partner registration code",
       "email": "E-mail address",
@@ -20,7 +20,7 @@
     "signup": "Sign up",
     "text": {
       "accept-prefix": "I accept the ",
-      "new-password-email": "Get an email with the new password.",
+      "new-password-email": "I forgot my password.",
       "terms-and-services": "Terms & Services"
     }
   },

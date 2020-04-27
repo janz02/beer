@@ -20,7 +20,7 @@
     "signup": "Regisztráció",
     "text": {
       "accept-prefix": "Elfogadom a ",
-      "new-password-email": "Kérek egy e-mailt az új jelszóval.",
+      "new-password-email": "Elfeleljtettem a jelszavamat.",
       "terms-and-services": "felhasználási feltételeket."
     }
   },
@@ -69,20 +69,20 @@
     "no": "Nem",
     "ok": "OK",
     "popup": {
-      "activate-title": "Biztos, hogy aktiválni szeretnéd?",
-      "confirm-title": "Biztos, hogy ezt szeretnéd tenni?",
-      "delete-title": "Biztos, hogy törölni szeretnéd?",
-      "discard-title": "Biztos, hogy el szeretnéd vetni?",
-      "inactivate-title": "Biztos, hogy inaktiválni szeretnéd?",
-      "restore-title": "Biztos, hogy vissza szeretnéd állítani?",
-      "save-title": "Biztos, hogy menteni szeretnéd?"
+      "activate-title": "Biztos, hogy szeretné aktiválni?",
+      "confirm-title": "Biztos, hogy ezt szeretné tenni?",
+      "delete-title": "Biztos, hogy szeretné törölni? A törlés végleges.",
+      "discard-title": "Biztos, hogy el szeretné vetni a módosításokat? Azok később nem visszaállíthatóak.",
+      "inactivate-title": "Biztos, hogy szeretné inaktiválni?",
+      "restore-title": "Biztos, hogy vissza szeretné állítani?",
+      "save-title": "Biztos, hogy mentené?"
     },
     "reset": "Visszállítás",
     "restore": "Visszállítás",
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
-    "try-again": "Újra próbálkozás",
+    "try-again": "Újra próbálkozás...",
     "upload": "Feltöltés",
     "view": "Megtekintés",
     "yes": "Igen"
@@ -142,7 +142,7 @@
     "client-activities": "Ügyfél aktivitások",
     "create": "Rögzítés",
     "create-and-accept": "Rögzítése és jóváhagyásra küldés",
-    "create-coupon-success": "Sikeres kupon létrehozás.",
+    "create-coupon-success": "Sikeres kupon létrehozás",
     "download-coupons": "Kuponok letöltése",
     "download-redeemed-coupons": "Beváltott kupokon letöltése",
     "edit": "Szerkesztés",
@@ -213,9 +213,9 @@
     "status-title": "Státusz módosítás"
   },
   "coupon-editor": {
-    "comment-delete-confirm-message": "Biztos benne, hogy törölni szeretné ezt a kommentet?",
-    "save-coupon-status-success": "Kupon státusz mentése sikeres.",
-    "save-coupon-success": "Sikeres kupon mentés.",
+    "comment-delete-confirm-message": "Biztos benne, hogy szeretné törölni ezt a kommentet? A törlés végleges.",
+    "save-coupon-status-success": "Kupon státusz mentése sikeres",
+    "save-coupon-success": "Sikeres kupon mentés",
     "timeline-title": "Előzmények"
   },
   "coupon-list": {
@@ -249,81 +249,81 @@
   },
   "error": {
     "auth": {
-      "expired-refresh-token": "Lejárt refresh token.",
-      "forbidden": "Hozzáférés nem engedélyezett.",
-      "invalid-email": "Invalid e-mail.",
-      "invalid-partner-code": "Invalid partner kód.",
-      "invalid-password": "Invalid partner jelszó.",
-      "invalid-refresh-token": "Invalid refresh token.",
-      "ldap": "Ldap hiba.",
-      "ldap-password-change": "Ldap jelszó változtatási hiba.",
-      "login-failed": "Hibás bejelentkezés.",
-      "newpassword-sameasold": "Az új jelszó nem egyezhet meg az előzővel.",
-      "password-inconsistent": "A két jelszó nem egyezik meg.",
-      "registration-failed": "Regsztráció sikertelen.",
+      "expired-refresh-token": "Lejárt a bejelentkezési ideje, kérem jelentkezzen be újra.",
+      "forbidden": "Hozzáférés megtagadva.",
+      "invalid-email": "Email nem megfelelő formátumú, kérem adjon meg megfelelő címet.",
+      "invalid-partner-code": "A partner kód nem létezik, kérem adjon meg egy létező partner kódot.",
+      "invalid-password": "Bejelentkezés sikertelen, ellenőrizze az email címet és a jelszót.",
+      "invalid-refresh-token": "Lejárt a bejelentkezési ideje, kérem jelentkezzen be újra.",
+      "ldap": "Bejelentkezés sikertelen, ellenőrizze az email címet és a jelszót.",
+      "ldap-password-change": "Jelszó változtatás sikertelen, előfordulhat, hogy a felhasználónak nem változtatható a jelszava.",
+      "login-failed": "Bejelentkezés sikertelen, próbálkozzon később.",
+      "newpassword-sameasold": "Az új jelszó nem egyezhet meg az előzővel, adjon meg egy új jelszót.",
+      "password-inconsistent": "A két új jelszó nem egyezik meg, ellenőrizze, hogy elgépelte-e.",
+      "registration-failed": "Regsztráció sikertelen, próbálkozzon később.",
       "sync-failed": "Felhasználók szinkronizációja sikerleten.",
       "user-agreements-must-be-accepted": "A szabályzat elfogadása kötelező.",
-      "user-exists": "Felhasználó már létezik.",
-      "user-inactive": "Felhasználó inaktív.",
-      "user-not-found": "Felhasználó nem található."
+      "user-exists": "Ilyen email címmel már regisztráltak, válasszon másik címet.",
+      "user-inactive": "Bejelentkezés sikertelen, a felhasználó inaktív.",
+      "user-not-found": "Bejelentkezés sikertelen, ellenőrizze az email címet és a jelszót."
     },
     "cashier": {
-      "cashier-cant-delete": "A pénztárat nem lehet törölni.",
-      "cashier-cant-save": "A pénztárat nem lehet módosítani.",
-      "cashier-couponId-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
-      "stamp-couponId-not-unique": "Digitális pecsét azonosító nem egyedi."
+      "cashier-cant-delete": "A pénztár törléséhez nincs jogosultsága.",
+      "cashier-cant-save": "A pénztár módosításához nincs jogosultsága.",
+      "cashier-couponId-not-unique": "Ezzel az online pénztár azonosítóval (AP) már van regisztráció, használjon másik azonosítót.",
+      "stamp-couponId-not-unique": "Ez a digitális pecsét azonosító nem használható, kérem válasszon másikat."
     },
     "comment": {
-      "comment-or-state-required": "Kötelező státuszt választani vagy kommentet hagyni."
+      "comment-or-state-required": "Kötelező státuszt választani vagy megjegyzést hagyni, töltse ki a megjegyzés mezőt, vagy válasszon új státuszt."
     },
     "common": {
-      "cant-modify": "Nem módosítható.",
+      "cant-modify": "Mező nem módosítható.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitöltése kötelező.",
-      "internal": "Internal.",
+      "internal": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
       "password-format": "Invalid jelszó formátum.",
-      "server-unavailable": "Szerver nem elérhető."
+      "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később."
     },
     "coupon": {
-      "already-claimed": "Kupon már kiváltva.",
-      "big-picture-invalid": "Nagy kép formátuma vagy mérete nem megfelelő.",
-      "cannot-claim": "Nem lehet kiváltani a kupont.",
-      "cant-be-deleted": "Kupon nem törölhető.",
-      "cant-change-state": "Kupon státusz változtatása sikertelen.",
-      "fix-discount-must-be-integer": "Csak egész szám adható meg.",
-      "fix-discount-out-of-range": "Csak 1 és 1.000.000 közötti érték adható meg.",
-      "invalid-initial-state": "Hibás kezdőállapot",
-      "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek.",
-      "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben ay állapotban.",
+      "already-claimed": "Ez a kupon már ki lett váltva, használjon másik kupont.",
+      "big-picture-invalid": "Nagy kép formátuma vagy mérete nem megfelelő, kövesse a felület utasításait.",
+      "cannot-claim": "A kupont nem lehet kiváltani, próbálkozzon később.",
+      "cant-be-deleted": "A kampány nem törölhető állapota, vagy a felhasználó jogosultsági szintje miatt.",
+      "cant-change-state": "A kampány státuszának módosítása sikertelen a felhasználó jogosultsági szintje miatt.",
+      "fix-discount-must-be-integer": "A kedvezmény mértéke csak egész szám lehet, adjon meg egész számot.",
+      "fix-discount-out-of-range": "A kedvezmény mértéke csak 1 és 1.000.000 közötti érték adható meg, adjon meg egy számot a 2 szám között.",
+      "invalid-initial-state": "Kampány csak létrejött státuszban hozható létre, ne módosítsa a státsuzt létrehozásnál.",
+      "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek, ellenőrizze a CSV fájl tartalmát, és számosságát.",
+      "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben az állapotban, frissítse az oldalt.",
       "item-price-required-if-previous-year-average-basket-value-empty": "A termék érték mező megadása kötelező, ha a tavalyi átlagos kosárérték mező üres.",
-      "name-be-edited-after-accepted": "A kupon neve nem módosithaó elfogadás után.",
-      "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
-      "partner-must-be-major": "__STRING_NOT_TRANSLATED__",
-      "percentage-discount-out-of-range": "Csak 1 és 100 közötti érték adható meg.",
-      "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia.",
-      "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie.",
+      "name-be-edited-after-accepted": "A kupon neve nem módosithaó elfogadás után, frissítse az oldalt.",
+      "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható, frissítse az oldalt.",
+      "partner-must-be-major": "Kiválasztott partnernek kiemelt partnernek kell lennie, válasszon kiemelt partnert.",
+      "percentage-discount-out-of-range": "Kedvezény értéke 1 és 100 közötti értélehet, adjon meg egy számot a 2 szám között.",
+      "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia, ellenőrize a CSV fájl tartalmát és számosságát.",
+      "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie, ellenőrize a CSV fájl tartalmát és számosságát.",
       "previous-year-average-basket-value-required-if-item-price-empty": "A tavalyi átlagos kosárérték mező megadása kötelező, ha a termék érték mező üres.",
-      "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie.",
-      "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő.",
-      "type-has-no-codes": "__STRING_NOT_TRANSLATED__",
-      "user-code-cant-save": "__STRING_NOT_TRANSLATED__"
+      "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie, ellenőrizze a PDF fájl tartamát",
+      "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő, kövesse a felület utasításait.",
+      "type-has-no-codes": "Ehhez a kampány típushoz nem tartoznak kuponkódok, azokat ne lehet letölteni.",
+      "user-code-cant-save": "Kérés sikertelen, prübálkozzon később."
     },
     "coupon-categories": {
-      "name-must-be-unique": "Kategória nevének egyedinek kell lennie."
+      "name-must-be-unique": "Kategória nevének egyedinek kell lennie, válasszon másik nevet."
     },
     "email-template": {
-      "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie.",
-      "not-found-version": "Nem található ilyen verziójú e-mail sablon."
+      "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie, válasszon másik nevet.",
+      "not-found-version": "Nem található ilyen verziójú e-mail sablon, válaszzon másik verziót."
     },
     "file": {
-      "download-fail": "Sikertelen fájl lekérdezés.",
-      "image-type-not-supported": "Rossz fájl formátum.",
-      "invalid-image-size": "Rossz kép méret.",
-      "invalid-prize-rule-type": "Rossz nyeremény szabály típus.",
-      "not-supported-format": "Nem támogatott fájl formátum."
+      "download-fail": "Keresett fájl nem található, törlődött a rendszerből.",
+      "image-type-not-supported": "Rossz kép formátum, válasszon megfelelő formátumot.",
+      "invalid-image-size": "Rossz kép méret, válasszon megfelelő képméretet.",
+      "invalid-prize-rule-type": "Rossz nyeremény szabály típus, válasszon PDF fájl formátumot.",
+      "not-supported-format": "Nem támogatott fájl formátum, válasszon támogatott formátumot."
     },
     "not-found": "Nem található.",
     "paginate": {
@@ -332,17 +332,17 @@
       "page-size": "Lapozó lap méret."
     },
     "partner": {
-      "cant-change-state": "Partner státusz változtatása sikertelen.",
-      "inactive-or-deleted": "Parnter inaktív vagy törölt.",
-      "name-must-be-unique": "Partner nevének egyedinek kell lennie."
+      "cant-change-state": "Partner státusz változtatása sikertelen, a felhasználó jogosultsági szintje miatt.",
+      "inactive-or-deleted": "Sikerelten művelet, mert a parnter inaktív vagy törölt.",
+      "name-must-be-unique": "Partner nevének egyedinek kell lennie, válasszon másik nevet."
     },
     "partner-contact": {
-      "invalid-type": "Nem megfelelő partner típus."
+      "invalid-type": "Nem megfelelő partner típus, válasszon másik típust."
     },
     "rtd": {
-      "communication": "RTD kommunikációs hiba."
+      "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
     },
-    "unknown-try-again": "Kérem, próbáld újra",
+    "unknown-try-again": "Kérem, próbálja újra",
     "validation": {
       "cashier": {
         "digital-stamp-id-max-length-30": "__STRING_NOT_TRANSLATED__",
@@ -561,7 +561,7 @@
     "add": "Új sablon hozzáadása",
     "available-templates": "Hírlevél sablonok",
     "close-editor": "Szerkesztő bezárása",
-    "fail-msg": "Sajnos, nem sikerült betölteni a sablont.",
+    "fail-msg": "Sajnos, nem sikerült betölteni a sablont, próbálkozzon újra",
     "field": {
       "email": "E-mail cím",
       "subject": "Tárgy",
@@ -598,7 +598,7 @@
     "field": {
       "address": "Székhely",
       "bank-account": "Bankszámla",
-      "different-address": "Külünböző levelezési cím",
+      "different-address": "Különböző levelezési cím",
       "mailing-address": "Levelezési cím",
       "major-partner": "Kiemelt partner",
       "name": "Partner név",
@@ -657,7 +657,7 @@
       "phone": "Telefonszám"
     },
     "save": "Módosítás mentése",
-    "save-profile-success": "Profile mentése sikeres."
+    "save-profile-success": "Profil mentése sikeres."
   },
   "site": {
     "editor-title": "Telephely",
