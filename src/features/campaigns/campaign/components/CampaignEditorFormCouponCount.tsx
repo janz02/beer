@@ -76,11 +76,7 @@ export const CampaignEditorFormCouponCount: FC<CampaignEditorFormCouponCountProp
 
       {!!coupon?.id && prizeOrDiscount && (
         <Col span={8}>
-          <Form.Item
-            name="download"
-            label={t('coupon-create.field.download')}
-            extra={t('coupon-create.field.download-help')}
-          >
+          <Form.Item name="download" label={t('coupon-create.field.download')}>
             <Button
               type="primary"
               loading={loading}

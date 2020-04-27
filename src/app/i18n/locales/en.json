@@ -145,6 +145,7 @@
     "create-coupon-success": "Creating a coupon was successful.",
     "download-coupons": "Download coupons",
     "download-redeemed-coupons": "Download claimed coupons",
+    "download-redeemed-coupons-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission.",
     "edit": "Edit",
     "editor-title": "Campaign editor",
     "field": {
@@ -152,7 +153,7 @@
       "awarded-campaign": "Highlighted campaign sign",
       "banner-link": "Banner link",
       "banner-link-help": "The banner link leads to this website. Campaign landing page (campaign code can be accepted).",
-      "big-image": "Coupon big image",
+      "big-image": "Big image",
       "big-image-help": "Only a 360*540 pixel JPG or PNG file can be accepted.",
       "category": "Campaign category",
       "category-help": "Please select the industry category regarding to your product/service in your offer",
@@ -176,7 +177,6 @@
       "distribution-start-date": "Campaign start date",
       "distribution-start-date-help": "The first day of the displaying.",
       "download": "Download",
-      "download-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission",
       "draw-date": "Draw date",
       "expiration-date": "Expiration date",
       "expiration-date-help": "The last day when claiming is possible.",
@@ -284,7 +284,6 @@
       "max-length-exact": "This field must be less then {{max}} characters.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",
-      "password-format": "Invalid password format.",
       "server-unavailable": "Server unavailable."
     },
     "coupon": {

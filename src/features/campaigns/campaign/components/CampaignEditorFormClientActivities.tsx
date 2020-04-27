@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Button, Row, Col } from 'antd'
+import { Button, Row, Col, Form } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { ExportOutlined } from '@ant-design/icons'
 import { campaignActions } from '../../campaignsSlice'
@@ -44,16 +44,18 @@ export const CampaignEditorFormClientActivities: FC = () => {
       {prizeOrDiscount && (
         <Row gutter={rowGutter}>
           <Col span={8}>
-            <Button
-              type="default"
-              loading={loading}
-              icon={<ExportOutlined />}
-              onClick={() => {
-                dispatch(campaignActions.downloadClaimedCoupons(coupon!))
-              }}
-            >
-              {t('coupon-create.download-redeemed-coupons')}
-            </Button>
+            <Form.Item extra={t('coupon-create.download-redeemed-coupons-help')}>
+              <Button
+                type="default"
+                loading={loading}
+                icon={<ExportOutlined />}
+                onClick={() => {
+                  dispatch(campaignActions.downloadClaimedCoupons(coupon!))
+                }}
+              >
+                {t('coupon-create.download-redeemed-coupons')}
+              </Button>
+            </Form.Item>
           </Col>
         </Row>
       )}
