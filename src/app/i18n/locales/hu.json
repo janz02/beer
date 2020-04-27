@@ -291,8 +291,8 @@
       "already-claimed": "Ez a kupon már ki lett váltva, használjon másik kupont.",
       "big-picture-invalid": "Nagy kép formátuma vagy mérete nem megfelelő, kövesse a felület utasításait.",
       "cannot-claim": "A kupont nem lehet kiváltani, próbálkozzon később.",
-      "cant-be-deleted": "A kampány nem törölhető állapota, vagy a felhasználó jogosultsági szintje miatt.",
-      "cant-change-state": "A kampány státuszának módosítása sikertelen a felhasználó jogosultsági szintje miatt.",
+      "cant-be-deleted": "Nincs jogosultsága törölni ezt a kampányt.",
+      "cant-change-state": "Nincs jogosultsága megváltoztatni a kampány állapotát.",
       "fix-discount-must-be-integer": "A kedvezmény mértéke csak egész szám lehet, adjon meg egész számot.",
       "fix-discount-out-of-range": "A kedvezmény mértéke csak 1 és 1.000.000 közötti érték adható meg, adjon meg egy számot a 2 szám között.",
       "invalid-initial-state": "Kampány csak létrejött státuszban hozható létre, ne módosítsa a státsuzt létrehozásnál.",
@@ -312,10 +312,10 @@
       "user-code-cant-save": "Kérés sikertelen, prübálkozzon később."
     },
     "coupon-categories": {
-      "name-must-be-unique": "Kategória nevének egyedinek kell lennie, válasszon másik nevet."
+      "name-must-be-unique": "Ilyen névvel már létezik kategória, válasszon másik nevet."
     },
     "email-template": {
-      "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie, válasszon másik nevet.",
+      "name-must-be-unique": "Ilyen névvel már létezik E-mail sablon, válasszon másik nevet.",
       "not-found-version": "Nem található ilyen verziójú e-mail sablon, válaszzon másik verziót."
     },
     "file": {
@@ -334,7 +334,7 @@
     "partner": {
       "cant-change-state": "Partner státusz változtatása sikertelen, a felhasználó jogosultsági szintje miatt.",
       "inactive-or-deleted": "Sikerelten művelet, mert a parnter inaktív vagy törölt.",
-      "name-must-be-unique": "Partner nevének egyedinek kell lennie, válasszon másik nevet."
+      "name-must-be-unique": "Már létezik egy partner ilyen névvel, válasszon másik nevet."
     },
     "partner-contact": {
       "invalid-type": "Nem megfelelő partner típus, válasszon másik típust."
