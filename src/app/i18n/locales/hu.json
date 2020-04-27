@@ -144,7 +144,8 @@
     "create-and-accept": "Rögzítése és jóváhagyásra küldés",
     "create-coupon-success": "Sikeres kupon létrehozás.",
     "download-coupons": "Kuponok letöltése",
-    "download-redeemed-coupons": "Beváltott kupokon letöltése",
+    "download-redeemed-coupons": "Beváltott kuponok letöltése",
+    "download-redeemed-coupons-help": "A kampány ideje alatt a beváltások időközi ellenőrzésére, a kampány végén a beváltások alapján történő jutalékelszámoláshoz a teljesítésigazolás alapjául szolgáló dokumentum.",
     "edit": "Szerkesztés",
     "editor-title": "Kampány szerkesztő",
     "field": {
@@ -152,7 +153,7 @@
       "awarded-campaign": "Kitüntett kampány jelölő",
       "banner-link": "Banner link",
       "banner-link-help": "A banner link erre a felületre fog mutatni. Kampány landing page (kampánykód befűzhető).",
-      "big-image": "Kupon nagy képe",
+      "big-image": "Nagy kép",
       "big-image-help": "Csak pontosan 360*540 pixel méretű JPG vagy PNG kiterjesztésű fájl fogadható el.",
       "category": "Kampány kategória",
       "category-help": "Kérjük, válassza a ki az iparági kategóriát az ajánlatban szereplő terméknek/szolgáltatásnak megfelelően.",
@@ -168,7 +169,7 @@
       "discount-amount": "Kedvezmény mértéke",
       "discount-amount-fix-help": "Pl. 1 500",
       "discount-amount-percent-help": "Pl. 7,5",
-      "discount-type": "Kedvezmény fajtája",
+      "discount-type": "Kedvezmény típus",
       "discount-type-help": "Kérjük, válassza ki, hogy a kedvezményt százalékban vagy fix (forint) értékben kívánja nyújtani!",
       "display-fix-banner-campaign": "Fix banner kampány megjelenítése",
       "distribution-end-date": "Kampány vége",
@@ -176,7 +177,6 @@
       "distribution-start-date": "Kampány kezdete",
       "distribution-start-date-help": "A megjelenés első napja.",
       "download": "Letöltés",
-      "download-help": "A kampány ideje alatt a beváltások időközi ellenőrzésére, a kampány végén a beváltások alapján történő jutalékelszámoláshoz a teljesítésigazolás alapjául szolgáló dokumentum.",
       "draw-date": "Sorsolás dátuma",
       "expiration-date": "Kupon lejárati dátuma",
       "expiration-date-help": "A beváltás utolsó lehetséges napja.",
@@ -284,7 +284,6 @@
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
-      "password-format": "Invalid jelszó formátum.",
       "server-unavailable": "Szerver nem elérhető."
     },
     "coupon": {
