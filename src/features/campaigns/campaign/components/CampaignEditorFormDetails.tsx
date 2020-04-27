@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Form, Input, Select, DatePicker, Row, Col, Checkbox, InputNumber } from 'antd'
+import { Form, Input, Select, DatePicker, Row, Col, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { CouponRank, CouponType, Roles, CouponMode, CouponDiscountType } from 'api/swagger/models'
 import { hasAllPermissions } from 'services/jwt-reader'
@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux'
 import { useCampaign } from '../useCampaign'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
+import { InputNumberI18n } from 'components/InputNumberI18n'
 
 interface CampaignEditorFormDetailsProps {
   form: FormInstance
@@ -202,16 +203,28 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                   validator(_rule, value) {
                     const parsedAsFloat = parseFloat(value)
                     if (selectedCouponDiscountType === CouponDiscountType.PercentValue) {
-                      if (parsedAsFloat < 0 || parsedAsFloat > 100) {
-                        return Promise.reject(t('error.coupon.percentage-discount-out-of-range'))
+                      if (parsedAsFloat < 0) {
+                        return Promise.reject(
+                          t('error.validation.coupon.discount-percent-greater-than-or-equal-0')
+                        )
+                      } else if (parsedAsFloat > 100) {
+                        return Promise.reject(
+                          t('error.validation.coupon.discount-percent-less-than-or-equal-100')
+                        )
                       }
                     } else if (selectedCouponDiscountType === CouponDiscountType.FixValue) {
                       if (!Number.isInteger(parsedAsFloat)) {
                         return Promise.reject(t('error.coupon.fix-discount-must-be-integer'))
                       }
 
-                      if (parsedAsFloat < 1 || parsedAsFloat > 1000000) {
-                        return Promise.reject(t('error.coupon.fix-discount-out-of-range'))
+                      if (parsedAsFloat < 1) {
+                        return Promise.reject(
+                          t('error.validation.coupon.discount-fix-greater-than-or-equal-1')
+                        )
+                      } else if (parsedAsFloat > 1000000) {
+                        return Promise.reject(
+                          t('error.validation.coupon.discount-fix-less-than-or-equal-1000000')
+                        )
                       }
                     }
 
@@ -221,15 +234,16 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               ]}
             >
               {selectedCouponDiscountType === CouponDiscountType.PercentValue ? (
-                <InputNumber
+                <InputNumberI18n
                   disabled={!displayEditor}
                   formatter={getSeparatorAndSuffixFormatter('%')}
                   parser={getSeparatorAndSuffixParser('%')}
                   min={0}
                   max={100}
+                  precision={2}
                 />
               ) : (
-                <InputNumber
+                <InputNumberI18n
                   disabled={!displayEditor}
                   formatter={getSeparatorAndSuffixFormatter('Ft')}
                   parser={getSeparatorAndSuffixParser('Ft')}
@@ -249,7 +263,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               extra={t('coupon-create.field.minimum-shopping-value-help')}
               rules={[rule.positiveInteger()]}
             >
-              <InputNumber
+              <InputNumberI18n
                 disabled={!displayEditor}
                 formatter={getSeparatorAndSuffixFormatter('Ft')}
                 parser={getSeparatorAndSuffixParser('Ft')}
@@ -275,9 +289,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                       )
                       if (!previousYearAverageBasketValue && !value) {
                         return Promise.reject(
-                          t(
-                            'error.coupon.item-price-required-if-previous-year-average-basket-value-empty'
-                          )
+                          t('error.validation.coupon.item-price-required-no-prev-year-average')
                         )
                       }
 
@@ -288,7 +300,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                 extra={t('coupon-create.field.item-price-help')}
                 className="mark-label-as-required"
               >
-                <InputNumber
+                <InputNumberI18n
                   disabled={!displayEditor}
                   formatter={getSeparatorAndSuffixFormatter('Ft')}
                   parser={getSeparatorAndSuffixParser('Ft')}
@@ -310,9 +322,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                       const itemPrice = getFieldValue('itemPrice')
                       if (!itemPrice && !value) {
                         return Promise.reject(
-                          t(
-                            'error.coupon.previous-year-average-basket-value-required-if-item-price-empty'
-                          )
+                          t('error.validation.coupon.previous-basket-value-required-non-item-price')
                         )
                       }
 
@@ -322,7 +332,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                 ]}
                 className="mark-label-as-required"
               >
-                <InputNumber
+                <InputNumberI18n
                   disabled={!displayEditor}
                   formatter={getSeparatorAndSuffixFormatter('Ft')}
                   parser={getSeparatorAndSuffixParser('Ft')}
@@ -344,7 +354,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                   rule.positiveInteger()
                 ]}
               >
-                <InputNumber
+                <InputNumberI18n
                   disabled={!displayEditor}
                   formatter={getSeparatorAndSuffixFormatter('Ft')}
                   parser={getSeparatorAndSuffixParser('Ft')}
