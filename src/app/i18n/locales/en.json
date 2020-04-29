@@ -293,18 +293,14 @@
       "cant-be-deleted": "Coupon can't be deleted.",
       "cant-change-state": "Can't change coupon state.",
       "fix-discount-must-be-integer": "Field must be a positive integer.",
-      "fix-discount-out-of-range": "Fix discount must be between 1 and 1,000,000.",
       "invalid-initial-state": "Invalid initial state.",
       "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
-      "item-price-required-if-previous-year-average-basket-value-empty": "Product value can't be empty if average basket value is empty.",
       "name-be-edited-after-accepted": "Coupon name cannot be edited after accepted.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "partner-must-be-major": "__STRING_NOT_TRANSLATED__",
-      "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
       "predefined-file-is-empty": "Predefined code file must not be empty.",
       "predefinied-file-invalid": "Predefined code file must bne valid CSV file.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty.",
       "prize-rules-invalid": "Prize rule file must be a PDF file.",
       "small-picture-invalid": "Small picture file format or size is invalid.",
       "type-has-no-codes": "__STRING_NOT_TRANSLATED__",
@@ -340,6 +336,9 @@
     },
     "rtd": {
       "communication": "RTD communication error."
+    },
+    "sendgrid": {
+      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "unknown-try-again": "Please, try again!",
     "validation": {
@@ -398,6 +397,9 @@
         "discount-required-for-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-required-for-discount": "__STRING_NOT_TRANSLATED__",
+        "discountValue": {
+          "max-decimal-precision-2": "__STRING_NOT_TRANSLATED__"
+        },
         "draw-date-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
         "draw-date-required-for-prize": "__STRING_NOT_TRANSLATED__",
         "end-date-required": "__STRING_NOT_TRANSLATED__",
@@ -456,7 +458,6 @@
         "id-required": "__STRING_NOT_TRANSLATED__"
       },
       "notification": {
-        "create-roles-cannot-be-empty": "__STRING_NOT_TRANSLATED__",
         "to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
         "type-invalid": "__STRING_NOT_TRANSLATED__",
         "type-required": "__STRING_NOT_TRANSLATED__"
