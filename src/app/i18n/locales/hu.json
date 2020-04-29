@@ -293,18 +293,14 @@
       "cant-be-deleted": "Kupon nem törölhető.",
       "cant-change-state": "Kupon státusz változtatása sikertelen.",
       "fix-discount-must-be-integer": "Csak egész szám adható meg.",
-      "fix-discount-out-of-range": "Csak 1 és 1.000.000 közötti érték adható meg.",
       "invalid-initial-state": "Hibás kezdőállapot",
       "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek.",
       "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben ay állapotban.",
-      "item-price-required-if-previous-year-average-basket-value-empty": "A termék érték mező megadása kötelező, ha a tavalyi átlagos kosárérték mező üres.",
       "name-be-edited-after-accepted": "A kupon neve nem módosithaó elfogadás után.",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "partner-must-be-major": "__STRING_NOT_TRANSLATED__",
-      "percentage-discount-out-of-range": "Csak 1 és 100 közötti érték adható meg.",
       "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia.",
       "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "A tavalyi átlagos kosárérték mező megadása kötelező, ha a termék érték mező üres.",
       "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie.",
       "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő.",
       "type-has-no-codes": "__STRING_NOT_TRANSLATED__",
@@ -340,6 +336,9 @@
     },
     "rtd": {
       "communication": "RTD kommunikációs hiba."
+    },
+    "sendgrid": {
+      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "unknown-try-again": "Kérem, próbáld újra",
     "validation": {
@@ -398,6 +397,9 @@
         "discount-required-for-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-required-for-discount": "__STRING_NOT_TRANSLATED__",
+        "discountValue": {
+          "max-decimal-precision-2": "__STRING_NOT_TRANSLATED__"
+        },
         "draw-date-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
         "draw-date-required-for-prize": "__STRING_NOT_TRANSLATED__",
         "end-date-required": "__STRING_NOT_TRANSLATED__",
@@ -456,7 +458,6 @@
         "id-required": "__STRING_NOT_TRANSLATED__"
       },
       "notification": {
-        "create-roles-cannot-be-empty": "__STRING_NOT_TRANSLATED__",
         "to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
         "type-invalid": "__STRING_NOT_TRANSLATED__",
         "type-required": "__STRING_NOT_TRANSLATED__"

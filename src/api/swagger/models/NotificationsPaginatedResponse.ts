@@ -23,51 +23,58 @@ import {
 /**
  * 
  * @export
- * @interface UserNotificationDtoPaginatedResponse
+ * @interface NotificationsPaginatedResponse
  */
-export interface UserNotificationDtoPaginatedResponse {
+export interface NotificationsPaginatedResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof NotificationsPaginatedResponse
+     */
+    unseenCount?: number;
     /**
      * 
      * @type {Array<UserNotificationDto>}
-     * @memberof UserNotificationDtoPaginatedResponse
+     * @memberof NotificationsPaginatedResponse
      */
     result?: Array<UserNotificationDto> | null;
     /**
      * 
      * @type {number}
-     * @memberof UserNotificationDtoPaginatedResponse
+     * @memberof NotificationsPaginatedResponse
      */
     page?: number;
     /**
      * 
      * @type {number}
-     * @memberof UserNotificationDtoPaginatedResponse
+     * @memberof NotificationsPaginatedResponse
      */
     from?: number;
     /**
      * 
      * @type {number}
-     * @memberof UserNotificationDtoPaginatedResponse
+     * @memberof NotificationsPaginatedResponse
      */
     to?: number;
     /**
      * 
      * @type {number}
-     * @memberof UserNotificationDtoPaginatedResponse
+     * @memberof NotificationsPaginatedResponse
      */
     size?: number;
 }
 
-export function UserNotificationDtoPaginatedResponseFromJSON(json: any): UserNotificationDtoPaginatedResponse {
-    return UserNotificationDtoPaginatedResponseFromJSONTyped(json, false);
+export function NotificationsPaginatedResponseFromJSON(json: any): NotificationsPaginatedResponse {
+    return NotificationsPaginatedResponseFromJSONTyped(json, false);
 }
 
-export function UserNotificationDtoPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserNotificationDtoPaginatedResponse {
+export function NotificationsPaginatedResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): NotificationsPaginatedResponse {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
+        'unseenCount': !exists(json, 'unseenCount') ? undefined : json['unseenCount'],
         'result': !exists(json, 'result') ? undefined : (json['result'] === null ? null : (json['result'] as Array<any>).map(UserNotificationDtoFromJSON)),
         'page': !exists(json, 'page') ? undefined : json['page'],
         'from': !exists(json, 'from') ? undefined : json['from'],
@@ -76,7 +83,7 @@ export function UserNotificationDtoPaginatedResponseFromJSONTyped(json: any, ign
     };
 }
 
-export function UserNotificationDtoPaginatedResponseToJSON(value?: UserNotificationDtoPaginatedResponse | null): any {
+export function NotificationsPaginatedResponseToJSON(value?: NotificationsPaginatedResponse | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -85,6 +92,7 @@ export function UserNotificationDtoPaginatedResponseToJSON(value?: UserNotificat
     }
     return {
         
+        'unseenCount': value.unseenCount,
         'result': value.result === undefined ? undefined : (value.result === null ? null : (value.result as Array<any>).map(UserNotificationDtoToJSON)),
         'page': value.page,
         'from': value.from,
