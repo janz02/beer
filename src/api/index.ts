@@ -1,3 +1,4 @@
+import { displayBackendError } from '../services/errorHelpers'
 import { InformationApi } from './swagger/apis/InformationApi'
 import { Configuration } from './swagger/runtime'
 import {
@@ -20,7 +21,7 @@ import {
 import { notification } from 'antd'
 import i18n from 'app/i18n'
 
-interface RequestError {
+export interface RequestError {
   code?: number
   errors?: RequestErrorItem[]
   guid?: string | null
@@ -54,29 +55,7 @@ export const config: Configuration = new Configuration({
         // In case of the refresh endpoint don't display errors.
         else if (ctx.response.status >= 400 && !ctx.url.endsWith('Auth/Refresh')) {
           const error: RequestError = await ctx.response.json()
-          let errorForLog = {}
-          let i = 0
-          error.errors?.forEach(errorItem => {
-            i++
-            let message = errorItem.errorkey ? i18n.t(errorItem.errorkey) : errorItem.message
-            // In case it has errorkey but it isn't translated yet use the english message.
-            if (message === errorItem.errorkey && errorItem.message) {
-              message = errorItem.message
-            }
-            errorForLog = { ...errorForLog, [i]: message }
-            notification.error({
-              message,
-              duration: null
-            })
-          })
-
-          console.table({
-            url: ctx.url,
-            code: error.code,
-            guid: error.guid,
-            stacktrace: error.stacktrace,
-            ...errorForLog
-          })
+          displayBackendError(error, ctx.url)
         }
 
         return Promise.resolve()
