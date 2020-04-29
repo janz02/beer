@@ -42,7 +42,7 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
       onMouseLeave={() => setHover(false)}
       onMouseEnter={() => setHover(true)}
       className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}
-      onClick={() => item.id && inspectItem(item.id)}
+      onClick={() => inspectItem(item)}
       actions={[
         // eslint-disable-next-line react/jsx-key
         <div className="notification-item__date">

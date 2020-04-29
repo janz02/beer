@@ -14,7 +14,7 @@ interface UseNotificationFeatures {
   handleGetNotifications: () => void
   handleClose: () => void
   handleOpen: () => void
-  inspectItem: (id: number) => void
+  inspectItem: (item: NotificationData) => void
 }
 
 const { getNotifications, close, open } = notificationActions
@@ -51,8 +51,10 @@ export const useNotification = (): UseNotificationFeatures => {
     dispatch(open())
   }
 
-  const inspectItem = (id: number): void => {
-    dispatch(notificationActions.markAsSeen(id))
+  const inspectItem = (item: NotificationData): void => {
+    if (item.isSeen === false && item.id) {
+      dispatch(notificationActions.markAsSeen(item.id))
+    }
   }
 
   const handleGetNotifications = useCallback((): void => {
