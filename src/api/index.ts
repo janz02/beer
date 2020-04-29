@@ -15,6 +15,7 @@ import {
   CashiersApi,
   FilesApi,
   CouponUserCodesApi,
+  NotificationsApi,
   NotificationHubApi
 } from './swagger/apis'
 
@@ -102,17 +103,6 @@ export const api = {
   cashiers: new CashiersApi(config),
   information: new InformationApi(config),
   files: new FilesApi(config),
-  notification: new NotificationHubApi(config)
+  notification: new NotificationsApi(config),
+  notificationHub: new NotificationHubApi(config)
 }
-
-// const c = signalr.buildConnection().signalr.startConnection(c)
-
-// setTimeout(() => {
-//   console.log('CONECT START 5000', { tkn: sessionStorage.getItem('jwt') })
-//   signalr.startConnection(c)
-
-// c?.start()
-// c?.on('NewNotification', data => {
-//   console.log(data)
-// })
-// }, 5000)

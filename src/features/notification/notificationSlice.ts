@@ -1,101 +1,58 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import moment, { Moment } from 'moment'
+import moment from 'moment'
 import { AppThunk } from 'app/store'
-import { delay } from 'services/temp/delay'
-import { ListRequestParams } from 'hooks/useTableUtils'
+import { ListRequestParams, OrderByType } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import { SignalrStatusReport } from 'middlewares/signalrMiddleware'
 import { HubConnectionState } from '@microsoft/signalr'
+import { api } from 'api'
+import { NotificationData, NotificationDataDack } from 'models/notification'
+import { GetNotificationsRequest } from 'api/swagger'
 
-// TODO: Remove
-const TEMP_DATA: NotificationData[] = [
-  {
-    id: '1',
-    title: 'New Shell Coupons',
-    description: 'Free coupons for you! Buy more shell stuff. bla blb alvlb gkfk sjdksjd dksjfdk',
-    read: false,
-    image: 'https://i7.pngguru.com/preview/9/209/70/5bbc0e96b85d3.jpg',
-    deliveryTime: '20200103T080910'
-  },
-  {
-    id: '8',
-    title: 'Old Shell Coupons',
-    description: 'Free coupons for you! Buy more shell stuff. bla blb alvlb gkfk sjdksjd dksjfdk',
-    read: true,
-    image: 'https://i7.pngguru.com/preview/9/209/70/5bbc0e96b85d3.jpg',
-    deliveryTime: '20181228T080910'
-  },
-  {
-    id: '3',
-    title: 'Empty notification',
-    description: '',
-    read: true,
-    image: '',
-    deliveryTime: '20191226T080910'
-  },
-  {
-    id: '4',
-    title: 'Unread notification',
-    description: 'hfhsd jdfksjdfk kjfkjsd',
-    read: false,
-    image: '',
-    deliveryTime: '20191226T080910'
-  },
-  {
-    id: '5',
-    title: 'Lazy notification',
-    description: '',
-    read: true,
-    image: '',
-    deliveryTime: '20191226T080910'
-  },
-  {
-    id: '6',
-    title: 'Old notification',
-    description: 'mnd dsfndsflkj mdsflk',
-    read: true,
-    image: '',
-    deliveryTime: '20181226T080910'
-  },
-  {
-    id: '7',
-    title: 'Very old notification',
-    description: '',
-    read: true,
-    image: '',
-    deliveryTime: '20171226T080910'
-  }
-]
+const NOTIFICATION_LIST_PAGE_SIZE = 20
 
-export interface NotificationData {
-  id: string
-  title: string
-  description: string
-  read: boolean
-  image: string
-  deliveryTime: Moment | string
+export enum NotificationListState {
+  Empty = 'Empty',
+  LoadedFirst = 'LoadedFirst',
+  LoadedMore = 'LoadedMore',
+  LoadedAll = 'LoadedAll'
 }
 
 interface NotificationState {
+  listState: FeatureState
+  listContentState: NotificationListState
   rtConnectionState?: HubConnectionState
   opened: boolean
-  unreadCount: number
-  hasMore: boolean
   listParams: ListRequestParams
-  notifications: NotificationData[]
-  listState: FeatureState
-  itemState: FeatureState
+  visibleCount: number
+  unseenCount: number
+  /** The date of the most recent notification; for fetching the recent notifications. */
+  newestDate?: moment.Moment
+  /** An object that works as a Set, to avoid repeating the notifications;
+   Set is not supported by immer by dafault, and an object works fine. 
+   In the component it is converted into an array. */
+  notifications: NotificationDataDack
+}
+
+interface NotifiacationListActionPayload {
+  list: NotificationData[]
+  unseenCount: number
+  listParams: ListRequestParams
+  listContentState?: NotificationListState
 }
 
 const initialState: NotificationState = {
-  opened: false,
-  unreadCount: 0,
   listState: FeatureState.Initial,
-  itemState: FeatureState.Initial,
-  notifications: [],
-  hasMore: true,
+  listContentState: NotificationListState.Empty,
+  opened: false,
+  unseenCount: 0,
+  visibleCount: 0,
+  notifications: {},
   listParams: {
-    pageSize: 10
+    page: 0,
+    pageSize: NOTIFICATION_LIST_PAGE_SIZE,
+    orderBy: 'Notification.CreatedDate',
+    orderByType: OrderByType.Descending
   }
 }
 
@@ -113,35 +70,40 @@ const notificationSlice = createSlice({
     setListState(state, action: PayloadAction<FeatureState>) {
       state.listState = action.payload
     },
-    setItemState(state, action: PayloadAction<FeatureState>) {
-      state.itemState = action.payload
+    setUnseenCount(state, action: PayloadAction<number>) {
+      state.unseenCount = action.payload
     },
     setRtConnectionState(state, action: PayloadAction<HubConnectionState | undefined>) {
       state.rtConnectionState = action.payload
     },
-    getNotificationsSuccess(state, action: PayloadAction<NotificationData[]>) {
-      state.notifications.unshift(...action.payload)
-      state.notifications = state.notifications.sort((a, b) =>
-        (a.deliveryTime as Moment).isBefore(b.deliveryTime as Moment) ? 1 : -1
-      )
-      // TODO - get this from api response
-      state.unreadCount = 0
-      state.notifications.forEach(noti => {
-        state.unreadCount += +!noti.read
-      })
+    patchNotificationList(state, action: PayloadAction<NotifiacationListActionPayload>) {
+      const { list, unseenCount, listParams, listContentState } = action.payload
       state.listState = FeatureState.Success
-      state.hasMore = state.notifications.length < 60
-    },
-    inspectNotificationSuccess(state, action: PayloadAction<string>) {
-      // TODO: this is for simulation at this point
-      const id = action.payload
-      const idx = state.notifications.findIndex(noti => noti.id === id)
-      state.notifications[idx].read = true
-      // TODO - get this from api response
-      state.unreadCount = 0
-      state.notifications.forEach(noti => {
-        state.unreadCount += +!noti.read
+      state.unseenCount = unseenCount
+      state.listParams = listParams
+      list.forEach(noti => {
+        if (noti.id) {
+          // Overrides existing notifications, keeps the uniqueness.
+          state.notifications[noti.id] = noti
+          if (!state.newestDate || noti.createdDate?.isAfter(state.newestDate)) {
+            state.newestDate = noti.createdDate
+          }
+        }
       })
+      if (listContentState) {
+        state.listContentState = listContentState
+      }
+      state.listState = FeatureState.Success
+
+      // Incomming notifications offset the pagination, it has to be corrected.
+      const actualPage = Object.keys(state.notifications).length / NOTIFICATION_LIST_PAGE_SIZE
+      state.listParams = listParams
+      state.listParams.page = Math.max(1, Math.floor(actualPage))
+      state.visibleCount = Object.keys(state.notifications).length
+    },
+    markAsSeenSuccess(state, action: PayloadAction<number>) {
+      state.notifications[action.payload].isSeen = true
+      state.unseenCount -= 1
     }
   }
 })
@@ -151,38 +113,128 @@ const {
   close,
   resetNotification,
   setListState,
-  setItemState,
-  inspectNotificationSuccess,
-  getNotificationsSuccess,
-  setRtConnectionState
+  markAsSeenSuccess,
+  setRtConnectionState,
+  patchNotificationList
 } = notificationSlice.actions
 
-const getNotifications = (params: ListRequestParams = {}): AppThunk => async dispatch => {
-  dispatch(setListState(FeatureState.Loading))
+/**
+ * Follows the pagination model
+ */
+const getNotifications = (): AppThunk => async (dispatch, getState) => {
   try {
-    // TODO: needs real api connection
-    const data = (await delay(
-      [...TEMP_DATA].map(noti => ({
-        ...noti,
-        id: Date.now() + `_${noti.id}_${Math.round(Math.random() * 2000)}`,
-        deliveryTime: moment(noti.deliveryTime),
-        description: noti.description + moment.now()
-      })),
-      400
-    )) as NotificationData[]
-    dispatch(getNotificationsSuccess(data))
+    const { listParams, listContentState } = getState().notification
+    dispatch(setListState(FeatureState.Loading))
+
+    const newListParams: ListRequestParams = { ...listParams }
+
+    switch (listContentState) {
+      case NotificationListState.Empty:
+        newListParams.page = 1
+        break
+      case NotificationListState.LoadedFirst:
+      case NotificationListState.LoadedMore:
+        newListParams.page = listParams.page ? listParams.page + 1 : 1
+        break
+      case NotificationListState.LoadedAll:
+        dispatch(setListState(FeatureState.Success))
+        return
+    }
+
+    const response = await api.notification.getNotifications(newListParams)
+
+    const hasMore = response.size && response.to ? response.size > response.to : false
+    const loadedMore = response.page ? response.page > 1 : false
+
+    let newListContentState: NotificationListState | undefined = listContentState
+    if (hasMore && loadedMore) {
+      newListContentState = NotificationListState.LoadedMore
+    } else if (hasMore && !loadedMore) {
+      newListContentState = NotificationListState.LoadedFirst
+    } else if (!hasMore) {
+      newListContentState = NotificationListState.LoadedAll
+    }
+
+    const list =
+      response.result?.map<NotificationData>(n => ({
+        ...n,
+        createdDate: moment(n.createdDate)
+      })) ?? []
+    const unseenCount = response.unseenCount ?? 0
+
+    const actionPayload: NotifiacationListActionPayload = {
+      list,
+      unseenCount,
+      listParams: newListParams,
+      listContentState: newListContentState
+    }
+
+    dispatch(patchNotificationList(actionPayload))
   } catch (err) {
     dispatch(setListState(FeatureState.Error))
   }
 }
 
-const inspectNotification = (id: string): AppThunk => async dispatch => {
-  dispatch(setItemState(FeatureState.Loading))
+/**
+ * If the notification list is empty it follows the pagination model,
+ * otherwise it fetches the notification between now and the most recent notification.
+ */
+const getRecentNotifications = (): AppThunk => async (dispatch, getState) => {
   try {
-    dispatch(inspectNotificationSuccess(id))
+    dispatch(setListState(FeatureState.Loading))
+    const { listParams, newestDate, listContentState } = getState().notification
+
+    const newListParams: ListRequestParams = { ...listParams }
+    let queryParams: GetNotificationsRequest = {}
+
+    switch (listContentState) {
+      case NotificationListState.Empty:
+        newListParams.page = 1
+        queryParams = newListParams
+        break
+      case NotificationListState.LoadedFirst:
+      case NotificationListState.LoadedMore:
+      case NotificationListState.LoadedAll:
+      default:
+        queryParams.toDate = moment().toDate()
+        queryParams.fromDate = newestDate?.toDate()
+        break
+    }
+
+    const response = await api.notification.getNotifications(queryParams)
+
+    let newListContentState: NotificationListState | undefined
+    if (listContentState === NotificationListState.Empty) {
+      const hasMore = response.size && response.to ? response.size > response.to : false
+      newListContentState = hasMore
+        ? NotificationListState.LoadedFirst
+        : NotificationListState.LoadedAll
+    }
+
+    const list =
+      response.result?.map<NotificationData>(n => ({
+        ...n,
+        createdDate: moment(n.createdDate)
+      })) ?? []
+
+    const actionPayload: NotifiacationListActionPayload = {
+      list,
+      unseenCount: response.unseenCount ?? 0,
+      listParams: newListParams,
+      listContentState: newListContentState
+    }
+
+    dispatch(patchNotificationList(actionPayload))
   } catch (err) {
-    dispatch(setItemState(FeatureState.Error))
+    dispatch(setListState(FeatureState.Error))
   }
+}
+
+const markAsSeen = (id: number): AppThunk => async dispatch => {
+  try {
+    await api.notification.seenNotification({ id })
+    dispatch(markAsSeenSuccess(id))
+  } catch (err) {}
 }
 
 const setConnectionState = (report: SignalrStatusReport): AppThunk => async dispatch => {
@@ -194,9 +246,10 @@ export const notificationReducer = notificationSlice.reducer
 export const notificationActions = {
   open,
   close,
+  markAsSeen,
   getNotifications,
+  getRecentNotifications,
   resetNotification,
-  inspectNotification,
   setConnectionState
 }
 

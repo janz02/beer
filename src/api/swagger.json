@@ -2750,17 +2750,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserNotificationDtoPaginatedResponse"
+                  "$ref": "#/components/schemas/NotificationsPaginatedResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserNotificationDtoPaginatedResponse"
+                  "$ref": "#/components/schemas/NotificationsPaginatedResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserNotificationDtoPaginatedResponse"
+                  "$ref": "#/components/schemas/NotificationsPaginatedResponse"
                 }
               }
             }
@@ -2813,6 +2813,69 @@
         "responses": {
           "200": {
             "description": "Successful update"
+          }
+        }
+      }
+    },
+    "/api/Notifications/Types": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Returns the possible notification types",
+        "operationId": "NotificationTypes",
+        "responses": {
+          "200": {
+            "description": "Returns the notification types",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Notifications/TestNotification": {
+      "post": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "For Testing purposes only",
+        "operationId": "addTestNotification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddNotificationTestCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notification added"
           }
         }
       }
@@ -5596,7 +5659,8 @@
       },
       "NotificationType": {
         "enum": [
-          "CampaignAccepted"
+          "CampaignMovedToWaitingState",
+          "PartnerContactRegistered"
         ],
         "type": "string"
       },
@@ -5607,10 +5671,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "userId": {
-            "type": "string",
-            "nullable": true
-          },
           "isSeen": {
             "type": "boolean"
           },
@@ -5620,12 +5680,28 @@
           "createdDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actualId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
-      "UserNotificationDtoPaginatedResponse": {
+      "NotificationsPaginatedResponse": {
         "type": "object",
         "properties": {
+          "unseenCount": {
+            "type": "integer",
+            "format": "int32"
+          },
           "result": {
             "type": "array",
             "items": {
@@ -5648,6 +5724,31 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "AddNotificationTestCommand": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/NotificationType"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "actualId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isSeen": {
+            "type": "boolean"
           }
         }
       },

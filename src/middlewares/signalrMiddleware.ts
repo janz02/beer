@@ -2,7 +2,8 @@ import { Action, PayloadAction } from '@reduxjs/toolkit'
 import { Dispatch } from 'react'
 import { store } from 'app/store'
 import { authActionType } from 'features/auth/authSlice'
-import { UserVm } from 'api/swagger'
+import { UserVm } from 'api/swagger/models'
+
 import {
   notificationActions,
   notificationActionType
@@ -47,8 +48,13 @@ const sendConnectionStateFactory = (connection: Connection, connectionCreatedAt:
  * Register the signlr method names, and the their callbacks
  * @param connection
  */
-const registerCallbacks = (connection: Connection): void => {
-  connection?.on('NewNotification', () => console.log('## NEW NOTI ', connection.connectionId))
+const registerCallbacks = (connection: Connection, jwt: string): void => {
+  // TODO: notification role matrix
+  // if (hasPermission([Roles.Administrator], jwt)) {
+  connection?.on('NewNotification', () => {
+    store.dispatch(notificationActions.getRecentNotifications())
+  })
+  // }
 }
 
 /**
@@ -74,7 +80,7 @@ const initConnection = (newJwt?: string): Connection => {
   connection.onreconnecting(() => sendConnectionState('onReconnecting'))
   connection.onclose(() => sendConnectionState('onClose'))
 
-  registerCallbacks(connection)
+  registerCallbacks(connection, jwt)
 
   connection
     .start()

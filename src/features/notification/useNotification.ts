@@ -1,8 +1,9 @@
-import { notificationActions, NotificationData } from './notificationSlice'
+import { notificationActions, NotificationListState } from './notificationSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
+import { NotificationData } from 'models/notification'
 
 interface UseNotificationFeatures {
   opened: boolean
@@ -13,35 +14,50 @@ interface UseNotificationFeatures {
   handleGetNotifications: () => void
   handleClose: () => void
   handleOpen: () => void
-  inspectItem: (id: string) => void
+  inspectItem: (id: number) => void
 }
 
+const { getNotifications, close, open } = notificationActions
+
 export const useNotification = (): UseNotificationFeatures => {
-  const { getNotifications, close, open, inspectNotification } = notificationActions
   const dispatch = useDispatch()
-  const { notifications, hasMore, listState, opened, unreadCount } = useSelector(
-    (state: RootState) => state.notification
-  )
+  const {
+    notifications: notificationsObj,
+    listState,
+    opened,
+    listContentState,
+    unseenCount: unreadCount
+  } = useSelector((state: RootState) => state.notification)
 
   const loading = listState === FeatureState.Loading
-  const canLoadMore = !loading && hasMore
+  const canLoadMore = !loading && listContentState !== NotificationListState.LoadedAll
 
   const handleClose = (): void => {
     dispatch(close())
   }
 
+  const notifications = useMemo(() => {
+    const notificationArray: NotificationData[] = []
+    Object.keys(notificationsObj).forEach(key => {
+      if (notificationsObj[key]) {
+        notificationArray.push({ ...notificationsObj[key], key: key })
+      }
+    })
+    notificationArray.sort((a, b) => (a.createdDate?.isBefore(b.createdDate) ? 1 : -1))
+    return notificationArray
+  }, [notificationsObj])
+
   const handleOpen = (): void => {
     dispatch(open())
   }
 
-  const inspectItem = (id: string): void => {
-    dispatch(inspectNotification(id))
-    dispatch(close())
+  const inspectItem = (id: number): void => {
+    dispatch(notificationActions.markAsSeen(id))
   }
 
   const handleGetNotifications = useCallback((): void => {
     dispatch(getNotifications())
-  }, [dispatch, getNotifications])
+  }, [dispatch])
 
   return {
     opened,
