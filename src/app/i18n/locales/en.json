@@ -145,6 +145,7 @@
     "create-coupon-success": "Creating a coupon was successful.",
     "download-coupons": "Download coupons",
     "download-redeemed-coupons": "Download claimed coupons",
+    "download-redeemed-coupons-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission.",
     "edit": "Edit",
     "editor-title": "Campaign editor",
     "field": {
@@ -152,7 +153,7 @@
       "awarded-campaign": "Highlighted campaign sign",
       "banner-link": "Banner link",
       "banner-link-help": "The banner link leads to this website. Campaign landing page (campaign code can be accepted).",
-      "big-image": "Coupon big image",
+      "big-image": "Big image",
       "big-image-help": "Only a 360*540 pixel JPG or PNG file can be accepted.",
       "category": "Campaign category",
       "category-help": "Please select the industry category regarding to your product/service in your offer",
@@ -176,7 +177,6 @@
       "distribution-start-date": "Campaign start date",
       "distribution-start-date-help": "The first day of the displaying.",
       "download": "Download",
-      "download-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission",
       "draw-date": "Draw date",
       "expiration-date": "Expiration date",
       "expiration-date-help": "The last day when claiming is possible.",
@@ -293,18 +293,14 @@
       "cant-be-deleted": "Coupon can't be deleted.",
       "cant-change-state": "Can't change coupon state.",
       "fix-discount-must-be-integer": "Field must be a positive integer.",
-      "fix-discount-out-of-range": "Fix discount must be between 1 and 1,000,000.",
       "invalid-initial-state": "Invalid initial state.",
       "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
-      "item-price-required-if-previous-year-average-basket-value-empty": "Product value can't be empty if average basket value is empty.",
       "name-be-edited-after-accepted": "Coupon name cannot be edited after accepted.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
       "partner-must-be-major": "__STRING_NOT_TRANSLATED__",
-      "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
       "predefined-file-is-empty": "Predefined code file must not be empty.",
       "predefinied-file-invalid": "Predefined code file must bne valid CSV file.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty.",
       "prize-rules-invalid": "Prize rule file must be a PDF file.",
       "small-picture-invalid": "Small picture file format or size is invalid.",
       "type-has-no-codes": "__STRING_NOT_TRANSLATED__",
@@ -340,6 +336,9 @@
     },
     "rtd": {
       "communication": "RTD communication error."
+    },
+    "sendgrid": {
+      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "unknown-try-again": "Please, try again!",
     "validation": {

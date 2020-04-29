@@ -1,8 +1,9 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { UploadFile, UploadProps, UploadChangeParam } from 'antd/lib/upload/interface'
 import { useTranslation } from 'react-i18next'
-import { api, getUrl } from 'api'
+import { api, RequestError, getUrl } from 'api'
 import { getBase64 } from 'services/file-reader'
+import { displayBackendError } from 'services/errorHelpers'
 
 interface FileThumbnail {
   label?: string
@@ -103,9 +104,14 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
           onSuccess?.(file.response.id)
           break
         case 'removed':
-        case 'error':
           setThumbnail({ loading: false, error: t('error.unknown-try-again') })
           break
+        case 'error': {
+          const error: RequestError = info.file.response
+          displayBackendError(error, file.error.url)
+          setThumbnail({ loading: false, error: t('error.unknown-try-again') })
+          break
+        }
       }
     },
     [handleUploadSuccess, onSuccess, t]

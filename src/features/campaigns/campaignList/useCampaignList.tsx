@@ -202,20 +202,14 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         key: 'startDate',
         ellipsis: false,
         sort: true,
-        filterMode: FilterMode.DATEPICKER,
-        render(value: moment.Moment) {
-          return <MomentDisplay date={value} />
-        }
+        filterMode: FilterMode.DATEPICKER
       }),
       columnConfig({
         title: t('coupon-list.end-date'),
         ellipsis: false,
         key: 'endDate',
         sort: true,
-        filterMode: FilterMode.DATEPICKER,
-        render(value: moment.Moment) {
-          return <MomentDisplay date={value} />
-        }
+        filterMode: FilterMode.DATEPICKER
       }),
       columnConfig({
         title: t('coupon-list.expire-date'),
