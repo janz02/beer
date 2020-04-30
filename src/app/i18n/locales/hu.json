@@ -255,93 +255,93 @@
   },
   "error": {
     "auth": {
-      "expired-refresh-token": "__STRING_NOT_TRANSLATED__",
-      "forbidden": "__STRING_NOT_TRANSLATED__",
-      "invalid-email": "__STRING_NOT_TRANSLATED__",
-      "invalid-partner-code": "__STRING_NOT_TRANSLATED__",
-      "invalid-password": "__STRING_NOT_TRANSLATED__",
-      "invalid-refresh-token": "__STRING_NOT_TRANSLATED__",
-      "ldap": "__STRING_NOT_TRANSLATED__",
-      "ldap-password-change": "__STRING_NOT_TRANSLATED__",
-      "login-failed": "__STRING_NOT_TRANSLATED__",
+      "expired-refresh-token": "Lejárt refresh token.",
+      "forbidden": "Hozzáférés nem engedélyezett.",
+      "invalid-email": "Invalid e-mail.",
+      "invalid-partner-code": "Invalid partner kód.",
+      "invalid-password": "Invalid partner jelszó.",
+      "invalid-refresh-token": "Invalid refresh token.",
+      "ldap": "Ldap hiba.",
+      "ldap-password-change": "Ldap jelszó változtatási hiba.",
+      "login-failed": "Hibás bejelentkezés.",
       "newpassword-sameasold": "Az új jelszó nem egyezhet meg az előzővel.",
       "password-inconsistent": "A két jelszó nem egyezik meg.",
-      "registration-failed": "__STRING_NOT_TRANSLATED__",
-      "sync-failed": "__STRING_NOT_TRANSLATED__",
-      "user-agreements-must-be-accepted": "__STRING_NOT_TRANSLATED__",
-      "user-exists": "__STRING_NOT_TRANSLATED__",
-      "user-inactive": "__STRING_NOT_TRANSLATED__",
-      "user-not-found": "__STRING_NOT_TRANSLATED__"
+      "registration-failed": "Regsztráció sikertelen.",
+      "sync-failed": "Felhasználók szinkronizációja sikerleten.",
+      "user-agreements-must-be-accepted": "A szabályzat elfogadása kötelező.",
+      "user-exists": "Felhasználó már létezik.",
+      "user-inactive": "Felhasználó inaktív.",
+      "user-not-found": "Felhasználó nem található."
     },
     "cashier": {
-      "cashier-cant-delete": "__STRING_NOT_TRANSLATED__",
-      "cashier-cant-save": "__STRING_NOT_TRANSLATED__",
-      "cashier-couponId-not-unique": "__STRING_NOT_TRANSLATED__",
-      "stamp-couponId-not-unique": "__STRING_NOT_TRANSLATED__"
+      "cashier-cant-delete": "A pénztárat nem lehet törölni.",
+      "cashier-cant-save": "A pénztárat nem lehet módosítani.",
+      "cashier-couponId-not-unique": "Online pénztár azonosító (AP) nem egyedi.",
+      "stamp-couponId-not-unique": "Digitális pecsét azonosító nem egyedi."
     },
     "comment": {
       "comment-or-state-required": "Kötelező státuszt választani vagy kommentet hagyni."
     },
     "common": {
-      "cant-modify": "__STRING_NOT_TRANSLATED__",
+      "cant-modify": "Nem módosítható.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező kitöltése kötelező.",
-      "internal": "__STRING_NOT_TRANSLATED__",
+      "internal": "Internal.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
-      "parameter-missing-or-invalid": "__STRING_NOT_TRANSLATED__",
+      "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
       "server-unavailable": "Szerver nem elérhető."
     },
     "coupon": {
-      "already-claimed": "__STRING_NOT_TRANSLATED__",
-      "big-picture-invalid": "__STRING_NOT_TRANSLATED__",
-      "cannot-claim": "__STRING_NOT_TRANSLATED__",
-      "cant-be-deleted": "__STRING_NOT_TRANSLATED__",
-      "cant-change-state": "__STRING_NOT_TRANSLATED__",
+      "already-claimed": "Kupon már kiváltva.",
+      "big-picture-invalid": "Nagy kép formátuma vagy mérete nem megfelelő.",
+      "cannot-claim": "Nem lehet kiváltani a kupont.",
+      "cant-be-deleted": "Kupon nem törölhető.",
+      "cant-change-state": "Kupon státusz változtatása sikertelen.",
       "fix-discount-must-be-integer": "Csak egész szám adható meg.",
-      "invalid-initial-state": "__STRING_NOT_TRANSLATED__",
-      "invalid-predefined-code-count": "__STRING_NOT_TRANSLATED__",
-      "invalid-state-predefined-codes": "__STRING_NOT_TRANSLATED__",
-      "name-be-edited-after-accepted": "__STRING_NOT_TRANSLATED__",
-      "only-accepted-can-be-changed": "__STRING_NOT_TRANSLATED__",
+      "invalid-initial-state": "Hibás kezdőállapot",
+      "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek.",
+      "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben ay állapotban.",
+      "name-be-edited-after-accepted": "A kupon neve nem módosithaó elfogadás után.",
+      "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható.",
       "partner-must-be-major": "__STRING_NOT_TRANSLATED__",
-      "predefined-file-is-empty": "__STRING_NOT_TRANSLATED__",
-      "predefinied-file-invalid": "__STRING_NOT_TRANSLATED__",
-      "prize-rules-invalid": "__STRING_NOT_TRANSLATED__",
-      "small-picture-invalid": "__STRING_NOT_TRANSLATED__",
+      "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia.",
+      "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie.",
+      "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie.",
+      "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő.",
       "type-has-no-codes": "__STRING_NOT_TRANSLATED__",
       "user-code-cant-save": "__STRING_NOT_TRANSLATED__"
     },
     "coupon-categories": {
-      "name-must-be-unique": "__STRING_NOT_TRANSLATED__"
+      "name-must-be-unique": "Kategória nevének egyedinek kell lennie."
     },
     "email-template": {
-      "name-must-be-unique": "__STRING_NOT_TRANSLATED__",
-      "not-found-version": "__STRING_NOT_TRANSLATED__"
+      "name-must-be-unique": "E-mail sablon névnek egyedinek kell lennie.",
+      "not-found-version": "Nem található ilyen verziójú e-mail sablon."
     },
     "file": {
       "download-fail": "Sikertelen fájl lekérdezés.",
-      "image-type-not-supported": "__STRING_NOT_TRANSLATED__",
-      "invalid-image-size": "__STRING_NOT_TRANSLATED__",
-      "invalid-prize-rule-type": "__STRING_NOT_TRANSLATED__",
-      "not-supported-format": "__STRING_NOT_TRANSLATED__"
+      "image-type-not-supported": "Rossz fájl formátum.",
+      "invalid-image-size": "Rossz kép méret.",
+      "invalid-prize-rule-type": "Rossz nyeremény szabály típus.",
+      "not-supported-format": "Nem támogatott fájl formátum."
     },
-    "not-found": "__STRING_NOT_TRANSLATED__",
+    "not-found": "Nem található.",
     "paginate": {
-      "order-by": "__STRING_NOT_TRANSLATED__",
-      "page": "__STRING_NOT_TRANSLATED__",
-      "page-size": "__STRING_NOT_TRANSLATED__"
+      "order-by": "Lapozó sorrend.",
+      "page": "Lapozó lap.",
+      "page-size": "Lapozó lap méret."
     },
     "partner": {
-      "cant-change-state": "__STRING_NOT_TRANSLATED__",
-      "inactive-or-deleted": "__STRING_NOT_TRANSLATED__",
-      "name-must-be-unique": "__STRING_NOT_TRANSLATED__"
+      "cant-change-state": "Partner státusz változtatása sikertelen.",
+      "inactive-or-deleted": "Parnter inaktív vagy törölt.",
+      "name-must-be-unique": "Partner nevének egyedinek kell lennie."
     },
     "partner-contact": {
-      "invalid-type": "__STRING_NOT_TRANSLATED__"
+      "invalid-type": "Nem megfelelő partner típus."
     },
     "rtd": {
-      "communication": "__STRING_NOT_TRANSLATED__"
+      "communication": "RTD kommunikációs hiba."
     },
     "sendgrid": {
       "communication": "__STRING_NOT_TRANSLATED__"
