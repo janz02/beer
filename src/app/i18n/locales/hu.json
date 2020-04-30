@@ -247,6 +247,12 @@
     "user": "Létrehozó felhasználó",
     "view-count": "Megjelenések száma"
   },
+  "enum": {
+    "noitfication-type": {
+      "CampaignMovedToWaitingState": "Kámpány várakozó állapotba került",
+      "PartnerContactRegistered": "Regisztrált partner kapcsolattartó"
+    }
+  },
   "error": {
     "auth": {
       "expired-refresh-token": "Lejárt refresh token.",
@@ -397,9 +403,7 @@
         "discount-required-for-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-required-for-discount": "__STRING_NOT_TRANSLATED__",
-        "discountValue": {
-          "max-decimal-precision-2": "__STRING_NOT_TRANSLATED__"
-        },
+        "discount-value-max-decimal-precision-2": "__STRING_NOT_TRANSLATED__",
         "draw-date-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
         "draw-date-required-for-prize": "__STRING_NOT_TRANSLATED__",
         "end-date-required": "__STRING_NOT_TRANSLATED__",
@@ -586,7 +590,8 @@
   "notification": {
     "empty-list": "Üres",
     "load-more": "Régebbiek...",
-    "notifications": "Értesítések"
+    "notifications": "Értesítések",
+    "read-all": "Mindegyik olvasottra állítása"
   },
   "partner": {
     "contacts": {

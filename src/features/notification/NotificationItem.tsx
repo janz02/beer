@@ -1,46 +1,39 @@
 import './NotificationItem.scss'
 import React, { FC, useState } from 'react'
 import moment from 'moment'
-import { NotificationData, notificationActions } from './notificationSlice'
-import { useDispatch } from 'hooks/react-redux-hooks'
 import { List, Avatar } from 'antd'
 import { BellFilled } from '@ant-design/icons'
 import { MomentDisplay } from 'components/MomentDisplay'
+import { useNotification } from './useNotification'
+import { NotificationData } from 'models/notification'
+import { useTranslation } from 'react-i18next'
+import { ListItemMetaProps } from 'antd/lib/list'
 
 interface NotificationItemProps {
   item: NotificationData
-  onClick: () => any
 }
 
-export const ListItem: FC<NotificationItemProps> = ({ item, onClick }) => {
-  const { inspectNotification } = notificationActions
-  const dispatch = useDispatch()
-
+export const NotificatonItem: FC<NotificationItemProps> = props => {
+  const { item } = props
+  const { t } = useTranslation()
+  const { handleInspectItem } = useNotification()
   const [hover, setHover] = useState(false)
 
-  const inspectItem = (id: string): void => {
-    dispatch(inspectNotification(id))
-    onClick()
+  const meta: ListItemMetaProps = {
+    title: t(`enum.noitfication-type.${item.type}`),
+    description: (
+      <MomentDisplay date={moment(item.createdDate)} mode={hover ? 'date time' : 'from now'} />
+    )
   }
 
   return (
     <List.Item
       onMouseLeave={() => setHover(false)}
       onMouseEnter={() => setHover(true)}
-      className={`notification-item ${item.read ? '' : 'notification-item--unread'}`}
-      onClick={() => inspectItem(item.id)}
-      actions={[
-        // eslint-disable-next-line react/jsx-key
-        <div className="notification-item__date">
-          <MomentDisplay date={moment(item.deliveryTime)} mode={hover ? 'date time' : 'from now'} />
-        </div>
-      ]}
+      className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}
+      onClick={() => handleInspectItem(item)}
     >
-      <List.Item.Meta
-        avatar={item.image ? <Avatar src={item.image} /> : <Avatar icon={<BellFilled />} />}
-        title={item.title}
-        description={item.description}
-      />
+      <List.Item.Meta avatar={<Avatar icon={<BellFilled />} />} {...meta} />
     </List.Item>
   )
 }

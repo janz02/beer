@@ -26,6 +26,8 @@ import { pageViewRoles } from 'services/roleHelpers'
 import { profileActions } from 'features/profile/profileSlice'
 import { NotificationFab } from 'features/notification/NotificationFab'
 import { NotificationDrawer } from 'features/notification/NotificationDrawer'
+import { hasPermission } from 'services/jwt-reader'
+import { notificationRoleConfig } from 'features/notification/useNotification'
 
 export const PrivateLayout: React.FC = ({ children }) => {
   const dispatch = useDispatch()
@@ -33,8 +35,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const isMobile = useIsMobile()
   const [menuOpened, setMenuOpened] = useState(!isMobile)
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile)
-  const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false)
-
   const profile = useSelector((state: RootState) => state.profile.profile)
 
   useEffect(() => {
@@ -150,10 +150,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
         />
       </SideMenu>
 
-      <NotificationDrawer
-        open={notificationDrawerOpen}
-        onClose={() => setNotificationDrawerOpen(false)}
-      />
+      {hasPermission(notificationRoleConfig) && <NotificationDrawer />}
 
       <Layout>
         <Button
@@ -163,7 +160,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
         />
         <Layout.Content className="layout-content">
           {children}
-          <NotificationFab onClick={() => setNotificationDrawerOpen(true)} />
+          {hasPermission(notificationRoleConfig) && <NotificationFab />}
         </Layout.Content>
       </Layout>
     </Layout>

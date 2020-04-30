@@ -15,7 +15,9 @@ import {
   SegmentsApi,
   CashiersApi,
   FilesApi,
-  CouponUserCodesApi
+  CouponUserCodesApi,
+  NotificationsApi,
+  NotificationHubApi
 } from './swagger/apis'
 
 import { notification } from 'antd'
@@ -33,7 +35,7 @@ interface RequestErrorItem {
   message?: string | null
 }
 
-function getUrl(): string {
+export function getUrl(): string {
   const getUrl = window.location
   return getUrl.protocol + '//' + getUrl.host
 }
@@ -79,5 +81,7 @@ export const api = {
   segments: new SegmentsApi(config),
   cashiers: new CashiersApi(config),
   information: new InformationApi(config),
-  files: new FilesApi(config)
+  files: new FilesApi(config),
+  notification: new NotificationsApi(config),
+  notificationHub: new NotificationHubApi(config)
 }

@@ -1,40 +1,59 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
 const shell = require("shelljs");
 const fs = require("fs-extra");
 const https = require("https");
 
-// 1. Get translation key list.
-const req = https.request(
-  {
-    // TODO: Use final DNS, lookout for prod - staging differences
-    hostname: "pkm-coupon-dev.grapetest.xyz",
-    path: "/api/Information",
-    method: "GET"
-  },
-  res => {
-    res.on("data", d => {
-      const keys = JSON.parse(d);
+// 1. Translation key list files
+const fileNameError = "src/app/i18n/backend-generated-error-codes.ts";
+const fileNameEnum = "src/app/i18n/backend-generated-enum-codes.ts";
 
-      // 2. Remove old list stored in backend-codes.ts.
-      const fileName = "src/app/i18n/backend-codes.ts";
-      fs.removeSync(fileName);
+// 2. Remove old list file and prepare the new one
+(() => {
+  const fileNames = [fileNameError, fileNameEnum];
+  fileNames.forEach(fileName => {
+    fs.removeSync(fileName);
+    fs.createFileSync(fileName);
+    fs.appendFileSync(fileName, "import i18n from '.'");
+  });
+})();
 
-      // 3. Generate new backend-codes.ts with the new list.
-      fs.createFileSync(fileName);
-      let content = "import i18n from '.'";
-      content += keys.reduce((acc, key) => acc + `\ni18n.t('${key}')`, "");
-      content += "\n";
-      fs.appendFileSync(fileName, content);
+// Function to generate translation keys
+const generateKeys = (path, fileName, prefix = "") => {
+  const req = https.request(
+    {
+      hostname: "pkm-coupon-dev.grapetest.xyz",
+      path,
+      method: "GET"
+    },
+    res => {
+      res.on("data", d => {
+        const keys = JSON.parse(d);
+        let content = "";
+        content += keys.reduce(
+          (acc, key) => acc + `\ni18n.t('${prefix}${key}')`,
+          ""
+        );
+        content += "\n";
+        fs.appendFileSync(fileName, content);
+      });
 
-      // 4. Generate i18n files with scanner.
-      shell.exec("npm run i18n:generate");
-    });
+      res.on("error", error => {
+        throw error;
+      });
+    }
+  );
 
-    res.on("error", error => {
-      throw error;
-    });
-  }
+  req.end();
+};
+
+// 3. Genatat lists
+generateKeys("/api/Information", fileNameError);
+generateKeys(
+  "/api/Notifications/Types",
+  fileNameEnum,
+  "enum.noitfication-type."
 );
 
-req.end();
+shell.exec("npm run i18n:generate");
