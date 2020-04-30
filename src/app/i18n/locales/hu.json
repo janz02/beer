@@ -279,7 +279,7 @@
     "common": {
       "cant-modify": "Mező nem módosítható.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
-      "field-required": "A mező kitöltése kötelező.",
+      "field-required": "A mező megadása kötelező.",
       "internal": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
@@ -363,10 +363,10 @@
         "dto-required": "DTO megadása kötelező, ellenőrizze a hívást.",
         "email-invalid-format": "Email nem megfelelő formátumú, kérem adjon meg egy megfelelő címet.",
         "email-max-length-100": "Email maximum 100 karakter lehet, kérem adjon meg egy megfelelő címet.",
-        "email-required": "Email kitöltése kötelező, kérem adjon meg egy megfelelő címet.",
-        "id-greater-than-0": "Id mező kitöltése kötelező, kérem adjon meg egy megfelelő azonosítót.",
-        "id-required": "Id mező kitöltése kötelező, kérem adjon meg egy megfelelő azonosítót.",
-        "new-password-required": "Új jelszó kitöltése kötelező, kérem adjon meg egy új jelszavat",
+        "email-required": "Email megadása kötelező, kérem adjon meg egy megfelelő címet.",
+        "id-greater-than-0": "Id mező megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
+        "id-required": "Id mező megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
+        "new-password-required": "Új jelszó megadása kötelező, kérem adjon meg egy új jelszavat",
         "password-invalid-format": "Jelszó nem megfelelő formátumú, kövesse a felület utasításait.",
         "password-max-length-64": "Jelszó maximum 64 karakter lehet, kövesse a felület utasításait.",
         "password-required": "Jelszó nem megfelelő formátumú, kövesse a felület utasításait.",
@@ -374,15 +374,15 @@
         "refresh-token-required": "Lejárt a bejelentkezési ideje, kérem jelentkezzen be újra.",
         "user-id-required": "Felhasználó id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
         "user-name-max-length-100": "Felhasználó neve maximum 100 karakter lehet, kérem adjon meg egy megfelelő nevet.",
-        "user-name-required": "Felhasználó név kitöltése kötelező, kérem adjon meg egy megfelelő nevet."
+        "user-name-required": "Felhasználó név megadása kötelező, kérem adjon meg egy megfelelő nevet."
       },
       "coupon": {
         "awarded-campaign-must-be-false": "Csak banner típusú kampány lehet kitüntetett kampány.",
         "big-picture-id-must-be-null-for-banner": "Nagy kép megadása tiltott banner kampánytípus esetén.",
         "big-picture-id-required-non-banner": "Nagy kép megadása kötelező, kövesse a felület utasításait.",
         "comment": {
-          "id-greater-than-0": "Komment id kitöltése kötelező, adjon meg egy megfelelő azonosítót.",
-          "id-required": "Komment id kitöltése kötelező, adjon meg egy megfelelő azonosítót",
+          "id-greater-than-0": "Komment id megadása kötelező, adjon meg egy megfelelő azonosítót.",
+          "id-required": "Komment id megadása kötelező, adjon meg egy megfelelő azonosítót",
           "max-length-200": "Komment hossza maximum 200 karakter lehet, írjon rövidebb kommentet."
         },
         "count-greater-than-0": "Kuponok számának megadása kötelező, kérem adjon meg egy megfelelő számosságot.",
@@ -390,11 +390,11 @@
         "count-required": "Kuponok számának megadása kötelező, kérem adjon meg egy megfelelő számosságot.",
         "description-max-length-255": "Kampány leírása maximum 255 karakter lehet, kérem adjon meg rövidebb szöveget.",
         "description-must-be-null-for-banner": "Banner kampány nem rendelkezhet leírással.",
-        "description-required-non-banner": "Kampány leírás kitöltése kötelező, kérem adjon meg egy leírást.",
-        "discount-fix-greater-than-or-equal-1": "Kedvezmény mérték kitöltése kötelező, kérem adjon meg egy számot.",
+        "description-required-non-banner": "Kampány leírás megadása kötelező, kérem adjon meg egy leírást.",
+        "discount-fix-greater-than-or-equal-1": "Kedvezmény mérték megadása kötelező, kérem adjon meg egy számot.",
         "discount-fix-less-than-or-equal-1000000": "Kedvezmény mértéke maximum 1.000.000 lehet, kérem adjon meg egy kisebb számot.",
         "discount-must-be-null-non-discount": "Nem kedvezmény kampány típusnál a kedvezmény mértékét nem lehet kitölteni.",
-        "discount-percent-greater-than-or-equal-0": "Kedvezmény mérték kitöltése kötelező, kérem adjon meg egy százalékot.",
+        "discount-percent-greater-than-or-equal-0": "Kedvezmény mérték megadása kötelező, kérem adjon meg egy százalékot.",
         "discount-percent-less-than-or-equal-100": "Kedvezmény mértéke maximum 100% lehet, kérem adjon meg egy kisebb százalékot.",
         "discount-required-for-discount": "Kedvezmény fajtájának megadása kötelező.",
         "discount-type-must-be-null-non-discount": "Nem kedvezmény típusú a kedvezmény típusát nem lehet kitölteni.",
@@ -422,12 +422,12 @@
         "previous-basket-value-must-be-null-non-discount": "Nem kedvezmény kampány típusnál a tavalyi átlagos kosár értékét nem lehet kitölteni.",
         "previous-basket-value-required-non-item-price": "Tavalyi átlagos kosár érték vagy a termék érték megadása kötelező, kérem adjon meg egy számot.",
         "prize-rules-file-id-must-be-null-non-prize": "Nem nyeremény kampány típusnál a nyereményjáték szabályzatot nem lehet kitölteni.",
-        "prize-rules-file-id-required-for-prize": "Nyereményjáték szabályzat kitöltése kötelező, adjon meg egy megfelelő PDF fájlt.",
+        "prize-rules-file-id-required-for-prize": "Nyereményjáték szabályzat megadása kötelező, adjon meg egy megfelelő PDF fájlt.",
         "prize-value-must-be-null-non-prize": "Nem nyeremény kampány típusnál a nyereményjáték szabályzatot nem lehet kitölteni.",
-        "prize-value-required-for-prize": "Nyereményjáték szabályzat kitöltése kötelező, adjon meg egy megfelelő PDF fájlt.",
+        "prize-value-required-for-prize": "Nyereményjáték szabályzat megadása kötelező, adjon meg egy megfelelő PDF fájlt.",
         "product-details-max-length-2000": "Termék/szolgáltatás részletek maximum 2000 karakter lehet, kérem adjon meg egy rövidebb leírást.",
         "product-details-must-be-null-for-prize": "N yeremény kampány típusnál a termék/szolgáltatás részleteket nem lehet kitölteni.",
-        "product-details-required-non-prize": "Termék/szolgáltatás részletek kitöltése kötelező, kérem adjon meg egy leírást.",
+        "product-details-required-non-prize": "Termék/szolgáltatás részletek megadása kötelező, kérem adjon meg egy leírást.",
         "rank-required": "Rangot kötelező megadni, kérem adjon meg egy rangot.",
         "small-picture-id-required": "Kis képet kötelező megadni, kérem adjon meg egy megfelelő képet.",
         "start-date-required": "Kampány kezdő dátumát kötelezőt megadni, kérem adjon meg egy dátumot.",
@@ -440,73 +440,73 @@
         "couponcode-required": "Kupon lejárt, ezért nem lehet beváltani, használjon másik kupont."
       },
       "email": {
-        "content-required": "__STRING_NOT_TRANSLATED__",
-        "recipient-required": "__STRING_NOT_TRANSLATED__",
-        "recipients-email-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "recipients-email-required": "__STRING_NOT_TRANSLATED__",
-        "recipients-required": "__STRING_NOT_TRANSLATED__",
-        "subject-required": "__STRING_NOT_TRANSLATED__",
-        "template-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "template-id-required": "__STRING_NOT_TRANSLATED__",
-        "template-name-required": "__STRING_NOT_TRANSLATED__",
-        "template-version-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "template-version-id-required": "__STRING_NOT_TRANSLATED__"
+        "content-required": "Email törzs megadása kötelező, kérem adjon meg egy megfelelő törzset.",
+        "recipient-required": "Címzett megadása kötelező, kérem adjon meg egy megfelelő email címet.",
+        "recipients-email-invalid-format": "Címzettek formátuma nem megfelelő, kérem adjon meg megfelelő email címeket.",
+        "recipients-email-required": "Címzett megadása kötelező, kérem adjon meg egy megfelelő email címet.",
+        "recipients-required": "Címzett megadása kötelező, kérem adjon meg egy megfelelő email címet.",
+        "subject-required": "Tárgy megadása kötelező, kérem adjon meg egy megfelelő tárgyat.",
+        "template-id-greater-than-0": "Email sablon megadása kötelező, kérem adjon meg egy sablot azonosítót.",
+        "template-id-required": "Email sablon megadása kötelező, kérem adjon meg egy sablot azonosítót.",
+        "template-name-required": "Email sablon megadása kötelező, kérem adjon meg egy sablot azonosítót.",
+        "template-version-id-greater-than-0": "Email sablon verzió megadása kötelező, kérem adjon meg egy sablot verziót.",
+        "template-version-id-required": "Email sablon verzió megadása kötelező, kérem adjon meg egy sablot verziót."
       },
       "file": {
-        "content-required": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__"
+        "content-required": "Fájl tartalom megadása kötelező, kérem adjon meg egy megfelelő fájlt.",
+        "id-required": "Fájl id megadása kötelező, kérem adjon meg egy megfelelő azonosítót."
       },
       "notification": {
-        "create-roles-cannot-be-empty": "__STRING_NOT_TRANSLATED__",
-        "to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
-        "type-invalid": "__STRING_NOT_TRANSLATED__",
-        "type-required": "__STRING_NOT_TRANSLATED__"
+        "create-roles-cannot-be-empty": "Értesítés készítéséhez jogosultságok megadása kötelező, kérem adjon meg megfelelő jogosultságokat.",
+        "to-date-greater-than-from-date": "Az értesítések lekérdezéséhez a kezdő dátumnak kisebbnek kell lennie, mint a végdátumnak.",
+        "type-invalid": "Értesítés típus nem megfelelő, adjon meg egy megfelelő típust.",
+        "type-required": "Értesítés típus megadása kötelező, adjon meg egy megfelelő típust."
       },
       "partner": {
-        "address-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "address-required": "__STRING_NOT_TRANSLATED__",
-        "bank-account-max-length-26": "__STRING_NOT_TRANSLATED__",
-        "bank-account-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-required": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__",
-        "registration-allowed-max-length-30": "__STRING_NOT_TRANSLATED__",
-        "registration-allowed-required": "__STRING_NOT_TRANSLATED__",
-        "registration-number-max-length-20": "__STRING_NOT_TRANSLATED__",
-        "registration-number-required": "__STRING_NOT_TRANSLATED__",
-        "state-required": "__STRING_NOT_TRANSLATED__",
-        "tax-number-max-length-20": "__STRING_NOT_TRANSLATED__",
-        "tax-number-required": "__STRING_NOT_TRANSLATED__"
+        "address-max-length-150": "Parnter címe maximum 150 karakter lehet, kérem adjon meg egy rövidebb címet.",
+        "address-required": "Partner címének megadása kötelező, kérem adjon meg egy címet.",
+        "bank-account-max-length-26": "Partner bankszámla maximum 26 karakter lehet, kérem adjon meg egy rövidebb számsort.",
+        "bank-account-required": "Partner bankszámla számát kötelező megadni, kérem adjon meg egy számsort.",
+        "id-greater-than-0": "Partner id megadása kötelező, kérem adjon meg egy azonosítót.",
+        "id-required": "Partner id megadása kötelező, kérem adjon meg egy azonosítót.",
+        "mailing-address-max-length-150": "Partner levelezési címe maximum 150 karakter lehet, kérem adjon meg egy címet.",
+        "mailing-address-required": "Partner levelezési cím megadása kötelező, kérem adjon meg egy címet.",
+        "name-max-length-150": "Partner neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-required": "Parnter név megadása kötelelező, kérem adjon meg egy megfelelő nevet.",
+        "registration-allowed-max-length-30": "Cégjegyző neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "registration-allowed-required": "Cégjegyző megadása kötelező, kérem adjon meg egy megfelelő nevet.",
+        "registration-number-max-length-20": "Cégjegyzék szám maximum 20 karakter lehet, kérem adjon meg egy rövidebb számot.",
+        "registration-number-required": "Cégjegyzék szám megadása kötelező, kérem adjon meg egy megfelelő számot.",
+        "state-required": "Székhely megadása kötelező, kérem adjon meg egy megfelelő címet.",
+        "tax-number-max-length-20": "Adószám maximum 20 karakter lehet, kérem adjon meg egy rövidebb számot.",
+        "tax-number-required": "Adószám megadása kötelező, kérem adjon meg egy számot."
       },
       "partner-contact": {
-        "is-active-required": "__STRING_NOT_TRANSLATED__",
-        "query-filters-required": "__STRING_NOT_TRANSLATED__",
-        "query-toggle-required": "__STRING_NOT_TRANSLATED__",
-        "role-required": "__STRING_NOT_TRANSLATED__"
+        "is-active-required": "Kapcsolat tartó státusz megadása kötelező, kérem adjon meg egy státuszt.",
+        "query-filters-required": "Kapcsolat tartó lekérdézés szűrőfeltételei hiányoznak, kérem adjon meg legalább egy üres lekérdezést.",
+        "query-toggle-required": "Kapcsolat tartó lekérdezéshez a választó hiányzik, kérem adja meg hogy NKM vagy külső kapcsolattartókat szeretne lekérdezni.",
+        "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
       },
       "register-partner-contact": {
-        "partner-code-max-length-10": "__STRING_NOT_TRANSLATED__",
-        "partner-code-required": "__STRING_NOT_TRANSLATED__"
+        "partner-code-max-length-10": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot.",
+        "partner-code-required": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot."
       },
       "register-user": {
-        "city-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "city-required": "__STRING_NOT_TRANSLATED__",
-        "mothers-maiden-name-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "mothers-maiden-name-required": "__STRING_NOT_TRANSLATED__",
-        "place-of-birth-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "place-of-birth-required": "__STRING_NOT_TRANSLATED__"
+        "city-max-length-100": "A város neve maximum 100 karakter lehet, kérem adjon meg egy rövidebb városnevet.",
+        "city-required": "Város megadása kötelező, kérem adjon meg egy várost.",
+        "mothers-maiden-name-max-length-100": "Anyja leánykori neve maximum 100 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "mothers-maiden-name-required": "Anyja leánykori nevét kötelező megadni, kérem adja meg a nevét.",
+        "place-of-birth-max-length-100": "Születési hely neve maximum 100 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "place-of-birth-required": "Születési hely megadása kötelező, kérem adja meg hol született."
       },
       "scoring": {
-        "event-type-required": "__STRING_NOT_TRANSLATED__"
+        "event-type-required": "Scoring esemény típus megadása kötelező, kérem adjon meg egy típust."
       },
       "segment": {
-        "email-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "email-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
+        "email-invalid-format": "Szegmens email nem megfelelő formátumú, kérem adjon meg megfelelő címet.",
+        "email-required": "Szegmens email megadása kötelező, kérem adjon meg egy megfelelő címet.",
+        "id-greater-than-0": "Szegmens id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
+        "id-required": "Szegmens id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
         "name-invalid-format": "__STRING_NOT_TRANSLATED__",
         "name-required": "__STRING_NOT_TRANSLATED__"
       },
