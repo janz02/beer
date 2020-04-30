@@ -247,95 +247,101 @@
     "user": "Creator user",
     "view-count": "View count"
   },
+  "enum": {
+    "noitfication-type": {
+      "CampaignMovedToWaitingState": "Campaign moved to waiting state",
+      "PartnerContactRegistered": "Parnter Contact Registered"
+    }
+  },
   "error": {
     "auth": {
-      "expired-refresh-token": "Refresh token expired.",
-      "forbidden": "Access forbidden.",
-      "invalid-email": "Invalid e-mail.",
-      "invalid-partner-code": "Invalid partner code.",
-      "invalid-password": "Invalid password.",
-      "invalid-refresh-token": "Invalid refresh token.",
-      "ldap": "Ldap error.",
-      "ldap-password-change": "Ldap password change error.",
-      "login-failed": "Authentication failed.",
+      "expired-refresh-token": "__STRING_NOT_TRANSLATED__",
+      "forbidden": "__STRING_NOT_TRANSLATED__",
+      "invalid-email": "__STRING_NOT_TRANSLATED__",
+      "invalid-partner-code": "__STRING_NOT_TRANSLATED__",
+      "invalid-password": "__STRING_NOT_TRANSLATED__",
+      "invalid-refresh-token": "__STRING_NOT_TRANSLATED__",
+      "ldap": "__STRING_NOT_TRANSLATED__",
+      "ldap-password-change": "__STRING_NOT_TRANSLATED__",
+      "login-failed": "__STRING_NOT_TRANSLATED__",
       "newpassword-sameasold": "The new password cannot be the same as the old password.",
       "password-inconsistent": "The two passwords are not matching.",
-      "registration-failed": "Registration failed.",
-      "sync-failed": "User sync failed.",
-      "user-agreements-must-be-accepted": "User agreements must be accepted",
-      "user-exists": "User exists.",
-      "user-inactive": "User inactive.",
-      "user-not-found": "User not found."
+      "registration-failed": "__STRING_NOT_TRANSLATED__",
+      "sync-failed": "__STRING_NOT_TRANSLATED__",
+      "user-agreements-must-be-accepted": "__STRING_NOT_TRANSLATED__",
+      "user-exists": "__STRING_NOT_TRANSLATED__",
+      "user-inactive": "__STRING_NOT_TRANSLATED__",
+      "user-not-found": "__STRING_NOT_TRANSLATED__"
     },
     "cashier": {
-      "cashier-cant-delete": "Cashier cannot be deleted.",
-      "cashier-cant-save": "Cashier cannot be saved.",
-      "cashier-couponId-not-unique": "Online cashier ID must be unique.",
-      "stamp-couponId-not-unique": "Digital stamp ID must be unique."
+      "cashier-cant-delete": "__STRING_NOT_TRANSLATED__",
+      "cashier-cant-save": "__STRING_NOT_TRANSLATED__",
+      "cashier-couponId-not-unique": "__STRING_NOT_TRANSLATED__",
+      "stamp-couponId-not-unique": "__STRING_NOT_TRANSLATED__"
     },
     "comment": {
       "comment-or-state-required": "You must select a state or comment something."
     },
     "common": {
-      "cant-modify": "Cannot be modified.",
+      "cant-modify": "__STRING_NOT_TRANSLATED__",
       "field-number": "This field must be a number.",
       "field-required": "This field is required.",
-      "internal": "Internal.",
+      "internal": "__STRING_NOT_TRANSLATED__",
       "max-length-exact": "This field must be less then {{max}} characters.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
-      "parameter-missing-or-invalid": "Parameter missing or is invalid.",
+      "parameter-missing-or-invalid": "__STRING_NOT_TRANSLATED__",
       "server-unavailable": "Server unavailable."
     },
     "coupon": {
-      "already-claimed": "Coupon already claimed.",
-      "big-picture-invalid": "Big picture file format or size is invalid.",
-      "cannot-claim": "Cannot claim coupon.",
-      "cant-be-deleted": "Coupon can't be deleted.",
-      "cant-change-state": "Can't change coupon state.",
+      "already-claimed": "__STRING_NOT_TRANSLATED__",
+      "big-picture-invalid": "__STRING_NOT_TRANSLATED__",
+      "cannot-claim": "__STRING_NOT_TRANSLATED__",
+      "cant-be-deleted": "__STRING_NOT_TRANSLATED__",
+      "cant-change-state": "__STRING_NOT_TRANSLATED__",
       "fix-discount-must-be-integer": "Field must be a positive integer.",
-      "invalid-initial-state": "Invalid initial state.",
-      "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
-      "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
-      "name-be-edited-after-accepted": "Coupon name cannot be edited after accepted.",
-      "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
+      "invalid-initial-state": "__STRING_NOT_TRANSLATED__",
+      "invalid-predefined-code-count": "__STRING_NOT_TRANSLATED__",
+      "invalid-state-predefined-codes": "__STRING_NOT_TRANSLATED__",
+      "name-be-edited-after-accepted": "__STRING_NOT_TRANSLATED__",
+      "only-accepted-can-be-changed": "__STRING_NOT_TRANSLATED__",
       "partner-must-be-major": "__STRING_NOT_TRANSLATED__",
-      "predefined-file-is-empty": "Predefined code file must not be empty.",
-      "predefinied-file-invalid": "Predefined code file must bne valid CSV file.",
-      "prize-rules-invalid": "Prize rule file must be a PDF file.",
-      "small-picture-invalid": "Small picture file format or size is invalid.",
+      "predefined-file-is-empty": "__STRING_NOT_TRANSLATED__",
+      "predefinied-file-invalid": "__STRING_NOT_TRANSLATED__",
+      "prize-rules-invalid": "__STRING_NOT_TRANSLATED__",
+      "small-picture-invalid": "__STRING_NOT_TRANSLATED__",
       "type-has-no-codes": "__STRING_NOT_TRANSLATED__",
       "user-code-cant-save": "__STRING_NOT_TRANSLATED__"
     },
     "coupon-categories": {
-      "name-must-be-unique": "Category name must be unique."
+      "name-must-be-unique": "__STRING_NOT_TRANSLATED__"
     },
     "email-template": {
-      "name-must-be-unique": "E-mail template name must be unique.",
-      "not-found-version": "E-mail template version not found."
+      "name-must-be-unique": "__STRING_NOT_TRANSLATED__",
+      "not-found-version": "__STRING_NOT_TRANSLATED__"
     },
     "file": {
       "download-fail": "Couldn't fetch your file.",
-      "image-type-not-supported": "Unsuppored image type.",
-      "invalid-image-size": "Invalid image dimensions.",
-      "invalid-prize-rule-type": "Invalid prize rule type.",
-      "not-supported-format": "Unsupported file format."
+      "image-type-not-supported": "__STRING_NOT_TRANSLATED__",
+      "invalid-image-size": "__STRING_NOT_TRANSLATED__",
+      "invalid-prize-rule-type": "__STRING_NOT_TRANSLATED__",
+      "not-supported-format": "__STRING_NOT_TRANSLATED__"
     },
-    "not-found": "Not found.",
+    "not-found": "__STRING_NOT_TRANSLATED__",
     "paginate": {
-      "order-by": "Paginate order by.",
-      "page": "Paginate page.",
-      "page-size": "Paginate page size."
+      "order-by": "__STRING_NOT_TRANSLATED__",
+      "page": "__STRING_NOT_TRANSLATED__",
+      "page-size": "__STRING_NOT_TRANSLATED__"
     },
     "partner": {
-      "cant-change-state": "Can't change partner state.",
-      "inactive-or-deleted": "Partner inactive ",
-      "name-must-be-unique": "Partner name must be unique."
+      "cant-change-state": "__STRING_NOT_TRANSLATED__",
+      "inactive-or-deleted": "__STRING_NOT_TRANSLATED__",
+      "name-must-be-unique": "__STRING_NOT_TRANSLATED__"
     },
     "partner-contact": {
-      "invalid-type": "Invalid partner contact type."
+      "invalid-type": "__STRING_NOT_TRANSLATED__"
     },
     "rtd": {
-      "communication": "RTD communication error."
+      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "sendgrid": {
       "communication": "__STRING_NOT_TRANSLATED__"
@@ -397,9 +403,7 @@
         "discount-required-for-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-required-for-discount": "__STRING_NOT_TRANSLATED__",
-        "discountValue": {
-          "max-decimal-precision-2": "__STRING_NOT_TRANSLATED__"
-        },
+        "discount-value-max-decimal-precision-2": "__STRING_NOT_TRANSLATED__",
         "draw-date-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
         "draw-date-required-for-prize": "__STRING_NOT_TRANSLATED__",
         "end-date-required": "__STRING_NOT_TRANSLATED__",
