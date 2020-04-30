@@ -1,4 +1,6 @@
 {
+  "CampaignMovedToWaitingState": "__STRING_NOT_TRANSLATED__",
+  "PartnerContactRegistered": "__STRING_NOT_TRANSLATED__",
   "app": {
     "title": "Plusz Kampány Motor"
   },
@@ -284,7 +286,6 @@
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
-      "password-format": "Invalid jelszó formátum.",
       "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később."
     },
     "coupon": {
@@ -341,6 +342,9 @@
     },
     "rtd": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
+    },
+    "sendgrid": {
+      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "unknown-try-again": "Kérem, próbálja újra",
     "validation": {
@@ -399,6 +403,7 @@
         "discount-required-for-discount": "Kedvezmény fajtájának megadása kötelező.",
         "discount-type-must-be-null-non-discount": "Nem kedvezmény típusú a kedvezmény típusát nem lehet kitölteni.",
         "discount-type-required-for-discount": "Kedvezmény típusát kötelező kitölteni.",
+        "discount-value-max-decimal-precision-2": "__STRING_NOT_TRANSLATED__",
         "draw-date-must-be-null-non-prize": "Nem nyeremény típusú kampányoknál a sorsolás időpontját nem lehet kitölteni.",
         "draw-date-required-for-prize": "Sorsolás időpontját kötelező kitölteni, kérem adjon meg egy dátumot.",
         "end-date-required": "Kampápny végét kötelező megadni, kérem adjon meg egy dátumot.",
@@ -457,7 +462,6 @@
         "id-required": "Fájl id megadása kötelező, kérem adjon meg egy megfelelő azonosítót."
       },
       "notification": {
-        "create-roles-cannot-be-empty": "Értesítés készítéséhez jogosultságok megadása kötelező, kérem adjon meg megfelelő jogosultságokat.",
         "to-date-greater-than-from-date": "Az értesítések lekérdezéséhez a kezdő dátumnak kisebbnek kell lennie, mint a végdátumnak.",
         "type-invalid": "Értesítés típus nem megfelelő, adjon meg egy megfelelő típust.",
         "type-required": "Értesítés típus megadása kötelező, adjon meg egy megfelelő típust."

@@ -1,4 +1,6 @@
 {
+  "CampaignMovedToWaitingState": "__STRING_NOT_TRANSLATED__",
+  "PartnerContactRegistered": "__STRING_NOT_TRANSLATED__",
   "app": {
     "title": "Plus Campaign Engine"
   },
@@ -284,7 +286,6 @@
       "max-length-exact": "This field must be less then {{max}} characters.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",
-      "password-format": "Invalid password format.",
       "server-unavailable": "Unsuccessful communication with the server, try again later."
     },
     "coupon": {
@@ -341,6 +342,9 @@
     },
     "rtd": {
       "communication": "The internal server is not available, try again later."
+    },
+    "sendgrid": {
+      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "unknown-try-again": "Please, try again!",
     "validation": {
@@ -399,6 +403,7 @@
         "discount-required-for-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-required-for-discount": "__STRING_NOT_TRANSLATED__",
+        "discount-value-max-decimal-precision-2": "__STRING_NOT_TRANSLATED__",
         "draw-date-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
         "draw-date-required-for-prize": "__STRING_NOT_TRANSLATED__",
         "end-date-required": "__STRING_NOT_TRANSLATED__",
@@ -457,7 +462,6 @@
         "id-required": "__STRING_NOT_TRANSLATED__"
       },
       "notification": {
-        "create-roles-cannot-be-empty": "__STRING_NOT_TRANSLATED__",
         "to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
         "type-invalid": "__STRING_NOT_TRANSLATED__",
         "type-required": "__STRING_NOT_TRANSLATED__"
