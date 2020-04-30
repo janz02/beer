@@ -2,8 +2,7 @@ import { Action, PayloadAction } from '@reduxjs/toolkit'
 import { Dispatch } from 'react'
 import { store } from 'app/store'
 import { authActionType } from 'features/auth/authSlice'
-import { UserVm } from 'api/swagger/models'
-
+import { UserVm, Roles } from 'api/swagger/models'
 import {
   notificationActions,
   notificationActionType
@@ -14,6 +13,7 @@ import {
   LogLevel,
   HubConnectionState
 } from '@microsoft/signalr'
+import { hasPermission } from 'services/jwt-reader'
 
 type Connection = HubConnection | null | undefined
 
@@ -49,12 +49,11 @@ const sendConnectionStateFactory = (connection: Connection, connectionCreatedAt:
  * @param connection
  */
 const registerCallbacks = (connection: Connection, jwt: string): void => {
-  // TODO: notification role matrix
-  // if (hasPermission([Roles.Administrator], jwt)) {
-  connection?.on('NewNotification', () => {
-    store.dispatch(notificationActions.getRecentNotifications())
-  })
-  // }
+  if (hasPermission([Roles.Administrator, Roles.CampaignManager], jwt)) {
+    connection?.on('NewNotification', () => {
+      store.dispatch(notificationActions.getRecentNotifications())
+    })
+  }
 }
 
 /**

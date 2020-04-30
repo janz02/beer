@@ -20,21 +20,11 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
   const { inspectItem } = useNotification()
   const [hover, setHover] = useState(false)
 
-  let meta: ListItemMetaProps = {}
-
-  switch (item.type) {
-    case NotificationType.CampaignMovedToWaitingState:
-      meta = {
-        title: t('notification.item.campaign-moved-to-waiting-state.title'),
-        description: t('notification.item.campaign-moved-to-waiting-state.description')
-      }
-      break
-    case NotificationType.PartnerContactRegistered:
-      meta = {
-        title: t('notification.item.partner-contact-registered.title'),
-        description: t('notification.item.partner-contact-registered.description')
-      }
-      break
+  const meta: ListItemMetaProps = {
+    title: t(`enum.noitfication-type.${item.type}`),
+    description: (
+      <MomentDisplay date={moment(item.createdDate)} mode={hover ? 'date time' : 'from now'} />
+    )
   }
 
   return (
@@ -43,15 +33,8 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
       onMouseEnter={() => setHover(true)}
       className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}
       onClick={() => inspectItem(item)}
-      actions={[
-        // eslint-disable-next-line react/jsx-key
-        <div className="notification-item__date">
-          <MomentDisplay date={moment(item.createdDate)} mode={hover ? 'date time' : 'from now'} />
-        </div>
-      ]}
     >
       <List.Item.Meta avatar={<Avatar icon={<BellFilled />} />} {...meta} />
-      {item.key}
     </List.Item>
   )
 }
