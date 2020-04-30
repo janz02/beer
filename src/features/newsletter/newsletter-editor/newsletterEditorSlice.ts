@@ -194,12 +194,11 @@ export const sendNewsletterEmailExample = (email: string, subject: string): AppT
   }
 }
 
-// TODO: consider lazy loading
 export const getSegmentsForEmail = (): AppThunk => async dispatch => {
   try {
     dispatch(getSegmentsRequest())
     const response = await api.segments.getSegments({
-      pageSize: 10000
+      pageSize: -1
     })
     const segments: any = response.result?.map(s => ({ ...s, id: '' + s.id }))
     dispatch(getSegmentsSuccess(segments ?? []))

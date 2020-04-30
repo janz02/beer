@@ -301,8 +301,7 @@ const getCategories = (): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    // TODO: categories pageSize is hardcoded, consider to do a better form field with lazy loading and search
-    const categories = await api.categories.getCategories({ pageSize: 10000, orderBy: 'name' })
+    const categories = await api.categories.getCategories({ pageSize: -1, orderBy: 'name' })
     dispatch(
       getCategoriesSuccess(categories.result!.map(x => ({ id: x.id, name: x.name } as Category)))
     )
@@ -315,9 +314,8 @@ const getMajorPartners = (): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    // TODO: partners pageSize is hardcoded, consider to do a better form field with lazy loading and search
     const partners = await api.partner.getPartners({
-      pageSize: 10000,
+      pageSize: -1,
       orderBy: 'name',
       majorPartner: true
     })
