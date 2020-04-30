@@ -4,17 +4,21 @@ import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
 import { useCallback, useMemo } from 'react'
 import { NotificationData } from 'models/notification'
+import { Roles } from 'api/swagger/models'
+
+export const notificationRoleConfig = [Roles.Administrator, Roles.CampaignManager]
 
 interface UseNotificationFeatures {
   opened: boolean
-  unreadCount: number
+  unseenCount: number
   notifications: NotificationData[]
   loading: boolean
   canLoadMore: boolean
   handleGetNotifications: () => void
   handleClose: () => void
   handleOpen: () => void
-  inspectItem: (item: NotificationData) => void
+  handleReadAll: () => void
+  handleInspectItem: (item: NotificationData) => void
 }
 
 const { getNotifications, close, open } = notificationActions
@@ -26,7 +30,7 @@ export const useNotification = (): UseNotificationFeatures => {
     listState,
     opened,
     listContentState,
-    unseenCount: unreadCount
+    unseenCount
   } = useSelector((state: RootState) => state.notification)
 
   const loading = listState === FeatureState.Loading
@@ -51,10 +55,14 @@ export const useNotification = (): UseNotificationFeatures => {
     dispatch(open())
   }
 
-  const inspectItem = (item: NotificationData): void => {
+  const handleInspectItem = (item: NotificationData): void => {
     if (item.isSeen === false && item.id) {
-      dispatch(notificationActions.markAsSeen(item.id))
+      dispatch(notificationActions.readOne(item.id))
     }
+  }
+
+  const handleReadAll = (): void => {
+    dispatch(notificationActions.readAll())
   }
 
   const handleGetNotifications = useCallback((): void => {
@@ -63,13 +71,14 @@ export const useNotification = (): UseNotificationFeatures => {
 
   return {
     opened,
-    unreadCount,
+    unseenCount,
     notifications,
     loading,
     canLoadMore,
+    handleReadAll,
     handleClose,
     handleOpen,
     handleGetNotifications,
-    inspectItem
+    handleInspectItem
   }
 }

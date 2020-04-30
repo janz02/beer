@@ -2,7 +2,7 @@ import { Action, PayloadAction } from '@reduxjs/toolkit'
 import { Dispatch } from 'react'
 import { store } from 'app/store'
 import { authActionType } from 'features/auth/authSlice'
-import { UserVm, Roles } from 'api/swagger/models'
+import { UserVm } from 'api/swagger/models'
 import {
   notificationActions,
   notificationActionType
@@ -14,6 +14,7 @@ import {
   HubConnectionState
 } from '@microsoft/signalr'
 import { hasPermission } from 'services/jwt-reader'
+import { notificationRoleConfig } from 'features/notification/useNotification'
 
 type Connection = HubConnection | null | undefined
 
@@ -49,7 +50,7 @@ const sendConnectionStateFactory = (connection: Connection, connectionCreatedAt:
  * @param connection
  */
 const registerCallbacks = (connection: Connection, jwt: string): void => {
-  if (hasPermission([Roles.Administrator, Roles.CampaignManager], jwt)) {
+  if (hasPermission(notificationRoleConfig, jwt)) {
     connection?.on('NewNotification', () => {
       store.dispatch(notificationActions.getRecentNotifications())
     })
@@ -65,6 +66,7 @@ const initConnection = (newJwt?: string): Connection => {
   const url = process.env.REACT_APP_API_URL
   const jwt = newJwt ?? sessionStorage.getItem('jwt')
   if (!jwt) return null
+
   const connection = new HubConnectionBuilder()
     .withUrl(`${url}/notificationHub`, {
       accessTokenFactory: () => jwt

@@ -589,18 +589,9 @@
   },
   "notification": {
     "empty-list": "Empty",
-    "item": {
-      "campaign-moved-to-waiting-state": {
-        "description": "__STRING_NOT_TRANSLATED__",
-        "title": "__STRING_NOT_TRANSLATED__"
-      },
-      "partner-contact-registered": {
-        "description": "__STRING_NOT_TRANSLATED__",
-        "title": "__STRING_NOT_TRANSLATED__"
-      }
-    },
     "load-more": "Load more...",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "read-all": "Mark all as Read"
   },
   "partner": {
     "contacts": {

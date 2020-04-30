@@ -589,18 +589,9 @@
   },
   "notification": {
     "empty-list": "Üres",
-    "item": {
-      "campaign-moved-to-waiting-state": {
-        "description": "__STRING_NOT_TRANSLATED__",
-        "title": "__STRING_NOT_TRANSLATED__"
-      },
-      "partner-contact-registered": {
-        "description": "__STRING_NOT_TRANSLATED__",
-        "title": "__STRING_NOT_TRANSLATED__"
-      }
-    },
     "load-more": "Régebbiek...",
-    "notifications": "Értesítések"
+    "notifications": "Értesítések",
+    "read-all": "Mindegyik olvasottra állítása"
   },
   "partner": {
     "contacts": {

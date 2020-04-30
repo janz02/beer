@@ -1,5 +1,5 @@
 import './NotificationList.scss'
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import { List, Empty, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
@@ -10,12 +10,6 @@ export const NotificationList: FC = () => {
   const { t } = useTranslation()
 
   const { notifications, loading, handleGetNotifications, canLoadMore } = useNotification()
-
-  // const canLoad
-  useEffect(() => {
-    if (notifications.length > 0) return
-    handleGetNotifications()
-  }, [handleGetNotifications, notifications])
 
   const loadMoreButton = canLoadMore && (
     <Button

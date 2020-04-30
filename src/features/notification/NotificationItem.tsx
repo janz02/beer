@@ -6,7 +6,6 @@ import { BellFilled } from '@ant-design/icons'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useNotification } from './useNotification'
 import { NotificationData } from 'models/notification'
-import { NotificationType } from 'api/swagger/models'
 import { useTranslation } from 'react-i18next'
 import { ListItemMetaProps } from 'antd/lib/list'
 
@@ -17,7 +16,7 @@ interface NotificationItemProps {
 export const NotificatonItem: FC<NotificationItemProps> = props => {
   const { item } = props
   const { t } = useTranslation()
-  const { inspectItem } = useNotification()
+  const { handleInspectItem } = useNotification()
   const [hover, setHover] = useState(false)
 
   const meta: ListItemMetaProps = {
@@ -32,9 +31,10 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
       onMouseLeave={() => setHover(false)}
       onMouseEnter={() => setHover(true)}
       className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}
-      onClick={() => inspectItem(item)}
+      onClick={() => handleInspectItem(item)}
     >
       <List.Item.Meta avatar={<Avatar icon={<BellFilled />} />} {...meta} />
+      {item.key}
     </List.Item>
   )
 }

@@ -26,7 +26,7 @@ interface NotificationState {
   listParams: ListRequestParams
   visibleCount: number
   unseenCount: number
-  /** The date of the most recent notification; for fetching the recent notifications. */
+  /** The date of the most recent visible notification; for fetching the recent notifications. */
   newestDate?: moment.Moment
   /** An object that works as a Set, to avoid repeating the notifications;
    Set is not supported by immer by dafault, and an object works fine. 
@@ -101,9 +101,15 @@ const notificationSlice = createSlice({
       state.listParams.page = Math.max(1, Math.floor(actualPage))
       state.visibleCount = Object.keys(state.notifications).length
     },
-    markAsSeenSuccess(state, action: PayloadAction<number>) {
+    readOneSuccess(state, action: PayloadAction<number>) {
       state.notifications[action.payload].isSeen = true
       state.unseenCount -= 1
+    },
+    readAllSuccess(state) {
+      Object.keys(state.notifications).forEach(key => {
+        state.notifications[key].isSeen = true
+      })
+      state.unseenCount = 0
     }
   }
 })
@@ -113,7 +119,8 @@ const {
   close,
   resetNotification,
   setListState,
-  markAsSeenSuccess,
+  readOneSuccess,
+  readAllSuccess,
   setRtConnectionState,
   patchNotificationList
 } = notificationSlice.actions
@@ -230,10 +237,17 @@ const getRecentNotifications = (): AppThunk => async (dispatch, getState) => {
   }
 }
 
-const markAsSeen = (id: number): AppThunk => async dispatch => {
+const readOne = (id: number): AppThunk => async dispatch => {
   try {
     await api.notification.seenNotification({ id })
-    dispatch(markAsSeenSuccess(id))
+    dispatch(readOneSuccess(id))
+  } catch (err) {}
+}
+
+const readAll = (): AppThunk => async dispatch => {
+  try {
+    await api.notification.seenAllNotifications()
+    dispatch(readAllSuccess())
   } catch (err) {}
 }
 
@@ -246,10 +260,11 @@ export const notificationReducer = notificationSlice.reducer
 export const notificationActions = {
   open,
   close,
-  markAsSeen,
   getNotifications,
   getRecentNotifications,
   resetNotification,
+  readOne,
+  readAll,
   setConnectionState
 }
 

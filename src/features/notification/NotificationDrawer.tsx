@@ -1,15 +1,23 @@
 import './NotificationDrawer.scss'
 import React, { FC } from 'react'
-import { Drawer } from 'antd'
+import { Drawer, Button } from 'antd'
 import { NotificationList } from './NotificationList'
 import { useTranslation } from 'react-i18next'
 import { useNotification } from './useNotification'
 import { RtConnectionDot } from './RtConnectionDot'
+import { EyeOutlined } from '@ant-design/icons'
+import Tooltip, { TooltipProps } from 'antd/lib/tooltip'
+
+const tooltipConfig: Partial<TooltipProps> = {
+  mouseEnterDelay: 0.5,
+  placement: 'bottomLeft',
+  style: { marginLeft: '0.5rem' }
+}
 
 export const NotificationDrawer: FC = () => {
   const { t } = useTranslation()
 
-  const { opened, handleClose } = useNotification()
+  const { opened, handleClose, handleReadAll, unseenCount } = useNotification()
 
   return (
     <Drawer
@@ -26,7 +34,11 @@ export const NotificationDrawer: FC = () => {
           {t('notification.notifications')}
         </span>
         <span className="notification-drawer__header__options">
-          {/* // Header option buttons */}
+          <Tooltip {...tooltipConfig} title={t('notification.read-all')}>
+            <Button disabled={!unseenCount} onClick={handleReadAll}>
+              <EyeOutlined />
+            </Button>
+          </Tooltip>
         </span>
       </div>
       <NotificationList />
