@@ -34,6 +34,19 @@ describe('MomentDisplay hu tests', () => {
     expect(text).toEqual('2011.10.31. 10:30')
   })
 
+  it('should render a formatted date and time-sec when mode is date time', () => {
+    // Arrange
+    const date = moment(new Date(2011, 9, 31, 10, 30, 10))
+    const mode = 'date time-sec'
+
+    // Act
+    const wrapper = shallow(<MomentDisplay date={date} mode={mode} />)
+
+    // Assert
+    const text = wrapper.text()
+    expect(text).toEqual('2011.10.31. 10:30:10')
+  })
+
   it('should render a formatted time when mode is time', () => {
     // Arrange
     const date = moment(new Date(2011, 9, 31, 10, 30))
@@ -235,6 +248,19 @@ describe('MomentDisplay en tests', () => {
     // Assert
     const text = wrapper.text()
     expect(text).toEqual('10/31/2011 10:30 AM')
+  })
+
+  it('should render a formatted date and time-sec when mode is date time', () => {
+    // Arrange
+    const date = moment(new Date(2011, 9, 31, 10, 30, 10))
+    const mode = 'date time-sec'
+
+    // Act
+    const wrapper = shallow(<MomentDisplay date={date} mode={mode} />)
+
+    // Assert
+    const text = wrapper.text()
+    expect(text).toEqual('10/31/2011 10:30:10 AM')
   })
 
   it('should render a formatted time when mode is time', () => {

@@ -15,7 +15,7 @@ export const CampaignEditorFormAudit: FC = () => {
           {coupon?.createdBy && (
             <div>
               {`${coupon?.createdBy}, `}
-              <MomentDisplay date={coupon?.createdDate} />
+              <MomentDisplay date={coupon?.createdDate} mode="date time-sec" />
             </div>
           )}
         </Form.Item>
@@ -26,7 +26,7 @@ export const CampaignEditorFormAudit: FC = () => {
           {coupon?.modifiedBy && (
             <div>
               {`${coupon?.modifiedBy}, `}
-              <MomentDisplay date={coupon?.modifiedDate} />
+              <MomentDisplay date={coupon?.modifiedDate} mode="date time-sec" />
             </div>
           )}
         </Form.Item>
@@ -37,7 +37,7 @@ export const CampaignEditorFormAudit: FC = () => {
           {coupon?.approvedBy && (
             <div>
               {`${coupon?.approvedBy}, `}
-              <MomentDisplay date={coupon?.approvedDate} />
+              <MomentDisplay date={coupon?.approvedDate} mode="date time-sec" />
             </div>
           )}
         </Form.Item>
