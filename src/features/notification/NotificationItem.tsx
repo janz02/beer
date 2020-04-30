@@ -34,7 +34,6 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
       onClick={() => handleInspectItem(item)}
     >
       <List.Item.Meta avatar={<Avatar icon={<BellFilled />} />} {...meta} />
-      {item.key}
     </List.Item>
   )
 }
