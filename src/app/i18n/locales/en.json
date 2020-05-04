@@ -632,7 +632,8 @@
     }
   },
   "partner-contact": {
-    "editor": "Contact editor",
+    "editor": "__STRING_NOT_TRANSLATED__",
+    "editor-title": "Partner Contact",
     "field": {
       "active": "Status",
       "email": "E-mail address",

@@ -43,6 +43,7 @@ interface UseReusablePartnerContactsUtils {
 export const useReusablePartnerContacts = (): UseReusablePartnerContactsUtils => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+
   const { partnerId, contactId } = useParams()
   const { pathname } = useSelector((state: RootState) => state.router.location)
   const { partnerId: selfPartnerId, id: selfUserId } = useSelector(

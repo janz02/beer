@@ -17,6 +17,7 @@ import {
   EditorModeOptionsProps,
   EditorMode
 } from 'components/buttons/EditorModeOptions'
+import { PartnerContactTile } from 'features/partnerContact/PartnerContactTile'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -97,7 +98,7 @@ export const PartnerEditorPage: React.FC = () => {
       {mode !== EditorMode.NEW && (
         <>
           <SitesListTile hidden={hideTables} />
-          <PartnerContactsTile hidden={hideTables} />
+          <PartnerContactTile />
         </>
       )}
     </>

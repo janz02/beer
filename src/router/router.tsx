@@ -21,10 +21,10 @@ import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
-import { PartnerContactsPage } from 'features/partnerContacts/PartnerContactsPage'
 import { pageViewRoles } from 'services/roleHelpers'
 import { CategoryPage } from 'features/campaignCategory/CategoryPage'
 import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
+import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -86,7 +86,7 @@ const Routes = (): JSX.Element => (
       exact
       path={['/contacts', '/contacts/:contactId']}
       roles={pageViewRoles.contacts}
-      component={PartnerContactsPage}
+      component={PartnerContactPage}
     />
     <PrivateRoute
       exact
