@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { history } from 'router/router'
-import { AuthLayout } from './AuthLayout'
+import { AuthLayout } from './components/AuthLayout'
 import { useCommonFormRules } from 'hooks/useCommonFormRules'
 import { useAuth } from './useAuth'
 
