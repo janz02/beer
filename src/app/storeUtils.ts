@@ -2,7 +2,6 @@ import { campaignActions } from '../features/campaigns/campaignsSlice'
 import { batch } from 'react-redux'
 import { notificationActions } from 'features/notification/notificationSlice'
 import { AppThunk } from './store'
-import { resetAuth } from 'features/auth/authSlice'
 import { resetSiteEditor } from 'features/sites/siteEditor/siteEditorSlice'
 import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
 import { newsletterListActions } from 'features/newsletter/newsletterList/newsletterListSlice'
@@ -20,6 +19,7 @@ import { profileActions } from 'features/profile/profileSlice'
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
 import { categoryEditorActions } from 'features/campaignCategory/categoryEditor/categoryEditorSlice'
 import { categoryListActions } from 'features/campaignCategory/categoryList/categoryListSlice'
+import { authActions } from 'features/auth/authSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -28,7 +28,7 @@ interface HardResetParams {
 export const hardResetStore = (params: HardResetParams = {}): AppThunk => async dispatch => {
   const { logout } = params
   batch(() => {
-    dispatch(resetAuth())
+    dispatch(authActions.resetAuth())
     dispatch(profileActions.resetProfile())
     dispatch(resetSiteEditor())
     dispatch(notificationActions.resetNotification())

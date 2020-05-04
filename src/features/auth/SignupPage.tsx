@@ -1,22 +1,20 @@
 import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
-import { signUp } from './authSlice'
-import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
-import { AuthLayout } from './AuthLayout'
+import { AuthLayout } from './components/AuthLayout'
 import { useCommonFormRules } from 'hooks/useCommonFormRules'
+import { useAuth } from './useAuth'
+import styles from './SignupPage.module.scss'
 
 export const SignupPage: React.FC = () => {
-  const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { loading } = useSelector((state: RootState) => state.auth)
+  const { loading, handleSignup } = useAuth()
   const rule = useCommonFormRules()
 
   return (
-    <AuthLayout className="signup" title={t(`auth.signup`)}>
-      <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
+    <AuthLayout title={t(`auth.signup`)}>
+      <Form name="signup" layout="vertical" onFinish={handleSignup}>
         <Form.Item
           name="name"
           label={t('auth.field.name')}
@@ -101,7 +99,7 @@ export const SignupPage: React.FC = () => {
           <Checkbox>
             <span className="text-faded">{t('auth.text.accept-prefix')}</span>
             <Button
-              className="signup__accept-terms"
+              className={styles.acceptTerms}
               type="link"
               onClick={() => console.log('TODO: open terms and services')}
             >
@@ -111,7 +109,7 @@ export const SignupPage: React.FC = () => {
         </Form.Item>
 
         <Button
-          className="auth__action-btn auth__action-btn--main"
+          className="action-btn action-btn--main"
           loading={loading}
           size="large"
           type="primary"
@@ -120,7 +118,7 @@ export const SignupPage: React.FC = () => {
           {t('auth.signup')}
         </Button>
       </Form>
-      <Button className="auth__action-btn" type="link" onClick={() => history.push('/auth')}>
+      <Button className="action-btn" type="link" onClick={() => history.push('/auth')}>
         {t('auth.login')}
       </Button>
     </AuthLayout>

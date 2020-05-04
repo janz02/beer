@@ -1,0 +1,38 @@
+@import "assets/scss/_variables";
+
+.auth {
+  min-width: 300px;
+  max-width: 350px;
+  margin: 4rem auto;
+
+  --minor-inset: 0.5rem;
+
+  :global(.ant-card-head) {
+    padding-top: 1rem;
+    border-bottom: none;
+    text-align: center;
+  }
+
+  .ant-card-body {
+    padding: 0.5rem 2rem 1.5rem;
+  }
+
+  :global(.action-btn) {
+    display: block;
+    min-width: 150px;
+    margin: auto;
+    margin-top: 0.5rem;
+
+    &.ant-btn-link {
+      font-weight: 600;
+    }
+
+    &--main {
+      margin-top: 2.5rem;
+    }
+  }
+}
+
+.logo {
+  pointer-events: none;
+}
