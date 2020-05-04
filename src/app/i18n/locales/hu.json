@@ -1,6 +1,6 @@
 {
-  "CampaignMovedToWaitingState": "Jóváhagyásra váró kampány érkezett!",
-  "PartnerContactRegistered": "Új kapcsolattartó regisztrált!",
+  "CampaignMovedToWaitingState": "A kampány jóváhagyásra váró státuszba került.",
+  "PartnerContactRegistered": "A kapcsolattartó regisztrációja megtörtént.",
   "app": {
     "title": "Plusz Kampány Motor"
   },
