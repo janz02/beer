@@ -10,6 +10,7 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { useCampaignList } from './useCampaignList'
 import { CampaignListTable } from './components/CampaignListTable'
+import { CouponListTabKey } from './campaignListSlice'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -17,6 +18,7 @@ export const CampaignListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const {
+    activeTabKey,
     couponToDelete,
     deletePopupVisible,
     handleIncludeArchivedChange,
@@ -59,17 +61,18 @@ export const CampaignListPage: FC = () => {
         }
         paddedBottom
         width="full"
+        activeTabKey={activeTabKey}
         tabList={[
           {
-            key: 'all',
+            key: CouponListTabKey.All,
             tab: t('coupon-list.all-tab')
           },
           {
-            key: 'waiting',
+            key: CouponListTabKey.Waiting,
             tab: t('coupon-list.pending-tab')
           }
         ]}
-        onTabChange={handleTabChange}
+        onTabChange={key => handleTabChange(key as CouponListTabKey)}
       >
         <CampaignListTable />
       </ResponsiveCard>
