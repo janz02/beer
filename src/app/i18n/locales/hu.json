@@ -1,6 +1,6 @@
 {
-  "CampaignMovedToWaitingState": "__STRING_NOT_TRANSLATED__",
-  "PartnerContactRegistered": "__STRING_NOT_TRANSLATED__",
+  "CampaignMovedToWaitingState": "Jóváhagyásra váró kampány érkezett!",
+  "PartnerContactRegistered": "Új kapcsolattartó regisztrált!",
   "app": {
     "title": "Plusz Kampány Motor"
   },
@@ -348,7 +348,7 @@
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
     },
     "sendgrid": {
-      "communication": "__STRING_NOT_TRANSLATED__"
+      "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
     },
     "unknown-try-again": "Kérem, próbálja újra",
     "validation": {
@@ -407,7 +407,7 @@
         "discount-required-for-discount": "Kedvezmény fajtájának megadása kötelező.",
         "discount-type-must-be-null-non-discount": "Nem kedvezmény típusú a kedvezmény típusát nem lehet kitölteni.",
         "discount-type-required-for-discount": "Kedvezmény típusát kötelező kitölteni.",
-        "discount-value-max-decimal-precision-2": "__STRING_NOT_TRANSLATED__",
+        "discount-value-max-decimal-precision-2": "Kevezmény fajtája 2 tizedespontos pontossággal lehet megadni, kérem adjon meg egy megfelelő számot.",
         "draw-date-must-be-null-non-prize": "Nem nyeremény típusú kampányoknál a sorsolás időpontját nem lehet kitölteni.",
         "draw-date-required-for-prize": "Sorsolás időpontját kötelező kitölteni, kérem adjon meg egy dátumot.",
         "end-date-required": "Kampápny végét kötelező megadni, kérem adjon meg egy dátumot.",
