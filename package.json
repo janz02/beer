@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@microsoft/signalr": "^3.1.3",
     "@reduxjs/toolkit": "^1.0.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/file-saver": "^2.0.1",
@@ -82,8 +83,7 @@
     "eject": "react-app-rewired eject",
     "generate-client": "node ./config/generate-client.js",
     "generate-backend-translation-keys": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./config/generate-backend-translation-keys.ps1",
-    "i18n:generate": "i18next-scanner --config ./config/i18next-scanner.config.js",
-    "adam": "yarn generate-client && yarn generate-backend-translation-keys && yarn i18n:generate && yarn start"
+    "i18n:generate": "i18next-scanner --config ./config/i18next-scanner.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"

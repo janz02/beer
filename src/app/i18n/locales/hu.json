@@ -146,7 +146,8 @@
     "create-and-accept": "Rögzítése és jóváhagyásra küldés",
     "create-coupon-success": "Sikeres kupon létrehozás",
     "download-coupons": "Kuponok letöltése",
-    "download-redeemed-coupons": "Beváltott kupokon letöltése",
+    "download-redeemed-coupons": "Beváltott kuponok letöltése",
+    "download-redeemed-coupons-help": "A kampány ideje alatt a beváltások időközi ellenőrzésére, a kampány végén a beváltások alapján történő jutalékelszámoláshoz a teljesítésigazolás alapjául szolgáló dokumentum.",
     "edit": "Szerkesztés",
     "editor-title": "Kampány szerkesztő",
     "field": {
@@ -154,7 +155,7 @@
       "awarded-campaign": "Kitüntett kampány jelölő",
       "banner-link": "Banner link",
       "banner-link-help": "A banner link erre a felületre fog mutatni. Kampány landing page (kampánykód befűzhető).",
-      "big-image": "Kupon nagy képe",
+      "big-image": "Nagy kép",
       "big-image-help": "Csak pontosan 360*540 pixel méretű JPG vagy PNG kiterjesztésű fájl fogadható el.",
       "category": "Kampány kategória",
       "category-help": "Kérjük, válassza a ki az iparági kategóriát az ajánlatban szereplő terméknek/szolgáltatásnak megfelelően.",
@@ -170,7 +171,7 @@
       "discount-amount": "Kedvezmény mértéke",
       "discount-amount-fix-help": "Pl. 1 500",
       "discount-amount-percent-help": "Pl. 7,5",
-      "discount-type": "Kedvezmény fajtája",
+      "discount-type": "Kedvezmény típus",
       "discount-type-help": "Kérjük, válassza ki, hogy a kedvezményt százalékban vagy fix (forint) értékben kívánja nyújtani!",
       "display-fix-banner-campaign": "Fix banner kampány megjelenítése",
       "distribution-end-date": "Kampány vége",
@@ -178,7 +179,6 @@
       "distribution-start-date": "Kampány kezdete",
       "distribution-start-date-help": "A megjelenés első napja.",
       "download": "Letöltés",
-      "download-help": "A kampány ideje alatt a beváltások időközi ellenőrzésére, a kampány végén a beváltások alapján történő jutalékelszámoláshoz a teljesítésigazolás alapjául szolgáló dokumentum.",
       "draw-date": "Sorsolás dátuma",
       "expiration-date": "Kupon lejárati dátuma",
       "expiration-date-help": "A beváltás utolsó lehetséges napja.",
@@ -249,6 +249,12 @@
     "user": "Létrehozó felhasználó",
     "view-count": "Megjelenések száma"
   },
+  "enum": {
+    "noitfication-type": {
+      "CampaignMovedToWaitingState": "Kámpány várakozó állapotba került",
+      "PartnerContactRegistered": "Regisztrált partner kapcsolattartó"
+    }
+  },
   "error": {
     "auth": {
       "expired-refresh-token": "Lejárt a bejelentkezési ideje, kérem jelentkezzen be újra.",
@@ -299,14 +305,12 @@
       "invalid-initial-state": "Kampány csak létrejött státuszban hozható létre, ne módosítsa a státsuzt létrehozásnál.",
       "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek, ellenőrizze a CSV fájl tartalmát, és számosságát.",
       "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben az állapotban, frissítse az oldalt.",
-      "item-price-required-if-previous-year-average-basket-value-empty": "A termék érték mező megadása kötelező, ha a tavalyi átlagos kosárérték mező üres.",
       "name-be-edited-after-accepted": "A kupon neve nem módosithaó elfogadás után, frissítse az oldalt.",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható, frissítse az oldalt.",
       "partner-must-be-major": "Kiválasztott partnernek kiemelt partnernek kell lennie, válasszon kiemelt partnert.",
       "percentage-discount-out-of-range": "Kedvezény értéke 1 és 100 közötti értélehet, adjon meg egy számot a 2 szám között.",
       "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia, ellenőrize a CSV fájl tartalmát és számosságát.",
       "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie, ellenőrize a CSV fájl tartalmát és számosságát.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "A tavalyi átlagos kosárérték mező megadása kötelező, ha a termék érték mező üres.",
       "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie, ellenőrizze a PDF fájl tartamát",
       "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő, kövesse a felület utasításait.",
       "type-has-no-codes": "Ehhez a kampány típushoz nem tartoznak kuponkódok, azokat ne lehet letölteni.",
@@ -590,7 +594,8 @@
   "notification": {
     "empty-list": "Üres",
     "load-more": "Régebbiek...",
-    "notifications": "Értesítések"
+    "notifications": "Értesítések",
+    "read-all": "Mindegyik olvasottra állítása"
   },
   "partner": {
     "contacts": {

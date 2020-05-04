@@ -147,6 +147,7 @@
     "create-coupon-success": "Successfully created the campaign.",
     "download-coupons": "Download coupons",
     "download-redeemed-coupons": "Download claimed coupons",
+    "download-redeemed-coupons-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission.",
     "edit": "Edit",
     "editor-title": "Campaign editor",
     "field": {
@@ -154,7 +155,7 @@
       "awarded-campaign": "Highlighted campaign sign",
       "banner-link": "Banner link",
       "banner-link-help": "The banner link leads to this website. Campaign landing page (campaign code can be accepted).",
-      "big-image": "Coupon big image",
+      "big-image": "Big image",
       "big-image-help": "Only a 360*540 pixel JPG or PNG file can be accepted.",
       "category": "Campaign category",
       "category-help": "Please select the industry category regarding to your product/service in your offer",
@@ -178,7 +179,6 @@
       "distribution-start-date": "Campaign start date",
       "distribution-start-date-help": "The first day of the displaying.",
       "download": "Download",
-      "download-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission",
       "draw-date": "Draw date",
       "expiration-date": "Expiration date",
       "expiration-date-help": "The last day when claiming is possible.",
@@ -249,6 +249,12 @@
     "user": "Creator user",
     "view-count": "View count"
   },
+  "enum": {
+    "noitfication-type": {
+      "CampaignMovedToWaitingState": "Campaign moved to waiting state",
+      "PartnerContactRegistered": "Parnter Contact Registered"
+    }
+  },
   "error": {
     "auth": {
       "expired-refresh-token": "Login expired, please log in again.",
@@ -299,14 +305,12 @@
       "invalid-initial-state": "Campaign can only be created with Created state, don't change the state on creation.",
       "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
-      "item-price-required-if-previous-year-average-basket-value-empty": "Product value can't be empty if average basket value is empty.",
       "name-be-edited-after-accepted": "Coupon name cannot be edited after accepted, reload the page.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed, reload the page.",
       "partner-must-be-major": "Only major partners can be selected, choose a major partner",
       "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100, choose a number between these numbers.",
       "predefined-file-is-empty": "Predefined code file is empty, check the content of the CSV file and the count.",
       "predefinied-file-invalid": "Predefined code file must be valid CSV file, check its type and content.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty.",
       "prize-rules-invalid": "Prize rule file must be a PDF file, check the content of file.",
       "small-picture-invalid": "Small picture file format or size is invalid.",
       "type-has-no-codes": "This campaign type does not produce coupon codes, so they cannot be downloaded.",
@@ -342,6 +346,9 @@
     },
     "rtd": {
       "communication": "The internal server is not available, try again later."
+    },
+    "sendgrid": {
+      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "sendgrid": {
       "communication": "__STRING_NOT_TRANSLATED__"
@@ -590,7 +597,8 @@
   "notification": {
     "empty-list": "Empty",
     "load-more": "Load more...",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "read-all": "Mark all as Read"
   },
   "partner": {
     "contacts": {
