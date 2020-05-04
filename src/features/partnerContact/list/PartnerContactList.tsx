@@ -32,7 +32,7 @@ export const PartnerContactList: FC<PartnerContactListProps> = props => {
       <ResponsiveCard
         disableAutoScale={shrinks}
         paddedBottom
-        floatingTitle={t('partner.contacts.list-title')}
+        floatingTitle={t('partner-contact.list-title')}
         forTable
       >
         <ResponsiveTable {...tableProps} />
