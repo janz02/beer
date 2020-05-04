@@ -1,27 +1,21 @@
 import React, { FC } from 'react'
-import './AuthLayout.scss'
 import { ReactComponent as Logo } from 'assets/img/logo.svg'
 import { Layout, Card, Typography } from 'antd'
-import { useIsMobile } from 'hooks'
+import styles from './AuthLayout.module.scss'
 
 interface AuthLayoutProps {
   title: string
-  className?: string
 }
 
 export const AuthLayout: FC<AuthLayoutProps> = props => {
-  const { title, className, children } = props
-  const isMobile = useIsMobile()
+  const { title, children } = props
   const { Title } = Typography
 
   return (
     <Layout.Content>
-      <Card
-        className={`auth ${isMobile ? 'auth--mobile' : ''}`}
-        title={<Logo className="auth__logo" />}
-      >
+      <Card className={styles.auth} title={<Logo className={styles.logo} />}>
         <Title level={4}>{title}</Title>
-        <div className={className ?? ''}>{children}</div>
+        <div>{children}</div>
       </Card>
     </Layout.Content>
   )

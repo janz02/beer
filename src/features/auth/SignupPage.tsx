@@ -5,6 +5,7 @@ import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 import { useCommonFormRules } from 'hooks/useCommonFormRules'
 import { useAuth } from './useAuth'
+import styles from './SignupPage.module.scss'
 
 export const SignupPage: React.FC = () => {
   const { t } = useTranslation()
@@ -12,7 +13,7 @@ export const SignupPage: React.FC = () => {
   const rule = useCommonFormRules()
 
   return (
-    <AuthLayout className="signup" title={t(`auth.signup`)}>
+    <AuthLayout title={t(`auth.signup`)}>
       <Form name="signup" layout="vertical" onFinish={handleSignup}>
         <Form.Item
           name="name"
@@ -98,7 +99,7 @@ export const SignupPage: React.FC = () => {
           <Checkbox>
             <span className="text-faded">{t('auth.text.accept-prefix')}</span>
             <Button
-              className="signup__accept-terms"
+              className={styles.acceptTerms}
               type="link"
               onClick={() => console.log('TODO: open terms and services')}
             >
@@ -108,7 +109,7 @@ export const SignupPage: React.FC = () => {
         </Form.Item>
 
         <Button
-          className="auth__action-btn auth__action-btn--main"
+          className="action-btn action-btn--main"
           loading={loading}
           size="large"
           type="primary"
@@ -117,7 +118,7 @@ export const SignupPage: React.FC = () => {
           {t('auth.signup')}
         </Button>
       </Form>
-      <Button className="auth__action-btn" type="link" onClick={() => history.push('/auth')}>
+      <Button className="action-btn" type="link" onClick={() => history.push('/auth')}>
         {t('auth.login')}
       </Button>
     </AuthLayout>

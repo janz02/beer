@@ -49,7 +49,7 @@ export const LoginPage: React.FC = () => {
           </Button>
         </div> */}
         <Button
-          className="auth__action-btn auth__action-btn--main"
+          className="action-btn action-btn--main"
           loading={loading}
           size="large"
           type="primary"
@@ -58,7 +58,7 @@ export const LoginPage: React.FC = () => {
           {t('auth.login')}
         </Button>
       </Form>
-      <Button className="auth__action-btn" type="link" onClick={() => history.push('/auth/signup')}>
+      <Button className="action-btn" type="link" onClick={() => history.push('/auth/signup')}>
         {t('auth.signup')}
       </Button>
     </AuthLayout>
