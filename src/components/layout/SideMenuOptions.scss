@@ -6,10 +6,18 @@
     bottom: 1em;
     width: 100%;
     min-height: 100px;
+  }
+
+  .side-menu-vertical-delimiter {
     border-top: 1px solid #4C4C4C;
   }
 
   .side-menu-nolink {
     cursor: default;
+  }
+
+  .app-version {
+    padding-top: 15px;
+    color: #A6ADB4;
   }
 }

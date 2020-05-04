@@ -5,7 +5,7 @@ import { FeatureState } from 'models/featureState'
 import { campaignActions } from '../campaignsSlice'
 import { Coupon } from 'models/coupon'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { campaignListActions } from './campaignListSlice'
+import { campaignListActions, CouponListTabKey } from './campaignListSlice'
 import { ColumnType } from 'antd/lib/table'
 import { useTranslation } from 'react-i18next'
 import { ColumnFilterItem, TablePaginationConfig } from 'antd/lib/table/interface'
@@ -29,13 +29,14 @@ import {
 interface UseCampaignListFeatures {
   loading: boolean
   coupons?: Coupon[]
+  activeTabKey: CouponListTabKey
   handleTableChange: any
   columnsConfig: ColumnType<Coupon>[]
   paginationConfig: false | TablePaginationConfig
   couponToDelete?: Coupon
   deletePopupVisible?: boolean
   handleIncludeArchivedChange: (checked: boolean) => void
-  handleTabChange: (key: string) => void
+  handleTabChange: (key: CouponListTabKey) => void
   handleDeleteCancel: () => void
   getCategories: typeof campaignActions.getCategories
   getCoupons: typeof campaignListActions.getCoupons
@@ -56,6 +57,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
   const {
     coupons,
     listParams,
+    activeTabKey,
     campaignToDelete: couponToDelete,
     deletePopupVisible,
     featureState
@@ -336,8 +338,8 @@ export const useCampaignList = (): UseCampaignListFeatures => {
     dispatch(campaignListActions.getCoupons())
   }
 
-  const handleTabChange = (key: string): void => {
-    dispatch(campaignListActions.setOnlyWaiting(key === 'waiting'))
+  const handleTabChange = (key: CouponListTabKey): void => {
+    dispatch(campaignListActions.setActiveTabKey(key))
     dispatch(campaignListActions.getCoupons())
   }
 
@@ -348,6 +350,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
   return {
     loading,
     coupons: addKeyProp(coupons),
+    activeTabKey,
     handleTableChange,
     columnsConfig,
     paginationConfig,

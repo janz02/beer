@@ -15,5 +15,6 @@
   },
   "[typescriptreact]": {
     "editor.formatOnSave": false
-  }
+  },
+  "yaml.format.singleQuote": true
 }

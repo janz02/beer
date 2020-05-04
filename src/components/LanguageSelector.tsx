@@ -11,6 +11,7 @@ import SubMenu from 'antd/lib/menu/SubMenu'
 export interface LanguageSelectorProps {
   public?: boolean
   collapsed?: boolean
+  className?: string
 }
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
@@ -91,7 +92,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
       theme="dark"
       selectable={false}
       key="language"
-      className="language-selector language-selector-dropdown-content"
+      className={`language-selector language-selector-dropdown-content ${props.className}`}
     >
       <SubMenu
         key="language"
