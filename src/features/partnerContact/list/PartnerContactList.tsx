@@ -4,19 +4,19 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { usePartnerContactList } from './usePartnerContactList'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { useTranslation } from 'react-i18next'
-import { ListRequestParams } from 'hooks/useTableUtils'
-import { UserType } from 'models/user'
+import { PartnerContactConfig } from '../PartnerContactTile'
 
 export interface PartnerContactListProps {
-  shrinks: boolean
-  userType: UserType
-  listConstraint: ListRequestParams
-  canEdit: boolean
-  handleEdit: (id: number) => void
+  config: PartnerContactConfig
+  // shrinks: boolean
+  // userType: UserType
+  // listConstraint: ListRequestParams
+  // canEdit: boolean
+  // handleEdit: (id: number) => void
 }
 
 export const PartnerContactList: FC<PartnerContactListProps> = props => {
-  const { shrinks } = props
+  const { shrinks } = props.config
   const { t } = useTranslation()
 
   const { contactToDelete, handleGetList, tableProps, deletePopupProps } = usePartnerContactList({

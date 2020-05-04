@@ -42,7 +42,7 @@ export const usePartnerContactEditor = (
 
   const editorModalProps: GenericModalFormProps = {
     loadingContent: editorState === FeatureState.Loading,
-    hideFooter: !editorProps.canEdit,
+    hideFooter: !editorProps.config.canEdit,
     modalProps: {
       visible: editOpen,
       title: t('partner-contact.editor-title'),

@@ -13,6 +13,7 @@ import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { FeatureState } from 'models/featureState'
 import { PartnerContactListProps } from './PartnerContactList'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
+import { partnerContactModalActions } from '../modal/partnerContactModalSlice'
 
 interface UsePartnerContactListProps {
   listProps: PartnerContactListProps
@@ -36,10 +37,10 @@ export const usePartnerContactList = (
 
   const handleGetList = useCallback(
     (params?: ListRequestParams) => {
-      dispatch(partnerContactListActions.setListConstraints(listProps.listConstraint))
+      dispatch(partnerContactListActions.setListConstraints(listProps.config.listConstraint))
       dispatch(partnerContactListActions.getContacts(params))
     },
-    [dispatch, listProps.listConstraint]
+    [dispatch, listProps.config.listConstraint]
   )
 
   const tableUtils = useTableUtils<PartnerContact>({
@@ -48,26 +49,31 @@ export const usePartnerContactList = (
     getDataAction: partnerContactListActions.getContacts
   })
 
+  const handleInspectContact = useCallback(
+    (id: number | undefined) => id && dispatch(partnerContactModalActions.inspectContact(id)),
+    [dispatch]
+  )
+
   const crudOptions = useCallback(
     (record: PartnerContact): CrudButtonsProps => {
       const config: CrudButtonsProps = {}
-      if (listProps.canEdit) {
+      if (listProps.config.canEdit) {
         config.onDelete = (): void => {
           setContanctToDelete({
             data: record,
             popupVisible: true
           })
         }
-        config.onEdit = () => record.id && listProps.handleEdit(record.id)
+        config.onEdit = () => handleInspectContact(record.id)
       } else {
-        config.onView = () => record.id && listProps.handleEdit(record.id)
+        config.onView = () => handleInspectContact(record.id)
       }
       return config
     },
-    [listProps]
+    [listProps, handleInspectContact]
   )
 
-  const roleOptions = useRoleGenerator(listProps.userType)
+  const roleOptions = useRoleGenerator(listProps.config.userType)
 
   const columnsConfig: ColumnType<PartnerContact>[] = useMemo(
     () => [
@@ -81,7 +87,7 @@ export const usePartnerContactList = (
       tableUtils.columnConfig({
         // TODO: Revisit this column after majorPartner and pca/pce roles are finalized.
         title:
-          listProps.userType === UserType.NKM
+          listProps.config.userType === UserType.NKM
             ? t('partner-contact.field.role')
             : t('partner-contact.field.type'),
         key: 'role',
@@ -89,7 +95,7 @@ export const usePartnerContactList = (
         width: '12rem',
         filters: roleOptions,
         render: (value, record: PartnerContact) =>
-          listProps.userType === UserType.NKM
+          listProps.config.userType === UserType.NKM
             ? value?.length && t(`user.role.${value.toLowerCase?.()}`)
             : record.majorPartner
             ? t('partner-contact.field.partner-type.major')

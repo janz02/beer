@@ -17,7 +17,12 @@ import {
   EditorModeOptionsProps,
   EditorMode
 } from 'components/buttons/EditorModeOptions'
-import { PartnerContactTile } from 'features/partnerContact/PartnerContactTile'
+import {
+  PartnerContactTile,
+  PartnerContactConfig
+} from 'features/partnerContact/PartnerContactTile'
+import { hasPermission } from 'services/jwt-reader'
+import { UserType } from 'models/user'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -65,6 +70,13 @@ export const PartnerEditorPage: React.FC = () => {
     handleEscapeEdit: () => setMode(EditorMode.VIEW)
   }
 
+  const partnerContactConfig: PartnerContactConfig = {
+    listConstraint: { partnerId: id },
+    shrinks: true,
+    userType: +id! === 1 ? UserType.NKM : UserType.PARTNER,
+    canEdit: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
+  }
+
   const options = (
     <>
       <PartnerStateButton />
@@ -98,7 +110,7 @@ export const PartnerEditorPage: React.FC = () => {
       {mode !== EditorMode.NEW && (
         <>
           <SitesListTile hidden={hideTables} />
-          <PartnerContactTile />
+          <PartnerContactTile {...partnerContactConfig} />
         </>
       )}
     </>
