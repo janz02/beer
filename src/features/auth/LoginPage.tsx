@@ -1,17 +1,14 @@
 import React from 'react'
 import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
-import { RootState } from 'app/rootReducer'
-import { login } from './authSlice'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 import { useCommonFormRules } from 'hooks/useCommonFormRules'
+import { useAuth } from './useAuth'
 
 export const LoginPage: React.FC = () => {
-  const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { loading } = useSelector((state: RootState) => state.auth)
+  const { loading, handleLogin } = useAuth()
   const rule = useCommonFormRules()
 
   return (
@@ -20,7 +17,7 @@ export const LoginPage: React.FC = () => {
         name="login"
         layout="vertical"
         initialValues={{ remember: true }}
-        onFinish={values => dispatch(login(values))}
+        onFinish={handleLogin}
       >
         <Form.Item
           label={t('auth.field.email')}

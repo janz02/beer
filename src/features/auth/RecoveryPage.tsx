@@ -2,27 +2,19 @@ import React from 'react'
 import { Form, Input, Button } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
-import { recoverPassword } from './authSlice'
-import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 import { useCommonFormRules } from 'hooks'
+import { useAuth } from './useAuth'
 
 export const RecoveryPage: React.FC = () => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const { loading } = useSelector((state: RootState) => state.auth)
+  const { loading, handleRecoverPassword } = useAuth()
   const rule = useCommonFormRules()
 
   return (
     <AuthLayout className="recovery" title={t(`auth.forgot-password`)}>
-      <Form
-        name="recovery"
-        onFinish={values => {
-          dispatch(recoverPassword(values))
-        }}
-      >
+      <Form name="recovery" onFinish={handleRecoverPassword}>
         <div className="instruction-text">{t('auth.text.new-password-email')}</div>
         <Form.Item
           name="email"

@@ -1,22 +1,19 @@
 import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
-import { signUp } from './authSlice'
-import { RootState } from 'app/rootReducer'
 import { history } from 'router/router'
 import { AuthLayout } from './AuthLayout'
 import { useCommonFormRules } from 'hooks/useCommonFormRules'
+import { useAuth } from './useAuth'
 
 export const SignupPage: React.FC = () => {
-  const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { loading } = useSelector((state: RootState) => state.auth)
+  const { loading, handleSignup } = useAuth()
   const rule = useCommonFormRules()
 
   return (
     <AuthLayout className="signup" title={t(`auth.signup`)}>
-      <Form name="signup" layout="vertical" onFinish={values => dispatch(signUp(values))}>
+      <Form name="signup" layout="vertical" onFinish={handleSignup}>
         <Form.Item
           name="name"
           label={t('auth.field.name')}
