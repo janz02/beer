@@ -11,12 +11,17 @@ import {
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 
+export enum CouponListTabKey {
+  All = 'all',
+  Waiting = 'waiting'
+}
+
 interface CouponListState {
   coupons: Coupon[]
   listParams: ListRequestParams
   allCouponsCount?: number
   includeArchived: boolean
-  onlyWaiting: boolean
+  activeTabKey: CouponListTabKey
   campaignToDelete?: Coupon
   deletePopupVisible: boolean
   featureState: FeatureState
@@ -28,7 +33,7 @@ const initialState: CouponListState = {
     pageSize: 10
   },
   includeArchived: false,
-  onlyWaiting: false,
+  activeTabKey: CouponListTabKey.All,
   deletePopupVisible: false,
   featureState: FeatureState.Initial
 }
@@ -55,8 +60,8 @@ const campaignListSlice = createSlice({
     setIncludeArchived(state, action: PayloadAction<boolean>) {
       state.includeArchived = action.payload
     },
-    setOnlyWaiting(state, action: PayloadAction<boolean>) {
-      state.onlyWaiting = action.payload
+    setActiveTabKey(state, action: PayloadAction<CouponListTabKey>) {
+      state.activeTabKey = action.payload
       state.listParams.page = 1
     },
     prepareCampaignDelete(state, action: PayloadAction<Coupon>) {
@@ -76,7 +81,7 @@ const {
   getCouponsSuccess,
   deleteSuccess,
   setIncludeArchived,
-  setOnlyWaiting,
+  setActiveTabKey,
   prepareCampaignDelete,
   cancelCampaignDelete
 } = campaignListSlice.actions
@@ -85,10 +90,10 @@ const getCoupons = (params: ListRequestParams = {}): AppThunk => async (dispatch
   try {
     dispatch(setFeatureState(FeatureState.Loading))
 
-    const { listParams, includeArchived, onlyWaiting } = getState().campaignList
+    const { listParams, includeArchived, activeTabKey } = getState().campaignList
     const revisedParams = reviseListRequestParams(listParams, params)
     revisedParams.includeArchived = includeArchived
-    revisedParams.onlyWaiting = onlyWaiting
+    revisedParams.onlyWaiting = activeTabKey === CouponListTabKey.Waiting
 
     // This is an exception because the backend needs it this way.
     if (revisedParams.orderBy === 'partnerName') {
@@ -140,7 +145,7 @@ const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
 export const campaignListActions = {
   resetCampaignList,
   setIncludeArchived,
-  setOnlyWaiting,
+  setActiveTabKey,
   prepareCampaignDelete,
   cancelCampaignDelete,
   getCoupons,
