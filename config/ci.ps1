@@ -1,3 +1,7 @@
+# WIP script to generate all backend related code, and moving away from Node during CI because of its instability
+# Will try to add retrys to javascript file first, but planning to create a full build pipeline in this script
+
+
 $expections = @(Invoke-WebRequest -Uri "https://pkm-coupon-dev.grapetest.xyz/api/Information" |
   ConvertFrom-Json |
   % { $_.Split([Environment]::NewLine) } |
