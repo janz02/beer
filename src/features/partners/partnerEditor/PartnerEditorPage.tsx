@@ -11,7 +11,7 @@ import { Roles } from 'api/swagger/models'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 import { SitesListTile } from 'features/sites/siteList/SitesListTile'
 import { PartnerStateButton } from './PartnerStateButton'
-import { PartnerContactsTile } from '../../partnerContacts/PartnerContactsTile'
+
 import {
   EditorModeOptions,
   EditorModeOptionsProps,

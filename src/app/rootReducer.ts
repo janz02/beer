@@ -15,10 +15,6 @@ import { partnersListReducer } from 'features/partners/partnerList/partnerListSl
 import { selfPartnerReducer } from 'features/partners/selfPartner/selfPartnerSlice'
 import { partnerEditorReducer } from 'features/partners/partnerEditor/partnerEditorSlice'
 import { partnerSiteListSlice, siteListSlice } from 'features/sites/siteList/siteListSliceFactory'
-import {
-  partnerContactsSlice,
-  contactsSlice
-} from 'features/partnerContacts/partnerContactsSliceFactory'
 import { categoryListReducer } from 'features/campaignCategory/categoryList/categoryListSlice'
 import { categoryEditorReducer } from 'features/campaignCategory/categoryEditor/categoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
@@ -37,13 +33,11 @@ export const rootReducer = combineReducers({
   partnerList: partnersListReducer,
   partnerEditor: partnerEditorReducer,
   partnerSiteList: partnerSiteListSlice.reducer,
-  partnerContacts: partnerContactsSlice.reducer,
   partnerContactList: partnerContactListReducer,
   partnerContactModal: partnerContactModalReducer,
   siteList: siteListSlice.reducer,
-  siteEditor: siteEditorReducer,
-  contacts: contactsSlice.reducer,
   newsletterList: newsletterListReducer,
+  siteEditor: siteEditorReducer,
   newsletterEditor: newsletterEditorReducer,
   userAccessList: userAccessListReducer,
   notification: notificationReducer
