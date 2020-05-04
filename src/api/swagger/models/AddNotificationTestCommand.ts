@@ -23,74 +23,60 @@ import {
 /**
  * 
  * @export
- * @interface UserNotificationDto
+ * @interface AddNotificationTestCommand
  */
-export interface UserNotificationDto {
-    /**
-     * 
-     * @type {number}
-     * @memberof UserNotificationDto
-     */
-    id?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UserNotificationDto
-     */
-    isSeen?: boolean;
+export interface AddNotificationTestCommand {
     /**
      * 
      * @type {NotificationType}
-     * @memberof UserNotificationDto
+     * @memberof AddNotificationTestCommand
      */
     type?: NotificationType;
     /**
      * 
      * @type {Date}
-     * @memberof UserNotificationDto
+     * @memberof AddNotificationTestCommand
      */
-    createdDate?: Date;
+    createdDate?: Date | null;
     /**
      * 
      * @type {number}
-     * @memberof UserNotificationDto
+     * @memberof AddNotificationTestCommand
      */
-    parentId?: number;
+    parentId?: number | null;
     /**
      * 
      * @type {number}
-     * @memberof UserNotificationDto
+     * @memberof AddNotificationTestCommand
      */
     actualId?: number;
     /**
      * 
-     * @type {string}
-     * @memberof UserNotificationDto
+     * @type {boolean}
+     * @memberof AddNotificationTestCommand
      */
-    value?: string | null;
+    isSeen?: boolean;
 }
 
-export function UserNotificationDtoFromJSON(json: any): UserNotificationDto {
-    return UserNotificationDtoFromJSONTyped(json, false);
+export function AddNotificationTestCommandFromJSON(json: any): AddNotificationTestCommand {
+    return AddNotificationTestCommandFromJSONTyped(json, false);
 }
 
-export function UserNotificationDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserNotificationDto {
+export function AddNotificationTestCommandFromJSONTyped(json: any, ignoreDiscriminator: boolean): AddNotificationTestCommand {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'isSeen': !exists(json, 'isSeen') ? undefined : json['isSeen'],
         'type': !exists(json, 'type') ? undefined : NotificationTypeFromJSON(json['type']),
-        'createdDate': !exists(json, 'createdDate') ? undefined : (new Date(json['createdDate'])),
+        'createdDate': !exists(json, 'createdDate') ? undefined : (json['createdDate'] === null ? null : new Date(json['createdDate'])),
         'parentId': !exists(json, 'parentId') ? undefined : json['parentId'],
         'actualId': !exists(json, 'actualId') ? undefined : json['actualId'],
-        'value': !exists(json, 'value') ? undefined : json['value'],
+        'isSeen': !exists(json, 'isSeen') ? undefined : json['isSeen'],
     };
 }
 
-export function UserNotificationDtoToJSON(value?: UserNotificationDto | null): any {
+export function AddNotificationTestCommandToJSON(value?: AddNotificationTestCommand | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -99,13 +85,11 @@ export function UserNotificationDtoToJSON(value?: UserNotificationDto | null): a
     }
     return {
         
-        'id': value.id,
-        'isSeen': value.isSeen,
         'type': NotificationTypeToJSON(value.type),
-        'createdDate': value.createdDate === undefined ? undefined : (value.createdDate.toISOString()),
+        'createdDate': value.createdDate === undefined ? undefined : (value.createdDate === null ? null : value.createdDate.toISOString()),
         'parentId': value.parentId,
         'actualId': value.actualId,
-        'value': value.value,
+        'isSeen': value.isSeen,
     };
 }
 

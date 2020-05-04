@@ -222,3 +222,8 @@ export const changePassword = (
     dispatch(changePasswordFail(err.toString()))
   }
 }
+
+export const authActionType = {
+  loginSuccess: authSlice.actions.loginSuccess.toString(),
+  logout: authSlice.actions.logoutUser.toString()
+}

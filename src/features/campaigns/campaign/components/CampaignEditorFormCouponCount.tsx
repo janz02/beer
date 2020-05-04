@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Form, Button, Row, Col, InputNumber } from 'antd'
+import { Form, Button, Row, Col } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { ExportOutlined } from '@ant-design/icons'
 import { FileUploadButton } from 'components/upload/FileUploadButton'
@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import { useCampaign } from '../useCampaign'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
+import { InputNumberI18n } from 'components/InputNumberI18n'
 
 interface CampaignEditorFormCouponCountProps {
   form: FormInstance
@@ -33,7 +34,7 @@ export const CampaignEditorFormCouponCount: FC<CampaignEditorFormCouponCountProp
             rule.positiveInteger()
           ]}
         >
-          <InputNumber
+          <InputNumberI18n
             disabled={!displayEditor}
             formatter={separatorFormatter}
             parser={separatorParser}
@@ -76,11 +77,7 @@ export const CampaignEditorFormCouponCount: FC<CampaignEditorFormCouponCountProp
 
       {!!coupon?.id && prizeOrDiscount && (
         <Col span={8}>
-          <Form.Item
-            name="download"
-            label={t('coupon-create.field.download')}
-            extra={t('coupon-create.field.download-help')}
-          >
+          <Form.Item name="download" label={t('coupon-create.field.download')}>
             <Button
               type="primary"
               loading={loading}

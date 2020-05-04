@@ -18,7 +18,8 @@
  * @enum {string}
  */
 export enum NotificationType {
-    CampaignAccepted = 'CampaignAccepted'
+    CampaignMovedToWaitingState = 'CampaignMovedToWaitingState',
+    PartnerContactRegistered = 'PartnerContactRegistered'
 }
 
 export function NotificationTypeFromJSON(json: any): NotificationType {
