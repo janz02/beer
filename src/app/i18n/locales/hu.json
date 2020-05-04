@@ -511,30 +511,30 @@
         "email-required": "Szegmens email megadása kötelező, kérem adjon meg egy megfelelő címet.",
         "id-greater-than-0": "Szegmens id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
         "id-required": "Szegmens id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
-        "name-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "name-invalid-format": "Szegmens neve PKM-el kell, hogy kezdődjön, kérem adjon meg egy megfelelő nevet.",
+        "name-required": "Szegmens nevét kötelező megadni, kérem adjon meg egy megfelelő nevet."
       },
       "segments": {
-        "list-required": "__STRING_NOT_TRANSLATED__"
+        "list-required": "Szegmens lista megadása kötelező, kérem adjon meg egy email listát."
       },
       "site": {
-        "address-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "address-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "address-max-length-100": "Telephely címe maximum 100 karakter lehet, kérem adjon meg egy rövidebb címet.",
+        "address-required": "Telephely cím megadása kötelező, kérem adjon meg egy megfelelő nevet.",
+        "id-greater-than-0": "Telephely id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
+        "id-required": "Telephely id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
+        "name-max-length-100": "Telephely neve maximum 100 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-required": "Telephely nevét kötelező megadni, kérem adjon meg egy megfelelő nevet."
       },
       "tag": {
-        "category-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "category-id-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "value-max-length-50": "__STRING_NOT_TRANSLATED__",
-        "value-required": "__STRING_NOT_TRANSLATED__"
+        "category-id-greater-than-0": "Tag kategória megadása kötelező, kérem adjon meg egy tag kategóriát.",
+        "category-id-required": "Tag kategória megadása kötelező, kérem adjon meg egy tag kategóriát.",
+        "id-greater-than-0": "Tag id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
+        "id-required": "Tag id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
+        "value-max-length-50": "Tag név maximum 50 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "value-required": "Tag név megadása kötelező, kérem adjon meg egy megfelelő nevet."
       },
       "tag-category": {
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "name-required": "Tag kategória név megadása kötelező, kérem adjon meg egy megfelelő nevet."
       }
     }
   },
