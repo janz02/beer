@@ -74,8 +74,6 @@ const getContacts = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setListState(FeatureState.Loading))
 
-    // const partnerId = getState().auth.userData.partnerId
-
     const state = getState().partnerContactList
     const partnerId = state.listConstraintParams?.partnerId
     if (!partnerId || isNaN(partnerId)) {
@@ -102,6 +100,7 @@ const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, ge
   try {
     dispatch(setDeleteState(FeatureState.Loading))
     const state = getState().partnerContactList
+    //  TODO: Integrate new delete endpoint
     // await api.auth.updatePartnerContactInfo({
     //   id,
     //   partnerContactStateDto: {
