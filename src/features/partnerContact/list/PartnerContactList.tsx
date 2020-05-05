@@ -5,27 +5,36 @@ import { usePartnerContactList } from './usePartnerContactList'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { useTranslation } from 'react-i18next'
 import { PartnerContactConfig } from '../PartnerContactTile'
+import { Button } from 'antd'
+import { UserAddOutlined } from '@ant-design/icons'
 
 export interface PartnerContactListProps {
   config: PartnerContactConfig
-  // shrinks: boolean
-  // userType: UserType
-  // listConstraint: ListRequestParams
-  // canEdit: boolean
-  // handleEdit: (id: number) => void
 }
 
 export const PartnerContactList: FC<PartnerContactListProps> = props => {
   const { shrinks } = props.config
   const { t } = useTranslation()
 
-  const { contactToDelete, handleGetList, tableProps, deletePopupProps } = usePartnerContactList({
-    listProps: props
+  const {
+    contactToDelete,
+    handleGetList,
+    tableProps,
+    deletePopupProps,
+    handleOpenInviter
+  } = usePartnerContactList({
+    config: props.config
   })
 
   useEffect(() => {
     handleGetList()
   }, [handleGetList])
+
+  const options = (
+    <Button type="primary" icon={<UserAddOutlined />} size="large" onClick={handleOpenInviter}>
+      {t('partner-contact.send-invitation')}
+    </Button>
+  )
 
   return (
     <>
@@ -33,6 +42,7 @@ export const PartnerContactList: FC<PartnerContactListProps> = props => {
         disableAutoScale={shrinks}
         paddedBottom
         floatingTitle={t('partner-contact.list-title')}
+        floatingOptions={options}
         forTable
       >
         <ResponsiveTable {...tableProps} />

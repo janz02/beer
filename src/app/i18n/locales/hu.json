@@ -63,6 +63,7 @@
     "go-back-to-list": "Vissza a listához",
     "inactivate": "Inaktiválás",
     "inactive": "Inaktív",
+    "invite": "Meghívás",
     "message": {
       "delete-success": "Sikeres törlés",
       "email-sent": "A kérés sikeresen fel lett dolgozva",
@@ -648,7 +649,8 @@
       "status-inactive": "Inaktív",
       "type": "Kapcsolattartó típus"
     },
-    "list-title": "Kapcsolattartók"
+    "list-title": "Kapcsolattartók",
+    "send-invitation": "Meghívó küldése"
   },
   "profile": {
     "editor-title": "Profiladatok",

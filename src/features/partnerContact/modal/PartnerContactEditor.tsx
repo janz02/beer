@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { usePartnerContactEditor } from './usePartnerContactEditor'
+import { usePartnerContactModals } from './usePartnerContactModals'
 import { Form, Input, Radio, Select } from 'antd'
 import { UserType } from 'models/user'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
@@ -21,7 +21,7 @@ export interface PartnerContactEditorProps {
 
 export const PartnerContactEditor: FC<PartnerContactEditorProps> = props => {
   const { canEdit, userType } = props.config
-  const { editorModalProps, editingSelf } = usePartnerContactEditor({ editorProps: props })
+  const { editorModalProps, editingSelf } = usePartnerContactModals({ config: props.config })
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 

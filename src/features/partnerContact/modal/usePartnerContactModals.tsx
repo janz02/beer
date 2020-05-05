@@ -4,22 +4,22 @@ import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
 import { useTranslation } from 'react-i18next'
 import { GenericModalFormProps } from 'components/popups/GenericModalForm'
-import { partnerContactModalActions } from '../partnerContactModalSlice'
-import { PartnerContactEditorProps } from './PartnerContactEditor'
+import { partnerContactModalActions } from './partnerContactModalSlice'
+import { PartnerContactConfig } from '../PartnerContactTile'
 
-interface UsePartnerContactEditorProps {
-  editorProps: PartnerContactEditorProps
+interface UsePartnerContactModalProps {
+  config: PartnerContactConfig
 }
-interface UsePartnerContactEditorUtils {
-  loading: boolean
+interface UsePartnerContactModalUtils {
   editingSelf: boolean
   editorModalProps: GenericModalFormProps
+  inviterModalProps: GenericModalFormProps
 }
-export const usePartnerContactEditor = (
-  props: UsePartnerContactEditorProps
-): UsePartnerContactEditorUtils => {
-  const { editorProps } = props
-  const { editorOpen: editOpen, contact, editorState } = useSelector(
+export const usePartnerContactModals = (
+  props: UsePartnerContactModalProps
+): UsePartnerContactModalUtils => {
+  const { canEdit } = props.config
+  const { editorOpen, contact, editorState, inviterOpen, inviterState } = useSelector(
     (s: RootState) => s.partnerContactModal
   )
   const { id: selfUserId } = useSelector((s: RootState) => s.auth.userData)
@@ -31,7 +31,7 @@ export const usePartnerContactEditor = (
     contact
   ])
 
-  const handleSaveItem = (values: any): void => {
+  const handleSaveContanct = (values: any): void => {
     dispatch(
       partnerContactModalActions.saveContact(contact?.id!, {
         ...values,
@@ -40,11 +40,15 @@ export const usePartnerContactEditor = (
     )
   }
 
+  const handleSendInvitation = (values: any): void => {
+    dispatch(partnerContactModalActions.sendInvitation(values.email))
+  }
+
   const editorModalProps: GenericModalFormProps = {
     loadingContent: editorState === FeatureState.Loading,
-    hideFooter: !editorProps.config.canEdit,
+    hideFooter: !canEdit,
     modalProps: {
-      visible: editOpen,
+      visible: editorOpen,
       title: t('partner-contact.editor-title'),
       okText: t('common.save'),
       afterClose: () => dispatch(partnerContactModalActions.clearContactData()),
@@ -52,14 +56,30 @@ export const usePartnerContactEditor = (
     },
     formProps: {
       name: 'partner-contact-editor',
-      onFinish: handleSaveItem
+      onFinish: handleSaveContanct
+    },
+    initialValues
+  }
+
+  const inviterModalProps: GenericModalFormProps = {
+    loadingContent: inviterState === FeatureState.Loading,
+    hideFooter: !canEdit,
+    modalProps: {
+      visible: inviterOpen,
+      title: t('partner-contact.send-invitation'),
+      okText: t('common.invite'),
+      onCancel: () => dispatch(partnerContactModalActions.closeInviter())
+    },
+    formProps: {
+      name: 'partner-contact-inviter',
+      onFinish: handleSendInvitation
     },
     initialValues
   }
 
   return {
-    loading: editorState === FeatureState.Loading,
     editingSelf,
-    editorModalProps
+    editorModalProps,
+    inviterModalProps
   }
 }

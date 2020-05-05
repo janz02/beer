@@ -6,22 +6,24 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
 import { partnerContactListActions } from '../list/partnerContactListSlice'
+import { delay } from 'services/temp/delay'
 
 interface State {
   editingSelf: boolean
   editorOpen: boolean
-  emailOpen: boolean
+  inviterOpen: boolean
   editorState: FeatureState
-  emailState: FeatureState
+  inviterState: FeatureState
   contact?: PartnerContact
+  inviterPartnerId?: number
 }
 
 const initialState: State = {
   editingSelf: false,
   editorOpen: false,
-  emailOpen: false,
+  inviterOpen: false,
   editorState: FeatureState.Initial,
-  emailState: FeatureState.Initial
+  inviterState: FeatureState.Initial
 }
 
 const slice = createSlice({
@@ -35,11 +37,13 @@ const slice = createSlice({
     closeEditor(state) {
       state.editorOpen = false
     },
-    openEmail(state) {
-      state.emailOpen = true
+    openInviter(state, action: PayloadAction<{ partnerId: number }>) {
+      state.inviterOpen = true
+      state.inviterPartnerId = action.payload.partnerId
     },
-    closeEmail(state) {
-      state.emailOpen = false
+    closeInviter(state) {
+      state.inviterOpen = false
+      state.inviterPartnerId = undefined
     },
     clearContactData(state) {
       state.contact = undefined
@@ -49,8 +53,8 @@ const slice = createSlice({
     setEditorState(state, action: PayloadAction<FeatureState>) {
       state.editorState = action.payload
     },
-    setEmailState(state, action: PayloadAction<FeatureState>) {
-      state.emailState = action.payload
+    setInviterState(state, action: PayloadAction<FeatureState>) {
+      state.inviterState = action.payload
     },
     getContactSuccess(
       state,
@@ -65,17 +69,17 @@ const slice = createSlice({
       state.editorState = FeatureState.Success
       message.success(i18n.t('common.message.save-success'), 5)
     },
-    sendEmailSuccess(state) {
-      state.emailOpen = false
-      state.emailState = FeatureState.Success
+    sendInvitatonSuccess(state) {
+      state.inviterOpen = false
+      state.inviterState = FeatureState.Success
       message.success(i18n.t('common.message.email-sent'), 5)
     }
   }
 })
-const { closeEditor, openEditor } = slice.actions
-const { setEditorState } = slice.actions
+const { closeEditor, openEditor, closeInviter, openInviter } = slice.actions
+const { setEditorState, setInviterState } = slice.actions
 const { reset, clearContactData, getContactSuccess } = slice.actions
-const { saveContactSuccess } = slice.actions
+const { saveContactSuccess, sendInvitatonSuccess } = slice.actions
 
 const inspectContact = (id: number): AppThunk => async (dispatch, getState) => {
   try {
@@ -126,13 +130,30 @@ const saveContact = (id: number, data: PartnerContact): AppThunk => async (dispa
   }
 }
 
+const sendInvitation = (email: string): AppThunk => async (dispatch, getState) => {
+  try {
+    dispatch(setInviterState(FeatureState.Loading))
+    const partnerId = getState().partnerContactModal.inviterPartnerId
+    // TODO: integrate
+    // await api.partnerContacts.sendInvitation({ partnerId, email })
+    await delay({}, 1000)
+    console.log({ partnerId, email })
+
+    dispatch(sendInvitatonSuccess())
+  } catch (err) {
+    dispatch(setInviterState(FeatureState.Error))
+  }
+}
+
 export const partnerContactModalReducer = slice.reducer
 
 export const partnerContactModalActions = {
   reset,
-  openEditor,
   closeEditor,
   clearContactData,
+  openInviter,
+  closeInviter,
+  sendInvitation,
   saveContact,
   inspectContact
 }

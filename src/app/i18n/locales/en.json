@@ -63,6 +63,7 @@
     "go-back-to-list": "Bact to the list",
     "inactivate": "Inactivate",
     "inactive": "Inactive",
+    "invite": "Invite",
     "message": {
       "delete-success": "Deleted successfully.",
       "email-sent": "Your request was processed successfully.",
@@ -651,7 +652,8 @@
       "status-inactive": "Inactive",
       "type": "Contact type"
     },
-    "list-title": "Partner Contacts"
+    "list-title": "Partner Contacts",
+    "send-invitation": "Send invitation"
   },
   "profile": {
     "editor-title": "Profile",

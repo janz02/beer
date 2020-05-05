@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import { PartnerContactList } from './list/PartnerContactList'
-import { PartnerContactEditor } from 'features/partnerContact/modal/editor/PartnerContactEditor'
+import { PartnerContactEditor } from 'features/partnerContact/modal/PartnerContactEditor'
 import { ListRequestParams } from 'hooks/useTableUtils'
 import { UserType } from 'models/user'
+import { PartnerContactInviter } from './modal/PartnerContactInviter'
 
 export interface PartnerContactConfig {
   shrinks: boolean
@@ -16,6 +17,7 @@ export const PartnerContactTile: FC<PartnerContactConfig> = config => {
     <>
       <PartnerContactList config={config} />
       <PartnerContactEditor config={config} />
+      <PartnerContactInviter config={config} />
     </>
   )
 }

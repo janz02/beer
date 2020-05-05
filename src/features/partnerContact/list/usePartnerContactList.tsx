@@ -11,23 +11,24 @@ import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { FeatureState } from 'models/featureState'
-import { PartnerContactListProps } from './PartnerContactList'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
 import { partnerContactModalActions } from '../modal/partnerContactModalSlice'
+import { PartnerContactConfig } from '../PartnerContactTile'
 
 interface UsePartnerContactListProps {
-  listProps: PartnerContactListProps
+  config: PartnerContactConfig
 }
 interface UsePartnerContactListUtils {
   tableProps: ResponsiveTableProps
   contactToDelete: PopupState<PartnerContact> | undefined | null
   deletePopupProps: GenericPopupProps
   handleGetList: (params?: ListRequestParams) => void
+  handleOpenInviter: () => void
 }
 export const usePartnerContactList = (
   props: UsePartnerContactListProps
 ): UsePartnerContactListUtils => {
-  const { listProps } = props
+  const { canEdit, listConstraint, userType } = props.config
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -37,10 +38,10 @@ export const usePartnerContactList = (
 
   const handleGetList = useCallback(
     (params?: ListRequestParams) => {
-      dispatch(partnerContactListActions.setListConstraints(listProps.config.listConstraint))
+      dispatch(partnerContactListActions.setListConstraints(listConstraint))
       dispatch(partnerContactListActions.getContacts(params))
     },
-    [dispatch, listProps.config.listConstraint]
+    [dispatch, listConstraint]
   )
 
   const tableUtils = useTableUtils<PartnerContact>({
@@ -50,14 +51,20 @@ export const usePartnerContactList = (
   })
 
   const handleInspectContact = useCallback(
-    (id: number | undefined) => id && dispatch(partnerContactModalActions.inspectContact(id)),
+    (id: number | undefined) => {
+      id && dispatch(partnerContactModalActions.inspectContact(id))
+    },
     [dispatch]
   )
+
+  const handleOpenInviter = (): void => {
+    dispatch(partnerContactModalActions.openInviter({ partnerId: listConstraint.partnerId }))
+  }
 
   const crudOptions = useCallback(
     (record: PartnerContact): CrudButtonsProps => {
       const config: CrudButtonsProps = {}
-      if (listProps.config.canEdit) {
+      if (canEdit) {
         config.onDelete = (): void => {
           setContanctToDelete({
             data: record,
@@ -70,10 +77,10 @@ export const usePartnerContactList = (
       }
       return config
     },
-    [listProps, handleInspectContact]
+    [handleInspectContact, canEdit]
   )
 
-  const roleOptions = useRoleGenerator(listProps.config.userType)
+  const roleOptions = useRoleGenerator(userType)
 
   const columnsConfig: ColumnType<PartnerContact>[] = useMemo(
     () => [
@@ -87,7 +94,7 @@ export const usePartnerContactList = (
       tableUtils.columnConfig({
         // TODO: Revisit this column after majorPartner and pca/pce roles are finalized.
         title:
-          listProps.config.userType === UserType.NKM
+          userType === UserType.NKM
             ? t('partner-contact.field.role')
             : t('partner-contact.field.type'),
         key: 'role',
@@ -95,7 +102,7 @@ export const usePartnerContactList = (
         width: '12rem',
         filters: roleOptions,
         render: (value, record: PartnerContact) =>
-          listProps.config.userType === UserType.NKM
+          userType === UserType.NKM
             ? value?.length && t(`user.role.${value.toLowerCase?.()}`)
             : record.majorPartner
             ? t('partner-contact.field.partner-type.major')
@@ -128,7 +135,7 @@ export const usePartnerContactList = (
         }
       })
     ],
-    [tableUtils, crudOptions, t, roleOptions, listProps]
+    [tableUtils, crudOptions, t, roleOptions, userType]
   )
 
   const tableProps: ResponsiveTableProps = {
@@ -155,6 +162,7 @@ export const usePartnerContactList = (
     deletePopupProps,
     tableProps,
     contactToDelete,
+    handleOpenInviter,
     handleGetList
   }
 }
