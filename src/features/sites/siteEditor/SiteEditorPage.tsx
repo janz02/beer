@@ -9,21 +9,23 @@ import { history } from 'router/router'
 import { CashierList } from '../cashierList/CashierList'
 import { CashierEditor } from '../cashierEditor/CashierEditor'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
-import { useReusableSites } from '../useReusableSites'
 import {
   EditorMode,
   EditorModeOptionsProps,
   EditorModeOptions
 } from 'components/buttons/EditorModeOptions'
+import { useTranslation } from 'react-i18next'
 
 export const SiteEditorPage: FC = () => {
+  const { t } = useTranslation()
+
   const { siteId: id, cashierId, partnerId } = useParams()
   const dispatch = useDispatch()
   const { loadingSave, site } = useSelector((state: RootState) => state.siteEditor)
 
   const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
 
-  const { route, label } = useReusableSites()
+  const { config } = useSelector((s: RootState) => s.siteList)
 
   const siteId = id ? +id : undefined
 
@@ -45,11 +47,11 @@ export const SiteEditorPage: FC = () => {
     handleAfterClose
   } = useGenericModalFormEditorUtils({
     dataId: cashierId,
-    rootRoute: `${route.root}/${id}`
+    rootRoute: `${config.routeRoot}/${id}`
   })
 
   const onSave = (site: Site): void => {
-    dispatch(saveSite({ ...site }, siteId, +partnerId!, route.root))
+    dispatch(saveSite({ ...site }, siteId, +partnerId!, config.routeRoot))
   }
 
   const optionProps: EditorModeOptionsProps = {
@@ -62,10 +64,10 @@ export const SiteEditorPage: FC = () => {
       <SiteEditorForm
         mode={mode}
         options={<EditorModeOptions {...optionProps} />}
-        title={label.title}
+        title={t('site.editor-title')}
         loading={loadingSave}
         onSave={onSave}
-        onExit={() => history.push(route.exit)}
+        onExit={() => history.push(config.routeExit)}
         site={site}
         id={siteId}
       />

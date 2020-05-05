@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom'
 import { Partner } from 'models/partner'
 import { Roles } from 'api/swagger/models'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
-import { SitesListTile } from 'features/sites/siteList/SitesListTile'
 import { PartnerStateButton } from './PartnerStateButton'
 
 import {
@@ -23,6 +22,8 @@ import {
 } from 'features/partnerContact/PartnerContactTile'
 import { hasPermission } from 'services/jwt-reader'
 import { UserType } from 'models/user'
+import { SiteFeatureConfig } from 'features/sites/siteList/siteListSlice'
+import { SiteList } from 'features/sites/siteList/SiteList'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -77,14 +78,18 @@ export const PartnerEditorPage: React.FC = () => {
     canEdit: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
   }
 
+  const sitesConfig: SiteFeatureConfig = {
+    shrinks: true,
+    routeRoot: `/partners/${id}/site`,
+    routeExit: `/partners/${id}`
+  }
+
   const options = (
     <>
       <PartnerStateButton />
       <EditorModeOptions {...optionProps} />
     </>
   )
-
-  const hideTables = mode !== EditorMode.VIEW
 
   return (
     <>
@@ -109,7 +114,7 @@ export const PartnerEditorPage: React.FC = () => {
       </GenericPopup>
       {mode !== EditorMode.NEW && (
         <>
-          <SitesListTile hidden={hideTables} />
+          <SiteList config={sitesConfig} />
           <PartnerContactTile {...partnerContactConfig} />
         </>
       )}

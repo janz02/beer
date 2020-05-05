@@ -12,7 +12,6 @@ import { RecoveryPage } from 'features/auth/RecoveryPage'
 import { SignupPage } from 'features/auth/SignupPage'
 import { ErrorPage } from '../components/error/ErrorPage'
 import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
-import { SitesListPage } from 'features/sites/siteList/SitesListPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { CampaignViewPage } from 'features/campaigns/campaign/CampaignViewPage'
@@ -25,6 +24,7 @@ import { pageViewRoles } from 'services/roleHelpers'
 import { CategoryPage } from 'features/campaignCategory/CategoryPage'
 import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
 import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
+import { SiteListPage } from 'features/sites/siteList/SitesListPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -75,7 +75,7 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.partners}
       component={SiteEditorPage}
     />
-    <PrivateRoute exact path="/sites" roles={pageViewRoles.sites} component={SitesListPage} />
+    <PrivateRoute exact path="/sites" roles={pageViewRoles.sites} component={SiteListPage} />
     <PrivateRoute
       exact
       path={['/sites/editor/', '/sites/editor/:siteId', '/sites/editor/:siteId/:cashierId']}
