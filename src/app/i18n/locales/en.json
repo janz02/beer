@@ -601,9 +601,6 @@
     "read-all": "Mark all as Read"
   },
   "partner": {
-    "contacts": {
-      "list-title": "Contacts"
-    },
     "editor": {
       "title": "Partner"
     },
@@ -639,7 +636,7 @@
     }
   },
   "partner-contact": {
-    "editor": "Contact editor",
+    "editor-title": "Partner Contact",
     "field": {
       "active": "Status",
       "email": "E-mail address",
@@ -654,8 +651,7 @@
       "status-inactive": "Inactive",
       "type": "Contact type"
     },
-    "list-title": "Contacts",
-    "viewer": "Contact"
+    "list-title": "Partner Contacts"
   },
   "profile": {
     "editor-title": "Profile",

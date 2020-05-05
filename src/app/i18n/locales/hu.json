@@ -598,9 +598,6 @@
     "read-all": "Mindegyik olvasottra állítása"
   },
   "partner": {
-    "contacts": {
-      "list-title": "Kapcsolattartók"
-    },
     "editor": {
       "title": "Partner adatai"
     },
@@ -636,7 +633,7 @@
     }
   },
   "partner-contact": {
-    "editor": "Kapcsolattartó szerkesztés",
+    "editor-title": "Kapcsolattartó",
     "field": {
       "active": "Státusz",
       "email": "E-mail cím",
@@ -651,8 +648,7 @@
       "status-inactive": "Inaktív",
       "type": "Kapcsolattartó típus"
     },
-    "list-title": "Kapcsolattartók",
-    "viewer": "Kapcsolattartó"
+    "list-title": "Kapcsolattartók"
   },
   "profile": {
     "editor-title": "Profiladatok",
