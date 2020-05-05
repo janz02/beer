@@ -302,14 +302,12 @@
       "cant-be-deleted": "Nincs jogosultsága törölni ezt a kampányt.",
       "cant-change-state": "Nincs jogosultsága megváltoztatni a kampány állapotát.",
       "fix-discount-must-be-integer": "A kedvezmény mértéke csak egész szám lehet, adjon meg egész számot.",
-      "fix-discount-out-of-range": "A kedvezmény mértéke csak 1 és 1.000.000 közötti érték adható meg, adjon meg egy számot a 2 szám között.",
       "invalid-initial-state": "Kampány csak létrejött státuszban hozható létre, ne módosítsa a státsuzt létrehozásnál.",
       "invalid-predefined-code-count": "A feltöltött kuponkódok nem megfelelőek, ellenőrizze a CSV fájl tartalmát, és számosságát.",
       "invalid-state-predefined-codes": "A kupon kódjai már nem módosíthatóak ebben az állapotban, frissítse az oldalt.",
       "name-be-edited-after-accepted": "A kupon neve nem módosithaó elfogadás után, frissítse az oldalt.",
       "only-accepted-can-be-changed": "Csak elfogadott kupon változtatható, frissítse az oldalt.",
       "partner-must-be-major": "Kiválasztott partnernek kiemelt partnernek kell lennie, válasszon kiemelt partnert.",
-      "percentage-discount-out-of-range": "Kedvezény értéke 1 és 100 közötti értélehet, adjon meg egy számot a 2 szám között.",
       "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia, ellenőrize a CSV fájl tartalmát és számosságát.",
       "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie, ellenőrize a CSV fájl tartalmát és számosságát.",
       "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie, ellenőrizze a PDF fájl tartamát",
@@ -600,6 +598,8 @@
   },
   "partner": {
     "editor": {
+      "accept": "Jóváhagyás",
+      "reject": "Elutasítás",
       "title": "Partner adatai"
     },
     "field": {
@@ -613,6 +613,7 @@
       "register-code": "Regisztációs kód",
       "registration-allowed": "Cégjegyző",
       "registration-number": "Cégjegyzék szám",
+      "registration-state": "Regisztráció státusza",
       "tax-number": "Adószám"
     },
     "list": {

@@ -15,6 +15,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { hasPermission } from 'services/jwt-reader'
 import { history } from 'router/router'
 import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
+import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -67,6 +68,13 @@ export const PartnerListPage: React.FC = () => {
           } as ColumnFilterItem
         }),
         render: value => t(`partner.partner-state.${value?.toLowerCase()}`)
+      }),
+      columnConfig({
+        title: t('partner.field.registration-state'),
+        key: 'registrationState',
+        sort: true,
+        render: (value: string) => <PartnerRegistrationStateDisplay registrationState={value} />
+        // TODO: integration, generate filtering.
       }),
       columnConfig({
         title: t('partner.field.address'),

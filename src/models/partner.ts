@@ -13,6 +13,8 @@ export interface Partner {
   registerCode?: string | null
   majorPartner?: boolean
   partnerState?: PartnerState
+  // TODO: integration property.
+  registrationState?: string
   contacts?: Array<PartnerContactVm> | null
   sites?: Array<SiteVm> | null
 }
