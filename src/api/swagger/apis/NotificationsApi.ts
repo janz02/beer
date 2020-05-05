@@ -15,16 +15,23 @@
 
 import * as runtime from '../runtime';
 import {
+    AddNotificationTestCommand,
+    AddNotificationTestCommandFromJSON,
+    AddNotificationTestCommandToJSON,
     NotificationType,
     NotificationTypeFromJSON,
     NotificationTypeToJSON,
+    NotificationsPaginatedResponse,
+    NotificationsPaginatedResponseFromJSON,
+    NotificationsPaginatedResponseToJSON,
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
-    UserNotificationDtoPaginatedResponse,
-    UserNotificationDtoPaginatedResponseFromJSON,
-    UserNotificationDtoPaginatedResponseToJSON,
 } from '../models';
+
+export interface AddTestNotificationRequest {
+    addNotificationTestCommand?: AddNotificationTestCommand;
+}
 
 export interface GetNotificationsRequest {
     fromDate?: Date | null;
@@ -46,10 +53,42 @@ export interface SeenNotificationRequest {
 export class NotificationsApi extends runtime.BaseAPI {
 
     /**
+     * For Testing purposes only
+     */
+    async addTestNotificationRaw(requestParameters: AddTestNotificationRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Notifications/TestNotification`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: AddNotificationTestCommandToJSON(requestParameters.addNotificationTestCommand),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * For Testing purposes only
+     */
+    async addTestNotification(requestParameters: AddTestNotificationRequest): Promise<void> {
+        await this.addTestNotificationRaw(requestParameters);
+    }
+
+    /**
      * Returns the Notifications with the specified filters applied
      * Gets a list of paginated/sorted notifications
      */
-    async getNotificationsRaw(requestParameters: GetNotificationsRequest): Promise<runtime.ApiResponse<UserNotificationDtoPaginatedResponse>> {
+    async getNotificationsRaw(requestParameters: GetNotificationsRequest): Promise<runtime.ApiResponse<NotificationsPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.fromDate !== undefined) {
@@ -93,15 +132,45 @@ export class NotificationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserNotificationDtoPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NotificationsPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the Notifications with the specified filters applied
      * Gets a list of paginated/sorted notifications
      */
-    async getNotifications(requestParameters: GetNotificationsRequest): Promise<UserNotificationDtoPaginatedResponse> {
+    async getNotifications(requestParameters: GetNotificationsRequest): Promise<NotificationsPaginatedResponse> {
         const response = await this.getNotificationsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Returns the possible notification types
+     */
+    async notificationTypesRaw(): Promise<runtime.ApiResponse<Array<string>>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Notifications/Types`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Returns the possible notification types
+     */
+    async notificationTypes(): Promise<Array<string>> {
+        const response = await this.notificationTypesRaw();
         return await response.value();
     }
 

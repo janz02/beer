@@ -12,6 +12,7 @@ import { hardResetStore } from 'app/storeUtils'
 import { Partner } from 'models/partner'
 import { UserData } from 'models/user'
 import { PartnerContact } from 'models/partnerContact'
+import { FeatureState } from 'models/featureState'
 
 const clearJwtData = (): void => {
   sessionStorage.removeItem('jwt')
@@ -25,21 +26,13 @@ const clearJwtData = (): void => {
 interface AuthState {
   loggedIn: boolean
   userData: UserData
-  loading: boolean
-  errorSignup: string
-  errorLogin: string
-  errorChangePassword: string
-  errorPasswordRecovery: string
+  featureState: FeatureState
 }
 
 const initialState = (): AuthState => ({
   loggedIn: isLoggedIn(),
   userData: getJwtUserdata(),
-  loading: false,
-  errorSignup: '',
-  errorLogin: '',
-  errorChangePassword: '',
-  errorPasswordRecovery: ''
+  featureState: FeatureState.Initial
 })
 
 const authSlice = createSlice({
@@ -47,28 +40,18 @@ const authSlice = createSlice({
   initialState: initialState(),
   reducers: {
     resetAuth: () => initialState(),
-    setLoadingStart(state) {
-      state.loading = true
+    setFeatureState(state, action: PayloadAction<FeatureState>) {
+      state.featureState = action.payload
     },
     signupSuccess(state) {
-      state.loading = false
-      state.errorSignup = ''
-    },
-    signupFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.errorSignup = action.payload
+      state.featureState = FeatureState.Success
     },
     passwordRecoverySuccess(state) {
-      state.loading = false
-      state.errorPasswordRecovery = ''
-    },
-    passwordRecoveryFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.errorPasswordRecovery = action.payload
+      state.featureState = FeatureState.Success
     },
     loginSuccess(state, action: PayloadAction<UserVm>) {
-      state.loading = false
-      state.errorLogin = ''
+      state.featureState = FeatureState.Success
+
       state.loggedIn = true
       const jwt = action.payload.jwtToken
       const refreshToken = action.payload.refreshToken
@@ -82,9 +65,9 @@ const authSlice = createSlice({
       jwtExpiration && sessionStorage.setItem('jwtExpiration', `${jwtExpiration}000`)
       state.userData = getJwtUserdata(jwt)
     },
-    loginFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.errorLogin = action.payload
+    loginFail(state) {
+      state.featureState = FeatureState.Error
+
       clearJwtData()
     },
     setSelfPartner(state, action: PayloadAction<Partner>) {
@@ -110,38 +93,28 @@ const authSlice = createSlice({
     },
     changePasswordSuccess(state) {
       message.success(i18n.t('auth.change-password-success'), 10)
-      state.loading = false
-      state.errorChangePassword = ''
-    },
-    changePasswordFail(state, action: PayloadAction<string>) {
-      state.loading = false
-      state.errorChangePassword = action.payload
+      state.featureState = FeatureState.Success
     }
   }
 })
 
 const {
-  setLoadingStart,
+  resetAuth,
+  setFeatureState,
   loginSuccess,
   loginFail,
   passwordRecoverySuccess,
-  passwordRecoveryFail,
   signupSuccess,
-  signupFail,
   logoutUser,
   changePasswordSuccess,
-  changePasswordFail,
   setSelfPartner,
   setSelfPartnerContact
 } = authSlice.actions
 
-export const { resetAuth } = authSlice.actions
-
-export const authReducer = authSlice.reducer
-
 export const login = (params: any): AppThunk => async (dispatch, state) => {
   dispatch(hardResetStore())
-  dispatch(setLoadingStart())
+  dispatch(setFeatureState(FeatureState.Loading))
+
   try {
     const loginRequest: LoginRequest = {
       loginDto: {
@@ -167,7 +140,7 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
 
     history.push('/')
   } catch (err) {
-    dispatch(loginFail(err.toString()))
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
@@ -176,17 +149,18 @@ export const logout = (): AppThunk => async dispatch => {
   dispatch(hardResetStore({ logout: true }))
 }
 
-export const recoverPassword = (params: any): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+export const recoverPassword = (): AppThunk => async dispatch => {
+  dispatch(setFeatureState(FeatureState.Loading))
+
   try {
     dispatch(passwordRecoverySuccess())
   } catch (err) {
-    dispatch(passwordRecoveryFail(err.toString()))
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
 export const signUp = (params: any): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+  dispatch(setFeatureState(FeatureState.Loading))
 
   const requestRequest: RegisterPartnerContactRequest = {
     registerPartnerContactDto: {
@@ -205,7 +179,7 @@ export const signUp = (params: any): AppThunk => async dispatch => {
     dispatch(signupSuccess())
     dispatch(login(params))
   } catch (err) {
-    dispatch(signupFail(err.toString()))
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
@@ -213,12 +187,30 @@ export const changePassword = (
   newPassword: string,
   oldPassword: string
 ): AppThunk => async dispatch => {
-  dispatch(setLoadingStart())
+  dispatch(setFeatureState(FeatureState.Loading))
+
   try {
     await api.auth.changePassword({ changePasswordDto: { newPassword, oldPassword } })
 
     dispatch(changePasswordSuccess())
   } catch (err) {
-    dispatch(changePasswordFail(err.toString()))
+    dispatch(setFeatureState(FeatureState.Error))
   }
 }
+
+export const authActionType = {
+  loginSuccess: authSlice.actions.loginSuccess.toString(),
+  logout: authSlice.actions.logoutUser.toString()
+}
+
+export const authActions = {
+  resetAuth,
+  loginFail,
+  login,
+  logout,
+  recoverPassword,
+  signUp,
+  changePassword
+}
+
+export const authReducer = authSlice.reducer

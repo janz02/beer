@@ -1,9 +1,11 @@
 {
+  "CampaignMovedToWaitingState": "__STRING_NOT_TRANSLATED__",
+  "PartnerContactRegistered": "__STRING_NOT_TRANSLATED__",
   "app": {
-    "title": "Plus Campaign Motor"
+    "title": "Plus Campaign Engine"
   },
   "auth": {
-    "change-password-success": "Change password success.",
+    "change-password-success": "Password successfully changed.",
     "field": {
       "code": "Partner registration code",
       "email": "E-mail address",
@@ -20,7 +22,7 @@
     "signup": "Sign up",
     "text": {
       "accept-prefix": "I accept the ",
-      "new-password-email": "Get an email with the new password.",
+      "new-password-email": "I forgot my password.",
       "terms-and-services": "Terms & Services"
     }
   },
@@ -61,28 +63,29 @@
     "go-back-to-list": "Bact to the list",
     "inactivate": "Inactivate",
     "inactive": "Inactive",
+    "invite": "Invite",
     "message": {
-      "delete-success": "Successful deletion",
-      "email-sent": "Your request was processed succesfully",
-      "save-success": "Successful saving"
+      "delete-success": "Deleted successfully.",
+      "email-sent": "Your request was processed successfully.",
+      "save-success": "Saved successfully."
     },
     "no": "No",
     "ok": "OK",
     "popup": {
-      "activate-title": "Are you sure about activating this?",
-      "confirm-title": "Are you sure about doing this?",
-      "delete-title": "Are you sure about deleting this data?",
-      "discard-title": "Are you sure about discarding this?",
-      "inactivate-title": "Are you sure about inactivating this?",
+      "activate-title": "Are you sure about activating?",
+      "confirm-title": "Are you sure to proceed?",
+      "delete-title": "Are you sure about deleting? Deletion is permanent.",
+      "discard-title": "Are you sure about discarding? It cannot be retrieved.",
+      "inactivate-title": "Are you sure about inactivating?",
       "restore-title": "Are you sure about restoring this?",
-      "save-title": "Are you sure about saving this data?"
+      "save-title": "Are you sure about saving this?"
     },
     "reset": "Reset",
     "restore": "Restore",
     "save": "Save",
     "search": "Search",
     "send": "Send",
-    "try-again": "Try again",
+    "try-again": "Try again...",
     "upload": "Upload",
     "view": "View",
     "yes": "Yes"
@@ -142,9 +145,10 @@
     "client-activities": "Client activities",
     "create": "Create",
     "create-and-accept": "Create and send for accept",
-    "create-coupon-success": "Creating a coupon was successful.",
+    "create-coupon-success": "Successfully created the campaign.",
     "download-coupons": "Download coupons",
     "download-redeemed-coupons": "Download claimed coupons",
+    "download-redeemed-coupons-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission.",
     "edit": "Edit",
     "editor-title": "Campaign editor",
     "field": {
@@ -152,7 +156,7 @@
       "awarded-campaign": "Highlighted campaign sign",
       "banner-link": "Banner link",
       "banner-link-help": "The banner link leads to this website. Campaign landing page (campaign code can be accepted).",
-      "big-image": "Coupon big image",
+      "big-image": "Big image",
       "big-image-help": "Only a 360*540 pixel JPG or PNG file can be accepted.",
       "category": "Campaign category",
       "category-help": "Please select the industry category regarding to your product/service in your offer",
@@ -176,7 +180,6 @@
       "distribution-start-date": "Campaign start date",
       "distribution-start-date-help": "The first day of the displaying.",
       "download": "Download",
-      "download-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission",
       "draw-date": "Draw date",
       "expiration-date": "Expiration date",
       "expiration-date-help": "The last day when claiming is possible.",
@@ -213,9 +216,9 @@
     "status-title": "Modify state"
   },
   "coupon-editor": {
-    "comment-delete-confirm-message": "Are you sure you want to delete this comment?",
-    "save-coupon-status-success": "Saving coupon status was successful.",
-    "save-coupon-success": "Saving coupon was successful.",
+    "comment-delete-confirm-message": "Are you sure you want to delete this comment? Deletion is permanent.",
+    "save-coupon-status-success": "Campaign status changed successfully.",
+    "save-coupon-success": "Campaign saved successfully.",
     "timeline-title": "Timeline"
   },
   "coupon-list": {
@@ -247,31 +250,37 @@
     "user": "Creator user",
     "view-count": "View count"
   },
+  "enum": {
+    "noitfication-type": {
+      "CampaignMovedToWaitingState": "Campaign moved to waiting state",
+      "PartnerContactRegistered": "Parnter Contact Registered"
+    }
+  },
   "error": {
     "auth": {
-      "expired-refresh-token": "Refresh token expired.",
+      "expired-refresh-token": "Login expired, please log in again.",
       "forbidden": "Access forbidden.",
-      "invalid-email": "Invalid e-mail.",
-      "invalid-partner-code": "Invalid partner code.",
-      "invalid-password": "Invalid password.",
-      "invalid-refresh-token": "Invalid refresh token.",
-      "ldap": "Ldap error.",
-      "ldap-password-change": "Ldap password change error.",
-      "login-failed": "Authentication failed.",
-      "newpassword-sameasold": "The new password cannot be the same as the old password.",
-      "password-inconsistent": "The two passwords are not matching.",
-      "registration-failed": "Registration failed.",
+      "invalid-email": "Invalid e-mail format, choose a valid email address.",
+      "invalid-partner-code": "Partner code does not exist, verify the partner code entered.",
+      "invalid-password": "Login failed, check the entered email or password.",
+      "invalid-refresh-token": "Login expired, please log in again.",
+      "ldap": "Login failed, check the entered email or password.",
+      "ldap-password-change": "Password could not be changed, the user may not change the password.",
+      "login-failed": "Login failed, try later.",
+      "newpassword-sameasold": "The new password cannot be the same as the old password, use different one.",
+      "password-inconsistent": "The two passwords are not matching, check the entered values.",
+      "registration-failed": "Registration failed, try later.",
       "sync-failed": "User sync failed.",
-      "user-agreements-must-be-accepted": "User agreements must be accepted",
-      "user-exists": "User exists.",
-      "user-inactive": "User inactive.",
-      "user-not-found": "User not found."
+      "user-agreements-must-be-accepted": "User agreements must be accepted.",
+      "user-exists": "Email address is already in use, choose a different one.",
+      "user-inactive": "Login failed, the user is inactive.",
+      "user-not-found": "Login failed, check the entered email or password."
     },
     "cashier": {
-      "cashier-cant-delete": "Cashier cannot be deleted.",
-      "cashier-cant-save": "Cashier cannot be saved.",
-      "cashier-couponId-not-unique": "Online cashier ID must be unique.",
-      "stamp-couponId-not-unique": "Digital stamp ID must be unique."
+      "cashier-cant-delete": "You don't have permission to delete this cashier.",
+      "cashier-cant-save": "You don't have permission to change this cashier.",
+      "cashier-couponId-not-unique": "There is already an online cashier with this ID, choose another one.",
+      "stamp-couponId-not-unique": "There is already a digital stamp with this ID, choose another one."
     },
     "comment": {
       "comment-or-state-required": "You must select a state or comment something."
@@ -280,47 +289,44 @@
       "cant-modify": "Cannot be modified.",
       "field-number": "This field must be a number.",
       "field-required": "This field is required.",
-      "internal": "Internal.",
+      "internal": "Unsuccessful communication with the server, try again later.",
       "max-length-exact": "This field must be less then {{max}} characters.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",
-      "password-format": "Invalid password format.",
-      "server-unavailable": "Server unavailable."
+      "server-unavailable": "Unsuccessful communication with the server, try again later."
     },
     "coupon": {
-      "already-claimed": "Coupon already claimed.",
-      "big-picture-invalid": "Big picture file format or size is invalid.",
-      "cannot-claim": "Cannot claim coupon.",
-      "cant-be-deleted": "Coupon can't be deleted.",
-      "cant-change-state": "Can't change coupon state.",
-      "fix-discount-must-be-integer": "Field must be a positive integer.",
-      "fix-discount-out-of-range": "Fix discount must be between 1 and 1,000,000.",
-      "invalid-initial-state": "Invalid initial state.",
+      "already-claimed": "Coupon already claimed, use another one.",
+      "big-picture-invalid": "Big picture file format or size is invalid, follow the instructions on the form.",
+      "cannot-claim": "Cannot claim coupon, try again later.",
+      "cant-be-deleted": "You don't have the permission to delete this campaign.",
+      "cant-change-state": "You don't have the permission to change the state of this campaign.",
+      "fix-discount-must-be-integer": "Field must be a positive integer, choose a valid integer.",
+      "fix-discount-out-of-range": "Fix discount must be between 1 and 1,000,000, so choose a number between these numbers.",
+      "invalid-initial-state": "Campaign can only be created with Created state, don't change the state on creation.",
       "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
-      "item-price-required-if-previous-year-average-basket-value-empty": "Product value can't be empty if average basket value is empty.",
-      "name-be-edited-after-accepted": "Coupon name cannot be edited after accepted.",
-      "only-accepted-can-be-changed": "Only accepted coupon can be changed.",
-      "partner-must-be-major": "__STRING_NOT_TRANSLATED__",
-      "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100.",
-      "predefined-file-is-empty": "Predefined code file must not be empty.",
-      "predefinied-file-invalid": "Predefined code file must bne valid CSV file.",
-      "previous-year-average-basket-value-required-if-item-price-empty": "Average basket value can't be empty if product value is empty.",
-      "prize-rules-invalid": "Prize rule file must be a PDF file.",
+      "name-be-edited-after-accepted": "Coupon name cannot be edited after accepted, reload the page.",
+      "only-accepted-can-be-changed": "Only accepted coupon can be changed, reload the page.",
+      "partner-must-be-major": "Only major partners can be selected, choose a major partner",
+      "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100, choose a number between these numbers.",
+      "predefined-file-is-empty": "Predefined code file is empty, check the content of the CSV file and the count.",
+      "predefinied-file-invalid": "Predefined code file must be valid CSV file, check its type and content.",
+      "prize-rules-invalid": "Prize rule file must be a PDF file, check the content of file.",
       "small-picture-invalid": "Small picture file format or size is invalid.",
-      "type-has-no-codes": "__STRING_NOT_TRANSLATED__",
-      "user-code-cant-save": "__STRING_NOT_TRANSLATED__"
+      "type-has-no-codes": "This campaign type does not produce coupon codes, so they cannot be downloaded.",
+      "user-code-cant-save": "Operation cannot be completed, try again later."
     },
     "coupon-categories": {
-      "name-must-be-unique": "Category name must be unique."
+      "name-must-be-unique": "There is a category already named that, choose a different name."
     },
     "email-template": {
-      "name-must-be-unique": "E-mail template name must be unique.",
-      "not-found-version": "E-mail template version not found."
+      "name-must-be-unique": "There is an e-mail template already named that, choose a different name.",
+      "not-found-version": "E-mail template version not found, choose a different version."
     },
     "file": {
       "download-fail": "Couldn't fetch your file.",
-      "image-type-not-supported": "Unsuppored image type.",
+      "image-type-not-supported": "Unsupported image type.",
       "invalid-image-size": "Invalid image dimensions.",
       "invalid-prize-rule-type": "Invalid prize rule type.",
       "not-supported-format": "Unsupported file format."
@@ -332,15 +338,21 @@
       "page-size": "Paginate page size."
     },
     "partner": {
-      "cant-change-state": "Can't change partner state.",
-      "inactive-or-deleted": "Partner inactive ",
-      "name-must-be-unique": "Partner name must be unique."
+      "cant-change-state": "You don't have permission to change the partner state.",
+      "inactive-or-deleted": "Operation cannot be completed, because the partner is deleted or inactive.",
+      "name-must-be-unique": "There is already a partner with that name, choose a different name"
     },
     "partner-contact": {
-      "invalid-type": "Invalid partner contact type."
+      "invalid-type": "Invalid partner contact type, choose a different type."
     },
     "rtd": {
-      "communication": "RTD communication error."
+      "communication": "The internal server is not available, try again later."
+    },
+    "sendgrid": {
+      "communication": "__STRING_NOT_TRANSLATED__"
+    },
+    "sendgrid": {
+      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "unknown-try-again": "Please, try again!",
     "validation": {
@@ -399,6 +411,7 @@
         "discount-required-for-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
         "discount-type-required-for-discount": "__STRING_NOT_TRANSLATED__",
+        "discount-value-max-decimal-precision-2": "__STRING_NOT_TRANSLATED__",
         "draw-date-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
         "draw-date-required-for-prize": "__STRING_NOT_TRANSLATED__",
         "end-date-required": "__STRING_NOT_TRANSLATED__",
@@ -457,7 +470,6 @@
         "id-required": "__STRING_NOT_TRANSLATED__"
       },
       "notification": {
-        "create-roles-cannot-be-empty": "__STRING_NOT_TRANSLATED__",
         "to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
         "type-invalid": "__STRING_NOT_TRANSLATED__",
         "type-required": "__STRING_NOT_TRANSLATED__"
@@ -561,7 +573,7 @@
     "add": "Add new template",
     "available-templates": "Available templates",
     "close-editor": "Close editor",
-    "fail-msg": "Unfortunatelly, couldn't load the template.",
+    "fail-msg": "Unfortunately, couldn't load the template.",
     "field": {
       "email": "Email address",
       "subject": "Subject",
@@ -586,19 +598,17 @@
   "notification": {
     "empty-list": "Empty",
     "load-more": "Load more...",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "read-all": "Mark all as Read"
   },
   "partner": {
-    "contacts": {
-      "list-title": "Contacts"
-    },
     "editor": {
       "title": "Partner"
     },
     "field": {
       "address": "Address",
       "bank-account": "Bank account",
-      "different-address": "Differen mailing address",
+      "different-address": "Different mailing address",
       "mailing-address": "Mailing address",
       "major-partner": "Major Partner",
       "name": "Partner name",
@@ -621,13 +631,13 @@
       "major": "Major",
       "normal": "KKV"
     },
-    "save-partner-success": "Saving partner was successful.",
+    "save-partner-success": "Successfully saved the partner.",
     "site": {
       "editor-title": "Partner's site"
     }
   },
   "partner-contact": {
-    "editor": "Contact editor",
+    "editor-title": "Partner Contact",
     "field": {
       "active": "Status",
       "email": "E-mail address",
@@ -642,8 +652,8 @@
       "status-inactive": "Inactive",
       "type": "Contact type"
     },
-    "list-title": "Contacts",
-    "viewer": "Contact"
+    "list-title": "Partner Contacts",
+    "send-invitation": "Send invitation"
   },
   "profile": {
     "editor-title": "Profile",
@@ -657,7 +667,7 @@
       "phone": "Phone"
     },
     "save": "Save changes",
-    "save-profile-success": "Saving profile was successful."
+    "save-profile-success": "Successfully saved the profile."
   },
   "site": {
     "editor-title": "Site",
@@ -713,7 +723,7 @@
       "username": "Username"
     },
     "msg": {
-      "change-succesful": "User access successfully changed"
+      "change-succesful": "Successfully changed User access."
     },
     "nkm-users": "NKM User",
     "partner-users": "Partner Contact",

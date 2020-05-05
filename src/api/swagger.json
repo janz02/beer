@@ -58,7 +58,7 @@
             "description": "Successful registration"
           },
           "400": {
-            "description": "Invalid e-mail: error.auth.invalid-email; \r\n                Invalid password: error.auth.password-format; \r\n                Error occured in registration: error.auth.registration-failed;\r\n                Invalid partner code: error.auth.invalid-partner-code; \r\n                User already exists: error.auth.user-exists",
+            "description": "Invalid e-mail: error.auth.invalid-email;\r\nInvalid password: error.auth.password-format;\r\nError occured in registration: error.auth.registration-failed;\r\nInvalid partner code: error.auth.invalid-partner-code;\r\nUser already exists: error.auth.user-exists",
             "content": {
               "text/plain": {
                 "schema": {
@@ -103,7 +103,7 @@
             "description": "Successful registration"
           },
           "400": {
-            "description": "Invalid e-mail: error.auth.invalid-email; \r\n                Invalid password: error.auth.password-format; \r\n                Error occured in registration: error.auth.registration-failed;\r\n                User already exists: error.auth.user-exists",
+            "description": "Invalid e-mail: error.auth.invalid-email;\r\nInvalid password: error.auth.password-format;\r\nError occured in registration: error.auth.registration-failed;\r\nUser already exists: error.auth.user-exists",
             "content": {
               "text/plain": {
                 "schema": {
@@ -165,7 +165,7 @@
             }
           },
           "400": {
-            "description": "Login failed: error.auth.login-failed; \r\n                LDAP Login failed: error.auth.ldap",
+            "description": "Login failed: error.auth.login-failed;\r\nLDAP Login failed: error.auth.ldap",
             "content": {
               "text/plain": {
                 "schema": {
@@ -227,7 +227,7 @@
             }
           },
           "400": {
-            "description": "Expired Refresh Token: error.auth.expired-refresh-token; \r\n                Invalid Refresh Token: error.auth.invalid-refresh-token",
+            "description": "Expired Refresh Token: error.auth.expired-refresh-token;\r\nInvalid Refresh Token: error.auth.invalid-refresh-token",
             "content": {
               "text/plain": {
                 "schema": {
@@ -876,6 +876,7 @@
           }
         ],
         "requestBody": {
+          "description": "New cashier details",
           "content": {
             "application/json": {
               "schema": {
@@ -1585,55 +1586,6 @@
       }
     },
     "/api/Coupons/{id}": {
-      "get": {
-        "tags": [
-          "Coupons"
-        ],
-        "summary": "Gets a Coupon entity by Id",
-        "description": "Returns the Coupon with the specified Id upon success",
-        "operationId": "getCoupon",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Id of the Coupon",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "Id of the Coupon",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful query: Coupon entity",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CouponVm"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CouponVm"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CouponVm"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation error occurred: error.common.validation"
-          },
-          "404": {
-            "description": "Entity not found: error.not-found"
-          }
-        }
-      },
       "put": {
         "tags": [
           "Coupons"
@@ -1699,6 +1651,55 @@
         "responses": {
           "200": {
             "description": "Successful deletion"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Coupons"
+        ],
+        "summary": "Gets a Coupon entity by Id",
+        "description": "Returns the Coupon with the specified Id upon success",
+        "operationId": "getCoupon",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the Coupon",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of the Coupon",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Coupon entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponVm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
           },
           "404": {
             "description": "Entity not found: error.not-found"
@@ -2155,6 +2156,7 @@
         "summary": "Sends the email template to the selected segment defined in RTD",
         "operationId": "sendEmailToSegment",
         "requestBody": {
+          "description": "The list of the recipients and the email template id",
           "content": {
             "application/json": {
               "schema": {
@@ -2750,17 +2752,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserNotificationDtoPaginatedResponse"
+                  "$ref": "#/components/schemas/NotificationsPaginatedResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserNotificationDtoPaginatedResponse"
+                  "$ref": "#/components/schemas/NotificationsPaginatedResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserNotificationDtoPaginatedResponse"
+                  "$ref": "#/components/schemas/NotificationsPaginatedResponse"
                 }
               }
             }
@@ -2813,6 +2815,69 @@
         "responses": {
           "200": {
             "description": "Successful update"
+          }
+        }
+      }
+    },
+    "/api/Notifications/Types": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Returns the possible notification types",
+        "operationId": "NotificationTypes",
+        "responses": {
+          "200": {
+            "description": "Returns the notification types",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Notifications/TestNotification": {
+      "post": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "For Testing purposes only",
+        "operationId": "addTestNotification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddNotificationTestCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notification added"
           }
         }
       }
@@ -5596,7 +5661,8 @@
       },
       "NotificationType": {
         "enum": [
-          "CampaignAccepted"
+          "CampaignMovedToWaitingState",
+          "PartnerContactRegistered"
         ],
         "type": "string"
       },
@@ -5607,10 +5673,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "userId": {
-            "type": "string",
-            "nullable": true
-          },
           "isSeen": {
             "type": "boolean"
           },
@@ -5620,12 +5682,28 @@
           "createdDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actualId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
-      "UserNotificationDtoPaginatedResponse": {
+      "NotificationsPaginatedResponse": {
         "type": "object",
         "properties": {
+          "unseenCount": {
+            "type": "integer",
+            "format": "int32"
+          },
           "result": {
             "type": "array",
             "items": {
@@ -5648,6 +5726,31 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "AddNotificationTestCommand": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/NotificationType"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "actualId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isSeen": {
+            "type": "boolean"
           }
         }
       },

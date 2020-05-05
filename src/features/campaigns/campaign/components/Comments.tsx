@@ -25,7 +25,7 @@ export const Comments: FC = () => {
 
   useEffect(() => {
     prepareCommentFormFields()
-  }, [prepareCommentFormFields])
+  }, [prepareCommentFormFields, coupon])
 
   const couponStatusDropdown = (): JSX.Element => {
     switch (coupon?.state) {

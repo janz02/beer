@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next'
 
 export const useSmartBrowserTabTitle = (): void => {
   const { t } = useTranslation()
-  const { unreadCount } = useSelector((state: RootState) => state.notification)
+  const { unseenCount } = useSelector((state: RootState) => state.notification)
 
   useEffect(() => {
-    const notificationCounter = unreadCount ? `(${unreadCount}) - ` : ''
+    const notificationCounter = unseenCount ? `(${unseenCount}) - ` : ''
     document.title = notificationCounter + t('app.title')
-  }, [unreadCount, t])
+  }, [unseenCount, t])
 }

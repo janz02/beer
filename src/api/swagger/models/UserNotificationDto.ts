@@ -34,12 +34,6 @@ export interface UserNotificationDto {
     id?: number;
     /**
      * 
-     * @type {string}
-     * @memberof UserNotificationDto
-     */
-    userId?: string | null;
-    /**
-     * 
      * @type {boolean}
      * @memberof UserNotificationDto
      */
@@ -56,6 +50,24 @@ export interface UserNotificationDto {
      * @memberof UserNotificationDto
      */
     createdDate?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserNotificationDto
+     */
+    parentId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserNotificationDto
+     */
+    actualId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserNotificationDto
+     */
+    value?: string | null;
 }
 
 export function UserNotificationDtoFromJSON(json: any): UserNotificationDto {
@@ -69,10 +81,12 @@ export function UserNotificationDtoFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'userId': !exists(json, 'userId') ? undefined : json['userId'],
         'isSeen': !exists(json, 'isSeen') ? undefined : json['isSeen'],
         'type': !exists(json, 'type') ? undefined : NotificationTypeFromJSON(json['type']),
         'createdDate': !exists(json, 'createdDate') ? undefined : (new Date(json['createdDate'])),
+        'parentId': !exists(json, 'parentId') ? undefined : json['parentId'],
+        'actualId': !exists(json, 'actualId') ? undefined : json['actualId'],
+        'value': !exists(json, 'value') ? undefined : json['value'],
     };
 }
 
@@ -86,10 +100,12 @@ export function UserNotificationDtoToJSON(value?: UserNotificationDto | null): a
     return {
         
         'id': value.id,
-        'userId': value.userId,
         'isSeen': value.isSeen,
         'type': NotificationTypeToJSON(value.type),
         'createdDate': value.createdDate === undefined ? undefined : (value.createdDate.toISOString()),
+        'parentId': value.parentId,
+        'actualId': value.actualId,
+        'value': value.value,
     };
 }
 

@@ -1,30 +1,21 @@
-import React, { FC, useEffect } from 'react'
 import './NotificationList.scss'
+import React, { FC } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import { List, Empty, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { ListItem } from './NotificationItem'
-import { useNotificationList } from './useNotificationList'
+import { NotificatonItem } from './NotificationItem'
+import { useNotification } from './useNotification'
 
-interface NotificationListProps {
-  onClick: () => void
-}
-
-export const NotificationList: FC<NotificationListProps> = props => {
-  const { onClick } = props
+export const NotificationList: FC = () => {
   const { t } = useTranslation()
 
-  const { notifications, loading, handeGetNotifications, canLoadMore } = useNotificationList()
-
-  useEffect(() => {
-    handeGetNotifications()
-  }, [handeGetNotifications])
+  const { notifications, loading, handleGetNotifications, canLoadMore } = useNotification()
 
   const loadMoreButton = canLoadMore && (
     <Button
       className="notification-list__load-more-btn"
       type="dashed"
-      onClick={handeGetNotifications}
+      onClick={handleGetNotifications}
     >
       {t('notification.load-more')}
     </Button>
@@ -37,13 +28,13 @@ export const NotificationList: FC<NotificationListProps> = props => {
       dataSource={notifications}
       loadMore={loadMoreButton}
       loading={loading}
-      rowKey={item => item.id}
+      rowKey={item => `${item.id}`}
       locale={{
         emptyText: (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('notification.empty-list')} />
         )
       }}
-      renderItem={item => <ListItem {...{ item, onClick }} />}
+      renderItem={item => <NotificatonItem item={item} />}
     />
   )
 
@@ -52,7 +43,7 @@ export const NotificationList: FC<NotificationListProps> = props => {
       <InfiniteScroll
         initialLoad={false}
         pageStart={0}
-        loadMore={handeGetNotifications}
+        loadMore={handleGetNotifications}
         hasMore={canLoadMore}
         useWindow={false}
       >
