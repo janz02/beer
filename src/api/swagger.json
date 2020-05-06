@@ -3277,6 +3277,13 @@
             }
           },
           {
+            "name": "partnerRegistrationState",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PartnerRegistrationState"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
