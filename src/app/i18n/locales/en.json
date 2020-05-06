@@ -621,16 +621,21 @@
       "mailing-address": "Mailing address",
       "major-partner": "Major Partner",
       "name": "Partner name",
+      "partner-registration-state": "Registration state",
       "partner-state": "State",
       "register-code": "Registration code",
       "registration-allowed": "Company register",
       "registration-number": "Company register number",
-      "registration-state": "Registration state",
       "tax-number": "VAT number"
     },
     "list": {
       "add": "Add new partner",
       "title": "Partners"
+    },
+    "partner-registration-state": {
+      "approved": "Approved",
+      "pending": "Panding",
+      "rejected": "Rejected"
     },
     "partner-state": {
       "active": "Active",

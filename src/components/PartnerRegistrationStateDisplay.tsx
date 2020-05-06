@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PartnerRegistrationState } from 'api/swagger/models'
 
 interface PartnerRegistrationStateDisplayProps {
-  registrationState?: string
+  partnerRegistrationState?: PartnerRegistrationState
 }
 
 export const PartnerRegistrationStateDisplay: FC<PartnerRegistrationStateDisplayProps> = props => {
-  const { registrationState } = props
+  const { partnerRegistrationState } = props
   const { t } = useTranslation()
 
-  if (!registrationState) return <></>
+  if (!partnerRegistrationState) return <></>
 
-  // TODO: integration, add translation keys to backend enums.
-  return <>{t(`partner.registration-state.${registrationState?.toLowerCase()}`)}</>
+  return <>{t(`partner.partner-registration-state.${partnerRegistrationState?.toLowerCase()}`)}</>
 }

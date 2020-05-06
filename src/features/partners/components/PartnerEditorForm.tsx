@@ -115,11 +115,13 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
 
         {!partner?.majorPartner && (
           <Form.Item
-            name="registrationState"
-            label={t('partner.field.registration-state')}
+            name="partnerRegistrationState"
+            label={t('partner.field.partner-registration-state')}
             {...formItemLayout}
           >
-            <PartnerRegistrationStateDisplay registrationState={partner?.registrationState} />
+            <PartnerRegistrationStateDisplay
+              partnerRegistrationState={partner?.partnerRegistrationState}
+            />
           </Form.Item>
         )}
 

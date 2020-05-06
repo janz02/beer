@@ -60,10 +60,7 @@ const updateProfile = (profile: Profile): AppThunk => async (dispatch, getState)
 
   try {
     await api.partnerContacts.updateSelfPartnerContact({
-      partnerContactSelfDto: {
-        ...getState().profile.profile,
-        ...profile
-      }
+      partnerContactSelfDto: { ...getState().profile.profile, ...profile }
     })
 
     dispatch(updateProfileSuccess())

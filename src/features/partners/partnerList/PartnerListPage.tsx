@@ -16,6 +16,7 @@ import { hasPermission } from 'services/jwt-reader'
 import { history } from 'router/router'
 import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
 import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
+import { PartnerRegistrationState } from 'api/swagger/models'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -35,7 +36,7 @@ export const PartnerListPage: React.FC = () => {
     addKeyProp
   } = useTableUtils<Partner>({
     listParamsState: listParams,
-    filterKeys: ['name', 'majorPartner', 'partnerState', 'address'],
+    filterKeys: ['name', 'majorPartner', 'partnerState', 'address', 'partnerRegistrationState'],
     getDataAction: getPartners
   })
 
@@ -70,11 +71,24 @@ export const PartnerListPage: React.FC = () => {
         render: value => t(`partner.partner-state.${value?.toLowerCase()}`)
       }),
       columnConfig({
-        title: t('partner.field.registration-state'),
-        key: 'registrationState',
+        title: t('partner.field.partner-registration-state'),
+        key: 'partnerRegistrationState',
         sort: true,
-        render: (value: string) => <PartnerRegistrationStateDisplay registrationState={value} />
-        // TODO: integration, generate filtering.
+        width: '12rem',
+        filterMode: FilterMode.FILTER,
+        filters: Object.keys(PartnerRegistrationState).map(f => {
+          return {
+            text: (
+              <PartnerRegistrationStateDisplay
+                partnerRegistrationState={f as PartnerRegistrationState}
+              />
+            ),
+            value: f
+          } as ColumnFilterItem
+        }),
+        render: (value: PartnerRegistrationState) => (
+          <PartnerRegistrationStateDisplay partnerRegistrationState={value} />
+        )
       }),
       columnConfig({
         title: t('partner.field.address'),
