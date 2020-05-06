@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Partner } from 'models/partner'
 import { api } from 'api'
-import { PartnerDto, PartnerState } from 'api/swagger'
+import { PartnerDto, PartnerState, PartnerRegistrationState } from 'api/swagger'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
@@ -11,13 +11,17 @@ interface PartnerEditorState {
   partner?: Partner
   error: boolean
   loading: boolean
+  loadingDelete: boolean
   loadingState: boolean
+  loadingRegState: boolean
 }
 
 const initialState: PartnerEditorState = {
   error: false,
   loading: false,
-  loadingState: false
+  loadingDelete: false,
+  loadingState: false,
+  loadingRegState: false
 }
 
 const partnerEditorSlice = createSlice({
@@ -48,9 +52,15 @@ const partnerEditorSlice = createSlice({
       state.loading = false
       state.error = true
     },
-    deletePartnerRequest() {},
-    deletePartnerSuccess() {},
-    deletePartnerFail() {},
+    deletePartnerRequest(state) {
+      state.loadingDelete = true
+    },
+    deletePartnerSuccess(state) {
+      state.loadingDelete = false
+    },
+    deletePartnerFail(state) {
+      state.loadingDelete = true
+    },
     setPartnerStateRequest(state) {
       state.loadingState = true
     },
@@ -59,6 +69,15 @@ const partnerEditorSlice = createSlice({
     },
     setPartnerStateFail(state) {
       state.loadingState = false
+    },
+    changeRegStatePartnerRequest(state) {
+      state.loadingRegState = true
+    },
+    changeRegStatePartnerSuccess(state) {
+      state.loadingRegState = false
+    },
+    schangeRegStatePartnerFail(state) {
+      state.loadingRegState = false
     }
   }
 })
@@ -70,6 +89,11 @@ const {
   setPartnerStateRequest,
   setPartnerStateSuccess,
   setPartnerStateFail
+} = partnerEditorSlice.actions
+const {
+  changeRegStatePartnerRequest,
+  changeRegStatePartnerSuccess,
+  schangeRegStatePartnerFail
 } = partnerEditorSlice.actions
 
 export const { resetPartnerEditor } = partnerEditorSlice.actions
@@ -141,5 +165,26 @@ export const setPartnerState = (id: number, state: PartnerState): AppThunk => as
   } catch (err) {
     dispatch(setPartnerStateFail())
     return { id, error: true }
+  }
+}
+
+export const changeRegStatePartner = (
+  id: number,
+  registrationState: PartnerRegistrationState
+): AppThunk => async dispatch => {
+  try {
+    dispatch(changeRegStatePartnerRequest())
+
+    await api.partner.changeRegStatePartner({
+      id,
+      changePartnerRegistrationStateDto: {
+        registrationState
+      }
+    })
+
+    dispatch(changeRegStatePartnerSuccess())
+    id && dispatch(getPartner(id))
+  } catch (err) {
+    dispatch(schangeRegStatePartnerFail())
   }
 }

@@ -4,10 +4,16 @@ import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
 import { PartnerEditorForm } from '../components/PartnerEditorForm'
 import { history } from 'router/router'
-import { getPartner, savePartner, resetPartnerEditor, deletePartner } from './partnerEditorSlice'
+import {
+  getPartner,
+  savePartner,
+  resetPartnerEditor,
+  deletePartner,
+  changeRegStatePartner
+} from './partnerEditorSlice'
 import { useParams } from 'react-router-dom'
 import { Partner } from 'models/partner'
-import { Roles } from 'api/swagger/models'
+import { Roles, PartnerRegistrationState } from 'api/swagger/models'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 import { PartnerStateButton } from './PartnerStateButton'
 
@@ -36,7 +42,9 @@ export const PartnerEditorPage: React.FC = () => {
   const { t } = useTranslation()
   const { partnerId: id } = useParams()
   const dispatch = useDispatch()
-  const { partner, loading } = useSelector((state: RootState) => state.partnerEditor)
+  const { partner, loading, loadingRegState } = useSelector(
+    (state: RootState) => state.partnerEditor
+  )
 
   const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
   const [partnerToDelete, setPartnerToDelete] = useState<PopupState<Partner>>()
@@ -85,11 +93,41 @@ export const PartnerEditorPage: React.FC = () => {
     routeExit: `/partners/${id}`
   }
 
+  const displayAcceptButton =
+    !partner?.majorPartner &&
+    (partner?.partnerRegistrationState === PartnerRegistrationState.Pending ||
+      partner?.partnerRegistrationState === PartnerRegistrationState.Rejected)
+  const displayRejectButton =
+    !partner?.majorPartner && partner?.partnerRegistrationState === PartnerRegistrationState.Pending
+
   const options = (
     <>
-      {/* TODO: integration, conditional display and actions. */}
-      <Button size="large">{t('partner.editor.accept')}</Button>
-      <Button size="large">{t('partner.editor.reject')}</Button>
+      {displayAcceptButton && (
+        <Button
+          size="large"
+          onClick={() =>
+            partner?.id &&
+            dispatch(changeRegStatePartner(partner?.id, PartnerRegistrationState.Approved))
+          }
+          loading={loadingRegState}
+        >
+          {t('partner.editor.accept')}
+        </Button>
+      )}
+
+      {displayRejectButton && (
+        <Button
+          size="large"
+          onClick={() =>
+            partner?.id &&
+            dispatch(changeRegStatePartner(partner?.id, PartnerRegistrationState.Rejected))
+          }
+          loading={loadingRegState}
+        >
+          {t('partner.editor.reject')}
+        </Button>
+      )}
+
       <PartnerStateButton />
       <EditorModeOptions {...optionProps} />
     </>
