@@ -1,4 +1,4 @@
-import { PartnerContactVm, SiteVm } from 'api/swagger'
+import { PartnerContactVm, SiteVm, PartnerRegistrationState } from 'api/swagger'
 import { PartnerState } from 'api/swagger/models/PartnerState'
 
 export interface Partner {
@@ -13,8 +13,7 @@ export interface Partner {
   registerCode?: string | null
   majorPartner?: boolean
   partnerState?: PartnerState
-  // TODO: integration property.
-  registrationState?: string
+  partnerRegistrationState?: PartnerRegistrationState
   contacts?: Array<PartnerContactVm> | null
   sites?: Array<SiteVm> | null
 }

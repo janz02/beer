@@ -609,16 +609,21 @@
       "mailing-address": "Levelezési cím",
       "major-partner": "Kiemelt partner",
       "name": "Partner név",
+      "partner-registration-state": "Regisztráció státusza",
       "partner-state": "Státusz",
       "register-code": "Regisztációs kód",
       "registration-allowed": "Cégjegyző",
       "registration-number": "Cégjegyzék szám",
-      "registration-state": "Regisztráció státusza",
       "tax-number": "Adószám"
     },
     "list": {
       "add": "Új partner hozzáadás",
       "title": "Partnerek"
+    },
+    "partner-registration-state": {
+      "approved": "Jóváhagyott",
+      "pending": "Jóváhagyásra vár",
+      "rejected": "Elutasított"
     },
     "partner-state": {
       "active": "Aktív",
