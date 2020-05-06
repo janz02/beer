@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { SiteEditorForm } from './SiteEditorForm'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetSiteEditor, saveSite, getSite } from './siteEditorSlice'
+import { siteEditorActions } from './siteEditorSlice'
 import { RootState } from 'app/rootReducer'
 import { Site } from 'models/site'
 import { history } from 'router/router'
@@ -15,13 +15,15 @@ import {
   EditorModeOptions
 } from 'components/buttons/EditorModeOptions'
 import { useTranslation } from 'react-i18next'
+import { FeatureState } from 'models/featureState'
 
 export const SiteEditorPage: FC = () => {
   const { t } = useTranslation()
 
   const { siteId: id, cashierId, partnerId } = useParams()
   const dispatch = useDispatch()
-  const { loadingSave, site } = useSelector((state: RootState) => state.siteEditor)
+  const { siteEditorState, site } = useSelector((state: RootState) => state.siteEditor)
+  const loadingSiteEditor = siteEditorState === FeatureState.Loading
 
   const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
 
@@ -34,9 +36,9 @@ export const SiteEditorPage: FC = () => {
   }, [id, site])
 
   useEffect(() => {
-    siteId && dispatch(getSite(siteId))
+    siteId && dispatch(siteEditorActions.getSite(siteId))
     return () => {
-      dispatch(resetSiteEditor())
+      dispatch(siteEditorActions.reset())
     }
   }, [dispatch, siteId])
 
@@ -51,7 +53,7 @@ export const SiteEditorPage: FC = () => {
   })
 
   const onSave = (site: Site): void => {
-    dispatch(saveSite({ ...site }, siteId, +partnerId!, config.routeRoot))
+    dispatch(siteEditorActions.saveSite({ ...site }, siteId, +partnerId!, config.routeRoot))
   }
 
   const optionProps: EditorModeOptionsProps = {
@@ -65,7 +67,7 @@ export const SiteEditorPage: FC = () => {
         mode={mode}
         options={<EditorModeOptions {...optionProps} />}
         title={t('site.editor-title')}
-        loading={loadingSave}
+        loading={loadingSiteEditor}
         onSave={onSave}
         onExit={() => history.push(config.routeExit)}
         site={site}

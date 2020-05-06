@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { useCommonFormRules } from 'hooks'
-import { getCashier, saveCashier, clearCashierEditor } from '../siteEditor/siteEditorSlice'
+import { siteEditorActions } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
+import { FeatureState } from 'models/featureState'
 
 interface CashierEditorProps {
   params: GenericModalFormEditorParams
@@ -21,17 +22,16 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [form] = Form.useForm()
-  const { cashier, loadingCashierSave, loadingCashierGet } = useSelector(
-    (state: RootState) => state.siteEditor
-  )
+  const { cashier, cashierEditorState } = useSelector((state: RootState) => state.siteEditor)
   const rule = useCommonFormRules()
+  const loadingCashierEditor = cashierEditorState === FeatureState.Loading
 
   useEffect(() => {
     if (!id || isNew) {
       return
     }
 
-    dispatch(getCashier(id))
+    dispatch(siteEditorActions.getCashier(id))
   }, [dispatch, isNew, id])
 
   useEffect(() => {
@@ -43,19 +43,19 @@ export const CashierEditor: FC<CashierEditorProps> = props => {
   const modalTitle = isNew ? t('cashier-editor.editor-create') : t('cashier-editor.editor-edit')
 
   const handleSave = async (cashier: Cashier): Promise<void> => {
-    const saved: any = await dispatch(saveCashier({ ...cashier, id }))
+    const saved: any = await dispatch(siteEditorActions.saveCashier({ ...cashier, id }))
     saved && handleExit()
   }
 
   const afterCloseExtended = (): void => {
     afterClose()
-    dispatch(clearCashierEditor())
+    dispatch(siteEditorActions.clearCashierEditor())
   }
 
   return (
     <GenericModalForm
-      loadingAction={loadingCashierSave}
-      loadingContent={loadingCashierGet}
+      // loadingAction={loadingCashierSave}
+      loadingContent={loadingCashierEditor}
       modalProps={{
         visible: visible,
         title: modalTitle,

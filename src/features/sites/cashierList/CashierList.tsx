@@ -6,11 +6,12 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTableUtils } from 'hooks/useTableUtils'
-import { getCashiers, deleteCashier } from '../siteEditor/siteEditorSlice'
+import { siteEditorActions } from '../siteEditor/siteEditorSlice'
 import { Cashier } from 'models/cashier'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ColumnType } from 'antd/lib/table'
 import { AddButton } from 'components/buttons/AddButton'
+import { FeatureState } from 'models/featureState'
 
 interface CashierListProps {
   onOpenEditor: (id?: number, createNew?: boolean) => void
@@ -19,9 +20,10 @@ interface CashierListProps {
 export const CashierList: FC<CashierListProps> = props => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { listParams, cashiers, site, loadingCashiers } = useSelector(
+  const { cashiersListParams, cashiers, site, cashierEditorState } = useSelector(
     (state: RootState) => state.siteEditor
   )
+  const loadingCashierList = cashierEditorState === FeatureState.Loading
 
   const [cashierToDelete, setCashierToDelete] = useState<{
     cashier?: Cashier
@@ -35,9 +37,9 @@ export const CashierList: FC<CashierListProps> = props => {
     actionColumnConfig,
     addKeyProp
   } = useTableUtils<Cashier>({
-    listParamsState: listParams,
+    listParamsState: cashiersListParams,
     filterKeys: ['cashierId', 'digitalStampId'],
-    getDataAction: getCashiers
+    getDataAction: siteEditorActions.getCashiers
   })
 
   const columnsConfig: ColumnType<Cashier>[] = useMemo(
@@ -89,7 +91,7 @@ export const CashierList: FC<CashierListProps> = props => {
         <ResponsiveTable
           hasHeaderOffset
           {...{
-            loading: loadingCashiers,
+            loading: loadingCashierList,
             columns: columnsConfig,
             dataSource: addKeyProp(cashiers),
             pagination: paginationConfig,
@@ -102,7 +104,7 @@ export const CashierList: FC<CashierListProps> = props => {
         id={cashierToDelete?.cashier?.id}
         type="delete"
         visible={!!cashierToDelete?.popupVisible}
-        onOkAction={deleteCashier(cashierToDelete?.cashier?.id!)}
+        onOkAction={siteEditorActions.deleteCashier(cashierToDelete?.cashier?.id!)}
         onCancel={() => setCashierToDelete({ ...cashierToDelete, popupVisible: false })}
         afterClose={() => setCashierToDelete(null)}
       />
