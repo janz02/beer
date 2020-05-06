@@ -14,6 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    PartnerRegistrationState,
+    PartnerRegistrationStateFromJSON,
+    PartnerRegistrationStateFromJSONTyped,
+    PartnerRegistrationStateToJSON,
     PartnerState,
     PartnerStateFromJSON,
     PartnerStateFromJSONTyped,
@@ -92,6 +96,12 @@ export interface PartnerVm {
      * @memberof PartnerVm
      */
     partnerState?: PartnerState;
+    /**
+     * 
+     * @type {PartnerRegistrationState}
+     * @memberof PartnerVm
+     */
+    partnerRegistrationState?: PartnerRegistrationState;
 }
 
 export function PartnerVmFromJSON(json: any): PartnerVm {
@@ -115,6 +125,7 @@ export function PartnerVmFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'registerCode': !exists(json, 'registerCode') ? undefined : json['registerCode'],
         'majorPartner': !exists(json, 'majorPartner') ? undefined : json['majorPartner'],
         'partnerState': !exists(json, 'partnerState') ? undefined : PartnerStateFromJSON(json['partnerState']),
+        'partnerRegistrationState': !exists(json, 'partnerRegistrationState') ? undefined : PartnerRegistrationStateFromJSON(json['partnerRegistrationState']),
     };
 }
 
@@ -138,6 +149,7 @@ export function PartnerVmToJSON(value?: PartnerVm | null): any {
         'registerCode': value.registerCode,
         'majorPartner': value.majorPartner,
         'partnerState': PartnerStateToJSON(value.partnerState),
+        'partnerRegistrationState': PartnerRegistrationStateToJSON(value.partnerRegistrationState),
     };
 }
 

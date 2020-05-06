@@ -2949,7 +2949,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PartnerContactDto"
+                "$ref": "#/components/schemas/PartnerContactSelfDto"
               }
             }
           }
@@ -3491,6 +3491,50 @@
         "responses": {
           "200": {
             "description": "Successful activation"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          }
+        }
+      }
+    },
+    "/api/Partners/ChangeRegState/{id}": {
+      "put": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Changes the registration state of a partner",
+        "description": "Changes the registration state of a partner with an Id of \"id\"",
+        "operationId": "changeRegStatePartner",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to change registration state/inactivate",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of entity to change registration state/inactivate",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dto containing the new value of the partner registration state",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePartnerRegistrationStateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful registration state change"
+          },
+          "400": {
+            "description": "Invalid state for state change"
           },
           "404": {
             "description": "Entity not found: error.not-found"
@@ -4695,7 +4739,9 @@
           "PartnerContactEditor",
           "User",
           "ServiceAccount",
-          "KprServiceAccount"
+          "KprServiceAccount",
+          "MainPartnerContact",
+          "NormalPartnerContact"
         ],
         "type": "string"
       },
@@ -5843,7 +5889,7 @@
           }
         }
       },
-      "PartnerContactDto": {
+      "PartnerContactSelfDto": {
         "type": "object",
         "properties": {
           "name": {
@@ -5860,11 +5906,42 @@
           }
         }
       },
+      "PartnerContactDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "$ref": "#/components/schemas/Roles"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
       "PartnerState": {
         "enum": [
           "Inactive",
           "Active",
           "Deleted"
+        ],
+        "type": "string"
+      },
+      "PartnerRegistrationState": {
+        "enum": [
+          "Pending",
+          "Rejected",
+          "Approved"
         ],
         "type": "string"
       },
@@ -5912,6 +5989,9 @@
           },
           "partnerState": {
             "$ref": "#/components/schemas/PartnerState"
+          },
+          "partnerRegistrationState": {
+            "$ref": "#/components/schemas/PartnerRegistrationState"
           }
         }
       },
@@ -5987,6 +6067,14 @@
         "properties": {
           "state": {
             "$ref": "#/components/schemas/PartnerState"
+          }
+        }
+      },
+      "ChangePartnerRegistrationStateDto": {
+        "type": "object",
+        "properties": {
+          "registrationState": {
+            "$ref": "#/components/schemas/PartnerRegistrationState"
           }
         }
       },
