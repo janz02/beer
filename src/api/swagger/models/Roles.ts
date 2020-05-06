@@ -26,7 +26,9 @@ export enum Roles {
     PartnerContactEditor = 'PartnerContactEditor',
     User = 'User',
     ServiceAccount = 'ServiceAccount',
-    KprServiceAccount = 'KprServiceAccount'
+    KprServiceAccount = 'KprServiceAccount',
+    MainPartnerContact = 'MainPartnerContact',
+    NormalPartnerContact = 'NormalPartnerContact'
 }
 
 export function RolesFromJSON(json: any): Roles {
