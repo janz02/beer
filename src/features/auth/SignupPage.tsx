@@ -9,14 +9,17 @@ import styles from './SignupPage.module.scss'
 import { useParams } from 'react-router-dom'
 
 export const SignupPage: React.FC = () => {
-  const { registrationCode } = useParams()
   const { t } = useTranslation()
   const { loading, handleSignup } = useAuth()
   const rule = useCommonFormRules()
+  const { registrationCode: registrationCodeUrlParam } = useParams()
+  const [form] = Form.useForm()
+
+  !!registrationCodeUrlParam && form.setFieldsValue({ code: registrationCodeUrlParam })
 
   return (
     <AuthLayout title={t(`auth.signup`)}>
-      <Form name="signup" layout="vertical" onFinish={handleSignup}>
+      <Form form={form} name="signup" layout="vertical" onFinish={handleSignup}>
         <Form.Item
           name="name"
           label={t('auth.field.name')}
@@ -94,11 +97,7 @@ export const SignupPage: React.FC = () => {
             rule.max(10, t('error.validation.register-partner-contact.partner-code-max-length-10'))
           ]}
         >
-          <Input
-            maxLength={10}
-            defaultValue={registrationCode ?? ''}
-            disabled={!!registrationCode}
-          />
+          <Input maxLength={10} disabled={!!registrationCodeUrlParam} />
         </Form.Item>
 
         <Form.Item name="acceptTerms" valuePropName="checked">
