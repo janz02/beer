@@ -6,8 +6,10 @@ import { AuthLayout } from './components/AuthLayout'
 import { useCommonFormRules } from 'hooks/useCommonFormRules'
 import { useAuth } from './useAuth'
 import styles from './SignupPage.module.scss'
+import { useParams } from 'react-router-dom'
 
 export const SignupPage: React.FC = () => {
+  const { registrationCode } = useParams()
   const { t } = useTranslation()
   const { loading, handleSignup } = useAuth()
   const rule = useCommonFormRules()
@@ -92,7 +94,11 @@ export const SignupPage: React.FC = () => {
             rule.max(10, t('error.validation.register-partner-contact.partner-code-max-length-10'))
           ]}
         >
-          <Input maxLength={10} />
+          <Input
+            maxLength={10}
+            defaultValue={registrationCode ?? ''}
+            disabled={!!registrationCode}
+          />
         </Form.Item>
 
         <Form.Item name="acceptTerms" valuePropName="checked">

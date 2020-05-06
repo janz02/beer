@@ -36,7 +36,7 @@ const onDefaultRoute = (): JSX.Element => {
 const Routes = (): JSX.Element => (
   <Switch>
     <PublicRoute onlyPublic exact path="/auth" component={LoginPage} />
-    <PublicRoute onlyPublic exact path="/auth/signup" component={SignupPage} />
+    <PublicRoute onlyPublic exact path="/auth/signup/:registrationCode?" component={SignupPage} />
     <PublicRoute onlyPublic exact path="/auth/recovery" component={RecoveryPage} />
     <PublicRoute exact path={['/error', '/error/:type']} component={ErrorPage} />
     <PublicRoute exact path="/error/:type" component={ErrorPage} />
