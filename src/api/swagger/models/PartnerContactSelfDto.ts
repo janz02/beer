@@ -13,56 +13,37 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    Roles,
-    RolesFromJSON,
-    RolesFromJSONTyped,
-    RolesToJSON,
-} from './';
-
 /**
  * 
  * @export
- * @interface PartnerContactDto
+ * @interface PartnerContactSelfDto
  */
-export interface PartnerContactDto {
+export interface PartnerContactSelfDto {
     /**
      * 
      * @type {string}
-     * @memberof PartnerContactDto
+     * @memberof PartnerContactSelfDto
      */
     name?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PartnerContactDto
+     * @memberof PartnerContactSelfDto
      */
     email?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PartnerContactDto
+     * @memberof PartnerContactSelfDto
      */
     phone?: string | null;
-    /**
-     * 
-     * @type {Roles}
-     * @memberof PartnerContactDto
-     */
-    role?: Roles;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PartnerContactDto
-     */
-    isActive?: boolean;
 }
 
-export function PartnerContactDtoFromJSON(json: any): PartnerContactDto {
-    return PartnerContactDtoFromJSONTyped(json, false);
+export function PartnerContactSelfDtoFromJSON(json: any): PartnerContactSelfDto {
+    return PartnerContactSelfDtoFromJSONTyped(json, false);
 }
 
-export function PartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerContactDto {
+export function PartnerContactSelfDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): PartnerContactSelfDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -71,12 +52,10 @@ export function PartnerContactDtoFromJSONTyped(json: any, ignoreDiscriminator: b
         'name': !exists(json, 'name') ? undefined : json['name'],
         'email': !exists(json, 'email') ? undefined : json['email'],
         'phone': !exists(json, 'phone') ? undefined : json['phone'],
-        'role': !exists(json, 'role') ? undefined : RolesFromJSON(json['role']),
-        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
     };
 }
 
-export function PartnerContactDtoToJSON(value?: PartnerContactDto | null): any {
+export function PartnerContactSelfDtoToJSON(value?: PartnerContactSelfDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -88,8 +67,6 @@ export function PartnerContactDtoToJSON(value?: PartnerContactDto | null): any {
         'name': value.name,
         'email': value.email,
         'phone': value.phone,
-        'role': RolesToJSON(value.role),
-        'isActive': value.isActive,
     };
 }
 

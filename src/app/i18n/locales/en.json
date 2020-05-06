@@ -1,6 +1,4 @@
 {
-  "CampaignMovedToWaitingState": "__STRING_NOT_TRANSLATED__",
-  "PartnerContactRegistered": "__STRING_NOT_TRANSLATED__",
   "app": {
     "title": "Plus Campaign Engine"
   },
@@ -268,6 +266,7 @@
       "ldap-password-change": "Password could not be changed, the user may not change the password.",
       "login-failed": "Login failed, try later.",
       "newpassword-sameasold": "The new password cannot be the same as the old password, use different one.",
+      "partner-contact-deleted": "__STRING_NOT_TRANSLATED__",
       "password-inconsistent": "The two passwords are not matching, check the entered values.",
       "registration-failed": "Registration failed, try later.",
       "sync-failed": "User sync failed.",
@@ -338,6 +337,8 @@
     "partner": {
       "cant-change-state": "You don't have permission to change the partner state.",
       "inactive-or-deleted": "Operation cannot be completed, because the partner is deleted or inactive.",
+      "invalid-registration-state-change": "__STRING_NOT_TRANSLATED__",
+      "major-cannot-change-registration-state": "__STRING_NOT_TRANSLATED__",
       "name-must-be-unique": "There is already a partner with that name, choose a different name"
     },
     "partner-contact": {
@@ -472,18 +473,28 @@
       "partner": {
         "address-max-length-150": "__STRING_NOT_TRANSLATED__",
         "address-required": "__STRING_NOT_TRANSLATED__",
+        "address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "address-street-number-required": "__STRING_NOT_TRANSLATED__",
+        "address-street-required": "__STRING_NOT_TRANSLATED__",
         "bank-account-max-length-26": "__STRING_NOT_TRANSLATED__",
         "bank-account-required": "__STRING_NOT_TRANSLATED__",
+        "contact-required": "__STRING_NOT_TRANSLATED__",
         "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
         "id-required": "__STRING_NOT_TRANSLATED__",
         "mailing-address-max-length-150": "__STRING_NOT_TRANSLATED__",
         "mailing-address-required": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-street-number-required": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-street-required": "__STRING_NOT_TRANSLATED__",
         "name-max-length-150": "__STRING_NOT_TRANSLATED__",
         "name-required": "__STRING_NOT_TRANSLATED__",
         "registration-allowed-max-length-30": "__STRING_NOT_TRANSLATED__",
         "registration-allowed-required": "__STRING_NOT_TRANSLATED__",
         "registration-number-max-length-20": "__STRING_NOT_TRANSLATED__",
         "registration-number-required": "__STRING_NOT_TRANSLATED__",
+        "registration-state-required": "__STRING_NOT_TRANSLATED__",
         "state-required": "__STRING_NOT_TRANSLATED__",
         "tax-number-max-length-20": "__STRING_NOT_TRANSLATED__",
         "tax-number-required": "__STRING_NOT_TRANSLATED__"
@@ -492,6 +503,7 @@
         "is-active-required": "__STRING_NOT_TRANSLATED__",
         "query-filters-required": "__STRING_NOT_TRANSLATED__",
         "query-toggle-required": "__STRING_NOT_TRANSLATED__",
+        "role-invalid": "__STRING_NOT_TRANSLATED__",
         "role-required": "__STRING_NOT_TRANSLATED__"
       },
       "register-partner-contact": {
@@ -629,10 +641,7 @@
       "major": "Major",
       "normal": "KKV"
     },
-    "save-partner-success": "Successfully saved the partner.",
-    "site": {
-      "editor-title": "Partner's site"
-    }
+    "save-partner-success": "Successfully saved the partner."
   },
   "partner-contact": {
     "editor-title": "Partner Contact",

@@ -21,6 +21,9 @@ import {
     PartnerContactDto,
     PartnerContactDtoFromJSON,
     PartnerContactDtoToJSON,
+    PartnerContactSelfDto,
+    PartnerContactSelfDtoFromJSON,
+    PartnerContactSelfDtoToJSON,
     PartnerContactVm,
     PartnerContactVmFromJSON,
     PartnerContactVmToJSON,
@@ -54,7 +57,7 @@ export interface UpdatePartnerContactRequest {
 }
 
 export interface UpdateSelfPartnerContactRequest {
-    partnerContactDto?: PartnerContactDto;
+    partnerContactSelfDto?: PartnerContactSelfDto;
 }
 
 /**
@@ -238,7 +241,7 @@ export class PartnerContactsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: PartnerContactDtoToJSON(requestParameters.partnerContactDto),
+            body: PartnerContactSelfDtoToJSON(requestParameters.partnerContactSelfDto),
         });
 
         return new runtime.VoidApiResponse(response);
