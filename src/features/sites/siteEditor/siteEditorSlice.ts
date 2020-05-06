@@ -12,166 +12,110 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
+import { FeatureState } from 'models/featureState'
 
-interface SiteEditorState {
+interface State {
   site?: Site
   cashiers?: Cashier[]
-  listParams: ListRequestParams
+  cashiersListParams: ListRequestParams
   cashier?: Cashier
-  loadingSite: boolean
-  loadingCashiers: boolean
-  loadingSave: boolean
-  loadingDelete: boolean
-  loadingCashierSave: boolean
-  loadingCashierGet: boolean
-  error: string
+  siteEditorState: FeatureState
+  cashierListState: FeatureState
+  cashierEditorState: FeatureState
+  cashierDeleteState: FeatureState
 }
 
-const initialState: SiteEditorState = {
+const initialState: State = {
   cashiers: [],
-  listParams: {
+  cashiersListParams: {
     pageSize: 10
   },
-  loadingSite: false,
-  loadingCashiers: false,
-  loadingSave: false,
-  loadingDelete: false,
-  loadingCashierSave: false,
-  loadingCashierGet: false,
-  error: ''
+  siteEditorState: FeatureState.Initial,
+  cashierListState: FeatureState.Initial,
+  cashierEditorState: FeatureState.Initial,
+  cashierDeleteState: FeatureState.Initial
 }
 
-const siteEditorSlice = createSlice({
+const slice = createSlice({
   name: 'siteEditor',
   initialState,
   reducers: {
-    resetSiteEditor: () => initialState,
-    getSiteRequest(state) {
-      state.loadingSite = true
+    reset: () => initialState,
+    setSiteEditorState(state, action: PayloadAction<FeatureState>) {
+      state.siteEditorState = action.payload
+    },
+    setCashierEditorState(state, action: PayloadAction<FeatureState>) {
+      state.cashierEditorState = action.payload
+    },
+    setCashierListState(state, action: PayloadAction<FeatureState>) {
+      state.cashierListState = action.payload
+    },
+    setCashierDeleteState(state, action: PayloadAction<FeatureState>) {
+      state.cashierDeleteState = action.payload
     },
     getSiteSuccess(state, action: PayloadAction<Site>) {
+      state.siteEditorState = FeatureState.Initial
       state.site = action.payload
-      state.loadingSite = false
-      state.error = ''
-    },
-    getSiteFail(state, action: PayloadAction<string>) {
-      state.loadingSite = false
-      state.error = action.payload
-    },
-    getCashiersRequest(state) {
-      state.loadingCashiers = true
     },
     getCashiersSuccess(
       state,
       action: PayloadAction<{ cashiers?: Cashier[]; listParams: ListRequestParams }>
     ) {
       state.cashiers = action.payload.cashiers
-      state.listParams = action.payload.listParams
-      state.loadingCashiers = false
-      state.error = ''
-    },
-    getCashiersFail(state, action: PayloadAction<string>) {
-      state.loadingCashiers = false
-      state.error = action.payload
-    },
-    saveSiteRequest(state) {
-      state.loadingSave = true
+      state.cashiersListParams = action.payload.listParams
+      state.cashierListState = FeatureState.Success
     },
     createSiteSuccess(state) {
       message.success(i18n.t('common.message.save-success'), 5)
-      state.loadingSave = false
-      state.error = ''
+      state.siteEditorState = FeatureState.Success
     },
     updateSiteSuccess(state) {
+      state.siteEditorState = FeatureState.Success
       message.success(i18n.t('common.message.save-success'), 5)
-      state.loadingSave = false
-      state.error = ''
-    },
-    saveSiteFail(state, action: PayloadAction<string>) {
-      state.loadingSave = false
-      state.error = action.payload
-    },
-    deleteCashierRequest(state) {
-      state.loadingDelete = true
     },
     deleteCashierSuccess(state) {
+      state.cashierDeleteState = FeatureState.Success
       message.success(i18n.t('common.message.delete-success'), 5)
-      state.loadingDelete = false
-      state.error = ''
-    },
-    deleteCashierFail(state, action: PayloadAction<string>) {
-      state.loadingDelete = false
-      state.error = action.payload
-    },
-    saveCashierRequest(state) {
-      state.loadingCashierSave = true
     },
     saveCashierSuccess(state) {
+      state.cashierEditorState = FeatureState.Success
       message.success(i18n.t('common.message.save-success'), 5)
-      state.loadingCashierSave = false
-      state.error = ''
-    },
-    saveCashierFail(state, action: PayloadAction<string>) {
-      state.loadingCashierSave = false
-      state.error = action.payload
-    },
-    getCashierRequest(state) {
-      state.loadingCashierGet = true
     },
     getCashierSuccess(state, action: PayloadAction<Cashier>) {
+      state.cashierEditorState = FeatureState.Success
       state.cashier = action.payload
-      state.loadingCashierGet = false
-      state.error = ''
-    },
-    getCashierFail(state, action: PayloadAction<string>) {
-      state.loadingCashierGet = false
-      state.error = action.payload
     },
     clearCashierEditor(state) {
+      state.cashierEditorState = FeatureState.Initial
       state.cashier = undefined
-      state.error = ''
-      state.loadingCashierSave = false
-      state.loadingCashierGet = false
     }
   }
 })
 
 const {
-  getSiteRequest,
+  setCashierEditorState,
+  setCashierListState,
+  setSiteEditorState,
+  setCashierDeleteState
+} = slice.actions
+const {
   getSiteSuccess,
-  getSiteFail,
-  saveSiteRequest,
   createSiteSuccess,
   updateSiteSuccess,
-  saveSiteFail,
-  saveCashierRequest,
   saveCashierSuccess,
-  saveCashierFail,
-  deleteCashierRequest,
   deleteCashierSuccess,
-  deleteCashierFail,
-  getCashiersRequest,
   getCashiersSuccess,
-  getCashiersFail,
-  getCashierRequest,
-  getCashierSuccess,
-  getCashierFail
-} = siteEditorSlice.actions
+  getCashierSuccess
+} = slice.actions
+const { reset, clearCashierEditor } = slice.actions
 
-export const { resetSiteEditor, clearCashierEditor } = siteEditorSlice.actions
-
-export const siteEditorReducer = siteEditorSlice.reducer
-
-export const getCashiers = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
+const getCashiers = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   const { site } = getState().siteEditor
   if (!site?.id) return
 
-  dispatch(getCashiersRequest())
   try {
-    const revisedParams = reviseListRequestParams(getState().siteEditor.listParams, params)
+    dispatch(setCashierListState(FeatureState.Loading))
+    const revisedParams = reviseListRequestParams(getState().siteEditor.cashiersListParams, params)
     const { result, ...pagination } = await api.cashiers.getCashiers({
       ...revisedParams,
       siteId: site.id
@@ -183,32 +127,29 @@ export const getCashiers = (params: ListRequestParams = {}): AppThunk => async (
       })
     )
   } catch (err) {
-    dispatch(getCashiersFail(err.toString()))
-    return err.toString()
+    dispatch(setCashierListState(FeatureState.Error))
   }
 }
 
-export const getSite = (id: number): AppThunk => async dispatch => {
-  dispatch(getSiteRequest())
+const getSite = (id: number): AppThunk => async dispatch => {
   try {
+    dispatch(setSiteEditorState(FeatureState.Loading))
     const site = await api.sites.getSite({ id })
-
     dispatch(getSiteSuccess(site as Site))
     dispatch(getCashiers())
   } catch (err) {
-    dispatch(getSiteFail(err.toString()))
-    return err.toString()
+    dispatch(setSiteEditorState(FeatureState.Error))
   }
 }
 
-export const saveSite = (
+const saveSite = (
   site: Site,
   id?: number,
   partnerId?: number,
   editorRoute?: string
 ): AppThunk => async dispatch => {
   try {
-    dispatch(saveSiteRequest())
+    dispatch(setSiteEditorState(FeatureState.Loading))
     // TODO: integrate, remove partner get because it will be on the JWT.
 
     let sitePartnerId = partnerId
@@ -238,15 +179,15 @@ export const saveSite = (
       newId.id && editorRoute && history.push(`${editorRoute}/${newId.id}`)
     }
   } catch (err) {
-    dispatch(saveSiteFail(err.toString()))
+    dispatch(setSiteEditorState(FeatureState.Error))
   }
 }
 
-export const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getState) => {
-  dispatch(saveCashierRequest())
-
+const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getState) => {
   try {
-    if (cashier.id) {
+    dispatch(setCashierEditorState(FeatureState.Loading))
+
+    if (cashier.id && !isNaN(cashier.id)) {
       await api.cashiers.updateCashier({ id: cashier.id, cashierDto: cashier })
     } else {
       await api.cashiers.createCashier({
@@ -258,36 +199,49 @@ export const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getS
     dispatch(getCashiers())
     return true
   } catch (err) {
-    dispatch(saveCashierFail(err.toString()))
+    dispatch(setCashierEditorState(FeatureState.Error))
     return false
   }
 }
 
-export const deleteCashier = (id: number): AppThunk => async (dispatch, getState) => {
-  dispatch(deleteCashierRequest())
-
+const deleteCashier = (id: number): AppThunk => async (dispatch, getState) => {
   try {
+    dispatch(setCashierDeleteState(FeatureState.Loading))
+
     await api.cashiers.deleteCashier({ id })
     dispatch(deleteCashierSuccess())
 
     const siteEditorState = getState().siteEditor
     if (siteEditorState.site?.id) {
-      const newPage = recalculatePaginationAfterDeletion(getState().siteList.listParams)
+      const newPage = recalculatePaginationAfterDeletion(getState().siteEditor.cashiersListParams)
       dispatch(getCashiers({ page: newPage }))
     }
     return { id }
   } catch (err) {
-    dispatch(deleteCashierFail(err.toString()))
+    dispatch(setCashierDeleteState(FeatureState.Error))
     return { id, error: err.toString() }
   }
 }
 
-export const getCashier = (id: number): AppThunk => async dispatch => {
-  dispatch(getCashierRequest())
+const getCashier = (id: number): AppThunk => async dispatch => {
   try {
+    dispatch(setCashierEditorState(FeatureState.Loading))
     const cashier = await api.cashiers.getCashier({ id })
     dispatch(getCashierSuccess(cashier))
   } catch (err) {
-    dispatch(getCashierFail(err.toString()))
+    dispatch(setCashierEditorState(FeatureState.Error))
   }
+}
+
+export const siteEditorReducer = slice.reducer
+
+export const siteEditorActions = {
+  reset,
+  clearCashierEditor,
+  getCashiers,
+  getSite,
+  saveSite,
+  saveCashier,
+  deleteCashier,
+  getCashier
 }

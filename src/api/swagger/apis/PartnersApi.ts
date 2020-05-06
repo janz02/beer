@@ -18,6 +18,9 @@ import {
     ActivatePartnerDto,
     ActivatePartnerDtoFromJSON,
     ActivatePartnerDtoToJSON,
+    ChangePartnerRegistrationStateDto,
+    ChangePartnerRegistrationStateDtoFromJSON,
+    ChangePartnerRegistrationStateDtoToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
@@ -41,6 +44,11 @@ import {
 export interface ActivatePartnerRequest {
     id: number;
     activatePartnerDto?: ActivatePartnerDto;
+}
+
+export interface ChangeRegStatePartnerRequest {
+    id: number;
+    changePartnerRegistrationStateDto?: ChangePartnerRegistrationStateDto;
 }
 
 export interface CreatePartnerRequest {
@@ -116,6 +124,44 @@ export class PartnersApi extends runtime.BaseAPI {
      */
     async activatePartner(requestParameters: ActivatePartnerRequest): Promise<void> {
         await this.activatePartnerRaw(requestParameters);
+    }
+
+    /**
+     * Changes the registration state of a partner with an Id of \"id\"
+     * Changes the registration state of a partner
+     */
+    async changeRegStatePartnerRaw(requestParameters: ChangeRegStatePartnerRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling changeRegStatePartner.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Partners/ChangeRegState/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ChangePartnerRegistrationStateDtoToJSON(requestParameters.changePartnerRegistrationStateDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Changes the registration state of a partner with an Id of \"id\"
+     * Changes the registration state of a partner
+     */
+    async changeRegStatePartner(requestParameters: ChangeRegStatePartnerRequest): Promise<void> {
+        await this.changeRegStatePartnerRaw(requestParameters);
     }
 
     /**

@@ -14,11 +14,11 @@ import { newsletterListReducer } from 'features/newsletter/newsletterList/newsle
 import { partnersListReducer } from 'features/partners/partnerList/partnerListSlice'
 import { selfPartnerReducer } from 'features/partners/selfPartner/selfPartnerSlice'
 import { partnerEditorReducer } from 'features/partners/partnerEditor/partnerEditorSlice'
-import { partnerSiteListSlice, siteListSlice } from 'features/sites/siteList/siteListSliceFactory'
 import { categoryListReducer } from 'features/campaignCategory/categoryList/categoryListSlice'
 import { categoryEditorReducer } from 'features/campaignCategory/categoryEditor/categoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
+import { siteListReducer } from 'features/sites/siteList/siteListSlice'
 
 export const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -32,11 +32,10 @@ export const rootReducer = combineReducers({
   selfPartner: selfPartnerReducer,
   partnerList: partnersListReducer,
   partnerEditor: partnerEditorReducer,
-  partnerSiteList: partnerSiteListSlice.reducer,
   partnerContactList: partnerContactListReducer,
   partnerContactModal: partnerContactModalReducer,
-  siteList: siteListSlice.reducer,
   newsletterList: newsletterListReducer,
+  siteList: siteListReducer,
   siteEditor: siteEditorReducer,
   newsletterEditor: newsletterEditorReducer,
   userAccessList: userAccessListReducer,

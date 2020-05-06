@@ -8,6 +8,7 @@ import { useNotification } from './useNotification'
 import { NotificationData } from 'models/notification'
 import { useTranslation } from 'react-i18next'
 import { ListItemMetaProps } from 'antd/lib/list'
+import { NotificationType } from 'api/swagger/models'
 
 interface NotificationItemProps {
   item: NotificationData
@@ -20,10 +21,18 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
   const [hover, setHover] = useState(false)
 
   const meta: ListItemMetaProps = {
-    title: t(`enum.noitfication-type.${item.type}`),
     description: (
       <MomentDisplay date={moment(item.createdDate)} mode={hover ? 'date time' : 'from now'} />
     )
+  }
+
+  switch (item.type) {
+    case NotificationType.CampaignMovedToWaitingState:
+      meta.title = t(`enum.noitfication-type.${item.type}`)
+      break
+    case NotificationType.PartnerContactRegistered:
+      meta.title = `${t(`enum.noitfication-type.${item.type}`)} ${item.value}`
+      break
   }
 
   return (

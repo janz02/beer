@@ -6,12 +6,17 @@ import { Site } from 'models/site'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
-import { EditorMode } from 'components/buttons/EditorModeOptions'
+import {
+  EditorMode,
+  EditorModeOptions,
+  EditorModeOptionsProps
+} from 'components/buttons/EditorModeOptions'
+import { useSiteEditorForm } from './useSiteEditorForm'
 
 export interface SiteEditorFormProps {
   mode: EditorMode
   title: string
-  options: JSX.Element
+  options: EditorModeOptionsProps
   onSave: (values: Site) => void
   onExit: () => void
   loading: boolean
@@ -19,10 +24,18 @@ export interface SiteEditorFormProps {
   id?: number | undefined
 }
 
-export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
-  const { onSave, loading, site, onExit, title, options, mode } = props
+export const SiteEditorForm: FC = () => {
   const { t } = useTranslation()
 
+  const { siteEditorFormProps, handleGetSite, handleResetSite } = useSiteEditorForm()
+  const { onSave, loading, site, onExit, title, options, mode } = siteEditorFormProps
+
+  useEffect(() => {
+    handleGetSite()
+    return () => {
+      handleResetSite()
+    }
+  }, [handleGetSite, handleResetSite])
   const rule = useCommonFormRules()
 
   const {
@@ -49,11 +62,13 @@ export const SiteEditorForm: FC<SiteEditorFormProps> = props => {
 
   const view = useMemo(() => mode === EditorMode.VIEW, [mode])
 
+  const editorOptions = <EditorModeOptions {...options} />
+
   return (
     <>
       <ResponsiveCard
         floatingTitle={title}
-        floatingOptions={options}
+        floatingOptions={editorOptions}
         floatingBackButton={{ onClick: onExit, primary: !modified }}
         paddedBottom
       >

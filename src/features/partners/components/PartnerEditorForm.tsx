@@ -9,6 +9,7 @@ import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButtonProps } from 'components/buttons/BackButton'
 import { EditorMode } from 'components/buttons/EditorModeOptions'
 import Typography from 'antd/lib/typography'
+import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
 
 const { Text } = Typography
 
@@ -111,6 +112,18 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
             )}
           </>
         </Form.Item>
+
+        {!partner?.majorPartner && (
+          <Form.Item
+            name="partnerRegistrationState"
+            label={t('partner.field.partner-registration-state')}
+            {...formItemLayout}
+          >
+            <PartnerRegistrationStateDisplay
+              partnerRegistrationState={partner?.partnerRegistrationState}
+            />
+          </Form.Item>
+        )}
 
         <Form.Item
           name="address"

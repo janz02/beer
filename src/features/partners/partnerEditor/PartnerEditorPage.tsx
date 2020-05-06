@@ -4,12 +4,17 @@ import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
 import { PartnerEditorForm } from '../components/PartnerEditorForm'
 import { history } from 'router/router'
-import { getPartner, savePartner, resetPartnerEditor, deletePartner } from './partnerEditorSlice'
+import {
+  getPartner,
+  savePartner,
+  resetPartnerEditor,
+  deletePartner,
+  changeRegStatePartner
+} from './partnerEditorSlice'
 import { useParams } from 'react-router-dom'
 import { Partner } from 'models/partner'
-import { Roles } from 'api/swagger/models'
+import { Roles, PartnerRegistrationState } from 'api/swagger/models'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
-import { SitesListTile } from 'features/sites/siteList/SitesListTile'
 import { PartnerStateButton } from './PartnerStateButton'
 
 import {
@@ -23,6 +28,9 @@ import {
 } from 'features/partnerContact/PartnerContactTile'
 import { hasPermission } from 'services/jwt-reader'
 import { UserType } from 'models/user'
+import { SiteFeatureConfig } from 'features/sites/siteList/siteListSlice'
+import { SiteList } from 'features/sites/siteList/SiteList'
+import { Button } from 'antd'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -34,7 +42,9 @@ export const PartnerEditorPage: React.FC = () => {
   const { t } = useTranslation()
   const { partnerId: id } = useParams()
   const dispatch = useDispatch()
-  const { partner, loading } = useSelector((state: RootState) => state.partnerEditor)
+  const { partner, loading, loadingRegState } = useSelector(
+    (state: RootState) => state.partnerEditor
+  )
 
   const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
   const [partnerToDelete, setPartnerToDelete] = useState<PopupState<Partner>>()
@@ -77,14 +87,51 @@ export const PartnerEditorPage: React.FC = () => {
     canEdit: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
   }
 
+  const sitesConfig: SiteFeatureConfig = {
+    shrinks: true,
+    routeRoot: `/partners/${id}/site`,
+    routeExit: `/partners/${id}`
+  }
+
+  const displayAcceptButton =
+    !partner?.majorPartner &&
+    (partner?.partnerRegistrationState === PartnerRegistrationState.Pending ||
+      partner?.partnerRegistrationState === PartnerRegistrationState.Rejected)
+  const displayRejectButton =
+    !partner?.majorPartner && partner?.partnerRegistrationState === PartnerRegistrationState.Pending
+
   const options = (
     <>
+      {displayAcceptButton && (
+        <Button
+          size="large"
+          onClick={() =>
+            partner?.id &&
+            dispatch(changeRegStatePartner(partner?.id, PartnerRegistrationState.Approved))
+          }
+          loading={loadingRegState}
+        >
+          {t('partner.editor.accept')}
+        </Button>
+      )}
+
+      {displayRejectButton && (
+        <Button
+          size="large"
+          onClick={() =>
+            partner?.id &&
+            dispatch(changeRegStatePartner(partner?.id, PartnerRegistrationState.Rejected))
+          }
+          loading={loadingRegState}
+        >
+          {t('partner.editor.reject')}
+        </Button>
+      )}
+
       <PartnerStateButton />
       <EditorModeOptions {...optionProps} />
     </>
   )
-
-  const hideTables = mode !== EditorMode.VIEW
 
   return (
     <>
@@ -109,7 +156,7 @@ export const PartnerEditorPage: React.FC = () => {
       </GenericPopup>
       {mode !== EditorMode.NEW && (
         <>
-          <SitesListTile hidden={hideTables} />
+          <SiteList config={sitesConfig} />
           <PartnerContactTile {...partnerContactConfig} />
         </>
       )}
