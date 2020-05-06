@@ -1,6 +1,4 @@
 {
-  "CampaignMovedToWaitingState": "A kampány jóváhagyásra váró státuszba került.",
-  "PartnerContactRegistered": "A kapcsolattartó regisztrációja megtörtént.",
   "app": {
     "title": "Plusz Kampány Motor"
   },
@@ -268,6 +266,7 @@
       "ldap-password-change": "Jelszó változtatás sikertelen, előfordulhat, hogy a felhasználónak nem változtatható a jelszava.",
       "login-failed": "Bejelentkezés sikertelen, próbálkozzon később.",
       "newpassword-sameasold": "Az új jelszó nem egyezhet meg az előzővel, adjon meg egy új jelszót.",
+      "partner-contact-deleted": "__STRING_NOT_TRANSLATED__",
       "password-inconsistent": "A két új jelszó nem egyezik meg, ellenőrizze, hogy elgépelte-e.",
       "registration-failed": "Regsztráció sikertelen, próbálkozzon később.",
       "sync-failed": "Felhasználók szinkronizációja sikerleten.",
@@ -338,6 +337,8 @@
     "partner": {
       "cant-change-state": "Partner státusz változtatása sikertelen, a felhasználó jogosultsági szintje miatt.",
       "inactive-or-deleted": "Sikerelten művelet, mert a parnter inaktív vagy törölt.",
+      "invalid-registration-state-change": "__STRING_NOT_TRANSLATED__",
+      "major-cannot-change-registration-state": "__STRING_NOT_TRANSLATED__",
       "name-must-be-unique": "Már létezik egy partner ilyen névvel, válasszon másik nevet."
     },
     "partner-contact": {
@@ -472,18 +473,28 @@
       "partner": {
         "address-max-length-150": "Parnter címe maximum 150 karakter lehet, kérem adjon meg egy rövidebb címet.",
         "address-required": "Partner címének megadása kötelező, kérem adjon meg egy címet.",
+        "address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "address-street-number-required": "__STRING_NOT_TRANSLATED__",
+        "address-street-required": "__STRING_NOT_TRANSLATED__",
         "bank-account-max-length-26": "Partner bankszámla maximum 26 karakter lehet, kérem adjon meg egy rövidebb számsort.",
         "bank-account-required": "Partner bankszámla számát kötelező megadni, kérem adjon meg egy számsort.",
+        "contact-required": "__STRING_NOT_TRANSLATED__",
         "id-greater-than-0": "Partner id megadása kötelező, kérem adjon meg egy azonosítót.",
         "id-required": "Partner id megadása kötelező, kérem adjon meg egy azonosítót.",
         "mailing-address-max-length-150": "Partner levelezési címe maximum 150 karakter lehet, kérem adjon meg egy címet.",
         "mailing-address-required": "Partner levelezési cím megadása kötelező, kérem adjon meg egy címet.",
+        "mailing-address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-street-number-required": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-street-required": "__STRING_NOT_TRANSLATED__",
         "name-max-length-150": "Partner neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "name-required": "Parnter név megadása kötelelező, kérem adjon meg egy megfelelő nevet.",
         "registration-allowed-max-length-30": "Cégjegyző neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "registration-allowed-required": "Cégjegyző megadása kötelező, kérem adjon meg egy megfelelő nevet.",
         "registration-number-max-length-20": "Cégjegyzék szám maximum 20 karakter lehet, kérem adjon meg egy rövidebb számot.",
         "registration-number-required": "Cégjegyzék szám megadása kötelező, kérem adjon meg egy megfelelő számot.",
+        "registration-state-required": "__STRING_NOT_TRANSLATED__",
         "state-required": "Székhely megadása kötelező, kérem adjon meg egy megfelelő címet.",
         "tax-number-max-length-20": "Adószám maximum 20 karakter lehet, kérem adjon meg egy rövidebb számot.",
         "tax-number-required": "Adószám megadása kötelező, kérem adjon meg egy számot."
@@ -492,6 +503,7 @@
         "is-active-required": "Kapcsolat tartó státusz megadása kötelező, kérem adjon meg egy státuszt.",
         "query-filters-required": "Kapcsolat tartó lekérdézés szűrőfeltételei hiányoznak, kérem adjon meg legalább egy üres lekérdezést.",
         "query-toggle-required": "Kapcsolat tartó lekérdezéshez a választó hiányzik, kérem adja meg hogy NKM vagy külső kapcsolattartókat szeretne lekérdezni.",
+        "role-invalid": "__STRING_NOT_TRANSLATED__",
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
       },
       "register-partner-contact": {
@@ -634,10 +646,7 @@
       "major": "Kiemelt",
       "normal": "KKV"
     },
-    "save-partner-success": "Partner mentése sikeres.",
-    "site": {
-      "editor-title": "Partner telephelye"
-    }
+    "save-partner-success": "Partner mentése sikeres."
   },
   "partner-contact": {
     "editor-title": "Kapcsolattartó",

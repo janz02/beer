@@ -1,6 +1,13 @@
 import React, { FC } from 'react'
-import { SitesListTile } from './SitesListTile'
+import { SiteFeatureConfig } from './siteListSlice'
+import { SiteList } from './SiteList'
 
-export const SitesListPage: FC = () => {
-  return <SitesListTile />
+export const SiteListPage: FC = () => {
+  const config: SiteFeatureConfig = {
+    routeRoot: '/sites/editor',
+    routeExit: '/sites',
+    shrinks: false
+  }
+
+  return <SiteList config={config} />
 }
