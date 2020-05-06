@@ -302,14 +302,12 @@
       "cant-be-deleted": "You don't have the permission to delete this campaign.",
       "cant-change-state": "You don't have the permission to change the state of this campaign.",
       "fix-discount-must-be-integer": "Field must be a positive integer, choose a valid integer.",
-      "fix-discount-out-of-range": "Fix discount must be between 1 and 1,000,000, so choose a number between these numbers.",
       "invalid-initial-state": "Campaign can only be created with Created state, don't change the state on creation.",
       "invalid-predefined-code-count": "Invalid coupon code prefix in the uploaded file.",
       "invalid-state-predefined-codes": "Coupon codes cannot be changed in this state.",
       "name-be-edited-after-accepted": "Coupon name cannot be edited after accepted, reload the page.",
       "only-accepted-can-be-changed": "Only accepted coupon can be changed, reload the page.",
       "partner-must-be-major": "Only major partners can be selected, choose a major partner",
-      "percentage-discount-out-of-range": "Percentage discount must be between 1 and 100, choose a number between these numbers.",
       "predefined-file-is-empty": "Predefined code file is empty, check the content of the CSV file and the count.",
       "predefinied-file-invalid": "Predefined code file must be valid CSV file, check its type and content.",
       "prize-rules-invalid": "Prize rule file must be a PDF file, check the content of file.",
@@ -347,9 +345,6 @@
     },
     "rtd": {
       "communication": "The internal server is not available, try again later."
-    },
-    "sendgrid": {
-      "communication": "__STRING_NOT_TRANSLATED__"
     },
     "sendgrid": {
       "communication": "__STRING_NOT_TRANSLATED__"
@@ -603,6 +598,8 @@
   },
   "partner": {
     "editor": {
+      "accept": "Accept",
+      "reject": "Reject",
       "title": "Partner"
     },
     "field": {
@@ -616,6 +613,7 @@
       "register-code": "Registration code",
       "registration-allowed": "Company register",
       "registration-number": "Company register number",
+      "registration-state": "Registration state",
       "tax-number": "VAT number"
     },
     "list": {

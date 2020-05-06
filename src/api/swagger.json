@@ -35,6 +35,33 @@
         }
       }
     },
+    "/api/Auth/RegisterPartner": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Registers a Sme(Kkv) partner",
+        "operationId": "registerPartner",
+        "requestBody": {
+          "description": "Details of the partner",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterPartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful registration"
+          },
+          "400": {
+            "description": "Validation error occurred"
+          }
+        }
+      }
+    },
     "/api/Auth/RegisterPartnerContact": {
       "post": {
         "tags": [
@@ -4459,6 +4486,67 @@
           }
         }
       },
+      "RegisterPartnerContactPersonDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "RegisterPartnerDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "bankAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressStreet": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressStreetNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "mailingAddressStreet": {
+            "type": "string",
+            "nullable": true
+          },
+          "mailingAddressStreetNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "contact": {
+            "$ref": "#/components/schemas/RegisterPartnerContactPersonDto"
+          }
+        }
+      },
       "RegisterPartnerContactDto": {
         "type": "object",
         "properties": {
@@ -4606,7 +4694,8 @@
           "PartnerContactApprover",
           "PartnerContactEditor",
           "User",
-          "ServiceAccount"
+          "ServiceAccount",
+          "KprServiceAccount"
         ],
         "type": "string"
       },

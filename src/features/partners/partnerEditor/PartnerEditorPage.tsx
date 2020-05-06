@@ -24,6 +24,7 @@ import { hasPermission } from 'services/jwt-reader'
 import { UserType } from 'models/user'
 import { SiteFeatureConfig } from 'features/sites/siteList/siteListSlice'
 import { SiteList } from 'features/sites/siteList/SiteList'
+import { Button } from 'antd'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -86,6 +87,9 @@ export const PartnerEditorPage: React.FC = () => {
 
   const options = (
     <>
+      {/* TODO: integration, conditional display and actions. */}
+      <Button size="large">{t('partner.editor.accept')}</Button>
+      <Button size="large">{t('partner.editor.reject')}</Button>
       <PartnerStateButton />
       <EditorModeOptions {...optionProps} />
     </>

@@ -52,6 +52,8 @@ export * from './PartnerVmPaginatedResponse';
 export * from './ProblemDetails';
 export * from './RefreshDto';
 export * from './RegisterPartnerContactDto';
+export * from './RegisterPartnerContactPersonDto';
+export * from './RegisterPartnerDto';
 export * from './RegisterUserDto';
 export * from './Roles';
 export * from './ScoreEventVm';

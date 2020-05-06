@@ -42,6 +42,9 @@ import {
     RegisterPartnerContactDto,
     RegisterPartnerContactDtoFromJSON,
     RegisterPartnerContactDtoToJSON,
+    RegisterPartnerDto,
+    RegisterPartnerDtoFromJSON,
+    RegisterPartnerDtoToJSON,
     RegisterUserDto,
     RegisterUserDtoFromJSON,
     RegisterUserDtoToJSON,
@@ -95,6 +98,10 @@ export interface LoginRequest {
 
 export interface RefreshRequest {
     refreshDto?: RefreshDto;
+}
+
+export interface RegisterPartnerRequest {
+    registerPartnerDto?: RegisterPartnerDto;
 }
 
 export interface RegisterPartnerContactRequest {
@@ -405,6 +412,38 @@ export class AuthApi extends runtime.BaseAPI {
     async refresh(requestParameters: RefreshRequest): Promise<UserVm> {
         const response = await this.refreshRaw(requestParameters);
         return await response.value();
+    }
+
+    /**
+     * Registers a Sme(Kkv) partner
+     */
+    async registerPartnerRaw(requestParameters: RegisterPartnerRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/RegisterPartner`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: RegisterPartnerDtoToJSON(requestParameters.registerPartnerDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Registers a Sme(Kkv) partner
+     */
+    async registerPartner(requestParameters: RegisterPartnerRequest): Promise<void> {
+        await this.registerPartnerRaw(requestParameters);
     }
 
     /**
