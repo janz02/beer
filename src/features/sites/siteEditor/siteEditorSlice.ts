@@ -187,7 +187,7 @@ const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getState) =
   try {
     dispatch(setCashierEditorState(FeatureState.Loading))
 
-    if (cashier.id) {
+    if (cashier.id && !isNaN(cashier.id)) {
       await api.cashiers.updateCashier({ id: cashier.id, cashierDto: cashier })
     } else {
       await api.cashiers.createCashier({
@@ -213,7 +213,7 @@ const deleteCashier = (id: number): AppThunk => async (dispatch, getState) => {
 
     const siteEditorState = getState().siteEditor
     if (siteEditorState.site?.id) {
-      const newPage = recalculatePaginationAfterDeletion(getState().siteList.listParams)
+      const newPage = recalculatePaginationAfterDeletion(getState().siteEditor.cashiersListParams)
       dispatch(getCashiers({ page: newPage }))
     }
     return { id }
