@@ -250,8 +250,8 @@
   },
   "enum": {
     "noitfication-type": {
-      "CampaignMovedToWaitingState": "Campaign moved to waiting state",
-      "PartnerContactRegistered": "Parnter Contact Registered"
+      "CampaignMovedToWaitingState": "Campaign moved to waiting status",
+      "PartnerContactRegistered": "New Parnter Contact: "
     }
   },
   "error": {
