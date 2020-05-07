@@ -2199,6 +2199,30 @@
         }
       }
     },
+    "/api/EmailSender/InvitePartnerContact": {
+      "post": {
+        "tags": [
+          "EmailSender"
+        ],
+        "summary": "Sends an invite partner contact email to the specified email address",
+        "operationId": "invitePartnerContact",
+        "requestBody": {
+          "description": "The recipient email address and the partnerId",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitePartnerContactDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The server accepted the command"
+          }
+        }
+      }
+    },
     "/api/EmailTemplates": {
       "post": {
         "tags": [
@@ -4804,10 +4828,6 @@
           "isActive": {
             "type": "boolean"
           },
-          "majorPartner": {
-            "type": "boolean",
-            "nullable": true
-          },
           "role": {
             "$ref": "#/components/schemas/Roles"
           }
@@ -5665,6 +5685,19 @@
           "emailSubject": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "InvitePartnerContactDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

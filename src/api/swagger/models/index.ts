@@ -35,6 +35,7 @@ export * from './EmailTemplateVm';
 export * from './FileVm';
 export * from './InlineObject';
 export * from './Int32EntityCreatedVm';
+export * from './InvitePartnerContactDto';
 export * from './LoginDto';
 export * from './MyClaimedCouponVm';
 export * from './MyCouponVm';
