@@ -15,8 +15,8 @@ export const SignupPage: React.FC = () => {
   const { registrationCode } = useParams()
   const [form] = Form.useForm()
 
-  const urlRegistrationCodeParam = useMemo(() => !!registrationCode, [registrationCode])
-  urlRegistrationCodeParam && form.setFieldsValue({ code: registrationCode })
+  const hasRegistrationCodeInUrl = useMemo(() => !!registrationCode, [registrationCode])
+  hasRegistrationCodeInUrl && form.setFieldsValue({ code: registrationCode })
 
   return (
     <AuthLayout title={t(`auth.signup`)}>
@@ -98,7 +98,7 @@ export const SignupPage: React.FC = () => {
             rule.max(10, t('error.validation.register-partner-contact.partner-code-max-length-10'))
           ]}
         >
-          <Input maxLength={10} disabled={urlRegistrationCodeParam} />
+          <Input maxLength={10} disabled={hasRegistrationCodeInUrl} />
         </Form.Item>
 
         <Form.Item name="acceptTerms" valuePropName="checked">
