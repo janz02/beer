@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { history } from 'router/router'
