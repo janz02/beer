@@ -33,14 +33,14 @@ export const useRoleGenerator = (userType?: UserType): UseRoleGeneratorUtils => 
       case UserType.PARTNER:
         return [
           {
-            // TODO: This is a fix, for Demo, to show Major or Normal on partner contact, will be changed when Major-Normal and Approver-Editor is fixed globally
-            text: t('user.role.pc-major'),
-            value: Roles.PartnerContactApprover
+            text: t('.main'),
+            // text: t('user.partner-role.mainpartnercontact'),
+            value: Roles.MainPartnerContact
           },
           {
-            // TODO: This is a fix, for Demo, to show Major or Normal on partner contact, will be changed when Major-Normal and Approver-Editor is fixed globally
-            text: t('user.role.pc-normal'),
-            value: Roles.PartnerContactEditor
+            text: t('.normal'),
+            // text: t('user.partner-role.normalpartnercontact'),
+            value: Roles.NormalPartnerContact
           }
         ]
       default:

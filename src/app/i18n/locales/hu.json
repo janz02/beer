@@ -697,13 +697,15 @@
     }
   },
   "user": {
+    "partner-role": {
+      "mainpartnercontact": "Fő",
+      "normalpartnercontact": "Normál"
+    },
     "role": {
       "administrator": "Adminisztrátor",
       "businesspartnermanager": "Ügyfél menedzser",
       "campaignmanager": "Kampány menedzser",
-      "partnermanager": "Partner menedzser",
-      "pc-major": "Fő",
-      "pc-normal": "Normál"
+      "partnermanager": "Partner menedzser"
     },
     "role-short": {
       "administrator": "Admin",

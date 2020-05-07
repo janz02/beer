@@ -697,13 +697,15 @@
     }
   },
   "user": {
+    "partner-role": {
+      "mainpartnercontact": "Main",
+      "normalpartnercontact": "Normal"
+    },
     "role": {
       "administrator": "Administrator",
       "businesspartnermanager": "Business Partner Manager",
       "campaignmanager": "Campaign Manager",
-      "partnermanager": "Partner Manager",
-      "pc-major": "Major",
-      "pc-normal": "Normal"
+      "partnermanager": "Partner Manager"
     },
     "role-short": {
       "administrator": "Admin",
