@@ -1,13 +1,12 @@
 import React, { FC, useEffect, useState, useMemo } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { UserAccessEditor } from './UserAccessEditor'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
-import { userAccessListActions } from './userAccessListSlice'
-import { useUserAccessListPage } from './useUserAccessListPage'
+import { userAccessActions } from '../userAccessSlice'
+import { useUserAccessList } from './useUserAccessList'
 
-export const UserAccessListPage: FC = () => {
+export const UserAccessList: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -17,17 +16,15 @@ export const UserAccessListPage: FC = () => {
     nkmUsersColumnsConfig,
     nkmUsersTableUtils,
     partnerUsersTableUtils,
-    setEditorModal,
-    editorModal,
     nkmUsers,
     nkmLoading,
     partnerUsers,
     partnerLoading
-  } = useUserAccessListPage()
+  } = useUserAccessList()
 
   useEffect(() => {
-    dispatch(userAccessListActions.getNkmUsers())
-    dispatch(userAccessListActions.getPartnerUsers())
+    dispatch(userAccessActions.getNkmUsers())
+    dispatch(userAccessActions.getPartnerUsers())
   }, [dispatch])
 
   const tableSelector = useMemo(
@@ -84,8 +81,6 @@ export const UserAccessListPage: FC = () => {
       >
         {contentTables[selectedTab]}
       </ResponsiveCard>
-
-      <UserAccessEditor {...editorModal} handleClose={() => setEditorModal(null)} />
     </>
   )
 }

@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { UserType } from 'models/user'
 
-type UseRoleGeneratorUtils = ColumnFilterItem[]
+export type RoleOptions = ColumnFilterItem[]
 
-export const useRoleGenerator = (userType?: UserType): UseRoleGeneratorUtils => {
+export const useRoleGenerator = (userType?: UserType): RoleOptions => {
   const { t } = useTranslation()
 
   const roleOptions = useMemo(() => {

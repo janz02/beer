@@ -2,7 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import { connectRouter } from 'connected-react-router'
 import { history } from '../router/router'
 import { routerHistoryStore } from '../router/routerHistoryStore'
-import { userAccessListReducer } from 'features/userAccess/userAccessListSlice'
+import { userAccessReducer } from 'features/userAccess/userAccessSlice'
 import { newsletterEditorReducer } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { authReducer } from 'features/auth/authSlice'
 import { campaignListReducer } from 'features/campaigns/campaignList/campaignListSlice'
@@ -38,7 +38,7 @@ export const rootReducer = combineReducers({
   siteList: siteListReducer,
   siteEditor: siteEditorReducer,
   newsletterEditor: newsletterEditorReducer,
-  userAccessList: userAccessListReducer,
+  userAccess: userAccessReducer,
   notification: notificationReducer
 })
 

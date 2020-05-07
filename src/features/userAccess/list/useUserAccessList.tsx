@@ -1,47 +1,45 @@
-import React, { useState, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { userAccessListActions } from './userAccessListSlice'
+import { userAccessActions } from '../userAccessSlice'
 import { useTableUtils, UseTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess, UserType } from 'models/user'
-import { UserAccessEditorProps } from './UserAccessEditor'
 import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/models'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
+import { FeatureState } from 'models/featureState'
 
-interface UseUserAccessListPageUtils {
+interface UseUserAccessListUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersTableUtils: UseTableUtils<UserAccess>
   partnerUsersTableUtils: UseTableUtils<UserAccess>
-  editorModal: UserAccessEditorProps | null | undefined
-  setEditorModal: React.Dispatch<React.SetStateAction<UserAccessEditorProps | null | undefined>>
   nkmUsers: UserAccess[]
   nkmLoading: boolean
   partnerUsers: UserAccess[]
   partnerLoading: boolean
 }
 
-export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
+export const useUserAccessList = (): UseUserAccessListUtils => {
+  const dispatch = useDispatch()
+
   const { t } = useTranslation()
   const {
     nkmListParams,
     partnerListParams,
     nkmUsers,
-    nkmLoading,
+    nkmListState,
     partnerUsers,
-    partnerLoading
-  } = useSelector((state: RootState) => state.userAccessList)
-
-  const [editorModal, setEditorModal] = useState<UserAccessEditorProps | null>()
+    partnerListState
+  } = useSelector((state: RootState) => state.userAccess)
 
   const nkmUsersTableUtils = useTableUtils<UserAccess>({
     listParamsState: nkmListParams,
     filterKeys: ['name', 'email', 'role', 'isActive'],
-    getDataAction: userAccessListActions.getNkmUsers
+    getDataAction: userAccessActions.getNkmUsers
   })
 
   const nkmRoleOptions = useRoleGenerator(UserType.NKM)
@@ -82,7 +80,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
               return (
                 <CrudButtons
                   onEdit={() =>
-                    setEditorModal({ visible: true, userId: user.id, userType: UserType.NKM })
+                    dispatch(userAccessActions.inspectUserAccess(UserType.NKM, user.id!))
                   }
                 />
               )
@@ -90,13 +88,13 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           })
         : {}
     ],
-    [nkmRoleOptions, nkmUsersTableUtils, t]
+    [nkmRoleOptions, nkmUsersTableUtils, t, dispatch]
   )
 
   const partnerUsersTableUtils = useTableUtils<UserAccess>({
     listParamsState: partnerListParams,
     filterKeys: ['name', 'email', 'partnerName', 'role', 'isActive'],
-    getDataAction: userAccessListActions.getPartnerUsers
+    getDataAction: userAccessActions.getPartnerUsers
   })
 
   const partnerRoleOptions = useRoleGenerator(UserType.PARTNER)
@@ -141,8 +139,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         sort: false,
         filters: partnerRoleOptions,
         width: '12rem',
-        render: (value: unknown, user: UserAccess) =>
-          user.role ? t(`user.role-short.${user.role?.toLowerCase()}`) : ''
+        render: role => (role ? t(`user.role-short.${role?.toLowerCase()}`) : '')
       }),
       hasPermission([Roles.Administrator])
         ? partnerUsersTableUtils.actionColumnConfig({
@@ -150,7 +147,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
               return (
                 <CrudButtons
                   onEdit={() =>
-                    setEditorModal({ visible: true, userId: user.id, userType: UserType.PARTNER })
+                    dispatch(userAccessActions.inspectUserAccess(UserType.PARTNER, user.id!))
                   }
                 />
               )
@@ -158,7 +155,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
           })
         : {}
     ],
-    [partnerRoleOptions, partnerUsersTableUtils, t]
+    [partnerRoleOptions, partnerUsersTableUtils, t, dispatch]
   )
 
   return {
@@ -166,11 +163,9 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
     nkmUsersColumnsConfig,
     nkmUsersTableUtils,
     partnerUsersTableUtils,
-    editorModal,
-    setEditorModal,
     nkmUsers,
-    nkmLoading,
+    nkmLoading: nkmListState === FeatureState.Loading,
     partnerUsers,
-    partnerLoading
+    partnerLoading: partnerListState === FeatureState.Loading
   }
 }
