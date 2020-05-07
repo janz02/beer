@@ -203,7 +203,6 @@ const getRecentNotifications = (): AppThunk => async (dispatch, getState) => {
       case NotificationListState.LoadedMore:
       case NotificationListState.LoadedAll:
       default:
-        queryParams.toDate = moment().toDate()
         queryParams.fromDate = newestDate?.toDate()
         break
     }
