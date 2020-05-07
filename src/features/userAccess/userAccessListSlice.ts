@@ -48,7 +48,7 @@ const userAccessListSlice = createSlice({
   name: 'usersAccessList',
   initialState,
   reducers: {
-    resetUsersAccessList: () => initialState,
+    reset: () => initialState,
     getNkmUsersRequest(state) {
       state.nkmLoading = true
     },
@@ -125,15 +125,9 @@ const {
 } = userAccessListSlice.actions
 const { getUserRequest, getUserSuccess, getUserFail } = userAccessListSlice.actions
 const { saveUserRequest, saveUserSuccess, saveUserFail } = userAccessListSlice.actions
+const { clearUserAccessEditor, reset } = userAccessListSlice.actions
 
-export const { clearUserAccessEditor, resetUsersAccessList } = userAccessListSlice.actions
-
-export const userAccessListReducer = userAccessListSlice.reducer
-
-export const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
+const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(getNkmUsersRequest())
     const revisedParams = reviseListRequestParams(getState().userAccessList.nkmListParams, params)
@@ -149,7 +143,7 @@ export const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (
   }
 }
 
-export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
+const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
@@ -160,6 +154,7 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
       params
     )
     const { result, ...pagination } = await api.auth.getPartnerContactsInfo(revisedParams)
+
     dispatch(
       getPartnerUsersSuccess({
         users: result as UserAccess[],
@@ -171,7 +166,7 @@ export const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => asy
   }
 }
 
-export const getUserAccess = (id: number): AppThunk => async dispatch => {
+const getUserAccess = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(getUserRequest())
     const response = await api.auth.getPartnerContactInfo({ id })
@@ -181,7 +176,7 @@ export const getUserAccess = (id: number): AppThunk => async dispatch => {
   }
 }
 
-export const saveUserAccess = (
+const saveUserAccess = (
   id: number,
   role: Roles,
   isActive: boolean,
@@ -202,4 +197,15 @@ export const saveUserAccess = (
     dispatch(saveUserFail(err.toString()))
     return false
   }
+}
+
+export const userAccessListReducer = userAccessListSlice.reducer
+
+export const userAccessListActions = {
+  saveUserAccess,
+  getUserAccess,
+  getNkmUsers,
+  getPartnerUsers,
+  clearUserAccessEditor,
+  reset
 }

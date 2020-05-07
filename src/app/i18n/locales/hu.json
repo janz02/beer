@@ -697,10 +697,6 @@
     }
   },
   "user": {
-    "partner-role": {
-      "mainpartnercontact": "Fő",
-      "normalpartnercontact": "Normál"
-    },
     "role": {
       "administrator": "Adminisztrátor",
       "businesspartnermanager": "Ügyfél menedzser",
@@ -711,6 +707,8 @@
       "administrator": "Admin",
       "businesspartnermanager": "Ügyfél men.",
       "campaignmanager": "Kampány men.",
+      "mainpartnercontact": "Fő",
+      "normalpartnercontact": "Normál",
       "partnercontactapprover": "Jóváhagyó",
       "partnercontacteditor": "Szerkesztő",
       "partnermanager": "Partner men."
@@ -723,12 +721,12 @@
     "field": {
       "email": "Email",
       "name": "Név",
+      "partner-contact-type": "Kapcsolattartó típus",
       "partner-name": "Partner",
       "partnerType": {
         "major": "Fő",
         "normal": "Normál"
       },
-      "pc-type": "Kapcsolattartó típus",
       "phone": "Telefon",
       "role": "Szerepkör",
       "status": "Státusz",

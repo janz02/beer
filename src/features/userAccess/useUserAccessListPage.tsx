@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { getNkmUsers, getPartnerUsers } from './userAccessListSlice'
+import { userAccessListActions } from './userAccessListSlice'
 import { useTableUtils, UseTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess, UserType } from 'models/user'
@@ -41,7 +41,7 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
   const nkmUsersTableUtils = useTableUtils<UserAccess>({
     listParamsState: nkmListParams,
     filterKeys: ['name', 'email', 'role', 'isActive'],
-    getDataAction: getNkmUsers
+    getDataAction: userAccessListActions.getNkmUsers
   })
 
   const nkmRoleOptions = useRoleGenerator(UserType.NKM)
@@ -95,8 +95,8 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
 
   const partnerUsersTableUtils = useTableUtils<UserAccess>({
     listParamsState: partnerListParams,
-    filterKeys: ['name', 'email', 'partnerName', 'role', 'isActive', 'majorPartner'],
-    getDataAction: getPartnerUsers
+    filterKeys: ['name', 'email', 'partnerName', 'role', 'isActive'],
+    getDataAction: userAccessListActions.getPartnerUsers
   })
 
   const partnerRoleOptions = useRoleGenerator(UserType.PARTNER)
@@ -135,28 +135,14 @@ export const useUserAccessListPage = (): UseUserAccessListPageUtils => {
         filterMode: FilterMode.ACTIVE_INACTIVE
       }),
       partnerUsersTableUtils.columnConfig({
-        title: t('user-access.field.pc-type'),
-        filterMode: FilterMode.FILTER,
-        width: '12rem',
-        key: 'majorPartner',
-        filters: [
-          { text: t('user-access.field.partnerType.major'), value: 'true' },
-          { text: t('user-access.field.partnerType.normal'), value: 'false' }
-        ],
-        render: (value: unknown, user: UserAccess) =>
-          user.majorPartner
-            ? t('user-access.field.partnerType.major')
-            : t('user-access.field.partnerType.normal')
-      }),
-      partnerUsersTableUtils.columnConfig({
-        title: t('user-access.field.role'),
+        title: t('user-access.field.partner-contact-type'),
         key: 'role',
         filterMode: FilterMode.FILTER,
         sort: false,
         filters: partnerRoleOptions,
-        width: '8rem',
+        width: '12rem',
         render: (value: unknown, user: UserAccess) =>
-          t(`user.role-short.${user.role?.toLowerCase()}`)
+          user.role ? t(`user.role-short.${user.role?.toLowerCase()}`) : ''
       }),
       hasPermission([Roles.Administrator])
         ? partnerUsersTableUtils.actionColumnConfig({

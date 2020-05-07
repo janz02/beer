@@ -4828,10 +4828,6 @@
           "isActive": {
             "type": "boolean"
           },
-          "majorPartner": {
-            "type": "boolean",
-            "nullable": true
-          },
           "role": {
             "$ref": "#/components/schemas/Roles"
           }

@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, useMemo } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { UserAccessEditor } from './UserAccessEditor'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
-import { getNkmUsers, getPartnerUsers } from './userAccessListSlice'
+import { userAccessListActions } from './userAccessListSlice'
 import { useUserAccessListPage } from './useUserAccessListPage'
 
 export const UserAccessListPage: FC = () => {
@@ -26,20 +26,23 @@ export const UserAccessListPage: FC = () => {
   } = useUserAccessListPage()
 
   useEffect(() => {
-    dispatch(getNkmUsers())
-    dispatch(getPartnerUsers())
+    dispatch(userAccessListActions.getNkmUsers())
+    dispatch(userAccessListActions.getPartnerUsers())
   }, [dispatch])
 
-  const tableSelector = [
-    {
-      key: 'nkm',
-      tab: t('user-access.nkm-users')
-    },
-    {
-      key: 'partner',
-      tab: t('user-access.partner-users')
-    }
-  ]
+  const tableSelector = useMemo(
+    () => [
+      {
+        key: 'nkm',
+        tab: t('user-access.nkm-users')
+      },
+      {
+        key: 'partner',
+        tab: t('user-access.partner-users')
+      }
+    ],
+    [t]
+  )
 
   const contentTables: { [key: string]: JSX.Element } = {
     nkm: (

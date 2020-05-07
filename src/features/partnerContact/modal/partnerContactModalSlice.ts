@@ -103,26 +103,19 @@ const saveContact = (id: number, data: PartnerContact): AppThunk => async (dispa
   try {
     dispatch(setEditorState(FeatureState.Loading))
 
-    // TODO: consider joning these updates into one endpoint
+    const { editingSelf, contact } = getState().partnerContactModal
+
     await api.partnerContacts.updatePartnerContact({
       id,
       partnerContactDto: {
         name: data.name,
         email: data.email,
-        phone: data.phone
+        phone: data.phone,
+        role: editingSelf ? contact?.role! : data.role!,
+        isActive: editingSelf ? contact?.isActive : data.isActive
       }
     })
 
-    const savingSelf = getState().partnerContactModal.editingSelf
-    if (!savingSelf && typeof data.role === 'string') {
-      await api.auth.updatePartnerContactInfo({
-        id,
-        partnerContactStateDto: {
-          role: data.role!,
-          isActive: data.isActive
-        }
-      })
-    }
     dispatch(saveContactSuccess())
     dispatch(partnerContactListActions.getContacts())
   } catch (err) {

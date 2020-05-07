@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { Form, Select, Radio } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { getUserAccess, saveUserAccess, clearUserAccessEditor } from './userAccessListSlice'
+import { userAccessListActions } from './userAccessListSlice'
 import Typography from 'antd/lib/typography'
 import { Roles } from 'api/swagger/models'
 import { useRoleGenerator } from '../../hooks/useRoleGenerator'
@@ -38,7 +38,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
 
   useEffect(() => {
     if (!visible) return
-    dispatch(getUserAccess(userId!))
+    dispatch(userAccessListActions.getUserAccess(userId!))
   }, [dispatch, userId, visible])
 
   const roleOptions = useRoleGenerator(userType)
@@ -54,7 +54,9 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
   const handleSave = async (values: UserAccessFormValues): Promise<void> => {
     const { role, status } = values
     if (userId && role && status) {
-      const saved = await dispatch(saveUserAccess(userId, role, status === Status.ACTIVE, userType))
+      const saved = await dispatch(
+        userAccessListActions.saveUserAccess(userId, role, status === Status.ACTIVE, userType)
+      )
       saved && handleClose && handleClose()
     }
   }
@@ -70,7 +72,7 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
         okText: t('common.save'),
         onCancel: handleClose,
         afterClose: () => {
-          dispatch(clearUserAccessEditor())
+          dispatch(userAccessListActions.clearUserAccessEditor())
         }
       }}
       formProps={{
@@ -83,7 +85,11 @@ export const UserAccessEditor: FC<UserAccessEditorProps> = props => {
 
       <Form.Item
         name="role"
-        label={t('user-access.field.role')}
+        label={
+          userType === UserType.NKM
+            ? t('user-access.field.role')
+            : t('user-access.field.partner-contact-type')
+        }
         rules={[rule.requiredString(t('error.validation.partner-contact.role-required'))]}
       >
         <Select>

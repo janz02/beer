@@ -33,13 +33,11 @@ export const useRoleGenerator = (userType?: UserType): UseRoleGeneratorUtils => 
       case UserType.PARTNER:
         return [
           {
-            text: '.main',
-            // text: t('user.partner-role.mainpartnercontact'),
+            text: t('user.role-short.mainpartnercontact'),
             value: Roles.MainPartnerContact
           },
           {
-            text: '.normal',
-            // text: t('user.partner-role.normalpartnercontact'),
+            text: t('user.role-short.normalpartnercontact'),
             value: Roles.NormalPartnerContact
           }
         ]

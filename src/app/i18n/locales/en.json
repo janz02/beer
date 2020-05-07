@@ -697,10 +697,6 @@
     }
   },
   "user": {
-    "partner-role": {
-      "mainpartnercontact": "Main",
-      "normalpartnercontact": "Normal"
-    },
     "role": {
       "administrator": "Administrator",
       "businesspartnermanager": "Business Partner Manager",
@@ -711,6 +707,8 @@
       "administrator": "Admin",
       "businesspartnermanager": "Business Man.",
       "campaignmanager": "Campaign Man.",
+      "mainpartnercontact": "Main",
+      "normalpartnercontact": "Normal",
       "partnercontactapprover": "Approver",
       "partnercontacteditor": "Editor",
       "partnermanager": "Partner Man."
@@ -723,12 +721,12 @@
     "field": {
       "email": "Email",
       "name": "Name",
+      "partner-contact-type": "Contact type",
       "partner-name": "Partner",
       "partnerType": {
         "major": "Major",
         "normal": "Normal"
       },
-      "pc-type": "Contact type",
       "phone": "Phone",
       "role": "Role",
       "status": "Status",
