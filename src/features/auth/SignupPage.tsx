@@ -6,17 +6,11 @@ import { AuthLayout } from './components/AuthLayout'
 import { useCommonFormRules } from 'hooks/useCommonFormRules'
 import { useAuth } from './useAuth'
 import styles from './SignupPage.module.scss'
-import { useParams } from 'react-router-dom'
 
 export const SignupPage: React.FC = () => {
   const { t } = useTranslation()
-  const { loading, handleSignup } = useAuth()
+  const { loading, handleSignup, hasRegistrationCodeInUrl, form } = useAuth()
   const rule = useCommonFormRules()
-  const { registrationCode } = useParams()
-  const [form] = Form.useForm()
-
-  const hasRegistrationCodeInUrl = useMemo(() => !!registrationCode, [registrationCode])
-  hasRegistrationCodeInUrl && form.setFieldsValue({ code: registrationCode })
 
   return (
     <AuthLayout title={t(`auth.signup`)}>
