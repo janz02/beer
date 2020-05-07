@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { history } from 'router/router'
@@ -12,10 +12,11 @@ export const SignupPage: React.FC = () => {
   const { t } = useTranslation()
   const { loading, handleSignup } = useAuth()
   const rule = useCommonFormRules()
-  const { registrationCode: registrationCodeUrlParam } = useParams()
+  const { registrationCode } = useParams()
   const [form] = Form.useForm()
 
-  !!registrationCodeUrlParam && form.setFieldsValue({ code: registrationCodeUrlParam })
+  const urlRegistrationCodeParam = useMemo(() => !!registrationCode, [registrationCode])
+  urlRegistrationCodeParam && form.setFieldsValue({ code: registrationCode })
 
   return (
     <AuthLayout title={t(`auth.signup`)}>
@@ -97,7 +98,7 @@ export const SignupPage: React.FC = () => {
             rule.max(10, t('error.validation.register-partner-contact.partner-code-max-length-10'))
           ]}
         >
-          <Input maxLength={10} disabled={!!registrationCodeUrlParam} />
+          <Input maxLength={10} disabled={urlRegistrationCodeParam} />
         </Form.Item>
 
         <Form.Item name="acceptTerms" valuePropName="checked">
