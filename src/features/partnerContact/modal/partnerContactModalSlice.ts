@@ -6,7 +6,6 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
 import { partnerContactListActions } from '../list/partnerContactListSlice'
-import { delay } from 'services/temp/delay'
 
 interface State {
   editingSelf: boolean
