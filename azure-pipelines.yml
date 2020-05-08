@@ -5,7 +5,7 @@ variables:
   DockerImageName: 'nkm-rtd-246410/couponmanager'
   DockerRegistryServiceConnection: 'NKM-RTD-GCP-DockerRegistry'
   npm_config_cache: $(Pipeline.Workspace)/.npm
-  
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -64,6 +64,7 @@ steps:
         if( $changed ) {
           Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
           Write-Host $changed
+          git diff .
           throw "Error"
         } else {
           Write-Host "The solution is using the latest API client."
