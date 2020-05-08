@@ -326,7 +326,8 @@
       "image-type-not-supported": "Unsupported image type.",
       "invalid-image-size": "Invalid image dimensions.",
       "invalid-prize-rule-type": "Invalid prize rule type.",
-      "not-supported-format": "Unsupported file format."
+      "not-supported-format": "Unsupported file format.",
+      "too-big": "__STRING_NOT_TRANSLATED__"
     },
     "not-found": "Not found.",
     "paginate": {
