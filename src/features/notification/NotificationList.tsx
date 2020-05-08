@@ -9,7 +9,13 @@ import { useNotification } from './useNotification'
 export const NotificationList: FC = () => {
   const { t } = useTranslation()
 
-  const { notifications, loading, handleGetNotifications, canLoadMore } = useNotification()
+  const {
+    notifications,
+    loading,
+    handleGetNotifications,
+    handleReadAll,
+    canLoadMore
+  } = useNotification()
 
   const loadMoreButton = canLoadMore && (
     <Button
@@ -40,6 +46,10 @@ export const NotificationList: FC = () => {
 
   return (
     <div className="infinite-list-container">
+      <div className="infinite-list-header" onClick={handleReadAll}>
+        <div className="infinite-list-header__action">{t('notification.read-all')}</div>
+      </div>
+
       <InfiniteScroll
         initialLoad={false}
         pageStart={0}

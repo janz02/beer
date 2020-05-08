@@ -1,3 +1,5 @@
+@import "assets/scss/_variables";
+
 .notification-list {
   .ant-spin-nested-loading {
     min-height: 30vh;
@@ -10,5 +12,25 @@
 
   &__footer {
     height: 3rem;
+  }
+}
+
+.infinite-list-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-height: 45px;
+  padding: 17px 15px 6px 7px;
+  border-bottom: 1px solid #F0F0F0;
+
+  &__action {
+    color: #A6ADB4;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color;
+      text-decoration: underline;
+    }
   }
 }

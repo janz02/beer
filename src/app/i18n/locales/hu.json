@@ -347,9 +347,6 @@
     "rtd": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
     },
-    "segment": {
-      "one-time-use-creation-failed": "__STRING_NOT_TRANSLATED__"
-    },
     "sendgrid": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
     },
@@ -453,7 +450,6 @@
       },
       "email": {
         "content-required": "Email törzs megadása kötelező, kérem adjon meg egy megfelelő törzset.",
-        "is-notification-required": "__STRING_NOT_TRANSLATED__",
         "recipient-required": "Címzett megadása kötelező, kérem adjon meg egy megfelelő email címet.",
         "recipients-email-invalid-format": "Címzettek formátuma nem megfelelő, kérem adjon meg megfelelő email címeket.",
         "recipients-email-required": "Címzett megadása kötelező, kérem adjon meg egy megfelelő email címet.",
@@ -531,8 +527,7 @@
         "id-greater-than-0": "Szegmens id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
         "id-required": "Szegmens id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
         "name-invalid-format": "Szegmens neve PKM-el kell, hogy kezdődjön, kérem adjon meg egy megfelelő nevet.",
-        "name-required": "Szegmens nevét kötelező megadni, kérem adjon meg egy megfelelő nevet.",
-        "one-time-use-required": "__STRING_NOT_TRANSLATED__"
+        "name-required": "Szegmens nevét kötelező megadni, kérem adjon meg egy megfelelő nevet."
       },
       "segments": {
         "list-required": "Szegmens lista megadása kötelező, kérem adjon meg egy email listát."
@@ -611,7 +606,7 @@
     "empty-list": "Üres",
     "load-more": "Régebbiek...",
     "notifications": "Értesítések",
-    "read-all": "Mindegyik olvasottra állítása"
+    "read-all": "Összes megjelölése olvasottként"
   },
   "partner": {
     "editor": {
@@ -659,6 +654,10 @@
       "active": "Státusz",
       "email": "E-mail cím",
       "name": "Név",
+      "partner-type": {
+        "major": "Fő",
+        "normal": "Normál"
+      },
       "phone": "Telefonszám",
       "role": "Jogosultság",
       "status-active": "Aktív",
@@ -702,14 +701,16 @@
       "administrator": "Adminisztrátor",
       "businesspartnermanager": "Ügyfél menedzser",
       "campaignmanager": "Kampány menedzser",
-      "partnermanager": "Partner menedzser"
+      "partnermanager": "Partner menedzser",
+      "pc-major": "Fő",
+      "pc-normal": "Normál"
     },
     "role-short": {
       "administrator": "Admin",
       "businesspartnermanager": "Ügyfél men.",
       "campaignmanager": "Kampány men.",
-      "mainpartnercontact": "Fő",
-      "normalpartnercontact": "Normál",
+      "partnercontactapprover": "Jóváhagyó",
+      "partnercontacteditor": "Szerkesztő",
       "partnermanager": "Partner men."
     }
   },
@@ -720,12 +721,12 @@
     "field": {
       "email": "Email",
       "name": "Név",
-      "partner-contact-type": "Kapcsolattartó típus",
       "partner-name": "Partner",
       "partnerType": {
         "major": "Fő",
         "normal": "Normál"
       },
+      "pc-type": "Kapcsolattartó típus",
       "phone": "Telefon",
       "role": "Szerepkör",
       "status": "Státusz",
