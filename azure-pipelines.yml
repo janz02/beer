@@ -4,7 +4,8 @@ trigger:
 variables:
   DockerImageName: 'nkm-rtd-246410/couponmanager'
   DockerRegistryServiceConnection: 'NKM-RTD-GCP-DockerRegistry'
-
+  npm_config_cache: $(Pipeline.Workspace)/.npm
+  
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -42,10 +43,15 @@ steps:
       versionSpec: '12.x'
     displayName: 'Install Node.js'
 
-  - task: Npm@1
+  - task: Cache@2
     inputs:
-      command: 'ci'
-    displayName: 'Install packages'
+      key: 'npm | "$(Agent.OS)" | package-lock.json'
+      restoreKeys: |
+         npm | "$(Agent.OS)"
+      path: $(npm_config_cache)
+    displayName: Cache npm
+  
+  - script: npm ci
 
   - task: PowerShell@2
     inputs:
