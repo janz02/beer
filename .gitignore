@@ -25,6 +25,3 @@ yarn.lock
 /junit.xml
 /output/cobertura-coverage.xml
 *.orig
-
-# Ignore all differences in line endings
-*        -crlf
