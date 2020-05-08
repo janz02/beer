@@ -25,3 +25,4 @@ yarn.lock
 /junit.xml
 /output/cobertura-coverage.xml
 *.orig
+0*.patch

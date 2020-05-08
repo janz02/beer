@@ -51,9 +51,9 @@ t('coupon.status.inactive')
 t('user.role-short.administrator')
 t('user.role-short.businesspartnermanager')
 t('user.role-short.campaignmanager')
-t('user.role-short.partnercontactapprover')
-t('user.role-short.partnercontacteditor')
 t('user.role-short.partnermanager')
+t('user.role-short.mainpartnercontact')
+t('user.role-short.normalpartnercontact')
 
 // Boolean mappings
 t(`user-access.field.partnerType.major`)

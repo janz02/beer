@@ -101,12 +101,7 @@ export const usePartnerContactList = (
         filterMode: FilterMode.FILTER,
         width: '12rem',
         filters: roleOptions,
-        render: (value, record: PartnerContact) =>
-          userType === UserType.NKM
-            ? value?.length && t(`user.role.${value.toLowerCase?.()}`)
-            : record.majorPartner
-            ? t('partner-contact.field.partner-type.major')
-            : t('partner-contact.field.partner-type.normal')
+        render: role => (role ? t(`user.role-short.${role?.toLowerCase()}`) : '')
       }),
       tableUtils.columnConfig({
         title: t('partner-contact.field.active'),

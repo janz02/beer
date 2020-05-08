@@ -37,6 +37,12 @@ export interface SendEmailToSegmentDto {
      * @memberof SendEmailToSegmentDto
      */
     emailSubject?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SendEmailToSegmentDto
+     */
+    isNotification?: boolean;
 }
 
 export function SendEmailToSegmentDtoFromJSON(json: any): SendEmailToSegmentDto {
@@ -52,6 +58,7 @@ export function SendEmailToSegmentDtoFromJSONTyped(json: any, ignoreDiscriminato
         'segmentId': !exists(json, 'segmentId') ? undefined : json['segmentId'],
         'emailTemplateId': !exists(json, 'emailTemplateId') ? undefined : json['emailTemplateId'],
         'emailSubject': !exists(json, 'emailSubject') ? undefined : json['emailSubject'],
+        'isNotification': !exists(json, 'isNotification') ? undefined : json['isNotification'],
     };
 }
 
@@ -67,6 +74,7 @@ export function SendEmailToSegmentDtoToJSON(value?: SendEmailToSegmentDto | null
         'segmentId': value.segmentId,
         'emailTemplateId': value.emailTemplateId,
         'emailSubject': value.emailSubject,
+        'isNotification': value.isNotification,
     };
 }
 

@@ -6,7 +6,6 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
 import { partnerContactListActions } from '../list/partnerContactListSlice'
-import { delay } from 'services/temp/delay'
 
 interface State {
   editingSelf: boolean
@@ -103,26 +102,19 @@ const saveContact = (id: number, data: PartnerContact): AppThunk => async (dispa
   try {
     dispatch(setEditorState(FeatureState.Loading))
 
-    // TODO: consider joning these updates into one endpoint
+    const { editingSelf, contact } = getState().partnerContactModal
+
     await api.partnerContacts.updatePartnerContact({
       id,
       partnerContactDto: {
         name: data.name,
         email: data.email,
-        phone: data.phone
+        phone: data.phone,
+        role: editingSelf ? contact?.role! : data.role!,
+        isActive: editingSelf ? contact?.isActive : data.isActive
       }
     })
 
-    const savingSelf = getState().partnerContactModal.editingSelf
-    if (!savingSelf && typeof data.role === 'string') {
-      await api.auth.updatePartnerContactInfo({
-        id,
-        partnerContactStateDto: {
-          role: data.role!,
-          isActive: data.isActive
-        }
-      })
-    }
     dispatch(saveContactSuccess())
     dispatch(partnerContactListActions.getContacts())
   } catch (err) {
@@ -134,11 +126,12 @@ const sendInvitation = (email: string): AppThunk => async (dispatch, getState) =
   try {
     dispatch(setInviterState(FeatureState.Loading))
     const partnerId = getState().partnerContactModal.inviterPartnerId
-    // TODO: integrate
-    // await api.partnerContacts.sendInvitation({ partnerId, email })
-    await delay({}, 1000)
-    console.log({ partnerId, email })
-
+    await api.emailSender.invitePartnerContact({
+      invitePartnerContactDto: {
+        email,
+        partnerId: +partnerId!
+      }
+    })
     dispatch(sendInvitatonSuccess())
   } catch (err) {
     dispatch(setInviterState(FeatureState.Error))
