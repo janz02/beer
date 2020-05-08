@@ -52,7 +52,7 @@ steps:
       targetType: 'inline'
       script: |
         if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
-        git config --global core.autocrlf true
+        git config --global core.autocrlf false
         npm run generate-client
         git add .
         $changed = git status -s
