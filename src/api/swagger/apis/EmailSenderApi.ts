@@ -41,7 +41,6 @@ export interface SendTestEmailRequest {
 /**
  * no description
  */
- //extra lines
 export class EmailSenderApi extends runtime.BaseAPI {
 
     /**
