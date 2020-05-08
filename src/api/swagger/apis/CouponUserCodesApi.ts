@@ -23,6 +23,11 @@ import {
     MyClaimedCouponVmToJSON,
 } from '../models';
 
+export interface BurnCouponRequest {
+    userId: string | null;
+    couponCode: string | null;
+}
+
 export interface CouponCodesCouponUserCodeRequest {
     couponId: number;
 }
@@ -69,6 +74,43 @@ export class CouponUserCodesApi extends runtime.BaseAPI {
      */
     async archiveClaimedCoupons(): Promise<void> {
         await this.archiveClaimedCouponsRaw();
+    }
+
+    /**
+     * Used to delete a coupon code from user purse
+     */
+    async burnCouponRaw(requestParameters: BurnCouponRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.userId === null || requestParameters.userId === undefined) {
+            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling burnCoupon.');
+        }
+
+        if (requestParameters.couponCode === null || requestParameters.couponCode === undefined) {
+            throw new runtime.RequiredError('couponCode','Required parameter requestParameters.couponCode was null or undefined when calling burnCoupon.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/CouponUserCodes/{userId}/BurnCoupon/{couponCode}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))).replace(`{${"couponCode"}}`, encodeURIComponent(String(requestParameters.couponCode))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Used to delete a coupon code from user purse
+     */
+    async burnCoupon(requestParameters: BurnCouponRequest): Promise<void> {
+        await this.burnCouponRaw(requestParameters);
     }
 
     /**

@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { FloatingActionButton } from 'components/buttons/FloatingActionButton'
-import { BellFilled } from '@ant-design/icons'
+import { BellOutlined } from '@ant-design/icons'
 import { useNotification } from './useNotification'
 
 export const NotificationFab: FC = () => {
@@ -16,10 +16,9 @@ export const NotificationFab: FC = () => {
       count={unseenCount}
       vertical="bottom"
       horizontal="right"
-      type="primary"
       onClick={handleOpen}
     >
-      <BellFilled />
+      <BellOutlined />
     </FloatingActionButton>
   )
 }

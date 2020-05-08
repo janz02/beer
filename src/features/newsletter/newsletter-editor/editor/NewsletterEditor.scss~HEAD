@@ -1,0 +1,72 @@
+<<<<<<< HEAD:src/features/newsletter/newsletter-editor/editor/NewsletterEditor.scss
+@import "assets/scss/_variables";
+
+// grapesjs-preset-newsletter overrides
+$active-color: $primary-color !default;
+
+@import "grapesjs/src/styles/scss/main.scss";
+@import "grapesjs-preset-newsletter/src/style/main.scss";
+
+.nle {
+  height: 100%;
+
+  $nle-header-height: 56px;
+
+  &__header {
+    height: $nle-header-height;
+    line-height: $nle-header-height;
+  }
+
+  &__containter {
+    height: calc(100% - #{$nle-header-height});
+
+    // Fix: colorpicker was generated outside of the view, with position: absolute
+    .sp-container {
+      position: fixed !important;
+    }
+  }
+}
+
+//removes the toggle btn from preview mode
+.gjs-off-prv {
+  display: none !important;
+}
+=======
+@import "assets/scss/_variables";
+
+// grapesjs-preset-newsletter overrides
+$active-color: $primary-color !default;
+
+@import "grapesjs/src/styles/scss/main.scss";
+@import "grapesjs-preset-newsletter/src/style/main.scss";
+
+.nle {
+  height: 100%;
+
+  $nle-header-height: 56px;
+
+  &__header {
+    height: $nle-header-height;
+    line-height: $nle-header-height;
+  }
+
+  &__containter {
+    height: calc(100% - #{$nle-header-height});
+
+    // Fix: colorpicker was generated outside of the view, with position: absolute
+    .sp-container {
+      position: fixed !important;
+    }
+  }
+}
+
+.nle-spinner {
+  width: 100%;
+  margin-top: 25vh;
+}
+
+//removes the toggle btn from preview mode
+.gjs-off-prv {
+  display: none !important;
+}
+>>>>>>> origin/master:src/features/newsletter/newsletter-editor/NewsletterEditor.scss

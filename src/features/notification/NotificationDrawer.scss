@@ -1,5 +1,5 @@
 .notification-drawer {
-  --notification-drawer-header-height: 56px;
+  --notification-drawer-header-height: 81px;
   --notification-drawer-footer-height: 56px;
   --notification-drawer-background: #FFFFFF;
 
@@ -13,22 +13,16 @@
     z-index: 1;
     top: 0;
     left: 0;
+    align-content: flex-start;
     justify-content: space-between;
     width: 100%;
     height: var(--notification-drawer-header-height);
-    padding: 0;
+    padding: 15px;
     background: var(--notification-drawer-background);
     box-shadow: 3px 1px 9px 0 #0000004D;
-    line-height: var(--notification-drawer-header-height);
+    font-size: 18px;
 
     &__title {
-      margin-left: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    &__options {
-      margin-right: 3.2rem;
       font-size: 1.1rem;
       font-weight: 600;
     }

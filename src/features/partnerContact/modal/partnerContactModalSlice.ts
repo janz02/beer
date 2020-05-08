@@ -6,7 +6,6 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
 import { partnerContactListActions } from '../list/partnerContactListSlice'
-import { delay } from 'services/temp/delay'
 
 interface State {
   editingSelf: boolean
@@ -127,11 +126,12 @@ const sendInvitation = (email: string): AppThunk => async (dispatch, getState) =
   try {
     dispatch(setInviterState(FeatureState.Loading))
     const partnerId = getState().partnerContactModal.inviterPartnerId
-    // TODO: integrate
-    // await api.partnerContacts.sendInvitation({ partnerId, email })
-    await delay({}, 1000)
-    console.log({ partnerId, email })
-
+    await api.emailSender.invitePartnerContact({
+      invitePartnerContactDto: {
+        email,
+        partnerId: +partnerId!
+      }
+    })
     dispatch(sendInvitatonSuccess())
   } catch (err) {
     dispatch(setInviterState(FeatureState.Error))
