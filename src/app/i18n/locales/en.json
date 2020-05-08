@@ -347,6 +347,9 @@
     "rtd": {
       "communication": "The internal server is not available, try again later."
     },
+    "segment": {
+      "one-time-use-creation-failed": "__STRING_NOT_TRANSLATED__"
+    },
     "sendgrid": {
       "communication": "__STRING_NOT_TRANSLATED__"
     },
@@ -450,6 +453,7 @@
       },
       "email": {
         "content-required": "__STRING_NOT_TRANSLATED__",
+        "is-notification-required": "__STRING_NOT_TRANSLATED__",
         "recipient-required": "__STRING_NOT_TRANSLATED__",
         "recipients-email-invalid-format": "__STRING_NOT_TRANSLATED__",
         "recipients-email-required": "__STRING_NOT_TRANSLATED__",
@@ -527,7 +531,8 @@
         "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
         "id-required": "__STRING_NOT_TRANSLATED__",
         "name-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "name-required": "__STRING_NOT_TRANSLATED__",
+        "one-time-use-required": "__STRING_NOT_TRANSLATED__"
       },
       "segments": {
         "list-required": "__STRING_NOT_TRANSLATED__"

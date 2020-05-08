@@ -5685,6 +5685,9 @@
           "emailSubject": {
             "type": "string",
             "nullable": true
+          },
+          "isNotification": {
+            "type": "boolean"
           }
         }
       },
@@ -6242,6 +6245,9 @@
               "$ref": "#/components/schemas/EmailSegmentDto"
             },
             "nullable": true
+          },
+          "oneTimeUse": {
+            "type": "boolean"
           }
         }
       },
