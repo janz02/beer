@@ -63,7 +63,10 @@ steps:
         $changed = git status -s
         if( $changed ) {
           Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
+          Write-Host "==================================================="
+          Write-Host ">Changes: "
           Write-Host $changed
+          Write-Host ">Diff: "
           git diff .
           throw "Error"
         } else {
