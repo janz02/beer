@@ -67,7 +67,7 @@ steps:
           Write-Host ">Changes: "
           Write-Host $changed
           Write-Host ">Diff: "
-          git diff .
+          Get-Content (git format-patch HEAD^)
           throw "Error"
         } else {
           Write-Host "The solution is using the latest API client."
