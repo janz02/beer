@@ -4,6 +4,7 @@ trigger:
 variables:
   DockerImageName: 'nkm-rtd-246410/couponmanager'
   DockerRegistryServiceConnection: 'NKM-RTD-GCP-DockerRegistry'
+  npm_config_cache: $(Pipeline.Workspace)/.npm
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -42,10 +43,15 @@ steps:
       versionSpec: '12.x'
     displayName: 'Install Node.js'
 
-  - task: Npm@1
+  - task: Cache@2
     inputs:
-      command: 'ci'
-    displayName: 'Install packages'
+      key: 'npm | "$(Agent.OS)" | package-lock.json'
+      restoreKeys: |
+         npm | "$(Agent.OS)"
+      path: $(npm_config_cache)
+    displayName: Cache npm
+  
+  - script: npm ci
 
   - task: PowerShell@2
     inputs:
@@ -53,9 +59,15 @@ steps:
       script: |
         if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
         npm run generate-client
+        git add .
         $changed = git status -s
         if( $changed ) {
           Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
+          Write-Host "==================================================="
+          Write-Host ">Changes: "
+          Write-Host $changed
+          Write-Host ">Diff: "
+          Get-Content (git format-patch HEAD^)
           throw "Error"
         } else {
           Write-Host "The solution is using the latest API client."

@@ -15,7 +15,7 @@ import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { CampaignViewPage } from 'features/campaigns/campaign/CampaignViewPage'
-import { UserAccessListPage } from 'features/userAccess/UserAccessListPage'
+import { UserAccessPage } from 'features/userAccess/UserAccessPage'
 import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
@@ -143,7 +143,7 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.newsletters}
       component={NewsletterEditorPage}
     />
-    <PrivateRoute exact path="/users" roles={pageViewRoles.users} component={UserAccessListPage} />
+    <PrivateRoute exact path="/users" roles={pageViewRoles.users} component={UserAccessPage} />
     <Route path="*" render={onDefaultRoute} />
   </Switch>
 )

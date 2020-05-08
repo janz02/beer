@@ -32,6 +32,12 @@ export interface CreateSegmentationCommand {
      * @memberof CreateSegmentationCommand
      */
     segments?: Array<EmailSegmentDto> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateSegmentationCommand
+     */
+    oneTimeUse?: boolean;
 }
 
 export function CreateSegmentationCommandFromJSON(json: any): CreateSegmentationCommand {
@@ -45,6 +51,7 @@ export function CreateSegmentationCommandFromJSONTyped(json: any, ignoreDiscrimi
     return {
         
         'segments': !exists(json, 'segments') ? undefined : (json['segments'] === null ? null : (json['segments'] as Array<any>).map(EmailSegmentDtoFromJSON)),
+        'oneTimeUse': !exists(json, 'oneTimeUse') ? undefined : json['oneTimeUse'],
     };
 }
 
@@ -58,6 +65,7 @@ export function CreateSegmentationCommandToJSON(value?: CreateSegmentationComman
     return {
         
         'segments': value.segments === undefined ? undefined : (value.segments === null ? null : (value.segments as Array<any>).map(EmailSegmentDtoToJSON)),
+        'oneTimeUse': value.oneTimeUse,
     };
 }
 

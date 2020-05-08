@@ -3,7 +3,7 @@ import { batch } from 'react-redux'
 import { notificationActions } from 'features/notification/notificationSlice'
 import { AppThunk } from './store'
 import { siteEditorActions } from 'features/sites/siteEditor/siteEditorSlice'
-import { resetUsersAccessList } from 'features/userAccess/userAccessListSlice'
+import { userAccessActions } from 'features/userAccess/userAccessSlice'
 import { newsletterListActions } from 'features/newsletter/newsletterList/newsletterListSlice'
 import { resetNewsletterEditor } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { resetRouterHistory } from 'router/routerHistoryStore'
@@ -35,8 +35,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(campaignListActions.resetCampaignList())
     dispatch(categoryEditorActions.resetCategoryEditor())
     dispatch(categoryListActions.resetCategoryList())
-    dispatch(resetUsersAccessList())
-    dispatch(resetUsersAccessList())
+    dispatch(userAccessActions.reset())
     dispatch(newsletterListActions.resetNewsletterList())
     dispatch(resetNewsletterEditor())
     dispatch(resetPartnersList())

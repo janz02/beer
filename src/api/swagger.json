@@ -2077,6 +2077,44 @@
         }
       }
     },
+    "/api/CouponUserCodes/{userId}/BurnCoupon/{couponCode}": {
+      "post": {
+        "tags": [
+          "CouponUserCodes"
+        ],
+        "summary": "Used to delete a coupon code from user purse",
+        "operationId": "burnCoupon",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "User id",
+              "nullable": true
+            }
+          },
+          {
+            "name": "couponCode",
+            "in": "path",
+            "description": "CouponCode to delete",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "CouponCode to delete",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/CouponUserPairs/GeneratePairs": {
       "post": {
         "tags": [
@@ -5685,6 +5723,9 @@
           "emailSubject": {
             "type": "string",
             "nullable": true
+          },
+          "isNotification": {
+            "type": "boolean"
           }
         }
       },
@@ -6242,6 +6283,9 @@
               "$ref": "#/components/schemas/EmailSegmentDto"
             },
             "nullable": true
+          },
+          "oneTimeUse": {
+            "type": "boolean"
           }
         }
       },

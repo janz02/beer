@@ -79,6 +79,7 @@
   },
   "scripts": {
     "start": "env-cmd -e dev react-app-rewired start",
+    "start:local": "env-cmd -e local react-app-rewired start",
     "test": "env-cmd -e dev react-app-rewired test --setupFiles ./config/setupTests.ts",
     "build": "env-cmd -x -e prod react-app-rewired build --REACT_APP_VERSION=$REACT_APP_VERSION",
     "eject": "react-app-rewired eject",
