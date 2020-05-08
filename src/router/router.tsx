@@ -139,7 +139,7 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/newsletter/:id"
+      path="/newsletter/:templateId"
       roles={pageViewRoles.newsletters}
       component={NewsletterEditorPage}
     />

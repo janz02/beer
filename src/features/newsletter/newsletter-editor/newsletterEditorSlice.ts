@@ -6,78 +6,113 @@ import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Segment } from 'models/segment'
+import { FeatureState } from 'models/featureState'
+import { delay } from 'services/temp/delay'
 
-export enum NewsletterTemplateState {
-  Undefined = 'undefined',
-  Loading = 'loading',
-  Loaded = 'loaded',
-  FailedToLoad = 'failedToLoad'
+export enum NewsletterTemplateContentState {
+  Initial = 'Initial',
+  Modified = 'Modified'
 }
 
-interface NewsletterEditorState {
-  error: string
-  templateState?: NewsletterTemplateState
+interface State {
+  openSegmentEmail: boolean
+  openTestEmail: boolean
+  openRevert: boolean
+  openDiscard: boolean
+  templateContentState: NewsletterTemplateContentState
+  templateState: FeatureState
+  saveState: FeatureState
+  restoreState: FeatureState
+  emailState: FeatureState
+  segmentState: FeatureState
   currentTemplateVersionId?: number
+  targetTemplateVersionId?: number
   template?: Newsletter
-  loadingEmail?: boolean
-  log?: any
   segments: Segment[]
+  log?: any
 }
 
-const initialState: NewsletterEditorState = {
-  templateState: NewsletterTemplateState.Undefined,
-  loadingEmail: false,
-  error: '',
+const initialState: State = {
+  openSegmentEmail: false,
+  openTestEmail: false,
+  openRevert: false,
+  openDiscard: false,
+  templateContentState: NewsletterTemplateContentState.Initial,
+  templateState: FeatureState.Initial,
+  saveState: FeatureState.Initial,
+  restoreState: FeatureState.Initial,
+  emailState: FeatureState.Initial,
+  segmentState: FeatureState.Initial,
   segments: []
 }
 
-const newsletterEditorSlice = createSlice({
+const slice = createSlice({
   name: 'newsletterEditor',
   initialState,
   reducers: {
-    resetNewsletterEditor: () => initialState,
+    reset: () => initialState,
+    openSegmentEmailModal(state) {
+      state.openSegmentEmail = true
+    },
+    closeSegmentEmailModal(state) {
+      state.openSegmentEmail = false
+    },
+    openTestEmailModal(state) {
+      state.openTestEmail = true
+    },
+    closeTestEmailModal(state) {
+      state.openTestEmail = false
+    },
+    openRevertModal(state) {
+      state.openRevert = true
+    },
+    closeRevertModal(state) {
+      state.openRevert = false
+    },
+    openDiscardModal(state, action: PayloadAction<number>) {
+      state.targetTemplateVersionId = action.payload
+      state.openDiscard = true
+    },
+    closeDiscardModal(state) {
+      state.openDiscard = false
+    },
+    setTemplateContentState(state, action: PayloadAction<NewsletterTemplateContentState>) {
+      state.templateContentState = action.payload
+    },
+    setTemplateState(state, action: PayloadAction<FeatureState>) {
+      state.templateState = action.payload
+    },
+    setSaveState(state, action: PayloadAction<FeatureState>) {
+      state.saveState = action.payload
+    },
+    setRestoreState(state, action: PayloadAction<FeatureState>) {
+      state.restoreState = action.payload
+    },
+    setEmailState(state, action: PayloadAction<FeatureState>) {
+      state.emailState = action.payload
+    },
+    setSegmentState(state, action: PayloadAction<FeatureState>) {
+      state.segmentState = action.payload
+    },
     clearNewsletterTemplate(state) {
       const localStorageKeys = ['gjs-html', 'gjs-css', 'gjs-assets', 'gjs-styles']
       localStorageKeys.forEach(key => localStorage.removeItem(key))
-      state.templateState = NewsletterTemplateState.Undefined
       state.template = undefined
       state.currentTemplateVersionId = undefined
-      state.error = ''
-    },
-    saveTemplateVersionRequest() {},
-    saveTemplateVersionSuccess() {},
-    saveTemplateVersionFail(state, action: PayloadAction<string>) {},
-    restoreTemplateVersionRequest() {},
-    restoreTemplateVersionSuccess() {},
-    restoreTemplateVersionFail(state, action: PayloadAction<string>) {},
-    sendEmailRequest(state) {
-      state.loadingEmail = true
-    },
-    sendEmailSuccess(state) {
-      state.loadingEmail = false
-    },
-    sendEmailFail(state) {
-      state.loadingEmail = false
-    },
-    getTemplateRequest(state) {
-      state.templateState = NewsletterTemplateState.Loading
-    },
-    getTemplateSuccess(state, action: PayloadAction<Newsletter>) {
-      state.template = action.payload
-      state.currentTemplateVersionId = action.payload.history?.[0]?.id
-      state.templateState = NewsletterTemplateState.Loaded
-    },
-    getTemplateFail(state) {
-      state.templateState = NewsletterTemplateState.FailedToLoad
+      state.templateState = FeatureState.Initial
     },
     switchNewsletterVersion(state, action: PayloadAction<number>) {
       state.currentTemplateVersionId = action.payload
     },
-    getSegmentsRequest() {},
+    getTemplateSuccess(state, action: PayloadAction<Newsletter>) {
+      state.template = action.payload
+      state.currentTemplateVersionId = action.payload.history?.[0]?.id
+      state.templateState = FeatureState.Success
+    },
     getSegmentsSuccess(state, action: PayloadAction<Segment[]>) {
       state.segments = action.payload
+      state.segmentState = FeatureState.Success
     },
-    getSegmentsFail(state, action: PayloadAction<string>) {},
     // For finding the bug in grapes.js
     logGrapesjsEvent(state, action: PayloadAction<any>) {
       state.log = action.payload
@@ -86,34 +121,36 @@ const newsletterEditorSlice = createSlice({
 })
 
 const {
-  saveTemplateVersionRequest,
-  saveTemplateVersionSuccess,
-  saveTemplateVersionFail
-} = newsletterEditorSlice.actions
+  setTemplateState,
+  setSaveState,
+  setRestoreState,
+  setEmailState,
+  setSegmentState,
+  setTemplateContentState
+} = slice.actions
+const { getTemplateSuccess } = slice.actions
+const { getSegmentsSuccess } = slice.actions
+const { clearNewsletterTemplate, switchNewsletterVersion, reset } = slice.actions
+const { logGrapesjsEvent } = slice.actions
 const {
-  restoreTemplateVersionRequest,
-  restoreTemplateVersionSuccess,
-  restoreTemplateVersionFail
-} = newsletterEditorSlice.actions
-const { getTemplateRequest, getTemplateSuccess, getTemplateFail } = newsletterEditorSlice.actions
-const { sendEmailRequest, sendEmailSuccess, sendEmailFail } = newsletterEditorSlice.actions
-const { getSegmentsRequest, getSegmentsSuccess, getSegmentsFail } = newsletterEditorSlice.actions
+  openSegmentEmailModal,
+  closeSegmentEmailModal,
+  openTestEmailModal,
+  closeTestEmailModal,
+  openRevertModal,
+  closeRevertModal,
+  openDiscardModal,
+  closeDiscardModal
+} = slice.actions
 
-export const {
-  clearNewsletterTemplate,
-  switchNewsletterVersion,
-  resetNewsletterEditor
-} = newsletterEditorSlice.actions
-export const { logGrapesjsEvent } = newsletterEditorSlice.actions
-
-export const newsletterEditorReducer = newsletterEditorSlice.reducer
-
-export const getNewsletterTemplate = (id: number): AppThunk => async dispatch => {
+const getNewsletterTemplate = (id: number): AppThunk => async dispatch => {
   try {
-    dispatch(getTemplateRequest())
+    dispatch(setTemplateState(FeatureState.Loading))
     const response = await api.emailTemplates.getTemplate({
       id
     })
+    await delay({}, 1000)
+    // throw Error()
     const data: Newsletter = {
       id: response.id,
       name: response.name,
@@ -126,16 +163,13 @@ export const getNewsletterTemplate = (id: number): AppThunk => async dispatch =>
     }
     dispatch(getTemplateSuccess(data))
   } catch (err) {
-    dispatch(getTemplateFail())
+    dispatch(setTemplateState(FeatureState.Error))
   }
 }
 
-export const saveNewsletterTemplateVersion = (content: string): AppThunk => async (
-  dispatch,
-  getState
-) => {
+const saveNewsletterTemplateVersion = (content: string): AppThunk => async (dispatch, getState) => {
   try {
-    dispatch(saveTemplateVersionRequest())
+    dispatch(setSaveState(FeatureState.Loading))
     const id = getState().newsletterEditor.template?.id
     if (!id) {
       return
@@ -146,16 +180,16 @@ export const saveNewsletterTemplateVersion = (content: string): AppThunk => asyn
         content
       }
     })
-    await dispatch(saveTemplateVersionSuccess())
-    await dispatch(getNewsletterTemplate(id))
+    dispatch(setSaveState(FeatureState.Success))
+    dispatch(getNewsletterTemplate(id))
   } catch (err) {
-    dispatch(saveTemplateVersionFail(err.toString()))
+    dispatch(setSaveState(FeatureState.Error))
   }
 }
 
-export const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch, getState) => {
+const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch, getState) => {
   try {
-    dispatch(restoreTemplateVersionRequest())
+    dispatch(setRestoreState(FeatureState.Loading))
     const { template, currentTemplateVersionId } = getState().newsletterEditor
     const id = template?.id
     const version = template?.history?.find(h => h.id === currentTemplateVersionId)?.version
@@ -164,19 +198,20 @@ export const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch,
       id: id,
       version: version
     })
-    dispatch(restoreTemplateVersionSuccess())
+    dispatch(setRestoreState(FeatureState.Success))
+    dispatch(closeRevertModal())
     dispatch(getNewsletterTemplate(id))
   } catch (err) {
-    dispatch(restoreTemplateVersionFail(err.toString()))
+    dispatch(setRestoreState(FeatureState.Error))
   }
 }
 
-export const sendNewsletterEmailExample = (email: string, subject: string): AppThunk => async (
+const sendNewsletterEmailExample = (email: string, subject: string): AppThunk => async (
   dispatch,
   getState
 ) => {
   try {
-    dispatch(sendEmailRequest())
+    dispatch(setEmailState(FeatureState.Loading))
     const templateId = getState().newsletterEditor.template?.id
     await api.emailSender.sendTestEmail({
       sendEmailsDto: {
@@ -185,35 +220,34 @@ export const sendNewsletterEmailExample = (email: string, subject: string): AppT
         emailSubject: subject
       }
     })
-    dispatch(sendEmailSuccess())
+    dispatch(setEmailState(FeatureState.Success))
+    dispatch(closeTestEmailModal())
     message.success(i18n.t('common.message.email-sent'), 5)
-    return true
   } catch (err) {
-    dispatch(sendEmailFail())
-    return false
+    dispatch(setEmailState(FeatureState.Error))
   }
 }
 
-export const getSegmentsForEmail = (): AppThunk => async dispatch => {
+const getSegmentsForEmail = (): AppThunk => async dispatch => {
   try {
-    dispatch(getSegmentsRequest())
+    dispatch(setSegmentState(FeatureState.Loading))
     const response = await api.segments.getSegments({
       pageSize: -1
     })
     const segments: any = response.result?.map(s => ({ ...s, id: '' + s.id }))
     dispatch(getSegmentsSuccess(segments ?? []))
   } catch (err) {
-    dispatch(getSegmentsFail(err.toString()))
+    dispatch(setSegmentState(FeatureState.Error))
   }
 }
 
-export const sendNewsletterEmailToSegment = (
-  segmentId: number,
-  subject: string
-): AppThunk => async (dispatch, getState) => {
+const sendNewsletterEmailToSegment = (segmentId: number, subject: string): AppThunk => async (
+  dispatch,
+  getState
+) => {
   try {
     const templateId = getState().newsletterEditor.template?.id
-    dispatch(sendEmailRequest())
+    dispatch(setEmailState(FeatureState.Loading))
     await api.emailSender.sendEmailToSegment({
       sendEmailToSegmentDto: {
         emailSubject: subject,
@@ -221,11 +255,34 @@ export const sendNewsletterEmailToSegment = (
         segmentId: segmentId
       }
     })
-    dispatch(sendEmailSuccess())
+    dispatch(setEmailState(FeatureState.Success))
+    dispatch(closeSegmentEmailModal())
     message.success(i18n.t('common.message.email-sent'), 5)
-    return true
   } catch (err) {
-    dispatch(sendEmailFail())
-    return false
+    dispatch(setEmailState(FeatureState.Error))
   }
+}
+
+export const newsletterEditorReducer = slice.reducer
+
+export const newsletterEditorActions = {
+  logGrapesjsEvent,
+  reset,
+  clearNewsletterTemplate,
+  switchNewsletterVersion,
+  openSegmentEmailModal,
+  closeSegmentEmailModal,
+  openTestEmailModal,
+  closeTestEmailModal,
+  openRevertModal,
+  closeRevertModal,
+  openDiscardModal,
+  closeDiscardModal,
+  setTemplateContentState,
+  getNewsletterTemplate,
+  sendNewsletterEmailToSegment,
+  sendNewsletterEmailExample,
+  getSegmentsForEmail,
+  restoreNewsletterTemplateVersion,
+  saveNewsletterTemplateVersion
 }

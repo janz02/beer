@@ -15,7 +15,7 @@
 
   &__toolbar {
     height: 100%;
-    // TODO:  check why align-items: center; didn't work in the builded version
+    // BUG:  check why align-items: center; didn't work in the builded version
     margin-top: 12px;
     padding-left: 3rem;
 

@@ -101,13 +101,13 @@ const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, ge
     dispatch(setDeleteState(FeatureState.Loading))
     const state = getState().partnerContactList
     //  TODO: Integrate new delete endpoint
-    // await api.auth.updatePartnerContactInfo({
-    //   id,
-    //   partnerContactStateDto: {
-    //     role: role,
-    //     isActive: false
-    //   }
-    // })
+    await api.auth.updatePartnerContactInfo({
+      id,
+      partnerContactStateDto: {
+        role: role,
+        isActive: false
+      }
+    })
     dispatch(deleteContactSuccess())
     const newPage = recalculatePaginationAfterDeletion(state.listParams)
     dispatch(getContacts({ page: newPage }))

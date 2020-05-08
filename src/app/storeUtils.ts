@@ -5,7 +5,7 @@ import { AppThunk } from './store'
 import { siteEditorActions } from 'features/sites/siteEditor/siteEditorSlice'
 import { userAccessActions } from 'features/userAccess/userAccessSlice'
 import { newsletterListActions } from 'features/newsletter/newsletterList/newsletterListSlice'
-import { resetNewsletterEditor } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
+import { newsletterEditorActions } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { resetRouterHistory } from 'router/routerHistoryStore'
 import { resetPartnersList } from 'features/partners/partnerList/partnerListSlice'
 import { resetSelfPartner } from 'features/partners/selfPartner/selfPartnerSlice'
@@ -37,7 +37,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(categoryListActions.resetCategoryList())
     dispatch(userAccessActions.reset())
     dispatch(newsletterListActions.resetNewsletterList())
-    dispatch(resetNewsletterEditor())
+    dispatch(newsletterEditorActions.reset())
     dispatch(resetPartnersList())
     dispatch(resetPartnerEditor())
     dispatch(resetSelfPartner())

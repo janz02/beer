@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useCallback, useEffect, useMemo, useState, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import grapesjs from 'grapesjs'
@@ -7,9 +7,13 @@ import grapesjs from 'grapesjs'
 // @ts-ignore
 import grapesjsNewsLetter from 'grapesjs-preset-newsletter'
 import { Newsletter } from 'models/newsletter'
-import locale from './locale'
-import { useDispatch } from 'react-redux'
-import { logGrapesjsEvent } from './newsletterEditorSlice'
+import locale from '../locale'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  newsletterEditorActions,
+  NewsletterTemplateContentState as ContentState
+} from '../newsletterEditorSlice'
+import { RootState } from 'app/rootReducer'
 
 interface GjsLogger {
   at: string
@@ -23,7 +27,7 @@ export interface UseNewsletterEditorProps {
   gjsEditorId: string
   template: Newsletter | undefined | null
   currentTemplateVersionId?: number
-  onEditorLoaded: () => void
+  onEditorLoaded?: () => void
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -31,6 +35,8 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
   const { gjsEditorId, template, currentTemplateVersionId, onEditorLoaded } = props
   const { i18n } = useTranslation()
   const dispatch = useDispatch()
+
+  const { templateContentState } = useSelector((s: RootState) => s.newsletterEditor)
 
   const currentTemplateVersion = useMemo(() => {
     const version = template?.history?.find(h => h?.id === currentTemplateVersionId)
@@ -46,7 +52,7 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
     return !template
   }, [template])
 
-  const [isTemplateModified, setIsTemplateModified] = useState(false)
+  // const [isTemplateModified, setIsTemplateModified] = useState(false)
 
   const updateCount = useRef(0)
 
@@ -62,9 +68,9 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
         logged.current.count++
       } else {
         if (logged.current.count > 1) {
-          dispatch(logGrapesjsEvent(logged.current))
+          dispatch(newsletterEditorActions.logGrapesjsEvent(logged.current))
         }
-        dispatch(logGrapesjsEvent(log))
+        dispatch(newsletterEditorActions.logGrapesjsEvent(log))
         logged.current = { ...log }
       }
     },
@@ -138,7 +144,7 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
     if (!editor) return
     editor.on('load', () => {
       addStyledTooltips()
-      onEditorLoaded()
+      onEditorLoaded?.()
       logger({ at: 'load', event: '', count: 1 })
     })
   }, [addStyledTooltips, dispatch, editor, logger, onEditorLoaded])
@@ -148,7 +154,9 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
     editor.on('update', (event: any) => {
       updateCount.current++
       if (updateCount.current === 2) {
-        setIsTemplateModified(true)
+        templateContentState !== ContentState.Modified &&
+          dispatch(newsletterEditorActions.setTemplateContentState(ContentState.Modified))
+        // setIsTemplateModified(true)
       }
       logger({
         at: 'update',
@@ -160,7 +168,7 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
     editor.on('run', (event: any, b: any) => {
       logger({ at: 'run', event, count: 1 })
     })
-  }, [dispatch, editor, logger])
+  }, [dispatch, editor, logger, templateContentState])
 
   useEffect(() => {
     // register buttons
@@ -200,8 +208,9 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
     }
     editor.setComponents(currentTemplateVersion?.content ?? '')
     updateCount.current = 0
-    setIsTemplateModified(false)
-  }, [currentTemplateVersion, editor, isLatestTemplate, updateCount])
+    dispatch(newsletterEditorActions.setTemplateContentState(ContentState.Initial))
+    // setIsTemplateModified(false)
+  }, [currentTemplateVersion, editor, isLatestTemplate, updateCount, dispatch])
 
-  return { getEditorContent, isLatestTemplate, isNewTemplate, isTemplateModified }
+  return { getEditorContent, isLatestTemplate, isNewTemplate }
 }
