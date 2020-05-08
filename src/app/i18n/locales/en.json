@@ -654,10 +654,6 @@
       "active": "Status",
       "email": "E-mail address",
       "name": "Name",
-      "partner-type": {
-        "major": "Major",
-        "normal": "Normal"
-      },
       "phone": "Phone",
       "role": "Role",
       "status-active": "Active",
@@ -709,8 +705,6 @@
       "campaignmanager": "Campaign Man.",
       "mainpartnercontact": "Main",
       "normalpartnercontact": "Normal",
-      "partnercontactapprover": "Approver",
-      "partnercontacteditor": "Editor",
       "partnermanager": "Partner Man."
     }
   },

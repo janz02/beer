@@ -654,10 +654,6 @@
       "active": "Státusz",
       "email": "E-mail cím",
       "name": "Név",
-      "partner-type": {
-        "major": "Fő",
-        "normal": "Normál"
-      },
       "phone": "Telefonszám",
       "role": "Jogosultság",
       "status-active": "Aktív",
@@ -709,8 +705,6 @@
       "campaignmanager": "Kampány men.",
       "mainpartnercontact": "Fő",
       "normalpartnercontact": "Normál",
-      "partnercontactapprover": "Jóváhagyó",
-      "partnercontacteditor": "Szerkesztő",
       "partnermanager": "Partner men."
     }
   },
