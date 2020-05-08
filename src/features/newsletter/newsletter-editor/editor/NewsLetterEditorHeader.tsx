@@ -1,4 +1,5 @@
-import React, { FC, useState, useEffect } from 'react'
+import './NewsletterEditorHeader.scss'
+import React, { FC, useEffect, useRef } from 'react'
 import { Select, Button, Tooltip, Dropdown, Menu, Form } from 'antd'
 import {
   CloseOutlined,
@@ -8,53 +9,37 @@ import {
   SendOutlined
 } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
-import { Newsletter } from 'models/newsletter'
-import './NewsletterEditorHeader.scss'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useFormUtils } from 'hooks/useFormUtils'
 import Typography from 'antd/lib/typography'
+import { useNewsletterEditorHandlers } from './useNewsletterEditorHandlers'
+import { FeatureState } from 'models/featureState'
 
 const { Text } = Typography
 
 export interface NewsLetterEditorHeaderProps {
-  className?: string
-  template: Newsletter | null | undefined
-  currentTemplateVersionId?: number
-  isNewTemplate: boolean
-  isTemplateModified: boolean
-  isLatestTemplate: boolean
   handleSaveVersion: () => void
-  handleRestoreVersion: () => void
-  handleVersionPreviewSwitch: (id: number) => void
-  handleExit: () => void
-  handleSendSample: () => void
-  handleSendSegment: () => void
 }
 
 export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => {
-  const {
-    className,
-    template,
-    currentTemplateVersionId,
-    isLatestTemplate,
-    isTemplateModified,
-    handleVersionPreviewSwitch,
-    handleRestoreVersion,
-    handleExit,
-    handleSaveVersion,
-    handleSendSample,
-    handleSendSegment
-  } = props
+  const { handleSaveVersion } = props
 
   const { t } = useTranslation()
 
-  const [saving, setSaving] = useState(false)
+  const {
+    handleOpenSegmentEmailModal,
+    handleOpenTestEmailModal,
+    handleOpenRevertModal,
+    handleVersionPreviewSwitch,
+    handleExitEditor,
+    isLatestTemplate,
+    isTemplateModified,
+    currentTemplateVersionId,
+    template,
+    saveState
+  } = useNewsletterEditorHandlers()
 
-  const handleSave = async (): Promise<any> => {
-    setSaving(true)
-    await handleSaveVersion()
-    setSaving(false)
-  }
+  const saving = saveState === FeatureState.Loading
 
   const { form, setFieldsValue } = useFormUtils()
 
@@ -62,10 +47,12 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
     setFieldsValue({ currentTemplateVersionId })
   }, [currentTemplateVersionId, setFieldsValue, template])
 
+  const selectRef = useRef<any>()
+
   const sendOptionMenu = (
     <Menu>
-      <Menu.Item onClick={handleSendSample}>{t('newsletter.send-sample')}</Menu.Item>
-      <Menu.Item onClick={handleSendSegment}>{t('newsletter.send-segment')}</Menu.Item>
+      <Menu.Item onClick={handleOpenTestEmailModal}>{t('newsletter.send-sample')}</Menu.Item>
+      <Menu.Item onClick={handleOpenSegmentEmailModal}>{t('newsletter.send-segment')}</Menu.Item>
     </Menu>
   )
 
@@ -73,12 +60,17 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
 
   const versionSelect = (
     <Select
+      ref={selectRef}
       onSelect={handleVersionPreviewSwitch}
+      // BUG: - Select.value is not bound to currentTemplateVersionId
+      // it only works as a default value, the cause is Form.Item which is only used for styling now
+      // so if the modification discard popup blocks the change of currentTemplateVersionId
+      // the select still will be switched, and it won't be in sync with the displayed template
       value={currentTemplateVersionId}
       style={{ width: '25em' }}
     >
       {template?.history?.map((h, i) => (
-        <Select.Option key={h.version} value={h.id!}>
+        <Select.Option key={h.id} value={h.id!}>
           {i ? <EyeOutlined /> : <EditOutlined />}
           <span className="nleh__version--number">v{h.version}</span>
           <span className="nleh__version--date">
@@ -93,7 +85,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
   const optionButtons = (
     <>
       {!isLatestTemplate && (
-        <Button icon={<EditOutlined />} onClick={handleRestoreVersion}>
+        <Button icon={<EditOutlined />} onClick={handleOpenRevertModal}>
           {t('common.restore')}
         </Button>
       )}
@@ -102,7 +94,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
           loading={saving}
           disabled={saving}
           icon={<SaveOutlined />}
-          onClick={handleSave}
+          onClick={handleSaveVersion}
           type={isTemplateModified ? 'primary' : 'default'}
         >
           {t('common.save')}
@@ -123,13 +115,13 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
         className="nleh__close"
         type="link"
         icon={<CloseOutlined />}
-        onClick={handleExit}
+        onClick={handleExitEditor}
       />
     </Tooltip>
   )
 
   return (
-    <div className={`${className} nleh`}>
+    <div className="nleh">
       <Form className="nleh__toolbar" name="newsletter-template-editor" layout="inline" form={form}>
         <Form.Item label={t('newsletter.template')}>{templateName}</Form.Item>
         <Form.Item label={t('newsletter.version')} name="currentTemplateVersionId">

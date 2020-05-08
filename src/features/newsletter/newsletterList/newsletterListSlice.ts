@@ -117,11 +117,11 @@ const createNewsletterTemplate = (name: string): AppThunk => async dispatch => {
   }
 }
 
+export const newsletterListReducer = newsletterListSlice.reducer
+
 export const newsletterListActions = {
   resetNewsletterList,
   getNewsletterTemplates,
   createNewsletterTemplate,
   deleteNewsletterTemplate
 }
-
-export const newsletterListReducer = newsletterListSlice.reducer
