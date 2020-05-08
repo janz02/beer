@@ -1,14 +1,14 @@
+import React, { FC } from 'react'
 import './NotificationItem.scss'
-import React, { FC, useState } from 'react'
 import moment from 'moment'
-import { List, Avatar } from 'antd'
-import { BellFilled } from '@ant-design/icons'
+import { List, Row, Col } from 'antd'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useNotification } from './useNotification'
 import { NotificationData } from 'models/notification'
 import { useTranslation } from 'react-i18next'
 import { ListItemMetaProps } from 'antd/lib/list'
 import { NotificationType } from 'api/swagger/models'
+import { EnvelopeIcon } from 'components/icons/EnvelopeIcon'
 
 interface NotificationItemProps {
   item: NotificationData
@@ -18,11 +18,17 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
   const { item } = props
   const { t } = useTranslation()
   const { handleInspectItem } = useNotification()
-  const [hover, setHover] = useState(false)
 
   const meta: ListItemMetaProps = {
     description: (
-      <MomentDisplay date={moment(item.createdDate)} mode={hover ? 'date time' : 'from now'} />
+      <Row justify="space-between">
+        <Col className="notification-date">
+          <MomentDisplay date={moment(item.createdDate)} mode="from now" />
+        </Col>
+        <Col>
+          <EnvelopeIcon opened={item.isSeen} onClick={() => handleInspectItem(item)} />
+        </Col>
+      </Row>
     )
   }
 
@@ -36,13 +42,8 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
   }
 
   return (
-    <List.Item
-      onMouseLeave={() => setHover(false)}
-      onMouseEnter={() => setHover(true)}
-      className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}
-      onClick={() => handleInspectItem(item)}
-    >
-      <List.Item.Meta avatar={<Avatar icon={<BellFilled />} />} {...meta} />
+    <List.Item className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}>
+      <List.Item.Meta {...meta} />
     </List.Item>
   )
 }

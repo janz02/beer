@@ -1,0 +1,15 @@
+@import "assets/scss/_variables";
+
+.envelopeIcon {
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke: #000000;
+    fill: none;
+  }
+
+  svg:hover {
+    stroke: $primary-color;
+    cursor: pointer;
+  }
+}

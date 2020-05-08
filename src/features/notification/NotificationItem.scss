@@ -1,12 +1,14 @@
+@import "assets/scss/_variables";
+
 .notification-item {
-  padding: 0.5rem 1rem !important;
+  padding: 17px 16px 10px 15px !important;
   border-bottom: 1px solid black;
 
   .ant-list-item-meta {
     margin-bottom: 0 !important;
 
     &-title {
-      margin-bottom: 0 !important;
+      margin-bottom: 15px !important;
     }
   }
 
@@ -18,8 +20,8 @@
   border-left: 7px solid transparent;
 
   &--unread {
-    border-left: 7px solid rgb(255, 101, 101);
-    background: rgba($color: #FF7070, $alpha: 0.06);
+    border-left: 7px solid $primary-color;
+    background: $primary-color-light;
   }
 
   &:hover {
@@ -28,5 +30,14 @@
 
   &:active {
     background: rgba($color: #000000, $alpha: 0.075);
+  }
+
+  .notification-date {
+    color: #A6ADB4;
+    font-size: 12px;
+
+    &:hover {
+      color: $primary-color;
+    }
   }
 }
