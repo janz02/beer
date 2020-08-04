@@ -27,6 +27,9 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
 } from '../models';
 
 export interface AddTestNotificationRequest {
@@ -188,7 +191,7 @@ export class NotificationsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Notifications/seen`,
+            path: `/api/Notifications/seenAll`,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,

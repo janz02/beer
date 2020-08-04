@@ -11,7 +11,6 @@ export * from './ChangeCouponStateDto';
 export * from './ChangePartnerRegistrationStateDto';
 export * from './ChangePasswordDto';
 export * from './ClaimedCouponCodeVm';
-export * from './CouponCodeVm';
 export * from './CouponCommentDto';
 export * from './CouponCommentVm';
 export * from './CouponDiscountType';

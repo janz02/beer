@@ -21,6 +21,9 @@ import {
     CouponCommentVm,
     CouponCommentVmFromJSON,
     CouponCommentVmToJSON,
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
 } from '../models';
 
 export interface AddCouponCommentRequest {

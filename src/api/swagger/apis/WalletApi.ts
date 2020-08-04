@@ -15,21 +15,26 @@
 
 import * as runtime from '../runtime';
 import {
-    MyCouponVm,
-    MyCouponVmFromJSON,
-    MyCouponVmToJSON,
+    MyClaimedCouponVm,
+    MyClaimedCouponVmFromJSON,
+    MyClaimedCouponVmToJSON,
 } from '../models';
+
+export interface BurnCouponRequest {
+    userId: string | null;
+    couponCode: string | null;
+}
 
 /**
  * no description
  */
-export class CouponUserPairsApi extends runtime.BaseAPI {
+export class WalletApi extends runtime.BaseAPI {
 
     /**
-     * Archives every pair of coupons and users, used before generating new pairs
-     * Archives every pair of coupons and users
+     * Archives every coupon code in the database
+     * Archives all coupon codes
      */
-    async archivePairsRaw(): Promise<runtime.ApiResponse<void>> {
+    async archiveWalletRaw(): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -39,7 +44,7 @@ export class CouponUserPairsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/CouponUserPairs/ArchivePairs`,
+            path: `/api/Wallet/Archive`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -49,18 +54,25 @@ export class CouponUserPairsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Archives every pair of coupons and users, used before generating new pairs
-     * Archives every pair of coupons and users
+     * Archives every coupon code in the database
+     * Archives all coupon codes
      */
-    async archivePairs(): Promise<void> {
-        await this.archivePairsRaw();
+    async archiveWallet(): Promise<void> {
+        await this.archiveWalletRaw();
     }
 
     /**
-     * Generates 8 pairs for every user or as many coupons are available
-     * Generates pairs of users and coupons
+     * Used to delete a coupon code from user purse
      */
-    async generatePairsRaw(): Promise<runtime.ApiResponse<void>> {
+    async burnCouponRaw(requestParameters: BurnCouponRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.userId === null || requestParameters.userId === undefined) {
+            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling burnCoupon.');
+        }
+
+        if (requestParameters.couponCode === null || requestParameters.couponCode === undefined) {
+            throw new runtime.RequiredError('couponCode','Required parameter requestParameters.couponCode was null or undefined when calling burnCoupon.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -70,7 +82,7 @@ export class CouponUserPairsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/CouponUserPairs/GeneratePairs`,
+            path: `/api/Wallet/{userId}/BurnCoupon/{couponCode}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters.userId))).replace(`{${"couponCode"}}`, encodeURIComponent(String(requestParameters.couponCode))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -80,18 +92,16 @@ export class CouponUserPairsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates 8 pairs for every user or as many coupons are available
-     * Generates pairs of users and coupons
+     * Used to delete a coupon code from user purse
      */
-    async generatePairs(): Promise<void> {
-        await this.generatePairsRaw();
+    async burnCoupon(requestParameters: BurnCouponRequest): Promise<void> {
+        await this.burnCouponRaw(requestParameters);
     }
 
     /**
-     * Returns a coupon list that contains up to 8 coupons for the user for today
-     * Returns the coupons generated for the user
+     * Returns claimed coupon codes
      */
-    async getMyCouponsRaw(): Promise<runtime.ApiResponse<Array<MyCouponVm>>> {
+    async getMyClaimedCouponsRaw(): Promise<runtime.ApiResponse<Array<MyClaimedCouponVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -101,21 +111,20 @@ export class CouponUserPairsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/CouponUserPairs/MyCoupons`,
+            path: `/api/Wallet/MyClaimedCoupons`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MyCouponVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MyClaimedCouponVmFromJSON));
     }
 
     /**
-     * Returns a coupon list that contains up to 8 coupons for the user for today
-     * Returns the coupons generated for the user
+     * Returns claimed coupon codes
      */
-    async getMyCoupons(): Promise<Array<MyCouponVm>> {
-        const response = await this.getMyCouponsRaw();
+    async getMyClaimedCoupons(): Promise<Array<MyClaimedCouponVm>> {
+        const response = await this.getMyClaimedCouponsRaw();
         return await response.value();
     }
 

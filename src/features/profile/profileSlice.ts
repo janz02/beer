@@ -47,7 +47,7 @@ const getProfile = (): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    const profile = await api.partnerContacts.getSelfPartnerContact()
+    const profile = await api.partnerContacts.getMyPartnerContact()
 
     dispatch(getProfileSuccess(profile))
   } catch (err) {
@@ -59,7 +59,7 @@ const updateProfile = (profile: Profile): AppThunk => async (dispatch, getState)
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    await api.partnerContacts.updateSelfPartnerContact({
+    await api.partnerContacts.updateMyPartnerContact({
       partnerContactSelfDto: { ...getState().profile.profile, ...profile }
     })
 

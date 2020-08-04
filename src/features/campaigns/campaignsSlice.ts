@@ -338,7 +338,7 @@ const downloadCoupons = (coupon: Coupon): AppThunk => async dispatch => {
 
   try {
     // TODO fix names
-    const blob: Blob = await api.couponUserCodes.couponCodesCouponUserCode({ couponId: coupon.id! })
+    const blob: Blob = await api.coupons.getCouponCodes({ couponId: coupon.id! })
     saveAs(blob, `${coupon.id} - ${coupon.name} CouponCodes.csv`)
     dispatch(downloadCouponsSuccess())
   } catch (err) {
@@ -351,7 +351,7 @@ const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispatch => {
 
   try {
     // TODO fix names
-    const blob: Blob = await api.couponUserCodes.couponUserCode({ couponId: coupon.id! })
+    const blob: Blob = await api.coupons.getCouponRedeemedCodes({ couponId: coupon.id! })
     saveAs(blob, `${coupon.id} - ${coupon.name} ClaimedCouponCodes.csv`)
     dispatch(downloadClaimedCouponsSuccess())
   } catch (err) {

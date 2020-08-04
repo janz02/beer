@@ -33,21 +33,24 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
 } from '../models';
 
-export interface CreateTemplateRequest {
+export interface CreateEmailTemplateRequest {
     createEmailTemplateDto?: CreateEmailTemplateDto;
 }
 
-export interface DeleteTemplateRequest {
+export interface DeleteEmailTemplateRequest {
     id: number;
 }
 
-export interface GetTemplateRequest {
+export interface GetEmailTemplateRequest {
     id: number;
 }
 
-export interface GetTemplatesRequest {
+export interface GetEmailTemplatesRequest {
     name?: string | null;
     modifiedAt?: Date | null;
     page?: number;
@@ -56,12 +59,12 @@ export interface GetTemplatesRequest {
     orderByType?: OrderByType;
 }
 
-export interface RestoreTemplateVersionRequest {
+export interface RestoreEmailTemplateVersionRequest {
     id: number;
     version: number;
 }
 
-export interface SaveTemplateVersionRequest {
+export interface SaveEmailTemplateVersionRequest {
     id: number;
     emailTemplateVersionDto?: EmailTemplateVersionDto;
 }
@@ -75,7 +78,7 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
      * Returns the id of the new template
      * Creates an email template
      */
-    async createTemplateRaw(requestParameters: CreateTemplateRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createEmailTemplateRaw(requestParameters: CreateEmailTemplateRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -101,17 +104,17 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
      * Returns the id of the new template
      * Creates an email template
      */
-    async createTemplate(requestParameters: CreateTemplateRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createTemplateRaw(requestParameters);
+    async createEmailTemplate(requestParameters: CreateEmailTemplateRequest): Promise<Int32EntityCreatedVm> {
+        const response = await this.createEmailTemplateRaw(requestParameters);
         return await response.value();
     }
 
     /**
      * Deletes an email template
      */
-    async deleteTemplateRaw(requestParameters: DeleteTemplateRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteEmailTemplateRaw(requestParameters: DeleteEmailTemplateRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTemplate.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteEmailTemplate.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -135,16 +138,16 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
     /**
      * Deletes an email template
      */
-    async deleteTemplate(requestParameters: DeleteTemplateRequest): Promise<void> {
-        await this.deleteTemplateRaw(requestParameters);
+    async deleteEmailTemplate(requestParameters: DeleteEmailTemplateRequest): Promise<void> {
+        await this.deleteEmailTemplateRaw(requestParameters);
     }
 
     /**
      * Gets an email template
      */
-    async getTemplateRaw(requestParameters: GetTemplateRequest): Promise<runtime.ApiResponse<EmailTemplateVm>> {
+    async getEmailTemplateRaw(requestParameters: GetEmailTemplateRequest): Promise<runtime.ApiResponse<EmailTemplateVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTemplate.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getEmailTemplate.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -168,15 +171,15 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
     /**
      * Gets an email template
      */
-    async getTemplate(requestParameters: GetTemplateRequest): Promise<EmailTemplateVm> {
-        const response = await this.getTemplateRaw(requestParameters);
+    async getEmailTemplate(requestParameters: GetEmailTemplateRequest): Promise<EmailTemplateVm> {
+        const response = await this.getEmailTemplateRaw(requestParameters);
         return await response.value();
     }
 
     /**
      * Gets all the available Email Temmplates
      */
-    async getTemplatesRaw(requestParameters: GetTemplatesRequest): Promise<runtime.ApiResponse<EmailTemplateSummaryVmPaginatedResponse>> {
+    async getEmailTemplatesRaw(requestParameters: GetEmailTemplatesRequest): Promise<runtime.ApiResponse<EmailTemplateSummaryVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -222,8 +225,8 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
     /**
      * Gets all the available Email Temmplates
      */
-    async getTemplates(requestParameters: GetTemplatesRequest): Promise<EmailTemplateSummaryVmPaginatedResponse> {
-        const response = await this.getTemplatesRaw(requestParameters);
+    async getEmailTemplates(requestParameters: GetEmailTemplatesRequest): Promise<EmailTemplateSummaryVmPaginatedResponse> {
+        const response = await this.getEmailTemplatesRaw(requestParameters);
         return await response.value();
     }
 
@@ -231,13 +234,13 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
      * Returns the id of the new template
      * Creates an email template
      */
-    async restoreTemplateVersionRaw(requestParameters: RestoreTemplateVersionRequest): Promise<runtime.ApiResponse<void>> {
+    async restoreEmailTemplateVersionRaw(requestParameters: RestoreEmailTemplateVersionRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling restoreTemplateVersion.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling restoreEmailTemplateVersion.');
         }
 
         if (requestParameters.version === null || requestParameters.version === undefined) {
-            throw new runtime.RequiredError('version','Required parameter requestParameters.version was null or undefined when calling restoreTemplateVersion.');
+            throw new runtime.RequiredError('version','Required parameter requestParameters.version was null or undefined when calling restoreEmailTemplateVersion.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -262,17 +265,17 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
      * Returns the id of the new template
      * Creates an email template
      */
-    async restoreTemplateVersion(requestParameters: RestoreTemplateVersionRequest): Promise<void> {
-        await this.restoreTemplateVersionRaw(requestParameters);
+    async restoreEmailTemplateVersion(requestParameters: RestoreEmailTemplateVersionRequest): Promise<void> {
+        await this.restoreEmailTemplateVersionRaw(requestParameters);
     }
 
     /**
      * Returns the id of the new template
      * Creates an email template
      */
-    async saveTemplateVersionRaw(requestParameters: SaveTemplateVersionRequest): Promise<runtime.ApiResponse<void>> {
+    async saveEmailTemplateVersionRaw(requestParameters: SaveEmailTemplateVersionRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling saveTemplateVersion.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling saveEmailTemplateVersion.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -300,8 +303,8 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
      * Returns the id of the new template
      * Creates an email template
      */
-    async saveTemplateVersion(requestParameters: SaveTemplateVersionRequest): Promise<void> {
-        await this.saveTemplateVersionRaw(requestParameters);
+    async saveEmailTemplateVersion(requestParameters: SaveEmailTemplateVersionRequest): Promise<void> {
+        await this.saveEmailTemplateVersionRaw(requestParameters);
     }
 
 }

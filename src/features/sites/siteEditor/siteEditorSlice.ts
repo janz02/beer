@@ -154,7 +154,7 @@ const saveSite = (
 
     let sitePartnerId = partnerId
     if (!sitePartnerId) {
-      const partner = await api.partner.getSelfPartner()
+      const partner = await api.partner.getMyPartner()
       sitePartnerId = partner.id
     }
 

@@ -6,7 +6,7 @@ const fs = require("fs-extra");
 shell
   .ShellString(
     shell.exec(
-      "curl https://pkm-coupon-dev.grapetest.xyz/swagger/v1/swagger.json"
+      "curl http://localhost:52136/swagger/v1/swagger.json"
     )
   )
   .to("src/api/swagger.json");

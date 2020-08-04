@@ -18,12 +18,15 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
     ScoringEventPaginatedResponse,
     ScoringEventPaginatedResponseFromJSON,
     ScoringEventPaginatedResponseToJSON,
 } from '../models';
 
-export interface GetMyScoresRequest {
+export interface GetMyScoringRequest {
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -39,7 +42,7 @@ export class ScoringApi extends runtime.BaseAPI {
      * Returns the scoreEvent list with the specified filters applied
      * Gets a scoreEvent entity list sorted and filtered
      */
-    async getMyScoresRaw(requestParameters: GetMyScoresRequest): Promise<runtime.ApiResponse<ScoringEventPaginatedResponse>> {
+    async getMyScoringRaw(requestParameters: GetMyScoringRequest): Promise<runtime.ApiResponse<ScoringEventPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.page !== undefined) {
@@ -78,8 +81,8 @@ export class ScoringApi extends runtime.BaseAPI {
      * Returns the scoreEvent list with the specified filters applied
      * Gets a scoreEvent entity list sorted and filtered
      */
-    async getMyScores(requestParameters: GetMyScoresRequest): Promise<ScoringEventPaginatedResponse> {
-        const response = await this.getMyScoresRaw(requestParameters);
+    async getMyScoring(requestParameters: GetMyScoringRequest): Promise<ScoringEventPaginatedResponse> {
+        const response = await this.getMyScoringRaw(requestParameters);
         return await response.value();
     }
 

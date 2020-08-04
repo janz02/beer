@@ -84,7 +84,7 @@ const inspectContact = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(openEditor())
     dispatch(setEditorState(FeatureState.Loading))
-    const contact = await api.partnerContacts.getOnePartnerContact({ id })
+    const contact = await api.partnerContacts.getPartnerContact({ id })
 
     // FIX: User without role can come with role: 0, caused by the AD sync according to the BE
     if ((contact.role as any) === 0) delete contact.role

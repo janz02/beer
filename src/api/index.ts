@@ -15,9 +15,10 @@ import {
   SegmentsApi,
   CashiersApi,
   FilesApi,
-  CouponUserCodesApi,
   NotificationsApi,
-  NotificationHubApi
+  NotificationHubApi,
+  UserCouponsApi,
+  WalletApi
 } from './swagger/apis'
 
 import { notification } from 'antd'
@@ -70,7 +71,6 @@ export const api = {
   coupons: new CouponsApi(config),
   tags: new TagsApi(config),
   couponComments: new CouponCommentsApi(config),
-  couponUserCodes: new CouponUserCodesApi(config),
   categories: new CategoriesApi(config),
   auth: new AuthApi(config),
   sites: new SitesApi(config),
@@ -83,5 +83,7 @@ export const api = {
   information: new InformationApi(config),
   files: new FilesApi(config),
   notification: new NotificationsApi(config),
-  notificationHub: new NotificationHubApi(config)
+  notificationHub: new NotificationHubApi(config),
+  UserCoupons: new UserCouponsApi(config),
+  Wallet: new WalletApi(config)
 }
