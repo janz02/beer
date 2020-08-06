@@ -194,7 +194,7 @@ describe('MomentDisplay hu tests', () => {
   it('should render a the elapsed time as text when the mode is from now (6 weeks 4 day = egy hónapja)', () => {
     // Arrange
     const spanWeeks = moment.duration(6, 'week')
-    const spanDays = moment.duration(4, 'day')
+    const spanDays = moment.duration(1, 'day')
     const date = moment(moment.now())
       .subtract(spanWeeks)
       .subtract(spanDays)
@@ -409,7 +409,7 @@ describe('MomentDisplay en tests', () => {
   it('should render a the elapsed time as text when the mode is from now (6 weeks 4 day = a month ago)', () => {
     // Arrange
     const spanWeeks = moment.duration(6, 'week')
-    const spanDays = moment.duration(4, 'day')
+    const spanDays = moment.duration(2, 'day')
     const date = moment(moment.now())
       .subtract(spanWeeks)
       .subtract(spanDays)

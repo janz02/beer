@@ -105,7 +105,7 @@ const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setNkmListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().userAccess.nkmListParams, params)
-    const { result, ...pagination } = await api.auth.getNkmPartnerContactsInfo(revisedParams)
+    const { result, ...pagination } = await api.auth.getNkmPartnerContacts(revisedParams)
     dispatch(
       getNkmUsersSuccess({
         users: result as UserAccess[],
@@ -124,7 +124,7 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
   try {
     dispatch(setPartnerListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().userAccess.partnerListParams, params)
-    const { result, ...pagination } = await api.auth.getPartnerContactsInfo(revisedParams)
+    const { result, ...pagination } = await api.auth.getPartnerContacts(revisedParams)
 
     dispatch(
       getPartnerUsersSuccess({
@@ -140,7 +140,7 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
 const inspectUserAccess = (userType: UserType, id: number): AppThunk => async dispatch => {
   try {
     dispatch(openEditor(userType))
-    const response = await api.auth.getPartnerContactInfo({ id })
+    const response = await api.auth.getPartnerContactState({ id })
     dispatch(getUserSuccess({ ...response } as UserAccess))
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
@@ -153,7 +153,7 @@ const saveUserAccess = (role: Roles, isActive: boolean): AppThunk => async (disp
     const type = getState().userAccess.editedUserType
     if (!id) return
     dispatch(setEditorState(FeatureState.Loading))
-    await api.auth.updatePartnerContactInfo({ id, partnerContactStateDto: { role, isActive } })
+    await api.auth.updatePartnerContactState({ id, partnerContactStateDto: { role, isActive } })
     message.success(i18n.t('user-access.msg.change-succesful'))
     dispatch(saveUserSuccess())
     type === UserType.NKM && dispatch(getNkmUsers())

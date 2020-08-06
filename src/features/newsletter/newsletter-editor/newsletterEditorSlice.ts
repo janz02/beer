@@ -146,7 +146,7 @@ const {
 const getNewsletterTemplate = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(setTemplateState(FeatureState.Loading))
-    const response = await api.emailTemplates.getTemplate({
+    const response = await api.emailTemplates.getEmailTemplate({
       id
     })
     await delay({}, 1000)
@@ -174,7 +174,7 @@ const saveNewsletterTemplateVersion = (content: string): AppThunk => async (disp
     if (!id) {
       return
     }
-    await api.emailTemplates.saveTemplateVersion({
+    await api.emailTemplates.saveEmailTemplateVersion({
       id: id,
       emailTemplateVersionDto: {
         content
@@ -194,7 +194,7 @@ const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch, getSta
     const id = template?.id
     const version = template?.history?.find(h => h.id === currentTemplateVersionId)?.version
     if (id === undefined || version === undefined) return
-    await api.emailTemplates.restoreTemplateVersion({
+    await api.emailTemplates.restoreEmailTemplateVersion({
       id: id,
       version: version
     })

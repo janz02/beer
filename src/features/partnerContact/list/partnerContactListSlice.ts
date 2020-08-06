@@ -101,7 +101,7 @@ const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, ge
     dispatch(setDeleteState(FeatureState.Loading))
     const state = getState().partnerContactList
     //  TODO: Integrate new delete endpoint
-    await api.auth.updatePartnerContactInfo({
+    await api.auth.updatePartnerContactState({
       id,
       partnerContactStateDto: {
         role: role,

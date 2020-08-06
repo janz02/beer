@@ -57,7 +57,7 @@ export const getMyPartner = (): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const partner = await api.partner.getSelfPartner()
+    const partner = await api.partner.getMyPartner()
     dispatch(
       getPartnersSuccess({
         ...partner
@@ -72,7 +72,7 @@ export const updateMyPartner = (partner: Partner): AppThunk => async (dispatch, 
   dispatch(setLoadingStart())
 
   try {
-    await api.partner.updateSelfPartner({
+    await api.partner.updateMyPartner({
       partnerDto: {
         ...getState().selfPartner.partner,
         ...partner,

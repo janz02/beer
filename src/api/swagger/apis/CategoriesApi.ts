@@ -30,6 +30,9 @@ import {
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
 } from '../models';
 
 export interface CreateCategoryRequest {
