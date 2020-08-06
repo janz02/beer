@@ -177,7 +177,7 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Gets all the available Email Temmplates
+     * Gets all the available Email Templates
      */
     async getEmailTemplatesRaw(requestParameters: GetEmailTemplatesRequest): Promise<runtime.ApiResponse<EmailTemplateSummaryVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -223,7 +223,7 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Gets all the available Email Temmplates
+     * Gets all the available Email Templates
      */
     async getEmailTemplates(requestParameters: GetEmailTemplatesRequest): Promise<EmailTemplateSummaryVmPaginatedResponse> {
         const response = await this.getEmailTemplatesRaw(requestParameters);
