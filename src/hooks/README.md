@@ -34,6 +34,9 @@ With the `useState` hook, it's possible to have the `count` variable that change
 to the `Example` component. `setState` changes the value, but only for the next call after rerender.
 The naming convention for hooks is to start them with `use`.
 
+Helper functions (found in the services folder) are different from hooks, they do not access global
+variables and they have nothing to do with FCs.
+
 ## How to use hooks?
 
 ### Order of hook calls
