@@ -59,7 +59,7 @@ By default RTK includes the [thunk](https://github.com/reduxjs/redux-thunk) midd
 >
 > Currently all `NewNotification`-s has a type field ([NotificationType](../../api/swagger/models/NotificationType.ts)) which describes the actual reason (not the audience) of why it was created.
 
-## See More
+## Read More
 
 - [Step by step ex. of redux logger middleware impl.](https://medium.com/better-programming/redux-middleware-in-depth-write-custom-redux-middleware-4f02e2497cd6)
 - [Redux.js.org middleware ex.](https://redux.js.org/introduction/ecosystem#middleware)
