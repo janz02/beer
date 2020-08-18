@@ -9,8 +9,30 @@ component wouldn't rerender.
 
 ## What are hooks?
 
-Hooks make it possible to have side effects in functional components and they notify React to
-rerender the component when something changes.
+Hooks make it possible to have side effects in FCs and they notify React to rerender the component
+when something changes.
+
+Example from the React [documentation](https://reactjs.org/docs/hooks-intro.html):
+
+```ts
+import React, { useState } from "react";
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+```
+
+With the `useState` hook, it's possible to have the `count` variable that changes between the calls
+to the `Example` component. `setState` changes the value, but only for the next call after rerender.
+The naming convention for hooks is to start them with `use`.
 
 ## How to use hooks?
 
@@ -34,8 +56,3 @@ Looking at Preact's implementation of
 global variable `currentIndex` that is incremented every time a hook is called, and the internal
 state of the hook is read from an array at that index, this explains why it is important to call the
 hooks in the same order.
-
-## React documentation
-
-One of the best places to start learning about hooks is the offical React
-[documentation](https://reactjs.org/docs/hooks-intro.html).
