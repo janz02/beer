@@ -1015,23 +1015,6 @@
         }
       }
     },
-    "/api/Auth/SyncAdUsers": {
-      "put": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Syncs in all the users from AD to be listed",
-        "operationId": "syncAdUsers",
-        "responses": {
-          "200": {
-            "description": "Successful syncing"
-          },
-          "400": {
-            "description": "Registration error occured"
-          }
-        }
-      }
-    },
     "/api/Cashiers": {
       "post": {
         "tags": [
@@ -3533,21 +3516,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/Coupons/CloseCoupons": {
-      "post": {
-        "tags": [
-          "Coupons"
-        ],
-        "summary": "Closes coupons",
-        "description": "Closes coupons when its accepted and either end date is passed or every coupon is claimed.",
-        "operationId": "closeCoupons",
-        "responses": {
-          "204": {
-            "description": "Successful closed coupons"
           }
         }
       }
@@ -8308,21 +8276,6 @@
         "responses": {
           "204": {
             "description": "Successful deletion"
-          }
-        }
-      }
-    },
-    "/api/UserCoupons/Generate": {
-      "post": {
-        "tags": [
-          "UserCoupons"
-        ],
-        "summary": "Generates pairs of users and coupons",
-        "description": "Generates 8 pairs for every user or as many coupons are available",
-        "operationId": "generateUserCoupons",
-        "responses": {
-          "204": {
-            "description": "Successful generation"
           }
         }
       }
