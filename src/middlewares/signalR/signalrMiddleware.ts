@@ -7,31 +7,16 @@ import {
   notificationActions,
   notificationActionType
 } from 'features/notification/notificationSlice'
-import {
-  HubConnection,
-  HubConnectionBuilder,
-  LogLevel,
-  HubConnectionState
-} from '@microsoft/signalr'
-import { hasPermission } from 'services/jwt-reader'
-import { notificationRoleConfig } from 'features/notification/useNotification'
-
-type Connection = HubConnection | null | undefined
-
-export interface SignalrStatusReport {
-  connectionState?: HubConnectionState
-  connectionId?: string | null
-  reportSource?: string | null
-  connectionCreatedAt?: number
-  error: any
-}
+import { HubConnectionBuilder, LogLevel, HubConnectionState } from '@microsoft/signalr'
+import { SignalrConnection, SignalrStatusReport } from './signalrTypes'
+import { subscribeForRoleBasedNewNotification } from 'features/notification/notificationSubscriptions'
 
 /**
- * Helper method to dispactch actions on connection lifecycle change.
+ * Helper method to dispatch actions on connection lifecycle change.
  * @param connection
  * @param connectionCreatedAt - it serves as an identifier, the connection id is lost at disconnection
  */
-const sendConnectionStateFactory = (connection: Connection, connectionCreatedAt: number) => (
+const sendConnectionStateFactory = (connection: SignalrConnection, connectionCreatedAt: number) => (
   reportSource: string,
   error?: any
 ) => {
@@ -46,23 +31,20 @@ const sendConnectionStateFactory = (connection: Connection, connectionCreatedAt:
 }
 
 /**
- * Register the signlr method names, and the their callbacks
+ * Register the signalr method names, and the their callbacks
  * @param connection
  */
-const registerCallbacks = (connection: Connection, jwt: string): void => {
-  if (hasPermission(notificationRoleConfig, jwt)) {
-    connection?.on('NewNotification', () => {
-      store.dispatch(notificationActions.getRecentNotifications())
-    })
-  }
+const registerCallbacks = (connection: SignalrConnection, jwt: string): void => {
+  subscribeForRoleBasedNewNotification(connection, jwt)
+  // Extend here to register more message handlers
 }
 
 /**
- * Creates a new connection if there is an accesible jwt.
- * @param newJwt if is not awailable it will resort to the session storage
+ * Creates a new connection if there is an accessible jwt.
+ * @param newJwt if is not available it will resort to the session storage
  * * at auth/loginSuccess the jwt is still not in the session storage, thus it comes from the action payload
  */
-const initConnection = (newJwt?: string): Connection => {
+const initConnection = (newJwt?: string): SignalrConnection => {
   const url = process.env.REACT_APP_API_URL
   const jwt = newJwt ?? sessionStorage.getItem('jwt')
   if (!jwt) return null
@@ -93,11 +75,11 @@ const initConnection = (newJwt?: string): Connection => {
 
 /**
  * Builds and starts a new connection. (Stops the existing connection before.)
- * @param currentCnnection
+ * @param currentConnection
  * @param jwt - only needed if comes from the `auth/loginSuccess` payload
  * @returns `newConnection`
  */
-const connect = (currentConnection: Connection, jwt?: string): Connection => {
+const connect = (currentConnection: SignalrConnection, jwt?: string): SignalrConnection => {
   if (currentConnection) {
     currentConnection.stop().then(() => {
       currentConnection = null
@@ -109,10 +91,10 @@ const connect = (currentConnection: Connection, jwt?: string): Connection => {
 }
 
 /**
- * Biuld and start a new connection. (Stops the existing connection before.)
+ * Build and start a new connection. (Stops the existing connection before.)
  * @param currentConnection
  */
-const disconnect = (currentConnection: Connection): void => {
+const disconnect = (currentConnection: SignalrConnection): void => {
   if (!currentConnection) return
   currentConnection.stop().then(() => {
     currentConnection = null
@@ -121,16 +103,16 @@ const disconnect = (currentConnection: Connection): void => {
 
 /**
  * Make a new connection if the current connection is not active.
- * @param currentCnnection
+ * @param currentConnection
  */
-const reconnect = (currentConnection: Connection): Connection => {
+const reconnect = (currentConnection: SignalrConnection): SignalrConnection => {
   if (!currentConnection || currentConnection.state === HubConnectionState.Disconnected) {
     return connect(currentConnection)
   }
 }
 
 /**
- * Connects to the signlR event hub
+ * Connects to the signalR event hub
  * * Tries to connect on init, if there is a jwt in the session storage
  * * Connects on login success action
  * * Reconnects on notification drawer open, if there is no active connection
@@ -141,6 +123,7 @@ export const signalrMiddleware = (): any => {
   let connection = initConnection()
   return () => (next: Dispatch<any>) => (action: Action) => {
     const newJwt = (action as PayloadAction<UserVm>)?.payload?.jwtToken ?? ''
+
     switch (action.type) {
       case authActionType.loginSuccess:
         connection = connect(connection, newJwt)
