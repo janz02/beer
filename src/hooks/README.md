@@ -59,3 +59,11 @@ Looking at Preact's implementation of
 global variable `currentIndex` that is incremented every time a hook is called, and the internal
 state of the hook is read from an array at that index, this explains why it is important to call the
 hooks in the same order.
+
+## Hooks in this folder
+
+The `react-router-dom.ts` and `react-redux-hooks.ts` files contain wrappers around Redux's and the
+React Router's own hooks. These wrappers are needed to be able to mock them in the unit tests. Jest
+can overwrite the exports of these two files because they are ES modules.
+
+Other hooks are documented in the files in which they are defined.
