@@ -33,7 +33,6 @@ export interface UseGenericModalFormEditorUtils {
 export const useGenericModalFormEditorUtils = (
   props: UseGenericModalFormEditorProps
 ): UseGenericModalFormEditorUtils => {
-  console.log(props)
   const { dataId, rootRoute, detailRoute, disableCreate } = props
 
   const [editorParams, setEditorParams] = useState<GenericModalFormEditorParams>({
