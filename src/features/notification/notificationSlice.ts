@@ -29,7 +29,7 @@ interface NotificationState {
   /** The date of the most recent visible notification; for fetching the recent notifications. */
   newestDate?: moment.Moment
   /** An object that works as a Set, to avoid repeating the notifications;
-   Set is not supported by immer by dafault, and an object works fine. 
+   Set is not supported by immer by dafault, and an object works fine.
    In the component it is converted into an array. */
   notifications: NotificationDataDack
 }
