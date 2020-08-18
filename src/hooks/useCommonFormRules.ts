@@ -2,6 +2,9 @@ import { Rule } from 'rc-field-form/lib/interface'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
 
+/**
+ * Contains validation rules that can be used with Ant Design Forms.
+ */
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useCommonFormRules() {
   const { t } = useTranslation()
