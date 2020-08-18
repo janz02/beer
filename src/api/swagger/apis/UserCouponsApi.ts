@@ -57,37 +57,6 @@ export class UserCouponsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates 8 pairs for every user or as many coupons are available
-     * Generates pairs of users and coupons
-     */
-    async generateUserCouponsRaw(): Promise<runtime.ApiResponse<void>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/UserCoupons/Generate`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Generates 8 pairs for every user or as many coupons are available
-     * Generates pairs of users and coupons
-     */
-    async generateUserCoupons(): Promise<void> {
-        await this.generateUserCouponsRaw();
-    }
-
-    /**
      * Returns a coupon list that contains up to 8 coupons for the user for today
      * Returns the coupons generated for the user
      */
