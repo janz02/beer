@@ -5,7 +5,7 @@
   </br>
     </br>
 
-## I18n
+## I18Next
 
 I18n is an internationalization framework that provides the capability of dynamically changing a site's language
 and makes easier to add additional languages to our project. The initial set up is in the *../index.ts* file.
@@ -21,14 +21,14 @@ and makes easier to add additional languages to our project. The initial set up 
 Take a [moment](https://momentjs.com/) to check this website.
 
 The date types of the DTOs are transformed to the **moment.Moment** type:
-```
+```JS
 import moment from 'moment'
 
 const startDate = moment(dto.startDate)
 ```
 
 Usage/display
-```
+```JS
  <MomentDisplay date={value} />
  ```
 
@@ -41,19 +41,21 @@ Currently we have two available languages, **english** and **hungarian**.
 Their dictionaries found in the *../locales* directory and are in a valid json format.
 
 The filname should be the two-letter iso code of the locale.
-Theese files are generated, only the translations are provided manually.
+These files are generated, only the translations are provided manually.
 
 No duplicate keys are allowed. Unused keys will be removed by the i18next-scanner (see below).
 
 Example
-```
+```json
+{
   "app": {
     "title": "Plus Campaign Engine"
-  },
+  }
+}
   ```
 
 The translated text will be available in dot separated stringified key:
-```
+```JS
   t('app.title')
   ```
   </br> 
@@ -66,7 +68,7 @@ Unused translations in the locales will be removed, while new ones will be added
 The new, missing values will be added as *__STRING_NOT_TRANSLATED__*.
 
 Usage
-```
+```powershell
 npm run i18n:generate
 ```
 
@@ -77,17 +79,17 @@ Configuration
 </br>
 
 ### **In components**
-```
+```JS
 import { useTranslation } from 'react-i18next'
 ```
 
 use the useTranslation hook in the root of the component function
-```
+```JS
 const { t } = useTranslation()
 ```
 
 The key of the resource will be the parameter of the hooked t() function.
-```
+```JS
   t('app.title')
 ```
   </br>
@@ -101,11 +103,11 @@ More usage examples can be found at [i18n interpolation page](https://www.i18nex
 
 
 
-```
+```JS
  t('error.common.max-length-exact', { max })
 ```
 *en.json*
-```
+```json
  {
   "error":{
     "common": {
@@ -118,7 +120,7 @@ More usage examples can be found at [i18n interpolation page](https://www.i18nex
   </br>
 
 ### **Data model interpolation**
- ```
+```JS
  const user = {
    name: "Will Smith",
    username: "wsmith"
@@ -128,11 +130,11 @@ More usage examples can be found at [i18n interpolation page](https://www.i18nex
 
 ```
 *en.json*
-```
+```json
  {
    "welcome" :
    {
-     title: "Welcome back, {{user.name}}"
+     "title": "Welcome back, {{user.name}}"
    }
  }
 ```
@@ -145,13 +147,13 @@ More usage examples can be found at [i18n interpolation page](https://www.i18nex
 The default version is the singular term in every translation.
 To provide a plural trasnlation as well, a **count** parameter must be added for interpolation.
 The plural key must end with _plural in the dictionaries.
-```
+```JS
 t('key', {count: 1}); // - "item"
 t('key', {count: 5}); // - "items"
 ```
 
 *en.json*
-```
+```json
 {
   "key": "item",
   "key_plural": "items"
@@ -167,7 +169,7 @@ The BackEnd provides their side of translations for validation messages and enum
 The *generate-backend-translation-keys* npm script pulls the actual translations from the dev environment, 
 and will be saved to the *backend-generated-enum-codes.ts* and *..-error-codes.ts* files like the following:
 
-```
+```JS
 i18n.t(key)
 ```
 
@@ -178,7 +180,7 @@ This usage is needed, otherwise the scanner will remove them as they are not pre
 There are some enums that the swagger does not provide, so they needs to be added to the *backend-manual-enum-codes.ts*
 
 Usage
-```
+```powershell
 npm run generate-backend-translation-keys
 ```
   </br>
