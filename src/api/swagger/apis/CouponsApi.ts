@@ -209,37 +209,6 @@ export class CouponsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Closes coupons when its accepted and either end date is passed or every coupon is claimed.
-     * Closes coupons
-     */
-    async closeCouponsRaw(): Promise<runtime.ApiResponse<void>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Coupons/CloseCoupons`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Closes coupons when its accepted and either end date is passed or every coupon is claimed.
-     * Closes coupons
-     */
-    async closeCoupons(): Promise<void> {
-        await this.closeCouponsRaw();
-    }
-
-    /**
      * Returns the id of the new Coupon upon success
      * Creates a Coupon entity
      */
