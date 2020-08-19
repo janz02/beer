@@ -14,11 +14,19 @@ export interface UseFormUtils<T = any> {
   getFieldValue: (field: any) => any
 }
 
+/**
+ * Utility hook for forms with a Save button
+ */
 export function useFormUtils<T = any>(): UseFormUtils<T> {
   const [form] = Form.useForm()
   const [submitable, setSubmitable] = useState(false)
   const [modified, setModified] = useState(false)
 
+  /**
+   * This function needs to be called when a field on the form changes.
+   * If there are no validation errors, the form will be submittable. But the form also won't be
+   * submittable if the user hasn't changed anything yet.
+   */
   const checkFieldsChange = useCallback(() => {
     const hasErrors = form.getFieldsError().some(field => field.errors.length)
     setModified(true)
@@ -27,6 +35,9 @@ export function useFormUtils<T = any>(): UseFormUtils<T> {
     }
   }, [form, submitable])
 
+  /**
+   * Resets the form, so it won't be submittable until the user changes something again on the form.
+   */
   const resetFormFlags = useCallback(() => {
     setSubmitable(false)
     setModified(false)

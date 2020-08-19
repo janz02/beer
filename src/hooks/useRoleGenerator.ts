@@ -6,6 +6,9 @@ import { UserType } from 'models/user'
 
 export type RoleOptions = ColumnFilterItem[]
 
+/**
+ * Returns a list a roles for a `userType`
+ */
 export const useRoleGenerator = (userType?: UserType): RoleOptions => {
   const { t } = useTranslation()
 

@@ -16,5 +16,6 @@
   "[typescriptreact]": {
     "editor.formatOnSave": false
   },
-  "yaml.format.singleQuote": true
+  "yaml.format.singleQuote": true,
+  "cSpell.words": ["middlewares", "reduxjs", "signalr"]
 }

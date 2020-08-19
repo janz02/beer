@@ -128,8 +128,8 @@ export const basePaginationConfig = (
 })
 
 /**
- * 
- @example 
+ * Used for implementating tables with pagination, filtering, searching and sorting.
+ @example
  // For filtering with dropdown select
 
  */
@@ -171,6 +171,12 @@ function useTableUtils<T extends { [key: string]: any }>(
     }
   }, [])
 
+  /**
+   * Renders the text in the table cell with highliting if the column is filtered by searching for
+   * the value contained in `listParamsState?.[key]`
+   * @param key The property name of the item that corresponds to the column
+   * @param fieldText The text that is present in the table cell
+   */
   const searchedTextHighlighter = useCallback(
     (key: string, fieldText: string): any =>
       listParamsState?.[key] ? (
@@ -190,6 +196,17 @@ function useTableUtils<T extends { [key: string]: any }>(
     [listParamsState]
   )
 
+  /**
+   * Configures the Ant Design table
+   * @param params.key The property name of the item
+   * @param params.filterMode The way that the column can be filtered
+   * @param params.filters Optional, overwrites the default filters if present. These filters are
+   * the values that the table can be filtered for.
+   * @param params.sort Enables sorting the table by this column's value
+   * @param params.disableSearchHighlight Highlighting won't be visible when searching
+   * @param params.renderMode If this parameter has the value "date time", the column will be
+   * rendered with `MomentDisplay`
+   */
   const columnConfig = useCallback(
     (params: ColumnConfigParams): ColumnType<any> => {
       const { key, filterMode, sort, filters, disableSearchHighlight, renderMode, ...rest } = params
@@ -257,6 +274,9 @@ function useTableUtils<T extends { [key: string]: any }>(
     [listParamsState, searchedTextHighlighter, t, toSortOrder]
   )
 
+  /**
+   * Config for the column that contains the edit, view or delete buttons
+   */
   const actionColumnConfig = useCallback((params: Partial<ColumnConfigParams>): ColumnType<any> => {
     return {
       key: 'actions',
@@ -266,6 +286,10 @@ function useTableUtils<T extends { [key: string]: any }>(
     }
   }, [])
 
+  /**
+   * `onChange` handler for Ant Design Table
+   * This callback executed when pagination, filters or sorter is changed
+   */
   const handleTableChange: any = useCallback(
     (
       pagination: PaginationConfig,
