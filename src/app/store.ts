@@ -1,7 +1,7 @@
 import { configureStore, Action } from '@reduxjs/toolkit'
 import { RootState, rootReducer } from './rootReducer'
 import thunk, { ThunkAction } from 'redux-thunk'
-import { signalrMiddleware } from '../middlewares/signalrMiddleware'
+import { signalrMiddleware } from '../middlewares/signalR/signalrMiddleware'
 
 export const store = configureStore({
   reducer: rootReducer,

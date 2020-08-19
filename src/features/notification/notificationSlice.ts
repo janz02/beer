@@ -3,11 +3,11 @@ import moment from 'moment'
 import { AppThunk } from 'app/store'
 import { ListRequestParams, OrderByType } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
-import { SignalrStatusReport } from 'middlewares/signalrMiddleware'
 import { HubConnectionState } from '@microsoft/signalr'
 import { api } from 'api'
 import { NotificationData, NotificationDataDack } from 'models/notification'
 import { GetNotificationsRequest } from 'api/swagger'
+import { SignalrStatusReport } from 'middlewares/signalR/signalrTypes'
 
 const NOTIFICATION_LIST_PAGE_SIZE = 20
 
@@ -29,7 +29,7 @@ interface NotificationState {
   /** The date of the most recent visible notification; for fetching the recent notifications. */
   newestDate?: moment.Moment
   /** An object that works as a Set, to avoid repeating the notifications;
-   Set is not supported by immer by dafault, and an object works fine.
+   Set is not supported by immer by default, and an object works fine.
    In the component it is converted into an array. */
   notifications: NotificationDataDack
 }
