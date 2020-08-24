@@ -24,8 +24,8 @@ Some of the reasons:
 - It's easier to update because you don't have to rewrite it, only regenerate it
 - They are type checked, so if something changes in the backend, you get compile time error message
   after the client is regenerated
-- You can automatically regenerate the client in the CI to ensure that the client matches the
-  backend APIs
+- The CI checks the version of the client, if it's out of date the build will fail and you have to
+  fix and commit it.
 
 ## Authentication
 
@@ -79,7 +79,7 @@ export const api = {
 ```
 
 You can add new controllers here, if a new version of the backend has a new one. Controller refers
-to a backend class that contains actions (endpoints), and the it's part of the url:
+to a backend class that contains actions (endpoints), and it's part of the url:
 
 ```
 /api/{controller}/{action}
