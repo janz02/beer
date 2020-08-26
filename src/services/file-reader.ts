@@ -1,5 +1,6 @@
 /**
- * Converts a file Blob to a base64 string and calls the callback with this base64 string.
+ * Converts a file Blob to a data url and calls the callback with this.
+ * e.g. a data url will look like: data:image/png;base64, if the blob is a png
  * @param img image
  * @param callback callback
  */
