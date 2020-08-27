@@ -94,17 +94,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-The Create React App comes with its default configuration from `react-scripts` that cannot be
-overwritten, only if you copy those configuration files into the project and remove `react-scripts`.
-This is done by the `eject` command.
-
-But this project also uses `react-app-rewired` that can override configurations using the
-`config-overrides.js` file, so there should be no reason to `eject`.
-
 ## Build using Docker
 
 If Docker is installed, you can build a Docker image:
