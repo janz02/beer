@@ -127,7 +127,7 @@ the container will run in the background.
 To stop the container:
 
 ```bash
-docker container kill 0123456789abcdef
+docker container kill abcdef
 ```
 
 You need to know the name of the container to kill it. The command that was used to run it, didn't
@@ -138,3 +138,8 @@ run, or you can find it using `docker container ls`.
 
 You can learn more in the [`./src/README.md`](./src/README.md) file and other `README.md` files in
 the subdirectories.
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+Documenting our code with [JSDoc](https://jsdoc.app/about-getting-started.html), JSDoc in
+[VS Code](https://code.visualstudio.com/docs/languages/javascript#_jsdoc-support)

@@ -2,6 +2,12 @@ import { RequestError } from 'api'
 import i18n from 'app/i18n'
 import { notification } from 'antd'
 
+/**
+ * Displays a (translated) notification for each error in the passed in error object
+ * and prints the errors as a table to the console.
+ * @param {RequestError} error object containing the errors to display
+ * @param {string | undefined} url the url where the error comes from
+ */
 export const displayBackendError = (error: RequestError, url?: string): void => {
   let errorForLog = {}
   let i = 0
