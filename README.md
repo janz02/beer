@@ -67,8 +67,8 @@ the code will recompile and the browser reloads the page if you make edits to an
 [Hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) is also enabled,
 but it only works for scss files, so you can change the styles without reloading.
 
-You can also use the the `npm run start:local` command to use the `local` environment which is
-defined in the `.env-cmdrc` file, but the default is the `dev` environment.
+You can also use the `npm run start:local` command to use the `local` environment which is defined
+in the `.env-cmdrc` file, but the default is the `dev` environment.
 
 ### `npm test`
 
