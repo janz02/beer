@@ -1,5 +1,9 @@
 import { Roles } from 'api/swagger/models'
 
+/**
+ * Group of roles to define more generic(flow specific/company specific) access rights.
+ * ex. usage: hasPermission(comboRoles.forNkm)
+ */
 export const comboRoles = {
   forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
   forNkm: [
@@ -18,6 +22,12 @@ export const comboRoles = {
   ]
 }
 
+/**
+ * Specifies the permissions(required roles) for each page/menu item.
+ * (Can be) used with hasPermission(roles) to check if the current user
+ * has access to a specific menu item/feature/page section.
+ * ex. hasPermission(pageViewRoles.campaigns)
+ */
 export const pageViewRoles = {
   users: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   newsletters: [Roles.Administrator, Roles.CampaignManager],
