@@ -8,7 +8,10 @@ The data flow of the redux is the following:
 
 Updates:
 * Something happens in the app, such as a user clicking a button
-* The app code **dispatches** an action to the Redux store, like dispatch({type: 'counter/increment'})
+* The app code **dispatches** an action to the Redux store, like 
+```js
+ dispatch({type: 'counter/increment'}) 
+ ```
 * Before the dispatched **action** gets called by the **reducer**, the configured **middlewares** will run. They can provide logging, debug, connection handling and other functionalities.
 * The **store** runs the **reducer** function again with the **previous state** and the **current action**, and saves the return value as the **new state**
   * The same goes for the **thunks** as well: they will be called by the current **state** and **action**. It can call multiple **actions**, async functions and modify the **state**.
@@ -162,3 +165,19 @@ It contains the providers and the routers used by all of its child components.
 * **ConnectedRouter** Synchronize router state with redux store through uni-directional flow, support hot reloading and dispatching browser history methods.
 * **BaseLayout** is a wrapper component for handling the actual pages title and the unseen notification count.
 * **RouterView** is the main view that presents the actual page and handles the authority of the user based on its roles.
+
+</br>
+
+## Debugging with DevTools
+DevTools is enabled per default in this application. It can be used by downloading ([from devTools site](https://github.com/zalmoxisus/redux-devtools-extension)) its the browser extension and opening the site.
+
+In its inspector the action history can be seen, and in its details the action payload and the modified state can be checked.
+It is also possible to revert back to an action in the history and even see the page with that state.
+The history with selected state can be exported and then imported back. It is an extremely useful function for bug reports, so the reporter can attach the history of the application, and the developer can trace back the issue.
+
+The DevTools middleware can be disabled in the *store.ts* file by
+
+```js
+ configureStore({devTools: false, ...)
+ ```
+
