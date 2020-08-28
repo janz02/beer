@@ -3,7 +3,15 @@
 Components placed in this folder are highly used building blocks of the application.
 If there are any new component that will be used up as a base of another components or as an element of the page, they should be placed here for further reuse.
 
-Don't forget: we use ant design component library for the design, this should be the starting pont for creating a new reusable component. Browse at [Ant Design page](https://ant.design/components/overview/).
+> Don't forget: we use ant design component library for the design, this should be the starting pont for creating a new reusable component.
+
+**If a new component is needed, the following sources/implementations should be considered, in order:**
+1. Ant design without any changes [Ant Design library](https://ant.design/components/overview/).
+2. Ant design with custom skin
+3. Combine Ant design components
+4. Choose from the [Ant design recommendations](https://ant.design/docs/react/recommendation)
+5. Search for an npm package for the problem
+6. And only as the last resort comes the custom implementation
 
 </br>
 
@@ -16,13 +24,14 @@ To learn even more, visit the [Features Readme](../features/README.md) or this [
 </br>
 
 ## File placement
-Keep all files relating to any one component in a single folder, including styling files.
+Keep all files relating to any one component in a single folder, including styling and unit test files.
 
 Add the same name to the style file as well.For example:
 
 ../responsive/
 - ResponsiveCard.SCSS
 - ResponsiveCard.TSX
+- ResponsiveCard.test.TSX
 
 It’s a good practice to name a component after the function that it executes so that it’s easily recognizable.
 
@@ -47,6 +56,31 @@ export const MomentDisplay: React.FC<MomentDisplayProps> = props => {//File and 
   );
 }
 ```
+
+## Unit testing
+
+Newly written components **MUST** have a unit test file with at least 80% code coverage.
+
+
+```js
+describe('MomentDisplay hu tests', () => {
+  beforeAll(() => {
+    setMomentLocale('hu')
+  })
+
+  it('should render a formatted date by default', () => {
+    // Arrange
+    const date = moment(new Date(2011, 9, 31, 10, 30))
+
+    // Act
+    const wrapper = shallow(<MomentDisplay date={date} />)
+
+    // Assert
+    const text = wrapper.text()
+    expect(text).toEqual('2011.10.31.')
+  })
+```
+
 
 ## Move logic to reducers
 
@@ -73,7 +107,7 @@ export const MomentDisplay: React.FC<MomentDisplayProps> = props => {//File and 
 export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
   const {
     ResponsiveCardProps,
-    **...rest**
+      ...rest
   } = props
 ```
 usage:
