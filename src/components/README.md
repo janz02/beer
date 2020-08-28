@@ -61,6 +61,16 @@ export const MomentDisplay: React.FC<MomentDisplayProps> = props => {//File and 
 
 Newly written components **MUST** have a unit test file with at least 80% code coverage.
 
+For coverage report, run
+
+```ps
+npm test -- --watchAll=false --passWithNoTests --reporters default --reporters jest-junit --coverage --coverageDirectory=coverage --coverageReporters cobertura
+```
+
+Then open the [Code coverage report](../../coverage/cobertura-coverage.xml)
+
+
+Example unit test
 
 ```js
 describe('MomentDisplay hu tests', () => {
