@@ -1,7 +1,13 @@
 {
   "recommendations": [
+    "visualstudioexptteam.vscodeintellicode",
     "stylelint.vscode-stylelint",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "editorconfig.editorconfig",
+    "usernamehw.errorlens",
+    "redhat.vscode-yaml"
   ]
 }
