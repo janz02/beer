@@ -5,12 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "name": "Launch Chrome",
       "request": "launch",
-      "name": "Debug with Chromium on Ubuntu",
+      "type": "pwa-chrome",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}",
-      "runtimeExecutable": "/usr/bin/chromium-browser"
+      "webRoot": "${workspaceFolder}"
     },
     {
       "name": "Debug CRA Tests",
