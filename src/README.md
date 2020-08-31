@@ -105,14 +105,12 @@ in npm, e.g. `@type/package-name`.
 
 ## VSCode Extensions
 
-- [Beautify](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify) for code
-  formatting
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
   to prevent typos in variable names and comments
 - [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
   for debugging inside VSCode
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) shows lint
-  errors as you type
+  errors as you type, also works for TypeScript
 - [npm](https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script) allows running
   npm scripts without command line
 - [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
@@ -121,7 +119,9 @@ in npm, e.g. `@type/package-name`.
   option for code formatting, but it takes ESLint rules into account, so it might be better
 - [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) to
   check SCSS formatting
-- [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
-  checks for TS lint rule violations
 - [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) for `.yml` file
   support
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+  applies the whitespace settings from the `.editorconfig` file
+- [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) makes
+  errors easier to notice
