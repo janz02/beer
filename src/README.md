@@ -28,7 +28,7 @@ repository.
 ### src
 
 Sources code of the application, these files are private and not served for the browser. This
-`README.md` file is about this folder.
+[README.md](README.md) file is about the `src` folder.
 
 #### api
 
