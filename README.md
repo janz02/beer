@@ -1,8 +1,10 @@
-## Introduction
+# Introduction
 
 This repository contains the frontend of the PKM project, where partners (mainly shops) can issue
 coupons for their products. Partners can register as users if they have a code. Another type of
 users are the NKM users (admins).
+
+</br>
 
 ## Dependencies
 
@@ -19,23 +21,25 @@ It uses Redux Toolkit for state management and the Ant Design component library.
 - **Typescript** makes it possible to have types in JavaScript
 - **Curl** is used for generating the API client  
   Should be already installed with Windows or Linux.
-- Other dependencies are listed in the `package.json` file.
+- Other dependencies are listed in the [package.json](package.json) file.
+
+</br>
 
 ## First start
 
-Install the dependencies from the `package.json` file:
+Install the dependencies from the [package.json](package.json):
 
 ```bash
 npm install
 ```
 
-This should have created the `node_modules` folder, it's ready to start the app:
+This should have created the [node_modules folder](node_modules), it's ready to start the app:
 
 ```bash
 npm start
 ```
 
-And now the frontend should be running on `http://localhost:3000`.
+And now the frontend should be running on [localhost:3000](http://localhost:3000).
 
 The following credentials can be used to log in:
 
@@ -43,6 +47,8 @@ The following credentials can be used to log in:
 username: devAdmin@g.hu
 password: testeR#1
 ```
+
+</br>
 
 ## Debug inside VS Code
 
@@ -53,14 +59,18 @@ Once the extension is installed, run the application with the `npm start` comman
 debugging in VSCode, the default hotkey for it is F5. It will start a new instance of Chrome and now
 it's possible to set breakpoints, checking the values of variables, etc in VS Code.
 
+</br>
+
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+```bash
+npm start
+```
 
 Runs the app in the development mode.  
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [localhost:3000](http://localhost:3000) to view it in the browser.
 
 Uses [Webpack DevServer](https://webpack.js.org/configuration/dev-server/) for live reloading, so
 the code will recompile and the browser reloads the page if you make edits to any imported file.
@@ -70,7 +80,9 @@ but it only works for scss files, so you can change the styles without reloading
 You can also use the `npm run start:local` command to use the `local` environment which is defined
 in the `.env-cmdrc` file, but the default is the `dev` environment.
 
-### `npm test`
+```bash
+npm test
+```
 
 Launches the test runner in the interactive watch mode.  
 See the section about
@@ -87,12 +99,16 @@ generate a report and save it to the `junit.xml` file, this will contain status 
 whether they are successful or not. It also generates a code coverage report to the
 `output/cobertura-coverage.xml` file.
 
-### `npm run build`
+```bash
+npm run build
+```
 
 Builds the app for production to the `build` folder.  
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.
+
+</br>
 
 ## Build using Docker
 
@@ -120,7 +136,7 @@ virtual machine, but more lightweight, because one OS can run multiple container
 common to use Linux containers, so Hyper-V or WSL is needed on Windows.
 
 In the command, `-p 3000:80` tells Docker the port mapping, 3000 will be the host port, so you can
-open it in the browser using `http://localhost:3000`, 80 is the port inside the container. The `-d`
+open it in the browser using [http://localhost:3000](http://localhost:3000), 80 is the port inside the container. The `-d`
 option is short for detached mode and it allows using the command line after running the command,
 the container will run in the background.
 
@@ -134,9 +150,11 @@ You need to know the name of the container to kill it. The command that was used
 specify a name for it, so Docker will generate one. It is written to the console when the image is
 run, or you can find it using `docker container ls`.
 
+</br>
+
 ## Learn More
 
-You can learn more in the [`./src/README.md`](./src/README.md) file and other `README.md` files in
+You can learn more in the [source readme file](./src/README.md) and other `README.md` files in
 the subdirectories.
 
 To learn React, check out the [React documentation](https://reactjs.org/).

@@ -3,43 +3,50 @@
 This is the entry point of the application where `ReactDOM.render` is called. There is also some
 code related to [hot module replacement](https://webpack.js.org/guides/hot-module-replacement/).
 
-## The ServiceWorker
+</br>
 
-There's a `serviceWorker.ts` file. It would allow using the app in offline mode, or as a PWA. It
+## ServiceWorker
+
+The [ServiceWorker](serviceWorker.ts) enables to use the app in offline mode or as a PWA. It
 uses [Workbox](https://developers.google.com/web/tools/workbox) under the hood. But it's not needed
 for PKM, so it's disabled.
 
+</br>
+
 ## Directory structure
 
-### build
+**build**
 
 Build output files are placed here when the `npm run build` command is run. These files will be
 served for the browser. This folder is ignored by Git.
 
-### config
+**config**
 
-Configations for nginx and code generators. See [../config/README.md](config/README.md).
+Configurations for nginx and code generators. See [config readme](config/README.md).
 
-### public
+**public**
 
 Files that are copied to the `build` folder by `npm run build`, but they are still part of the
 repository.
 
-### src
+**src**
 
-Sources code of the application, these files are private and not served for the browser. This
-[README.md](README.md) file is about the `src` folder.
+Sources code of the application, these files are private and not served for the browser.
 
-#### api
+**src/api**
 
-Contains code that makes calling the backend easier. See [api/README.md](api/README.md).
+Contains code that makes calling the backend easier. See [API readme](api/README.md).
 
-#### app
+**src/app**
 
 Here is the topmost component defined, the `App`, and other root files that holds everything
-together.
+together. See [app readme](app/README.md).
 
-#### assets
+**src/app/i18n**
+
+The generated locale resource files and the translation/localization logic is found here. See [localization readme](app/i18n/README.md).
+
+**src/assets**
 
 Images and SCSS files stay in this folder:
 
@@ -49,47 +56,55 @@ Images and SCSS files stay in this folder:
 - The SCSS files in this folder are not related to any component, they are more of a general styles
   and customizations for Ant Design.
 
-#### components
+**src/components**
 
 Contains reusable React functional components and optionally the associated stylings. These are not
-related to any specific page in the application.
+related to any specific page in the application. See [components readme](components/README.md).
 
-#### features
+**src/features**
 
 This is where application specific components and the related logic are. See
-[features/README.md](features/README.md).
+[features readme](features/README.md).
 
-#### hooks
+**src/features/auth**
 
-Reusable React Hooks are here. See [hooks/README.md](hooks/README.md).
+The authentication related logic is written here. See [auth readme](features/auth/README.md).
 
-#### middlewares
+**src/hooks**
+
+Reusable React Hooks are here. See [hooks readme](hooks/README.md).
+
+**src/middlewares**
 
 In this folder, there is the SignalR middleware to handle notifications from the server without
-polling. See [hooks/README.md](hooks/README.md).
+polling. See [signalR readme](middlewares/signalR/readme.md).
 
-#### models
+**src/models**
 
-Models are types that only contain data, no methods. See [models/README.md](models/README.md).
+Models are types that only contain data, no methods. See [models readme](models/README.md).
 
-#### router
+**src/router**
 
 Different parts of the application can be accessed by certain URLs. The router is responsible for
 choosing the correct component based on the URLs.
 
-#### services
+**src/services**
 
-Reusable helper functions. See [services/README.md](services/README.md).
+Reusable helper functions. See [services readme](services/README.md).
 
-## Coding conventions
+</br>
 
-### Styling
+# Coding conventions
 
-The styles are written with SCSS and the rules are in the [../.stylelintrc](../.stylelintrc) file.
+## Styling
+
+The styles are written with SCSS and the rules are in the [stylelintrc](../.stylelintrc) file.
 These rules are checked by the stylelint extension. If a component requires styling, there should be
 a `.scss` file next to the component with the same name.
 
-### Typescript
+</br>
+
+## Typescript
 
 Typescript files may contain components, in this case their extension is `.tsx`, other typescript
 files are `.ts` files. There can be only one component one component in a file and its name matches
@@ -103,7 +118,9 @@ Identifiers in TS should be typed and avoid using `any`. An exception to this ru
 doesn't have typings. If typings are not included in the npm package, it may be in the `@types` scope
 in npm, e.g. `@type/package-name`.
 
-## VSCode Extensions
+</br>
+
+# VSCode Extensions
 
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
   to prevent typos in variable names and comments
