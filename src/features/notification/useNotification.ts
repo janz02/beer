@@ -5,8 +5,21 @@ import { FeatureState } from 'models/featureState'
 import { useCallback, useMemo } from 'react'
 import { NotificationData } from 'models/notification'
 import { Roles } from 'api/swagger/models'
+import { NotificationType } from 'api/swagger/models/NotificationType'
+import { useHistory } from 'react-router-dom'
 
 export const notificationRoleConfig = [Roles.Administrator, Roles.CampaignManager]
+
+export const notificationLinks = [
+  {
+    type: NotificationType.CampaignMovedToWaitingState,
+    link: "/campaign/{actualId}"
+  },
+  {
+    type: NotificationType.PartnerContactRegistered,
+    link: "/partners/{parentId}"
+  }
+]
 
 interface UseNotificationFeatures {
   opened: boolean
@@ -18,13 +31,15 @@ interface UseNotificationFeatures {
   handleClose: () => void
   handleOpen: () => void
   handleReadAll: () => void
-  handleInspectItem: (item: NotificationData) => void
+  handleInspectItem: (item: NotificationData, e?: Event) => void,
+  handleNavigateItem: (item: NotificationData) => void
 }
 
 const { getNotifications, close, open } = notificationActions
 
 export const useNotification = (): UseNotificationFeatures => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const {
     notifications: notificationsObj,
     listState,
@@ -55,10 +70,46 @@ export const useNotification = (): UseNotificationFeatures => {
     dispatch(open())
   }
 
-  const handleInspectItem = (item: NotificationData): void => {
+  const handleInspectItem = (item: NotificationData, e?: Event): void => {
+    e?.stopPropagation()
+
     if (item.isSeen === false && item.id) {
       dispatch(notificationActions.readOne(item.id))
     }
+  }
+
+  const handleNavigateItem = (item: NotificationData): void => {
+    handleInspectItem(item);
+
+    if (item.id) {
+      const link = getNotificationLink(item)
+      if (link) {
+        history.push(link)
+      }
+    }
+  }
+
+  const getNotificationLink = (notification: NotificationData): string | undefined => {
+    let link = notificationLinks.find((notificationLink) => notificationLink.type === notification.type)?.link;
+
+    if (!link) {
+      return undefined
+    }
+
+    if (notification.actualId !== undefined) {
+      link = link.replace("{actualId}", notification.actualId.toString())
+    }
+
+    if (notification.parentId !== undefined) {
+      link = link.replace("{parentId}", notification.parentId.toString())
+    }
+
+    // Do not return with invalid link
+    if (link.indexOf("{parentId}") !== -1 || link?.indexOf("{actualId}") !== -1) {
+      return undefined
+    }
+
+    return link
   }
 
   const handleReadAll = (): void => {
@@ -68,6 +119,7 @@ export const useNotification = (): UseNotificationFeatures => {
   const handleGetNotifications = useCallback((): void => {
     dispatch(getNotifications())
   }, [dispatch])
+
 
   return {
     opened,
@@ -79,6 +131,7 @@ export const useNotification = (): UseNotificationFeatures => {
     handleClose,
     handleOpen,
     handleGetNotifications,
-    handleInspectItem
+    handleInspectItem,
+    handleNavigateItem
   }
 }

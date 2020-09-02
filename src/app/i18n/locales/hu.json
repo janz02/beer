@@ -250,7 +250,7 @@
   },
   "enum": {
     "noitfication-type": {
-      "CampaignMovedToWaitingState": "Kámpány várakozó állapotba került",
+      "CampaignMovedToWaitingState": "Kampány várakozó állapotba került",
       "PartnerContactRegistered": "Új KKV partner regisztráció:"
     }
   },

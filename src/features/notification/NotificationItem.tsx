@@ -17,7 +17,7 @@ interface NotificationItemProps {
 export const NotificatonItem: FC<NotificationItemProps> = props => {
   const { item } = props
   const { t } = useTranslation()
-  const { handleInspectItem } = useNotification()
+  const { handleInspectItem, handleNavigateItem } = useNotification()
 
   const meta: ListItemMetaProps = {
     description: (
@@ -26,7 +26,7 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
           <MomentDisplay date={moment(item.createdDate)} mode="from now" />
         </Col>
         <Col>
-          <EnvelopeIcon opened={item.isSeen} onClick={() => handleInspectItem(item)} />
+          <EnvelopeIcon opened={item.isSeen} onClick={(e: Event) => handleInspectItem(item, e)} />
         </Col>
       </Row>
     )
@@ -42,7 +42,7 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
   }
 
   return (
-    <List.Item className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}>
+    <List.Item className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`} onClick={() => handleNavigateItem(item)}>
       <List.Item.Meta {...meta} />
     </List.Item>
   )
