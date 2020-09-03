@@ -15,7 +15,7 @@ export const DeleteButton: FC<DeleteButtonProps> = props => {
   return (
     <Tooltip mouseEnterDelay={0.45} placement="bottom" title={label ?? t('common.delete')}>
       <Button
-        type="danger"
+        danger
         icon={<DeleteOutlined />}
         shape="circle"
         style={{ marginLeft: '1rem' }}
