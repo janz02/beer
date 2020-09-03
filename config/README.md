@@ -53,6 +53,8 @@ npm run generate-client
 A script to support the Generate client script. It will get the validation error messages and enums
 to be translated provided by the BE Swagger. It will also generate a file for using generated keys.
 
+A check is added to ensure that notification link is added for every notification type.
+
 By doing this, the called i18next scan script won't delete the generated keys because they are used.
 Additional information at [i18next readme](../src/app/i18n/readme.md).
 

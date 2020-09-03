@@ -249,7 +249,7 @@
     "view-count": "Megjelenések száma"
   },
   "enum": {
-    "noitfication-type": {
+    "notification-type": {
       "CampaignMovedToWaitingState": "Kampány várakozó állapotba került",
       "CouponClosed": "A kampályhoz tartozó kuponokat kikapcsolták",
       "CouponCountDepleted": "A kampányhoz tartozó kuponok elfogytak",

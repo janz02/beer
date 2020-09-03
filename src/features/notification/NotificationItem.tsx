@@ -34,10 +34,10 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
 
   switch (item.type) {
     case NotificationType.CampaignMovedToWaitingState:
-      meta.title = t(`enum.noitfication-type.${item.type}`)
+      meta.title = t(`enum.notification-type.${item.type}`)
       break
     case NotificationType.PartnerContactRegistered:
-      meta.title = `${t(`enum.noitfication-type.${item.type}`)} ${item.value}`
+      meta.title = `${t(`enum.notification-type.${item.type}`)} ${item.value}`
       break
   }
 

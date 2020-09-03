@@ -249,7 +249,7 @@
     "view-count": "View count"
   },
   "enum": {
-    "noitfication-type": {
+    "notification-type": {
       "CampaignMovedToWaitingState": "Campaign moved to waiting status",
       "CouponClosed": "Coupon closed",
       "CouponCountDepleted": "Coupon count depleted",
