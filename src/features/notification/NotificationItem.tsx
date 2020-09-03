@@ -7,7 +7,7 @@ import { useNotification } from './useNotification'
 import { NotificationData } from 'models/notification'
 import { useTranslation } from 'react-i18next'
 import { ListItemMetaProps } from 'antd/lib/list'
-import { NotificationType } from 'api/swagger/models'
+import { NotificationType } from 'api/swagger/models/NotificationType'
 import { EnvelopeIcon } from 'components/icons/EnvelopeIcon'
 
 interface NotificationItemProps {
@@ -26,7 +26,7 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
           <MomentDisplay date={moment(item.createdDate)} mode="from now" />
         </Col>
         <Col>
-          <EnvelopeIcon opened={item.isSeen} onClick={(e: Event) => handleInspectItem(item, e)} />
+          <EnvelopeIcon opened={item.isSeen} onClick={(e: Event) => handleInspectItem(e, item)} />
         </Col>
       </Row>
     )
