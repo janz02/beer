@@ -1,6 +1,6 @@
-@import "../../../assets/scss/variables";
+@import "../../../../assets/scss/variables";
 
-.category-list {
+.category-list-table {
   td.ant-table-column-sort {
     // Disabling background sorting indicator because the table has only one column so it looks ugly.
     background-color: $color-white;

@@ -126,7 +126,7 @@
       "prize": "Prize"
     }
   },
-  "coupon-category": {
+  "campaign-category": {
     "add": "Add new campaign category",
     "editor-create": "Create",
     "editor-edit": "Edit",
@@ -572,7 +572,6 @@
     "language": "Language"
   },
   "menu": {
-    "campaign-categories": "Campaign categories",
     "campaigns": "Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
@@ -580,7 +579,8 @@
     "partners": "Partners",
     "profile": "Profile",
     "sites": "Sites",
-    "users": "Users"
+    "users": "Users",
+    "settings": "Settings"
   },
   "newsletter": {
     "add": "Add new template",
@@ -740,6 +740,10 @@
     "nkm-users": "NKM User",
     "partner-users": "Partner Contact",
     "user-access": "Users and Access Rights"
+  },
+  "settings": {
+    "title": "Settings",
+    "campaign-categories": "Campaign categories"
   },
   "warning-prompt": {
     "nav-unsaved-changes": "There are unsaved changes, do you really wish to navigate away?"
