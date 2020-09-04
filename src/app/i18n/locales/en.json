@@ -24,6 +24,14 @@
       "terms-and-services": "Terms & Services"
     }
   },
+  "campaign-category": {
+    "add": "Add new campaign category",
+    "editor-create": "Create",
+    "editor-edit": "Edit",
+    "field": {
+      "name": "Category name"
+    }
+  },
   "cashier-editor": {
     "editor-create": "Create cashier",
     "editor-edit": "Edit cashier",
@@ -125,15 +133,6 @@
       "discount": "Discount",
       "prize": "Prize"
     }
-  },
-  "campaign-category": {
-    "add": "Add new campaign category",
-    "editor-create": "Create",
-    "editor-edit": "Edit",
-    "field": {
-      "name": "Category name"
-    },
-    "list-title": "Campaign categories"
   },
   "coupon-create": {
     "activate": "Activate",
@@ -583,9 +582,9 @@
     "partner-data": "Partner data",
     "partners": "Partners",
     "profile": "Profile",
+    "settings": "Settings",
     "sites": "Sites",
-    "users": "Users",
-    "settings": "Settings"
+    "users": "Users"
   },
   "newsletter": {
     "add": "Add new template",
@@ -688,6 +687,9 @@
     "save": "Save changes",
     "save-profile-success": "Successfully saved the profile."
   },
+  "settings": {
+    "title": "Settings"
+  },
   "site": {
     "editor-title": "Site",
     "field": {
@@ -745,10 +747,6 @@
     "nkm-users": "NKM User",
     "partner-users": "Partner Contact",
     "user-access": "Users and Access Rights"
-  },
-  "settings": {
-    "title": "Settings",
-    "campaign-categories": "Campaign categories"
   },
   "warning-prompt": {
     "nav-unsaved-changes": "There are unsaved changes, do you really wish to navigate away?"
