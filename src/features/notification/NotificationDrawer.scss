@@ -10,7 +10,7 @@
   &__header {
     display: inline-flex;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     top: 0;
     left: 0;
     align-content: flex-start;
@@ -26,11 +26,5 @@
       font-size: 1.1rem;
       font-weight: 600;
     }
-  }
-
-  .infinite-list-container {
-    height: calc(100vh - var(--notification-drawer-header-height));
-    margin-top: var(--notification-drawer-header-height);
-    overflow: auto;
   }
 }

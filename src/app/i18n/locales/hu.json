@@ -613,10 +613,13 @@
     "version": "Verzió"
   },
   "notification": {
+    "earlier": "Korábbi",
     "empty-list": "Üres",
     "load-more": "Régebbiek...",
     "notifications": "Értesítések",
-    "read-all": "Összes megjelölése olvasottként"
+    "read-all": "Összes megjelölése olvasottként",
+    "today": "Ma",
+    "yesterday": "Tegnap"
   },
   "partner": {
     "editor": {
