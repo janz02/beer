@@ -3,23 +3,15 @@ import { CategoryList } from './categoryList/CategoryList'
 import { CategoryEditor } from './categoryEditor/CategoryEditor'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { categoryListActions } from './categoryList/categoryListSlice'
-import { useParams } from 'hooks/react-router-dom-hooks'
-import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
+import { UseGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 
-export const CategoryPage: React.FC = () => {
+export interface CategoryTabProps {
+  modalUtils: UseGenericModalFormEditorUtils
+}
+
+export const CategoryTab: React.FC<CategoryTabProps> = props => {
   const dispatch = useDispatch()
-
-  const { id } = useParams()
-
-  const {
-    editorParams,
-    routeToEditor,
-    handleExit,
-    handleAfterClose
-  } = useGenericModalFormEditorUtils({
-    dataId: id,
-    rootRoute: '/categories'
-  })
+  const { editorParams, routeToEditor, handleExit, handleAfterClose } = props.modalUtils
 
   useEffect(() => {
     dispatch(categoryListActions.getCategories())

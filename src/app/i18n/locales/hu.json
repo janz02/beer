@@ -126,7 +126,7 @@
       "prize": "Nyeremény"
     }
   },
-  "coupon-category": {
+  "campaign-category": {
     "add": "Új kampány kategória hozzáadása",
     "editor-create": "Létrehozás",
     "editor-edit": "Szerkesztés",
@@ -572,7 +572,6 @@
     "language": "Nyelv"
   },
   "menu": {
-    "campaign-categories": "Kampány kategóriák",
     "campaigns": "Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
@@ -580,7 +579,8 @@
     "partners": "Partnerek",
     "profile": "Profil",
     "sites": "Telephelyek",
-    "users": "Felhasználók"
+    "users": "Felhasználók",
+    "settings": "Beállítások"
   },
   "newsletter": {
     "add": "Új sablon hozzáadása",
@@ -740,6 +740,10 @@
     "nkm-users": "NKM Felhasználó",
     "partner-users": "Partner Kapcsolattartó",
     "user-access": "Felhasználók és Jogosultságok"
+  },
+  "settings": {
+    "title": "Beállítások",
+    "campaign-categories": "Kampány kategóriák"
   },
   "warning-prompt": {
     "nav-unsaved-changes": "Vannak mentetlen módosítások, biztos hogy el szeretné hagyni az oldalt?"

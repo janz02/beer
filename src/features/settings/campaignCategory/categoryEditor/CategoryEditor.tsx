@@ -37,7 +37,9 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
     handleGetCategory()
   }, [handleGetCategory])
 
-  const modalTitle = isNew ? t('coupon-category.editor-create') : t('coupon-category.editor-edit')
+  const modalTitle = isNew
+    ? t('campaign-category.editor-create')
+    : t('campaign-category.editor-edit')
 
   return (
     <GenericModalForm
@@ -57,7 +59,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
       initialValues={initialValues}
     >
       <Form.Item
-        label={t('coupon-category.field.name')}
+        label={t('campaign-category.field.name')}
         name="name"
         rules={[
           rule.requiredString(t('error.validation.category.name-required')),

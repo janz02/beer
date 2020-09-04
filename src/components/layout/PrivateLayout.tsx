@@ -13,7 +13,7 @@ import {
   LogoutOutlined,
   UsergroupAddOutlined,
   SendOutlined,
-  AppstoreAddOutlined,
+  SettingOutlined,
   ContactsOutlined,
   RightOutlined,
   LeftOutlined
@@ -89,10 +89,10 @@ export const PrivateLayout: React.FC = ({ children }) => {
         roles: pageViewRoles.users
       },
       {
-        label: t('menu.campaign-categories'),
-        link: '/categories',
-        icon: <AppstoreAddOutlined />,
-        roles: pageViewRoles.categories
+        label: t('menu.settings'),
+        link: '/settings',
+        icon: <SettingOutlined />,
+        roles: pageViewRoles.settings
       },
       {
         label: t('menu.sites'),
