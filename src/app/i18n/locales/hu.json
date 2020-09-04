@@ -249,8 +249,10 @@
     "view-count": "Megjelenések száma"
   },
   "enum": {
-    "noitfication-type": {
-      "CampaignMovedToWaitingState": "Kámpány várakozó állapotba került",
+    "notification-type": {
+      "CampaignMovedToWaitingState": "Kampány várakozó állapotba került",
+      "CouponClosed": "A kampályhoz tartozó kuponokat kikapcsolták",
+      "CouponCountDepleted": "A kampányhoz tartozó kuponok elfogytak",
       "PartnerContactRegistered": "Új KKV partner regisztráció:"
     }
   },
@@ -330,6 +332,9 @@
       "too-big": "__STRING_NOT_TRANSLATED__"
     },
     "not-found": "Nem található.",
+    "notification": {
+      "cannot-navigate-to-notification-link": "Az értesítéshez tartozó hivatkozás nem nyitható meg."
+    },
     "paginate": {
       "order-by": "Lapozó sorrend.",
       "page": "Lapozó lap.",

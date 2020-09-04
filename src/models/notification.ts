@@ -1,4 +1,4 @@
-import { NotificationType } from 'api/swagger/models'
+import { NotificationType } from 'api/swagger/models/NotificationType'
 import moment from 'moment'
 
 export interface NotificationData {

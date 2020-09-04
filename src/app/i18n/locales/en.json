@@ -249,9 +249,11 @@
     "view-count": "View count"
   },
   "enum": {
-    "noitfication-type": {
+    "notification-type": {
       "CampaignMovedToWaitingState": "Campaign moved to waiting status",
-      "PartnerContactRegistered": "New Parnter Contact: "
+      "CouponClosed": "Coupon closed",
+      "CouponCountDepleted": "Coupon count depleted",
+      "PartnerContactRegistered": "New Partner Contact: "
     }
   },
   "error": {
@@ -330,6 +332,9 @@
       "too-big": "__STRING_NOT_TRANSLATED__"
     },
     "not-found": "Not found.",
+    "notification": {
+      "cannot-navigate-to-notification-link": "Cannot navigate to notification link"
+    },
     "paginate": {
       "order-by": "Paginate order by.",
       "page": "Paginate page.",

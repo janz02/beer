@@ -20,9 +20,8 @@ const fileNameEnum = "src/app/i18n/backend-generated-enum-codes.ts";
 })();
 
 // Function to generate translation keys
-const generateKeys = (path, fileName, prefix = "") => {
-  const req = https.request(
-    {
+const generateKeys = (path, fileName, prefix = "", onData) => {
+  const req = https.request({
       hostname: "pkm-coupon-dev.grapetest.xyz",
       path,
       method: "GET"
@@ -37,6 +36,10 @@ const generateKeys = (path, fileName, prefix = "") => {
         );
         content += "\n";
         fs.appendFileSync(fileName, content);
+
+        if (onData) {
+          onData(keys);
+        }
       });
 
       res.on("error", error => {
@@ -48,12 +51,25 @@ const generateKeys = (path, fileName, prefix = "") => {
   req.end();
 };
 
-// 3. Genatat lists
+//Check method for notification links
+const checkNotificationLinks = (json) => {
+  const notificationLinksRaw = fs.readFileSync('src/features/notification/notificationLinks.json');
+  const notificationLinks = JSON.parse(notificationLinksRaw);
+
+  const allNotificationHasLink = json.every(x => notificationLinks.filter(z => z.type === x).length === 1);
+
+  if (!allNotificationHasLink) {
+    throw Error("Notification links are missing for the newly added notifications. Add them to the notificationLinks.json file.");
+  }
+}
+
+// 3. Generate lists
 generateKeys("/api/Information", fileNameError);
 generateKeys(
   "/api/Notifications/Types",
   fileNameEnum,
-  "enum.noitfication-type."
+  "enum.notification-type.",
+  checkNotificationLinks
 );
 
 shell.exec("npm run i18n:generate");
