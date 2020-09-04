@@ -24,6 +24,14 @@
       "terms-and-services": "felhasználási feltételeket."
     }
   },
+  "campaign-category": {
+    "add": "Új kampány kategória hozzáadása",
+    "editor-create": "Létrehozás",
+    "editor-edit": "Szerkesztés",
+    "field": {
+      "name": "Kategória neve"
+    }
+  },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
     "editor-edit": "Pénztár szerkesztés",
@@ -125,15 +133,6 @@
       "discount": "Kedvezmény",
       "prize": "Nyeremény"
     }
-  },
-  "campaign-category": {
-    "add": "Új kampány kategória hozzáadása",
-    "editor-create": "Létrehozás",
-    "editor-edit": "Szerkesztés",
-    "field": {
-      "name": "Kategória neve"
-    },
-    "list-title": "Kampány kategóriák"
   },
   "coupon-create": {
     "activate": "Aktiválás",
@@ -583,9 +582,9 @@
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "profile": "Profil",
+    "settings": "Beállítások",
     "sites": "Telephelyek",
-    "users": "Felhasználók",
-    "settings": "Beállítások"
+    "users": "Felhasználók"
   },
   "newsletter": {
     "add": "Új sablon hozzáadása",
@@ -688,6 +687,9 @@
     "save": "Módosítás mentése",
     "save-profile-success": "Profil mentése sikeres."
   },
+  "settings": {
+    "title": "Beállítások"
+  },
   "site": {
     "editor-title": "Telephely",
     "field": {
@@ -745,10 +747,6 @@
     "nkm-users": "NKM Felhasználó",
     "partner-users": "Partner Kapcsolattartó",
     "user-access": "Felhasználók és Jogosultságok"
-  },
-  "settings": {
-    "title": "Beállítások",
-    "campaign-categories": "Kampány kategóriák"
   },
   "warning-prompt": {
     "nav-unsaved-changes": "Vannak mentetlen módosítások, biztos hogy el szeretné hagyni az oldalt?"

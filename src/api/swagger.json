@@ -986,9 +986,6 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful update"
-          },
           "400": {
             "description": "Validation Error: validation.error",
             "content": {
@@ -1008,6 +1005,9 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Successful update"
           },
           "404": {
             "description": "User not found error: error.not-found"
