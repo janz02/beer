@@ -14,7 +14,7 @@ interface NotificationItemProps {
   item: NotificationData
 }
 
-export const NotificatonItem: FC<NotificationItemProps> = props => {
+export const NotificationItem: FC<NotificationItemProps> = props => {
   const { item } = props
   const { t } = useTranslation()
   const { handleInspectItem, handleNavigateItem } = useNotification()
@@ -42,7 +42,10 @@ export const NotificatonItem: FC<NotificationItemProps> = props => {
   }
 
   return (
-    <List.Item className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`} onClick={() => handleNavigateItem(item)}>
+    <List.Item
+      className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}
+      onClick={() => handleNavigateItem(item)}
+    >
       <List.Item.Meta {...meta} />
     </List.Item>
   )

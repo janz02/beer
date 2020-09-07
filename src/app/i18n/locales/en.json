@@ -613,10 +613,13 @@
     "version": "Version"
   },
   "notification": {
+    "earlier": "Earlier",
     "empty-list": "Empty",
     "load-more": "Load more...",
     "notifications": "Notifications",
-    "read-all": "Mark all as Read"
+    "read-all": "Mark all as Read",
+    "today": "Today",
+    "yesterday": "Yesterday"
   },
   "partner": {
     "editor": {
