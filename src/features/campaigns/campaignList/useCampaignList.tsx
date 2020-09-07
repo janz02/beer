@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
@@ -333,19 +333,25 @@ export const useCampaignList = (): UseCampaignListFeatures => {
     [actionColumnConfig, categories, columnConfig, t, dispatch]
   )
 
-  const handleIncludeArchivedChange = (checked: boolean): void => {
-    dispatch(campaignListActions.setIncludeArchived(checked))
-    dispatch(campaignListActions.getCoupons())
-  }
+  const handleIncludeArchivedChange = useCallback(
+    (checked: boolean): void => {
+      dispatch(campaignListActions.setIncludeArchived(checked))
+      dispatch(campaignListActions.getCoupons())
+    },
+    [dispatch]
+  )
 
-  const handleTabChange = (key: CouponListTabKey): void => {
-    dispatch(campaignListActions.setActiveTabKey(key))
-    dispatch(campaignListActions.getCoupons())
-  }
+  const handleTabChange = useCallback(
+    (key: CouponListTabKey): void => {
+      dispatch(campaignListActions.setActiveTabKey(key))
+      dispatch(campaignListActions.getCoupons())
+    },
+    [dispatch]
+  )
 
-  const handleDeleteCancel = (): void => {
+  const handleDeleteCancel = useCallback((): void => {
     dispatch(campaignListActions.cancelCampaignDelete())
-  }
+  }, [dispatch])
 
   return {
     loading,
