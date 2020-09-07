@@ -63,6 +63,9 @@ export const CampaignListPage: FC = () => {
     [t]
   )
 
+  /**
+   * Display different tab bar actions for different tabs conditionally based on the activeTabKey
+   */
   const tabBarActions = useMemo(
     () => (
       <>
