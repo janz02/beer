@@ -42,7 +42,10 @@ export const NotificationItem: FC<NotificationItemProps> = props => {
   }
 
   return (
-    <List.Item className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`} onClick={() => handleNavigateItem(item)}>
+    <List.Item
+      className={`notification-item ${item.isSeen ? '' : 'notification-item--unread'}`}
+      onClick={() => handleNavigateItem(item)}
+    >
       <List.Item.Meta {...meta} />
     </List.Item>
   )
