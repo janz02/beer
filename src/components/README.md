@@ -35,6 +35,7 @@ Add the same name to the style file as well.For example:
 
 It’s a good practice to name a component after the function that it executes so that it’s easily recognizable.
 
+</br>
 
 ## Formatting
 
@@ -57,6 +58,8 @@ export const MomentDisplay: React.FC<MomentDisplayProps> = props => {//File and 
 }
 ```
 
+</br>
+
 ## Unit testing
 
 Newly written components **MUST** have a unit test file with at least 80% code coverage.
@@ -67,7 +70,7 @@ For coverage report, run
 npm test -- --watchAll=false --passWithNoTests --reporters default --reporters jest-junit --coverage --coverageDirectory=coverage --coverageReporters cobertura
 ```
 
-Then open the [Code coverage report](../../coverage/cobertura-coverage.xml)
+Then open the [Code coverage report](../../coverage/cobertura-coverage.xml).
 
 
 Example unit test
@@ -91,6 +94,7 @@ describe('MomentDisplay hu tests', () => {
   })
 ```
 
+</br>
 
 ## Move logic to reducers
 
@@ -100,6 +104,7 @@ describe('MomentDisplay hu tests', () => {
 
 * If a component does not own a property, then that property should not influence its state. Add it in props instead
 
+</br>
 
 ## Single responsibility 
 
@@ -110,6 +115,8 @@ describe('MomentDisplay hu tests', () => {
 * If the component becomes huge, unwieldy and difficult to maintain, it’s better to break it up into as many smaller components as required.
 
 * Reuse instead of creating a new component.
+
+</br>
 
 ## Pass html attributes as props to spread
 

@@ -24,6 +24,14 @@
       "terms-and-services": "Terms & Services"
     }
   },
+  "campaign-category": {
+    "add": "Add new campaign category",
+    "editor-create": "Create",
+    "editor-edit": "Edit",
+    "field": {
+      "name": "Category name"
+    }
+  },
   "cashier-editor": {
     "editor-create": "Create cashier",
     "editor-edit": "Edit cashier",
@@ -125,15 +133,6 @@
       "discount": "Discount",
       "prize": "Prize"
     }
-  },
-  "coupon-category": {
-    "add": "Add new campaign category",
-    "editor-create": "Create",
-    "editor-edit": "Edit",
-    "field": {
-      "name": "Category name"
-    },
-    "list-title": "Campaign categories"
   },
   "coupon-create": {
     "activate": "Activate",
@@ -252,9 +251,11 @@
     "view-count": "View count"
   },
   "enum": {
-    "noitfication-type": {
+    "notification-type": {
       "CampaignMovedToWaitingState": "Campaign moved to waiting status",
-      "PartnerContactRegistered": "New Parnter Contact: "
+      "CouponClosed": "Coupon closed",
+      "CouponCountDepleted": "Coupon count depleted",
+      "PartnerContactRegistered": "New Partner Contact: "
     }
   },
   "error": {
@@ -333,6 +334,9 @@
       "too-big": "__STRING_NOT_TRANSLATED__"
     },
     "not-found": "Not found.",
+    "notification": {
+      "cannot-navigate-to-notification-link": "Cannot navigate to notification link"
+    },
     "paginate": {
       "order-by": "Paginate order by.",
       "page": "Paginate page.",
@@ -575,13 +579,13 @@
     "language": "Language"
   },
   "menu": {
-    "campaign-categories": "Campaign categories",
     "campaigns": "Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
     "profile": "Profile",
+    "settings": "Settings",
     "sites": "Sites",
     "users": "Users"
   },
@@ -685,6 +689,9 @@
     },
     "save": "Save changes",
     "save-profile-success": "Successfully saved the profile."
+  },
+  "settings": {
+    "title": "Settings"
   },
   "site": {
     "editor-title": "Site",

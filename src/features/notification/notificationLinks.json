@@ -1,0 +1,17 @@
+[{
+    "type": "CampaignMovedToWaitingState",
+    "link": "/campaign/{actualId}"
+  },
+  {
+    "type": "PartnerContactRegistered",
+    "link": "/partners/{parentId}"
+  },
+  {
+    "type": "CouponCountDepleted",
+    "link": "/campaign/{actualId}"
+  },
+  {
+    "type": "CouponClosed",
+    "link": "/campaign/{actualId}"
+  }
+]

@@ -19,7 +19,9 @@
  */
 export enum NotificationType {
     CampaignMovedToWaitingState = 'CampaignMovedToWaitingState',
-    PartnerContactRegistered = 'PartnerContactRegistered'
+    PartnerContactRegistered = 'PartnerContactRegistered',
+    CouponCountDepleted = 'CouponCountDepleted',
+    CouponClosed = 'CouponClosed'
 }
 
 export function NotificationTypeFromJSON(json: any): NotificationType {
