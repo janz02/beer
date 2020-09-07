@@ -219,8 +219,7 @@
     "timeline-title": "Timeline"
   },
   "coupon-list": {
-    "add": "Add new campaign",
-    "all-tab": "All",
+    "add": "Create new campaign",
     "campaign-type": "Campaign type",
     "campaigns": "Campaigns",
     "category": "Campaign category",
@@ -235,7 +234,11 @@
     "mode": "Claim mode",
     "name": "Campaign name",
     "partner": "Partner",
+    "all-tab": "All",
     "pending-tab": "Pending approve",
+    "accepted-tab": "Accepted",
+    "closed-tab": "Closed",
+    "created-tab": "Created",
     "preferred-position": "Preferred position",
     "rank": "Discount level",
     "redeem-count": "Redeem count",

@@ -56,6 +56,7 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
           <Button
             hidden={!thumbnail?.url}
             shape="circle"
+            type="default"
             danger
             onClick={e => {
               e.stopPropagation()

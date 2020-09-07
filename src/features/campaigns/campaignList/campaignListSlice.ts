@@ -12,8 +12,11 @@ import {
 import { FeatureState } from 'models/featureState'
 
 export enum CouponListTabKey {
-  All = 'all',
-  Waiting = 'waiting'
+  Waiting = 'waiting',
+  Accepted = 'accepted',
+  Closed = 'closed',
+  Created = 'created',
+  All = 'all'
 }
 
 interface CouponListState {
@@ -33,7 +36,7 @@ const initialState: CouponListState = {
     pageSize: 10
   },
   includeArchived: false,
-  activeTabKey: CouponListTabKey.All,
+  activeTabKey: CouponListTabKey.Waiting,
   deletePopupVisible: false,
   featureState: FeatureState.Initial
 }
@@ -91,9 +94,11 @@ const getCoupons = (params: ListRequestParams = {}): AppThunk => async (dispatch
     dispatch(setFeatureState(FeatureState.Loading))
 
     const { listParams, includeArchived, activeTabKey } = getState().campaignList
+
     const revisedParams = reviseListRequestParams(listParams, params)
+
     revisedParams.includeArchived = includeArchived
-    revisedParams.onlyWaiting = activeTabKey === CouponListTabKey.Waiting
+    revisedParams.state = activeTabKey
 
     // This is an exception because the backend needs it this way.
     if (revisedParams.orderBy === 'partnerName') {
@@ -131,7 +136,7 @@ const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    await await api.coupons.deleteCoupon({ id })
+    await api.coupons.deleteCoupon({ id })
     dispatch(deleteSuccess())
     const newPage = recalculatePaginationAfterDeletion(getState().campaignList.listParams)
     dispatch(getCoupons({ page: newPage }))

@@ -28,9 +28,11 @@ export const App: React.FC = () => {
       <ConfigProvider locale={antLocale()}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
-            <BaseLayout>
-              <RouterView />
-            </BaseLayout>
+            <React.StrictMode>
+              <BaseLayout>
+                <RouterView />
+              </BaseLayout>
+            </React.StrictMode>
           </ConnectedRouter>
         </Provider>
       </ConfigProvider>
