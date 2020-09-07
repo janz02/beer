@@ -220,8 +220,7 @@
     "timeline-title": "Előzmények"
   },
   "coupon-list": {
-    "add": "Új kampány hozzáadása",
-    "all-tab": "Összes",
+    "add": "Új kampány létrehozása",
     "campaign-type": "Kampány típus",
     "campaigns": "Kampányok",
     "category": "Kampány kategória",
@@ -236,7 +235,11 @@
     "mode": "Beváltás módja",
     "name": "Kampány név",
     "partner": "Partner",
+    "all-tab": "Összes",
     "pending-tab": "Jóváhagyásra vár",
+    "accepted-tab": "Futó / jóváhagyott",
+    "closed-tab": "Lezárt",
+    "created-tab": "Rögzített",
     "preferred-position": "Preferált pozíció",
     "rank": "Kedvezmény szint",
     "redeem-count": "Beváltások száma",
