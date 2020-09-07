@@ -691,7 +691,8 @@
     "save-profile-success": "Successfully saved the profile."
   },
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "campaign-categories": "Campaign categories"
   },
   "site": {
     "editor-title": "Site",

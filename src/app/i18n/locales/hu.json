@@ -691,7 +691,8 @@
     "save-profile-success": "Profil mentése sikeres."
   },
   "settings": {
-    "title": "Beállítások"
+    "title": "Beállítások",
+    "campaign-categories": "Kampány kategóriák"
   },
   "site": {
     "editor-title": "Telephely",

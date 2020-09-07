@@ -2,7 +2,13 @@ import './CrudButtons.scss'
 import React, { FC } from 'react'
 import { Tooltip, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { EditOutlined, DeleteOutlined, SendOutlined, EyeOutlined } from '@ant-design/icons'
+import {
+  FormOutlined,
+  DeleteOutlined,
+  RightCircleOutlined,
+  SendOutlined,
+  EyeOutlined
+} from '@ant-design/icons'
 import { TooltipProps } from 'antd/lib/tooltip'
 
 const tooltipConfig: Partial<TooltipProps> = {
@@ -16,41 +22,42 @@ export interface CrudButtonsProps {
   onSend?: () => void
   onEdit?: () => void
   onView?: () => void
+  useRightCircleForView?: boolean
 }
 
 /**
  * Common buttons for list or table items.
  */
 export const CrudButtons: FC<CrudButtonsProps> = props => {
-  const { onDelete, onEdit, onSend, onView } = props
+  const { onDelete, onEdit, onSend, onView, useRightCircleForView } = props
   const { t } = useTranslation()
 
   return (
     <div className="crudButtons">
       {onSend && (
         <Tooltip {...tooltipConfig} title={t('common.send')}>
-          <Button onClick={onSend}>
+          <Button className="crud-button" onClick={onSend}>
             <SendOutlined />
           </Button>
         </Tooltip>
       )}
       {onView && (
         <Tooltip {...tooltipConfig} title={t('common.view')}>
-          <Button onClick={onView}>
-            <EyeOutlined />
+          <Button className="crud-button" onClick={onView}>
+            {useRightCircleForView ? <RightCircleOutlined /> : <EyeOutlined />}
           </Button>
         </Tooltip>
       )}
       {onEdit && (
         <Tooltip {...tooltipConfig} title={t('common.edit')}>
-          <Button onClick={onEdit}>
-            <EditOutlined />
+          <Button className="crud-button" onClick={onEdit}>
+            <FormOutlined />
           </Button>
         </Tooltip>
       )}
       {onDelete && (
         <Tooltip {...tooltipConfig} title={t('common.delete')}>
-          <Button danger onClick={onDelete}>
+          <Button className="crud-button" onClick={onDelete}>
             <DeleteOutlined />
           </Button>
         </Tooltip>

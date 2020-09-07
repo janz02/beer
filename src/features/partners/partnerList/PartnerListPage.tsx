@@ -98,7 +98,12 @@ export const PartnerListPage: React.FC = () => {
       }),
       actionColumnConfig({
         render(record: Partner) {
-          return <CrudButtons onView={() => history.push(`/partners/${record.id}`)} />
+          return (
+            <CrudButtons
+              useRightCircleForView
+              onView={() => history.push(`/partners/${record.id}`)}
+            />
+          )
         }
       })
     ],
