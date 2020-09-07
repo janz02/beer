@@ -31,22 +31,22 @@ export const NotificationList: FC = () => {
 
   const notificationList = (groupName: string, groupedNotifications: NotificationData[], loadMore: boolean) => {
     return (
-      groupedNotifications.length > 0 ?
-        <List
-          className="notification-list"
-          itemLayout="vertical"
-          dataSource={groupedNotifications}
-          loadMore={loadMore ? loadMoreButton : null}
-          loading={loading}
-          header={groupName}
-          rowKey={item => `${item.id}`}
-          locale={{
-            emptyText: (
-              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('notification.empty-list')} />
-            )
-          }}
-          renderItem={item => <NotificationItem item={item} />}
-        /> : null)
+      groupedNotifications.length > 0 &&
+      <List
+        className="notification-list"
+        itemLayout="vertical"
+        dataSource={groupedNotifications}
+        loadMore={loadMore ? loadMoreButton : null}
+        loading={loading}
+        header={groupName}
+        rowKey={item => `${item.id}`}
+        locale={{
+          emptyText: (
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('notification.empty-list')} />
+          )
+        }}
+        renderItem={item => <NotificationItem item={item} />}
+      />)
   }
 
   const todayNotifications = notifications.filter(x => x.createdDate!.diff(moment(), 'day') === 0)
