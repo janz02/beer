@@ -3,17 +3,35 @@
 const shell = require("shelljs");
 const fs = require("fs-extra");
 
-shell
-  .ShellString(
-    shell.exec(
-      "curl https://pkm-coupon-dev.grapetest.xyz/swagger/v1/swagger.json"
-    )
-  )
-  .to("src/api/swagger.json");
+const downloadSwaggerDefinitionFile = (url, path) => {
+  shell.ShellString(shell.exec(`curl ${url}`)).to(path);
+};
 
-fs.removeSync("src/api/swagger");
+const generateClient = (swaggerDefFile, outputDir) => {
+  shell.exec(
+    `openapi-generator generate -i ${swaggerDefFile} -g typescript-fetch -p typescriptThreePlus=true -o ${outputDir}`
+  );
+};
+
+const couponApiPath = "src/api/coupon-api";
+const campaignEditorApiPath = "src/api/campaign-editor-api";
+const couponApiSwaggerFile = "src/api/coupon-api-swagger.json";
+const campaignEditorSwaggerFile = "src/api/campaign-editor-api-swagger.json";
+
+// Download swagger files
+downloadSwaggerDefinitionFile(
+  "https://pkm-coupon-dev.grapetest.xyz/swagger/v1/swagger.json",
+  couponApiSwaggerFile
+);
+downloadSwaggerDefinitionFile(
+  "https://rtd-campaigneditor-dev.grapetest.xyz/swagger/v1/swagger.json",
+  campaignEditorSwaggerFile
+);
+
+// Cleanup
+fs.removeSync(couponApiPath);
+fs.removeSync(campaignEditorApiPath);
 
 // Generate clients
-shell.exec(
-  "openapi-generator generate -i src/api/swagger.json -g typescript-fetch -p typescriptThreePlus=true -o src/api/swagger"
-);
+generateClient(couponApiSwaggerFile, couponApiPath);
+generateClient(campaignEditorSwaggerFile, campaignEditorApiPath);
