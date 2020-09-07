@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import { TablePaginationConfig } from 'antd/lib/table'
-import { useIsMobile } from './isMobileHook'
+import { useIsMobile } from './useIsMobile'
 import { useDispatch } from './react-redux-hooks'
 import { PaginationConfig } from 'antd/lib/pagination'
 import { SorterResult, SortOrder, ColumnFilterItem, ColumnType } from 'antd/lib/table/interface'
@@ -124,7 +124,7 @@ export const basePaginationConfig = (
   pageSizeOptions: ['5', '10', '25', '50'],
   showSizeChanger: true,
   // TODO: this doesn't work but hopefully they will fix it.
-  position: 'bottomCenter'
+  position: ['bottomCenter']
 })
 
 /**
