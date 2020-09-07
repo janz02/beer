@@ -6,17 +6,17 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode, ActivenessOptions } from 'hooks/useTableUtils'
 import { getPartners } from './partnerListSlice'
 import { ColumnType } from 'antd/lib/table'
-import { PartnerState } from 'api/swagger/models/PartnerState'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { hasPermission } from 'services/jwt-reader'
 import { history } from 'router/router'
 import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
 import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
-import { PartnerRegistrationState } from 'api/swagger/models'
+import { PartnerRegistrationState, PartnerState } from 'api/swagger/models'
+import { ActivenessStatus } from 'components/ActivenessDisplay'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -61,14 +61,13 @@ export const PartnerListPage: React.FC = () => {
         key: 'partnerState',
         sort: true,
         width: '8rem',
-        filterMode: FilterMode.FILTER,
-        filters: Object.keys(PartnerState).map(f => {
-          return {
-            text: t(`partner.partner-state.${f?.toLowerCase()}`),
-            value: f
-          } as ColumnFilterItem
-        }),
-        render: value => t(`partner.partner-state.${value?.toLowerCase()}`)
+        filterMode: FilterMode.ACTIVE_INACTIVE,
+        activenessOptions: {
+          active: t(`partner.partner-state.active`),
+          inactive: t(`partner.partner-state.inactive`),
+          deleted: t(`partner.partner-state.deleted`)
+        },
+        activenessMapper: (x: PartnerState) => x.toLowerCase() as ActivenessStatus
       }),
       columnConfig({
         title: t('partner.field.partner-registration-state'),
