@@ -8,17 +8,13 @@ import { NotificationList } from './NotificationList'
 
 export const GroupedNotificationLists: FC = () => {
   const { t } = useTranslation()
-
   const { notifications, handleGetNotifications, handleReadAll, canLoadMore } = useNotification()
 
-  const todayNotifications = notifications.filter(x => x.createdDate?.diff(moment(), 'day') === 0)
+  const yesterday = moment().subtract(1, 'day')
 
-  const yesterdayNotifications = notifications.filter(
-    x => x.createdDate?.diff(moment(), 'day') === -1
-  )
-  const earlierNotifications = notifications.filter(
-    x => x.createdDate && x.createdDate?.diff(moment(), 'day') < -1
-  )
+  const todayNotifications = notifications.filter(x => x.createdDate?.isSame(moment(), 'd'))
+  const yesterdayNotifications = notifications.filter(x => x.createdDate?.isSame(yesterday, 'd'))
+  const earlierNotifications = notifications.filter(x => x.createdDate?.isBefore(yesterday, 'd'))
 
   return (
     <div className="infinite-list-root">
