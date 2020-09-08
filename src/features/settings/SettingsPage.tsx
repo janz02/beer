@@ -1,56 +1,49 @@
 import React, { useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
-import { useTranslation } from 'react-i18next'
 import { hasPermission } from 'services/jwt-reader'
 import { useCategoryTab } from './campaignCategory/useCategoryTab'
-import { pageViewRoles } from 'services/roleHelpers'
+import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
+import { AppstoreAddOutlined } from '@ant-design/icons'
+import { Roles } from 'api/swagger'
 
 export interface SettingsTab {
+  key: string
+  title: string
+  roles: Roles[]
   headerOptions?: JSX.Element
   tabContent: JSX.Element
 }
 
-const tabDefinitions = [
-  {
-    key: 'campaign-categories',
-    tab: 'settings.campaign-categories',
-    roles: pageViewRoles.categories
-  }
-]
-
 export const SettingsPage: React.FC = () => {
-  const { t } = useTranslation()
-  const categoryTab = useCategoryTab()
-
-  const tabList = tabDefinitions
-    .filter(x => hasPermission(x.roles))
-    .map(x => ({
-      key: x.key,
-      tab: t(x.tab)
-    }))
-
-  const [currentTabKey, setCurrentTabKey] = useState(tabList[0]?.key)
-
-  let currentTab: SettingsTab | undefined
-  switch (currentTabKey) {
-    case 'campaign-categories':
-      currentTab = categoryTab
-      break
-
-    default:
-      break
-  }
+  const allTabs = [useCategoryTab()]
+  const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
+  const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
+  const currentTab = permittedTabs.find(x => x.key === currentTabKey)
 
   return (
     <ResponsiveCard
       width="full"
       forTable
-      floatingTitle={t('settings.title')}
+      disableAutoScale
+      floatingTitle={currentTab?.title}
       floatingOptions={currentTab?.headerOptions}
-      tabList={tabList}
-      onTabChange={setCurrentTabKey}
     >
-      {currentTab?.tabContent}
+      <ResponsiveTabs onChange={setCurrentTabKey} type="card" activeKey={currentTabKey}>
+        {permittedTabs.map(tab => (
+          <TabPane
+            key="campaign-categories"
+            tab={
+              <TabPanelTitle
+                title={tab.title}
+                icon={<AppstoreAddOutlined />}
+                badgeProps={{ count: 0, size: 'default' }}
+              />
+            }
+          >
+            {tab?.tabContent}
+          </TabPane>
+        ))}
+      </ResponsiveTabs>
     </ResponsiveCard>
   )
 }
