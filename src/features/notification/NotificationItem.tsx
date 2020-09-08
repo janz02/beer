@@ -39,6 +39,15 @@ export const NotificationItem: FC<NotificationItemProps> = props => {
     case NotificationType.PartnerContactRegistered:
       meta.title = `${t(`enum.notification-type.${item.type}`)} ${item.value}`
       break
+    case NotificationType.CouponClosed:
+      meta.title = t(`enum.notification-type.${item.type}`)
+      break
+    case NotificationType.CouponCountDepleted:
+      meta.title = t(`enum.notification-type.${item.type}`)
+      break
+    default:
+      meta.title = t(`enum.notification-type.${item.type}`)
+      break
   }
 
   return (
