@@ -73,8 +73,12 @@ export const useNotification = (): UseNotificationFeatures => {
 
   const inspectItem = useCallback(
     (item: NotificationData): void => {
-      if (item.isSeen === false && item.id) {
-        dispatch(notificationActions.readOne(item.id))
+      if (item.id) {
+        if (item.isSeen) {
+          dispatch(notificationActions.unReadOne(item.id))
+        } else {
+          dispatch(notificationActions.readOne(item.id))
+        }
       }
     },
     [dispatch]

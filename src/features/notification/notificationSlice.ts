@@ -110,6 +110,10 @@ const notificationSlice = createSlice({
         state.notifications[key].isSeen = true
       })
       state.unseenCount = 0
+    },
+    unReadOneSuccess(state, action: PayloadAction<number>) {
+      state.notifications[action.payload].isSeen = false
+      state.unseenCount += 1
     }
   }
 })
@@ -120,6 +124,7 @@ const {
   resetNotification,
   setListState,
   readOneSuccess,
+  unReadOneSuccess,
   readAllSuccess,
   setRtConnectionState,
   patchNotificationList
@@ -250,6 +255,13 @@ const readAll = (): AppThunk => async dispatch => {
   } catch (err) {}
 }
 
+const unReadOne = (id: number): AppThunk => async dispatch => {
+  try {
+    await api.notification.unSeenNotification({ id })
+    dispatch(unReadOneSuccess(id))
+  } catch (err) {}
+}
+
 const setConnectionState = (report: SignalrStatusReport): AppThunk => async dispatch => {
   dispatch(setRtConnectionState(report.connectionState))
 }
@@ -264,6 +276,7 @@ export const notificationActions = {
   resetNotification,
   readOne,
   readAll,
+  unReadOne,
   setConnectionState
 }
 
