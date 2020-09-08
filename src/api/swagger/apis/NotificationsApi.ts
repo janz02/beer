@@ -50,6 +50,10 @@ export interface SeenNotificationRequest {
     id: number;
 }
 
+export interface UnSeenNotificationRequest {
+    id: number;
+}
+
 /**
  * no description
  */
@@ -191,7 +195,7 @@ export class NotificationsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Notifications/seenAll`,
+            path: `/api/Notifications/SeenAll`,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -226,7 +230,7 @@ export class NotificationsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Notifications/{id}/seen`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/Notifications/{id}/Seen`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -241,6 +245,41 @@ export class NotificationsApi extends runtime.BaseAPI {
      */
     async seenNotification(requestParameters: SeenNotificationRequest): Promise<void> {
         await this.seenNotificationRaw(requestParameters);
+    }
+
+    /**
+     * Sets the notification with the given Id as unseen
+     * Updates a notification to unseen
+     */
+    async unSeenNotificationRaw(requestParameters: UnSeenNotificationRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling unSeenNotification.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Notifications/{id}/UnSeen`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Sets the notification with the given Id as unseen
+     * Updates a notification to unseen
+     */
+    async unSeenNotification(requestParameters: UnSeenNotificationRequest): Promise<void> {
+        await this.unSeenNotificationRaw(requestParameters);
     }
 
 }
