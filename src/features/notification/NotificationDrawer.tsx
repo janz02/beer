@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useNotification } from './useNotification'
 import { NotificationFilterType } from './notificationSlice'
 
-const { TabPane } = Tabs
+const TabPane = Tabs.TabPane
 
 export const NotificationDrawer: FC = () => {
   const { t } = useTranslation()
