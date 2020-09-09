@@ -1,6 +1,6 @@
 import { displayBackendError } from '../services/errorHelpers'
-import { InformationApi } from './swagger/apis/InformationApi'
-import { Configuration } from './swagger/runtime'
+import { InformationApi } from './coupon-api/apis/InformationApi'
+import { Configuration } from './coupon-api/runtime'
 import {
   CouponsApi,
   CategoriesApi,
@@ -19,7 +19,7 @@ import {
   NotificationHubApi,
   UserCouponsApi,
   WalletApi
-} from './swagger/apis'
+} from './coupon-api/apis'
 
 import { notification } from 'antd'
 import i18n from 'app/i18n'
