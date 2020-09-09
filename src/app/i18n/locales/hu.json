@@ -743,5 +743,19 @@
   },
   "warning-prompt": {
     "nav-unsaved-changes": "Vannak mentetlen módosítások, biztos hogy el szeretné hagyni az oldalt?"
+  },
+  "column-order": {
+    "drag-and-drop": {
+      "header": "Megjelenő oszlopok rendezése"
+    },
+    "layout": {
+      "header": "Oszlopok",
+      "default": "Alapértelmezettek visszaállítása",
+      "apply": "Alkalmazás",
+      "cancel": "Mégsem"
+    },
+    "dropdown": {
+      "link": "Oszlopok testreszabása"
+    }
   }
 }

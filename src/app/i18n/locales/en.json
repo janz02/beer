@@ -743,5 +743,19 @@
   },
   "warning-prompt": {
     "nav-unsaved-changes": "There are unsaved changes, do you really wish to navigate away?"
+  },
+  "column-order": {
+    "drag-and-drop": {
+      "header": "Shown columns order"
+    },
+    "layout": {
+      "header": "Columns",
+      "default": "Restore defaults",
+      "apply": "Apply",
+      "cancel": "Cancel"
+    },
+    "dropdown": {
+      "link": "Customize columns"
+    }
   }
 }
