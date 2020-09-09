@@ -79,7 +79,7 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
 
   const translations = useMemo(
     () => ({
-      en: (locale as any)[i18n.language]
+      ...(locale as any)[i18n.language]
     }),
     [i18n.language]
   )
@@ -95,7 +95,7 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
         [grapesjsNewsLetter]: {
           // Translations that are not handled by the news letter preset.
           // Update only the locale files, the `en` is a placeholder for all translations.
-          ...translations.en?.preset
+          ...translations?.preset
         }
       },
       i18n: {
@@ -121,8 +121,8 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
     const tooltipableElements = document.querySelectorAll('*[title][class*="gjs"]')
 
     // fix. the tooltips at the egde, that are adding extra horizontal by default
-    const ttToLeft = [translations.en?.panels?.buttons?.titles?.['open-blocks']]
-    const ttToRight = [translations.en?.panels?.buttons?.titles?.deviceDesktop]
+    const ttToLeft = [translations?.panels?.buttons?.titles?.['open-blocks']]
+    const ttToRight = [translations?.panels?.buttons?.titles?.deviceDesktop]
 
     for (let index = 0; index < tooltipableElements.length; index++) {
       const element = tooltipableElements[index]
@@ -193,6 +193,54 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
             }
           }
           download('template.html', template)
+        }
+      }
+    ])
+
+    // borrowed code sample from grapesjs-preset-newsletter plugin
+    // original solution caused form submitting bug with the unset button type
+    // Custom code import workaround:
+    editor.Panels.removeButton('options', 'gjs-open-import-template')
+
+    editor.Panels.addButton('options', [
+      {
+        id: 'pkm-import-code',
+        className: 'fa fa-download',
+        command: (editor: any) => {
+          const md = editor.Modal
+          const codeViewer = editor && editor.CodeManager.getViewer('CodeMirror').clone()
+          const container = document.createElement('div')
+          // Init import button
+          const btnImp = document.createElement('button')
+          btnImp.setAttribute('type', 'button')
+          btnImp.className = 'gjs-btn-prim gjs-btn-import'
+          btnImp.innerHTML = translations?.preset?.modalBtnImport
+          btnImp.onclick = () => {
+            const code = codeViewer.editor.getValue()
+            editor.DomComponents.getWrapper().set('content', '')
+            editor.setComponents(code)
+            editor.Modal.close()
+          }
+          codeViewer.set({
+            codeName: 'htmlmixed',
+            readOnly: 0
+          })
+
+          let viewer = codeViewer.editor
+          md.setTitle(translations?.preset?.modalTitleImport)
+          // Init code viewer if not yet instantiated
+          if (!viewer) {
+            const txtarea = document.createElement('textarea')
+            container.appendChild(txtarea)
+            container.appendChild(btnImp)
+            codeViewer.init(txtarea)
+            viewer = codeViewer.editor
+          }
+          md.setContent('')
+          md.setContent(container)
+          codeViewer.setContent('')
+          md.open()
+          viewer.refresh()
         }
       }
     ])
