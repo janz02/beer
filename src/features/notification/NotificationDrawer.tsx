@@ -10,10 +10,8 @@ const { TabPane } = Tabs
 
 export const NotificationDrawer: FC = () => {
   const { t } = useTranslation()
-
   const { opened, activeFilter, handleClose, handleFilterChange } = useNotification()
 
-  const notifications = <GroupedNotificationLists />
   return (
     <Drawer
       className="notification-drawer"
@@ -34,13 +32,13 @@ export const NotificationDrawer: FC = () => {
         onChange={handleFilterChange}
       >
         <TabPane tab={t('notification.filter.all')} key={NotificationFilterType.All}>
-          {notifications}
+          <GroupedNotificationLists />
         </TabPane>
         <TabPane tab={t('notification.filter.unread')} key={NotificationFilterType.UnRead}>
-          {notifications}
+          <GroupedNotificationLists />
         </TabPane>
         <TabPane tab={t('notification.filter.read')} key={NotificationFilterType.Read}>
-          {notifications}
+          <GroupedNotificationLists />
         </TabPane>
       </Tabs>
     </Drawer>

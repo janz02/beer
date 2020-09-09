@@ -68,9 +68,9 @@ export const useNotification = (): UseNotificationFeatures => {
       case NotificationFilterType.All:
         return notifications
       case NotificationFilterType.Read:
-        return notifications.filter(n => n.isSeen === true)
+        return notifications.filter(n => n.isSeen)
       case NotificationFilterType.UnRead:
-        return notifications.filter(n => n.isSeen === false)
+        return notifications.filter(n => !n.isSeen)
       default:
         return notifications
     }
