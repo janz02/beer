@@ -8,13 +8,22 @@ import { NotificationList } from './NotificationList'
 
 export const GroupedNotificationLists: FC = () => {
   const { t } = useTranslation()
-  const { notifications, handleGetNotifications, handleReadAll, canLoadMore } = useNotification()
+  const {
+    filteredNotifications,
+    handleGetNotifications,
+    handleReadAll,
+    canLoadMore
+  } = useNotification()
 
   const yesterday = moment().subtract(1, 'day')
 
-  const todayNotifications = notifications.filter(x => x.createdDate?.isSame(moment(), 'd'))
-  const yesterdayNotifications = notifications.filter(x => x.createdDate?.isSame(yesterday, 'd'))
-  const earlierNotifications = notifications.filter(x => x.createdDate?.isBefore(yesterday, 'd'))
+  const todayNotifications = filteredNotifications.filter(x => x.createdDate?.isSame(moment(), 'd'))
+  const yesterdayNotifications = filteredNotifications.filter(x =>
+    x.createdDate?.isSame(yesterday, 'd')
+  )
+  const earlierNotifications = filteredNotifications.filter(x =>
+    x.createdDate?.isBefore(yesterday, 'd')
+  )
 
   return (
     <div className="infinite-list-root">
@@ -32,16 +41,18 @@ export const GroupedNotificationLists: FC = () => {
           <NotificationList
             groupName={t('notification.today')}
             items={todayNotifications}
-            loadMore={todayNotifications.length === notifications.length}
+            loadMore={todayNotifications.length === filteredNotifications.length}
           />
           <NotificationList
             groupName={t('notification.yesterday')}
             items={yesterdayNotifications}
-            loadMore={yesterdayNotifications.length === notifications.length}
+            loadMore={yesterdayNotifications.length === filteredNotifications.length}
           />
           <NotificationList
             groupName={
-              earlierNotifications.length === notifications.length ? ' ' : t('notification.earlier')
+              earlierNotifications.length === filteredNotifications.length
+                ? ' '
+                : t('notification.earlier')
             }
             items={earlierNotifications}
             loadMore

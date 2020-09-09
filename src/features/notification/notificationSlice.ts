@@ -18,6 +18,12 @@ export enum NotificationListState {
   LoadedAll = 'LoadedAll'
 }
 
+export enum NotificationFilterType {
+  All = 'All',
+  Read = 'Read',
+  UnRead = 'UnRead'
+}
+
 interface NotificationState {
   listState: FeatureState
   listContentState: NotificationListState
@@ -32,6 +38,7 @@ interface NotificationState {
    Set is not supported by immer by default, and an object works fine.
    In the component it is converted into an array. */
   notifications: NotificationDataDack
+  activeFilter: NotificationFilterType
 }
 
 interface NotifiacationListActionPayload {
@@ -44,6 +51,7 @@ interface NotifiacationListActionPayload {
 const initialState: NotificationState = {
   listState: FeatureState.Initial,
   listContentState: NotificationListState.Empty,
+  activeFilter: NotificationFilterType.All,
   opened: false,
   unseenCount: 0,
   visibleCount: 0,
@@ -114,6 +122,9 @@ const notificationSlice = createSlice({
     unReadOneSuccess(state, action: PayloadAction<number>) {
       state.notifications[action.payload].isSeen = false
       state.unseenCount += 1
+    },
+    changeFilter(state, action: PayloadAction<NotificationFilterType>) {
+      state.activeFilter = action.payload
     }
   }
 })
@@ -127,7 +138,8 @@ const {
   unReadOneSuccess,
   readAllSuccess,
   setRtConnectionState,
-  patchNotificationList
+  patchNotificationList,
+  changeFilter
 } = notificationSlice.actions
 
 /**
@@ -277,7 +289,8 @@ export const notificationActions = {
   readOne,
   readAll,
   unReadOne,
-  setConnectionState
+  setConnectionState,
+  changeFilter
 }
 
 export const notificationActionType = {

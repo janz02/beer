@@ -12,9 +12,7 @@
 }
 
 .infinite-list-root {
-  height: calc(100vh - var(--notification-drawer-header-height));
-  margin-top: var(--notification-drawer-header-height);
-  overflow: auto;
+  position: inherit;
 }
 
 .infinite-list-container {
