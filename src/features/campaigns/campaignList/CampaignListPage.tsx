@@ -10,6 +10,8 @@ import { AddButton } from 'components/buttons/AddButton'
 import { useCampaignList } from './useCampaignList'
 import { CampaignListTabs } from './components/CampaignListTabs'
 import { Checkbox } from 'antd'
+import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -34,11 +36,13 @@ export const CampaignListPage: FC = () => {
     deleteCoupon
   } = useCampaignList()
 
+  const columnOrder = useColumnOrder(columnsConfig, 'CampaignListColumnOrder')
+
   const tableProps = {
     loading,
     coupons,
     handleTableChange,
-    columnsConfig,
+    columnsConfig: columnOrder.currentColumns,
     paginationConfig
   }
 
@@ -76,9 +80,10 @@ export const CampaignListPage: FC = () => {
         >
           {t('coupon-list.show-archived')}
         </Checkbox>
+        <ColumnOrderDropdown {...columnOrder} />
       </>
     ),
-    [t, handleIncludeArchivedChange]
+    [t, handleIncludeArchivedChange, columnOrder]
   )
 
   return (
