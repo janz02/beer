@@ -219,13 +219,16 @@
     "timeline-title": "Timeline"
   },
   "coupon-list": {
-    "add": "Add new campaign",
+    "accepted-tab": "Accepted",
+    "add": "Create new campaign",
     "all-tab": "All",
     "campaign-type": "Campaign type",
     "campaigns": "Campaigns",
     "category": "Campaign category",
     "click-count": "Click count",
+    "closed-tab": "Closed",
     "coupon-count": "Coupon count",
+    "created-tab": "Created",
     "discount-amount": "Discount amount",
     "discount-type": "Discount type",
     "draw-date": "Draw date",
@@ -613,10 +616,18 @@
     "version": "Version"
   },
   "notification": {
+    "earlier": "Earlier",
     "empty-list": "Empty",
+    "filter": {
+      "all": "All",
+      "read": "Read",
+      "unread": "Unread"
+    },
     "load-more": "Load more...",
     "notifications": "Notifications",
-    "read-all": "Mark all as Read"
+    "read-all": "Mark all as Read",
+    "today": "Today",
+    "yesterday": "Yesterday"
   },
   "partner": {
     "editor": {
@@ -688,7 +699,7 @@
     "save-profile-success": "Successfully saved the profile."
   },
   "settings": {
-    "title": "Settings"
+    "campaign-categories": "Campaign categories"
   },
   "site": {
     "editor-title": "Site",

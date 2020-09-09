@@ -1,21 +1,21 @@
-import './NotificationList.scss'
 import React, { FC } from 'react'
-import InfiniteScroll from 'react-infinite-scroller'
-import { List, Empty, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { NotificatonItem } from './NotificationItem'
 import { useNotification } from './useNotification'
+import { Button, List, Empty } from 'antd'
 
-export const NotificationList: FC = () => {
+import { NotificationData } from 'models/notification'
+import { NotificationItem } from './NotificationItem'
+
+interface NotificationListProps {
+  groupName: string
+  items: NotificationData[]
+  loadMore: boolean
+}
+
+export const NotificationList: FC<NotificationListProps> = props => {
+  const { items, groupName, loadMore } = props
   const { t } = useTranslation()
-
-  const {
-    notifications,
-    loading,
-    handleGetNotifications,
-    handleReadAll,
-    canLoadMore
-  } = useNotification()
+  const { loading, handleGetNotifications, canLoadMore } = useNotification()
 
   const loadMoreButton = canLoadMore && (
     <Button
@@ -27,38 +27,21 @@ export const NotificationList: FC = () => {
     </Button>
   )
 
-  const notificationList = (
+  return items.length > 0 || loadMore ? (
     <List
       className="notification-list"
       itemLayout="vertical"
-      dataSource={notifications}
-      loadMore={loadMoreButton}
+      dataSource={items}
+      loadMore={loadMore ? loadMoreButton : null}
       loading={loading}
+      header={groupName}
       rowKey={item => `${item.id}`}
       locale={{
         emptyText: (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('notification.empty-list')} />
         )
       }}
-      renderItem={item => <NotificatonItem item={item} />}
+      renderItem={item => <NotificationItem item={item} />}
     />
-  )
-
-  return (
-    <div className="infinite-list-container">
-      <div className="infinite-list-header" onClick={handleReadAll}>
-        <div className="infinite-list-header__action">{t('notification.read-all')}</div>
-      </div>
-
-      <InfiniteScroll
-        initialLoad={false}
-        pageStart={0}
-        loadMore={handleGetNotifications}
-        hasMore={canLoadMore}
-        useWindow={false}
-      >
-        {notificationList}
-      </InfiniteScroll>
-    </div>
-  )
+  ) : null
 }

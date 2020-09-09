@@ -1,13 +1,13 @@
-const traitInputAttr = { placeholder: "eg. Text here" };
+const traitInputAttr = { placeholder: 'eg. Text here' }
 // TODO use grapesjs locale file, once it is in the build npm package, because right now it isn't
 // import en from 'grapesjs/locale/en';
 
 export default {
   assetManager: {
-    addButton: "Load",
-    modalTitle: "Select image",
-    inputPlh: "URL of the image",
-    uploadTitle: "Drag or import a picture here"
+    addButton: 'Load',
+    modalTitle: 'Select image',
+    inputPlh: 'URL of the image',
+    uploadTitle: 'Drag or import a picture here'
   },
   // Here just as a reference, GrapesJS core doesn't contain any block,
   // so this should be omitted from other local files
@@ -21,71 +21,71 @@ export default {
   },
   domComponents: {
     names: {
-      "": "Box",
-      wrapper: "Body",
-      text: "Text",
-      comment: "Comment",
-      image: "Image",
-      video: "Video",
-      label: "Label",
-      link: "Link",
-      map: "Map",
-      tfoot: "Table foot",
-      tbody: "Table body",
-      thead: "Table head",
-      table: "Table",
-      row: "Table row",
-      cell: "Table cell"
+      '': 'Box',
+      wrapper: 'Body',
+      text: 'Text',
+      comment: 'Comment',
+      image: 'Image',
+      video: 'Video',
+      label: 'Label',
+      link: 'Link',
+      map: 'Map',
+      tfoot: 'Table foot',
+      tbody: 'Table body',
+      thead: 'Table head',
+      table: 'Table',
+      row: 'Table row',
+      cell: 'Table cell'
     }
   },
   deviceManager: {
-    device: "Device",
+    device: 'Device',
     devices: {
-      desktop: "Desktop",
-      tablet: "Tablet",
-      mobileLandscape: "Mobile Landscape",
-      mobilePortrait: "Mobile Portrait"
+      desktop: 'Desktop',
+      tablet: 'Tablet',
+      mobileLandscape: 'Mobile Landscape',
+      mobilePortrait: 'Mobile Portrait'
     }
   },
   panels: {
     buttons: {
       titles: {
-        preview: "Preview",
-        fullscreen: "Fullscreen",
-        "sw-visibility": "View components",
-        "export-template": "View code",
-        "open-sm": "Open Style Manager",
-        "open-tm": "Settings",
-        "open-layers": "Open Layer Manager",
-        "open-blocks": "Open Blocks",
-        "pkm-save-template": "Save template",
-        "pkm-download-as-html": "Download template file",
-        "pkm-restore-template": "Restore template"
+        preview: 'Preview',
+        fullscreen: 'Fullscreen',
+        'sw-visibility': 'View components',
+        'export-template': 'View code',
+        'open-sm': 'Open Style Manager',
+        'open-tm': 'Settings',
+        'open-layers': 'Open Layer Manager',
+        'open-blocks': 'Open Blocks',
+        'pkm-save-template': 'Save template',
+        'pkm-download-as-html': 'Download template file',
+        'pkm-restore-template': 'Restore template'
       }
     }
   },
   selectorManager: {
-    label: "Classes",
-    selected: "Selected",
-    emptyState: "- State -",
+    label: 'Classes',
+    selected: 'Selected',
+    emptyState: '- State -',
     states: {
-      hover: "Hover",
-      active: "Click",
-      "nth-of-type(2n)": "Even/Odd"
+      hover: 'Hover',
+      active: 'Click',
+      'nth-of-type(2n)': 'Even/Odd'
     }
   },
   styleManager: {
-    empty: "Select an element before using Style Manager",
-    layer: "Layer",
-    fileButton: "Images",
+    empty: 'Select an element before using Style Manager',
+    layer: 'Layer',
+    fileButton: 'Images',
     sectors: {
-      general: "General",
-      layout: "Layout",
-      typography: "Typography",
-      decorations: "Decorations",
-      extra: "Extra",
-      flex: "Flex",
-      dimension: "Dimension"
+      general: 'General',
+      layout: 'Layout',
+      typography: 'Typography',
+      decorations: 'Decorations',
+      extra: 'Extra',
+      flex: 'Flex',
+      dimension: 'Dimension'
     },
     // The core library generates the name by their `property` name
     properties: {
@@ -93,8 +93,8 @@ export default {
     }
   },
   traitManager: {
-    empty: "Select an element before using Trait Manager",
-    label: "Component settings",
+    empty: 'Select an element before using Trait Manager',
+    label: 'Component settings',
     traits: {
       // The core library generates the name by their `name` property
       labels: {
@@ -108,16 +108,21 @@ export default {
         id: traitInputAttr,
         alt: traitInputAttr,
         title: traitInputAttr,
-        href: { placeholder: "eg. https://google.com" }
+        href: { placeholder: 'eg. https://google.com' }
       },
       // In a trait like select, these are used to translate option names
       options: {
         target: {
-          false: "This window",
-          _blank: "New window"
+          false: 'This window',
+          _blank: 'New window'
         }
       }
     }
   },
-  preset: {}
-};
+  preset: {
+    // The labels set by newsletter-preset. See `default` in:
+    // https://github.com/artf/grapesjs-preset-newsletter/blob/master/src/index.js
+    modalTitleImport: 'Template Import',
+    modalBtnImport: 'Import'
+  }
+}

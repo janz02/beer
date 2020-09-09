@@ -7,6 +7,7 @@ import { CategoryTab } from './CategoryTab'
 import { hasPermission } from 'services/jwt-reader'
 import { SettingsTab } from '../SettingsPage'
 import { Roles } from 'api/swagger/models'
+import { pageViewRoles } from 'services/roleHelpers'
 
 export const useCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
@@ -28,6 +29,9 @@ export const useCategoryTab = (): SettingsTab => {
   const tabContent = <CategoryTab modalUtils={modalUtils} />
 
   return {
+    key: 'campaign-categories',
+    title: t('settings.campaign-categories'),
+    roles: pageViewRoles.categories,
     headerOptions,
     tabContent
   }

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
@@ -10,7 +10,6 @@ import { ColumnType } from 'antd/lib/table'
 import { useTranslation } from 'react-i18next'
 import { ColumnFilterItem, TablePaginationConfig } from 'antd/lib/table/interface'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
-import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 import { Thumbnail } from 'components/thumbnail/Thumbnail'
 import moment from 'moment'
 import { history } from 'router/router'
@@ -25,6 +24,7 @@ import {
   CouponMode,
   CouponDiscountType
 } from 'api/swagger/models'
+import { isCouponActive } from 'components/CampaignActiveDisplay'
 
 interface UseCampaignListFeatures {
   loading: boolean
@@ -157,12 +157,13 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         key: 'isActive',
         ellipsis: false,
         width: '5rem',
-        filterMode: FilterMode.FILTER,
-        filters: [
-          { text: t(`coupon.status.active`), value: 'true' },
-          { text: t(`coupon.status.inactive`), value: 'false' }
-        ],
-        render: (value: unknown, coupon: Coupon) => <CampaignActiveDisplay coupon={coupon} />
+        filterMode: FilterMode.ACTIVE_INACTIVE,
+        activenessOptions: {
+          active: t(`coupon.status.active`),
+          inactive: t(`coupon.status.inactive`)
+        },
+        activenessMapper: (value, coupon: Coupon) =>
+          isCouponActive(coupon) ? 'active' : 'inactive'
       }),
       columnConfig({
         title: t('coupon-list.category'),
@@ -333,19 +334,25 @@ export const useCampaignList = (): UseCampaignListFeatures => {
     [actionColumnConfig, categories, columnConfig, t, dispatch]
   )
 
-  const handleIncludeArchivedChange = (checked: boolean): void => {
-    dispatch(campaignListActions.setIncludeArchived(checked))
-    dispatch(campaignListActions.getCoupons())
-  }
+  const handleIncludeArchivedChange = useCallback(
+    (checked: boolean): void => {
+      dispatch(campaignListActions.setIncludeArchived(checked))
+      dispatch(campaignListActions.getCoupons())
+    },
+    [dispatch]
+  )
 
-  const handleTabChange = (key: CouponListTabKey): void => {
-    dispatch(campaignListActions.setActiveTabKey(key))
-    dispatch(campaignListActions.getCoupons())
-  }
+  const handleTabChange = useCallback(
+    (key: CouponListTabKey): void => {
+      dispatch(campaignListActions.setActiveTabKey(key))
+      dispatch(campaignListActions.getCoupons())
+    },
+    [dispatch]
+  )
 
-  const handleDeleteCancel = (): void => {
+  const handleDeleteCancel = useCallback((): void => {
     dispatch(campaignListActions.cancelCampaignDelete())
-  }
+  }, [dispatch])
 
   return {
     loading,

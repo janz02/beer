@@ -1,0 +1,63 @@
+@import "assets/scss/_variables";
+
+.notification-list {
+  &__load-more-btn {
+    display: block;
+    margin: 1.5rem auto;
+  }
+
+  &__footer {
+    height: 3rem;
+  }
+}
+
+.infinite-list-root {
+  position: inherit;
+}
+
+.infinite-list-container {
+  z-index: q;
+  margin-top: -37px;
+
+  .ant-list-header {
+    display: flex;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    justify-content: flex-start;
+    width: 100%;
+    height: 38px;
+    padding: 17px 15px 6px 7px;
+    border-bottom: 1px solid #F0F0F0;
+    opacity: 1;
+    background-color: #FFFFFF;
+    color: #404C57;
+    font-size: 12px;
+    line-height: 1;
+    text-align: left;
+    text-transform: uppercase;
+  }
+}
+
+.infinite-list-header {
+  display: flex;
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  justify-content: flex-end;
+  height: 37px;
+  padding: 17px 15px 6px 7px;
+  border-bottom: 1px solid #F0F0F0;
+  line-height: 1;
+
+  &__action {
+    color: #A6ADB4;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color;
+      text-decoration: underline;
+    }
+  }
+}

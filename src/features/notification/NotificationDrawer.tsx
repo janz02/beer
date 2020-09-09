@@ -1,14 +1,16 @@
 import './NotificationDrawer.scss'
 import React, { FC } from 'react'
-import { Drawer } from 'antd'
-import { NotificationList } from './NotificationList'
+import { Drawer, Tabs } from 'antd'
+import { GroupedNotificationLists } from './GroupedNotificationLists'
 import { useTranslation } from 'react-i18next'
 import { useNotification } from './useNotification'
+import { NotificationFilterType } from './notificationSlice'
+
+const TabPane = Tabs.TabPane
 
 export const NotificationDrawer: FC = () => {
   const { t } = useTranslation()
-
-  const { opened, handleClose } = useNotification()
+  const { opened, activeFilter, handleClose, handleFilterChange } = useNotification()
 
   return (
     <Drawer
@@ -24,7 +26,21 @@ export const NotificationDrawer: FC = () => {
           {t('notification.notifications')}
         </span>
       </div>
-      <NotificationList />
+      <Tabs
+        className="notification-drawer__header__tabs"
+        defaultActiveKey={activeFilter}
+        onChange={handleFilterChange}
+      >
+        <TabPane tab={t('notification.filter.all')} key={NotificationFilterType.All}>
+          <GroupedNotificationLists />
+        </TabPane>
+        <TabPane tab={t('notification.filter.unread')} key={NotificationFilterType.UnRead}>
+          <GroupedNotificationLists />
+        </TabPane>
+        <TabPane tab={t('notification.filter.read')} key={NotificationFilterType.Read}>
+          <GroupedNotificationLists />
+        </TabPane>
+      </Tabs>
     </Drawer>
   )
 }

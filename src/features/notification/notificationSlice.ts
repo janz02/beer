@@ -18,6 +18,12 @@ export enum NotificationListState {
   LoadedAll = 'LoadedAll'
 }
 
+export enum NotificationFilterType {
+  All = 'All',
+  Read = 'Read',
+  UnRead = 'UnRead'
+}
+
 interface NotificationState {
   listState: FeatureState
   listContentState: NotificationListState
@@ -32,6 +38,7 @@ interface NotificationState {
    Set is not supported by immer by default, and an object works fine.
    In the component it is converted into an array. */
   notifications: NotificationDataDack
+  activeFilter: NotificationFilterType
 }
 
 interface NotifiacationListActionPayload {
@@ -44,6 +51,7 @@ interface NotifiacationListActionPayload {
 const initialState: NotificationState = {
   listState: FeatureState.Initial,
   listContentState: NotificationListState.Empty,
+  activeFilter: NotificationFilterType.All,
   opened: false,
   unseenCount: 0,
   visibleCount: 0,
@@ -110,6 +118,13 @@ const notificationSlice = createSlice({
         state.notifications[key].isSeen = true
       })
       state.unseenCount = 0
+    },
+    unReadOneSuccess(state, action: PayloadAction<number>) {
+      state.notifications[action.payload].isSeen = false
+      state.unseenCount += 1
+    },
+    changeFilter(state, action: PayloadAction<NotificationFilterType>) {
+      state.activeFilter = action.payload
     }
   }
 })
@@ -120,9 +135,11 @@ const {
   resetNotification,
   setListState,
   readOneSuccess,
+  unReadOneSuccess,
   readAllSuccess,
   setRtConnectionState,
-  patchNotificationList
+  patchNotificationList,
+  changeFilter
 } = notificationSlice.actions
 
 /**
@@ -250,6 +267,13 @@ const readAll = (): AppThunk => async dispatch => {
   } catch (err) {}
 }
 
+const unReadOne = (id: number): AppThunk => async dispatch => {
+  try {
+    await api.notification.unSeenNotification({ id })
+    dispatch(unReadOneSuccess(id))
+  } catch (err) {}
+}
+
 const setConnectionState = (report: SignalrStatusReport): AppThunk => async dispatch => {
   dispatch(setRtConnectionState(report.connectionState))
 }
@@ -264,7 +288,9 @@ export const notificationActions = {
   resetNotification,
   readOne,
   readAll,
-  setConnectionState
+  unReadOne,
+  setConnectionState,
+  changeFilter
 }
 
 export const notificationActionType = {

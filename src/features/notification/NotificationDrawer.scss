@@ -1,5 +1,4 @@
 .notification-drawer {
-  --notification-drawer-header-height: 81px;
   --notification-drawer-footer-height: 56px;
   --notification-drawer-background: #FFFFFF;
 
@@ -10,27 +9,40 @@
   &__header {
     display: inline-flex;
     position: absolute;
-    z-index: 1;
     top: 0;
     left: 0;
     align-content: flex-start;
     justify-content: space-between;
     width: 100%;
-    height: var(--notification-drawer-header-height);
-    padding: 15px;
+    padding: 17px 0 19px 14px;
     background: var(--notification-drawer-background);
-    box-shadow: 3px 1px 9px 0 #0000004D;
     font-size: 18px;
 
     &__title {
       font-size: 1.1rem;
       font-weight: 600;
     }
-  }
 
-  .infinite-list-container {
-    height: calc(100vh - var(--notification-drawer-header-height));
-    margin-top: var(--notification-drawer-header-height);
-    overflow: auto;
+    &__tabs {
+      height: 100%;
+
+      .ant-tabs-nav {
+        z-index: 3;
+        margin-bottom: 0;
+        padding: 0 14px;
+        box-shadow: 3px 1px 9px 0 #0000004D;
+      }
+
+      .ant-tabs-tab {
+        margin: 57px 30px 0 0;
+        padding: 0 0 6px 0;
+        font-size: 14px;
+        line-height: 1;
+      }
+
+      .ant-tabs-content-holder {
+        overflow: auto;
+      }
+    }
   }
 }
