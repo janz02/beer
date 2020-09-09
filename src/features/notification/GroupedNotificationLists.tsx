@@ -41,12 +41,15 @@ export const GroupedNotificationLists: FC = () => {
           <NotificationList
             groupName={t('notification.today')}
             items={todayNotifications}
-            loadMore={todayNotifications.length === filteredNotifications.length}
+            loadMore={
+              todayNotifications.length === filteredNotifications.length &&
+              filteredNotifications.length !== 0
+            }
           />
           <NotificationList
             groupName={t('notification.yesterday')}
             items={yesterdayNotifications}
-            loadMore={yesterdayNotifications.length === filteredNotifications.length}
+            loadMore={yesterdayNotifications.length > 0 && earlierNotifications.length === 0}
           />
           <NotificationList
             groupName={
@@ -55,7 +58,7 @@ export const GroupedNotificationLists: FC = () => {
                 : t('notification.earlier')
             }
             items={earlierNotifications}
-            loadMore
+            loadMore={earlierNotifications.length > 0 || filteredNotifications.length === 0}
           />
         </div>
       </InfiniteScroll>
