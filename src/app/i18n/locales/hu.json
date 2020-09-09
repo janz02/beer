@@ -219,12 +219,16 @@
     "timeline-title": "Előzmények"
   },
   "coupon-list": {
+    "accepted-tab": "Futó / jóváhagyott",
     "add": "Új kampány létrehozása",
+    "all-tab": "Összes",
     "campaign-type": "Kampány típus",
     "campaigns": "Kampányok",
     "category": "Kampány kategória",
     "click-count": "Kattintások száma",
+    "closed-tab": "Lezárt",
     "coupon-count": "Kuponok száma",
+    "created-tab": "Rögzített",
     "discount-amount": "Kedvezmény mértéke",
     "discount-type": "Kedvezmény típus",
     "draw-date": "Sorsolás dátuma",
@@ -234,11 +238,7 @@
     "mode": "Beváltás módja",
     "name": "Kampány név",
     "partner": "Partner",
-    "all-tab": "Összes",
     "pending-tab": "Jóváhagyásra vár",
-    "accepted-tab": "Futó / jóváhagyott",
-    "closed-tab": "Lezárt",
-    "created-tab": "Rögzített",
     "preferred-position": "Preferált pozíció",
     "rank": "Kedvezmény szint",
     "redeem-count": "Beváltások száma",
@@ -618,6 +618,11 @@
   "notification": {
     "earlier": "Korábbi",
     "empty-list": "Üres",
+    "filter": {
+      "all": "Össszes",
+      "read": "Olvasottak",
+      "unread": "Olvasatlanok"
+    },
     "load-more": "Régebbiek...",
     "notifications": "Értesítések",
     "read-all": "Összes megjelölése olvasottként",
@@ -694,7 +699,6 @@
     "save-profile-success": "Profil mentése sikeres."
   },
   "settings": {
-    "title": "Beállítások",
     "campaign-categories": "Kampány kategóriák"
   },
   "site": {

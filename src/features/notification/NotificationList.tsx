@@ -27,7 +27,7 @@ export const NotificationList: FC<NotificationListProps> = props => {
     </Button>
   )
 
-  return items.length > 0 ? (
+  return items.length > 0 || loadMore ? (
     <List
       className="notification-list"
       itemLayout="vertical"

@@ -1,4 +1,8 @@
-import { notificationActions, NotificationListState } from './notificationSlice'
+import {
+  notificationActions,
+  NotificationListState,
+  NotificationFilterType
+} from './notificationSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
@@ -17,14 +21,17 @@ interface UseNotificationFeatures {
   opened: boolean
   unseenCount: number
   notifications: NotificationData[]
+  filteredNotifications: NotificationData[]
   loading: boolean
   canLoadMore: boolean
+  activeFilter: string
   handleGetNotifications: () => void
   handleOpen: () => void
   handleClose: () => void
   handleReadAll: () => void
   handleInspectItem: (e: Event, item: NotificationData) => void
   handleNavigateItem: (item: NotificationData) => void
+  handleFilterChange: (activeTabKey: string) => void
 }
 
 const { getNotifications, close, open } = notificationActions
@@ -38,7 +45,8 @@ export const useNotification = (): UseNotificationFeatures => {
     listState,
     opened,
     listContentState,
-    unseenCount
+    unseenCount,
+    activeFilter
   } = useSelector((state: RootState) => state.notification)
 
   const loading = listState === FeatureState.Loading
@@ -54,6 +62,19 @@ export const useNotification = (): UseNotificationFeatures => {
     notificationArray.sort((a, b) => (a.createdDate?.isBefore(b.createdDate) ? 1 : -1))
     return notificationArray
   }, [notificationsObj])
+
+  const filteredNotifications = useMemo(() => {
+    switch (activeFilter) {
+      case NotificationFilterType.All:
+        return notifications
+      case NotificationFilterType.Read:
+        return notifications.filter(n => n.isSeen)
+      case NotificationFilterType.UnRead:
+        return notifications.filter(n => !n.isSeen)
+      default:
+        return notifications
+    }
+  }, [notifications, activeFilter])
 
   const handleGetNotifications = useCallback((): void => {
     dispatch(getNotifications())
@@ -71,21 +92,18 @@ export const useNotification = (): UseNotificationFeatures => {
     dispatch(notificationActions.readAll())
   }, [dispatch])
 
-  const inspectItem = useCallback(
-    (item: NotificationData): void => {
-      if (item.isSeen === false && item.id) {
-        dispatch(notificationActions.readOne(item.id))
-      }
-    },
-    [dispatch]
-  )
-
   const handleInspectItem = useCallback(
     (e: Event, item: NotificationData): void => {
       e?.stopPropagation()
-      inspectItem(item)
+      if (item.id) {
+        if (item.isSeen) {
+          dispatch(notificationActions.unReadOne(item.id))
+        } else {
+          dispatch(notificationActions.readOne(item.id))
+        }
+      }
     },
-    [inspectItem]
+    [dispatch]
   )
 
   const getNotificationLink = (notification: NotificationData): string | undefined => {
@@ -114,7 +132,9 @@ export const useNotification = (): UseNotificationFeatures => {
   }
   const handleNavigateItem = useCallback(
     (item: NotificationData): void => {
-      inspectItem(item)
+      if (!item.isSeen && item.id) {
+        dispatch(notificationActions.readOne(item.id))
+      }
 
       const link = getNotificationLink(item)
       if (link) {
@@ -127,20 +147,30 @@ export const useNotification = (): UseNotificationFeatures => {
         })
       }
     },
-    [dispatch, t, history, inspectItem]
+    [dispatch, t, history]
+  )
+
+  const handleFilterChange = useCallback(
+    (activeTabKey: string): void => {
+      dispatch(notificationActions.changeFilter(activeTabKey as NotificationFilterType))
+    },
+    [dispatch]
   )
 
   return {
     opened,
     unseenCount,
     notifications,
+    filteredNotifications,
     loading,
     canLoadMore,
+    activeFilter,
     handleGetNotifications,
     handleOpen,
     handleClose,
     handleReadAll,
     handleInspectItem,
-    handleNavigateItem
+    handleNavigateItem,
+    handleFilterChange
   }
 }
