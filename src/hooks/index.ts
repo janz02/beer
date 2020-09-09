@@ -1,4 +1,5 @@
-import { useIsMobile } from './isMobileHook'
+import { useIsMobile } from './useIsMobile'
+import { useIsMediumScreen } from './useIsMediumScreen'
 import { useCommonFormRules } from './useCommonFormRules'
 
-export { useIsMobile, useCommonFormRules }
+export { useIsMobile, useIsMediumScreen, useCommonFormRules }

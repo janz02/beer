@@ -24,6 +24,14 @@
       "terms-and-services": "felhasználási feltételeket."
     }
   },
+  "campaign-category": {
+    "add": "Új kampány kategória hozzáadása",
+    "editor-create": "Létrehozás",
+    "editor-edit": "Szerkesztés",
+    "field": {
+      "name": "Kategória neve"
+    }
+  },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
     "editor-edit": "Pénztár szerkesztés",
@@ -126,15 +134,6 @@
       "prize": "Nyeremény"
     }
   },
-  "coupon-category": {
-    "add": "Új kampány kategória hozzáadása",
-    "editor-create": "Létrehozás",
-    "editor-edit": "Szerkesztés",
-    "field": {
-      "name": "Kategória neve"
-    },
-    "list-title": "Kampány kategóriák"
-  },
   "coupon-create": {
     "activate": "Aktiválás",
     "audit": "Audit",
@@ -220,8 +219,7 @@
     "timeline-title": "Előzmények"
   },
   "coupon-list": {
-    "add": "Új kampány hozzáadása",
-    "all-tab": "Összes",
+    "add": "Új kampány létrehozása",
     "campaign-type": "Kampány típus",
     "campaigns": "Kampányok",
     "category": "Kampány kategória",
@@ -236,7 +234,11 @@
     "mode": "Beváltás módja",
     "name": "Kampány név",
     "partner": "Partner",
+    "all-tab": "Összes",
     "pending-tab": "Jóváhagyásra vár",
+    "accepted-tab": "Futó / jóváhagyott",
+    "closed-tab": "Lezárt",
+    "created-tab": "Rögzített",
     "preferred-position": "Preferált pozíció",
     "rank": "Kedvezmény szint",
     "redeem-count": "Beváltások száma",
@@ -249,8 +251,10 @@
     "view-count": "Megjelenések száma"
   },
   "enum": {
-    "noitfication-type": {
-      "CampaignMovedToWaitingState": "Kámpány várakozó állapotba került",
+    "notification-type": {
+      "CampaignMovedToWaitingState": "Kampány várakozó állapotba került",
+      "CouponClosed": "A kampályhoz tartozó kuponokat kikapcsolták",
+      "CouponCountDepleted": "A kampányhoz tartozó kuponok elfogytak",
       "PartnerContactRegistered": "Új KKV partner regisztráció:"
     }
   },
@@ -330,6 +334,9 @@
       "too-big": "__STRING_NOT_TRANSLATED__"
     },
     "not-found": "Nem található.",
+    "notification": {
+      "cannot-navigate-to-notification-link": "Az értesítéshez tartozó hivatkozás nem nyitható meg."
+    },
     "paginate": {
       "order-by": "Lapozó sorrend.",
       "page": "Lapozó lap.",
@@ -572,13 +579,13 @@
     "language": "Nyelv"
   },
   "menu": {
-    "campaign-categories": "Kampány kategóriák",
     "campaigns": "Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "profile": "Profil",
+    "settings": "Beállítások",
     "sites": "Telephelyek",
     "users": "Felhasználók"
   },
@@ -609,10 +616,13 @@
     "version": "Verzió"
   },
   "notification": {
+    "earlier": "Korábbi",
     "empty-list": "Üres",
     "load-more": "Régebbiek...",
     "notifications": "Értesítések",
-    "read-all": "Összes megjelölése olvasottként"
+    "read-all": "Összes megjelölése olvasottként",
+    "today": "Ma",
+    "yesterday": "Tegnap"
   },
   "partner": {
     "editor": {
@@ -682,6 +692,10 @@
     },
     "save": "Módosítás mentése",
     "save-profile-success": "Profil mentése sikeres."
+  },
+  "settings": {
+    "title": "Beállítások",
+    "campaign-categories": "Kampány kategóriák"
   },
   "site": {
     "editor-title": "Telephely",

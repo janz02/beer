@@ -21,7 +21,7 @@ import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
 import { pageViewRoles } from 'services/roleHelpers'
-import { CategoryPage } from 'features/campaignCategory/CategoryPage'
+import { SettingsPage } from 'features/settings/SettingsPage'
 import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
 import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
 import { SiteListPage } from 'features/sites/siteList/SitesListPage'
@@ -114,15 +114,15 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/categories"
+      path="/settings"
       roles={pageViewRoles.categories}
-      component={CategoryPage}
+      component={SettingsPage}
     />
     <PrivateRoute
       exact
-      path="/categories/:id"
+      path="/settings/categories/:id"
       roles={pageViewRoles.categoryEditor}
-      component={CategoryPage}
+      component={SettingsPage}
     />
     <PrivateRoute
       exact

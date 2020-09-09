@@ -11,7 +11,7 @@ Further readings: [Interfaces vs Classes](https://stackoverflow.com/questions/40
 ## DTOs
 
 The Data Transfer Objects are the models for the BackEnd communication.
-They are automatically generated from the BE Swagger and are stored in the *./src/api/swagger/models* directory.
+They are automatically generated from the BE Swagger and are stored in the [models directory](../api/swagger/models).
 
 </br>
 
@@ -20,7 +20,7 @@ They are automatically generated from the BE Swagger and are stored in the *./sr
 The Models presented in the layout and DTOs are separated. 
 This way, even if the BE model changes, the view does not have to be changed with it.
 This solution also has the flexibility for Front End side changes, or providing additional functionality, 
-like date localization with **moment.js**.
+like date localization with `moment.js`.
 
 The mapping can be found in the related features slice, directly in the API call function.
 
@@ -28,7 +28,7 @@ The mapping can be found in the related features slice, directly in the API call
 
 **Date representation with moment**
 
-The date types of the DTOs are transformed to the **moment.Moment** type, for internationalization purposes:
+The date types of the DTOs are transformed to the `moment.Moment` type, for internationalization purposes:
 
 From DTO to model
 ```JS

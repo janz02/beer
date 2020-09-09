@@ -1,7 +1,7 @@
 import './NotificationDrawer.scss'
 import React, { FC } from 'react'
 import { Drawer } from 'antd'
-import { NotificationList } from './NotificationList'
+import { GroupedNotificationLists } from './GroupedNotificationLists'
 import { useTranslation } from 'react-i18next'
 import { useNotification } from './useNotification'
 
@@ -24,7 +24,7 @@ export const NotificationDrawer: FC = () => {
           {t('notification.notifications')}
         </span>
       </div>
-      <NotificationList />
+      <GroupedNotificationLists />
     </Drawer>
   )
 }

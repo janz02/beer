@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState, useMemo } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
 import { userAccessActions } from '../userAccessSlice'
 import { useUserAccessList } from './useUserAccessList'
+import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
 
 export const UserAccessList: FC = () => {
   const dispatch = useDispatch()
@@ -27,60 +28,40 @@ export const UserAccessList: FC = () => {
     dispatch(userAccessActions.getPartnerUsers())
   }, [dispatch])
 
-  const tableSelector = useMemo(
-    () => [
-      {
-        key: 'nkm',
-        tab: t('user-access.nkm-users')
-      },
-      {
-        key: 'partner',
-        tab: t('user-access.partner-users')
-      }
-    ],
-    [t]
-  )
-
-  const contentTables: { [key: string]: JSX.Element } = {
-    nkm: (
-      <ResponsiveTable
-        hasHeaderOffset
-        {...{
-          loading: nkmLoading,
-          columns: nkmUsersColumnsConfig,
-          dataSource: nkmUsers.map((u, i) => ({ ...u, key: i })),
-          pagination: nkmUsersTableUtils.paginationConfig,
-          onChange: nkmUsersTableUtils.handleTableChange
-        }}
-      />
-    ),
-    partner: (
-      <ResponsiveTable
-        hasHeaderOffset
-        {...{
-          loading: partnerLoading,
-          columns: partnerUsersColumnsConfig,
-          dataSource: partnerUsers.map((u, i) => ({ ...u, key: i })),
-          pagination: partnerUsersTableUtils.paginationConfig,
-          onChange: partnerUsersTableUtils.handleTableChange
-        }}
-      />
-    )
-  }
-
   return (
-    <>
-      <ResponsiveCard
-        width="full"
-        forTable
-        floatingTitle={t('user-access.user-access')}
-        tabList={tableSelector}
-        onTabChange={key => {
-          setSelectedTab(key)
-        }}
-      >
-        {contentTables[selectedTab]}
-      </ResponsiveCard>
-    </>
+    <ResponsiveCard
+      disableAutoScale
+      width="full"
+      forTable
+      paddedBottom
+      floatingTitle={t('user-access.user-access')}
+    >
+      <ResponsiveTabs type="card" defaultActiveKey={selectedTab} onChange={setSelectedTab}>
+        <TabPane key="nkm" tab={<TabPanelTitle title={t('user-access.nkm-users')} />}>
+          <ResponsiveTable
+            hasHeaderOffset
+            {...{
+              loading: nkmLoading,
+              columns: nkmUsersColumnsConfig,
+              dataSource: nkmUsers.map((u, i) => ({ ...u, key: i })),
+              pagination: nkmUsersTableUtils.paginationConfig,
+              onChange: nkmUsersTableUtils.handleTableChange
+            }}
+          />
+        </TabPane>
+        <TabPane key="partner" tab={<TabPanelTitle title={t('user-access.partner-users')} />}>
+          <ResponsiveTable
+            hasHeaderOffset
+            {...{
+              loading: partnerLoading,
+              columns: partnerUsersColumnsConfig,
+              dataSource: partnerUsers.map((u, i) => ({ ...u, key: i })),
+              pagination: partnerUsersTableUtils.paginationConfig,
+              onChange: partnerUsersTableUtils.handleTableChange
+            }}
+          />
+        </TabPane>
+      </ResponsiveTabs>
+    </ResponsiveCard>
   )
 }

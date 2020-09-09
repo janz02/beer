@@ -1,5 +1,4 @@
-import React, { useEffect, FC } from 'react'
-import { Checkbox } from 'antd'
+import React, { useEffect, FC, useMemo } from 'react'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { history } from 'router/router'
 import { useTranslation } from 'react-i18next'
@@ -9,25 +8,41 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { useCampaignList } from './useCampaignList'
-import { CampaignListTable } from './components/CampaignListTable'
-import { CouponListTabKey } from './campaignListSlice'
+import { CampaignListTabs } from './components/CampaignListTabs'
+import { Checkbox } from 'antd'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
 export const CampaignListPage: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
+
   const {
-    activeTabKey,
+    loading,
+    coupons,
+    handleTableChange,
+    columnsConfig,
+    paginationConfig,
     couponToDelete,
     deletePopupVisible,
     handleIncludeArchivedChange,
+    activeTabKey,
     handleTabChange,
     handleDeleteCancel,
     getCategories,
     getCoupons,
     deleteCoupon
   } = useCampaignList()
+
+  const tableProps = {
+    loading,
+    coupons,
+    handleTableChange,
+    columnsConfig,
+    paginationConfig
+  }
+
+  // TODO create useCampaignNotifications for getting badge numbers
 
   useEffect(() => {
     dispatch(getCategories())
@@ -37,44 +52,51 @@ export const CampaignListPage: FC = () => {
     dispatch(getCoupons())
   }, [dispatch, getCoupons])
 
+  const cardHeaderActions = useMemo(
+    () => (
+      <>
+        {hasPermission(couponCreateRoles) && (
+          <AddButton onClick={() => history.push(`/campaign`)}>{t('coupon-list.add')}</AddButton>
+        )}
+      </>
+    ),
+    [t]
+  )
+
+  /**
+   * Display different tab bar actions for different tabs conditionally based on the activeTabKey
+   */
+  const tabBarActions = useMemo(
+    () => (
+      <>
+        <Checkbox
+          onChange={e => {
+            handleIncludeArchivedChange(e.target.checked)
+          }}
+        >
+          {t('coupon-list.show-archived')}
+        </Checkbox>
+      </>
+    ),
+    [t, handleIncludeArchivedChange]
+  )
+
   return (
     <>
       <ResponsiveCard
         disableAutoScale
-        forTable
-        floatingTitle={t('coupon-list.campaigns')}
-        floatingOptions={
-          <>
-            <Checkbox
-              onChange={e => {
-                handleIncludeArchivedChange(e.target.checked)
-              }}
-            >
-              {t('coupon-list.show-archived')}
-            </Checkbox>
-            {hasPermission(couponCreateRoles) && (
-              <AddButton onClick={() => history.push(`/campaign`)}>
-                {t('coupon-list.add')}
-              </AddButton>
-            )}
-          </>
-        }
-        paddedBottom
         width="full"
-        activeTabKey={activeTabKey}
-        tabList={[
-          {
-            key: CouponListTabKey.All,
-            tab: t('coupon-list.all-tab')
-          },
-          {
-            key: CouponListTabKey.Waiting,
-            tab: t('coupon-list.pending-tab')
-          }
-        ]}
-        onTabChange={key => handleTabChange(key as CouponListTabKey)}
+        floatingTitle={t('coupon-list.campaigns')}
+        forTable
+        paddedBottom
+        floatingOptions={cardHeaderActions}
       >
-        <CampaignListTable />
+        <CampaignListTabs
+          tableProps={tableProps}
+          activeTabKey={activeTabKey}
+          onTabChange={handleTabChange}
+          tabBarRightActions={tabBarActions}
+        />
       </ResponsiveCard>
 
       <GenericPopup

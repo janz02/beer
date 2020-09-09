@@ -50,7 +50,7 @@ export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUti
   const columnsConfig: ColumnType<Category>[] = useMemo(
     () => [
       columnConfig({
-        title: t('coupon-category.field.name'),
+        title: t('campaign-category.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH

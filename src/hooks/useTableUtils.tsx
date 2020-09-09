@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import { TablePaginationConfig } from 'antd/lib/table'
-import { useIsMobile } from './isMobileHook'
+import { useIsMobile } from './useIsMobile'
 import { useDispatch } from './react-redux-hooks'
 import { PaginationConfig } from 'antd/lib/pagination'
 import { SorterResult, SortOrder, ColumnFilterItem, ColumnType } from 'antd/lib/table/interface'
@@ -10,6 +10,7 @@ import { SearchTableDropdown } from 'components/table-dropdowns/SearchTableDropd
 import { DatepickerTableDropdown } from 'components/table-dropdowns/DatepickerTableDropdown'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useTranslation } from 'react-i18next'
+import { ActivenessDisplay, ActivenessStatus } from 'components/ActivenessDisplay'
 
 export enum OrderByType {
   Ascending = 'Ascending',
@@ -69,6 +70,12 @@ export const storableListRequestParams = (
   ...responsePagination
 })
 
+export interface ActivenessOptions {
+  active: string
+  inactive: string
+  deleted?: string
+}
+
 interface ColumnConfigParams extends ColumnType<any> {
   key: string
   filterMode?: FilterMode
@@ -76,6 +83,8 @@ interface ColumnConfigParams extends ColumnType<any> {
   sort?: boolean
   disableSearchHighlight?: boolean
   renderMode?: 'date time' | null
+  activenessOptions?: ActivenessOptions
+  activenessMapper?: (value: any, record: any) => ActivenessStatus
 }
 
 export interface UseTableUtils<T> {
@@ -210,6 +219,7 @@ function useTableUtils<T extends { [key: string]: any }>(
   const columnConfig = useCallback(
     (params: ColumnConfigParams): ColumnType<any> => {
       const { key, filterMode, sort, filters, disableSearchHighlight, renderMode, ...rest } = params
+
       const config: ColumnType<T> = {
         ellipsis: true,
         ...rest,
@@ -247,14 +257,24 @@ function useTableUtils<T extends { [key: string]: any }>(
           ]
           config.render = (value: boolean) => (value ? t('common.yes') : t('common.no'))
           break
-        case FilterMode.ACTIVE_INACTIVE:
+        case FilterMode.ACTIVE_INACTIVE: {
+          const options = params.activenessOptions ?? {
+            active: t('common.active'),
+            inactive: t('common.inactive')
+          }
+
           config.filterMultiple = false
-          config.filters = filters ?? [
-            { value: 'true', text: t('common.active') },
-            { value: 'false', text: t('common.inactive') }
-          ]
-          config.render = (value: boolean) => (value ? t('common.active') : t('common.inactive'))
+          config.filters = Object.entries(options).map(([value, text]) => ({ value, text }))
+
+          const mapper = params.activenessMapper ?? (x => (x ? 'active' : 'inactive'))
+          config.onFilter = (value, record) => mapper(value, record) === value
+
+          config.render = (value, record) => {
+            const status = mapper(value, record)
+            return <ActivenessDisplay status={status} text={options[status] as string} />
+          }
           break
+        }
         default:
           break
       }
