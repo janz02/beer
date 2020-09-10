@@ -6,28 +6,20 @@ import { ColumnOrderDragAndDrop } from './ColumnOrderDragAndDrop'
 import { UseColumnOrderFeatures } from './useColumnOrder'
 import Text from 'antd/lib/typography/Text'
 import { useTranslation } from 'react-i18next'
+import styles from './ColumnOrderLayout.module.scss'
 
 export const ColumOrderLayout: <T>(
   p: UseColumnOrderFeatures<T>
 ) => React.ReactElement<UseColumnOrderFeatures<T>> = props => {
   const { t } = useTranslation()
 
-  const {
-    changeVisibility,
-    storeColumnsOrder,
-    setTempColumns,
-    tempColumns,
-    setCurrentColumns,
-    defaultColumns
-  } = props
-
   return (
-    <Card style={{ width: 295 }}>
-      <Row gutter={[0, 8]} style={{ flexDirection: 'column' }}>
+    <Card className={styles.card}>
+      <Row gutter={[0, 8]} className={styles.mainRow}>
         <Col>
           <Row justify="space-between">
             <Col span={22}>
-              <Title level={3} style={{ fontWeight: 300 }}>
+              <Title level={3} className={styles.title}>
                 {t('column-order.layout.header')}
               </Title>
             </Col>
@@ -37,7 +29,7 @@ export const ColumOrderLayout: <T>(
                 shape="circle"
                 size="small"
                 icon={<CloseOutlined />}
-                onClick={() => changeVisibility()}
+                onClick={props.handleChangeVisibility}
               />
             </Col>
           </Row>
@@ -46,30 +38,23 @@ export const ColumOrderLayout: <T>(
           <ColumnOrderDragAndDrop {...props} />
         </Col>
         <Col>
-          <Button
-            type="link"
-            style={{ marginLeft: -15 }}
-            onClick={() => setTempColumns(defaultColumns)}
-          >
-            <span style={{ textDecoration: 'underline' }}>{t('column-order.layout.default')}</span>
+          <Button type="link" className={styles.defaultButton} onClick={props.handleResetToDefault}>
+            <span>{t('column-order.layout.default')}</span>
           </Button>
         </Col>
         <Col>
           <Row justify="space-between">
             <Col span={12}>
-              <Button type="text" style={{ marginLeft: -15 }} onClick={() => changeVisibility()}>
+              <Button
+                type="text"
+                className={styles.cancelButton}
+                onClick={props.handleChangeVisibility}
+              >
                 <Text type="secondary">{t('column-order.layout.cancel')}</Text>
               </Button>
             </Col>
-            <Col span={12} style={{ textAlign: 'end' }}>
-              <Button
-                type="primary"
-                onClick={() => {
-                  setCurrentColumns(tempColumns)
-                  storeColumnsOrder()
-                  changeVisibility()
-                }}
-              >
+            <Col span={12} className={styles.applyButtonCol}>
+              <Button type="primary" onClick={props.handleApplyChanges}>
                 {t('column-order.layout.apply')}
               </Button>
             </Col>

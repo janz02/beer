@@ -6,7 +6,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
-import { useTableUtils, FilterMode, ActivenessOptions } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { getPartners } from './partnerListSlice'
 import { ColumnType } from 'antd/lib/table'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
@@ -17,6 +17,9 @@ import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
 import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
 import { PartnerRegistrationState, PartnerState } from 'api/swagger/models'
 import { ActivenessStatus } from 'components/ActivenessDisplay'
+import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -109,10 +112,17 @@ export const PartnerListPage: React.FC = () => {
     [actionColumnConfig, columnConfig, t]
   )
 
-  const headerOptions = hasPermission(partnersEditorRoles) ? (
-    <AddButton onClick={() => history.push(`/partners/new`)}>{t('partner.list.add')}</AddButton>
-  ) : (
-    undefined
+  const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.PARTNER)
+
+  const headerOptions = (
+    <>
+      {hasPermission(partnersEditorRoles) ? (
+        <AddButton onClick={() => history.push(`/partners/new`)}>{t('partner.list.add')}</AddButton>
+      ) : (
+        undefined
+      )}
+      <ColumnOrderDropdown {...columnOrder} />
+    </>
   )
 
   return (
@@ -125,7 +135,7 @@ export const PartnerListPage: React.FC = () => {
         <ResponsiveTable
           {...{
             loading,
-            columns: columnsConfig,
+            columns: columnOrder.currentColumns,
             dataSource: addKeyProp(partners),
             pagination: paginationConfig,
             onChange: handleTableChange

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useMemo } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
@@ -8,6 +8,7 @@ import { useUserAccessList } from './useUserAccessList'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 
 export const UserAccessList: FC = () => {
   const dispatch = useDispatch()
@@ -30,10 +31,10 @@ export const UserAccessList: FC = () => {
     dispatch(userAccessActions.getPartnerUsers())
   }, [dispatch])
 
-  const nkmColumnOrder = useColumnOrder(nkmUsersColumnsConfig, 'UserAccessListNkmColumnOrder')
+  const nkmColumnOrder = useColumnOrder(nkmUsersColumnsConfig, ColumnStorageName.USER_ACCESS_NKM)
   const partnerColumnOrder = useColumnOrder(
     partnerUsersColumnsConfig,
-    'UserAccessListPartnerColumnOrder'
+    ColumnStorageName.USER_ACCES_PARTNER
   )
 
   const tabBarActions =

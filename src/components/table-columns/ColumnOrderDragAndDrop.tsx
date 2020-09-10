@@ -1,5 +1,5 @@
 import React from 'react'
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { UseColumnOrderFeatures } from './useColumnOrder'
 import { MoreOutlined } from '@ant-design/icons'
 import styles from './ColumnOrderDragAndDrop.module.scss'
@@ -28,29 +28,12 @@ export const ColumnOrderDragAndDrop: <T>(
 ) => React.ReactElement<UseColumnOrderFeatures<T>> = props => {
   const { t } = useTranslation()
 
-  const { setTempColumns, tempColumns } = props
-
-  const reorder = (startIndex: number, endIndex: number): void => {
-    const result = Array.from(tempColumns)
-    const [removed] = result.splice(startIndex, 1)
-    result.splice(endIndex, 0, removed)
-
-    setTempColumns(result)
-  }
-
-  const onDragEnd = (result: DropResult): void => {
-    if (!result.destination) {
-      return
-    }
-    reorder(result.source.index, result.destination.index)
-  }
-
   return (
     <>
       <Text strong className={styles.header}>
         {t('column-order.drag-and-drop.header')}
       </Text>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={props.onDragEnd}>
         <Droppable droppableId="droppable">
           {provided => (
             <div
@@ -58,7 +41,7 @@ export const ColumnOrderDragAndDrop: <T>(
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {tempColumns
+              {props.tempColumns
                 .filter(column => column.title && column.dataIndex)
                 .map((column, index) => DraggableItem(column, index))}
               {provided.placeholder}

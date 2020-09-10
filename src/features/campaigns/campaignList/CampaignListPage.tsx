@@ -11,6 +11,8 @@ import { useCampaignList } from './useCampaignList'
 import { CampaignListTabs } from './components/CampaignListTabs'
 import { Checkbox } from 'antd'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+import { CouponListTabKey } from './campaignListSlice'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
@@ -36,13 +38,19 @@ export const CampaignListPage: FC = () => {
     deleteCoupon
   } = useCampaignList()
 
-  const columnOrder = useColumnOrder(columnsConfig, 'CampaignListColumnOrder')
+  const columnOrders = {
+    [CouponListTabKey.Waiting]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_WAITING),
+    [CouponListTabKey.Accepted]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_ACCEPTED),
+    [CouponListTabKey.Closed]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_CLOSED),
+    [CouponListTabKey.Created]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_CREATED),
+    [CouponListTabKey.All]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_ALL)
+  }
 
   const tableProps = {
     loading,
     coupons,
     handleTableChange,
-    columnsConfig: columnOrder.currentColumns,
+    columnsConfig,
     paginationConfig
   }
 
@@ -80,10 +88,10 @@ export const CampaignListPage: FC = () => {
         >
           {t('coupon-list.show-archived')}
         </Checkbox>
-        <ColumnOrderDropdown {...columnOrder} />
+        <ColumnOrderDropdown {...columnOrders[activeTabKey]} />
       </>
     ),
-    [t, handleIncludeArchivedChange, columnOrder]
+    [t, handleIncludeArchivedChange, columnOrders, activeTabKey]
   )
 
   return (
@@ -97,6 +105,7 @@ export const CampaignListPage: FC = () => {
         floatingOptions={cardHeaderActions}
       >
         <CampaignListTabs
+          columnOrders={columnOrders}
           tableProps={tableProps}
           activeTabKey={activeTabKey}
           onTabChange={handleTabChange}

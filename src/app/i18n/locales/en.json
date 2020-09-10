@@ -49,6 +49,20 @@
     },
     "table-title": "Cashiers"
   },
+  "column-order": {
+    "drag-and-drop": {
+      "header": "Shown columns order"
+    },
+    "dropdown": {
+      "link": "Customize columns"
+    },
+    "layout": {
+      "apply": "Apply",
+      "cancel": "Cancel",
+      "default": "Restore defaults",
+      "header": "Columns"
+    }
+  },
   "common": {
     "activate": "Activate",
     "active": "Active",
@@ -219,12 +233,16 @@
     "timeline-title": "Timeline"
   },
   "coupon-list": {
+    "accepted-tab": "Accepted",
     "add": "Create new campaign",
+    "all-tab": "All",
     "campaign-type": "Campaign type",
     "campaigns": "Campaigns",
     "category": "Campaign category",
     "click-count": "Click count",
+    "closed-tab": "Closed",
     "coupon-count": "Coupon count",
+    "created-tab": "Created",
     "discount-amount": "Discount amount",
     "discount-type": "Discount type",
     "draw-date": "Draw date",
@@ -234,11 +252,7 @@
     "mode": "Claim mode",
     "name": "Campaign name",
     "partner": "Partner",
-    "all-tab": "All",
     "pending-tab": "Pending approve",
-    "accepted-tab": "Accepted",
-    "closed-tab": "Closed",
-    "created-tab": "Created",
     "preferred-position": "Preferred position",
     "rank": "Discount level",
     "redeem-count": "Redeem count",
@@ -694,7 +708,6 @@
     "save-profile-success": "Successfully saved the profile."
   },
   "settings": {
-    "title": "Settings",
     "campaign-categories": "Campaign categories"
   },
   "site": {
@@ -757,19 +770,5 @@
   },
   "warning-prompt": {
     "nav-unsaved-changes": "There are unsaved changes, do you really wish to navigate away?"
-  },
-  "column-order": {
-    "drag-and-drop": {
-      "header": "Shown columns order"
-    },
-    "layout": {
-      "header": "Columns",
-      "default": "Restore defaults",
-      "apply": "Apply",
-      "cancel": "Cancel"
-    },
-    "dropdown": {
-      "link": "Customize columns"
-    }
   }
 }
