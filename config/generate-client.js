@@ -13,25 +13,23 @@ const generateClient = (swaggerDefFile, outputDir) => {
   );
 };
 
-const couponApiPath = "src/api/coupon-api";
-const campaignEditorApiPath = "src/api/campaign-editor-api";
-const couponApiSwaggerFile = "src/api/coupon-api-swagger.json";
-const campaignEditorSwaggerFile = "src/api/campaign-editor-api-swagger.json";
+const apis = [
+  {
+    name: "coupon-api",
+    url: "https://pkm-coupon-dev.grapetest.xyz/swagger/v1/swagger.json"
+  },
+  {
+    name: "campaign-editor-api",
+    url: "https://rtd-campaigneditor-dev.grapetest.xyz/swagger/v1/swagger.json"
+  }
+];
 
-// Download swagger files
-downloadSwaggerDefinitionFile(
-  "https://pkm-coupon-dev.grapetest.xyz/swagger/v1/swagger.json",
-  couponApiSwaggerFile
-);
-downloadSwaggerDefinitionFile(
-  "https://rtd-campaigneditor-dev.grapetest.xyz/swagger/v1/swagger.json",
-  campaignEditorSwaggerFile
-);
+// Download swagger files & Cleanup & Generate clients
+apis.forEach(api => {
+  const apiPath = `src/api/${api.name}`;
+  const apiSwaggerFile = `src/api/${api.name}-swagger.json`;
 
-// Cleanup
-fs.removeSync(couponApiPath);
-fs.removeSync(campaignEditorApiPath);
-
-// Generate clients
-generateClient(couponApiSwaggerFile, couponApiPath);
-generateClient(campaignEditorSwaggerFile, campaignEditorApiPath);
+  downloadSwaggerDefinitionFile(api.url, apiSwaggerFile);
+  fs.removeSync(apiPath);
+  generateClient(apiSwaggerFile, apiPath);
+});
