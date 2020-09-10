@@ -11,7 +11,7 @@ Further readings: [Interfaces vs Classes](https://stackoverflow.com/questions/40
 ## DTOs
 
 The Data Transfer Objects are the models for the BackEnd communication.
-They are automatically generated from the BE Swagger and are stored in the [models directory](../api/swagger/models).
+They are automatically generated from the BE Swagger and are stored in the [models directory](../api/coupon-api/models).
 
 </br>
 

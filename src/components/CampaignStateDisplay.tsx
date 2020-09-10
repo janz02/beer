@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Tag } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { CouponState } from 'api/swagger/models'
+import { CouponState } from 'api/coupon-api/models'
 
 interface CampaignStateDisplayProps {
   state?: CouponState

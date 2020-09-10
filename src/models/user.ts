@@ -1,4 +1,4 @@
-import { Roles } from 'api/swagger/models'
+import { Roles } from 'api/coupon-api/models'
 
 export enum Status {
   ACTIVE = 'active',
