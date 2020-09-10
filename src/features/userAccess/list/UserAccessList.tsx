@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, useMemo } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
@@ -37,12 +37,15 @@ export const UserAccessList: FC = () => {
     ColumnStorageName.USER_ACCES_PARTNER
   )
 
-  const tabBarActions =
-    selectedTab === 'nkm' ? (
-      <ColumnOrderDropdown {...nkmColumnOrder} />
-    ) : (
-      <ColumnOrderDropdown {...partnerColumnOrder} />
-    )
+  const tabBarActions = useMemo(
+    () =>
+      selectedTab === 'nkm' ? (
+        <ColumnOrderDropdown {...nkmColumnOrder} />
+      ) : (
+        <ColumnOrderDropdown {...partnerColumnOrder} />
+      ),
+    [selectedTab, nkmColumnOrder, partnerColumnOrder]
+  )
 
   return (
     <ResponsiveCard
