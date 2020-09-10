@@ -42,7 +42,7 @@ export function getUrl(): string {
 }
 
 export const config: Configuration = new Configuration({
-  basePath: process.env.REACT_APP_API_URL || getUrl(),
+  basePath: process.env.REACT_APP_COUPON_API_URL || getUrl(),
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: [
     {

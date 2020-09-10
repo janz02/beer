@@ -45,7 +45,7 @@ const registerCallbacks = (connection: SignalrConnection, jwt: string): void => 
  * * at auth/loginSuccess the jwt is still not in the session storage, thus it comes from the action payload
  */
 const initConnection = (newJwt?: string): SignalrConnection => {
-  const url = process.env.REACT_APP_API_URL
+  const url = process.env.REACT_APP_COUPON_API_URL
   const jwt = newJwt ?? sessionStorage.getItem('jwt')
   if (!jwt) return null
 
