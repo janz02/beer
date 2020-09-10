@@ -9,7 +9,7 @@ import {
   TemplatesApi,
   TestGroupCategoriesApi
 } from './campaign-editor-api/apis'
-import { campaignApiConfig } from './apiConfig'
+import { campaignApiConfig } from './apiConfigs'
 
 export const campaignApi = {
   campaigns: new CampaignsApi(campaignApiConfig),

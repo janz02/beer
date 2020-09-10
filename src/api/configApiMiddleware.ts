@@ -2,7 +2,7 @@ import { logout } from 'features/auth/authSlice'
 import { couponApi } from './couponApi'
 import JwtDecode from 'jwt-decode'
 import { store } from 'app/store'
-import { couponApiConfig, campaignApiConfig } from './apiConfig'
+import { couponApiConfig, campaignApiConfig } from './apiConfigs'
 
 let tokenPromise: Promise<void> | null
 let tokenPromiseResolver: (value?: void | PromiseLike<void>) => void

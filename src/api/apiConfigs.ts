@@ -35,7 +35,7 @@ export const couponApiConfig: CouponApiConfiguration = new CouponApiConfiguratio
 
 export const campaignApiConfig: CampaignEditorApiConfiguration = new CampaignEditorApiConfiguration(
   {
-    basePath: baseUrl,
+    basePath: baseUrl, // 'https://rtd-campaigneditor-dev.grapetest.xyz',
     middleware: [errorHandlerMiddleware]
   }
 )

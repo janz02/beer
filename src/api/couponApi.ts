@@ -18,7 +18,7 @@ import {
   WalletApi,
   InformationApi
 } from './coupon-api/apis'
-import { couponApiConfig } from './apiConfig'
+import { couponApiConfig } from './apiConfigs'
 
 export const couponApi = {
   coupons: new CouponsApi(couponApiConfig),
