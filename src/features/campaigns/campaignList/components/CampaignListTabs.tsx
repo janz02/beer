@@ -10,8 +10,11 @@ import {
   CompassOutlined
 } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
+import { Coupon } from 'models/coupon'
+import { UseColumnOrderFeatures } from 'components/table-columns/useColumnOrder'
 
 interface CampaignListTabsProps {
+  columnOrders: Record<string, UseColumnOrderFeatures<Coupon>>
   tableProps: CampaignListTableProps
   activeTabKey: CouponListTabKey
   onTabChange: (key: CouponListTabKey) => void
@@ -19,6 +22,7 @@ interface CampaignListTabsProps {
 }
 
 export const CampaignListTabs: FC<CampaignListTabsProps> = ({
+  columnOrders,
   tableProps,
   activeTabKey,
   onTabChange,
@@ -82,7 +86,7 @@ export const CampaignListTabs: FC<CampaignListTabsProps> = ({
             />
           }
         >
-          <CampaignListTable {...tableProps} />
+          <CampaignListTable {...tableProps} columnsConfig={columnOrders[tab.key].currentColumns} />
         </TabPane>
       ))}
     </ResponsiveTabs>
