@@ -9,11 +9,11 @@ const services = [
   {
     name: "files",
     url: "https://pkm-files-dev.grapetest.xyz/swagger/v1/swagger.json"
-  },
-  {
-    name: "campaign-editor",
-    url: "https://rtd-campaigneditor-dev.grapetest.xyz/swagger/v1/swagger.json"
   }
+  // {
+  //   name: "campaign-editor",
+  //   url: "https://rtd-campaigneditor-dev.grapetest.xyz/swagger/v1/swagger.json"
+  // }
 ];
 
 const docsFolder = "src/api2/docs";
