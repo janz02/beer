@@ -3,7 +3,7 @@ import { AppThunk } from 'app/store'
 import { Partner } from 'models/partner'
 import { message } from 'antd'
 import i18n from 'app/i18n'
-import { api } from 'api2'
+import { api } from 'api'
 
 interface SelfPartnerState {
   partner?: Partner

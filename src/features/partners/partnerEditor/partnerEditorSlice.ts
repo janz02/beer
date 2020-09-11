@@ -4,8 +4,8 @@ import { Partner } from 'models/partner'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
-import { api } from 'api2'
-import { PartnerDto, PartnerRegistrationState, PartnerState } from 'api2/swagger/coupon'
+import { api } from 'api'
+import { PartnerDto, PartnerRegistrationState, PartnerState } from 'api/swagger/coupon'
 
 interface PartnerEditorState {
   partner?: Partner

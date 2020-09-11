@@ -87,7 +87,6 @@
     "build": "env-cmd -x -e prod react-app-rewired build --REACT_APP_VERSION=$REACT_APP_VERSION",
     "eject": "react-app-rewired eject",
     "generate-client": "node ./config/generate-client.js",
-    "generate-multiple-client": "node ./config/generate-multiple-client.js",
     "generate-backend-translation-keys": "node ./config/generate-backend-translation-keys.js",
     "ci:generate": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./config/ci.ps1",
     "i18n:generate": "i18next-scanner --config ./config/i18next-scanner.config.js"

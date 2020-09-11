@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { api } from 'api2'
+import { api } from 'api'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
@@ -8,7 +8,7 @@ import {
   storableListRequestParams
 } from 'hooks/useTableUtils'
 import { PartnerContact } from 'models/partnerContact'
-import { Roles } from 'api2/swagger/coupon'
+import { Roles } from 'api/swagger/coupon'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'

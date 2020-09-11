@@ -7,7 +7,7 @@ import {
   Roles,
   CouponMode,
   CouponDiscountType
-} from 'api2/swagger/coupon'
+} from 'api/swagger/coupon'
 import { hasAllPermissions } from 'services/jwt-reader'
 import { FileUploadButton } from 'components/upload/FileUploadButton'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'

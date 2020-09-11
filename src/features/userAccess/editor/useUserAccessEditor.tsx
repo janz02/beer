@@ -5,7 +5,7 @@ import { RootState } from 'app/rootReducer'
 import { useRoleGenerator, RoleOptions } from 'hooks/useRoleGenerator'
 import { userAccessActions } from '../userAccessSlice'
 import { Status, UserType, UserAccess } from 'models/user'
-import { Roles } from 'api2/swagger/coupon'
+import { Roles } from 'api/swagger/coupon'
 import { GenericModalFormProps } from 'components/popups/GenericModalForm'
 import { FeatureState } from 'models/featureState'
 

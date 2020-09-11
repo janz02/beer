@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { api } from 'api2'
+import { api } from 'api'
 import { Site } from 'models/site'
 import { message } from 'antd'
 import i18n from 'app/i18n'

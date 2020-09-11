@@ -1,6 +1,6 @@
 import i18n from 'app/i18n'
 import { notification } from 'antd'
-import { RequestError } from 'api2/middleware'
+import { RequestError } from 'api/middleware'
 
 /**
  * Displays a (translated) notification for each error in the passed in error object

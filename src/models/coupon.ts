@@ -5,7 +5,7 @@ import {
   CouponState,
   CouponDiscountType,
   CouponMode
-} from 'api2/swagger/coupon'
+} from 'api/swagger/coupon'
 import { CouponComment } from './couponComment'
 
 export interface Coupon {

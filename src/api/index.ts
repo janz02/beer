@@ -17,7 +17,7 @@ import {
   UserCouponsApi,
   WalletApi,
   FilesApi
-} from './swagger/coupon'
+} from '../api/swagger/coupon'
 // import {
 //   CampaignsApi,
 //   PermissionsApi,
@@ -29,11 +29,11 @@ import {
 //   TemplatesApi,
 //   TestGroupCategoriesApi
 // } from './swagger/campaign-editor'
-import { FilesApi as FilesMsApi } from './swagger/files'
-import { errorHandlingMiddleware, tokenConfigMiddleware } from './middleware'
-import { Middleware, Configuration as CouponConfiguration } from './swagger/coupon/runtime'
+import { FilesApi as FilesMsApi } from '../api/swagger/files'
+import { errorHandlingMiddleware } from './middleware'
+import { Middleware, Configuration as CouponConfiguration } from '../api/swagger/coupon/runtime'
 // import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
-import { Configuration as FilesConfiguration } from './swagger/files/runtime'
+import { Configuration as FilesConfiguration } from '../api/swagger/files/runtime'
 
 export function getUrl(): string {
   const getUrl = window.location
@@ -57,15 +57,15 @@ export const apiBaseConfig = (props?: ApiBaseConfigProps) => ({
 
 // ---- OTHER CONFIGS
 // todo update appendUrl props when apis are available from same origin
-const couponConfig: CouponConfiguration = new CouponConfiguration(
+export const couponConfig: CouponConfiguration = new CouponConfiguration(
   apiBaseConfig({ appendUrl: process.env.REACT_APP_COUPON_API_URL })
 )
 
-// const campaignEditorConfig: CampaignEditorConfiguration = new CampaignEditorConfiguration(
+// export const campaignEditorConfig: CampaignEditorConfiguration = new CampaignEditorConfiguration(
 //   apiBaseConfig({ appendUrl: process.env.REACT_APP_CAMPAIGNEDITOR_API_URL })
 // )
 
-const filesConfig: FilesConfiguration = new FilesConfiguration(
+export const filesConfig: FilesConfiguration = new FilesConfiguration(
   apiBaseConfig({ appendUrl: process.env.REACT_APP_FILES_API_URL })
 )
 
@@ -83,8 +83,8 @@ export const api = {
   segments: new SegmentsApi(couponConfig),
   cashiers: new CashiersApi(couponConfig),
   information: new InformationApi(couponConfig),
-  files: new FilesApi(couponConfig),
-  filesMS: new FilesMsApi(filesConfig),
+  files: new FilesApi(couponConfig), // note: this will be moved to Files MS in the future
+  filesMS: new FilesMsApi(filesConfig), // note: keep this, if FilesApi removed from Coupon MS
   notification: new NotificationsApi(couponConfig),
   notificationHub: new NotificationHubApi(couponConfig),
   UserCoupons: new UserCouponsApi(couponConfig),
@@ -98,10 +98,4 @@ export const api = {
   // sharepoint: new SharepointApi(campaignEditorConfig),
   // templates: new TemplatesApi(campaignEditorConfig),
   // testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)
-}
-
-export const configApiMiddleware = (): void => {
-  couponConfig.middleware.push(...tokenConfigMiddleware)
-  filesConfig.middleware.push(...tokenConfigMiddleware)
-  // campaignEditorConfig.middleware.push(...tokenConfigMiddleware)
 }

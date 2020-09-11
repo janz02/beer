@@ -3,7 +3,7 @@ import {
   SiteVm,
   PartnerRegistrationState,
   PartnerState
-} from 'api2/swagger/coupon'
+} from 'api/swagger/coupon'
 
 export interface Partner {
   id?: number

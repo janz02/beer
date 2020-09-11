@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { api } from 'api2'
+import { api } from 'api'
 import {
   ListRequestParams,
   reviseListRequestParams,
@@ -9,7 +9,7 @@ import {
 import { UserAccess, UserType } from 'models/user'
 import { message } from 'antd'
 import i18n from 'app/i18n'
-import { Roles } from 'api2/swagger/coupon'
+import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 
 interface State {

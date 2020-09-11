@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { NewsletterPreview } from 'models/newsletter'
-import { api } from 'api2'
+import { api } from 'api'
 import { history } from 'router/router'
 import moment from 'moment'
 import { Segment } from 'models/segment'

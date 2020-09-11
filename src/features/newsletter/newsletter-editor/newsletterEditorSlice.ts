@@ -1,7 +1,7 @@
 import { AppThunk } from 'app/store'
 import { Newsletter } from 'models/newsletter'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { api } from 'api2'
+import { api } from 'api'
 import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'

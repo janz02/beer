@@ -1,7 +1,8 @@
 import { logout } from 'features/auth/authSlice'
 import JwtDecode from 'jwt-decode'
 import { store } from 'app/store'
-import { api } from 'api2'
+import { api } from 'api'
+import { couponConfig, filesConfig } from '../index'
 
 let tokenPromise: Promise<void> | null
 let tokenPromiseResolver: (value?: void | PromiseLike<void>) => void
@@ -62,3 +63,9 @@ export const tokenConfigMiddleware = [
     }
   }
 ]
+
+export const configApiMiddleware = (): void => {
+  couponConfig.middleware.push(...tokenConfigMiddleware)
+  filesConfig.middleware.push(...tokenConfigMiddleware)
+  // campaignEditorConfig.middleware.push(...tokenConfigMiddleware)
+}

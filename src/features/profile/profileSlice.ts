@@ -3,7 +3,7 @@ import { AppThunk } from 'app/store'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Profile } from 'models/profile'
-import { api } from 'api2'
+import { api } from 'api'
 import { FeatureState } from 'models/featureState'
 
 interface ProfileState {

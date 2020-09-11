@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { PartnerContactTile, PartnerContactConfig } from './PartnerContactTile'
 import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api2/swagger/coupon'
+import { Roles } from 'api/swagger/coupon'
 import { useSelector } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { UserType } from 'models/user'

@@ -4,9 +4,9 @@ import { AppThunk } from 'app/store'
 import { ListRequestParams, OrderByType } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import { HubConnectionState } from '@microsoft/signalr'
-import { api } from 'api2'
+import { api } from 'api'
 import { NotificationData, NotificationDataDack } from 'models/notification'
-import { GetNotificationsRequest } from 'api2/swagger/coupon'
+import { GetNotificationsRequest } from 'api/swagger/coupon'
 import { SignalrStatusReport } from 'middlewares/signalR/signalrTypes'
 
 const NOTIFICATION_LIST_PAGE_SIZE = 20

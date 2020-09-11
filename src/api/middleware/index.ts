@@ -1,2 +1,2 @@
 export * from './errorHandlingMiddleware'
-export * from './tokenConfigMiddleware'
+export * from './configApiMiddleware'

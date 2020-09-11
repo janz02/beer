@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Coupon } from 'models/coupon'
 import { AppThunk } from 'app/store'
-import { api } from 'api2'
+import { api } from 'api'
 import moment from 'moment'
 import {
   ListRequestParams,

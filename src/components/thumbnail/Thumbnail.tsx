@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useCallback } from 'react'
 import { Spin, Tooltip } from 'antd'
-import { api } from 'api2'
+import { api } from 'api'
 import { getBase64 } from 'services/file-reader'
 import { useTranslation } from 'react-i18next'
 import { DisconnectOutlined } from '@ant-design/icons'

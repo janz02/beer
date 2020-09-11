@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { UploadFile, UploadProps, UploadChangeParam } from 'antd/lib/upload/interface'
 import { useTranslation } from 'react-i18next'
-import { api } from 'api2'
+import { api } from 'api'
 import { getBase64 } from 'services/file-reader'
 import { displayBackendError } from 'services/errorHelpers'
 import { getUrl } from 'services/baseUrlHelper'
-import { RequestError } from 'api2/middleware'
+import { RequestError } from 'api/middleware'
 
 interface FileThumbnail {
   label?: string

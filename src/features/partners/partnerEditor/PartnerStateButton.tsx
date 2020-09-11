@@ -1,5 +1,5 @@
 import React, { FC, useState, useMemo } from 'react'
-import { PartnerState } from 'api2/swagger/coupon'
+import { PartnerState } from 'api/swagger/coupon'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
 import { useSelector } from 'hooks/react-redux-hooks'

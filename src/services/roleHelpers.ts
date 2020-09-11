@@ -1,4 +1,4 @@
-import { Roles } from 'api2/swagger/coupon'
+import { Roles } from 'api/swagger/coupon'
 
 /**
  * Group of roles to define more generic(flow specific/company specific) access rights.

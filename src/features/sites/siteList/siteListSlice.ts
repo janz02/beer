@@ -8,7 +8,7 @@ import {
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import { AppThunk } from 'app/store'
-import { api } from 'api2'
+import { api } from 'api'
 
 export interface SiteFeatureConfig {
   shrinks: boolean

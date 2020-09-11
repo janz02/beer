@@ -1,4 +1,4 @@
-import { PartnerRegistrationState } from 'api2/swagger/coupon'
+import { PartnerRegistrationState } from 'api/swagger/coupon'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
