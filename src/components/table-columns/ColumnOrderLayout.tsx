@@ -51,7 +51,10 @@ export const ColumOrderLayout: <T>(
               </Option>
             ))}
           </Select>
-          <Checkbox onChange={e => props.addOrRemoveAllColumn(e.target.checked)}>
+          <Checkbox
+            checked={props.hiddenColumns.length === 0}
+            onChange={e => props.addOrRemoveAllColumn(e.target.checked)}
+          >
             {t('column-order.layout.add-all-checkbox')}
           </Checkbox>
         </Col>
