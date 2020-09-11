@@ -11,7 +11,7 @@ export const NotificationLinkPreValidator = {
   },
 
   async GetPartner(id: number): Promise<boolean> {
-    const response = await couponApi.partner.getPartner({ id })
+    const response = await couponApi.partnerContacts.getPartnerContact({ id })
     return response !== undefined
   },
 
@@ -22,7 +22,7 @@ export const NotificationLinkPreValidator = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async PartnerContactRegistered(actualId: number, parentId: number): Promise<boolean> {
-    return await this.GetPartner(parentId)
+    return await this.GetPartner(actualId)
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
