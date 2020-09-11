@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { NewsletterPreview } from 'models/newsletter'
-import { api } from 'api'
+import { couponApi } from 'api'
 import { history } from 'router/router'
 import moment from 'moment'
 import { Segment } from 'models/segment'
@@ -75,7 +75,9 @@ const getNewsletterTemplates = (
     const revisedParams = ignoreCurrentParams
       ? params
       : reviseListRequestParams(getState().newsletterList.listParams, params)
-    const { result, ...pagination } = await api.emailTemplates.getEmailTemplates(revisedParams)
+    const { result, ...pagination } = await couponApi.emailTemplates.getEmailTemplates(
+      revisedParams
+    )
     const templates = result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
     dispatch(
       getListSuccess({
@@ -94,7 +96,7 @@ const resetNewsletterTemplateFilters = (): AppThunk =>
 const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await api.emailTemplates.deleteEmailTemplate({ id })
+    await couponApi.emailTemplates.deleteEmailTemplate({ id })
     dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(getState().newsletterList.listParams)
     dispatch(getNewsletterTemplates({ page: newPage }))
@@ -107,7 +109,7 @@ const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatch, getS
 const createNewsletterTemplate = (name: string): AppThunk => async dispatch => {
   try {
     dispatch(setCreateState(FeatureState.Loading))
-    const id = await api.emailTemplates.createEmailTemplate({
+    const id = await couponApi.emailTemplates.createEmailTemplate({
       createEmailTemplateDto: {
         name,
         content: `<div style="height: 10%; text-align: center; padding: 1rem">${name}</div>`

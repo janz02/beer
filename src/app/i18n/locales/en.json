@@ -49,6 +49,20 @@
     },
     "table-title": "Cashiers"
   },
+  "column-order": {
+    "drag-and-drop": {
+      "header": "Shown columns order"
+    },
+    "dropdown": {
+      "link": "Customize columns"
+    },
+    "layout": {
+      "apply": "Apply",
+      "cancel": "Cancel",
+      "default": "Restore defaults",
+      "header": "Columns"
+    }
+  },
   "common": {
     "activate": "Activate",
     "active": "Active",

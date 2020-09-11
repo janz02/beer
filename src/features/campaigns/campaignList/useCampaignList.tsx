@@ -23,7 +23,7 @@ import {
   CouponRank,
   CouponMode,
   CouponDiscountType
-} from 'api/swagger/models'
+} from 'api/coupon-api/models'
 import { isCouponActive } from 'components/CampaignActiveDisplay'
 
 interface UseCampaignListFeatures {

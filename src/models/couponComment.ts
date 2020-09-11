@@ -1,4 +1,4 @@
-import { CouponState } from 'api/swagger/models'
+import { CouponState } from 'api/coupon-api/models'
 import moment from 'moment'
 
 export interface CouponComment {

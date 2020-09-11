@@ -1,4 +1,4 @@
-import { Roles } from 'api/swagger/models'
+import { Roles } from 'api/coupon-api/models'
 
 /**
  * Group of roles to define more generic(flow specific/company specific) access rights.

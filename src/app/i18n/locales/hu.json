@@ -49,6 +49,20 @@
     },
     "table-title": "Pénztárak"
   },
+  "column-order": {
+    "drag-and-drop": {
+      "header": "Megjelenő oszlopok rendezése"
+    },
+    "dropdown": {
+      "link": "Oszlopok testreszabása"
+    },
+    "layout": {
+      "apply": "Alkalmazás",
+      "cancel": "Mégsem",
+      "default": "Alapértelmezettek visszaállítása",
+      "header": "Oszlopok"
+    }
+  },
   "common": {
     "activate": "Aktiválás",
     "active": "Aktív",

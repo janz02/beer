@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, useMemo } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
@@ -7,6 +7,9 @@ import { userAccessActions } from '../userAccessSlice'
 import { useUserAccessList } from './useUserAccessList'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 
 export const UserAccessList: FC = () => {
   const dispatch = useDispatch()
@@ -30,7 +33,25 @@ export const UserAccessList: FC = () => {
     dispatch(userAccessActions.getPartnerUsers())
   }, [dispatch])
 
-  const tabBarContent = <ResetFiltersButton onClick={resetFilters} />
+  const nkmColumnOrder = useColumnOrder(nkmUsersColumnsConfig, ColumnStorageName.USER_ACCESS_NKM)
+  const partnerColumnOrder = useColumnOrder(
+    partnerUsersColumnsConfig,
+    ColumnStorageName.USER_ACCES_PARTNER
+  )
+
+  const tabBarActions = useMemo(
+    () => (
+      <>
+        <ResetFiltersButton onClick={resetFilters} />
+        {selectedTab === 'nkm' ? (
+          <ColumnOrderDropdown {...nkmColumnOrder} />
+        ) : (
+          <ColumnOrderDropdown {...partnerColumnOrder} />
+        )}
+      </>
+    ),
+    [selectedTab, nkmColumnOrder, partnerColumnOrder, resetFilters]
+  )
 
   return (
     <ResponsiveCard
@@ -44,14 +65,14 @@ export const UserAccessList: FC = () => {
         type="card"
         defaultActiveKey={selectedTab}
         onChange={setSelectedTab}
-        tabBarExtraContent={tabBarContent}
+        tabBarExtraContent={tabBarActions}
       >
         <TabPane key="nkm" tab={<TabPanelTitle title={t('user-access.nkm-users')} />}>
           <ResponsiveTable
             hasHeaderOffset
             {...{
               loading: nkmLoading,
-              columns: nkmUsersColumnsConfig,
+              columns: nkmColumnOrder.currentColumns,
               dataSource: nkmUsers.map((u, i) => ({ ...u, key: i })),
               pagination: nkmUsersTableUtils.paginationConfig,
               onChange: nkmUsersTableUtils.handleTableChange
@@ -63,7 +84,7 @@ export const UserAccessList: FC = () => {
             hasHeaderOffset
             {...{
               loading: partnerLoading,
-              columns: partnerUsersColumnsConfig,
+              columns: partnerColumnOrder.currentColumns,
               dataSource: partnerUsers.map((u, i) => ({ ...u, key: i })),
               pagination: partnerUsersTableUtils.paginationConfig,
               onChange: partnerUsersTableUtils.handleTableChange

@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Partner } from 'models/partner'
-import { api } from 'api'
-import { PartnerDto, PartnerState, PartnerRegistrationState } from 'api/swagger'
+import { couponApi } from 'api'
+import { PartnerDto, PartnerState, PartnerRegistrationState } from 'api/coupon-api'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
@@ -103,7 +103,7 @@ export const partnerEditorReducer = partnerEditorSlice.reducer
 export const getPartner = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(getPartnerRequest())
-    const partner = await api.partner.getPartner({ id })
+    const partner = await couponApi.partner.getPartner({ id })
     dispatch(getPartnerSuccess(partner))
   } catch (err) {
     dispatch(getParnterFail())
@@ -116,7 +116,7 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
     dispatch(savePartnerRequest())
 
     if (partner?.id) {
-      await api.partner.updatePartner({
+      await couponApi.partner.updatePartner({
         id: partner.id,
         partnerDto: {
           ...partner,
@@ -125,7 +125,7 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
       })
       dispatch(getPartner(partner.id))
     } else {
-      const response = await api.partner.createPartner({ partnerDto: data as PartnerDto })
+      const response = await couponApi.partner.createPartner({ partnerDto: data as PartnerDto })
 
       history.push(`/partners/${response.id}`)
     }
@@ -139,7 +139,7 @@ export const savePartner = (data: Partner): AppThunk => async (dispatch, getStat
 export const deletePartner = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(deletePartnerRequest())
-    await api.partner.deletePartner({ id })
+    await couponApi.partner.deletePartner({ id })
     dispatch(deletePartnerSuccess())
     message.success(i18n.t('common.message.delete-success'), 5)
     history.push(`/partners`)
@@ -153,7 +153,7 @@ export const deletePartner = (id: number): AppThunk => async dispatch => {
 export const setPartnerState = (id: number, state: PartnerState): AppThunk => async dispatch => {
   try {
     dispatch(setPartnerStateRequest())
-    await api.partner.activatePartner({
+    await couponApi.partner.activatePartner({
       id,
       activatePartnerDto: {
         state
@@ -175,7 +175,7 @@ export const changeRegStatePartner = (
   try {
     dispatch(changeRegStatePartnerRequest())
 
-    await api.partner.changeRegStatePartner({
+    await couponApi.partner.changeRegStatePartner({
       id,
       changePartnerRegistrationStateDto: {
         registrationState

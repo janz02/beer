@@ -15,9 +15,12 @@ import { hasPermission } from 'services/jwt-reader'
 import { history } from 'router/router'
 import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
 import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
-import { PartnerRegistrationState, PartnerState } from 'api/swagger/models'
+import { PartnerRegistrationState, PartnerState } from 'api/coupon-api/models'
 import { ActivenessStatus } from 'components/ActivenessDisplay'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -114,13 +117,18 @@ export const PartnerListPage: React.FC = () => {
     [actionColumnConfig, columnConfig, t]
   )
 
-  const headerOptions = hasPermission(partnersEditorRoles) ? (
+  const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.PARTNER)
+
+  const headerOptions = (
     <>
       <ResetFiltersButton onClick={resetFilters} />
-      <AddButton onClick={() => history.push(`/partners/new`)}>{t('partner.list.add')}</AddButton>
+      <ColumnOrderDropdown {...columnOrder} />
+      {hasPermission(partnersEditorRoles) ? (
+        <AddButton onClick={() => history.push(`/partners/new`)}>{t('partner.list.add')}</AddButton>
+      ) : (
+        undefined
+      )}
     </>
-  ) : (
-    undefined
   )
 
   return (
@@ -133,7 +141,7 @@ export const PartnerListPage: React.FC = () => {
         <ResponsiveTable
           {...{
             loading,
-            columns: columnsConfig,
+            columns: columnOrder.currentColumns,
             dataSource: addKeyProp(partners),
             pagination: paginationConfig,
             onChange: handleTableChange

@@ -9,6 +9,11 @@ import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { AddButton } from 'components/buttons/AddButton'
 import { useNewlsetterList } from './useNewlsetterList'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+import { ColumnType } from 'antd/lib/table'
+import { NewsletterPreview } from 'models/newsletter'
+import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
@@ -27,9 +32,15 @@ export const NewsletterList: FC = () => {
     handleGetNewsletterTemplates()
   }, [handleGetNewsletterTemplates])
 
+  const columnOrder = useColumnOrder(
+    tableProps.columns as ColumnType<NewsletterPreview>[],
+    ColumnStorageName.NEWSLETTER
+  )
+
   const headerOptions = (
     <>
       <ResetFiltersButton onClick={resetFilters} />
+      <ColumnOrderDropdown {...columnOrder} />
       <AddButton onClick={openCreateTemplateModal}>{t('newsletter.add')}</AddButton>
     </>
   )
@@ -42,7 +53,7 @@ export const NewsletterList: FC = () => {
         forTable
         width="normal"
       >
-        <ResponsiveTable {...tableProps} />
+        <ResponsiveTable {...tableProps} columns={columnOrder.currentColumns} />
       </ResponsiveCard>
 
       <GenericPopup {...deletePopupProps} />
