@@ -34,11 +34,7 @@ import { errorHandlingMiddleware } from './middleware'
 import { Middleware, Configuration as CouponConfiguration } from '../api/swagger/coupon/runtime'
 // import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
 import { Configuration as FilesConfiguration } from '../api/swagger/files/runtime'
-
-export function getUrl(): string {
-  const getUrl = window.location
-  return getUrl.protocol + '//' + getUrl.host
-}
+import { getUrl } from 'services/baseUrlHelper'
 
 // ---- BASE CONFIG
 const apiMiddleware: Middleware[] = [...errorHandlingMiddleware]
@@ -50,7 +46,7 @@ interface ApiBaseConfigProps {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const apiBaseConfig = (props?: ApiBaseConfigProps) => ({
   // basePath: (process.env.REACT_APP_API_URL || getUrl()) + (props?.appendUrl ?? ''), // would be this one with same origin for apis
-  basePath: props?.appendUrl ?? '', // todo: update to above when apis are available from same origin
+  basePath: getUrl(props?.appendUrl), // todo: update to above when apis are available from same origin
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: apiMiddleware
 })
@@ -87,8 +83,8 @@ export const api = {
   filesMS: new FilesMsApi(filesConfig), // note: keep this, if FilesApi removed from Coupon MS
   notification: new NotificationsApi(couponConfig),
   notificationHub: new NotificationHubApi(couponConfig),
-  UserCoupons: new UserCouponsApi(couponConfig),
-  Wallet: new WalletApi(couponConfig)
+  userCoupons: new UserCouponsApi(couponConfig),
+  wallet: new WalletApi(couponConfig)
   // campaigns: new CampaignsApi(campaignEditorConfig),
   // permissions: new PermissionsApi(campaignEditorConfig),
   // products: new ProductsApi(campaignEditorConfig),

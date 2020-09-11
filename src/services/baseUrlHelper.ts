@@ -1,7 +1,7 @@
 /**
  * Returns the base url of the app
  */
-export function getUrl(): string {
-  const baseUrl = window.location
-  return process.env.REACT_APP_API_URL || baseUrl.protocol + '//' + baseUrl.host
+export function getUrl(baseUrl?: string): string {
+  const location = window.location
+  return baseUrl || location.protocol + '//' + location.host
 }
