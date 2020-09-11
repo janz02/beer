@@ -22,15 +22,7 @@ export const SettingsPage: React.FC = () => {
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
   const currentTab = permittedTabs.find(x => x.key === currentTabKey)
 
-  const tabBarExtraContent = (
-    <ResetFiltersButton
-      onClick={() => {
-        for (const tab of allTabs) {
-          tab.resetFilters()
-        }
-      }}
-    />
-  )
+  const tabBarExtraContent = <ResetFiltersButton onClick={() => currentTab?.resetFilters()} />
 
   return (
     <ResponsiveCard

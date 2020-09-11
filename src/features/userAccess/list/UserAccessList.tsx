@@ -29,8 +29,11 @@ export const UserAccessList: FC = () => {
   } = useUserAccessList()
 
   useEffect(() => {
-    dispatch(userAccessActions.getNkmUsers())
-    dispatch(userAccessActions.getPartnerUsers())
+    if (selectedTab === 'nkm') {
+      dispatch(userAccessActions.getNkmUsers())
+    } else {
+      dispatch(userAccessActions.getPartnerUsers())
+    }
   }, [dispatch])
 
   const nkmColumnOrder = useColumnOrder(nkmUsersColumnsConfig, ColumnStorageName.USER_ACCESS_NKM)
