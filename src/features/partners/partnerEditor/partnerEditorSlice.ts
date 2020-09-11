@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Partner } from 'models/partner'
-import { PartnerDto, PartnerState, PartnerRegistrationState } from 'api2/swagger/coupon'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
+import { api } from 'api2'
+import { PartnerDto, PartnerRegistrationState, PartnerState } from 'api2/swagger/coupon'
 
 interface PartnerEditorState {
   partner?: Partner
