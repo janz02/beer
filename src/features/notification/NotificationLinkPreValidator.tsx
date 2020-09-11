@@ -6,13 +6,21 @@ export const NotificationLinkPreValidator = {
       return false
     }
 
-    const response = await couponApi.coupons.getCoupon({ id })
-    return response !== undefined
+    await couponApi.coupons.getCoupon({ id })
+    // If the call was unsuccessful, the await will return with an error, and the promise will be false
+    return true
+  },
+
+  async GetPartnerContact(id: number): Promise<boolean> {
+    await couponApi.partnerContacts.getPartnerContact({ id })
+    // If the call was unsuccessful, the await will return with an error, and the promise will be false
+    return true
   },
 
   async GetPartner(id: number): Promise<boolean> {
-    const response = await couponApi.partnerContacts.getPartnerContact({ id })
-    return response !== undefined
+    await couponApi.partner.getPartner({ id })
+    // If the call was unsuccessful, the await will return with an error, and the promise will be false
+    return true
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,7 +30,7 @@ export const NotificationLinkPreValidator = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async PartnerContactRegistered(actualId: number, parentId: number): Promise<boolean> {
-    return await this.GetPartner(actualId)
+    return (await this.GetPartner(parentId)) && (await this.GetPartnerContact(actualId))
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
