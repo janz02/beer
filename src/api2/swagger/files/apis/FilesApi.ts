@@ -18,6 +18,9 @@ import {
     FileAccess,
     FileAccessFromJSON,
     FileAccessToJSON,
+    FileInfoVm,
+    FileInfoVmFromJSON,
+    FileInfoVmToJSON,
     FileVm,
     FileVmFromJSON,
     FileVmToJSON,
@@ -28,6 +31,10 @@ export interface DeleteFileRequest {
 }
 
 export interface DownloadFileRequest {
+    id: string | null;
+}
+
+export interface InfoFileRequest {
     id: string | null;
 }
 
@@ -101,6 +108,38 @@ export class FilesApi extends runtime.BaseAPI {
      */
     async downloadFile(requestParameters: DownloadFileRequest): Promise<Blob> {
         const response = await this.downloadFileRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async infoFileRaw(requestParameters: InfoFileRequest): Promise<runtime.ApiResponse<FileInfoVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling infoFile.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Files/{id}/Info`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileInfoVmFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async infoFile(requestParameters: InfoFileRequest): Promise<FileInfoVm> {
+        const response = await this.infoFileRaw(requestParameters);
         return await response.value();
     }
 

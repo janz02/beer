@@ -117,6 +117,47 @@
         }
       }
     },
+    "/api/Files/{id}/Info": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "operationId": "infoFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileInfoVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileInfoVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileInfoVm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Information": {
       "get": {
         "tags": [
@@ -174,6 +215,20 @@
             "type": "string",
             "nullable": true
           },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "exstension": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileInfoVm": {
+        "type": "object",
+        "properties": {
           "fileName": {
             "type": "string",
             "nullable": true

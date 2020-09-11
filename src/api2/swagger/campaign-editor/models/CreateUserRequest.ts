@@ -31,6 +31,12 @@ export interface CreateUserRequest {
      * @memberof CreateUserRequest
      */
     email?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserRequest
+     */
+    captchaToken?: string | null;
 }
 
 export function CreateUserRequestFromJSON(json: any): CreateUserRequest {
@@ -45,6 +51,7 @@ export function CreateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'email': !exists(json, 'email') ? undefined : json['email'],
+        'captchaToken': !exists(json, 'captchaToken') ? undefined : json['captchaToken'],
     };
 }
 
@@ -59,6 +66,7 @@ export function CreateUserRequestToJSON(value?: CreateUserRequest | null): any {
         
         'name': value.name,
         'email': value.email,
+        'captchaToken': value.captchaToken,
     };
 }
 

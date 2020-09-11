@@ -6206,6 +6206,10 @@
           "email": {
             "type": "string",
             "nullable": true
+          },
+          "captchaToken": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6317,6 +6321,10 @@
             "type": "string",
             "description": "Email address that identifies the standalone user",
             "example": "test@email.com"
+          },
+          "captchaToken": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
