@@ -44,6 +44,9 @@ const slice = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     setListState(state, action: PayloadAction<FeatureState>) {
       state.listState = action.payload
     },
@@ -70,14 +73,11 @@ const slice = createSlice({
   }
 })
 
-const { setDeleteState, setListState, setFeatureConfig } = slice.actions
+const { setDeleteState, setListState, setFeatureConfig, resetListParams } = slice.actions
 const { deleteSiteSuccess, getSitesSuccess } = slice.actions
 const { reset, setListConstraints } = slice.actions
 
-const getSites = (params: ListRequestParams = {}, ignoreCurrentParams = false): AppThunk => async (
-  dispatch,
-  getState
-) => {
+const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
     const { listConstraintParams, listParams } = getState().siteList
@@ -85,7 +85,7 @@ const getSites = (params: ListRequestParams = {}, ignoreCurrentParams = false): 
       throw Error('Invalid partner id: ' + listConstraintParams?.partnerId)
     }
 
-    const revisedParams = ignoreCurrentParams ? params : reviseListRequestParams(listParams, params)
+    const revisedParams = reviseListRequestParams(listParams, params)
     const { result, ...pagination } = await couponApi.sites.getSites({
       ...revisedParams,
       ...listConstraintParams
@@ -102,7 +102,10 @@ const getSites = (params: ListRequestParams = {}, ignoreCurrentParams = false): 
   }
 }
 
-const resetSiteFilters = (): AppThunk => getSites(initialState.listParams, true)
+const resetSiteFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getSites())
+}
 
 const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   try {

@@ -38,6 +38,9 @@ const newsletterListSlice = createSlice({
   initialState,
   reducers: {
     resetNewsletterList: () => initialState,
+    resetListParams: state => {
+      state.listParams = initialState.listParams
+    },
     setListState: (state, action: PayloadAction<FeatureState>) => {
       state.listState = action.payload
     },
@@ -63,18 +66,17 @@ const {
   setDeleteState,
   setListState,
   getListSuccess,
-  resetNewsletterList
+  resetNewsletterList,
+  resetListParams
 } = newsletterListSlice.actions
 
-const getNewsletterTemplates = (
-  params: ListRequestParams = {},
-  ignoreCurrentParams = false
-): AppThunk => async (dispatch, getState) => {
+const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const revisedParams = ignoreCurrentParams
-      ? params
-      : reviseListRequestParams(getState().newsletterList.listParams, params)
+    const revisedParams = reviseListRequestParams(getState().newsletterList.listParams, params)
     const { result, ...pagination } = await couponApi.emailTemplates.getEmailTemplates(
       revisedParams
     )
@@ -90,8 +92,10 @@ const getNewsletterTemplates = (
   }
 }
 
-const resetNewsletterTemplateFilters = (): AppThunk =>
-  getNewsletterTemplates(initialState.listParams, true)
+const resetNewsletterTemplateFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getNewsletterTemplates())
+}
 
 const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
   try {

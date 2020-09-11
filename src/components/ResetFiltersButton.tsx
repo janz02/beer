@@ -11,7 +11,7 @@ export const ResetFiltersButton: React.FC<ResetFiltersButtonProps> = props => {
   const { t } = useTranslation()
 
   return (
-    <Button className="reset-filters-button" type="link" onClick={props.onClick}>
+    <Button className="reset-filters-button" type="link" {...props}>
       {t('common.reset-filters')}
     </Button>
   )

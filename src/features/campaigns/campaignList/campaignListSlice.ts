@@ -46,6 +46,9 @@ const campaignListSlice = createSlice({
   initialState,
   reducers: {
     resetCampaignList: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     setFeatureState(state, action: PayloadAction<FeatureState>) {
       state.featureState = action.payload
     },
@@ -80,6 +83,7 @@ const campaignListSlice = createSlice({
 
 const {
   resetCampaignList,
+  resetListParams,
   setFeatureState,
   getCouponsSuccess,
   deleteSuccess,
@@ -89,16 +93,13 @@ const {
   cancelCampaignDelete
 } = campaignListSlice.actions
 
-const getCoupons = (
-  params: ListRequestParams = {},
-  ignoreCurrentParams = false
-): AppThunk => async (dispatch, getState) => {
+const getCoupons = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setFeatureState(FeatureState.Loading))
 
     const { listParams, includeArchived, activeTabKey } = getState().campaignList
 
-    const revisedParams = ignoreCurrentParams ? params : reviseListRequestParams(listParams, params)
+    const revisedParams = reviseListRequestParams(listParams, params)
 
     revisedParams.includeArchived = includeArchived
     revisedParams.state = activeTabKey
@@ -135,7 +136,10 @@ const getCoupons = (
   }
 }
 
-const resetCouponFilters = (): AppThunk => getCoupons({ ...initialState.listParams }, true)
+const resetCouponFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getCoupons())
+}
 
 const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
   dispatch(setFeatureState(FeatureState.Loading))

@@ -11,11 +11,13 @@ import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 
+type UserAccessTab = 'nkm' | 'partner'
+
 export const UserAccessList: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const [selectedTab, setSelectedTab] = useState('nkm')
+  const [selectedTab, setSelectedTab] = useState<UserAccessTab>('nkm')
   const {
     partnerUsersColumnsConfig,
     nkmUsersColumnsConfig,
@@ -25,15 +27,13 @@ export const UserAccessList: FC = () => {
     nkmLoading,
     partnerUsers,
     partnerLoading,
-    resetFilters
+    resetNkmFilters,
+    resetPartnerFilters
   } = useUserAccessList()
 
   useEffect(() => {
-    if (selectedTab === 'nkm') {
-      dispatch(userAccessActions.getNkmUsers())
-    } else {
-      dispatch(userAccessActions.getPartnerUsers())
-    }
+    dispatch(userAccessActions.getNkmUsers())
+    dispatch(userAccessActions.getPartnerUsers())
   }, [dispatch])
 
   const nkmColumnOrder = useColumnOrder(nkmUsersColumnsConfig, ColumnStorageName.USER_ACCESS_NKM)
@@ -42,8 +42,16 @@ export const UserAccessList: FC = () => {
     ColumnStorageName.USER_ACCES_PARTNER
   )
 
-  const tabBarActions = useMemo(
-    () => (
+  const tabBarActions = useMemo(() => {
+    const resetFilters = (): void => {
+      if (selectedTab === 'nkm') {
+        resetNkmFilters()
+      } else {
+        resetPartnerFilters()
+      }
+    }
+
+    return (
       <>
         <ResetFiltersButton onClick={resetFilters} />
         {selectedTab === 'nkm' ? (
@@ -52,9 +60,8 @@ export const UserAccessList: FC = () => {
           <ColumnOrderDropdown {...partnerColumnOrder} />
         )}
       </>
-    ),
-    [selectedTab, nkmColumnOrder, partnerColumnOrder, resetFilters]
-  )
+    )
+  }, [selectedTab, nkmColumnOrder, partnerColumnOrder, resetNkmFilters, resetPartnerFilters])
 
   return (
     <ResponsiveCard
@@ -67,7 +74,7 @@ export const UserAccessList: FC = () => {
       <ResponsiveTabs
         type="card"
         defaultActiveKey={selectedTab}
-        onChange={setSelectedTab}
+        onChange={x => setSelectedTab(x as UserAccessTab)}
         tabBarExtraContent={tabBarActions}
       >
         <TabPane key="nkm" tab={<TabPanelTitle title={t('user-access.nkm-users')} />}>

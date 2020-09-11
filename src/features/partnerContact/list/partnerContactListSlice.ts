@@ -45,6 +45,9 @@ const slice = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     setListState(state, action: PayloadAction<FeatureState>) {
       state.listState = action.payload
     },
@@ -68,12 +71,9 @@ const slice = createSlice({
   }
 })
 const { getContactsSuccess, deleteContactSuccess } = slice.actions
-const { reset, setListState, setDeleteState, setListConstraints } = slice.actions
+const { reset, resetListParams, setListState, setDeleteState, setListConstraints } = slice.actions
 
-const getContacts = (
-  params: ListRequestParams = {},
-  ignoreCurrentParams = false
-): AppThunk => async (dispatch, getState) => {
+const getContacts = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
 
@@ -83,9 +83,7 @@ const getContacts = (
       throw Error('Invalid partner id: ' + partnerId)
     }
 
-    const revisedParams = ignoreCurrentParams
-      ? params
-      : reviseListRequestParams(state.listParams, params)
+    const revisedParams = reviseListRequestParams(state.listParams, params)
     const { result, ...pagination } = await couponApi.partnerContacts.getPartnerPartnerContact({
       ...revisedParams,
       ...state.listConstraintParams
@@ -101,7 +99,10 @@ const getContacts = (
   }
 }
 
-const resetContactFilters = (): AppThunk => getContacts(initialState.listParams, true)
+const resetContactFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getContacts())
+}
 
 const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, getState) => {
   try {

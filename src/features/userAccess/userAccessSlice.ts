@@ -11,7 +11,6 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Roles } from 'api/coupon-api/models'
 import { FeatureState } from 'models/featureState'
-import { getPartners } from 'features/partners/partnerList/partnerListSlice'
 
 interface State {
   nkmUsers: UserAccess[]
@@ -46,6 +45,12 @@ const slice = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    resetNkmListParams(state) {
+      state.nkmListParams = initialState.nkmListParams
+    },
+    resetParterListParams(state) {
+      state.partnerListParams = initialState.partnerListParams
+    },
     openEditor(state, action: PayloadAction<UserType>) {
       state.editedUserType = action.payload
       state.editorOpen = true
@@ -94,7 +99,7 @@ const slice = createSlice({
 })
 const { openEditor, closeEditor } = slice.actions
 const { setEditorState, setNkmListState, setPartnerListState } = slice.actions
-const { clearUserAccessEditor, reset } = slice.actions
+const { clearUserAccessEditor, reset, resetNkmListParams, resetParterListParams } = slice.actions
 const {
   getNkmUsersSuccess,
   getPartnerUsersSuccess,
@@ -102,15 +107,10 @@ const {
   saveUserSuccess
 } = slice.actions
 
-const getNkmUsers = (
-  params: ListRequestParams = {},
-  ignoreCurrentParams = false
-): AppThunk => async (dispatch, getState) => {
+const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setNkmListState(FeatureState.Loading))
-    const revisedParams = ignoreCurrentParams
-      ? params
-      : reviseListRequestParams(getState().userAccess.nkmListParams, params)
+    const revisedParams = reviseListRequestParams(getState().userAccess.nkmListParams, params)
     const { result, ...pagination } = await couponApi.auth.getNkmPartnerContacts(revisedParams)
 
     dispatch(
@@ -124,17 +124,18 @@ const getNkmUsers = (
   }
 }
 
-const resetNkmUsersFilters = (): AppThunk => getNkmUsers(initialState.nkmListParams, true)
+const resetNkmUsersFilters = (): AppThunk => async dispatch => {
+  dispatch(resetNkmListParams())
+  dispatch(getNkmUsers())
+}
 
-const getPartnerUsers = (
-  params: ListRequestParams = {},
-  ignoreCurrentParams = false
-): AppThunk => async (dispatch, getState) => {
+const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch(setPartnerListState(FeatureState.Loading))
-    const revisedParams = ignoreCurrentParams
-      ? params
-      : reviseListRequestParams(getState().userAccess.partnerListParams, params)
+    const revisedParams = reviseListRequestParams(getState().userAccess.partnerListParams, params)
     const { result, ...pagination } = await couponApi.auth.getPartnerContacts(revisedParams)
 
     dispatch(
@@ -148,7 +149,9 @@ const getPartnerUsers = (
   }
 }
 
-const resetPartnerUsersFilters = (): AppThunk => getPartners(initialState.partnerListParams, true)
+const resetPartnerUsersFilters = (): AppThunk => async dispatch => {
+  dispatch(resetParterListParams())
+}
 
 const inspectUserAccess = (userType: UserType, id: number): AppThunk => async dispatch => {
   try {

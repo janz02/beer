@@ -29,6 +29,9 @@ const partnersListSlice = createSlice({
   initialState,
   reducers: {
     resetPartnersList: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     getPartnersRequest(state) {
       state.loading = true
     },
@@ -48,22 +51,24 @@ const partnersListSlice = createSlice({
   }
 })
 
-const { getPartnersRequest, getPartnersSuccess, getPartnersFail } = partnersListSlice.actions
+const {
+  resetListParams,
+  getPartnersRequest,
+  getPartnersSuccess,
+  getPartnersFail
+} = partnersListSlice.actions
 export const { resetPartnersList } = partnersListSlice.actions
 
 export const partnersListReducer = partnersListSlice.reducer
 
-export const getPartners = (
-  params: ListRequestParams = {},
-  ignoreCurrentParams = false
-): AppThunk => async (dispatch, getState) => {
+export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch(getPartnersRequest())
 
-    const revisedParams = ignoreCurrentParams
-      ? params
-      : reviseListRequestParams(getState().partnerList.listParams, params)
-
+    const revisedParams = reviseListRequestParams(getState().partnerList.listParams, params)
     const { result, ...pagination } = await couponApi.partner.getPartners(revisedParams)
 
     dispatch(
@@ -77,4 +82,7 @@ export const getPartners = (
   }
 }
 
-export const resetPartnerFilters = (): AppThunk => getPartners(initialState.listParams, true)
+export const resetPartnerFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getPartners())
+}

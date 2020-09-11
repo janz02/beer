@@ -34,6 +34,9 @@ const categoryListSlice = createSlice({
   initialState,
   reducers: {
     resetCategoryList: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     setListState: (state, action: PayloadAction<FeatureState>) => {
       state.listState = action.payload
     },
@@ -52,21 +55,17 @@ const categoryListSlice = createSlice({
 })
 
 const {
+  resetListParams,
   setListState,
   setDeleteState,
   getCategoriesSuccess,
   resetCategoryList
 } = categoryListSlice.actions
 
-const getCategories = (
-  params: ListRequestParams = {},
-  ignoreCurrentParams = false
-): AppThunk => async (dispatch, getState) => {
+const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const revisedParams = ignoreCurrentParams
-      ? params
-      : reviseListRequestParams(getState().categoryList.listParams, params)
+    const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
     const { result, ...pagination } = await couponApi.categories.getCategories(revisedParams)
 
     dispatch(
@@ -80,7 +79,10 @@ const getCategories = (
   }
 }
 
-const resetCategoryFilters = (): AppThunk => getCategories(initialState.listParams, true)
+const resetCategoryFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getCategories())
+}
 
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
