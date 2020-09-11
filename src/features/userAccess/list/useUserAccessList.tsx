@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { UserAccess, UserType } from 'models/user'
 import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/coupon-api/models'
+import { Roles } from 'api/swagger/coupon'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
 import { FeatureState } from 'models/featureState'
 

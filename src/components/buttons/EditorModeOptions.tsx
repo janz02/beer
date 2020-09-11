@@ -1,10 +1,10 @@
 import React, { useMemo, FC } from 'react'
-import { Roles } from 'api/coupon-api/models'
 import { hasPermission } from 'services/jwt-reader'
 import { DeleteButton } from './DeleteButton'
 import { EditButton } from './EditButton'
 import { EscapeButton } from './EscapeButton'
 import { useTranslation } from 'react-i18next'
+import { Roles } from 'api/swagger/coupon'
 
 export enum EditorMode {
   NEW = 'new',

@@ -11,7 +11,7 @@ import {
   CouponState,
   CouponMode,
   CouponDiscountType
-} from 'api/coupon-api/models'
+} from 'api/swagger/coupon'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { FormProps, FormInstance } from 'antd/lib/form'
 import { CouponComment } from 'models/couponComment'

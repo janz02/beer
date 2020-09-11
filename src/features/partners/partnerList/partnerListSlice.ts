@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { couponApi } from 'api'
+import { api } from 'api'
 import {
   ListRequestParams,
   reviseListRequestParams,
@@ -62,7 +62,7 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
 
     const revisedParams = reviseListRequestParams(getState().partnerList.listParams, params)
 
-    const { result, ...pagination } = await couponApi.partner.getPartners(revisedParams)
+    const { result, ...pagination } = await api.partner.getPartners(revisedParams)
 
     dispatch(
       getPartnersSuccess({

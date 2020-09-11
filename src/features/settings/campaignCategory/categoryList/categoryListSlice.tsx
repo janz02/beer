@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
-import { couponApi } from 'api'
+import { api } from 'api'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
@@ -62,7 +62,7 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
-    const { result, ...pagination } = await couponApi.categories.getCategories(revisedParams)
+    const { result, ...pagination } = await api.categories.getCategories(revisedParams)
 
     dispatch(
       getCategoriesSuccess({
@@ -78,7 +78,7 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await couponApi.categories.deleteCategory({ id })
+    await api.categories.deleteCategory({ id })
     dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
     dispatch(getCategories({ page: newPage }))

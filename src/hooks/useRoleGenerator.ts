@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Roles } from 'api/coupon-api/models'
+import { Roles } from 'api/swagger/coupon'
 import { useTranslation } from 'react-i18next'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { UserType } from 'models/user'

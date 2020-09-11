@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { CategoryTab } from './CategoryTab'
 import { hasPermission } from 'services/jwt-reader'
 import { SettingsTab } from '../SettingsPage'
-import { Roles } from 'api/coupon-api/models'
+import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
 
 export const useCategoryTab = (): SettingsTab => {
