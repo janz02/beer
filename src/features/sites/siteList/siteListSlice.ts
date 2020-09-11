@@ -8,7 +8,7 @@ import {
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import { AppThunk } from 'app/store'
-import { api } from 'api'
+import { couponApi } from 'api'
 
 export interface SiteFeatureConfig {
   shrinks: boolean
@@ -83,7 +83,7 @@ const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, 
     }
 
     const revisedParams = reviseListRequestParams(listParams, params)
-    const { result, ...pagination } = await api.sites.getSites({
+    const { result, ...pagination } = await couponApi.sites.getSites({
       ...revisedParams,
       ...listConstraintParams
     })
@@ -102,7 +102,7 @@ const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, 
 const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await api.sites.deleteSite({ id })
+    await couponApi.sites.deleteSite({ id })
     dispatch(deleteSiteSuccess())
     const { listParams } = getState().siteList
     const newPage = recalculatePaginationAfterDeletion(listParams)

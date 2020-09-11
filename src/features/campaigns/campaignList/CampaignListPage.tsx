@@ -2,7 +2,7 @@ import React, { useEffect, FC, useMemo } from 'react'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { history } from 'router/router'
 import { useTranslation } from 'react-i18next'
-import { Roles } from 'api/swagger/models'
+import { Roles } from 'api/coupon-api/models'
 import { hasPermission } from 'services/jwt-reader'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { GenericPopup } from 'components/popups/GenericPopup'
@@ -10,6 +10,10 @@ import { AddButton } from 'components/buttons/AddButton'
 import { useCampaignList } from './useCampaignList'
 import { CampaignListTabs } from './components/CampaignListTabs'
 import { Checkbox } from 'antd'
+import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+import { CouponListTabKey } from './campaignListSlice'
+import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -33,6 +37,14 @@ export const CampaignListPage: FC = () => {
     getCoupons,
     deleteCoupon
   } = useCampaignList()
+
+  const columnOrders = {
+    [CouponListTabKey.Waiting]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_WAITING),
+    [CouponListTabKey.Accepted]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_ACCEPTED),
+    [CouponListTabKey.Closed]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_CLOSED),
+    [CouponListTabKey.Created]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_CREATED),
+    [CouponListTabKey.All]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_ALL)
+  }
 
   const tableProps = {
     loading,
@@ -76,9 +88,10 @@ export const CampaignListPage: FC = () => {
         >
           {t('coupon-list.show-archived')}
         </Checkbox>
+        <ColumnOrderDropdown {...columnOrders[activeTabKey]} />
       </>
     ),
-    [t, handleIncludeArchivedChange]
+    [t, handleIncludeArchivedChange, columnOrders, activeTabKey]
   )
 
   return (
@@ -92,6 +105,7 @@ export const CampaignListPage: FC = () => {
         floatingOptions={cardHeaderActions}
       >
         <CampaignListTabs
+          columnOrders={columnOrders}
           tableProps={tableProps}
           activeTabKey={activeTabKey}
           onTabChange={handleTabChange}

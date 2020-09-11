@@ -1,6 +1,5 @@
-import React, { FC } from 'react'
+import React from 'react'
 import './ActivenessDisplay.scss'
-import { useTranslation } from 'react-i18next'
 
 export type ActivenessStatus = 'active' | 'inactive' | 'deleted'
 
@@ -10,8 +9,6 @@ interface ActivenessDisplayProps {
 }
 
 export const ActivenessDisplay: React.FC<ActivenessDisplayProps> = props => {
-  const { t } = useTranslation()
-
   return (
     <div className="activeness-display">
       <span className={'active-inactive-badge ' + props.status} />

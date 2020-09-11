@@ -1,7 +1,13 @@
 import React, { FC } from 'react'
 import { Form, Input, Select, DatePicker, Row, Col, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { CouponRank, CouponType, Roles, CouponMode, CouponDiscountType } from 'api/swagger/models'
+import {
+  CouponRank,
+  CouponType,
+  Roles,
+  CouponMode,
+  CouponDiscountType
+} from 'api/coupon-api/models'
 import { hasAllPermissions } from 'services/jwt-reader'
 import { FileUploadButton } from 'components/upload/FileUploadButton'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'

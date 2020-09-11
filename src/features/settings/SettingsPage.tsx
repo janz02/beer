@@ -4,7 +4,7 @@ import { hasPermission } from 'services/jwt-reader'
 import { useCategoryTab } from './campaignCategory/useCategoryTab'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
 import { AppstoreAddOutlined } from '@ant-design/icons'
-import { Roles } from 'api/swagger'
+import { Roles } from 'api/coupon-api'
 
 export interface SettingsTab {
   key: string
