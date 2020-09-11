@@ -4,14 +4,16 @@ import { CategoryEditor } from './categoryEditor/CategoryEditor'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { categoryListActions } from './categoryList/categoryListSlice'
 import { UseGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
+import { UseCategoryListUtils } from './categoryList/useCategoryList'
 
 export interface CategoryTabProps {
+  categoryListUtils: UseCategoryListUtils
   modalUtils: UseGenericModalFormEditorUtils
 }
 
 export const CategoryTab: React.FC<CategoryTabProps> = props => {
   const dispatch = useDispatch()
-  const { editorParams, routeToEditor, handleExit, handleAfterClose } = props.modalUtils
+  const { editorParams, handleExit, handleAfterClose } = props.modalUtils
 
   useEffect(() => {
     dispatch(categoryListActions.getCategories())
@@ -19,7 +21,7 @@ export const CategoryTab: React.FC<CategoryTabProps> = props => {
 
   return (
     <>
-      <CategoryList onOpenEditor={routeToEditor} />
+      <CategoryList categoryListUtils={props.categoryListUtils} />
       <CategoryEditor params={editorParams} handleExit={handleExit} afterClose={handleAfterClose} />
     </>
   )

@@ -2,15 +2,14 @@ import React, { FC } from 'react'
 import './CategoryList.scss'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { useCategoryList } from './useCategoryList'
+import { UseCategoryListUtils } from './useCategoryList'
 
 interface CategoryListProps {
-  onOpenEditor: (id?: number) => void
+  categoryListUtils: UseCategoryListUtils
 }
 
 export const CategoryList: FC<CategoryListProps> = props => {
-  const { onOpenEditor } = props
-  const { tableProps, popupProps } = useCategoryList({ onOpenEditor })
+  const { tableProps, popupProps } = props.categoryListUtils
 
   return (
     <>

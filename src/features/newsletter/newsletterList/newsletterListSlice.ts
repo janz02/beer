@@ -66,13 +66,15 @@ const {
   resetNewsletterList
 } = newsletterListSlice.actions
 
-const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
+const getNewsletterTemplates = (
+  params: ListRequestParams = {},
+  ignoreCurrentParams = false
+): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const revisedParams = reviseListRequestParams(getState().newsletterList.listParams, params)
+    const revisedParams = ignoreCurrentParams
+      ? params
+      : reviseListRequestParams(getState().newsletterList.listParams, params)
     const { result, ...pagination } = await api.emailTemplates.getEmailTemplates(revisedParams)
     const templates = result?.map(t => ({ ...t, modifiedAt: moment(t.modifiedAt) }))
     dispatch(
@@ -85,6 +87,9 @@ const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => asy
     dispatch(setListState(FeatureState.Error))
   }
 }
+
+const resetNewsletterTemplateFilters = (): AppThunk =>
+  getNewsletterTemplates(initialState.listParams, true)
 
 const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
   try {
@@ -122,6 +127,7 @@ export const newsletterListReducer = newsletterListSlice.reducer
 export const newsletterListActions = {
   resetNewsletterList,
   getNewsletterTemplates,
+  resetNewsletterTemplateFilters,
   createNewsletterTemplate,
   deleteNewsletterTemplate
 }

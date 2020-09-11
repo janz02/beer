@@ -21,6 +21,7 @@ interface UseSiteListUtils {
   siteToDelete: PopupState<Site> | undefined | null
   handleGetSites: () => void
   handleAdd: () => void
+  resetFilters: () => void
 }
 export const useSiteList = (props: UseSiteListProps): UseSiteListUtils => {
   const { t } = useTranslation()
@@ -45,6 +46,10 @@ export const useSiteList = (props: UseSiteListProps): UseSiteListUtils => {
     filterKeys: ['name', 'address'],
     getDataAction: siteListActions.getSites
   })
+
+  const resetFilters = (): void => {
+    dispatch(siteListActions.resetSiteFilters)
+  }
 
   const handleAdd = useCallback((): void => history.push(routeRoot), [routeRoot])
 
@@ -116,5 +121,5 @@ export const useSiteList = (props: UseSiteListProps): UseSiteListUtils => {
     afterClose: () => setSiteToDelete(null)
   }
 
-  return { tableProps, handleGetSites, handleAdd, deletePopupProps, siteToDelete }
+  return { tableProps, handleGetSites, handleAdd, deletePopupProps, siteToDelete, resetFilters }
 }

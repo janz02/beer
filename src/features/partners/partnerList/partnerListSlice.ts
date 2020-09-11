@@ -53,14 +53,16 @@ export const { resetPartnersList } = partnersListSlice.actions
 
 export const partnersListReducer = partnersListSlice.reducer
 
-export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const getPartners = (
+  params: ListRequestParams = {},
+  ignoreCurrentParams = false
+): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(getPartnersRequest())
 
-    const revisedParams = reviseListRequestParams(getState().partnerList.listParams, params)
+    const revisedParams = ignoreCurrentParams
+      ? params
+      : reviseListRequestParams(getState().partnerList.listParams, params)
 
     const { result, ...pagination } = await api.partner.getPartners(revisedParams)
 
@@ -74,3 +76,5 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
     dispatch(getPartnersFail())
   }
 }
+
+export const resetPartnerFilters = (): AppThunk => getPartners(initialState.listParams, true)

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { userAccessActions } from '../userAccessSlice'
 import { useUserAccessList } from './useUserAccessList'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 
 export const UserAccessList: FC = () => {
   const dispatch = useDispatch()
@@ -20,13 +21,16 @@ export const UserAccessList: FC = () => {
     nkmUsers,
     nkmLoading,
     partnerUsers,
-    partnerLoading
+    partnerLoading,
+    resetFilters
   } = useUserAccessList()
 
   useEffect(() => {
     dispatch(userAccessActions.getNkmUsers())
     dispatch(userAccessActions.getPartnerUsers())
   }, [dispatch])
+
+  const tabBarContent = <ResetFiltersButton onClick={resetFilters} />
 
   return (
     <ResponsiveCard
@@ -36,7 +40,12 @@ export const UserAccessList: FC = () => {
       paddedBottom
       floatingTitle={t('user-access.user-access')}
     >
-      <ResponsiveTabs type="card" defaultActiveKey={selectedTab} onChange={setSelectedTab}>
+      <ResponsiveTabs
+        type="card"
+        defaultActiveKey={selectedTab}
+        onChange={setSelectedTab}
+        tabBarExtraContent={tabBarContent}
+      >
         <TabPane key="nkm" tab={<TabPanelTitle title={t('user-access.nkm-users')} />}>
           <ResponsiveTable
             hasHeaderOffset

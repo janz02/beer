@@ -14,6 +14,7 @@ import { FeatureState } from 'models/featureState'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
 import { partnerContactModalActions } from '../modal/partnerContactModalSlice'
 import { PartnerContactConfig } from '../PartnerContactTile'
+import { displayBackendError } from 'services/errorHelpers'
 
 interface UsePartnerContactListProps {
   config: PartnerContactConfig
@@ -24,6 +25,7 @@ interface UsePartnerContactListUtils {
   deletePopupProps: GenericPopupProps
   handleGetList: (params?: ListRequestParams) => void
   handleOpenInviter: () => void
+  resetFilters: () => void
 }
 export const usePartnerContactList = (
   props: UsePartnerContactListProps
@@ -49,6 +51,10 @@ export const usePartnerContactList = (
     filterKeys: ['name', 'email', 'phone', 'role'],
     getDataAction: partnerContactListActions.getContacts
   })
+
+  const resetFilters = (): void => {
+    dispatch(partnerContactListActions.resetContactFilters)
+  }
 
   const handleInspectContact = useCallback(
     (id: number | undefined) => {
@@ -159,6 +165,7 @@ export const usePartnerContactList = (
     tableProps,
     contactToDelete,
     handleOpenInviter,
-    handleGetList
+    handleGetList,
+    resetFilters
   }
 }

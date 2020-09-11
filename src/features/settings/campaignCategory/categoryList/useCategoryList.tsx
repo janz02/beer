@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FeatureState } from 'models/featureState'
 import { categoryListActions } from './categoryListSlice'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
@@ -17,15 +17,17 @@ interface UseCategoryListProps {
   onOpenEditor: (id?: number) => void
 }
 
-interface UseCategoryListUtils {
+export interface UseCategoryListUtils {
   tableProps: ResponsiveTableProps
   popupProps: GenericPopupProps
+  resetFilters: () => void
 }
 
 export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUtils => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
-  const { getCategories, deleteCategory } = categoryListActions
+  const dispatch = useDispatch()
+  const { getCategories, deleteCategory, resetCategoryFilters } = categoryListActions
   const { listParams, categories, listState } = useSelector(
     (state: RootState) => state.categoryList
   )
@@ -95,6 +97,7 @@ export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUti
 
   return {
     tableProps,
-    popupProps
+    popupProps,
+    resetFilters: () => dispatch(resetCategoryFilters())
   }
 }

@@ -11,6 +11,7 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Roles } from 'api/swagger/models'
 import { FeatureState } from 'models/featureState'
+import { getPartners } from 'features/partners/partnerList/partnerListSlice'
 
 interface State {
   nkmUsers: UserAccess[]
@@ -101,10 +102,15 @@ const {
   saveUserSuccess
 } = slice.actions
 
-const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
+const getNkmUsers = (
+  params: ListRequestParams = {},
+  ignoreCurrentParams = false
+): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setNkmListState(FeatureState.Loading))
-    const revisedParams = reviseListRequestParams(getState().userAccess.nkmListParams, params)
+    const revisedParams = ignoreCurrentParams
+      ? params
+      : reviseListRequestParams(getState().userAccess.nkmListParams, params)
     const { result, ...pagination } = await api.auth.getNkmPartnerContacts(revisedParams)
     dispatch(
       getNkmUsersSuccess({
@@ -117,13 +123,17 @@ const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatc
   }
 }
 
-const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
-  dispatch,
-  getState
-) => {
+const resetNkmUsersFilters = (): AppThunk => getNkmUsers(initialState.nkmListParams, true)
+
+const getPartnerUsers = (
+  params: ListRequestParams = {},
+  ignoreCurrentParams = false
+): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setPartnerListState(FeatureState.Loading))
-    const revisedParams = reviseListRequestParams(getState().userAccess.partnerListParams, params)
+    const revisedParams = ignoreCurrentParams
+      ? params
+      : reviseListRequestParams(getState().userAccess.partnerListParams, params)
     const { result, ...pagination } = await api.auth.getPartnerContacts(revisedParams)
 
     dispatch(
@@ -136,6 +146,8 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
     dispatch(setPartnerListState(FeatureState.Error))
   }
 }
+
+const resetPartnerUsersFilters = (): AppThunk => getPartners(initialState.partnerListParams, true)
 
 const inspectUserAccess = (userType: UserType, id: number): AppThunk => async dispatch => {
   try {
@@ -171,7 +183,9 @@ export const userAccessActions = {
   saveUserAccess,
   inspectUserAccess,
   getNkmUsers,
+  resetNkmUsersFilters,
   getPartnerUsers,
+  resetPartnerUsersFilters,
   closeEditor,
   clearUserAccessEditor,
   reset

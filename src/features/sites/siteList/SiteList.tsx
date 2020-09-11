@@ -6,6 +6,7 @@ import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { SiteFeatureConfig } from './siteListSlice'
 import { GenericPopup } from 'components/popups/GenericPopup'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 
 interface SiteListProps {
   config: SiteFeatureConfig
@@ -13,7 +14,14 @@ interface SiteListProps {
 export const SiteList: FC<SiteListProps> = props => {
   const { shrinks } = props.config
   const { t } = useTranslation()
-  const { tableProps, handleGetSites, handleAdd, deletePopupProps, siteToDelete } = useSiteList({
+  const {
+    tableProps,
+    handleGetSites,
+    handleAdd,
+    deletePopupProps,
+    siteToDelete,
+    resetFilters
+  } = useSiteList({
     config: props.config
   })
 
@@ -21,7 +29,12 @@ export const SiteList: FC<SiteListProps> = props => {
     handleGetSites()
   }, [handleGetSites])
 
-  const headerOptions = <AddButton onClick={handleAdd}>{t('site-list.add')}</AddButton>
+  const headerOptions = (
+    <>
+      <ResetFiltersButton onClick={resetFilters} />
+      <AddButton onClick={handleAdd}>{t('site-list.add')}</AddButton>
+    </>
+  )
 
   return (
     <>

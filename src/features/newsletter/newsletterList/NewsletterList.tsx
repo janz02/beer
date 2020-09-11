@@ -8,6 +8,7 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { AddButton } from 'components/buttons/AddButton'
 import { useNewlsetterList } from './useNewlsetterList'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 
 export const NewsletterList: FC = () => {
   const { t } = useTranslation()
@@ -18,7 +19,8 @@ export const NewsletterList: FC = () => {
     deletePopupProps,
     createModalFormProps,
     openCreateTemplateModal,
-    handleGetNewsletterTemplates
+    handleGetNewsletterTemplates,
+    resetFilters
   } = useNewlsetterList()
 
   useEffect(() => {
@@ -26,7 +28,10 @@ export const NewsletterList: FC = () => {
   }, [handleGetNewsletterTemplates])
 
   const headerOptions = (
-    <AddButton onClick={openCreateTemplateModal}>{t('newsletter.add')}</AddButton>
+    <>
+      <ResetFiltersButton onClick={resetFilters} />
+      <AddButton onClick={openCreateTemplateModal}>{t('newsletter.add')}</AddButton>
+    </>
   )
 
   return (

@@ -58,10 +58,15 @@ const {
   resetCategoryList
 } = categoryListSlice.actions
 
-const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
+const getCategories = (
+  params: ListRequestParams = {},
+  ignoreCurrentParams = false
+): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
+    const revisedParams = ignoreCurrentParams
+      ? params
+      : reviseListRequestParams(getState().categoryList.listParams, params)
     const { result, ...pagination } = await api.categories.getCategories(revisedParams)
 
     dispatch(
@@ -74,6 +79,8 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
     dispatch(setListState(FeatureState.Error))
   }
 }
+
+const resetCategoryFilters = (): AppThunk => getCategories(initialState.listParams, true)
 
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
@@ -92,6 +99,7 @@ const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
 export const categoryListActions = {
   resetCategoryList,
   getCategories,
+  resetCategoryFilters,
   deleteCategory
 }
 

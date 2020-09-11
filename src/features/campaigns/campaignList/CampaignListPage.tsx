@@ -9,7 +9,8 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
 import { useCampaignList } from './useCampaignList'
 import { CampaignListTabs } from './components/CampaignListTabs'
-import { Checkbox } from 'antd'
+import { Checkbox, Button } from 'antd'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -25,8 +26,9 @@ export const CampaignListPage: FC = () => {
     paginationConfig,
     couponToDelete,
     deletePopupVisible,
-    handleIncludeArchivedChange,
     activeTabKey,
+    resetFilters,
+    handleIncludeArchivedChange,
     handleTabChange,
     handleDeleteCancel,
     getCategories,
@@ -76,9 +78,10 @@ export const CampaignListPage: FC = () => {
         >
           {t('coupon-list.show-archived')}
         </Checkbox>
+        <ResetFiltersButton onClick={resetFilters} />
       </>
     ),
-    [t, handleIncludeArchivedChange]
+    [t, handleIncludeArchivedChange, resetFilters]
   )
 
   return (

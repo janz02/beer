@@ -74,7 +74,10 @@ const { setDeleteState, setListState, setFeatureConfig } = slice.actions
 const { deleteSiteSuccess, getSitesSuccess } = slice.actions
 const { reset, setListConstraints } = slice.actions
 
-const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
+const getSites = (params: ListRequestParams = {}, ignoreCurrentParams = false): AppThunk => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch(setListState(FeatureState.Loading))
     const { listConstraintParams, listParams } = getState().siteList
@@ -82,7 +85,7 @@ const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, 
       throw Error('Invalid partner id: ' + listConstraintParams?.partnerId)
     }
 
-    const revisedParams = reviseListRequestParams(listParams, params)
+    const revisedParams = ignoreCurrentParams ? params : reviseListRequestParams(listParams, params)
     const { result, ...pagination } = await api.sites.getSites({
       ...revisedParams,
       ...listConstraintParams
@@ -98,6 +101,8 @@ const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, 
     dispatch(setListState(FeatureState.Error))
   }
 }
+
+const resetSiteFilters = (): AppThunk => getSites(initialState.listParams, true)
 
 const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   try {
@@ -121,5 +126,6 @@ export const siteListActions = {
   setListConstraints,
   setFeatureConfig,
   getSites,
+  resetSiteFilters,
   deleteSite
 }
