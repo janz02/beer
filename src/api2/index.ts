@@ -12,17 +12,28 @@ import {
   SegmentsApi,
   CashiersApi,
   InformationApi,
-  FilesApi,
   NotificationsApi,
   NotificationHubApi,
   UserCouponsApi,
-  WalletApi
+  WalletApi,
+  FilesApi
 } from './swagger/coupon'
-import { Middleware } from './swagger/coupon/runtime'
-import * as fromCoupon from './swagger/coupon/runtime'
-// import * as fromFiles from './swagger/files/runtime'
-import { tokenConfigMiddleware } from './middleware/tokenConfigMiddleware'
-import { errorHandlingMiddleware } from './middleware/errorHandlingMiddleware'
+import {
+  CampaignsApi,
+  PermissionsApi,
+  ProductsApi,
+  SegmentationQueriesApi,
+  SegmentationCategoriesApi,
+  SegmentationsApi,
+  SharepointApi,
+  TemplatesApi,
+  TestGroupCategoriesApi
+} from './swagger/campaign-editor'
+import { FilesApi as FilesMsApi } from './swagger/files'
+import { errorHandlingMiddleware, tokenConfigMiddleware } from './middleware'
+import { Middleware, Configuration as CouponConfiguration } from './swagger/coupon/runtime'
+import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
+import { Configuration as FilesConfiguration } from './swagger/files/runtime'
 
 export function getUrl(): string {
   const getUrl = window.location
@@ -38,15 +49,25 @@ interface ApiBaseConfigProps {
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const apiBaseConfig = (props?: ApiBaseConfigProps) => ({
-  basePath: (process.env.REACT_APP_API_URL || getUrl()) + (props?.appendUrl ?? ''),
+  // basePath: (process.env.REACT_APP_API_URL || getUrl()) + (props?.appendUrl ?? ''), // would be this one with same origin for apis
+  basePath: props?.appendUrl ?? '', // todo: update to above when apis are available from same origin
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: apiMiddleware
 })
 
 // ---- OTHER CONFIGS
-const couponConfig: fromCoupon.Configuration = new fromCoupon.Configuration(apiBaseConfig())
+// todo update appendUrl props when apis are available from same origin
+const couponConfig: CouponConfiguration = new CouponConfiguration(
+  apiBaseConfig({ appendUrl: process.env.REACT_APP_COUPON_API_URL })
+)
 
-// const filesConfig: fromFiles.Configuration = new fromCoupon.Configuration(apiBaseConfig())
+const campaignEditorConfig: CampaignEditorConfiguration = new CampaignEditorConfiguration(
+  apiBaseConfig({ appendUrl: process.env.REACT_APP_CAMPAIGNEDITOR_API_URL })
+)
+
+const filesConfig: FilesConfiguration = new FilesConfiguration(
+  apiBaseConfig({ appendUrl: process.env.REACT_APP_FILES_API_URL })
+)
 
 export const api = {
   coupons: new CouponsApi(couponConfig),
@@ -63,9 +84,18 @@ export const api = {
   cashiers: new CashiersApi(couponConfig),
   information: new InformationApi(couponConfig),
   files: new FilesApi(couponConfig),
-  // files: new FilesApi(filesConfig),
+  filesMS: new FilesMsApi(filesConfig),
   notification: new NotificationsApi(couponConfig),
   notificationHub: new NotificationHubApi(couponConfig),
   UserCoupons: new UserCouponsApi(couponConfig),
-  Wallet: new WalletApi(couponConfig)
+  Wallet: new WalletApi(couponConfig),
+  campaigns: new CampaignsApi(campaignEditorConfig),
+  permissions: new PermissionsApi(campaignEditorConfig),
+  products: new ProductsApi(campaignEditorConfig),
+  segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig),
+  segmentationQueries: new SegmentationQueriesApi(campaignEditorConfig),
+  segmentations: new SegmentationsApi(campaignEditorConfig),
+  sharepoint: new SharepointApi(campaignEditorConfig),
+  templates: new TemplatesApi(campaignEditorConfig),
+  testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)
 }

@@ -9,6 +9,10 @@ const services = [
   {
     name: "files",
     url: "https://pkm-files-dev.grapetest.xyz/swagger/v1/swagger.json"
+  },
+  {
+    name: "campaign-editor",
+    url: "https://rtd-campaigneditor-dev.grapetest.xyz/swagger/v1/swagger.json"
   }
 ];
 
@@ -31,7 +35,7 @@ const generateFetchApi = async ({ name }) => {
   await shell.exec(
     `openapi-generator generate -i ${docFolder(name)} -o ${generatedApiFolder(
       name
-    )} -g typescript-fetch -p typescriptThreePlus=true`
+    )} -g typescript-fetch -p typescriptThreePlus=true --skip-validate-spec`
   );
 };
 

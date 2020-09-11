@@ -1,7 +1,7 @@
 import { logout } from 'features/auth/authSlice'
-import { api } from 'api'
 import JwtDecode from 'jwt-decode'
 import { store } from 'app/store'
+import { api } from 'api2'
 
 let tokenPromise: Promise<void> | null
 let tokenPromiseResolver: (value?: void | PromiseLike<void>) => void

@@ -29,6 +29,7 @@
               },
               "encoding": {
                 "file": {
+                  "contentType": "multipart/form-data",
                   "style": "form"
                 },
                 "fileAccess": {
