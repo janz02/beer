@@ -135,7 +135,7 @@ const getCoupons = (
   }
 }
 
-const resetCouponFilters = (): AppThunk => getCoupons(initialState.listParams, true)
+const resetCouponFilters = (): AppThunk => getCoupons({ ...initialState.listParams }, true)
 
 const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
   dispatch(setFeatureState(FeatureState.Loading))

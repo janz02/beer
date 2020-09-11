@@ -98,7 +98,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
   })
 
   const resetFilters = (): void => {
-    dispatch(campaignListActions.resetCouponFilters)
+    dispatch(campaignListActions.resetCouponFilters())
   }
 
   const columnsConfig = useMemo(
