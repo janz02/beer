@@ -30,6 +30,9 @@ import {
     UserDto,
     UserDtoFromJSON,
     UserDtoToJSON,
+    UserModelPaginatedSearchResponse,
+    UserModelPaginatedSearchResponseFromJSON,
+    UserModelPaginatedSearchResponseToJSON,
 } from '../models';
 
 export interface GetAdGroupsRequest {
@@ -37,6 +40,10 @@ export interface GetAdGroupsRequest {
 }
 
 export interface GetFunctionPermissionsRequest {
+    _queryParameters?: { [key: string]: string; };
+}
+
+export interface GetUsersForPermissionRequest {
     _queryParameters?: { [key: string]: string; };
 }
 
@@ -50,8 +57,8 @@ export interface LoginRequest {
 export class AccountsApi extends runtime.BaseAPI {
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neighter order is procssed.
-     * Query for groups in the system which were syncronized from the domain Activ Direcrory
+     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
+     * Query for groups in the system which were synchronized from the domain Active Directory
      */
     async getAdGroupsRaw(requestParameters: GetAdGroupsRequest): Promise<runtime.ApiResponse<AdGroupModelPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -77,8 +84,8 @@ export class AccountsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neighter order is procssed.
-     * Query for groups in the system which were syncronized from the domain Activ Direcrory
+     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
+     * Query for groups in the system which were synchronized from the domain Active Directory
      */
     async getAdGroups(requestParameters: GetAdGroupsRequest): Promise<AdGroupModelPaginatedSearchResponse> {
         const response = await this.getAdGroupsRaw(requestParameters);
@@ -86,8 +93,8 @@ export class AccountsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neighter order is procssed.
-     * Query for all function permisson for the given permissionId.
+     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
+     * Query for all function permission for the given permissionId.
      */
     async getFunctionPermissionsRaw(requestParameters: GetFunctionPermissionsRequest): Promise<runtime.ApiResponse<FunctionPermissionModelPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -113,8 +120,8 @@ export class AccountsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neighter order is procssed.
-     * Query for all function permisson for the given permissionId.
+     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
+     * Query for all function permission for the given permissionId.
      */
     async getFunctionPermissions(requestParameters: GetFunctionPermissionsRequest): Promise<FunctionPermissionModelPaginatedSearchResponse> {
         const response = await this.getFunctionPermissionsRaw(requestParameters);
@@ -123,7 +130,7 @@ export class AccountsApi extends runtime.BaseAPI {
 
     /**
      * Has only temporary implementation on service since there is no exact functional  requirement for the profile!
-     * Returns basic informations about the current user. The profile will be returned.
+     * Returns basic information about the current user. The profile will be returned.
      */
     async getMyAccountRaw(): Promise<runtime.ApiResponse<ProfileViewModel>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -146,7 +153,7 @@ export class AccountsApi extends runtime.BaseAPI {
 
     /**
      * Has only temporary implementation on service since there is no exact functional  requirement for the profile!
-     * Returns basic informations about the current user. The profile will be returned.
+     * Returns basic information about the current user. The profile will be returned.
      */
     async getMyAccount(): Promise<ProfileViewModel> {
         const response = await this.getMyAccountRaw();
@@ -184,8 +191,44 @@ export class AccountsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case  any error occours handles as Microsoft.AspNetCore.Mvc.BadRequestResult.
-     * Tries to authenticate with the given informations agains the configured Active  Directory.
+     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
+     * Query for all directly referenced users for the given permissionId.
+     */
+    async getUsersForPermissionRaw(requestParameters: GetUsersForPermissionRequest): Promise<runtime.ApiResponse<UserModelPaginatedSearchResponse>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters._queryParameters !== undefined) {
+            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Accounts/GetUsersForPermission`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserModelPaginatedSearchResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
+     * Query for all directly referenced users for the given permissionId.
+     */
+    async getUsersForPermission(requestParameters: GetUsersForPermissionRequest): Promise<UserModelPaginatedSearchResponse> {
+        const response = await this.getUsersForPermissionRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case  any error occurs handles as Microsoft.AspNetCore.Mvc.BadRequestResult.
+     * Tries to authenticate with the given information against the configured Active  Directory.
      */
     async loginRaw(requestParameters: LoginRequest): Promise<runtime.ApiResponse<string>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -206,8 +249,8 @@ export class AccountsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case  any error occours handles as Microsoft.AspNetCore.Mvc.BadRequestResult.
-     * Tries to authenticate with the given informations agains the configured Active  Directory.
+     * Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case  any error occurs handles as Microsoft.AspNetCore.Mvc.BadRequestResult.
+     * Tries to authenticate with the given information against the configured Active  Directory.
      */
     async login(requestParameters: LoginRequest): Promise<string> {
         const response = await this.loginRaw(requestParameters);
@@ -240,7 +283,7 @@ export class AccountsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case  any error occours handles as Microsoft.AspNetCore.Mvc.BadRequestResult.
+     * Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case  any error occurs handles as Microsoft.AspNetCore.Mvc.BadRequestResult.
      * Returns refresh token for the current user, for long term session.
      */
     async refreshTokenRaw(): Promise<runtime.ApiResponse<void>> {
@@ -259,7 +302,7 @@ export class AccountsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case  any error occours handles as Microsoft.AspNetCore.Mvc.BadRequestResult.
+     * Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case  any error occurs handles as Microsoft.AspNetCore.Mvc.BadRequestResult.
      * Returns refresh token for the current user, for long term session.
      */
     async refreshToken(): Promise<void> {

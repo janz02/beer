@@ -11,7 +11,7 @@
         "tags": [
           "Accounts"
         ],
-        "summary": "Returns basic informations about the current user. The profile will be returned.",
+        "summary": "Returns basic information about the current user. The profile will be returned.",
         "description": "Has only temporary implementation on service since there is no exact functional\r\nrequirement for the profile!",
         "operationId": "getMyAccount",
         "responses": {
@@ -99,14 +99,14 @@
         "tags": [
           "Accounts"
         ],
-        "summary": "Query for groups in the system which were syncronized from the domain Activ Direcrory",
-        "description": "Implementation not complete, the queryParameters only uses permissionId\r\nand in page response will returns all entities, neighter order is procssed.",
+        "summary": "Query for groups in the system which were synchronized from the domain Active Directory",
+        "description": "Implementation not complete, the queryParameters only uses permissionId\r\nand in page response will returns all entities, neither order is processed.",
         "operationId": "getAdGroups",
         "parameters": [
           {
             "name": "queryParameters",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
+            "description": "Query parameters which will be translated for conditions, order, paging parameters.",
             "schema": {
               "type": "object",
               "additionalProperties": {
@@ -147,19 +147,72 @@
         ]
       }
     },
+    "/api/Accounts/GetUsersForPermission": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Query for all directly referenced users for the given permissionId.",
+        "description": "Implementation not complete, the queryParameters only uses permissionId\r\nand in page response will returns all entities, neither order is processed.",
+        "operationId": "getUsersForPermission",
+        "parameters": [
+          {
+            "name": "queryParameters",
+            "in": "query",
+            "description": "Query parameters which will be translated for conditions, order, paging parameters.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserModelPaginatedSearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserModelPaginatedSearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserModelPaginatedSearchResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/Accounts/GetAllFunctionPermission": {
       "get": {
         "tags": [
           "Accounts"
         ],
-        "summary": "Query for all function permisson for the given permissionId.",
-        "description": "Implementation not complete, the queryParameters only uses permissionId\r\nand in page response will returns all entities, neighter order is procssed.",
+        "summary": "Query for all function permission for the given permissionId.",
+        "description": "Implementation not complete, the queryParameters only uses permissionId\r\nand in page response will returns all entities, neither order is processed.",
         "operationId": "getFunctionPermissions",
         "parameters": [
           {
             "name": "queryParameters",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
+            "description": "Query parameters which will be translated for conditions, order, paging parameters.",
             "schema": {
               "type": "object",
               "additionalProperties": {
@@ -205,8 +258,8 @@
         "tags": [
           "Accounts"
         ],
-        "summary": "Tries to authenticate with the given informations agains the configured Active\r\nDirectory.",
-        "description": "Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case\r\nany error occours handles as Microsoft.AspNetCore.Mvc.BadRequestResult.",
+        "summary": "Tries to authenticate with the given information against the configured Active\r\nDirectory.",
+        "description": "Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case\r\nany error occurs handles as Microsoft.AspNetCore.Mvc.BadRequestResult.",
         "operationId": "login",
         "requestBody": {
           "description": "The authentication parameters fulfilled model.",
@@ -263,7 +316,7 @@
           "Accounts"
         ],
         "summary": "Returns refresh token for the current user, for long term session.",
-        "description": "Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case\r\nany error occours handles as Microsoft.AspNetCore.Mvc.BadRequestResult.",
+        "description": "Gives Microsoft.AspNetCore.Mvc.UnauthorizedResult in case user was not found and in case\r\nany error occurs handles as Microsoft.AspNetCore.Mvc.BadRequestResult.",
         "operationId": "refreshToken",
         "responses": {
           "200": {
@@ -3492,6 +3545,339 @@
         ]
       }
     },
+    "/api/StaticMergeTags/Create": {
+      "post": {
+        "tags": [
+          "StaticMergeTags"
+        ],
+        "summary": "Creates a StaticMergeTag, returning its id.",
+        "operationId": "createStaticMergeTag",
+        "requestBody": {
+          "description": "The entity to be created",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticMergeTagModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticMergeTagModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticMergeTagModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticMergeTagModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/StaticMergeTags/GetOne/{id}": {
+      "get": {
+        "tags": [
+          "StaticMergeTags"
+        ],
+        "summary": "Gets the requested instance, identified by id.",
+        "operationId": "getStaticMergeTag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the instance to be returned.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item found and returned",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticMergeTagDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticMergeTagDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticMergeTagDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/StaticMergeTags/GetAll": {
+      "get": {
+        "tags": [
+          "StaticMergeTags"
+        ],
+        "summary": "Returns the StaticMergeTags for the actual query.",
+        "operationId": "getStaticMergeTags",
+        "parameters": [
+          {
+            "name": "queryParameters",
+            "in": "query",
+            "description": "Query parameters which will be translated for conditions, order, paging parameters.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticMergeTagModelPaginatedSearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticMergeTagModelPaginatedSearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticMergeTagModelPaginatedSearchResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/StaticMergeTags/GetMany/many": {
+      "get": {
+        "tags": [
+          "StaticMergeTags"
+        ],
+        "summary": "Returns the StaticMergeTags identified by the ids.",
+        "operationId": "getManyStaticMergeTags",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "The identifications of the StaticMergeTags to be returned",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StaticMergeTagModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StaticMergeTagModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StaticMergeTagModel"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/StaticMergeTags/Update": {
+      "put": {
+        "tags": [
+          "StaticMergeTags"
+        ],
+        "summary": "Update the current instance with the fulfilled model.",
+        "operationId": "updateStaticMergeTag",
+        "requestBody": {
+          "description": "The desired modifications to be made. All value has to be filled!",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticMergeTagModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticMergeTagModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticMergeTagModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticMergeTagModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Entity updated successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/StaticMergeTags/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "StaticMergeTags"
+        ],
+        "summary": "Deletes the item identified by id.",
+        "operationId": "deleteStaticMergeTag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the entity to be deleted.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/Templates/GetTemplateById/{id}": {
       "get": {
         "tags": [
@@ -4171,35 +4557,43 @@
         "properties": {
           "id": {
             "type": "integer",
+            "description": "The id of the user.",
             "format": "int32"
           },
           "name": {
             "type": "string",
+            "description": "The natural name of the user.",
             "nullable": true
           },
           "email": {
             "type": "string",
+            "description": "The email of the user.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A dto to describe a user."
       },
       "AdGroupModel": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
+            "description": "The id of the ad group.",
             "format": "int32"
           },
           "name": {
             "type": "string",
+            "description": "The name of the ad group.",
             "nullable": true
           },
           "isSelected": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether the connection between the ad group and the permission is 'live' or 'active'.\r\nTrue means users belonging to the group are given the permission. False means they are not."
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A model to describe an ad group that belongs to permissions."
       },
       "AdGroupModelPaginatedSearchResponse": {
         "type": "object",
@@ -4208,6 +4602,49 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AdGroupModel"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserModel": {
+        "type": "object",
+        "properties": {
+          "isSelected": {
+            "type": "boolean",
+            "description": "Whether the connection between the user and the permission is 'live' or 'active'.\r\nTrue means the user is given the permission. False means they are not."
+          },
+          "id": {
+            "type": "integer",
+            "description": "The id of the user.",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "The natural name of the user.",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the user.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A model to describe a user that belongs to permissions."
+      },
+      "UserModelPaginatedSearchResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserModel"
             },
             "nullable": true
           },
@@ -5219,27 +5656,33 @@
         "properties": {
           "id": {
             "type": "integer",
+            "description": "Id of permission. Should only be used if the model is describing an already existing permission.",
             "format": "int32"
           },
           "name": {
             "type": "string",
+            "description": "Name of the permission.",
             "nullable": true
           },
           "createdDate": {
             "type": "string",
+            "description": "When the permission was created.",
             "format": "date-time"
           },
           "createdBy": {
             "type": "integer",
+            "description": "The id of whom the permission was created by.",
             "format": "int32"
           },
           "modifiedDate": {
             "type": "string",
+            "description": "When the permission was last modified.",
             "format": "date-time",
             "nullable": true
           },
           "modifiedBy": {
             "type": "integer",
+            "description": "The id of whom the permission was last modified by.",
             "format": "int32",
             "nullable": true
           },
@@ -5248,6 +5691,15 @@
             "items": {
               "$ref": "#/components/schemas/AdGroupModel"
             },
+            "description": "A list of ad groups that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
+            "nullable": true
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserModel"
+            },
+            "description": "A list of users that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
             "nullable": true
           },
           "functionPermissions": {
@@ -5255,10 +5707,12 @@
             "items": {
               "$ref": "#/components/schemas/FunctionPermissionModel"
             },
+            "description": "A list of function permissions that belong to this permission.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A model to describe the structure of Permissions."
       },
       "PermissionModelPaginatedSearchResponse": {
         "type": "object",
@@ -5752,6 +6206,10 @@
           "email": {
             "type": "string",
             "nullable": true
+          },
+          "captchaToken": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5863,6 +6321,10 @@
             "type": "string",
             "description": "Email address that identifies the standalone user",
             "example": "test@email.com"
+          },
+          "captchaToken": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5894,6 +6356,95 @@
             "type": "string",
             "nullable": true,
             "example": "+3618809200"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaticMergeTagModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaticMergeTagDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaticMergeTagModelPaginatedSearchResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StaticMergeTagModel"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -6159,7 +6710,7 @@
   "tags": [
     {
       "name": "Accounts",
-      "description": "Defines the enpoint which is responsible for the basic authenticated user informations\r\nand rovide the capeability to login. The M:NKM.RTD.CampaignEditor.Controllers.AccountsController.Login(NKM.RTD.CampaignEditor.Prototypes.LoginRequestModel) API\r\nused for the basic authentication and the M:NKM.RTD.CampaignEditor.Controllers.AccountsController.RefreshToken\r\nis for refresh the actual authentication."
+      "description": "Defines the endpoint which is responsible for the basic authenticated user information\r\nand provide the capability to login. The M:NKM.RTD.CampaignEditor.Controllers.AccountsController.Login(NKM.RTD.CampaignEditor.Prototypes.LoginRequestModel) API\r\nused for the basic authentication and the M:NKM.RTD.CampaignEditor.Controllers.AccountsController.RefreshToken\r\nis for refresh the actual authentication."
     },
     {
       "name": "CampaignResults",
@@ -6216,6 +6767,10 @@
     {
       "name": "StandaloneUsers",
       "description": "This controller used for standalone user registration, request password, change password, password reset"
+    },
+    {
+      "name": "StaticMergeTags",
+      "description": "Provides CRUD operations for StaticMergeTag entities."
     },
     {
       "name": "Templates",

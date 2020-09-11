@@ -22,58 +22,68 @@ import {
     FunctionPermissionModelFromJSON,
     FunctionPermissionModelFromJSONTyped,
     FunctionPermissionModelToJSON,
+    UserModel,
+    UserModelFromJSON,
+    UserModelFromJSONTyped,
+    UserModelToJSON,
 } from './';
 
 /**
- * 
+ * A model to describe the structure of Permissions.
  * @export
  * @interface PermissionModel
  */
 export interface PermissionModel {
     /**
-     * 
+     * Id of permission. Should only be used if the model is describing an already existing permission.
      * @type {number}
      * @memberof PermissionModel
      */
     id?: number;
     /**
-     * 
+     * Name of the permission.
      * @type {string}
      * @memberof PermissionModel
      */
     name?: string | null;
     /**
-     * 
+     * When the permission was created.
      * @type {Date}
      * @memberof PermissionModel
      */
     createdDate?: Date;
     /**
-     * 
+     * The id of whom the permission was created by.
      * @type {number}
      * @memberof PermissionModel
      */
     createdBy?: number;
     /**
-     * 
+     * When the permission was last modified.
      * @type {Date}
      * @memberof PermissionModel
      */
     modifiedDate?: Date | null;
     /**
-     * 
+     * The id of whom the permission was last modified by.
      * @type {number}
      * @memberof PermissionModel
      */
     modifiedBy?: number | null;
     /**
-     * 
+     * A list of ad groups that belong to this permission.  Use IsSelected to define if the connection is active.
      * @type {Array<AdGroupModel>}
      * @memberof PermissionModel
      */
     adGroups?: Array<AdGroupModel> | null;
     /**
-     * 
+     * A list of users that belong to this permission.  Use IsSelected to define if the connection is active.
+     * @type {Array<UserModel>}
+     * @memberof PermissionModel
+     */
+    users?: Array<UserModel> | null;
+    /**
+     * A list of function permissions that belong to this permission.
      * @type {Array<FunctionPermissionModel>}
      * @memberof PermissionModel
      */
@@ -97,6 +107,7 @@ export function PermissionModelFromJSONTyped(json: any, ignoreDiscriminator: boo
         'modifiedDate': !exists(json, 'modifiedDate') ? undefined : (json['modifiedDate'] === null ? null : new Date(json['modifiedDate'])),
         'modifiedBy': !exists(json, 'modifiedBy') ? undefined : json['modifiedBy'],
         'adGroups': !exists(json, 'adGroups') ? undefined : (json['adGroups'] === null ? null : (json['adGroups'] as Array<any>).map(AdGroupModelFromJSON)),
+        'users': !exists(json, 'users') ? undefined : (json['users'] === null ? null : (json['users'] as Array<any>).map(UserModelFromJSON)),
         'functionPermissions': !exists(json, 'functionPermissions') ? undefined : (json['functionPermissions'] === null ? null : (json['functionPermissions'] as Array<any>).map(FunctionPermissionModelFromJSON)),
     };
 }
@@ -117,6 +128,7 @@ export function PermissionModelToJSON(value?: PermissionModel | null): any {
         'modifiedDate': value.modifiedDate === undefined ? undefined : (value.modifiedDate === null ? null : value.modifiedDate.toISOString()),
         'modifiedBy': value.modifiedBy,
         'adGroups': value.adGroups === undefined ? undefined : (value.adGroups === null ? null : (value.adGroups as Array<any>).map(AdGroupModelToJSON)),
+        'users': value.users === undefined ? undefined : (value.users === null ? null : (value.users as Array<any>).map(UserModelToJSON)),
         'functionPermissions': value.functionPermissions === undefined ? undefined : (value.functionPermissions === null ? null : (value.functionPermissions as Array<any>).map(FunctionPermissionModelToJSON)),
     };
 }

@@ -14,48 +14,55 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * A model to describe a user that belongs to permissions.
  * @export
- * @interface CreateUserRequest
+ * @interface UserModel
  */
-export interface CreateUserRequest {
+export interface UserModel {
     /**
-     * 
+     * Whether the connection between the user and the permission is \'live\' or \'active\'.  True means the user is given the permission. False means they are not.
+     * @type {boolean}
+     * @memberof UserModel
+     */
+    isSelected?: boolean;
+    /**
+     * The id of the user.
+     * @type {number}
+     * @memberof UserModel
+     */
+    id?: number;
+    /**
+     * The natural name of the user.
      * @type {string}
-     * @memberof CreateUserRequest
+     * @memberof UserModel
      */
     name?: string | null;
     /**
-     * 
+     * The email of the user.
      * @type {string}
-     * @memberof CreateUserRequest
+     * @memberof UserModel
      */
     email?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUserRequest
-     */
-    captchaToken?: string | null;
 }
 
-export function CreateUserRequestFromJSON(json: any): CreateUserRequest {
-    return CreateUserRequestFromJSONTyped(json, false);
+export function UserModelFromJSON(json: any): UserModel {
+    return UserModelFromJSONTyped(json, false);
 }
 
-export function CreateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateUserRequest {
+export function UserModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserModel {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
+        'isSelected': !exists(json, 'isSelected') ? undefined : json['isSelected'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'email': !exists(json, 'email') ? undefined : json['email'],
-        'captchaToken': !exists(json, 'captchaToken') ? undefined : json['captchaToken'],
     };
 }
 
-export function CreateUserRequestToJSON(value?: CreateUserRequest | null): any {
+export function UserModelToJSON(value?: UserModel | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -64,9 +71,10 @@ export function CreateUserRequestToJSON(value?: CreateUserRequest | null): any {
     }
     return {
         
+        'isSelected': value.isSelected,
+        'id': value.id,
         'name': value.name,
         'email': value.email,
-        'captchaToken': value.captchaToken,
     };
 }
 

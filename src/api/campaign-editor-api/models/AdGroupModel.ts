@@ -14,25 +14,25 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * A model to describe an ad group that belongs to permissions.
  * @export
  * @interface AdGroupModel
  */
 export interface AdGroupModel {
     /**
-     * 
+     * The id of the ad group.
      * @type {number}
      * @memberof AdGroupModel
      */
     id?: number;
     /**
-     * 
+     * The name of the ad group.
      * @type {string}
      * @memberof AdGroupModel
      */
     name?: string | null;
     /**
-     * 
+     * Whether the connection between the ad group and the permission is \'live\' or \'active\'.  True means users belonging to the group are given the permission. False means they are not.
      * @type {boolean}
      * @memberof AdGroupModel
      */

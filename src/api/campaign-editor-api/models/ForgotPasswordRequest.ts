@@ -25,6 +25,12 @@ export interface ForgotPasswordRequest {
      * @memberof ForgotPasswordRequest
      */
     email: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ForgotPasswordRequest
+     */
+    captchaToken?: string | null;
 }
 
 export function ForgotPasswordRequestFromJSON(json: any): ForgotPasswordRequest {
@@ -38,6 +44,7 @@ export function ForgotPasswordRequestFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'email': json['email'],
+        'captchaToken': !exists(json, 'captchaToken') ? undefined : json['captchaToken'],
     };
 }
 
@@ -51,6 +58,7 @@ export function ForgotPasswordRequestToJSON(value?: ForgotPasswordRequest | null
     return {
         
         'email': value.email,
+        'captchaToken': value.captchaToken,
     };
 }
 
