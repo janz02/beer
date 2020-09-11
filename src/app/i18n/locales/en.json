@@ -335,7 +335,8 @@
     },
     "not-found": "Not found.",
     "notification": {
-      "cannot-navigate-to-notification-link": "Cannot navigate to notification link"
+      "cannot-navigate-to-notification-link": "Cannot navigate to notification link",
+      "entity-for-navigation-does-not-exists": "The entity for navigation to does not exists"
     },
     "paginate": {
       "order-by": "Paginate order by.",

@@ -335,7 +335,8 @@
     },
     "not-found": "Nem található.",
     "notification": {
-      "cannot-navigate-to-notification-link": "Az értesítéshez tartozó hivatkozás nem nyitható meg."
+      "cannot-navigate-to-notification-link": "Az értesítéshez tartozó hivatkozás nem nyitható meg.",
+      "entity-for-navigation-does-not-exists": "__STRING_NOT_TRANSLATED__"
     },
     "paginate": {
       "order-by": "Lapozó sorrend.",

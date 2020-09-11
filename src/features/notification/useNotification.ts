@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 // NotificationLinks are manually created for all new notificationType generated from the backend api swagger.
 import notificationLinks from './notificationLinks.json'
+import { NotificationLinkPreValidator } from './NotificationLinkPreValidator'
 
 export const notificationRoleConfig = [Roles.Administrator, Roles.CampaignManager]
 
@@ -106,6 +107,26 @@ export const useNotification = (): UseNotificationFeatures => {
     [dispatch]
   )
 
+  const preValidateNotificationLink = async (item: NotificationData): Promise<boolean> => {
+    if (
+      item.type &&
+      item.actualId !== undefined &&
+      item.parentId !== undefined &&
+      NotificationLinkPreValidator[item.type] !== undefined
+    ) {
+      try {
+        const preValidation = await NotificationLinkPreValidator[item.type](
+          item.actualId,
+          item.parentId
+        )
+        return preValidation
+      } catch {
+        return false
+      }
+    }
+    return false
+  }
+
   const getNotificationLink = (notification: NotificationData): string | undefined => {
     let link = notificationLinks.find(
       notificationLink => notificationLink.type === notification?.type?.toString()
@@ -130,10 +151,20 @@ export const useNotification = (): UseNotificationFeatures => {
 
     return link
   }
+
   const handleNavigateItem = useCallback(
-    (item: NotificationData): void => {
+    async (item: NotificationData): Promise<void> => {
       if (!item.isSeen && item.id) {
         dispatch(notificationActions.readOne(item.id))
+      }
+
+      const preValidationResult = await preValidateNotificationLink(item)
+      if (!preValidationResult) {
+        notification.error({
+          message: t('error.notification.entity-for-navigation-does-not-exists'),
+          duration: null
+        })
+        return
       }
 
       const link = getNotificationLink(item)

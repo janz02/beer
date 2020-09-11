@@ -51,7 +51,7 @@ const generateKeys = (path, fileName, prefix = "", onData) => {
   req.end();
 };
 
-//Check method for notification links
+// Check method for notification links
 const checkNotificationLinks = (json) => {
   const notificationLinksRaw = fs.readFileSync('src/features/notification/notificationLinks.json');
   const notificationLinks = JSON.parse(notificationLinksRaw);
@@ -59,7 +59,7 @@ const checkNotificationLinks = (json) => {
   const allNotificationHasLink = json.every(x => notificationLinks.filter(z => z.type === x).length === 1);
 
   if (!allNotificationHasLink) {
-    throw Error("Notification links are missing for the newly added notifications. Add them to the notificationLinks.json file.");
+    throw Error("Notification links are missing for the newly added notifications. Check the feature/notification/README file");
   }
 }
 
