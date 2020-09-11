@@ -1,6 +1,5 @@
 import { displayBackendError } from '../services/errorHelpers'
 import { InformationApi } from './swagger/apis/InformationApi'
-import { Configuration } from './swagger/runtime'
 import {
   CouponsApi,
   CategoriesApi,
@@ -23,6 +22,7 @@ import {
 
 import { notification } from 'antd'
 import i18n from 'app/i18n'
+import { Configuration } from './swagger'
 
 export interface RequestError {
   code?: number

@@ -1,22 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-// shell
-//   .ShellString(
-//     shell.exec(
-//       "curl https://pkm-coupon-dev.grapetest.xyz/swagger/v1/swagger.json"
-//     )
-//   )
-//   .to("src/api/swagger.json");
-
-// fs.removeSync("src/api/swagger");
-
-// // Generate clients
-// shell.exec(
-//   "openapi-generator generate -i src/api/swagger.json -g typescript-fetch -p typescriptThreePlus=true -o src/api/swagger"
-// );
-
-// --- Config
-
+// ------ Config
 const services = [
   {
     name: "coupon",
@@ -28,11 +12,10 @@ const services = [
   }
 ];
 
-const docsFolder = "src/api2/_docs";
-const generatedApisFolder = "src/api2/_generated";
+const docsFolder = "src/api2/docs";
+const generatedApisFolder = "src/api2/swagger";
 
-// --- Scripts
-
+// ------ Scripts
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const shell = require("shelljs");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -51,18 +34,22 @@ const generateFetchApi = async ({ name }) => {
     )} -g typescript-fetch -p typescriptThreePlus=true`
   );
 };
+
 const run = async () => {
   console.log("\n\n\n\n Downloading Docs ");
   fs.removeSync(docsFolder);
   fs.ensureDirSync(docsFolder);
+
   for (let i = 0; i < services.length; i++) {
     const ms = services[i];
     console.log("\x1b[33m%s\x1b[0m", "\n   ->  Doc: " + ms.name);
     await downloadDocumentation(ms);
     console.log("\n\n\n\n");
   }
+
   fs.removeSync(generatedApisFolder);
   fs.ensureDirSync(generatedApisFolder);
+
   for (let i = 0; i < services.length; i++) {
     const ms = services[i];
     console.log(
@@ -75,8 +62,10 @@ const run = async () => {
     );
     await generateFetchApi(ms);
   }
+
   console.log("\n\n\n\n");
   console.log("\x1b[36m%s\x1b[0m", "Generated microservice clients: ");
+
   for (let i = 0; i < services.length; i++) {
     const ms = services[i].name;
     const docOk = fs.pathExistsSync(docFolder(ms));
@@ -96,4 +85,5 @@ const run = async () => {
   }
   console.log("\n");
 };
+
 run();

@@ -3,14 +3,11 @@ import ReactDOM from 'react-dom'
 import 'assets/scss/index.scss'
 import * as serviceWorker from 'serviceWorker'
 import './app/i18n'
-import { configApiMiddleware } from 'api/configApiMiddleware'
 
 const render = (): void => {
   const App = require('./app/App').App
   ReactDOM.render(<App />, document.getElementById('root'))
 }
-
-configApiMiddleware()
 
 render()
 
