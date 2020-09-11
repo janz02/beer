@@ -72,7 +72,11 @@ export const ColumOrderLayout: <T>(
               </Button>
             </Col>
             <Col span={12} className={styles.applyButtonCol}>
-              <Button type="primary" onClick={props.handleApplyChanges}>
+              <Button
+                disabled={props.tempColumns.length === 0}
+                type="primary"
+                onClick={props.handleApplyChanges}
+              >
                 {t('column-order.layout.apply')}
               </Button>
             </Col>
