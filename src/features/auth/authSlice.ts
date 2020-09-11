@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { history } from 'router/router'
-import { LoginRequest, RegisterPartnerContactRequest } from 'api/coupon-api/apis'
-import { UserVm } from 'api/coupon-api'
+import { LoginRequest, RegisterPartnerContactRequest, UserVm } from 'api2/swagger/coupon'
 import { getJwtUserdata, isLoggedIn } from 'services/jwt-reader'
-import { couponApi } from 'api'
+import { api } from 'api2'
 import JwtDecode from 'jwt-decode'
 import { message } from 'antd'
 import i18n from 'app/i18n'
@@ -123,14 +122,14 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
       }
     }
 
-    const userVm = await couponApi.auth.login(loginRequest)
+    const userVm = await api.auth.login(loginRequest)
     const cameFrom = state().routerHistory.cameFrom
     dispatch(loginSuccess(userVm))
 
-    const partner = await couponApi.partner.getMyPartner()
+    const partner = await api.partner.getMyPartner()
     dispatch(setSelfPartner({ id: partner.id, name: partner.name }))
 
-    const contact = await couponApi.partnerContacts.getMyPartnerContact()
+    const contact = await api.partnerContacts.getMyPartnerContact()
     dispatch(setSelfPartnerContact({ id: contact.id }))
 
     if (!cameFrom.includes('error')) {
@@ -174,7 +173,7 @@ export const signUp = (params: any): AppThunk => async dispatch => {
   }
 
   try {
-    await couponApi.auth.registerPartnerContact(requestRequest)
+    await api.auth.registerPartnerContact(requestRequest)
 
     dispatch(signupSuccess())
     dispatch(login(params))
@@ -190,7 +189,7 @@ export const changePassword = (
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    await couponApi.auth.changePassword({ changePasswordDto: { newPassword, oldPassword } })
+    await api.auth.changePassword({ changePasswordDto: { newPassword, oldPassword } })
 
     dispatch(changePasswordSuccess())
   } catch (err) {

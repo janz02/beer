@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { couponApi } from 'api'
+import { api } from 'api2'
 import { PartnerContact } from 'models/partnerContact'
 import { message } from 'antd'
 import i18n from 'app/i18n'
@@ -84,7 +84,7 @@ const inspectContact = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(openEditor())
     dispatch(setEditorState(FeatureState.Loading))
-    const contact = await couponApi.partnerContacts.getPartnerContact({ id })
+    const contact = await api.partnerContacts.getPartnerContact({ id })
 
     // FIX: User without role can come with role: 0, caused by the AD sync according to the BE
     if ((contact.role as any) === 0) delete contact.role
@@ -104,7 +104,7 @@ const saveContact = (id: number, data: PartnerContact): AppThunk => async (dispa
 
     const { editingSelf, contact } = getState().partnerContactModal
 
-    await couponApi.partnerContacts.updatePartnerContact({
+    await api.partnerContacts.updatePartnerContact({
       id,
       partnerContactDto: {
         name: data.name,
@@ -126,7 +126,7 @@ const sendInvitation = (email: string): AppThunk => async (dispatch, getState) =
   try {
     dispatch(setInviterState(FeatureState.Loading))
     const partnerId = getState().partnerContactModal.inviterPartnerId
-    await couponApi.emailSender.invitePartnerContact({
+    await api.emailSender.invitePartnerContact({
       invitePartnerContactDto: {
         email,
         partnerId: +partnerId!

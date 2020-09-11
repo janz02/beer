@@ -9,7 +9,7 @@ import { FeatureState } from 'models/featureState'
 import { useCallback, useMemo } from 'react'
 import { notification } from 'antd'
 import { NotificationData } from 'models/notification'
-import { Roles } from 'api/coupon-api/models/Roles'
+import { Roles } from 'api2/swagger/coupon'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 // NotificationLinks are manually created for all new notificationType generated from the backend api swagger.

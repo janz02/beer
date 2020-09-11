@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux'
 import { useCampaign } from '../useCampaign'
 import { CampaignEditorForm } from './CampaignEditorForm'
 import { Comments } from './Comments'
-import { CouponState, Roles } from 'api/coupon-api/models'
+import { CouponState, Roles } from 'api2/swagger/coupon'
 
 export interface CampaignEditorProps {
   editing: boolean

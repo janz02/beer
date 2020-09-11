@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react'
 import { Menu, Tooltip } from 'antd'
 import { Link } from 'react-router-dom'
-import { Roles } from 'api/coupon-api/models'
+import { Roles } from 'api2/swagger/coupon'
 import { hasPermission } from 'services/jwt-reader'
 import './SideMenuOptions.scss'
 import { useSelector } from 'hooks/react-redux-hooks'

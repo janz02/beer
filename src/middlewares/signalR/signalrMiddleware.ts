@@ -2,7 +2,7 @@ import { Action, PayloadAction } from '@reduxjs/toolkit'
 import { Dispatch } from 'react'
 import { store } from 'app/store'
 import { authActionType } from 'features/auth/authSlice'
-import { UserVm } from 'api/coupon-api/models'
+import { UserVm } from 'api2/swagger/coupon'
 import {
   notificationActions,
   notificationActionType

@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { UploadFile, UploadProps, UploadChangeParam } from 'antd/lib/upload/interface'
 import { useTranslation } from 'react-i18next'
-import { couponApi } from 'api'
+import { api } from 'api2'
 import { getBase64 } from 'services/file-reader'
 import { displayBackendError } from 'services/errorHelpers'
 import { getUrl } from 'services/baseUrlHelper'
-import { RequestError } from 'api/errorContract'
+import { RequestError } from 'api2/middleware'
 
 interface FileThumbnail {
   label?: string
@@ -64,13 +64,13 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
       try {
         switch (mode) {
           case 'image': {
-            const blob: Blob = await couponApi.files.downloadFile({ id: fileId })
+            const blob: Blob = await api.files.downloadFile({ id: fileId })
             getBase64(blob, imageUrl => setThumbnail({ url: imageUrl, loading: false }))
             break
           }
           default: {
             // TODO : integrate api
-            const fileName = await couponApi.files.getFileName({ id: fileId })
+            const fileName = await api.files.getFileName({ id: fileId })
             setThumbnail({ label: fileName, loading: false })
             break
           }

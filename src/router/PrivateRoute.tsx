@@ -4,7 +4,7 @@ import { PrivateLayout } from 'components/layout/PrivateLayout'
 import { RootState } from 'app/rootReducer'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { hasPermission } from '../services/jwt-reader'
-import { Roles } from 'api/coupon-api/models'
+import { Roles } from 'api2/swagger/coupon'
 
 interface PrivateRouteProps extends RouteProps {
   roles?: Roles[]

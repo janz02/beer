@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useCallback } from 'react'
 import { Spin, Tooltip } from 'antd'
-import { couponApi } from 'api'
+import { api } from 'api2'
 import { getBase64 } from 'services/file-reader'
 import { useTranslation } from 'react-i18next'
 import { DisconnectOutlined } from '@ant-design/icons'
@@ -27,7 +27,7 @@ export const Thumbnail: FC<ThumbnailProps> = props => {
     }, 0)
 
     try {
-      const file = await couponApi.files.downloadFile({ id: fileId })
+      const file = await api.files.downloadFile({ id: fileId })
       getBase64(file, imageUrl => {
         setThumbnail({ url: imageUrl, loading: false })
       })

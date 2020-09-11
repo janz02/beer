@@ -1,4 +1,4 @@
-import { NotificationType } from 'api/coupon-api/models/NotificationType'
+import { NotificationType } from 'api2/swagger/coupon'
 import moment from 'moment'
 
 export interface NotificationData {

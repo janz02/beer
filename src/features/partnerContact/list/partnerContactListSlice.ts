@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { couponApi } from 'api'
+import { api } from 'api2'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
@@ -8,7 +8,7 @@ import {
   storableListRequestParams
 } from 'hooks/useTableUtils'
 import { PartnerContact } from 'models/partnerContact'
-import { Roles } from 'api/coupon-api'
+import { Roles } from 'api2/swagger/coupon'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
@@ -81,7 +81,7 @@ const getContacts = (params: ListRequestParams = {}): AppThunk => async (dispatc
     }
 
     const revisedParams = reviseListRequestParams(state.listParams, params)
-    const { result, ...pagination } = await couponApi.partnerContacts.getPartnerPartnerContact({
+    const { result, ...pagination } = await api.partnerContacts.getPartnerPartnerContact({
       ...revisedParams,
       ...state.listConstraintParams
     })
@@ -101,7 +101,7 @@ const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, ge
     dispatch(setDeleteState(FeatureState.Loading))
     const state = getState().partnerContactList
     //  TODO: Integrate new delete endpoint
-    await couponApi.auth.updatePartnerContactState({
+    await api.auth.updatePartnerContactState({
       id,
       partnerContactStateDto: {
         role: role,
