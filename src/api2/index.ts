@@ -41,7 +41,7 @@ export function getUrl(): string {
 }
 
 // ---- BASE CONFIG
-const apiMiddleware: Middleware[] = [...errorHandlingMiddleware, ...tokenConfigMiddleware]
+const apiMiddleware: Middleware[] = [...errorHandlingMiddleware]
 
 interface ApiBaseConfigProps {
   appendUrl?: string
@@ -98,4 +98,10 @@ export const api = {
   // sharepoint: new SharepointApi(campaignEditorConfig),
   // templates: new TemplatesApi(campaignEditorConfig),
   // testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)
+}
+
+export const configApiMiddleware = (): void => {
+  couponConfig.middleware.push(...tokenConfigMiddleware)
+  filesConfig.middleware.push(...tokenConfigMiddleware)
+  // campaignEditorConfig.middleware.push(...tokenConfigMiddleware)
 }
