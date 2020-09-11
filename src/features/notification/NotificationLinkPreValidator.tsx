@@ -1,4 +1,4 @@
-import { api } from 'api'
+import { couponApi } from 'api'
 
 export const NotificationLinkPreValidator = {
   async GetCoupon(id: number): Promise<boolean> {
@@ -6,12 +6,12 @@ export const NotificationLinkPreValidator = {
       return false
     }
 
-    const response = await api.coupons.getCoupon({ id })
+    const response = await couponApi.coupons.getCoupon({ id })
     return response !== undefined
   },
 
   async GetPartner(id: number): Promise<boolean> {
-    const response = await api.partner.getPartner({ id })
+    const response = await couponApi.partner.getPartner({ id })
     return response !== undefined
   },
 
