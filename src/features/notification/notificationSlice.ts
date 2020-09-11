@@ -4,9 +4,9 @@ import { AppThunk } from 'app/store'
 import { ListRequestParams, OrderByType } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import { HubConnectionState } from '@microsoft/signalr'
-import { api } from 'api'
+import { couponApi } from 'api'
 import { NotificationData, NotificationDataDack } from 'models/notification'
-import { GetNotificationsRequest } from 'api/swagger'
+import { GetNotificationsRequest } from 'api/coupon-api'
 import { SignalrStatusReport } from 'middlewares/signalR/signalrTypes'
 
 const NOTIFICATION_LIST_PAGE_SIZE = 20
@@ -165,7 +165,7 @@ const getNotifications = (): AppThunk => async (dispatch, getState) => {
         return
     }
 
-    const response = await api.notification.getNotifications(newListParams)
+    const response = await couponApi.notification.getNotifications(newListParams)
 
     const hasMore = response.size && response.to ? response.size > response.to : false
     const loadedMore = response.page ? response.page > 1 : false
@@ -224,7 +224,7 @@ const getRecentNotifications = (): AppThunk => async (dispatch, getState) => {
         break
     }
 
-    const response = await api.notification.getNotifications(queryParams)
+    const response = await couponApi.notification.getNotifications(queryParams)
 
     let newListContentState: NotificationListState | undefined
     if (listContentState === NotificationListState.Empty) {
@@ -255,21 +255,21 @@ const getRecentNotifications = (): AppThunk => async (dispatch, getState) => {
 
 const readOne = (id: number): AppThunk => async dispatch => {
   try {
-    await api.notification.seenNotification({ id })
+    await couponApi.notification.seenNotification({ id })
     dispatch(readOneSuccess(id))
   } catch (err) {}
 }
 
 const readAll = (): AppThunk => async dispatch => {
   try {
-    await api.notification.seenAllNotifications()
+    await couponApi.notification.seenAllNotifications()
     dispatch(readAllSuccess())
   } catch (err) {}
 }
 
 const unReadOne = (id: number): AppThunk => async dispatch => {
   try {
-    await api.notification.unSeenNotification({ id })
+    await couponApi.notification.unSeenNotification({ id })
     dispatch(unReadOneSuccess(id))
   } catch (err) {}
 }

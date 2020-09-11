@@ -1,5 +1,5 @@
 import React, { useMemo, FC } from 'react'
-import { Roles } from 'api/swagger/models'
+import { Roles } from 'api/coupon-api/models'
 import { hasPermission } from 'services/jwt-reader'
 import { DeleteButton } from './DeleteButton'
 import { EditButton } from './EditButton'

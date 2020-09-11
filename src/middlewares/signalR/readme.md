@@ -57,7 +57,7 @@ By default RTK includes the [thunk](https://github.com/reduxjs/redux-thunk) midd
 >
 > Register further callbacks in `registerCallbacks` for subscribing to other server-side methods. Note that you probably have to extend the store/slice also if you want to handle and display these new type of messages/notifications.
 >
-> Currently all `NewNotification`-s has a type field ([NotificationType](../../api/swagger/models/NotificationType.ts)) which describes the actual reason (not the audience) of why it was created.
+> Currently all `NewNotification`-s has a type field ([NotificationType](../../api/coupon-api/models/NotificationType.ts)) which describes the actual reason (not the audience) of why it was created.
 
 ## Read More
 

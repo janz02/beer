@@ -1,4 +1,4 @@
-import { RequestError } from 'api'
+import { RequestError } from 'api/errorContract'
 import i18n from 'app/i18n'
 import { notification } from 'antd'
 

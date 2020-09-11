@@ -4,7 +4,7 @@
 
 import JwtDecode from 'jwt-decode'
 import { UserData } from 'models/user'
-import { Roles } from 'api/swagger/models'
+import { Roles } from 'api/coupon-api/models'
 
 const ROLE_KEY = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
 

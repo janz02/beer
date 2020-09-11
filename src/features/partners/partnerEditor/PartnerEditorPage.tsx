@@ -13,7 +13,7 @@ import {
 } from './partnerEditorSlice'
 import { useParams } from 'react-router-dom'
 import { Partner } from 'models/partner'
-import { Roles, PartnerRegistrationState } from 'api/swagger/models'
+import { Roles, PartnerRegistrationState } from 'api/coupon-api/models'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 import { PartnerStateButton } from './PartnerStateButton'
 

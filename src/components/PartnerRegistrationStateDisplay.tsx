@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PartnerRegistrationState } from 'api/swagger/models'
+import { PartnerRegistrationState } from 'api/coupon-api/models'
 
 interface PartnerRegistrationStateDisplayProps {
   partnerRegistrationState?: PartnerRegistrationState
