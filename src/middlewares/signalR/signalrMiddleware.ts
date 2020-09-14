@@ -2,7 +2,7 @@ import { Action, PayloadAction } from '@reduxjs/toolkit'
 import { Dispatch } from 'react'
 import { store } from 'app/store'
 import { authActionType } from 'features/auth/authSlice'
-import { UserVm } from 'api/coupon-api/models'
+import { UserVm } from 'api/swagger/coupon'
 import {
   notificationActions,
   notificationActionType
@@ -45,7 +45,7 @@ const registerCallbacks = (connection: SignalrConnection, jwt: string): void => 
  * * at auth/loginSuccess the jwt is still not in the session storage, thus it comes from the action payload
  */
 const initConnection = (newJwt?: string): SignalrConnection => {
-  const url = process.env.REACT_APP_API_URL
+  const url = process.env.REACT_APP_COUPON_API_URL
   const jwt = newJwt ?? sessionStorage.getItem('jwt')
   if (!jwt) return null
 

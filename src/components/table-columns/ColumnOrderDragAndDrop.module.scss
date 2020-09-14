@@ -12,10 +12,13 @@
 }
 
 .draggableItem {
+  display: flex;
+  align-items: center;
   padding: 0.65em 0;
   border-bottom: 1px solid $border-color-base;
 }
 
 .draggableItemText {
+  flex: 1;
   padding: 0 0.3em;
 }

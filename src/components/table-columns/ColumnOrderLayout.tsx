@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Row, Col } from 'antd'
+import { Card, Button, Row, Col, Select, Checkbox } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import { CloseOutlined } from '@ant-design/icons'
 import { ColumnOrderDragAndDrop } from './ColumnOrderDragAndDrop'
@@ -7,6 +7,7 @@ import { UseColumnOrderFeatures } from './useColumnOrder'
 import Text from 'antd/lib/typography/Text'
 import { useTranslation } from 'react-i18next'
 import styles from './ColumnOrderLayout.module.scss'
+import { Option } from 'antd/lib/mentions'
 
 export const ColumOrderLayout: <T>(
   p: UseColumnOrderFeatures<T>
@@ -38,6 +39,26 @@ export const ColumOrderLayout: <T>(
           <ColumnOrderDragAndDrop {...props} />
         </Col>
         <Col>
+          <Select
+            value={[]}
+            placeholder={t('column-order.layout.add-select-placeholder')}
+            onChange={value => props.addColumn(value)}
+            className={styles.addSelect}
+          >
+            {props.hiddenColumns.map(column => (
+              <Option value={String(column.dataIndex)} key={String(column.dataIndex)}>
+                {column.title}
+              </Option>
+            ))}
+          </Select>
+          <Checkbox
+            checked={props.hiddenColumns.length === 0}
+            onChange={e => props.addOrRemoveAllColumn(e.target.checked)}
+          >
+            {t('column-order.layout.add-all-checkbox')}
+          </Checkbox>
+        </Col>
+        <Col>
           <Button type="link" className={styles.defaultButton} onClick={props.handleResetToDefault}>
             <span>{t('column-order.layout.default')}</span>
           </Button>
@@ -54,7 +75,11 @@ export const ColumOrderLayout: <T>(
               </Button>
             </Col>
             <Col span={12} className={styles.applyButtonCol}>
-              <Button type="primary" onClick={props.handleApplyChanges}>
+              <Button
+                disabled={props.tempColumns.length === 0}
+                type="primary"
+                onClick={props.handleApplyChanges}
+              >
                 {t('column-order.layout.apply')}
               </Button>
             </Col>

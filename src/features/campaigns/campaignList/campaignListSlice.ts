@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Coupon } from 'models/coupon'
 import { AppThunk } from 'app/store'
-import { couponApi } from 'api'
+import { api } from 'api'
 import moment from 'moment'
 import {
   ListRequestParams,
@@ -109,7 +109,7 @@ const getCoupons = (params: ListRequestParams = {}): AppThunk => async (dispatch
       revisedParams.orderBy = 'partner.name'
     }
 
-    const { result, ...pagination } = await couponApi.coupons.getCoupons(revisedParams)
+    const { result, ...pagination } = await api.coupons.getCoupons(revisedParams)
 
     // Reverting exception because the frontend needs it this way.
     if (revisedParams.orderBy === 'partner.name') {
@@ -145,7 +145,7 @@ const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    await couponApi.coupons.deleteCoupon({ id })
+    await api.coupons.deleteCoupon({ id })
     dispatch(deleteSuccess())
     const newPage = recalculatePaginationAfterDeletion(getState().campaignList.listParams)
     dispatch(getCoupons({ page: newPage }))

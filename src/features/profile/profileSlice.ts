@@ -3,7 +3,7 @@ import { AppThunk } from 'app/store'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Profile } from 'models/profile'
-import { couponApi } from 'api'
+import { api } from 'api'
 import { FeatureState } from 'models/featureState'
 
 interface ProfileState {
@@ -47,7 +47,7 @@ const getProfile = (): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    const profile = await couponApi.partnerContacts.getMyPartnerContact()
+    const profile = await api.partnerContacts.getMyPartnerContact()
 
     dispatch(getProfileSuccess(profile))
   } catch (err) {
@@ -59,7 +59,7 @@ const updateProfile = (profile: Profile): AppThunk => async (dispatch, getState)
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    await couponApi.partnerContacts.updateMyPartnerContact({
+    await api.partnerContacts.updateMyPartnerContact({
       partnerContactSelfDto: { ...getState().profile.profile, ...profile }
     })
 
