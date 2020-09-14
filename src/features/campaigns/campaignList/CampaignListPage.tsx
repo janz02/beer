@@ -2,7 +2,7 @@ import React, { useEffect, FC, useMemo } from 'react'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { history } from 'router/router'
 import { useTranslation } from 'react-i18next'
-import { Roles } from 'api/coupon-api/models'
+import { Roles } from 'api/swagger/coupon'
 import { hasPermission } from 'services/jwt-reader'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { GenericPopup } from 'components/popups/GenericPopup'
@@ -14,6 +14,7 @@ import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdow
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { CouponListTabKey } from './campaignListSlice'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -29,8 +30,9 @@ export const CampaignListPage: FC = () => {
     paginationConfig,
     couponToDelete,
     deletePopupVisible,
-    handleIncludeArchivedChange,
     activeTabKey,
+    resetFilters,
+    handleIncludeArchivedChange,
     handleTabChange,
     handleDeleteCancel,
     getCategories,
@@ -88,10 +90,11 @@ export const CampaignListPage: FC = () => {
         >
           {t('coupon-list.show-archived')}
         </Checkbox>
+        <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrders[activeTabKey]} />
       </>
     ),
-    [t, handleIncludeArchivedChange, columnOrders, activeTabKey]
+    [t, handleIncludeArchivedChange, columnOrders, activeTabKey, resetFilters]
   )
 
   return (

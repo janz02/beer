@@ -16,7 +16,8 @@ import { GenericModalFormProps } from 'components/popups/GenericModalForm'
 const {
   createNewsletterTemplate,
   deleteNewsletterTemplate,
-  getNewsletterTemplates
+  getNewsletterTemplates,
+  resetNewsletterTemplateFilters
 } = newsletterListActions
 
 interface UseNewlsetterListUtils {
@@ -25,6 +26,7 @@ interface UseNewlsetterListUtils {
   createModalFormProps: GenericModalFormProps
   openCreateTemplateModal: () => void
   handleGetNewsletterTemplates: () => void
+  resetFilters: () => void
 }
 export const useNewlsetterList = (): UseNewlsetterListUtils => {
   const { t } = useTranslation()
@@ -60,6 +62,10 @@ export const useNewlsetterList = (): UseNewlsetterListUtils => {
     filterKeys: ['name', 'modifiedAt'],
     getDataAction: getNewsletterTemplates
   })
+
+  const resetFilters = (): void => {
+    dispatch(resetNewsletterTemplateFilters())
+  }
 
   const columnsConfig: ColumnType<NewsletterPreview>[] = useMemo(
     () => [
@@ -146,6 +152,7 @@ export const useNewlsetterList = (): UseNewlsetterListUtils => {
     deletePopupProps,
     createModalFormProps,
     openCreateTemplateModal,
-    handleGetNewsletterTemplates
+    handleGetNewsletterTemplates,
+    resetFilters
   }
 }

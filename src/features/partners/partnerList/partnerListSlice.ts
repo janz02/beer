@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { couponApi } from 'api'
+import { api } from 'api'
 import {
   ListRequestParams,
   reviseListRequestParams,
@@ -29,6 +29,9 @@ const partnersListSlice = createSlice({
   initialState,
   reducers: {
     resetPartnersList: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     getPartnersRequest(state) {
       state.loading = true
     },
@@ -48,7 +51,12 @@ const partnersListSlice = createSlice({
   }
 })
 
-const { getPartnersRequest, getPartnersSuccess, getPartnersFail } = partnersListSlice.actions
+const {
+  resetListParams,
+  getPartnersRequest,
+  getPartnersSuccess,
+  getPartnersFail
+} = partnersListSlice.actions
 export const { resetPartnersList } = partnersListSlice.actions
 
 export const partnersListReducer = partnersListSlice.reducer
@@ -62,7 +70,7 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
 
     const revisedParams = reviseListRequestParams(getState().partnerList.listParams, params)
 
-    const { result, ...pagination } = await couponApi.partner.getPartners(revisedParams)
+    const { result, ...pagination } = await api.partner.getPartners(revisedParams)
 
     dispatch(
       getPartnersSuccess({
@@ -73,4 +81,9 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
   } catch (err) {
     dispatch(getPartnersFail())
   }
+}
+
+export const resetPartnerFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getPartners())
 }

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { Category } from 'models/category'
-import { couponApi } from 'api'
+import { api } from 'api'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
@@ -34,6 +34,9 @@ const categoryListSlice = createSlice({
   initialState,
   reducers: {
     resetCategoryList: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     setListState: (state, action: PayloadAction<FeatureState>) => {
       state.listState = action.payload
     },
@@ -52,6 +55,7 @@ const categoryListSlice = createSlice({
 })
 
 const {
+  resetListParams,
   setListState,
   setDeleteState,
   getCategoriesSuccess,
@@ -62,7 +66,7 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
-    const { result, ...pagination } = await couponApi.categories.getCategories(revisedParams)
+    const { result, ...pagination } = await api.categories.getCategories(revisedParams)
 
     dispatch(
       getCategoriesSuccess({
@@ -75,10 +79,15 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
   }
 }
 
+const resetCategoryFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getCategories())
+}
+
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await couponApi.categories.deleteCategory({ id })
+    await api.categories.deleteCategory({ id })
     dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
     dispatch(getCategories({ page: newPage }))
@@ -92,6 +101,7 @@ const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
 export const categoryListActions = {
   resetCategoryList,
   getCategories,
+  resetCategoryFilters,
   deleteCategory
 }
 

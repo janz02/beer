@@ -4,7 +4,8 @@ import { hasPermission } from 'services/jwt-reader'
 import { useCategoryTab } from './campaignCategory/useCategoryTab'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
 import { AppstoreAddOutlined } from '@ant-design/icons'
-import { Roles } from 'api/coupon-api'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { Roles } from 'api/swagger/coupon'
 
 export interface SettingsTab {
   key: string
@@ -12,6 +13,7 @@ export interface SettingsTab {
   roles: Roles[]
   headerOptions?: JSX.Element
   tabContent: JSX.Element
+  resetFilters: () => void
 }
 
 export const SettingsPage: React.FC = () => {
@@ -19,6 +21,8 @@ export const SettingsPage: React.FC = () => {
   const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
   const currentTab = permittedTabs.find(x => x.key === currentTabKey)
+
+  const tabBarExtraContent = <ResetFiltersButton onClick={() => currentTab?.resetFilters()} />
 
   return (
     <ResponsiveCard
@@ -28,7 +32,12 @@ export const SettingsPage: React.FC = () => {
       floatingTitle={currentTab?.title}
       floatingOptions={currentTab?.headerOptions}
     >
-      <ResponsiveTabs onChange={setCurrentTabKey} type="card" activeKey={currentTabKey}>
+      <ResponsiveTabs
+        onChange={setCurrentTabKey}
+        type="card"
+        activeKey={currentTabKey}
+        tabBarExtraContent={tabBarExtraContent}
+      >
         {permittedTabs.map(tab => (
           <TabPane
             key="campaign-categories"

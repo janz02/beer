@@ -6,15 +6,18 @@ import { useTranslation } from 'react-i18next'
 import { userAccessActions } from '../userAccessSlice'
 import { useUserAccessList } from './useUserAccessList'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+
+type UserAccessTab = 'nkm' | 'partner'
 
 export const UserAccessList: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const [selectedTab, setSelectedTab] = useState('nkm')
+  const [selectedTab, setSelectedTab] = useState<UserAccessTab>('nkm')
   const {
     partnerUsersColumnsConfig,
     nkmUsersColumnsConfig,
@@ -23,7 +26,9 @@ export const UserAccessList: FC = () => {
     nkmUsers,
     nkmLoading,
     partnerUsers,
-    partnerLoading
+    partnerLoading,
+    resetNkmFilters,
+    resetPartnerFilters
   } = useUserAccessList()
 
   useEffect(() => {
@@ -37,15 +42,26 @@ export const UserAccessList: FC = () => {
     ColumnStorageName.USER_ACCES_PARTNER
   )
 
-  const tabBarActions = useMemo(
-    () =>
-      selectedTab === 'nkm' ? (
-        <ColumnOrderDropdown {...nkmColumnOrder} />
-      ) : (
-        <ColumnOrderDropdown {...partnerColumnOrder} />
-      ),
-    [selectedTab, nkmColumnOrder, partnerColumnOrder]
-  )
+  const tabBarActions = useMemo(() => {
+    const resetFilters = (): void => {
+      if (selectedTab === 'nkm') {
+        resetNkmFilters()
+      } else {
+        resetPartnerFilters()
+      }
+    }
+
+    return (
+      <>
+        <ResetFiltersButton onClick={resetFilters} />
+        {selectedTab === 'nkm' ? (
+          <ColumnOrderDropdown {...nkmColumnOrder} />
+        ) : (
+          <ColumnOrderDropdown {...partnerColumnOrder} />
+        )}
+      </>
+    )
+  }, [selectedTab, nkmColumnOrder, partnerColumnOrder, resetNkmFilters, resetPartnerFilters])
 
   return (
     <ResponsiveCard
@@ -58,7 +74,7 @@ export const UserAccessList: FC = () => {
       <ResponsiveTabs
         type="card"
         defaultActiveKey={selectedTab}
-        onChange={setSelectedTab}
+        onChange={x => setSelectedTab(x as UserAccessTab)}
         tabBarExtraContent={tabBarActions}
       >
         <TabPane key="nkm" tab={<TabPanelTitle title={t('user-access.nkm-users')} />}>

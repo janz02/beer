@@ -1,5 +1,9 @@
-import { PartnerContactVm, SiteVm, PartnerRegistrationState } from 'api/coupon-api'
-import { PartnerState } from 'api/coupon-api/models/PartnerState'
+import {
+  PartnerContactVm,
+  SiteVm,
+  PartnerRegistrationState,
+  PartnerState
+} from 'api/swagger/coupon'
 
 export interface Partner {
   id?: number

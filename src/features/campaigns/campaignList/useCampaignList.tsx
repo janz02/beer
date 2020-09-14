@@ -23,7 +23,7 @@ import {
   CouponRank,
   CouponMode,
   CouponDiscountType
-} from 'api/coupon-api/models'
+} from 'api/swagger/coupon'
 import { isCouponActive } from 'components/CampaignActiveDisplay'
 
 interface UseCampaignListFeatures {
@@ -35,6 +35,7 @@ interface UseCampaignListFeatures {
   paginationConfig: false | TablePaginationConfig
   couponToDelete?: Coupon
   deletePopupVisible?: boolean
+  resetFilters: () => void
   handleIncludeArchivedChange: (checked: boolean) => void
   handleTabChange: (key: CouponListTabKey) => void
   handleDeleteCancel: () => void
@@ -95,6 +96,10 @@ export const useCampaignList = (): UseCampaignListFeatures => {
     ],
     getDataAction: campaignListActions.getCoupons
   })
+
+  const resetFilters = (): void => {
+    dispatch(campaignListActions.resetCouponFilters())
+  }
 
   const columnsConfig = useMemo(
     (): ColumnType<Coupon>[] => [
@@ -363,6 +368,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
     paginationConfig,
     couponToDelete,
     deletePopupVisible,
+    resetFilters,
     handleIncludeArchivedChange,
     handleTabChange,
     handleDeleteCancel,

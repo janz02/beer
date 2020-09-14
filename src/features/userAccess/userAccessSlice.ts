@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { couponApi } from 'api'
+import { api } from 'api'
 import {
   ListRequestParams,
   reviseListRequestParams,
@@ -9,7 +9,7 @@ import {
 import { UserAccess, UserType } from 'models/user'
 import { message } from 'antd'
 import i18n from 'app/i18n'
-import { Roles } from 'api/coupon-api/models'
+import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 
 interface State {
@@ -45,6 +45,12 @@ const slice = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    resetNkmListParams(state) {
+      state.nkmListParams = initialState.nkmListParams
+    },
+    resetParterListParams(state) {
+      state.partnerListParams = initialState.partnerListParams
+    },
     openEditor(state, action: PayloadAction<UserType>) {
       state.editedUserType = action.payload
       state.editorOpen = true
@@ -93,7 +99,7 @@ const slice = createSlice({
 })
 const { openEditor, closeEditor } = slice.actions
 const { setEditorState, setNkmListState, setPartnerListState } = slice.actions
-const { clearUserAccessEditor, reset } = slice.actions
+const { clearUserAccessEditor, reset, resetNkmListParams, resetParterListParams } = slice.actions
 const {
   getNkmUsersSuccess,
   getPartnerUsersSuccess,
@@ -105,7 +111,7 @@ const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setNkmListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().userAccess.nkmListParams, params)
-    const { result, ...pagination } = await couponApi.auth.getNkmPartnerContacts(revisedParams)
+    const { result, ...pagination } = await api.auth.getNkmPartnerContacts(revisedParams)
     dispatch(
       getNkmUsersSuccess({
         users: result as UserAccess[],
@@ -117,6 +123,11 @@ const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatc
   }
 }
 
+const resetNkmUsersFilters = (): AppThunk => async dispatch => {
+  dispatch(resetNkmListParams())
+  dispatch(getNkmUsers())
+}
+
 const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
@@ -124,7 +135,7 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
   try {
     dispatch(setPartnerListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().userAccess.partnerListParams, params)
-    const { result, ...pagination } = await couponApi.auth.getPartnerContacts(revisedParams)
+    const { result, ...pagination } = await api.auth.getPartnerContacts(revisedParams)
 
     dispatch(
       getPartnerUsersSuccess({
@@ -137,10 +148,14 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
   }
 }
 
+const resetPartnerUsersFilters = (): AppThunk => async dispatch => {
+  dispatch(resetParterListParams())
+}
+
 const inspectUserAccess = (userType: UserType, id: number): AppThunk => async dispatch => {
   try {
     dispatch(openEditor(userType))
-    const response = await couponApi.auth.getPartnerContactState({ id })
+    const response = await api.auth.getPartnerContactState({ id })
     dispatch(getUserSuccess({ ...response } as UserAccess))
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
@@ -153,7 +168,7 @@ const saveUserAccess = (role: Roles, isActive: boolean): AppThunk => async (disp
     const type = getState().userAccess.editedUserType
     if (!id) return
     dispatch(setEditorState(FeatureState.Loading))
-    await couponApi.auth.updatePartnerContactState({
+    await api.auth.updatePartnerContactState({
       id,
       partnerContactStateDto: { role, isActive }
     })
@@ -174,7 +189,9 @@ export const userAccessActions = {
   saveUserAccess,
   inspectUserAccess,
   getNkmUsers,
+  resetNkmUsersFilters,
   getPartnerUsers,
+  resetPartnerUsersFilters,
   closeEditor,
   clearUserAccessEditor,
   reset

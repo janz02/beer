@@ -2,22 +2,29 @@ import { useState, useEffect } from 'react'
 import { ColumnType } from 'antd/lib/table'
 import { DropResult } from 'react-beautiful-dnd'
 import { ColumnStorageName } from './ColumnStorageName'
+import { SelectValue } from 'antd/lib/select'
 
 export interface UseColumnOrderFeatures<T> {
   visible: boolean
   currentColumns: ColumnType<T>[]
   tempColumns: ColumnType<T>[]
+  hiddenColumns: ColumnType<T>[]
   handleChangeVisibility: () => void
   handleApplyChanges: () => void
   handleResetToDefault: () => void
+  addColumn: (value: SelectValue) => void
+  addOrRemoveAllColumn: (value: boolean) => void
+  hideColumn: (column: ColumnType<T>) => void
   onDragEnd: (result: DropResult) => void
 }
 
 /**
  * Contains the logic for reordering, and saving columns order
- * tempColumns used while rearringing inside the drag-and-drop component
+ * Pass this hook as a prop to the ColumnOrderDropdown component
+ * tempColumns used while rearranging inside the drag-and-drop component
+ * hiddenColumns used in the Select component
  * currentColumns are the actual columns for the Table
- * @param defaultColumns the default state, to reset to
+ * @param defaultColumns the default state of the columns, used for reset and initial values
  * @param storageName the name for the localStorage, to get and set the columns order
  */
 export const useColumnOrder = <T extends {}>(
@@ -25,17 +32,54 @@ export const useColumnOrder = <T extends {}>(
   storageName: ColumnStorageName
 ): UseColumnOrderFeatures<T> => {
   const [visible, setVisible] = useState<boolean>(false)
-  const [currentColumns, setCurrentColumns] = useState<ColumnType<T>[]>([...defaultColumns])
+  const [currentColumns, setCurrentColumns] = useState<ColumnType<T>[]>([])
   const [tempColumns, setTempColumns] = useState<ColumnType<T>[]>([])
+  const [hiddenColumns, setHiddenColumns] = useState<ColumnType<T>[]>([])
 
-  /**
-   * Toggles the visibility
-   */
   const changeVisibility = (): void => setVisible(!visible)
 
-  /**
-   * Stores the dataIndex array to the localStorage
-   */
+  const partition = (array: any[], conditionFn: (column: any) => boolean): any[][] =>
+    array.reduce(
+      (result: any[], element: any) => {
+        result[conditionFn(element) ? 0 : 1].push(element)
+        return result
+      },
+      [[], []]
+    )
+
+  const reorderColumns = (storedDataIndexes: string[]): void => {
+    const [shownColumns, notShownColumns] = partition(
+      defaultColumns,
+      column => !column.dataIndex || storedDataIndexes.includes(column.dataIndex)
+    )
+
+    setHiddenColumns(notShownColumns)
+
+    setCurrentColumns(
+      shownColumns.sort((column1, column2) => {
+        if (!column1.dataIndex) {
+          return 1
+        }
+        if (!column2.dataIndex) {
+          return -1
+        }
+        return (
+          storedDataIndexes.indexOf(String(column1.dataIndex)) -
+          storedDataIndexes.indexOf(String(column2.dataIndex))
+        )
+      })
+    )
+  }
+
+  const reorderColumnsFromStore = (): void => {
+    const storedDataIndexes: string | null = localStorage.getItem(storageName)
+    if (storedDataIndexes) {
+      reorderColumns(JSON.parse(storedDataIndexes))
+    } else {
+      setCurrentColumns([...defaultColumns])
+    }
+  }
+
   const storeColumnsOrder = (): void => {
     const dataIndexes: string[] = tempColumns
       .filter(column => column.dataIndex)
@@ -44,50 +88,12 @@ export const useColumnOrder = <T extends {}>(
     localStorage.setItem(storageName, JSON.stringify(dataIndexes))
   }
 
-  /**
-   * Reorders the columns based on the stored array order
-   * @param dataIndexes array, which is the base for reordering
-   */
-  const reorderColumns = (dataIndexes: string[]): void => {
-    setCurrentColumns(
-      currentColumns.sort((column1, column2) => {
-        if (!column1.dataIndex) {
-          return 1
-        }
-        if (!column2.dataIndex) {
-          return -1
-        }
-        return (
-          dataIndexes.indexOf(String(column1.dataIndex)) -
-          dataIndexes.indexOf(String(column2.dataIndex))
-        )
-      })
-    )
-  }
-
-  /**
-   * Gets the column order from the store
-   */
-  const reorderColumnsFromStore = (): void => {
-    const dataIndexes: string | null = localStorage.getItem(storageName)
-    if (dataIndexes) {
-      reorderColumns(JSON.parse(dataIndexes))
-    }
-  }
-
-  /**
-   * After rearringing is done, set the currentColumns, and store the order in the store
-   */
   const applyChanges = (): void => {
-    setCurrentColumns(tempColumns)
+    setCurrentColumns([...tempColumns, ...defaultColumns.filter(column => !column.dataIndex)])
     storeColumnsOrder()
     changeVisibility()
   }
 
-  /**
-   * After dragging is over, rearranges the tempColums, to match the dragged value
-   * using react-beautiful-dnd for the event
-   */
   const onDragEnd = (dropResult: DropResult): void => {
     if (!dropResult.destination) {
       return
@@ -100,8 +106,32 @@ export const useColumnOrder = <T extends {}>(
     setTempColumns(resultArray)
   }
 
-  const resetTempColumnsToDefault = (): void => {
-    setTempColumns([...defaultColumns])
+  const addColumn = (value: SelectValue): void => {
+    setHiddenColumns(hiddenColumns.filter(hiddenColumn => hiddenColumn.dataIndex !== value))
+    setTempColumns([
+      ...tempColumns,
+      ...defaultColumns.filter(column => String(column.dataIndex) === value.toString())
+    ] as ColumnType<T>[])
+  }
+
+  const addOrRemoveAllColumn = (value: boolean): void => {
+    if (value) {
+      setTempColumns([...tempColumns, ...hiddenColumns])
+      setHiddenColumns([])
+    } else {
+      setTempColumns([])
+      setHiddenColumns(defaultColumns.filter(column => column.dataIndex))
+    }
+  }
+
+  const hideColumn = (column: ColumnType<T>): void => {
+    setHiddenColumns([...hiddenColumns, column])
+    setTempColumns(tempColumns.filter(tempColumn => tempColumn !== column))
+  }
+
+  const resetToDefault = (): void => {
+    setTempColumns(defaultColumns.filter(column => column.dataIndex))
+    setHiddenColumns([])
   }
 
   useEffect(() => {
@@ -110,16 +140,20 @@ export const useColumnOrder = <T extends {}>(
   }, [])
 
   useEffect(() => {
-    setTempColumns(currentColumns)
+    setTempColumns(currentColumns.filter(column => column.dataIndex))
   }, [currentColumns])
 
   return {
     visible,
     currentColumns,
     tempColumns,
+    hiddenColumns,
     handleChangeVisibility: changeVisibility,
     handleApplyChanges: applyChanges,
-    handleResetToDefault: resetTempColumnsToDefault,
+    handleResetToDefault: resetToDefault,
+    addColumn,
+    addOrRemoveAllColumn,
+    hideColumn,
     onDragEnd
   }
 }

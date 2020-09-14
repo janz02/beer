@@ -3,7 +3,7 @@ import { AppThunk } from 'app/store'
 import { Partner } from 'models/partner'
 import { message } from 'antd'
 import i18n from 'app/i18n'
-import { couponApi } from 'api'
+import { api } from 'api'
 
 interface SelfPartnerState {
   partner?: Partner
@@ -57,7 +57,7 @@ export const getMyPartner = (): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const partner = await couponApi.partner.getMyPartner()
+    const partner = await api.partner.getMyPartner()
     dispatch(
       getPartnersSuccess({
         ...partner
@@ -72,7 +72,7 @@ export const updateMyPartner = (partner: Partner): AppThunk => async (dispatch, 
   dispatch(setLoadingStart())
 
   try {
-    await couponApi.partner.updateMyPartner({
+    await api.partner.updateMyPartner({
       partnerDto: {
         ...getState().selfPartner.partner,
         ...partner,

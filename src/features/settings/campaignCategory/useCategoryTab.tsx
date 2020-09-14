@@ -6,8 +6,9 @@ import { useTranslation } from 'react-i18next'
 import { CategoryTab } from './CategoryTab'
 import { hasPermission } from 'services/jwt-reader'
 import { SettingsTab } from '../SettingsPage'
-import { Roles } from 'api/coupon-api/models'
+import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
+import { useCategoryList } from './categoryList/useCategoryList'
 
 export const useCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
@@ -19,6 +20,8 @@ export const useCategoryTab = (): SettingsTab => {
     detailRoute: '/categories'
   })
 
+  const categoryListUtils = useCategoryList({ onOpenEditor: modalUtils.routeToEditor })
+
   let headerOptions: JSX.Element | undefined
   if (hasPermission([Roles.Administrator])) {
     headerOptions = (
@@ -26,13 +29,14 @@ export const useCategoryTab = (): SettingsTab => {
     )
   }
 
-  const tabContent = <CategoryTab modalUtils={modalUtils} />
+  const tabContent = <CategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />
 
   return {
     key: 'campaign-categories',
     title: t('settings.campaign-categories'),
     roles: pageViewRoles.categories,
     headerOptions,
-    tabContent
+    tabContent,
+    resetFilters: categoryListUtils.resetFilters
   }
 }

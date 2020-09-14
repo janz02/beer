@@ -146,7 +146,6 @@ function useTableUtils<T extends { [key: string]: any }>(
   props: UseTableUtilsProps<T>
 ): UseTableUtils<T> {
   const { listParamsState, getDataAction, filterKeys, sortWithoutDefaultOption } = props
-
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
   const { t } = useTranslation()

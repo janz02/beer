@@ -7,7 +7,7 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { getPartners } from './partnerListSlice'
+import { getPartners, resetPartnerFilters } from './partnerListSlice'
 import { ColumnType } from 'antd/lib/table'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { CrudButtons } from 'components/buttons/CrudButtons'
@@ -15,8 +15,9 @@ import { hasPermission } from 'services/jwt-reader'
 import { history } from 'router/router'
 import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
 import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
-import { PartnerRegistrationState, PartnerState } from 'api/coupon-api/models'
+import { PartnerRegistrationState, PartnerState } from 'api/swagger/coupon'
 import { ActivenessStatus } from 'components/ActivenessDisplay'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
@@ -42,6 +43,10 @@ export const PartnerListPage: React.FC = () => {
     filterKeys: ['name', 'majorPartner', 'partnerState', 'address', 'partnerRegistrationState'],
     getDataAction: getPartners
   })
+
+  const resetFilters = (): void => {
+    dispatch(resetPartnerFilters())
+  }
 
   const columnsConfig = useMemo(
     (): ColumnType<Partner>[] => [
@@ -116,12 +121,13 @@ export const PartnerListPage: React.FC = () => {
 
   const headerOptions = (
     <>
+      <ResetFiltersButton onClick={resetFilters} />
+      <ColumnOrderDropdown {...columnOrder} />
       {hasPermission(partnersEditorRoles) ? (
         <AddButton onClick={() => history.push(`/partners/new`)}>{t('partner.list.add')}</AddButton>
       ) : (
         undefined
       )}
-      <ColumnOrderDropdown {...columnOrder} />
     </>
   )
 
