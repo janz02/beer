@@ -1,4 +1,4 @@
-import { couponApi } from 'api'
+import { api } from 'api'
 
 export const NotificationLinkPreValidator = {
   async GetCoupon(id: number): Promise<boolean> {
@@ -6,19 +6,19 @@ export const NotificationLinkPreValidator = {
       return false
     }
 
-    await couponApi.coupons.getCoupon({ id })
+    await api.coupons.getCoupon({ id })
     // If the call was unsuccessful, the await will return with an error, and the promise will be false
     return true
   },
 
   async GetPartnerContact(id: number): Promise<boolean> {
-    await couponApi.partnerContacts.getPartnerContact({ id })
+    await api.partnerContacts.getPartnerContact({ id })
     // If the call was unsuccessful, the await will return with an error, and the promise will be false
     return true
   },
 
   async GetPartner(id: number): Promise<boolean> {
-    await couponApi.partner.getPartner({ id })
+    await api.partner.getPartner({ id })
     // If the call was unsuccessful, the await will return with an error, and the promise will be false
     return true
   },
