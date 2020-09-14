@@ -44,6 +44,9 @@ const slice = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     setListState(state, action: PayloadAction<FeatureState>) {
       state.listState = action.payload
     },
@@ -70,7 +73,7 @@ const slice = createSlice({
   }
 })
 
-const { setDeleteState, setListState, setFeatureConfig } = slice.actions
+const { setDeleteState, setListState, setFeatureConfig, resetListParams } = slice.actions
 const { deleteSiteSuccess, getSitesSuccess } = slice.actions
 const { reset, setListConstraints } = slice.actions
 
@@ -99,6 +102,11 @@ const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, 
   }
 }
 
+const resetSiteFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getSites())
+}
+
 const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
@@ -121,5 +129,6 @@ export const siteListActions = {
   setListConstraints,
   setFeatureConfig,
   getSites,
+  resetSiteFilters,
   deleteSite
 }

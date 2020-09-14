@@ -103,6 +103,7 @@
       "save-title": "Are you sure about saving this?"
     },
     "reset": "Reset",
+    "reset-filters": "Reset filters to defaults",
     "restore": "Restore",
     "save": "Save",
     "search": "Search",

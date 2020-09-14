@@ -38,6 +38,9 @@ const newsletterListSlice = createSlice({
   initialState,
   reducers: {
     resetNewsletterList: () => initialState,
+    resetListParams: state => {
+      state.listParams = initialState.listParams
+    },
     setListState: (state, action: PayloadAction<FeatureState>) => {
       state.listState = action.payload
     },
@@ -63,7 +66,8 @@ const {
   setDeleteState,
   setListState,
   getListSuccess,
-  resetNewsletterList
+  resetNewsletterList,
+  resetListParams
 } = newsletterListSlice.actions
 
 const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => async (
@@ -86,6 +90,11 @@ const getNewsletterTemplates = (params: ListRequestParams = {}): AppThunk => asy
   } catch (err) {
     dispatch(setListState(FeatureState.Error))
   }
+}
+
+const resetNewsletterTemplateFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getNewsletterTemplates())
 }
 
 const deleteNewsletterTemplate = (id: number): AppThunk => async (dispatch, getState) => {
@@ -124,6 +133,7 @@ export const newsletterListReducer = newsletterListSlice.reducer
 export const newsletterListActions = {
   resetNewsletterList,
   getNewsletterTemplates,
+  resetNewsletterTemplateFilters,
   createNewsletterTemplate,
   deleteNewsletterTemplate
 }

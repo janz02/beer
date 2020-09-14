@@ -45,6 +45,9 @@ const slice = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     setListState(state, action: PayloadAction<FeatureState>) {
       state.listState = action.payload
     },
@@ -68,7 +71,7 @@ const slice = createSlice({
   }
 })
 const { getContactsSuccess, deleteContactSuccess } = slice.actions
-const { reset, setListState, setDeleteState, setListConstraints } = slice.actions
+const { reset, resetListParams, setListState, setDeleteState, setListConstraints } = slice.actions
 
 const getContacts = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
@@ -94,6 +97,11 @@ const getContacts = (params: ListRequestParams = {}): AppThunk => async (dispatc
   } catch (err) {
     dispatch(setListState(FeatureState.Error))
   }
+}
+
+const resetContactFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getContacts())
 }
 
 const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, getState) => {
@@ -124,5 +132,6 @@ export const partnerContactListActions = {
   reset,
   setListConstraints,
   getContacts,
+  resetContactFilters,
   deleteContact
 }

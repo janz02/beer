@@ -8,6 +8,7 @@ import { GenericPopup } from 'components/popups/GenericPopup'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { AddButton } from 'components/buttons/AddButton'
 import { useNewlsetterList } from './useNewlsetterList'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ColumnType } from 'antd/lib/table'
@@ -23,7 +24,8 @@ export const NewsletterList: FC = () => {
     deletePopupProps,
     createModalFormProps,
     openCreateTemplateModal,
-    handleGetNewsletterTemplates
+    handleGetNewsletterTemplates,
+    resetFilters
   } = useNewlsetterList()
 
   useEffect(() => {
@@ -37,8 +39,9 @@ export const NewsletterList: FC = () => {
 
   const headerOptions = (
     <>
-      <AddButton onClick={openCreateTemplateModal}>{t('newsletter.add')}</AddButton>
+      <ResetFiltersButton onClick={resetFilters} />
       <ColumnOrderDropdown {...columnOrder} />
+      <AddButton onClick={openCreateTemplateModal}>{t('newsletter.add')}</AddButton>
     </>
   )
 

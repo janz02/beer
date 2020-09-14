@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { PartnerContactConfig } from '../PartnerContactTile'
 import { Button } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
 
 export interface PartnerContactListProps {
   config: PartnerContactConfig
@@ -21,7 +22,8 @@ export const PartnerContactList: FC<PartnerContactListProps> = props => {
     handleGetList,
     tableProps,
     deletePopupProps,
-    handleOpenInviter
+    handleOpenInviter,
+    resetFilters
   } = usePartnerContactList({
     config: props.config
   })
@@ -31,9 +33,12 @@ export const PartnerContactList: FC<PartnerContactListProps> = props => {
   }, [handleGetList])
 
   const options = (
-    <Button type="primary" icon={<UserAddOutlined />} size="large" onClick={handleOpenInviter}>
-      {t('partner-contact.send-invitation')}
-    </Button>
+    <>
+      <ResetFiltersButton onClick={resetFilters} />
+      <Button type="primary" icon={<UserAddOutlined />} size="large" onClick={handleOpenInviter}>
+        {t('partner-contact.send-invitation')}
+      </Button>
+    </>
   )
 
   return (

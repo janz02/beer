@@ -45,6 +45,12 @@ const slice = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    resetNkmListParams(state) {
+      state.nkmListParams = initialState.nkmListParams
+    },
+    resetParterListParams(state) {
+      state.partnerListParams = initialState.partnerListParams
+    },
     openEditor(state, action: PayloadAction<UserType>) {
       state.editedUserType = action.payload
       state.editorOpen = true
@@ -93,7 +99,7 @@ const slice = createSlice({
 })
 const { openEditor, closeEditor } = slice.actions
 const { setEditorState, setNkmListState, setPartnerListState } = slice.actions
-const { clearUserAccessEditor, reset } = slice.actions
+const { clearUserAccessEditor, reset, resetNkmListParams, resetParterListParams } = slice.actions
 const {
   getNkmUsersSuccess,
   getPartnerUsersSuccess,
@@ -117,6 +123,11 @@ const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatc
   }
 }
 
+const resetNkmUsersFilters = (): AppThunk => async dispatch => {
+  dispatch(resetNkmListParams())
+  dispatch(getNkmUsers())
+}
+
 const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
@@ -135,6 +146,10 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
   } catch (err) {
     dispatch(setPartnerListState(FeatureState.Error))
   }
+}
+
+const resetPartnerUsersFilters = (): AppThunk => async dispatch => {
+  dispatch(resetParterListParams())
 }
 
 const inspectUserAccess = (userType: UserType, id: number): AppThunk => async dispatch => {
@@ -174,7 +189,9 @@ export const userAccessActions = {
   saveUserAccess,
   inspectUserAccess,
   getNkmUsers,
+  resetNkmUsersFilters,
   getPartnerUsers,
+  resetPartnerUsersFilters,
   closeEditor,
   clearUserAccessEditor,
   reset

@@ -21,6 +21,8 @@ interface UseUserAccessListUtils {
   nkmLoading: boolean
   partnerUsers: UserAccess[]
   partnerLoading: boolean
+  resetNkmFilters: () => void
+  resetPartnerFilters: () => void
 }
 
 export const useUserAccessList = (): UseUserAccessListUtils => {
@@ -158,6 +160,14 @@ export const useUserAccessList = (): UseUserAccessListUtils => {
     [partnerRoleOptions, partnerUsersTableUtils, t, dispatch]
   )
 
+  const resetNkmFilters = (): void => {
+    dispatch(userAccessActions.resetPartnerUsersFilters())
+  }
+
+  const resetPartnerFilters = (): void => {
+    dispatch(userAccessActions.resetPartnerUsersFilters())
+  }
+
   return {
     partnerUsersColumnsConfig,
     nkmUsersColumnsConfig,
@@ -166,6 +176,8 @@ export const useUserAccessList = (): UseUserAccessListUtils => {
     nkmUsers,
     nkmLoading: nkmListState === FeatureState.Loading,
     partnerUsers,
-    partnerLoading: partnerListState === FeatureState.Loading
+    partnerLoading: partnerListState === FeatureState.Loading,
+    resetNkmFilters,
+    resetPartnerFilters
   }
 }

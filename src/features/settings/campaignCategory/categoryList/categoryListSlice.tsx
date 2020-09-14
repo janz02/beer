@@ -34,6 +34,9 @@ const categoryListSlice = createSlice({
   initialState,
   reducers: {
     resetCategoryList: () => initialState,
+    resetListParams(state) {
+      state.listParams = initialState.listParams
+    },
     setListState: (state, action: PayloadAction<FeatureState>) => {
       state.listState = action.payload
     },
@@ -52,6 +55,7 @@ const categoryListSlice = createSlice({
 })
 
 const {
+  resetListParams,
   setListState,
   setDeleteState,
   getCategoriesSuccess,
@@ -75,6 +79,11 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
   }
 }
 
+const resetCategoryFilters = (): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getCategories())
+}
+
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
@@ -92,6 +101,7 @@ const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
 export const categoryListActions = {
   resetCategoryList,
   getCategories,
+  resetCategoryFilters,
   deleteCategory
 }
 
