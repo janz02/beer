@@ -57,6 +57,8 @@
       "link": "Oszlopok testreszabása"
     },
     "layout": {
+      "add-all-checkbox": "Összes bekapcsolása",
+      "add-select-placeholder": "Hozzáadás",
       "apply": "Alkalmazás",
       "cancel": "Mégsem",
       "default": "Alapértelmezettek visszaállítása",

@@ -57,6 +57,8 @@
       "link": "Customize columns"
     },
     "layout": {
+      "add-all-checkbox": "Add all column",
+      "add-select-placeholder": "Add column",
       "apply": "Apply",
       "cancel": "Cancel",
       "default": "Restore defaults",
