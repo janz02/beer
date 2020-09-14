@@ -8,7 +8,7 @@ import { getUrl } from 'services/baseUrlHelper'
 import { RequestError } from 'api/middleware'
 
 interface FileThumbnail {
-  label?: string | undefined | null
+  label?: string
   url?: string
   loading?: boolean
   error?: string
@@ -27,18 +27,17 @@ export interface UseFileUploadProps {
 export interface UseFileUploadUtils {
   thumbnail: FileThumbnail | null | undefined
   appendedUploadProps?: UploadProps
-  handleClear: (id: any) => void
+  handleClear: () => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
 }
 
 export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
   const { initialFileId, uploadProps, onRemove, onSuccess, mode } = props
 
-  const [fileId, setFileId] = useState(initialFileId)
   const { t } = useTranslation()
 
   // TODO: Move this logic to Api, this is just a temporary solution
-  const basePath = getUrl(process.env.REACT_APP_FILES_API_URL)
+  const basePath = getUrl()
   const apiKey = (): string => `Bearer ${sessionStorage.getItem('jwt')}`
 
   const [thumbnail, setThumbnail] = useState<FileThumbnail>()
@@ -71,8 +70,8 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
           }
           default: {
             // TODO : integrate api
-            const fileInfo = await api.files.infoFile({ id: fileId })
-            setThumbnail({ label: fileInfo.fileName, loading: false })
+            const fileName = await api.files.getFileName({ id: fileId })
+            setThumbnail({ label: fileName, loading: false })
             break
           }
         }
@@ -105,7 +104,6 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
         case 'done':
           handleUploadSuccess(file)
           onSuccess?.(file.response.id)
-          setFileId(file.response.id)
           break
         case 'removed':
           setThumbnail({ loading: false, error: t('error.unknown-try-again') })
@@ -121,14 +119,9 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
     [handleUploadSuccess, onSuccess, t]
   )
 
-  const handleClear = async () => {
-    try {
-      await api.files.deleteFile({ id: fileId || null })
-      setThumbnail(undefined)
-      onRemove?.()
-    } catch (error) {
-      displayBackendError(error)
-    }
+  const handleClear = (): void => {
+    setThumbnail(undefined)
+    onRemove?.()
   }
 
   const appendedUploadProps = useMemo(

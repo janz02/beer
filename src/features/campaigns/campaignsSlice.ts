@@ -363,9 +363,9 @@ const downloadPrizeFile = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    const fileInfo = await api.files.infoFile({ id: coupon.prizeRulesFileId! })
+    const fileName: string = await api.files.getFileName({ id: coupon.prizeRulesFileId! })
     const blob: Blob = await api.files.downloadFile({ id: coupon.prizeRulesFileId! })
-    saveAs(blob, `${fileInfo.fileName}.${fileInfo.exstension}`)
+    saveAs(blob, fileName)
     dispatch(downloadPrizeFileSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
@@ -376,11 +376,11 @@ const downloadPredefinedCodesFile = (coupon: Coupon): AppThunk => async dispatch
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    const fileInfo = await api.files.infoFile({
+    const fileName: string = await api.files.getFileName({
       id: coupon.predefinedCodesFileId!
     })
     const blob: Blob = await api.files.downloadFile({ id: coupon.predefinedCodesFileId! })
-    saveAs(blob, `${fileInfo.fileName}.${fileInfo.exstension}`)
+    saveAs(blob, fileName)
     dispatch(downloadPredefinedCouponsFileSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))

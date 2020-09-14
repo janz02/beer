@@ -8351,21 +8351,6 @@
         }
       }
     },
-    "/api/UserCoupons/Archive": {
-      "post": {
-        "tags": [
-          "UserCoupons"
-        ],
-        "summary": "Archives every pair of coupons and users",
-        "description": "Archives every pair of coupons and users, used before generating new pairs",
-        "operationId": "archiveUserCoupons",
-        "responses": {
-          "204": {
-            "description": "Successful archiving"
-          }
-        }
-      }
-    },
     "/api/UserCoupons/MyCoupons": {
       "get": {
         "tags": [

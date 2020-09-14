@@ -26,37 +26,6 @@ import {
 export class UserCouponsApi extends runtime.BaseAPI {
 
     /**
-     * Archives every pair of coupons and users, used before generating new pairs
-     * Archives every pair of coupons and users
-     */
-    async archiveUserCouponsRaw(): Promise<runtime.ApiResponse<void>> {
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/UserCoupons/Archive`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Archives every pair of coupons and users, used before generating new pairs
-     * Archives every pair of coupons and users
-     */
-    async archiveUserCoupons(): Promise<void> {
-        await this.archiveUserCouponsRaw();
-    }
-
-    /**
      * Returns a coupon list that contains up to 8 coupons for the user for today
      * Returns the coupons generated for the user
      */

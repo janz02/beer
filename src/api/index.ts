@@ -79,8 +79,8 @@ export const api = {
   segments: new SegmentsApi(couponConfig),
   cashiers: new CashiersApi(couponConfig),
   information: new InformationApi(couponConfig),
-  // files: new FilesApi(couponConfig), // note: this will be moved to Files MS in the future
-  files: new FilesMsApi(filesConfig), // note: keep this, if FilesApi removed from Coupon MS
+  files: new FilesApi(couponConfig), // note: this will be moved to Files MS in the future
+  filesMS: new FilesMsApi(filesConfig), // note: keep this, if FilesApi removed from Coupon MS
   notification: new NotificationsApi(couponConfig),
   notificationHub: new NotificationHubApi(couponConfig),
   userCoupons: new UserCouponsApi(couponConfig),
