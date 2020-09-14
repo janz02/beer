@@ -95,11 +95,11 @@ steps:
       customCommand: 'run build'
     displayName: 'Build solution'
 
-  - task: Npm@1
-    inputs:
-      command: 'custom'
-      customCommand: 'test -- --watchAll=false --passWithNoTests --reporters default --reporters jest-junit --coverage --coverageDirectory=output --coverageReporters cobertura'
-    displayName: 'Run Tests'
+  # - task: Npm@1
+  #   inputs:
+  #     command: 'custom'
+  #     customCommand: 'test -- --watchAll=false --passWithNoTests --reporters default --reporters jest-junit --coverage --coverageDirectory=output --coverageReporters cobertura'
+  #   displayName: 'Run Tests'
 
   - task: PublishTestResults@2
     condition: succeededOrFailed()
