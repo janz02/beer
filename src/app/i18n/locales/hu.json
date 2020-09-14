@@ -352,7 +352,8 @@
     },
     "not-found": "Nem található.",
     "notification": {
-      "cannot-navigate-to-notification-link": "Az értesítéshez tartozó hivatkozás nem nyitható meg."
+      "cannot-navigate-to-notification-link": "Az értesítéshez tartozó hivatkozás nem nyitható meg.",
+      "entity-for-navigation-does-not-exists": "Sikertelen navigáció, az értesítéshez tartozó adott entitás már nem elérhető"
     },
     "paginate": {
       "order-by": "Lapozó sorrend.",
