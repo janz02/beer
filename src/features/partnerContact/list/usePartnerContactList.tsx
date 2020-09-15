@@ -14,7 +14,6 @@ import { FeatureState } from 'models/featureState'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
 import { partnerContactModalActions } from '../modal/partnerContactModalSlice'
 import { PartnerContactConfig } from '../PartnerContactTile'
-import { displayBackendError } from 'services/errorHelpers'
 
 interface UsePartnerContactListProps {
   config: PartnerContactConfig
