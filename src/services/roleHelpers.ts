@@ -35,7 +35,7 @@ export const pageViewRoles = {
   couponCreator: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor],
   couponEditor: [Roles.Administrator, Roles.CampaignManager, ...comboRoles.forPartner],
   sites: comboRoles.forPartner,
-  settings: comboRoles.forAll,
+  settings: comboRoles.forNkm,
   categories: comboRoles.forNkm,
   categoryEditor: [Roles.Administrator],
   segments: comboRoles.forNkm,
