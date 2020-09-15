@@ -161,7 +161,7 @@ export const useUserAccessList = (): UseUserAccessListUtils => {
   )
 
   const resetNkmFilters = (): void => {
-    dispatch(userAccessActions.resetPartnerUsersFilters())
+    dispatch(userAccessActions.resetNkmUsersFilters())
   }
 
   const resetPartnerFilters = (): void => {

@@ -222,11 +222,12 @@ function useTableUtils<T extends { [key: string]: any }>(
       const config: ColumnType<T> = {
         ellipsis: true,
         ...rest,
-        dataIndex: key
+        dataIndex: key,
+        key
       }
 
       if (filterMode) {
-        config.filteredValue = listParamsState?.[key] ? [listParamsState?.[key]] : undefined
+        config.filteredValue = listParamsState?.[key] ? [listParamsState?.[key]] : null
       }
 
       switch (filterMode) {
@@ -281,7 +282,7 @@ function useTableUtils<T extends { [key: string]: any }>(
       if (sort) {
         config.sorter = true
         config.sortOrder =
-          listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : undefined
+          listParamsState.orderBy === key ? toSortOrder(listParamsState.orderByType) : null
       }
 
       if (renderMode === 'date time') {

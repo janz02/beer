@@ -150,6 +150,7 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
 
 const resetPartnerUsersFilters = (): AppThunk => async dispatch => {
   dispatch(resetParterListParams())
+  dispatch(getPartnerUsers())
 }
 
 const inspectUserAccess = (userType: UserType, id: number): AppThunk => async dispatch => {
