@@ -25,6 +25,7 @@ import { SettingsPage } from 'features/settings/SettingsPage'
 import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
 import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
 import { SiteListPage } from 'features/sites/siteList/SitesListPage'
+import { ProductEditorPage } from 'features/settings/products/productEditor/ProductEditorPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -119,6 +120,13 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.categoryEditor}
       component={SettingsPage}
     />
+    <PrivateRoute
+      exact
+      path={['/settings/products/new', '/settings/products/:id']}
+      roles={pageViewRoles.productEditor}
+      component={ProductEditorPage}
+    />
+
     <PrivateRoute
       exact
       path="/profile"

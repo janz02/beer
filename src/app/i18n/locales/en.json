@@ -32,6 +32,13 @@
       "name": "Category name"
     }
   },
+  "campaign-product": {
+    "add": "Add new Product",
+    "field": {
+      "createdDate": "Product name",
+      "name": "Created date"
+    }
+  },
   "cashier-editor": {
     "editor-create": "Create cashier",
     "editor-edit": "Edit cashier",
@@ -536,6 +543,10 @@
         "role-invalid": "__STRING_NOT_TRANSLATED__",
         "role-required": "__STRING_NOT_TRANSLATED__"
       },
+      "product": {
+        "name-max-length-150": "The product name can be maximum 150 characters long. Please add a valid value.",
+        "name-required": "The product name field is required. Please add a value."
+      },
       "register-partner-contact": {
         "partner-code-max-length-10": "__STRING_NOT_TRANSLATED__",
         "partner-code-required": "__STRING_NOT_TRANSLATED__"
@@ -702,6 +713,14 @@
     "list-title": "Partner Contacts",
     "send-invitation": "Send invitation"
   },
+  "product": {
+    "editor": {
+      "title": "Product base information"
+    },
+    "field": {
+      "name": "Product name"
+    }
+  },
   "profile": {
     "editor-title": "Profile",
     "field": {
@@ -717,7 +736,8 @@
     "save-profile-success": "Successfully saved the profile."
   },
   "settings": {
-    "campaign-categories": "Campaign categories"
+    "campaign-categories": "Campaign categories",
+    "campaign-products": "Products"
   },
   "site": {
     "editor-title": "Site",

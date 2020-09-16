@@ -9,6 +9,7 @@ import { SettingsTab } from '../SettingsPage'
 import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
 import { useCategoryList } from './categoryList/useCategoryList'
+import { AppstoreAddOutlined } from '@ant-design/icons'
 
 export const useCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
@@ -37,6 +38,8 @@ export const useCategoryTab = (): SettingsTab => {
     roles: pageViewRoles.categories,
     headerOptions,
     tabContent,
+    icon: <AppstoreAddOutlined />,
+    notificationCount: 0,
     resetFilters: categoryListUtils.resetFilters
   }
 }

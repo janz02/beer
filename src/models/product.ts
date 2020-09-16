@@ -1,8 +1,8 @@
 export interface Product {
   id?: number
   name?: string | null
-  createdDate?: Date
+  createdDate?: moment.Moment
   createdBy?: number
-  modifiedDate?: Date | null
+  modifiedDate?: moment.Moment
   modifiedBy?: number | null
 }

@@ -4,7 +4,6 @@ import { hasPermission } from 'services/jwt-reader'
 import { useCategoryTab } from './campaignCategory/useCategoryTab'
 import { useProductTab } from './products/useProductTab'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
-import { AppstoreAddOutlined } from '@ant-design/icons'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
 
@@ -14,6 +13,8 @@ export interface SettingsTab {
   roles: Roles[]
   headerOptions?: JSX.Element
   tabContent: JSX.Element
+  icon: JSX.Element
+  notificationCount: number
   resetFilters: () => void
 }
 
@@ -45,8 +46,8 @@ export const SettingsPage: React.FC = () => {
             tab={
               <TabPanelTitle
                 title={tab.title}
-                icon={<AppstoreAddOutlined />}
-                badgeProps={{ count: 0, size: 'default' }}
+                icon={tab.icon}
+                badgeProps={{ count: tab.notificationCount, size: 'default' }}
               />
             }
           >

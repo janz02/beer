@@ -10,6 +10,7 @@ import {
   OrderByType
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
+import moment from 'moment'
 
 interface CouponProductListState {
   products: Product[]
@@ -69,9 +70,16 @@ const getProducts = (params: ListRequestParams = {}): AppThunk => async (dispatc
     const revisedParams = reviseListRequestParams(getState().productList.listParams, params)
     const { items } = await api.products.getProducts({})
 
+    const products =
+      items?.map<Product>(c => ({
+        ...(c as any),
+        createdDate: moment(c.createdDate),
+        modifiedDate: moment(c.modifiedDate)
+      })) ?? []
+
     dispatch(
       getProductsSuccess({
-        products: items as Product[],
+        products: products,
         listParams: storableListRequestParams(revisedParams, {})
       })
     )

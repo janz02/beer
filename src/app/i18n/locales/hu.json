@@ -32,6 +32,13 @@
       "name": "Kategória neve"
     }
   },
+  "campaign-product": {
+    "add": "Új termék létrehozása",
+    "field": {
+      "createdDate": "Létrehozás dátuma",
+      "name": "Termék megnevezése"
+    }
+  },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
     "editor-edit": "Pénztár szerkesztés",
@@ -536,6 +543,10 @@
         "role-invalid": "__STRING_NOT_TRANSLATED__",
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
       },
+      "product": {
+        "name-max-length-150": "Termék név maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet",
+        "name-required": "Termék név megadása kötelelező, kérem adjon meg egy megfelelő nevet."
+      },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot.",
         "partner-code-required": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot."
@@ -702,6 +713,14 @@
     "list-title": "Kapcsolattartók",
     "send-invitation": "Meghívó küldése"
   },
+  "product": {
+    "editor": {
+      "title": "Termék meghatározása"
+    },
+    "field": {
+      "name": "Termék megnevezése"
+    }
+  },
   "profile": {
     "editor-title": "Profiladatok",
     "field": {
@@ -717,7 +736,8 @@
     "save-profile-success": "Profil mentése sikeres."
   },
   "settings": {
-    "campaign-categories": "Kampány kategóriák"
+    "campaign-categories": "Kampány kategóriák",
+    "campaign-products": "Termékek"
   },
   "site": {
     "editor-title": "Telephely",

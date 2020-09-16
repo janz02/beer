@@ -9,6 +9,8 @@ import { SettingsTab } from '../SettingsPage'
 import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
 import { useProductList } from './productList/useProductList'
+import { history } from '../../../router/router'
+import { GoldOutlined } from '@ant-design/icons'
 
 export const useProductTab = (): SettingsTab => {
   const { t } = useTranslation()
@@ -25,11 +27,13 @@ export const useProductTab = (): SettingsTab => {
   let headerOptions: JSX.Element | undefined
   if (hasPermission([Roles.Administrator])) {
     headerOptions = (
-      <AddButton onClick={() => modalUtils.routeToEditor()}>{t('campaign-product.add')}</AddButton>
+      <AddButton onClick={() => history.push(`/settings/products/new`)}>
+        {t('campaign-product.add')}
+      </AddButton>
     )
   }
 
-  const tabContent = <ProductTab modalUtils={modalUtils} productListUtils={productListUtils} />
+  const tabContent = <ProductTab productListUtils={productListUtils} />
 
   return {
     key: 'campaign-products',
@@ -37,6 +41,8 @@ export const useProductTab = (): SettingsTab => {
     roles: pageViewRoles.products,
     headerOptions,
     tabContent,
+    icon: <GoldOutlined />,
+    notificationCount: 0,
     resetFilters: productListUtils.resetFilters
   }
 }

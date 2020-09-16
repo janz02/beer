@@ -12,6 +12,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
+import { history } from '../../../../router/router'
 
 interface UseProductListProps {
   onOpenEditor: (id?: number) => void
@@ -57,14 +58,16 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
       columnConfig({
         title: t('campaign-product.field.createdDate'),
         key: 'createdDate',
-        sort: true
+        sort: true,
+        ellipsis: false,
+        filterMode: FilterMode.DATEPICKER
       }),
       hasPermission([Roles.Administrator])
         ? actionColumnConfig({
             render(record: Product) {
               return (
                 <CrudButtons
-                  onEdit={() => onOpenEditor(record.id)}
+                  onEdit={() => history.push(`/settings/products/${record.id}`)}
                   onDelete={() => {
                     setProductToDelete({
                       data: record,
