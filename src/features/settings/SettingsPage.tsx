@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
 import { useCategoryTab } from './campaignCategory/useCategoryTab'
+import { useProductTab } from './products/useProductTab'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
 import { AppstoreAddOutlined } from '@ant-design/icons'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
@@ -17,7 +18,7 @@ export interface SettingsTab {
 }
 
 export const SettingsPage: React.FC = () => {
-  const allTabs = [useCategoryTab()]
+  const allTabs = [useCategoryTab(), useProductTab()]
   const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
   const currentTab = permittedTabs.find(x => x.key === currentTabKey)
@@ -40,7 +41,7 @@ export const SettingsPage: React.FC = () => {
       >
         {permittedTabs.map(tab => (
           <TabPane
-            key="campaign-categories"
+            key={tab.key}
             tab={
               <TabPanelTitle
                 title={tab.title}

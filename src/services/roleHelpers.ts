@@ -44,5 +44,6 @@ export const pageViewRoles = {
   selfpartner: comboRoles.forPartner,
   partners: comboRoles.forNkm,
   contacts: comboRoles.forPartner,
-  tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
+  tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
+  products: [Roles.Administrator]
 }
