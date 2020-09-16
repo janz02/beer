@@ -20,6 +20,8 @@ import { partnerContactModalReducer } from 'features/partnerContact/modal/partne
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
 import { createBrowserHistory } from 'history'
 
+// TODO Temporary fix for app.test.  ../router/router history was used here
+// Probably a mock for the router/ history needed for proper solution, but needs more investigation
 const browserHistory = createBrowserHistory()
 
 export const rootReducer = combineReducers({
