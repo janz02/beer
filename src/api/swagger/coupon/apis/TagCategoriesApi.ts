@@ -43,6 +43,14 @@ export interface DeleteTagCategoryRequest {
     id: number;
 }
 
+export interface ExportTagCategoriesRequest {
+    name?: string | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetTagCategoriesRequest {
     name?: string | null;
     page?: number;
@@ -133,6 +141,58 @@ export class TagCategoriesApi extends runtime.BaseAPI {
      */
     async deleteTagCategory(requestParameters: DeleteTagCategoryRequest): Promise<void> {
         await this.deleteTagCategoryRaw(requestParameters);
+    }
+
+    /**
+     * Exports the Category list with the specified filters applied in a csv file
+     * Exports a Category entity list sorted and filtered
+     */
+    async exportTagCategoriesRaw(requestParameters: ExportTagCategoriesRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/TagCategories/Export`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the Category list with the specified filters applied in a csv file
+     * Exports a Category entity list sorted and filtered
+     */
+    async exportTagCategories(requestParameters: ExportTagCategoriesRequest): Promise<Blob> {
+        const response = await this.exportTagCategoriesRaw(requestParameters);
+        return await response.value();
     }
 
     /**

@@ -76,6 +76,33 @@ export interface DeleteCouponRequest {
     id: number;
 }
 
+export interface ExportCouponsRequest {
+    includeArchived?: boolean;
+    onlyWaiting?: boolean;
+    name?: string | null;
+    rank?: CouponRank;
+    type?: CouponType;
+    state?: CouponState;
+    startDate?: Date | null;
+    endDate?: Date | null;
+    expireDate?: Date | null;
+    couponCount?: number | null;
+    minimumShoppingValue?: number | null;
+    discountValue?: number | null;
+    categoryId?: number | null;
+    isActive?: boolean | null;
+    partnerName?: string | null;
+    mode?: CouponMode;
+    discountType?: CouponDiscountType;
+    createdBy?: string | null;
+    preferredPosition?: number | null;
+    drawDate?: Date | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetCouponRequest {
     id: number;
 }
@@ -276,6 +303,134 @@ export class CouponsApi extends runtime.BaseAPI {
      */
     async deleteCoupon(requestParameters: DeleteCouponRequest): Promise<void> {
         await this.deleteCouponRaw(requestParameters);
+    }
+
+    /**
+     * Exports the Coupon list with the specified filters applied in a csv file
+     * Exports a Coupon entity list sorted and filtered
+     */
+    async exportCouponsRaw(requestParameters: ExportCouponsRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.includeArchived !== undefined) {
+            queryParameters['includeArchived'] = requestParameters.includeArchived;
+        }
+
+        if (requestParameters.onlyWaiting !== undefined) {
+            queryParameters['onlyWaiting'] = requestParameters.onlyWaiting;
+        }
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.rank !== undefined) {
+            queryParameters['rank'] = requestParameters.rank;
+        }
+
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        if (requestParameters.state !== undefined) {
+            queryParameters['state'] = requestParameters.state;
+        }
+
+        if (requestParameters.startDate !== undefined) {
+            queryParameters['startDate'] = (requestParameters.startDate as any).toISOString();
+        }
+
+        if (requestParameters.endDate !== undefined) {
+            queryParameters['endDate'] = (requestParameters.endDate as any).toISOString();
+        }
+
+        if (requestParameters.expireDate !== undefined) {
+            queryParameters['expireDate'] = (requestParameters.expireDate as any).toISOString();
+        }
+
+        if (requestParameters.couponCount !== undefined) {
+            queryParameters['couponCount'] = requestParameters.couponCount;
+        }
+
+        if (requestParameters.minimumShoppingValue !== undefined) {
+            queryParameters['minimumShoppingValue'] = requestParameters.minimumShoppingValue;
+        }
+
+        if (requestParameters.discountValue !== undefined) {
+            queryParameters['discountValue'] = requestParameters.discountValue;
+        }
+
+        if (requestParameters.categoryId !== undefined) {
+            queryParameters['categoryId'] = requestParameters.categoryId;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.partnerName !== undefined) {
+            queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.mode !== undefined) {
+            queryParameters['mode'] = requestParameters.mode;
+        }
+
+        if (requestParameters.discountType !== undefined) {
+            queryParameters['discountType'] = requestParameters.discountType;
+        }
+
+        if (requestParameters.createdBy !== undefined) {
+            queryParameters['createdBy'] = requestParameters.createdBy;
+        }
+
+        if (requestParameters.preferredPosition !== undefined) {
+            queryParameters['preferredPosition'] = requestParameters.preferredPosition;
+        }
+
+        if (requestParameters.drawDate !== undefined) {
+            queryParameters['drawDate'] = (requestParameters.drawDate as any).toISOString();
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/ExportCoupons`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the Coupon list with the specified filters applied in a csv file
+     * Exports a Coupon entity list sorted and filtered
+     */
+    async exportCoupons(requestParameters: ExportCouponsRequest): Promise<Blob> {
+        const response = await this.exportCouponsRaw(requestParameters);
+        return await response.value();
     }
 
     /**
