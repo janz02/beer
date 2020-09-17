@@ -34,6 +34,8 @@
   },
   "campaign-product": {
     "add": "Új termék létrehozása",
+    "editor-create": "Új termék létrehozása",
+    "editor-edit": "Termék szerkesztése",
     "field": {
       "createdDate": "Létrehozás dátuma",
       "name": "Termék megnevezése"
@@ -544,7 +546,7 @@
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
       },
       "product": {
-        "name-max-length-150": "Termék név maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet",
+        "name-max-length-500": "Termék név maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet",
         "name-required": "Termék név megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
       "register-partner-contact": {
@@ -712,14 +714,6 @@
     },
     "list-title": "Kapcsolattartók",
     "send-invitation": "Meghívó küldése"
-  },
-  "product": {
-    "editor": {
-      "title": "Termék meghatározása"
-    },
-    "field": {
-      "name": "Termék megnevezése"
-    }
   },
   "profile": {
     "editor-title": "Profiladatok",

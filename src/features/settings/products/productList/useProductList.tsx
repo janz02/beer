@@ -6,13 +6,10 @@ import { productListActions } from './productListSlice'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { Product } from 'models/product'
 import { ColumnType } from 'antd/lib/table'
-import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/swagger/coupon'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
-import { history } from '../../../../router/router'
 
 interface UseProductListProps {
   onOpenEditor: (id?: number) => void
@@ -62,23 +59,21 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
         ellipsis: false,
         filterMode: FilterMode.DATEPICKER
       }),
-      hasPermission([Roles.Administrator])
-        ? actionColumnConfig({
-            render(record: Product) {
-              return (
-                <CrudButtons
-                  onEdit={() => history.push(`/settings/products/${record.id}`)}
-                  onDelete={() => {
-                    setProductToDelete({
-                      data: record,
-                      popupVisible: true
-                    })
-                  }}
-                />
-              )
-            }
-          })
-        : {}
+      actionColumnConfig({
+        render(record: Product) {
+          return (
+            <CrudButtons
+              onEdit={() => onOpenEditor(record.id)}
+              onDelete={() => {
+                setProductToDelete({
+                  data: record,
+                  popupVisible: true
+                })
+              }}
+            />
+          )
+        }
+      })
     ],
     [columnConfig, t, actionColumnConfig, onOpenEditor]
   )

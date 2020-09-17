@@ -4,12 +4,9 @@ import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { ProductTab } from './ProductTab'
-import { hasPermission } from 'services/jwt-reader'
 import { SettingsTab } from '../SettingsPage'
-import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
 import { useProductList } from './productList/useProductList'
-import { history } from '../../../router/router'
 import { GoldOutlined } from '@ant-design/icons'
 
 export const useProductTab = (): SettingsTab => {
@@ -24,16 +21,11 @@ export const useProductTab = (): SettingsTab => {
 
   const productListUtils = useProductList({ onOpenEditor: modalUtils.routeToEditor })
 
-  let headerOptions: JSX.Element | undefined
-  if (hasPermission([Roles.Administrator])) {
-    headerOptions = (
-      <AddButton onClick={() => history.push(`/settings/products/new`)}>
-        {t('campaign-product.add')}
-      </AddButton>
-    )
-  }
+  const headerOptions = (
+    <AddButton onClick={() => modalUtils.routeToEditor()}>{t('campaign-product.add')}</AddButton>
+  )
 
-  const tabContent = <ProductTab productListUtils={productListUtils} />
+  const tabContent = <ProductTab modalUtils={modalUtils} productListUtils={productListUtils} />
 
   return {
     key: 'campaign-products',

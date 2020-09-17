@@ -34,6 +34,8 @@
   },
   "campaign-product": {
     "add": "Add new Product",
+    "editor-create": "New product",
+    "editor-edit": "Edit product",
     "field": {
       "createdDate": "Product name",
       "name": "Created date"
@@ -544,7 +546,7 @@
         "role-required": "__STRING_NOT_TRANSLATED__"
       },
       "product": {
-        "name-max-length-150": "The product name can be maximum 150 characters long. Please add a valid value.",
+        "name-max-length-500": "The product name can be maximum 500 characters long. Please add a valid value.",
         "name-required": "The product name field is required. Please add a value."
       },
       "register-partner-contact": {
@@ -712,14 +714,6 @@
     },
     "list-title": "Partner Contacts",
     "send-invitation": "Send invitation"
-  },
-  "product": {
-    "editor": {
-      "title": "Product base information"
-    },
-    "field": {
-      "name": "Product name"
-    }
   },
   "profile": {
     "editor-title": "Profile",
