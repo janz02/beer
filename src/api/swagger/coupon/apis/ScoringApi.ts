@@ -26,6 +26,13 @@ import {
     ScoringEventPaginatedResponseToJSON,
 } from '../models';
 
+export interface ExportMyScoringRequest {
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetMyScoringRequest {
     page?: number;
     pageSize?: number;
@@ -37,6 +44,54 @@ export interface GetMyScoringRequest {
  * no description
  */
 export class ScoringApi extends runtime.BaseAPI {
+
+    /**
+     * Exports the scoreEvent list with the specified filters applied in a csv file
+     * Exports a scoreEvent entity list sorted and filtered
+     */
+    async exportMyScoringRaw(requestParameters: ExportMyScoringRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Scoring/Export`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the scoreEvent list with the specified filters applied in a csv file
+     * Exports a scoreEvent entity list sorted and filtered
+     */
+    async exportMyScoring(requestParameters: ExportMyScoringRequest): Promise<Blob> {
+        const response = await this.exportMyScoringRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      * Returns the scoreEvent list with the specified filters applied

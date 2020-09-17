@@ -38,6 +38,18 @@ import {
     RolesToJSON,
 } from '../models';
 
+export interface ExportPartnerPartnerContactRequest {
+    partnerId?: number;
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    role?: Roles;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetPartnerContactRequest {
     id: number;
 }
@@ -67,6 +79,70 @@ export interface UpdatePartnerContactRequest {
  * no description
  */
 export class PartnerContactsApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async exportPartnerPartnerContactRaw(requestParameters: ExportPartnerPartnerContactRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.partnerId !== undefined) {
+            queryParameters['partnerId'] = requestParameters.partnerId;
+        }
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.phone !== undefined) {
+            queryParameters['phone'] = requestParameters.phone;
+        }
+
+        if (requestParameters.email !== undefined) {
+            queryParameters['email'] = requestParameters.email;
+        }
+
+        if (requestParameters.role !== undefined) {
+            queryParameters['role'] = requestParameters.role;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/PartnerContacts/Export`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     */
+    async exportPartnerPartnerContact(requestParameters: ExportPartnerPartnerContactRequest): Promise<Blob> {
+        const response = await this.exportPartnerPartnerContactRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      */
