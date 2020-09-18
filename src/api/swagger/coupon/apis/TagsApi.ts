@@ -43,6 +43,16 @@ export interface DeleteTagRequest {
     id: number;
 }
 
+export interface ExportTagsRequest {
+    value?: string | null;
+    tagCategory?: string | null;
+    isActive?: boolean | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetTagRequest {
     id: number;
 }
@@ -135,6 +145,66 @@ export class TagsApi extends runtime.BaseAPI {
      */
     async deleteTag(requestParameters: DeleteTagRequest): Promise<void> {
         await this.deleteTagRaw(requestParameters);
+    }
+
+    /**
+     * Exports the Tag list with the specified filters applied in a csv file
+     * Exports a Tag entity list sorted and filtered
+     */
+    async exportTagsRaw(requestParameters: ExportTagsRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.value !== undefined) {
+            queryParameters['value'] = requestParameters.value;
+        }
+
+        if (requestParameters.tagCategory !== undefined) {
+            queryParameters['tagCategory'] = requestParameters.tagCategory;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Tags/Export`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the Tag list with the specified filters applied in a csv file
+     * Exports a Tag entity list sorted and filtered
+     */
+    async exportTags(requestParameters: ExportTagsRequest): Promise<Blob> {
+        const response = await this.exportTagsRaw(requestParameters);
+        return await response.value();
     }
 
     /**

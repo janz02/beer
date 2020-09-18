@@ -43,6 +43,14 @@ export interface DeleteCategoryRequest {
     id: number;
 }
 
+export interface ExportCategoriesRequest {
+    name?: string | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetCategoriesRequest {
     name?: string | null;
     page?: number;
@@ -133,6 +141,58 @@ export class CategoriesApi extends runtime.BaseAPI {
      */
     async deleteCategory(requestParameters: DeleteCategoryRequest): Promise<void> {
         await this.deleteCategoryRaw(requestParameters);
+    }
+
+    /**
+     * Exports the Category list with the specified filters applied in a csv file
+     * Exports a Category entity list sorted and filtered in a csv file
+     */
+    async exportCategoriesRaw(requestParameters: ExportCategoriesRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Categories/ExportCategories`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the Category list with the specified filters applied in a csv file
+     * Exports a Category entity list sorted and filtered in a csv file
+     */
+    async exportCategories(requestParameters: ExportCategoriesRequest): Promise<Blob> {
+        const response = await this.exportCategoriesRaw(requestParameters);
+        return await response.value();
     }
 
     /**

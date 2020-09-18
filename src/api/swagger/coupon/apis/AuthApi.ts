@@ -60,6 +60,34 @@ export interface ChangePasswordRequest {
     changePasswordDto?: ChangePasswordDto;
 }
 
+export interface ExportNkmPartnerContactsRequest {
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    partnerName?: string | null;
+    isActive?: boolean | null;
+    role?: Roles;
+    majorPartner?: boolean | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
+export interface ExportPartnerContactsRequest {
+    name?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    partnerName?: string | null;
+    isActive?: boolean | null;
+    role?: Roles;
+    majorPartner?: boolean | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetNkmPartnerContactsRequest {
     name?: string | null;
     phone?: string | null;
@@ -154,6 +182,158 @@ export class AuthApi extends runtime.BaseAPI {
      */
     async changePassword(requestParameters: ChangePasswordRequest): Promise<void> {
         await this.changePasswordRaw(requestParameters);
+    }
+
+    /**
+     * Exports the details of elevated users in a csv file
+     * Exports the details of elevated users
+     */
+    async exportNkmPartnerContactsRaw(requestParameters: ExportNkmPartnerContactsRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.phone !== undefined) {
+            queryParameters['phone'] = requestParameters.phone;
+        }
+
+        if (requestParameters.email !== undefined) {
+            queryParameters['email'] = requestParameters.email;
+        }
+
+        if (requestParameters.partnerName !== undefined) {
+            queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.role !== undefined) {
+            queryParameters['role'] = requestParameters.role;
+        }
+
+        if (requestParameters.majorPartner !== undefined) {
+            queryParameters['majorPartner'] = requestParameters.majorPartner;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/ExportNkmPartnerContacts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the details of elevated users in a csv file
+     * Exports the details of elevated users
+     */
+    async exportNkmPartnerContacts(requestParameters: ExportNkmPartnerContactsRequest): Promise<Blob> {
+        const response = await this.exportNkmPartnerContactsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Exports the details of partner contacts in a csv file
+     * Exports the details of partner contacts
+     */
+    async exportPartnerContactsRaw(requestParameters: ExportPartnerContactsRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.phone !== undefined) {
+            queryParameters['phone'] = requestParameters.phone;
+        }
+
+        if (requestParameters.email !== undefined) {
+            queryParameters['email'] = requestParameters.email;
+        }
+
+        if (requestParameters.partnerName !== undefined) {
+            queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.role !== undefined) {
+            queryParameters['role'] = requestParameters.role;
+        }
+
+        if (requestParameters.majorPartner !== undefined) {
+            queryParameters['majorPartner'] = requestParameters.majorPartner;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Auth/ExportPartnerContacts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the details of partner contacts in a csv file
+     * Exports the details of partner contacts
+     */
+    async exportPartnerContacts(requestParameters: ExportPartnerContactsRequest): Promise<Blob> {
+        const response = await this.exportPartnerContactsRaw(requestParameters);
+        return await response.value();
     }
 
     /**
