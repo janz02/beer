@@ -13,12 +13,12 @@ import { AppstoreAddOutlined } from '@ant-design/icons'
 
 export const useCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
-  const { id } = useParams()
+  const { id, tab } = useParams()
 
   const modalUtils = useGenericModalFormEditorUtils({
-    dataId: id,
+    dataId: tab === 'campaign-categories' ? id : undefined,
     rootRoute: '/settings',
-    detailRoute: '/categories'
+    detailRoute: '/campaign-categories'
   })
 
   const categoryListUtils = useCategoryList({ onOpenEditor: modalUtils.routeToEditor })

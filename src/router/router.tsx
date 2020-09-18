@@ -115,14 +115,8 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/settings" roles={pageViewRoles.settings} component={SettingsPage} />
     <PrivateRoute
       exact
-      path="/settings/categories/:id"
-      roles={pageViewRoles.categoryEditor}
-      component={SettingsPage}
-    />
-    <PrivateRoute
-      exact
-      path="/settings/products/:id"
-      roles={pageViewRoles.productEditor}
+      path="/settings/:tab/:id"
+      roles={pageViewRoles.settings}
       component={SettingsPage}
     />
 

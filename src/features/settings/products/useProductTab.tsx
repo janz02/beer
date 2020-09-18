@@ -11,10 +11,10 @@ import { GoldOutlined } from '@ant-design/icons'
 
 export const useProductTab = (): SettingsTab => {
   const { t } = useTranslation()
-  const { id } = useParams()
+  const { id, tab } = useParams()
 
   const modalUtils = useGenericModalFormEditorUtils({
-    dataId: id,
+    dataId: tab === 'products' ? id : undefined,
     rootRoute: '/settings',
     detailRoute: '/products'
   })

@@ -61,6 +61,7 @@ const saveProduct = (product: Product): AppThunk => async dispatch => {
       await api.products.updateProduct({
         id,
         productModel: {
+          id,
           name: product.name
         }
       })
