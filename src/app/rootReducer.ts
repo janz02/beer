@@ -19,6 +19,8 @@ import { categoryEditorReducer } from 'features/settings/campaignCategory/catego
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
+import { testGroupCategoryListReducer } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
+import { testGroupCategoryEditorReducer } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
 
 export const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -39,7 +41,9 @@ export const rootReducer = combineReducers({
   siteEditor: siteEditorReducer,
   newsletterEditor: newsletterEditorReducer,
   userAccess: userAccessReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  testGroupCategoryList: testGroupCategoryListReducer,
+  testGroupCategoryEditor: testGroupCategoryEditorReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

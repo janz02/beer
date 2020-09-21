@@ -121,6 +121,12 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
+      path="/settings/test-group-categories/:id"
+      roles={pageViewRoles.categoryEditor} // TODO
+      component={SettingsPage}
+    />
+    <PrivateRoute
+      exact
       path="/profile"
       roles={pageViewRoles.profile}
       component={ProfileEditorPage}

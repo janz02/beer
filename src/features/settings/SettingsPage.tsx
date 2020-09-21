@@ -6,6 +6,7 @@ import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/ta
 import { AppstoreAddOutlined } from '@ant-design/icons'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
+import { useTestGroupCategoryTab } from './testGroupCategory/useTestGroupCategoryTab'
 
 export interface SettingsTab {
   key: string
@@ -17,7 +18,7 @@ export interface SettingsTab {
 }
 
 export const SettingsPage: React.FC = () => {
-  const allTabs = [useCategoryTab()]
+  const allTabs = [useCategoryTab(), useTestGroupCategoryTab()]
   const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
   const currentTab = permittedTabs.find(x => x.key === currentTabKey)
@@ -40,7 +41,7 @@ export const SettingsPage: React.FC = () => {
       >
         {permittedTabs.map(tab => (
           <TabPane
-            key="campaign-categories"
+            key={tab.key}
             tab={
               <TabPanelTitle
                 title={tab.title}

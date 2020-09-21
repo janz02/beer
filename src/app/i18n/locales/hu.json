@@ -717,7 +717,8 @@
     "save-profile-success": "Profil mentése sikeres."
   },
   "settings": {
-    "campaign-categories": "Kampány kategóriák"
+    "campaign-categories": "Kampány kategóriák",
+    "test-group-categories": "Tesztcsoport osztályok"
   },
   "site": {
     "editor-title": "Telephely",
@@ -732,6 +733,15 @@
     "table": {
       "address": "Cím",
       "name": "Telephely név"
+    }
+  },
+  "test-group-category": {
+    "add": "Új tesztosztály létrehozása",
+    "editor-create": "Tesztosztály létrehozása",
+    "editor-edit": "Tesztosztály módosítása",
+    "field": {
+      "created-date": "Létrehozás dátuma",
+      "name": "Tesztosztály megnevezése"
     }
   },
   "user": {
