@@ -708,14 +708,20 @@
     "send-invitation": "Send invitation"
   },
   "permission": {
+    "categories": {
+      "basics": "Permission identify",
+      "function-permissions": "Function permission",
+      "groups": "AD user groups",
+      "users": "Users"
+    },
     "editor": {
-      "title": {
-        "view": "View permission",
-        "edit": "Edit permission",
-        "new": "Create new permission"
-      },
       "create": "Create permission",
-      "modify": "Modify permission"
+      "modify": "Modify permission",
+      "title": {
+        "edit": "Edit permission",
+        "new": "Create new permission",
+        "view": "View permission"
+      }
     },
     "field": {
       "name": "Permission name"

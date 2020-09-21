@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Collapse, List } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { CampaignPermission } from 'models/campaignPermission'
 import { useIsMobile, useCommonFormRules } from 'hooks'
@@ -8,19 +8,36 @@ import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { BackButtonProps } from 'components/buttons/BackButton'
 import { EditorMode } from 'components/buttons/EditorModeOptions'
+import { CampaignFunctionPermission } from 'models/campaignFunctionPermission'
+import { CampaignAdGroup } from 'models/campaignAdGroup'
+import { CampaignUser } from 'models/campaignUser'
 
 export interface PermissionEditorFormProps {
   mode: EditorMode
   loading: boolean
   title: string
   permission?: CampaignPermission
+  campaignUsers?: CampaignUser[]
+  campaignAdGroups?: CampaignAdGroup[]
+  campaignFunctionPermissions?: CampaignFunctionPermission[]
   handleBack?: () => void
   options?: JSX.Element
   handleSave: (values: CampaignPermission) => void
 }
 
 export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props => {
-  const { title, handleBack, handleSave, loading, permission, mode, options } = props
+  const {
+    title,
+    handleBack,
+    handleSave,
+    loading,
+    permission,
+    mode,
+    options,
+    campaignUsers,
+    campaignAdGroups,
+    campaignFunctionPermissions
+  } = props
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   const isMobile = useIsMobile()
@@ -33,8 +50,7 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
     modified,
     checkFieldsChange,
     resetFormFlags,
-    setFieldsValue,
-    getFieldValue
+    setFieldsValue
   } = useFormUtils()
 
   const formLayout = isMobile ? 'vertical' : 'horizontal'
@@ -80,17 +96,49 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
           checkFieldsChange()
         }}
       >
-        <Form.Item
-          name="name"
-          label={t('permission.field.name')}
-          rules={[
-            rule.requiredString(t('error.validation.permission.name-required')),
-            rule.max(150, t('error.validation.permission.name-max-length-150'))
-          ]}
-          {...formItemLayout}
-        >
-          <Input disabled={view} />
-        </Form.Item>
+        <Collapse defaultActiveKey={['1']}>
+          <Collapse.Panel header={t('permission.categories.basics')} key="1">
+            <Form.Item
+              name="name"
+              label={t('permission.field.name')}
+              rules={[
+                rule.requiredString(t('error.validation.permission.name-required')),
+                rule.max(500, t('error.validation.permission.name-max-length-500'))
+              ]}
+              {...formItemLayout}
+            >
+              <Input disabled={view} />
+            </Form.Item>
+          </Collapse.Panel>
+        </Collapse>
+
+        <Collapse defaultActiveKey={['1']}>
+          <Collapse.Panel header={t('permission.categories.function-permissions')} key="0">
+            <List
+              dataSource={campaignFunctionPermissions}
+              renderItem={item => <List.Item>{item.name}</List.Item>}
+            />
+          </Collapse.Panel>
+        </Collapse>
+
+        <Collapse defaultActiveKey={['1']}>
+          <Collapse.Panel header={t('permission.categories.groups')} key="0">
+            <List
+              dataSource={campaignAdGroups}
+              renderItem={item => <List.Item>{item.name}</List.Item>}
+            />
+          </Collapse.Panel>
+        </Collapse>
+
+        <Collapse defaultActiveKey={['1']}>
+          <Collapse.Panel header={t('permission.categories.users')} key="0">
+            <List
+              dataSource={campaignUsers}
+              renderItem={item => <List.Item>{item.name}</List.Item>}
+            />
+          </Collapse.Panel>
+        </Collapse>
+
         <Button
           hidden={mode === EditorMode.VIEW}
           type="primary"

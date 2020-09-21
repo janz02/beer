@@ -708,14 +708,20 @@
     "send-invitation": "Meghívó küldése"
   },
   "permission": {
+    "categories": {
+      "basics": "Jogosultsági kör meghatározása",
+      "function-permissions": "Jogosultsági kör számára elérhető funkciók megjelölése",
+      "groups": "Jogosultsági kört elérő AD user csoportok megjelölése",
+      "users": "Jogosultsági kört elérő felhasználók megjelölése"
+    },
     "editor": {
-      "title": {
-        "view": "Jogosultság megtekintése",
-        "edit": "Jogosultság szerkesztése",
-        "new": "Új jogosultság létrehozása"
-      },
       "create": "Jogosultság létrehozása",
-      "modify": "Jogosultság módosítása"
+      "modify": "Jogosultság módosítása",
+      "title": {
+        "edit": "Jogosultság szerkesztése",
+        "new": "Új jogosultság létrehozása",
+        "view": "Jogosultság megtekintése"
+      }
     },
     "field": {
       "name": "Jogosultsági kör megnevezése"

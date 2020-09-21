@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { CampaignPermission } from 'models/campaignPermission'
+import { CampaignAdGroup } from 'models/campaignAdGroup'
+import { CampaignFunctionPermission } from 'models/campaignFunctionPermission'
+import { CampaignUser } from 'models/campaignUser'
 import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
@@ -9,6 +12,9 @@ import { PermissionModel } from 'api/swagger/campaign-editor'
 
 interface PermissionEditorState {
   permission?: CampaignPermission
+  campaignAdGroups?: CampaignAdGroup[]
+  campaignUsers?: CampaignUser[]
+  campaignFunctionPermissions?: CampaignFunctionPermission[]
   error: boolean
   loading: boolean
   loadingDelete: boolean
@@ -41,6 +47,18 @@ const permissionEditorSlice = createSlice({
       state.loading = false
       state.error = true
     },
+    getFunctionPermissionsSuccess(state, action: PayloadAction<CampaignFunctionPermission[]>) {
+      state.loading = false
+      state.campaignFunctionPermissions = action.payload
+    },
+    getAdGroupsSuccess(state, action: PayloadAction<CampaignAdGroup[]>) {
+      state.loading = false
+      state.campaignAdGroups = action.payload
+    },
+    getCampaignUsersSuccess(state, action: PayloadAction<CampaignUser[]>) {
+      state.loading = false
+      state.campaignUsers = action.payload
+    },
     savePermissionRequest(state) {
       state.loading = true
     },
@@ -67,7 +85,10 @@ const permissionEditorSlice = createSlice({
 const {
   getPermissionSuccess,
   getPermissionFail,
-  getPermissionRequest
+  getPermissionRequest,
+  getAdGroupsSuccess,
+  getCampaignUsersSuccess,
+  getFunctionPermissionsSuccess
 } = permissionEditorSlice.actions
 const {
   deletePermissionRequest,
@@ -89,6 +110,45 @@ export const getPermission = (id: number): AppThunk => async dispatch => {
     dispatch(getPermissionRequest())
     const permission = await api.permissions.getPermission({ id })
     dispatch(getPermissionSuccess(permission))
+  } catch (err) {
+    dispatch(getPermissionFail())
+  }
+}
+
+export const getFunctionPermissions = (id: number): AppThunk => async dispatch => {
+  try {
+    dispatch(getPermissionRequest())
+    const { items } = await api.accounts.getFunctionPermissions({
+      //  _queryParameters: { permissionid: id.toString() }
+    })
+    dispatch(
+      getFunctionPermissionsSuccess(items!.map(x => ({ ...x } as CampaignFunctionPermission)))
+    )
+  } catch (err) {
+    dispatch(getPermissionFail())
+  }
+}
+
+export const getAdGroups = (id: number): AppThunk => async dispatch => {
+  try {
+    dispatch(getPermissionRequest())
+
+    const { items } = await api.accounts.getAdGroups({
+      // _queryParameters: { permissionid: id.toString() }
+    })
+    dispatch(getAdGroupsSuccess(items!.map(x => ({ ...x } as CampaignAdGroup))))
+  } catch (err) {
+    dispatch(getPermissionFail())
+  }
+}
+
+export const getCampaignUsers = (id: number): AppThunk => async dispatch => {
+  try {
+    dispatch(getPermissionRequest())
+    const { items } = await api.accounts.getUsersForPermission({
+      //  _queryParameters: { permissionid: id.toString() }
+    })
+    dispatch(getCampaignUsersSuccess(items!.map(x => ({ ...x } as CampaignUser))))
   } catch (err) {
     dispatch(getPermissionFail())
   }

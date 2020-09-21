@@ -7,7 +7,10 @@ import {
   getPermission,
   savePermission,
   resetPermissionEditor,
-  deletePermission
+  deletePermission,
+  getAdGroups,
+  getCampaignUsers,
+  getFunctionPermissions
 } from './permissionEditorSlice'
 import { useParams } from 'react-router-dom'
 import { CampaignPermission } from 'models/campaignPermission'
@@ -28,13 +31,24 @@ export const PermissionEditorPage: React.FC = () => {
   const { t } = useTranslation()
   const { permissionId: id } = useParams()
   const dispatch = useDispatch()
-  const { permission, loading } = useSelector((state: RootState) => state.permissionEditor)
+  const {
+    permission,
+    loading,
+    campaignUsers,
+    campaignAdGroups,
+    campaignFunctionPermissions
+  } = useSelector((state: RootState) => state.permissionEditor)
 
   const [mode, setMode] = useState(id ? EditorMode.VIEW : EditorMode.NEW)
   const [permissionToDelete, setPermissionToDelete] = useState<PopupState<CampaignPermission>>()
 
   useEffect(() => {
-    id && dispatch(getPermission(+id))
+    if (id) {
+      dispatch(getPermission(+id))
+      dispatch(getFunctionPermissions(+id))
+      dispatch(getAdGroups(+id))
+      dispatch(getCampaignUsers(+id))
+    }
 
     return () => {
       dispatch(resetPermissionEditor())
@@ -90,6 +104,9 @@ export const PermissionEditorPage: React.FC = () => {
         handleSave={handleSave}
         loading={loading}
         permission={{ ...permission }}
+        campaignUsers={campaignUsers}
+        campaignAdGroups={campaignAdGroups}
+        campaignFunctionPermissions={campaignFunctionPermissions}
         title={title(mode)}
         handleBack={() => history.push('/permissions')}
       />
