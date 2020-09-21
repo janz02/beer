@@ -38,6 +38,30 @@ export interface ProductModelPaginatedSearchResponse {
      * @memberof ProductModelPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductModelPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductModelPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductModelPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductModelPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function ProductModelPaginatedSearchResponseFromJSON(json: any): ProductModelPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function ProductModelPaginatedSearchResponseFromJSONTyped(json: any, igno
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(ProductModelFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function ProductModelPaginatedSearchResponseToJSON(value?: ProductModelPa
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(ProductModelToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 

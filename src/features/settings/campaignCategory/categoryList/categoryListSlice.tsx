@@ -66,7 +66,7 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
-    const { result, ...pagination } = await api.categories.getCategories(revisedParams)
+    const { result, ...pagination } = await api.coupon.categories.getCategories(revisedParams)
 
     dispatch(
       getCategoriesSuccess({
@@ -87,7 +87,7 @@ const resetCategoryFilters = (): AppThunk => async dispatch => {
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await api.categories.deleteCategory({ id })
+    await api.coupon.categories.deleteCategory({ id })
     dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
     dispatch(getCategories({ page: newPage }))

@@ -38,6 +38,30 @@ export interface CampaignListItemPaginatedSearchResponse {
      * @memberof CampaignListItemPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignListItemPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignListItemPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignListItemPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignListItemPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function CampaignListItemPaginatedSearchResponseFromJSON(json: any): CampaignListItemPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function CampaignListItemPaginatedSearchResponseFromJSONTyped(json: any, 
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(CampaignListItemFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function CampaignListItemPaginatedSearchResponseToJSON(value?: CampaignLi
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(CampaignListItemToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 

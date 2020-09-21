@@ -6426,7 +6426,7 @@
         }
       }
     },
-    "/api/PartnerContacts/Export": {
+    "/api/PartnerContacts/ExportPartnerPartnerContacts": {
       "get": {
         "tags": [
           "PartnerContacts"
@@ -7089,7 +7089,7 @@
         }
       }
     },
-    "/api/Partners/Export": {
+    "/api/Partners/ExportPartners": {
       "get": {
         "tags": [
           "Partners"
@@ -7458,7 +7458,7 @@
         }
       }
     },
-    "/api/Scoring/Export": {
+    "/api/Scoring/ExportMyScores": {
       "get": {
         "tags": [
           "Scoring"
@@ -8383,7 +8383,7 @@
         }
       }
     },
-    "/api/Sites/Export": {
+    "/api/Sites/ExportSites": {
       "get": {
         "tags": [
           "Sites"
@@ -8912,7 +8912,7 @@
         }
       }
     },
-    "/api/TagCategories/Export": {
+    "/api/TagCategories/ExportTagCategories": {
       "get": {
         "tags": [
           "TagCategories"
@@ -9476,7 +9476,7 @@
         }
       }
     },
-    "/api/Tags/Export": {
+    "/api/Tags/ExportTags": {
       "get": {
         "tags": [
           "Tags"

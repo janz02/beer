@@ -84,7 +84,7 @@ const getContacts = (params: ListRequestParams = {}): AppThunk => async (dispatc
     }
 
     const revisedParams = reviseListRequestParams(state.listParams, params)
-    const { result, ...pagination } = await api.partnerContacts.getPartnerPartnerContact({
+    const { result, ...pagination } = await api.coupon.partnerContacts.getPartnerPartnerContact({
       ...revisedParams,
       ...state.listConstraintParams
     })
@@ -109,7 +109,7 @@ const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, ge
     dispatch(setDeleteState(FeatureState.Loading))
     const state = getState().partnerContactList
     //  TODO: Integrate new delete endpoint
-    await api.auth.updatePartnerContactState({
+    await api.coupon.auth.updatePartnerContactState({
       id,
       partnerContactStateDto: {
         role: role,
