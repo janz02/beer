@@ -348,7 +348,7 @@
       "invalid-image-size": "Rossz kép méret, válasszon megfelelő képméretet.",
       "invalid-prize-rule-type": "Rossz nyeremény szabály típus, válasszon PDF fájl formátumot.",
       "not-supported-format": "Nem támogatott fájl formátum, válasszon támogatott formátumot.",
-      "too-big": "A feltöltött fájl mérete meghaladja a maximális méretet.(51MB)"
+      "too-big": "A feltöltött fájl mérete meghaladja az 51MB-os méretet. Kérem töltsön fel egy kisebb fájlt!"
     },
     "not-found": "Nem található.",
     "notification": {
