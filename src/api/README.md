@@ -104,7 +104,7 @@ to a backend class that contains actions (endpoints), and it's part of the url:
 An example call to the `/api/Partners/My` endpoint:
 
 ```ts
-const partner = await api.partner.getMyPartner();
+const partner = await api.coupon.partner.getMyPartner();
 ```
 
 `getMyPartner` returns with a `Promise`, so you can use `await` for it. There are also raw functions

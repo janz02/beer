@@ -31,7 +31,7 @@ export const tokenConfigMiddleware = [
         tokenPromise = new Promise(resolve => {
           tokenPromiseResolver = resolve
         })
-        const user = await api.auth.refresh({ refreshDto: { refreshToken: refreshToken } })
+        const user = await api.coupon.auth.refresh({ refreshDto: { refreshToken: refreshToken } })
         const jwt = user.jwtToken
         refreshToken = user.refreshToken || ''
         const decodedJwt: any = jwt && JwtDecode(jwt)

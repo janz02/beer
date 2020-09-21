@@ -64,13 +64,13 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
       try {
         switch (mode) {
           case 'image': {
-            const blob: Blob = await api.files.downloadFile({ id: fileId })
+            const blob: Blob = await api.coupon.files.downloadFile({ id: fileId })
             getBase64(blob, imageUrl => setThumbnail({ url: imageUrl, loading: false }))
             break
           }
           default: {
             // TODO : integrate api
-            const fileName = await api.files.getFileName({ id: fileId })
+            const fileName = await api.coupon.files.getFileName({ id: fileId })
             setThumbnail({ label: fileName, loading: false })
             break
           }

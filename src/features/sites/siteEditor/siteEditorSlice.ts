@@ -116,7 +116,7 @@ const getCashiers = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setCashierListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().siteEditor.cashiersListParams, params)
-    const { result, ...pagination } = await api.cashiers.getCashiers({
+    const { result, ...pagination } = await api.coupon.cashiers.getCashiers({
       ...revisedParams,
       siteId: site.id
     })
@@ -134,7 +134,7 @@ const getCashiers = (params: ListRequestParams = {}): AppThunk => async (dispatc
 const getSite = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(setSiteEditorState(FeatureState.Loading))
-    const site = await api.sites.getSite({ id })
+    const site = await api.coupon.sites.getSite({ id })
     dispatch(getSiteSuccess(site as Site))
     dispatch(getCashiers())
   } catch (err) {
@@ -154,12 +154,12 @@ const saveSite = (
 
     let sitePartnerId = partnerId
     if (!sitePartnerId) {
-      const partner = await api.partner.getMyPartner()
+      const partner = await api.coupon.partner.getMyPartner()
       sitePartnerId = partner.id
     }
 
     if (id) {
-      await api.sites.updateSite({
+      await api.coupon.sites.updateSite({
         id,
         siteDto: {
           ...site,
@@ -169,7 +169,7 @@ const saveSite = (
       dispatch(updateSiteSuccess())
       dispatch(getCashiers())
     } else {
-      const newId = await api.sites.createSite({
+      const newId = await api.coupon.sites.createSite({
         siteDto: {
           ...site,
           partnerId: sitePartnerId
@@ -188,9 +188,9 @@ const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getState) =
     dispatch(setCashierEditorState(FeatureState.Loading))
 
     if (cashier.id && !isNaN(cashier.id)) {
-      await api.cashiers.updateCashier({ id: cashier.id, cashierDto: cashier })
+      await api.coupon.cashiers.updateCashier({ id: cashier.id, cashierDto: cashier })
     } else {
-      await api.cashiers.createCashier({
+      await api.coupon.cashiers.createCashier({
         createCashierDto: { ...cashier, siteId: getState().siteEditor.site?.id }
       })
     }
@@ -208,7 +208,7 @@ const deleteCashier = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setCashierDeleteState(FeatureState.Loading))
 
-    await api.cashiers.deleteCashier({ id })
+    await api.coupon.cashiers.deleteCashier({ id })
     dispatch(deleteCashierSuccess())
 
     const siteEditorState = getState().siteEditor
@@ -226,7 +226,7 @@ const deleteCashier = (id: number): AppThunk => async (dispatch, getState) => {
 const getCashier = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(setCashierEditorState(FeatureState.Loading))
-    const cashier = await api.cashiers.getCashier({ id })
+    const cashier = await api.coupon.cashiers.getCashier({ id })
     dispatch(getCashierSuccess(cashier))
   } catch (err) {
     dispatch(setCashierEditorState(FeatureState.Error))
