@@ -536,6 +536,10 @@
         "role-invalid": "__STRING_NOT_TRANSLATED__",
         "role-required": "__STRING_NOT_TRANSLATED__"
       },
+      "permission": {
+        "name-max-length-500": "The permission name can be maximum 500 characters long. Please provide a shorter name.",
+        "name-required": "Permission name field is required. Please provide a valid name."
+      },
       "register-partner-contact": {
         "partner-code-max-length-10": "__STRING_NOT_TRANSLATED__",
         "partner-code-required": "__STRING_NOT_TRANSLATED__"
@@ -602,6 +606,7 @@
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
+    "permissions": "PErmissions",
     "profile": "Profile",
     "settings": "Settings",
     "sites": "Sites",
@@ -701,6 +706,24 @@
     },
     "list-title": "Partner Contacts",
     "send-invitation": "Send invitation"
+  },
+  "permission": {
+    "editor": {
+      "title": {
+        "view": "View permission",
+        "edit": "Edit permission",
+        "new": "Create new permission"
+      },
+      "create": "Create permission",
+      "modify": "Modify permission"
+    },
+    "field": {
+      "name": "Permission name"
+    },
+    "list": {
+      "add": "New Permission",
+      "title": "Permissions"
+    }
   },
   "profile": {
     "editor-title": "Profile",

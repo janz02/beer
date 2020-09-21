@@ -19,6 +19,8 @@ import { partnerContactListReducer } from 'features/partnerContact/list/partnerC
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
 import { createBrowserHistory } from 'history'
+import { permissionListReducer } from 'features/permissions/permissionList/permissionListSlice'
+import { permissionEditorReducer } from 'features/permissions/permissionEditor/permissionEditorSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
 // Probably a mock for the router/ history needed for proper solution, but needs more investigation
@@ -43,7 +45,9 @@ export const rootReducer = combineReducers({
   siteEditor: siteEditorReducer,
   newsletterEditor: newsletterEditorReducer,
   userAccess: userAccessReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  permissionList: permissionListReducer,
+  permissionEditor: permissionEditorReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

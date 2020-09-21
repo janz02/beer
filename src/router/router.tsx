@@ -25,6 +25,8 @@ import { SettingsPage } from 'features/settings/SettingsPage'
 import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
 import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
 import { SiteListPage } from 'features/sites/siteList/SitesListPage'
+import { PermissionEditorPage } from 'features/permissions/permissionEditor/PermissionEditorPage'
+import { PermissionListPage } from 'features/permissions/permissionList/PermissionListPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -139,6 +141,18 @@ const Routes = (): JSX.Element => (
       component={NewsletterEditorPage}
     />
     <PrivateRoute exact path="/users" roles={pageViewRoles.users} component={UserAccessPage} />
+    <PrivateRoute
+      exact
+      path="/permissions"
+      roles={pageViewRoles.permissions}
+      component={PermissionListPage}
+    />
+    <PrivateRoute
+      exact
+      path={['/permissions/new', '/permissions/:permissionId']}
+      roles={pageViewRoles.permissionEditor}
+      component={PermissionEditorPage}
+    />
     <Route path="*" render={onDefaultRoute} />
   </Switch>
 )

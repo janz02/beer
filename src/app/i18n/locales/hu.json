@@ -501,7 +501,7 @@
         "type-required": "Értesítés típus megadása kötelező, adjon meg egy megfelelő típust."
       },
       "partner": {
-        "address-max-length-150": "Parnter címe maximum 150 karakter lehet, kérem adjon meg egy rövidebb címet.",
+        "address-max-length-150": "Partner címe maximum 150 karakter lehet, kérem adjon meg egy rövidebb címet.",
         "address-required": "Partner címének megadása kötelező, kérem adjon meg egy címet.",
         "address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
         "address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
@@ -519,7 +519,7 @@
         "mailing-address-street-number-required": "__STRING_NOT_TRANSLATED__",
         "mailing-address-street-required": "__STRING_NOT_TRANSLATED__",
         "name-max-length-150": "Partner neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
-        "name-required": "Parnter név megadása kötelelező, kérem adjon meg egy megfelelő nevet.",
+        "name-required": "Partner név megadása kötelelező, kérem adjon meg egy megfelelő nevet.",
         "registration-allowed-max-length-30": "Cégjegyző neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "registration-allowed-required": "Cégjegyző megadása kötelező, kérem adjon meg egy megfelelő nevet.",
         "registration-number-max-length-20": "Cégjegyzék szám maximum 20 karakter lehet, kérem adjon meg egy rövidebb számot.",
@@ -535,6 +535,10 @@
         "query-toggle-required": "Kapcsolat tartó lekérdezéshez a választó hiányzik, kérem adja meg hogy NKM vagy külső kapcsolattartókat szeretne lekérdezni.",
         "role-invalid": "__STRING_NOT_TRANSLATED__",
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
+      },
+      "permission": {
+        "name-max-length-500": "Jogosultsági kör megnevezése maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-required": "Jogosultsági kör megnevezésének megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot.",
@@ -602,6 +606,7 @@
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
+    "permissions": "Jogosultságkezelés",
     "profile": "Profil",
     "settings": "Beállítások",
     "sites": "Telephelyek",
@@ -701,6 +706,24 @@
     },
     "list-title": "Kapcsolattartók",
     "send-invitation": "Meghívó küldése"
+  },
+  "permission": {
+    "editor": {
+      "title": {
+        "view": "Jogosultság megtekintése",
+        "edit": "Jogosultság szerkesztése",
+        "new": "Új jogosultság létrehozása"
+      },
+      "create": "Jogosultság létrehozása",
+      "modify": "Jogosultság módosítása"
+    },
+    "field": {
+      "name": "Jogosultsági kör megnevezése"
+    },
+    "list": {
+      "add": "Új jogosultság hozzáadása",
+      "title": "Jogosultságkezelés"
+    }
   },
   "profile": {
     "editor-title": "Profiladatok",
