@@ -3,24 +3,25 @@ import { useParams } from 'hooks/react-router-dom-hooks'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
-import { CategoryTab } from './CategoryTab'
+import { CampaignCategoryTab } from './CampaignCategoryTab'
 import { hasPermission } from 'services/jwt-reader'
 import { SettingsTab } from '../SettingsPage'
 import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
-import { useCategoryList } from './categoryList/useCategoryList'
+import { useCampaignCategoryList } from './categoryList/useCampaignCategoryList'
+import { AppstoreAddOutlined } from '@ant-design/icons'
 
-export const useCategoryTab = (): SettingsTab => {
+export const useCampaignCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
-  const { id } = useParams()
+  const { tab, id } = useParams()
 
   const modalUtils = useGenericModalFormEditorUtils({
-    dataId: id,
+    dataId: tab === 'campaign-categories' ? id : undefined,
     rootRoute: '/settings',
-    detailRoute: '/categories'
+    detailRoute: '/campaign-categories'
   })
 
-  const categoryListUtils = useCategoryList({ onOpenEditor: modalUtils.routeToEditor })
+  const categoryListUtils = useCampaignCategoryList({ onOpenEditor: modalUtils.routeToEditor })
 
   let headerOptions: JSX.Element | undefined
   if (hasPermission([Roles.Administrator])) {
@@ -29,7 +30,9 @@ export const useCategoryTab = (): SettingsTab => {
     )
   }
 
-  const tabContent = <CategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />
+  const tabContent = (
+    <CampaignCategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />
+  )
 
   return {
     key: 'campaign-categories',
@@ -37,6 +40,7 @@ export const useCategoryTab = (): SettingsTab => {
     roles: pageViewRoles.categories,
     headerOptions,
     tabContent,
+    icon: <AppstoreAddOutlined />,
     resetFilters: categoryListUtils.resetFilters
   }
 }

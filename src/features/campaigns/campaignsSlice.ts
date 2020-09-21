@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { Category } from 'models/category'
+import { CampaignCategory } from 'models/campaignCategory'
 import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
@@ -15,7 +15,7 @@ import { FeatureState } from 'models/featureState'
 
 interface CampaignsState {
   coupon?: Coupon
-  categories?: Category[]
+  categories?: CampaignCategory[]
   majorPartners?: Partner[]
   editing?: boolean
   stateForCreate?: CouponState
@@ -83,7 +83,7 @@ const campaignsSlice = createSlice({
       message.success(i18n.t('coupon-editor.save-coupon-status-success'), 10)
       state.featureState = FeatureState.Success
     },
-    getCategoriesSuccess(state, action: PayloadAction<Category[]>) {
+    getCategoriesSuccess(state, action: PayloadAction<CampaignCategory[]>) {
       state.categories = action.payload
       state.featureState = FeatureState.Success
     },
@@ -303,7 +303,9 @@ const getCategories = (): AppThunk => async dispatch => {
   try {
     const categories = await api.coupon.categories.getCategories({ pageSize: -1, orderBy: 'name' })
     dispatch(
-      getCategoriesSuccess(categories.result!.map(x => ({ id: x.id, name: x.name } as Category)))
+      getCategoriesSuccess(
+        categories.result!.map(x => ({ id: x.id, name: x.name } as CampaignCategory))
+      )
     )
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
-import { useCategoryTab } from './campaignCategory/useCategoryTab'
+import { useCampaignCategoryTab } from './campaignCategories/useCampaignCategoryTab'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
-import { AppstoreAddOutlined } from '@ant-design/icons'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
+import { useSegmentationCategoryTab } from './segmentationCategories/useSegmentationCategoryTab'
 
 export interface SettingsTab {
   key: string
@@ -13,11 +13,12 @@ export interface SettingsTab {
   roles: Roles[]
   headerOptions?: JSX.Element
   tabContent: JSX.Element
+  icon: React.ReactNode
   resetFilters: () => void
 }
 
 export const SettingsPage: React.FC = () => {
-  const allTabs = [useCategoryTab()]
+  const allTabs = [useCampaignCategoryTab(), useSegmentationCategoryTab()]
   const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
   const currentTab = permittedTabs.find(x => x.key === currentTabKey)
@@ -40,11 +41,11 @@ export const SettingsPage: React.FC = () => {
       >
         {permittedTabs.map(tab => (
           <TabPane
-            key="campaign-categories"
+            key={tab.key}
             tab={
               <TabPanelTitle
                 title={tab.title}
-                icon={<AppstoreAddOutlined />}
+                icon={tab.icon}
                 badgeProps={{ count: 0, size: 'default' }}
               />
             }

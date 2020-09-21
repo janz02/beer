@@ -4,21 +4,21 @@ import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { useCategoryEditor } from './useCategoryEditor'
+import { useCampaignCategoryEditor } from './useCampaignCategoryEditor'
 
-export interface CategoryEditorParams {
+export interface CampaignCategoryEditorParams {
   visible?: boolean
   isNew?: boolean
   categoryId?: number
 }
 
-interface CategoryEditorProps {
+interface CampaignCategoryEditorProps {
   params: GenericModalFormEditorParams
   handleExit: () => void
   afterClose: () => void
 }
 
-export const CategoryEditor: FC<CategoryEditorProps> = props => {
+export const CampaignCategoryEditor: FC<CampaignCategoryEditorProps> = props => {
   const { params, handleExit } = props
   const { visible, isNew } = params
 
@@ -31,7 +31,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
     handleGetCategory,
     handleSave,
     afterCloseExtended
-  } = useCategoryEditor(props)
+  } = useCampaignCategoryEditor(props)
 
   useEffect(() => {
     handleGetCategory()
@@ -53,7 +53,7 @@ export const CategoryEditor: FC<CategoryEditorProps> = props => {
         onCancel: handleExit
       }}
       formProps={{
-        name: 'category-editor',
+        name: 'campaign-category-editor',
         onFinish: handleSave
       }}
       initialValues={initialValues}

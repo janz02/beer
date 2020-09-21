@@ -2,9 +2,9 @@ import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { FeatureState } from 'models/featureState'
-import { categoryListActions } from './categoryListSlice'
+import { campaignCategoryListActions } from './campaignCategoryListSlice'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { Category } from 'models/category'
+import { CampaignCategory } from 'models/campaignCategory'
 import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/coupon'
@@ -13,26 +13,28 @@ import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 
-interface UseCategoryListProps {
+interface UseCampaignCategoryListProps {
   onOpenEditor: (id?: number) => void
 }
 
-export interface UseCategoryListUtils {
+export interface UseCampaignCategoryListUtils {
   tableProps: ResponsiveTableProps
   popupProps: GenericPopupProps
   resetFilters: () => void
 }
 
-export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUtils => {
+export const useCampaignCategoryList = (
+  props: UseCampaignCategoryListProps
+): UseCampaignCategoryListUtils => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { getCategories, deleteCategory, resetCategoryFilters } = categoryListActions
+  const { getCategories, deleteCategory, resetCategoryFilters } = campaignCategoryListActions
   const { listParams, categories, listState } = useSelector(
-    (state: RootState) => state.categoryList
+    (state: RootState) => state.campaignCategoryList
   )
 
-  const [categoryToDelete, setCategoryToDelete] = useState<PopupState<Category>>()
+  const [categoryToDelete, setCategoryToDelete] = useState<PopupState<CampaignCategory>>()
 
   const loading = listState === FeatureState.Loading
 
@@ -42,14 +44,14 @@ export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUti
     columnConfig,
     actionColumnConfig,
     addKeyProp
-  } = useTableUtils<Category>({
+  } = useTableUtils<CampaignCategory>({
     listParamsState: listParams,
     filterKeys: ['name'],
     sortWithoutDefaultOption: true,
     getDataAction: getCategories
   })
 
-  const columnsConfig: ColumnType<Category>[] = useMemo(
+  const columnsConfig: ColumnType<CampaignCategory>[] = useMemo(
     () => [
       columnConfig({
         title: t('campaign-category.field.name'),
@@ -59,7 +61,7 @@ export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUti
       }),
       hasPermission([Roles.Administrator])
         ? actionColumnConfig({
-            render(record: Category) {
+            render(record: CampaignCategory) {
               return (
                 <CrudButtons
                   onEdit={() => onOpenEditor(record.id)}

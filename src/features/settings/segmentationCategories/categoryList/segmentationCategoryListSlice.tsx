@@ -1,24 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { Category } from 'models/category'
+import { CampaignCategory } from 'models/campaignCategory'
 import { api } from 'api'
 import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
-  storableListRequestParams,
   OrderByType
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
+import moment from 'moment'
 
-interface CouponCategoryListState {
-  categories: Category[]
+interface SegmentationCategoryListState {
+  categories: CampaignCategory[]
   listParams: ListRequestParams
   listState: FeatureState
   deleteState: FeatureState
 }
 
-const initialState: CouponCategoryListState = {
+const initialState: SegmentationCategoryListState = {
   categories: [],
   listParams: {
     pageSize: 10,
@@ -29,8 +29,8 @@ const initialState: CouponCategoryListState = {
   deleteState: FeatureState.Initial
 }
 
-const categoryListSlice = createSlice({
-  name: 'categoryList',
+const segmentationCategoryListSlice = createSlice({
+  name: 'segmentationCategoryList',
   initialState,
   reducers: {
     resetCategoryList: () => initialState,
@@ -45,7 +45,7 @@ const categoryListSlice = createSlice({
     },
     getCategoriesSuccess(
       state,
-      action: PayloadAction<{ categories: Category[]; listParams: ListRequestParams }>
+      action: PayloadAction<{ categories: CampaignCategory[]; listParams: ListRequestParams }>
     ) {
       state.categories = action.payload.categories
       state.listParams = action.payload.listParams
@@ -60,18 +60,38 @@ const {
   setDeleteState,
   getCategoriesSuccess,
   resetCategoryList
-} = categoryListSlice.actions
+} = segmentationCategoryListSlice.actions
 
 const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
-    const { result, ...pagination } = await api.coupon.categories.getCategories(revisedParams)
+    const listParams = reviseListRequestParams(
+      getState().segmentationCategoryList.listParams,
+      params
+    )
+
+    const queryParameters: { [key: string]: string } = {}
+    if (listParams.orderBy) {
+      const type = listParams.orderByType !== OrderByType.Descending ? 'asc' : 'desc'
+      queryParameters.orderBy = listParams.orderBy + '_' + type
+    }
+
+    const result = await api.campaignEditor.segmentationCategories.getSegmentationCategories({
+      _queryParameters: queryParameters
+    })
+
+    listParams.from = 1
+    listParams.page = 1
+    listParams.to = result.totalCount
+    listParams.size = result.totalCount
 
     dispatch(
       getCategoriesSuccess({
-        categories: result as Category[],
-        listParams: storableListRequestParams(revisedParams, pagination)
+        categories: result.items?.map(x => ({
+          ...x,
+          createdDate: moment(x.createdDate)
+        })) as CampaignCategory[],
+        listParams
       })
     )
   } catch (err) {
@@ -87,9 +107,11 @@ const resetCategoryFilters = (): AppThunk => async dispatch => {
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await api.coupon.categories.deleteCategory({ id })
+    await api.campaignEditor.segmentationCategories.deleteSegmentationCategory({ id })
     dispatch(setDeleteState(FeatureState.Success))
-    const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
+    const newPage = recalculatePaginationAfterDeletion(
+      getState().segmentationCategoryList.listParams
+    )
     dispatch(getCategories({ page: newPage }))
     return { id }
   } catch (err) {
@@ -98,11 +120,11 @@ const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   }
 }
 
-export const categoryListActions = {
+export const segmentationCategoryListActions = {
   resetCategoryList,
   getCategories,
   resetCategoryFilters,
   deleteCategory
 }
 
-export const categoryListReducer = categoryListSlice.reducer
+export const segmentationCategoryListReducer = segmentationCategoryListSlice.reducer
