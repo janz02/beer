@@ -8,7 +8,7 @@ import { getUrl } from 'services/baseUrlHelper'
 import { RequestError } from 'api/middleware'
 
 interface FileThumbnail {
-  label?: string
+  label?: string | undefined | null
   url?: string
   loading?: boolean
   error?: string
@@ -27,13 +27,14 @@ export interface UseFileUploadProps {
 export interface UseFileUploadUtils {
   thumbnail: FileThumbnail | null | undefined
   appendedUploadProps?: UploadProps
-  handleClear: () => void
+  handleClear: (id: any) => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
 }
 
 export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
   const { initialFileId, uploadProps, onRemove, onSuccess, mode } = props
 
+  const [fileId, setFileId] = useState(initialFileId)
   const { t } = useTranslation()
 
   // TODO: Move this logic to Api, this is just a temporary solution
@@ -64,14 +65,14 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
       try {
         switch (mode) {
           case 'image': {
-            const blob: Blob = await api.coupon.files.downloadFile({ id: fileId })
+            const blob: Blob = await api.files.files.downloadFile({ id: fileId })
             getBase64(blob, imageUrl => setThumbnail({ url: imageUrl, loading: false }))
             break
           }
           default: {
             // TODO : integrate api
-            const fileName = await api.coupon.files.getFileName({ id: fileId })
-            setThumbnail({ label: fileName, loading: false })
+            const fileInfo = await api.files.files.infoFile({ id: fileId })
+            setThumbnail({ label: fileInfo.fileName, loading: false })
             break
           }
         }
@@ -104,6 +105,7 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
         case 'done':
           handleUploadSuccess(file)
           onSuccess?.(file.response.id)
+          setFileId(file.response.id)
           break
         case 'removed':
           setThumbnail({ loading: false, error: t('error.unknown-try-again') })
@@ -119,9 +121,14 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
     [handleUploadSuccess, onSuccess, t]
   )
 
-  const handleClear = (): void => {
-    setThumbnail(undefined)
-    onRemove?.()
+  const handleClear = async () => {
+    try {
+      await api.files.files.deleteFile({ id: fileId || null })
+      setThumbnail(undefined)
+      onRemove?.()
+    } catch (error) {
+      displayBackendError(error)
+    }
   }
 
   const appendedUploadProps = useMemo(
