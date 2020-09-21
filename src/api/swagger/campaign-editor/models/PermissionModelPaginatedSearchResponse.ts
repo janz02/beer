@@ -38,6 +38,30 @@ export interface PermissionModelPaginatedSearchResponse {
      * @memberof PermissionModelPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PermissionModelPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PermissionModelPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PermissionModelPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PermissionModelPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function PermissionModelPaginatedSearchResponseFromJSON(json: any): PermissionModelPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function PermissionModelPaginatedSearchResponseFromJSONTyped(json: any, i
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(PermissionModelFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function PermissionModelPaginatedSearchResponseToJSON(value?: PermissionM
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(PermissionModelToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 

@@ -300,7 +300,7 @@ export class PartnersApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Partners/Export`,
+            path: `/api/Partners/ExportPartners`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

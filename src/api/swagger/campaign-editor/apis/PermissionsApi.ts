@@ -44,6 +44,8 @@ export interface GetPermissionsRequest {
     take?: number;
     orderBy?: string;
     ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface UpdatePermissionRequest {
@@ -210,6 +212,14 @@ export class PermissionsApi extends runtime.BaseAPI {
 
         if (requestParameters.ids) {
             queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

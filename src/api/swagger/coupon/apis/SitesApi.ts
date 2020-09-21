@@ -189,7 +189,7 @@ export class SitesApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Sites/Export`,
+            path: `/api/Sites/ExportSites`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

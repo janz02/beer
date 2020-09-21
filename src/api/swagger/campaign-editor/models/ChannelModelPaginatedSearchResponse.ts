@@ -38,6 +38,30 @@ export interface ChannelModelPaginatedSearchResponse {
      * @memberof ChannelModelPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChannelModelPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChannelModelPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChannelModelPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChannelModelPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function ChannelModelPaginatedSearchResponseFromJSON(json: any): ChannelModelPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function ChannelModelPaginatedSearchResponseFromJSONTyped(json: any, igno
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(ChannelModelFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function ChannelModelPaginatedSearchResponseToJSON(value?: ChannelModelPa
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(ChannelModelToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 

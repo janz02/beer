@@ -38,6 +38,30 @@ export interface SiteLevelSettingDtoPaginatedSearchResponse {
      * @memberof SiteLevelSettingDtoPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SiteLevelSettingDtoPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SiteLevelSettingDtoPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SiteLevelSettingDtoPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SiteLevelSettingDtoPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function SiteLevelSettingDtoPaginatedSearchResponseFromJSON(json: any): SiteLevelSettingDtoPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function SiteLevelSettingDtoPaginatedSearchResponseFromJSONTyped(json: an
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(SiteLevelSettingDtoFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function SiteLevelSettingDtoPaginatedSearchResponseToJSON(value?: SiteLev
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(SiteLevelSettingDtoToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 

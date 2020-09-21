@@ -38,6 +38,30 @@ export interface SegmentListItemPaginatedSearchResponse {
      * @memberof SegmentListItemPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SegmentListItemPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SegmentListItemPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SegmentListItemPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SegmentListItemPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function SegmentListItemPaginatedSearchResponseFromJSON(json: any): SegmentListItemPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function SegmentListItemPaginatedSearchResponseFromJSONTyped(json: any, i
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(SegmentListItemFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function SegmentListItemPaginatedSearchResponseToJSON(value?: SegmentList
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(SegmentListItemToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 

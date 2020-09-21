@@ -38,6 +38,30 @@ export interface SegmentationCategoryPaginatedSearchResponse {
      * @memberof SegmentationCategoryPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SegmentationCategoryPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SegmentationCategoryPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SegmentationCategoryPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SegmentationCategoryPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function SegmentationCategoryPaginatedSearchResponseFromJSON(json: any): SegmentationCategoryPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function SegmentationCategoryPaginatedSearchResponseFromJSONTyped(json: a
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(SegmentationCategoryFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function SegmentationCategoryPaginatedSearchResponseToJSON(value?: Segmen
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(SegmentationCategoryToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 

@@ -29,7 +29,10 @@ import {
 //   TemplatesApi,
 //   TestGroupCategoriesApi
 // } from './swagger/campaign-editor'
-import { FilesApi as FilesMsApi } from '../api/swagger/files'
+import {
+  FilesApi as FilesFilesMsApi,
+  InformationApi as InformationFilesMsApi
+} from '../api/swagger/files'
 import { errorHandlingMiddleware } from './middleware'
 import { Middleware, Configuration as CouponConfiguration } from '../api/swagger/coupon/runtime'
 // import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
@@ -87,7 +90,8 @@ export const api = {
     files: new FilesApi(couponConfig) // note: this will be moved to Files MS in the future
   },
   files: {
-    files: new FilesMsApi(filesConfig) // note: keep this, if FilesApi removed from Coupon MS
+    files: new FilesFilesMsApi(filesConfig), // note: keep this, if FilesApi removed from Coupon MS
+    information: new InformationFilesMsApi(filesConfig)
   },
   campaignEditor: {
     // campaigns: new CampaignsApi(campaignEditorConfig),

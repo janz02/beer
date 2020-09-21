@@ -38,6 +38,30 @@ export interface StaticMergeTagModelPaginatedSearchResponse {
      * @memberof StaticMergeTagModelPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StaticMergeTagModelPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StaticMergeTagModelPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StaticMergeTagModelPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StaticMergeTagModelPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function StaticMergeTagModelPaginatedSearchResponseFromJSON(json: any): StaticMergeTagModelPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function StaticMergeTagModelPaginatedSearchResponseFromJSONTyped(json: an
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(StaticMergeTagModelFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function StaticMergeTagModelPaginatedSearchResponseToJSON(value?: StaticM
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(StaticMergeTagModelToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 
