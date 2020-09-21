@@ -954,6 +954,304 @@
         }
       }
     },
+    "/api/Auth/ExportPartnerContacts": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Exports the details of partner contacts",
+        "description": "Exports the details of partner contacts in a csv file",
+        "operationId": "exportPartnerContacts",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Roles"
+            }
+          },
+          {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 420,
+      "name": "Snoop Dogg",
+      "email": "SnoopyDoggo@cbd.hu",
+      "phone": "+36204206969",
+      "partnerName": "Blaze It!",
+      "isActive": false,
+      "role": 200
+    },
+    {
+      "id": 42,
+      "name": "Elon Musk",
+      "email": "ElonGreatestMusk@tesla.hu",
+      "phone": "+36204351488",
+      "partnerName": "Stupid Company",
+      "isActive": true,
+      "role": 100
+    },
+    {
+      "id": 666,
+      "name": "Bruce Willis",
+      "email": "Frank.Moses@red.hu",
+      "phone": "+36201234567",
+      "partnerName": "Hell",
+      "isActive": true,
+      "role": 1100
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 3,
+  "size": 3
+}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error: validation.error"
+          }
+        }
+      }
+    },
+    "/api/Auth/ExportNkmPartnerContacts": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Exports the details of elevated users",
+        "description": "Exports the details of elevated users in a csv file",
+        "operationId": "exportNkmPartnerContacts",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Roles"
+            }
+          },
+          {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 420,
+      "name": "Snoop Dogg",
+      "email": "SnoopyDoggo@cbd.hu",
+      "phone": "+36204206969",
+      "partnerName": "Blaze It!",
+      "isActive": false,
+      "role": 200
+    },
+    {
+      "id": 42,
+      "name": "Elon Musk",
+      "email": "ElonGreatestMusk@tesla.hu",
+      "phone": "+36204351488",
+      "partnerName": "Stupid Company",
+      "isActive": true,
+      "role": 100
+    },
+    {
+      "id": 666,
+      "name": "Bruce Willis",
+      "email": "Frank.Moses@red.hu",
+      "phone": "+36201234567",
+      "partnerName": "Hell",
+      "isActive": true,
+      "role": 1100
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 3,
+  "size": 3
+}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error: validation.error"
+          }
+        }
+      }
+    },
     "/api/Auth/UpdatePartnerContact/{id}": {
       "put": {
         "tags": [
@@ -1448,6 +1746,73 @@
         }
       }
     },
+    "/api/Cashiers/ExportCashiers": {
+      "get": {
+        "tags": [
+          "Cashiers"
+        ],
+        "summary": "Exports a Cashier entity list sorted and filtered",
+        "description": "Export the Cashier list with the specified filters applied in a csv file",
+        "operationId": "exportCashiers",
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Csv file of Cashier entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
     "/api/Categories": {
       "post": {
         "tags": [
@@ -1865,6 +2230,73 @@
         "responses": {
           "204": {
             "description": "Successful deletion"
+          }
+        }
+      }
+    },
+    "/api/Categories/ExportCategories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Exports a Category entity list sorted and filtered in a csv file",
+        "description": "Exports the Category list with the specified filters applied in a csv file",
+        "operationId": "exportCategories",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export: Csv file of Category entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
           }
         }
       }
@@ -3059,6 +3491,299 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Coupons/ExportCoupons": {
+      "get": {
+        "tags": [
+          "Coupons"
+        ],
+        "summary": "Exports a Coupon entity list sorted and filtered",
+        "description": "Exports the Coupon list with the specified filters applied in a csv file",
+        "operationId": "exportCoupons",
+        "parameters": [
+          {
+            "name": "includeArchived",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "onlyWaiting",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "rank",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponRank"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponType"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponState"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "expireDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "couponCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "minimumShoppingValue",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "discountValue",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "nullable": true
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponMode"
+            }
+          },
+          {
+            "name": "discountType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CouponDiscountType"
+            }
+          },
+          {
+            "name": "createdBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "preferredPosition",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "drawDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export: Csv file of Coupon entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 1,
+      "name": "Ingyen Túró Rudi!",
+      "rank": 100,
+      "type": 0,
+      "state": 100,
+      "startDate": "2020-08-01T10:00:00",
+      "endDate": "2021-08-01T10:00:00",
+      "expireDate": "2021-09-01T10:00:00",
+      "couponCount": 50000,
+      "minimumShoppingValue": 500,
+      "discountValue": 100.0,
+      "categoryId": 1,
+      "isActive": false,
+      "isPartnerActive": false,
+      "partnerName": "Tesco",
+      "showCount": 0,
+      "clickCount": 0,
+      "claimCount": 0,
+      "smallPictureId": "Na meg ez se",
+      "bigPictureId": "És nem is lesz",
+      "mode": 100,
+      "discountType": 100,
+      "createdBy": "Sales Ernő",
+      "createdDate": "2020-04-11T13:42:50",
+      "modifiedBy": "Kasszás Erzsi",
+      "modifiedDate": null,
+      "approvedBy": "Menedzser Endre",
+      "approvedDate": "2020-07-12T20:30:40",
+      "preferredPosition": 4,
+      "drawDate": null
+    },
+    {
+      "id": 2,
+      "name": "Pisztácia fagyi!",
+      "rank": 300,
+      "type": 200,
+      "state": 100,
+      "startDate": "2020-09-01T10:00:00",
+      "endDate": "2021-09-01T10:00:00",
+      "expireDate": "2021-10-01T10:00:00",
+      "couponCount": 50000,
+      "minimumShoppingValue": 500,
+      "discountValue": 100.0,
+      "categoryId": 2,
+      "isActive": true,
+      "isPartnerActive": true,
+      "partnerName": "Firpo",
+      "showCount": 50,
+      "clickCount": 1225,
+      "claimCount": 150,
+      "smallPictureId": "Csokoládé nem is volt",
+      "bigPictureId": "Pisztácia kifogyott",
+      "mode": 200,
+      "discountType": 100,
+      "createdBy": "Charlie Firpo",
+      "createdDate": "2020-05-01T01:12:23",
+      "modifiedBy": "Charlie Firpo",
+      "modifiedDate": "2020-06-01T10:12:23",
+      "approvedBy": "Johnny Firpo",
+      "approvedDate": "2020-03-10T10:20:30",
+      "preferredPosition": 3,
+      "drawDate": "2021-11-01T01:01:01"
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 2,
+  "size": 5
+}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
           }
         }
       }
@@ -5701,6 +6426,99 @@
         }
       }
     },
+    "/api/PartnerContacts/ExportPartnerPartnerContacts": {
+      "get": {
+        "tags": [
+          "PartnerContacts"
+        ],
+        "operationId": "exportPartnerPartnerContact",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Roles"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file.",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Partners/My": {
       "get": {
         "tags": [
@@ -6271,6 +7089,103 @@
         }
       }
     },
+    "/api/Partners/ExportPartners": {
+      "get": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "Exports an entity list sorted and filtered",
+        "description": "Exports the entity list with the specified filters applied in a csv file",
+        "operationId": "exportPartners",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "majorPartner",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerState",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PartnerState"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerRegistrationState",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PartnerRegistrationState"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Csv file of entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
     "/api/Partners/Activate/{id}": {
       "put": {
         "tags": [
@@ -6539,6 +7454,65 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Scoring/ExportMyScores": {
+      "get": {
+        "tags": [
+          "Scoring"
+        ],
+        "summary": "Exports a scoreEvent entity list sorted and filtered",
+        "description": "Exports the scoreEvent list with the specified filters applied in a csv file",
+        "operationId": "exportMyScoring",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Csv file of scoreEvent Entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: validation.error"
           }
         }
       }
@@ -7409,6 +8383,90 @@
         }
       }
     },
+    "/api/Sites/ExportSites": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Exports an entity list sorted and filtered",
+        "description": "Exports the entity list with the specified filters applied in a csv file",
+        "operationId": "exportSites",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "partnerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: csv file of entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
     "/api/TagCategories": {
       "post": {
         "tags": [
@@ -7850,6 +8908,73 @@
         "responses": {
           "204": {
             "description": "Successful deletion"
+          }
+        }
+      }
+    },
+    "/api/TagCategories/ExportTagCategories": {
+      "get": {
+        "tags": [
+          "TagCategories"
+        ],
+        "summary": "Exports a Category entity list sorted and filtered",
+        "description": "Exports the Category list with the specified filters applied in a csv file",
+        "operationId": "exportTagCategories",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Csv file of Category entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
           }
         }
       }
@@ -8347,6 +9472,89 @@
         "responses": {
           "204": {
             "description": "Successful deletion"
+          }
+        }
+      }
+    },
+    "/api/Tags/ExportTags": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "summary": "Exports a Tag entity list sorted and filtered",
+        "description": "Exports the Tag list with the specified filters applied in a csv file",
+        "operationId": "exportTags",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "tagCategory",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Csv file of Tag entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
           }
         }
       }

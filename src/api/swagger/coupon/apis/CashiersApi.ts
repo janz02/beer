@@ -46,6 +46,14 @@ export interface DeleteCashierRequest {
     id: number;
 }
 
+export interface ExportCashiersRequest {
+    siteId?: number;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetCashierRequest {
     id: number;
 }
@@ -136,6 +144,58 @@ export class CashiersApi extends runtime.BaseAPI {
      */
     async deleteCashier(requestParameters: DeleteCashierRequest): Promise<void> {
         await this.deleteCashierRaw(requestParameters);
+    }
+
+    /**
+     * Export the Cashier list with the specified filters applied in a csv file
+     * Exports a Cashier entity list sorted and filtered
+     */
+    async exportCashiersRaw(requestParameters: ExportCashiersRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.siteId !== undefined) {
+            queryParameters['siteId'] = requestParameters.siteId;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Cashiers/ExportCashiers`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Export the Cashier list with the specified filters applied in a csv file
+     * Exports a Cashier entity list sorted and filtered
+     */
+    async exportCashiers(requestParameters: ExportCashiersRequest): Promise<Blob> {
+        const response = await this.exportCashiersRaw(requestParameters);
+        return await response.value();
     }
 
     /**

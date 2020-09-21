@@ -38,6 +38,30 @@ export interface TestGroupCategoryModelPaginatedSearchResponse {
      * @memberof TestGroupCategoryModelPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TestGroupCategoryModelPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TestGroupCategoryModelPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TestGroupCategoryModelPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TestGroupCategoryModelPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function TestGroupCategoryModelPaginatedSearchResponseFromJSON(json: any): TestGroupCategoryModelPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function TestGroupCategoryModelPaginatedSearchResponseFromJSONTyped(json:
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(TestGroupCategoryModelFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function TestGroupCategoryModelPaginatedSearchResponseToJSON(value?: Test
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(TestGroupCategoryModelToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 
