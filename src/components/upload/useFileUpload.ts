@@ -38,7 +38,7 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
   const { t } = useTranslation()
 
   // TODO: Move this logic to Api, this is just a temporary solution
-  const uploadUrl = `${getUrl(process.env.REACT_APP_COUPON_API_URL)}/api/Files`
+  const uploadUrl = `${getUrl(process.env.REACT_APP_FILES_API_URL)}/api/Files`
   const apiKey = `Bearer ${sessionStorage.getItem('jwt')}`
 
   const [thumbnail, setThumbnail] = useState<FileThumbnail>()
