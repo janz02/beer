@@ -84,14 +84,28 @@ In the [index file](index.ts), there's a global variable called `api`:
 
 ```ts
 export const api = {
-  coupons: new CouponsApi(config),
-  tags: new TagsApi(config),
-  ...
+	campaignEditor: {
+		campaigns: new CampaignsApi(campaignEditorConfig),
+		permissions: new PermissionsApi(campaignEditorConfig),
+		...
+	},
+	coupon: {
+		coupons: new CouponsApi(couponConfig),
+		tags: new TagsApi(couponConfig),
+	},
+	files: {
+		files: new FilesMsApi(filesConfig)
+	}
+	...
 }
 ```
 
-You can add new controllers here, if a new version of the backend has a new one. Controller refers
-to a backend class that contains actions (endpoints), and it's part of the url:
+The api object properties are structured based on the microservice and controller names.
+The first level is the microservice name, the second level is their controllers' names.
+You can add new microservices or controllers here, with their specific microservice's configs
+if a new version of the backend has a new one.
+More about microservices: https://microservices.io/patterns/microservices.html
+Controller refers to a backend class that contains actions (endpoints), and it's part of the url:
 
 ```
 /api/{controller}/{action}
