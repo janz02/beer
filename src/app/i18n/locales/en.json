@@ -541,46 +541,46 @@
         "partner-code-required": "Partner code is required for registration. Please use a valid partner code!"
       },
       "register-user": {
-        "city-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "city-required": "__STRING_NOT_TRANSLATED__",
-        "mothers-maiden-name-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "mothers-maiden-name-required": "__STRING_NOT_TRANSLATED__",
-        "place-of-birth-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "place-of-birth-required": "__STRING_NOT_TRANSLATED__"
+        "city-max-length-100": "City name cannot be longer than 100 characters. Please use a shorter city name!",
+        "city-required": "City name is required. Please provide a valid city name!",
+        "mothers-maiden-name-max-length-100": "Mother's maiden name cannot be longer than 100 characters. Please use a shorter mother's maiden name!",
+        "mothers-maiden-name-required": "Mother's maiden name is required. Please provide a valid mother's maiden name!",
+        "place-of-birth-max-length-100": "Place of birth cannot be longer than 100 characters. Please use a shorter place of birth!",
+        "place-of-birth-required": "Place of birth is required. Please provide a valid place of birth!"
       },
       "scoring": {
-        "event-type-required": "__STRING_NOT_TRANSLATED__"
+        "event-type-required": "Scoring event type is required. Please provide a valid event type!"
       },
       "segment": {
-        "email-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "email-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "name-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__",
-        "one-time-use-required": "__STRING_NOT_TRANSLATED__"
+        "email-invalid-format": "At least one of the e-mail addresses are invalid for the segment. Please check the e-mail addresses!",
+        "email-required": "At least one of the e-mail addresses are empty for the segment. Please the e-mail addresses!",
+        "id-greater-than-0": "Segment ID must be greater than 0. Please provide a valid segment ID!",
+        "id-required": "Segment ID is required. Please provide a valid segment ID!",
+        "name-invalid-format": "Segment name is invalid. Please make sure, that the segment name starts with \"PKM\"",
+        "name-required": "Segment name is required. Please make sure, that the segment name starts with \"PKM\"",
+        "one-time-use-required": "One time use value required for the segment. Please provide a value regarding one time use of the segment!"
       },
       "segments": {
-        "list-required": "__STRING_NOT_TRANSLATED__"
+        "list-required": "Segments list is required. Please provide a valid list of segments!"
       },
       "site": {
-        "address-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "address-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "address-max-length-100": "Site address cannot be longer than 100 characters. Please use a shorter address!",
+        "address-required": "Site address is required. Please provide a valid address!",
+        "id-greater-than-0": "Site ID must be greater than 0. Please use a valid ID!",
+        "id-required": "Site ID is required. Please provide a valid ID!",
+        "name-max-length-100": "Site name cannot be longer than 100 characters. Please use a shorter name!",
+        "name-required": "Site name is required. Please provide a valid site name!"
       },
       "tag": {
-        "category-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "category-id-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "value-max-length-50": "__STRING_NOT_TRANSLATED__",
-        "value-required": "__STRING_NOT_TRANSLATED__"
+        "category-id-greater-than-0": "Category ID for the tag must be greater than 0. Please use a valid Category ID!",
+        "category-id-required": "Category ID is required for the tag. Please provide a valid Category ID!",
+        "id-greater-than-0": "Tag ID must be greater than 0. Please use a valid Tag ID!",
+        "id-required": "Tag ID is required. Please provide a valid Tag ID!",
+        "value-max-length-50": "Tag value cannot be longer than 50 characters. Please use a shorter value!",
+        "value-required": "Tag value is required. Please provide a valid value!"
       },
       "tag-category": {
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "name-required": "Tag category name is required. Please provide a valid tag category name!"
       }
     }
   },
