@@ -25,6 +25,7 @@ interface UsePartnerContactListUtils {
   handleGetList: (params?: ListRequestParams) => void
   handleOpenInviter: () => void
   resetFilters: () => void
+  handleExport: () => void
 }
 export const usePartnerContactList = (
   props: UsePartnerContactListProps
@@ -35,7 +36,7 @@ export const usePartnerContactList = (
 
   const { listParams, contacts, listState } = useSelector((s: RootState) => s.partnerContactList)
 
-  const [contactToDelete, setContanctToDelete] = useState<PopupState<PartnerContact>>()
+  const [contactToDelete, setContactToDelete] = useState<PopupState<PartnerContact>>()
 
   const handleGetList = useCallback(
     (params?: ListRequestParams) => {
@@ -71,7 +72,7 @@ export const usePartnerContactList = (
       const config: CrudButtonsProps = {}
       if (canEdit) {
         config.onDelete = (): void => {
-          setContanctToDelete({
+          setContactToDelete({
             data: record,
             popupVisible: true
           })
@@ -151,13 +152,17 @@ export const usePartnerContactList = (
     type: 'delete',
     id: contactToDelete?.data?.id!,
     visible: !!contactToDelete?.popupVisible,
-    onCancel: () => setContanctToDelete({ ...contactToDelete, popupVisible: false }),
+    onCancel: () => setContactToDelete({ ...contactToDelete, popupVisible: false }),
     onOkAction: partnerContactListActions.deleteContact(
       contactToDelete?.data?.id!,
       contactToDelete?.data?.role!
     ),
-    afterClose: () => setContanctToDelete(null)
+    afterClose: () => setContactToDelete(null)
   }
+
+  const handleExport = useCallback((): void => {
+    dispatch(partnerContactListActions.exportPartnerContacts())
+  }, [dispatch])
 
   return {
     deletePopupProps,
@@ -165,6 +170,7 @@ export const usePartnerContactList = (
     contactToDelete,
     handleOpenInviter,
     handleGetList,
-    resetFilters
+    resetFilters,
+    handleExport
   }
 }

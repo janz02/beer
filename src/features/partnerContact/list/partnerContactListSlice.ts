@@ -12,6 +12,7 @@ import { Roles } from 'api/swagger/coupon'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 interface State {
   editorOpen: boolean
@@ -126,6 +127,20 @@ const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, ge
   }
 }
 
+const exportPartnerContacts = (): AppThunk => async (dispatch, getState) => {
+  const { listParams, listConstraintParams } = getState().partnerContactList
+
+  try {
+    const file = await api.coupon.partnerContacts.exportPartnerPartnerContact({
+      ...listParams,
+      ...listConstraintParams
+    })
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    return { error: err.toString() }
+  }
+}
+
 export const partnerContactListReducer = slice.reducer
 
 export const partnerContactListActions = {
@@ -133,5 +148,6 @@ export const partnerContactListActions = {
   setListConstraints,
   getContacts,
   resetContactFilters,
-  deleteContact
+  deleteContact,
+  exportPartnerContacts
 }

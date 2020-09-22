@@ -15,6 +15,7 @@ import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { CouponListTabKey } from './campaignListSlice'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { ExportButton } from 'components/buttons/ExportButton'
 
 const couponCreateRoles = [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor]
 
@@ -37,6 +38,7 @@ export const CampaignListPage: FC = () => {
     handleDeleteCancel,
     getCategories,
     getCoupons,
+    handleExport,
     deleteCoupon
   } = useCampaignList()
 
@@ -77,12 +79,9 @@ export const CampaignListPage: FC = () => {
     [t]
   )
 
-  /**
-   * Display different tab bar actions for different tabs conditionally based on the activeTabKey
-   */
-  const tabBarActions = useMemo(
-    () => (
-      <>
+  const archivedCheckbox = useMemo(
+    () =>
+      activeTabKey === CouponListTabKey.All && (
         <Checkbox
           onChange={e => {
             handleIncludeArchivedChange(e.target.checked)
@@ -90,15 +89,27 @@ export const CampaignListPage: FC = () => {
         >
           {t('coupon-list.show-archived')}
         </Checkbox>
+      ),
+    [activeTabKey, handleIncludeArchivedChange, t]
+  )
+
+  /**
+   * Display different tab bar actions for different tabs conditionally based on the activeTabKey
+   */
+  const tabBarActions = useMemo(
+    () => (
+      <>
+        {archivedCheckbox}
+        <ExportButton onClick={handleExport} />
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrders[activeTabKey]} />
       </>
     ),
-    [t, handleIncludeArchivedChange, columnOrders, activeTabKey, resetFilters]
+    [archivedCheckbox, resetFilters, columnOrders, activeTabKey, handleExport]
   )
 
   return (
-    <>
+    <div className="campaign-list">
       <ResponsiveCard
         disableAutoScale
         width="full"
@@ -123,6 +134,6 @@ export const CampaignListPage: FC = () => {
         onOkAction={couponToDelete?.id ? deleteCoupon(couponToDelete.id) : undefined}
         onCancel={() => handleDeleteCancel()}
       />
-    </>
+    </div>
   )
 }

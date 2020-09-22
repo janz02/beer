@@ -11,6 +11,9 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
+import { downloadBlobAsCsv } from 'services/file-reader'
+
+export type UserAccessTab = 'nkm' | 'partner'
 
 interface State {
   nkmUsers: UserAccess[]
@@ -48,7 +51,7 @@ const slice = createSlice({
     resetNkmListParams(state) {
       state.nkmListParams = initialState.nkmListParams
     },
-    resetParterListParams(state) {
+    resetPartnerListParams(state) {
       state.partnerListParams = initialState.partnerListParams
     },
     openEditor(state, action: PayloadAction<UserType>) {
@@ -99,7 +102,7 @@ const slice = createSlice({
 })
 const { openEditor, closeEditor } = slice.actions
 const { setEditorState, setNkmListState, setPartnerListState } = slice.actions
-const { clearUserAccessEditor, reset, resetNkmListParams, resetParterListParams } = slice.actions
+const { clearUserAccessEditor, reset, resetNkmListParams, resetPartnerListParams } = slice.actions
 const {
   getNkmUsersSuccess,
   getPartnerUsersSuccess,
@@ -149,7 +152,7 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
 }
 
 const resetPartnerUsersFilters = (): AppThunk => async dispatch => {
-  dispatch(resetParterListParams())
+  dispatch(resetPartnerListParams())
   dispatch(getPartnerUsers())
 }
 
@@ -184,6 +187,25 @@ const saveUserAccess = (role: Roles, isActive: boolean): AppThunk => async (disp
   }
 }
 
+const exportPartnerContacts = (activeTab: UserAccessTab): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  const { nkmListParams, partnerListParams } = getState().userAccess
+
+  try {
+    const file =
+      activeTab === 'nkm'
+        ? await api.coupon.auth.exportNkmPartnerContacts(nkmListParams)
+        : await api.coupon.auth.exportPartnerContacts(partnerListParams)
+
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    console.log(err)
+    return { error: err.toString() }
+  }
+}
+
 export const userAccessReducer = slice.reducer
 
 export const userAccessActions = {
@@ -195,5 +217,6 @@ export const userAccessActions = {
   resetPartnerUsersFilters,
   closeEditor,
   clearUserAccessEditor,
-  reset
+  reset,
+  exportPartnerContacts
 }

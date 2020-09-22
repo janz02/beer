@@ -10,6 +10,7 @@ import {
   storableListRequestParams
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 export enum CouponListTabKey {
   Waiting = 'waiting',
@@ -156,6 +157,17 @@ const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
   }
 }
 
+const exportCoupons = (): AppThunk => async (dispatch, getState) => {
+  const { listParams } = getState().campaignList
+
+  try {
+    const file = await api.coupon.coupons.exportCoupons(listParams)
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    return { error: err.toString() }
+  }
+}
+
 export const campaignListActions = {
   resetCampaignList,
   setIncludeArchived,
@@ -164,7 +176,8 @@ export const campaignListActions = {
   cancelCampaignDelete,
   getCoupons,
   resetCouponFilters,
-  deleteCoupon
+  deleteCoupon,
+  exportCoupons
 }
 
 export const campaignListReducer = campaignListSlice.reducer
