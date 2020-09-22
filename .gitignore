@@ -26,3 +26,4 @@ yarn.lock
 /output/cobertura-coverage.xml
 *.orig
 0*.patch
+/.vs

@@ -509,7 +509,7 @@
         "address-street-required": "Partner címének utcaszám összetevőjének megadása kötelező, kérem adjon meg egy utcanevet.",
         "bank-account-max-length-26": "Partner bankszámla maximum 26 karakter lehet, kérem adjon meg egy rövidebb számsort.",
         "bank-account-required": "Partner bankszámla számát kötelező megadni, kérem adjon meg egy számsort.",
-        "contact-required": "Partner ",
+        "contact-required": "Partner kapcsolattartó megadása kötelező, kérem adjon meg egy megfelelő kapcsolattartót.",
         "id-greater-than-0": "Partner id megadása kötelező, kérem adjon meg egy azonosítót.",
         "id-required": "Partner id megadása kötelező, kérem adjon meg egy azonosítót.",
         "mailing-address-max-length-150": "Partner levelezési címe maximum 150 karakter lehet, kérem adjon meg egy rövidebb címet.",
