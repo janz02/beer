@@ -1,5 +1,5 @@
 import { useIsMobile } from './useIsMobile'
-import { useIsMediumScreen } from './useIsMediumScreen'
+import { useIsLargeScreen } from './useIsLargeScreen'
 import { useCommonFormRules } from './useCommonFormRules'
 
-export { useIsMobile, useIsMediumScreen, useCommonFormRules }
+export { useIsMobile, useIsLargeScreen, useCommonFormRules }
