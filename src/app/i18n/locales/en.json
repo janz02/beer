@@ -287,7 +287,7 @@
       "ldap-password-change": "Password could not be changed, the user may not change the password.",
       "login-failed": "Login failed, try later.",
       "newpassword-sameasold": "The new password cannot be the same as the old password, use different one.",
-      "partner-contact-deleted": "__STRING_NOT_TRANSLATED__",
+      "partner-contact-deleted": "The partner contact associated with the e-mail address has been deleted.",
       "password-inconsistent": "The two passwords are not matching, check the entered values.",
       "registration-failed": "Registration failed, try later.",
       "sync-failed": "User sync failed.",
@@ -348,7 +348,7 @@
       "invalid-image-size": "Invalid image dimensions.",
       "invalid-prize-rule-type": "Invalid prize rule type.",
       "not-supported-format": "Unsupported file format.",
-      "too-big": "__STRING_NOT_TRANSLATED__"
+      "too-big": "The uploaded file exceeds maximum file size of 51MB. Please upload something smaller."
     },
     "not-found": "Not found.",
     "notification": {
@@ -363,8 +363,8 @@
     "partner": {
       "cant-change-state": "You don't have permission to change the partner state.",
       "inactive-or-deleted": "Operation cannot be completed, because the partner is deleted or inactive.",
-      "invalid-registration-state-change": "__STRING_NOT_TRANSLATED__",
-      "major-cannot-change-registration-state": "__STRING_NOT_TRANSLATED__",
+      "invalid-registration-state-change": "Invalid partner registration state.",
+      "major-cannot-change-registration-state": "Major partner registration state cannot be changed.",
       "name-must-be-unique": "There is already a partner with that name, choose a different name"
     },
     "partner-contact": {
@@ -374,18 +374,18 @@
       "communication": "The internal server is not available, try again later."
     },
     "segment": {
-      "one-time-use-creation-failed": "__STRING_NOT_TRANSLATED__"
+      "one-time-use-creation-failed": "One time use segment creation has failed. Please try again later!"
     },
     "sendgrid": {
-      "communication": "__STRING_NOT_TRANSLATED__"
+      "communication": "An error has occured while trying to send an email. Please try again later!"
     },
     "unknown-try-again": "Please, try again!",
     "validation": {
       "cashier": {
-        "digital-stamp-id-max-length-30": "__STRING_NOT_TRANSLATED__",
-        "digital-stamp-id-required": "__STRING_NOT_TRANSLATED__",
-        "id-max-length-30": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__"
+        "digital-stamp-id-max-length-30": "Digital stamp id cannot be longer than 30 characters. Please use a shorter digital stamp id!",
+        "digital-stamp-id-required": "Digital stamp id is required for a cashier. Please use a valid digital stamp id!",
+        "id-max-length-30": "Cashier ID cannot be longer than 30 characters. Please use a shorter cashier ID!",
+        "id-required": "Cashier ID is required for a cashier. Please use a valid cashier ID!"
       },
       "category": {
         "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
