@@ -1,5 +1,5 @@
 import { NotificationLinkPreValidator } from './NotificationLinkPreValidator'
-import { NotificationType } from 'api/coupon-api/models/NotificationType'
+import { NotificationType } from 'api/swagger/coupon/models/NotificationType'
 import notificationLinks from './notificationLinks.json'
 import hungarianTranslations from '../../app/i18n/locales/hu.json'
 

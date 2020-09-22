@@ -1,6 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import { connectRouter } from 'connected-react-router'
-import { history } from '../router/router'
 import { routerHistoryStore } from '../router/routerHistoryStore'
 import { userAccessReducer } from 'features/userAccess/userAccessSlice'
 import { newsletterEditorReducer } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
@@ -19,9 +18,14 @@ import { categoryEditorReducer } from 'features/settings/campaignCategory/catego
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
+import { createBrowserHistory } from 'history'
+
+// TODO Temporary fix for app.test.  ../router/router history was used here
+// Probably a mock for the router/ history needed for proper solution, but needs more investigation
+const browserHistory = createBrowserHistory()
 
 export const rootReducer = combineReducers({
-  router: connectRouter(history),
+  router: connectRouter(browserHistory),
   routerHistory: routerHistoryStore,
   auth: authReducer,
   profile: profileReducer,

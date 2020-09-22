@@ -86,7 +86,7 @@ const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, 
     }
 
     const revisedParams = reviseListRequestParams(listParams, params)
-    const { result, ...pagination } = await api.sites.getSites({
+    const { result, ...pagination } = await api.coupon.sites.getSites({
       ...revisedParams,
       ...listConstraintParams
     })
@@ -110,7 +110,7 @@ const resetSiteFilters = (): AppThunk => async dispatch => {
 const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await api.sites.deleteSite({ id })
+    await api.coupon.sites.deleteSite({ id })
     dispatch(deleteSiteSuccess())
     const { listParams } = getState().siteList
     const newPage = recalculatePaginationAfterDeletion(listParams)

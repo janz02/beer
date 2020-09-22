@@ -122,14 +122,14 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
       }
     }
 
-    const userVm = await api.auth.login(loginRequest)
+    const userVm = await api.coupon.auth.login(loginRequest)
     const cameFrom = state().routerHistory.cameFrom
     dispatch(loginSuccess(userVm))
 
-    const partner = await api.partner.getMyPartner()
+    const partner = await api.coupon.partner.getMyPartner()
     dispatch(setSelfPartner({ id: partner.id, name: partner.name }))
 
-    const contact = await api.partnerContacts.getMyPartnerContact()
+    const contact = await api.coupon.partnerContacts.getMyPartnerContact()
     dispatch(setSelfPartnerContact({ id: contact.id }))
 
     if (!cameFrom.includes('error')) {
@@ -173,7 +173,7 @@ export const signUp = (params: any): AppThunk => async dispatch => {
   }
 
   try {
-    await api.auth.registerPartnerContact(requestRequest)
+    await api.coupon.auth.registerPartnerContact(requestRequest)
 
     dispatch(signupSuccess())
     dispatch(login(params))
@@ -189,7 +189,7 @@ export const changePassword = (
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    await api.auth.changePassword({ changePasswordDto: { newPassword, oldPassword } })
+    await api.coupon.auth.changePassword({ changePasswordDto: { newPassword, oldPassword } })
 
     dispatch(changePasswordSuccess())
   } catch (err) {

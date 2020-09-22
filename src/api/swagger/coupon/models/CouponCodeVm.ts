@@ -16,32 +16,32 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface InlineObject
+ * @interface CouponCodeVm
  */
-export interface InlineObject {
+export interface CouponCodeVm {
     /**
      * 
-     * @type {Blob}
-     * @memberof InlineObject
+     * @type {string}
+     * @memberof CouponCodeVm
      */
-    file?: Blob | null;
+    couponCode?: string | null;
 }
 
-export function InlineObjectFromJSON(json: any): InlineObject {
-    return InlineObjectFromJSONTyped(json, false);
+export function CouponCodeVmFromJSON(json: any): CouponCodeVm {
+    return CouponCodeVmFromJSONTyped(json, false);
 }
 
-export function InlineObjectFromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineObject {
+export function CouponCodeVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): CouponCodeVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'file': !exists(json, 'file') ? undefined : json['file'],
+        'couponCode': !exists(json, 'couponCode') ? undefined : json['couponCode'],
     };
 }
 
-export function InlineObjectToJSON(value?: InlineObject | null): any {
+export function CouponCodeVmToJSON(value?: CouponCodeVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -50,7 +50,7 @@ export function InlineObjectToJSON(value?: InlineObject | null): any {
     }
     return {
         
-        'file': value.file,
+        'couponCode': value.couponCode,
     };
 }
 

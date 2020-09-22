@@ -62,6 +62,18 @@ export interface DeletePartnerRequest {
     id: number;
 }
 
+export interface ExportPartnersRequest {
+    name?: string | null;
+    majorPartner?: boolean | null;
+    partnerState?: PartnerState;
+    address?: string | null;
+    partnerRegistrationState?: PartnerRegistrationState;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetPartnerRequest {
     id: number;
 }
@@ -236,6 +248,74 @@ export class PartnersApi extends runtime.BaseAPI {
      */
     async deletePartner(requestParameters: DeletePartnerRequest): Promise<void> {
         await this.deletePartnerRaw(requestParameters);
+    }
+
+    /**
+     * Exports the entity list with the specified filters applied in a csv file
+     * Exports an entity list sorted and filtered
+     */
+    async exportPartnersRaw(requestParameters: ExportPartnersRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.majorPartner !== undefined) {
+            queryParameters['majorPartner'] = requestParameters.majorPartner;
+        }
+
+        if (requestParameters.partnerState !== undefined) {
+            queryParameters['partnerState'] = requestParameters.partnerState;
+        }
+
+        if (requestParameters.address !== undefined) {
+            queryParameters['address'] = requestParameters.address;
+        }
+
+        if (requestParameters.partnerRegistrationState !== undefined) {
+            queryParameters['partnerRegistrationState'] = requestParameters.partnerRegistrationState;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Partners/ExportPartners`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the entity list with the specified filters applied in a csv file
+     * Exports an entity list sorted and filtered
+     */
+    async exportPartners(requestParameters: ExportPartnersRequest): Promise<Blob> {
+        const response = await this.exportPartnersRaw(requestParameters);
+        return await response.value();
     }
 
     /**

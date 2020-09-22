@@ -24,6 +24,9 @@ import {
     ClaimedCouponCodeVm,
     ClaimedCouponCodeVmFromJSON,
     ClaimedCouponCodeVmToJSON,
+    CouponCodeVm,
+    CouponCodeVmFromJSON,
+    CouponCodeVmToJSON,
     CouponDiscountType,
     CouponDiscountTypeFromJSON,
     CouponDiscountTypeToJSON,
@@ -48,6 +51,9 @@ import {
     DetailedCouponVmPaginatedResponse,
     DetailedCouponVmPaginatedResponseFromJSON,
     DetailedCouponVmPaginatedResponseToJSON,
+    FileVm,
+    FileVmFromJSON,
+    FileVmToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
@@ -74,6 +80,33 @@ export interface CreateCouponRequest {
 
 export interface DeleteCouponRequest {
     id: number;
+}
+
+export interface ExportCouponsRequest {
+    includeArchived?: boolean;
+    onlyWaiting?: boolean;
+    name?: string | null;
+    rank?: CouponRank;
+    type?: CouponType;
+    state?: CouponState;
+    startDate?: Date | null;
+    endDate?: Date | null;
+    expireDate?: Date | null;
+    couponCount?: number | null;
+    minimumShoppingValue?: number | null;
+    discountValue?: number | null;
+    categoryId?: number | null;
+    isActive?: boolean | null;
+    partnerName?: string | null;
+    mode?: CouponMode;
+    discountType?: CouponDiscountType;
+    createdBy?: string | null;
+    preferredPosition?: number | null;
+    drawDate?: Date | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
 }
 
 export interface GetCouponRequest {
@@ -176,7 +209,7 @@ export class CouponsApi extends runtime.BaseAPI {
      * Claims a coupon to put it in the used up coupons for the user
      * Claims a coupon for the logged in user
      */
-    async claimCouponRaw(requestParameters: ClaimCouponRequest): Promise<runtime.ApiResponse<DetailedCouponVmPaginatedResponse>> {
+    async claimCouponRaw(requestParameters: ClaimCouponRequest): Promise<runtime.ApiResponse<CouponCodeVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling claimCoupon.');
         }
@@ -196,14 +229,14 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DetailedCouponVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponCodeVmFromJSON(jsonValue));
     }
 
     /**
      * Claims a coupon to put it in the used up coupons for the user
      * Claims a coupon for the logged in user
      */
-    async claimCoupon(requestParameters: ClaimCouponRequest): Promise<DetailedCouponVmPaginatedResponse> {
+    async claimCoupon(requestParameters: ClaimCouponRequest): Promise<CouponCodeVm> {
         const response = await this.claimCouponRaw(requestParameters);
         return await response.value();
     }
@@ -276,6 +309,134 @@ export class CouponsApi extends runtime.BaseAPI {
      */
     async deleteCoupon(requestParameters: DeleteCouponRequest): Promise<void> {
         await this.deleteCouponRaw(requestParameters);
+    }
+
+    /**
+     * Exports the Coupon list with the specified filters applied in a csv file
+     * Exports a Coupon entity list sorted and filtered
+     */
+    async exportCouponsRaw(requestParameters: ExportCouponsRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.includeArchived !== undefined) {
+            queryParameters['includeArchived'] = requestParameters.includeArchived;
+        }
+
+        if (requestParameters.onlyWaiting !== undefined) {
+            queryParameters['onlyWaiting'] = requestParameters.onlyWaiting;
+        }
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.rank !== undefined) {
+            queryParameters['rank'] = requestParameters.rank;
+        }
+
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        if (requestParameters.state !== undefined) {
+            queryParameters['state'] = requestParameters.state;
+        }
+
+        if (requestParameters.startDate !== undefined) {
+            queryParameters['startDate'] = (requestParameters.startDate as any).toISOString();
+        }
+
+        if (requestParameters.endDate !== undefined) {
+            queryParameters['endDate'] = (requestParameters.endDate as any).toISOString();
+        }
+
+        if (requestParameters.expireDate !== undefined) {
+            queryParameters['expireDate'] = (requestParameters.expireDate as any).toISOString();
+        }
+
+        if (requestParameters.couponCount !== undefined) {
+            queryParameters['couponCount'] = requestParameters.couponCount;
+        }
+
+        if (requestParameters.minimumShoppingValue !== undefined) {
+            queryParameters['minimumShoppingValue'] = requestParameters.minimumShoppingValue;
+        }
+
+        if (requestParameters.discountValue !== undefined) {
+            queryParameters['discountValue'] = requestParameters.discountValue;
+        }
+
+        if (requestParameters.categoryId !== undefined) {
+            queryParameters['categoryId'] = requestParameters.categoryId;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.partnerName !== undefined) {
+            queryParameters['partnerName'] = requestParameters.partnerName;
+        }
+
+        if (requestParameters.mode !== undefined) {
+            queryParameters['mode'] = requestParameters.mode;
+        }
+
+        if (requestParameters.discountType !== undefined) {
+            queryParameters['discountType'] = requestParameters.discountType;
+        }
+
+        if (requestParameters.createdBy !== undefined) {
+            queryParameters['createdBy'] = requestParameters.createdBy;
+        }
+
+        if (requestParameters.preferredPosition !== undefined) {
+            queryParameters['preferredPosition'] = requestParameters.preferredPosition;
+        }
+
+        if (requestParameters.drawDate !== undefined) {
+            queryParameters['drawDate'] = (requestParameters.drawDate as any).toISOString();
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Coupons/ExportCoupons`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the Coupon list with the specified filters applied in a csv file
+     * Exports a Coupon entity list sorted and filtered
+     */
+    async exportCoupons(requestParameters: ExportCouponsRequest): Promise<Blob> {
+        const response = await this.exportCouponsRaw(requestParameters);
+        return await response.value();
     }
 
     /**
@@ -354,7 +515,7 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns a list of coupon codes that could be claimed by users
      * Returns all possible coupon codes
      */
-    async getCouponCodesRaw(requestParameters: GetCouponCodesRequest): Promise<runtime.ApiResponse<Blob>> {
+    async getCouponCodesRaw(requestParameters: GetCouponCodesRequest): Promise<runtime.ApiResponse<FileVm>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
             throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling getCouponCodes.');
         }
@@ -374,14 +535,14 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.BlobApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileVmFromJSON(jsonValue));
     }
 
     /**
      * Returns a list of coupon codes that could be claimed by users
      * Returns all possible coupon codes
      */
-    async getCouponCodes(requestParameters: GetCouponCodesRequest): Promise<Blob> {
+    async getCouponCodes(requestParameters: GetCouponCodesRequest): Promise<FileVm> {
         const response = await this.getCouponCodesRaw(requestParameters);
         return await response.value();
     }
@@ -390,7 +551,7 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns a list of eedeemed coupon codes that have been used up by users
      * Returns the redeemed claimed coupon codes for a coupon
      */
-    async getCouponRedeemedCodesRaw(requestParameters: GetCouponRedeemedCodesRequest): Promise<runtime.ApiResponse<Blob>> {
+    async getCouponRedeemedCodesRaw(requestParameters: GetCouponRedeemedCodesRequest): Promise<runtime.ApiResponse<FileVm>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
             throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling getCouponRedeemedCodes.');
         }
@@ -410,14 +571,14 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.BlobApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileVmFromJSON(jsonValue));
     }
 
     /**
      * Returns a list of eedeemed coupon codes that have been used up by users
      * Returns the redeemed claimed coupon codes for a coupon
      */
-    async getCouponRedeemedCodes(requestParameters: GetCouponRedeemedCodesRequest): Promise<Blob> {
+    async getCouponRedeemedCodes(requestParameters: GetCouponRedeemedCodesRequest): Promise<FileVm> {
         const response = await this.getCouponRedeemedCodesRaw(requestParameters);
         return await response.value();
     }

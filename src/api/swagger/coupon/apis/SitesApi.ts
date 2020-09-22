@@ -43,6 +43,16 @@ export interface DeleteSiteRequest {
     id: number;
 }
 
+export interface ExportSitesRequest {
+    name?: string | null;
+    address?: string | null;
+    partnerId?: number | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
+}
+
 export interface GetSiteRequest {
     id: number;
 }
@@ -135,6 +145,66 @@ export class SitesApi extends runtime.BaseAPI {
      */
     async deleteSite(requestParameters: DeleteSiteRequest): Promise<void> {
         await this.deleteSiteRaw(requestParameters);
+    }
+
+    /**
+     * Exports the entity list with the specified filters applied in a csv file
+     * Exports an entity list sorted and filtered
+     */
+    async exportSitesRaw(requestParameters: ExportSitesRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.address !== undefined) {
+            queryParameters['address'] = requestParameters.address;
+        }
+
+        if (requestParameters.partnerId !== undefined) {
+            queryParameters['partnerId'] = requestParameters.partnerId;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Sites/ExportSites`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the entity list with the specified filters applied in a csv file
+     * Exports an entity list sorted and filtered
+     */
+    async exportSites(requestParameters: ExportSitesRequest): Promise<Blob> {
+        const response = await this.exportSitesRaw(requestParameters);
+        return await response.value();
     }
 
     /**
