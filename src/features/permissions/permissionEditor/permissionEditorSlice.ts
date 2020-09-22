@@ -8,7 +8,12 @@ import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
-import { PermissionModel } from 'api/swagger/campaign-editor'
+import {
+  AdGroupModel,
+  FunctionPermissionModel,
+  PermissionModel,
+  UserModel
+} from 'api/swagger/campaign-editor'
 
 interface PermissionEditorState {
   permission?: CampaignPermission
@@ -108,47 +113,58 @@ export const permissionEditorReducer = permissionEditorSlice.reducer
 export const getPermission = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(getPermissionRequest())
-    const permission = await api.permissions.getPermission({ id })
+    const permission = await api.campaignEditor.permissions.getPermission({ id })
     dispatch(getPermissionSuccess(permission))
   } catch (err) {
     dispatch(getPermissionFail())
   }
 }
 
-export const getFunctionPermissions = (id: number): AppThunk => async dispatch => {
+export const getFunctionPermissions = (id: string | undefined): AppThunk => async dispatch => {
   try {
     dispatch(getPermissionRequest())
-    const { items } = await api.accounts.getFunctionPermissions({
-      //  _queryParameters: { permissionid: id.toString() }
-    })
-    dispatch(
-      getFunctionPermissionsSuccess(items!.map(x => ({ ...x } as CampaignFunctionPermission)))
-    )
+    const queryParameter = id ? { _queryParameters: { permissionid: id.toString() } } : {}
+    const { items } = await api.campaignEditor.accounts.getFunctionPermissions(queryParameter)
+
+    if (items) {
+      dispatch(
+        getFunctionPermissionsSuccess(items.map(x => ({ ...x } as CampaignFunctionPermission)))
+      )
+    } else {
+      dispatch(getPermissionFail())
+    }
   } catch (err) {
     dispatch(getPermissionFail())
   }
 }
 
-export const getAdGroups = (id: number): AppThunk => async dispatch => {
+export const getAdGroups = (id: string | undefined): AppThunk => async dispatch => {
   try {
     dispatch(getPermissionRequest())
+    const queryParameter = id ? { _queryParameters: { permissionid: id.toString() } } : {}
+    const { items } = await api.campaignEditor.accounts.getAdGroups(queryParameter)
 
-    const { items } = await api.accounts.getAdGroups({
-      // _queryParameters: { permissionid: id.toString() }
-    })
-    dispatch(getAdGroupsSuccess(items!.map(x => ({ ...x } as CampaignAdGroup))))
+    if (items) {
+      dispatch(getAdGroupsSuccess(items.map(x => ({ ...x } as CampaignAdGroup))))
+    } else {
+      dispatch(getPermissionFail())
+    }
   } catch (err) {
     dispatch(getPermissionFail())
   }
 }
 
-export const getCampaignUsers = (id: number): AppThunk => async dispatch => {
+export const getCampaignUsers = (id: string | undefined): AppThunk => async dispatch => {
   try {
     dispatch(getPermissionRequest())
-    const { items } = await api.accounts.getUsersForPermission({
-      //  _queryParameters: { permissionid: id.toString() }
-    })
-    dispatch(getCampaignUsersSuccess(items!.map(x => ({ ...x } as CampaignUser))))
+    const queryParameter = id ? { _queryParameters: { permissionid: id.toString() } } : {}
+    const { items } = await api.campaignEditor.accounts.getUsersForPermission(queryParameter)
+
+    if (items) {
+      dispatch(getCampaignUsersSuccess(items.map(x => ({ ...x } as CampaignUser))))
+    } else {
+      dispatch(getPermissionFail())
+    }
   } catch (err) {
     dispatch(getPermissionFail())
   }
@@ -160,20 +176,34 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
 ) => {
   try {
     const permission = getState().permissionEditor.permission
+    const users = getState().permissionEditor.campaignUsers?.map(x => x as UserModel)
+    const adGroups = getState().permissionEditor.campaignAdGroups?.map(x => x as AdGroupModel)
+    const functionPermissions = getState().permissionEditor.campaignFunctionPermissions?.map(
+      x => x as FunctionPermissionModel
+    )
+
     dispatch(savePermissionRequest())
 
     if (permission?.id) {
-      await api.permissions.updatePermission({
+      await api.campaignEditor.permissions.updatePermission({
         id: permission.id,
         permissionModel: {
           ...permission,
-          ...data
+          ...data,
+          adGroups: adGroups,
+          users: users,
+          functionPermissions: functionPermissions
         } as PermissionModel
       })
       dispatch(getPermission(permission.id))
     } else {
-      const createdPermissionId = await api.permissions.createPermission({
-        permissionModel: data as PermissionModel
+      const createdPermissionId = await api.campaignEditor.permissions.createPermission({
+        permissionModel: {
+          ...data,
+          adGroups: adGroups,
+          users: users,
+          functionPermissions: functionPermissions
+        } as PermissionModel
       })
 
       history.push(`/permissions/${createdPermissionId}`)
@@ -181,6 +211,7 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
     dispatch(savePermissionSuccess())
     message.success(i18n.t('common.message.save-success'), 5)
   } catch (err) {
+    console.log(err)
     dispatch(savePermissionFail())
   }
 }
@@ -188,7 +219,7 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
 export const deletePermission = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(deletePermissionRequest())
-    await api.permissions.deletePermission({ id })
+    await api.campaignEditor.permissions.deletePermission({ id })
     dispatch(deletePermissionSuccess())
     message.success(i18n.t('common.message.delete-success'), 5)
     history.push(`/permissions`)

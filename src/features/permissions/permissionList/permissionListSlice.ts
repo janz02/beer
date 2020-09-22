@@ -3,6 +3,7 @@ import { AppThunk } from 'app/store'
 import { api } from 'api'
 import {
   ListRequestParams,
+  Pagination,
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
@@ -70,12 +71,17 @@ export const getPermissions = (params: ListRequestParams = {}): AppThunk => asyn
 
     const revisedParams = reviseListRequestParams(getState().partnerList.listParams, params)
 
-    const { items, ...pagination } = await api.permissions.getPermissions(revisedParams)
+    const { items, ...pagination } = await api.campaignEditor.permissions.getPermissions(
+      revisedParams
+    )
 
     dispatch(
       getPermissionsSuccess({
-        permissions: items as any,
-        listParams: storableListRequestParams(revisedParams, {})
+        permissions: items as CampaignPermission[],
+        listParams: storableListRequestParams(revisedParams, {
+          ...pagination,
+          size: pagination.totalCount
+        } as Pagination)
       })
     )
   } catch (err) {

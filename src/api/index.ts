@@ -18,24 +18,25 @@ import {
   WalletApi,
   FilesApi
 } from '../api/swagger/coupon'
-// import {
-//   CampaignsApi,
-//   PermissionsApi,
-//   ProductsApi,
-//   SegmentationQueriesApi,
-//   SegmentationCategoriesApi,
-//   SegmentationsApi,
-//   SharepointApi,
-//   TemplatesApi,
-//   TestGroupCategoriesApi
-// } from './swagger/campaign-editor'
+import {
+  CampaignsApi,
+  PermissionsApi,
+  ProductsApi,
+  SegmentationQueriesApi,
+  SegmentationCategoriesApi,
+  SegmentationsApi,
+  SharepointApi,
+  TemplatesApi,
+  TestGroupCategoriesApi,
+  AccountsApi
+} from './swagger/campaign-editor'
 import {
   FilesApi as FilesFilesMsApi,
   InformationApi as InformationFilesMsApi
 } from '../api/swagger/files'
 import { errorHandlingMiddleware } from './middleware'
 import { Middleware, Configuration as CouponConfiguration } from '../api/swagger/coupon/runtime'
-// import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
+import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
 import { Configuration as FilesConfiguration } from '../api/swagger/files/runtime'
 import { getUrl } from 'services/baseUrlHelper'
 
@@ -60,9 +61,9 @@ export const couponConfig: CouponConfiguration = new CouponConfiguration(
   apiBaseConfig({ appendUrl: process.env.REACT_APP_COUPON_API_URL })
 )
 
-// export const campaignEditorConfig: CampaignEditorConfiguration = new CampaignEditorConfiguration(
-//   apiBaseConfig({ appendUrl: process.env.REACT_APP_CAMPAIGNEDITOR_API_URL })
-// )
+export const campaignEditorConfig: CampaignEditorConfiguration = new CampaignEditorConfiguration(
+  apiBaseConfig({ appendUrl: process.env.REACT_APP_CAMPAIGNEDITOR_API_URL })
+)
 
 export const filesConfig: FilesConfiguration = new FilesConfiguration(
   apiBaseConfig({ appendUrl: process.env.REACT_APP_FILES_API_URL })
@@ -94,14 +95,15 @@ export const api = {
     information: new InformationFilesMsApi(filesConfig)
   },
   campaignEditor: {
-    // campaigns: new CampaignsApi(campaignEditorConfig),
-    // permissions: new PermissionsApi(campaignEditorConfig),
-    // products: new ProductsApi(campaignEditorConfig),
-    // segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig),
-    // segmentationQueries: new SegmentationQueriesApi(campaignEditorConfig),
-    // segmentations: new SegmentationsApi(campaignEditorConfig),
-    // sharepoint: new SharepointApi(campaignEditorConfig),
-    // templates: new TemplatesApi(campaignEditorConfig),
-    // testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)
+    accounts: new AccountsApi(campaignEditorConfig),
+    campaigns: new CampaignsApi(campaignEditorConfig),
+    permissions: new PermissionsApi(campaignEditorConfig),
+    products: new ProductsApi(campaignEditorConfig),
+    segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig),
+    segmentationQueries: new SegmentationQueriesApi(campaignEditorConfig),
+    segmentations: new SegmentationsApi(campaignEditorConfig),
+    sharepoint: new SharepointApi(campaignEditorConfig),
+    templates: new TemplatesApi(campaignEditorConfig),
+    testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)
   }
 }
