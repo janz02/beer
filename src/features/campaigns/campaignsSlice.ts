@@ -12,6 +12,7 @@ import { Partner } from 'models/partner'
 import { saveAs } from 'file-saver'
 import { Coupon } from 'models/coupon'
 import { FeatureState } from 'models/featureState'
+import { FileVm } from 'api/swagger/files'
 
 interface CampaignsState {
   coupon?: Coupon
@@ -338,8 +339,10 @@ const downloadCoupons = (coupon: Coupon): AppThunk => async dispatch => {
 
   try {
     // TODO fix names
-    const blob: Blob = await api.coupon.coupons.getCouponCodes({ couponId: coupon.id! })
-    saveAs(blob, `${coupon.id} - ${coupon.name} CouponCodes.csv`)
+    const info: FileVm = await api.coupon.coupons.getCouponCodes({ couponId: coupon.id! })
+    const blob: Blob = await api.files.files.downloadFile({ id: `${info.id}` })
+
+    saveAs(blob, `${info.id} - ${info.fileName} CouponCodes.${info.exstension}`)
     dispatch(downloadCouponsSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
@@ -351,8 +354,10 @@ const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispatch => {
 
   try {
     // TODO fix names
-    const blob: Blob = await api.coupon.coupons.getCouponRedeemedCodes({ couponId: coupon.id! })
-    saveAs(blob, `${coupon.id} - ${coupon.name} ClaimedCouponCodes.csv`)
+    const info: FileVm = await api.coupon.coupons.getCouponRedeemedCodes({ couponId: coupon.id! })
+    const blob: Blob = await api.files.files.downloadFile({ id: `${info.id}` })
+
+    saveAs(blob, `${info.id} - ${info.fileName} CouponCodes.${info.exstension}`)
     dispatch(downloadClaimedCouponsSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
