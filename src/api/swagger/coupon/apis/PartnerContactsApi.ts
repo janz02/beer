@@ -128,7 +128,7 @@ export class PartnerContactsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/PartnerContacts/Export`,
+            path: `/api/PartnerContacts/ExportPartnerPartnerContacts`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

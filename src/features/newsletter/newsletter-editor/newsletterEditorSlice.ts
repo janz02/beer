@@ -146,7 +146,7 @@ const {
 const getNewsletterTemplate = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(setTemplateState(FeatureState.Loading))
-    const response = await api.emailTemplates.getEmailTemplate({
+    const response = await api.coupon.emailTemplates.getEmailTemplate({
       id
     })
     await delay({}, 1000)
@@ -174,7 +174,7 @@ const saveNewsletterTemplateVersion = (content: string): AppThunk => async (disp
     if (!id) {
       return
     }
-    await api.emailTemplates.saveEmailTemplateVersion({
+    await api.coupon.emailTemplates.saveEmailTemplateVersion({
       id: id,
       emailTemplateVersionDto: {
         content
@@ -194,7 +194,7 @@ const restoreNewsletterTemplateVersion = (): AppThunk => async (dispatch, getSta
     const id = template?.id
     const version = template?.history?.find(h => h.id === currentTemplateVersionId)?.version
     if (id === undefined || version === undefined) return
-    await api.emailTemplates.restoreEmailTemplateVersion({
+    await api.coupon.emailTemplates.restoreEmailTemplateVersion({
       id: id,
       version: version
     })
@@ -213,7 +213,7 @@ const sendNewsletterEmailExample = (email: string, subject: string): AppThunk =>
   try {
     dispatch(setEmailState(FeatureState.Loading))
     const templateId = getState().newsletterEditor.template?.id
-    await api.emailSender.sendTestEmail({
+    await api.coupon.emailSender.sendTestEmail({
       sendEmailsDto: {
         recipients: [email],
         emailTemplateId: templateId,
@@ -231,7 +231,7 @@ const sendNewsletterEmailExample = (email: string, subject: string): AppThunk =>
 const getSegmentsForEmail = (): AppThunk => async dispatch => {
   try {
     dispatch(setSegmentState(FeatureState.Loading))
-    const response = await api.segments.getSegments({
+    const response = await api.coupon.segments.getSegments({
       pageSize: -1
     })
     const segments: any = response.result?.map(s => ({ ...s, id: '' + s.id }))
@@ -248,7 +248,7 @@ const sendNewsletterEmailToSegment = (segmentId: number, subject: string): AppTh
   try {
     const templateId = getState().newsletterEditor.template?.id
     dispatch(setEmailState(FeatureState.Loading))
-    await api.emailSender.sendEmailToSegment({
+    await api.coupon.emailSender.sendEmailToSegment({
       sendEmailToSegmentDto: {
         emailSubject: subject,
         emailTemplateId: templateId,

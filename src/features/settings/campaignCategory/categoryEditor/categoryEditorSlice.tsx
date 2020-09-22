@@ -45,7 +45,7 @@ const { resetCategoryEditor } = categoryEditorSlice.actions
 const getCategory = (params: GetCategoryRequest): AppThunk => async dispatch => {
   dispatch(setEditorState(FeatureState.Loading))
   try {
-    const response = await api.categories.getCategory(params)
+    const response = await api.coupon.categories.getCategory(params)
     dispatch(getCategorySuccess(response as Category))
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
@@ -58,14 +58,14 @@ const saveCategory = (category: Category): AppThunk => async dispatch => {
   let id = category?.id
   try {
     if (id && !isNaN(id)) {
-      await api.categories.updateCategory({
+      await api.coupon.categories.updateCategory({
         id,
         categoryDto: {
           name: category.name
         }
       })
     } else {
-      const { id: newId } = await api.categories.createCategory({
+      const { id: newId } = await api.coupon.categories.createCategory({
         categoryDto: {
           name: category.name
         }

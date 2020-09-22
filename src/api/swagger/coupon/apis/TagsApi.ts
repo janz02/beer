@@ -189,7 +189,7 @@ export class TagsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Tags/Export`,
+            path: `/api/Tags/ExportTags`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

@@ -6,19 +6,19 @@ export const NotificationLinkPreValidator = {
       return false
     }
 
-    await api.coupons.getCoupon({ id })
+    await api.coupon.coupons.getCoupon({ id })
     // If the call was unsuccessful, the await will return with an error, and the promise will be false
     return true
   },
 
   async GetPartnerContact(id: number): Promise<boolean> {
-    await api.partnerContacts.getPartnerContact({ id })
+    await api.coupon.partnerContacts.getPartnerContact({ id })
     // If the call was unsuccessful, the await will return with an error, and the promise will be false
     return true
   },
 
   async GetPartner(id: number): Promise<boolean> {
-    await api.partner.getPartner({ id })
+    await api.coupon.partner.getPartner({ id })
     // If the call was unsuccessful, the await will return with an error, and the promise will be false
     return true
   },

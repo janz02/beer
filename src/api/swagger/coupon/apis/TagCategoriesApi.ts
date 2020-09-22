@@ -177,7 +177,7 @@ export class TagCategoriesApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/TagCategories/Export`,
+            path: `/api/TagCategories/ExportTagCategories`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

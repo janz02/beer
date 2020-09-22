@@ -75,7 +75,7 @@ export class ScoringApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Scoring/Export`,
+            path: `/api/Scoring/ExportMyScores`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

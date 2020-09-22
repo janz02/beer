@@ -38,6 +38,30 @@ export interface CampaignResultEventModelPaginatedSearchResponse {
      * @memberof CampaignResultEventModelPaginatedSearchResponse
      */
     totalCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignResultEventModelPaginatedSearchResponse
+     */
+    from?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignResultEventModelPaginatedSearchResponse
+     */
+    to?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignResultEventModelPaginatedSearchResponse
+     */
+    page?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignResultEventModelPaginatedSearchResponse
+     */
+    pageSize?: number;
 }
 
 export function CampaignResultEventModelPaginatedSearchResponseFromJSON(json: any): CampaignResultEventModelPaginatedSearchResponse {
@@ -52,6 +76,10 @@ export function CampaignResultEventModelPaginatedSearchResponseFromJSONTyped(jso
         
         'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(CampaignResultEventModelFromJSON)),
         'totalCount': !exists(json, 'totalCount') ? undefined : json['totalCount'],
+        'from': !exists(json, 'from') ? undefined : json['from'],
+        'to': !exists(json, 'to') ? undefined : json['to'],
+        'page': !exists(json, 'page') ? undefined : json['page'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
     };
 }
 
@@ -66,6 +94,10 @@ export function CampaignResultEventModelPaginatedSearchResponseToJSON(value?: Ca
         
         'items': value.items === undefined ? undefined : (value.items === null ? null : (value.items as Array<any>).map(CampaignResultEventModelToJSON)),
         'totalCount': value.totalCount,
+        'from': value.from,
+        'to': value.to,
+        'page': value.page,
+        'pageSize': value.pageSize,
     };
 }
 

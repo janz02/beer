@@ -31,7 +31,6 @@ import {
 
 export interface GetMergeTagsRequest {
     language: string;
-    langId?: string;
 }
 
 export interface GetSegmentationQueryRequest {
@@ -88,10 +87,6 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.langId !== undefined) {
-            queryParameters['langId'] = requestParameters.langId;
-        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
