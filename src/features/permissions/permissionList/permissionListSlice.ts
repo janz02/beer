@@ -69,7 +69,7 @@ export const getPermissions = (params: ListRequestParams = {}): AppThunk => asyn
   try {
     dispatch(getPermissionsRequest())
 
-    const revisedParams = reviseListRequestParams(getState().partnerList.listParams, params)
+    const revisedParams = reviseListRequestParams(getState().permissionList.listParams, params)
 
     const { items, ...pagination } = await api.campaignEditor.permissions.getPermissions(
       revisedParams
