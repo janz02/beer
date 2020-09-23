@@ -21,6 +21,7 @@ interface SegmentationCategoryListState {
 const initialState: SegmentationCategoryListState = {
   categories: [],
   listParams: {
+    page: 1,
     pageSize: 10,
     orderBy: 'name',
     orderByType: OrderByType.Ascending
@@ -65,25 +66,23 @@ const {
 const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const listParams = reviseListRequestParams(
+    const revisedParams = reviseListRequestParams(
       getState().segmentationCategoryList.listParams,
       params
     )
 
-    const queryParameters: { [key: string]: string } = {}
-    if (listParams.orderBy) {
-      const type = listParams.orderByType !== OrderByType.Descending ? 'asc' : 'desc'
-      queryParameters.orderBy = listParams.orderBy + '_' + type
+    const queryParameters: { [key: string]: string } = {
+      page: String(revisedParams.page),
+      pageSize: String(revisedParams.pageSize)
     }
 
+    if (revisedParams.orderBy) {
+      const type = revisedParams.orderByType !== OrderByType.Descending ? 'asc' : 'desc'
+      queryParameters.orderBy = revisedParams.orderBy + '_' + type
+    }
     const result = await api.campaignEditor.segmentationCategories.getSegmentationCategories({
       _queryParameters: queryParameters
     })
-
-    listParams.from = 1
-    listParams.page = 1
-    listParams.to = result.totalCount
-    listParams.size = result.totalCount
 
     dispatch(
       getCategoriesSuccess({
@@ -91,7 +90,13 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
           ...x,
           createdDate: moment(x.createdDate)
         })) as CampaignCategory[],
-        listParams
+        listParams: {
+          ...revisedParams,
+          from: result.from,
+          to: result.to,
+          page: result.page,
+          size: result.totalCount
+        }
       })
     )
   } catch (err) {

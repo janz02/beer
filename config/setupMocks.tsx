@@ -19,7 +19,7 @@ export const setupStore = (store: {} = {}): void => {
   const useEffect = jest.spyOn(React, 'useEffect')
   useEffect.mockImplementationOnce((f: any) => f())
 
-  jest.spyOn(ReactReduxHooks, 'useSelector').mockImplementation(state => mockStore.getState())
+  jest.spyOn(ReactReduxHooks, 'useSelector').mockImplementation(f => f(mockStore.getState()))
   jest.spyOn(ReactReduxHooks, 'useDispatch').mockImplementation(() => mockStore.dispatch)
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { UseGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
 import { UseSegmentationCategoryListUtils } from './categoryList/useSegmentationCategoryList'
 import { segmentationCategoryListActions } from './categoryList/segmentationCategoryListSlice'
 import { SegmentationCategoryList } from './categoryList/SegmentationCategoryList'

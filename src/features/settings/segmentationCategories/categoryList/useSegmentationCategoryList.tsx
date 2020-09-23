@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
 import { segmentationCategoryListActions } from './segmentationCategoryListSlice'
 import { useTableUtils } from 'hooks/useTableUtils'

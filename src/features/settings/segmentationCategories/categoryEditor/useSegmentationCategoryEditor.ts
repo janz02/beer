@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react'
 import { SegmentationCategory } from 'models/segmentationCategory'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
 import { segmentationCategoryEditorActions } from './segmentationCategoryEditorSlice'
