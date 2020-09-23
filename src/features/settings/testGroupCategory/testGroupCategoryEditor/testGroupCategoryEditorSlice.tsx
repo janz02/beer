@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { GetCategoryRequest } from 'api/swagger/coupon'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
@@ -50,7 +49,7 @@ const { resetCategoryEditor } = testGroupCategoryEditorSlice.actions
 const getCategory = (params: GetTestGroupCategoryRequest): AppThunk => async dispatch => {
   dispatch(setEditorState(FeatureState.Loading))
   try {
-    const response = await api.testGroupCategories.getTestGroupCategory(params)
+    const response = await api.campaignEditor.testGroupCategories.getTestGroupCategory(params)
     dispatch(getCategorySuccess(response as TestGroupCategory))
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
@@ -63,14 +62,14 @@ const saveCategory = (category: TestGroupCategory): AppThunk => async dispatch =
   let id = category?.id
   try {
     if (id && !isNaN(id)) {
-      await api.testGroupCategories.updateTestGroupCategory({
+      await api.campaignEditor.testGroupCategories.updateTestGroupCategory({
         id,
         testGroupCategoryModel: {
           name: category.name
         }
       })
     } else {
-      const newId = await api.testGroupCategories.createTestGroupCategory({
+      const newId = await api.campaignEditor.testGroupCategories.createTestGroupCategory({
         testGroupCategoryModel: {
           name: category.name
         }

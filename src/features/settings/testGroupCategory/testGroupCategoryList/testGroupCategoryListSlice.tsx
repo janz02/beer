@@ -73,7 +73,7 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
     )
 
     // FIXME pass query after pagination finalized on backend
-    const { items } = await api.testGroupCategories.getTestGroupCategories({})
+    const { items } = await api.campaignEditor.testGroupCategories.getTestGroupCategories({})
 
     const testGroupCategories =
       items?.map<TestGroupCategory>(c => ({
@@ -81,6 +81,7 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
         createdDate: moment(c.createdDate)
       })) ?? []
 
+    // FIXME pass query after pagination finalized on backend
     dispatch(
       getCategoriesSuccess({
         categories: testGroupCategories,
@@ -101,7 +102,7 @@ const resetCategoryFilters = (): AppThunk => async dispatch => {
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    // await api.categories.deleteCategory({ id })
+    await api.campaignEditor.testGroupCategories.deleteTestGroupCategory({ id })
     dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
     dispatch(getCategories({ page: newPage }))

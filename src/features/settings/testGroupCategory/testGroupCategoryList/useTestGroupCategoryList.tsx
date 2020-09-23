@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'

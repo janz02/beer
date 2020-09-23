@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
