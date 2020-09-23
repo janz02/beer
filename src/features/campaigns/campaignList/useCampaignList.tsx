@@ -39,6 +39,7 @@ interface UseCampaignListFeatures {
   handleIncludeArchivedChange: (checked: boolean) => void
   handleTabChange: (key: CouponListTabKey) => void
   handleDeleteCancel: () => void
+  handleExport: () => void
   getCategories: typeof campaignActions.getCategories
   getCoupons: typeof campaignListActions.getCoupons
   deleteCoupon: typeof campaignListActions.deleteCoupon
@@ -359,6 +360,10 @@ export const useCampaignList = (): UseCampaignListFeatures => {
     dispatch(campaignListActions.cancelCampaignDelete())
   }, [dispatch])
 
+  const handleExport = useCallback((): void => {
+    dispatch(campaignListActions.exportCoupons())
+  }, [dispatch])
+
   return {
     loading,
     coupons: addKeyProp(coupons),
@@ -372,6 +377,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
     handleIncludeArchivedChange,
     handleTabChange,
     handleDeleteCancel,
+    handleExport,
     getCategories: campaignActions.getCategories,
     getCoupons: campaignListActions.getCoupons,
     deleteCoupon: campaignListActions.deleteCoupon

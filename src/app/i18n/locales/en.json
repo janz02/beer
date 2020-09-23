@@ -73,6 +73,7 @@
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
+    "export": "Export",
     "escape": "Escape",
     "escape-editor": "Escape editor mode",
     "field": {
