@@ -1,0 +1,76 @@
+.header-menu-button {
+  &__container {
+    position: relative;
+    z-index: 2;
+    top: 18px;
+    left: -18px;
+
+    &.mobile {
+      top: 5px;
+      left: 5px;
+    }
+  }
+
+  &__background {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+    border-radius: 18px;
+    opacity: 1;
+    background: #F0F2F5 0% 0% no-repeat padding-box;
+  }
+
+  &__top-border {
+    width: 2px;
+    height: 2px;
+    border-bottom-right-radius: 2px;
+    background: #001529;
+  }
+
+  &__top-border-background {
+    position: absolute;
+    top: -1.9px;
+    left: 16px;
+    width: 2px;
+    height: 2px;
+    background: #F0F2F5;
+  }
+
+  &__bottom-border {
+    width: 2px;
+    height: 2px;
+    border-top-right-radius: 2px;
+    background: #001529;
+  }
+
+  &__bottom-border-background {
+    position: absolute;
+    bottom: -1.9px;
+    left: 16px;
+    width: 2px;
+    height: 2px;
+    background: #F0F2F5;
+  }
+
+  &__button {
+    flex-wrap: wrap-reverse;
+    width: 28px;
+    height: 28px;
+    margin: 4px 0 0 4px;
+    opacity: 1;
+    background: #08979C 0% 0% no-repeat padding-box;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: #08979C 0% 0% no-repeat padding-box;
+    }
+  }
+
+  &__arrow {
+    opacity: 1;
+    color: #FFFFFF;
+    font-size: 9px;
+  }
+}
