@@ -29,10 +29,7 @@ import {
   TestGroupCategoriesApi,
   AccountsApi
 } from './swagger/campaign-editor'
-import {
-  FilesApi as FilesFilesMsApi,
-  InformationApi as InformationFilesMsApi
-} from '../api/swagger/files'
+import { FilesApi, InformationApi as InformationFilesMsApi } from '../api/swagger/files'
 import { errorHandlingMiddleware } from './middleware'
 import { Middleware, Configuration as CouponConfiguration } from '../api/swagger/coupon/runtime'
 import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'

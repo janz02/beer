@@ -14,14 +14,9 @@ import {
 } from './permissionEditorSlice'
 import { useParams } from 'react-router-dom'
 import { CampaignPermission } from 'models/campaignPermission'
-import { Roles } from 'api/swagger/coupon'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 
-import {
-  EditorModeOptions,
-  EditorModeOptionsProps,
-  EditorMode
-} from 'components/buttons/EditorModeOptions'
+import { EditorModeOptions, EditorMode } from 'components/buttons/EditorModeOptions'
 
 import { PermissionEditorForm } from './components/PermissionEditorForm'
 import { pageViewRoles } from 'services/roleHelpers'
