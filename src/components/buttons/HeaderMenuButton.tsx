@@ -5,15 +5,14 @@ import './HeaderMenuButton.scss'
 
 export interface HeaderMenuButtonProps extends ButtonProps {
   open: boolean
-  isMobile: boolean
 }
 
 export const HeaderMenuButton: FC<HeaderMenuButtonProps> = props => {
-  const { open, isMobile, ...buttonProps } = props
+  const { open, ...buttonProps } = props
 
   return (
-    <div className={`header-menu-button__container ${isMobile ? ' mobile' : ''}`}>
-      <div className="header-menu-button__top-border-background" hidden={isMobile}>
+    <div className="header-menu-button__container">
+      <div className="header-menu-button__top-border-background">
         <div className="header-menu-button__top-border" />
       </div>
       <div className="header-menu-button__background">
@@ -29,7 +28,7 @@ export const HeaderMenuButton: FC<HeaderMenuButtonProps> = props => {
           }
         />
       </div>
-      <div className="header-menu-button__bottom-border-background" hidden={isMobile}>
+      <div className="header-menu-button__bottom-border-background">
         <div className="header-menu-button__bottom-border" />
       </div>
     </div>

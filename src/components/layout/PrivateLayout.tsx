@@ -154,7 +154,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
       <Layout>
         <HeaderMenuButton
           open={menuOpened && !isMobile}
-          isMobile={isMobile}
           onClick={() => setMenuOpened(!menuOpened)}
         />
         <Layout.Content className="layout-content">
