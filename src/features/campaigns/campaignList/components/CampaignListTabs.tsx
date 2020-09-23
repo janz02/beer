@@ -82,7 +82,7 @@ export const CampaignListTabs: FC<CampaignListTabsProps> = ({
             <TabPanelTitle
               title={tab.title}
               icon={tab.icon}
-              badgeProps={{ count: 0, size: 'default' }} // TODO badge count
+              badgeProps={{ count: 0 }} // TODO badge count
             />
           }
         >

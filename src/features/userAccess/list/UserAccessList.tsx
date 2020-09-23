@@ -1,23 +1,21 @@
-import React, { FC, useEffect, useState, useMemo } from 'react'
+import React, { FC, useEffect, useMemo } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
-import { userAccessActions } from '../userAccessSlice'
+import { userAccessActions, UserAccessTab } from '../userAccessSlice'
 import { useUserAccessList } from './useUserAccessList'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
-
-type UserAccessTab = 'nkm' | 'partner'
+import { ExportButton } from 'components/buttons/ExportButton'
 
 export const UserAccessList: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const [selectedTab, setSelectedTab] = useState<UserAccessTab>('nkm')
   const {
     partnerUsersColumnsConfig,
     nkmUsersColumnsConfig,
@@ -28,7 +26,10 @@ export const UserAccessList: FC = () => {
     partnerUsers,
     partnerLoading,
     resetNkmFilters,
-    resetPartnerFilters
+    resetPartnerFilters,
+    selectedTab,
+    setSelectedTab,
+    handleExport
   } = useUserAccessList()
 
   useEffect(() => {
@@ -53,6 +54,7 @@ export const UserAccessList: FC = () => {
 
     return (
       <>
+        <ExportButton onClick={handleExport} />
         <ResetFiltersButton onClick={resetFilters} />
         {selectedTab === 'nkm' ? (
           <ColumnOrderDropdown {...nkmColumnOrder} />
@@ -61,7 +63,14 @@ export const UserAccessList: FC = () => {
         )}
       </>
     )
-  }, [selectedTab, nkmColumnOrder, partnerColumnOrder, resetNkmFilters, resetPartnerFilters])
+  }, [
+    selectedTab,
+    nkmColumnOrder,
+    partnerColumnOrder,
+    resetNkmFilters,
+    resetPartnerFilters,
+    handleExport
+  ])
 
   return (
     <ResponsiveCard

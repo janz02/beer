@@ -60,7 +60,7 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
             danger
             onClick={e => {
               e.stopPropagation()
-              handleClear()
+              handleClear(props.initialFileId)
             }}
             className="picture-upload-options__button picture-upload-options__button--delete"
           >
@@ -69,7 +69,7 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
         )}
       </div>
     )
-  }, [handleClear, props.disabled, thumbnail])
+  }, [handleClear, props.disabled, thumbnail, props.initialFileId])
 
   const upload = useMemo(() => {
     return (

@@ -24,6 +24,9 @@ import {
     ClaimedCouponCodeVm,
     ClaimedCouponCodeVmFromJSON,
     ClaimedCouponCodeVmToJSON,
+    CouponCodeVm,
+    CouponCodeVmFromJSON,
+    CouponCodeVmToJSON,
     CouponDiscountType,
     CouponDiscountTypeFromJSON,
     CouponDiscountTypeToJSON,
@@ -48,6 +51,9 @@ import {
     DetailedCouponVmPaginatedResponse,
     DetailedCouponVmPaginatedResponseFromJSON,
     DetailedCouponVmPaginatedResponseToJSON,
+    FileVm,
+    FileVmFromJSON,
+    FileVmToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
@@ -203,7 +209,7 @@ export class CouponsApi extends runtime.BaseAPI {
      * Claims a coupon to put it in the used up coupons for the user
      * Claims a coupon for the logged in user
      */
-    async claimCouponRaw(requestParameters: ClaimCouponRequest): Promise<runtime.ApiResponse<DetailedCouponVmPaginatedResponse>> {
+    async claimCouponRaw(requestParameters: ClaimCouponRequest): Promise<runtime.ApiResponse<CouponCodeVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling claimCoupon.');
         }
@@ -223,14 +229,14 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DetailedCouponVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponCodeVmFromJSON(jsonValue));
     }
 
     /**
      * Claims a coupon to put it in the used up coupons for the user
      * Claims a coupon for the logged in user
      */
-    async claimCoupon(requestParameters: ClaimCouponRequest): Promise<DetailedCouponVmPaginatedResponse> {
+    async claimCoupon(requestParameters: ClaimCouponRequest): Promise<CouponCodeVm> {
         const response = await this.claimCouponRaw(requestParameters);
         return await response.value();
     }
@@ -509,7 +515,7 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns a list of coupon codes that could be claimed by users
      * Returns all possible coupon codes
      */
-    async getCouponCodesRaw(requestParameters: GetCouponCodesRequest): Promise<runtime.ApiResponse<Blob>> {
+    async getCouponCodesRaw(requestParameters: GetCouponCodesRequest): Promise<runtime.ApiResponse<FileVm>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
             throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling getCouponCodes.');
         }
@@ -529,14 +535,14 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.BlobApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileVmFromJSON(jsonValue));
     }
 
     /**
      * Returns a list of coupon codes that could be claimed by users
      * Returns all possible coupon codes
      */
-    async getCouponCodes(requestParameters: GetCouponCodesRequest): Promise<Blob> {
+    async getCouponCodes(requestParameters: GetCouponCodesRequest): Promise<FileVm> {
         const response = await this.getCouponCodesRaw(requestParameters);
         return await response.value();
     }
@@ -545,7 +551,7 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns a list of eedeemed coupon codes that have been used up by users
      * Returns the redeemed claimed coupon codes for a coupon
      */
-    async getCouponRedeemedCodesRaw(requestParameters: GetCouponRedeemedCodesRequest): Promise<runtime.ApiResponse<Blob>> {
+    async getCouponRedeemedCodesRaw(requestParameters: GetCouponRedeemedCodesRequest): Promise<runtime.ApiResponse<FileVm>> {
         if (requestParameters.couponId === null || requestParameters.couponId === undefined) {
             throw new runtime.RequiredError('couponId','Required parameter requestParameters.couponId was null or undefined when calling getCouponRedeemedCodes.');
         }
@@ -565,14 +571,14 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.BlobApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileVmFromJSON(jsonValue));
     }
 
     /**
      * Returns a list of eedeemed coupon codes that have been used up by users
      * Returns the redeemed claimed coupon codes for a coupon
      */
-    async getCouponRedeemedCodes(requestParameters: GetCouponRedeemedCodesRequest): Promise<Blob> {
+    async getCouponRedeemedCodes(requestParameters: GetCouponRedeemedCodesRequest): Promise<FileVm> {
         const response = await this.getCouponRedeemedCodesRaw(requestParameters);
         return await response.value();
     }
