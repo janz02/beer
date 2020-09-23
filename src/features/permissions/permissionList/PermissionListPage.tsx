@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { getPermissions, resetPermissionFilters } from './permissionListSlice'
 import { ColumnType } from 'antd/lib/table'
-import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { history } from 'router/router'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
@@ -63,7 +62,7 @@ export const PermissionListPage: React.FC = () => {
     [actionColumnConfig, columnConfig, t]
   )
 
-  const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.PARTNER)
+  const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.PERMISSION)
 
   const headerOptions = (
     <>

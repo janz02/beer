@@ -1,3 +1,5 @@
+import './PermissionEditorForm.scss'
+
 import React, { useEffect, useMemo } from 'react'
 import { Form, Input, Button, Collapse, List } from 'antd'
 import { useTranslation } from 'react-i18next'
@@ -42,7 +44,7 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
   const rule = useCommonFormRules()
   const isMobile = useIsMobile()
 
-  const view = useMemo(() => mode === EditorMode.VIEW, [mode])
+  const isInViewMode = useMemo(() => mode === EditorMode.VIEW, [mode])
 
   const {
     form,
@@ -68,13 +70,13 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
   }
 
   useEffect(() => {
-    if (mode === EditorMode.VIEW) {
+    if (isInViewMode) {
       setFieldsValue({
         ...permission
       })
       resetFormFlags()
     }
-  }, [mode, permission, resetFormFlags, setFieldsValue])
+  }, [isInViewMode, permission, resetFormFlags, setFieldsValue])
 
   const backButtonProps: BackButtonProps | undefined = handleBack
     ? { primary: !modified, onClick: handleBack, label: t('common.go-back-to-list') }
@@ -88,13 +90,12 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
     >
       <NavigationAlert when={modified && mode === EditorMode.EDIT} />
       <Form
+        className="permission-editor-form"
         name="permission-editor-form"
         onFinish={handleSubmit}
         form={form}
         layout={formLayout}
-        onFieldsChange={() => {
-          checkFieldsChange()
-        }}
+        onFieldsChange={checkFieldsChange}
       >
         <Collapse defaultActiveKey={['1']}>
           <Collapse.Panel header={t('permission.categories.basics')} key="1">
@@ -107,7 +108,7 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
               ]}
               {...formItemLayout}
             >
-              <Input disabled={view} />
+              <Input disabled={isInViewMode} />
             </Form.Item>
           </Collapse.Panel>
         </Collapse>
@@ -140,7 +141,7 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
         </Collapse>
 
         <Button
-          hidden={mode === EditorMode.VIEW}
+          hidden={isInViewMode}
           type="primary"
           htmlType="submit"
           disabled={!submitable}

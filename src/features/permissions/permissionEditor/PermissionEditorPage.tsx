@@ -24,8 +24,7 @@ import {
 } from 'components/buttons/EditorModeOptions'
 
 import { PermissionEditorForm } from './components/PermissionEditorForm'
-
-export const permissionsEditorRoles = [Roles.Administrator, Roles.CampaignManager]
+import { pageViewRoles } from 'services/roleHelpers'
 
 export const PermissionEditorPage: React.FC = () => {
   const { t } = useTranslation()
@@ -65,22 +64,20 @@ export const PermissionEditorPage: React.FC = () => {
     dispatch(savePermission(values))
   }
 
-  const optionProps: EditorModeOptionsProps = {
-    mode,
-    editPermission: permissionsEditorRoles,
-    handleDelete: () => {
-      setPermissionToDelete({
-        data: permission,
-        popupVisible: true
-      })
-    },
-    handleEdit: () => setMode(EditorMode.EDIT),
-    handleEscapeEdit: () => setMode(EditorMode.VIEW)
-  }
-
   const options = (
     <>
-      <EditorModeOptions {...optionProps} />
+      <EditorModeOptions
+        mode={mode}
+        editPermission={pageViewRoles.permissionEditor}
+        handleDelete={() => {
+          setPermissionToDelete({
+            data: permission,
+            popupVisible: true
+          })
+        }}
+        handleEdit={() => setMode(EditorMode.EDIT)}
+        handleEscapeEdit={() => setMode(EditorMode.VIEW)}
+      />
     </>
   )
 
