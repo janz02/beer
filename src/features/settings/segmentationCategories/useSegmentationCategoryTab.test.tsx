@@ -56,7 +56,7 @@ const SegmentationCategoryHeaderContent: React.FC = () => {
   return <>{useSegmentationCategoryTab().headerOptions}</>
 }
 
-describe('asdasd', () => {
+describe('segmentation category tests', () => {
   it('categories appear in the table', () => {
     // Arrange
     setupPermissions([])
