@@ -24,6 +24,22 @@
       "terms-and-services": "Terms & Services"
     }
   },
+  "bp-history": {
+    "field": {
+      "bpCode": "BP ID",
+      "campaignName": "Campaign name",
+      "campaignResult": "Campaign result",
+      "campaignTechnicalName": "Campaign technical name",
+      "channelName": "Channel",
+      "contact": "Contact",
+      "createdDate": "Event date",
+      "event": "Event",
+      "eventResult": "Event result"
+    },
+    "list": {
+      "title": "BP History"
+    }
+  },
   "campaign-category": {
     "add": "Add new campaign category",
     "editor-create": "Create",
@@ -268,6 +284,10 @@
     "view-count": "View count"
   },
   "enum": {
+    "channel-type": {
+      "Email": "E-mail",
+      "Phone": "Phone"
+    },
     "notification-type": {
       "CampaignMovedToWaitingState": "Campaign moved to waiting status",
       "CouponClosed": "Coupon closed",
@@ -597,6 +617,7 @@
     "language": "Language"
   },
   "menu": {
+    "bp-history": "BP History",
     "campaigns": "Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",

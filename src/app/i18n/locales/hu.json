@@ -24,6 +24,22 @@
       "terms-and-services": "felhasználási feltételeket."
     }
   },
+  "bp-history": {
+    "field": {
+      "bpCode": "ÜP azonosító",
+      "campaignName": "Kampány neve",
+      "campaignResult": "Kampány eredménye",
+      "campaignTechnicalName": "Kampány technikai neve",
+      "channelName": "Csatorna",
+      "contact": "Elérhetőség",
+      "createdDate": "Esemény dátuma",
+      "event": "Esemény",
+      "eventResult": "Esemény eredménye"
+    },
+    "list": {
+      "title": "ÜP History"
+    }
+  },
   "campaign-category": {
     "add": "Új kampány kategória hozzáadása",
     "editor-create": "Létrehozás",
@@ -268,6 +284,10 @@
     "view-count": "Megjelenések száma"
   },
   "enum": {
+    "channel-type": {
+      "Email": "E-mail",
+      "Phone": "Telefon"
+    },
     "notification-type": {
       "CampaignMovedToWaitingState": "Kampány várakozó állapotba került",
       "CouponClosed": "A kampályhoz tartozó kuponokat kikapcsolták",
@@ -597,6 +617,7 @@
     "language": "Nyelv"
   },
   "menu": {
+    "bp-history": "ÜP History",
     "campaigns": "Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
