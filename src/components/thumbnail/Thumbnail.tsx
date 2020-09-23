@@ -27,7 +27,7 @@ export const Thumbnail: FC<ThumbnailProps> = props => {
     }, 0)
 
     try {
-      const file = await api.coupon.files.downloadFile({ id: fileId })
+      const file = await api.files.files.downloadFile({ id: fileId })
       getBase64(file, imageUrl => {
         setThumbnail({ url: imageUrl, loading: false })
       })

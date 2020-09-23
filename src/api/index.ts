@@ -15,8 +15,7 @@ import {
   NotificationsApi,
   NotificationHubApi,
   UserCouponsApi,
-  WalletApi,
-  FilesApi
+  WalletApi
 } from '../api/swagger/coupon'
 import {
   CampaignsApi,
@@ -87,11 +86,10 @@ export const api = {
     notification: new NotificationsApi(couponConfig),
     notificationHub: new NotificationHubApi(couponConfig),
     userCoupons: new UserCouponsApi(couponConfig),
-    wallet: new WalletApi(couponConfig),
-    files: new FilesApi(couponConfig) // note: this will be moved to Files MS in the future
+    wallet: new WalletApi(couponConfig)
   },
   files: {
-    files: new FilesFilesMsApi(filesConfig), // note: keep this, if FilesApi removed from Coupon MS
+    files: new FilesApi(filesConfig),
     information: new InformationFilesMsApi(filesConfig)
   },
   campaignEditor: {
