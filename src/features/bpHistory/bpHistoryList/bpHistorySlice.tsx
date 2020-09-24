@@ -9,6 +9,7 @@ import {
 } from 'hooks/useTableUtils'
 import { BpHistoryItem } from 'models/bpHistoryItem'
 import { BpHistoryTemplate } from 'models/bpHistoryTemplate'
+import moment from 'moment'
 
 interface BpHistoryState {
   bpHistoryItems: BpHistoryItem[]
@@ -98,7 +99,10 @@ export const getBpHistory = (params: ListRequestParams = {}): AppThunk => async 
 
     dispatch(
       getBpHistorySuccess({
-        bpHistoryItems: items as BpHistoryItem[],
+        bpHistoryItems: (items as BpHistoryItem[]).map((el: BpHistoryItem) => ({
+          ...el,
+          createdDate: moment(el.createdDate)
+        })),
         listParams: storableListRequestParams(revisedParams, {
           ...pagination,
           size: pagination.totalCount

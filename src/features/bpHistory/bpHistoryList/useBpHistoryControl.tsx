@@ -16,6 +16,7 @@ import {
 } from './bpHistorySlice'
 import { Channels } from 'models/channels'
 import { notification } from 'antd'
+import { MomentDisplay } from 'components/MomentDisplay'
 
 interface BpHistoryControl<T> {
   loading: boolean
@@ -89,7 +90,10 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
       columnConfig({
         title: t('bp-history.field.createdDate'),
         key: 'createdDate',
-        sort: true
+        sort: true,
+        render(value) {
+          return <MomentDisplay date={value} />
+        }
       }),
       columnConfig({
         title: t('bp-history.field.bpCode'),

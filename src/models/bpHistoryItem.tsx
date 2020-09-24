@@ -1,10 +1,11 @@
 import { Channels } from './channels'
+import moment from 'moment'
 
 export interface BpHistoryItem {
   id?: number
   campaignName?: string | null
   campaignTechnicalName?: string | null
-  createdDate?: Date
+  createdDate?: moment.Moment
   bpId?: string | null
   contact?: string | null
   channelId?: Channels
