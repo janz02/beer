@@ -15,12 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateCampaignTreatmentViewModel,
-    CreateCampaignTreatmentViewModelFromJSON,
-    CreateCampaignTreatmentViewModelToJSON,
-    CreateCampaignViewModel,
-    CreateCampaignViewModelFromJSON,
-    CreateCampaignViewModelToJSON,
+    CreateCampaignTreatmentVm,
+    CreateCampaignTreatmentVmFromJSON,
+    CreateCampaignTreatmentVmToJSON,
+    CreateCampaignVm,
+    CreateCampaignVmFromJSON,
+    CreateCampaignVmToJSON,
 } from '../models';
 
 /**
@@ -32,7 +32,7 @@ export class ViewModelsApi extends runtime.BaseAPI {
      * Used in the secound screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignTreatmentRaw(): Promise<runtime.ApiResponse<CreateCampaignTreatmentViewModel>> {
+    async createCampaignTreatmentRaw(): Promise<runtime.ApiResponse<CreateCampaignTreatmentVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -44,14 +44,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateCampaignTreatmentViewModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateCampaignTreatmentVmFromJSON(jsonValue));
     }
 
     /**
      * Used in the secound screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignTreatment(): Promise<CreateCampaignTreatmentViewModel> {
+    async createCampaignTreatment(): Promise<CreateCampaignTreatmentVm> {
         const response = await this.createCampaignTreatmentRaw();
         return await response.value();
     }
@@ -60,7 +60,7 @@ export class ViewModelsApi extends runtime.BaseAPI {
      * Used in the first screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignViewModelRaw(): Promise<runtime.ApiResponse<CreateCampaignViewModel>> {
+    async createCampaignViewModelRaw(): Promise<runtime.ApiResponse<CreateCampaignVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -72,14 +72,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateCampaignViewModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateCampaignVmFromJSON(jsonValue));
     }
 
     /**
      * Used in the first screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignViewModel(): Promise<CreateCampaignViewModel> {
+    async createCampaignViewModel(): Promise<CreateCampaignVm> {
         const response = await this.createCampaignViewModelRaw();
         return await response.value();
     }
