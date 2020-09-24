@@ -120,6 +120,7 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.settings}
       component={SettingsPage}
     />
+
     <PrivateRoute
       exact
       path="/profile"

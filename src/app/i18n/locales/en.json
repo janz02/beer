@@ -51,6 +51,15 @@
       "name": "Category name"
     }
   },
+  "campaign-product": {
+    "add": "Add new Product",
+    "editor-create": "New product",
+    "editor-edit": "Edit product",
+    "field": {
+      "createdDate": "Created date",
+      "name": "Product name"
+    }
+  },
   "segmentation-category": {
     "add": "Add new segmentation category",
     "editor-create": "Create",
@@ -570,6 +579,10 @@
         "role-invalid": "Partner contact role is invalid. Please provide a valid partner contact role!",
         "role-required": "Partner contact role is required. Please provide a valid partner contact role!"
       },
+      "product": {
+        "name-max-length-500": "The product name can be maximum 500 characters long. Please add a valid value.",
+        "name-required": "The product name field is required. Please add a value."
+      },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner code for registration cannot be longer than 10 characters. Please use a shorter partner code!",
         "partner-code-required": "Partner code is required for registration. Please use a valid partner code!"
@@ -754,7 +767,8 @@
   "settings": {
     "campaign-categories": "Campaign categories",
     "segmentation-categories": "Segmentation categories",
-    "test-group-categories": "Testgroup categories"
+    "test-group-categories": "Testgroup categories",
+    "campaign-products": "Products"
   },
   "site": {
     "editor-title": "Site",

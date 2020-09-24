@@ -1,40 +1,36 @@
 import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
+import { useDispatch, useSelector } from '../../../../hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
+import { productListActions } from './productListSlice'
+import { useTableUtils } from 'hooks/useTableUtils'
+import { Product } from 'models/product'
 import { ColumnType } from 'antd/lib/table'
-import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/swagger/coupon'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
-import { TestGroupCategory } from 'models/testGroupCategory'
-import { testGroupCategoryListActions } from './testGroupCategoryListSlice'
+import { Roles } from 'api/swagger/coupon'
+import { hasPermission } from 'services/jwt-reader'
 
-interface UseCategoryListProps {
+interface UseProductListProps {
   onOpenEditor: (id?: number) => void
 }
 
-export interface UseTestGroupCategoryListUtils {
+export interface UseProductListUtils {
   tableProps: ResponsiveTableProps
   popupProps: GenericPopupProps
   resetFilters: () => void
 }
 
-export const useTestGroupCategoryList = (
-  props: UseCategoryListProps
-): UseTestGroupCategoryListUtils => {
+export const useProductList = (props: UseProductListProps): UseProductListUtils => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { getCategories, deleteCategory, resetCategoryFilters } = testGroupCategoryListActions
-  const { listParams, categories, listState } = useSelector(
-    (state: RootState) => state.testGroupCategoryList
-  )
+  const { getProducts, deleteProduct, resetProductFilters } = productListActions
+  const { listParams, products, listState } = useSelector((state: RootState) => state.productList)
 
-  const [categoryToDelete, setCategoryToDelete] = useState<PopupState<TestGroupCategory>>()
+  const [productToDelete, setProductToDelete] = useState<PopupState<Product>>()
 
   const loading = listState === FeatureState.Loading
 
@@ -44,35 +40,34 @@ export const useTestGroupCategoryList = (
     columnConfig,
     actionColumnConfig,
     addKeyProp
-  } = useTableUtils<TestGroupCategory>({
+  } = useTableUtils<Product>({
     listParamsState: listParams,
     filterKeys: ['name'],
     sortWithoutDefaultOption: true,
-    getDataAction: getCategories
+    getDataAction: getProducts
   })
 
-  const columnsConfig: ColumnType<TestGroupCategory>[] = useMemo(
+  const columnsConfig: ColumnType<Product>[] = useMemo(
     () => [
       columnConfig({
-        title: t('test-group-category.field.name'),
+        title: t('campaign-product.field.name'),
         key: 'name',
-        sort: true,
-        filterMode: FilterMode.SEARCH
+        sort: true
       }),
       columnConfig({
-        title: t('test-group-category.field.created-date'),
+        title: t('campaign-product.field.createdDate'),
         key: 'createdDate',
         width: '13rem',
         renderMode: 'date time'
       }),
       hasPermission([Roles.Administrator])
         ? actionColumnConfig({
-            render(record: TestGroupCategory) {
+            render(record: Product) {
               return (
                 <CrudButtons
                   onEdit={() => onOpenEditor(record.id)}
                   onDelete={() => {
-                    setCategoryToDelete({
+                    setProductToDelete({
                       data: record,
                       popupVisible: true
                     })
@@ -89,23 +84,23 @@ export const useTestGroupCategoryList = (
   const tableProps: ResponsiveTableProps = {
     loading,
     columns: columnsConfig,
-    dataSource: addKeyProp(categories),
+    dataSource: addKeyProp(products),
     pagination: paginationConfig,
     onChange: handleTableChange
   }
 
   const popupProps: GenericPopupProps = {
-    id: categoryToDelete?.data?.id,
+    id: productToDelete?.data?.id,
     type: 'delete',
-    visible: !!categoryToDelete?.popupVisible,
-    onOkAction: deleteCategory(categoryToDelete?.data?.id!),
-    onCancel: () => setCategoryToDelete({ ...categoryToDelete, popupVisible: false }),
-    afterClose: () => setCategoryToDelete(null)
+    visible: !!productToDelete?.popupVisible,
+    onOkAction: deleteProduct(productToDelete?.data?.id!),
+    onCancel: () => setProductToDelete({ ...productToDelete, popupVisible: false }),
+    afterClose: () => setProductToDelete(null)
   }
 
   return {
     tableProps,
     popupProps,
-    resetFilters: () => dispatch(resetCategoryFilters())
+    resetFilters: () => dispatch(resetProductFilters())
   }
 }

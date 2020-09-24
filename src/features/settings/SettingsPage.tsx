@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
+import { useProductTab } from './products/useProductTab'
 import { useCampaignCategoryTab } from './campaignCategories/useCampaignCategoryTab'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
@@ -14,7 +15,8 @@ export interface SettingsTab {
   roles: Roles[]
   headerOptions?: JSX.Element
   tabContent: JSX.Element
-  icon: React.ReactNode
+  icon: JSX.Element
+  notificationCount: number
   resetFilters: () => void
 }
 
@@ -22,7 +24,8 @@ export const SettingsPage: React.FC = () => {
   const allTabs = [
     useCampaignCategoryTab(),
     useSegmentationCategoryTab(),
-    useTestGroupCategoryTab()
+    useTestGroupCategoryTab(),
+    useProductTab()
   ]
   const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
@@ -51,7 +54,7 @@ export const SettingsPage: React.FC = () => {
               <TabPanelTitle
                 title={tab.title}
                 icon={tab.icon}
-                badgeProps={{ count: 0, size: 'default' }}
+                badgeProps={{ count: tab.notificationCount }}
               />
             }
           >

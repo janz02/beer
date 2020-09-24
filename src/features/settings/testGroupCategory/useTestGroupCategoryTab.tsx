@@ -43,6 +43,7 @@ export const useTestGroupCategoryTab = (): SettingsTab => {
     headerOptions,
     tabContent,
     icon: <GroupOutlined />,
+    notificationCount: 0,
     resetFilters: categoryListUtils.resetFilters
   }
 }

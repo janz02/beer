@@ -43,6 +43,7 @@ export const useSegmentationCategoryTab = (): SettingsTab => {
     headerOptions,
     tabContent,
     icon: <PartitionOutlined />,
+    notificationCount: 0,
     resetFilters: categoryListUtils.resetFilters
   }
 }
