@@ -74,10 +74,22 @@ export interface TreatmentDto {
     endTime?: TimeSpan | null;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof TreatmentDto
+     */
+    emailTimeRules?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof TreatmentDto
+     */
+    emailResendRules?: Array<number> | null;
+    /**
+     * 
      * @type {number}
      * @memberof TreatmentDto
      */
-    emailMaxResends?: number;
+    emailMaxResends?: number | null;
     /**
      * 
      * @type {number}
@@ -86,10 +98,22 @@ export interface TreatmentDto {
     emailResendFrequency?: number;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof TreatmentDto
+     */
+    phoneTimeRules?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof TreatmentDto
+     */
+    phoneRecallRules?: Array<number> | null;
+    /**
+     * 
      * @type {number}
      * @memberof TreatmentDto
      */
-    phoneMaxRecalls?: number;
+    phoneMaxRecalls?: number | null;
     /**
      * 
      * @type {number}
@@ -121,8 +145,12 @@ export function TreatmentDtoFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'endDate': !exists(json, 'endDate') ? undefined : (json['endDate'] === null ? null : new Date(json['endDate'])),
         'startTime': !exists(json, 'startTime') ? undefined : TimeSpanFromJSON(json['startTime']),
         'endTime': !exists(json, 'endTime') ? undefined : TimeSpanFromJSON(json['endTime']),
+        'emailTimeRules': !exists(json, 'emailTimeRules') ? undefined : json['emailTimeRules'],
+        'emailResendRules': !exists(json, 'emailResendRules') ? undefined : json['emailResendRules'],
         'emailMaxResends': !exists(json, 'emailMaxResends') ? undefined : json['emailMaxResends'],
         'emailResendFrequency': !exists(json, 'emailResendFrequency') ? undefined : json['emailResendFrequency'],
+        'phoneTimeRules': !exists(json, 'phoneTimeRules') ? undefined : json['phoneTimeRules'],
+        'phoneRecallRules': !exists(json, 'phoneRecallRules') ? undefined : json['phoneRecallRules'],
         'phoneMaxRecalls': !exists(json, 'phoneMaxRecalls') ? undefined : json['phoneMaxRecalls'],
         'phoneRecallFrequency': !exists(json, 'phoneRecallFrequency') ? undefined : json['phoneRecallFrequency'],
         'discounts': !exists(json, 'discounts') ? undefined : (json['discounts'] === null ? null : (json['discounts'] as Array<any>).map(DiscountDtoFromJSON)),
@@ -145,8 +173,12 @@ export function TreatmentDtoToJSON(value?: TreatmentDto | null): any {
         'endDate': value.endDate === undefined ? undefined : (value.endDate === null ? null : value.endDate.toISOString()),
         'startTime': TimeSpanToJSON(value.startTime),
         'endTime': TimeSpanToJSON(value.endTime),
+        'emailTimeRules': value.emailTimeRules,
+        'emailResendRules': value.emailResendRules,
         'emailMaxResends': value.emailMaxResends,
         'emailResendFrequency': value.emailResendFrequency,
+        'phoneTimeRules': value.phoneTimeRules,
+        'phoneRecallRules': value.phoneRecallRules,
         'phoneMaxRecalls': value.phoneMaxRecalls,
         'phoneRecallFrequency': value.phoneRecallFrequency,
         'discounts': value.discounts === undefined ? undefined : (value.discounts === null ? null : (value.discounts as Array<any>).map(DiscountDtoToJSON)),

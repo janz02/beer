@@ -6369,6 +6369,30 @@
             "type": "integer",
             "format": "int32"
           },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "marketTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "businessTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
           "startDate": {
             "type": "string",
             "format": "date-time"
@@ -6392,10 +6416,6 @@
           "comment": {
             "type": "string",
             "nullable": true
-          },
-          "statusId": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -6422,10 +6442,6 @@
           "templateTypeId": {
             "type": "integer",
             "format": "int32"
-          },
-          "unique_Identifier": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -6474,10 +6490,6 @@
             "type": "string",
             "nullable": true
           },
-          "segmentDisplayName": {
-            "type": "string",
-            "nullable": true
-          },
           "type": {
             "allOf": [
               {
@@ -6488,10 +6500,6 @@
           "segmentationCategoryId": {
             "type": "integer",
             "format": "int32",
-            "nullable": true
-          },
-          "segmentationCategoryName": {
-            "type": "string",
             "nullable": true
           },
           "referenceSegmentationId": {
@@ -6606,17 +6614,51 @@
             ],
             "nullable": true
           },
+          "emailTimeRules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "emailResendRules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
           "emailMaxResends": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "emailResendFrequency": {
             "type": "integer",
             "format": "int32"
           },
+          "phoneTimeRules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "phoneRecallRules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
           "phoneMaxRecalls": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "phoneRecallFrequency": {
             "type": "integer",
@@ -6647,6 +6689,30 @@
             "type": "integer",
             "format": "int32"
           },
+          "businessTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "marketTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
           "productId": {
             "type": "integer",
             "format": "int32"
@@ -6673,11 +6739,6 @@
           },
           "comment": {
             "type": "string",
-            "nullable": true
-          },
-          "createdBy": {
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           },
           "statusId": {
