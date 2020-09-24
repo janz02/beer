@@ -10,6 +10,8 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
+import { Roles } from 'api/swagger/coupon'
+import { hasPermission } from 'services/jwt-reader'
 
 interface UseProductListProps {
   onOpenEditor: (id?: number) => void
@@ -58,21 +60,23 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
         width: '13rem',
         renderMode: 'date time'
       }),
-      actionColumnConfig({
-        render(record: Product) {
-          return (
-            <CrudButtons
-              onEdit={() => onOpenEditor(record.id)}
-              onDelete={() => {
-                setProductToDelete({
-                  data: record,
-                  popupVisible: true
-                })
-              }}
-            />
-          )
-        }
-      })
+      hasPermission([Roles.Administrator])
+        ? actionColumnConfig({
+            render(record: Product) {
+              return (
+                <CrudButtons
+                  onEdit={() => onOpenEditor(record.id)}
+                  onDelete={() => {
+                    setProductToDelete({
+                      data: record,
+                      popupVisible: true
+                    })
+                  }}
+                />
+              )
+            }
+          })
+        : {}
     ],
     [columnConfig, t, actionColumnConfig, onOpenEditor]
   )

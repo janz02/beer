@@ -8,6 +8,8 @@ import { SettingsTab } from '../SettingsPage'
 import { pageViewRoles } from 'services/roleHelpers'
 import { useProductList } from './productList/useProductList'
 import { GoldOutlined } from '@ant-design/icons'
+import { hasPermission } from 'services/jwt-reader'
+import { Roles } from 'api/swagger/coupon'
 
 export const useProductTab = (): SettingsTab => {
   const { t } = useTranslation()
@@ -21,9 +23,12 @@ export const useProductTab = (): SettingsTab => {
 
   const productListUtils = useProductList({ onOpenEditor: modalUtils.routeToEditor })
 
-  const headerOptions = (
-    <AddButton onClick={() => modalUtils.routeToEditor()}>{t('campaign-product.add')}</AddButton>
-  )
+  let headerOptions: JSX.Element | undefined
+  if (hasPermission([Roles.Administrator])) {
+    headerOptions = (
+      <AddButton onClick={() => modalUtils.routeToEditor()}>{t('campaign-product.add')}</AddButton>
+    )
+  }
 
   const tabContent = <ProductTab modalUtils={modalUtils} productListUtils={productListUtils} />
 
