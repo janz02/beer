@@ -8,22 +8,30 @@ import React, { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BpHistoryItem } from 'models/bpHistoryItem'
 import { ColumnType, TablePaginationConfig } from 'antd/lib/table'
-import { getBpHistory, resetBpHistoryFilters } from './bpHistoryListSlice'
+import {
+  clearTemplate,
+  getBpHistory,
+  getBpHistoryTemplateById,
+  resetBpHistoryFilters
+} from './bpHistorySlice'
 import { Channels } from 'models/channels'
+import { notification } from 'antd'
 
 interface BpHistoryControl<T> {
   loading: boolean
   source: Array<T>
   paginationConfig: false | TablePaginationConfig
   columnOrder: UseColumnOrderFeatures<T>
+  templateBody: string | null
   handleResetFilters: () => void
+  handleTemplateCloseClick: () => void
 }
 
 export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { bpHistoryItems, loading, listParams } = useSelector(
-    (state: RootState) => state.bpHistoryList
+  const { bpHistoryItems, loading, listParams, template } = useSelector(
+    (state: RootState) => state.bpHistory
   )
 
   useEffect(() => {
@@ -42,9 +50,21 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
     dispatch(resetBpHistoryFilters())
   }, [dispatch])
 
-  const handleTemplateClick = useCallback(templateId => {
-    return <>{`template Id: ${templateId}`}</>
-  }, [])
+  const handleTemplateViewClick = useCallback(
+    templateId => {
+      if (!templateId) {
+        notification.error({ message: t('error.common.no-template') })
+        return
+      }
+
+      dispatch(getBpHistoryTemplateById(templateId))
+    },
+    [dispatch, t]
+  )
+
+  const handleTemplateCloseClick = useCallback(() => {
+    dispatch(clearTemplate())
+  }, [dispatch])
 
   const columnsConfig: ColumnType<BpHistoryItem>[] = useMemo(
     () => [
@@ -100,11 +120,11 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
       actionColumnConfig({
         width: '50px',
         render(record: BpHistoryItem) {
-          return <CrudButtons onView={() => handleTemplateClick(record.templateId)} />
+          return <CrudButtons onView={() => handleTemplateViewClick(record.templateId)} />
         }
       })
     ],
-    [actionColumnConfig, columnConfig, t, handleTemplateClick]
+    [actionColumnConfig, columnConfig, t, handleTemplateViewClick]
   )
 
   const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.BP_HISTORY)
@@ -113,7 +133,9 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
     loading,
     columnOrder,
     paginationConfig,
+    templateBody: template?.body || null,
     source: addKeyProp(bpHistoryItems),
-    handleResetFilters
+    handleResetFilters,
+    handleTemplateCloseClick
   }
 }

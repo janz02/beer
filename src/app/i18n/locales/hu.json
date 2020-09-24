@@ -89,9 +89,9 @@
     "delete": "Törlés",
     "discard": "Elvetés",
     "edit": "Szerkesztés",
-    "export": "Exportálás",
     "escape": "Bezárás",
     "escape-editor": "Szerkesztés elhagyása",
+    "export": "Exportálás",
     "field": {
       "help": {
         "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
@@ -332,6 +332,7 @@
       "field-required": "A mező megadása kötelező.",
       "internal": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
+      "no-template": "Nem található sablon azonosító.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
       "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később."

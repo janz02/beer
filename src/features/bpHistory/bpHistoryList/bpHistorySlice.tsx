@@ -8,35 +8,38 @@ import {
   storableListRequestParams
 } from 'hooks/useTableUtils'
 import { BpHistoryItem } from 'models/bpHistoryItem'
+import { BpHistoryTemplate } from 'models/bpHistoryTemplate'
 
-interface BpHistoryListState {
+interface BpHistoryState {
   bpHistoryItems: BpHistoryItem[]
   error: boolean
   loading: boolean
   listParams: ListRequestParams
+  template: BpHistoryTemplate | null
 }
 
-const initialState: BpHistoryListState = {
+const initialState: BpHistoryState = {
   error: false,
   loading: false,
   bpHistoryItems: [],
   listParams: {
     pageSize: 10
-  }
+  },
+  template: null
 }
 
-const bpHistoryListSlice = createSlice({
+const bpHistorySlice = createSlice({
   name: 'bpHistoryList',
   initialState,
   reducers: {
-    resetBpHistoryList: () => initialState,
+    resetBpHistory: () => initialState,
     resetListParams(state) {
       state.listParams = initialState.listParams
     },
-    getBpHistoryListRequest(state) {
+    getBpHistoryRequest(state) {
       state.loading = true
     },
-    getBpHistoryListSuccess(
+    getBpHistorySuccess(
       state,
       action: PayloadAction<{ bpHistoryItems: BpHistoryItem[]; listParams: ListRequestParams }>
     ) {
@@ -45,39 +48,54 @@ const bpHistoryListSlice = createSlice({
       state.loading = false
       state.error = false
     },
-    getBpHistoryListFail(state) {
+    getBpHistoryFail(state) {
       state.loading = false
       state.error = true
+    },
+    getBpHistoryTemplateSuccess(state, action: PayloadAction<{ template: BpHistoryTemplate }>) {
+      state.template = action.payload.template
+      state.loading = false
+      state.error = false
+    },
+    getBpHistoryTemplateFail(state) {
+      state.loading = false
+      state.error = true
+    },
+    clearTemplate(state) {
+      state.template = initialState.template
     }
   }
 })
 
 const {
   resetListParams,
-  getBpHistoryListRequest,
-  getBpHistoryListSuccess,
-  getBpHistoryListFail
-} = bpHistoryListSlice.actions
-export const { resetBpHistoryList } = bpHistoryListSlice.actions
+  getBpHistoryRequest,
+  getBpHistorySuccess,
+  getBpHistoryFail,
+  getBpHistoryTemplateSuccess,
+  getBpHistoryTemplateFail
+} = bpHistorySlice.actions
 
-export const bpHistoryListReducer = bpHistoryListSlice.reducer
+export const { clearTemplate } = bpHistorySlice.actions
+
+export const bpHistoryReducer = bpHistorySlice.reducer
 
 export const getBpHistory = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
 ) => {
   try {
-    dispatch(getBpHistoryListRequest())
+    dispatch(getBpHistoryRequest())
 
     const revisedParams: ListRequestParams = reviseListRequestParams(
-      getState().bpHistoryList.listParams,
+      getState().bpHistory.listParams,
       params
     )
 
-    const { items, ...pagination } = await api.campaignEditor.campaignResults.getEvents({})
+    const { items, ...pagination } = await api.campaignEditor.campaignResults.getEvents({}) // todo pagination
 
     dispatch(
-      getBpHistoryListSuccess({
+      getBpHistorySuccess({
         bpHistoryItems: items as BpHistoryItem[],
         listParams: storableListRequestParams(revisedParams, {
           ...pagination,
@@ -86,11 +104,24 @@ export const getBpHistory = (params: ListRequestParams = {}): AppThunk => async 
       })
     )
   } catch (err) {
-    dispatch(getBpHistoryListFail())
+    dispatch(getBpHistoryFail())
   }
 }
 
 export const resetBpHistoryFilters = (): AppThunk => async dispatch => {
   dispatch(resetListParams())
+  dispatch(clearTemplate())
   dispatch(getBpHistory())
+}
+
+export const getBpHistoryTemplateById = (id: number): AppThunk => async dispatch => {
+  try {
+    dispatch(getBpHistoryRequest())
+
+    const template: BpHistoryTemplate = await api.campaignEditor.templates.getTemplateById({ id })
+
+    dispatch(getBpHistoryTemplateSuccess({ template }))
+  } catch (err) {
+    dispatch(getBpHistoryTemplateFail())
+  }
 }

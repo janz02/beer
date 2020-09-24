@@ -4,7 +4,8 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useBpHistoryControl } from './useBpHistryControl'
+import { BpHistoryViewer } from './BpHistoryViewer'
+import { useBpHistoryControl } from './useBpHistoryControl'
 
 export const BpHistoryListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -29,6 +30,10 @@ export const BpHistoryListPage: React.FC = () => {
           dataSource={control.source}
           pagination={control.paginationConfig}
           scroll={{ x: true }}
+        />
+        <BpHistoryViewer
+          content={control.templateBody}
+          onCancel={control.handleTemplateCloseClick}
         />
       </ResponsiveCard>
     </>
