@@ -60,15 +60,6 @@
       "name": "Termék megnevezése"
     }
   },
-  "segmentation-category": {
-    "add": "Új szegmentációs kategória hozzáadása",
-    "editor-create": "Létrehozás",
-    "editor-edit": "Szerkesztés",
-    "field": {
-      "name": "Kategória neve",
-      "created-date": "Létrehozás dátuma"
-    }
-  },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
     "editor-edit": "Pénztár szerkesztés",
@@ -579,13 +570,13 @@
         "role-invalid": "Nem megfelelő kapcsolattartó szerepkör. Kérem adjon meg egy helyzetnek megfelelő szerepkört.",
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
       },
-      "product": {
-        "name-max-length-500": "Termék név maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet",
-        "name-required": "Termék név megadása kötelelező, kérem adjon meg egy megfelelő nevet."
-      },
       "permission": {
         "name-max-length-500": "Jogosultsági kör megnevezése maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "name-required": "Jogosultsági kör megnevezésének megadása kötelelező, kérem adjon meg egy megfelelő nevet."
+      },
+      "product": {
+        "name-max-length-500": "Termék név maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet",
+        "name-required": "Termék név megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot.",
@@ -793,11 +784,20 @@
     "save": "Módosítás mentése",
     "save-profile-success": "Profil mentése sikeres."
   },
+  "segmentation-category": {
+    "add": "Új szegmentációs kategória hozzáadása",
+    "editor-create": "Létrehozás",
+    "editor-edit": "Szerkesztés",
+    "field": {
+      "created-date": "Létrehozás dátuma",
+      "name": "Kategória neve"
+    }
+  },
   "settings": {
     "campaign-categories": "Kampány kategóriák",
+    "campaign-products": "Termékek",
     "segmentation-categories": "Szegmentációs kategóriák",
-    "test-group-categories": "Tesztcsoport osztályok",
-    "campaign-products": "Termékek"
+    "test-group-categories": "Tesztcsoport osztályok"
   },
   "site": {
     "editor-title": "Telephely",

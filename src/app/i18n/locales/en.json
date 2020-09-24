@@ -60,15 +60,6 @@
       "name": "Product name"
     }
   },
-  "segmentation-category": {
-    "add": "Add new segmentation category",
-    "editor-create": "Create",
-    "editor-edit": "Edit",
-    "field": {
-      "name": "Category name",
-      "created-date": "Date of creation"
-    }
-  },
   "cashier-editor": {
     "editor-create": "Create cashier",
     "editor-edit": "Edit cashier",
@@ -579,13 +570,13 @@
         "role-invalid": "Partner contact role is invalid. Please provide a valid partner contact role!",
         "role-required": "Partner contact role is required. Please provide a valid partner contact role!"
       },
-      "product": {
-        "name-max-length-500": "The product name can be maximum 500 characters long. Please add a valid value.",
-        "name-required": "The product name field is required. Please add a value."
-      },
       "permission": {
         "name-max-length-500": "The permission name can be maximum 500 characters long. Please provide a shorter name.",
         "name-required": "Permission name field is required. Please provide a valid name."
+      },
+      "product": {
+        "name-max-length-500": "The product name can be maximum 500 characters long. Please add a valid value.",
+        "name-required": "The product name field is required. Please add a value."
       },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner code for registration cannot be longer than 10 characters. Please use a shorter partner code!",
@@ -793,11 +784,20 @@
     "save": "Save changes",
     "save-profile-success": "Successfully saved the profile."
   },
+  "segmentation-category": {
+    "add": "Add new segmentation category",
+    "editor-create": "Create",
+    "editor-edit": "Edit",
+    "field": {
+      "created-date": "Date of creation",
+      "name": "Category name"
+    }
+  },
   "settings": {
     "campaign-categories": "Campaign categories",
+    "campaign-products": "Products",
     "segmentation-categories": "Segmentation categories",
-    "test-group-categories": "Testgroup categories",
-    "campaign-products": "Products"
+    "test-group-categories": "Testgroup categories"
   },
   "site": {
     "editor-title": "Site",
