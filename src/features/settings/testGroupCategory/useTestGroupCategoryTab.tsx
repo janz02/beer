@@ -9,6 +9,7 @@ import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
 import { useTestGroupCategoryList } from './testGroupCategoryList/useTestGroupCategoryList'
 import { TestGroupCategoryTab } from './TestGroupCategoryTab'
+import { GroupOutlined } from '@ant-design/icons'
 
 export const useTestGroupCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
@@ -38,9 +39,10 @@ export const useTestGroupCategoryTab = (): SettingsTab => {
   return {
     key: 'test-group-categories',
     title: t('settings.test-group-categories'),
-    roles: pageViewRoles.categories,
+    roles: pageViewRoles.settings,
     headerOptions,
     tabContent,
+    icon: <GroupOutlined />,
     resetFilters: categoryListUtils.resetFilters
   }
 }

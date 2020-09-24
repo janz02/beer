@@ -22,11 +22,12 @@ import {
   //   PermissionsApi,
   //   ProductsApi,
   //   SegmentationQueriesApi,
-  SegmentationCategoriesApi
+  SegmentationCategoriesApi,
   //   SegmentationsApi,
   //   SharepointApi,
   //   TemplatesApi,
   //   TestGroupCategoriesApi
+  TestGroupCategoriesApi
 } from './swagger/campaign-editor'
 import { FilesApi, InformationApi as InformationFilesMsApi } from '../api/swagger/files'
 import { errorHandlingMiddleware } from './middleware'
@@ -34,7 +35,6 @@ import { Middleware, Configuration as CouponConfiguration } from '../api/swagger
 import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
 import { Configuration as FilesConfiguration } from '../api/swagger/files/runtime'
 import { getUrl } from 'services/baseUrlHelper'
-import { TestGroupCategoriesApi } from './swagger/campaign-editor'
 
 // ---- BASE CONFIG
 const apiMiddleware: Middleware[] = [...errorHandlingMiddleware]
@@ -93,7 +93,7 @@ export const api = {
     // campaigns: new CampaignsApi(campaignEditorConfig),
     // permissions: new PermissionsApi(campaignEditorConfig),
     // products: new ProductsApi(campaignEditorConfig),
-    segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig)
+    segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig),
     // segmentationQueries: new SegmentationQueriesApi(campaignEditorConfig),
     // segmentations: new SegmentationsApi(campaignEditorConfig),
     // sharepoint: new SharepointApi(campaignEditorConfig),

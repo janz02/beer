@@ -64,13 +64,14 @@ const saveCategory = (category: TestGroupCategory): AppThunk => async dispatch =
     if (id && !isNaN(id)) {
       await api.campaignEditor.testGroupCategories.updateTestGroupCategory({
         id,
-        testGroupCategoryModel: {
+        updateTestGroupCategoryCommand: {
+          id,
           name: category.name
         }
       })
     } else {
       const newId = await api.campaignEditor.testGroupCategories.createTestGroupCategory({
-        testGroupCategoryModel: {
+        createTestGroupCategoryCommand: {
           name: category.name
         }
       })

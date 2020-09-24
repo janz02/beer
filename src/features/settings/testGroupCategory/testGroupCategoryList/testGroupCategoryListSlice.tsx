@@ -3,11 +3,11 @@ import { AppThunk } from 'app/store'
 import { api } from 'api'
 import {
   ListRequestParams,
-  // recalculatePaginationAfterDeletion,
   reviseListRequestParams,
   storableListRequestParams,
   OrderByType,
-  recalculatePaginationAfterDeletion
+  recalculatePaginationAfterDeletion,
+  Pagination
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import { TestGroupCategory } from 'models/testGroupCategory'
@@ -72,21 +72,21 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
       params
     )
 
-    // FIXME pass query after pagination finalized on backend
-    const { items } = await api.campaignEditor.testGroupCategories.getTestGroupCategories({})
+    const {
+      items,
+      ...pagination
+    } = await api.campaignEditor.testGroupCategories.getTestGroupCategories(revisedParams)
 
-    const testGroupCategories =
-      items?.map<TestGroupCategory>(c => ({
-        ...(c as any),
-        createdDate: moment(c.createdDate)
-      })) ?? []
-
-    // FIXME pass query after pagination finalized on backend
     dispatch(
       getCategoriesSuccess({
-        categories: testGroupCategories,
-        // listParams: storableListRequestParams(revisedParams, pagination)
-        listParams: initialState.listParams
+        categories: items?.map(x => ({
+          ...x,
+          createdDate: moment(x.createdDate)
+        })) as TestGroupCategory[],
+        listParams: storableListRequestParams(revisedParams, {
+          ...pagination,
+          size: pagination.totalCount
+        } as Pagination)
       })
     )
   } catch (err) {
@@ -104,7 +104,7 @@ const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
     dispatch(setDeleteState(FeatureState.Loading))
     await api.campaignEditor.testGroupCategories.deleteTestGroupCategory({ id })
     dispatch(setDeleteState(FeatureState.Success))
-    const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
+    const newPage = recalculatePaginationAfterDeletion(getState().testGroupCategoryList.listParams)
     dispatch(getCategories({ page: newPage }))
     return { id }
   } catch (err) {
