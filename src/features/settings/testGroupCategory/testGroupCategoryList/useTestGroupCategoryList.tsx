@@ -62,8 +62,8 @@ export const useTestGroupCategoryList = (
       columnConfig({
         title: t('test-group-category.field.created-date'),
         key: 'createdDate',
-        sort: true,
-        filterMode: FilterMode.DATEPICKER
+        width: '13rem',
+        renderMode: 'date time'
       }),
       hasPermission([Roles.Administrator])
         ? actionColumnConfig({
