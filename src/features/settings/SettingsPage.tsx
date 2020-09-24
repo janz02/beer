@@ -8,7 +8,6 @@ import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
 import { useTestGroupCategoryTab } from './testGroupCategory/useTestGroupCategoryTab'
 import { useSegmentationCategoryTab } from './segmentationCategories/useSegmentationCategoryTab'
-import { Roles } from 'api/swagger/coupon'
 
 export interface SettingsTab {
   key: string

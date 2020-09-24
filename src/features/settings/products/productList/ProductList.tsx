@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import './ProductList.scss'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { UseProductListUtils } from './useProductList'
