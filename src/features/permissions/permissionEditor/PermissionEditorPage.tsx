@@ -40,9 +40,9 @@ export const PermissionEditorPage: React.FC = () => {
     if (id) {
       dispatch(getPermission(+id))
     }
-    dispatch(getFunctionPermissions(id))
-    dispatch(getAdGroups(id))
-    dispatch(getCampaignUsers(id))
+    dispatch(getFunctionPermissions(id as number | undefined))
+    dispatch(getAdGroups(id as number | undefined))
+    dispatch(getCampaignUsers(id as number | undefined))
 
     return () => {
       dispatch(resetPermissionEditor())

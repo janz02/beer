@@ -9,6 +9,7 @@ import {
 import { FeatureState } from 'models/featureState'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 export interface SiteFeatureConfig {
   shrinks: boolean
@@ -122,6 +123,21 @@ const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   }
 }
 
+const exportSites = (): AppThunk => async (dispatch, getState) => {
+  const { listParams, listConstraintParams } = getState().siteList
+
+  try {
+    const file = await api.coupon.sites.exportSites({
+      ...listParams,
+      ...listConstraintParams
+    })
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    console.log(err)
+    return { error: err.toString() }
+  }
+}
+
 export const siteListReducer = slice.reducer
 
 export const siteListActions = {
@@ -130,5 +146,6 @@ export const siteListActions = {
   setFeatureConfig,
   getSites,
   resetSiteFilters,
-  deleteSite
+  deleteSite,
+  exportSites
 }

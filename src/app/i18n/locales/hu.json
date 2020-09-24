@@ -73,6 +73,7 @@
     "delete": "Törlés",
     "discard": "Elvetés",
     "edit": "Szerkesztés",
+    "export": "Exportálás",
     "escape": "Bezárás",
     "escape-editor": "Szerkesztés elhagyása",
     "field": {
@@ -287,7 +288,7 @@
       "ldap-password-change": "Jelszó változtatás sikertelen, előfordulhat, hogy a felhasználónak nem változtatható a jelszava.",
       "login-failed": "Bejelentkezés sikertelen, próbálkozzon később.",
       "newpassword-sameasold": "Az új jelszó nem egyezhet meg az előzővel, adjon meg egy új jelszót.",
-      "partner-contact-deleted": "__STRING_NOT_TRANSLATED__",
+      "partner-contact-deleted": "Az e-mail címhez tartozó kapcsolattartó törlésre került.",
       "password-inconsistent": "A két új jelszó nem egyezik meg, ellenőrizze, hogy elgépelte-e.",
       "registration-failed": "Regsztráció sikertelen, próbálkozzon később.",
       "sync-failed": "Felhasználók szinkronizációja sikerleten.",
@@ -348,7 +349,7 @@
       "invalid-image-size": "Rossz kép méret, válasszon megfelelő képméretet.",
       "invalid-prize-rule-type": "Rossz nyeremény szabály típus, válasszon PDF fájl formátumot.",
       "not-supported-format": "Nem támogatott fájl formátum, válasszon támogatott formátumot.",
-      "too-big": "__STRING_NOT_TRANSLATED__"
+      "too-big": "A feltöltött fájl mérete meghaladja az 51MB-os méretet. Kérem töltsön fel egy kisebb fájlt!"
     },
     "not-found": "Nem található.",
     "notification": {
@@ -362,9 +363,9 @@
     },
     "partner": {
       "cant-change-state": "Partner státusz változtatása sikertelen, a felhasználó jogosultsági szintje miatt.",
-      "inactive-or-deleted": "Sikerelten művelet, mert a parnter inaktív vagy törölt.",
-      "invalid-registration-state-change": "__STRING_NOT_TRANSLATED__",
-      "major-cannot-change-registration-state": "__STRING_NOT_TRANSLATED__",
+      "inactive-or-deleted": "Sikertelen művelet, mert a parnter inaktív vagy törölt.",
+      "invalid-registration-state-change": "Hibás partner regisztrációs státuszt adott meg.",
+      "major-cannot-change-registration-state": "Kiemelt partner regisztrációs státuszát nem módosíthatja!",
       "name-must-be-unique": "Már létezik egy partner ilyen névvel, válasszon másik nevet."
     },
     "partner-contact": {
@@ -374,7 +375,7 @@
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
     },
     "segment": {
-      "one-time-use-creation-failed": "__STRING_NOT_TRANSLATED__"
+      "one-time-use-creation-failed": "Az egyszer használatos szegmens létrehozása közben hiba lépett fel. Kérem próbálja újra!"
     },
     "sendgrid": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
@@ -479,7 +480,7 @@
       },
       "email": {
         "content-required": "Email törzs megadása kötelező, kérem adjon meg egy megfelelő törzset.",
-        "is-notification-required": "__STRING_NOT_TRANSLATED__",
+        "is-notification-required": "Email értesítésre vonatkozó tulajdonság értékének megadása kötelező.",
         "recipient-required": "Címzett megadása kötelező, kérem adjon meg egy megfelelő email címet.",
         "recipients-email-invalid-format": "Címzettek formátuma nem megfelelő, kérem adjon meg megfelelő email címeket.",
         "recipients-email-required": "Címzett megadása kötelező, kérem adjon meg egy megfelelő email címet.",
@@ -503,37 +504,37 @@
       "partner": {
         "address-max-length-150": "Partner címe maximum 150 karakter lehet, kérem adjon meg egy rövidebb címet.",
         "address-required": "Partner címének megadása kötelező, kérem adjon meg egy címet.",
-        "address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "address-street-number-required": "__STRING_NOT_TRANSLATED__",
-        "address-street-required": "__STRING_NOT_TRANSLATED__",
+        "address-street-max-length-150": "Partner címének utca összetevője maximum 150 karakter lehet, kérem adjon meg egy rövidebb utcanevet.",
+        "address-street-number-max-length-150": "Partner címének utcaszám összetevője maximum 150 karakter lehet, kérem adjon meg egy rövidebb utcaszámot.",
+        "address-street-number-required": "Partner címének utca összetevőjének megadása kötelező, kérem adjon meg egy utcaszámot.",
+        "address-street-required": "Partner címének utcaszám összetevőjének megadása kötelező, kérem adjon meg egy utcanevet.",
         "bank-account-max-length-26": "Partner bankszámla maximum 26 karakter lehet, kérem adjon meg egy rövidebb számsort.",
         "bank-account-required": "Partner bankszámla számát kötelező megadni, kérem adjon meg egy számsort.",
-        "contact-required": "__STRING_NOT_TRANSLATED__",
+        "contact-required": "Partner kapcsolattartó megadása kötelező, kérem adjon meg egy megfelelő kapcsolattartót.",
         "id-greater-than-0": "Partner id megadása kötelező, kérem adjon meg egy azonosítót.",
         "id-required": "Partner id megadása kötelező, kérem adjon meg egy azonosítót.",
-        "mailing-address-max-length-150": "Partner levelezési címe maximum 150 karakter lehet, kérem adjon meg egy címet.",
+        "mailing-address-max-length-150": "Partner levelezési címe maximum 150 karakter lehet, kérem adjon meg egy rövidebb címet.",
         "mailing-address-required": "Partner levelezési cím megadása kötelező, kérem adjon meg egy címet.",
-        "mailing-address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-street-number-required": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-street-required": "__STRING_NOT_TRANSLATED__",
+        "mailing-address-street-max-length-150": "Partner levelezési címének utca összetevője maximum 150 karakter lehet, kérem adjon meg egy rövidebb utcanevet.",
+        "mailing-address-street-number-max-length-150": "Partner levelezési címének utcaszám összetevője maximum 150 karakter lehet, kérem adjon meg egy rövidebb utcaszámot.",
+        "mailing-address-street-number-required": "Partner levelezési címének utcaszám összetevőjének megadása kötelező, kérem adjon meg egy utcaszámot.",
+        "mailing-address-street-required": "Partner levelezési címének utca összetevőjének megadása kötelező, kérem adjon meg egy utcanevet.",
         "name-max-length-150": "Partner neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "name-required": "Partner név megadása kötelelező, kérem adjon meg egy megfelelő nevet.",
         "registration-allowed-max-length-30": "Cégjegyző neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "registration-allowed-required": "Cégjegyző megadása kötelező, kérem adjon meg egy megfelelő nevet.",
         "registration-number-max-length-20": "Cégjegyzék szám maximum 20 karakter lehet, kérem adjon meg egy rövidebb számot.",
         "registration-number-required": "Cégjegyzék szám megadása kötelező, kérem adjon meg egy megfelelő számot.",
-        "registration-state-required": "__STRING_NOT_TRANSLATED__",
+        "registration-state-required": "Partner regisztrációs állapot megadása kötelező. Kérem adjon meg egy állapot értéket.",
         "state-required": "Székhely megadása kötelező, kérem adjon meg egy megfelelő címet.",
         "tax-number-max-length-20": "Adószám maximum 20 karakter lehet, kérem adjon meg egy rövidebb számot.",
         "tax-number-required": "Adószám megadása kötelező, kérem adjon meg egy számot."
       },
       "partner-contact": {
-        "is-active-required": "Kapcsolat tartó státusz megadása kötelező, kérem adjon meg egy státuszt.",
-        "query-filters-required": "Kapcsolat tartó lekérdézés szűrőfeltételei hiányoznak, kérem adjon meg legalább egy üres lekérdezést.",
-        "query-toggle-required": "Kapcsolat tartó lekérdezéshez a választó hiányzik, kérem adja meg hogy NKM vagy külső kapcsolattartókat szeretne lekérdezni.",
-        "role-invalid": "__STRING_NOT_TRANSLATED__",
+        "is-active-required": "Kapcsolattartó státusz megadása kötelező, kérem adjon meg egy státuszt.",
+        "query-filters-required": "Kapcsolattartó lekérdézés szűrőfeltételei hiányoznak, kérem adjon meg legalább egy üres lekérdezést.",
+        "query-toggle-required": "Kapcsolattartó lekérdezéshez a választó hiányzik, kérem adja meg hogy NKM vagy külső kapcsolattartókat szeretne lekérdezni.",
+        "role-invalid": "Nem megfelelő kapcsolattartó szerepkör. Kérem adjon meg egy helyzetnek megfelelő szerepkört.",
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
       },
       "permission": {
@@ -562,7 +563,7 @@
         "id-required": "Szegmens id megadása kötelező, kérem adjon meg egy megfelelő azonosítót.",
         "name-invalid-format": "Szegmens neve PKM-el kell, hogy kezdődjön, kérem adjon meg egy megfelelő nevet.",
         "name-required": "Szegmens nevét kötelező megadni, kérem adjon meg egy megfelelő nevet.",
-        "one-time-use-required": "__STRING_NOT_TRANSLATED__"
+        "one-time-use-required": "Egyszer használatos szegmens megadása kötelező. Kérem adjon meg egy megfelelő szegmenst!"
       },
       "segments": {
         "list-required": "Szegmens lista megadása kötelező, kérem adjon meg egy email listát."
@@ -774,8 +775,8 @@
       "administrator": "Admin",
       "businesspartnermanager": "Ügyfél men.",
       "campaignmanager": "Kampány men.",
-      "mainpartnercontact": "__STRING_NOT_TRANSLATED__",
-      "normalpartnercontact": "__STRING_NOT_TRANSLATED__",
+      "mainpartnercontact": "Fő kapcs.",
+      "normalpartnercontact": "Norm kapcs.",
       "partnermanager": "Partner men."
     }
   },
@@ -786,7 +787,7 @@
     "field": {
       "email": "Email",
       "name": "Név",
-      "partner-contact-type": "__STRING_NOT_TRANSLATED__",
+      "partner-contact-type": "Kapcsolattartó típusa",
       "partner-name": "Partner",
       "partnerType": {
         "major": "Fő",

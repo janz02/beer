@@ -15,12 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    ChannelModel,
-    ChannelModelFromJSON,
-    ChannelModelToJSON,
-    ChannelModelPaginatedSearchResponse,
-    ChannelModelPaginatedSearchResponseFromJSON,
-    ChannelModelPaginatedSearchResponseToJSON,
+    ChannelVm,
+    ChannelVmFromJSON,
+    ChannelVmToJSON,
+    ChannelVmPaginatedSearchResponse,
+    ChannelVmPaginatedSearchResponseFromJSON,
+    ChannelVmPaginatedSearchResponseToJSON,
 } from '../models';
 
 export interface GetChannelRequest {
@@ -28,7 +28,12 @@ export interface GetChannelRequest {
 }
 
 export interface GetChannelsRequest {
-    _queryParameters?: { [key: string]: string; };
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface GetManyChannelsRequest {
@@ -43,7 +48,7 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Gets the requested channel, identified by id.
      */
-    async getChannelRaw(requestParameters: GetChannelRequest): Promise<runtime.ApiResponse<ChannelModel>> {
+    async getChannelRaw(requestParameters: GetChannelRequest): Promise<runtime.ApiResponse<ChannelVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getChannel.');
         }
@@ -63,13 +68,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ChannelModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ChannelVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested channel, identified by id.
      */
-    async getChannel(requestParameters: GetChannelRequest): Promise<ChannelModel> {
+    async getChannel(requestParameters: GetChannelRequest): Promise<ChannelVm> {
         const response = await this.getChannelRaw(requestParameters);
         return await response.value();
     }
@@ -77,11 +82,31 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Returns the channels for the actual query.
      */
-    async getChannelsRaw(requestParameters: GetChannelsRequest): Promise<runtime.ApiResponse<ChannelModelPaginatedSearchResponse>> {
+    async getChannelsRaw(requestParameters: GetChannelsRequest): Promise<runtime.ApiResponse<ChannelVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -97,13 +122,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ChannelModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ChannelVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the channels for the actual query.
      */
-    async getChannels(requestParameters: GetChannelsRequest): Promise<ChannelModelPaginatedSearchResponse> {
+    async getChannels(requestParameters: GetChannelsRequest): Promise<ChannelVmPaginatedSearchResponse> {
         const response = await this.getChannelsRaw(requestParameters);
         return await response.value();
     }
@@ -111,7 +136,7 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Returns the channels identified by the ids.
      */
-    async getManyChannelsRaw(requestParameters: GetManyChannelsRequest): Promise<runtime.ApiResponse<Array<ChannelModel>>> {
+    async getManyChannelsRaw(requestParameters: GetManyChannelsRequest): Promise<runtime.ApiResponse<Array<ChannelVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -131,13 +156,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ChannelModelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ChannelVmFromJSON));
     }
 
     /**
      * Returns the channels identified by the ids.
      */
-    async getManyChannels(requestParameters: GetManyChannelsRequest): Promise<Array<ChannelModel>> {
+    async getManyChannels(requestParameters: GetManyChannelsRequest): Promise<Array<ChannelVm>> {
         const response = await this.getManyChannelsRaw(requestParameters);
         return await response.value();
     }

@@ -15,9 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
-    TreatmentModel,
-    TreatmentModelFromJSON,
-    TreatmentModelToJSON,
+    TreatmentVm,
+    TreatmentVmFromJSON,
+    TreatmentVmToJSON,
 } from '../models';
 
 export interface GetTreatmentRequest {
@@ -32,7 +32,7 @@ export class TreatmentsApi extends runtime.BaseAPI {
     /**
      * Gets the requested treatment, identified by the container campaign id.
      */
-    async getTreatmentRaw(requestParameters: GetTreatmentRequest): Promise<runtime.ApiResponse<TreatmentModel>> {
+    async getTreatmentRaw(requestParameters: GetTreatmentRequest): Promise<runtime.ApiResponse<TreatmentVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTreatment.');
         }
@@ -48,13 +48,13 @@ export class TreatmentsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TreatmentModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => TreatmentVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested treatment, identified by the container campaign id.
      */
-    async getTreatment(requestParameters: GetTreatmentRequest): Promise<TreatmentModel> {
+    async getTreatment(requestParameters: GetTreatmentRequest): Promise<TreatmentVm> {
         const response = await this.getTreatmentRaw(requestParameters);
         return await response.value();
     }

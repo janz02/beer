@@ -15,12 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    CampaignResultEventModelPaginatedSearchResponse,
-    CampaignResultEventModelPaginatedSearchResponseFromJSON,
-    CampaignResultEventModelPaginatedSearchResponseToJSON,
-    UploadCsvModel,
-    UploadCsvModelFromJSON,
-    UploadCsvModelToJSON,
+    CampaignResultEventVmPaginatedSearchResponse,
+    CampaignResultEventVmPaginatedSearchResponseFromJSON,
+    CampaignResultEventVmPaginatedSearchResponseToJSON,
+    UploadCsvCommand,
+    UploadCsvCommandFromJSON,
+    UploadCsvCommandToJSON,
 } from '../models';
 
 export interface DownloadCsvRequest {
@@ -29,11 +29,20 @@ export interface DownloadCsvRequest {
 }
 
 export interface GetEventsRequest {
-    _queryParameters?: { [key: string]: string; };
+    campaignId?: string;
+    segmentationId?: string;
+    templateId?: string;
+    bpId?: string;
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface UploadCsvForCampaignResultRequest {
-    uploadCsvModel?: UploadCsvModel;
+    uploadCsvCommand?: UploadCsvCommand;
 }
 
 /**
@@ -79,13 +88,49 @@ export class CampaignResultsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Queries for the result infromations from the database with the given filters and parameters
+     * Queries for the result information from the database with the given filters and parameters
      */
-    async getEventsRaw(requestParameters: GetEventsRequest): Promise<runtime.ApiResponse<CampaignResultEventModelPaginatedSearchResponse>> {
+    async getEventsRaw(requestParameters: GetEventsRequest): Promise<runtime.ApiResponse<CampaignResultEventVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.campaignId !== undefined) {
+            queryParameters['CampaignId'] = requestParameters.campaignId;
+        }
+
+        if (requestParameters.segmentationId !== undefined) {
+            queryParameters['SegmentationId'] = requestParameters.segmentationId;
+        }
+
+        if (requestParameters.templateId !== undefined) {
+            queryParameters['TemplateId'] = requestParameters.templateId;
+        }
+
+        if (requestParameters.bpId !== undefined) {
+            queryParameters['BpId'] = requestParameters.bpId;
+        }
+
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -101,13 +146,13 @@ export class CampaignResultsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignResultEventModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignResultEventVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
-     * Queries for the result infromations from the database with the given filters and parameters
+     * Queries for the result information from the database with the given filters and parameters
      */
-    async getEvents(requestParameters: GetEventsRequest): Promise<CampaignResultEventModelPaginatedSearchResponse> {
+    async getEvents(requestParameters: GetEventsRequest): Promise<CampaignResultEventVmPaginatedSearchResponse> {
         const response = await this.getEventsRaw(requestParameters);
         return await response.value();
     }
@@ -131,7 +176,7 @@ export class CampaignResultsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UploadCsvModelToJSON(requestParameters.uploadCsvModel),
+            body: UploadCsvCommandToJSON(requestParameters.uploadCsvCommand),
         });
 
         return new runtime.VoidApiResponse(response);

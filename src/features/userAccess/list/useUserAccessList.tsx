@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { userAccessActions } from '../userAccessSlice'
+import { userAccessActions, UserAccessTab } from '../userAccessSlice'
 import { useTableUtils, UseTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess, UserType } from 'models/user'
@@ -21,14 +21,19 @@ interface UseUserAccessListUtils {
   nkmLoading: boolean
   partnerUsers: UserAccess[]
   partnerLoading: boolean
+  selectedTab: UserAccessTab
+  setSelectedTab: (tab: UserAccessTab) => void
   resetNkmFilters: () => void
   resetPartnerFilters: () => void
+  handleExport: () => void
 }
 
 export const useUserAccessList = (): UseUserAccessListUtils => {
   const dispatch = useDispatch()
-
   const { t } = useTranslation()
+
+  const [selectedTab, setSelectedTab] = useState<UserAccessTab>('nkm')
+
   const {
     nkmListParams,
     partnerListParams,
@@ -168,6 +173,10 @@ export const useUserAccessList = (): UseUserAccessListUtils => {
     dispatch(userAccessActions.resetPartnerUsersFilters())
   }
 
+  const handleExport = useCallback((): void => {
+    dispatch(userAccessActions.exportPartnerContacts(selectedTab))
+  }, [dispatch, selectedTab])
+
   return {
     partnerUsersColumnsConfig,
     nkmUsersColumnsConfig,
@@ -178,6 +187,9 @@ export const useUserAccessList = (): UseUserAccessListUtils => {
     partnerUsers,
     partnerLoading: partnerListState === FeatureState.Loading,
     resetNkmFilters,
-    resetPartnerFilters
+    resetPartnerFilters,
+    selectedTab,
+    setSelectedTab,
+    handleExport
   }
 }

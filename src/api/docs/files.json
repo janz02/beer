@@ -158,6 +158,128 @@
         }
       }
     },
+    "/api/Files/Create": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Creates a file on internal storage and leaves it open to append",
+        "operationId": "createFile",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Files/{id}/Append": {
+      "put": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Appends to a file on internal storage(not a new line)",
+        "operationId": "appendFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppendDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/{id}/Close": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Closes a file on the internal storage",
+        "operationId": "closeFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Information": {
       "get": {
         "tags": [
@@ -234,6 +356,39 @@
             "nullable": true
           },
           "exstension": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileContentType": {
+        "enum": [
+          "TextPlain",
+          "TextCsv"
+        ],
+        "type": "string"
+      },
+      "CreateFileDto": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileAccess": {
+            "$ref": "#/components/schemas/FileAccess"
+          },
+          "fileContentType": {
+            "$ref": "#/components/schemas/FileContentType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppendDto": {
+        "type": "object",
+        "properties": {
+          "content": {
             "type": "string",
             "nullable": true
           }

@@ -8,12 +8,7 @@ import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
-import {
-  AdGroupModel,
-  FunctionPermissionModel,
-  PermissionModel,
-  UserModel
-} from 'api/swagger/campaign-editor'
+import { AdGroupVm, FunctionPermissionVm, PermissionVm, UserVm } from 'api/swagger/campaign-editor'
 
 interface PermissionEditorState {
   permission?: CampaignPermission
@@ -120,11 +115,12 @@ export const getPermission = (id: number): AppThunk => async dispatch => {
   }
 }
 
-export const getFunctionPermissions = (id: string | undefined): AppThunk => async dispatch => {
+export const getFunctionPermissions = (id: number | undefined): AppThunk => async dispatch => {
   try {
     dispatch(getPermissionRequest())
-    const queryParameter = id ? { _queryParameters: { permissionid: id.toString() } } : {}
-    const { items } = await api.campaignEditor.accounts.getFunctionPermissions(queryParameter)
+    const { items } = await api.campaignEditor.accounts.getFunctionPermissions(
+      id ? { permissionId: id } : {}
+    )
 
     if (items) {
       dispatch(
@@ -138,11 +134,10 @@ export const getFunctionPermissions = (id: string | undefined): AppThunk => asyn
   }
 }
 
-export const getAdGroups = (id: string | undefined): AppThunk => async dispatch => {
+export const getAdGroups = (id: number | undefined): AppThunk => async dispatch => {
   try {
     dispatch(getPermissionRequest())
-    const queryParameter = id ? { _queryParameters: { permissionid: id.toString() } } : {}
-    const { items } = await api.campaignEditor.accounts.getAdGroups(queryParameter)
+    const { items } = await api.campaignEditor.accounts.getAdGroups(id ? { permissionId: id } : {})
 
     if (items) {
       dispatch(getAdGroupsSuccess(items.map(x => ({ ...x } as CampaignAdGroup))))
@@ -154,11 +149,12 @@ export const getAdGroups = (id: string | undefined): AppThunk => async dispatch 
   }
 }
 
-export const getCampaignUsers = (id: string | undefined): AppThunk => async dispatch => {
+export const getCampaignUsers = (id: number | undefined): AppThunk => async dispatch => {
   try {
     dispatch(getPermissionRequest())
-    const queryParameter = id ? { _queryParameters: { permissionid: id.toString() } } : {}
-    const { items } = await api.campaignEditor.accounts.getUsersForPermission(queryParameter)
+    const { items } = await api.campaignEditor.accounts.getUsersForPermission(
+      id ? { permissionId: id } : {}
+    )
 
     if (items) {
       dispatch(getCampaignUsersSuccess(items.map(x => ({ ...x } as CampaignUser))))
@@ -176,10 +172,10 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
 ) => {
   try {
     const permission = getState().permissionEditor.permission
-    const users = getState().permissionEditor.campaignUsers?.map(x => x as UserModel)
-    const adGroups = getState().permissionEditor.campaignAdGroups?.map(x => x as AdGroupModel)
+    const users = getState().permissionEditor.campaignUsers?.map(x => x as UserVm)
+    const adGroups = getState().permissionEditor.campaignAdGroups?.map(x => x as AdGroupVm)
     const functionPermissions = getState().permissionEditor.campaignFunctionPermissions?.map(
-      x => x as FunctionPermissionModel
+      x => x as FunctionPermissionVm
     )
 
     dispatch(savePermissionRequest())
@@ -187,23 +183,23 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
     if (permission?.id) {
       await api.campaignEditor.permissions.updatePermission({
         id: permission.id,
-        permissionModel: {
+        createUpdatePermissionCommand: {
           ...permission,
           ...data,
           adGroups: adGroups,
           users: users,
           functionPermissions: functionPermissions
-        } as PermissionModel
+        } as PermissionVm
       })
       dispatch(getPermission(permission.id))
     } else {
       const createdPermissionId = await api.campaignEditor.permissions.createPermission({
-        permissionModel: {
+        createUpdatePermissionCommand: {
           ...data,
           adGroups: adGroups,
           users: users,
           functionPermissions: functionPermissions
-        } as PermissionModel
+        } as PermissionVm
       })
 
       history.push(`/permissions/${createdPermissionId}`)

@@ -15,15 +15,15 @@
 
 import * as runtime from '../runtime';
 import {
-    SiteLevelSettingDto,
-    SiteLevelSettingDtoFromJSON,
-    SiteLevelSettingDtoToJSON,
-    SiteLevelSettingDtoPaginatedSearchResponse,
-    SiteLevelSettingDtoPaginatedSearchResponseFromJSON,
-    SiteLevelSettingDtoPaginatedSearchResponseToJSON,
-    SiteLevelSettingModel,
-    SiteLevelSettingModelFromJSON,
-    SiteLevelSettingModelToJSON,
+    SiteLevelSettingVm,
+    SiteLevelSettingVmFromJSON,
+    SiteLevelSettingVmToJSON,
+    SiteLevelSettingVmPaginatedSearchResponse,
+    SiteLevelSettingVmPaginatedSearchResponseFromJSON,
+    SiteLevelSettingVmPaginatedSearchResponseToJSON,
+    UpdateSiteLevelSettingCommand,
+    UpdateSiteLevelSettingCommandFromJSON,
+    UpdateSiteLevelSettingCommandToJSON,
 } from '../models';
 
 export interface GetSiteLevelSettingRequest {
@@ -31,12 +31,19 @@ export interface GetSiteLevelSettingRequest {
 }
 
 export interface GetSiteLevelSettingsRequest {
-    _queryParameters?: { [key: string]: string; };
+    name?: string;
+    value?: string;
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface UpdateSiteLevelSettingRequest {
     id: number;
-    siteLevelSettingModel?: SiteLevelSettingModel;
+    updateSiteLevelSettingCommand?: UpdateSiteLevelSettingCommand;
 }
 
 /**
@@ -47,7 +54,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
     /**
      * Get site level setting by id
      */
-    async getSiteLevelSettingRaw(requestParameters: GetSiteLevelSettingRequest): Promise<runtime.ApiResponse<SiteLevelSettingDto>> {
+    async getSiteLevelSettingRaw(requestParameters: GetSiteLevelSettingRequest): Promise<runtime.ApiResponse<SiteLevelSettingVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSiteLevelSetting.');
         }
@@ -67,13 +74,13 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SiteLevelSettingDtoFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SiteLevelSettingVmFromJSON(jsonValue));
     }
 
     /**
      * Get site level setting by id
      */
-    async getSiteLevelSetting(requestParameters: GetSiteLevelSettingRequest): Promise<SiteLevelSettingDto> {
+    async getSiteLevelSetting(requestParameters: GetSiteLevelSettingRequest): Promise<SiteLevelSettingVm> {
         const response = await this.getSiteLevelSettingRaw(requestParameters);
         return await response.value();
     }
@@ -81,11 +88,39 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
     /**
      * Get all site level settings
      */
-    async getSiteLevelSettingsRaw(requestParameters: GetSiteLevelSettingsRequest): Promise<runtime.ApiResponse<SiteLevelSettingDtoPaginatedSearchResponse>> {
+    async getSiteLevelSettingsRaw(requestParameters: GetSiteLevelSettingsRequest): Promise<runtime.ApiResponse<SiteLevelSettingVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
+
+        if (requestParameters.value !== undefined) {
+            queryParameters['Value'] = requestParameters.value;
+        }
+
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -101,13 +136,13 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SiteLevelSettingDtoPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SiteLevelSettingVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
      * Get all site level settings
      */
-    async getSiteLevelSettings(requestParameters: GetSiteLevelSettingsRequest): Promise<SiteLevelSettingDtoPaginatedSearchResponse> {
+    async getSiteLevelSettings(requestParameters: GetSiteLevelSettingsRequest): Promise<SiteLevelSettingVmPaginatedSearchResponse> {
         const response = await this.getSiteLevelSettingsRaw(requestParameters);
         return await response.value();
     }
@@ -135,7 +170,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: SiteLevelSettingModelToJSON(requestParameters.siteLevelSettingModel),
+            body: UpdateSiteLevelSettingCommandToJSON(requestParameters.updateSiteLevelSettingCommand),
         });
 
         return new runtime.VoidApiResponse(response);

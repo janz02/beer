@@ -8,6 +8,7 @@ import { PartnerContactConfig } from '../PartnerContactTile'
 import { Button } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { ExportButton } from 'components/buttons/ExportButton'
 
 export interface PartnerContactListProps {
   config: PartnerContactConfig
@@ -23,7 +24,8 @@ export const PartnerContactList: FC<PartnerContactListProps> = props => {
     tableProps,
     deletePopupProps,
     handleOpenInviter,
-    resetFilters
+    resetFilters,
+    handleExport
   } = usePartnerContactList({
     config: props.config
   })
@@ -34,6 +36,7 @@ export const PartnerContactList: FC<PartnerContactListProps> = props => {
 
   const options = (
     <>
+      <ExportButton onClick={handleExport} />
       <ResetFiltersButton onClick={resetFilters} />
       <Button type="primary" icon={<UserAddOutlined />} size="large" onClick={handleOpenInviter}>
         {t('partner-contact.send-invitation')}
