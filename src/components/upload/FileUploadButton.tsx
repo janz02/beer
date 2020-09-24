@@ -49,7 +49,7 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
           type="link"
           onClick={e => {
             e.stopPropagation()
-            handleClear()
+            handleClear(props.initialFileId)
           }}
         >
           <DeleteOutlined />

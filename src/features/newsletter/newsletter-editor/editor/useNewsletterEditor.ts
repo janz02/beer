@@ -244,7 +244,7 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
         }
       }
     ])
-  }, [translations, editor])
+  }, [editor, translations])
 
   useEffect(() => {
     // reload template if editor, template or locale changed

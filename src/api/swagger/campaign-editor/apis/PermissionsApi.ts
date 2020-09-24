@@ -15,16 +15,19 @@
 
 import * as runtime from '../runtime';
 import {
-    PermissionModel,
-    PermissionModelFromJSON,
-    PermissionModelToJSON,
-    PermissionModelPaginatedSearchResponse,
-    PermissionModelPaginatedSearchResponseFromJSON,
-    PermissionModelPaginatedSearchResponseToJSON,
+    CreateUpdatePermissionCommand,
+    CreateUpdatePermissionCommandFromJSON,
+    CreateUpdatePermissionCommandToJSON,
+    PermissionVm,
+    PermissionVmFromJSON,
+    PermissionVmToJSON,
+    PermissionVmPaginatedSearchResponse,
+    PermissionVmPaginatedSearchResponseFromJSON,
+    PermissionVmPaginatedSearchResponseToJSON,
 } from '../models';
 
 export interface CreatePermissionRequest {
-    permissionModel?: PermissionModel;
+    createUpdatePermissionCommand?: CreateUpdatePermissionCommand;
 }
 
 export interface DeletePermissionRequest {
@@ -50,7 +53,7 @@ export interface GetPermissionsRequest {
 
 export interface UpdatePermissionRequest {
     id: number;
-    permissionModel?: PermissionModel;
+    createUpdatePermissionCommand?: CreateUpdatePermissionCommand;
 }
 
 /**
@@ -77,7 +80,7 @@ export class PermissionsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PermissionModelToJSON(requestParameters.permissionModel),
+            body: CreateUpdatePermissionCommandToJSON(requestParameters.createUpdatePermissionCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -127,7 +130,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Returns the permissions identified by the ids.
      */
-    async getManyPermissionsRaw(requestParameters: GetManyPermissionsRequest): Promise<runtime.ApiResponse<Array<PermissionModel>>> {
+    async getManyPermissionsRaw(requestParameters: GetManyPermissionsRequest): Promise<runtime.ApiResponse<Array<PermissionVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -147,13 +150,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PermissionModelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PermissionVmFromJSON));
     }
 
     /**
      * Returns the permissions identified by the ids.
      */
-    async getManyPermissions(requestParameters: GetManyPermissionsRequest): Promise<Array<PermissionModel>> {
+    async getManyPermissions(requestParameters: GetManyPermissionsRequest): Promise<Array<PermissionVm>> {
         const response = await this.getManyPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -161,7 +164,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Gets the requested permission, identified by id.
      */
-    async getPermissionRaw(requestParameters: GetPermissionRequest): Promise<runtime.ApiResponse<PermissionModel>> {
+    async getPermissionRaw(requestParameters: GetPermissionRequest): Promise<runtime.ApiResponse<PermissionVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPermission.');
         }
@@ -181,13 +184,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => PermissionModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested permission, identified by id.
      */
-    async getPermission(requestParameters: GetPermissionRequest): Promise<PermissionModel> {
+    async getPermission(requestParameters: GetPermissionRequest): Promise<PermissionVm> {
         const response = await this.getPermissionRaw(requestParameters);
         return await response.value();
     }
@@ -195,7 +198,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Returns the permissions for the actual query.
      */
-    async getPermissionsRaw(requestParameters: GetPermissionsRequest): Promise<runtime.ApiResponse<PermissionModelPaginatedSearchResponse>> {
+    async getPermissionsRaw(requestParameters: GetPermissionsRequest): Promise<runtime.ApiResponse<PermissionVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.skip !== undefined) {
@@ -235,13 +238,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => PermissionModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PermissionVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the permissions for the actual query.
      */
-    async getPermissions(requestParameters: GetPermissionsRequest): Promise<PermissionModelPaginatedSearchResponse> {
+    async getPermissions(requestParameters: GetPermissionsRequest): Promise<PermissionVmPaginatedSearchResponse> {
         const response = await this.getPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -270,7 +273,7 @@ export class PermissionsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: PermissionModelToJSON(requestParameters.permissionModel),
+            body: CreateUpdatePermissionCommandToJSON(requestParameters.createUpdatePermissionCommand),
         });
 
         return new runtime.VoidApiResponse(response);

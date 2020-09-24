@@ -6,7 +6,6 @@ export * from './CouponCommentsApi';
 export * from './CouponsApi';
 export * from './EmailSenderApi';
 export * from './EmailTemplatesApi';
-export * from './FilesApi';
 export * from './InformationApi';
 export * from './NotificationHubApi';
 export * from './NotificationsApi';

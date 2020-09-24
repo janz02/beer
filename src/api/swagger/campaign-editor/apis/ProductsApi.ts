@@ -15,16 +15,22 @@
 
 import * as runtime from '../runtime';
 import {
-    ProductModel,
-    ProductModelFromJSON,
-    ProductModelToJSON,
-    ProductModelPaginatedSearchResponse,
-    ProductModelPaginatedSearchResponseFromJSON,
-    ProductModelPaginatedSearchResponseToJSON,
+    CreateProductCommand,
+    CreateProductCommandFromJSON,
+    CreateProductCommandToJSON,
+    ProductVm,
+    ProductVmFromJSON,
+    ProductVmToJSON,
+    ProductVmPaginatedSearchResponse,
+    ProductVmPaginatedSearchResponseFromJSON,
+    ProductVmPaginatedSearchResponseToJSON,
+    UpdateProductCommand,
+    UpdateProductCommandFromJSON,
+    UpdateProductCommandToJSON,
 } from '../models';
 
 export interface CreateProductRequest {
-    productModel?: ProductModel;
+    createProductCommand?: CreateProductCommand;
 }
 
 export interface DeleteProductRequest {
@@ -40,12 +46,18 @@ export interface GetProductRequest {
 }
 
 export interface GetProductsRequest {
-    _queryParameters?: { [key: string]: string; };
+    name?: string;
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface UpdateProductRequest {
     id: number;
-    productModel?: ProductModel;
+    updateProductCommand?: UpdateProductCommand;
 }
 
 /**
@@ -72,7 +84,7 @@ export class ProductsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ProductModelToJSON(requestParameters.productModel),
+            body: CreateProductCommandToJSON(requestParameters.createProductCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -124,7 +136,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Returns the products identified by the ids.
      */
-    async getManyProductsRaw(requestParameters: GetManyProductsRequest): Promise<runtime.ApiResponse<Array<ProductModel>>> {
+    async getManyProductsRaw(requestParameters: GetManyProductsRequest): Promise<runtime.ApiResponse<Array<ProductVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -144,13 +156,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProductModelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProductVmFromJSON));
     }
 
     /**
      * Returns the products identified by the ids.
      */
-    async getManyProducts(requestParameters: GetManyProductsRequest): Promise<Array<ProductModel>> {
+    async getManyProducts(requestParameters: GetManyProductsRequest): Promise<Array<ProductVm>> {
         const response = await this.getManyProductsRaw(requestParameters);
         return await response.value();
     }
@@ -158,7 +170,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Gets the requested product, identified by id.
      */
-    async getProductRaw(requestParameters: GetProductRequest): Promise<runtime.ApiResponse<ProductModel>> {
+    async getProductRaw(requestParameters: GetProductRequest): Promise<runtime.ApiResponse<ProductVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProduct.');
         }
@@ -178,13 +190,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ProductModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProductVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested product, identified by id.
      */
-    async getProduct(requestParameters: GetProductRequest): Promise<ProductModel> {
+    async getProduct(requestParameters: GetProductRequest): Promise<ProductVm> {
         const response = await this.getProductRaw(requestParameters);
         return await response.value();
     }
@@ -192,11 +204,35 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Returns the products for the actual query.
      */
-    async getProductsRaw(requestParameters: GetProductsRequest): Promise<runtime.ApiResponse<ProductModelPaginatedSearchResponse>> {
+    async getProductsRaw(requestParameters: GetProductsRequest): Promise<runtime.ApiResponse<ProductVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
+
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -212,13 +248,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ProductModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProductVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the products for the actual query.
      */
-    async getProducts(requestParameters: GetProductsRequest): Promise<ProductModelPaginatedSearchResponse> {
+    async getProducts(requestParameters: GetProductsRequest): Promise<ProductVmPaginatedSearchResponse> {
         const response = await this.getProductsRaw(requestParameters);
         return await response.value();
     }
@@ -247,7 +283,7 @@ export class ProductsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: ProductModelToJSON(requestParameters.productModel),
+            body: UpdateProductCommandToJSON(requestParameters.updateProductCommand),
         });
 
         return new runtime.VoidApiResponse(response);

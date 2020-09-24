@@ -15,19 +15,25 @@
 
 import * as runtime from '../runtime';
 import {
-    CampaignTestGroupCategoryModel,
-    CampaignTestGroupCategoryModelFromJSON,
-    CampaignTestGroupCategoryModelToJSON,
-    TestGroupCategoryModel,
-    TestGroupCategoryModelFromJSON,
-    TestGroupCategoryModelToJSON,
-    TestGroupCategoryModelPaginatedSearchResponse,
-    TestGroupCategoryModelPaginatedSearchResponseFromJSON,
-    TestGroupCategoryModelPaginatedSearchResponseToJSON,
+    CampaignTestGroupCategoryVm,
+    CampaignTestGroupCategoryVmFromJSON,
+    CampaignTestGroupCategoryVmToJSON,
+    CreateTestGroupCategoryCommand,
+    CreateTestGroupCategoryCommandFromJSON,
+    CreateTestGroupCategoryCommandToJSON,
+    TestGroupCategoryVm,
+    TestGroupCategoryVmFromJSON,
+    TestGroupCategoryVmToJSON,
+    TestGroupCategoryVmPaginatedSearchResponse,
+    TestGroupCategoryVmPaginatedSearchResponseFromJSON,
+    TestGroupCategoryVmPaginatedSearchResponseToJSON,
+    UpdateTestGroupCategoryCommand,
+    UpdateTestGroupCategoryCommandFromJSON,
+    UpdateTestGroupCategoryCommandToJSON,
 } from '../models';
 
 export interface CreateTestGroupCategoryRequest {
-    testGroupCategoryModel?: TestGroupCategoryModel;
+    createTestGroupCategoryCommand?: CreateTestGroupCategoryCommand;
 }
 
 export interface DeleteTestGroupCategoryRequest {
@@ -43,7 +49,13 @@ export interface GetManyTestGroupCategoriesRequest {
 }
 
 export interface GetTestGroupCategoriesRequest {
-    _queryParameters?: { [key: string]: string; };
+    name?: string;
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface GetTestGroupCategoryRequest {
@@ -52,7 +64,7 @@ export interface GetTestGroupCategoryRequest {
 
 export interface UpdateTestGroupCategoryRequest {
     id: number;
-    testGroupCategoryModel?: TestGroupCategoryModel;
+    updateTestGroupCategoryCommand?: UpdateTestGroupCategoryCommand;
 }
 
 /**
@@ -79,7 +91,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TestGroupCategoryModelToJSON(requestParameters.testGroupCategoryModel),
+            body: CreateTestGroupCategoryCommandToJSON(requestParameters.createTestGroupCategoryCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -131,7 +143,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Get test group based on the campaignId.
      */
-    async getCampaignTestGroupCategoriesRaw(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<CampaignTestGroupCategoryModel>>> {
+    async getCampaignTestGroupCategoriesRaw(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<CampaignTestGroupCategoryVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.campaignId !== undefined) {
@@ -151,13 +163,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CampaignTestGroupCategoryModelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CampaignTestGroupCategoryVmFromJSON));
     }
 
     /**
      * Get test group based on the campaignId.
      */
-    async getCampaignTestGroupCategories(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<Array<CampaignTestGroupCategoryModel>> {
+    async getCampaignTestGroupCategories(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<Array<CampaignTestGroupCategoryVm>> {
         const response = await this.getCampaignTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -165,7 +177,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the test groups identified by the ids.
      */
-    async getManyTestGroupCategoriesRaw(requestParameters: GetManyTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<TestGroupCategoryModel>>> {
+    async getManyTestGroupCategoriesRaw(requestParameters: GetManyTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<TestGroupCategoryVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -185,13 +197,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TestGroupCategoryModelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TestGroupCategoryVmFromJSON));
     }
 
     /**
      * Returns the test groups identified by the ids.
      */
-    async getManyTestGroupCategories(requestParameters: GetManyTestGroupCategoriesRequest): Promise<Array<TestGroupCategoryModel>> {
+    async getManyTestGroupCategories(requestParameters: GetManyTestGroupCategoriesRequest): Promise<Array<TestGroupCategoryVm>> {
         const response = await this.getManyTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -199,11 +211,35 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the test groups for the actual query.
      */
-    async getTestGroupCategoriesRaw(requestParameters: GetTestGroupCategoriesRequest): Promise<runtime.ApiResponse<TestGroupCategoryModelPaginatedSearchResponse>> {
+    async getTestGroupCategoriesRaw(requestParameters: GetTestGroupCategoriesRequest): Promise<runtime.ApiResponse<TestGroupCategoryVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
+
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -219,13 +255,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TestGroupCategoryModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => TestGroupCategoryVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the test groups for the actual query.
      */
-    async getTestGroupCategories(requestParameters: GetTestGroupCategoriesRequest): Promise<TestGroupCategoryModelPaginatedSearchResponse> {
+    async getTestGroupCategories(requestParameters: GetTestGroupCategoriesRequest): Promise<TestGroupCategoryVmPaginatedSearchResponse> {
         const response = await this.getTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -233,7 +269,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Gets the requested test group, identified by id.
      */
-    async getTestGroupCategoryRaw(requestParameters: GetTestGroupCategoryRequest): Promise<runtime.ApiResponse<TestGroupCategoryModel>> {
+    async getTestGroupCategoryRaw(requestParameters: GetTestGroupCategoryRequest): Promise<runtime.ApiResponse<TestGroupCategoryVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTestGroupCategory.');
         }
@@ -253,13 +289,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TestGroupCategoryModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => TestGroupCategoryVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested test group, identified by id.
      */
-    async getTestGroupCategory(requestParameters: GetTestGroupCategoryRequest): Promise<TestGroupCategoryModel> {
+    async getTestGroupCategory(requestParameters: GetTestGroupCategoryRequest): Promise<TestGroupCategoryVm> {
         const response = await this.getTestGroupCategoryRaw(requestParameters);
         return await response.value();
     }
@@ -288,7 +324,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: TestGroupCategoryModelToJSON(requestParameters.testGroupCategoryModel),
+            body: UpdateTestGroupCategoryCommandToJSON(requestParameters.updateTestGroupCategoryCommand),
         });
 
         return new runtime.VoidApiResponse(response);

@@ -3893,233 +3893,26 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/CouponCodeVm"
                 },
                 "example": {
-  "result": [
-    {
-      "id": 1,
-      "name": "Ingyen Túró Rudi!",
-      "rank": 100,
-      "type": 0,
-      "state": 100,
-      "startDate": "2020-08-01T10:00:00",
-      "endDate": "2021-08-01T10:00:00",
-      "expireDate": "2021-09-01T10:00:00",
-      "couponCount": 50000,
-      "minimumShoppingValue": 500,
-      "discountValue": 100.0,
-      "categoryId": 1,
-      "isActive": false,
-      "isPartnerActive": false,
-      "partnerName": "Tesco",
-      "showCount": 0,
-      "clickCount": 0,
-      "claimCount": 0,
-      "smallPictureId": "Na meg ez se",
-      "bigPictureId": "És nem is lesz",
-      "mode": 100,
-      "discountType": 100,
-      "createdBy": "Sales Ernő",
-      "createdDate": "2020-04-11T13:42:50",
-      "modifiedBy": "Kasszás Erzsi",
-      "modifiedDate": null,
-      "approvedBy": "Menedzser Endre",
-      "approvedDate": "2020-07-12T20:30:40",
-      "preferredPosition": 4,
-      "drawDate": null
-    },
-    {
-      "id": 2,
-      "name": "Pisztácia fagyi!",
-      "rank": 300,
-      "type": 200,
-      "state": 100,
-      "startDate": "2020-09-01T10:00:00",
-      "endDate": "2021-09-01T10:00:00",
-      "expireDate": "2021-10-01T10:00:00",
-      "couponCount": 50000,
-      "minimumShoppingValue": 500,
-      "discountValue": 100.0,
-      "categoryId": 2,
-      "isActive": true,
-      "isPartnerActive": true,
-      "partnerName": "Firpo",
-      "showCount": 50,
-      "clickCount": 1225,
-      "claimCount": 150,
-      "smallPictureId": "Csokoládé nem is volt",
-      "bigPictureId": "Pisztácia kifogyott",
-      "mode": 200,
-      "discountType": 100,
-      "createdBy": "Charlie Firpo",
-      "createdDate": "2020-05-01T01:12:23",
-      "modifiedBy": "Charlie Firpo",
-      "modifiedDate": "2020-06-01T10:12:23",
-      "approvedBy": "Johnny Firpo",
-      "approvedDate": "2020-03-10T10:20:30",
-      "preferredPosition": 3,
-      "drawDate": "2021-11-01T01:01:01"
-    }
-  ],
-  "page": 1,
-  "from": 1,
-  "to": 2,
-  "size": 5
+  "couponCode": "UNIQUECODE"
 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/CouponCodeVm"
                 },
                 "example": {
-  "result": [
-    {
-      "id": 1,
-      "name": "Ingyen Túró Rudi!",
-      "rank": 100,
-      "type": 0,
-      "state": 100,
-      "startDate": "2020-08-01T10:00:00",
-      "endDate": "2021-08-01T10:00:00",
-      "expireDate": "2021-09-01T10:00:00",
-      "couponCount": 50000,
-      "minimumShoppingValue": 500,
-      "discountValue": 100.0,
-      "categoryId": 1,
-      "isActive": false,
-      "isPartnerActive": false,
-      "partnerName": "Tesco",
-      "showCount": 0,
-      "clickCount": 0,
-      "claimCount": 0,
-      "smallPictureId": "Na meg ez se",
-      "bigPictureId": "És nem is lesz",
-      "mode": 100,
-      "discountType": 100,
-      "createdBy": "Sales Ernő",
-      "createdDate": "2020-04-11T13:42:50",
-      "modifiedBy": "Kasszás Erzsi",
-      "modifiedDate": null,
-      "approvedBy": "Menedzser Endre",
-      "approvedDate": "2020-07-12T20:30:40",
-      "preferredPosition": 4,
-      "drawDate": null
-    },
-    {
-      "id": 2,
-      "name": "Pisztácia fagyi!",
-      "rank": 300,
-      "type": 200,
-      "state": 100,
-      "startDate": "2020-09-01T10:00:00",
-      "endDate": "2021-09-01T10:00:00",
-      "expireDate": "2021-10-01T10:00:00",
-      "couponCount": 50000,
-      "minimumShoppingValue": 500,
-      "discountValue": 100.0,
-      "categoryId": 2,
-      "isActive": true,
-      "isPartnerActive": true,
-      "partnerName": "Firpo",
-      "showCount": 50,
-      "clickCount": 1225,
-      "claimCount": 150,
-      "smallPictureId": "Csokoládé nem is volt",
-      "bigPictureId": "Pisztácia kifogyott",
-      "mode": 200,
-      "discountType": 100,
-      "createdBy": "Charlie Firpo",
-      "createdDate": "2020-05-01T01:12:23",
-      "modifiedBy": "Charlie Firpo",
-      "modifiedDate": "2020-06-01T10:12:23",
-      "approvedBy": "Johnny Firpo",
-      "approvedDate": "2020-03-10T10:20:30",
-      "preferredPosition": 3,
-      "drawDate": "2021-11-01T01:01:01"
-    }
-  ],
-  "page": 1,
-  "from": 1,
-  "to": 2,
-  "size": 5
+  "couponCode": "UNIQUECODE"
 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/CouponCodeVm"
                 },
                 "example": {
-  "result": [
-    {
-      "id": 1,
-      "name": "Ingyen Túró Rudi!",
-      "rank": 100,
-      "type": 0,
-      "state": 100,
-      "startDate": "2020-08-01T10:00:00",
-      "endDate": "2021-08-01T10:00:00",
-      "expireDate": "2021-09-01T10:00:00",
-      "couponCount": 50000,
-      "minimumShoppingValue": 500,
-      "discountValue": 100.0,
-      "categoryId": 1,
-      "isActive": false,
-      "isPartnerActive": false,
-      "partnerName": "Tesco",
-      "showCount": 0,
-      "clickCount": 0,
-      "claimCount": 0,
-      "smallPictureId": "Na meg ez se",
-      "bigPictureId": "És nem is lesz",
-      "mode": 100,
-      "discountType": 100,
-      "createdBy": "Sales Ernő",
-      "createdDate": "2020-04-11T13:42:50",
-      "modifiedBy": "Kasszás Erzsi",
-      "modifiedDate": null,
-      "approvedBy": "Menedzser Endre",
-      "approvedDate": "2020-07-12T20:30:40",
-      "preferredPosition": 4,
-      "drawDate": null
-    },
-    {
-      "id": 2,
-      "name": "Pisztácia fagyi!",
-      "rank": 300,
-      "type": 200,
-      "state": 100,
-      "startDate": "2020-09-01T10:00:00",
-      "endDate": "2021-09-01T10:00:00",
-      "expireDate": "2021-10-01T10:00:00",
-      "couponCount": 50000,
-      "minimumShoppingValue": 500,
-      "discountValue": 100.0,
-      "categoryId": 2,
-      "isActive": true,
-      "isPartnerActive": true,
-      "partnerName": "Firpo",
-      "showCount": 50,
-      "clickCount": 1225,
-      "claimCount": 150,
-      "smallPictureId": "Csokoládé nem is volt",
-      "bigPictureId": "Pisztácia kifogyott",
-      "mode": 200,
-      "discountType": 100,
-      "createdBy": "Charlie Firpo",
-      "createdDate": "2020-05-01T01:12:23",
-      "modifiedBy": "Charlie Firpo",
-      "modifiedDate": "2020-06-01T10:12:23",
-      "approvedBy": "Johnny Firpo",
-      "approvedDate": "2020-03-10T10:20:30",
-      "preferredPosition": 3,
-      "drawDate": "2021-11-01T01:01:01"
-    }
-  ],
-  "page": 1,
-  "from": 1,
-  "to": 2,
-  "size": 5
+  "couponCode": "UNIQUECODE"
 }
               }
             }
@@ -4418,10 +4211,19 @@
           "200": {
             "description": "Successful query",
             "content": {
-              "application/octet-stream": {
+              "text/plain": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
                 }
               }
             }
@@ -4460,10 +4262,19 @@
           "200": {
             "description": "Successful query",
             "content": {
-              "application/octet-stream": {
+              "text/plain": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileVm"
                 }
               }
             }
@@ -5086,146 +4897,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Files": {
-      "post": {
-        "tags": [
-          "Files"
-        ],
-        "operationId": "uploadFile",
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "file": {
-                    "type": "string",
-                    "format": "binary",
-                    "nullable": true
-                  }
-                }
-              },
-              "encoding": {
-                "file": {
-                  "contentType": "multipart/form-data",
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/FileVm"
-                },
-                "example": {
-  "id": "PrepareForTrouble!",
-  "fileName": "AndMakeItDouble!"
-}
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FileVm"
-                },
-                "example": {
-  "id": "PrepareForTrouble!",
-  "fileName": "AndMakeItDouble!"
-}
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FileVm"
-                },
-                "example": {
-  "id": "PrepareForTrouble!",
-  "fileName": "AndMakeItDouble!"
-}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Files/{id}": {
-      "get": {
-        "tags": [
-          "Files"
-        ],
-        "operationId": "downloadFile",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested file.",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Files/{id}/Name": {
-      "get": {
-        "tags": [
-          "Files"
-        ],
-        "operationId": "getFileName",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                },
-                "example": "LoremIpsumWhateverYouAreNotGonnaReadItAnyways"
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                },
-                "example": "LoremIpsumWhateverYouAreNotGonnaReadItAnyways"
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string"
-                },
-                "example": "LoremIpsumWhateverYouAreNotGonnaReadItAnyways"
               }
             }
           }
@@ -10859,6 +10530,15 @@
           }
         }
       },
+      "CouponCodeVm": {
+        "type": "object",
+        "properties": {
+          "couponCode": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "ActivateCouponDto": {
         "type": "object",
         "properties": {
@@ -10875,6 +10555,23 @@
             "items": {
               "type": "string"
             },
+            "nullable": true
+          }
+        }
+      },
+      "FileVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "exstension": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -11047,19 +10744,6 @@
         "type": "object",
         "properties": {
           "content": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "FileVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "fileName": {
             "type": "string",
             "nullable": true
           }

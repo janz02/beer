@@ -1,9 +1,9 @@
 import configureStore from 'redux-mock-store'
 import * as ReactReduxHooks from '../src/hooks/react-redux-hooks'
 import * as ReactRouterDomHooks from '../src/hooks/react-router-dom-hooks'
+import * as JwtReader from 'services/jwt-reader'
 import thunk from 'redux-thunk'
 import React from 'react'
-import * as JwtReader from 'services/jwt-reader'
 import { Roles } from 'api/swagger/coupon'
 
 /**

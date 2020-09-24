@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { Category } from 'models/category'
+import { CampaignCategory } from 'models/campaignCategory'
 import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
@@ -12,10 +12,11 @@ import { Partner } from 'models/partner'
 import { saveAs } from 'file-saver'
 import { Coupon } from 'models/coupon'
 import { FeatureState } from 'models/featureState'
+import { FileVm } from 'api/swagger/files'
 
 interface CampaignsState {
   coupon?: Coupon
-  categories?: Category[]
+  categories?: CampaignCategory[]
   majorPartners?: Partner[]
   editing?: boolean
   stateForCreate?: CouponState
@@ -83,7 +84,7 @@ const campaignsSlice = createSlice({
       message.success(i18n.t('coupon-editor.save-coupon-status-success'), 10)
       state.featureState = FeatureState.Success
     },
-    getCategoriesSuccess(state, action: PayloadAction<Category[]>) {
+    getCategoriesSuccess(state, action: PayloadAction<CampaignCategory[]>) {
       state.categories = action.payload
       state.featureState = FeatureState.Success
     },
@@ -303,7 +304,9 @@ const getCategories = (): AppThunk => async dispatch => {
   try {
     const categories = await api.coupon.categories.getCategories({ pageSize: -1, orderBy: 'name' })
     dispatch(
-      getCategoriesSuccess(categories.result!.map(x => ({ id: x.id, name: x.name } as Category)))
+      getCategoriesSuccess(
+        categories.result!.map(x => ({ id: x.id, name: x.name } as CampaignCategory))
+      )
     )
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
@@ -338,8 +341,10 @@ const downloadCoupons = (coupon: Coupon): AppThunk => async dispatch => {
 
   try {
     // TODO fix names
-    const blob: Blob = await api.coupon.coupons.getCouponCodes({ couponId: coupon.id! })
-    saveAs(blob, `${coupon.id} - ${coupon.name} CouponCodes.csv`)
+    const info: FileVm = await api.coupon.coupons.getCouponCodes({ couponId: coupon.id! })
+    const blob: Blob = await api.files.files.downloadFile({ id: `${info.id}` })
+
+    saveAs(blob, `${info.id} - ${info.fileName} CouponCodes.${info.exstension}`)
     dispatch(downloadCouponsSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
@@ -351,8 +356,10 @@ const downloadClaimedCoupons = (coupon: Coupon): AppThunk => async dispatch => {
 
   try {
     // TODO fix names
-    const blob: Blob = await api.coupon.coupons.getCouponRedeemedCodes({ couponId: coupon.id! })
-    saveAs(blob, `${coupon.id} - ${coupon.name} ClaimedCouponCodes.csv`)
+    const info: FileVm = await api.coupon.coupons.getCouponRedeemedCodes({ couponId: coupon.id! })
+    const blob: Blob = await api.files.files.downloadFile({ id: `${info.id}` })
+
+    saveAs(blob, `${info.id} - ${info.fileName} CouponCodes.${info.exstension}`)
     dispatch(downloadClaimedCouponsSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
@@ -363,9 +370,9 @@ const downloadPrizeFile = (coupon: Coupon): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    const fileName: string = await api.coupon.files.getFileName({ id: coupon.prizeRulesFileId! })
-    const blob: Blob = await api.coupon.files.downloadFile({ id: coupon.prizeRulesFileId! })
-    saveAs(blob, fileName)
+    const fileInfo = await api.files.files.infoFile({ id: coupon.prizeRulesFileId! })
+    const blob: Blob = await api.files.files.downloadFile({ id: coupon.prizeRulesFileId! })
+    saveAs(blob, `${fileInfo.fileName}.${fileInfo.exstension}`)
     dispatch(downloadPrizeFileSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
@@ -376,11 +383,11 @@ const downloadPredefinedCodesFile = (coupon: Coupon): AppThunk => async dispatch
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    const fileName: string = await api.coupon.files.getFileName({
+    const fileInfo = await api.files.files.infoFile({
       id: coupon.predefinedCodesFileId!
     })
-    const blob: Blob = await api.coupon.files.downloadFile({ id: coupon.predefinedCodesFileId! })
-    saveAs(blob, fileName)
+    const blob: Blob = await api.files.files.downloadFile({ id: coupon.predefinedCodesFileId! })
+    saveAs(blob, `${fileInfo.fileName}.${fileInfo.exstension}`)
     dispatch(downloadPredefinedCouponsFileSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))

@@ -15,22 +15,25 @@
 
 import * as runtime from '../runtime';
 import {
+    CreateStaticMergeTagCommand,
+    CreateStaticMergeTagCommandFromJSON,
+    CreateStaticMergeTagCommandToJSON,
     ProblemDetails,
     ProblemDetailsFromJSON,
     ProblemDetailsToJSON,
-    StaticMergeTagDto,
-    StaticMergeTagDtoFromJSON,
-    StaticMergeTagDtoToJSON,
-    StaticMergeTagModel,
-    StaticMergeTagModelFromJSON,
-    StaticMergeTagModelToJSON,
-    StaticMergeTagModelPaginatedSearchResponse,
-    StaticMergeTagModelPaginatedSearchResponseFromJSON,
-    StaticMergeTagModelPaginatedSearchResponseToJSON,
+    StaticMergeTagVm,
+    StaticMergeTagVmFromJSON,
+    StaticMergeTagVmToJSON,
+    StaticMergeTagVmPaginatedSearchResponse,
+    StaticMergeTagVmPaginatedSearchResponseFromJSON,
+    StaticMergeTagVmPaginatedSearchResponseToJSON,
+    UpdateStaticMergeTagCommand,
+    UpdateStaticMergeTagCommandFromJSON,
+    UpdateStaticMergeTagCommandToJSON,
 } from '../models';
 
 export interface CreateStaticMergeTagRequest {
-    staticMergeTagModel?: StaticMergeTagModel;
+    createStaticMergeTagCommand?: CreateStaticMergeTagCommand;
 }
 
 export interface DeleteStaticMergeTagRequest {
@@ -46,11 +49,16 @@ export interface GetStaticMergeTagRequest {
 }
 
 export interface GetStaticMergeTagsRequest {
-    _queryParameters?: { [key: string]: string; };
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface UpdateStaticMergeTagRequest {
-    staticMergeTagModel?: StaticMergeTagModel;
+    updateStaticMergeTagCommand?: UpdateStaticMergeTagCommand;
 }
 
 /**
@@ -77,7 +85,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: StaticMergeTagModelToJSON(requestParameters.staticMergeTagModel),
+            body: CreateStaticMergeTagCommandToJSON(requestParameters.createStaticMergeTagCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -127,7 +135,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
     /**
      * Returns the StaticMergeTags identified by the ids.
      */
-    async getManyStaticMergeTagsRaw(requestParameters: GetManyStaticMergeTagsRequest): Promise<runtime.ApiResponse<Array<StaticMergeTagModel>>> {
+    async getManyStaticMergeTagsRaw(requestParameters: GetManyStaticMergeTagsRequest): Promise<runtime.ApiResponse<Array<StaticMergeTagVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -147,13 +155,13 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StaticMergeTagModelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StaticMergeTagVmFromJSON));
     }
 
     /**
      * Returns the StaticMergeTags identified by the ids.
      */
-    async getManyStaticMergeTags(requestParameters: GetManyStaticMergeTagsRequest): Promise<Array<StaticMergeTagModel>> {
+    async getManyStaticMergeTags(requestParameters: GetManyStaticMergeTagsRequest): Promise<Array<StaticMergeTagVm>> {
         const response = await this.getManyStaticMergeTagsRaw(requestParameters);
         return await response.value();
     }
@@ -161,7 +169,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
     /**
      * Gets the requested instance, identified by id.
      */
-    async getStaticMergeTagRaw(requestParameters: GetStaticMergeTagRequest): Promise<runtime.ApiResponse<StaticMergeTagDto>> {
+    async getStaticMergeTagRaw(requestParameters: GetStaticMergeTagRequest): Promise<runtime.ApiResponse<StaticMergeTagVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getStaticMergeTag.');
         }
@@ -181,13 +189,13 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => StaticMergeTagDtoFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StaticMergeTagVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested instance, identified by id.
      */
-    async getStaticMergeTag(requestParameters: GetStaticMergeTagRequest): Promise<StaticMergeTagDto> {
+    async getStaticMergeTag(requestParameters: GetStaticMergeTagRequest): Promise<StaticMergeTagVm> {
         const response = await this.getStaticMergeTagRaw(requestParameters);
         return await response.value();
     }
@@ -195,11 +203,31 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
     /**
      * Returns the StaticMergeTags for the actual query.
      */
-    async getStaticMergeTagsRaw(requestParameters: GetStaticMergeTagsRequest): Promise<runtime.ApiResponse<StaticMergeTagModelPaginatedSearchResponse>> {
+    async getStaticMergeTagsRaw(requestParameters: GetStaticMergeTagsRequest): Promise<runtime.ApiResponse<StaticMergeTagVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -215,13 +243,13 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => StaticMergeTagModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StaticMergeTagVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the StaticMergeTags for the actual query.
      */
-    async getStaticMergeTags(requestParameters: GetStaticMergeTagsRequest): Promise<StaticMergeTagModelPaginatedSearchResponse> {
+    async getStaticMergeTags(requestParameters: GetStaticMergeTagsRequest): Promise<StaticMergeTagVmPaginatedSearchResponse> {
         const response = await this.getStaticMergeTagsRaw(requestParameters);
         return await response.value();
     }
@@ -245,7 +273,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: StaticMergeTagModelToJSON(requestParameters.staticMergeTagModel),
+            body: UpdateStaticMergeTagCommandToJSON(requestParameters.updateStaticMergeTagCommand),
         });
 
         return new runtime.VoidApiResponse(response);
