@@ -1,8 +1,10 @@
 import configureStore from 'redux-mock-store'
 import * as ReactReduxHooks from '../src/hooks/react-redux-hooks'
 import * as ReactRouterDomHooks from '../src/hooks/react-router-dom-hooks'
+import * as JwtReader from 'services/jwt-reader'
 import thunk from 'redux-thunk'
 import React from 'react'
+import { Roles } from 'api/swagger/coupon'
 
 /**
  * Use this, if you want to check whether a certain amount of sub-component is loaded
@@ -25,4 +27,10 @@ export const setupStore = (store: {} = {}): void => {
 
 export const setupUseParams = (params: {} = {}): void => {
   jest.spyOn(ReactRouterDomHooks, 'useParams').mockImplementation(() => params)
+}
+
+export const setupPermissions = (roles: Roles[]): void => {
+  jest
+    .spyOn(JwtReader, 'hasPermission')
+    .mockImplementation(x => !!x && x.some(y => roles.includes(y)))
 }

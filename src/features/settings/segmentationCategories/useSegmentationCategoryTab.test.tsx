@@ -1,8 +1,7 @@
 import { render } from 'enzyme'
 import React from 'react'
-import * as JwtReader from 'services/jwt-reader'
 import { useSegmentationCategoryTab } from './useSegmentationCategoryTab'
-import { setupUseParams, setupStore } from '../../../../config/setupMocks'
+import { setupUseParams, setupStore, setupPermissions } from '../../../../config/setupMocks'
 import { FeatureState } from 'models/featureState'
 import { OrderByType, Roles } from 'api/swagger/coupon'
 import moment from 'moment'
@@ -41,12 +40,6 @@ setupStore({
     editorState: FeatureState.Initial
   }
 })
-
-const setupPermissions = (roles: Roles[]): void => {
-  jest
-    .spyOn(JwtReader, 'hasPermission')
-    .mockImplementation(x => !!x && x.some(y => roles.includes(y)))
-}
 
 const SegmentationCategoryTabContent: React.FC = () => {
   return useSegmentationCategoryTab().tabContent
