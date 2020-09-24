@@ -59,7 +59,7 @@ export const rootReducer = combineReducers({
   productEditor: productEditorReducer,
   testGroupCategoryList: testGroupCategoryListReducer,
   testGroupCategoryEditor: testGroupCategoryEditorReducer,
-  bpHistory: bpHistoryReducer
+  bpHistory: bpHistoryReducer,
   permissionList: permissionListReducer,
   permissionEditor: permissionEditorReducer
 })
