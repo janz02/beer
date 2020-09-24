@@ -27,6 +27,7 @@ import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
 import { SiteListPage } from 'features/sites/siteList/SitesListPage'
 import { PermissionEditorPage } from 'features/permissions/permissionEditor/PermissionEditorPage'
 import { PermissionListPage } from 'features/permissions/permissionList/PermissionListPage'
+import { BpHistoryListPage } from 'features/bpHistory/bpHistoryList/BpHistoryListPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -118,9 +119,10 @@ const Routes = (): JSX.Element => (
     <PrivateRoute
       exact
       path="/settings/:tab/:id"
-      roles={pageViewRoles.categoryEditor}
+      roles={pageViewRoles.settings}
       component={SettingsPage}
     />
+
     <PrivateRoute
       exact
       path="/profile"
@@ -141,6 +143,12 @@ const Routes = (): JSX.Element => (
       component={NewsletterEditorPage}
     />
     <PrivateRoute exact path="/users" roles={pageViewRoles.users} component={UserAccessPage} />
+    <PrivateRoute
+      exact
+      path="/bp-history"
+      roles={pageViewRoles.bpHistory}
+      component={BpHistoryListPage}
+    />
     <PrivateRoute
       exact
       path="/permissions"

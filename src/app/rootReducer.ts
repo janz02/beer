@@ -19,7 +19,12 @@ import { segmentationCategoryEditorReducer } from 'features/settings/segmentatio
 import { campaignCategoryEditorReducer } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
+import { bpHistoryReducer } from 'features/bpHistory/bpHistorySlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
+import { testGroupCategoryListReducer } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
+import { testGroupCategoryEditorReducer } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
+import { productListReducer } from 'features/settings/products/productList/productListSlice'
+import { productEditorReducer } from 'features/settings/products/productEditor/productEditorSlice'
 import { createBrowserHistory } from 'history'
 import { permissionListReducer } from 'features/permissions/permissionList/permissionListSlice'
 import { permissionEditorReducer } from 'features/permissions/permissionEditor/permissionEditorSlice'
@@ -50,6 +55,11 @@ export const rootReducer = combineReducers({
   newsletterEditor: newsletterEditorReducer,
   userAccess: userAccessReducer,
   notification: notificationReducer,
+  productList: productListReducer,
+  productEditor: productEditorReducer,
+  testGroupCategoryList: testGroupCategoryListReducer,
+  testGroupCategoryEditor: testGroupCategoryEditorReducer,
+  bpHistory: bpHistoryReducer
   permissionList: permissionListReducer,
   permissionEditor: permissionEditorReducer
 })

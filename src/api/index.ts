@@ -27,6 +27,7 @@ import {
   SharepointApi,
   TemplatesApi,
   TestGroupCategoriesApi,
+  CampaignResultsApi,
   AccountsApi
 } from './swagger/campaign-editor'
 import { FilesApi, InformationApi as InformationFilesMsApi } from '../api/swagger/files'
@@ -89,9 +90,10 @@ export const api = {
     files: new FilesApi(filesConfig),
     information: new InformationFilesMsApi(filesConfig)
   },
-  campaignEditor: {
+    campaignEditor: {
     accounts: new AccountsApi(campaignEditorConfig),
     campaigns: new CampaignsApi(campaignEditorConfig),
+    campaignResults: new CampaignResultsApi(campaignEditorConfig),
     permissions: new PermissionsApi(campaignEditorConfig),
     products: new ProductsApi(campaignEditorConfig),
     segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig),

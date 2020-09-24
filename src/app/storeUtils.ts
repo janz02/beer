@@ -20,6 +20,8 @@ import { partnerContactListActions } from 'features/partnerContact/list/partnerC
 import { partnerContactModalActions } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { authActions } from 'features/auth/authSlice'
 import { siteListActions } from 'features/sites/siteList/siteListSlice'
+import { testGroupCategoryListActions } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
+import { testGroupCategoryEditorActions } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -47,6 +49,8 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetSelfPartner())
     dispatch(partnerContactListActions.reset())
     dispatch(partnerContactModalActions.reset())
+    dispatch(testGroupCategoryListActions.resetCategoryList())
+    dispatch(testGroupCategoryEditorActions.resetCategoryEditor())
     logout && dispatch(resetRouterHistory())
   })
 }
