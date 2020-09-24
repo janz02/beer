@@ -12,8 +12,10 @@ import { resetSelfPartner } from 'features/partners/selfPartner/selfPartnerSlice
 import { resetPartnerEditor } from 'features/partners/partnerEditor/partnerEditorSlice'
 import { profileActions } from 'features/profile/profileSlice'
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
-import { categoryEditorActions } from 'features/settings/campaignCategory/categoryEditor/categoryEditorSlice'
-import { categoryListActions } from 'features/settings/campaignCategory/categoryList/categoryListSlice'
+import { campaignCategoryEditorActions } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
+import { campaignCategoryListActions } from 'features/settings/campaignCategories/categoryList/campaignCategoryListSlice'
+import { segmentationCategoryListActions } from 'features/settings/segmentationCategories/categoryList/segmentationCategoryListSlice'
+import { segmentationCategoryEditorActions } from 'features/settings/segmentationCategories/categoryEditor/segmentationCategoryEditorSlice'
 import { partnerContactListActions } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalActions } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { authActions } from 'features/auth/authSlice'
@@ -33,8 +35,10 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(siteEditorActions.reset())
     dispatch(campaignActions.resetCampaigns())
     dispatch(campaignListActions.resetCampaignList())
-    dispatch(categoryEditorActions.resetCategoryEditor())
-    dispatch(categoryListActions.resetCategoryList())
+    dispatch(campaignCategoryEditorActions.resetCategoryEditor())
+    dispatch(campaignCategoryListActions.resetCategoryList())
+    dispatch(segmentationCategoryListActions.resetCategoryList())
+    dispatch(segmentationCategoryEditorActions.resetCategoryEditor())
     dispatch(userAccessActions.reset())
     dispatch(newsletterListActions.resetNewsletterList())
     dispatch(newsletterEditorActions.reset())

@@ -15,7 +15,7 @@ import {
 import { useFormUtils } from 'hooks/useFormUtils'
 import { FormProps, FormInstance } from 'antd/lib/form'
 import { CouponComment } from 'models/couponComment'
-import { Category } from 'models/category'
+import { CampaignCategory } from 'models/campaignCategory'
 import { Partner } from 'models/partner'
 import { UserData } from 'models/user'
 import { useCallback } from 'react'
@@ -29,7 +29,7 @@ interface UseCampaignFeatures {
   selectedCouponType?: CouponType
   selectedCouponMode?: CouponMode
   selectedCouponDiscountType?: CouponDiscountType
-  categories?: Category[]
+  categories?: CampaignCategory[]
   majorPartners?: Partner[]
   userData: UserData
   displayEditor?: boolean

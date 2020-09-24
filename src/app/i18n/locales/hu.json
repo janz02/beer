@@ -51,6 +51,15 @@
       "name": "Kategória neve"
     }
   },
+  "segmentation-category": {
+    "add": "Új szegmentációs kategória hozzáadása",
+    "editor-create": "Létrehozás",
+    "editor-edit": "Szerkesztés",
+    "field": {
+      "name": "Kategória neve",
+      "created-date": "Létrehozás dátuma"
+    }
+  },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
     "editor-edit": "Pénztár szerkesztés",
@@ -743,7 +752,8 @@
     "save-profile-success": "Profil mentése sikeres."
   },
   "settings": {
-    "campaign-categories": "Kampány kategóriák"
+    "campaign-categories": "Kampány kategóriák",
+    "segmentation-categories": "Szegmentációs kategóriák"
   },
   "site": {
     "editor-title": "Telephely",

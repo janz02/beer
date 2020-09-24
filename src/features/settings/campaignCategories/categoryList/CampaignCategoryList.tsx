@@ -1,14 +1,14 @@
 import React, { FC } from 'react'
-import './CategoryList.scss'
+import './CampaignCategoryList.scss'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { UseCategoryListUtils } from './useCategoryList'
+import { UseCampaignCategoryListUtils } from './useCampaignCategoryList'
 
-interface CategoryListProps {
-  categoryListUtils: UseCategoryListUtils
+interface CampaignCategoryListProps {
+  categoryListUtils: UseCampaignCategoryListUtils
 }
 
-export const CategoryList: FC<CategoryListProps> = props => {
+export const CampaignCategoryList: FC<CampaignCategoryListProps> = props => {
   const { tableProps, popupProps } = props.categoryListUtils
 
   return (

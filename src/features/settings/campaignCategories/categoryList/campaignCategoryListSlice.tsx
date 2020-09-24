@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { Category } from 'models/category'
+import { CampaignCategory } from 'models/campaignCategory'
 import { api } from 'api'
 import {
   ListRequestParams,
@@ -12,7 +12,7 @@ import {
 import { FeatureState } from 'models/featureState'
 
 interface CouponCategoryListState {
-  categories: Category[]
+  categories: CampaignCategory[]
   listParams: ListRequestParams
   listState: FeatureState
   deleteState: FeatureState
@@ -29,8 +29,8 @@ const initialState: CouponCategoryListState = {
   deleteState: FeatureState.Initial
 }
 
-const categoryListSlice = createSlice({
-  name: 'categoryList',
+const campaignCategoryListSlice = createSlice({
+  name: 'campaignCategoryList',
   initialState,
   reducers: {
     resetCategoryList: () => initialState,
@@ -45,7 +45,7 @@ const categoryListSlice = createSlice({
     },
     getCategoriesSuccess(
       state,
-      action: PayloadAction<{ categories: Category[]; listParams: ListRequestParams }>
+      action: PayloadAction<{ categories: CampaignCategory[]; listParams: ListRequestParams }>
     ) {
       state.categories = action.payload.categories
       state.listParams = action.payload.listParams
@@ -60,17 +60,20 @@ const {
   setDeleteState,
   getCategoriesSuccess,
   resetCategoryList
-} = categoryListSlice.actions
+} = campaignCategoryListSlice.actions
 
 const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const revisedParams = reviseListRequestParams(getState().categoryList.listParams, params)
+    const revisedParams = reviseListRequestParams(
+      getState().campaignCategoryList.listParams,
+      params
+    )
     const { result, ...pagination } = await api.coupon.categories.getCategories(revisedParams)
 
     dispatch(
       getCategoriesSuccess({
-        categories: result as Category[],
+        categories: result as CampaignCategory[],
         listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
@@ -89,7 +92,7 @@ const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
     dispatch(setDeleteState(FeatureState.Loading))
     await api.coupon.categories.deleteCategory({ id })
     dispatch(setDeleteState(FeatureState.Success))
-    const newPage = recalculatePaginationAfterDeletion(getState().categoryList.listParams)
+    const newPage = recalculatePaginationAfterDeletion(getState().campaignCategoryList.listParams)
     dispatch(getCategories({ page: newPage }))
     return { id }
   } catch (err) {
@@ -98,11 +101,11 @@ const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   }
 }
 
-export const categoryListActions = {
+export const campaignCategoryListActions = {
   resetCategoryList,
   getCategories,
   resetCategoryFilters,
   deleteCategory
 }
 
-export const categoryListReducer = categoryListSlice.reducer
+export const campaignCategoryListReducer = campaignCategoryListSlice.reducer
