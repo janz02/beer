@@ -39,6 +39,7 @@ export const PermissionEditorPage: React.FC = () => {
   useEffect(() => {
     if (id) {
       dispatch(getPermission(+id))
+      setMode(EditorMode.VIEW)
     }
     dispatch(getFunctionPermissions(id as number | undefined))
     dispatch(getAdGroups(id as number | undefined))
@@ -48,12 +49,6 @@ export const PermissionEditorPage: React.FC = () => {
       dispatch(resetPermissionEditor())
     }
   }, [dispatch, id])
-
-  useEffect(() => {
-    if (id) {
-      setMode(EditorMode.VIEW)
-    }
-  }, [id, permission])
 
   const handleSave = (values: CampaignPermission): void => {
     dispatch(savePermission(values))
