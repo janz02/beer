@@ -46,6 +46,24 @@ export interface UpdateCampaignCommand {
     productTypeId?: number;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof UpdateCampaignCommand
+     */
+    businessTypes?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof UpdateCampaignCommand
+     */
+    serviceTypes?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof UpdateCampaignCommand
+     */
+    marketTypes?: Array<number> | null;
+    /**
+     * 
      * @type {number}
      * @memberof UpdateCampaignCommand
      */
@@ -91,12 +109,6 @@ export interface UpdateCampaignCommand {
      * @type {number}
      * @memberof UpdateCampaignCommand
      */
-    createdBy?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateCampaignCommand
-     */
     statusId?: number;
     /**
      * 
@@ -119,6 +131,9 @@ export function UpdateCampaignCommandFromJSONTyped(json: any, ignoreDiscriminato
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'productTypeId': !exists(json, 'productTypeId') ? undefined : json['productTypeId'],
+        'businessTypes': !exists(json, 'businessTypes') ? undefined : json['businessTypes'],
+        'serviceTypes': !exists(json, 'serviceTypes') ? undefined : json['serviceTypes'],
+        'marketTypes': !exists(json, 'marketTypes') ? undefined : json['marketTypes'],
         'productId': !exists(json, 'productId') ? undefined : json['productId'],
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
@@ -126,7 +141,6 @@ export function UpdateCampaignCommandFromJSONTyped(json: any, ignoreDiscriminato
         'departmentId': !exists(json, 'departmentId') ? undefined : json['departmentId'],
         'responsibleId': !exists(json, 'responsibleId') ? undefined : json['responsibleId'],
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
-        'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
         'statusId': !exists(json, 'statusId') ? undefined : json['statusId'],
         'treatment': !exists(json, 'treatment') ? undefined : TreatmentDtoFromJSON(json['treatment']),
     };
@@ -144,6 +158,9 @@ export function UpdateCampaignCommandToJSON(value?: UpdateCampaignCommand | null
         'id': value.id,
         'name': value.name,
         'productTypeId': value.productTypeId,
+        'businessTypes': value.businessTypes,
+        'serviceTypes': value.serviceTypes,
+        'marketTypes': value.marketTypes,
         'productId': value.productId,
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
@@ -151,7 +168,6 @@ export function UpdateCampaignCommandToJSON(value?: UpdateCampaignCommand | null
         'departmentId': value.departmentId,
         'responsibleId': value.responsibleId,
         'comment': value.comment,
-        'createdBy': value.createdBy,
         'statusId': value.statusId,
         'treatment': TreatmentDtoToJSON(value.treatment),
     };

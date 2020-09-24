@@ -1,32 +1,36 @@
 import { useMemo, useCallback } from 'react'
-import { Category } from 'models/category'
-import { useSelector, useDispatch } from 'react-redux'
+import { SegmentationCategory } from 'models/segmentationCategory'
+import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
-import { categoryEditorActions } from './categoryEditorSlice'
+import { segmentationCategoryEditorActions } from './segmentationCategoryEditorSlice'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 
-interface UseCategoryEditorProps {
+interface UseSegmentationCategoryEditorProps {
   params: Pick<GenericModalFormEditorParams, 'id'>
   handleExit: () => void
   afterClose: () => void
 }
-interface UseCategoryEditorUtils {
+interface UseSegmentationCategoryEditorUtils {
   loading: boolean
-  initialValues: Category
+  initialValues: SegmentationCategory
   handleGetCategory: () => void
-  handleSave: (values: Category) => Promise<void>
+  handleSave: (values: SegmentationCategory) => Promise<void>
   afterCloseExtended: () => void
 }
-export const useCategoryEditor = (props: UseCategoryEditorProps): UseCategoryEditorUtils => {
+export const useSegmentationCategoryEditor = (
+  props: UseSegmentationCategoryEditorProps
+): UseSegmentationCategoryEditorUtils => {
   const { params, handleExit, afterClose } = props
   const { id } = params
 
-  const { getCategory, resetCategoryEditor, saveCategory } = categoryEditorActions
+  const { getCategory, resetCategoryEditor, saveCategory } = segmentationCategoryEditorActions
   const dispatch = useDispatch()
 
-  const { category, editorState } = useSelector((state: RootState) => state.categoryEditor)
-  const initialValues = useMemo((): Category => ({ name: category?.name }), [category])
+  const { category, editorState } = useSelector(
+    (state: RootState) => state.segmentationCategoryEditor
+  )
+  const initialValues = useMemo((): SegmentationCategory => ({ name: category?.name }), [category])
 
   const loading = editorState === FeatureState.Loading
 
@@ -35,8 +39,8 @@ export const useCategoryEditor = (props: UseCategoryEditorProps): UseCategoryEdi
     dispatch(resetCategoryEditor())
   }
 
-  const handleSave = async (values: Category): Promise<void> => {
-    const newCategory: Category = { id, name: values.name }
+  const handleSave = async (values: SegmentationCategory): Promise<void> => {
+    const newCategory: SegmentationCategory = { id, name: values.name }
     const saved: any = await dispatch(saveCategory(newCategory))
     saved && handleExit()
   }

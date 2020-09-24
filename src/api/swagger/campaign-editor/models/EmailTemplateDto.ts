@@ -49,12 +49,6 @@ export interface EmailTemplateDto {
      * @memberof EmailTemplateDto
      */
     templateTypeId?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EmailTemplateDto
-     */
-    uniqueIdentifier?: string;
 }
 
 export function EmailTemplateDtoFromJSON(json: any): EmailTemplateDto {
@@ -72,7 +66,6 @@ export function EmailTemplateDtoFromJSONTyped(json: any, ignoreDiscriminator: bo
         'subject': !exists(json, 'subject') ? undefined : json['subject'],
         'body': !exists(json, 'body') ? undefined : json['body'],
         'templateTypeId': !exists(json, 'templateTypeId') ? undefined : json['templateTypeId'],
-        'uniqueIdentifier': !exists(json, 'unique_Identifier') ? undefined : json['unique_Identifier'],
     };
 }
 
@@ -90,7 +83,6 @@ export function EmailTemplateDtoToJSON(value?: EmailTemplateDto | null): any {
         'subject': value.subject,
         'body': value.body,
         'templateTypeId': value.templateTypeId,
-        'unique_Identifier': value.uniqueIdentifier,
     };
 }
 

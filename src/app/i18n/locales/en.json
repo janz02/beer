@@ -32,6 +32,15 @@
       "name": "Category name"
     }
   },
+  "segmentation-category": {
+    "add": "Add new segmentation category",
+    "editor-create": "Create",
+    "editor-edit": "Edit",
+    "field": {
+      "name": "Category name",
+      "created-date": "Date of creation"
+    }
+  },
   "cashier-editor": {
     "editor-create": "Create cashier",
     "editor-edit": "Edit cashier",
@@ -747,7 +756,8 @@
     "save-profile-success": "Successfully saved the profile."
   },
   "settings": {
-    "campaign-categories": "Campaign categories"
+    "campaign-categories": "Campaign categories",
+    "segmentation-categories": "Segmentation categories"
   },
   "site": {
     "editor-title": "Site",

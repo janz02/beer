@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
-import { categoryListActions } from './categoryListSlice'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { Category } from 'models/category'
+import { segmentationCategoryListActions } from './segmentationCategoryListSlice'
+import { useTableUtils } from 'hooks/useTableUtils'
+import { SegmentationCategory } from 'models/segmentationCategory'
 import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/coupon'
@@ -13,26 +13,28 @@ import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 
-interface UseCategoryListProps {
+interface UseSegmentationCategoryListProps {
   onOpenEditor: (id?: number) => void
 }
 
-export interface UseCategoryListUtils {
+export interface UseSegmentationCategoryListUtils {
   tableProps: ResponsiveTableProps
   popupProps: GenericPopupProps
   resetFilters: () => void
 }
 
-export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUtils => {
+export const useSegmentationCategoryList = (
+  props: UseSegmentationCategoryListProps
+): UseSegmentationCategoryListUtils => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { getCategories, deleteCategory, resetCategoryFilters } = categoryListActions
+  const { getCategories, deleteCategory, resetCategoryFilters } = segmentationCategoryListActions
   const { listParams, categories, listState } = useSelector(
-    (state: RootState) => state.categoryList
+    (state: RootState) => state.segmentationCategoryList
   )
 
-  const [categoryToDelete, setCategoryToDelete] = useState<PopupState<Category>>()
+  const [categoryToDelete, setCategoryToDelete] = useState<PopupState<SegmentationCategory>>()
 
   const loading = listState === FeatureState.Loading
 
@@ -42,24 +44,31 @@ export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUti
     columnConfig,
     actionColumnConfig,
     addKeyProp
-  } = useTableUtils<Category>({
+  } = useTableUtils<SegmentationCategory>({
     listParamsState: listParams,
     filterKeys: ['name'],
     sortWithoutDefaultOption: true,
     getDataAction: getCategories
   })
 
-  const columnsConfig: ColumnType<Category>[] = useMemo(
+  const columnsConfig: ColumnType<SegmentationCategory>[] = useMemo(
     () => [
       columnConfig({
-        title: t('campaign-category.field.name'),
+        title: t('segmentation-category.field.name'),
         key: 'name',
-        sort: true,
-        filterMode: FilterMode.SEARCH
+        sort: true
+        // filterMode: FilterMode.SEARCH
+      }),
+      columnConfig({
+        title: t('segmentation-category.field.created-date'),
+        key: 'createdDate',
+        width: '13rem',
+        renderMode: 'date time'
+        // filterMode: FilterMode.DATEPICKER
       }),
       hasPermission([Roles.Administrator])
         ? actionColumnConfig({
-            render(record: Category) {
+            render(record: SegmentationCategory) {
               return (
                 <CrudButtons
                   onEdit={() => onOpenEditor(record.id)}
@@ -98,6 +107,8 @@ export const useCategoryList = (props: UseCategoryListProps): UseCategoryListUti
   return {
     tableProps,
     popupProps,
-    resetFilters: () => dispatch(resetCategoryFilters())
+    resetFilters: () => {
+      dispatch(resetCategoryFilters())
+    }
   }
 }
