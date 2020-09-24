@@ -753,7 +753,8 @@
   },
   "settings": {
     "campaign-categories": "Campaign categories",
-    "segmentation-categories": "Segmentation categories"
+    "segmentation-categories": "Segmentation categories",
+    "test-group-categories": "Testgroup categories"
   },
   "site": {
     "editor-title": "Site",
@@ -768,6 +769,15 @@
     "table": {
       "address": "Address",
       "name": "Site name"
+    }
+  },
+  "test-group-category": {
+    "add": "Create new testgroup",
+    "editor-create": "Create testgroup",
+    "editor-edit": "Edit testgroup",
+    "field": {
+      "created-date": "Created date",
+      "name": "Testgroup name"
     }
   },
   "user": {

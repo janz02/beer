@@ -5,6 +5,7 @@ import { useCampaignCategoryTab } from './campaignCategories/useCampaignCategory
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
+import { useTestGroupCategoryTab } from './testGroupCategory/useTestGroupCategoryTab'
 import { useSegmentationCategoryTab } from './segmentationCategories/useSegmentationCategoryTab'
 
 export interface SettingsTab {
@@ -18,7 +19,11 @@ export interface SettingsTab {
 }
 
 export const SettingsPage: React.FC = () => {
-  const allTabs = [useCampaignCategoryTab(), useSegmentationCategoryTab()]
+  const allTabs = [
+    useCampaignCategoryTab(),
+    useSegmentationCategoryTab(),
+    useTestGroupCategoryTab()
+  ]
   const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
   const currentTab = permittedTabs.find(x => x.key === currentTabKey)

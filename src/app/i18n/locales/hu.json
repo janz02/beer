@@ -753,7 +753,8 @@
   },
   "settings": {
     "campaign-categories": "Kampány kategóriák",
-    "segmentation-categories": "Szegmentációs kategóriák"
+    "segmentation-categories": "Szegmentációs kategóriák",
+    "test-group-categories": "Tesztcsoport osztályok"
   },
   "site": {
     "editor-title": "Telephely",
@@ -768,6 +769,15 @@
     "table": {
       "address": "Cím",
       "name": "Telephely név"
+    }
+  },
+  "test-group-category": {
+    "add": "Új tesztosztály létrehozása",
+    "editor-create": "Tesztosztály létrehozása",
+    "editor-edit": "Tesztosztály módosítása",
+    "field": {
+      "created-date": "Létrehozás dátuma",
+      "name": "Tesztosztály megnevezése"
     }
   },
   "user": {
