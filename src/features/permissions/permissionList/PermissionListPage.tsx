@@ -28,9 +28,13 @@ export const PermissionListPage: React.FC = () => {
     dispatch(getPermissions())
   }, [dispatch])
 
-  const { paginationConfig, columnConfig, actionColumnConfig, addKeyProp } = useTableUtils<
-    CampaignPermission
-  >({
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<CampaignPermission>({
     listParamsState: listParams,
     filterKeys: ['name'],
     getDataAction: getPermissions
@@ -45,8 +49,7 @@ export const PermissionListPage: React.FC = () => {
       columnConfig({
         title: t('permission.field.name'),
         key: 'name',
-        sort: true,
-        filterMode: FilterMode.SEARCH
+        sort: true
       }),
       actionColumnConfig({
         render(record: CampaignPermission) {
@@ -86,7 +89,8 @@ export const PermissionListPage: React.FC = () => {
             loading,
             columns: columnOrder.currentColumns,
             dataSource: addKeyProp(permissions),
-            pagination: paginationConfig
+            pagination: paginationConfig,
+            onChange: handleTableChange
           }}
         />
       </ResponsiveCard>
