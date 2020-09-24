@@ -39,6 +39,24 @@ export interface CreateCampaignCommand {
     productId?: number;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof CreateCampaignCommand
+     */
+    serviceTypes?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CreateCampaignCommand
+     */
+    marketTypes?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CreateCampaignCommand
+     */
+    businessTypes?: Array<number> | null;
+    /**
+     * 
      * @type {Date}
      * @memberof CreateCampaignCommand
      */
@@ -73,12 +91,6 @@ export interface CreateCampaignCommand {
      * @memberof CreateCampaignCommand
      */
     comment?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateCampaignCommand
-     */
-    statusId?: number;
 }
 
 export function CreateCampaignCommandFromJSON(json: any): CreateCampaignCommand {
@@ -94,13 +106,15 @@ export function CreateCampaignCommandFromJSONTyped(json: any, ignoreDiscriminato
         'name': !exists(json, 'name') ? undefined : json['name'],
         'productTypeId': !exists(json, 'productTypeId') ? undefined : json['productTypeId'],
         'productId': !exists(json, 'productId') ? undefined : json['productId'],
+        'serviceTypes': !exists(json, 'serviceTypes') ? undefined : json['serviceTypes'],
+        'marketTypes': !exists(json, 'marketTypes') ? undefined : json['marketTypes'],
+        'businessTypes': !exists(json, 'businessTypes') ? undefined : json['businessTypes'],
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
         'requesterId': !exists(json, 'requesterId') ? undefined : json['requesterId'],
         'departmentId': !exists(json, 'departmentId') ? undefined : json['departmentId'],
         'responsibleId': !exists(json, 'responsibleId') ? undefined : json['responsibleId'],
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
-        'statusId': !exists(json, 'statusId') ? undefined : json['statusId'],
     };
 }
 
@@ -116,13 +130,15 @@ export function CreateCampaignCommandToJSON(value?: CreateCampaignCommand | null
         'name': value.name,
         'productTypeId': value.productTypeId,
         'productId': value.productId,
+        'serviceTypes': value.serviceTypes,
+        'marketTypes': value.marketTypes,
+        'businessTypes': value.businessTypes,
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
         'requesterId': value.requesterId,
         'departmentId': value.departmentId,
         'responsibleId': value.responsibleId,
         'comment': value.comment,
-        'statusId': value.statusId,
     };
 }
 

@@ -44,12 +44,6 @@ export interface DiscountSegmentDto {
     name?: string | null;
     /**
      * 
-     * @type {string}
-     * @memberof DiscountSegmentDto
-     */
-    segmentDisplayName?: string | null;
-    /**
-     * 
      * @type {SegmentationType}
      * @memberof DiscountSegmentDto
      */
@@ -60,12 +54,6 @@ export interface DiscountSegmentDto {
      * @memberof DiscountSegmentDto
      */
     segmentationCategoryId?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DiscountSegmentDto
-     */
-    segmentationCategoryName?: string | null;
     /**
      * 
      * @type {number}
@@ -110,10 +98,8 @@ export function DiscountSegmentDtoFromJSONTyped(json: any, ignoreDiscriminator: 
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'segmentDisplayName': !exists(json, 'segmentDisplayName') ? undefined : json['segmentDisplayName'],
         'type': !exists(json, 'type') ? undefined : SegmentationTypeFromJSON(json['type']),
         'segmentationCategoryId': !exists(json, 'segmentationCategoryId') ? undefined : json['segmentationCategoryId'],
-        'segmentationCategoryName': !exists(json, 'segmentationCategoryName') ? undefined : json['segmentationCategoryName'],
         'referenceSegmentationId': !exists(json, 'referenceSegmentationId') ? undefined : json['referenceSegmentationId'],
         'segmentSize': !exists(json, 'segmentSize') ? undefined : json['segmentSize'],
         'cumulativeIntersection': !exists(json, 'cumulativeIntersection') ? undefined : json['cumulativeIntersection'],
@@ -133,10 +119,8 @@ export function DiscountSegmentDtoToJSON(value?: DiscountSegmentDto | null): any
         
         'id': value.id,
         'name': value.name,
-        'segmentDisplayName': value.segmentDisplayName,
         'type': SegmentationTypeToJSON(value.type),
         'segmentationCategoryId': value.segmentationCategoryId,
-        'segmentationCategoryName': value.segmentationCategoryName,
         'referenceSegmentationId': value.referenceSegmentationId,
         'segmentSize': value.segmentSize,
         'cumulativeIntersection': value.cumulativeIntersection,

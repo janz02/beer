@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { Category } from 'models/category'
+import { CampaignCategory } from 'models/campaignCategory'
 import { api } from 'api'
 import { GetCategoryRequest } from 'api/swagger/coupon'
-import { categoryListActions } from '../categoryList/categoryListSlice'
+import { campaignCategoryListActions } from '../categoryList/campaignCategoryListSlice'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
 
 interface CouponCategoryEditorState {
   id?: number
-  category?: Category | null
+  category?: CampaignCategory | null
   editorState: FeatureState
 }
 
@@ -19,18 +19,18 @@ const initialState: CouponCategoryEditorState = {
 }
 
 const categoryEditorSlice = createSlice({
-  name: 'categoryEditor',
+  name: 'campaignCategoryEditor',
   initialState,
   reducers: {
     resetCategoryEditor: () => initialState,
     setEditorState: (state, action: PayloadAction<FeatureState>) => {
       state.editorState = action.payload
     },
-    getCategorySuccess(state, action: PayloadAction<Category>) {
+    getCategorySuccess(state, action: PayloadAction<CampaignCategory>) {
       state.category = action.payload
       state.editorState = FeatureState.Success
     },
-    saveCategorySuccess(state, action: PayloadAction<Category>) {
+    saveCategorySuccess(state, action: PayloadAction<CampaignCategory>) {
       message.success(i18n.t('common.message.save-success'), 5)
       state.category = action.payload
       state.editorState = FeatureState.Success
@@ -46,13 +46,13 @@ const getCategory = (params: GetCategoryRequest): AppThunk => async dispatch => 
   dispatch(setEditorState(FeatureState.Loading))
   try {
     const response = await api.coupon.categories.getCategory(params)
-    dispatch(getCategorySuccess(response as Category))
+    dispatch(getCategorySuccess(response as CampaignCategory))
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
   }
 }
 
-const saveCategory = (category: Category): AppThunk => async dispatch => {
+const saveCategory = (category: CampaignCategory): AppThunk => async dispatch => {
   dispatch(setEditorState(FeatureState.Loading))
 
   let id = category?.id
@@ -73,7 +73,7 @@ const saveCategory = (category: Category): AppThunk => async dispatch => {
       id = newId
     }
     dispatch(saveCategorySuccess({ ...category, id }))
-    dispatch(categoryListActions.getCategories())
+    dispatch(campaignCategoryListActions.getCategories())
     return true
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
@@ -81,10 +81,10 @@ const saveCategory = (category: Category): AppThunk => async dispatch => {
   }
 }
 
-export const categoryEditorActions = {
+export const campaignCategoryEditorActions = {
   resetCategoryEditor,
   getCategory,
   saveCategory
 }
 
-export const categoryEditorReducer = categoryEditorSlice.reducer
+export const campaignCategoryEditorReducer = categoryEditorSlice.reducer
