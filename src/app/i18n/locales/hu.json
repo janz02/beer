@@ -38,6 +38,9 @@
     },
     "list": {
       "title": "ÜP History"
+    },
+    "modal": {
+      "title": "Tárgy"
     }
   },
   "campaign-category": {

@@ -32,7 +32,8 @@ export const BpHistoryListPage: React.FC = () => {
           scroll={{ x: true }}
         />
         <BpHistoryViewer
-          content={control.templateBody}
+          title={control.templateModal.title}
+          content={control.templateModal.content}
           onCancel={control.handleTemplateCloseClick}
         />
       </ResponsiveCard>

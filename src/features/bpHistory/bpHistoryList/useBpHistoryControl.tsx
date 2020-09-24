@@ -22,7 +22,10 @@ interface BpHistoryControl<T> {
   source: Array<T>
   paginationConfig: false | TablePaginationConfig
   columnOrder: UseColumnOrderFeatures<T>
-  templateBody: string | null
+  templateModal: {
+    title: string | null
+    content: string | null
+  }
   handleResetFilters: () => void
   handleTemplateCloseClick: () => void
 }
@@ -133,7 +136,10 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
     loading,
     columnOrder,
     paginationConfig,
-    templateBody: template?.body || null,
+    templateModal: {
+      content: template?.body || null,
+      title: template?.subject || null
+    },
     source: addKeyProp(bpHistoryItems),
     handleResetFilters,
     handleTemplateCloseClick

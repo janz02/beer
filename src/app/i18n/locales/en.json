@@ -38,6 +38,9 @@
     },
     "list": {
       "title": "BP History"
+    },
+    "modal": {
+      "title": "Subject"
     }
   },
   "campaign-category": {
