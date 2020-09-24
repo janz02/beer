@@ -19,6 +19,7 @@ import { segmentationCategoryEditorReducer } from 'features/settings/segmentatio
 import { campaignCategoryEditorReducer } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
+import { bpHistoryReducer } from 'features/bpHistory/bpHistorySlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
 import { createBrowserHistory } from 'history'
 
@@ -47,7 +48,8 @@ export const rootReducer = combineReducers({
   siteEditor: siteEditorReducer,
   newsletterEditor: newsletterEditorReducer,
   userAccess: userAccessReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  bpHistory: bpHistoryReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

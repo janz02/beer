@@ -55,6 +55,9 @@ t('user.role-short.partnermanager')
 t('user.role-short.mainpartnercontact')
 t('user.role-short.normalpartnercontact')
 
+t(`enum.channel-type.Email`)
+t(`enum.channel-type.Phone`)
+
 // Boolean mappings
 t(`user-access.field.partnerType.major`)
 t(`user-access.field.partnerType.normal`)
