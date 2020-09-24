@@ -12,10 +12,10 @@ import { useCategoryList } from './categoryList/useCategoryList'
 
 export const useCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
-  const { id } = useParams()
+  const { tab, id } = useParams()
 
   const modalUtils = useGenericModalFormEditorUtils({
-    dataId: id,
+    dataId: tab === 'categories' ? id : undefined,
     rootRoute: '/settings',
     detailRoute: '/categories'
   })

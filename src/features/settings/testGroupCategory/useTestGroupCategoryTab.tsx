@@ -12,10 +12,10 @@ import { TestGroupCategoryTab } from './TestGroupCategoryTab'
 
 export const useTestGroupCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
-  const { id } = useParams()
+  const { tab, id } = useParams()
 
   const modalUtils = useGenericModalFormEditorUtils({
-    dataId: id,
+    dataId: tab === 'test-group-categories' ? id : undefined,
     rootRoute: '/settings',
     detailRoute: '/test-group-categories'
   })

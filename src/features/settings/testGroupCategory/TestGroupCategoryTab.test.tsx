@@ -9,7 +9,7 @@ import { Roles } from 'api/swagger/coupon'
 
 jest.mock('app/store')
 
-setupUseParams({ id: 1 })
+setupUseParams({ id: 1, tab: 'test-group-categories' })
 
 setupStore({
   testGroupCategoryList: {
