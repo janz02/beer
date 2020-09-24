@@ -130,6 +130,7 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
         sort: true
       }),
       actionColumnConfig({
+        fixed: 'right',
         width: '50px',
         render(record: BpHistoryItem) {
           return <CrudButtons onView={() => handleTemplateViewClick(record.templateId)} />
