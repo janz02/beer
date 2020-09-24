@@ -15,15 +15,21 @@
 
 import * as runtime from '../runtime';
 import {
-    AssignTestGroupCategoriesModel,
-    AssignTestGroupCategoriesModelFromJSON,
-    AssignTestGroupCategoriesModelToJSON,
-    CampaignListItemPaginatedSearchResponse,
-    CampaignListItemPaginatedSearchResponseFromJSON,
-    CampaignListItemPaginatedSearchResponseToJSON,
-    CampaignModel,
-    CampaignModelFromJSON,
-    CampaignModelToJSON,
+    AssignTestGroupCategoriesCommand,
+    AssignTestGroupCategoriesCommandFromJSON,
+    AssignTestGroupCategoriesCommandToJSON,
+    CampaignListItemVmPaginatedSearchResponse,
+    CampaignListItemVmPaginatedSearchResponseFromJSON,
+    CampaignListItemVmPaginatedSearchResponseToJSON,
+    CampaignVm,
+    CampaignVmFromJSON,
+    CampaignVmToJSON,
+    CreateCampaignCommand,
+    CreateCampaignCommandFromJSON,
+    CreateCampaignCommandToJSON,
+    UpdateCampaignCommand,
+    UpdateCampaignCommandFromJSON,
+    UpdateCampaignCommandToJSON,
 } from '../models';
 
 export interface ApproveCampaignRequest {
@@ -31,7 +37,7 @@ export interface ApproveCampaignRequest {
 }
 
 export interface CreateCampaignRequest {
-    campaignModel?: CampaignModel;
+    createCampaignCommand?: CreateCampaignCommand;
 }
 
 export interface DeleteCampaignRequest {
@@ -47,12 +53,35 @@ export interface GetCampaignRequest {
 }
 
 export interface GetCampaignsRequest {
-    _queryParameters?: { [key: string]: string; };
+    name?: string;
+    isTechnical?: boolean;
+    technicalName?: string;
+    responsible?: string;
+    createdBy?: string;
+    startDateFrom?: string;
+    realStartDateFrom?: string;
+    startDateTo?: string;
+    realStartDateTo?: string;
+    endDateFrom?: string;
+    realEndDateFrom?: string;
+    endDateTo?: string;
+    realEndDateTo?: string;
+    createdDateFrom?: string;
+    createdDateTo?: string;
+    status?: string;
+    productId?: string;
+    statuses?: Array<string>;
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface SendCampaignToTestGroupRequest {
     campaignId: string;
-    assignTestGroupCategoriesModel?: AssignTestGroupCategoriesModel;
+    assignTestGroupCategoriesCommand?: AssignTestGroupCategoriesCommand;
 }
 
 export interface StartCampaignImmediatelyRequest {
@@ -64,7 +93,7 @@ export interface StopCampaignImmediatelyRequest {
 }
 
 export interface UpdateCampaignRequest {
-    campaignModel?: CampaignModel;
+    updateCampaignCommand?: UpdateCampaignCommand;
 }
 
 /**
@@ -121,11 +150,11 @@ export class CampaignsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Campaigns/Save`,
+            path: `/api/Campaigns/Create`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CampaignModelToJSON(requestParameters.campaignModel),
+            body: CreateCampaignCommandToJSON(requestParameters.createCampaignCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -208,7 +237,7 @@ export class CampaignsApi extends runtime.BaseAPI {
     /**
      * Query for a dedicates campaign dentified by id.
      */
-    async getCampaignRaw(requestParameters: GetCampaignRequest): Promise<runtime.ApiResponse<CampaignModel>> {
+    async getCampaignRaw(requestParameters: GetCampaignRequest): Promise<runtime.ApiResponse<CampaignVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCampaign.');
         }
@@ -228,26 +257,118 @@ export class CampaignsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignVmFromJSON(jsonValue));
     }
 
     /**
      * Query for a dedicates campaign dentified by id.
      */
-    async getCampaign(requestParameters: GetCampaignRequest): Promise<CampaignModel> {
+    async getCampaign(requestParameters: GetCampaignRequest): Promise<CampaignVm> {
         const response = await this.getCampaignRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Ther is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the enduser.
+     * Ther is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
      * Returns the campaigns for the actual query.
      */
-    async getCampaignsRaw(requestParameters: GetCampaignsRequest): Promise<runtime.ApiResponse<CampaignListItemPaginatedSearchResponse>> {
+    async getCampaignsRaw(requestParameters: GetCampaignsRequest): Promise<runtime.ApiResponse<CampaignListItemVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
+
+        if (requestParameters.isTechnical !== undefined) {
+            queryParameters['IsTechnical'] = requestParameters.isTechnical;
+        }
+
+        if (requestParameters.technicalName !== undefined) {
+            queryParameters['TechnicalName'] = requestParameters.technicalName;
+        }
+
+        if (requestParameters.responsible !== undefined) {
+            queryParameters['Responsible'] = requestParameters.responsible;
+        }
+
+        if (requestParameters.createdBy !== undefined) {
+            queryParameters['CreatedBy'] = requestParameters.createdBy;
+        }
+
+        if (requestParameters.startDateFrom !== undefined) {
+            queryParameters['StartDateFrom'] = requestParameters.startDateFrom;
+        }
+
+        if (requestParameters.realStartDateFrom !== undefined) {
+            queryParameters['RealStartDateFrom'] = requestParameters.realStartDateFrom;
+        }
+
+        if (requestParameters.startDateTo !== undefined) {
+            queryParameters['StartDateTo'] = requestParameters.startDateTo;
+        }
+
+        if (requestParameters.realStartDateTo !== undefined) {
+            queryParameters['RealStartDateTo'] = requestParameters.realStartDateTo;
+        }
+
+        if (requestParameters.endDateFrom !== undefined) {
+            queryParameters['EndDateFrom'] = requestParameters.endDateFrom;
+        }
+
+        if (requestParameters.realEndDateFrom !== undefined) {
+            queryParameters['RealEndDateFrom'] = requestParameters.realEndDateFrom;
+        }
+
+        if (requestParameters.endDateTo !== undefined) {
+            queryParameters['EndDateTo'] = requestParameters.endDateTo;
+        }
+
+        if (requestParameters.realEndDateTo !== undefined) {
+            queryParameters['RealEndDateTo'] = requestParameters.realEndDateTo;
+        }
+
+        if (requestParameters.createdDateFrom !== undefined) {
+            queryParameters['CreatedDateFrom'] = requestParameters.createdDateFrom;
+        }
+
+        if (requestParameters.createdDateTo !== undefined) {
+            queryParameters['CreatedDateTo'] = requestParameters.createdDateTo;
+        }
+
+        if (requestParameters.status !== undefined) {
+            queryParameters['Status'] = requestParameters.status;
+        }
+
+        if (requestParameters.productId !== undefined) {
+            queryParameters['ProductId'] = requestParameters.productId;
+        }
+
+        if (requestParameters.statuses) {
+            queryParameters['Statuses'] = requestParameters.statuses;
+        }
+
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -263,21 +384,21 @@ export class CampaignsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignListItemPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignListItemVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
-     * Ther is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the enduser.
+     * Ther is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
      * Returns the campaigns for the actual query.
      */
-    async getCampaigns(requestParameters: GetCampaignsRequest): Promise<CampaignListItemPaginatedSearchResponse> {
+    async getCampaigns(requestParameters: GetCampaignsRequest): Promise<CampaignListItemVmPaginatedSearchResponse> {
         const response = await this.getCampaignsRaw(requestParameters);
         return await response.value();
     }
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups for the indicated model   identified campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups for the indicated model   identified campaign.
      */
     async sendCampaignToTestGroupRaw(requestParameters: SendCampaignToTestGroupRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.campaignId === null || requestParameters.campaignId === undefined) {
@@ -299,7 +420,7 @@ export class CampaignsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: AssignTestGroupCategoriesModelToJSON(requestParameters.assignTestGroupCategoriesModel),
+            body: AssignTestGroupCategoriesCommandToJSON(requestParameters.assignTestGroupCategoriesCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -307,7 +428,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups for the indicated model   identified campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups for the indicated model   identified campaign.
      */
     async sendCampaignToTestGroup(requestParameters: SendCampaignToTestGroupRequest): Promise<void> {
         await this.sendCampaignToTestGroupRaw(requestParameters);
@@ -384,7 +505,7 @@ export class CampaignsApi extends runtime.BaseAPI {
     /**
      * Update the current instance with the fulfilled model
      */
-    async updateCampaignRaw(requestParameters: UpdateCampaignRequest): Promise<runtime.ApiResponse<CampaignModel>> {
+    async updateCampaignRaw(requestParameters: UpdateCampaignRequest): Promise<runtime.ApiResponse<CampaignVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -400,16 +521,16 @@ export class CampaignsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: CampaignModelToJSON(requestParameters.campaignModel),
+            body: UpdateCampaignCommandToJSON(requestParameters.updateCampaignCommand),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignVmFromJSON(jsonValue));
     }
 
     /**
      * Update the current instance with the fulfilled model
      */
-    async updateCampaign(requestParameters: UpdateCampaignRequest): Promise<CampaignModel> {
+    async updateCampaign(requestParameters: UpdateCampaignRequest): Promise<CampaignVm> {
         const response = await this.updateCampaignRaw(requestParameters);
         return await response.value();
     }

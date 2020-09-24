@@ -15,16 +15,22 @@
 
 import * as runtime from '../runtime';
 import {
-    SegmentationCategory,
-    SegmentationCategoryFromJSON,
-    SegmentationCategoryToJSON,
-    SegmentationCategoryPaginatedSearchResponse,
-    SegmentationCategoryPaginatedSearchResponseFromJSON,
-    SegmentationCategoryPaginatedSearchResponseToJSON,
+    CreateSegmentationCategoryCommand,
+    CreateSegmentationCategoryCommandFromJSON,
+    CreateSegmentationCategoryCommandToJSON,
+    SegmentationCategoryVm,
+    SegmentationCategoryVmFromJSON,
+    SegmentationCategoryVmToJSON,
+    SegmentationCategoryVmPaginatedSearchResponse,
+    SegmentationCategoryVmPaginatedSearchResponseFromJSON,
+    SegmentationCategoryVmPaginatedSearchResponseToJSON,
+    UpdateSegmentationCategoryCommand,
+    UpdateSegmentationCategoryCommandFromJSON,
+    UpdateSegmentationCategoryCommandToJSON,
 } from '../models';
 
 export interface CreateSegmentationCategoryRequest {
-    segmentationCategory?: SegmentationCategory;
+    createSegmentationCategoryCommand?: CreateSegmentationCategoryCommand;
 }
 
 export interface DeleteSegmentationCategoryRequest {
@@ -36,7 +42,12 @@ export interface GetManySegmentationCategoriesRequest {
 }
 
 export interface GetSegmentationCategoriesRequest {
-    _queryParameters?: { [key: string]: string; };
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface GetSegmentationCategoryRequest {
@@ -45,7 +56,7 @@ export interface GetSegmentationCategoryRequest {
 
 export interface UpdateSegmentationCategoryRequest {
     id: number;
-    segmentationCategory?: SegmentationCategory;
+    updateSegmentationCategoryCommand?: UpdateSegmentationCategoryCommand;
 }
 
 /**
@@ -72,7 +83,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: SegmentationCategoryToJSON(requestParameters.segmentationCategory),
+            body: CreateSegmentationCategoryCommandToJSON(requestParameters.createSegmentationCategoryCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -124,7 +135,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the segmentation categories identified by the ids.
      */
-    async getManySegmentationCategoriesRaw(requestParameters: GetManySegmentationCategoriesRequest): Promise<runtime.ApiResponse<Array<SegmentationCategory>>> {
+    async getManySegmentationCategoriesRaw(requestParameters: GetManySegmentationCategoriesRequest): Promise<runtime.ApiResponse<Array<SegmentationCategoryVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -144,13 +155,13 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SegmentationCategoryFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SegmentationCategoryVmFromJSON));
     }
 
     /**
      * Returns the segmentation categories identified by the ids.
      */
-    async getManySegmentationCategories(requestParameters: GetManySegmentationCategoriesRequest): Promise<Array<SegmentationCategory>> {
+    async getManySegmentationCategories(requestParameters: GetManySegmentationCategoriesRequest): Promise<Array<SegmentationCategoryVm>> {
         const response = await this.getManySegmentationCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -158,11 +169,31 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the segmentation categories for the actual query.
      */
-    async getSegmentationCategoriesRaw(requestParameters: GetSegmentationCategoriesRequest): Promise<runtime.ApiResponse<SegmentationCategoryPaginatedSearchResponse>> {
+    async getSegmentationCategoriesRaw(requestParameters: GetSegmentationCategoriesRequest): Promise<runtime.ApiResponse<SegmentationCategoryVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -178,13 +209,13 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationCategoryPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationCategoryVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the segmentation categories for the actual query.
      */
-    async getSegmentationCategories(requestParameters: GetSegmentationCategoriesRequest): Promise<SegmentationCategoryPaginatedSearchResponse> {
+    async getSegmentationCategories(requestParameters: GetSegmentationCategoriesRequest): Promise<SegmentationCategoryVmPaginatedSearchResponse> {
         const response = await this.getSegmentationCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -192,7 +223,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
     /**
      * Gets the requested segmentation category, identified by id.
      */
-    async getSegmentationCategoryRaw(requestParameters: GetSegmentationCategoryRequest): Promise<runtime.ApiResponse<SegmentationCategory>> {
+    async getSegmentationCategoryRaw(requestParameters: GetSegmentationCategoryRequest): Promise<runtime.ApiResponse<SegmentationCategoryVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSegmentationCategory.');
         }
@@ -212,13 +243,13 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationCategoryFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationCategoryVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested segmentation category, identified by id.
      */
-    async getSegmentationCategory(requestParameters: GetSegmentationCategoryRequest): Promise<SegmentationCategory> {
+    async getSegmentationCategory(requestParameters: GetSegmentationCategoryRequest): Promise<SegmentationCategoryVm> {
         const response = await this.getSegmentationCategoryRaw(requestParameters);
         return await response.value();
     }
@@ -247,7 +278,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: SegmentationCategoryToJSON(requestParameters.segmentationCategory),
+            body: UpdateSegmentationCategoryCommandToJSON(requestParameters.updateSegmentationCategoryCommand),
         });
 
         return new runtime.VoidApiResponse(response);

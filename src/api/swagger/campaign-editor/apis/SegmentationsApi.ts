@@ -15,29 +15,32 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateSegmentationFromCsv,
-    CreateSegmentationFromCsvFromJSON,
-    CreateSegmentationFromCsvToJSON,
-    CreateUpdateSegmentation,
-    CreateUpdateSegmentationFromJSON,
-    CreateUpdateSegmentationToJSON,
-    DiscountSegmentModel,
-    DiscountSegmentModelFromJSON,
-    DiscountSegmentModelToJSON,
-    SegmentListItemPaginatedSearchResponse,
-    SegmentListItemPaginatedSearchResponseFromJSON,
-    SegmentListItemPaginatedSearchResponseToJSON,
-    SegmentModel,
-    SegmentModelFromJSON,
-    SegmentModelToJSON,
+    CreateSegmentationFromCsvCommand,
+    CreateSegmentationFromCsvCommandFromJSON,
+    CreateSegmentationFromCsvCommandToJSON,
+    CreateUpdateSegmentationCommand,
+    CreateUpdateSegmentationCommandFromJSON,
+    CreateUpdateSegmentationCommandToJSON,
+    DiscountSegmentVm,
+    DiscountSegmentVmFromJSON,
+    DiscountSegmentVmToJSON,
+    SegmentListItemVmPaginatedSearchResponse,
+    SegmentListItemVmPaginatedSearchResponseFromJSON,
+    SegmentListItemVmPaginatedSearchResponseToJSON,
+    SegmentationType,
+    SegmentationTypeFromJSON,
+    SegmentationTypeToJSON,
+    SegmentationVm,
+    SegmentationVmFromJSON,
+    SegmentationVmToJSON,
 } from '../models';
 
 export interface CreateFromCsvRequest {
-    createSegmentationFromCsv?: CreateSegmentationFromCsv;
+    createSegmentationFromCsvCommand?: CreateSegmentationFromCsvCommand;
 }
 
 export interface CreateSegmentationRequest {
-    createUpdateSegmentation?: CreateUpdateSegmentation;
+    createUpdateSegmentationCommand?: CreateUpdateSegmentationCommand;
 }
 
 export interface DownloadBusinessPartnersRequest {
@@ -53,11 +56,22 @@ export interface GetSegmentationRequest {
 }
 
 export interface GetSegmentationsRequest {
-    _queryParameters?: { [key: string]: string; };
+    name?: string;
+    createdDateFrom?: string;
+    createdDateTo?: string;
+    categoryName?: string;
+    segmentationCategoryId?: number;
+    type?: SegmentationType;
+    skip?: number;
+    take?: number;
+    orderBy?: string;
+    ids?: Array<number>;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface UpdateSegmentationRequest {
-    createUpdateSegmentation?: CreateUpdateSegmentation;
+    createUpdateSegmentationCommand?: CreateUpdateSegmentationCommand;
 }
 
 export interface UploadCsvForSegmentationRequest {
@@ -89,7 +103,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateSegmentationFromCsvToJSON(requestParameters.createSegmentationFromCsv),
+            body: CreateSegmentationFromCsvCommandToJSON(requestParameters.createSegmentationFromCsvCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -123,7 +137,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUpdateSegmentationToJSON(requestParameters.createUpdateSegmentation),
+            body: CreateUpdateSegmentationCommandToJSON(requestParameters.createUpdateSegmentationCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -174,7 +188,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Get the connected discound based on the id identifier.
      */
-    async getDiscountSegmentationRaw(requestParameters: GetDiscountSegmentationRequest): Promise<runtime.ApiResponse<DiscountSegmentModel>> {
+    async getDiscountSegmentationRaw(requestParameters: GetDiscountSegmentationRequest): Promise<runtime.ApiResponse<DiscountSegmentVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDiscountSegmentation.');
         }
@@ -194,13 +208,13 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DiscountSegmentModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => DiscountSegmentVmFromJSON(jsonValue));
     }
 
     /**
      * Get the connected discound based on the id identifier.
      */
-    async getDiscountSegmentation(requestParameters: GetDiscountSegmentationRequest): Promise<DiscountSegmentModel> {
+    async getDiscountSegmentation(requestParameters: GetDiscountSegmentationRequest): Promise<DiscountSegmentVm> {
         const response = await this.getDiscountSegmentationRaw(requestParameters);
         return await response.value();
     }
@@ -208,7 +222,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Gets the requested segmentation, identified by id.
      */
-    async getSegmentationRaw(requestParameters: GetSegmentationRequest): Promise<runtime.ApiResponse<SegmentModel>> {
+    async getSegmentationRaw(requestParameters: GetSegmentationRequest): Promise<runtime.ApiResponse<SegmentationVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSegmentation.');
         }
@@ -228,13 +242,13 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested segmentation, identified by id.
      */
-    async getSegmentation(requestParameters: GetSegmentationRequest): Promise<SegmentModel> {
+    async getSegmentation(requestParameters: GetSegmentationRequest): Promise<SegmentationVm> {
         const response = await this.getSegmentationRaw(requestParameters);
         return await response.value();
     }
@@ -242,11 +256,55 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Returns the segmentation for the actual query.
      */
-    async getSegmentationsRaw(requestParameters: GetSegmentationsRequest): Promise<runtime.ApiResponse<SegmentListItemPaginatedSearchResponse>> {
+    async getSegmentationsRaw(requestParameters: GetSegmentationsRequest): Promise<runtime.ApiResponse<SegmentListItemVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
+
+        if (requestParameters.createdDateFrom !== undefined) {
+            queryParameters['CreatedDateFrom'] = requestParameters.createdDateFrom;
+        }
+
+        if (requestParameters.createdDateTo !== undefined) {
+            queryParameters['CreatedDateTo'] = requestParameters.createdDateTo;
+        }
+
+        if (requestParameters.categoryName !== undefined) {
+            queryParameters['CategoryName'] = requestParameters.categoryName;
+        }
+
+        if (requestParameters.segmentationCategoryId !== undefined) {
+            queryParameters['SegmentationCategoryId'] = requestParameters.segmentationCategoryId;
+        }
+
+        if (requestParameters.type !== undefined) {
+            queryParameters['Type'] = requestParameters.type;
+        }
+
+        if (requestParameters.skip !== undefined) {
+            queryParameters['Skip'] = requestParameters.skip;
+        }
+
+        if (requestParameters.take !== undefined) {
+            queryParameters['Take'] = requestParameters.take;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['OrderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.ids) {
+            queryParameters['Ids'] = requestParameters.ids;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['Page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -262,13 +320,13 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentListItemPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentListItemVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the segmentation for the actual query.
      */
-    async getSegmentations(requestParameters: GetSegmentationsRequest): Promise<SegmentListItemPaginatedSearchResponse> {
+    async getSegmentations(requestParameters: GetSegmentationsRequest): Promise<SegmentListItemVmPaginatedSearchResponse> {
         const response = await this.getSegmentationsRaw(requestParameters);
         return await response.value();
     }
@@ -293,7 +351,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUpdateSegmentationToJSON(requestParameters.createUpdateSegmentation),
+            body: CreateUpdateSegmentationCommandToJSON(requestParameters.createUpdateSegmentationCommand),
         });
 
         return new runtime.VoidApiResponse(response);
