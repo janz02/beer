@@ -92,7 +92,9 @@ export const getBpHistory = (params: ListRequestParams = {}): AppThunk => async 
       params
     )
 
-    const { items, ...pagination } = await api.campaignEditor.campaignResults.getEvents({}) // todo pagination
+    const { items, ...pagination } = await api.campaignEditor.campaignResults.getEvents(
+      revisedParams
+    )
 
     dispatch(
       getBpHistorySuccess({

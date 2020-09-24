@@ -30,13 +30,14 @@ export const BpHistoryListPage: React.FC = () => {
           dataSource={control.source}
           pagination={control.paginationConfig}
           scroll={{ x: true }}
-        />
-        <BpHistoryViewer
-          title={control.templateModal.title}
-          content={control.templateModal.content}
-          onCancel={control.handleTemplateCloseClick}
+          onChange={control.handleTableChange}
         />
       </ResponsiveCard>
+      <BpHistoryViewer
+        title={control.templateModal.title}
+        content={control.templateModal.content}
+        onCancel={control.handleTemplateCloseClick}
+      />
     </>
   )
 }

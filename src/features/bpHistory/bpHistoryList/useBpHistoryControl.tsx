@@ -28,6 +28,7 @@ interface BpHistoryControl<T> {
   }
   handleResetFilters: () => void
   handleTemplateCloseClick: () => void
+  handleTableChange: () => void
 }
 
 export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
@@ -41,9 +42,13 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
     dispatch(getBpHistory())
   }, [dispatch])
 
-  const { paginationConfig, columnConfig, actionColumnConfig, addKeyProp } = useTableUtils<
-    BpHistoryItem
-  >({
+  const {
+    paginationConfig,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp,
+    handleTableChange
+  } = useTableUtils<BpHistoryItem>({
     listParamsState: listParams,
     filterKeys: ['bpId'],
     getDataAction: getBpHistory
@@ -132,6 +137,8 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
 
   const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.BP_HISTORY)
 
+  const source = useMemo(() => addKeyProp(bpHistoryItems), [addKeyProp, bpHistoryItems])
+
   return {
     loading,
     columnOrder,
@@ -140,8 +147,9 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
       content: template?.body || null,
       title: template?.subject || null
     },
-    source: addKeyProp(bpHistoryItems),
+    source,
     handleResetFilters,
-    handleTemplateCloseClick
+    handleTemplateCloseClick,
+    handleTableChange
   }
 }
