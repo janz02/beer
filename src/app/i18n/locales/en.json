@@ -56,8 +56,8 @@
     "editor-create": "New product",
     "editor-edit": "Edit product",
     "field": {
-      "createdDate": "Product name",
-      "name": "Created date"
+      "createdDate": "Created date",
+      "name": "Product name"
     }
   },
   "segmentation-category": {

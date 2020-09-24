@@ -64,7 +64,6 @@ const {
   resetProductList
 } = productListSlice.actions
 
-// TODO requestParams and response pagination needs to be handled
 const getProducts = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))

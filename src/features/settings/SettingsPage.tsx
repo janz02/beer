@@ -48,7 +48,7 @@ export const SettingsPage: React.FC = () => {
               <TabPanelTitle
                 title={tab.title}
                 icon={tab.icon}
-                badgeProps={{ count: tab.notificationCount, size: 'default' }}
+                badgeProps={{ count: tab.notificationCount }}
               />
             }
           >

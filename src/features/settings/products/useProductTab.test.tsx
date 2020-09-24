@@ -60,48 +60,48 @@ describe('product list tests', () => {
     expect(tabContent.html()).toContain('Product1')
     expect(tabContent.html()).toContain('Product2')
   })
-})
 
-it('admins can create new products', () => {
-  // Arrange
-  setupPermissions([Roles.Administrator])
+  it('admins can create new products', () => {
+    // Arrange
+    setupPermissions([Roles.Administrator])
 
-  // Act
-  const headerContent = render(<ProductTabHeaderContent />)
+    // Act
+    const headerContent = render(<ProductTabHeaderContent />)
 
-  // Assert
-  expect(headerContent.html()).toContain('Add new')
-})
+    // Assert
+    expect(headerContent.html()).toContain('Add new')
+  })
 
-it('other users cannot create new products', () => {
-  // Arrange
-  setupPermissions([])
+  it('other users cannot create new products', () => {
+    // Arrange
+    setupPermissions([])
 
-  // Act
-  const headerContent = render(<ProductTabHeaderContent />)
+    // Act
+    const headerContent = render(<ProductTabHeaderContent />)
 
-  // Assert
-  expect(headerContent.html()).toBeNull()
-})
+    // Assert
+    expect(headerContent.html()).toBeNull()
+  })
 
-it('admins have crud buttons', () => {
-  // Arrange
-  setupPermissions([Roles.Administrator])
+  it('admins have crud buttons', () => {
+    // Arrange
+    setupPermissions([Roles.Administrator])
 
-  // Act
-  const tabContent = render(<ProductTabContent />)
+    // Act
+    const tabContent = render(<ProductTabContent />)
 
-  // Assert
-  expect(tabContent.html()).toContain('aria-label="delete"')
-})
+    // Assert
+    expect(tabContent.html()).toContain('aria-label="delete"')
+  })
 
-it('other users dont have crud buttons', () => {
-  // Arrange
-  setupPermissions([])
+  it('other users dont have crud buttons', () => {
+    // Arrange
+    setupPermissions([])
 
-  // Act
-  const tabContent = render(<ProductTabContent />)
+    // Act
+    const tabContent = render(<ProductTabContent />)
 
-  // Assert
-  expect(tabContent.html()).not.toContain('aria-label="delete"')
+    // Assert
+    expect(tabContent.html()).not.toContain('aria-label="delete"')
+  })
 })
