@@ -90,7 +90,7 @@ export const api = {
     files: new FilesApi(filesConfig),
     information: new InformationFilesMsApi(filesConfig)
   },
-    campaignEditor: {
+  campaignEditor: {
     accounts: new AccountsApi(campaignEditorConfig),
     campaigns: new CampaignsApi(campaignEditorConfig),
     campaignResults: new CampaignResultsApi(campaignEditorConfig),

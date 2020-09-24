@@ -18,16 +18,12 @@ interface PermissionEditorState {
   error: boolean
   loading: boolean
   loadingDelete: boolean
-  loadingState: boolean
-  loadingRegState: boolean
 }
 
 const initialState: PermissionEditorState = {
   error: false,
   loading: false,
-  loadingDelete: false,
-  loadingState: false,
-  loadingRegState: false
+  loadingDelete: false
 }
 
 const permissionEditorSlice = createSlice({

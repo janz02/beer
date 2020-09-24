@@ -9,7 +9,7 @@ import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { useTableUtils } from 'hooks/useTableUtils'
 import { CampaignPermission } from 'models/campaignPermission'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { getPermissions, resetPermissionFilters } from './permissionListSlice'
@@ -24,9 +24,9 @@ export const usePermissionListPage = (): UsePermissionListPageUtils => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const resetFilters = (): void => {
+  const resetFilters = useCallback(() => {
     dispatch(resetPermissionFilters())
-  }
+  }, [dispatch])
 
   const { permissions, loading, listParams } = useSelector(
     (state: RootState) => state.permissionList
@@ -67,22 +67,35 @@ export const usePermissionListPage = (): UsePermissionListPageUtils => {
 
   const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.PERMISSION)
 
-  const tableProps = {
-    loading,
-    columns: columnOrder.currentColumns,
-    dataSource: addKeyProp(permissions),
-    pagination: paginationConfig,
-    onChange: handleTableChange
-  }
+  const tableProps = useMemo(
+    () => ({
+      loading,
+      columns: columnOrder.currentColumns,
+      dataSource: addKeyProp(permissions),
+      pagination: paginationConfig,
+      onChange: handleTableChange
+    }),
+    [
+      addKeyProp,
+      columnOrder.currentColumns,
+      paginationConfig,
+      handleTableChange,
+      loading,
+      permissions
+    ]
+  )
 
-  const headerOptions = (
-    <>
-      <ResetFiltersButton onClick={resetFilters} />
-      <ColumnOrderDropdown {...columnOrder} />
-      <AddButton onClick={() => history.push(`/permissions/new`)}>
-        {t('permission.list.add')}
-      </AddButton>
-    </>
+  const headerOptions = useMemo(
+    () => (
+      <>
+        <ResetFiltersButton onClick={resetFilters} />
+        <ColumnOrderDropdown {...columnOrder} />
+        <AddButton onClick={() => history.push(`/permissions/new`)}>
+          {t('permission.list.add')}
+        </AddButton>
+      </>
+    ),
+    [columnOrder, resetFilters, t]
   )
 
   return {

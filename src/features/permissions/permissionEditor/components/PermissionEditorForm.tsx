@@ -1,6 +1,6 @@
 import './PermissionEditorForm.scss'
 
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { Form, Input, Button, Collapse, List } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { CampaignPermission } from 'models/campaignPermission'
@@ -55,19 +55,25 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
     setFieldsValue
   } = useFormUtils()
 
-  const formLayout = isMobile ? 'vertical' : 'horizontal'
-  const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: { span: 6 },
-          wrapperCol: { span: 14 }
-        }
-      : null
+  const formLayout = useMemo(() => (isMobile ? 'vertical' : 'horizontal'), [isMobile])
+  const formItemLayout = useMemo(
+    () =>
+      formLayout === 'horizontal'
+        ? {
+            labelCol: { span: 6 },
+            wrapperCol: { span: 14 }
+          }
+        : null,
+    [formLayout]
+  )
 
-  const handleSubmit = (values: any): void => {
-    handleSave(values)
-    resetFormFlags()
-  }
+  const handleSubmit = useCallback(
+    (values: any) => {
+      handleSave(values)
+      resetFormFlags()
+    },
+    [handleSave, resetFormFlags]
+  )
 
   useEffect(() => {
     if (isInViewMode) {
@@ -78,9 +84,13 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
     }
   }, [isInViewMode, permission, resetFormFlags, setFieldsValue])
 
-  const backButtonProps: BackButtonProps | undefined = handleBack
-    ? { primary: !modified, onClick: handleBack, label: t('common.go-back-to-list') }
-    : undefined
+  const backButtonProps: BackButtonProps | undefined = useMemo(
+    () =>
+      handleBack
+        ? { primary: !modified, onClick: handleBack, label: t('common.go-back-to-list') }
+        : undefined,
+    [handleBack, modified, t]
+  )
 
   return (
     <ResponsiveCard
