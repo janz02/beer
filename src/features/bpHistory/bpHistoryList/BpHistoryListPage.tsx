@@ -4,8 +4,8 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { BpHistoryViewer } from './BpHistoryViewer'
-import { useBpHistoryControl } from './useBpHistoryControl'
+import { BpHistoryViewer } from '../components/BpHistoryViewer'
+import { useBpHistoryControl } from '../useBpHistoryControl'
 
 export const BpHistoryListPage: React.FC = () => {
   const { t } = useTranslation()
