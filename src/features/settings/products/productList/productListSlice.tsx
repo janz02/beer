@@ -7,7 +7,8 @@ import {
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
   storableListRequestParams,
-  OrderByType
+  OrderByType,
+  Pagination
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
@@ -68,19 +69,21 @@ const getProducts = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().productList.listParams, params)
-    const { items } = await api.products.getProducts({})
+    const { items, ...pagination } = await api.campaignEditor.products.getProducts(revisedParams)
 
     const products =
       items?.map<Product>(c => ({
-        ...(c as any),
-        createdDate: moment(c.createdDate),
-        modifiedDate: moment(c.modifiedDate)
+        ...(c as Product),
+        createdDate: moment(c.createdDate)
       })) ?? []
 
     dispatch(
       getProductsSuccess({
         products: products,
-        listParams: storableListRequestParams(revisedParams, {})
+        listParams: storableListRequestParams(revisedParams, {
+          ...pagination,
+          size: pagination.totalCount
+        } as Pagination)
       })
     )
   } catch (err) {
@@ -96,7 +99,7 @@ const resetProductFilters = (): AppThunk => async dispatch => {
 const deleteProduct = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await api.products.deleteProduct({ id })
+    await api.campaignEditor.products.deleteProduct({ id })
     dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(getState().productList.listParams)
     dispatch(getProducts({ page: newPage }))

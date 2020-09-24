@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../../../hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
 import { productListActions } from './productListSlice'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils } from 'hooks/useTableUtils'
 import { Product } from 'models/product'
 import { ColumnType } from 'antd/lib/table'
 import { CrudButtons } from 'components/buttons/CrudButtons'
@@ -55,9 +55,8 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
       columnConfig({
         title: t('campaign-product.field.createdDate'),
         key: 'createdDate',
-        sort: true,
-        ellipsis: false,
-        filterMode: FilterMode.DATEPICKER
+        width: '13rem',
+        renderMode: 'date time'
       }),
       actionColumnConfig({
         render(record: Product) {

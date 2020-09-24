@@ -45,7 +45,7 @@ const { resetProductEditor } = productEditorSlice.actions
 const getProduct = (params: GetProductRequest): AppThunk => async dispatch => {
   dispatch(setEditorState(FeatureState.Loading))
   try {
-    const response = await api.products.getProduct(params)
+    const response = await api.campaignEditor.products.getProduct(params)
     dispatch(getProductSuccess(response as Product))
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
@@ -58,16 +58,16 @@ const saveProduct = (product: Product): AppThunk => async dispatch => {
   let id = product?.id
   try {
     if (id && !isNaN(id)) {
-      await api.products.updateProduct({
+      await api.campaignEditor.products.updateProduct({
         id,
-        productModel: {
+        updateProductCommand: {
           id,
           name: product.name
         }
       })
     } else {
-      const createdProductId: number = await api.products.createProduct({
-        productModel: {
+      const createdProductId: number = await api.campaignEditor.products.createProduct({
+        createProductCommand: {
           name: product.name
         }
       })
