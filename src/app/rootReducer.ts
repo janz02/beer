@@ -21,6 +21,8 @@ import { partnerContactListReducer } from 'features/partnerContact/list/partnerC
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { bpHistoryReducer } from 'features/bpHistory/bpHistorySlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
+import { testGroupCategoryListReducer } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
+import { testGroupCategoryEditorReducer } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
 import { productListReducer } from 'features/settings/products/productList/productListSlice'
 import { productEditorReducer } from 'features/settings/products/productEditor/productEditorSlice'
 import { createBrowserHistory } from 'history'
@@ -53,6 +55,8 @@ export const rootReducer = combineReducers({
   notification: notificationReducer,
   productList: productListReducer,
   productEditor: productEditorReducer,
+  testGroupCategoryList: testGroupCategoryListReducer,
+  testGroupCategoryEditor: testGroupCategoryEditorReducer,
   bpHistory: bpHistoryReducer
 })
 

@@ -11,7 +11,7 @@ import {
   CloseOutlined,
   StopOutlined
 } from '@ant-design/icons'
-import { useDispatch } from '../../hooks/react-redux-hooks'
+import { useDispatch } from 'hooks/react-redux-hooks'
 import { AppThunk } from 'app/store'
 
 export type PopupType =
