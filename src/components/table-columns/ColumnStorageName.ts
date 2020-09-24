@@ -7,5 +7,6 @@ export enum ColumnStorageName {
   PARTNER = 'partner-columns',
   NEWSLETTER = 'newsletter-columns',
   USER_ACCESS_NKM = 'user-access-nkm-columns',
-  USER_ACCES_PARTNER = 'user-access-partner-columns'
+  USER_ACCES_PARTNER = 'user-access-partner-columns',
+  BP_HISTORY = 'bp-history-columns'
 }

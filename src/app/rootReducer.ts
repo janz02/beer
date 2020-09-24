@@ -19,6 +19,7 @@ import { segmentationCategoryEditorReducer } from 'features/settings/segmentatio
 import { campaignCategoryEditorReducer } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
+import { bpHistoryReducer } from 'features/bpHistory/bpHistorySlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
 import { testGroupCategoryListReducer } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
 import { testGroupCategoryEditorReducer } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
@@ -51,7 +52,8 @@ export const rootReducer = combineReducers({
   userAccess: userAccessReducer,
   notification: notificationReducer,
   testGroupCategoryList: testGroupCategoryListReducer,
-  testGroupCategoryEditor: testGroupCategoryEditorReducer
+  testGroupCategoryEditor: testGroupCategoryEditorReducer,
+  bpHistory: bpHistoryReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>
