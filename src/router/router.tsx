@@ -25,6 +25,7 @@ import { SettingsPage } from 'features/settings/SettingsPage'
 import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
 import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
 import { SiteListPage } from 'features/sites/siteList/SitesListPage'
+import { BpHistoryListPage } from 'features/bpHistory/bpHistoryList/BpHistoryListPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -140,6 +141,12 @@ const Routes = (): JSX.Element => (
       component={NewsletterEditorPage}
     />
     <PrivateRoute exact path="/users" roles={pageViewRoles.users} component={UserAccessPage} />
+    <PrivateRoute
+      exact
+      path="/bp-history"
+      roles={pageViewRoles.bpHistory}
+      component={BpHistoryListPage}
+    />
     <Route path="*" render={onDefaultRoute} />
   </Switch>
 )

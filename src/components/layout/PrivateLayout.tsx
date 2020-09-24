@@ -14,7 +14,8 @@ import {
   UsergroupAddOutlined,
   SendOutlined,
   SettingOutlined,
-  ContactsOutlined
+  ContactsOutlined,
+  HistoryOutlined
 } from '@ant-design/icons'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -104,6 +105,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/contacts',
         icon: <UsergroupAddOutlined />,
         roles: pageViewRoles.contacts
+      },
+      {
+        label: t('menu.bp-history'),
+        link: '/bp-history',
+        icon: <HistoryOutlined />,
+        roles: pageViewRoles.bpHistory
       }
     ],
     [t]

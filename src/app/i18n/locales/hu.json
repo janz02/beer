@@ -24,6 +24,25 @@
       "terms-and-services": "felhasználási feltételeket."
     }
   },
+  "bp-history": {
+    "field": {
+      "bpCode": "ÜP azonosító",
+      "campaignName": "Kampány neve",
+      "campaignResult": "Kampány eredménye",
+      "campaignTechnicalName": "Kampány technikai neve",
+      "channelName": "Csatorna",
+      "contact": "Elérhetőség",
+      "createdDate": "Esemény dátuma",
+      "event": "Esemény",
+      "eventResult": "Esemény eredménye"
+    },
+    "list": {
+      "title": "ÜP History"
+    },
+    "modal": {
+      "title": "Tárgy"
+    }
+  },
   "campaign-category": {
     "add": "Új kampány kategória hozzáadása",
     "editor-create": "Létrehozás",
@@ -91,9 +110,9 @@
     "delete": "Törlés",
     "discard": "Elvetés",
     "edit": "Szerkesztés",
-    "export": "Exportálás",
     "escape": "Bezárás",
     "escape-editor": "Szerkesztés elhagyása",
+    "export": "Exportálás",
     "field": {
       "help": {
         "password-format": "A jelszó 8-64 karakter hosszú, tartalmazzon számot, kis- és nagybetűt, speciális karaktert és ne tartalmazzon ékezetet, illetve szóközt.",
@@ -287,6 +306,10 @@
     "view-count": "Megjelenések száma"
   },
   "enum": {
+    "channel-type": {
+      "Email": "E-mail",
+      "Phone": "Telefon"
+    },
     "notification-type": {
       "CampaignMovedToWaitingState": "Kampány várakozó állapotba került",
       "CouponClosed": "A kampályhoz tartozó kuponokat kikapcsolták",
@@ -330,6 +353,7 @@
       "field-required": "A mező megadása kötelező.",
       "internal": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
+      "no-template": "Nem található sablon azonosító.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
       "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később."
@@ -620,6 +644,7 @@
     "language": "Nyelv"
   },
   "menu": {
+    "bp-history": "ÜP History",
     "campaigns": "Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",

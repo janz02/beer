@@ -26,9 +26,10 @@ import {
   SegmentationsApi,
   SharepointApi,
   TemplatesApi,
-  TestGroupCategoriesApi
+  TestGroupCategoriesApi,
+  CampaignResultsApi
 } from './swagger/campaign-editor'
-import { FilesApi, InformationApi as FileInformationApi } from '../api/swagger/files'
+import { FilesApi, InformationApi as InformationFilesMsApi } from '../api/swagger/files'
 import { errorHandlingMiddleware } from './middleware'
 import { Middleware, Configuration as CouponConfiguration } from '../api/swagger/coupon/runtime'
 import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
@@ -86,10 +87,11 @@ export const api = {
   },
   files: {
     files: new FilesApi(filesConfig),
-    information: new FileInformationApi(filesConfig)
+    information: new InformationFilesMsApi(filesConfig)
   },
   campaignEditor: {
     campaigns: new CampaignsApi(campaignEditorConfig),
+    campaignResults: new CampaignResultsApi(campaignEditorConfig),
     permissions: new PermissionsApi(campaignEditorConfig),
     products: new ProductsApi(campaignEditorConfig),
     segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig),

@@ -24,6 +24,25 @@
       "terms-and-services": "Terms & Services"
     }
   },
+  "bp-history": {
+    "field": {
+      "bpCode": "BP ID",
+      "campaignName": "Campaign name",
+      "campaignResult": "Campaign result",
+      "campaignTechnicalName": "Campaign technical name",
+      "channelName": "Channel",
+      "contact": "Contact",
+      "createdDate": "Event date",
+      "event": "Event",
+      "eventResult": "Event result"
+    },
+    "list": {
+      "title": "BP History"
+    },
+    "modal": {
+      "title": "Subject"
+    }
+  },
   "campaign-category": {
     "add": "Add new campaign category",
     "editor-create": "Create",
@@ -91,9 +110,9 @@
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
-    "export": "Export",
     "escape": "Escape",
     "escape-editor": "Escape editor mode",
+    "export": "Export",
     "field": {
       "help": {
         "password-format": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space.",
@@ -287,6 +306,10 @@
     "view-count": "View count"
   },
   "enum": {
+    "channel-type": {
+      "Email": "E-mail",
+      "Phone": "Phone"
+    },
     "notification-type": {
       "CampaignMovedToWaitingState": "Campaign moved to waiting status",
       "CouponClosed": "Coupon closed",
@@ -330,6 +353,7 @@
       "field-required": "This field is required.",
       "internal": "Unsuccessful communication with the server, try again later.",
       "max-length-exact": "This field must be less then {{max}} characters.",
+      "no-template": "Template ID not found.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",
       "server-unavailable": "Unsuccessful communication with the server, try again later."
@@ -620,6 +644,7 @@
     "language": "Language"
   },
   "menu": {
+    "bp-history": "BP History",
     "campaigns": "Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
