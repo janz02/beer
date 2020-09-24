@@ -15,9 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
-    LanguageModel,
-    LanguageModelFromJSON,
-    LanguageModelToJSON,
+    LanguagesVm,
+    LanguagesVmFromJSON,
+    LanguagesVmToJSON,
 } from '../models';
 
 /**
@@ -28,7 +28,7 @@ export class LanguagesApi extends runtime.BaseAPI {
     /**
      * Returns the languages for the actual query.
      */
-    async getLanguagesRaw(): Promise<runtime.ApiResponse<Array<LanguageModel>>> {
+    async getLanguagesRaw(): Promise<runtime.ApiResponse<Array<LanguagesVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -44,13 +44,13 @@ export class LanguagesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LanguageModelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LanguagesVmFromJSON));
     }
 
     /**
      * Returns the languages for the actual query.
      */
-    async getLanguages(): Promise<Array<LanguageModel>> {
+    async getLanguages(): Promise<Array<LanguagesVm>> {
         const response = await this.getLanguagesRaw();
         return await response.value();
     }

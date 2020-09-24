@@ -15,9 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
-    UserSettingDto,
-    UserSettingDtoFromJSON,
-    UserSettingDtoToJSON,
+    UserSettingsVm,
+    UserSettingsVmFromJSON,
+    UserSettingsVmToJSON,
 } from '../models';
 
 export interface SetLanguageRequest {
@@ -32,7 +32,7 @@ export class UserSettingsApi extends runtime.BaseAPI {
     /**
      * Get current user\'s setting
      */
-    async getUserSettingRaw(): Promise<runtime.ApiResponse<UserSettingDto>> {
+    async getUserSettingRaw(): Promise<runtime.ApiResponse<UserSettingsVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -48,13 +48,13 @@ export class UserSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserSettingDtoFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserSettingsVmFromJSON(jsonValue));
     }
 
     /**
      * Get current user\'s setting
      */
-    async getUserSetting(): Promise<UserSettingDto> {
+    async getUserSetting(): Promise<UserSettingsVm> {
         const response = await this.getUserSettingRaw();
         return await response.value();
     }
