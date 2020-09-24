@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { SiteFeatureConfig } from './siteListSlice'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { ExportButton } from 'components/buttons/ExportButton'
 
 interface SiteListProps {
   config: SiteFeatureConfig
@@ -20,7 +21,8 @@ export const SiteList: FC<SiteListProps> = props => {
     handleAdd,
     deletePopupProps,
     siteToDelete,
-    resetFilters
+    resetFilters,
+    handleExport
   } = useSiteList({
     config: props.config
   })
@@ -31,6 +33,7 @@ export const SiteList: FC<SiteListProps> = props => {
 
   const headerOptions = (
     <>
+      <ExportButton onClick={handleExport} />
       <ResetFiltersButton onClick={resetFilters} />
       <AddButton onClick={handleAdd}>{t('site-list.add')}</AddButton>
     </>

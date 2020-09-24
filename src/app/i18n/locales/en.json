@@ -52,16 +52,16 @@
     "editor-create": "Create cashier",
     "editor-edit": "Edit cashier",
     "field": {
-      "cashier-id": "Online cashier ID",
+      "cashier-id": "Online cashier Id",
       "cashier-id-help": "Please enter the AP code for that cashier where you will place our digital stamper.",
-      "digital-stamp-id": "Digital stamp ID"
+      "digital-stamp-id": "Digital stamp Id"
     }
   },
   "cashier-list": {
     "add": "Add new cashier",
     "table": {
-      "cashier-id": "Online cashier ID",
-      "digital-stamp-id": "Digital stamp ID"
+      "cashier-id": "Online cashier Id",
+      "digital-stamp-id": "Digital stamp Id"
     },
     "table-title": "Cashiers"
   },
@@ -89,6 +89,7 @@
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
+    "export": "Export",
     "escape": "Escape",
     "escape-editor": "Escape editor mode",
     "field": {
@@ -307,7 +308,7 @@
       "ldap-password-change": "Password could not be changed, the user may not change the password.",
       "login-failed": "Login failed, try later.",
       "newpassword-sameasold": "The new password cannot be the same as the old password, use different one.",
-      "partner-contact-deleted": "__STRING_NOT_TRANSLATED__",
+      "partner-contact-deleted": "The partner contact associated with the e-mail address has been deleted.",
       "password-inconsistent": "The two passwords are not matching, check the entered values.",
       "registration-failed": "Registration failed, try later.",
       "sync-failed": "User sync failed.",
@@ -319,8 +320,8 @@
     "cashier": {
       "cashier-cant-delete": "You don't have permission to delete this cashier.",
       "cashier-cant-save": "You don't have permission to change this cashier.",
-      "cashier-couponId-not-unique": "There is already an online cashier with this ID, choose another one.",
-      "stamp-couponId-not-unique": "There is already a digital stamp with this ID, choose another one."
+      "cashier-couponId-not-unique": "There is already an online cashier with this Id, choose another one.",
+      "stamp-couponId-not-unique": "There is already a digital stamp with this Id, choose another one."
     },
     "comment": {
       "comment-or-state-required": "You must select a state or comment something."
@@ -368,7 +369,7 @@
       "invalid-image-size": "Invalid image dimensions.",
       "invalid-prize-rule-type": "Invalid prize rule type.",
       "not-supported-format": "Unsupported file format.",
-      "too-big": "__STRING_NOT_TRANSLATED__"
+      "too-big": "The uploaded file exceeds maximum file size of 51MB. Please upload something smaller."
     },
     "not-found": "Not found.",
     "notification": {
@@ -383,8 +384,8 @@
     "partner": {
       "cant-change-state": "You don't have permission to change the partner state.",
       "inactive-or-deleted": "Operation cannot be completed, because the partner is deleted or inactive.",
-      "invalid-registration-state-change": "__STRING_NOT_TRANSLATED__",
-      "major-cannot-change-registration-state": "__STRING_NOT_TRANSLATED__",
+      "invalid-registration-state-change": "Invalid partner registration state.",
+      "major-cannot-change-registration-state": "Major partner registration state cannot be changed.",
       "name-must-be-unique": "There is already a partner with that name, choose a different name"
     },
     "partner-contact": {
@@ -394,213 +395,213 @@
       "communication": "The internal server is not available, try again later."
     },
     "segment": {
-      "one-time-use-creation-failed": "__STRING_NOT_TRANSLATED__"
+      "one-time-use-creation-failed": "One time use segment creation has failed. Please try again later!"
     },
     "sendgrid": {
-      "communication": "__STRING_NOT_TRANSLATED__"
+      "communication": "An error has occured while trying to send an email. Please try again later!"
     },
     "unknown-try-again": "Please, try again!",
     "validation": {
       "cashier": {
-        "digital-stamp-id-max-length-30": "__STRING_NOT_TRANSLATED__",
-        "digital-stamp-id-required": "__STRING_NOT_TRANSLATED__",
-        "id-max-length-30": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__"
+        "digital-stamp-id-max-length-30": "Digital stamp Id cannot be longer than 30 characters. Please use a shorter digital stamp Id!",
+        "digital-stamp-id-required": "Digital stamp Id is required for a cashier. Please use a valid digital stamp Id!",
+        "id-max-length-30": "Cashier Id cannot be longer than 30 characters. Please use a shorter cashier Id!",
+        "id-required": "Cashier Id is required for a cashier. Please use a valid cashier Id!"
       },
       "category": {
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-50": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "id-greater-than-0": "Category Id must be greater than 0. Please use a valid category Id!",
+        "id-required": "Category Id is required for a category. Please use a valid category Id!",
+        "name-max-length-50": "Category name cannot be longer than 50 characters. Please use a shorter category name!",
+        "name-required": "Category name is required for a category. Please use a valid category name!"
       },
       "change-password": {
-        "old-password-required": "__STRING_NOT_TRANSLATED__"
+        "old-password-required": "Old password is required for changing your password. Please enter your old password!"
       },
       "common": {
-        "dto-required": "__STRING_NOT_TRANSLATED__",
-        "email-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "email-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "email-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "new-password-required": "__STRING_NOT_TRANSLATED__",
-        "password-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "password-max-length-64": "__STRING_NOT_TRANSLATED__",
-        "password-required": "__STRING_NOT_TRANSLATED__",
-        "phone-max-length-20": "__STRING_NOT_TRANSLATED__",
-        "refresh-token-required": "__STRING_NOT_TRANSLATED__",
-        "user-id-required": "__STRING_NOT_TRANSLATED__",
-        "user-name-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "user-name-required": "__STRING_NOT_TRANSLATED__"
+        "dto-required": "DTO is required for the request. Please check your request!",
+        "email-invalid-format": "The e-mail address is invalid. Please use a valid e-mail address!",
+        "email-max-length-100": "E-mail address cannot be longer than 100 characters. Please use a shorter e-mail address!",
+        "email-required": "E-mail address is required. Please provide a valid e-mail address.",
+        "id-greater-than-0": "Id value must be greater than 0. Please use a valid value!",
+        "id-required": "Id value is required. Please provide a valid value for Id!",
+        "new-password-required": "New password value is required. Please use provide a valid new password!",
+        "password-invalid-format": "The password is invalid. Please provide a valid password value!",
+        "password-max-length-64": "Password cannot be longer than 64 characters. Please use a shorter password!",
+        "password-required": "Password value is required. Please provide a valid password!",
+        "phone-max-length-20": "Phone number cannot be longer than 20 characters. Please use a short phone number!",
+        "refresh-token-required": "Refresh token is required. Please provide a valid refresh token!",
+        "user-id-required": "User Id is required. Please provide a valid user Id!",
+        "user-name-max-length-100": "Username cannot be longer than 100 characters. Please use a shorter username!",
+        "user-name-required": "Username is required. Please provide a valid username!"
       },
       "coupon": {
-        "awarded-campaign-must-be-false": "__STRING_NOT_TRANSLATED__",
-        "big-picture-id-must-be-null-for-banner": "__STRING_NOT_TRANSLATED__",
-        "big-picture-id-required-non-banner": "__STRING_NOT_TRANSLATED__",
+        "awarded-campaign-must-be-false": "Only banner type campaign can be awarded campaign.",
+        "big-picture-id-must-be-null-for-banner": "Banner type campaigns cannot have big pictures.",
+        "big-picture-id-required-non-banner": "Non-banner type campaigns must have big pictures.",
         "comment": {
-          "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-          "id-required": "__STRING_NOT_TRANSLATED__",
-          "max-length-200": "__STRING_NOT_TRANSLATED__"
+          "id-greater-than-0": "Coupon comment Id must be greater than 0. Please provide a valid Id!",
+          "id-required": "Coupon comment Id is required for the action. Please provide a valid coupon comment Id!",
+          "max-length-200": "Coupon comment cannot be longer than 200 characters. Please provide a shorter coupon comment!"
         },
-        "count-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "count-less-than-100000000": "__STRING_NOT_TRANSLATED__",
-        "count-required": "__STRING_NOT_TRANSLATED__",
-        "description-max-length-255": "__STRING_NOT_TRANSLATED__",
-        "description-must-be-null-for-banner": "__STRING_NOT_TRANSLATED__",
-        "description-required-non-banner": "__STRING_NOT_TRANSLATED__",
-        "discount-fix-greater-than-or-equal-1": "__STRING_NOT_TRANSLATED__",
-        "discount-fix-less-than-or-equal-1000000": "__STRING_NOT_TRANSLATED__",
-        "discount-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
-        "discount-percent-greater-than-or-equal-0": "__STRING_NOT_TRANSLATED__",
-        "discount-percent-less-than-or-equal-100": "__STRING_NOT_TRANSLATED__",
-        "discount-required-for-discount": "__STRING_NOT_TRANSLATED__",
-        "discount-type-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
-        "discount-type-required-for-discount": "__STRING_NOT_TRANSLATED__",
-        "discount-value-max-decimal-precision-2": "__STRING_NOT_TRANSLATED__",
-        "draw-date-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
-        "draw-date-required-for-prize": "__STRING_NOT_TRANSLATED__",
-        "end-date-required": "__STRING_NOT_TRANSLATED__",
-        "expire-date-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
-        "expire-date-required-for-discount": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "item-price-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "item-price-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
-        "item-price-required-no-prev-year-average": "__STRING_NOT_TRANSLATED__",
-        "minimum-shopping-value-greater-than-or-equal-0": "__STRING_NOT_TRANSLATED__",
-        "minimum-shopping-value-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
-        "mode-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
-        "mode-required-for-discount": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-60": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__",
-        "online-claim-link-max-length-2000": "__STRING_NOT_TRANSLATED__",
-        "online-claim-link-must-be-null-for-physical": "__STRING_NOT_TRANSLATED__",
-        "online-claim-link-required-for-online": "__STRING_NOT_TRANSLATED__",
-        "previous-basket-value-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "previous-basket-value-must-be-null-non-discount": "__STRING_NOT_TRANSLATED__",
-        "previous-basket-value-required-non-item-price": "__STRING_NOT_TRANSLATED__",
-        "prize-rules-file-id-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
-        "prize-rules-file-id-required-for-prize": "__STRING_NOT_TRANSLATED__",
-        "prize-value-must-be-null-non-prize": "__STRING_NOT_TRANSLATED__",
-        "prize-value-required-for-prize": "__STRING_NOT_TRANSLATED__",
-        "product-details-max-length-2000": "__STRING_NOT_TRANSLATED__",
-        "product-details-must-be-null-for-prize": "__STRING_NOT_TRANSLATED__",
-        "product-details-required-non-prize": "__STRING_NOT_TRANSLATED__",
-        "rank-required": "__STRING_NOT_TRANSLATED__",
-        "small-picture-id-required": "__STRING_NOT_TRANSLATED__",
-        "start-date-required": "__STRING_NOT_TRANSLATED__",
-        "state-required": "__STRING_NOT_TRANSLATED__",
-        "tags-list-required": "__STRING_NOT_TRANSLATED__",
-        "type-required": "__STRING_NOT_TRANSLATED__"
+        "count-greater-than-0": "Coupon count must be greater than 0. Please use a valid number for coupon count!",
+        "count-less-than-100000000": "Coupon count must be less than 100000000. Please use a valid number for coupon count!",
+        "count-required": "Coupon count is required for the action. Please use a valid number for coupon count!",
+        "description-max-length-255": "Coupon description cannot be longer than 255 characters. Please use a shorter description!",
+        "description-must-be-null-for-banner": "Coupon description must be null for banner type coupons.",
+        "description-required-non-banner": "Coupon description is required for non-banner type coupons.",
+        "discount-fix-greater-than-or-equal-1": "Coupon fix discount value must be greater than or equal to 0. Please provide a valid value!",
+        "discount-fix-less-than-or-equal-1000000": "Coupon fix discount value must be less than or equal to 1000000. Please provide a valid value!",
+        "discount-must-be-null-non-discount": "Coupon discount value must be null for non-discount type coupon.",
+        "discount-percent-greater-than-or-equal-0": "Coupon percent discount value must be greater than or equal to 0. Please provide a valid value!",
+        "discount-percent-less-than-or-equal-100": "Coupon percent discount value must be less than or equal to 100. Please provide a valid value!",
+        "discount-required-for-discount": "Coupon discount value is required for discount type coupon.",
+        "discount-type-must-be-null-non-discount": "Discount type must be null for non-discount type coupon.",
+        "discount-type-required-for-discount": "Discount type is required for discount type coupon. Please provide a valid discount type!",
+        "discount-value-max-decimal-precision-2": "Discount value cannot have more than 2 decimal values for precision.",
+        "draw-date-must-be-null-non-prize": "Coupon draw date must be null for non-prize type coupons.",
+        "draw-date-required-for-prize": "Coupon draw date is required for prize type coupons. Please provide a valid draw date!",
+        "end-date-required": "Coupon end date is required for a coupon. Please provide a valid end date!",
+        "expire-date-must-be-null-non-discount": "Coupon expire date must be null for for non-discount type coupons.",
+        "expire-date-required-for-discount": "Coupon expire date is required for discount coupons. Please provide a valid discount coupons!",
+        "id-greater-than-0": "Coupon Id must be greater than 0. Please provide a valid coupon Id!",
+        "id-required": "Coupon Id is required. Please provide a valid coupon Id!",
+        "item-price-greater-than-0": "Coupon item price must be greater than 0. Please provide a valid item price value!",
+        "item-price-must-be-null-non-discount": "Item price for non-discount type coupons must be null.",
+        "item-price-required-no-prev-year-average": "Item price is required for coupons with no previous year average value.",
+        "minimum-shopping-value-greater-than-or-equal-0": "Minimum shopping value must be greater than or equal to 0. Please provide a valid value!",
+        "minimum-shopping-value-must-be-null-non-discount": "Minimum shopping value for non-discount type coupons must be null.",
+        "mode-must-be-null-non-discount": "Coupon mode must be null for non-discount type coupons.",
+        "mode-required-for-discount": "Coupon mode is required for discount type coupons. Please provide a valid mode!",
+        "name-max-length-60": "Coupon name cannot be longer than 60 characters. Please use a shorter name for the coupon!",
+        "name-required": "Coupon name is required. Please provide a valid name for the coupon!",
+        "online-claim-link-max-length-2000": "Coupon online claim link cannot be longer than 200 characters. Please provide a shorter claim link!",
+        "online-claim-link-must-be-null-for-physical": "Coupon online claim must be null for physical type coupons.",
+        "online-claim-link-required-for-online": "Coupon online claim link is required for online type coupons.",
+        "previous-basket-value-greater-than-0": "Coupon previous year average basket value field value must be greater than 0. Please provide a valid value!",
+        "previous-basket-value-must-be-null-non-discount": "Coupon previous year average basket value field must be null for non discount coupons.",
+        "previous-basket-value-required-non-item-price": "Coupon previous year average basket value field is required when no item price is given.",
+        "prize-rules-file-id-must-be-null-non-prize": "A prize rules file must be null for non-prize type coupons.",
+        "prize-rules-file-id-required-for-prize": "A prize rules file is required for prize type coupons. Please provide a valid file!",
+        "prize-value-must-be-null-non-prize": "Prize value must be null for non-prize type coupons.",
+        "prize-value-required-for-prize": "Prize value is required for prize type coupons. Please provide a valid prize value!",
+        "product-details-max-length-2000": "Coupon product details link cannot be longer than 2000 characters. Please use a shorter product details link!",
+        "product-details-must-be-null-for-prize": "Coupon product details link must be null for prize type coupons. Please provide a valid link!",
+        "product-details-required-non-prize": "Coupon product details link is required for non-prize type coupons.",
+        "rank-required": "Coupon rank is required for coupons. Please provide a valid rank!",
+        "small-picture-id-required": "Coupon small picture is required for coupons. Please provide a valid small picture Id!",
+        "start-date-required": "Coupon start date is required. Please provide a valid start date!",
+        "state-required": "Coupon state is required. Please provide a valid coupon state!",
+        "tags-list-required": "Coupon tags list is required. Please provide a valid tag list!",
+        "type-required": "Coupon type is required. Please provide a valid coupon type!"
       },
       "coupon-user-code": {
-        "claim-date-required": "__STRING_NOT_TRANSLATED__",
-        "couponcode-required": "__STRING_NOT_TRANSLATED__"
+        "claim-date-required": "Coupon user code's claim date is required. Please provide a valid claim date!",
+        "couponcode-required": "Coupon user code's coupon code is required. Please provide a valid coupon code!"
       },
       "email": {
-        "content-required": "__STRING_NOT_TRANSLATED__",
-        "is-notification-required": "__STRING_NOT_TRANSLATED__",
-        "recipient-required": "__STRING_NOT_TRANSLATED__",
-        "recipients-email-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "recipients-email-required": "__STRING_NOT_TRANSLATED__",
-        "recipients-required": "__STRING_NOT_TRANSLATED__",
-        "subject-required": "__STRING_NOT_TRANSLATED__",
-        "template-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "template-id-required": "__STRING_NOT_TRANSLATED__",
-        "template-name-required": "__STRING_NOT_TRANSLATED__",
-        "template-version-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "template-version-id-required": "__STRING_NOT_TRANSLATED__"
+        "content-required": "E-mail content is required. Please provide a valid content for the e-mail!",
+        "is-notification-required": "Field value indicating if e-mail is a notification is missing. Please provide a valid value!",
+        "recipient-required": "E-mail recipient is required. Please provide a valid recipient for the e-mail!",
+        "recipients-email-invalid-format": "At least one of the recipient's e-mail address format is invalid. Please check the e-mail addresses!",
+        "recipients-email-required": "At least one of the recipient's e-mail address is missing. Please check that every e-mail address is valid!",
+        "recipients-required": "Recipients e-mail address list is required. Please provide a valid list!",
+        "subject-required": "E-mail subject is required. Please provide a valid e-mail subject!",
+        "template-id-greater-than-0": "E-mail template Id must be greater than 0. Please provide a valid value!",
+        "template-id-required": "E-mail template Id is required. Please provide a template Id!",
+        "template-name-required": "E-mail template name is required. Please provide a valid template name!",
+        "template-version-id-greater-than-0": "E-mail template version Id must be greater than 0. Please provide a valid template version Id!",
+        "template-version-id-required": "E-mail template version Id is required. Please provide a valid template version Id!"
       },
       "file": {
-        "content-required": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__"
+        "content-required": "File content is required. Please provide a valid file content!",
+        "id-required": "File Id is required. Please provide a valid file Id!"
       },
       "notification": {
-        "to-date-greater-than-from-date": "__STRING_NOT_TRANSLATED__",
-        "type-invalid": "__STRING_NOT_TRANSLATED__",
-        "type-required": "__STRING_NOT_TRANSLATED__"
+        "to-date-greater-than-from-date": "The starting date cannot greater than the ending date. Please provide valid dates!",
+        "type-invalid": "The given notification type is invalid. Please provide a valid notification type!",
+        "type-required": "Notification type is required. Please provide a valid notification type!"
       },
       "partner": {
-        "address-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "address-required": "__STRING_NOT_TRANSLATED__",
-        "address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "address-street-number-required": "__STRING_NOT_TRANSLATED__",
-        "address-street-required": "__STRING_NOT_TRANSLATED__",
-        "bank-account-max-length-26": "__STRING_NOT_TRANSLATED__",
-        "bank-account-required": "__STRING_NOT_TRANSLATED__",
-        "contact-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-required": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-street-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-street-number-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-street-number-required": "__STRING_NOT_TRANSLATED__",
-        "mailing-address-street-required": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-150": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__",
-        "registration-allowed-max-length-30": "__STRING_NOT_TRANSLATED__",
-        "registration-allowed-required": "__STRING_NOT_TRANSLATED__",
-        "registration-number-max-length-20": "__STRING_NOT_TRANSLATED__",
-        "registration-number-required": "__STRING_NOT_TRANSLATED__",
-        "registration-state-required": "__STRING_NOT_TRANSLATED__",
-        "state-required": "__STRING_NOT_TRANSLATED__",
-        "tax-number-max-length-20": "__STRING_NOT_TRANSLATED__",
-        "tax-number-required": "__STRING_NOT_TRANSLATED__"
+        "address-max-length-150": "Partner address cannot be longer than 150 characters. Please provide a shorter address!",
+        "address-required": "Partner address is required. Please provide a valid address!",
+        "address-street-max-length-150": "Partner address street name cannot be longer than 150 characters. Please provide a shorter street name!",
+        "address-street-number-max-length-150": "Partner address street number cannot be longer than 150 characters. Please provide a shorter street number!",
+        "address-street-number-required": "Partner address street number is required. Please provide a valid street number!",
+        "address-street-required": "Partner address street name is required. Please provide a valid street name!",
+        "bank-account-max-length-26": "Partner bank account number cannot be longer than 26 characters. Please provide a short bank account number!",
+        "bank-account-required": "Partner bank account number is required. Please provide a valid bank account number!",
+        "contact-required": "Partner contact for the partner is required. Please provide a valid partner contact!",
+        "id-greater-than-0": "Partner Id must be greater than 0. Please provide a valid Id!",
+        "id-required": "Partner Id is required for the action. Please provide a valid Id!",
+        "mailing-address-max-length-150": "Partner mailing address cannot be longer than 150 characters. Please provide a shorter mailing address!",
+        "mailing-address-required": "Partner mailing address is required. Please provide a valid e-mail address!",
+        "mailing-address-street-max-length-150": "Partner mailing address street name cannot be longer than 150 characters. Please provide a shorter street name!",
+        "mailing-address-street-number-max-length-150": "Partner mailing address street number cannot be longer than 150 characters. Please provide a shorter street number!",
+        "mailing-address-street-number-required": "Partner mailing address street number is required. Please provide a valid street number!",
+        "mailing-address-street-required": "Partner mailing address street name is required. Please provide a valid street name!",
+        "name-max-length-150": "Partner name cannot be longer than 150 characters. Please provide a shorter name!",
+        "name-required": "Partner name is required. Please provide a valid partner name!",
+        "registration-allowed-max-length-30": "Partner registration allowed value cannot be longer than 30 characters. Please provide a shorter value!",
+        "registration-allowed-required": "Partner registration allowed is required. Please provide a valid registration allowed value!",
+        "registration-number-max-length-20": "Partner registration number cannot be longer than 20 characters. Please provide a shorter registration number!",
+        "registration-number-required": "Partner registration number is required. Please provide a valid registration number!",
+        "registration-state-required": "Partner registration state is required. Please provide a valid registration state!",
+        "state-required": "Partner state is required. Please provide a valid state!",
+        "tax-number-max-length-20": "Partner tax number cannot be longer than 20 characters. Please provide a shorter tax number!",
+        "tax-number-required": "Partner tax number is required. Please provide a valid tax number!"
       },
       "partner-contact": {
-        "is-active-required": "__STRING_NOT_TRANSLATED__",
-        "query-filters-required": "__STRING_NOT_TRANSLATED__",
-        "query-toggle-required": "__STRING_NOT_TRANSLATED__",
-        "role-invalid": "__STRING_NOT_TRANSLATED__",
-        "role-required": "__STRING_NOT_TRANSLATED__"
+        "is-active-required": "Partner contact active state indicating value is required. Please provide a valid active state value!",
+        "query-filters-required": "Partner contact query filters are required. Please provide valid query filters!",
+        "query-toggle-required": "Partner contact query toggle is required. Please provide a valid query toggle!",
+        "role-invalid": "Partner contact role is invalid. Please provide a valid partner contact role!",
+        "role-required": "Partner contact role is required. Please provide a valid partner contact role!"
       },
       "register-partner-contact": {
-        "partner-code-max-length-10": "__STRING_NOT_TRANSLATED__",
-        "partner-code-required": "__STRING_NOT_TRANSLATED__"
+        "partner-code-max-length-10": "Partner code for registration cannot be longer than 10 characters. Please use a shorter partner code!",
+        "partner-code-required": "Partner code is required for registration. Please use a valid partner code!"
       },
       "register-user": {
-        "city-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "city-required": "__STRING_NOT_TRANSLATED__",
-        "mothers-maiden-name-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "mothers-maiden-name-required": "__STRING_NOT_TRANSLATED__",
-        "place-of-birth-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "place-of-birth-required": "__STRING_NOT_TRANSLATED__"
+        "city-max-length-100": "City name cannot be longer than 100 characters. Please use a shorter city name!",
+        "city-required": "City name is required. Please provide a valid city name!",
+        "mothers-maiden-name-max-length-100": "Mother's maiden name cannot be longer than 100 characters. Please use a shorter mother's maiden name!",
+        "mothers-maiden-name-required": "Mother's maiden name is required. Please provide a valid mother's maiden name!",
+        "place-of-birth-max-length-100": "Place of birth cannot be longer than 100 characters. Please use a shorter place of birth!",
+        "place-of-birth-required": "Place of birth is required. Please provide a valid place of birth!"
       },
       "scoring": {
-        "event-type-required": "__STRING_NOT_TRANSLATED__"
+        "event-type-required": "Scoring event type is required. Please provide a valid event type!"
       },
       "segment": {
-        "email-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "email-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "name-invalid-format": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__",
-        "one-time-use-required": "__STRING_NOT_TRANSLATED__"
+        "email-invalid-format": "At least one of the e-mail addresses are invalid for the segment. Please check the e-mail addresses!",
+        "email-required": "At least one of the e-mail addresses are empty for the segment. Please the e-mail addresses!",
+        "id-greater-than-0": "Segment Id must be greater than 0. Please provide a valid segment Id!",
+        "id-required": "Segment Id is required. Please provide a valid segment Id!",
+        "name-invalid-format": "Segment name is invalid. Please make sure, that the segment name starts with \"PKM\"",
+        "name-required": "Segment name is required. Please make sure, that the segment name starts with \"PKM\"",
+        "one-time-use-required": "One time use value required for the segment. Please provide a value regarding one time use of the segment!"
       },
       "segments": {
-        "list-required": "__STRING_NOT_TRANSLATED__"
+        "list-required": "Segments list is required. Please provide a valid list of segments!"
       },
       "site": {
-        "address-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "address-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-100": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "address-max-length-100": "Site address cannot be longer than 100 characters. Please use a shorter address!",
+        "address-required": "Site address is required. Please provide a valid address!",
+        "id-greater-than-0": "Site Id must be greater than 0. Please use a valid Id!",
+        "id-required": "Site Id is required. Please provide a valid Id!",
+        "name-max-length-100": "Site name cannot be longer than 100 characters. Please use a shorter name!",
+        "name-required": "Site name is required. Please provide a valid site name!"
       },
       "tag": {
-        "category-id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "category-id-required": "__STRING_NOT_TRANSLATED__",
-        "id-greater-than-0": "__STRING_NOT_TRANSLATED__",
-        "id-required": "__STRING_NOT_TRANSLATED__",
-        "value-max-length-50": "__STRING_NOT_TRANSLATED__",
-        "value-required": "__STRING_NOT_TRANSLATED__"
+        "category-id-greater-than-0": "Category Id for the tag must be greater than 0. Please use a valid Category Id!",
+        "category-id-required": "Category Id is required for the tag. Please provide a valid Category Id!",
+        "id-greater-than-0": "Tag Id must be greater than 0. Please use a valid Tag Id!",
+        "id-required": "Tag Id is required. Please provide a valid Tag Id!",
+        "value-max-length-50": "Tag value cannot be longer than 50 characters. Please use a shorter value!",
+        "value-required": "Tag value is required. Please provide a valid value!"
       },
       "tag-category": {
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "name-required": "Tag category name is required. Please provide a valid tag category name!"
       }
     }
   },

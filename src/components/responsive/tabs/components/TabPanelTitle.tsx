@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react'
 import Badge, { BadgeProps } from 'antd/lib/badge'
-import { useIsMediumScreen } from 'hooks'
+import { useIsLargeScreen } from 'hooks'
 
 interface TabPanelTitleProps {
   title: string
@@ -9,7 +9,7 @@ interface TabPanelTitleProps {
 }
 
 export const TabPanelTitle: FC<TabPanelTitleProps> = ({ title, icon, badgeProps }) => {
-  const isMediumScreen = useIsMediumScreen()
+  const isMediumScreen = useIsLargeScreen()
 
   const hasToDisplayTitle = useMemo(() => !isMediumScreen || !icon, [isMediumScreen, icon])
 
