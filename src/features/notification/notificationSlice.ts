@@ -165,7 +165,7 @@ const getNotifications = (): AppThunk => async (dispatch, getState) => {
         return
     }
 
-    const response = await api.notification.getNotifications(newListParams)
+    const response = await api.coupon.notification.getNotifications(newListParams)
 
     const hasMore = response.size && response.to ? response.size > response.to : false
     const loadedMore = response.page ? response.page > 1 : false
@@ -224,7 +224,7 @@ const getRecentNotifications = (): AppThunk => async (dispatch, getState) => {
         break
     }
 
-    const response = await api.notification.getNotifications(queryParams)
+    const response = await api.coupon.notification.getNotifications(queryParams)
 
     let newListContentState: NotificationListState | undefined
     if (listContentState === NotificationListState.Empty) {
@@ -255,21 +255,21 @@ const getRecentNotifications = (): AppThunk => async (dispatch, getState) => {
 
 const readOne = (id: number): AppThunk => async dispatch => {
   try {
-    await api.notification.seenNotification({ id })
+    await api.coupon.notification.seenNotification({ id })
     dispatch(readOneSuccess(id))
   } catch (err) {}
 }
 
 const readAll = (): AppThunk => async dispatch => {
   try {
-    await api.notification.seenAllNotifications()
+    await api.coupon.notification.seenAllNotifications()
     dispatch(readAllSuccess())
   } catch (err) {}
 }
 
 const unReadOne = (id: number): AppThunk => async dispatch => {
   try {
-    await api.notification.unSeenNotification({ id })
+    await api.coupon.notification.unSeenNotification({ id })
     dispatch(unReadOneSuccess(id))
   } catch (err) {}
 }

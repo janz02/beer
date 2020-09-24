@@ -15,8 +15,7 @@ import {
   NotificationsApi,
   NotificationHubApi,
   UserCouponsApi,
-  WalletApi,
-  FilesApi
+  WalletApi
 } from '../api/swagger/coupon'
 import {
   CampaignsApi,
@@ -66,32 +65,38 @@ export const filesConfig: FilesConfiguration = new FilesConfiguration(
 )
 
 export const api = {
-  coupons: new CouponsApi(couponConfig),
-  tags: new TagsApi(couponConfig),
-  couponComments: new CouponCommentsApi(couponConfig),
-  categories: new CategoriesApi(couponConfig),
-  auth: new AuthApi(couponConfig),
-  sites: new SitesApi(couponConfig),
-  partner: new PartnersApi(couponConfig),
-  partnerContacts: new PartnerContactsApi(couponConfig),
-  emailSender: new EmailSenderApi(couponConfig),
-  emailTemplates: new EmailTemplatesApi(couponConfig),
-  segments: new SegmentsApi(couponConfig),
-  cashiers: new CashiersApi(couponConfig),
-  information: new InformationApi(couponConfig),
-  files: new FilesApi(couponConfig), // note: this will be moved to Files MS in the future
-  filesMS: new FilesMsApi(filesConfig), // note: keep this, if FilesApi removed from Coupon MS
-  notification: new NotificationsApi(couponConfig),
-  notificationHub: new NotificationHubApi(couponConfig),
-  userCoupons: new UserCouponsApi(couponConfig),
-  wallet: new WalletApi(couponConfig),
-  campaigns: new CampaignsApi(campaignEditorConfig),
-  permissions: new PermissionsApi(campaignEditorConfig),
-  products: new ProductsApi(campaignEditorConfig),
-  segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig),
-  segmentationQueries: new SegmentationQueriesApi(campaignEditorConfig),
-  segmentations: new SegmentationsApi(campaignEditorConfig),
-  sharepoint: new SharepointApi(campaignEditorConfig),
-  templates: new TemplatesApi(campaignEditorConfig),
-  testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)
+  coupon: {
+    coupons: new CouponsApi(couponConfig),
+    tags: new TagsApi(couponConfig),
+    couponComments: new CouponCommentsApi(couponConfig),
+    categories: new CategoriesApi(couponConfig),
+    auth: new AuthApi(couponConfig),
+    sites: new SitesApi(couponConfig),
+    partner: new PartnersApi(couponConfig),
+    partnerContacts: new PartnerContactsApi(couponConfig),
+    emailSender: new EmailSenderApi(couponConfig),
+    emailTemplates: new EmailTemplatesApi(couponConfig),
+    segments: new SegmentsApi(couponConfig),
+    cashiers: new CashiersApi(couponConfig),
+    information: new InformationApi(couponConfig),
+    notification: new NotificationsApi(couponConfig),
+    notificationHub: new NotificationHubApi(couponConfig),
+    userCoupons: new UserCouponsApi(couponConfig),
+    wallet: new WalletApi(couponConfig)
+  },
+  files: {
+    files: new FilesApi(filesConfig),
+    information: new InformationFilesMsApi(filesConfig)
+  },
+  campaignEditor: {
+    // campaigns: new CampaignsApi(campaignEditorConfig),
+    // permissions: new PermissionsApi(campaignEditorConfig),
+    // products: new ProductsApi(campaignEditorConfig),
+    segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig)
+    // segmentationQueries: new SegmentationQueriesApi(campaignEditorConfig),
+    // segmentations: new SegmentationsApi(campaignEditorConfig),
+    // sharepoint: new SharepointApi(campaignEditorConfig),
+    // templates: new TemplatesApi(campaignEditorConfig),
+    // testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)
+  }
 }

@@ -10,6 +10,7 @@ import {
   storableListRequestParams
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 export enum CouponListTabKey {
   Waiting = 'waiting',
@@ -109,7 +110,7 @@ const getCoupons = (params: ListRequestParams = {}): AppThunk => async (dispatch
       revisedParams.orderBy = 'partner.name'
     }
 
-    const { result, ...pagination } = await api.coupons.getCoupons(revisedParams)
+    const { result, ...pagination } = await api.coupon.coupons.getCoupons(revisedParams)
 
     // Reverting exception because the frontend needs it this way.
     if (revisedParams.orderBy === 'partner.name') {
@@ -145,7 +146,7 @@ const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    await api.coupons.deleteCoupon({ id })
+    await api.coupon.coupons.deleteCoupon({ id })
     dispatch(deleteSuccess())
     const newPage = recalculatePaginationAfterDeletion(getState().campaignList.listParams)
     dispatch(getCoupons({ page: newPage }))
@@ -153,6 +154,17 @@ const deleteCoupon = (id: number): AppThunk => async (dispatch, getState) => {
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
     return { id, error: err.toString() }
+  }
+}
+
+const exportCoupons = (): AppThunk => async (dispatch, getState) => {
+  const { listParams } = getState().campaignList
+
+  try {
+    const file = await api.coupon.coupons.exportCoupons(listParams)
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    return { error: err.toString() }
   }
 }
 
@@ -164,7 +176,8 @@ export const campaignListActions = {
   cancelCampaignDelete,
   getCoupons,
   resetCouponFilters,
-  deleteCoupon
+  deleteCoupon,
+  exportCoupons
 }
 
 export const campaignListReducer = campaignListSlice.reducer

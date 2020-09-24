@@ -20,7 +20,7 @@ The login action leads to the `login thunk` in the authSlice. This action resets
 First async call logins the user:
 
 ```js
-const userVm = await api.auth.login(loginRequest);
+const userVm = await api.coupon.auth.login(loginRequest);
 ```
 
 After dispatching the `loginSuccess`.
@@ -48,13 +48,13 @@ jwtExpiration && sessionStorage.setItem("jwtExpiration", `${jwtExpiration}000`);
 then gets the logged in contact's partner (storing the partner id and partner name in the `state`, and in the `sessionStorage`):
 
 ```js
-const partner = await api.partner.getMyPartner();
+const partner = await api.coupon.partner.getMyPartner();
 ```
 
 and finally gets the partner contact (storing the contact id in the `state`, and in the `sessionStorage`):
 
 ```js
-const contact = await api.partnerContacts.getMyPartnerContact();
+const contact = await api.coupon.partnerContacts.getMyPartnerContact();
 ```
 
 If the user came from a previous page, then gets redirected back, or normally redirected to the home page, if the login proccess was successful.
@@ -75,7 +75,7 @@ Starting from the useAuth hook, under the handleSignup function, we dispatch the
 There is one api call here
 
 ```js
-await api.auth.registerPartnerContact(requestRequest);
+await api.coupon.auth.registerPartnerContact(requestRequest);
 ```
 
 and if it is successful, then the user gets [logged](#login-flow) in.
@@ -89,7 +89,7 @@ Starting from the [useProfile](../profile/useProfile.ts) hook, under the handleF
 There is one api call here
 
 ```js
-await api.auth.changePassword({
+await api.coupon.auth.changePassword({
   changePasswordDto: { newPassword, oldPassword }
 });
 ```

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
-import { useCategoryTab } from './campaignCategory/useCategoryTab'
 import { useProductTab } from './products/useProductTab'
+import { useCampaignCategoryTab } from './campaignCategories/useCampaignCategoryTab'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
+import { useSegmentationCategoryTab } from './segmentationCategories/useSegmentationCategoryTab'
 
 export interface SettingsTab {
   key: string
@@ -19,7 +20,7 @@ export interface SettingsTab {
 }
 
 export const SettingsPage: React.FC = () => {
-  const allTabs = [useCategoryTab(), useProductTab()]
+    const allTabs = [useCampaignCategoryTab(), useSegmentationCategoryTab(), useProductTab()]
   const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)
   const currentTab = permittedTabs.find(x => x.key === currentTabKey)

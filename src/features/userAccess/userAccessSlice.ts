@@ -11,6 +11,9 @@ import { message } from 'antd'
 import i18n from 'app/i18n'
 import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
+import { downloadBlobAsCsv } from 'services/file-reader'
+
+export type UserAccessTab = 'nkm' | 'partner'
 
 interface State {
   nkmUsers: UserAccess[]
@@ -48,7 +51,7 @@ const slice = createSlice({
     resetNkmListParams(state) {
       state.nkmListParams = initialState.nkmListParams
     },
-    resetParterListParams(state) {
+    resetPartnerListParams(state) {
       state.partnerListParams = initialState.partnerListParams
     },
     openEditor(state, action: PayloadAction<UserType>) {
@@ -99,7 +102,7 @@ const slice = createSlice({
 })
 const { openEditor, closeEditor } = slice.actions
 const { setEditorState, setNkmListState, setPartnerListState } = slice.actions
-const { clearUserAccessEditor, reset, resetNkmListParams, resetParterListParams } = slice.actions
+const { clearUserAccessEditor, reset, resetNkmListParams, resetPartnerListParams } = slice.actions
 const {
   getNkmUsersSuccess,
   getPartnerUsersSuccess,
@@ -111,7 +114,7 @@ const getNkmUsers = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setNkmListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().userAccess.nkmListParams, params)
-    const { result, ...pagination } = await api.auth.getNkmPartnerContacts(revisedParams)
+    const { result, ...pagination } = await api.coupon.auth.getNkmPartnerContacts(revisedParams)
     dispatch(
       getNkmUsersSuccess({
         users: result as UserAccess[],
@@ -135,7 +138,7 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
   try {
     dispatch(setPartnerListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().userAccess.partnerListParams, params)
-    const { result, ...pagination } = await api.auth.getPartnerContacts(revisedParams)
+    const { result, ...pagination } = await api.coupon.auth.getPartnerContacts(revisedParams)
 
     dispatch(
       getPartnerUsersSuccess({
@@ -149,14 +152,14 @@ const getPartnerUsers = (params: ListRequestParams = {}): AppThunk => async (
 }
 
 const resetPartnerUsersFilters = (): AppThunk => async dispatch => {
-  dispatch(resetParterListParams())
+  dispatch(resetPartnerListParams())
   dispatch(getPartnerUsers())
 }
 
 const inspectUserAccess = (userType: UserType, id: number): AppThunk => async dispatch => {
   try {
     dispatch(openEditor(userType))
-    const response = await api.auth.getPartnerContactState({ id })
+    const response = await api.coupon.auth.getPartnerContactState({ id })
     dispatch(getUserSuccess({ ...response } as UserAccess))
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
@@ -169,7 +172,7 @@ const saveUserAccess = (role: Roles, isActive: boolean): AppThunk => async (disp
     const type = getState().userAccess.editedUserType
     if (!id) return
     dispatch(setEditorState(FeatureState.Loading))
-    await api.auth.updatePartnerContactState({
+    await api.coupon.auth.updatePartnerContactState({
       id,
       partnerContactStateDto: { role, isActive }
     })
@@ -184,6 +187,25 @@ const saveUserAccess = (role: Roles, isActive: boolean): AppThunk => async (disp
   }
 }
 
+const exportPartnerContacts = (activeTab: UserAccessTab): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  const { nkmListParams, partnerListParams } = getState().userAccess
+
+  try {
+    const file =
+      activeTab === 'nkm'
+        ? await api.coupon.auth.exportNkmPartnerContacts(nkmListParams)
+        : await api.coupon.auth.exportPartnerContacts(partnerListParams)
+
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    console.log(err)
+    return { error: err.toString() }
+  }
+}
+
 export const userAccessReducer = slice.reducer
 
 export const userAccessActions = {
@@ -195,5 +217,6 @@ export const userAccessActions = {
   resetPartnerUsersFilters,
   closeEditor,
   clearUserAccessEditor,
-  reset
+  reset,
+  exportPartnerContacts
 }

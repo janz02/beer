@@ -7,6 +7,7 @@ import {
   storableListRequestParams
 } from 'hooks/useTableUtils'
 import { Partner } from 'models/partner'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 interface PartnerListState {
   partners: Partner[]
@@ -70,7 +71,7 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
 
     const revisedParams = reviseListRequestParams(getState().partnerList.listParams, params)
 
-    const { result, ...pagination } = await api.partner.getPartners(revisedParams)
+    const { result, ...pagination } = await api.coupon.partner.getPartners(revisedParams)
 
     dispatch(
       getPartnersSuccess({
@@ -80,6 +81,17 @@ export const getPartners = (params: ListRequestParams = {}): AppThunk => async (
     )
   } catch (err) {
     dispatch(getPartnersFail())
+  }
+}
+
+export const exportPartners = (): AppThunk => async (dispatch, getState) => {
+  const { listParams } = getState().partnerList
+
+  try {
+    const file = await api.coupon.partner.exportPartners(listParams)
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    return { error: err.toString() }
   }
 }
 

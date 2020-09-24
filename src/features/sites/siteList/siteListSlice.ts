@@ -9,6 +9,7 @@ import {
 import { FeatureState } from 'models/featureState'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 export interface SiteFeatureConfig {
   shrinks: boolean
@@ -86,7 +87,7 @@ const getSites = (params: ListRequestParams = {}): AppThunk => async (dispatch, 
     }
 
     const revisedParams = reviseListRequestParams(listParams, params)
-    const { result, ...pagination } = await api.sites.getSites({
+    const { result, ...pagination } = await api.coupon.sites.getSites({
       ...revisedParams,
       ...listConstraintParams
     })
@@ -110,7 +111,7 @@ const resetSiteFilters = (): AppThunk => async dispatch => {
 const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await api.sites.deleteSite({ id })
+    await api.coupon.sites.deleteSite({ id })
     dispatch(deleteSiteSuccess())
     const { listParams } = getState().siteList
     const newPage = recalculatePaginationAfterDeletion(listParams)
@@ -122,6 +123,21 @@ const deleteSite = (id: number): AppThunk => async (dispatch, getState) => {
   }
 }
 
+const exportSites = (): AppThunk => async (dispatch, getState) => {
+  const { listParams, listConstraintParams } = getState().siteList
+
+  try {
+    const file = await api.coupon.sites.exportSites({
+      ...listParams,
+      ...listConstraintParams
+    })
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    console.log(err)
+    return { error: err.toString() }
+  }
+}
+
 export const siteListReducer = slice.reducer
 
 export const siteListActions = {
@@ -130,5 +146,6 @@ export const siteListActions = {
   setFeatureConfig,
   getSites,
   resetSiteFilters,
-  deleteSite
+  deleteSite,
+  exportSites
 }

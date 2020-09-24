@@ -12,6 +12,7 @@ import { Roles } from 'api/swagger/coupon'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 interface State {
   editorOpen: boolean
@@ -84,7 +85,7 @@ const getContacts = (params: ListRequestParams = {}): AppThunk => async (dispatc
     }
 
     const revisedParams = reviseListRequestParams(state.listParams, params)
-    const { result, ...pagination } = await api.partnerContacts.getPartnerPartnerContact({
+    const { result, ...pagination } = await api.coupon.partnerContacts.getPartnerPartnerContact({
       ...revisedParams,
       ...state.listConstraintParams
     })
@@ -109,7 +110,7 @@ const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, ge
     dispatch(setDeleteState(FeatureState.Loading))
     const state = getState().partnerContactList
     //  TODO: Integrate new delete endpoint
-    await api.auth.updatePartnerContactState({
+    await api.coupon.auth.updatePartnerContactState({
       id,
       partnerContactStateDto: {
         role: role,
@@ -126,6 +127,20 @@ const deleteContact = (id: number, role: Roles): AppThunk => async (dispatch, ge
   }
 }
 
+const exportPartnerContacts = (): AppThunk => async (dispatch, getState) => {
+  const { listParams, listConstraintParams } = getState().partnerContactList
+
+  try {
+    const file = await api.coupon.partnerContacts.exportPartnerPartnerContact({
+      ...listParams,
+      ...listConstraintParams
+    })
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    return { error: err.toString() }
+  }
+}
+
 export const partnerContactListReducer = slice.reducer
 
 export const partnerContactListActions = {
@@ -133,5 +148,6 @@ export const partnerContactListActions = {
   setListConstraints,
   getContacts,
   resetContactFilters,
-  deleteContact
+  deleteContact,
+  exportPartnerContacts
 }

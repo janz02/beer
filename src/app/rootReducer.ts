@@ -13,8 +13,10 @@ import { newsletterListReducer } from 'features/newsletter/newsletterList/newsle
 import { partnersListReducer } from 'features/partners/partnerList/partnerListSlice'
 import { selfPartnerReducer } from 'features/partners/selfPartner/selfPartnerSlice'
 import { partnerEditorReducer } from 'features/partners/partnerEditor/partnerEditorSlice'
-import { categoryListReducer } from 'features/settings/campaignCategory/categoryList/categoryListSlice'
-import { categoryEditorReducer } from 'features/settings/campaignCategory/categoryEditor/categoryEditorSlice'
+import { campaignCategoryListReducer } from 'features/settings/campaignCategories/categoryList/campaignCategoryListSlice'
+import { segmentationCategoryListReducer } from 'features/settings/segmentationCategories/categoryList/segmentationCategoryListSlice'
+import { segmentationCategoryEditorReducer } from 'features/settings/segmentationCategories/categoryEditor/segmentationCategoryEditorSlice'
+import { campaignCategoryEditorReducer } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
@@ -33,8 +35,10 @@ export const rootReducer = combineReducers({
   profile: profileReducer,
   campaignList: campaignListReducer,
   campaigns: campaignsReducer,
-  categoryList: categoryListReducer,
-  categoryEditor: categoryEditorReducer,
+  campaignCategoryList: campaignCategoryListReducer,
+  campaignCategoryEditor: campaignCategoryEditorReducer,
+  segmentationCategoryEditor: segmentationCategoryEditorReducer,
+  segmentationCategoryList: segmentationCategoryListReducer,
   selfPartner: selfPartnerReducer,
   partnerList: partnersListReducer,
   partnerEditor: partnerEditorReducer,

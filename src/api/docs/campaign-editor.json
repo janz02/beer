@@ -20,17 +20,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProfileViewModel"
+                  "$ref": "#/components/schemas/ProfileVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProfileViewModel"
+                  "$ref": "#/components/schemas/ProfileVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProfileViewModel"
+                  "$ref": "#/components/schemas/ProfileVm"
                 }
               }
             }
@@ -61,7 +61,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserDto"
+                    "$ref": "#/components/schemas/UserVm"
                   }
                 }
               },
@@ -69,7 +69,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserDto"
+                    "$ref": "#/components/schemas/UserVm"
                   }
                 }
               },
@@ -77,7 +77,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserDto"
+                    "$ref": "#/components/schemas/UserVm"
                   }
                 }
               }
@@ -100,18 +100,15 @@
           "Accounts"
         ],
         "summary": "Query for groups in the system which were synchronized from the domain Active Directory",
-        "description": "Implementation not complete, the queryParameters only uses permissionId\r\nand in page response will returns all entities, neither order is processed.",
         "operationId": "getAdGroups",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "permissionId",
             "in": "query",
-            "description": "Query parameters which will be translated for conditions, order, paging parameters.",
+            "description": "Permission id",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -121,17 +118,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/AdGroupModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/AdGroupVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AdGroupModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/AdGroupVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AdGroupModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/AdGroupVmPaginatedSearchResponse"
                 }
               }
             }
@@ -153,18 +150,15 @@
           "Accounts"
         ],
         "summary": "Query for all directly referenced users for the given permissionId.",
-        "description": "Implementation not complete, the queryParameters only uses permissionId\r\nand in page response will returns all entities, neither order is processed.",
         "operationId": "getUsersForPermission",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "permissionId",
             "in": "query",
-            "description": "Query parameters which will be translated for conditions, order, paging parameters.",
+            "description": "Permission id",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -174,17 +168,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/UserVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/UserVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/UserVmPaginatedSearchResponse"
                 }
               }
             }
@@ -206,18 +200,15 @@
           "Accounts"
         ],
         "summary": "Query for all function permission for the given permissionId.",
-        "description": "Implementation not complete, the queryParameters only uses permissionId\r\nand in page response will returns all entities, neither order is processed.",
         "operationId": "getFunctionPermissions",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "permissionId",
             "in": "query",
-            "description": "Query parameters which will be translated for conditions, order, paging parameters.",
+            "description": "Permission id",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -227,17 +218,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/FunctionPermissionModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/FunctionPermissionVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FunctionPermissionModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/FunctionPermissionVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FunctionPermissionModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/FunctionPermissionVmPaginatedSearchResponse"
                 }
               }
             }
@@ -266,22 +257,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequestModel"
+                "$ref": "#/components/schemas/LoginRequestCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequestModel"
+                "$ref": "#/components/schemas/LoginRequestCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequestModel"
+                "$ref": "#/components/schemas/LoginRequestCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequestModel"
+                "$ref": "#/components/schemas/LoginRequestCommand"
               }
             }
           }
@@ -344,18 +335,85 @@
         "tags": [
           "CampaignResults"
         ],
-        "summary": "Queries for the result infromations from the database with the given filters and parameters",
+        "summary": "Queries for the result information from the database with the given filters and parameters",
         "operationId": "getEvents",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "CampaignId",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
+              "type": "string"
+            }
+          },
+          {
+            "name": "SegmentationId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TemplateId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "BpId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -365,17 +423,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignResultEventModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/CampaignResultEventVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignResultEventModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/CampaignResultEventVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignResultEventModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/CampaignResultEventVmPaginatedSearchResponse"
                 }
               }
             }
@@ -445,22 +503,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/UploadCsvModel"
+                "$ref": "#/components/schemas/UploadCsvCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UploadCsvModel"
+                "$ref": "#/components/schemas/UploadCsvCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UploadCsvModel"
+                "$ref": "#/components/schemas/UploadCsvCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UploadCsvModel"
+                "$ref": "#/components/schemas/UploadCsvCommand"
               }
             }
           }
@@ -486,18 +544,186 @@
           "Campaigns"
         ],
         "summary": "Returns the campaigns for the actual query.",
-        "description": "Ther is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign\r\nonly for the user who created the draft state, in order to protect it from other users\r\nand let a sandbox campaign designment for the enduser.",
+        "description": "Ther is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign\r\nonly for the user who created the draft state, in order to protect it from other users\r\nand let a sandbox campaign designment for the end user.",
         "operationId": "getCampaigns",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "Name",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsTechnical",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "TechnicalName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Responsible",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CreatedBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "StartDateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RealStartDateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "StartDateTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RealStartDateTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EndDateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RealEndDateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EndDateTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RealEndDateTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CreatedDateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CreatedDateTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProductId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Statuses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "string"
               }
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -507,17 +733,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignListItemPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/CampaignListItemVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignListItemPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/CampaignListItemVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignListItemPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/CampaignListItemVmPaginatedSearchResponse"
                 }
               }
             }
@@ -592,17 +818,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignModel"
+                  "$ref": "#/components/schemas/CampaignVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignModel"
+                  "$ref": "#/components/schemas/CampaignVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignModel"
+                  "$ref": "#/components/schemas/CampaignVm"
                 }
               }
             }
@@ -618,7 +844,7 @@
         ]
       }
     },
-    "/api/Campaigns/Save": {
+    "/api/Campaigns/Create": {
       "post": {
         "tags": [
           "Campaigns"
@@ -630,22 +856,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CampaignModel"
+                "$ref": "#/components/schemas/CreateCampaignCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CampaignModel"
+                "$ref": "#/components/schemas/CreateCampaignCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CampaignModel"
+                "$ref": "#/components/schemas/CreateCampaignCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CampaignModel"
+                "$ref": "#/components/schemas/CreateCampaignCommand"
               }
             }
           }
@@ -677,22 +903,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CampaignModel"
+                "$ref": "#/components/schemas/UpdateCampaignCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CampaignModel"
+                "$ref": "#/components/schemas/UpdateCampaignCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CampaignModel"
+                "$ref": "#/components/schemas/UpdateCampaignCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CampaignModel"
+                "$ref": "#/components/schemas/UpdateCampaignCommand"
               }
             }
           }
@@ -703,17 +929,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignModel"
+                  "$ref": "#/components/schemas/CampaignVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignModel"
+                  "$ref": "#/components/schemas/CampaignVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CampaignModel"
+                  "$ref": "#/components/schemas/CampaignVm"
                 }
               }
             }
@@ -942,7 +1168,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created\r\nto NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups for the indicated model \r\nidentified campaign.",
+        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created\r\nto NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups for the indicated model \r\nidentified campaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "sendCampaignToTestGroup",
         "parameters": [
@@ -960,22 +1186,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/AssignTestGroupCategoriesModel"
+                "$ref": "#/components/schemas/AssignTestGroupCategoriesCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AssignTestGroupCategoriesModel"
+                "$ref": "#/components/schemas/AssignTestGroupCategoriesCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AssignTestGroupCategoriesModel"
+                "$ref": "#/components/schemas/AssignTestGroupCategoriesCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AssignTestGroupCategoriesModel"
+                "$ref": "#/components/schemas/AssignTestGroupCategoriesCommand"
               }
             }
           }
@@ -1020,17 +1246,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChannelModel"
+                  "$ref": "#/components/schemas/ChannelVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChannelModel"
+                  "$ref": "#/components/schemas/ChannelVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChannelModel"
+                  "$ref": "#/components/schemas/ChannelVm"
                 }
               }
             }
@@ -1055,14 +1281,53 @@
         "operationId": "getChannels",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "Skip",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -1072,17 +1337,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChannelModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/ChannelVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChannelModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/ChannelVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChannelModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/ChannelVmPaginatedSearchResponse"
                 }
               }
             }
@@ -1127,7 +1392,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ChannelModel"
+                    "$ref": "#/components/schemas/ChannelVm"
                   }
                 }
               },
@@ -1135,7 +1400,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ChannelModel"
+                    "$ref": "#/components/schemas/ChannelVm"
                   }
                 }
               },
@@ -1143,7 +1408,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ChannelModel"
+                    "$ref": "#/components/schemas/ChannelVm"
                   }
                 }
               }
@@ -1224,7 +1489,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LanguageModel"
+                    "$ref": "#/components/schemas/LanguagesVm"
                   }
                 }
               },
@@ -1232,7 +1497,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LanguageModel"
+                    "$ref": "#/components/schemas/LanguagesVm"
                   }
                 }
               },
@@ -1240,7 +1505,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LanguageModel"
+                    "$ref": "#/components/schemas/LanguagesVm"
                   }
                 }
               }
@@ -1357,6 +1622,22 @@
                 "format": "int32"
               }
             }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
         ],
         "responses": {
@@ -1365,17 +1646,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PermissionModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/PermissionVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PermissionModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/PermissionVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PermissionModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/PermissionVmPaginatedSearchResponse"
                 }
               }
             }
@@ -1416,17 +1697,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PermissionModel"
+                  "$ref": "#/components/schemas/PermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PermissionModel"
+                  "$ref": "#/components/schemas/PermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PermissionModel"
+                  "$ref": "#/components/schemas/PermissionVm"
                 }
               }
             }
@@ -1471,7 +1752,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/PermissionModel"
+                    "$ref": "#/components/schemas/PermissionVm"
                   }
                 }
               },
@@ -1479,7 +1760,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/PermissionModel"
+                    "$ref": "#/components/schemas/PermissionVm"
                   }
                 }
               },
@@ -1487,7 +1768,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/PermissionModel"
+                    "$ref": "#/components/schemas/PermissionVm"
                   }
                 }
               }
@@ -1516,22 +1797,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/PermissionModel"
+                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PermissionModel"
+                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PermissionModel"
+                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PermissionModel"
+                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
             }
           }
@@ -1596,22 +1877,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/PermissionModel"
+                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PermissionModel"
+                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PermissionModel"
+                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PermissionModel"
+                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
             }
           }
@@ -1690,17 +1971,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductModel"
+                  "$ref": "#/components/schemas/ProductVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductModel"
+                  "$ref": "#/components/schemas/ProductVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductModel"
+                  "$ref": "#/components/schemas/ProductVm"
                 }
               }
             }
@@ -1725,14 +2006,60 @@
         "operationId": "getProducts",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "Name",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
+              "type": "string"
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -1742,17 +2069,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/ProductVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/ProductVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/ProductVmPaginatedSearchResponse"
                 }
               }
             }
@@ -1797,7 +2124,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProductModel"
+                    "$ref": "#/components/schemas/ProductVm"
                   }
                 }
               },
@@ -1805,7 +2132,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProductModel"
+                    "$ref": "#/components/schemas/ProductVm"
                   }
                 }
               },
@@ -1813,7 +2140,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProductModel"
+                    "$ref": "#/components/schemas/ProductVm"
                   }
                 }
               }
@@ -1842,22 +2169,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductModel"
+                "$ref": "#/components/schemas/CreateProductCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductModel"
+                "$ref": "#/components/schemas/CreateProductCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductModel"
+                "$ref": "#/components/schemas/CreateProductCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductModel"
+                "$ref": "#/components/schemas/CreateProductCommand"
               }
             }
           }
@@ -1922,22 +2249,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductModel"
+                "$ref": "#/components/schemas/UpdateProductCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductModel"
+                "$ref": "#/components/schemas/UpdateProductCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductModel"
+                "$ref": "#/components/schemas/UpdateProductCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductModel"
+                "$ref": "#/components/schemas/UpdateProductCommand"
               }
             }
           }
@@ -2021,7 +2348,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SegmentationCategory"
+                    "$ref": "#/components/schemas/SegmentationCategoryVm"
                   }
                 }
               },
@@ -2029,7 +2356,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SegmentationCategory"
+                    "$ref": "#/components/schemas/SegmentationCategoryVm"
                   }
                 }
               },
@@ -2037,7 +2364,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SegmentationCategory"
+                    "$ref": "#/components/schemas/SegmentationCategoryVm"
                   }
                 }
               }
@@ -2063,14 +2390,53 @@
         "operationId": "getSegmentationCategories",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "Skip",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -2080,17 +2446,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationCategoryPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SegmentationCategoryVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationCategoryPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SegmentationCategoryVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationCategoryPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SegmentationCategoryVmPaginatedSearchResponse"
                 }
               }
             }
@@ -2131,17 +2497,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationCategory"
+                  "$ref": "#/components/schemas/SegmentationCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationCategory"
+                  "$ref": "#/components/schemas/SegmentationCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationCategory"
+                  "$ref": "#/components/schemas/SegmentationCategoryVm"
                 }
               }
             }
@@ -2169,22 +2535,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/SegmentationCategory"
+                "$ref": "#/components/schemas/CreateSegmentationCategoryCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SegmentationCategory"
+                "$ref": "#/components/schemas/CreateSegmentationCategoryCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SegmentationCategory"
+                "$ref": "#/components/schemas/CreateSegmentationCategoryCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SegmentationCategory"
+                "$ref": "#/components/schemas/CreateSegmentationCategoryCommand"
               }
             }
           }
@@ -2249,22 +2615,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/SegmentationCategory"
+                "$ref": "#/components/schemas/UpdateSegmentationCategoryCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SegmentationCategory"
+                "$ref": "#/components/schemas/UpdateSegmentationCategoryCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SegmentationCategory"
+                "$ref": "#/components/schemas/UpdateSegmentationCategoryCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SegmentationCategory"
+                "$ref": "#/components/schemas/UpdateSegmentationCategoryCommand"
               }
             }
           }
@@ -2344,17 +2710,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationQueryModel"
+                  "$ref": "#/components/schemas/SegmentationQueryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationQueryModel"
+                  "$ref": "#/components/schemas/SegmentationQueryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentationQueryModel"
+                  "$ref": "#/components/schemas/SegmentationQueryVm"
                 }
               }
             }
@@ -2382,22 +2748,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/QueryBuilderModel"
+                "$ref": "#/components/schemas/QueryBuilderQuery"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/QueryBuilderModel"
+                "$ref": "#/components/schemas/QueryBuilderQuery"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/QueryBuilderModel"
+                "$ref": "#/components/schemas/QueryBuilderQuery"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/QueryBuilderModel"
+                "$ref": "#/components/schemas/QueryBuilderQuery"
               }
             }
           }
@@ -2410,7 +2776,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SegmentationQueryResult"
+                    "$ref": "#/components/schemas/SegmentationQueryResultVm"
                   }
                 }
               },
@@ -2418,7 +2784,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SegmentationQueryResult"
+                    "$ref": "#/components/schemas/SegmentationQueryResultVm"
                   }
                 }
               },
@@ -2426,7 +2792,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SegmentationQueryResult"
+                    "$ref": "#/components/schemas/SegmentationQueryResultVm"
                   }
                 }
               }
@@ -2457,17 +2823,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/QueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/QueryBuilderFieldConfigVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/QueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/QueryBuilderFieldConfigVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/QueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/QueryBuilderFieldConfigVm"
                 }
               }
             }
@@ -2492,16 +2858,9 @@
         "operationId": "getMergeTags",
         "parameters": [
           {
-            "name": "langId",
-            "in": "query",
-            "description": "Language code of dictionary keys. Example: \"hu\", \"en\".",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "language",
             "in": "path",
+            "description": "Language code of dictionary keys. Example: \"hu\", \"en\".",
             "required": true,
             "schema": {
               "type": "string"
@@ -2558,14 +2917,96 @@
         "operationId": "getSegmentations",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "Name",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
+              "type": "string"
+            }
+          },
+          {
+            "name": "CreatedDateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CreatedDateTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CategoryName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SegmentationCategoryId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SegmentationType"
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -2575,17 +3016,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentListItemPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SegmentListItemVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentListItemPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SegmentListItemVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentListItemPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SegmentListItemVmPaginatedSearchResponse"
                 }
               }
             }
@@ -2626,17 +3067,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentModel"
+                  "$ref": "#/components/schemas/SegmentationVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentModel"
+                  "$ref": "#/components/schemas/SegmentationVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SegmentModel"
+                  "$ref": "#/components/schemas/SegmentationVm"
                 }
               }
             }
@@ -2664,22 +3105,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentation"
+                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentation"
+                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentation"
+                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentation"
+                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
             }
           }
@@ -2712,22 +3153,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentation"
+                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentation"
+                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentation"
+                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentation"
+                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
             }
           }
@@ -2859,22 +3300,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationFromCsv"
+                "$ref": "#/components/schemas/CreateSegmentationFromCsvCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationFromCsv"
+                "$ref": "#/components/schemas/CreateSegmentationFromCsvCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationFromCsv"
+                "$ref": "#/components/schemas/CreateSegmentationFromCsvCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationFromCsv"
+                "$ref": "#/components/schemas/CreateSegmentationFromCsvCommand"
               }
             }
           }
@@ -2939,17 +3380,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiscountSegmentModel"
+                  "$ref": "#/components/schemas/DiscountSegmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiscountSegmentModel"
+                  "$ref": "#/components/schemas/DiscountSegmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiscountSegmentModel"
+                  "$ref": "#/components/schemas/DiscountSegmentVm"
                 }
               }
             }
@@ -2990,7 +3431,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TreeNodeModel"
+                    "$ref": "#/components/schemas/TreeNodeVm"
                   }
                 }
               },
@@ -2998,7 +3439,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TreeNodeModel"
+                    "$ref": "#/components/schemas/TreeNodeVm"
                   }
                 }
               },
@@ -3006,7 +3447,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TreeNodeModel"
+                    "$ref": "#/components/schemas/TreeNodeVm"
                   }
                 }
               }
@@ -3099,14 +3540,67 @@
         "operationId": "getSiteLevelSettings",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "Name",
             "in": "query",
-            "description": "Query parameter",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
+              "type": "string"
+            }
+          },
+          {
+            "name": "Value",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -3116,17 +3610,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SiteLevelSettingDtoPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SiteLevelSettingVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SiteLevelSettingDtoPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SiteLevelSettingVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SiteLevelSettingDtoPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/SiteLevelSettingVmPaginatedSearchResponse"
                 }
               }
             }
@@ -3167,17 +3661,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SiteLevelSettingDto"
+                  "$ref": "#/components/schemas/SiteLevelSettingVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SiteLevelSettingDto"
+                  "$ref": "#/components/schemas/SiteLevelSettingVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SiteLevelSettingDto"
+                  "$ref": "#/components/schemas/SiteLevelSettingVm"
                 }
               }
             }
@@ -3215,22 +3709,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/SiteLevelSettingModel"
+                "$ref": "#/components/schemas/UpdateSiteLevelSettingCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SiteLevelSettingModel"
+                "$ref": "#/components/schemas/UpdateSiteLevelSettingCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SiteLevelSettingModel"
+                "$ref": "#/components/schemas/UpdateSiteLevelSettingCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SiteLevelSettingModel"
+                "$ref": "#/components/schemas/UpdateSiteLevelSettingCommand"
               }
             }
           }
@@ -3262,22 +3756,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserModel"
+                "$ref": "#/components/schemas/CreateUserCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserModel"
+                "$ref": "#/components/schemas/CreateUserCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserModel"
+                "$ref": "#/components/schemas/CreateUserCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserModel"
+                "$ref": "#/components/schemas/CreateUserCommand"
               }
             }
           }
@@ -3369,22 +3863,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/ValidatePasswordChangeModel"
+                "$ref": "#/components/schemas/ValidatePasswordChangeCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ValidatePasswordChangeModel"
+                "$ref": "#/components/schemas/ValidatePasswordChangeCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ValidatePasswordChangeModel"
+                "$ref": "#/components/schemas/ValidatePasswordChangeCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ValidatePasswordChangeModel"
+                "$ref": "#/components/schemas/ValidatePasswordChangeCommand"
               }
             }
           }
@@ -3429,22 +3923,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangeForgotPasswordModel"
+                "$ref": "#/components/schemas/ChangeForgotPasswordCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangeForgotPasswordModel"
+                "$ref": "#/components/schemas/ChangeForgotPasswordCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangeForgotPasswordModel"
+                "$ref": "#/components/schemas/ChangeForgotPasswordCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangeForgotPasswordModel"
+                "$ref": "#/components/schemas/ChangeForgotPasswordCommand"
               }
             }
           }
@@ -3469,22 +3963,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/ForgotPasswordModel"
+                "$ref": "#/components/schemas/ForgotPasswordCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ForgotPasswordModel"
+                "$ref": "#/components/schemas/ForgotPasswordCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ForgotPasswordModel"
+                "$ref": "#/components/schemas/ForgotPasswordCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ForgotPasswordModel"
+                "$ref": "#/components/schemas/ForgotPasswordCommand"
               }
             }
           }
@@ -3509,22 +4003,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/ResendPasswordChangeLinkModel"
+                "$ref": "#/components/schemas/ResendPasswordChangeLinkCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResendPasswordChangeLinkModel"
+                "$ref": "#/components/schemas/ResendPasswordChangeLinkCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResendPasswordChangeLinkModel"
+                "$ref": "#/components/schemas/ResendPasswordChangeLinkCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ResendPasswordChangeLinkModel"
+                "$ref": "#/components/schemas/ResendPasswordChangeLinkCommand"
               }
             }
           }
@@ -3556,22 +4050,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserModel"
+                "$ref": "#/components/schemas/CreateUserCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserModel"
+                "$ref": "#/components/schemas/CreateUserCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserModel"
+                "$ref": "#/components/schemas/CreateUserCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserModel"
+                "$ref": "#/components/schemas/CreateUserCommand"
               }
             }
           }
@@ -3624,22 +4118,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserExtensionInfoModel"
+                "$ref": "#/components/schemas/UserExtensionInfoCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserExtensionInfoModel"
+                "$ref": "#/components/schemas/UserExtensionInfoCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserExtensionInfoModel"
+                "$ref": "#/components/schemas/UserExtensionInfoCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserExtensionInfoModel"
+                "$ref": "#/components/schemas/UserExtensionInfoCommand"
               }
             }
           }
@@ -3684,17 +4178,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserExtensionInfoModel"
+                  "$ref": "#/components/schemas/UserExtensionInfoVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserExtensionInfoModel"
+                  "$ref": "#/components/schemas/UserExtensionInfoVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserExtensionInfoModel"
+                  "$ref": "#/components/schemas/UserExtensionInfoVm"
                 }
               }
             }
@@ -3714,22 +4208,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/StaticMergeTagModel"
+                "$ref": "#/components/schemas/CreateStaticMergeTagCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/StaticMergeTagModel"
+                "$ref": "#/components/schemas/CreateStaticMergeTagCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/StaticMergeTagModel"
+                "$ref": "#/components/schemas/CreateStaticMergeTagCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/StaticMergeTagModel"
+                "$ref": "#/components/schemas/CreateStaticMergeTagCommand"
               }
             }
           }
@@ -3794,17 +4288,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/StaticMergeTagDto"
+                  "$ref": "#/components/schemas/StaticMergeTagVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StaticMergeTagDto"
+                  "$ref": "#/components/schemas/StaticMergeTagVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StaticMergeTagDto"
+                  "$ref": "#/components/schemas/StaticMergeTagVm"
                 }
               }
             }
@@ -3849,14 +4343,53 @@
         "operationId": "getStaticMergeTags",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "Skip",
             "in": "query",
-            "description": "Query parameters which will be translated for conditions, order, paging parameters.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -3866,17 +4399,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/StaticMergeTagModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/StaticMergeTagVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StaticMergeTagModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/StaticMergeTagVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StaticMergeTagModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/StaticMergeTagVmPaginatedSearchResponse"
                 }
               }
             }
@@ -3921,7 +4454,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StaticMergeTagModel"
+                    "$ref": "#/components/schemas/StaticMergeTagVm"
                   }
                 }
               },
@@ -3929,7 +4462,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StaticMergeTagModel"
+                    "$ref": "#/components/schemas/StaticMergeTagVm"
                   }
                 }
               },
@@ -3937,7 +4470,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StaticMergeTagModel"
+                    "$ref": "#/components/schemas/StaticMergeTagVm"
                   }
                 }
               }
@@ -3966,22 +4499,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/StaticMergeTagModel"
+                "$ref": "#/components/schemas/UpdateStaticMergeTagCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/StaticMergeTagModel"
+                "$ref": "#/components/schemas/UpdateStaticMergeTagCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/StaticMergeTagModel"
+                "$ref": "#/components/schemas/UpdateStaticMergeTagCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/StaticMergeTagModel"
+                "$ref": "#/components/schemas/UpdateStaticMergeTagCommand"
               }
             }
           }
@@ -4056,7 +4589,24 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailTemplateVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailTemplateVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailTemplateVm"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4089,7 +4639,24 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailTemplateVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailTemplateVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailTemplateVm"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4127,17 +4694,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestGroupCategoryModel"
+                  "$ref": "#/components/schemas/TestGroupCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestGroupCategoryModel"
+                  "$ref": "#/components/schemas/TestGroupCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestGroupCategoryModel"
+                  "$ref": "#/components/schemas/TestGroupCategoryVm"
                 }
               }
             }
@@ -4162,14 +4729,60 @@
         "operationId": "getTestGroupCategories",
         "parameters": [
           {
-            "name": "queryParameters",
+            "name": "Name",
             "in": "query",
-            "description": "Query parameters which will be translated for consitions, order, paging parameters.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
+              "type": "string"
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -4179,17 +4792,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestGroupCategoryModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/TestGroupCategoryVmPaginatedSearchResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestGroupCategoryModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/TestGroupCategoryVmPaginatedSearchResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestGroupCategoryModelPaginatedSearchResponse"
+                  "$ref": "#/components/schemas/TestGroupCategoryVmPaginatedSearchResponse"
                 }
               }
             }
@@ -4234,7 +4847,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TestGroupCategoryModel"
+                    "$ref": "#/components/schemas/TestGroupCategoryVm"
                   }
                 }
               },
@@ -4242,7 +4855,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TestGroupCategoryModel"
+                    "$ref": "#/components/schemas/TestGroupCategoryVm"
                   }
                 }
               },
@@ -4250,7 +4863,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TestGroupCategoryModel"
+                    "$ref": "#/components/schemas/TestGroupCategoryVm"
                   }
                 }
               }
@@ -4279,22 +4892,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/TestGroupCategoryModel"
+                "$ref": "#/components/schemas/CreateTestGroupCategoryCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestGroupCategoryModel"
+                "$ref": "#/components/schemas/CreateTestGroupCategoryCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestGroupCategoryModel"
+                "$ref": "#/components/schemas/CreateTestGroupCategoryCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/TestGroupCategoryModel"
+                "$ref": "#/components/schemas/CreateTestGroupCategoryCommand"
               }
             }
           }
@@ -4359,22 +4972,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/TestGroupCategoryModel"
+                "$ref": "#/components/schemas/UpdateTestGroupCategoryCommand"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestGroupCategoryModel"
+                "$ref": "#/components/schemas/UpdateTestGroupCategoryCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestGroupCategoryModel"
+                "$ref": "#/components/schemas/UpdateTestGroupCategoryCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/TestGroupCategoryModel"
+                "$ref": "#/components/schemas/UpdateTestGroupCategoryCommand"
               }
             }
           }
@@ -4455,7 +5068,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CampaignTestGroupCategoryModel"
+                    "$ref": "#/components/schemas/CampaignTestGroupCategoryVm"
                   }
                 }
               },
@@ -4463,7 +5076,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CampaignTestGroupCategoryModel"
+                    "$ref": "#/components/schemas/CampaignTestGroupCategoryVm"
                   }
                 }
               },
@@ -4471,7 +5084,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CampaignTestGroupCategoryModel"
+                    "$ref": "#/components/schemas/CampaignTestGroupCategoryVm"
                   }
                 }
               }
@@ -4513,17 +5126,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/TreatmentModel"
+                  "$ref": "#/components/schemas/TreatmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TreatmentModel"
+                  "$ref": "#/components/schemas/TreatmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TreatmentModel"
+                  "$ref": "#/components/schemas/TreatmentVm"
                 }
               }
             }
@@ -4578,17 +5191,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserSettingDto"
+                  "$ref": "#/components/schemas/UserSettingsVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserSettingDto"
+                  "$ref": "#/components/schemas/UserSettingsVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserSettingDto"
+                  "$ref": "#/components/schemas/UserSettingsVm"
                 }
               }
             }
@@ -4618,17 +5231,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateCampaignViewModel"
+                  "$ref": "#/components/schemas/CreateCampaignVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateCampaignViewModel"
+                  "$ref": "#/components/schemas/CreateCampaignVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateCampaignViewModel"
+                  "$ref": "#/components/schemas/CreateCampaignVm"
                 }
               }
             }
@@ -4650,17 +5263,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateCampaignTreatmentViewModel"
+                  "$ref": "#/components/schemas/CreateCampaignTreatmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateCampaignTreatmentViewModel"
+                  "$ref": "#/components/schemas/CreateCampaignTreatmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateCampaignTreatmentViewModel"
+                  "$ref": "#/components/schemas/CreateCampaignTreatmentVm"
                 }
               }
             }
@@ -4671,7 +5284,7 @@
   },
   "components": {
     "schemas": {
-      "ProfileViewModel": {
+      "ProfileVm": {
         "type": "object",
         "properties": {
           "name": {
@@ -4709,7 +5322,7 @@
         },
         "additionalProperties": false
       },
-      "UserDto": {
+      "UserVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -4731,7 +5344,7 @@
         "additionalProperties": false,
         "description": "A dto to describe a user."
       },
-      "AdGroupModel": {
+      "AdGroupVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -4752,67 +5365,73 @@
         "additionalProperties": false,
         "description": "A model to describe an ad group that belongs to permissions."
       },
-      "AdGroupModelPaginatedSearchResponse": {
+      "AdGroupVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AdGroupModel"
+              "$ref": "#/components/schemas/AdGroupVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "UserModel": {
-        "type": "object",
-        "properties": {
-          "isSelected": {
-            "type": "boolean",
-            "description": "Whether the connection between the user and the permission is 'live' or 'active'.\r\nTrue means the user is given the permission. False means they are not."
-          },
-          "id": {
-            "type": "integer",
-            "description": "The id of the user.",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "description": "The natural name of the user.",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "description": "The email of the user.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A model to describe a user that belongs to permissions."
-      },
-      "UserModelPaginatedSearchResponse": {
+      "UserVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserModel"
+              "$ref": "#/components/schemas/UserVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "FunctionPermissionModel": {
+      "FunctionPermissionVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -4835,24 +5454,40 @@
         },
         "additionalProperties": false
       },
-      "FunctionPermissionModelPaginatedSearchResponse": {
+      "FunctionPermissionVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/FunctionPermissionModel"
+              "$ref": "#/components/schemas/FunctionPermissionVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "LoginRequestModel": {
+      "LoginRequestCommand": {
         "type": "object",
         "properties": {
           "username": {
@@ -4866,7 +5501,7 @@
         },
         "additionalProperties": false
       },
-      "CampaignResultEventModel": {
+      "CampaignResultEventVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -4917,24 +5552,40 @@
         },
         "additionalProperties": false
       },
-      "CampaignResultEventModelPaginatedSearchResponse": {
+      "CampaignResultEventVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CampaignResultEventModel"
+              "$ref": "#/components/schemas/CampaignResultEventVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "UploadCsvModel": {
+      "UploadCsvCommand": {
         "type": "object",
         "properties": {
           "campaignId": {
@@ -4952,7 +5603,7 @@
         },
         "additionalProperties": false
       },
-      "CampaignListItem": {
+      "CampaignListItemVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5031,17 +5682,33 @@
         },
         "additionalProperties": false
       },
-      "CampaignListItemPaginatedSearchResponse": {
+      "CampaignListItemVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CampaignListItem"
+              "$ref": "#/components/schemas/CampaignListItemVm"
             },
             "nullable": true
           },
           "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
             "type": "integer",
             "format": "int32"
           }
@@ -5109,7 +5776,7 @@
         },
         "additionalProperties": false
       },
-      "EmailTemplateModel": {
+      "EmailTemplateVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5209,7 +5876,7 @@
         },
         "additionalProperties": false
       },
-      "QueryBuilderModel": {
+      "QueryBuilderQuery": {
         "type": "object",
         "properties": {
           "condition": {
@@ -5250,7 +5917,7 @@
           "rules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/QueryBuilderModel"
+              "$ref": "#/components/schemas/QueryBuilderQuery"
             },
             "nullable": true
           },
@@ -5274,7 +5941,7 @@
         "type": "integer",
         "format": "int32"
       },
-      "SegmentCondition": {
+      "SegmentConditionVm": {
         "type": "object",
         "properties": {
           "ruleId": {
@@ -5306,7 +5973,7 @@
         },
         "additionalProperties": false
       },
-      "SegmentationQueryModel": {
+      "SegmentationQueryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5324,7 +5991,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/QueryBuilderModel"
+                "$ref": "#/components/schemas/QueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -5332,14 +5999,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SegmentCondition"
+              "$ref": "#/components/schemas/SegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "DiscountSegmentModel": {
+      "DiscountSegmentVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5392,7 +6059,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/SegmentationQueryModel"
+                "$ref": "#/components/schemas/SegmentationQueryVm"
               }
             ],
             "nullable": true
@@ -5400,7 +6067,7 @@
         },
         "additionalProperties": false
       },
-      "DiscountModel": {
+      "DiscountVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5426,14 +6093,14 @@
           "templates": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EmailTemplateModel"
+              "$ref": "#/components/schemas/EmailTemplateVm"
             },
             "nullable": true
           },
           "segment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DiscountSegmentModel"
+                "$ref": "#/components/schemas/DiscountSegmentVm"
               }
             ],
             "nullable": true
@@ -5441,7 +6108,7 @@
         },
         "additionalProperties": false
       },
-      "TreatmentModel": {
+      "TreatmentVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5533,14 +6200,14 @@
           "discounts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DiscountModel"
+              "$ref": "#/components/schemas/DiscountVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "SimpleTestGroupCategoryModel": {
+      "TestGroupCategoryWithNameVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5554,13 +6221,13 @@
         },
         "additionalProperties": false
       },
-      "CampaignTestGroupCategoryModel": {
+      "CampaignTestGroupCategoryVm": {
         "type": "object",
         "properties": {
           "testGroupCategory": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/SimpleTestGroupCategoryModel"
+                "$ref": "#/components/schemas/TestGroupCategoryWithNameVm"
               }
             ],
             "nullable": true
@@ -5568,14 +6235,14 @@
           "users": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserDto"
+              "$ref": "#/components/schemas/UserVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "CampaignModel": {
+      "CampaignVm": {
         "type": "object",
         "properties": {
           "canBeSendOutToTestGroup": {
@@ -5665,9 +6332,413 @@
             "format": "int32",
             "nullable": true
           },
-          "modifiedBy": {
+          "statusId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatment": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TreatmentVm"
+              }
+            ],
+            "nullable": true
+          },
+          "testGroupCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CampaignTestGroupCategoryVm"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCampaignCommand": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "productTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "marketTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "businessTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requesterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "responsibleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmailTemplateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "discountId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subject": {
+            "type": "string",
+            "nullable": true
+          },
+          "body": {
+            "type": "string",
+            "nullable": true
+          },
+          "templateTypeId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SegmentationQueryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "segmentationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tree": {
+            "type": "string",
+            "nullable": true
+          },
+          "query": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueryBuilderQuery"
+              }
+            ],
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SegmentConditionVm"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiscountSegmentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SegmentationType"
+              }
+            ]
+          },
+          "segmentationCategoryId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "referenceSegmentationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "segmentSize": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cumulativeIntersection": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "businessPartnerCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "query": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SegmentationQueryDto"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiscountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "discountTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "segmentationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "discountAmount": {
+            "type": "number",
+            "format": "float"
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailTemplateDto"
+            },
+            "nullable": true
+          },
+          "segment": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DiscountSegmentDto"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TreatmentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "campaignId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "channelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "startTime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeSpan"
+              }
+            ],
+            "nullable": true
+          },
+          "endTime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeSpan"
+              }
+            ],
+            "nullable": true
+          },
+          "emailTimeRules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "emailResendRules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "emailMaxResends": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "emailResendFrequency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "phoneTimeRules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "phoneRecallRules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "phoneMaxRecalls": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "phoneRecallFrequency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "discounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateCampaignCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "productTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "businessTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "marketTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requesterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "responsibleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comment": {
+            "type": "string",
             "nullable": true
           },
           "statusId": {
@@ -5677,22 +6748,15 @@
           "treatment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/TreatmentModel"
+                "$ref": "#/components/schemas/TreatmentDto"
               }
             ],
-            "nullable": true
-          },
-          "testGroupCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CampaignTestGroupCategoryModel"
-            },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "AssignTestGroupCategoriesModel": {
+      "AssignTestGroupCategoriesCommand": {
         "required": [
           "campaignId",
           "campaignTestGroupCategories"
@@ -5706,7 +6770,7 @@
           "campaignTestGroupCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CampaignTestGroupCategoryModel"
+              "$ref": "#/components/schemas/CampaignTestGroupCategoryVm"
             }
           },
           "isTestGroupMailsAlreadySentOut": {
@@ -5715,7 +6779,7 @@
         },
         "additionalProperties": false
       },
-      "ChannelModel": {
+      "ChannelVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5729,17 +6793,33 @@
         },
         "additionalProperties": false
       },
-      "ChannelModelPaginatedSearchResponse": {
+      "ChannelVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ChannelModel"
+              "$ref": "#/components/schemas/ChannelVm"
             },
             "nullable": true
           },
           "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
             "type": "integer",
             "format": "int32"
           }
@@ -5794,7 +6874,7 @@
         },
         "additionalProperties": false
       },
-      "LanguageModel": {
+      "LanguagesVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5808,7 +6888,33 @@
         },
         "additionalProperties": false
       },
-      "PermissionModel": {
+      "UserPermissionVm": {
+        "type": "object",
+        "properties": {
+          "isSelected": {
+            "type": "boolean",
+            "description": "Whether the connection between the user and the permission is 'live' or 'active'.\r\nTrue means the user is given the permission. False means they are not."
+          },
+          "id": {
+            "type": "integer",
+            "description": "The id of the user.",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "The natural name of the user.",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the user.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A model to describe a user that belongs to permissions."
+      },
+      "PermissionVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5821,32 +6927,10 @@
             "description": "Name of the permission.",
             "nullable": true
           },
-          "createdDate": {
-            "type": "string",
-            "description": "When the permission was created.",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "integer",
-            "description": "The id of whom the permission was created by.",
-            "format": "int32"
-          },
-          "modifiedDate": {
-            "type": "string",
-            "description": "When the permission was last modified.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "integer",
-            "description": "The id of whom the permission was last modified by.",
-            "format": "int32",
-            "nullable": true
-          },
           "adGroups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AdGroupModel"
+              "$ref": "#/components/schemas/AdGroupVm"
             },
             "description": "A list of ad groups that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
             "nullable": true
@@ -5854,7 +6938,7 @@
           "users": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserModel"
+              "$ref": "#/components/schemas/UserPermissionVm"
             },
             "description": "A list of users that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
             "nullable": true
@@ -5862,7 +6946,7 @@
           "functionPermissions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/FunctionPermissionModel"
+              "$ref": "#/components/schemas/FunctionPermissionVm"
             },
             "description": "A list of function permissions that belong to this permission.",
             "nullable": true
@@ -5871,24 +6955,80 @@
         "additionalProperties": false,
         "description": "A model to describe the structure of Permissions."
       },
-      "PermissionModelPaginatedSearchResponse": {
+      "PermissionVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PermissionModel"
+              "$ref": "#/components/schemas/PermissionVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "ProductModel": {
+      "CreateUpdatePermissionCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id of permission. Should only be used if the model is describing an already existing permission.",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the permission.",
+            "nullable": true
+          },
+          "adGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdGroupVm"
+            },
+            "description": "A list of ad groups that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
+            "nullable": true
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPermissionVm"
+            },
+            "description": "A list of users that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
+            "nullable": true
+          },
+          "functionPermissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FunctionPermissionVm"
+            },
+            "description": "A list of function permissions that belong to this permission.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5902,42 +7042,68 @@
           "createdDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "createdBy": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ProductModelPaginatedSearchResponse": {
+      "ProductVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ProductModel"
+              "$ref": "#/components/schemas/ProductVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "SegmentationCategory": {
+      "CreateProductCommand": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateProductCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SegmentationCategoryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -5955,24 +7121,64 @@
         },
         "additionalProperties": false
       },
-      "SegmentationCategoryPaginatedSearchResponse": {
+      "SegmentationCategoryVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SegmentationCategory"
+              "$ref": "#/components/schemas/SegmentationCategoryVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "SegmentationQueryResult": {
+      "CreateSegmentationCategoryCommand": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateSegmentationCategoryCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SegmentationQueryResultVm": {
         "type": "object",
         "properties": {
           "ruleId": {
@@ -6033,7 +7239,7 @@
         },
         "additionalProperties": false
       },
-      "QueryBuilderFieldConfig": {
+      "QueryBuilderFieldConfigVm": {
         "type": "object",
         "properties": {
           "fields": {
@@ -6046,7 +7252,7 @@
         },
         "additionalProperties": false
       },
-      "SegmentListItem": {
+      "SegmentListItemVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -6076,10 +7282,6 @@
             "format": "int32",
             "nullable": true
           },
-          "createdBy": {
-            "type": "integer",
-            "format": "int32"
-          },
           "createdDate": {
             "type": "string",
             "format": "date-time"
@@ -6087,17 +7289,33 @@
         },
         "additionalProperties": false
       },
-      "SegmentListItemPaginatedSearchResponse": {
+      "SegmentListItemVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SegmentListItem"
+              "$ref": "#/components/schemas/SegmentListItemVm"
             },
             "nullable": true
           },
           "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
             "type": "integer",
             "format": "int32"
           }
@@ -6130,7 +7348,7 @@
         },
         "additionalProperties": false
       },
-      "SegmentModel": {
+      "SegmentationVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -6172,10 +7390,6 @@
             "format": "int32",
             "nullable": true
           },
-          "createdBy": {
-            "type": "integer",
-            "format": "int32"
-          },
           "createdDate": {
             "type": "string",
             "format": "date-time"
@@ -6190,7 +7404,7 @@
         },
         "additionalProperties": false
       },
-      "CreateUpdateSegmentation": {
+      "CreateUpdateSegmentationCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -6240,7 +7454,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/QueryBuilderModel"
+                "$ref": "#/components/schemas/QueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -6248,14 +7462,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SegmentCondition"
+              "$ref": "#/components/schemas/SegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "CreateSegmentationFromCsv": {
+      "CreateSegmentationFromCsvCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -6272,7 +7486,7 @@
         },
         "additionalProperties": false
       },
-      "TreeNodeModel": {
+      "TreeNodeVm": {
         "type": "object",
         "properties": {
           "key": {
@@ -6286,7 +7500,7 @@
           "children": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TreeNodeModel"
+              "$ref": "#/components/schemas/TreeNodeVm"
             },
             "nullable": true
           },
@@ -6300,7 +7514,7 @@
         },
         "additionalProperties": false
       },
-      "SiteLevelSettingDto": {
+      "SiteLevelSettingVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -6318,24 +7532,40 @@
         },
         "additionalProperties": false
       },
-      "SiteLevelSettingDtoPaginatedSearchResponse": {
+      "SiteLevelSettingVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SiteLevelSettingDto"
+              "$ref": "#/components/schemas/SiteLevelSettingVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "SiteLevelSettingModel": {
+      "UpdateSiteLevelSettingCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -6353,7 +7583,7 @@
         },
         "additionalProperties": false
       },
-      "CreateUserModel": {
+      "CreateUserCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -6371,7 +7601,7 @@
         },
         "additionalProperties": false
       },
-      "ValidatePasswordChangeModel": {
+      "ValidatePasswordChangeCommand": {
         "type": "object",
         "properties": {
           "guid": {
@@ -6411,7 +7641,7 @@
           "additionalProperties": false
         }
       },
-      "ChangeForgotPasswordUserExtensionInfoUpdateModel": {
+      "ChangeForgotPasswordUserExtensionInfoUpdateCommand": {
         "type": "object",
         "properties": {
           "company": {
@@ -6437,7 +7667,7 @@
         },
         "additionalProperties": false
       },
-      "ChangeForgotPasswordModel": {
+      "ChangeForgotPasswordCommand": {
         "required": [
           "newPassword"
         ],
@@ -6458,7 +7688,7 @@
           "extensionInfo": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ChangeForgotPasswordUserExtensionInfoUpdateModel"
+                "$ref": "#/components/schemas/ChangeForgotPasswordUserExtensionInfoUpdateCommand"
               }
             ],
             "description": "Extension object which can contain values to set.<br />\r\nSet this object only if you want to modify the user's extension information to the given values.<br />\r\nIf you do not set a property, it will not be modified.",
@@ -6467,7 +7697,7 @@
         },
         "additionalProperties": false
       },
-      "ForgotPasswordModel": {
+      "ForgotPasswordCommand": {
         "required": [
           "email"
         ],
@@ -6486,7 +7716,7 @@
         },
         "additionalProperties": false
       },
-      "ResendPasswordChangeLinkModel": {
+      "ResendPasswordChangeLinkCommand": {
         "required": [
           "email"
         ],
@@ -6505,7 +7735,7 @@
         },
         "additionalProperties": false
       },
-      "UserExtensionInfoModel": {
+      "UserExtensionInfoCommand": {
         "type": "object",
         "properties": {
           "userDiscriminatorId": {
@@ -6536,7 +7766,52 @@
         },
         "additionalProperties": false
       },
-      "StaticMergeTagModel": {
+      "UserExtensionInfoVm": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "nullable": true,
+            "example": "Grape Solutions Zrt."
+          },
+          "department": {
+            "type": "string",
+            "nullable": true,
+            "example": "Application Development Department"
+          },
+          "position": {
+            "type": "string",
+            "nullable": true,
+            "example": "Software Developer"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true,
+            "example": "+3618809200"
+          },
+          "userDiscriminatorId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateStaticMergeTagCommand": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaticMergeTagVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -6551,28 +7826,47 @@
             "type": "string",
             "nullable": true
           },
-          "createdBy": {
-            "type": "integer",
-            "format": "int32"
-          },
           "createdDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "modifiedBy": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "StaticMergeTagDto": {
+      "StaticMergeTagVmPaginatedSearchResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StaticMergeTagVm"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateStaticMergeTagCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -6586,46 +7880,11 @@
           "value": {
             "type": "string",
             "nullable": true
-          },
-          "createdBy": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedBy": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "StaticMergeTagModelPaginatedSearchResponse": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StaticMergeTagModel"
-            },
-            "nullable": true
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TestGroupCategoryModel": {
+      "TestGroupCategoryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -6639,42 +7898,68 @@
           "createdDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "createdBy": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "TestGroupCategoryModelPaginatedSearchResponse": {
+      "TestGroupCategoryVmPaginatedSearchResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TestGroupCategoryModel"
+              "$ref": "#/components/schemas/TestGroupCategoryVm"
             },
             "nullable": true
           },
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "UserSettingDto": {
+      "CreateTestGroupCategoryCommand": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateTestGroupCategoryCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserSettingsVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -6706,7 +7991,7 @@
         },
         "additionalProperties": false
       },
-      "CreateCampaignViewModel": {
+      "CreateCampaignVm": {
         "type": "object",
         "properties": {
           "departments": {
@@ -6790,7 +8075,7 @@
         },
         "additionalProperties": false
       },
-      "CreateCampaignTreatmentViewModel": {
+      "CreateCampaignTreatmentVm": {
         "type": "object",
         "properties": {
           "channels": {
@@ -6886,7 +8171,7 @@
   "tags": [
     {
       "name": "Accounts",
-      "description": "Defines the endpoint which is responsible for the basic authenticated user information\r\nand provide the capability to login. The M:NKM.RTD.CampaignEditor.Controllers.AccountsController.Login(NKM.RTD.CampaignEditor.Prototypes.LoginRequestModel) API\r\nused for the basic authentication and the M:NKM.RTD.CampaignEditor.Controllers.AccountsController.RefreshToken\r\nis for refresh the actual authentication."
+      "description": "Defines the endpoint which is responsible for the basic authenticated user information\r\nand provide the capability to login. The M:NKM.RTD.CampaignEditor.Controllers.AccountsController.Login(NKM.RTD.CampaignEditor.Prototypes.LoginRequestCommand) API\r\nused for the basic authentication and the M:NKM.RTD.CampaignEditor.Controllers.AccountsController.RefreshToken\r\nis for refresh the actual authentication."
     },
     {
       "name": "CampaignResults",

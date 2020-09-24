@@ -15,6 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
+    AppendDto,
+    AppendDtoFromJSON,
+    AppendDtoToJSON,
+    CreateFileDto,
+    CreateFileDtoFromJSON,
+    CreateFileDtoToJSON,
     FileAccess,
     FileAccessFromJSON,
     FileAccessToJSON,
@@ -25,6 +31,19 @@ import {
     FileVmFromJSON,
     FileVmToJSON,
 } from '../models';
+
+export interface AppendFileRequest {
+    id: string | null;
+    appendDto?: AppendDto;
+}
+
+export interface CloseFileRequest {
+    id: string | null;
+}
+
+export interface CreateFileRequest {
+    createFileDto?: CreateFileDto;
+}
 
 export interface DeleteFileRequest {
     id: string | null;
@@ -47,6 +66,109 @@ export interface UploadFileRequest {
  * no description
  */
 export class FilesApi extends runtime.BaseAPI {
+
+    /**
+     * Appends to a file on internal storage(not a new line)
+     */
+    async appendFileRaw(requestParameters: AppendFileRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling appendFile.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Files/{id}/Append`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: AppendDtoToJSON(requestParameters.appendDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Appends to a file on internal storage(not a new line)
+     */
+    async appendFile(requestParameters: AppendFileRequest): Promise<void> {
+        await this.appendFileRaw(requestParameters);
+    }
+
+    /**
+     * Closes a file on the internal storage
+     */
+    async closeFileRaw(requestParameters: CloseFileRequest): Promise<runtime.ApiResponse<FileVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling closeFile.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Files/{id}/Close`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Closes a file on the internal storage
+     */
+    async closeFile(requestParameters: CloseFileRequest): Promise<FileVm> {
+        const response = await this.closeFileRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Creates a file on internal storage and leaves it open to append
+     */
+    async createFileRaw(requestParameters: CreateFileRequest): Promise<runtime.ApiResponse<FileVm>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Files/Create`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateFileDtoToJSON(requestParameters.createFileDto),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Creates a file on internal storage and leaves it open to append
+     */
+    async createFile(requestParameters: CreateFileRequest): Promise<FileVm> {
+        const response = await this.createFileRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      */

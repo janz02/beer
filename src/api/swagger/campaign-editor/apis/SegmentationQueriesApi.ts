@@ -15,23 +15,22 @@
 
 import * as runtime from '../runtime';
 import {
-    QueryBuilderFieldConfig,
-    QueryBuilderFieldConfigFromJSON,
-    QueryBuilderFieldConfigToJSON,
-    QueryBuilderModel,
-    QueryBuilderModelFromJSON,
-    QueryBuilderModelToJSON,
-    SegmentationQueryModel,
-    SegmentationQueryModelFromJSON,
-    SegmentationQueryModelToJSON,
-    SegmentationQueryResult,
-    SegmentationQueryResultFromJSON,
-    SegmentationQueryResultToJSON,
+    QueryBuilderFieldConfigVm,
+    QueryBuilderFieldConfigVmFromJSON,
+    QueryBuilderFieldConfigVmToJSON,
+    QueryBuilderQuery,
+    QueryBuilderQueryFromJSON,
+    QueryBuilderQueryToJSON,
+    SegmentationQueryResultVm,
+    SegmentationQueryResultVmFromJSON,
+    SegmentationQueryResultVmToJSON,
+    SegmentationQueryVm,
+    SegmentationQueryVmFromJSON,
+    SegmentationQueryVmToJSON,
 } from '../models';
 
 export interface GetMergeTagsRequest {
     language: string;
-    langId?: string;
 }
 
 export interface GetSegmentationQueryRequest {
@@ -39,7 +38,7 @@ export interface GetSegmentationQueryRequest {
 }
 
 export interface QuerySegmentationQueriesRequest {
-    queryBuilderModel?: QueryBuilderModel;
+    queryBuilderQuery?: QueryBuilderQuery;
 }
 
 /**
@@ -51,7 +50,7 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
      * For further infromation https://github.com/ukrbublik/react-awesome-query-builder
      * Returns the configuration for the frontend controllers.
      */
-    async getConfigRaw(): Promise<runtime.ApiResponse<QueryBuilderFieldConfig>> {
+    async getConfigRaw(): Promise<runtime.ApiResponse<QueryBuilderFieldConfigVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -67,14 +66,14 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => QueryBuilderFieldConfigFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => QueryBuilderFieldConfigVmFromJSON(jsonValue));
     }
 
     /**
      * For further infromation https://github.com/ukrbublik/react-awesome-query-builder
      * Returns the configuration for the frontend controllers.
      */
-    async getConfig(): Promise<QueryBuilderFieldConfig> {
+    async getConfig(): Promise<QueryBuilderFieldConfigVm> {
         const response = await this.getConfigRaw();
         return await response.value();
     }
@@ -88,10 +87,6 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
-
-        if (requestParameters.langId !== undefined) {
-            queryParameters['langId'] = requestParameters.langId;
-        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -120,7 +115,7 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
     /**
      * Gets the requested query, identified by segmentationId.
      */
-    async getSegmentationQueryRaw(requestParameters: GetSegmentationQueryRequest): Promise<runtime.ApiResponse<SegmentationQueryModel>> {
+    async getSegmentationQueryRaw(requestParameters: GetSegmentationQueryRequest): Promise<runtime.ApiResponse<SegmentationQueryVm>> {
         if (requestParameters.segmentationId === null || requestParameters.segmentationId === undefined) {
             throw new runtime.RequiredError('segmentationId','Required parameter requestParameters.segmentationId was null or undefined when calling getSegmentationQuery.');
         }
@@ -140,13 +135,13 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationQueryModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationQueryVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested query, identified by segmentationId.
      */
-    async getSegmentationQuery(requestParameters: GetSegmentationQueryRequest): Promise<SegmentationQueryModel> {
+    async getSegmentationQuery(requestParameters: GetSegmentationQueryRequest): Promise<SegmentationQueryVm> {
         const response = await this.getSegmentationQueryRaw(requestParameters);
         return await response.value();
     }
@@ -154,7 +149,7 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
     /**
      * Used to query the backend for the actual result of a query builder tree/query  Due to known limitations of the GET request, URL max length, used with POST   to bypass the limitations. As much as GET body request is not well supported,  this violation was introduced.
      */
-    async querySegmentationQueriesRaw(requestParameters: QuerySegmentationQueriesRequest): Promise<runtime.ApiResponse<Array<SegmentationQueryResult>>> {
+    async querySegmentationQueriesRaw(requestParameters: QuerySegmentationQueriesRequest): Promise<runtime.ApiResponse<Array<SegmentationQueryResultVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -170,16 +165,16 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: QueryBuilderModelToJSON(requestParameters.queryBuilderModel),
+            body: QueryBuilderQueryToJSON(requestParameters.queryBuilderQuery),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SegmentationQueryResultFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SegmentationQueryResultVmFromJSON));
     }
 
     /**
      * Used to query the backend for the actual result of a query builder tree/query  Due to known limitations of the GET request, URL max length, used with POST   to bypass the limitations. As much as GET body request is not well supported,  this violation was introduced.
      */
-    async querySegmentationQueries(requestParameters: QuerySegmentationQueriesRequest): Promise<Array<SegmentationQueryResult>> {
+    async querySegmentationQueries(requestParameters: QuerySegmentationQueriesRequest): Promise<Array<SegmentationQueryResultVm>> {
         const response = await this.querySegmentationQueriesRaw(requestParameters);
         return await response.value();
     }

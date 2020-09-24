@@ -15,40 +15,40 @@
 
 import * as runtime from '../runtime';
 import {
-    AdGroupModelPaginatedSearchResponse,
-    AdGroupModelPaginatedSearchResponseFromJSON,
-    AdGroupModelPaginatedSearchResponseToJSON,
-    FunctionPermissionModelPaginatedSearchResponse,
-    FunctionPermissionModelPaginatedSearchResponseFromJSON,
-    FunctionPermissionModelPaginatedSearchResponseToJSON,
-    LoginRequestModel,
-    LoginRequestModelFromJSON,
-    LoginRequestModelToJSON,
-    ProfileViewModel,
-    ProfileViewModelFromJSON,
-    ProfileViewModelToJSON,
-    UserDto,
-    UserDtoFromJSON,
-    UserDtoToJSON,
-    UserModelPaginatedSearchResponse,
-    UserModelPaginatedSearchResponseFromJSON,
-    UserModelPaginatedSearchResponseToJSON,
+    AdGroupVmPaginatedSearchResponse,
+    AdGroupVmPaginatedSearchResponseFromJSON,
+    AdGroupVmPaginatedSearchResponseToJSON,
+    FunctionPermissionVmPaginatedSearchResponse,
+    FunctionPermissionVmPaginatedSearchResponseFromJSON,
+    FunctionPermissionVmPaginatedSearchResponseToJSON,
+    LoginRequestCommand,
+    LoginRequestCommandFromJSON,
+    LoginRequestCommandToJSON,
+    ProfileVm,
+    ProfileVmFromJSON,
+    ProfileVmToJSON,
+    UserVm,
+    UserVmFromJSON,
+    UserVmToJSON,
+    UserVmPaginatedSearchResponse,
+    UserVmPaginatedSearchResponseFromJSON,
+    UserVmPaginatedSearchResponseToJSON,
 } from '../models';
 
 export interface GetAdGroupsRequest {
-    _queryParameters?: { [key: string]: string; };
+    permissionId?: number;
 }
 
 export interface GetFunctionPermissionsRequest {
-    _queryParameters?: { [key: string]: string; };
+    permissionId?: number;
 }
 
 export interface GetUsersForPermissionRequest {
-    _queryParameters?: { [key: string]: string; };
+    permissionId?: number;
 }
 
 export interface LoginRequest {
-    loginRequestModel?: LoginRequestModel;
+    loginRequestCommand?: LoginRequestCommand;
 }
 
 /**
@@ -57,14 +57,13 @@ export interface LoginRequest {
 export class AccountsApi extends runtime.BaseAPI {
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
      * Query for groups in the system which were synchronized from the domain Active Directory
      */
-    async getAdGroupsRaw(requestParameters: GetAdGroupsRequest): Promise<runtime.ApiResponse<AdGroupModelPaginatedSearchResponse>> {
+    async getAdGroupsRaw(requestParameters: GetAdGroupsRequest): Promise<runtime.ApiResponse<AdGroupVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.permissionId !== undefined) {
+            queryParameters['permissionId'] = requestParameters.permissionId;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -80,27 +79,25 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AdGroupModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AdGroupVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
      * Query for groups in the system which were synchronized from the domain Active Directory
      */
-    async getAdGroups(requestParameters: GetAdGroupsRequest): Promise<AdGroupModelPaginatedSearchResponse> {
+    async getAdGroups(requestParameters: GetAdGroupsRequest): Promise<AdGroupVmPaginatedSearchResponse> {
         const response = await this.getAdGroupsRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
      * Query for all function permission for the given permissionId.
      */
-    async getFunctionPermissionsRaw(requestParameters: GetFunctionPermissionsRequest): Promise<runtime.ApiResponse<FunctionPermissionModelPaginatedSearchResponse>> {
+    async getFunctionPermissionsRaw(requestParameters: GetFunctionPermissionsRequest): Promise<runtime.ApiResponse<FunctionPermissionVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.permissionId !== undefined) {
+            queryParameters['permissionId'] = requestParameters.permissionId;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -116,14 +113,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FunctionPermissionModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => FunctionPermissionVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
      * Query for all function permission for the given permissionId.
      */
-    async getFunctionPermissions(requestParameters: GetFunctionPermissionsRequest): Promise<FunctionPermissionModelPaginatedSearchResponse> {
+    async getFunctionPermissions(requestParameters: GetFunctionPermissionsRequest): Promise<FunctionPermissionVmPaginatedSearchResponse> {
         const response = await this.getFunctionPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -132,7 +128,7 @@ export class AccountsApi extends runtime.BaseAPI {
      * Has only temporary implementation on service since there is no exact functional  requirement for the profile!
      * Returns basic information about the current user. The profile will be returned.
      */
-    async getMyAccountRaw(): Promise<runtime.ApiResponse<ProfileViewModel>> {
+    async getMyAccountRaw(): Promise<runtime.ApiResponse<ProfileVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -148,14 +144,14 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ProfileViewModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProfileVmFromJSON(jsonValue));
     }
 
     /**
      * Has only temporary implementation on service since there is no exact functional  requirement for the profile!
      * Returns basic information about the current user. The profile will be returned.
      */
-    async getMyAccount(): Promise<ProfileViewModel> {
+    async getMyAccount(): Promise<ProfileVm> {
         const response = await this.getMyAccountRaw();
         return await response.value();
     }
@@ -163,7 +159,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Returns all the users stored in the system.
      */
-    async getUserAccountsRaw(): Promise<runtime.ApiResponse<Array<UserDto>>> {
+    async getUserAccountsRaw(): Promise<runtime.ApiResponse<Array<UserVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -179,26 +175,25 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserDtoFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserVmFromJSON));
     }
 
     /**
      * Returns all the users stored in the system.
      */
-    async getUserAccounts(): Promise<Array<UserDto>> {
+    async getUserAccounts(): Promise<Array<UserVm>> {
         const response = await this.getUserAccountsRaw();
         return await response.value();
     }
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
      * Query for all directly referenced users for the given permissionId.
      */
-    async getUsersForPermissionRaw(requestParameters: GetUsersForPermissionRequest): Promise<runtime.ApiResponse<UserModelPaginatedSearchResponse>> {
+    async getUsersForPermissionRaw(requestParameters: GetUsersForPermissionRequest): Promise<runtime.ApiResponse<UserVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
-        if (requestParameters._queryParameters !== undefined) {
-            queryParameters['queryParameters'] = requestParameters._queryParameters;
+        if (requestParameters.permissionId !== undefined) {
+            queryParameters['permissionId'] = requestParameters.permissionId;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -214,14 +209,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserModelPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserVmPaginatedSearchResponseFromJSON(jsonValue));
     }
 
     /**
-     * Implementation not complete, the queryParameters only uses permissionId  and in page response will returns all entities, neither order is processed.
      * Query for all directly referenced users for the given permissionId.
      */
-    async getUsersForPermission(requestParameters: GetUsersForPermissionRequest): Promise<UserModelPaginatedSearchResponse> {
+    async getUsersForPermission(requestParameters: GetUsersForPermissionRequest): Promise<UserVmPaginatedSearchResponse> {
         const response = await this.getUsersForPermissionRaw(requestParameters);
         return await response.value();
     }
@@ -242,7 +236,7 @@ export class AccountsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: LoginRequestModelToJSON(requestParameters.loginRequestModel),
+            body: LoginRequestCommandToJSON(requestParameters.loginRequestCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;

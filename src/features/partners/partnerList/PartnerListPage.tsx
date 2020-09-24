@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { Partner } from 'models/partner'
@@ -7,7 +7,7 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { getPartners, resetPartnerFilters } from './partnerListSlice'
+import { getPartners, resetPartnerFilters, exportPartners } from './partnerListSlice'
 import { ColumnType } from 'antd/lib/table'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { CrudButtons } from 'components/buttons/CrudButtons'
@@ -21,6 +21,7 @@ import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { ExportButton } from 'components/buttons/ExportButton'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -47,6 +48,10 @@ export const PartnerListPage: React.FC = () => {
   const resetFilters = (): void => {
     dispatch(resetPartnerFilters())
   }
+
+  const handleExport = useCallback((): void => {
+    dispatch(exportPartners())
+  }, [dispatch])
 
   const columnsConfig = useMemo(
     (): ColumnType<Partner>[] => [
@@ -121,6 +126,7 @@ export const PartnerListPage: React.FC = () => {
 
   const headerOptions = (
     <>
+      <ExportButton onClick={handleExport} />
       <ResetFiltersButton onClick={resetFilters} />
       <ColumnOrderDropdown {...columnOrder} />
       {hasPermission(partnersEditorRoles) ? (
