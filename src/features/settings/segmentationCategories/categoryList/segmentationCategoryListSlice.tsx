@@ -71,17 +71,16 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
       params
     )
 
-    const queryParameters: { [key: string]: string } = {
-      page: String(revisedParams.page),
-      pageSize: String(revisedParams.pageSize)
-    }
-
+    let orderBy
     if (revisedParams.orderBy) {
       const type = revisedParams.orderByType !== OrderByType.Descending ? 'asc' : 'desc'
-      queryParameters.orderBy = revisedParams.orderBy + '_' + type
+      orderBy = revisedParams.orderBy + '_' + type
     }
+
     const result = await api.campaignEditor.segmentationCategories.getSegmentationCategories({
-      _queryParameters: queryParameters
+      page: revisedParams.page,
+      pageSize: revisedParams.pageSize,
+      orderBy
     })
 
     dispatch(
