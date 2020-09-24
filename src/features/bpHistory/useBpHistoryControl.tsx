@@ -143,14 +143,19 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
 
   const source = useMemo(() => addKeyProp(bpHistoryItems), [addKeyProp, bpHistoryItems])
 
+  const templateModal = useMemo(
+    () => ({
+      content: template?.body || null,
+      title: template?.subject || null
+    }),
+    [template]
+  )
+
   return {
     loading,
     columnOrder,
     paginationConfig,
-    templateModal: {
-      content: template?.body || null,
-      title: template?.subject || null
-    },
+    templateModal,
     source,
     handleResetFilters,
     handleTemplateCloseClick,

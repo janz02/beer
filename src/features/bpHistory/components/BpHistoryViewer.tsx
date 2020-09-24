@@ -15,7 +15,7 @@ export const BpHistoryViewer: FC<BpHistoryViewerProps> = props => {
   return (
     <Modal
       className={styles.templateContainer}
-      title={`${t('bp-history.modal.title')}: ${props.title}`}
+      title={`${t('bp-history.modal.title')}: ${props.title || ''}`}
       visible={!!props.content && !!props.title}
       footer={null}
       onCancel={props.onCancel}
