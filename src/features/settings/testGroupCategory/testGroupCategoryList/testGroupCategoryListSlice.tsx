@@ -6,8 +6,7 @@ import {
   reviseListRequestParams,
   storableListRequestParams,
   OrderByType,
-  recalculatePaginationAfterDeletion,
-  Pagination
+  recalculatePaginationAfterDeletion
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import { TestGroupCategory } from 'models/testGroupCategory'
@@ -83,10 +82,7 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
           ...x,
           createdDate: moment(x.createdDate)
         })) as TestGroupCategory[],
-        listParams: storableListRequestParams(revisedParams, {
-          ...pagination,
-          size: pagination.totalCount
-        } as Pagination)
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {

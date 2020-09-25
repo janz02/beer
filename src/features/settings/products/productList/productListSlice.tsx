@@ -7,8 +7,7 @@ import {
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
   storableListRequestParams,
-  OrderByType,
-  Pagination
+  OrderByType
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
@@ -79,10 +78,7 @@ const getProducts = (params: ListRequestParams = {}): AppThunk => async (dispatc
     dispatch(
       getProductsSuccess({
         products: products,
-        listParams: storableListRequestParams(revisedParams, {
-          ...pagination,
-          size: pagination.totalCount
-        } as Pagination)
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {

@@ -26,6 +26,8 @@ import { testGroupCategoryEditorReducer } from 'features/settings/testGroupCateg
 import { productListReducer } from 'features/settings/products/productList/productListSlice'
 import { productEditorReducer } from 'features/settings/products/productEditor/productEditorSlice'
 import { createBrowserHistory } from 'history'
+import { permissionListReducer } from 'features/permissions/permissionList/permissionListSlice'
+import { permissionEditorReducer } from 'features/permissions/permissionEditor/permissionEditorSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
 // Probably a mock for the router/ history needed for proper solution, but needs more investigation
@@ -57,7 +59,9 @@ export const rootReducer = combineReducers({
   productEditor: productEditorReducer,
   testGroupCategoryList: testGroupCategoryListReducer,
   testGroupCategoryEditor: testGroupCategoryEditorReducer,
-  bpHistory: bpHistoryReducer
+  bpHistory: bpHistoryReducer,
+  permissionList: permissionListReducer,
+  permissionEditor: permissionEditorReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

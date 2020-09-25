@@ -47,5 +47,7 @@ export const pageViewRoles = {
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   products: [Roles.Administrator],
   productEditor: [Roles.Administrator],
-  bpHistory: [Roles.Administrator]
+  bpHistory: [Roles.Administrator],
+  permissions: [Roles.Administrator],
+  permissionEditor: [Roles.Administrator]
 }

@@ -6,7 +6,8 @@ import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
-  OrderByType
+  OrderByType,
+  storableListRequestParams
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
@@ -77,25 +78,21 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
       orderBy = revisedParams.orderBy + '_' + type
     }
 
-    const result = await api.campaignEditor.segmentationCategories.getSegmentationCategories({
-      page: revisedParams.page,
-      pageSize: revisedParams.pageSize,
+    const {
+      items,
+      ...pagination
+    } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({
+      ...revisedParams,
       orderBy
     })
 
     dispatch(
       getCategoriesSuccess({
-        categories: result.items?.map(x => ({
+        categories: items?.map(x => ({
           ...x,
           createdDate: moment(x.createdDate)
         })) as CampaignCategory[],
-        listParams: {
-          ...revisedParams,
-          from: result.from,
-          to: result.to,
-          page: result.page,
-          size: result.totalCount
-        }
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
