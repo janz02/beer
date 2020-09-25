@@ -5391,7 +5391,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -5424,7 +5424,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -5480,7 +5480,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -5578,7 +5578,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -5708,7 +5708,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -6819,7 +6819,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -6981,7 +6981,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -7072,7 +7072,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -7147,7 +7147,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -7315,7 +7315,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -7558,7 +7558,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -7859,7 +7859,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }
@@ -7928,7 +7928,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageSize": {
+          "size": {
             "type": "integer",
             "format": "int32"
           }

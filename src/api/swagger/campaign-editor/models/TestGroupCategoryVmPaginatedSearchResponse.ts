@@ -61,7 +61,7 @@ export interface TestGroupCategoryVmPaginatedSearchResponse {
      * @type {number}
      * @memberof TestGroupCategoryVmPaginatedSearchResponse
      */
-    pageSize?: number;
+    size?: number;
 }
 
 export function TestGroupCategoryVmPaginatedSearchResponseFromJSON(json: any): TestGroupCategoryVmPaginatedSearchResponse {
@@ -79,7 +79,7 @@ export function TestGroupCategoryVmPaginatedSearchResponseFromJSONTyped(json: an
         'from': !exists(json, 'from') ? undefined : json['from'],
         'to': !exists(json, 'to') ? undefined : json['to'],
         'page': !exists(json, 'page') ? undefined : json['page'],
-        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
+        'size': !exists(json, 'size') ? undefined : json['size'],
     };
 }
 
@@ -97,7 +97,7 @@ export function TestGroupCategoryVmPaginatedSearchResponseToJSON(value?: TestGro
         'from': value.from,
         'to': value.to,
         'page': value.page,
-        'pageSize': value.pageSize,
+        'size': value.size,
     };
 }
 
