@@ -82,26 +82,4 @@ describe('product list tests', () => {
     // Assert
     expect(headerContent.html()).toBeNull()
   })
-
-  it('admins have crud buttons', () => {
-    // Arrange
-    setupPermissions([Roles.Administrator])
-
-    // Act
-    const tabContent = render(<ProductTabContent />)
-
-    // Assert
-    expect(tabContent.html()).toContain('aria-label="delete"')
-  })
-
-  it('other users dont have crud buttons', () => {
-    // Arrange
-    setupPermissions([])
-
-    // Act
-    const tabContent = render(<ProductTabContent />)
-
-    // Assert
-    expect(tabContent.html()).not.toContain('aria-label="delete"')
-  })
 })

@@ -392,7 +392,8 @@
     "paginate": {
       "order-by": "Lapozó sorrend.",
       "page": "Lapozó lap.",
-      "page-size": "Lapozó lap méret."
+      "page-size": "Lapozó lap méret.",
+      "query-not-null": "Sikertelen kommunikáció a szerverrel, próbálkozzon később."
     },
     "partner": {
       "cant-change-state": "Partner státusz változtatása sikertelen, a felhasználó jogosultsági szintje miatt.",
@@ -529,6 +530,10 @@
         "content-required": "Fájl tartalom megadása kötelező, kérem adjon meg egy megfelelő fájlt.",
         "id-required": "Fájl id megadása kötelező, kérem adjon meg egy megfelelő azonosítót."
       },
+      "kafka-produce-key-required": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
+      "kafka-produce-topic-required": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
+      "kafka-produce-value-required": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
+      "kafka-query-message-required": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "notification": {
         "to-date-greater-than-from-date": "Az értesítések lekérdezéséhez a kezdő dátumnak kisebbnek kell lennie, mint a végdátumnak.",
         "type-invalid": "Értesítés típus nem megfelelő, adjon meg egy megfelelő típust.",
@@ -571,11 +576,11 @@
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
       },
       "permission": {
-        "name-max-length-500": "Jogosultsági kör megnevezése maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-max-length-100": "Jogosultsági kör megnevezése maximum 100 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "name-required": "Jogosultsági kör megnevezésének megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
       "product": {
-        "name-max-length-500": "Termék név maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet",
+        "name-max-length-100": "Termék név maximum 100 karakter lehet, kérem adjon meg egy rövidebb nevet",
         "name-required": "Termék név megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
       "register-partner-contact": {

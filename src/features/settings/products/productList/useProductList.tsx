@@ -66,12 +66,13 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
               return (
                 <CrudButtons
                   onEdit={() => onOpenEditor(record.id)}
-                  onDelete={() => {
+                  // Deletion is disabled until the RTD BE fixes the 403 error
+                  /* onDelete={() => {
                     setProductToDelete({
                       data: record,
                       popupVisible: true
                     })
-                  }}
+                  }} */
                 />
               )
             }
