@@ -61,7 +61,7 @@ export interface CampaignListItemVmPaginatedSearchResponse {
      * @type {number}
      * @memberof CampaignListItemVmPaginatedSearchResponse
      */
-    pageSize?: number;
+    size?: number;
 }
 
 export function CampaignListItemVmPaginatedSearchResponseFromJSON(json: any): CampaignListItemVmPaginatedSearchResponse {
@@ -79,7 +79,7 @@ export function CampaignListItemVmPaginatedSearchResponseFromJSONTyped(json: any
         'from': !exists(json, 'from') ? undefined : json['from'],
         'to': !exists(json, 'to') ? undefined : json['to'],
         'page': !exists(json, 'page') ? undefined : json['page'],
-        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
+        'size': !exists(json, 'size') ? undefined : json['size'],
     };
 }
 
@@ -97,7 +97,7 @@ export function CampaignListItemVmPaginatedSearchResponseToJSON(value?: Campaign
         'from': value.from,
         'to': value.to,
         'page': value.page,
-        'pageSize': value.pageSize,
+        'size': value.size,
     };
 }
 

@@ -60,15 +60,6 @@
       "name": "Termék megnevezése"
     }
   },
-  "segmentation-category": {
-    "add": "Új szegmentációs kategória hozzáadása",
-    "editor-create": "Létrehozás",
-    "editor-edit": "Szerkesztés",
-    "field": {
-      "name": "Kategória neve",
-      "created-date": "Létrehozás dátuma"
-    }
-  },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
     "editor-edit": "Pénztár szerkesztés",
@@ -562,7 +553,7 @@
         "mailing-address-street-number-required": "Partner levelezési címének utcaszám összetevőjének megadása kötelező, kérem adjon meg egy utcaszámot.",
         "mailing-address-street-required": "Partner levelezési címének utca összetevőjének megadása kötelező, kérem adjon meg egy utcanevet.",
         "name-max-length-150": "Partner neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
-        "name-required": "Parnter név megadása kötelelező, kérem adjon meg egy megfelelő nevet.",
+        "name-required": "Partner név megadása kötelelező, kérem adjon meg egy megfelelő nevet.",
         "registration-allowed-max-length-30": "Cégjegyző neve maximum 150 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "registration-allowed-required": "Cégjegyző megadása kötelező, kérem adjon meg egy megfelelő nevet.",
         "registration-number-max-length-20": "Cégjegyzék szám maximum 20 karakter lehet, kérem adjon meg egy rövidebb számot.",
@@ -578,6 +569,10 @@
         "query-toggle-required": "Kapcsolattartó lekérdezéshez a választó hiányzik, kérem adja meg hogy NKM vagy külső kapcsolattartókat szeretne lekérdezni.",
         "role-invalid": "Nem megfelelő kapcsolattartó szerepkör. Kérem adjon meg egy helyzetnek megfelelő szerepkört.",
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
+      },
+      "permission": {
+        "name-max-length-500": "Jogosultsági kör megnevezése maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-required": "Jogosultsági kör megnevezésének megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
       "product": {
         "name-max-length-500": "Termék név maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet",
@@ -650,6 +645,7 @@
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
+    "permissions": "Jogosultságkezelés",
     "profile": "Profil",
     "settings": "Beállítások",
     "sites": "Telephelyek",
@@ -750,6 +746,30 @@
     "list-title": "Kapcsolattartók",
     "send-invitation": "Meghívó küldése"
   },
+  "permission": {
+    "categories": {
+      "basics": "Jogosultsági kör meghatározása",
+      "function-permissions": "Jogosultsági kör számára elérhető funkciók megjelölése",
+      "groups": "Jogosultsági kört elérő AD user csoportok megjelölése",
+      "users": "Jogosultsági kört elérő felhasználók megjelölése"
+    },
+    "editor": {
+      "create": "Jogosultság létrehozása",
+      "modify": "Jogosultság módosítása",
+      "title": {
+        "edit": "Jogosultság szerkesztése",
+        "new": "Új jogosultság létrehozása",
+        "view": "Jogosultság megtekintése"
+      }
+    },
+    "field": {
+      "name": "Jogosultsági kör megnevezése"
+    },
+    "list": {
+      "add": "Új jogosultság hozzáadása",
+      "title": "Jogosultságkezelés"
+    }
+  },
   "profile": {
     "editor-title": "Profiladatok",
     "field": {
@@ -764,11 +784,20 @@
     "save": "Módosítás mentése",
     "save-profile-success": "Profil mentése sikeres."
   },
+  "segmentation-category": {
+    "add": "Új szegmentációs kategória hozzáadása",
+    "editor-create": "Létrehozás",
+    "editor-edit": "Szerkesztés",
+    "field": {
+      "created-date": "Létrehozás dátuma",
+      "name": "Kategória neve"
+    }
+  },
   "settings": {
     "campaign-categories": "Kampány kategóriák",
+    "campaign-products": "Termékek",
     "segmentation-categories": "Szegmentációs kategóriák",
-    "test-group-categories": "Tesztcsoport osztályok",
-    "campaign-products": "Termékek"
+    "test-group-categories": "Tesztcsoport osztályok"
   },
   "site": {
     "editor-title": "Telephely",

@@ -3,7 +3,6 @@ import { AppThunk } from 'app/store'
 import { api } from 'api'
 import {
   ListRequestParams,
-  Pagination,
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
@@ -103,10 +102,7 @@ export const getBpHistory = (params: ListRequestParams = {}): AppThunk => async 
           ...el,
           createdDate: moment(el.createdDate)
         })),
-        listParams: storableListRequestParams(revisedParams, {
-          ...pagination,
-          size: pagination.totalCount
-        } as Pagination)
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {

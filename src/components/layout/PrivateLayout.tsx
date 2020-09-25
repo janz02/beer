@@ -15,7 +15,8 @@ import {
   SendOutlined,
   SettingOutlined,
   ContactsOutlined,
-  HistoryOutlined
+  HistoryOutlined,
+  ClusterOutlined
 } from '@ant-design/icons'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -111,6 +112,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/bp-history',
         icon: <HistoryOutlined />,
         roles: pageViewRoles.bpHistory
+      },
+      {
+        label: t('menu.permissions'),
+        link: '/permissions',
+        icon: <ClusterOutlined />,
+        roles: pageViewRoles.permissions
       }
     ],
     [t]

@@ -61,7 +61,7 @@ export interface PermissionVmPaginatedSearchResponse {
      * @type {number}
      * @memberof PermissionVmPaginatedSearchResponse
      */
-    pageSize?: number;
+    size?: number;
 }
 
 export function PermissionVmPaginatedSearchResponseFromJSON(json: any): PermissionVmPaginatedSearchResponse {
@@ -79,7 +79,7 @@ export function PermissionVmPaginatedSearchResponseFromJSONTyped(json: any, igno
         'from': !exists(json, 'from') ? undefined : json['from'],
         'to': !exists(json, 'to') ? undefined : json['to'],
         'page': !exists(json, 'page') ? undefined : json['page'],
-        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
+        'size': !exists(json, 'size') ? undefined : json['size'],
     };
 }
 
@@ -97,7 +97,7 @@ export function PermissionVmPaginatedSearchResponseToJSON(value?: PermissionVmPa
         'from': value.from,
         'to': value.to,
         'page': value.page,
-        'pageSize': value.pageSize,
+        'size': value.size,
     };
 }
 
