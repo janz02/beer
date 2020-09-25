@@ -41,6 +41,7 @@ export const useCampaignCategoryTab = (): SettingsTab => {
     headerOptions,
     tabContent,
     icon: <AppstoreAddOutlined />,
+    notificationCount: 0,
     resetFilters: categoryListUtils.resetFilters
   }
 }

@@ -19,7 +19,12 @@ import { segmentationCategoryEditorReducer } from 'features/settings/segmentatio
 import { campaignCategoryEditorReducer } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
+import { bpHistoryReducer } from 'features/bpHistory/bpHistorySlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
+import { testGroupCategoryListReducer } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
+import { testGroupCategoryEditorReducer } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
+import { productListReducer } from 'features/settings/products/productList/productListSlice'
+import { productEditorReducer } from 'features/settings/products/productEditor/productEditorSlice'
 import { createBrowserHistory } from 'history'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
@@ -47,7 +52,12 @@ export const rootReducer = combineReducers({
   siteEditor: siteEditorReducer,
   newsletterEditor: newsletterEditorReducer,
   userAccess: userAccessReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  productList: productListReducer,
+  productEditor: productEditorReducer,
+  testGroupCategoryList: testGroupCategoryListReducer,
+  testGroupCategoryEditor: testGroupCategoryEditorReducer,
+  bpHistory: bpHistoryReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

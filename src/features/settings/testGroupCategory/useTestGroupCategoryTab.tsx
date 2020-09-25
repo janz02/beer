@@ -7,42 +7,42 @@ import { hasPermission } from 'services/jwt-reader'
 import { SettingsTab } from '../SettingsPage'
 import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
-import { SegmentationCategoryTab } from './SegmentationCategoryTab'
-import { PartitionOutlined } from '@ant-design/icons'
-import { useSegmentationCategoryList } from './categoryList/useSegmentationCategoryList'
+import { useTestGroupCategoryList } from './testGroupCategoryList/useTestGroupCategoryList'
+import { TestGroupCategoryTab } from './TestGroupCategoryTab'
+import { GroupOutlined } from '@ant-design/icons'
 
-export const useSegmentationCategoryTab = (): SettingsTab => {
+export const useTestGroupCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
   const { tab, id } = useParams()
 
   const modalUtils = useGenericModalFormEditorUtils({
-    dataId: tab === 'segmentation-categories' ? id : undefined,
+    dataId: tab === 'test-group-categories' ? id : undefined,
     rootRoute: '/settings',
-    detailRoute: '/segmentation-categories'
+    detailRoute: '/test-group-categories'
   })
 
-  const categoryListUtils = useSegmentationCategoryList({ onOpenEditor: modalUtils.routeToEditor })
+  const categoryListUtils = useTestGroupCategoryList({ onOpenEditor: modalUtils.routeToEditor })
 
   let headerOptions: JSX.Element | undefined
   if (hasPermission([Roles.Administrator])) {
     headerOptions = (
       <AddButton onClick={() => modalUtils.routeToEditor()}>
-        {t('segmentation-category.add')}
+        {t('test-group-category.add')}
       </AddButton>
     )
   }
 
   const tabContent = (
-    <SegmentationCategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />
+    <TestGroupCategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />
   )
 
   return {
-    key: 'segmentation-categories',
-    title: t('settings.segmentation-categories'),
-    roles: pageViewRoles.categories,
+    key: 'test-group-categories',
+    title: t('settings.test-group-categories'),
+    roles: pageViewRoles.settings,
     headerOptions,
     tabContent,
-    icon: <PartitionOutlined />,
+    icon: <GroupOutlined />,
     notificationCount: 0,
     resetFilters: categoryListUtils.resetFilters
   }

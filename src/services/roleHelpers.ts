@@ -56,5 +56,8 @@ export const pageViewRoles = {
     Roles.PartnerManager,
     Roles.MainPartnerContact
   ],
-  tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
+  tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
+  products: [Roles.Administrator],
+  productEditor: [Roles.Administrator],
+  bpHistory: [Roles.Administrator]
 }
