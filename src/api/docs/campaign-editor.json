@@ -750,6 +750,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead]"
           }
         },
         "security": [
@@ -784,6 +787,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead]"
           }
         },
         "security": [
@@ -835,6 +841,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead]"
           }
         },
         "security": [
@@ -882,6 +891,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead, CampaignEdit]"
           }
         },
         "security": [
@@ -946,6 +958,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead, CampaignEdit]"
           }
         },
         "security": [
@@ -998,6 +1013,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead, CampaignEdit]"
           }
         },
         "security": [
@@ -1050,6 +1068,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead, CampaignEdit]"
           }
         },
         "security": [
@@ -1102,6 +1123,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead, CampaignEdit]"
           }
         },
         "security": [
@@ -1154,6 +1178,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead, CampaignEdit]"
           }
         },
         "security": [
@@ -1212,6 +1239,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead, CampaignEdit]"
           }
         },
         "security": [
@@ -1465,6 +1495,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [EmailSend]"
           }
         },
         "security": [
@@ -2727,6 +2760,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [SegmentationRead, SegmentationEdit]"
           }
         },
         "security": [
@@ -2800,6 +2836,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [SegmentationRead, SegmentationEdit]"
           }
         },
         "security": [
@@ -2840,6 +2879,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [SegmentationRead, SegmentationEdit]"
           }
         },
         "security": [
@@ -2899,6 +2941,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [SegmentationRead, SegmentationEdit]"
           }
         },
         "security": [
@@ -3455,6 +3500,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead]"
           }
         },
         "security": [
@@ -3522,6 +3570,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead]"
           }
         },
         "security": [
@@ -3808,6 +3859,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [AdminEdit]"
           }
         },
         "security": [
@@ -3842,6 +3896,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [AdminEdit]"
           }
         },
         "security": [
@@ -4029,6 +4086,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [AdminEdit]"
           }
         },
         "security": [
@@ -4096,6 +4156,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [AdminEdit]"
           }
         },
         "security": [
@@ -4610,6 +4673,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead]"
           }
         },
         "security": [
@@ -4660,6 +4726,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead]"
           }
         },
         "security": [

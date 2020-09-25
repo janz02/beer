@@ -392,7 +392,8 @@
     "paginate": {
       "order-by": "Paginate order by.",
       "page": "Paginate page.",
-      "page-size": "Paginate page size."
+      "page-size": "Paginate page size.",
+      "query-not-null": "Unsuccessful communication with the server, try again later"
     },
     "partner": {
       "cant-change-state": "You don't have permission to change the partner state.",
@@ -529,6 +530,10 @@
         "content-required": "File content is required. Please provide a valid file content!",
         "id-required": "File Id is required. Please provide a valid file Id!"
       },
+      "kafka-produce-key-required": "Unsuccessful communication with the server, try again later",
+      "kafka-produce-topic-required": "Unsuccessful communication with the server, try again later",
+      "kafka-produce-value-required": "Unsuccessful communication with the server, try again later",
+      "kafka-query-message-required": "Unsuccessful communication with the server, try again later",
       "notification": {
         "to-date-greater-than-from-date": "The starting date cannot greater than the ending date. Please provide valid dates!",
         "type-invalid": "The given notification type is invalid. Please provide a valid notification type!",
@@ -571,11 +576,11 @@
         "role-required": "Partner contact role is required. Please provide a valid partner contact role!"
       },
       "permission": {
-        "name-max-length-100": "The permission name can be maximum 500 characters long. Please provide a shorter name.",
+        "name-max-length-100": "The permission name can be maximum 100 characters long. Please provide a shorter name.",
         "name-required": "Permission name field is required. Please provide a valid name."
       },
       "product": {
-        "name-max-length-100": "The product name can be maximum 500 characters long. Please add a valid value.",
+        "name-max-length-100": "The product name can be maximum 100 characters long. Please add a valid value.",
         "name-required": "The product name field is required. Please add a value."
       },
       "register-partner-contact": {
