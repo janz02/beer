@@ -571,11 +571,11 @@
         "role-required": "Kapcsolattartó jogosultsági szintjét kötelező megadni, kérem adjon meg egy megfelelő szerepkört."
       },
       "permission": {
-        "name-max-length-500": "Jogosultsági kör megnevezése maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-max-length-100": "Jogosultsági kör megnevezése maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet.",
         "name-required": "Jogosultsági kör megnevezésének megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
       "product": {
-        "name-max-length-500": "Termék név maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet",
+        "name-max-length-100": "Termék név maximum 500 karakter lehet, kérem adjon meg egy rövidebb nevet",
         "name-required": "Termék név megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
       "register-partner-contact": {

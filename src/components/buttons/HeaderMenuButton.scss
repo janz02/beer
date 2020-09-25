@@ -1,3 +1,5 @@
+@import "../../assets/scss/variables";
+
 .header-menu-button {
   &__container {
     position: relative;
@@ -14,14 +16,14 @@
     min-height: 36px;
     border-radius: 18px;
     opacity: 1;
-    background: #F0F2F5 0% 0% no-repeat padding-box;
+    background: $layout-bg;
   }
 
   &__top-border {
     width: 2px;
     height: 2px;
     border-bottom-right-radius: 2px;
-    background: #001529;
+    background: $navbar-bg;
   }
 
   &__top-border-background {
@@ -30,14 +32,14 @@
     left: 16px;
     width: 2px;
     height: 2px;
-    background: #F0F2F5;
+    background: $layout-bg;
   }
 
   &__bottom-border {
     width: 2px;
     height: 2px;
     border-top-right-radius: 2px;
-    background: #001529;
+    background: $navbar-bg;
   }
 
   &__bottom-border-background {
@@ -46,7 +48,7 @@
     left: 16px;
     width: 2px;
     height: 2px;
-    background: #F0F2F5;
+    background: $layout-bg;
   }
 
   &__button {
@@ -55,13 +57,13 @@
     height: 28px;
     margin: 4px 0 0 4px;
     opacity: 1;
-    background: #08979C 0% 0% no-repeat padding-box;
+    background: $primary-color;
 
     &:hover,
     &:active,
     &:focus {
-      border-color: #001529;
-      background: #08979C 0% 0% no-repeat padding-box;
+      border-color: $navbar-bg;
+      background: $primary-color;
     }
   }
 

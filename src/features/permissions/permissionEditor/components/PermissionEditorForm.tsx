@@ -114,7 +114,7 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
               label={t('permission.field.name')}
               rules={[
                 rule.requiredString(t('error.validation.permission.name-required')),
-                rule.max(500, t('error.validation.permission.name-max-length-500'))
+                rule.max(100, t('error.validation.permission.name-max-length-100'))
               ]}
               {...formItemLayout}
             >

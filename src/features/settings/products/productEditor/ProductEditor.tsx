@@ -61,10 +61,10 @@ export const ProductEditor: FC<ProductEditorProps> = props => {
         name="name"
         rules={[
           rule.requiredString(t('error.validation.product.name-required')),
-          rule.max(500, t('error.validation.product.name-max-length-500'))
+          rule.max(100, t('error.validation.product.name-max-length-100'))
         ]}
       >
-        <Input maxLength={500} />
+        <Input maxLength={100} />
       </Form.Item>
     </GenericModalForm>
   )

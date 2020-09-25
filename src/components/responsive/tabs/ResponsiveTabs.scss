@@ -1,3 +1,5 @@
+@import "../../../assets/scss/variables";
+
 // it's outside of the flow
 .ant-tabs-dropdown .tab-panel-title .anticon {
   margin-right: 5px;
@@ -5,13 +7,13 @@
 
 .responsive-tabs {
   .ant-tabs-nav {
-    background: #f0f2f5;
+    background: $layout-bg;
 
     .ant-tabs-tab {
       border-radius: 0.8rem 0.8rem 0 0 !important;
 
       &:not(.ant-tabs-tab-active) {
-        background-color: #d8dde3;
+        background-color: #D8DDE3;
       }
 
       .tab-panel-title {
@@ -21,7 +23,7 @@
       .ant-badge .ant-badge-count {
         margin-top: 0.1rem;
         margin-right: 0.4rem;
-        background-color: #f5222d;
+        background-color: #F5222D;
         -webkit-box-shadow: none;
         box-shadow: none;
       }

@@ -571,11 +571,11 @@
         "role-required": "Partner contact role is required. Please provide a valid partner contact role!"
       },
       "permission": {
-        "name-max-length-500": "The permission name can be maximum 500 characters long. Please provide a shorter name.",
+        "name-max-length-100": "The permission name can be maximum 500 characters long. Please provide a shorter name.",
         "name-required": "Permission name field is required. Please provide a valid name."
       },
       "product": {
-        "name-max-length-500": "The product name can be maximum 500 characters long. Please add a valid value.",
+        "name-max-length-100": "The product name can be maximum 500 characters long. Please add a valid value.",
         "name-required": "The product name field is required. Please add a value."
       },
       "register-partner-contact": {

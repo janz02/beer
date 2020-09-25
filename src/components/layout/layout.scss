@@ -1,3 +1,5 @@
+@import "../../assets/scss/variables";
+
 .layout {
   section.ant-layout {
     height: 100vh;
@@ -28,7 +30,7 @@
 
 .drawer {
   .ant-drawer-wrapper-body {
-    background: #001529;
+    background: $navbar-bg;
 
     .ant-drawer-body {
       padding: 0;
