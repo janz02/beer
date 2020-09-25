@@ -10,7 +10,7 @@ import { SearchTableDropdown } from 'components/table-dropdowns/SearchTableDropd
 import { DatepickerTableDropdown } from 'components/table-dropdowns/DatepickerTableDropdown'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useTranslation } from 'react-i18next'
-import { ActivenessDisplay, ActivenessStatus } from 'components/ActivenessDisplay'
+import { ActivenessDisplay } from 'components/ActivenessDisplay'
 
 export enum OrderByType {
   Ascending = 'Ascending',
@@ -30,7 +30,8 @@ export enum FilterMode {
    * For filtering and rendering ACTIVE or INACTIVE values, mapped to 'true' and 'fasle'.
    * No need to populate filters and render prop with this option.
    */
-  ACTIVE_INACTIVE = 'active_inactive'
+  ACTIVE_INACTIVE = 'active_inactive',
+  ENUM = 'enum'
 }
 
 export interface Pagination {
@@ -83,8 +84,6 @@ interface ColumnConfigParams extends ColumnType<any> {
   sort?: boolean
   disableSearchHighlight?: boolean
   renderMode?: 'date time' | null
-  activenessOptions?: ActivenessOptions
-  activenessMapper?: (value: any, record: any) => ActivenessStatus
 }
 
 export interface UseTableUtils<T> {
@@ -258,23 +257,27 @@ function useTableUtils<T extends { [key: string]: any }>(
           config.render = (value: boolean) => (value ? t('common.yes') : t('common.no'))
           break
         case FilterMode.ACTIVE_INACTIVE: {
-          const options = params.activenessOptions ?? {
-            active: t('common.active'),
-            inactive: t('common.inactive')
-          }
+          const activeText = t('common.active')
+          const inactiveText = t('common.inactive')
 
           config.filterMultiple = false
-          config.filters = Object.entries(options).map(([value, text]) => ({ value, text }))
+          config.filters = [
+            { value: true, text: activeText },
+            { value: false, text: inactiveText }
+          ]
 
-          const mapper = params.activenessMapper ?? (x => (x ? 'active' : 'inactive'))
-          config.onFilter = (value, record) => mapper(value, record) === value
-
-          config.render = (value, record) => {
-            const status = mapper(value, record)
-            return <ActivenessDisplay status={status} text={options[status] as string} />
-          }
+          config.render = value => (
+            <ActivenessDisplay
+              status={value ? 'active' : 'inactive'}
+              text={value ? activeText : inactiveText}
+            />
+          )
           break
         }
+        case FilterMode.ENUM:
+          config.filterMultiple = false
+          config.filters = filters
+          break
         default:
           break
       }
