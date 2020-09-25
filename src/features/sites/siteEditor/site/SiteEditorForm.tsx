@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { useTranslation } from 'react-i18next'
@@ -60,9 +60,8 @@ export const SiteEditorForm: FC = () => {
     resetFormFlags()
   }
 
-  const view = useMemo(() => mode === EditorMode.VIEW, [mode])
-
-  const editorOptions = <EditorModeOptions {...options} />
+  const view = mode === EditorMode.VIEW
+  const editorOptions = <>{options.canEdit && <EditorModeOptions {...options} />}</>
 
   return (
     <>

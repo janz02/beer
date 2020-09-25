@@ -14,6 +14,7 @@ export const CashierManager: FC = () => {
   const rule = useCommonFormRules()
 
   const {
+    canEdit,
     cashierManagerVisible,
     handleCreateCashier,
     cashierTableProps,
@@ -22,9 +23,13 @@ export const CashierManager: FC = () => {
   } = useCashierManager()
 
   const listHeaderOptions = (
-    <AddButton size="middle" onClick={handleCreateCashier}>
-      {t('cashier-list.add')}
-    </AddButton>
+    <>
+      {canEdit && (
+        <AddButton size="middle" onClick={handleCreateCashier}>
+          {t('cashier-list.add')}
+        </AddButton>
+      )}
+    </>
   )
 
   return (

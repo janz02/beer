@@ -12,6 +12,7 @@ import { api } from 'api'
 import { downloadBlobAsCsv } from 'services/file-reader'
 
 export interface SiteFeatureConfig {
+  canEdit: boolean
   shrinks: boolean
   routeRoot: string
   routeExit: string
@@ -34,6 +35,7 @@ const initialState: State = {
     pageSize: 10
   },
   config: {
+    canEdit: false,
     shrinks: true,
     routeRoot: '/sites/editor',
     routeExit: '/sites'

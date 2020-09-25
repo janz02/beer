@@ -31,6 +31,7 @@ import { UserType } from 'models/user'
 import { SiteFeatureConfig } from 'features/sites/siteList/siteListSlice'
 import { SiteList } from 'features/sites/siteList/SiteList'
 import { Button } from 'antd'
+import { pageViewRoles } from 'services/roleHelpers'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -69,7 +70,7 @@ export const PartnerEditorPage: React.FC = () => {
 
   const optionProps: EditorModeOptionsProps = {
     mode,
-    editPermission: partnersEditorRoles,
+    canEdit: hasPermission(partnersEditorRoles),
     handleDelete: () => {
       setPartnerToDelete({
         data: partner,
@@ -88,6 +89,7 @@ export const PartnerEditorPage: React.FC = () => {
   }
 
   const sitesConfig: SiteFeatureConfig = {
+    canEdit: hasPermission(pageViewRoles.contactsEditor),
     shrinks: true,
     routeRoot: `/partners/${id}/site`,
     routeExit: `/partners/${id}`

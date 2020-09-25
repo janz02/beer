@@ -33,6 +33,7 @@ export const useSiteEditorForm = (): UseSiteEditorFormUtils => {
 
   const siteEditorOptionProps: EditorModeOptionsProps = {
     mode: siteEditorMode,
+    canEdit: config.canEdit,
     handleEdit: () => setSiteEditorMode(EditorMode.EDIT),
     handleEscapeEdit: () => setSiteEditorMode(EditorMode.VIEW)
   }
