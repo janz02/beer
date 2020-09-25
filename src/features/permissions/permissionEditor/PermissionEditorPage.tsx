@@ -20,6 +20,7 @@ import { EditorModeOptions, EditorMode } from 'components/buttons/EditorModeOpti
 
 import { PermissionEditorForm } from './components/PermissionEditorForm'
 import { pageViewRoles } from 'services/roleHelpers'
+import { hasPermission } from 'services/jwt-reader'
 
 export const PermissionEditorPage: React.FC = () => {
   const { t } = useTranslation()
@@ -58,7 +59,7 @@ export const PermissionEditorPage: React.FC = () => {
     <>
       <EditorModeOptions
         mode={mode}
-        editPermission={pageViewRoles.permissionEditor}
+        canEdit={hasPermission(pageViewRoles.permissionEditor)}
         handleDelete={() => {
           setPermissionToDelete({
             data: permission,

@@ -101,7 +101,7 @@ export const useCashierManager = (): UseCashierManagerUtils => {
         }
       })
     ],
-    [columnConfig, t, actionColumnConfig, cashierEditorModalUtils, dispatch]
+    [columnConfig, t, actionColumnConfig, cashierEditorModalUtils, config, dispatch]
   )
 
   const cashierTableProps: ResponsiveTableProps = {
