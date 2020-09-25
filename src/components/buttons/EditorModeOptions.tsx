@@ -1,10 +1,8 @@
 import React, { useMemo, FC } from 'react'
-import { hasPermission } from 'services/jwt-reader'
 import { DeleteButton } from './DeleteButton'
 import { EditButton } from './EditButton'
 import { EscapeButton } from './EscapeButton'
 import { useTranslation } from 'react-i18next'
-import { Roles } from 'api/swagger/coupon'
 
 export enum EditorMode {
   NEW = 'new',
@@ -14,19 +12,19 @@ export enum EditorMode {
 
 export interface EditorModeOptionsProps {
   mode: EditorMode
-  editPermission?: Roles[]
+  canEdit: boolean
   handleDelete?: () => void
   handleEdit?: () => void
   handleEscapeEdit?: () => void
 }
 
 export const EditorModeOptions: FC<EditorModeOptionsProps> = props => {
-  const { mode, editPermission, handleDelete, handleEdit, handleEscapeEdit } = props
+  const { mode, canEdit, handleDelete, handleEdit, handleEscapeEdit } = props
   const { t } = useTranslation()
   const options = useMemo((): JSX.Element | undefined => {
     switch (mode) {
       case EditorMode.VIEW:
-        return hasPermission(editPermission) ? (
+        return canEdit ? (
           <>
             {handleDelete && <DeleteButton onClick={handleDelete} />}
             {handleEdit && <EditButton onClick={handleEdit} />}
@@ -45,6 +43,6 @@ export const EditorModeOptions: FC<EditorModeOptionsProps> = props => {
       default:
         return undefined
     }
-  }, [editPermission, handleDelete, handleEdit, handleEscapeEdit, mode, t])
+  }, [canEdit, handleDelete, handleEdit, handleEscapeEdit, mode, t])
   return <>{options}</>
 }

@@ -35,7 +35,7 @@ export const SiteList: FC<SiteListProps> = props => {
     <>
       <ExportButton onClick={handleExport} />
       <ResetFiltersButton onClick={resetFilters} />
-      <AddButton onClick={handleAdd}>{t('site-list.add')}</AddButton>
+      {props.config.canEdit && <AddButton onClick={handleAdd}>{t('site-list.add')}</AddButton>}
     </>
   )
 

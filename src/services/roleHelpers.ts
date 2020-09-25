@@ -35,6 +35,12 @@ export const pageViewRoles = {
   couponCreator: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor],
   couponEditor: [Roles.Administrator, Roles.CampaignManager, ...comboRoles.forPartner],
   sites: comboRoles.forPartner,
+  sitesEditor: [
+    Roles.Administrator,
+    Roles.CampaignManager,
+    Roles.PartnerManager,
+    Roles.MainPartnerContact
+  ],
   settings: comboRoles.forNkm,
   categories: comboRoles.forNkm,
   categoryEditor: [Roles.Administrator],
@@ -43,6 +49,12 @@ export const pageViewRoles = {
   readonlyProfile: comboRoles.forNkm,
   selfpartner: comboRoles.forPartner,
   partners: comboRoles.forNkm,
-  contacts: comboRoles.forPartner,
+  contacts: [Roles.MainPartnerContact],
+  contactsEditor: [
+    Roles.Administrator,
+    Roles.CampaignManager,
+    Roles.PartnerManager,
+    Roles.MainPartnerContact
+  ],
   tags: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager]
 }
