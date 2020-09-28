@@ -15,5 +15,12 @@ export const ResponsiveTable: FC<ResponsiveTableProps> = props => {
     `${hasHeaderOffset ? 'has-header-offset ' : ''}` +
     `${hasFixedColumn ? 'has-fixed-column ' : ''}`
 
-  return <Table size="small" {...tableProps} className={className} />
+  const resolveRowClassName = (record: any, index: number): string => {
+    console.log(record)
+    return index % 2 === 0 ? 'table-even-row' : 'table-odd-row'
+  }
+
+  return (
+    <Table size="small" {...tableProps} rowClassName={resolveRowClassName} className={className} />
+  )
 }

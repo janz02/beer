@@ -26,6 +26,22 @@ $table-header-height: 56px;
             border-bottom: 2px solid rgba(0, 0, 0, 0.068);
           }
 
+          tr:nth-child(even) {
+            background: $table--even-row-bg;
+          }
+
+          tr:nth-child(odd) {
+            background: $table--odd-row-bg;
+          }
+
+          tr:nth-child(even):hover {
+            background: $table--even-row-hover-bg;
+          }
+
+          tr:nth-child(odd):hover {
+            background: $table--odd-row-hover-bg;
+          }
+
           tbody > tr:last-child > td {
             border: none;
           }
