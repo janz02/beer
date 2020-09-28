@@ -41,8 +41,11 @@ export const partnersEditorRoles = [
 
 export const PartnerEditorPage: React.FC = () => {
   const { t } = useTranslation()
-  const { partnerId: id } = useParams()
   const dispatch = useDispatch()
+
+  const params = useParams<{ partnerId?: string }>()
+  const id = params.partnerId ? +params.partnerId : undefined
+
   const { partner, loading, loadingRegState } = useSelector(
     (state: RootState) => state.partnerEditor
   )
@@ -51,7 +54,7 @@ export const PartnerEditorPage: React.FC = () => {
   const [partnerToDelete, setPartnerToDelete] = useState<PopupState<Partner>>()
 
   useEffect(() => {
-    id && dispatch(getPartner(+id))
+    id && dispatch(getPartner(id))
 
     return () => {
       dispatch(resetPartnerEditor())
@@ -84,7 +87,7 @@ export const PartnerEditorPage: React.FC = () => {
   const partnerContactConfig: PartnerContactConfig = {
     listConstraint: { partnerId: id },
     shrinks: true,
-    userType: +id! === 1 ? UserType.NKM : UserType.PARTNER,
+    userType: id === 1 ? UserType.NKM : UserType.PARTNER,
     canEdit: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
   }
 
@@ -158,7 +161,7 @@ export const PartnerEditorPage: React.FC = () => {
       </GenericPopup>
       {mode !== EditorMode.NEW && (
         <>
-          <SiteList config={sitesConfig} partnerId={partner!.id!} />
+          <SiteList config={sitesConfig} partnerId={id!} />
           <PartnerContactTile {...partnerContactConfig} />
         </>
       )}
