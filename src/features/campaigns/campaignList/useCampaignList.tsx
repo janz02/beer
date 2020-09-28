@@ -163,13 +163,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         key: 'isActive',
         ellipsis: false,
         width: '5rem',
-        filterMode: FilterMode.ACTIVE_INACTIVE,
-        activenessOptions: {
-          active: t(`coupon.status.active`),
-          inactive: t(`coupon.status.inactive`)
-        },
-        activenessMapper: (value, coupon: Coupon) =>
-          isCouponActive(coupon) ? 'active' : 'inactive'
+        filterMode: FilterMode.ACTIVE_INACTIVE
       }),
       columnConfig({
         title: t('coupon-list.category'),
@@ -366,7 +360,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
 
   return {
     loading,
-    coupons: addKeyProp(coupons),
+    coupons: addKeyProp(coupons).map(x => ({ ...x, isActive: isCouponActive(x) })),
     activeTabKey,
     handleTableChange,
     columnsConfig,
