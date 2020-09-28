@@ -14,6 +14,11 @@
 
 
 import * as runtime from '../runtime';
+import {
+    EmailTemplateVm,
+    EmailTemplateVmFromJSON,
+    EmailTemplateVmToJSON,
+} from '../models';
 
 export interface GetTemplateByGuidRequest {
     guid: string;
@@ -31,7 +36,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Gets the requested template, identified by guid.
      */
-    async getTemplateByGuidRaw(requestParameters: GetTemplateByGuidRequest): Promise<runtime.ApiResponse<void>> {
+    async getTemplateByGuidRaw(requestParameters: GetTemplateByGuidRequest): Promise<runtime.ApiResponse<EmailTemplateVm>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getTemplateByGuid.');
         }
@@ -51,20 +56,21 @@ export class TemplatesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EmailTemplateVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested template, identified by guid.
      */
-    async getTemplateByGuid(requestParameters: GetTemplateByGuidRequest): Promise<void> {
-        await this.getTemplateByGuidRaw(requestParameters);
+    async getTemplateByGuid(requestParameters: GetTemplateByGuidRequest): Promise<EmailTemplateVm> {
+        const response = await this.getTemplateByGuidRaw(requestParameters);
+        return await response.value();
     }
 
     /**
      * Gets the requested template, identified by id.
      */
-    async getTemplateByIdRaw(requestParameters: GetTemplateByIdRequest): Promise<runtime.ApiResponse<void>> {
+    async getTemplateByIdRaw(requestParameters: GetTemplateByIdRequest): Promise<runtime.ApiResponse<EmailTemplateVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTemplateById.');
         }
@@ -84,14 +90,15 @@ export class TemplatesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EmailTemplateVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested template, identified by id.
      */
-    async getTemplateById(requestParameters: GetTemplateByIdRequest): Promise<void> {
-        await this.getTemplateByIdRaw(requestParameters);
+    async getTemplateById(requestParameters: GetTemplateByIdRequest): Promise<EmailTemplateVm> {
+        const response = await this.getTemplateByIdRaw(requestParameters);
+        return await response.value();
     }
 
 }

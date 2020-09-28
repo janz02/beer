@@ -15,9 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
-    TreeNodeModel,
-    TreeNodeModelFromJSON,
-    TreeNodeModelToJSON,
+    TreeNodeVm,
+    TreeNodeVmFromJSON,
+    TreeNodeVmToJSON,
 } from '../models';
 
 export interface GetFileStructureRequest {
@@ -36,7 +36,7 @@ export class SharepointApi extends runtime.BaseAPI {
     /**
      * Returns a folder structure of a dedicated - configured sharepoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
-    async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<TreeNodeModel>>> {
+    async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<TreeNodeVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.withoutFile !== undefined) {
@@ -56,13 +56,13 @@ export class SharepointApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TreeNodeModelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TreeNodeVmFromJSON));
     }
 
     /**
      * Returns a folder structure of a dedicated - configured sharepoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
-    async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<TreeNodeModel>> {
+    async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<TreeNodeVm>> {
         const response = await this.getFileStructureRaw(requestParameters);
         return await response.value();
     }

@@ -1,0 +1,99 @@
+@import "../../assets/scss/variables";
+
+.header-menu-button {
+    &__container {
+        position: relative;
+        z-index: 2;
+        top: 18px;
+        left: -18px;
+        max-width: fit-content;
+    }
+
+    &__background {
+        display: flex;
+        width: 36px;
+        min-width: 36px;
+        height: 36px;
+        min-height: 36px;
+        border-radius: 18px;
+        opacity: 1;
+        background: $layout-bg;
+    }
+
+    &__top-border {
+        width: 2px;
+        height: 2px;
+        border-bottom-right-radius: 2px;
+        background: $navbar-bg;
+    }
+
+    &__top-border-background {
+        position: absolute;
+        top: -1.9px;
+        left: 16px;
+        width: 2px;
+        height: 2px;
+        background: $layout-bg;
+    }
+
+    &__bottom-border {
+        width: 2px;
+        height: 2px;
+        border-top-right-radius: 2px;
+        background: $navbar-bg;
+    }
+
+    &__bottom-border-background {
+        position: absolute;
+        bottom: -1.9px;
+        left: 16px;
+        width: 2px;
+        height: 2px;
+        background: $layout-bg;
+    }
+
+    &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        margin: 4px 0 0 4px;
+        opacity: 1;
+        background: $primary-color;
+
+        &:hover {
+            border-color: $navbar-bg;
+            background: $primary-color;
+        }
+
+        &:focus {
+            background: $primary-color;
+        }
+    }
+
+    &__arrow {
+        opacity: 1;
+        color: #FFFFFF;
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-device-width: 575px) {
+  .header-menu-button {
+    &__container {
+      position: relative;
+      z-index: 2;
+      top: 5px;
+      left: 5px;
+    }
+
+    &__top-border-background {
+      display: none;
+    }
+
+    &__bottom-border-background {
+      display: none;
+    }
+  }
+}

@@ -82,23 +82,31 @@ export const useSiteList = (props: UseSiteListProps): UseSiteListUtils => {
       }),
       actionColumnConfig({
         render(value: unknown, record: Site) {
+          let onView
+          let onEdit
+          let onDelete
+
+          if (config.canEdit) {
+            onEdit = () => record.id && handleEdit(record.id)
+            onDelete = () => {
+              setSiteToDelete({
+                data: record,
+                popupVisible: true
+              })
+            }
+          } else {
+            onView = () => record.id && handleEdit(record.id)
+          }
+
           return (
             <>
-              <CrudButtons
-                onEdit={() => record.id && handleEdit(record.id)}
-                onDelete={() => {
-                  setSiteToDelete({
-                    data: record,
-                    popupVisible: true
-                  })
-                }}
-              />
+              <CrudButtons onView={onView} onEdit={onEdit} onDelete={onDelete} />
             </>
           )
         }
       })
     ],
-    [actionColumnConfig, columnConfig, t, handleEdit]
+    [actionColumnConfig, columnConfig, t, handleEdit, config]
   )
 
   const handleGetSites = useCallback(

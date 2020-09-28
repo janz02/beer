@@ -16,6 +16,7 @@ import { GenericModalFormProps } from 'components/popups/GenericModalForm'
 
 interface UseCashierManagerUtils {
   cashierManagerVisible: boolean
+  canEdit: boolean
   handleCreateCashier: () => void
   cashierTableProps: ResponsiveTableProps
   cashierDeletePopupProps: GenericPopupProps
@@ -81,24 +82,26 @@ export const useCashierManager = (): UseCashierManagerUtils => {
       }),
       actionColumnConfig({
         render(record: Cashier) {
-          return (
-            <CrudButtons
-              onEdit={() => {
-                record.id && dispatch(siteEditorActions.getCashier(record.id))
-                cashierEditorModalUtils.routeToEditor(record.id)
-              }}
-              onDelete={() => {
-                setCashierToDelete({
-                  data: record,
-                  popupVisible: true
-                })
-              }}
-            />
-          )
+          let onEdit, onDelete
+
+          if (config.canEdit) {
+            onEdit = () => {
+              record.id && dispatch(siteEditorActions.getCashier(record.id))
+              cashierEditorModalUtils.routeToEditor(record.id)
+            }
+            onDelete = () => {
+              setCashierToDelete({
+                data: record,
+                popupVisible: true
+              })
+            }
+          }
+
+          return <CrudButtons onEdit={onEdit} onDelete={onDelete} />
         }
       })
     ],
-    [columnConfig, t, actionColumnConfig, cashierEditorModalUtils, dispatch]
+    [columnConfig, t, actionColumnConfig, cashierEditorModalUtils, config, dispatch]
   )
 
   const cashierTableProps: ResponsiveTableProps = {
@@ -141,6 +144,7 @@ export const useCashierManager = (): UseCashierManagerUtils => {
 
   return {
     cashierManagerVisible,
+    canEdit: config.canEdit,
     handleCreateCashier,
     cashierTableProps,
     cashierDeletePopupProps,

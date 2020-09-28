@@ -15,27 +15,30 @@
 
 import * as runtime from '../runtime';
 import {
-    ChangeForgotPasswordModel,
-    ChangeForgotPasswordModelFromJSON,
-    ChangeForgotPasswordModelToJSON,
-    CreateUserModel,
-    CreateUserModelFromJSON,
-    CreateUserModelToJSON,
-    ForgotPasswordModel,
-    ForgotPasswordModelFromJSON,
-    ForgotPasswordModelToJSON,
+    ChangeForgotPasswordCommand,
+    ChangeForgotPasswordCommandFromJSON,
+    ChangeForgotPasswordCommandToJSON,
+    CreateUserCommand,
+    CreateUserCommandFromJSON,
+    CreateUserCommandToJSON,
+    ForgotPasswordCommand,
+    ForgotPasswordCommandFromJSON,
+    ForgotPasswordCommandToJSON,
     ProblemDetails,
     ProblemDetailsFromJSON,
     ProblemDetailsToJSON,
-    ResendPasswordChangeLinkModel,
-    ResendPasswordChangeLinkModelFromJSON,
-    ResendPasswordChangeLinkModelToJSON,
-    UserExtensionInfoModel,
-    UserExtensionInfoModelFromJSON,
-    UserExtensionInfoModelToJSON,
-    ValidatePasswordChangeModel,
-    ValidatePasswordChangeModelFromJSON,
-    ValidatePasswordChangeModelToJSON,
+    ResendPasswordChangeLinkCommand,
+    ResendPasswordChangeLinkCommandFromJSON,
+    ResendPasswordChangeLinkCommandToJSON,
+    UserExtensionInfoCommand,
+    UserExtensionInfoCommandFromJSON,
+    UserExtensionInfoCommandToJSON,
+    UserExtensionInfoVm,
+    UserExtensionInfoVmFromJSON,
+    UserExtensionInfoVmToJSON,
+    ValidatePasswordChangeCommand,
+    ValidatePasswordChangeCommandFromJSON,
+    ValidatePasswordChangeCommandToJSON,
 } from '../models';
 
 export interface ActivateStandaloneUserRequest {
@@ -43,19 +46,19 @@ export interface ActivateStandaloneUserRequest {
 }
 
 export interface ChangeForgotPasswordRequest {
-    changeForgotPasswordModel?: ChangeForgotPasswordModel;
+    changeForgotPasswordCommand?: ChangeForgotPasswordCommand;
 }
 
 export interface CreateStandaloneUserRequest {
-    createUserModel?: CreateUserModel;
+    createUserCommand?: CreateUserCommand;
 }
 
 export interface CreateStandaloneUserByAdminRequest {
-    createUserModel?: CreateUserModel;
+    createUserCommand?: CreateUserCommand;
 }
 
 export interface ForgotPasswordRequest {
-    forgotPasswordModel?: ForgotPasswordModel;
+    forgotPasswordCommand?: ForgotPasswordCommand;
 }
 
 export interface GetStandaloneUserRequest {
@@ -67,15 +70,15 @@ export interface GetUserExtensionInfoByPasswordChangeGuidRequest {
 }
 
 export interface ReSendPasswordChangeLinkRequest {
-    resendPasswordChangeLinkModel?: ResendPasswordChangeLinkModel;
+    resendPasswordChangeLinkCommand?: ResendPasswordChangeLinkCommand;
 }
 
 export interface SaveExtensionInfoRequest {
-    userExtensionInfoModel?: UserExtensionInfoModel;
+    userExtensionInfoCommand?: UserExtensionInfoCommand;
 }
 
 export interface ValidatePasswordChangeRequest {
-    validatePasswordChangeModel?: ValidatePasswordChangeModel;
+    validatePasswordChangeCommand?: ValidatePasswordChangeCommand;
 }
 
 /**
@@ -132,7 +135,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ChangeForgotPasswordModelToJSON(requestParameters.changeForgotPasswordModel),
+            body: ChangeForgotPasswordCommandToJSON(requestParameters.changeForgotPasswordCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -161,7 +164,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUserModelToJSON(requestParameters.createUserModel),
+            body: CreateUserCommandToJSON(requestParameters.createUserCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -193,7 +196,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUserModelToJSON(requestParameters.createUserModel),
+            body: CreateUserCommandToJSON(requestParameters.createUserCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -223,7 +226,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ForgotPasswordModelToJSON(requestParameters.forgotPasswordModel),
+            body: ForgotPasswordCommandToJSON(requestParameters.forgotPasswordCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -273,7 +276,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     /**
      * Gets the user extension info by the users password change guid.
      */
-    async getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<runtime.ApiResponse<UserExtensionInfoModel>> {
+    async getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<runtime.ApiResponse<UserExtensionInfoVm>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getUserExtensionInfoByPasswordChangeGuid.');
         }
@@ -289,13 +292,13 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserExtensionInfoModelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserExtensionInfoVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the user extension info by the users password change guid.
      */
-    async getUserExtensionInfoByPasswordChangeGuid(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<UserExtensionInfoModel> {
+    async getUserExtensionInfoByPasswordChangeGuid(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<UserExtensionInfoVm> {
         const response = await this.getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters);
         return await response.value();
     }
@@ -320,7 +323,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ResendPasswordChangeLinkModelToJSON(requestParameters.resendPasswordChangeLinkModel),
+            body: ResendPasswordChangeLinkCommandToJSON(requestParameters.resendPasswordChangeLinkCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -354,7 +357,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UserExtensionInfoModelToJSON(requestParameters.userExtensionInfoModel),
+            body: UserExtensionInfoCommandToJSON(requestParameters.userExtensionInfoCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -383,7 +386,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ValidatePasswordChangeModelToJSON(requestParameters.validatePasswordChangeModel),
+            body: ValidatePasswordChangeCommandToJSON(requestParameters.validatePasswordChangeCommand),
         });
 
         return new runtime.VoidApiResponse(response);

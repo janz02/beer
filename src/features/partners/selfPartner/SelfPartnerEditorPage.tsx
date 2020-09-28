@@ -11,6 +11,8 @@ import {
   EditorModeOptions,
   EditorModeOptionsProps
 } from 'components/buttons/EditorModeOptions'
+import { hasPermission } from 'services/jwt-reader'
+import { pageViewRoles } from 'services/roleHelpers'
 
 export const SelfPartnerEditorPage: React.FC = () => {
   const dispatch = useDispatch()
@@ -28,6 +30,7 @@ export const SelfPartnerEditorPage: React.FC = () => {
   }
 
   const optionProps: EditorModeOptionsProps = {
+    canEdit: hasPermission(pageViewRoles.contactsEditor),
     mode,
     handleEdit: () => setMode(EditorMode.EDIT),
     handleEscapeEdit: () => setMode(EditorMode.VIEW)

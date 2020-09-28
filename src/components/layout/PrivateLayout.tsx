@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Layout, Button } from 'antd'
+import { Layout } from 'antd'
 import { useIsMobile } from 'hooks'
 import './layout.scss'
 import { SideMenu } from './SideMenu'
@@ -15,8 +15,8 @@ import {
   SendOutlined,
   SettingOutlined,
   ContactsOutlined,
-  RightOutlined,
-  LeftOutlined
+  HistoryOutlined,
+  ClusterOutlined
 } from '@ant-design/icons'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -28,6 +28,7 @@ import { NotificationFab } from 'features/notification/NotificationFab'
 import { NotificationDrawer } from 'features/notification/NotificationDrawer'
 import { hasPermission } from 'services/jwt-reader'
 import { notificationRoleConfig } from 'features/notification/useNotification'
+import { HeaderMenuButton } from 'components/buttons/HeaderMenuButton'
 
 export const PrivateLayout: React.FC = ({ children }) => {
   const dispatch = useDispatch()
@@ -105,6 +106,18 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/contacts',
         icon: <UsergroupAddOutlined />,
         roles: pageViewRoles.contacts
+      },
+      {
+        label: t('menu.bp-history'),
+        link: '/bp-history',
+        icon: <HistoryOutlined />,
+        roles: pageViewRoles.bpHistory
+      },
+      {
+        label: t('menu.permissions'),
+        link: '/permissions',
+        icon: <ClusterOutlined />,
+        roles: pageViewRoles.permissions
       }
     ],
     [t]
@@ -153,10 +166,9 @@ export const PrivateLayout: React.FC = ({ children }) => {
       {hasPermission(notificationRoleConfig) && <NotificationDrawer />}
 
       <Layout>
-        <Button
-          className={`header__menu-button ${isMobile ? ' mobile' : ''}`}
+        <HeaderMenuButton
+          open={menuOpened && !isMobile}
           onClick={() => setMenuOpened(!menuOpened)}
-          icon={isMobile ? <RightOutlined /> : menuOpened ? <LeftOutlined /> : <RightOutlined />}
         />
         <Layout.Content className="layout-content">
           {children}

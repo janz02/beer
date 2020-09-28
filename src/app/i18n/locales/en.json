@@ -24,12 +24,40 @@
       "terms-and-services": "Terms & Services"
     }
   },
+  "bp-history": {
+    "field": {
+      "bpCode": "BP ID",
+      "campaignName": "Campaign name",
+      "campaignResult": "Campaign result",
+      "campaignTechnicalName": "Campaign technical name",
+      "channelName": "Channel",
+      "contact": "Contact",
+      "createdDate": "Event date",
+      "event": "Event",
+      "eventResult": "Event result"
+    },
+    "list": {
+      "title": "BP History"
+    },
+    "modal": {
+      "title": "Subject"
+    }
+  },
   "campaign-category": {
     "add": "Add new campaign category",
     "editor-create": "Create",
     "editor-edit": "Edit",
     "field": {
       "name": "Category name"
+    }
+  },
+  "campaign-product": {
+    "add": "Add new Product",
+    "editor-create": "New product",
+    "editor-edit": "Edit product",
+    "field": {
+      "createdDate": "Created date",
+      "name": "Product name"
     }
   },
   "cashier-editor": {
@@ -73,9 +101,9 @@
     "delete": "Delete",
     "discard": "Discard",
     "edit": "Edit",
-    "export": "Export",
     "escape": "Escape",
     "escape-editor": "Escape editor mode",
+    "export": "Export",
     "field": {
       "help": {
         "password-format": "The password must be 8-64 characters long, include at least one number, lower and uppercase letter, special character and doesn't includes non-english letters and space.",
@@ -269,6 +297,10 @@
     "view-count": "View count"
   },
   "enum": {
+    "channel-type": {
+      "Email": "E-mail",
+      "Phone": "Phone"
+    },
     "notification-type": {
       "CampaignMovedToWaitingState": "Campaign moved to waiting status",
       "CouponClosed": "Coupon closed",
@@ -312,6 +344,7 @@
       "field-required": "This field is required.",
       "internal": "Unsuccessful communication with the server, try again later.",
       "max-length-exact": "This field must be less then {{max}} characters.",
+      "no-template": "Template ID not found.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",
       "server-unavailable": "Unsuccessful communication with the server, try again later."
@@ -359,7 +392,8 @@
     "paginate": {
       "order-by": "Paginate order by.",
       "page": "Paginate page.",
-      "page-size": "Paginate page size."
+      "page-size": "Paginate page size.",
+      "query-not-null": "Unsuccessful communication with the server, try again later"
     },
     "partner": {
       "cant-change-state": "You don't have permission to change the partner state.",
@@ -496,6 +530,10 @@
         "content-required": "File content is required. Please provide a valid file content!",
         "id-required": "File Id is required. Please provide a valid file Id!"
       },
+      "kafka-produce-key-required": "Unsuccessful communication with the server, try again later",
+      "kafka-produce-topic-required": "Unsuccessful communication with the server, try again later",
+      "kafka-produce-value-required": "Unsuccessful communication with the server, try again later",
+      "kafka-query-message-required": "Unsuccessful communication with the server, try again later",
       "notification": {
         "to-date-greater-than-from-date": "The starting date cannot greater than the ending date. Please provide valid dates!",
         "type-invalid": "The given notification type is invalid. Please provide a valid notification type!",
@@ -536,6 +574,14 @@
         "query-toggle-required": "Partner contact query toggle is required. Please provide a valid query toggle!",
         "role-invalid": "Partner contact role is invalid. Please provide a valid partner contact role!",
         "role-required": "Partner contact role is required. Please provide a valid partner contact role!"
+      },
+      "permission": {
+        "name-max-length-100": "The permission name can be maximum 100 characters long. Please provide a shorter name.",
+        "name-required": "Permission name field is required. Please provide a valid name."
+      },
+      "product": {
+        "name-max-length-100": "The product name can be maximum 100 characters long. Please add a valid value.",
+        "name-required": "The product name field is required. Please add a value."
       },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner code for registration cannot be longer than 10 characters. Please use a shorter partner code!",
@@ -598,11 +644,13 @@
     "language": "Language"
   },
   "menu": {
+    "bp-history": "BP History",
     "campaigns": "Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
+    "permissions": "Permissions",
     "profile": "Profile",
     "settings": "Settings",
     "sites": "Sites",
@@ -703,6 +751,30 @@
     "list-title": "Partner Contacts",
     "send-invitation": "Send invitation"
   },
+  "permission": {
+    "categories": {
+      "basics": "Permission identify",
+      "function-permissions": "Function permission",
+      "groups": "AD user groups",
+      "users": "Users"
+    },
+    "editor": {
+      "create": "Create permission",
+      "modify": "Modify permission",
+      "title": {
+        "edit": "Edit permission",
+        "new": "Create new permission",
+        "view": "View permission"
+      }
+    },
+    "field": {
+      "name": "Permission name"
+    },
+    "list": {
+      "add": "New Permission",
+      "title": "Permissions"
+    }
+  },
   "profile": {
     "editor-title": "Profile",
     "field": {
@@ -717,8 +789,20 @@
     "save": "Save changes",
     "save-profile-success": "Successfully saved the profile."
   },
+  "segmentation-category": {
+    "add": "Add new segmentation category",
+    "editor-create": "Create",
+    "editor-edit": "Edit",
+    "field": {
+      "created-date": "Date of creation",
+      "name": "Category name"
+    }
+  },
   "settings": {
-    "campaign-categories": "Campaign categories"
+    "campaign-categories": "Campaign categories",
+    "campaign-products": "Products",
+    "segmentation-categories": "Segmentation categories",
+    "test-group-categories": "Testgroup categories"
   },
   "site": {
     "editor-title": "Site",
@@ -733,6 +817,15 @@
     "table": {
       "address": "Address",
       "name": "Site name"
+    }
+  },
+  "test-group-category": {
+    "add": "Create new testgroup",
+    "editor-create": "Create testgroup",
+    "editor-edit": "Edit testgroup",
+    "field": {
+      "created-date": "Created date",
+      "name": "Testgroup name"
     }
   },
   "user": {

@@ -113,11 +113,7 @@ export const usePartnerContactList = (
         title: t('partner-contact.field.active'),
         key: 'isActive',
         width: '6rem',
-        filterMode: FilterMode.ACTIVE_INACTIVE,
-        activenessOptions: {
-          active: t(`partner-contact.field.status-active`),
-          inactive: t(`partner-contact.field.status-inactive`)
-        }
+        filterMode: FilterMode.ACTIVE_INACTIVE
       }),
       tableUtils.columnConfig({
         title: t('partner-contact.field.email'),

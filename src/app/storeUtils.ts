@@ -12,12 +12,16 @@ import { resetSelfPartner } from 'features/partners/selfPartner/selfPartnerSlice
 import { resetPartnerEditor } from 'features/partners/partnerEditor/partnerEditorSlice'
 import { profileActions } from 'features/profile/profileSlice'
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
-import { categoryEditorActions } from 'features/settings/campaignCategory/categoryEditor/categoryEditorSlice'
-import { categoryListActions } from 'features/settings/campaignCategory/categoryList/categoryListSlice'
+import { campaignCategoryEditorActions } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
+import { campaignCategoryListActions } from 'features/settings/campaignCategories/categoryList/campaignCategoryListSlice'
+import { segmentationCategoryListActions } from 'features/settings/segmentationCategories/categoryList/segmentationCategoryListSlice'
+import { segmentationCategoryEditorActions } from 'features/settings/segmentationCategories/categoryEditor/segmentationCategoryEditorSlice'
 import { partnerContactListActions } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalActions } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { authActions } from 'features/auth/authSlice'
 import { siteListActions } from 'features/sites/siteList/siteListSlice'
+import { testGroupCategoryListActions } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
+import { testGroupCategoryEditorActions } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -33,8 +37,10 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(siteEditorActions.reset())
     dispatch(campaignActions.resetCampaigns())
     dispatch(campaignListActions.resetCampaignList())
-    dispatch(categoryEditorActions.resetCategoryEditor())
-    dispatch(categoryListActions.resetCategoryList())
+    dispatch(campaignCategoryEditorActions.resetCategoryEditor())
+    dispatch(campaignCategoryListActions.resetCategoryList())
+    dispatch(segmentationCategoryListActions.resetCategoryList())
+    dispatch(segmentationCategoryEditorActions.resetCategoryEditor())
     dispatch(userAccessActions.reset())
     dispatch(newsletterListActions.resetNewsletterList())
     dispatch(newsletterEditorActions.reset())
@@ -43,6 +49,8 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetSelfPartner())
     dispatch(partnerContactListActions.reset())
     dispatch(partnerContactModalActions.reset())
+    dispatch(testGroupCategoryListActions.resetCategoryList())
+    dispatch(testGroupCategoryEditorActions.resetCategoryEditor())
     logout && dispatch(resetRouterHistory())
   })
 }

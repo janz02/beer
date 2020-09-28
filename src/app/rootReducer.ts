@@ -13,12 +13,21 @@ import { newsletterListReducer } from 'features/newsletter/newsletterList/newsle
 import { partnersListReducer } from 'features/partners/partnerList/partnerListSlice'
 import { selfPartnerReducer } from 'features/partners/selfPartner/selfPartnerSlice'
 import { partnerEditorReducer } from 'features/partners/partnerEditor/partnerEditorSlice'
-import { categoryListReducer } from 'features/settings/campaignCategory/categoryList/categoryListSlice'
-import { categoryEditorReducer } from 'features/settings/campaignCategory/categoryEditor/categoryEditorSlice'
+import { campaignCategoryListReducer } from 'features/settings/campaignCategories/categoryList/campaignCategoryListSlice'
+import { segmentationCategoryListReducer } from 'features/settings/segmentationCategories/categoryList/segmentationCategoryListSlice'
+import { segmentationCategoryEditorReducer } from 'features/settings/segmentationCategories/categoryEditor/segmentationCategoryEditorSlice'
+import { campaignCategoryEditorReducer } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
+import { bpHistoryReducer } from 'features/bpHistory/bpHistorySlice'
 import { siteListReducer } from 'features/sites/siteList/siteListSlice'
+import { testGroupCategoryListReducer } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
+import { testGroupCategoryEditorReducer } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
+import { productListReducer } from 'features/settings/products/productList/productListSlice'
+import { productEditorReducer } from 'features/settings/products/productEditor/productEditorSlice'
 import { createBrowserHistory } from 'history'
+import { permissionListReducer } from 'features/permissions/permissionList/permissionListSlice'
+import { permissionEditorReducer } from 'features/permissions/permissionEditor/permissionEditorSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
 // Probably a mock for the router/ history needed for proper solution, but needs more investigation
@@ -31,8 +40,10 @@ export const rootReducer = combineReducers({
   profile: profileReducer,
   campaignList: campaignListReducer,
   campaigns: campaignsReducer,
-  categoryList: categoryListReducer,
-  categoryEditor: categoryEditorReducer,
+  campaignCategoryList: campaignCategoryListReducer,
+  campaignCategoryEditor: campaignCategoryEditorReducer,
+  segmentationCategoryEditor: segmentationCategoryEditorReducer,
+  segmentationCategoryList: segmentationCategoryListReducer,
   selfPartner: selfPartnerReducer,
   partnerList: partnersListReducer,
   partnerEditor: partnerEditorReducer,
@@ -43,7 +54,14 @@ export const rootReducer = combineReducers({
   siteEditor: siteEditorReducer,
   newsletterEditor: newsletterEditorReducer,
   userAccess: userAccessReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  productList: productListReducer,
+  productEditor: productEditorReducer,
+  testGroupCategoryList: testGroupCategoryListReducer,
+  testGroupCategoryEditor: testGroupCategoryEditorReducer,
+  bpHistory: bpHistoryReducer,
+  permissionList: permissionListReducer,
+  permissionEditor: permissionEditorReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>
