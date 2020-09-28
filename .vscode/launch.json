@@ -12,6 +12,21 @@
       "webRoot": "${workspaceFolder}"
     },
     {
+      "name": "Launch Edge",
+      "request": "launch",
+      "type": "pwa-msedge",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Firefox",
+      "request": "launch",
+      "type": "firefox",
+      "reAttach": true,
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "name": "Debug CRA Tests",
       "type": "node",
       "request": "launch",
