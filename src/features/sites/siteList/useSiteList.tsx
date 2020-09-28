@@ -14,6 +14,7 @@ import { FeatureState } from 'models/featureState'
 
 interface UseSiteListProps {
   config: SiteFeatureConfig
+  partnerId: number
 }
 interface UseSiteListUtils {
   deletePopupProps: GenericPopupProps
@@ -111,10 +112,10 @@ export const useSiteList = (props: UseSiteListProps): UseSiteListUtils => {
 
   const handleGetSites = useCallback(
     (params?: ListRequestParams) => {
-      dispatch(siteListActions.setListConstraints({ partnerId: 2 }))
+      dispatch(siteListActions.setListConstraints({ partnerId: props.partnerId }))
       dispatch(siteListActions.getSites(params))
     },
-    [dispatch]
+    [dispatch, props.partnerId]
   )
 
   const tableProps: ResponsiveTableProps = {

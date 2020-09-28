@@ -11,6 +11,7 @@ import { ExportButton } from 'components/buttons/ExportButton'
 
 interface SiteListProps {
   config: SiteFeatureConfig
+  partnerId: number
 }
 export const SiteList: FC<SiteListProps> = props => {
   const { shrinks } = props.config
@@ -24,7 +25,8 @@ export const SiteList: FC<SiteListProps> = props => {
     resetFilters,
     handleExport
   } = useSiteList({
-    config: props.config
+    config: props.config,
+    partnerId: props.partnerId
   })
 
   useEffect(() => {

@@ -158,7 +158,7 @@ export const PartnerEditorPage: React.FC = () => {
       </GenericPopup>
       {mode !== EditorMode.NEW && (
         <>
-          <SiteList config={sitesConfig} />
+          <SiteList config={sitesConfig} partnerId={partner!.id!} />
           <PartnerContactTile {...partnerContactConfig} />
         </>
       )}
