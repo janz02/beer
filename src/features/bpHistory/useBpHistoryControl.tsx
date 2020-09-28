@@ -4,7 +4,7 @@ import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { useColumnOrder, UseColumnOrderFeatures } from 'components/table-columns/useColumnOrder'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BpHistoryItem } from 'models/bpHistoryItem'
 import { ColumnType, TablePaginationConfig } from 'antd/lib/table'
@@ -18,11 +18,11 @@ import { Channels } from 'models/channels'
 import { notification } from 'antd'
 import { MomentDisplay } from 'components/MomentDisplay'
 
-interface BpHistoryControl<T> {
+interface BpHistoryControl {
   loading: boolean
-  source: Array<T>
+  source: BpHistoryItem[]
   paginationConfig: false | TablePaginationConfig
-  columnOrder: UseColumnOrderFeatures<T>
+  columnOrder: UseColumnOrderFeatures<BpHistoryItem>
   templateModal: {
     title: string | null
     content: string | null
@@ -30,18 +30,15 @@ interface BpHistoryControl<T> {
   handleResetFilters: () => void
   handleTemplateCloseClick: () => void
   handleTableChange: () => void
+  loadHistory: () => void
 }
 
-export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
+export const useBpHistoryControl = (): BpHistoryControl => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { bpHistoryItems, loading, listParams, template } = useSelector(
     (state: RootState) => state.bpHistory
   )
-
-  useEffect(() => {
-    dispatch(getBpHistory())
-  }, [dispatch])
 
   const {
     paginationConfig,
@@ -152,6 +149,8 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
     [template]
   )
 
+  const loadHistory = useCallback(() => dispatch(getBpHistory()), [dispatch])
+
   return {
     loading,
     columnOrder,
@@ -160,6 +159,7 @@ export const useBpHistoryControl = (): BpHistoryControl<BpHistoryItem> => {
     source,
     handleResetFilters,
     handleTemplateCloseClick,
-    handleTableChange
+    handleTableChange,
+    loadHistory
   }
 }
