@@ -88,11 +88,11 @@ export const PartnerEditorPage: React.FC = () => {
     listConstraint: { partnerId: id },
     shrinks: true,
     userType: id === 1 ? UserType.NKM : UserType.PARTNER,
-    canEdit: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
+    canEdit: hasPermission(pageViewRoles.contactsEditor)
   }
 
   const sitesConfig: SiteFeatureConfig = {
-    canEdit: hasPermission(pageViewRoles.contactsEditor),
+    canEdit: hasPermission(pageViewRoles.sitesEditor),
     shrinks: true,
     routeRoot: `/partners/${id}/site`,
     routeExit: `/partners/${id}`
