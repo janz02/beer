@@ -1,10 +1,9 @@
 import React, { FC, useEffect } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
-import { useSiteList } from './useSiteList'
+import { SiteFeatureConfig, useSiteList } from './useSiteList'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
-import { SiteFeatureConfig } from './siteListSlice'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { ExportButton } from 'components/buttons/ExportButton'
@@ -13,6 +12,7 @@ interface SiteListProps {
   config: SiteFeatureConfig
   partnerId: number
 }
+
 export const SiteList: FC<SiteListProps> = props => {
   const { shrinks } = props.config
   const { t } = useTranslation()

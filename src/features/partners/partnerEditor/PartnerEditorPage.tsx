@@ -28,10 +28,10 @@ import {
 } from 'features/partnerContact/PartnerContactTile'
 import { hasPermission } from 'services/jwt-reader'
 import { UserType } from 'models/user'
-import { SiteFeatureConfig } from 'features/sites/siteList/siteListSlice'
 import { SiteList } from 'features/sites/siteList/SiteList'
 import { Button } from 'antd'
 import { pageViewRoles } from 'services/roleHelpers'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
