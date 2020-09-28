@@ -1,6 +1,6 @@
 import React from 'react'
 import { BpHistoryViewer } from './BpHistoryViewer'
-import { mount } from 'enzyme'
+import { mount, ReactWrapper } from 'enzyme'
 import { I18nextProvider } from 'react-i18next'
 import i18n from '../../../app/i18n'
 import { act } from 'react-dom/test-utils'
@@ -15,19 +15,23 @@ const BpHistoryViewerComponent: React.FC = () => (
   </I18nextProvider>
 )
 
+let viewer: any = null
+beforeEach(() => {
+  viewer = mount(<BpHistoryViewerComponent />)
+})
+
+afterEach(() => {
+  ;(viewer as ReactWrapper).unmount()
+  viewer = null
+})
+
 describe('bp history viewer tests', () => {
   it('should render', () => {
-    // Act
-    const viewer = mount(<BpHistoryViewerComponent />)
-
     // Assert
     expect(viewer.html()).toBeDefined()
   })
 
   it('should have title and content', () => {
-    // Act
-    const viewer = mount(<BpHistoryViewerComponent />)
-
     // Assert
     expect(viewer.html()).toContain('Valami')
     expect(viewer.html()).toContain('h1')
@@ -35,9 +39,6 @@ describe('bp history viewer tests', () => {
   })
 
   it('should have subject label in every language in title', () => {
-    // Act
-    const viewer = mount(<BpHistoryViewerComponent />)
-
     // Assert
     expect(viewer.html()).toContain(
       i18n.getDataByLanguage('en').translation['bp-history'].modal.title
