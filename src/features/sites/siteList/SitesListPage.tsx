@@ -14,7 +14,11 @@ export const getSiteListPageConfig = (): SiteFeatureConfig => ({
 })
 
 export const SiteListPage: FC = () => {
-  const partnerId = useSelector((state: RootState) => state.auth.userData.partnerId)!
+  const partnerId = useSelector((state: RootState) => state.auth.userData.partnerId)
+  if (!partnerId) {
+    return <></>
+  }
+
   const siteListPageConfig = getSiteListPageConfig()
   return <SiteList config={siteListPageConfig} partnerId={partnerId} />
 }
