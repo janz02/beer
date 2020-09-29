@@ -8,8 +8,9 @@ import { AddButton } from 'components/buttons/AddButton'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { Form, Input } from 'antd'
 import { useCommonFormRules } from 'hooks'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
 
-export const CashierManager: FC = () => {
+export const CashierManager: FC<{ config: SiteFeatureConfig }> = ({ config }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
@@ -20,7 +21,7 @@ export const CashierManager: FC = () => {
     cashierTableProps,
     cashierDeletePopupProps,
     cashierEditorFormModalProps
-  } = useCashierManager()
+  } = useCashierManager(config)
 
   const listHeaderOptions = (
     <>

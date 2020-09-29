@@ -13,6 +13,7 @@ import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { FeatureState } from 'models/featureState'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { GenericModalFormProps } from 'components/popups/GenericModalForm'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
 
 interface UseCashierManagerUtils {
   cashierManagerVisible: boolean
@@ -22,11 +23,10 @@ interface UseCashierManagerUtils {
   cashierDeletePopupProps: GenericPopupProps
   cashierEditorFormModalProps: GenericModalFormProps
 }
-export const useCashierManager = (): UseCashierManagerUtils => {
+export const useCashierManager = (config: SiteFeatureConfig): UseCashierManagerUtils => {
   const { siteId, cashierId } = useParams()
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { config } = useSelector((s: RootState) => s.siteList)
   const {
     cashiersListParams,
     cashiers,

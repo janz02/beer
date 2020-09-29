@@ -9,18 +9,18 @@ import { Site } from 'models/site'
 import { history } from 'router/router'
 import { useTranslation } from 'react-i18next'
 import { SiteEditorFormProps } from './SiteEditorForm'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
 
 interface UseSiteEditorFormUtils {
   siteEditorFormProps: SiteEditorFormProps
   handleGetSite: () => void
   handleResetSite: () => void
 }
-export const useSiteEditorForm = (): UseSiteEditorFormUtils => {
+export const useSiteEditorForm = (config: SiteFeatureConfig): UseSiteEditorFormUtils => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { siteId: id, partnerId } = useParams()
   const siteId = id ? +id : undefined
-  const { config } = useSelector((s: RootState) => s.siteList)
   const { siteEditorState, site } = useSelector((state: RootState) => state.siteEditor)
 
   const loadingSiteEditor = siteEditorState === FeatureState.Loading

@@ -28,10 +28,10 @@ import {
 } from 'features/partnerContact/PartnerContactTile'
 import { hasPermission } from 'services/jwt-reader'
 import { UserType } from 'models/user'
-import { SiteFeatureConfig } from 'features/sites/siteList/siteListSlice'
 import { SiteList } from 'features/sites/siteList/SiteList'
 import { Button } from 'antd'
 import { pageViewRoles } from 'services/roleHelpers'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
 
 export const partnersEditorRoles = [
   Roles.Administrator,
@@ -41,8 +41,11 @@ export const partnersEditorRoles = [
 
 export const PartnerEditorPage: React.FC = () => {
   const { t } = useTranslation()
-  const { partnerId: id } = useParams()
   const dispatch = useDispatch()
+
+  const params = useParams<{ partnerId?: string }>()
+  const id = params.partnerId ? +params.partnerId : undefined
+
   const { partner, loading, loadingRegState } = useSelector(
     (state: RootState) => state.partnerEditor
   )
@@ -51,7 +54,7 @@ export const PartnerEditorPage: React.FC = () => {
   const [partnerToDelete, setPartnerToDelete] = useState<PopupState<Partner>>()
 
   useEffect(() => {
-    id && dispatch(getPartner(+id))
+    id && dispatch(getPartner(id))
 
     return () => {
       dispatch(resetPartnerEditor())
@@ -84,12 +87,12 @@ export const PartnerEditorPage: React.FC = () => {
   const partnerContactConfig: PartnerContactConfig = {
     listConstraint: { partnerId: id },
     shrinks: true,
-    userType: +id! === 1 ? UserType.NKM : UserType.PARTNER,
-    canEdit: hasPermission([Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager])
+    userType: id === 1 ? UserType.NKM : UserType.PARTNER,
+    canEdit: hasPermission(pageViewRoles.contactsEditor)
   }
 
   const sitesConfig: SiteFeatureConfig = {
-    canEdit: hasPermission(pageViewRoles.contactsEditor),
+    canEdit: hasPermission(pageViewRoles.sitesEditor),
     shrinks: true,
     routeRoot: `/partners/${id}/site`,
     routeExit: `/partners/${id}`
@@ -158,7 +161,7 @@ export const PartnerEditorPage: React.FC = () => {
       </GenericPopup>
       {mode !== EditorMode.NEW && (
         <>
-          <SiteList config={sitesConfig} />
+          <SiteList config={sitesConfig} partnerId={id!} />
           <PartnerContactTile {...partnerContactConfig} />
         </>
       )}
