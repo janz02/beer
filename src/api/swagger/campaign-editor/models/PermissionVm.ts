@@ -13,21 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    AdGroupVm,
-    AdGroupVmFromJSON,
-    AdGroupVmFromJSONTyped,
-    AdGroupVmToJSON,
-    FunctionPermissionVm,
-    FunctionPermissionVmFromJSON,
-    FunctionPermissionVmFromJSONTyped,
-    FunctionPermissionVmToJSON,
-    UserPermissionVm,
-    UserPermissionVmFromJSON,
-    UserPermissionVmFromJSONTyped,
-    UserPermissionVmToJSON,
-} from './';
-
 /**
  * A model to describe the structure of Permissions.
  * @export
@@ -46,24 +31,6 @@ export interface PermissionVm {
      * @memberof PermissionVm
      */
     name?: string | null;
-    /**
-     * A list of ad groups that belong to this permission.  Use IsSelected to define if the connection is active.
-     * @type {Array<AdGroupVm>}
-     * @memberof PermissionVm
-     */
-    adGroups?: Array<AdGroupVm> | null;
-    /**
-     * A list of users that belong to this permission.  Use IsSelected to define if the connection is active.
-     * @type {Array<UserPermissionVm>}
-     * @memberof PermissionVm
-     */
-    users?: Array<UserPermissionVm> | null;
-    /**
-     * A list of function permissions that belong to this permission.
-     * @type {Array<FunctionPermissionVm>}
-     * @memberof PermissionVm
-     */
-    functionPermissions?: Array<FunctionPermissionVm> | null;
 }
 
 export function PermissionVmFromJSON(json: any): PermissionVm {
@@ -78,9 +45,6 @@ export function PermissionVmFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'adGroups': !exists(json, 'adGroups') ? undefined : (json['adGroups'] === null ? null : (json['adGroups'] as Array<any>).map(AdGroupVmFromJSON)),
-        'users': !exists(json, 'users') ? undefined : (json['users'] === null ? null : (json['users'] as Array<any>).map(UserPermissionVmFromJSON)),
-        'functionPermissions': !exists(json, 'functionPermissions') ? undefined : (json['functionPermissions'] === null ? null : (json['functionPermissions'] as Array<any>).map(FunctionPermissionVmFromJSON)),
     };
 }
 
@@ -95,9 +59,6 @@ export function PermissionVmToJSON(value?: PermissionVm | null): any {
         
         'id': value.id,
         'name': value.name,
-        'adGroups': value.adGroups === undefined ? undefined : (value.adGroups === null ? null : (value.adGroups as Array<any>).map(AdGroupVmToJSON)),
-        'users': value.users === undefined ? undefined : (value.users === null ? null : (value.users as Array<any>).map(UserPermissionVmToJSON)),
-        'functionPermissions': value.functionPermissions === undefined ? undefined : (value.functionPermissions === null ? null : (value.functionPermissions as Array<any>).map(FunctionPermissionVmToJSON)),
     };
 }
 
