@@ -40,7 +40,7 @@ export const useSegmentationListPage = (): UseSegmentationListPageUtils => {
     addKeyProp
   } = useTableUtils<CampaignSegmentation>({
     listParamsState: listParams,
-    filterKeys: ['name', 'categoryName'],
+    filterKeys: ['name', 'categoryName', 'createdDate'],
     getDataAction: getSegmentations
   })
 
@@ -89,7 +89,7 @@ export const useSegmentationListPage = (): UseSegmentationListPageUtils => {
     [/* actionColumnConfig, */ columnConfig, t]
   )
 
-  const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.PERMISSION)
+  const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.SEGMENTATION)
 
   const tableProps = useMemo(
     () => ({
