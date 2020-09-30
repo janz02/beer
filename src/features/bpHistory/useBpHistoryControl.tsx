@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { BpHistoryItem } from 'models/bpHistoryItem'
+import { BpHistoryItem } from 'models/campaign/bpHistoryItem'
 import { ColumnType, TablePaginationConfig } from 'antd/lib/table'
 import {
   clearTemplate,

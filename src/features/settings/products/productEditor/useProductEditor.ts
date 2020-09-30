@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react'
-import { Product } from 'models/product'
+import { Product } from 'models/campaign/product'
 import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'

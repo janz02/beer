@@ -195,7 +195,7 @@ function useTableUtils<T extends { [key: string]: any }>(
             borderRadius: '5px'
           }}
           searchWords={[listParamsState?.[key]]}
-          textToHighlight={fieldText.toString()}
+          textToHighlight={fieldText?.toString()}
         />
       ) : (
         fieldText

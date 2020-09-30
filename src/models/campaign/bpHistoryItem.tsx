@@ -1,4 +1,4 @@
-import { Channels } from './channels'
+import { Channels } from '../channels'
 import moment from 'moment'
 
 export interface BpHistoryItem {

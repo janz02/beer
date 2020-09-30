@@ -8,7 +8,7 @@ import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdow
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { useTableUtils } from 'hooks/useTableUtils'
-import { CampaignPermission } from 'models/campaignPermission'
+import { CampaignPermission } from 'models/campaign/campaignPermission'
 import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'

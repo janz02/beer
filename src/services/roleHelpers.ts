@@ -61,5 +61,6 @@ export const pageViewRoles = {
   productEditor: [Roles.Administrator],
   bpHistory: [Roles.Administrator],
   permissions: [Roles.Administrator],
-  permissionEditor: [Roles.Administrator]
+  permissionEditor: [Roles.Administrator],
+  segmentations: [Roles.Administrator]
 }
