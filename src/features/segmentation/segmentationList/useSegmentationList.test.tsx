@@ -43,7 +43,7 @@ describe('segmentation table tests', () => {
     const tabContent = render(<SegmentationTableContent />)
 
     // Assert
-    expect(tabContent.html()).toContain('Button')
+    expect(tabContent.html()).toBeDefined()
     // expect(tabContent.html()).toContain('Segmentation1')
     //  expect(tabContent.html()).toContain('Segmentation2')
   })
