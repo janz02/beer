@@ -1,0 +1,33 @@
+@import "../assets/scss/variables";
+
+.campaign-state {
+  &-created {
+    border-color: $campaign-state-created-color;
+    background-color: $campaign-state-created-bg;
+    color: $campaign-state-created-color;
+  }
+
+  &-accepted {
+    border-color: $campaign-state-accepted-color;
+    background-color: $campaign-state-accepted-bg;
+    color: $campaign-state-accepted-color;
+  }
+
+  &-waiting {
+    border-color: $campaign-state-waiting-color;
+    background-color: $campaign-state-waiting-bg;
+    color: $campaign-state-waiting-color;
+  }
+
+  &-closed {
+    border-color: $campaign-state-closed-color;
+    background-color: $campaign-state-closed-bg;
+    color: $campaign-state-closed-color;
+  }
+
+  &-archived {
+    border-color: $campaign-state-archived-color;
+    background-color: $campaign-state-archived-bg;
+    color: $campaign-state-archived-color;
+  }
+}

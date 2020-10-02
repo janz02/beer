@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Tag } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { CouponState } from 'api/swagger/coupon'
+import './CampaignStateDisplay.scss'
 
 interface CampaignStateDisplayProps {
   state?: CouponState
@@ -13,25 +14,7 @@ export const CampaignStateDisplay: FC<CampaignStateDisplayProps> = props => {
 
   if (!state) return <></>
 
-  let color = 'orange'
+  const className = 'campaign-state-' + state.toLowerCase()
 
-  switch (state) {
-    case CouponState.Created:
-      color = 'orange'
-      break
-    case CouponState.Waiting:
-      color = 'green'
-      break
-    case CouponState.Accepted:
-      color = 'cyan'
-      break
-    case CouponState.Closed:
-      color = 'geekblue'
-      break
-    case CouponState.Archived:
-      color = 'default'
-      break
-  }
-
-  return <Tag color={color}>{t(`coupon.state.${state.toLowerCase()}`)}</Tag>
+  return <Tag className={className}>{t(`coupon.state.${state.toLowerCase()}`)}</Tag>
 }

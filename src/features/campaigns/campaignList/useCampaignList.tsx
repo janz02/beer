@@ -25,6 +25,7 @@ import {
   CouponDiscountType
 } from 'api/swagger/coupon'
 import { isCouponActive } from 'components/CampaignActiveDisplay'
+import { CampaignTypeDisplay } from 'components/CampaignTypeDisplay'
 
 interface UseCampaignListFeatures {
   loading: boolean
@@ -113,9 +114,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         filters: Object.keys(CouponType).map(f => {
           return { text: t(`coupon.type.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
-        render(value) {
-          return t(`coupon.type.${value?.toLowerCase()}`)
-        }
+        render: (value: CouponType) => <CampaignTypeDisplay type={value} />
       }),
       columnConfig({
         title: t('coupon-list.partner'),
