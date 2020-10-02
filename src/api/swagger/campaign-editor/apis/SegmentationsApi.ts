@@ -24,6 +24,9 @@ import {
     DiscountSegmentVm,
     DiscountSegmentVmFromJSON,
     DiscountSegmentVmToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     SegmentListItemVmPaginatedSearchResponse,
     SegmentListItemVmPaginatedSearchResponseFromJSON,
     SegmentListItemVmPaginatedSearchResponseToJSON,
@@ -68,6 +71,7 @@ export interface GetSegmentationsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface UpdateSegmentationRequest {
@@ -305,6 +309,10 @@ export class SegmentationsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

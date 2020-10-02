@@ -18,6 +18,9 @@ import {
     CampaignResultEventVmPaginatedSearchResponse,
     CampaignResultEventVmPaginatedSearchResponseFromJSON,
     CampaignResultEventVmPaginatedSearchResponseToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     UploadCsvCommand,
     UploadCsvCommandFromJSON,
     UploadCsvCommandToJSON,
@@ -39,6 +42,7 @@ export interface GetEventsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface UploadCsvForCampaignResultRequest {
@@ -131,6 +135,10 @@ export class CampaignResultsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
