@@ -18,6 +18,9 @@ import {
     CreateUpdatePermissionCommand,
     CreateUpdatePermissionCommandFromJSON,
     CreateUpdatePermissionCommandToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     PermissionVm,
     PermissionVmFromJSON,
     PermissionVmToJSON,
@@ -49,6 +52,7 @@ export interface GetPermissionsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface UpdatePermissionRequest {
@@ -223,6 +227,10 @@ export class PermissionsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

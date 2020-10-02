@@ -18,6 +18,9 @@ import {
     CreateStaticMergeTagCommand,
     CreateStaticMergeTagCommandFromJSON,
     CreateStaticMergeTagCommandToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     ProblemDetails,
     ProblemDetailsFromJSON,
     ProblemDetailsToJSON,
@@ -55,6 +58,7 @@ export interface GetStaticMergeTagsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface UpdateStaticMergeTagRequest {
@@ -228,6 +232,10 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

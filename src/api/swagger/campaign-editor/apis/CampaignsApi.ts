@@ -27,6 +27,9 @@ import {
     CreateCampaignCommand,
     CreateCampaignCommandFromJSON,
     CreateCampaignCommandToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     UpdateCampaignCommand,
     UpdateCampaignCommandFromJSON,
     UpdateCampaignCommandToJSON,
@@ -77,6 +80,7 @@ export interface GetCampaignsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface SendCampaignToTestGroupRequest {
@@ -369,6 +373,10 @@ export class CampaignsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

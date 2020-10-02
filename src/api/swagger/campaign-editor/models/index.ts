@@ -42,6 +42,7 @@ export * from './Int32LabelValueTree';
 export * from './LanguagesVm';
 export * from './LoginRequestCommand';
 export * from './Operator';
+export * from './OrderByType';
 export * from './PermissionVm';
 export * from './PermissionVmPaginatedSearchResponse';
 export * from './ProblemDetails';

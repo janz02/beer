@@ -18,6 +18,9 @@ import {
     CreateProductCommand,
     CreateProductCommandFromJSON,
     CreateProductCommandToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     ProductVm,
     ProductVmFromJSON,
     ProductVmToJSON,
@@ -53,6 +56,7 @@ export interface GetProductsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface UpdateProductRequest {
@@ -233,6 +237,10 @@ export class ProductsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
