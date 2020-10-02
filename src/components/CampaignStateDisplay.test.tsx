@@ -6,7 +6,7 @@ import { CouponState } from 'api/swagger/coupon'
 describe('CampaignStateDisplay tests', () => {
   it('should render accepted state', () => {
     // Arrange
-    const state: CouponState = CouponState.Accepted
+    const state = CouponState.Accepted
 
     // Act
     const wrapper = render(<CampaignStateDisplay state={state} />)
@@ -18,7 +18,7 @@ describe('CampaignStateDisplay tests', () => {
 
   it('should render archived state', () => {
     // Arrange
-    const state: CouponState = CouponState.Archived
+    const state = CouponState.Archived
 
     // Act
     const wrapper = render(<CampaignStateDisplay state={state} />)
@@ -30,7 +30,7 @@ describe('CampaignStateDisplay tests', () => {
 
   it('should render closed state', () => {
     // Arrange
-    const state: CouponState = CouponState.Closed
+    const state = CouponState.Closed
 
     // Act
     const wrapper = render(<CampaignStateDisplay state={state} />)
@@ -42,7 +42,7 @@ describe('CampaignStateDisplay tests', () => {
 
   it('should render created state', () => {
     // Arrange
-    const state: CouponState = CouponState.Created
+    const state = CouponState.Created
 
     // Act
     const wrapper = render(<CampaignStateDisplay state={state} />)
@@ -54,7 +54,7 @@ describe('CampaignStateDisplay tests', () => {
 
   it('should render waiting state', () => {
     // Arrange
-    const state: CouponState = CouponState.Waiting
+    const state = CouponState.Waiting
 
     // Act
     const wrapper = render(<CampaignStateDisplay state={state} />)

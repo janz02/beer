@@ -6,7 +6,7 @@ import { CouponType } from 'api/swagger/coupon'
 describe('CampaignTypeDisplay tests', () => {
   it('should show banner icon', () => {
     // Arrange
-    const type: CouponType = CouponType.Banner
+    const type = CouponType.Banner
 
     // Act
     const wrapper = render(<CampaignTypeDisplay type={type} />)
@@ -18,7 +18,7 @@ describe('CampaignTypeDisplay tests', () => {
 
   it('should show prize icon', () => {
     // Arrange
-    const type: CouponType = CouponType.Prize
+    const type = CouponType.Prize
 
     // Act
     const wrapper = render(<CampaignTypeDisplay type={type} />)
@@ -30,7 +30,7 @@ describe('CampaignTypeDisplay tests', () => {
 
   it('should show discount icon', () => {
     // Arrange
-    const type: CouponType = CouponType.Discount
+    const type = CouponType.Discount
 
     // Act
     const wrapper = render(<CampaignTypeDisplay type={type} />)

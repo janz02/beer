@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CouponType } from 'api/swagger/coupon'
 import { Tooltip } from 'antd'
@@ -17,8 +17,8 @@ export const CampaignTypeDisplay: FC<CampaignTypeDisplayProps> = props => {
 
   if (!type) return <></>
 
-  let icon
-  let tooltip
+  let icon: FunctionComponent
+  let tooltip: string
 
   switch (type) {
     case CouponType.Banner: {
