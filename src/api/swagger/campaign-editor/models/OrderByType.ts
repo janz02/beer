@@ -17,22 +17,20 @@
  * @export
  * @enum {string}
  */
-export enum QueryConditionOperation {
-    Preserved = 'Preserved',
-    Added = 'Added',
-    Removed = 'Removed',
-    Changed = 'Changed'
+export enum OrderByType {
+    Ascending = 'Ascending',
+    Descending = 'Descending'
 }
 
-export function QueryConditionOperationFromJSON(json: any): QueryConditionOperation {
-    return QueryConditionOperationFromJSONTyped(json, false);
+export function OrderByTypeFromJSON(json: any): OrderByType {
+    return OrderByTypeFromJSONTyped(json, false);
 }
 
-export function QueryConditionOperationFromJSONTyped(json: any, ignoreDiscriminator: boolean): QueryConditionOperation {
-    return json as QueryConditionOperation;
+export function OrderByTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): OrderByType {
+    return json as OrderByType;
 }
 
-export function QueryConditionOperationToJSON(value?: QueryConditionOperation | null): any {
+export function OrderByTypeToJSON(value?: OrderByType | null): any {
     return value as any;
 }
 

@@ -415,6 +415,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -724,6 +731,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -1359,6 +1373,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -1670,6 +1691,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -2094,6 +2122,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -2470,6 +2505,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -3052,6 +3094,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -3652,6 +3701,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -4454,6 +4510,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -4852,6 +4915,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -5570,6 +5640,13 @@
         },
         "additionalProperties": false
       },
+      "OrderByType": {
+        "enum": [
+          "Ascending",
+          "Descending"
+        ],
+        "type": "string"
+      },
       "CampaignResultEventVm": {
         "type": "object",
         "properties": {
@@ -5877,60 +5954,56 @@
       },
       "SegmentationType": {
         "enum": [
-          1,
-          2,
-          3
+          "Query",
+          "Csv",
+          "TechnicalQuery"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Condition": {
         "enum": [
-          0,
-          1
+          "And",
+          "Or"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Operator": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19
+          "Equal",
+          "Not_equal",
+          "Less",
+          "Less_or_equal",
+          "Greater",
+          "Greater_or_equal",
+          "Like",
+          "Not_like",
+          "Between",
+          "Not_between",
+          "Range_between",
+          "Range_not_between",
+          "Is_empty",
+          "Is_not_empty",
+          "Select_equals",
+          "Select_not_equals",
+          "Select_any_in",
+          "Select_not_any_in",
+          "Multiselect_equals",
+          "Multiselect_not_equals"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "ControlType": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
+          "Number",
+          "Text",
+          "Boolean",
+          "Select",
+          "MultiSelect",
+          "Date",
+          "DateTime",
+          "Time"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "QueryValues": {
         "type": "object",
@@ -6002,13 +6075,12 @@
       },
       "QueryConditionOperation": {
         "enum": [
-          1,
-          2,
-          3,
-          4
+          "Preserved",
+          "Added",
+          "Removed",
+          "Changed"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "SegmentConditionVm": {
         "type": "object",

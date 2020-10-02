@@ -18,9 +18,9 @@
  * @enum {string}
  */
 export enum SegmentationType {
-    NUMBER_1 = 1,
-    NUMBER_2 = 2,
-    NUMBER_3 = 3
+    Query = 'Query',
+    Csv = 'Csv',
+    TechnicalQuery = 'TechnicalQuery'
 }
 
 export function SegmentationTypeFromJSON(json: any): SegmentationType {

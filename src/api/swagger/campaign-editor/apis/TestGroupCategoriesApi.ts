@@ -21,6 +21,9 @@ import {
     CreateTestGroupCategoryCommand,
     CreateTestGroupCategoryCommandFromJSON,
     CreateTestGroupCategoryCommandToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     TestGroupCategoryVm,
     TestGroupCategoryVmFromJSON,
     TestGroupCategoryVmToJSON,
@@ -56,6 +59,7 @@ export interface GetTestGroupCategoriesRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface GetTestGroupCategoryRequest {
@@ -240,6 +244,10 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
