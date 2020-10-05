@@ -12,6 +12,7 @@ import { DateRangePickerTableDropdown } from 'components/table-dropdowns/DateRan
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useTranslation } from 'react-i18next'
 import { ActivenessDisplay } from 'components/ActivenessDisplay'
+import moment from 'moment'
 
 export enum OrderByType {
   Ascending = 'Ascending',
@@ -247,12 +248,11 @@ function useTableUtils<T extends { [key: string]: any }>(
         case FilterMode.DATERANGEPICKER:
           config.filterDropdown = DateRangePickerTableDropdown
           config.filterIcon = () => <CalendarOutlined />
-          config.render = (value: any) => <span>{value}</span>
-          /* config.render = (value: any) => (
+          config.render = (value: any) => (
             <div>
               <MomentDisplay date={value[0]} /> - <MomentDisplay date={value[1]} />
             </div>
-          ) */
+          )
           break
         case FilterMode.FILTER:
           if (filters?.length) {
@@ -354,11 +354,20 @@ function useTableUtils<T extends { [key: string]: any }>(
 
       requestParams.orderByType = toOrderByType(sorter.order)
       requestParams.orderBy = requestParams.orderByType ? (sorter?.field as string) : undefined
-
       filterKeys?.forEach((key: any) => {
-        requestParams[key] = filters?.[key]?.[0]
+        const filterItem = filters?.[key]?.[0]
+
+        if (moment.isMoment(filterItem)) {
+          requestParams[key] = filterItem.format('L')
+        } else if (Array.isArray(filterItem)) {
+          requestParams[key + 'From'] = filterItem[0].format('L')
+          requestParams[key + 'To'] = filterItem[1].format('L')
+        } else {
+          requestParams[key] = filterItem
+        }
       })
 
+      console.log(requestParams)
       dispatch(getDataAction(requestParams))
     },
     [dispatch, filterKeys, getDataAction, listParamsState, sortWithoutDefaultOption, toOrderByType]
