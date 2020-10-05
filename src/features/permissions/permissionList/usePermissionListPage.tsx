@@ -7,7 +7,7 @@ import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { FilterMode, useTableUtils } from 'hooks/useTableUtils'
 import { CampaignPermission } from 'models/campaignPermission'
 import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -49,7 +49,9 @@ export const usePermissionListPage = (): UsePermissionListPageUtils => {
       columnConfig({
         title: t('permission.field.name'),
         key: 'name',
-        sort: true
+        sort: true,
+        filterMode: FilterMode.SEARCH,
+        disableSearchHighlight: true
       }),
       actionColumnConfig({
         render(record: CampaignPermission) {

@@ -3,7 +3,7 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
 import { segmentationCategoryListActions } from './segmentationCategoryListSlice'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { FilterMode, useTableUtils } from 'hooks/useTableUtils'
 import { SegmentationCategory } from 'models/segmentationCategory'
 import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
@@ -56,15 +56,15 @@ export const useSegmentationCategoryList = (
       columnConfig({
         title: t('segmentation-category.field.name'),
         key: 'name',
-        sort: true
-        // filterMode: FilterMode.SEARCH
+        sort: true,
+        filterMode: FilterMode.SEARCH,
+        disableSearchHighlight: true
       }),
       columnConfig({
         title: t('segmentation-category.field.created-date'),
         key: 'createdDate',
         width: '13rem',
         renderMode: 'date time'
-        // filterMode: FilterMode.DATEPICKER
       }),
       hasPermission([Roles.Administrator])
         ? actionColumnConfig({

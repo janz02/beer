@@ -57,7 +57,8 @@ export const useTestGroupCategoryList = (
         title: t('test-group-category.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        disableSearchHighlight: true
       }),
       columnConfig({
         title: t('test-group-category.field.created-date'),
