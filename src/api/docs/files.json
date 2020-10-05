@@ -10,6 +10,7 @@
         "tags": [
           "Files"
         ],
+        "summary": "Uploads a file to the server",
         "operationId": "uploadFile",
         "requestBody": {
           "content": {
@@ -68,14 +69,17 @@
         "tags": [
           "Files"
         ],
+        "summary": "Downloads a file from the server",
         "operationId": "downloadFile",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the file to download",
             "required": true,
             "schema": {
               "type": "string",
+              "description": "ID of the file to download",
               "nullable": true
             }
           }
@@ -98,14 +102,17 @@
         "tags": [
           "Files"
         ],
+        "summary": "Deletes a file on the server",
         "operationId": "deleteFile",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the file",
             "required": true,
             "schema": {
               "type": "string",
+              "description": "ID of the file",
               "nullable": true
             }
           }
@@ -122,14 +129,17 @@
         "tags": [
           "Files"
         ],
+        "summary": "Returns info about the requested file",
         "operationId": "infoFile",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the file",
             "required": true,
             "schema": {
               "type": "string",
+              "description": "ID of the file",
               "nullable": true
             }
           }
@@ -166,7 +176,7 @@
         "summary": "Creates a file on internal storage and leaves it open to append",
         "operationId": "createFile",
         "requestBody": {
-          "description": "",
+          "description": "DTO containing details and content of the file",
           "content": {
             "application/json": {
               "schema": {
@@ -210,17 +220,17 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "File ID to append to",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "File ID to append to",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Parameters of appending",
           "content": {
             "application/json": {
               "schema": {
@@ -247,11 +257,11 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "File ID to close",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "File ID to close",
               "nullable": true
             }
           }
@@ -276,6 +286,37 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Files/Thumbnail": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Gets the thumbnail of a file",
+        "operationId": "downloadThumbnail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ThumbNailSize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -394,6 +435,13 @@
           }
         },
         "additionalProperties": false
+      },
+      "ThumbNailSize": {
+        "enum": [
+          "Normal",
+          "Small"
+        ],
+        "type": "string"
       }
     },
     "securitySchemes": {
