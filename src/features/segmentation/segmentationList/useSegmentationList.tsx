@@ -60,20 +60,18 @@ export const useSegmentationListPage = (): UseSegmentationListPageUtils => {
       }),
       columnConfig({
         title: t('segmentation.field.cumulativeIntersection'),
-        key: 'cumulativeIntersection',
-        sort: true
+        key: 'cumulativeIntersection'
       }),
       columnConfig({
         title: t('segmentation.field.segmentSize'),
-        key: 'segmentSize',
-        sort: true
+        key: 'segmentSize'
       }),
       columnConfig({
         title: t('segmentation.field.createdDate'),
         key: 'createdDate',
         sort: true,
         renderMode: 'date time',
-        filterMode: FilterMode.DATEPICKER
+        filterMode: FilterMode.DATERANGEPICKER
       })
       //  actionColumnConfig({
       //       render(record: CampaignSegmentation) {

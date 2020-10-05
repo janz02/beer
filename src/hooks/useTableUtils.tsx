@@ -8,6 +8,7 @@ import { SearchOutlined, CalendarOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
 import { SearchTableDropdown } from 'components/table-dropdowns/SearchTableDropdown'
 import { DatepickerTableDropdown } from 'components/table-dropdowns/DatepickerTableDropdown'
+import { DateRangePickerTableDropdown } from 'components/table-dropdowns/DateRangePickerTableDropdown'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useTranslation } from 'react-i18next'
 import { ActivenessDisplay } from 'components/ActivenessDisplay'
@@ -21,6 +22,7 @@ export enum FilterMode {
   FILTER = 'filter',
   SEARCH = 'search',
   DATEPICKER = 'datepicker',
+  DATERANGEPICKER = 'daterangepicker',
   /**
    * For filtering and renderindg YES or NO values, mapped to 'true' and 'fasle'.
    * No need to populate filters and render prop with this option.
@@ -241,6 +243,16 @@ function useTableUtils<T extends { [key: string]: any }>(
           config.filterDropdown = DatepickerTableDropdown
           config.filterIcon = () => <CalendarOutlined />
           config.render = (value: any) => <MomentDisplay date={value} />
+          break
+        case FilterMode.DATERANGEPICKER:
+          config.filterDropdown = DateRangePickerTableDropdown
+          config.filterIcon = () => <CalendarOutlined />
+          config.render = (value: any) => <span>{value}</span>
+          /* config.render = (value: any) => (
+            <div>
+              <MomentDisplay date={value[0]} /> - <MomentDisplay date={value[1]} />
+            </div>
+          ) */
           break
         case FilterMode.FILTER:
           if (filters?.length) {
