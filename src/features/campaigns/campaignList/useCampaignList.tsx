@@ -26,6 +26,7 @@ import {
 } from 'api/swagger/coupon'
 import { isCouponActive } from 'components/CampaignActiveDisplay'
 import { CampaignTypeDisplay } from 'components/CampaignTypeDisplay'
+import { ThumbNailSize } from 'api/swagger/files'
 
 interface UseCampaignListFeatures {
   loading: boolean
@@ -196,7 +197,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         ellipsis: false,
         key: 'smallPictureId',
         render(value) {
-          return value && <Thumbnail fileId={value} />
+          return value && <Thumbnail fileId={value} size={ThumbNailSize.Small} />
         }
       }),
       columnConfig({
