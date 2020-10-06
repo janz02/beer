@@ -20,7 +20,7 @@ export interface UseFileUploadProps {
   onSuccess?: (id: string) => void
   onRemove?: () => void
   onClick?: () => void
-  initialFileId?: string | null
+  initialFileId?: string | null | undefined
   mode?: 'image' | 'file'
 }
 
@@ -34,7 +34,14 @@ export interface UseFileUploadUtils {
 export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
   const { initialFileId, uploadProps, onRemove, onSuccess, mode } = props
 
-  const [fileId, setFileId] = useState(initialFileId)
+  const [fileId, setFileId] = useState<any>()
+
+  useEffect(() => {
+    if (!fileId) {
+      setFileId(initialFileId)
+    }
+  }, [initialFileId, fileId])
+
   const { t } = useTranslation()
 
   // TODO: Move this logic to Api, this is just a temporary solution
@@ -84,12 +91,12 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
   )
 
   useEffect(() => {
-    if (!initialFileId) {
+    if (!fileId) {
       return
     }
-    handleFileDownload(initialFileId)
+    handleFileDownload(fileId)
     setThumbnail({ url: '' })
-  }, [handleFileDownload, initialFileId])
+  }, [handleFileDownload, fileId])
 
   const handleFileUpload = useCallback(
     (info: UploadChangeParam<UploadFile<any>>): void => {
