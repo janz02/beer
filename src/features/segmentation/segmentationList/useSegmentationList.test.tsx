@@ -3,6 +3,7 @@ import React from 'react'
 import { useSegmentationListPage } from './useSegmentationList'
 import { setupStore } from '../../../../config/setupMocks'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
+import moment from 'moment'
 
 jest.mock('app/store')
 
@@ -14,11 +15,19 @@ setupStore({
     segmentations: [
       {
         id: 1,
-        name: 'Segmentation1'
+        name: 'Segmentation1',
+        categoryName: 'Category1',
+        segmentSize: 100,
+        cumulativeIntersection: 10,
+        createdDate: moment(new Date(2020, 1, 1))
       },
       {
         id: 2,
-        name: 'Segmentation2'
+        name: 'Segmentation2',
+        categoryName: 'Category4',
+        segmentSize: 100,
+        cumulativeIntersection: 0,
+        createdDate: moment(new Date(2020, 10, 1))
       }
     ],
     listParams: {}
@@ -40,10 +49,10 @@ const SegmentationTableContent: React.FC = () => {
 describe('segmentation table tests', () => {
   it('segmentations appear in the table', () => {
     // Act
-    const tabContent = render(<SegmentationTableContent />)
+    const tableContent = render(<SegmentationTableContent />)
 
     // Assert
-    expect(tabContent.html()).toBeDefined()
+    expect(tableContent.html()).toBeDefined()
     // expect(tabContent.html()).toContain('Segmentation1')
     //  expect(tabContent.html()).toContain('Segmentation2')
   })
