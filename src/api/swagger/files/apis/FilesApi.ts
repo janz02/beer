@@ -248,7 +248,7 @@ export class FilesApi extends runtime.BaseAPI {
     /**
      * Gets the thumbnail of a file
      */
-    async downloadThumbnailRaw(requestParameters: DownloadThumbnailRequest): Promise<runtime.ApiResponse<void>> {
+    async downloadThumbnailRaw(requestParameters: DownloadThumbnailRequest): Promise<runtime.ApiResponse<Blob>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.id !== undefined) {
@@ -272,14 +272,15 @@ export class FilesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.BlobApiResponse(response);
     }
 
     /**
      * Gets the thumbnail of a file
      */
-    async downloadThumbnail(requestParameters: DownloadThumbnailRequest): Promise<void> {
-        await this.downloadThumbnailRaw(requestParameters);
+    async downloadThumbnail(requestParameters: DownloadThumbnailRequest): Promise<Blob> {
+        const response = await this.downloadThumbnailRaw(requestParameters);
+        return await response.value();
     }
 
     /**
