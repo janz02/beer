@@ -30,6 +30,9 @@ import {
     FileVm,
     FileVmFromJSON,
     FileVmToJSON,
+    ThumbNailSize,
+    ThumbNailSizeFromJSON,
+    ThumbNailSizeToJSON,
 } from '../models';
 
 export interface AppendFileRequest {
@@ -51,6 +54,11 @@ export interface DeleteFileRequest {
 
 export interface DownloadFileRequest {
     id: string | null;
+}
+
+export interface DownloadThumbnailRequest {
+    id?: string | null;
+    size?: ThumbNailSize;
 }
 
 export interface InfoFileRequest {
@@ -171,6 +179,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes a file on the server
      */
     async deleteFileRaw(requestParameters: DeleteFileRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -196,12 +205,14 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Deletes a file on the server
      */
     async deleteFile(requestParameters: DeleteFileRequest): Promise<void> {
         await this.deleteFileRaw(requestParameters);
     }
 
     /**
+     * Downloads a file from the server
      */
     async downloadFileRaw(requestParameters: DownloadFileRequest): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -227,6 +238,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Downloads a file from the server
      */
     async downloadFile(requestParameters: DownloadFileRequest): Promise<Blob> {
         const response = await this.downloadFileRaw(requestParameters);
@@ -234,6 +246,45 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Gets the thumbnail of a file
+     */
+    async downloadThumbnailRaw(requestParameters: DownloadThumbnailRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.id !== undefined) {
+            queryParameters['id'] = requestParameters.id;
+        }
+
+        if (requestParameters.size !== undefined) {
+            queryParameters['size'] = requestParameters.size;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Files/Thumbnail`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Gets the thumbnail of a file
+     */
+    async downloadThumbnail(requestParameters: DownloadThumbnailRequest): Promise<Blob> {
+        const response = await this.downloadThumbnailRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Returns info about the requested file
      */
     async infoFileRaw(requestParameters: InfoFileRequest): Promise<runtime.ApiResponse<FileInfoVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -259,6 +310,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Returns info about the requested file
      */
     async infoFile(requestParameters: InfoFileRequest): Promise<FileInfoVm> {
         const response = await this.infoFileRaw(requestParameters);
@@ -266,6 +318,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Uploads a file to the server
      */
     async uploadFileRaw(requestParameters: UploadFileRequest): Promise<runtime.ApiResponse<FileVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -312,6 +365,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Uploads a file to the server
      */
     async uploadFile(requestParameters: UploadFileRequest): Promise<FileVm> {
         const response = await this.uploadFileRaw(requestParameters);

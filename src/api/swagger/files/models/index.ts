@@ -5,3 +5,4 @@ export * from './FileContentType';
 export * from './FileInfoVm';
 export * from './FileVm';
 export * from './InlineObject';
+export * from './ThumbNailSize';

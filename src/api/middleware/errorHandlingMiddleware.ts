@@ -15,6 +15,8 @@ interface RequestErrorItem {
   message?: string | null
 }
 
+const errorDisplayExcludedUrls = ['Auth/Refresh', 'Files/Thumbnail']
+
 export const errorHandlingMiddleware: Middleware[] = [
   {
     post: async ctx => {
@@ -25,9 +27,10 @@ export const errorHandlingMiddleware: Middleware[] = [
         })
         console.error(i18n.t('error.common.server-unavailable'))
         console.table(ctx.response)
-      }
-      // In case of the refresh endpoint don't display errors.
-      else if (ctx.response.status >= 400 && !ctx.url.endsWith('Auth/Refresh')) {
+      } else if (
+        ctx.response.status >= 400 &&
+        errorDisplayExcludedUrls.every(x => ctx.url.lastIndexOf(x) === -1)
+      ) {
         const error: RequestError = await ctx.response.json()
         displayBackendError(error, ctx.url)
       }
