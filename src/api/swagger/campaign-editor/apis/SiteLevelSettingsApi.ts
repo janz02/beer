@@ -35,7 +35,6 @@ export interface GetSiteLevelSettingRequest {
 
 export interface GetSiteLevelSettingsRequest {
     name?: string;
-    value?: string;
     skip?: number;
     take?: number;
     orderBy?: string;
@@ -97,10 +96,6 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
 
         if (requestParameters.name !== undefined) {
             queryParameters['Name'] = requestParameters.name;
-        }
-
-        if (requestParameters.value !== undefined) {
-            queryParameters['Value'] = requestParameters.value;
         }
 
         if (requestParameters.skip !== undefined) {
@@ -167,7 +162,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

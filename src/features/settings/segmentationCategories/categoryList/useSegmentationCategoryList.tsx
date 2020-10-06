@@ -57,8 +57,7 @@ export const useSegmentationCategoryList = (
         title: t('segmentation-category.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        disableSearchHighlight: true
+        filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('segmentation-category.field.created-date'),

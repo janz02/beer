@@ -96,8 +96,7 @@ export const useBpHistoryControl = (): BpHistoryControl => {
         title: t('bp-history.field.bpCode'),
         key: 'bpId',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        disableSearchHighlight: true
+        filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('bp-history.field.contact'),

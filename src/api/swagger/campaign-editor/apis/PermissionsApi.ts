@@ -46,6 +46,7 @@ export interface GetPermissionRequest {
 }
 
 export interface GetPermissionsRequest {
+    name?: string;
     skip?: number;
     take?: number;
     orderBy?: string;
@@ -73,7 +74,7 @@ export class PermissionsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -205,6 +206,10 @@ export class PermissionsApi extends runtime.BaseAPI {
     async getPermissionsRaw(requestParameters: GetPermissionsRequest): Promise<runtime.ApiResponse<PermissionVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
+
         if (requestParameters.skip !== undefined) {
             queryParameters['Skip'] = requestParameters.skip;
         }
@@ -270,7 +275,7 @@ export class PermissionsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

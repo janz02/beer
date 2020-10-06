@@ -50,8 +50,7 @@ export const usePermissionListPage = (): UsePermissionListPageUtils => {
         title: t('permission.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        disableSearchHighlight: true
+        filterMode: FilterMode.SEARCH
       }),
       actionColumnConfig({
         render(record: CampaignPermission) {

@@ -53,8 +53,7 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
         title: t('campaign-product.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH,
-        disableSearchHighlight: true
+        filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('campaign-product.field.createdDate'),
