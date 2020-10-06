@@ -130,7 +130,6 @@ export function useFileUpload(props: UseFileUploadProps): UseFileUploadUtils {
 
   const handleClear = async () => {
     try {
-      await api.files.files.deleteFile({ id: fileId || null })
       setThumbnail(undefined)
       onRemove?.()
     } catch (error) {
