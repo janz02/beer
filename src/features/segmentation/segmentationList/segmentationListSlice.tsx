@@ -73,12 +73,17 @@ export const getSegmentations = (params: ListRequestParams = {}): AppThunk => as
     dispatch(getSegmentationRequest())
 
     const revisedParams = reviseListRequestParams(getState().segmentationList.listParams, params)
+    // Cleanup for the createdDate filter
     revisedParams.createdDateFrom = params.createdDateFrom
     revisedParams.createdDateTo = params.createdDateTo
 
     const { items, ...pagination } = await api.campaignEditor.segmentations.getSegmentations(
       revisedParams
     )
+
+    // Retention of createdDate filter
+    // Subtraction is needed from  the end date because 1 day added when the request was created
+    // in the useTableUtils, so it can filter to a proper one day range
     const listParams = storableListRequestParams(revisedParams, pagination)
     if (listParams.createdDateFrom && listParams.createdDateTo) {
       listParams.createdDate = [
