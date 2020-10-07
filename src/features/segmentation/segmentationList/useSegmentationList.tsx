@@ -1,7 +1,5 @@
 import { ColumnType } from 'antd/lib/table'
 import { RootState } from 'app/rootReducer'
-// import { AddButton } from 'components/buttons/AddButton'
-// import { CrudButtons } from 'components/buttons/CrudButtons'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
@@ -13,7 +11,6 @@ import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { getSegmentations, resetSegmentationFilters } from './segmentationListSlice'
-// import { history } from 'router/router'
 
 export interface UseSegmentationListPageUtils {
   tableProps: ResponsiveTableProps
@@ -32,13 +29,9 @@ export const useSegmentationListPage = (): UseSegmentationListPageUtils => {
     (state: RootState) => state.segmentationList
   )
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    // actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<CampaignSegmentation>({
+  const { paginationConfig, handleTableChange, columnConfig, addKeyProp } = useTableUtils<
+    CampaignSegmentation
+  >({
     listParamsState: listParams,
     filterKeys: ['name', 'categoryName', 'createdDate'],
     getDataAction: getSegmentations
@@ -73,18 +66,8 @@ export const useSegmentationListPage = (): UseSegmentationListPageUtils => {
         renderMode: 'date time',
         filterMode: FilterMode.DATERANGEPICKER
       })
-      //  actionColumnConfig({
-      //       render(record: CampaignSegmentation) {
-      //         return (
-      //           <CrudButtons
-      //             useRightCircleForView
-      //              onView={() => history.push(`/segmentations/${record.id}`)}
-      //           />
-      //         )
-      //       }
-      //     })
     ],
-    [/* actionColumnConfig, */ columnConfig, t]
+    [columnConfig, t]
   )
 
   const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.SEGMENTATION)
@@ -112,9 +95,6 @@ export const useSegmentationListPage = (): UseSegmentationListPageUtils => {
       <>
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrder} />
-        {/* <AddButton onClick={() => history.push(`/segmentations/new`)}>
-          {t('segmentation.list.add')}
-        </AddButton> */}
       </>
     ),
     [columnOrder, resetFilters]
