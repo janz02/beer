@@ -3,7 +3,7 @@ import { RootState } from 'app/rootReducer'
 import { useDispatch, useSelector } from '../../../../hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
 import { productListActions } from './productListSlice'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { FilterMode, useTableUtils } from 'hooks/useTableUtils'
 import { Product } from 'models/campaign/product'
 import { ColumnType } from 'antd/lib/table'
 import { CrudButtons } from 'components/buttons/CrudButtons'
@@ -52,7 +52,8 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
       columnConfig({
         title: t('campaign-product.field.name'),
         key: 'name',
-        sort: true
+        sort: true,
+        filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('campaign-product.field.createdDate'),
