@@ -744,8 +744,6 @@
       "name": "Név",
       "phone": "Telefonszám",
       "role": "Jogosultság",
-      "status-active": "Aktív",
-      "status-inactive": "Inaktív",
       "type": "Kapcsolattartó típus"
     },
     "list-title": "Kapcsolattartók",
@@ -802,6 +800,7 @@
     "campaign-categories": "Kampány kategóriák",
     "campaign-products": "Termékek",
     "segmentation-categories": "Szegmentációs kategóriák",
+    "system-params": "Rendszerparaméterek",
     "test-group-categories": "Tesztcsoport osztályok"
   },
   "site": {
@@ -817,6 +816,19 @@
     "table": {
       "address": "Cím",
       "name": "Telephely név"
+    }
+  },
+  "system-params": {
+    "field": {
+      "description": "Paraméter leírás",
+      "name": "Paraméter név",
+      "value": "Paraméter érték"
+    },
+    "key": {
+      "customerSupportEmail": "Az ügyfélszolgálat e-mail címe, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
+      "customerSuppportPhone": "Az ügyfélszolgálat telefonszáma, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
+      "kkvLimit": "Megadja a limitációt, hogy egy KKV partnernek párhuzamosan hány jóváhagyott kampánya lehet a rendszerben",
+      "winnerCouponLink": "A KPR websiteon a nyertes kuponok liistáját tartalmazó oldal linkje, amelyet a kiküldött nyeremény értesítő email tartalmaz."
     }
   },
   "test-group-category": {
