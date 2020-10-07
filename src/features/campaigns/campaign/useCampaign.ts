@@ -15,7 +15,7 @@ import {
 import { useFormUtils } from 'hooks/useFormUtils'
 import { FormProps, FormInstance } from 'antd/lib/form'
 import { CouponComment } from 'models/couponComment'
-import { CampaignCategory } from 'models/campaignCategory'
+import { CampaignCategory } from 'models/campaign/campaignCategory'
 import { Partner } from 'models/partner'
 import { UserData } from 'models/user'
 import { useCallback } from 'react'

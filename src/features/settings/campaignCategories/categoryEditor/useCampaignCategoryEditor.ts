@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react'
-import { CampaignCategory } from 'models/campaignCategory'
+import { CampaignCategory } from 'models/campaign/campaignCategory'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'

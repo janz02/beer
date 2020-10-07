@@ -9,7 +9,7 @@ import {
   recalculatePaginationAfterDeletion
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
-import { TestGroupCategory } from 'models/testGroupCategory'
+import { TestGroupCategory } from 'models/campaign/testGroupCategory'
 import moment from 'moment'
 
 interface TestGroupCategoryListState {
