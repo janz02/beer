@@ -45,6 +45,7 @@ export interface GetManySegmentationCategoriesRequest {
 }
 
 export interface GetSegmentationCategoriesRequest {
+    name?: string;
     skip?: number;
     take?: number;
     orderBy?: string;
@@ -76,7 +77,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -175,6 +176,10 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
      */
     async getSegmentationCategoriesRaw(requestParameters: GetSegmentationCategoriesRequest): Promise<runtime.ApiResponse<SegmentationCategoryVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
 
         if (requestParameters.skip !== undefined) {
             queryParameters['Skip'] = requestParameters.skip;
@@ -275,7 +280,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
