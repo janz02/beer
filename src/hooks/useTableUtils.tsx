@@ -361,13 +361,12 @@ function useTableUtils<T extends { [key: string]: any }>(
           requestParams[key] = filterItem.format('L')
         } else if (Array.isArray(filterItem)) {
           requestParams[key + 'From'] = filterItem[0].format('L')
-          requestParams[key + 'To'] = filterItem[1].format('L')
+          requestParams[key + 'To'] = (filterItem[1] as moment.Moment).add(1, 'day').format('L')
         } else {
           requestParams[key] = filterItem
         }
       })
 
-      console.log(requestParams)
       dispatch(getDataAction(requestParams))
     },
     [dispatch, filterKeys, getDataAction, listParamsState, sortWithoutDefaultOption, toOrderByType]

@@ -73,18 +73,26 @@ export const getSegmentations = (params: ListRequestParams = {}): AppThunk => as
     dispatch(getSegmentationRequest())
 
     const revisedParams = reviseListRequestParams(getState().segmentationList.listParams, params)
+    revisedParams.createdDateFrom = params.createdDateFrom
+    revisedParams.createdDateTo = params.createdDateTo
 
     const { items, ...pagination } = await api.campaignEditor.segmentations.getSegmentations(
       revisedParams
     )
-
+    const listParams = storableListRequestParams(revisedParams, pagination)
+    if (listParams.createdDateFrom && listParams.createdDateTo) {
+      listParams.createdDate = [
+        moment(listParams.createdDateFrom),
+        moment(listParams.createdDateTo).subtract(1, 'day')
+      ]
+    }
     dispatch(
       getSegmentationSuccess({
         segmentations: (items as CampaignSegmentation[]).map((x: CampaignSegmentation) => ({
           ...x,
           createdDate: moment(x.createdDate)
         })),
-        listParams: storableListRequestParams(revisedParams, pagination)
+        listParams: listParams
       })
     )
   } catch (err) {
