@@ -4,7 +4,7 @@ import { Form, Button, Row, Col, Collapse } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { CouponState } from 'api/swagger/coupon'
 import { history } from 'router/router'
-import { useCampaign } from '../useCampaign'
+import { UseCampaignFeatures } from '../useCampaign'
 import { CampaignEditorFormBasics } from './CampaignEditorFormBasics'
 import { CampaignEditorFormDetails } from './CampaignEditorFormDetails'
 import { CampaignEditorFormCouponCount } from './CampaignEditorFormCouponCount'
@@ -12,7 +12,11 @@ import { CampaignEditorFormClientActivities } from './CampaignEditorFormClientAc
 import { CampaignEditorFormAudit } from './CampaignEditorFormAudit'
 import { useDispatch } from 'react-redux'
 
-export const CampaignEditorForm: FC = () => {
+interface CampaignEditorFormProps {
+  campaign: UseCampaignFeatures
+}
+
+export const CampaignEditorForm: FC<CampaignEditorFormProps> = props => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const {
@@ -25,7 +29,7 @@ export const CampaignEditorForm: FC = () => {
     submitable,
     handleCouponChange,
     setStateForCreate
-  } = useCampaign()
+  } = props.campaign
 
   useEffect(() => {
     handleCouponChange()
@@ -35,26 +39,26 @@ export const CampaignEditorForm: FC = () => {
     <Form name="coupon-editor-form" layout="vertical" form={form} {...formProps}>
       <Collapse defaultActiveKey={['1']}>
         <Collapse.Panel header={t('coupon-create.campaign-basics')} key="1">
-          <CampaignEditorFormBasics />
+          <CampaignEditorFormBasics campaign={props.campaign} />
         </Collapse.Panel>
       </Collapse>
 
       <Collapse defaultActiveKey={['1']}>
         <Collapse.Panel header={t('coupon-create.campaign-details')} key="1">
-          <CampaignEditorFormDetails form={form} />
+          <CampaignEditorFormDetails form={form} campaign={props.campaign} />
         </Collapse.Panel>
       </Collapse>
 
       <Collapse defaultActiveKey={['1']}>
         <Collapse.Panel header={t('coupon-create.field.coupon-count')} key="1">
-          <CampaignEditorFormCouponCount form={form} />
+          <CampaignEditorFormCouponCount form={form} campaign={props.campaign} />
         </Collapse.Panel>
       </Collapse>
 
       {!displayEditor && (
         <Collapse defaultActiveKey={['1']}>
           <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
-            <CampaignEditorFormClientActivities />
+            <CampaignEditorFormClientActivities campaign={props.campaign} />
           </Collapse.Panel>
         </Collapse>
       )}
@@ -62,7 +66,7 @@ export const CampaignEditorForm: FC = () => {
       {!displayEditor && (
         <Collapse defaultActiveKey={['1']}>
           <Collapse.Panel header={t('coupon-create.audit')} key="1">
-            <CampaignEditorFormAudit />
+            <CampaignEditorFormAudit campaign={props.campaign} />
           </Collapse.Panel>
         </Collapse>
       )}

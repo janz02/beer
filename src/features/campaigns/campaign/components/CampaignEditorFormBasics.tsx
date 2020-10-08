@@ -7,11 +7,15 @@ import { hasPermission } from 'services/jwt-reader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 import { comboRoles } from 'services/roleHelpers'
-import { useCampaign } from '../useCampaign'
+import { UseCampaignFeatures } from '../useCampaign'
 import { useCommonFormRules } from 'hooks'
 import { useDispatch } from 'react-redux'
 
-export const CampaignEditorFormBasics: FC = () => {
+interface CampaignEditorFormBasicsProps {
+  campaign: UseCampaignFeatures
+}
+
+export const CampaignEditorFormBasics: FC<CampaignEditorFormBasicsProps> = props => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const rule = useCommonFormRules()
@@ -24,7 +28,7 @@ export const CampaignEditorFormBasics: FC = () => {
     rowGutter,
     prizeOrDiscount,
     setSelectedCouponType
-  } = useCampaign()
+  } = props.campaign
 
   return (
     <>
