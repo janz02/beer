@@ -4,12 +4,16 @@ import { useTranslation } from 'react-i18next'
 import { ExportOutlined } from '@ant-design/icons'
 import { campaignActions } from '../../campaignsSlice'
 import { useDispatch } from 'react-redux'
-import { useCampaign } from '../useCampaign'
+import { UseCampaignFeatures } from '../useCampaign'
 
-export const CampaignEditorFormClientActivities: FC = () => {
+interface CampaignEditorFormClientActivitiesProps {
+  campaign: UseCampaignFeatures
+}
+
+export const CampaignEditorFormClientActivities: FC<CampaignEditorFormClientActivitiesProps> = props => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { loading, coupon, rowGutter, prizeOrDiscount } = useCampaign()
+  const { loading, coupon, rowGutter, prizeOrDiscount } = props.campaign
 
   return (
     <>

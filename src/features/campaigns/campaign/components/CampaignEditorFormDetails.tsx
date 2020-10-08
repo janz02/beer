@@ -1,13 +1,7 @@
 import React, { FC } from 'react'
 import { Form, Input, Select, DatePicker, Row, Col, Checkbox } from 'antd'
 import { useTranslation } from 'react-i18next'
-import {
-  CouponRank,
-  CouponType,
-  Roles,
-  CouponMode,
-  CouponDiscountType
-} from 'api/swagger/coupon'
+import { CouponRank, CouponType, Roles, CouponMode, CouponDiscountType } from 'api/swagger/coupon'
 import { hasAllPermissions } from 'services/jwt-reader'
 import { FileUploadButton } from 'components/upload/FileUploadButton'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
@@ -17,12 +11,13 @@ import {
 } from 'services/numberInputHelpers'
 import { campaignActions } from '../../campaignsSlice'
 import { useDispatch } from 'react-redux'
-import { useCampaign } from '../useCampaign'
+import { UseCampaignFeatures } from '../useCampaign'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
 import { InputNumberI18n } from 'components/InputNumberI18n'
 
 interface CampaignEditorFormDetailsProps {
+  campaign: UseCampaignFeatures
   form: FormInstance
 }
 
@@ -42,7 +37,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
     prizeOrDiscount,
     setSelectedCouponMode,
     setSelectedCouponDiscountType
-  } = useCampaign()
+  } = props.campaign
 
   const displayDiscountValue =
     selectedCouponType === CouponType.Discount &&
