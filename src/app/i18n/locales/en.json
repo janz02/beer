@@ -797,7 +797,6 @@
       "segmentSize": "Segment size"
     },
     "list": {
-      "add": "Create New Segmentation",
       "title": "Segmentation"
     }
   },
@@ -833,6 +832,9 @@
     }
   },
   "system-params": {
+    "editor": {
+      "title": "System parameters"
+    },
     "field": {
       "description": "Parameter description",
       "name": "Parameter name",

@@ -5,12 +5,12 @@ import { FeatureState } from 'models/featureState'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/swagger/coupon'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { SystemParam } from 'models/systemParam'
 import { systemParamsActions } from './systemParamsSlice'
+import { pageViewRoles } from 'services/roleHelpers'
 
 interface HookProps {
   onOpenEditor: (id?: number) => void
@@ -32,6 +32,8 @@ export const useSystemParamsList = (props: HookProps): ListUtils => {
   useEffect(() => {
     dispatch(systemParamsActions.getSystemParams())
   }, [dispatch])
+
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditors), [])
 
   const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
@@ -66,15 +68,17 @@ export const useSystemParamsList = (props: HookProps): ListUtils => {
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
-      hasPermission([Roles.Administrator])
-        ? actionColumnConfig({
-            render(record: any) {
-              return <CrudButtons onEdit={() => onOpenEditor(record.id)} />
-            }
-          })
-        : {}
+      actionColumnConfig({
+        render(record: any) {
+          return isEditorUser ? (
+            <CrudButtons onEdit={() => onOpenEditor(record.id)} />
+          ) : (
+            <CrudButtons onView={() => onOpenEditor(record.id)} />
+          )
+        }
+      })
     ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor]
+    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
   )
 
   const tableProps: ResponsiveTableProps = useMemo(

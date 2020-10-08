@@ -41,7 +41,8 @@ export const pageViewRoles = {
     Roles.PartnerManager,
     Roles.MainPartnerContact
   ],
-  settings: comboRoles.forNkm,
+  settings: comboRoles.forNkm, // todo
+  settingsEditors: comboRoles.forNkm, // todo
   categories: comboRoles.forNkm,
   categoryEditor: [Roles.Administrator],
   segments: comboRoles.forNkm,

@@ -1,9 +1,7 @@
 import React, { useMemo } from 'react'
 import { useParams } from 'hooks/react-router-dom-hooks'
 import { useTranslation } from 'react-i18next'
-import { hasPermission } from 'services/jwt-reader'
 import { SettingsTab } from '../SettingsPage'
-import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
 import { OneToOneOutlined } from '@ant-design/icons'
 import { SystemParamsTab } from './SystemParamsTab'
@@ -12,7 +10,7 @@ import { useSystemParamsList } from './useSystemParamsList'
 
 export const useSystemParamsTab = (): SettingsTab => {
   const { t } = useTranslation()
-  const { tab, id } = useParams<{ tab: string; id: string }>()
+  const { id } = useParams<{ id: string }>()
 
   const editorUtils = useGenericModalFormEditorUtils({
     dataId: id,

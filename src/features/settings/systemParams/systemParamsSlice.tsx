@@ -13,6 +13,7 @@ interface SystemParamsState {
   systemParamsList: SystemParam[]
   listParams: ListRequestParams
   listState: FeatureState
+  editorState: FeatureState
 }
 
 const initialState: SystemParamsState = {
@@ -20,19 +21,26 @@ const initialState: SystemParamsState = {
   listParams: {
     pageSize: 10
   },
-  listState: FeatureState.Initial
+  listState: FeatureState.Initial,
+  editorState: FeatureState.Initial
 }
 
 const systemParamsSlice = createSlice({
   name: 'systemParams',
   initialState,
   reducers: {
-    resetSystemParamsList: () => initialState,
+    resetSystemParams: () => initialState,
     resetListParams(state) {
       state.listParams = initialState.listParams
     },
+    resetEditorState(state) {
+      state.editorState = FeatureState.Initial
+    },
     setListState: (state, action: PayloadAction<FeatureState>) => {
       state.listState = action.payload
+    },
+    setEditorState: (state, action: PayloadAction<FeatureState>) => {
+      state.editorState = action.payload
     },
     getSystemParamsSuccess(
       state,
@@ -48,8 +56,10 @@ const systemParamsSlice = createSlice({
 const {
   resetListParams,
   setListState,
+  setEditorState,
   getSystemParamsSuccess,
-  resetSystemParamsList
+  resetSystemParams,
+  resetEditorState
 } = systemParamsSlice.actions
 
 const getSystemParams = (params: ListRequestParams = {}): AppThunk => async (
@@ -104,15 +114,37 @@ const getSystemParams = (params: ListRequestParams = {}): AppThunk => async (
   }
 }
 
+const updateSystemParam = (
+  param: SystemParam,
+  callbackFn: Function
+): AppThunk => async dispatch => {
+  try {
+    dispatch(setEditorState(FeatureState.Loading))
+    // todo integration
+    dispatch(setEditorState(FeatureState.Success))
+    callbackFn()
+    // todo reload store values
+  } catch (err) {
+    dispatch(setEditorState(FeatureState.Error))
+  }
+}
+
 const resetSystemParamsFilters = (): AppThunk => async dispatch => {
   dispatch(resetListParams())
   dispatch(getSystemParams())
 }
 
+const resetSystemParamsEditor = (): AppThunk => async dispatch => {
+  dispatch(resetEditorState())
+  dispatch(getSystemParams())
+}
+
 export const systemParamsActions = {
-  resetSystemParamsList,
+  resetSystemParams,
   getSystemParams,
-  resetSystemParamsFilters
+  resetSystemParamsFilters,
+  updateSystemParam,
+  resetSystemParamsEditor
 }
 
 export const systemParamsReducer = systemParamsSlice.reducer

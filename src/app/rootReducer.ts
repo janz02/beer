@@ -64,7 +64,7 @@ export const rootReducer = combineReducers({
   bpHistory: bpHistoryReducer,
   permissionList: permissionListReducer,
   permissionEditor: permissionEditorReducer,
-  segmentationList: segmentationListReducer
+  segmentationList: segmentationListReducer,
   systemParams: systemParamsReducer
 })
 
