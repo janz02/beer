@@ -652,6 +652,7 @@
     "partners": "Partnerek",
     "permissions": "Jogosultságkezelés",
     "profile": "Profil",
+    "segmentations": "Szegmentáció",
     "settings": "Beállítások",
     "sites": "Telephelyek",
     "users": "Felhasználók"
@@ -786,6 +787,19 @@
     },
     "save": "Módosítás mentése",
     "save-profile-success": "Profil mentése sikeres."
+  },
+  "segmentation": {
+    "field": {
+      "category": "Szegmentáció kategóriája",
+      "createdDate": "Létrehozás dátuma",
+      "cumulativeIntersection": "Kumulatív metszet",
+      "name": "Szegmentáció neve",
+      "segmentSize": "Szegmensméret"
+    },
+    "list": {
+      "add": "Új szegmentáció létrehozása",
+      "title": "Szegmentáció"
+    }
   },
   "segmentation-category": {
     "add": "Új szegmentációs kategória hozzáadása",

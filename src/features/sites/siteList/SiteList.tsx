@@ -10,6 +10,7 @@ import { ExportButton } from 'components/buttons/ExportButton'
 
 interface SiteListProps {
   config: SiteFeatureConfig
+  partnerEditorPage?: boolean
   partnerId: number
 }
 
@@ -26,7 +27,8 @@ export const SiteList: FC<SiteListProps> = props => {
     handleExport
   } = useSiteList({
     config: props.config,
-    partnerId: props.partnerId
+    partnerId: props.partnerId,
+    partnerEditorPage: props.partnerEditorPage
   })
 
   useEffect(() => {

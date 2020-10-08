@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { CampaignCategory } from 'models/campaignCategory'
+import { CampaignCategory } from 'models/campaign/campaignCategory'
 import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'

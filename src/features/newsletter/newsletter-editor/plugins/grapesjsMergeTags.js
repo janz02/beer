@@ -60,18 +60,26 @@ export default grapesjs.plugins.add("grapesjsMergeTags", (editor, options) => {
 
       const el = document.createElement("div");
       el.innerHTML = `
-			<select id="${selectId}">
-			<option value="" >- ${opts.noSelection} -</option>
-        ${options
-          .map(
-            opt =>
-              `<option value="${opt.id}" ${opt.selected ? "selected" : ""}>${
-                opt.name
-              }</option>`
-          )
-          .join("")}
-      </select>
-		`;
+        <div class="gjs-field-wrp gjs-field-wrp--select" data-input="">
+          <div class="gjs-field gjs-field-select">
+            <div data-input="">
+              <select id="${selectId}">
+                <option value="" >- ${opts.noSelection} -</option>
+                  ${options
+                    .map(
+                      opt =>
+                        `<option value="${opt.id}" ${
+                          opt.selected ? "selected" : ""
+                        }>${opt.name}</option>`
+                    )
+                    .join("")}
+              </select>
+            </div>
+            <div class="gjs-sel-arrow">
+            <div class="gjs-d-s-arrow"></div>
+          </div>
+          </div>
+        </div>`;
 
       const selectElement = el.querySelector(`#${selectId}`);
       selectElement.addEventListener("change", ev => {

@@ -6,8 +6,8 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
-import { BpHistoryItem } from 'models/bpHistoryItem'
-import { BpHistoryTemplate } from 'models/bpHistoryTemplate'
+import { BpHistoryItem } from 'models/campaign/bpHistoryItem'
+import { BpHistoryTemplate } from 'models/campaign/bpHistoryTemplate'
 import moment from 'moment'
 
 interface BpHistoryState {

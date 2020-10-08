@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { Product } from 'models/product'
+import { Product } from 'models/campaign/product'
 import { api } from 'api'
 import {
   ListRequestParams,

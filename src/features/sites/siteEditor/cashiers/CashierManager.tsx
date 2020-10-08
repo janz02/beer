@@ -15,7 +15,6 @@ export const CashierManager: FC<{ config: SiteFeatureConfig }> = ({ config }) =>
   const rule = useCommonFormRules()
 
   const {
-    canEdit,
     cashierManagerVisible,
     handleCreateCashier,
     cashierTableProps,
@@ -25,7 +24,7 @@ export const CashierManager: FC<{ config: SiteFeatureConfig }> = ({ config }) =>
 
   const listHeaderOptions = (
     <>
-      {canEdit && (
+      {config.canEdit && (
         <AddButton size="middle" onClick={handleCreateCashier}>
           {t('cashier-list.add')}
         </AddButton>

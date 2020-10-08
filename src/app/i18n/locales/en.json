@@ -652,6 +652,7 @@
     "partners": "Partners",
     "permissions": "Permissions",
     "profile": "Profile",
+    "segmentations": "Segmentation",
     "settings": "Settings",
     "sites": "Sites",
     "users": "Users"
@@ -786,6 +787,19 @@
     },
     "save": "Save changes",
     "save-profile-success": "Successfully saved the profile."
+  },
+  "segmentation": {
+    "field": {
+      "category": "Segmentation category",
+      "createdDate": "Created Date",
+      "cumulativeIntersection": "Cumulative intersection",
+      "name": "Segmentation name",
+      "segmentSize": "Segment size"
+    },
+    "list": {
+      "add": "Create New Segmentation",
+      "title": "Segmentation"
+    }
   },
   "segmentation-category": {
     "add": "Add new segmentation category",

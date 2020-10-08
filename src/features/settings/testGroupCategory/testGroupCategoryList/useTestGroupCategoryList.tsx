@@ -10,7 +10,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
-import { TestGroupCategory } from 'models/testGroupCategory'
+import { TestGroupCategory } from 'models/campaign/testGroupCategory'
 import { testGroupCategoryListActions } from './testGroupCategoryListSlice'
 
 interface UseCategoryListProps {
