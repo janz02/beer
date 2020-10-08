@@ -5,9 +5,9 @@
 This component is used to warn the user if he/she wants to leave the current page when a form has
 unsaved changes. There are two ways to exit:
 
-- The user can either click something within the application that changes the path, in this case
-  `react-router`'s [`Prompt`](https://reactrouter.com/core/api/Prompt) component can be used to
-  create a popup when the route changes.
+- The user can either click something within the application that changes the path, or the browser's
+  back button, in this case `react-router`'s [`Prompt`](https://reactrouter.com/core/api/Prompt)
+  will show a popup when the route changes.
 
 - The other way is just closing the browser tab. In this case `Prompt` is useless, but there's a
   [`beforeunload`](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event
