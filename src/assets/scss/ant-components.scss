@@ -1,8 +1,10 @@
 :root {
-  .ant-form-item-label > label.ant-form-item-required {
+  .ant-form-item-label label.ant-form-item-required {
     // "Required" asterisk goes after the label.
+    &:not(.ant-form-item-required-mark-optional)::before,
     &::before {
       all: unset;
+      display: none;
     }
 
     &::after {
