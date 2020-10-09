@@ -48,6 +48,7 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
         onFinish: handleSave
       }}
       initialValues={initialValues}
+      hideFooter={isReadonly}
     >
       <Form.Item label={t('system-params.field.name')} name="name">
         <Input disabled className="readonly-form-item" />
@@ -60,10 +61,14 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
       <Form.Item
         label={t('system-params.field.value')}
         name="value"
-        rules={[
-          rule.requiredString(t('error.common.field-required')),
-          rule.max(500, t('error.common.max-length-exact', { max: 500 }))
-        ]}
+        rules={
+          !isReadonly
+            ? [
+                rule.requiredString(t('error.common.field-required')),
+                rule.max(500, t('error.common.max-length-exact', { max: 500 }))
+              ]
+            : []
+        }
       >
         <Input
           maxLength={500}
