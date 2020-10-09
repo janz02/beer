@@ -10,8 +10,8 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
-import { Roles } from 'api/swagger/coupon'
 import { hasPermission } from 'services/jwt-reader'
+import { pageViewRoles } from 'services/roleHelpers'
 
 interface UseProductListProps {
   onOpenEditor: (id?: number) => void
@@ -30,9 +30,11 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
   const { getProducts, deleteProduct, resetProductFilters } = productListActions
   const { listParams, products, listState } = useSelector((state: RootState) => state.productList)
 
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
+
   const [productToDelete, setProductToDelete] = useState<PopupState<Product>>()
 
-  const loading = listState === FeatureState.Loading
+  const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
   const {
     paginationConfig,
@@ -61,7 +63,7 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
         width: '13rem',
         renderMode: 'date time'
       }),
-      hasPermission([Roles.Administrator])
+      isEditorUser
         ? actionColumnConfig({
             render(record: Product) {
               return (
@@ -80,25 +82,31 @@ export const useProductList = (props: UseProductListProps): UseProductListUtils 
           })
         : {}
     ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor]
+    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
   )
 
-  const tableProps: ResponsiveTableProps = {
-    loading,
-    columns: columnsConfig,
-    dataSource: addKeyProp(products),
-    pagination: paginationConfig,
-    onChange: handleTableChange
-  }
+  const tableProps: ResponsiveTableProps = useMemo(
+    () => ({
+      loading,
+      columns: columnsConfig,
+      dataSource: addKeyProp(products),
+      pagination: paginationConfig,
+      onChange: handleTableChange
+    }),
+    [loading, columnsConfig, addKeyProp, products, paginationConfig, handleTableChange]
+  )
 
-  const popupProps: GenericPopupProps = {
-    id: productToDelete?.data?.id,
-    type: 'delete',
-    visible: !!productToDelete?.popupVisible,
-    onOkAction: deleteProduct(productToDelete?.data?.id!),
-    onCancel: () => setProductToDelete({ ...productToDelete, popupVisible: false }),
-    afterClose: () => setProductToDelete(null)
-  }
+  const popupProps: GenericPopupProps = useMemo(
+    () => ({
+      id: productToDelete?.data?.id,
+      type: 'delete',
+      visible: !!productToDelete?.popupVisible,
+      onOkAction: deleteProduct(productToDelete?.data?.id!),
+      onCancel: () => setProductToDelete({ ...productToDelete, popupVisible: false }),
+      afterClose: () => setProductToDelete(null)
+    }),
+    [productToDelete, deleteProduct]
+  )
 
   return {
     tableProps,

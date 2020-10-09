@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useParams } from 'hooks/react-router-dom-hooks'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
 import { hasPermission } from 'services/jwt-reader'
 import { SettingsTab } from '../SettingsPage'
-import { Roles } from 'api/swagger/coupon'
 import { pageViewRoles } from 'services/roleHelpers'
 import { SegmentationCategoryTab } from './SegmentationCategoryTab'
 import { PartitionOutlined } from '@ant-design/icons'
@@ -15,6 +14,8 @@ export const useSegmentationCategoryTab = (): SettingsTab => {
   const { t } = useTranslation()
   const { tab, id } = useParams()
 
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
+
   const modalUtils = useGenericModalFormEditorUtils({
     dataId: tab === 'segmentation-categories' ? id : undefined,
     rootRoute: '/settings',
@@ -23,17 +24,21 @@ export const useSegmentationCategoryTab = (): SettingsTab => {
 
   const categoryListUtils = useSegmentationCategoryList({ onOpenEditor: modalUtils.routeToEditor })
 
-  let headerOptions: JSX.Element | undefined
-  if (hasPermission([Roles.Administrator])) {
-    headerOptions = (
-      <AddButton onClick={() => modalUtils.routeToEditor()}>
-        {t('segmentation-category.add')}
-      </AddButton>
-    )
-  }
+  const headerOptions = useMemo(
+    () =>
+      isEditorUser ? (
+        <AddButton onClick={() => modalUtils.routeToEditor()}>
+          {t('segmentation-category.add')}
+        </AddButton>
+      ) : (
+        <></>
+      ),
+    [isEditorUser, modalUtils, t]
+  )
 
-  const tabContent = (
-    <SegmentationCategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />
+  const tabContent = useMemo(
+    () => <SegmentationCategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />,
+    [modalUtils, categoryListUtils]
   )
 
   return {
