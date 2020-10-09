@@ -60,11 +60,11 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
         label={t('system-params.field.value')}
         name="value"
         rules={[
-          rule.requiredString(t('error.validation.category.name-required')),
-          rule.max(50, t('error.validation.category.name-max-length-50'))
+          rule.requiredString(t('error.common.field-required')),
+          rule.max(500, t('error.common.max-length-exact', { max: 500 }))
         ]}
       >
-        <Input maxLength={50} />
+        <Input maxLength={500} />
       </Form.Item>
     </GenericModalForm>
   )

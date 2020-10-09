@@ -31,8 +31,6 @@ export const useSystemParamsEditor = (props: HookProps): HookUtils => {
     const mappedId = id ? +id : null
     const foundParam = systemParamsList.find(p => p.id === mappedId)
     setInitialValues(foundParam)
-
-    console.log(mappedId, systemParamsList, foundParam)
   }, [id, systemParamsList])
 
   const afterCloseExtended = (): void => {
@@ -44,7 +42,7 @@ export const useSystemParamsEditor = (props: HookProps): HookUtils => {
     dispatch(
       systemParamsActions.updateSystemParam(updatedParam, () => {
         handleExit()
-        // dispatch(systemParamsActions.getSystemParams())
+        // dispatch(systemParamsActions.getSystemParams()) // might need this at integration
       })
     )
   }
