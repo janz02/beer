@@ -8,7 +8,7 @@ import { useFormUtils } from 'hooks/useFormUtils'
 import { FormInstance } from 'antd/lib/form'
 import { useCallback } from 'react'
 
-interface UseProfileFeatures {
+export interface UseProfileFeatures {
   editable?: boolean
   loading: boolean
   modified: boolean

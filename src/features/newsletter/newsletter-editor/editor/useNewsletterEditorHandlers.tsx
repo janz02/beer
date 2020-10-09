@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 import { FeatureState } from 'models/featureState'
 import { Newsletter } from 'models/newsletter'
 
-interface UseNewsletterEditorHandlersUtils {
+export interface UseNewsletterEditorHandlersUtils {
   template: Newsletter | undefined
   isTemplateModified: boolean
   isLatestTemplate: boolean

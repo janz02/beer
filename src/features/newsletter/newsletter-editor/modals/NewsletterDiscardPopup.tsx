@@ -1,13 +1,17 @@
 import React, { FC } from 'react'
 import { GenericPopup } from 'components/popups/GenericPopup'
-import { useNewsletterEditorModals } from './useNewsletterEditorModals'
+import { UseNewsletterEditorModalsUtils } from './useNewsletterEditorModals'
 import { useTranslation } from 'react-i18next'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { NewsletterTemplateContentState as ContentState } from '../newsletterEditorSlice'
 
-export const NewsletterDiscardPopup: FC = () => {
+interface NewsletterDiscardPopupProps {
+  newsletterEditorModalsUtils: UseNewsletterEditorModalsUtils
+}
+
+export const NewsletterDiscardPopup: FC<NewsletterDiscardPopupProps> = props => {
   const { t } = useTranslation()
-  const { discardPopupProps, templateContentState } = useNewsletterEditorModals()
+  const { discardPopupProps, templateContentState } = props.newsletterEditorModalsUtils
 
   return (
     <>

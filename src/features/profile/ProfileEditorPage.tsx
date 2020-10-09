@@ -9,7 +9,8 @@ import { NavigationAlert } from 'components/popups/NavigationAlert'
 export const ProfileEditorPage: FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { modified, getProfile, getMyPartner } = useProfile()
+  const profile = useProfile()
+  const { modified, getProfile, getMyPartner } = profile
 
   useEffect(() => {
     dispatch(getProfile())
@@ -22,7 +23,7 @@ export const ProfileEditorPage: FC = () => {
   return (
     <ResponsiveCard floatingTitle={t('profile.editor-title')}>
       <NavigationAlert when={modified} />
-      <ProfileEditorForm />
+      <ProfileEditorForm profile={profile} />
     </ResponsiveCard>
   )
 }

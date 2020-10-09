@@ -8,7 +8,7 @@ import { newsletterEditorActions, NewsletterTemplateContentState } from '../news
 import { Segment } from 'models/segment'
 import { GenericPopupProps } from 'components/popups/GenericPopup'
 
-interface UseNewsletterEditorModalsUtils {
+export interface UseNewsletterEditorModalsUtils {
   templateContentState: NewsletterTemplateContentState
   openSegmentEmail: boolean
   segments: Segment[]

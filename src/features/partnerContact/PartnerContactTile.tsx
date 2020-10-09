@@ -4,6 +4,7 @@ import { PartnerContactEditor } from 'features/partnerContact/modal/PartnerConta
 import { ListRequestParams } from 'hooks/useTableUtils'
 import { UserType } from 'models/user'
 import { PartnerContactInviter } from './modal/PartnerContactInviter'
+import { usePartnerContactModals } from './modal/usePartnerContactModals'
 
 export interface PartnerContactConfig {
   shrinks: boolean
@@ -13,11 +14,13 @@ export interface PartnerContactConfig {
 }
 
 export const PartnerContactTile: FC<PartnerContactConfig> = config => {
+  const partnerContactModalUtils = usePartnerContactModals({ config })
+
   return (
     <>
       <PartnerContactList config={config} />
-      <PartnerContactEditor config={config} />
-      <PartnerContactInviter config={config} />
+      <PartnerContactEditor config={config} partnerContactModalUtils={partnerContactModalUtils} />
+      <PartnerContactInviter partnerContactModalUtils={partnerContactModalUtils} />
     </>
   )
 }

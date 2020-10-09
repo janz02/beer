@@ -18,7 +18,7 @@ import { NotificationLinkPreValidator } from './NotificationLinkPreValidator'
 
 export const notificationRoleConfig = [Roles.Administrator, Roles.CampaignManager]
 
-interface UseNotificationFeatures {
+export interface UseNotificationFeatures {
   opened: boolean
   unseenCount: number
   notifications: NotificationData[]

@@ -4,11 +4,15 @@ import './NewsletterEditor.scss'
 import { useNewsletterEditor } from './useNewsletterEditor'
 import { NewsLetterEditorHeader, NewsLetterEditorHeaderProps } from './NewsLetterEditorHeader'
 import { FeatureState } from 'models/featureState'
-import { useNewsletterEditorHandlers } from './useNewsletterEditorHandlers'
+import { UseNewsletterEditorHandlersUtils } from './useNewsletterEditorHandlers'
 
 const EDITOR_SELECTOR = 'pkm-grapesjs'
 
-export const NewsletterEditor: FC = () => {
+interface NewsletterEditorProps {
+  newsletterEditorHandlers: UseNewsletterEditorHandlersUtils
+}
+
+export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
   const {
     handleGetTemplate,
     handleClearTemplate,
@@ -16,7 +20,7 @@ export const NewsletterEditor: FC = () => {
     currentTemplateVersionId,
     template,
     templateState
-  } = useNewsletterEditorHandlers()
+  } = props.newsletterEditorHandlers
 
   const { getEditorContent } = useNewsletterEditor({
     gjsEditorId: EDITOR_SELECTOR,

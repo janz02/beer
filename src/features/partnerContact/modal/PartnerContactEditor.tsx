@@ -3,11 +3,11 @@ import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { usePartnerContactModals } from './usePartnerContactModals'
+import { UsePartnerContactModalUtils } from './usePartnerContactModals'
 import { Form, Input, Radio, Select } from 'antd'
 import { UserType } from 'models/user'
 import { useRoleGenerator } from 'hooks/useRoleGenerator'
-import { PartnerContactConfig } from 'features/partnerContact/PartnerContactTile'
+import { PartnerContactConfig } from '../PartnerContactTile'
 
 export interface PartnerContactsParams {
   visible?: boolean
@@ -17,11 +17,12 @@ export interface PartnerContactsParams {
 
 export interface PartnerContactEditorProps {
   config: PartnerContactConfig
+  partnerContactModalUtils: UsePartnerContactModalUtils
 }
 
 export const PartnerContactEditor: FC<PartnerContactEditorProps> = props => {
   const { canEdit, userType } = props.config
-  const { editorModalProps, editingSelf } = usePartnerContactModals({ config: props.config })
+  const { editorModalProps, editingSelf } = props.partnerContactModalUtils
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 

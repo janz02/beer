@@ -10,11 +10,13 @@ import { PartnerContactConfig } from '../PartnerContactTile'
 interface UsePartnerContactModalProps {
   config: PartnerContactConfig
 }
-interface UsePartnerContactModalUtils {
+
+export interface UsePartnerContactModalUtils {
   editingSelf: boolean
   editorModalProps: GenericModalFormProps
   inviterModalProps: GenericModalFormProps
 }
+
 export const usePartnerContactModals = (
   props: UsePartnerContactModalProps
 ): UsePartnerContactModalUtils => {

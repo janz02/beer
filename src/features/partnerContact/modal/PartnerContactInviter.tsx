@@ -3,16 +3,16 @@ import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { useCommonFormRules } from 'hooks'
 import { useTranslation } from 'react-i18next'
 import { Form, Input } from 'antd'
-import { usePartnerContactModals } from './usePartnerContactModals'
-import { PartnerContactConfig } from '../PartnerContactTile'
+import { UsePartnerContactModalUtils } from './usePartnerContactModals'
 
 interface PartnerContactInviterProps {
-  config: PartnerContactConfig
+  partnerContactModalUtils: UsePartnerContactModalUtils
 }
+
 export const PartnerContactInviter: FC<PartnerContactInviterProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
-  const { inviterModalProps } = usePartnerContactModals({ config: props.config })
+  const { inviterModalProps } = props.partnerContactModalUtils
 
   return (
     <GenericModalForm {...inviterModalProps}>
