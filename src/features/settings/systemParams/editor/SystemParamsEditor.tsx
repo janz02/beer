@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { useSystemParamsEditor } from './useSystemParamsEditor'
+import { useSystemParamsEditorUtils } from './useSystemParamsEditorUtils'
 
 interface SystemParamsEditorProps {
   params: GenericModalFormEditorParams
@@ -25,7 +25,7 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
     getSystemParamById,
     handleSave,
     afterCloseExtended
-  } = useSystemParamsEditor(props)
+  } = useSystemParamsEditorUtils(props)
 
   useEffect(() => {
     getSystemParamById()

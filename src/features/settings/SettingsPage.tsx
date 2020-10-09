@@ -8,7 +8,7 @@ import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
 import { useTestGroupCategoryTab } from './testGroupCategory/useTestGroupCategoryTab'
 import { useSegmentationCategoryTab } from './segmentationCategories/useSegmentationCategoryTab'
-import { useSystemParamsTab } from './systemParams/useSystemParamsTab'
+import { useSystemParamsTabUtils } from './systemParams/tab/useSystemParamsTabUtils'
 
 export interface SettingsTab {
   key: string
@@ -23,7 +23,7 @@ export interface SettingsTab {
 
 export const SettingsPage: React.FC = () => {
   const allTabs = [
-    useSystemParamsTab(),
+    useSystemParamsTabUtils(),
     useCampaignCategoryTab(),
     useSegmentationCategoryTab(),
     useTestGroupCategoryTab(),

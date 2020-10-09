@@ -9,19 +9,21 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { SystemParam } from 'models/systemParam'
-import { systemParamsActions } from './systemParamsSlice'
+import { systemParamsActions } from '../systemParamsSlice'
 import { pageViewRoles } from 'services/roleHelpers'
 
-interface HookProps {
+interface SystemParamsListUtilsProps {
   onOpenEditor: (id?: number) => void
 }
 
-interface ListUtils {
+interface SystemParamsListUtils {
   tableProps: ResponsiveTableProps
   resetFilters: () => void
 }
 
-export const useSystemParamsList = (props: HookProps): ListUtils => {
+export const useSystemParamsListUtils = (
+  props: SystemParamsListUtilsProps
+): SystemParamsListUtils => {
   const { onOpenEditor } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()

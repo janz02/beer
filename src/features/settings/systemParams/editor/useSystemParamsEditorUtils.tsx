@@ -4,20 +4,22 @@ import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
 import { useParams } from 'hooks/react-router-dom-hooks'
 import { SystemParam } from 'models/systemParam'
-import { systemParamsActions } from './systemParamsSlice'
+import { systemParamsActions } from '../systemParamsSlice'
 
-interface HookProps {
+interface SystemParamsEditorUtilsProps {
   handleExit: () => void
   afterClose: () => void
 }
-interface HookUtils {
+interface SystemParamsEditorUtils {
   loading: boolean
   initialValues: SystemParam | undefined | null
   getSystemParamById: () => void
   afterCloseExtended: () => void
   handleSave: (values: SystemParam) => Promise<void>
 }
-export const useSystemParamsEditor = (props: HookProps): HookUtils => {
+export const useSystemParamsEditorUtils = (
+  props: SystemParamsEditorUtilsProps
+): SystemParamsEditorUtils => {
   const { handleExit, afterClose } = props
   const { id } = useParams<{ id: string }>()
 

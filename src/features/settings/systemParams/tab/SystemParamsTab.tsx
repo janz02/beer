@@ -1,5 +1,5 @@
 import React from 'react'
-import { SystemParamsEditor } from './SystemParamsEditor'
+import { SystemParamsEditor } from '../editor/SystemParamsEditor'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 
 interface TabProps {
