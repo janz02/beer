@@ -20,7 +20,7 @@ import { Partner } from 'models/partner'
 import { UserData } from 'models/user'
 import { useCallback } from 'react'
 
-interface UseCampaignFeatures {
+export interface UseCampaignFeatures {
   loading: boolean
   id?: number
   couponIsNew: boolean

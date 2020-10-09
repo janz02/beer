@@ -8,10 +8,14 @@ import { DeleteFilled, CheckOutlined, ArrowRightOutlined } from '@ant-design/ico
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
 import { MomentDisplay } from 'components/MomentDisplay'
-import { useCampaign } from '../useCampaign'
 import { useCommonFormRules } from 'hooks'
+import { UseCampaignFeatures } from '../useCampaign'
 
-export const Comments: FC = () => {
+interface CommentsProps {
+  campaign: UseCampaignFeatures
+}
+
+export const Comments: FC<CommentsProps> = ({ campaign }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   const {
@@ -21,7 +25,7 @@ export const Comments: FC = () => {
     submitableComment,
     prepareCommentFormFields,
     handleDeleteCouponCommment
-  } = useCampaign()
+  } = campaign
 
   useEffect(() => {
     prepareCommentFormFields()
