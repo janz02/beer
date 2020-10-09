@@ -4,7 +4,7 @@ import { api } from 'api'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { FeatureState } from 'models/featureState'
-import { TestGroupCategory } from 'models/testGroupCategory'
+import { TestGroupCategory } from 'models/campaign/testGroupCategory'
 import { testGroupCategoryListActions } from '../testGroupCategoryList/testGroupCategoryListSlice'
 import { GetTestGroupCategoryRequest } from 'api/swagger/campaign-editor'
 

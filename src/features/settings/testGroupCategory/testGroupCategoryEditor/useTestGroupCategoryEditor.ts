@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
-import { TestGroupCategory } from 'models/testGroupCategory'
+import { TestGroupCategory } from 'models/campaign/testGroupCategory'
 import { testGroupCategoryEditorActions } from './testGroupCategoryEditorSlice'
 
 interface UseCategoryEditorProps {

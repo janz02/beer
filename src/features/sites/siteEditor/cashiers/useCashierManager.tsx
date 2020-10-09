@@ -13,20 +13,20 @@ import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { FeatureState } from 'models/featureState'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { GenericModalFormProps } from 'components/popups/GenericModalForm'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
+import { getSiteListRootPath } from '../site/useSiteEditorForm'
 
 interface UseCashierManagerUtils {
   cashierManagerVisible: boolean
-  canEdit: boolean
   handleCreateCashier: () => void
   cashierTableProps: ResponsiveTableProps
   cashierDeletePopupProps: GenericPopupProps
   cashierEditorFormModalProps: GenericModalFormProps
 }
-export const useCashierManager = (): UseCashierManagerUtils => {
-  const { siteId, cashierId } = useParams()
+export const useCashierManager = (config: SiteFeatureConfig): UseCashierManagerUtils => {
+  const { siteId, cashierId, partnerId } = useParams()
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { config } = useSelector((s: RootState) => s.siteList)
   const {
     cashiersListParams,
     cashiers,
@@ -37,7 +37,7 @@ export const useCashierManager = (): UseCashierManagerUtils => {
 
   const cashierEditorModalUtils = useGenericModalFormEditorUtils({
     dataId: cashierId,
-    rootRoute: `${config.routeRoot}/${siteId}`
+    rootRoute: `${getSiteListRootPath(partnerId)}/${siteId}`
   })
 
   const cashierManagerVisible = !!siteId && !isNaN(+siteId)
@@ -144,7 +144,6 @@ export const useCashierManager = (): UseCashierManagerUtils => {
 
   return {
     cashierManagerVisible,
-    canEdit: config.canEdit,
     handleCreateCashier,
     cashierTableProps,
     cashierDeletePopupProps,

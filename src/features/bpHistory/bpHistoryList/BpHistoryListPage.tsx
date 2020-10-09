@@ -2,14 +2,28 @@ import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BpHistoryViewer } from '../components/BpHistoryViewer'
 import { useBpHistoryControl } from '../useBpHistoryControl'
 
 export const BpHistoryListPage: React.FC = () => {
   const { t } = useTranslation()
-  const control = useBpHistoryControl()
+  const {
+    loading,
+    columnOrder,
+    paginationConfig,
+    templateModal,
+    source,
+    handleResetFilters,
+    handleTemplateCloseClick,
+    handleTableChange,
+    loadHistory
+  } = useBpHistoryControl()
+
+  useEffect(() => {
+    loadHistory()
+  }, [loadHistory])
 
   return (
     <>
@@ -17,26 +31,26 @@ export const BpHistoryListPage: React.FC = () => {
         floatingTitle={t('bp-history.list.title')}
         floatingOptions={
           <>
-            <ResetFiltersButton onClick={control.handleResetFilters} />
-            <ColumnOrderDropdown {...control.columnOrder} />
+            <ResetFiltersButton onClick={handleResetFilters} />
+            <ColumnOrderDropdown {...columnOrder} />
           </>
         }
         forTable
         width="full"
       >
         <ResponsiveTable
-          loading={control.loading}
-          columns={control.columnOrder.currentColumns}
-          dataSource={control.source}
-          pagination={control.paginationConfig}
+          loading={loading}
+          columns={columnOrder.currentColumns}
+          dataSource={source}
+          pagination={paginationConfig}
           scroll={{ x: true }}
-          onChange={control.handleTableChange}
+          onChange={handleTableChange}
         />
       </ResponsiveCard>
       <BpHistoryViewer
-        title={control.templateModal.title}
-        content={control.templateModal.content}
-        onCancel={control.handleTemplateCloseClick}
+        title={templateModal.title}
+        content={templateModal.content}
+        onCancel={handleTemplateCloseClick}
       />
     </>
   )

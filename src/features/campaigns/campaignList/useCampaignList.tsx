@@ -25,6 +25,8 @@ import {
   CouponDiscountType
 } from 'api/swagger/coupon'
 import { isCouponActive } from 'components/CampaignActiveDisplay'
+import { CampaignTypeDisplay } from 'components/CampaignTypeDisplay'
+import { ThumbNailSize } from 'api/swagger/files'
 
 interface UseCampaignListFeatures {
   loading: boolean
@@ -113,9 +115,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         filters: Object.keys(CouponType).map(f => {
           return { text: t(`coupon.type.${f?.toLowerCase()}`), value: f } as ColumnFilterItem
         }),
-        render(value) {
-          return t(`coupon.type.${value?.toLowerCase()}`)
-        }
+        render: (value: CouponType) => <CampaignTypeDisplay type={value} />
       }),
       columnConfig({
         title: t('coupon-list.partner'),
@@ -163,13 +163,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         key: 'isActive',
         ellipsis: false,
         width: '5rem',
-        filterMode: FilterMode.ACTIVE_INACTIVE,
-        activenessOptions: {
-          active: t(`coupon.status.active`),
-          inactive: t(`coupon.status.inactive`)
-        },
-        activenessMapper: (value, coupon: Coupon) =>
-          isCouponActive(coupon) ? 'active' : 'inactive'
+        filterMode: FilterMode.ACTIVE_INACTIVE
       }),
       columnConfig({
         title: t('coupon-list.category'),
@@ -203,7 +197,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
         ellipsis: false,
         key: 'smallPictureId',
         render(value) {
-          return value && <Thumbnail fileId={value} />
+          return value && <Thumbnail fileId={value} size={ThumbNailSize.Small} />
         }
       }),
       columnConfig({
@@ -366,7 +360,7 @@ export const useCampaignList = (): UseCampaignListFeatures => {
 
   return {
     loading,
-    coupons: addKeyProp(coupons),
+    coupons: addKeyProp(coupons).map(x => ({ ...x, isActive: isCouponActive(x) })),
     activeTabKey,
     handleTableChange,
     columnsConfig,

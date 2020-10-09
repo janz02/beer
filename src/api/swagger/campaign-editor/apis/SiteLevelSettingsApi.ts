@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     SiteLevelSettingVm,
     SiteLevelSettingVmFromJSON,
     SiteLevelSettingVmToJSON,
@@ -32,13 +35,13 @@ export interface GetSiteLevelSettingRequest {
 
 export interface GetSiteLevelSettingsRequest {
     name?: string;
-    value?: string;
     skip?: number;
     take?: number;
     orderBy?: string;
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface UpdateSiteLevelSettingRequest {
@@ -95,10 +98,6 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             queryParameters['Name'] = requestParameters.name;
         }
 
-        if (requestParameters.value !== undefined) {
-            queryParameters['Value'] = requestParameters.value;
-        }
-
         if (requestParameters.skip !== undefined) {
             queryParameters['Skip'] = requestParameters.skip;
         }
@@ -121,6 +120,10 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -159,7 +162,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

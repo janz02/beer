@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { CampaignCategory } from 'models/campaignCategory'
+import { CampaignCategory } from 'models/campaign/campaignCategory'
 import { api } from 'api'
 import {
   ListRequestParams,
@@ -72,19 +72,10 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
       params
     )
 
-    let orderBy
-    if (revisedParams.orderBy) {
-      const type = revisedParams.orderByType !== OrderByType.Descending ? 'asc' : 'desc'
-      orderBy = revisedParams.orderBy + '_' + type
-    }
-
     const {
       items,
       ...pagination
-    } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({
-      ...revisedParams,
-      orderBy
-    })
+    } = await api.campaignEditor.segmentationCategories.getSegmentationCategories(revisedParams)
 
     dispatch(
       getCategoriesSuccess({

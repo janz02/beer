@@ -8,9 +8,11 @@ import { SearchOutlined, CalendarOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
 import { SearchTableDropdown } from 'components/table-dropdowns/SearchTableDropdown'
 import { DatepickerTableDropdown } from 'components/table-dropdowns/DatepickerTableDropdown'
+import { DateRangePickerTableDropdown } from 'components/table-dropdowns/DateRangePickerTableDropdown'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useTranslation } from 'react-i18next'
-import { ActivenessDisplay, ActivenessStatus } from 'components/ActivenessDisplay'
+import { ActivenessDisplay } from 'components/ActivenessDisplay'
+import moment from 'moment'
 
 export enum OrderByType {
   Ascending = 'Ascending',
@@ -21,6 +23,7 @@ export enum FilterMode {
   FILTER = 'filter',
   SEARCH = 'search',
   DATEPICKER = 'datepicker',
+  DATERANGEPICKER = 'daterangepicker',
   /**
    * For filtering and renderindg YES or NO values, mapped to 'true' and 'fasle'.
    * No need to populate filters and render prop with this option.
@@ -30,7 +33,8 @@ export enum FilterMode {
    * For filtering and rendering ACTIVE or INACTIVE values, mapped to 'true' and 'fasle'.
    * No need to populate filters and render prop with this option.
    */
-  ACTIVE_INACTIVE = 'active_inactive'
+  ACTIVE_INACTIVE = 'active_inactive',
+  ENUM = 'enum'
 }
 
 export interface Pagination {
@@ -83,8 +87,6 @@ interface ColumnConfigParams extends ColumnType<any> {
   sort?: boolean
   disableSearchHighlight?: boolean
   renderMode?: 'date time' | null
-  activenessOptions?: ActivenessOptions
-  activenessMapper?: (value: any, record: any) => ActivenessStatus
 }
 
 export interface UseTableUtils<T> {
@@ -196,7 +198,7 @@ function useTableUtils<T extends { [key: string]: any }>(
             borderRadius: '5px'
           }}
           searchWords={[listParamsState?.[key]]}
-          textToHighlight={fieldText.toString()}
+          textToHighlight={fieldText?.toString()}
         />
       ) : (
         fieldText
@@ -243,6 +245,15 @@ function useTableUtils<T extends { [key: string]: any }>(
           config.filterIcon = () => <CalendarOutlined />
           config.render = (value: any) => <MomentDisplay date={value} />
           break
+        case FilterMode.DATERANGEPICKER:
+          config.filterDropdown = DateRangePickerTableDropdown
+          config.filterIcon = () => <CalendarOutlined />
+          config.render = (value: any) => (
+            <div>
+              <MomentDisplay date={value[0]} /> - <MomentDisplay date={value[1]} />
+            </div>
+          )
+          break
         case FilterMode.FILTER:
           if (filters?.length) {
             config.filterMultiple = false
@@ -258,23 +269,27 @@ function useTableUtils<T extends { [key: string]: any }>(
           config.render = (value: boolean) => (value ? t('common.yes') : t('common.no'))
           break
         case FilterMode.ACTIVE_INACTIVE: {
-          const options = params.activenessOptions ?? {
-            active: t('common.active'),
-            inactive: t('common.inactive')
-          }
+          const activeText = t('common.active')
+          const inactiveText = t('common.inactive')
 
           config.filterMultiple = false
-          config.filters = Object.entries(options).map(([value, text]) => ({ value, text }))
+          config.filters = [
+            { value: true, text: activeText },
+            { value: false, text: inactiveText }
+          ]
 
-          const mapper = params.activenessMapper ?? (x => (x ? 'active' : 'inactive'))
-          config.onFilter = (value, record) => mapper(value, record) === value
-
-          config.render = (value, record) => {
-            const status = mapper(value, record)
-            return <ActivenessDisplay status={status} text={options[status] as string} />
-          }
+          config.render = value => (
+            <ActivenessDisplay
+              status={value ? 'active' : 'inactive'}
+              text={value ? activeText : inactiveText}
+            />
+          )
           break
         }
+        case FilterMode.ENUM:
+          config.filterMultiple = false
+          config.filters = filters
+          break
         default:
           break
       }
@@ -339,9 +354,17 @@ function useTableUtils<T extends { [key: string]: any }>(
 
       requestParams.orderByType = toOrderByType(sorter.order)
       requestParams.orderBy = requestParams.orderByType ? (sorter?.field as string) : undefined
-
       filterKeys?.forEach((key: any) => {
-        requestParams[key] = filters?.[key]?.[0]
+        const filterItem = filters?.[key]?.[0]
+
+        if (moment.isMoment(filterItem)) {
+          requestParams[key] = filterItem.format('L')
+        } else if (Array.isArray(filterItem)) {
+          requestParams[key + 'From'] = filterItem[0].format('L')
+          requestParams[key + 'To'] = (filterItem[1] as moment.Moment).add(1, 'day').format('L')
+        } else {
+          requestParams[key] = filterItem
+        }
       })
 
       dispatch(getDataAction(requestParams))

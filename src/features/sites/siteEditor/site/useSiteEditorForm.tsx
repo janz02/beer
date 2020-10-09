@@ -9,18 +9,24 @@ import { Site } from 'models/site'
 import { history } from 'router/router'
 import { useTranslation } from 'react-i18next'
 import { SiteEditorFormProps } from './SiteEditorForm'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
+
+export const getSiteListExitPath = (partnerId?: number | string): string =>
+  partnerId ? `/partners/${partnerId}` : `/sites`
+
+export const getSiteListRootPath = (partnerId?: number | string): string =>
+  partnerId ? `/partners/${partnerId}/site` : `/sites/editor`
 
 interface UseSiteEditorFormUtils {
   siteEditorFormProps: SiteEditorFormProps
   handleGetSite: () => void
   handleResetSite: () => void
 }
-export const useSiteEditorForm = (): UseSiteEditorFormUtils => {
+export const useSiteEditorForm = (config: SiteFeatureConfig): UseSiteEditorFormUtils => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { siteId: id, partnerId } = useParams()
   const siteId = id ? +id : undefined
-  const { config } = useSelector((s: RootState) => s.siteList)
   const { siteEditorState, site } = useSelector((state: RootState) => state.siteEditor)
 
   const loadingSiteEditor = siteEditorState === FeatureState.Loading
@@ -39,12 +45,15 @@ export const useSiteEditorForm = (): UseSiteEditorFormUtils => {
   }
 
   const handleSaveSite = (site: Site): void => {
-    dispatch(siteEditorActions.saveSite({ ...site }, siteId, +partnerId!, config.routeRoot))
+    dispatch(
+      siteEditorActions.saveSite({ ...site }, siteId, +partnerId!, getSiteListRootPath(partnerId))
+    )
   }
 
-  const handleExitSiteEditor = useCallback((): void => history.push(config.routeExit), [
-    config.routeExit
-  ])
+  const handleExitSiteEditor = useCallback(
+    (): void => history.push(getSiteListExitPath(partnerId)),
+    [partnerId]
+  )
 
   const handleGetSite = useCallback((): void => {
     siteId && dispatch(siteEditorActions.getSite(siteId))

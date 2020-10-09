@@ -2,11 +2,15 @@ import React, { FC } from 'react'
 import { Form, Row, Col } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { MomentDisplay } from 'components/MomentDisplay'
-import { useCampaign } from '../useCampaign'
+import { UseCampaignFeatures } from '../useCampaign'
 
-export const CampaignEditorFormAudit: FC = () => {
+interface CampaignEditorFormAuditProps {
+  campaign: UseCampaignFeatures
+}
+
+export const CampaignEditorFormAudit: FC<CampaignEditorFormAuditProps> = props => {
   const { t } = useTranslation()
-  const { coupon, rowGutter } = useCampaign()
+  const { coupon, rowGutter } = props.campaign
 
   return (
     <Row gutter={rowGutter}>

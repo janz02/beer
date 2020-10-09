@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import { useTableUtils, FilterMode, ListRequestParams } from 'hooks/useTableUtils'
 import { Site } from 'models/site'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,15 +6,24 @@ import { RootState } from 'app/rootReducer'
 import { ColumnType } from 'antd/lib/table'
 import { history } from 'router/router'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { siteListActions, SiteFeatureConfig } from './siteListSlice'
+import { siteListActions } from './siteListSlice'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { FeatureState } from 'models/featureState'
+import { getSiteListRootPath } from '../siteEditor/site/useSiteEditorForm'
+
+export interface SiteFeatureConfig {
+  canEdit: boolean
+  shrinks: boolean
+}
 
 interface UseSiteListProps {
   config: SiteFeatureConfig
+  partnerEditorPage?: boolean
+  partnerId: number
 }
+
 interface UseSiteListUtils {
   deletePopupProps: GenericPopupProps
   tableProps: ResponsiveTableProps
@@ -24,17 +33,17 @@ interface UseSiteListUtils {
   resetFilters: () => void
   handleExport: () => void
 }
-export const useSiteList = (props: UseSiteListProps): UseSiteListUtils => {
+
+export const useSiteList = ({
+  config,
+  partnerId,
+  partnerEditorPage
+}: UseSiteListProps): UseSiteListUtils => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const { listParams, sites, listState, config } = useSelector((s: RootState) => s.siteList)
+  const { listParams, sites, listState } = useSelector((s: RootState) => s.siteList)
   const [siteToDelete, setSiteToDelete] = useState<PopupState<Site>>()
-  const { routeRoot } = config
-
-  useEffect(() => {
-    dispatch(siteListActions.setFeatureConfig(props.config))
-  }, [dispatch, props.config])
 
   const {
     paginationConfig,
@@ -56,6 +65,7 @@ export const useSiteList = (props: UseSiteListProps): UseSiteListUtils => {
     dispatch(siteListActions.exportSites())
   }, [dispatch])
 
+  const routeRoot = getSiteListRootPath(partnerEditorPage ? partnerId : undefined)
   const handleAdd = useCallback((): void => history.push(routeRoot), [routeRoot])
 
   const handleEdit = useCallback(
@@ -111,10 +121,10 @@ export const useSiteList = (props: UseSiteListProps): UseSiteListUtils => {
 
   const handleGetSites = useCallback(
     (params?: ListRequestParams) => {
-      dispatch(siteListActions.setListConstraints({ partnerId: 2 }))
+      dispatch(siteListActions.setListConstraints({ partnerId }))
       dispatch(siteListActions.getSites(params))
     },
-    [dispatch]
+    [dispatch, partnerId]
   )
 
   const tableProps: ResponsiveTableProps = {

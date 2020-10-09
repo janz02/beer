@@ -9,5 +9,6 @@ export enum ColumnStorageName {
   USER_ACCESS_NKM = 'user-access-nkm-columns',
   USER_ACCES_PARTNER = 'user-access-partner-columns',
   BP_HISTORY = 'bp-history-columns',
-  PERMISSION = 'permission-columns'
+  PERMISSION = 'permission-columns',
+  SEGMENTATION = 'segmentation-columns'
 }

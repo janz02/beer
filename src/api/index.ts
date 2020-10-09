@@ -28,7 +28,8 @@ import {
   TemplatesApi,
   TestGroupCategoriesApi,
   CampaignResultsApi,
-  AccountsApi
+  AccountsApi,
+  StaticMergeTagsApi
 } from './swagger/campaign-editor'
 import { FilesApi, InformationApi as InformationFilesMsApi } from '../api/swagger/files'
 import { errorHandlingMiddleware } from './middleware'
@@ -100,6 +101,7 @@ export const api = {
     segmentationQueries: new SegmentationQueriesApi(campaignEditorConfig),
     segmentations: new SegmentationsApi(campaignEditorConfig),
     sharepoint: new SharepointApi(campaignEditorConfig),
+    staticMergeTags: new StaticMergeTagsApi(campaignEditorConfig),
     templates: new TemplatesApi(campaignEditorConfig),
     testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)
   }

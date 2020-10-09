@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 interface BpHistoryViewerProps {
   title?: string | null
   content?: string | null
-  onCancel: () => void
+  onCancel?: () => void
 }
 
 export const BpHistoryViewer: FC<BpHistoryViewerProps> = props => {

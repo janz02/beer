@@ -15,13 +15,13 @@ import { hasPermission } from 'services/jwt-reader'
 import { history } from 'router/router'
 import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
 import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
-import { PartnerRegistrationState, PartnerState } from 'api/swagger/coupon'
-import { ActivenessStatus } from 'components/ActivenessDisplay'
+import { PartnerRegistrationState } from 'api/swagger/coupon'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrder } from 'components/table-columns/useColumnOrder'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ExportButton } from 'components/buttons/ExportButton'
+import { ActivenessDisplay } from 'components/ActivenessDisplay'
 
 export const PartnerListPage: React.FC = () => {
   const { t } = useTranslation()
@@ -74,13 +74,16 @@ export const PartnerListPage: React.FC = () => {
         key: 'partnerState',
         sort: true,
         width: '8rem',
-        filterMode: FilterMode.ACTIVE_INACTIVE,
-        activenessOptions: {
-          active: t(`partner.partner-state.active`),
-          inactive: t(`partner.partner-state.inactive`),
-          deleted: t(`partner.partner-state.deleted`)
-        },
-        activenessMapper: (x: PartnerState) => x.toLowerCase() as ActivenessStatus
+        filterMode: FilterMode.ENUM,
+        filters: [
+          { value: 'Active', text: t('partner.partner-state.active') },
+          { value: 'Inactive', text: t('partner.partner-state.inactive') },
+          { value: 'Deleted', text: t('partner.partner-state.deleted') }
+        ],
+        render: value => {
+          const activeness = value.toLowerCase()
+          return <ActivenessDisplay status={activeness} text={t('common.' + activeness)} />
+        }
       }),
       columnConfig({
         title: t('partner.field.partner-registration-state'),

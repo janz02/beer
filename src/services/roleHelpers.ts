@@ -41,7 +41,8 @@ export const pageViewRoles = {
     Roles.PartnerManager,
     Roles.MainPartnerContact
   ],
-  settings: comboRoles.forNkm,
+  settings: comboRoles.forAll,
+  settingsEditor: [Roles.Administrator],
   categories: comboRoles.forNkm,
   categoryEditor: [Roles.Administrator],
   segments: comboRoles.forNkm,
@@ -61,5 +62,6 @@ export const pageViewRoles = {
   productEditor: [Roles.Administrator],
   bpHistory: [Roles.Administrator],
   permissions: [Roles.Administrator],
-  permissionEditor: [Roles.Administrator]
+  permissionEditor: [Roles.Administrator],
+  segmentations: [Roles.Administrator]
 }
