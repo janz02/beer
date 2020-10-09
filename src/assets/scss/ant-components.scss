@@ -36,6 +36,7 @@
 
     .ant-form-item-label {
       padding-bottom: 0.1rem;
+      font-weight: bolder;
     }
   }
 
@@ -95,5 +96,12 @@
     .ant-dropdown-menu {
       max-height: 300px;
     }
+  }
+
+  .ant-input[disabled].readonly-form-item {
+    padding-left: 0;
+    border: none;
+    background-color: transparent;
+    color: $text-color;
   }
 }

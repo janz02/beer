@@ -17,6 +17,7 @@ interface SystemParamsListUtilsProps {
 }
 
 interface SystemParamsListUtils {
+  isEditorUser: boolean
   tableProps: ResponsiveTableProps
   resetFilters: () => void
 }
@@ -95,6 +96,7 @@ export const useSystemParamsListUtils = (
   )
 
   return {
+    isEditorUser,
     tableProps,
     resetFilters: () => dispatch(systemParamsActions.resetSystemParamsFilters())
   }

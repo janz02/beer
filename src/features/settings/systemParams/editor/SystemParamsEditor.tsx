@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, PropsWithChildren, useEffect } from 'react'
 import { Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
@@ -6,14 +6,15 @@ import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { useSystemParamsEditorUtils } from './useSystemParamsEditorUtils'
 
-interface SystemParamsEditorProps {
+interface SystemParamsEditorProps extends PropsWithChildren<any> {
+  isReadonly: boolean
   params: GenericModalFormEditorParams
   handleExit: () => void
   afterClose: () => void
 }
 
 export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
-  const { params, handleExit } = props
+  const { params, handleExit, isReadonly } = props
   const { visible } = params
 
   const { t } = useTranslation()
@@ -49,11 +50,11 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
       initialValues={initialValues}
     >
       <Form.Item label={t('system-params.field.name')} name="name">
-        <Input disabled />
+        <Input disabled className="readonly-form-item" />
       </Form.Item>
 
       <Form.Item label={t('system-params.field.description')} name="description">
-        <Input.TextArea disabled />
+        <Input.TextArea disabled className="readonly-form-item" />
       </Form.Item>
 
       <Form.Item
@@ -64,7 +65,11 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
           rule.max(500, t('error.common.max-length-exact', { max: 500 }))
         ]}
       >
-        <Input maxLength={500} />
+        <Input
+          maxLength={500}
+          disabled={isReadonly}
+          className={isReadonly ? 'readonly-form-item' : ''}
+        />
       </Form.Item>
     </GenericModalForm>
   )
