@@ -76,7 +76,7 @@ const {
   getBpHistoryTemplateFail
 } = bpHistorySlice.actions
 
-export const { clearTemplate } = bpHistorySlice.actions
+export const { clearTemplate, resetBpHistory } = bpHistorySlice.actions
 
 export const bpHistoryReducer = bpHistorySlice.reducer
 

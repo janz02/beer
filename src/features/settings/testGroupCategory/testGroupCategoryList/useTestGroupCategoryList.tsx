@@ -5,13 +5,13 @@ import { FeatureState } from 'models/featureState'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/swagger/coupon'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { TestGroupCategory } from 'models/campaign/testGroupCategory'
 import { testGroupCategoryListActions } from './testGroupCategoryListSlice'
+import { pageViewRoles } from 'services/roleHelpers'
 
 interface UseCategoryListProps {
   onOpenEditor: (id?: number) => void
@@ -34,9 +34,11 @@ export const useTestGroupCategoryList = (
     (state: RootState) => state.testGroupCategoryList
   )
 
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
+
   const [categoryToDelete, setCategoryToDelete] = useState<PopupState<TestGroupCategory>>()
 
-  const loading = listState === FeatureState.Loading
+  const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
   const {
     paginationConfig,
@@ -65,7 +67,7 @@ export const useTestGroupCategoryList = (
         width: '13rem',
         renderMode: 'date time'
       }),
-      hasPermission([Roles.Administrator])
+      isEditorUser
         ? actionColumnConfig({
             render(record: TestGroupCategory) {
               return (
@@ -83,25 +85,31 @@ export const useTestGroupCategoryList = (
           })
         : {}
     ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor]
+    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
   )
 
-  const tableProps: ResponsiveTableProps = {
-    loading,
-    columns: columnsConfig,
-    dataSource: addKeyProp(categories),
-    pagination: paginationConfig,
-    onChange: handleTableChange
-  }
+  const tableProps: ResponsiveTableProps = useMemo(
+    () => ({
+      loading,
+      columns: columnsConfig,
+      dataSource: addKeyProp(categories),
+      pagination: paginationConfig,
+      onChange: handleTableChange
+    }),
+    [paginationConfig, handleTableChange, addKeyProp, categories, columnsConfig, loading]
+  )
 
-  const popupProps: GenericPopupProps = {
-    id: categoryToDelete?.data?.id,
-    type: 'delete',
-    visible: !!categoryToDelete?.popupVisible,
-    onOkAction: deleteCategory(categoryToDelete?.data?.id!),
-    onCancel: () => setCategoryToDelete({ ...categoryToDelete, popupVisible: false }),
-    afterClose: () => setCategoryToDelete(null)
-  }
+  const popupProps: GenericPopupProps = useMemo(
+    () => ({
+      id: categoryToDelete?.data?.id,
+      type: 'delete',
+      visible: !!categoryToDelete?.popupVisible,
+      onOkAction: deleteCategory(categoryToDelete?.data?.id!),
+      onCancel: () => setCategoryToDelete({ ...categoryToDelete, popupVisible: false }),
+      afterClose: () => setCategoryToDelete(null)
+    }),
+    [categoryToDelete, deleteCategory]
+  )
 
   return {
     tableProps,

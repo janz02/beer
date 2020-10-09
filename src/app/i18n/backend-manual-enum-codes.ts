@@ -58,6 +58,11 @@ t('user.role-short.normalpartnercontact')
 t(`enum.channel-type.Email`)
 t(`enum.channel-type.Phone`)
 
+t('system-params.key.kkvLimit')
+t('system-params.key.customerSuppportPhone')
+t('system-params.key.customerSupportEmail')
+t('system-params.key.winnerCouponLink')
+
 // Boolean mappings
 t(`user-access.field.partnerType.major`)
 t(`user-access.field.partnerType.normal`)

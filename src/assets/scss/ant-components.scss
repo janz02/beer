@@ -1,8 +1,10 @@
 :root {
-  .ant-form-item-label > label.ant-form-item-required {
+  .ant-form-item-label label.ant-form-item-required {
     // "Required" asterisk goes after the label.
+    &:not(.ant-form-item-required-mark-optional)::before,
     &::before {
       all: unset;
+      display: none;
     }
 
     &::after {
@@ -36,6 +38,7 @@
 
     .ant-form-item-label {
       padding-bottom: 0.1rem;
+      font-weight: bolder;
     }
   }
 
@@ -95,5 +98,12 @@
     .ant-dropdown-menu {
       max-height: 300px;
     }
+  }
+
+  .ant-input[disabled].readonly-form-item {
+    padding-left: 0;
+    border: none;
+    background-color: transparent;
+    color: $text-color;
   }
 }
