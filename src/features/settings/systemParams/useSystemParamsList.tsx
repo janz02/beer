@@ -33,7 +33,7 @@ export const useSystemParamsList = (props: HookProps): ListUtils => {
     dispatch(systemParamsActions.getSystemParams())
   }, [dispatch])
 
-  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditors), [])
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
 
   const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
