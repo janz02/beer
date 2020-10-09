@@ -142,33 +142,31 @@ export const Comments: FC<CommentsProps> = ({ campaign }) => {
                   </div>
                 }
               >
-                <Popconfirm
-                  title={t('coupon-editor.comment-delete-confirm-message')}
-                  onConfirm={() => {
-                    handleDeleteCouponCommment(coupon, x)
-                  }}
-                  okText={t('common.ok')}
-                  cancelText={t('common.cancel')}
-                >
-                  <>
-                    <div className="timeline-item__title">
-                      <MomentDisplay date={x.dateTime} /> &nbsp;
-                      {(x.stateFrom || x.stateTo) && (
-                        <strong>
-                          {x.stateFrom && t(`coupon.state.${x.stateFrom.toLowerCase()}`)}
-                          <ArrowRightOutlined />
-                          {x.stateTo && t(`coupon.state.${x.stateTo.toLowerCase()}`)}
-                        </strong>
-                      )}
-                    </div>
-                    <div className="timeline-item__body text-faded">
-                      {x.comment} - {x.from}
-                      <Button size="small" type="link">
-                        <DeleteFilled />
-                      </Button>
-                    </div>
-                  </>
-                </Popconfirm>
+                <div className="timeline-item__title">
+                  <MomentDisplay date={x.dateTime} /> &nbsp;
+                  {(x.stateFrom || x.stateTo) && (
+                    <strong>
+                      {x.stateFrom && t(`coupon.state.${x.stateFrom.toLowerCase()}`)}
+                      <ArrowRightOutlined />
+                      {x.stateTo && t(`coupon.state.${x.stateTo.toLowerCase()}`)}
+                    </strong>
+                  )}
+                </div>
+                <div className="timeline-item__body text-faded">
+                  {x.comment} - {x.from}
+                  <Popconfirm
+                    title={t('coupon-editor.comment-delete-confirm-message')}
+                    onConfirm={() => {
+                      handleDeleteCouponCommment(coupon, x)
+                    }}
+                    okText={t('common.ok')}
+                    cancelText={t('common.cancel')}
+                  >
+                    <Button size="small" type="link">
+                      <DeleteFilled />
+                    </Button>
+                  </Popconfirm>
+                </div>
               </Timeline.Item>
             ))}
         </Timeline>
