@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { useSegmentationCategoryEditor } from './useSegmentationCategoryEditor'
+import { useSegmentationCategoryEditorUtils } from './useSegmentationCategoryEditorUtils'
 
 export interface SegmentationCategoryEditorParams {
   visible?: boolean
@@ -31,7 +31,7 @@ export const SegmentationCategoryEditor: FC<SegmentationCategoryEditorProps> = p
     handleGetCategory,
     handleSave,
     afterCloseExtended
-  } = useSegmentationCategoryEditor(props)
+  } = useSegmentationCategoryEditorUtils(props)
 
   useEffect(() => {
     handleGetCategory()

@@ -5,21 +5,21 @@ import { NewsletterTestEmailModal } from './modals/NewsletterTestEmailModal'
 import { NewsletterRevertPopup } from './modals/NewsletterRevertPopup'
 import { NewsletterDiscardPopup } from './modals/NewsletterDiscardPopup'
 import { NewsletterEmptyEditor } from './editor/NewsletterEmptyEditor'
-import { useNewsletterEditorModals } from './modals/useNewsletterEditorModals'
-import { useNewsletterEditorHandlers } from './editor/useNewsletterEditorHandlers'
+import { useNewsletterEditorModalUtils } from './modals/useNewsletterEditorModalUtils'
+import { useNewsletterEditorHandlerUtils } from './editor/useNewsletterEditorHandlerUtils'
 
 export const NewsletterEditorPage: FC = () => {
-  const newsletterEditorModalsUtils = useNewsletterEditorModals()
-  const newsletterEditorHandlers = useNewsletterEditorHandlers()
+  const newsletterEditorModalUtils = useNewsletterEditorModalUtils()
+  const newsletterEditorHandlerUtils = useNewsletterEditorHandlerUtils()
 
   return (
     <>
-      <NewsletterEditor newsletterEditorHandlers={newsletterEditorHandlers} />
-      <NewsletterEmptyEditor newsletterEditorHandlers={newsletterEditorHandlers} />
-      <NewsletterSegmentEmailModal newsletterEditorModalsUtils={newsletterEditorModalsUtils} />
-      <NewsletterTestEmailModal newsletterEditorModalsUtils={newsletterEditorModalsUtils} />
-      <NewsletterRevertPopup newsletterEditorModalsUtils={newsletterEditorModalsUtils} />
-      <NewsletterDiscardPopup newsletterEditorModalsUtils={newsletterEditorModalsUtils} />
+      <NewsletterEditor newsletterEditorHandlerUtils={newsletterEditorHandlerUtils} />
+      <NewsletterEmptyEditor newsletterEditorHandlerUtils={newsletterEditorHandlerUtils} />
+      <NewsletterSegmentEmailModal newsletterEditorModalUtils={newsletterEditorModalUtils} />
+      <NewsletterTestEmailModal newsletterEditorModalUtils={newsletterEditorModalUtils} />
+      <NewsletterRevertPopup newsletterEditorModalUtils={newsletterEditorModalUtils} />
+      <NewsletterDiscardPopup newsletterEditorModalUtils={newsletterEditorModalUtils} />
     </>
   )
 }

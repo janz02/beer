@@ -3,15 +3,15 @@ import { Card, Button, Row, Col, Select, Checkbox } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import { CloseOutlined } from '@ant-design/icons'
 import { ColumnOrderDragAndDrop } from './ColumnOrderDragAndDrop'
-import { UseColumnOrderFeatures } from './useColumnOrder'
+import { ColumnOrderUtils } from './useColumnOrderUtils'
 import Text from 'antd/lib/typography/Text'
 import { useTranslation } from 'react-i18next'
 import styles from './ColumnOrderLayout.module.scss'
 import { Option } from 'antd/lib/mentions'
 
 export const ColumOrderLayout: <T>(
-  p: UseColumnOrderFeatures<T>
-) => React.ReactElement<UseColumnOrderFeatures<T>> = props => {
+  p: ColumnOrderUtils<T>
+) => React.ReactElement<ColumnOrderUtils<T>> = props => {
   const { t } = useTranslation()
 
   return (

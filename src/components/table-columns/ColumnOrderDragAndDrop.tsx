@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { UseColumnOrderFeatures } from './useColumnOrder'
+import { ColumnOrderUtils } from './useColumnOrderUtils'
 import { MoreOutlined, DeleteOutlined } from '@ant-design/icons'
 import styles from './ColumnOrderDragAndDrop.module.scss'
 import Text from 'antd/lib/typography/Text'
@@ -9,8 +9,8 @@ import { ColumnType } from 'antd/lib/table'
 import { Button } from 'antd'
 
 export const ColumnOrderDragAndDrop: <T>(
-  p: UseColumnOrderFeatures<T>
-) => React.ReactElement<UseColumnOrderFeatures<T>> = props => {
+  p: ColumnOrderUtils<T>
+) => React.ReactElement<ColumnOrderUtils<T>> = props => {
   const { t } = useTranslation()
 
   const DraggableItem = useCallback(

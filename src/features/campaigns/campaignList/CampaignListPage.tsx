@@ -7,13 +7,13 @@ import { hasPermission } from 'services/jwt-reader'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { AddButton } from 'components/buttons/AddButton'
-import { useCampaignList } from './useCampaignList'
+import { useCampaignListUtils } from './useCampaignListUtils'
 import { CampaignListTabs } from './components/CampaignListTabs'
 import { Checkbox } from 'antd'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { CouponListTabKey } from './campaignListSlice'
-import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { ExportButton } from 'components/buttons/ExportButton'
 
@@ -40,14 +40,26 @@ export const CampaignListPage: FC = () => {
     getCoupons,
     handleExport,
     deleteCoupon
-  } = useCampaignList()
+  } = useCampaignListUtils()
 
   const columnOrders = {
-    [CouponListTabKey.Waiting]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_WAITING),
-    [CouponListTabKey.Accepted]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_ACCEPTED),
-    [CouponListTabKey.Closed]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_CLOSED),
-    [CouponListTabKey.Created]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_CREATED),
-    [CouponListTabKey.All]: useColumnOrder(columnsConfig, ColumnStorageName.CAMPAIGN_ALL)
+    [CouponListTabKey.Waiting]: useColumnOrderUtils(
+      columnsConfig,
+      ColumnStorageName.CAMPAIGN_WAITING
+    ),
+    [CouponListTabKey.Accepted]: useColumnOrderUtils(
+      columnsConfig,
+      ColumnStorageName.CAMPAIGN_ACCEPTED
+    ),
+    [CouponListTabKey.Closed]: useColumnOrderUtils(
+      columnsConfig,
+      ColumnStorageName.CAMPAIGN_CLOSED
+    ),
+    [CouponListTabKey.Created]: useColumnOrderUtils(
+      columnsConfig,
+      ColumnStorageName.CAMPAIGN_CREATED
+    ),
+    [CouponListTabKey.All]: useColumnOrderUtils(columnsConfig, ColumnStorageName.CAMPAIGN_ALL)
   }
 
   const tableProps = {
@@ -119,7 +131,7 @@ export const CampaignListPage: FC = () => {
         floatingOptions={cardHeaderActions}
       >
         <CampaignListTabs
-          columnOrders={columnOrders}
+          columnOrderUtils={columnOrders}
           tableProps={tableProps}
           activeTabKey={activeTabKey}
           onTabChange={handleTabChange}

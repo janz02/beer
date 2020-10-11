@@ -11,8 +11,8 @@ import {
   EditorModeOptions,
   EditorModeOptionsProps
 } from 'components/buttons/EditorModeOptions'
-import { useSiteEditorForm } from './useSiteEditorForm'
-import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
+import { useSiteEditorFormUtils } from './useSiteEditorFormUtils'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteListUtils'
 
 export interface SiteEditorFormProps {
   mode: EditorMode
@@ -28,7 +28,7 @@ export interface SiteEditorFormProps {
 export const SiteEditorForm: FC<{ config: SiteFeatureConfig }> = ({ config }) => {
   const { t } = useTranslation()
 
-  const { siteEditorFormProps, handleGetSite, handleResetSite } = useSiteEditorForm(config)
+  const { siteEditorFormProps, handleGetSite, handleResetSite } = useSiteEditorFormUtils(config)
   const { onSave, loading, site, onExit, title, options, mode } = siteEditorFormProps
 
   useEffect(() => {

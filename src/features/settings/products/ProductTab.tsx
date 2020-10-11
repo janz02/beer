@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { ProductList } from './productList/ProductList'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { productListActions } from './productList/productListSlice'
-import { UseProductListUtils } from './productList/useProductList'
+import { ProductListUtils } from './productList/useProductListUtils'
 import { UseGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { ProductEditor } from './productEditor/ProductEditor'
 
 export interface ProductTabProps {
-  productListUtils: UseProductListUtils
+  productListUtils: ProductListUtils
   modalUtils: UseGenericModalFormEditorUtils
 }
 

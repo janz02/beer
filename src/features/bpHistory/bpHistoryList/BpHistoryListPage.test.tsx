@@ -48,7 +48,7 @@ const mockStore = {
   }
 }
 
-const mockColumnOrder = {
+const mockColumnOrderUtils = {
   visible: true,
   currentColumns: [],
   tempColumns: [],
@@ -64,7 +64,7 @@ const mockColumnOrder = {
 
 const mockHook = {
   loading: false,
-  columnOrder: mockColumnOrder,
+  columnOrderUtils: mockColumnOrderUtils,
   paginationConfig: false,
   templateModal: { title: null, content: null },
   source: [...mockStore.bpHistory.bpHistoryItems],

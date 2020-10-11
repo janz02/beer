@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'enzyme'
-import { useTestGroupCategoryTab } from './useTestGroupCategoryTab'
+import { useTestGroupCategoryTabUtils } from './useTestGroupCategoryTabUtils'
 import { setupPermissions, setupStore, setupUseParams } from '../../../../config/setupMocks'
 import { OrderByType } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
@@ -39,11 +39,11 @@ setupStore({
 })
 
 const TestGroupCategoryTabContent: React.FC = () => {
-  return useTestGroupCategoryTab().tabContent
+  return useTestGroupCategoryTabUtils().tabContent
 }
 
 const TestGroupCategoryHeaderContent: React.FC = () => {
-  return <>{useTestGroupCategoryTab().headerOptions}</>
+  return <>{useTestGroupCategoryTabUtils().headerOptions}</>
 }
 
 describe('TestGroupCategory tests', () => {

@@ -9,13 +9,13 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useCommonFormRules } from 'hooks'
-import { UseCampaignFeatures } from '../useCampaign'
+import { CampaignUtils } from '../useCampaignUtils'
 
 interface CommentsProps {
-  campaign: UseCampaignFeatures
+  campaignUtils: CampaignUtils
 }
 
-export const Comments: FC<CommentsProps> = ({ campaign }) => {
+export const Comments: FC<CommentsProps> = ({ campaignUtils }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   const {
@@ -25,7 +25,7 @@ export const Comments: FC<CommentsProps> = ({ campaign }) => {
     submitableComment,
     prepareCommentFormFields,
     handleDeleteCouponCommment
-  } = campaign
+  } = campaignUtils
 
   useEffect(() => {
     prepareCommentFormFields()

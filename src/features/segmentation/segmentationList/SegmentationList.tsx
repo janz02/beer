@@ -3,12 +3,12 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useTranslation } from 'react-i18next'
 import { getSegmentations } from './segmentationListSlice'
-import { useSegmentationListPage } from './useSegmentationList'
+import { useSegmentationListUtils } from './useSegmentationListUtils'
 import { useDispatch } from 'react-redux'
 
 export const SegmentationListPage: React.FC = () => {
   const { t } = useTranslation()
-  const { headerOptions, tableProps } = useSegmentationListPage()
+  const { headerOptions, tableProps } = useSegmentationListUtils()
   const dispatch = useDispatch()
 
   useEffect(() => {

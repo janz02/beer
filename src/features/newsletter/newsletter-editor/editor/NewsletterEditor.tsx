@@ -1,15 +1,15 @@
 import React, { FC, useEffect } from 'react'
 import 'grapesjs-preset-newsletter/style/tooltip.css'
 import './NewsletterEditor.scss'
-import { useNewsletterEditor } from './useNewsletterEditor'
+import { useNewsletterEditorUtils } from './useNewsletterEditorUtils'
 import { NewsLetterEditorHeader, NewsLetterEditorHeaderProps } from './NewsLetterEditorHeader'
 import { FeatureState } from 'models/featureState'
-import { UseNewsletterEditorHandlersUtils } from './useNewsletterEditorHandlers'
+import { NewsletterEditorHandlerUtils } from './useNewsletterEditorHandlerUtils'
 
 const EDITOR_SELECTOR = 'pkm-grapesjs'
 
 interface NewsletterEditorProps {
-  newsletterEditorHandlers: UseNewsletterEditorHandlersUtils
+  newsletterEditorHandlerUtils: NewsletterEditorHandlerUtils
 }
 
 export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
@@ -20,9 +20,9 @@ export const NewsletterEditor: FC<NewsletterEditorProps> = props => {
     currentTemplateVersionId,
     template,
     templateState
-  } = props.newsletterEditorHandlers
+  } = props.newsletterEditorHandlerUtils
 
-  const { getEditorContent } = useNewsletterEditor({
+  const { getEditorContent } = useNewsletterEditorUtils({
     gjsEditorId: EDITOR_SELECTOR,
     currentTemplateVersionId,
     template

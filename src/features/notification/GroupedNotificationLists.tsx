@@ -2,12 +2,12 @@ import './GroupedNotificationLists.scss'
 import React, { FC } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import { useTranslation } from 'react-i18next'
-import { UseNotificationFeatures } from './useNotification'
+import { NotificationUtils } from './useNotificationUtils'
 import moment from 'moment'
 import { NotificationList } from './NotificationList'
 
 interface GroupedNotificationListsProps {
-  notificationFeatures: UseNotificationFeatures
+  notificationUtils: NotificationUtils
 }
 
 export const GroupedNotificationLists: FC<GroupedNotificationListsProps> = props => {
@@ -17,7 +17,7 @@ export const GroupedNotificationLists: FC<GroupedNotificationListsProps> = props
     handleGetNotifications,
     handleReadAll,
     canLoadMore
-  } = props.notificationFeatures
+  } = props.notificationUtils
 
   const yesterday = moment().subtract(1, 'day')
 
@@ -49,13 +49,13 @@ export const GroupedNotificationLists: FC<GroupedNotificationListsProps> = props
               todayNotifications.length === filteredNotifications.length &&
               filteredNotifications.length !== 0
             }
-            notificationFeatures={props.notificationFeatures}
+            notificationUtils={props.notificationUtils}
           />
           <NotificationList
             groupName={t('notification.yesterday')}
             items={yesterdayNotifications}
             loadMore={yesterdayNotifications.length > 0 && earlierNotifications.length === 0}
-            notificationFeatures={props.notificationFeatures}
+            notificationUtils={props.notificationUtils}
           />
           <NotificationList
             groupName={
@@ -65,7 +65,7 @@ export const GroupedNotificationLists: FC<GroupedNotificationListsProps> = props
             }
             items={earlierNotifications}
             loadMore={earlierNotifications.length > 0 || filteredNotifications.length === 0}
-            notificationFeatures={props.notificationFeatures}
+            notificationUtils={props.notificationUtils}
           />
         </div>
       </InfiniteScroll>

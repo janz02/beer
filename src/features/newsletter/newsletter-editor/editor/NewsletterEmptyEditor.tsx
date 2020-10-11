@@ -4,16 +4,16 @@ import { Spin, Result, Button } from 'antd'
 import { FeatureState } from 'models/featureState'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
-import { UseNewsletterEditorHandlersUtils } from './useNewsletterEditorHandlers'
+import { NewsletterEditorHandlerUtils } from './useNewsletterEditorHandlerUtils'
 
 interface NewsletterEmptyEditorProps {
-  newsletterEditorHandlers: UseNewsletterEditorHandlersUtils
+  newsletterEditorHandlerUtils: NewsletterEditorHandlerUtils
 }
 
 export const NewsletterEmptyEditor: FC<NewsletterEmptyEditorProps> = props => {
   const { t } = useTranslation()
 
-  const { templateState, handleExitEditor, handleGetTemplate } = props.newsletterEditorHandlers
+  const { templateState, handleExitEditor, handleGetTemplate } = props.newsletterEditorHandlerUtils
 
   return (
     <>

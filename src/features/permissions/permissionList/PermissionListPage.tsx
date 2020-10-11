@@ -3,12 +3,12 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useTranslation } from 'react-i18next'
 import { getPermissions } from './permissionListSlice'
-import { usePermissionListPage } from './usePermissionListPage'
+import { usePermissionListUtils } from './usePermissionListUtils'
 import { useDispatch } from 'react-redux'
 
 export const PermissionListPage: React.FC = () => {
   const { t } = useTranslation()
-  const { headerOptions, tableProps } = usePermissionListPage()
+  const { headerOptions, tableProps } = usePermissionListUtils()
   const dispatch = useDispatch()
 
   useEffect(() => {

@@ -3,18 +3,18 @@ import React, { FC } from 'react'
 import { Drawer, Tabs } from 'antd'
 import { GroupedNotificationLists } from './GroupedNotificationLists'
 import { useTranslation } from 'react-i18next'
-import { UseNotificationFeatures } from './useNotification'
+import { NotificationUtils } from './useNotificationUtils'
 import { NotificationFilterType } from './notificationSlice'
 
 const TabPane = Tabs.TabPane
 
 interface NotificationDrawerProps {
-  notificationFeatures: UseNotificationFeatures
+  notificationUtils: NotificationUtils
 }
 
 export const NotificationDrawer: FC<NotificationDrawerProps> = props => {
   const { t } = useTranslation()
-  const { opened, activeFilter, handleClose, handleFilterChange } = props.notificationFeatures
+  const { opened, activeFilter, handleClose, handleFilterChange } = props.notificationUtils
 
   return (
     <Drawer
@@ -36,13 +36,13 @@ export const NotificationDrawer: FC<NotificationDrawerProps> = props => {
         onChange={handleFilterChange}
       >
         <TabPane tab={t('notification.filter.all')} key={NotificationFilterType.All}>
-          <GroupedNotificationLists notificationFeatures={props.notificationFeatures} />
+          <GroupedNotificationLists notificationUtils={props.notificationUtils} />
         </TabPane>
         <TabPane tab={t('notification.filter.unread')} key={NotificationFilterType.UnRead}>
-          <GroupedNotificationLists notificationFeatures={props.notificationFeatures} />
+          <GroupedNotificationLists notificationUtils={props.notificationUtils} />
         </TabPane>
         <TabPane tab={t('notification.filter.read')} key={NotificationFilterType.Read}>
-          <GroupedNotificationLists notificationFeatures={props.notificationFeatures} />
+          <GroupedNotificationLists notificationUtils={props.notificationUtils} />
         </TabPane>
       </Tabs>
     </Drawer>
