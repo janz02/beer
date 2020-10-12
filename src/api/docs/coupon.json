@@ -4187,7 +4187,7 @@
       }
     },
     "/api/Coupons/{couponId}/Codes": {
-      "get": {
+      "post": {
         "tags": [
           "Coupons"
         ],

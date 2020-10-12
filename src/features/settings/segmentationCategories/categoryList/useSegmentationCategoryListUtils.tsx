@@ -7,11 +7,11 @@ import { FilterMode, useTableUtils } from 'hooks/useTableUtils'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/swagger/coupon'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
+import { pageViewRoles } from 'services/roleHelpers'
 
 interface SegmentationCategoryListUtilsProps {
   onOpenEditor: (id?: number) => void
@@ -34,9 +34,11 @@ export const useSegmentationCategoryListUtils = (
     (state: RootState) => state.segmentationCategoryList
   )
 
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
+
   const [categoryToDelete, setCategoryToDelete] = useState<PopupState<SegmentationCategory>>()
 
-  const loading = listState === FeatureState.Loading
+  const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
   const {
     paginationConfig,
@@ -65,7 +67,7 @@ export const useSegmentationCategoryListUtils = (
         width: '13rem',
         renderMode: 'date time'
       }),
-      hasPermission([Roles.Administrator])
+      isEditorUser
         ? actionColumnConfig({
             render(record: SegmentationCategory) {
               return (
@@ -83,25 +85,31 @@ export const useSegmentationCategoryListUtils = (
           })
         : {}
     ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor]
+    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
   )
 
-  const tableProps: ResponsiveTableProps = {
-    loading,
-    columns: columnsConfig,
-    dataSource: addKeyProp(categories),
-    pagination: paginationConfig,
-    onChange: handleTableChange
-  }
+  const tableProps: ResponsiveTableProps = useMemo(
+    () => ({
+      loading,
+      columns: columnsConfig,
+      dataSource: addKeyProp(categories),
+      pagination: paginationConfig,
+      onChange: handleTableChange
+    }),
+    [loading, columnsConfig, addKeyProp, categories, paginationConfig, handleTableChange]
+  )
 
-  const popupProps: GenericPopupProps = {
-    id: categoryToDelete?.data?.id,
-    type: 'delete',
-    visible: !!categoryToDelete?.popupVisible,
-    onOkAction: deleteCategory(categoryToDelete?.data?.id!),
-    onCancel: () => setCategoryToDelete({ ...categoryToDelete, popupVisible: false }),
-    afterClose: () => setCategoryToDelete(null)
-  }
+  const popupProps: GenericPopupProps = useMemo(
+    () => ({
+      id: categoryToDelete?.data?.id,
+      type: 'delete',
+      visible: !!categoryToDelete?.popupVisible,
+      onOkAction: deleteCategory(categoryToDelete?.data?.id!),
+      onCancel: () => setCategoryToDelete({ ...categoryToDelete, popupVisible: false }),
+      afterClose: () => setCategoryToDelete(null)
+    }),
+    [categoryToDelete, deleteCategory]
+  )
 
   return {
     tableProps,

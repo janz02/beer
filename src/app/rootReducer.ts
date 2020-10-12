@@ -29,6 +29,7 @@ import { createBrowserHistory } from 'history'
 import { permissionListReducer } from 'features/permissions/permissionList/permissionListSlice'
 import { permissionEditorReducer } from 'features/permissions/permissionEditor/permissionEditorSlice'
 import { segmentationListReducer } from 'features/segmentation/segmentationList/segmentationListSlice'
+import { systemParamsReducer } from 'features/settings/systemParams/systemParamsSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
 // Probably a mock for the router/ history needed for proper solution, but needs more investigation
@@ -63,7 +64,8 @@ export const rootReducer = combineReducers({
   bpHistory: bpHistoryReducer,
   permissionList: permissionListReducer,
   permissionEditor: permissionEditorReducer,
-  segmentationList: segmentationListReducer
+  segmentationList: segmentationListReducer,
+  systemParams: systemParamsReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

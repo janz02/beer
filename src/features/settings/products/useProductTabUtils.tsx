@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useParams } from 'hooks/react-router-dom-hooks'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { AddButton } from 'components/buttons/AddButton'
@@ -9,11 +9,12 @@ import { pageViewRoles } from 'services/roleHelpers'
 import { useProductListUtils } from './productList/useProductListUtils'
 import { GoldOutlined } from '@ant-design/icons'
 import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/swagger/coupon'
 
 export const useProductTabUtils = (): SettingsTabUtils => {
   const { t } = useTranslation()
   const { id, tab } = useParams()
+
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
 
   const modalUtils = useGenericModalFormEditorUtils({
     dataId: tab === 'products' ? id : undefined,
@@ -23,14 +24,22 @@ export const useProductTabUtils = (): SettingsTabUtils => {
 
   const productListUtils = useProductListUtils({ onOpenEditor: modalUtils.routeToEditor })
 
-  let headerOptions: JSX.Element | undefined
-  if (hasPermission([Roles.Administrator])) {
-    headerOptions = (
-      <AddButton onClick={() => modalUtils.routeToEditor()}>{t('campaign-product.add')}</AddButton>
-    )
-  }
+  const headerOptions = useMemo(
+    () =>
+      isEditorUser ? (
+        <AddButton onClick={() => modalUtils.routeToEditor()}>
+          {t('campaign-product.add')}
+        </AddButton>
+      ) : (
+        <></>
+      ),
+    [isEditorUser, modalUtils, t]
+  )
 
-  const tabContent = <ProductTab modalUtils={modalUtils} productListUtils={productListUtils} />
+  const tabContent = useMemo(
+    () => <ProductTab modalUtils={modalUtils} productListUtils={productListUtils} />,
+    [modalUtils, productListUtils]
+  )
 
   return {
     key: 'campaign-products',

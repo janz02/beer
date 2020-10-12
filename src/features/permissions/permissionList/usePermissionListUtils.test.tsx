@@ -1,13 +1,13 @@
-import { render } from 'enzyme'
+import '@testing-library/jest-dom'
 import React from 'react'
 import { usePermissionListUtils } from './usePermissionListUtils'
 import { setupStore } from '../../../../config/setupMocks'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
+import { render, screen } from '@testing-library/react'
 
 jest.mock('app/store')
 
 setupStore({
-  auth: { loggedIn: true },
   permissionList: {
     error: false,
     loading: false,
@@ -33,18 +33,14 @@ setupStore({
 })
 
 const PermissionTableContent: React.FC = () => {
-  const tableProps = usePermissionListUtils().tableProps
+  const { tableProps } = usePermissionListUtils()
+
   return <ResponsiveTable {...tableProps} />
 }
 
-describe('permission table tests', () => {
-  it('permissions appear in the table', () => {
-    // Act
-    const tabContent = render(<PermissionTableContent />)
+test('permissions appear in the table', () => {
+  render(<PermissionTableContent />)
 
-    // Assert
-    expect(tabContent.html()).toContain('Button')
-    // expect(tabContent.html()).toContain('Permission1')
-    //  expect(tabContent.html()).toContain('Permission2')
-  })
+  expect(screen.getByText(/Permission1/)).toBeInTheDocument()
+  expect(screen.getByText(/Permission2/)).toBeInTheDocument()
 })

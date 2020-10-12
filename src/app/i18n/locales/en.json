@@ -797,7 +797,6 @@
       "segmentSize": "Segment size"
     },
     "list": {
-      "add": "Create New Segmentation",
       "title": "Segmentation"
     }
   },
@@ -814,6 +813,7 @@
     "campaign-categories": "Campaign categories",
     "campaign-products": "Products",
     "segmentation-categories": "Segmentation categories",
+    "system-params": "System parameters",
     "test-group-categories": "Testgroup categories"
   },
   "site": {
@@ -829,6 +829,22 @@
     "table": {
       "address": "Address",
       "name": "Site name"
+    }
+  },
+  "system-params": {
+    "editor": {
+      "title": "System parameters"
+    },
+    "field": {
+      "description": "Parameter description",
+      "name": "Parameter name",
+      "value": "Parameter value"
+    },
+    "key": {
+      "customerSupportEmail": "__STRING_NOT_TRANSLATED__",
+      "customerSuppportPhone": "__STRING_NOT_TRANSLATED__",
+      "kkvLimit": "__STRING_NOT_TRANSLATED__",
+      "winnerCouponLink": "__STRING_NOT_TRANSLATED__"
     }
   },
   "test-group-category": {

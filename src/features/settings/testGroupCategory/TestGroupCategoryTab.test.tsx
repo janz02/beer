@@ -1,11 +1,13 @@
+import '@testing-library/jest-dom'
 import React from 'react'
-import { render } from 'enzyme'
 import { useTestGroupCategoryTabUtils } from './useTestGroupCategoryTabUtils'
 import { setupPermissions, setupStore, setupUseParams } from '../../../../config/setupMocks'
 import { OrderByType } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
 import { Roles } from 'api/swagger/coupon'
+import { render, screen } from '@testing-library/react'
+import { MemoryRouter, Route } from 'react-router-dom'
 
 jest.mock('app/store')
 
@@ -39,67 +41,78 @@ setupStore({
 })
 
 const TestGroupCategoryTabContent: React.FC = () => {
-  return useTestGroupCategoryTabUtils().tabContent
+  return (
+    <MemoryRouter>
+      <Route>{useTestGroupCategoryTabUtils().tabContent}</Route>
+    </MemoryRouter>
+  )
 }
 
 const TestGroupCategoryHeaderContent: React.FC = () => {
-  return <>{useTestGroupCategoryTabUtils().headerOptions}</>
+  return (
+    <MemoryRouter>
+      <Route>{useTestGroupCategoryTabUtils().headerOptions}</Route>
+    </MemoryRouter>
+  )
 }
 
-describe('TestGroupCategory tests', () => {
-  it('TestGroupCategoryTab should contain categories from store', () => {
-    // Arrange
-    setupPermissions([])
+test('TestGroupCategoryTab should contain categories from store', () => {
+  // Arrange
+  setupPermissions([])
 
-    // Act
-    const tabContent = render(<TestGroupCategoryTabContent />)
+  // Act
+  render(<TestGroupCategoryTabContent />)
 
-    // Assert
-    expect(tabContent.html()).toContain('category1')
-    expect(tabContent.html()).toContain('category2')
-  })
+  // Assert
+  expect(screen.getByText(/category1/)).toBeInTheDocument()
+  expect(screen.getByText(/category2/)).toBeInTheDocument()
+})
 
-  it('admins can create new TestGroupCategories', () => {
-    // Arrange
-    setupPermissions([Roles.Administrator])
+test('admins can create new TestGroupCategories', () => {
+  // Arrange
+  setupPermissions([Roles.Administrator])
 
-    // Act
-    const headerContent = render(<TestGroupCategoryHeaderContent />)
+  // Act
+  render(<TestGroupCategoryHeaderContent />)
 
-    // Assert
-    expect(headerContent.html()).toContain('Create new testgroup')
-  })
+  // Assert
+  const button = screen.getByText(/Create new testgroup/).closest('button')
+  expect(button).toBeInTheDocument()
 
-  it('other users cannot create new TestGroupCategories', () => {
-    // Arrange
-    setupPermissions([])
+  // not showing the window after click currently
+  // fireEvent.click(button as HTMLButtonElement)
+  // expect(screen.getByText(/Category name/)).toBeInTheDocument()
+})
 
-    // Act
-    const headerContent = render(<TestGroupCategoryHeaderContent />)
+test('other users cannot create new TestGroupCategories', () => {
+  // Arrange
+  setupPermissions([])
 
-    // Assert
-    expect(headerContent.html()).toBeNull()
-  })
+  // Act
+  render(<TestGroupCategoryHeaderContent />)
 
-  it('admins have crud buttons', () => {
-    // Arrange
-    setupPermissions([Roles.Administrator])
+  // Assert
+  expect(screen.queryByText(/Create new testgroup/)).toBeNull()
+})
 
-    // Act
-    const tabContent = render(<TestGroupCategoryTabContent />)
+test('admins have crud buttons', () => {
+  // Arrange
+  setupPermissions([Roles.Administrator])
 
-    // Assert
-    expect(tabContent.html()).toContain('aria-label="delete"')
-  })
+  // Act
+  render(<TestGroupCategoryTabContent />)
 
-  it('other users dont have crud buttons', () => {
-    // Arrange
-    setupPermissions([])
+  // Assert
+  expect(screen.getAllByLabelText('delete')[0]).toBeInTheDocument()
+})
 
-    // Act
-    const tabContent = render(<TestGroupCategoryTabContent />)
+test('other users dont have crud buttons', () => {
+  // Arrange
+  setupPermissions([])
 
-    // Assert
-    expect(tabContent.html()).not.toContain('aria-label="delete"')
-  })
+  // Act
+  render(<TestGroupCategoryTabContent />)
+
+  // Assert
+  expect(screen.queryByLabelText(/aria-label="delete"/)).toBeNull()
 })
