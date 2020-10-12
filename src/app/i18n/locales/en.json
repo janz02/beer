@@ -832,6 +832,12 @@
     }
   },
   "system-params": {
+    "description": {
+      "customerSupportEmail": "__STRING_NOT_TRANSLATED__",
+      "customerSuppportPhone": "__STRING_NOT_TRANSLATED__",
+      "kkvLimit": "__STRING_NOT_TRANSLATED__",
+      "winnerCouponLink": "__STRING_NOT_TRANSLATED__"
+    },
     "editor": {
       "title": "System parameters"
     },

@@ -13,7 +13,7 @@ interface SystemParamsEditorUtilsProps {
 interface SystemParamsEditorUtils {
   loading: boolean
   initialValues: SystemParam | undefined | null
-  getSystemParamById: () => void
+  getSystemParam: () => void
   afterCloseExtended: () => void
   handleSave: (values: SystemParam) => Promise<void>
 }
@@ -29,7 +29,7 @@ export const useSystemParamsEditorUtils = (
   const loading = useMemo(() => editorState === FeatureState.Loading, [editorState])
   const [initialValues, setInitialValues] = useState<SystemParam | undefined | null>(null)
 
-  const getSystemParamById = useCallback(() => {
+  const getSystemParam = useCallback(() => {
     const mappedId = id ? +id : null
     const foundParam = systemParamsList.find(p => p.id === mappedId)
     setInitialValues(foundParam)
@@ -52,7 +52,7 @@ export const useSystemParamsEditorUtils = (
   return {
     loading,
     initialValues,
-    getSystemParamById,
+    getSystemParam,
     handleSave,
     afterCloseExtended
   }

@@ -74,31 +74,31 @@ const getSystemParams = (params: ListRequestParams = {}): AppThunk => async (
     const items = [
       {
         id: 1,
-        name: 'KKV kampány limit',
+        name: i18n.t(`system-params.key.${'kkvLimit'}`),
         key: 'kkvLimit',
         value: '20',
-        description: i18n.t(`system-params.key.${'kkvLimit'}`)
+        description: i18n.t(`system-params.description.${'kkvLimit'}`)
       },
       {
         id: 2,
-        name: 'Ügyfélszolgálat telefonszám',
+        name: i18n.t(`system-params.key.${'customerSuppportPhone'}`),
         key: 'customerSuppportPhone',
         value: '06 20 123 4567',
-        description: i18n.t(`system-params.key.${'customerSuppportPhone'}`)
+        description: i18n.t(`system-params.description.${'customerSuppportPhone'}`)
       },
       {
         id: 3,
-        name: 'Ügyfélszolgálat e-mail cím',
+        name: i18n.t(`system-params.key.${'customerSupportEmail'}`),
         key: 'customerSupportEmail',
         value: 'ugyfelszolgalat@nkmplusz.hu',
-        description: i18n.t(`system-params.key.${'customerSupportEmail'}`)
+        description: i18n.t(`system-params.description.${'customerSupportEmail'}`)
       },
       {
         id: 4,
-        name: 'KPR nyertes kuponok gyűjtője link',
+        name: i18n.t(`system-params.key.${'winnerCouponLink'}`),
         key: 'winnerCouponLink',
         value: '/WinnerCoupon',
-        description: i18n.t(`system-params.key.${'winnerCouponLink'}`)
+        description: i18n.t(`system-params.description.${'winnerCouponLink'}`)
       }
     ]
     const pagination = { totalCount: 4, from: 0, to: 10, page: 1, size: 10 }

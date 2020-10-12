@@ -63,6 +63,11 @@ t('system-params.key.customerSuppportPhone')
 t('system-params.key.customerSupportEmail')
 t('system-params.key.winnerCouponLink')
 
+t('system-params.description.kkvLimit')
+t('system-params.description.customerSuppportPhone')
+t('system-params.description.customerSupportEmail')
+t('system-params.description.winnerCouponLink')
+
 // Boolean mappings
 t(`user-access.field.partnerType.major`)
 t(`user-access.field.partnerType.normal`)

@@ -832,6 +832,12 @@
     }
   },
   "system-params": {
+    "description": {
+      "customerSupportEmail": "Az ügyfélszolgálat e-mail címe, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
+      "customerSuppportPhone": "Az ügyfélszolgálat telefonszáma, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
+      "kkvLimit": "Megadja a limitációt, hogy egy KKV partnernek párhuzamosan hány jóváhagyott kampánya lehet a rendszerben",
+      "winnerCouponLink": "A KPR websiteon a nyertes kuponok liistáját tartalmazó oldal linkje, amelyet a kiküldött nyeremény értesítő email tartalmaz."
+    },
     "editor": {
       "title": "Rendszerparaméterek"
     },
@@ -841,10 +847,10 @@
       "value": "Paraméter érték"
     },
     "key": {
-      "customerSupportEmail": "Az ügyfélszolgálat e-mail címe, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
-      "customerSuppportPhone": "Az ügyfélszolgálat telefonszáma, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
-      "kkvLimit": "Megadja a limitációt, hogy egy KKV partnernek párhuzamosan hány jóváhagyott kampánya lehet a rendszerben",
-      "winnerCouponLink": "A KPR websiteon a nyertes kuponok liistáját tartalmazó oldal linkje, amelyet a kiküldött nyeremény értesítő email tartalmaz."
+      "customerSupportEmail": "Ügyfélszolgálat e-mail cím",
+      "customerSuppportPhone": "Ügyfélszolgálat telefonszám",
+      "kkvLimit": "KKV kampány limit",
+      "winnerCouponLink": "KPR nyertes kuponok gyűjtője link"
     }
   },
   "test-group-category": {

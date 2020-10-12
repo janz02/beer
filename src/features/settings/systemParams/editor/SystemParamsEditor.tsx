@@ -23,14 +23,14 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
   const {
     initialValues,
     loading,
-    getSystemParamById,
+    getSystemParam,
     handleSave,
     afterCloseExtended
   } = useSystemParamsEditorUtils(props)
 
   useEffect(() => {
-    getSystemParamById()
-  }, [getSystemParamById])
+    getSystemParam()
+  }, [getSystemParam])
 
   return (
     <GenericModalForm
