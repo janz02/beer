@@ -5,6 +5,7 @@ import * as JwtReader from 'services/jwt-reader'
 import thunk from 'redux-thunk'
 import React from 'react'
 import { Roles } from 'api/swagger/coupon'
+import * as columnOrderHook from 'components/table-columns/useColumnOrder'
 
 /**
  * Use this, if you want to check whether a certain amount of sub-component is loaded
@@ -18,9 +19,15 @@ import { Roles } from 'api/swagger/coupon'
 export const setupStore = (store: {} = {}): void => {
   const mockStore = configureStore([thunk])(store)
 
-  const useEffect = jest.spyOn(React, 'useEffect')
-  useEffect.mockImplementationOnce((f: any) => f())
+  // Temp fix so useEffect hook is bypassed in tests
+  jest
+    .spyOn(columnOrderHook, 'useColumnOrder')
+    .mockImplementation(
+      defaultColumns =>
+        ({ currentColumns: defaultColumns } as columnOrderHook.UseColumnOrderFeatures<any>)
+    )
 
+  jest.spyOn(React, 'useEffect').mockImplementationOnce(f => f())
   jest.spyOn(ReactReduxHooks, 'useSelector').mockImplementation(f => f(mockStore.getState()))
   jest.spyOn(ReactReduxHooks, 'useDispatch').mockImplementation(() => mockStore.dispatch)
 }
