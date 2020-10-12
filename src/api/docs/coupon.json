@@ -3297,8 +3297,8 @@
                 },
                 "example": {
   "id": 1,
-  "name": "Ingyen T�r� Rudi!",
-  "description": "Ingy� t�r�s rudesz!",
+  "name": "Ingyen Túró Rudi!",
+  "description": "Ingyé túrós rudesz!",
   "rank": 100,
   "type": 0,
   "state": 100,
@@ -3318,17 +3318,17 @@
   "predefinedCodesFileId": null,
   "createdBy": "Sales Erno",
   "createdDate": "2020-04-11T13:42:50",
-  "modifiedBy": "Kassz�s Erzsi",
+  "modifiedBy": "Kasszás Erzsi",
   "modifiedDate": null,
   "approvedBy": "Menedzser Endre",
   "approvedDate": "2020-07-12T20:30:40",
-  "bigPictureId": "�s nem is lesz",
+  "bigPictureId": "És nem is lesz",
   "smallPictureId": "Na meg ez se",
   "isActive": true,
   "smallPicture": "Nem kell ilyesmi",
   "bigPicture": "Az nincs",
   "onlineClaimLink": null,
-  "productDetails": "Kapsz egy ingyen t�r�rudit!!!444n�gyn�gy",
+  "productDetails": "Kapsz egy ingyen túrórudit!!!444négynégy",
   "drawDate": null,
   "prizeRulesFileId": "Majd lesz valahogy",
   "itemPrice": null,
@@ -3350,8 +3350,8 @@
                 },
                 "example": {
   "id": 1,
-  "name": "Ingyen T�r� Rudi!",
-  "description": "Ingy� t�r�s rudesz!",
+  "name": "Ingyen Túró Rudi!",
+  "description": "Ingyé túrós rudesz!",
   "rank": 100,
   "type": 0,
   "state": 100,
@@ -3371,17 +3371,17 @@
   "predefinedCodesFileId": null,
   "createdBy": "Sales Erno",
   "createdDate": "2020-04-11T13:42:50",
-  "modifiedBy": "Kassz�s Erzsi",
+  "modifiedBy": "Kasszás Erzsi",
   "modifiedDate": null,
   "approvedBy": "Menedzser Endre",
   "approvedDate": "2020-07-12T20:30:40",
-  "bigPictureId": "�s nem is lesz",
+  "bigPictureId": "És nem is lesz",
   "smallPictureId": "Na meg ez se",
   "isActive": true,
   "smallPicture": "Nem kell ilyesmi",
   "bigPicture": "Az nincs",
   "onlineClaimLink": null,
-  "productDetails": "Kapsz egy ingyen t�r�rudit!!!444n�gyn�gy",
+  "productDetails": "Kapsz egy ingyen túrórudit!!!444négynégy",
   "drawDate": null,
   "prizeRulesFileId": "Majd lesz valahogy",
   "itemPrice": null,
@@ -3403,8 +3403,8 @@
                 },
                 "example": {
   "id": 1,
-  "name": "Ingyen T�r� Rudi!",
-  "description": "Ingy� t�r�s rudesz!",
+  "name": "Ingyen Túró Rudi!",
+  "description": "Ingyé túrós rudesz!",
   "rank": 100,
   "type": 0,
   "state": 100,
@@ -3424,17 +3424,17 @@
   "predefinedCodesFileId": null,
   "createdBy": "Sales Erno",
   "createdDate": "2020-04-11T13:42:50",
-  "modifiedBy": "Kassz�s Erzsi",
+  "modifiedBy": "Kasszás Erzsi",
   "modifiedDate": null,
   "approvedBy": "Menedzser Endre",
   "approvedDate": "2020-07-12T20:30:40",
-  "bigPictureId": "�s nem is lesz",
+  "bigPictureId": "És nem is lesz",
   "smallPictureId": "Na meg ez se",
   "isActive": true,
   "smallPicture": "Nem kell ilyesmi",
   "bigPicture": "Az nincs",
   "onlineClaimLink": null,
-  "productDetails": "Kapsz egy ingyen t�r�rudit!!!444n�gyn�gy",
+  "productDetails": "Kapsz egy ingyen túrórudit!!!444négynégy",
   "drawDate": null,
   "prizeRulesFileId": "Majd lesz valahogy",
   "itemPrice": null,
@@ -4187,7 +4187,7 @@
       }
     },
     "/api/Coupons/{couponId}/Codes": {
-      "post": {
+      "get": {
         "tags": [
           "Coupons"
         ],
@@ -8138,6 +8138,524 @@
         }
       }
     },
+    "/api/SystemParameters/Keys": {
+      "get": {
+        "tags": [
+          "SystemParameters"
+        ],
+        "summary": "Returns a list of all the system parameter keys",
+        "operationId": "getSystemParameterKeys",
+        "responses": {
+          "200": {
+            "description": "Successful query: string list of system parameter keys",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+  "YBZQKDCZRP",
+  "SESROIDJWE",
+  "EYXIEOZMNZ",
+  "ROWQQJSIRG",
+  "IZCEABEZSP",
+  "MMUSFSFXCT",
+  "QQJKCCCKAG",
+  "HOEOZNGIAN",
+  "ZJVPCADPQA",
+  "GEEVPEHMJE",
+  "TNMELRQLID",
+  "GHZQRFUJVD",
+  "YQJEXVICPT",
+  "OMKIJGGBJK",
+  "KKDKVCQHXC",
+  "GDJACJKQOW",
+  "ELERXDMHWP",
+  "PAHFNNGQCG",
+  "YQQJFBVLXU",
+  "CMJUAYDSCY"
+]
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+  "YBZQKDCZRP",
+  "SESROIDJWE",
+  "EYXIEOZMNZ",
+  "ROWQQJSIRG",
+  "IZCEABEZSP",
+  "MMUSFSFXCT",
+  "QQJKCCCKAG",
+  "HOEOZNGIAN",
+  "ZJVPCADPQA",
+  "GEEVPEHMJE",
+  "TNMELRQLID",
+  "GHZQRFUJVD",
+  "YQJEXVICPT",
+  "OMKIJGGBJK",
+  "KKDKVCQHXC",
+  "GDJACJKQOW",
+  "ELERXDMHWP",
+  "PAHFNNGQCG",
+  "YQQJFBVLXU",
+  "CMJUAYDSCY"
+]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+  "YBZQKDCZRP",
+  "SESROIDJWE",
+  "EYXIEOZMNZ",
+  "ROWQQJSIRG",
+  "IZCEABEZSP",
+  "MMUSFSFXCT",
+  "QQJKCCCKAG",
+  "HOEOZNGIAN",
+  "ZJVPCADPQA",
+  "GEEVPEHMJE",
+  "TNMELRQLID",
+  "GHZQRFUJVD",
+  "YQJEXVICPT",
+  "OMKIJGGBJK",
+  "KKDKVCQHXC",
+  "GDJACJKQOW",
+  "ELERXDMHWP",
+  "PAHFNNGQCG",
+  "YQQJFBVLXU",
+  "CMJUAYDSCY"
+]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SystemParameters/{id}": {
+      "get": {
+        "tags": [
+          "SystemParameters"
+        ],
+        "summary": "Gets a SystemParameterVm entity by Id",
+        "description": "Returns the SystemParameterVm with the specified Id upon success",
+        "operationId": "getSystemParameter",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the SystemParameterVm",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Id of the SystemParameterVm",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: SystemParameterVm entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemParameterVm"
+                },
+                "example": {
+  "key": "system.settings.partner-campaign-limit",
+  "value": "50"
+}
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemParameterVm"
+                },
+                "example": {
+  "key": "system.settings.partner-campaign-limit",
+  "value": "50"
+}
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemParameterVm"
+                },
+                "example": {
+  "key": "system.settings.partner-campaign-limit",
+  "value": "50"
+}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SystemParameters": {
+      "get": {
+        "tags": [
+          "SystemParameters"
+        ],
+        "summary": "Gets a SystemParameterVm entity list sorted and filtered",
+        "description": "Returns the SystemParameterVm list with the specified filters applied",
+        "operationId": "getSystemParameters",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: List of SystemParameterVm entities",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemParameterVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "50"
+    },
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "100"
+    },
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "15"
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 3,
+  "size": 5
+}
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemParameterVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "50"
+    },
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "100"
+    },
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "15"
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 3,
+  "size": 5
+}
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemParameterVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "50"
+    },
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "100"
+    },
+    {
+      "key": "system.settings.partner-campaign-limit",
+      "value": "15"
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 3,
+  "size": 5
+}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SystemParameters/ExportSystemParameters": {
+      "get": {
+        "tags": [
+          "SystemParameters"
+        ],
+        "summary": "Exports a SystemParameterVm entity list sorted and filtered in a csv file",
+        "description": "Exports the SystemParameterVm list with the specified filters applied in a csv file",
+        "operationId": "exportSystemParameters",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export: Csv file of SystemParameterVm entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/SystemParameters/{key}": {
+      "put": {
+        "tags": [
+          "SystemParameters"
+        ],
+        "summary": "Updates a SystemParameter entity",
+        "description": "Updates a SystemParameter entity with Key of \"key\"",
+        "operationId": "updateSystemParameter",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "New entity details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SystemParameterDto"
+              },
+              "example": {
+  "value": "configuration"
+}
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful update"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TagCategories": {
       "post": {
         "tags": [
@@ -11224,6 +11742,56 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "SystemParameterVm": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SystemParameterVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemParameterVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SystemParameterDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

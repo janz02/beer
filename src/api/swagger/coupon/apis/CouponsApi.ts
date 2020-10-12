@@ -530,7 +530,7 @@ export class CouponsApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/api/Coupons/{couponId}/Codes`.replace(`{${"couponId"}}`, encodeURIComponent(String(requestParameters.couponId))),
-            method: 'POST',
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });

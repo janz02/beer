@@ -14,6 +14,7 @@ export * from './PartnersApi';
 export * from './ScoringApi';
 export * from './SegmentsApi';
 export * from './SitesApi';
+export * from './SystemParametersApi';
 export * from './TagCategoriesApi';
 export * from './TagsApi';
 export * from './UserCouponsApi';
