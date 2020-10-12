@@ -3,10 +3,10 @@ import { CampaignEditor } from './components/CampaignEditor'
 import { useCampaignUtils } from './useCampaignUtils'
 
 export const CampaignViewPage: FC = () => {
-  const campaign = useCampaignUtils()
-  const { getCoupon } = campaign
+  const campaignUtils = useCampaignUtils()
+  const { getCoupon } = campaignUtils
 
   useEffect(() => getCoupon(), [getCoupon])
 
-  return <CampaignEditor editing={false} campaignUtils={campaign} />
+  return <CampaignEditor editing={false} campaignUtils={campaignUtils} />
 }
