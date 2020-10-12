@@ -6,7 +6,7 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
-import { CampaignPermission } from 'models/campaignPermission'
+import { CampaignPermission } from 'models/campaign/campaignPermission'
 
 interface PermissionListState {
   permissions: CampaignPermission[]

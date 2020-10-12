@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useCallback, useEffect, useMemo, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import grapesjs from 'grapesjs'
@@ -14,6 +14,8 @@ import {
   NewsletterTemplateContentState as ContentState
 } from '../newsletterEditorSlice'
 import { RootState } from 'app/rootReducer'
+import grapesjsMergeTags from '../plugins/grapesjsMergeTags'
+import { api } from 'api'
 
 interface GjsLogger {
   at: string
@@ -84,18 +86,33 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
     [i18n.language]
   )
 
+  const [staticTagList, setStaticTagList] = useState([])
+
+  useEffect(() => {
+    api.campaignEditor.staticMergeTags
+      .getStaticMergeTags({ skip: 0, take: -1 })
+      .then((res: any) => {
+        const mappedTags = res.items.map((tag: any) => ({ id: tag.name, name: tag.name }))
+        setStaticTagList(mappedTags)
+      })
+      .catch(e => console.log(e))
+  }, [])
+
   const editor = useMemo(() => {
     if (!template) return
     return grapesjs.init({
       // TODO: consider removing db, giving db id
       container: `#${gjsEditorId}`,
       height: '100%',
-      plugins: [grapesjsNewsLetter],
+      plugins: [grapesjsNewsLetter, grapesjsMergeTags],
       pluginsOpts: {
         [grapesjsNewsLetter]: {
           // Translations that are not handled by the news letter preset.
           // Update only the locale files, the `en` is a placeholder for all translations.
           ...translations?.preset
+        },
+        [grapesjsMergeTags]: {
+          tagSelectOptions: staticTagList
         }
       },
       i18n: {
@@ -108,7 +125,7 @@ export const useNewsletterEditor = (props: UseNewsletterEditorProps) => {
         messages: translations
       }
     })
-  }, [gjsEditorId, template, translations])
+  }, [gjsEditorId, template, translations, staticTagList])
 
   const getEditorContent = useCallback(() => {
     if (!editor) return

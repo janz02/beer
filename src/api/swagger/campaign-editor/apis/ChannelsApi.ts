@@ -21,6 +21,9 @@ import {
     ChannelVmPaginatedSearchResponse,
     ChannelVmPaginatedSearchResponseFromJSON,
     ChannelVmPaginatedSearchResponseToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
 } from '../models';
 
 export interface GetChannelRequest {
@@ -34,6 +37,7 @@ export interface GetChannelsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface GetManyChannelsRequest {
@@ -107,6 +111,10 @@ export class ChannelsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

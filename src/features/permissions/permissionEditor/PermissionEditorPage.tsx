@@ -13,7 +13,7 @@ import {
   getFunctionPermissions
 } from './permissionEditorSlice'
 import { useParams } from 'react-router-dom'
-import { CampaignPermission } from 'models/campaignPermission'
+import { CampaignPermission } from 'models/campaign/campaignPermission'
 import { GenericPopup, PopupState } from 'components/popups/GenericPopup'
 
 import { EditorModeOptions, EditorMode } from 'components/buttons/EditorModeOptions'

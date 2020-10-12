@@ -93,9 +93,7 @@ export const PartnerEditorPage: React.FC = () => {
 
   const sitesConfig: SiteFeatureConfig = {
     canEdit: hasPermission(pageViewRoles.sitesEditor),
-    shrinks: true,
-    routeRoot: `/partners/${id}/site`,
-    routeExit: `/partners/${id}`
+    shrinks: true
   }
 
   const displayAcceptButton =
@@ -161,7 +159,7 @@ export const PartnerEditorPage: React.FC = () => {
       </GenericPopup>
       {mode !== EditorMode.NEW && (
         <>
-          <SiteList config={sitesConfig} partnerId={id!} />
+          <SiteList config={sitesConfig} partnerEditorPage partnerId={id!} />
           <PartnerContactTile {...partnerContactConfig} />
         </>
       )}

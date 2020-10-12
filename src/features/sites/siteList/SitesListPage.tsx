@@ -8,8 +8,6 @@ import { SiteFeatureConfig } from './useSiteList'
 
 export const getSiteListPageConfig = (): SiteFeatureConfig => ({
   canEdit: hasPermission(pageViewRoles.sitesEditor),
-  routeRoot: '/sites/editor',
-  routeExit: '/sites',
   shrinks: false
 })
 

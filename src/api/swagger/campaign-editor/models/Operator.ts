@@ -18,26 +18,26 @@
  * @enum {string}
  */
 export enum Operator {
-    NUMBER_0 = 0,
-    NUMBER_1 = 1,
-    NUMBER_2 = 2,
-    NUMBER_3 = 3,
-    NUMBER_4 = 4,
-    NUMBER_5 = 5,
-    NUMBER_6 = 6,
-    NUMBER_7 = 7,
-    NUMBER_8 = 8,
-    NUMBER_9 = 9,
-    NUMBER_10 = 10,
-    NUMBER_11 = 11,
-    NUMBER_12 = 12,
-    NUMBER_13 = 13,
-    NUMBER_14 = 14,
-    NUMBER_15 = 15,
-    NUMBER_16 = 16,
-    NUMBER_17 = 17,
-    NUMBER_18 = 18,
-    NUMBER_19 = 19
+    Equal = 'Equal',
+    NotEqual = 'Not_equal',
+    Less = 'Less',
+    LessOrEqual = 'Less_or_equal',
+    Greater = 'Greater',
+    GreaterOrEqual = 'Greater_or_equal',
+    Like = 'Like',
+    NotLike = 'Not_like',
+    Between = 'Between',
+    NotBetween = 'Not_between',
+    RangeBetween = 'Range_between',
+    RangeNotBetween = 'Range_not_between',
+    IsEmpty = 'Is_empty',
+    IsNotEmpty = 'Is_not_empty',
+    SelectEquals = 'Select_equals',
+    SelectNotEquals = 'Select_not_equals',
+    SelectAnyIn = 'Select_any_in',
+    SelectNotAnyIn = 'Select_not_any_in',
+    MultiselectEquals = 'Multiselect_equals',
+    MultiselectNotEquals = 'Multiselect_not_equals'
 }
 
 export function OperatorFromJSON(json: any): Operator {

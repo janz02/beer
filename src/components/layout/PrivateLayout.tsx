@@ -16,7 +16,8 @@ import {
   SettingOutlined,
   ContactsOutlined,
   HistoryOutlined,
-  ClusterOutlined
+  ClusterOutlined,
+  PieChartOutlined
 } from '@ant-design/icons'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -70,6 +71,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/partners',
         icon: <HomeFilled />,
         roles: pageViewRoles.partners
+      },
+      {
+        label: t('menu.segmentations'),
+        link: '/segmentations',
+        icon: <PieChartOutlined />,
+        roles: pageViewRoles.segmentations
       },
       {
         label: t('menu.partner-data'),

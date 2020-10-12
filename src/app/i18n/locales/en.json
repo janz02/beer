@@ -652,6 +652,7 @@
     "partners": "Partners",
     "permissions": "Permissions",
     "profile": "Profile",
+    "segmentations": "Segmentation",
     "settings": "Settings",
     "sites": "Sites",
     "users": "Users"
@@ -744,8 +745,6 @@
       "name": "Name",
       "phone": "Phone",
       "role": "Role",
-      "status-active": "Active",
-      "status-inactive": "Inactive",
       "type": "Contact type"
     },
     "list-title": "Partner Contacts",
@@ -789,6 +788,18 @@
     "save": "Save changes",
     "save-profile-success": "Successfully saved the profile."
   },
+  "segmentation": {
+    "field": {
+      "category": "Segmentation category",
+      "createdDate": "Created Date",
+      "cumulativeIntersection": "Cumulative intersection",
+      "name": "Segmentation name",
+      "segmentSize": "Segment size"
+    },
+    "list": {
+      "title": "Segmentation"
+    }
+  },
   "segmentation-category": {
     "add": "Add new segmentation category",
     "editor-create": "Create",
@@ -802,6 +813,7 @@
     "campaign-categories": "Campaign categories",
     "campaign-products": "Products",
     "segmentation-categories": "Segmentation categories",
+    "system-params": "System parameters",
     "test-group-categories": "Testgroup categories"
   },
   "site": {
@@ -817,6 +829,22 @@
     "table": {
       "address": "Address",
       "name": "Site name"
+    }
+  },
+  "system-params": {
+    "editor": {
+      "title": "System parameters"
+    },
+    "field": {
+      "description": "Parameter description",
+      "name": "Parameter name",
+      "value": "Parameter value"
+    },
+    "key": {
+      "customerSupportEmail": "__STRING_NOT_TRANSLATED__",
+      "customerSuppportPhone": "__STRING_NOT_TRANSLATED__",
+      "kkvLimit": "__STRING_NOT_TRANSLATED__",
+      "winnerCouponLink": "__STRING_NOT_TRANSLATED__"
     }
   },
   "test-group-category": {

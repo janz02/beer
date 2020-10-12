@@ -18,8 +18,8 @@
  * @enum {string}
  */
 export enum Condition {
-    NUMBER_0 = 0,
-    NUMBER_1 = 1
+    And = 'And',
+    Or = 'Or'
 }
 
 export function ConditionFromJSON(json: any): Condition {

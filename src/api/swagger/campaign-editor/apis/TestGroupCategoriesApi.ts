@@ -21,6 +21,9 @@ import {
     CreateTestGroupCategoryCommand,
     CreateTestGroupCategoryCommandFromJSON,
     CreateTestGroupCategoryCommandToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     TestGroupCategoryVm,
     TestGroupCategoryVmFromJSON,
     TestGroupCategoryVmToJSON,
@@ -56,6 +59,7 @@ export interface GetTestGroupCategoriesRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface GetTestGroupCategoryRequest {
@@ -80,7 +84,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -242,6 +246,10 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             queryParameters['PageSize'] = requestParameters.pageSize;
         }
 
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -313,7 +321,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

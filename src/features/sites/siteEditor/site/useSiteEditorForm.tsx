@@ -11,6 +11,12 @@ import { useTranslation } from 'react-i18next'
 import { SiteEditorFormProps } from './SiteEditorForm'
 import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
 
+export const getSiteListExitPath = (partnerId?: number | string): string =>
+  partnerId ? `/partners/${partnerId}` : `/sites`
+
+export const getSiteListRootPath = (partnerId?: number | string): string =>
+  partnerId ? `/partners/${partnerId}/site` : `/sites/editor`
+
 interface UseSiteEditorFormUtils {
   siteEditorFormProps: SiteEditorFormProps
   handleGetSite: () => void
@@ -39,12 +45,15 @@ export const useSiteEditorForm = (config: SiteFeatureConfig): UseSiteEditorFormU
   }
 
   const handleSaveSite = (site: Site): void => {
-    dispatch(siteEditorActions.saveSite({ ...site }, siteId, +partnerId!, config.routeRoot))
+    dispatch(
+      siteEditorActions.saveSite({ ...site }, siteId, +partnerId!, getSiteListRootPath(partnerId))
+    )
   }
 
-  const handleExitSiteEditor = useCallback((): void => history.push(config.routeExit), [
-    config.routeExit
-  ])
+  const handleExitSiteEditor = useCallback(
+    (): void => history.push(getSiteListExitPath(partnerId)),
+    [partnerId]
+  )
 
   const handleGetSite = useCallback((): void => {
     siteId && dispatch(siteEditorActions.getSite(siteId))

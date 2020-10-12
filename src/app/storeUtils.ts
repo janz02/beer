@@ -22,6 +22,8 @@ import { authActions } from 'features/auth/authSlice'
 import { siteListActions } from 'features/sites/siteList/siteListSlice'
 import { testGroupCategoryListActions } from 'features/settings/testGroupCategory/testGroupCategoryList/testGroupCategoryListSlice'
 import { testGroupCategoryEditorActions } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
+import { resetBpHistory } from 'features/bpHistory/bpHistorySlice'
+import { systemParamsActions } from 'features/settings/systemParams/systemParamsSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -51,6 +53,8 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(partnerContactModalActions.reset())
     dispatch(testGroupCategoryListActions.resetCategoryList())
     dispatch(testGroupCategoryEditorActions.resetCategoryEditor())
+    dispatch(resetBpHistory())
+    dispatch(systemParamsActions.resetSystemParams())
     logout && dispatch(resetRouterHistory())
   })
 }

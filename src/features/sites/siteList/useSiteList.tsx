@@ -11,16 +11,16 @@ import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
 import { FeatureState } from 'models/featureState'
+import { getSiteListRootPath } from '../siteEditor/site/useSiteEditorForm'
 
 export interface SiteFeatureConfig {
   canEdit: boolean
   shrinks: boolean
-  routeRoot: string
-  routeExit: string
 }
 
 interface UseSiteListProps {
   config: SiteFeatureConfig
+  partnerEditorPage?: boolean
   partnerId: number
 }
 
@@ -34,13 +34,16 @@ interface UseSiteListUtils {
   handleExport: () => void
 }
 
-export const useSiteList = ({ config, partnerId }: UseSiteListProps): UseSiteListUtils => {
+export const useSiteList = ({
+  config,
+  partnerId,
+  partnerEditorPage
+}: UseSiteListProps): UseSiteListUtils => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const { listParams, sites, listState } = useSelector((s: RootState) => s.siteList)
   const [siteToDelete, setSiteToDelete] = useState<PopupState<Site>>()
-  const { routeRoot } = config
 
   const {
     paginationConfig,
@@ -62,6 +65,7 @@ export const useSiteList = ({ config, partnerId }: UseSiteListProps): UseSiteLis
     dispatch(siteListActions.exportSites())
   }, [dispatch])
 
+  const routeRoot = getSiteListRootPath(partnerEditorPage ? partnerId : undefined)
   const handleAdd = useCallback((): void => history.push(routeRoot), [routeRoot])
 
   const handleEdit = useCallback(

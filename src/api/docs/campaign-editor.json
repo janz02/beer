@@ -255,22 +255,7 @@
         "requestBody": {
           "description": "The authentication parameters fulfilled model.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequestCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequestCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequestCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/LoginRequestCommand"
               }
@@ -297,8 +282,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Accounts/RefreshToken": {
@@ -312,8 +305,16 @@
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Accounts/Logout": {
@@ -326,8 +327,16 @@
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/CampaignResults/GetEvents": {
@@ -415,6 +424,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -501,22 +517,7 @@
         "requestBody": {
           "description": "The model determine the path on sharepoint and the CSV to be uploaded",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UploadCsvCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UploadCsvCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UploadCsvCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UploadCsvCommand"
               }
@@ -725,6 +726,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -863,22 +871,7 @@
         "requestBody": {
           "description": "The campaign to be created",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCampaignCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCampaignCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCampaignCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateCampaignCommand"
               }
@@ -913,22 +906,7 @@
         "requestBody": {
           "description": "The desired modifications to be made. All value has to be filled!",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCampaignCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCampaignCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCampaignCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateCampaignCommand"
               }
@@ -981,25 +959,7 @@
         "requestBody": {
           "description": "The identification of the campaign to be modifies.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "type": "integer",
                 "format": "int32"
@@ -1036,25 +996,7 @@
         "requestBody": {
           "description": "The identification of the campaign to be modifies.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "type": "integer",
                 "format": "int32"
@@ -1091,25 +1033,7 @@
         "requestBody": {
           "description": "The identification of the campaign to be modifies.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "type": "integer",
                 "format": "int32"
@@ -1146,25 +1070,7 @@
         "requestBody": {
           "description": "The identification of the campaign to be modifies.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "type": "integer",
                 "format": "int32"
@@ -1211,22 +1117,7 @@
         "requestBody": {
           "description": "The identification of the campaign to be modified with the given options.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AssignTestGroupCategoriesCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AssignTestGroupCategoriesCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AssignTestGroupCategoriesCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/AssignTestGroupCategoriesCommand"
               }
@@ -1358,6 +1249,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -1623,6 +1521,13 @@
         "operationId": "getPermissions",
         "parameters": [
           {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Skip",
             "in": "query",
             "schema": {
@@ -1670,6 +1575,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -1828,22 +1740,7 @@
         "requestBody": {
           "description": "The permission to be created",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
@@ -1908,22 +1805,7 @@
         "requestBody": {
           "description": "The desired modifications to be made. All value has to be filled!",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateUpdatePermissionCommand"
               }
@@ -2094,6 +1976,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -2200,22 +2089,7 @@
         "requestBody": {
           "description": "The product to be created",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateProductCommand"
               }
@@ -2280,22 +2154,7 @@
         "requestBody": {
           "description": "The desired modifications to be made. All value has to be filled!",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProductCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProductCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProductCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateProductCommand"
               }
@@ -2423,6 +2282,13 @@
         "operationId": "getSegmentationCategories",
         "parameters": [
           {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Skip",
             "in": "query",
             "schema": {
@@ -2470,6 +2336,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -2566,22 +2439,7 @@
         "requestBody": {
           "description": "The segmentation category to be created",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationCategoryCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationCategoryCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationCategoryCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateSegmentationCategoryCommand"
               }
@@ -2646,22 +2504,7 @@
         "requestBody": {
           "description": "The desired modifications to be made. All value has to be filled!",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSegmentationCategoryCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSegmentationCategoryCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSegmentationCategoryCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateSegmentationCategoryCommand"
               }
@@ -2782,22 +2625,7 @@
         "requestBody": {
           "description": "The base data to run agains the data.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/QueryBuilderQuery"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/QueryBuilderQuery"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/QueryBuilderQuery"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/QueryBuilderQuery"
               }
@@ -3053,6 +2881,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -3148,22 +2983,7 @@
         "requestBody": {
           "description": "The segmentation to be created",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
@@ -3196,22 +3016,7 @@
         "requestBody": {
           "description": "The desired modifications to be made. All value has to be filled!",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateUpdateSegmentationCommand"
               }
@@ -3343,22 +3148,7 @@
         "requestBody": {
           "description": "The partner upload with the name of the extractes input.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationFromCsvCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationFromCsvCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSegmentationFromCsvCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateSegmentationFromCsvCommand"
               }
@@ -3522,22 +3312,7 @@
         "requestBody": {
           "description": "The relative path on the sharepoint to be target of the selected file.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "string"
-              }
-            },
             "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "type": "string"
               }
@@ -3598,13 +3373,6 @@
             }
           },
           {
-            "name": "Value",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Skip",
             "in": "query",
             "schema": {
@@ -3652,6 +3420,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -3758,22 +3533,7 @@
         "requestBody": {
           "description": "Item to updated",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSiteLevelSettingCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSiteLevelSettingCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSiteLevelSettingCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateSiteLevelSettingCommand"
               }
@@ -3805,22 +3565,7 @@
         "requestBody": {
           "description": "model contains basic information : name and email address",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateUserCommand"
               }
@@ -3830,8 +3575,16 @@
         "responses": {
           "204": {
             "description": "The operation was successful."
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/StandaloneUsers/Inactivate/{id}": {
@@ -3918,22 +3671,7 @@
         "requestBody": {
           "description": "Request object that contains the guid to be validated.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ValidatePasswordChangeCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ValidatePasswordChangeCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ValidatePasswordChangeCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ValidatePasswordChangeCommand"
               }
@@ -3963,8 +3701,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/StandaloneUsers/ChangeForgotPassword": {
@@ -3978,22 +3724,7 @@
         "requestBody": {
           "description": "The request which contains data to persist.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeForgotPasswordCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeForgotPasswordCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeForgotPasswordCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ChangeForgotPasswordCommand"
               }
@@ -4003,8 +3734,16 @@
         "responses": {
           "200": {
             "description": "The operation was successful."
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/StandaloneUsers/ForgotPassword": {
@@ -4018,22 +3757,7 @@
         "requestBody": {
           "description": "The request object which identifies the user.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ForgotPasswordCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ForgotPasswordCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ForgotPasswordCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ForgotPasswordCommand"
               }
@@ -4043,8 +3767,16 @@
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/StandaloneUsers/ReSendPasswordChangeLink": {
@@ -4058,22 +3790,7 @@
         "requestBody": {
           "description": "The request object which identifies the user.",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ResendPasswordChangeLinkCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ResendPasswordChangeLinkCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ResendPasswordChangeLinkCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ResendPasswordChangeLinkCommand"
               }
@@ -4108,22 +3825,7 @@
         "requestBody": {
           "description": "Contains BaseInformation : name and email address",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateUserCommand"
               }
@@ -4179,22 +3881,7 @@
         "requestBody": {
           "description": "It contains company name, department, position, phone number and userid",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserExtensionInfoCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserExtensionInfoCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserExtensionInfoCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UserExtensionInfoCommand"
               }
@@ -4255,8 +3942,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/StaticMergeTags/Create": {
@@ -4269,22 +3964,7 @@
         "requestBody": {
           "description": "The entity to be created",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateStaticMergeTagCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateStaticMergeTagCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateStaticMergeTagCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateStaticMergeTagCommand"
               }
@@ -4406,6 +4086,20 @@
         "operationId": "getStaticMergeTags",
         "parameters": [
           {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Value",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Skip",
             "in": "query",
             "schema": {
@@ -4453,6 +4147,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
             }
           }
         ],
@@ -4560,22 +4261,7 @@
         "requestBody": {
           "description": "The desired modifications to be made. All value has to be filled!",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateStaticMergeTagCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateStaticMergeTagCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateStaticMergeTagCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateStaticMergeTagCommand"
               }
@@ -4853,6 +4539,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
           }
         ],
         "responses": {
@@ -4959,22 +4652,7 @@
         "requestBody": {
           "description": "The test group to be created",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTestGroupCategoryCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTestGroupCategoryCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTestGroupCategoryCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateTestGroupCategoryCommand"
               }
@@ -5039,22 +4717,7 @@
         "requestBody": {
           "description": "The desired modifications to be made. All value has to be filled!",
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTestGroupCategoryCommand"
-              }
-            },
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTestGroupCategoryCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTestGroupCategoryCommand"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateTestGroupCategoryCommand"
               }
@@ -5209,8 +4872,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/UserSettings/setlanguage/{languageId}": {
@@ -5570,6 +5241,13 @@
         },
         "additionalProperties": false
       },
+      "OrderByType": {
+        "enum": [
+          "Ascending",
+          "Descending"
+        ],
+        "type": "string"
+      },
       "CampaignResultEventVm": {
         "type": "object",
         "properties": {
@@ -5877,60 +5555,56 @@
       },
       "SegmentationType": {
         "enum": [
-          1,
-          2,
-          3
+          "Query",
+          "Csv",
+          "TechnicalQuery"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Condition": {
         "enum": [
-          0,
-          1
+          "And",
+          "Or"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Operator": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19
+          "Equal",
+          "Not_equal",
+          "Less",
+          "Less_or_equal",
+          "Greater",
+          "Greater_or_equal",
+          "Like",
+          "Not_like",
+          "Between",
+          "Not_between",
+          "Range_between",
+          "Range_not_between",
+          "Is_empty",
+          "Is_not_empty",
+          "Select_equals",
+          "Select_not_equals",
+          "Select_any_in",
+          "Select_not_any_in",
+          "Multiselect_equals",
+          "Multiselect_not_equals"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "ControlType": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
+          "Number",
+          "Text",
+          "Boolean",
+          "Select",
+          "MultiSelect",
+          "Date",
+          "DateTime",
+          "Time"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "QueryValues": {
         "type": "object",
@@ -6002,13 +5676,12 @@
       },
       "QueryConditionOperation": {
         "enum": [
-          1,
-          2,
-          3,
-          4
+          "Preserved",
+          "Added",
+          "Removed",
+          "Changed"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "SegmentConditionVm": {
         "type": "object",

@@ -18,6 +18,9 @@ import {
     CreateStaticMergeTagCommand,
     CreateStaticMergeTagCommandFromJSON,
     CreateStaticMergeTagCommandToJSON,
+    OrderByType,
+    OrderByTypeFromJSON,
+    OrderByTypeToJSON,
     ProblemDetails,
     ProblemDetailsFromJSON,
     ProblemDetailsToJSON,
@@ -49,12 +52,15 @@ export interface GetStaticMergeTagRequest {
 }
 
 export interface GetStaticMergeTagsRequest {
+    name?: string;
+    value?: string;
     skip?: number;
     take?: number;
     orderBy?: string;
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
+    orderByType?: OrderByType;
 }
 
 export interface UpdateStaticMergeTagRequest {
@@ -74,7 +80,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -206,6 +212,14 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
     async getStaticMergeTagsRaw(requestParameters: GetStaticMergeTagsRequest): Promise<runtime.ApiResponse<StaticMergeTagVmPaginatedSearchResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.name !== undefined) {
+            queryParameters['Name'] = requestParameters.name;
+        }
+
+        if (requestParameters.value !== undefined) {
+            queryParameters['Value'] = requestParameters.value;
+        }
+
         if (requestParameters.skip !== undefined) {
             queryParameters['Skip'] = requestParameters.skip;
         }
@@ -228,6 +242,10 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
 
         if (requestParameters.pageSize !== undefined) {
             queryParameters['PageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['OrderByType'] = requestParameters.orderByType;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -262,7 +280,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json-patch+json';
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { SegmentationCategory } from 'models/segmentationCategory'
+import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { api } from 'api'
 import { GetCategoryRequest } from 'api/swagger/coupon'
 import { segmentationCategoryListActions } from '../categoryList/segmentationCategoryListSlice'
