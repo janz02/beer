@@ -3,6 +3,7 @@ import React from 'react'
 import { setupStore } from '../../../config/setupMocks'
 import { Table } from 'antd'
 import { useBpHistoryControl } from './useBpHistoryControl'
+import moment from 'moment'
 
 jest.mock('app/store')
 setupStore({
@@ -12,7 +13,7 @@ setupStore({
         id: 1,
         campaignName: 'Campaign name 1',
         campaignTechnicalName: '',
-        createdDate: '2020-03-25T18:30:29.639Z',
+        createdDate: moment('2020-03-25T18:30:29.639Z'),
         bpId: 'Példa 1',
         contact: 'pelda@pelda.hu',
         channelId: 1,
@@ -25,7 +26,7 @@ setupStore({
         id: 2,
         campaignName: 'Campaign name 2',
         campaignTechnicalName: '',
-        createdDate: '2020-03-25T18:30:29.639Z',
+        createdDate: moment('2020-03-25T18:30:29.639Z'),
         bpId: 'Példa 2',
         contact: 'pelda2@pelda2.hu',
         channelId: 2,
