@@ -19,6 +19,10 @@ $table-header-height: 56px;
         border-bottom: 2px solid rgba(0, 0, 0, 0.068);
 
         table {
+          tr > td {
+            height: $table--row-min-height;
+          }
+
           th {
             position: sticky;
             z-index: 1;
