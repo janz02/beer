@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useCashierManager } from './useCashierManager'
+import { useCashierManagerUtils } from './useCashierManagerUtils'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { GenericPopup } from 'components/popups/GenericPopup'
@@ -8,7 +8,7 @@ import { AddButton } from 'components/buttons/AddButton'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { Form, Input } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteListUtils'
 
 export const CashierManager: FC<{ config: SiteFeatureConfig }> = ({ config }) => {
   const { t } = useTranslation()
@@ -20,7 +20,7 @@ export const CashierManager: FC<{ config: SiteFeatureConfig }> = ({ config }) =>
     cashierTableProps,
     cashierDeletePopupProps,
     cashierEditorFormModalProps
-  } = useCashierManager(config)
+  } = useCashierManagerUtils(config)
 
   const listHeaderOptions = (
     <>

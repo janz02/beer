@@ -6,7 +6,7 @@ import i18n from '../../../app/i18n'
 import { setupStore } from '../../../../config/setupMocks'
 import moment from 'moment'
 
-const useBpHistoryControl = require('../useBpHistoryControl')
+const useBpHistoryUtils = require('../useBpHistoryUtils')
 
 jest.mock('app/store')
 
@@ -49,7 +49,7 @@ const mockStore = {
   }
 }
 
-const mockColumnOrder = {
+const mockColumnOrderUtils = {
   visible: true,
   currentColumns: [],
   tempColumns: [],
@@ -65,7 +65,7 @@ const mockColumnOrder = {
 
 const mockHook = {
   loading: false,
-  columnOrder: mockColumnOrder,
+  columnOrderUtils: mockColumnOrderUtils,
   paginationConfig: false,
   templateModal: { title: null, content: null },
   source: [...mockStore.bpHistory.bpHistoryItems],
@@ -92,7 +92,7 @@ describe('BP history list tests', () => {
 
   it('should render history items', () => {
     const myHook = jest
-      .spyOn(useBpHistoryControl, 'useBpHistoryControl')
+      .spyOn(useBpHistoryUtils, 'useBpHistoryUtils')
       .mockImplementation(() => ({ ...mockHook }))
 
     const listPage = render(<BpHistoryListComponent />)

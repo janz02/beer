@@ -7,9 +7,9 @@ import { useCommonFormRules } from 'hooks'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { AddButton } from 'components/buttons/AddButton'
-import { useNewlsetterList } from './useNewlsetterList'
+import { useNewsletterListUtils } from './useNewsletterListUtils'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
-import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ColumnType } from 'antd/lib/table'
 import { NewsletterPreview } from 'models/newsletter'
@@ -26,13 +26,13 @@ export const NewsletterList: FC = () => {
     openCreateTemplateModal,
     handleGetNewsletterTemplates,
     resetFilters
-  } = useNewlsetterList()
+  } = useNewsletterListUtils()
 
   useEffect(() => {
     handleGetNewsletterTemplates()
   }, [handleGetNewsletterTemplates])
 
-  const columnOrder = useColumnOrder(
+  const columnOrderUtils = useColumnOrderUtils(
     tableProps.columns as ColumnType<NewsletterPreview>[],
     ColumnStorageName.NEWSLETTER
   )
@@ -40,7 +40,7 @@ export const NewsletterList: FC = () => {
   const headerOptions = (
     <>
       <ResetFiltersButton onClick={resetFilters} />
-      <ColumnOrderDropdown {...columnOrder} />
+      <ColumnOrderDropdown {...columnOrderUtils} />
       <AddButton onClick={openCreateTemplateModal}>{t('newsletter.add')}</AddButton>
     </>
   )
@@ -53,7 +53,7 @@ export const NewsletterList: FC = () => {
         forTable
         width="normal"
       >
-        <ResponsiveTable {...tableProps} columns={columnOrder.currentColumns} />
+        <ResponsiveTable {...tableProps} columns={columnOrderUtils.currentColumns} />
       </ResponsiveCard>
 
       <GenericPopup {...deletePopupProps} />

@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useFormUtils } from 'hooks/useFormUtils'
 import Typography from 'antd/lib/typography'
-import { useNewsletterEditorHandlers } from './useNewsletterEditorHandlers'
+import { useNewsletterEditorHandlerUtils } from './useNewsletterEditorHandlerUtils'
 import { FeatureState } from 'models/featureState'
 
 const { Text } = Typography
@@ -37,7 +37,7 @@ export const NewsLetterEditorHeader: FC<NewsLetterEditorHeaderProps> = props => 
     currentTemplateVersionId,
     template,
     saveState
-  } = useNewsletterEditorHandlers()
+  } = useNewsletterEditorHandlerUtils()
 
   const saving = saveState === FeatureState.Loading
 

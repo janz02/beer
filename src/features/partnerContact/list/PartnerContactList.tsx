@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { usePartnerContactList } from './usePartnerContactList'
+import { usePartnerContactListUtils } from './usePartnerContactListUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { useTranslation } from 'react-i18next'
 import { PartnerContactConfig } from '../PartnerContactTile'
@@ -26,7 +26,7 @@ export const PartnerContactList: FC<PartnerContactListProps> = props => {
     handleOpenInviter,
     resetFilters,
     handleExport
-  } = usePartnerContactList({
+  } = usePartnerContactListUtils({
     config: props.config
   })
 

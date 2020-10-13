@@ -5,13 +5,13 @@ import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdow
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BpHistoryViewer } from '../components/BpHistoryViewer'
-import { useBpHistoryControl } from '../useBpHistoryControl'
+import { useBpHistoryUtils } from '../useBpHistoryUtils'
 
 export const BpHistoryListPage: React.FC = () => {
   const { t } = useTranslation()
   const {
     loading,
-    columnOrder,
+    columnOrderUtils,
     paginationConfig,
     templateModal,
     source,
@@ -19,7 +19,7 @@ export const BpHistoryListPage: React.FC = () => {
     handleTemplateCloseClick,
     handleTableChange,
     loadHistory
-  } = useBpHistoryControl()
+  } = useBpHistoryUtils()
 
   useEffect(() => {
     loadHistory()
@@ -32,7 +32,7 @@ export const BpHistoryListPage: React.FC = () => {
         floatingOptions={
           <>
             <ResetFiltersButton onClick={handleResetFilters} />
-            <ColumnOrderDropdown {...columnOrder} />
+            <ColumnOrderDropdown {...columnOrderUtils} />
           </>
         }
         forTable
@@ -40,7 +40,7 @@ export const BpHistoryListPage: React.FC = () => {
       >
         <ResponsiveTable
           loading={loading}
-          columns={columnOrder.currentColumns}
+          columns={columnOrderUtils.currentColumns}
           dataSource={source}
           pagination={paginationConfig}
           scroll={{ x: true }}

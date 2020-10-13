@@ -11,13 +11,13 @@ import {
 } from 'services/numberInputHelpers'
 import { campaignActions } from '../../campaignsSlice'
 import { useDispatch } from 'react-redux'
-import { UseCampaignFeatures } from '../useCampaign'
+import { CampaignUtils } from '../useCampaignUtils'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
 import { InputNumberI18n } from 'components/InputNumberI18n'
 
 interface CampaignEditorFormDetailsProps {
-  campaign: UseCampaignFeatures
+  campaignUtils: CampaignUtils
   form: FormInstance
 }
 
@@ -37,7 +37,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
     prizeOrDiscount,
     setSelectedCouponMode,
     setSelectedCouponDiscountType
-  } = props.campaign
+  } = props.campaignUtils
 
   const displayDiscountValue =
     selectedCouponType === CouponType.Discount &&

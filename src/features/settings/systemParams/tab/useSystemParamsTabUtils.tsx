@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react'
 import { useParams } from 'hooks/react-router-dom-hooks'
 import { useTranslation } from 'react-i18next'
-import { SettingsTab } from '../../SettingsPage'
+import { SettingsTabUtils } from '../../SettingsPage'
 import { pageViewRoles } from 'services/roleHelpers'
 import { OneToOneOutlined } from '@ant-design/icons'
 import { SystemParamsTab } from './SystemParamsTab'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { useSystemParamsListUtils } from '../lister/useSystemParamsListUtils'
 
-export const useSystemParamsTabUtils = (): SettingsTab => {
+export const useSystemParamsTabUtils = (): SettingsTabUtils => {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
 

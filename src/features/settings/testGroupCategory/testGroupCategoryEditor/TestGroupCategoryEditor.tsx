@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { useTestGroupCategoryEditor } from './useTestGroupCategoryEditor'
+import { useTestGroupCategoryEditorUtils } from './useTestGroupCategoryEditorUtils'
 
 export interface TestGroupCategoryEditorParams {
   visible?: boolean
@@ -31,7 +31,7 @@ export const TestGroupCategoryEditor: FC<CategoryEditorProps> = props => {
     handleGetCategory,
     handleSave,
     afterCloseExtended
-  } = useTestGroupCategoryEditor(props)
+  } = useTestGroupCategoryEditorUtils(props)
 
   useEffect(() => {
     handleGetCategory()

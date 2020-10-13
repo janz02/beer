@@ -1,10 +1,14 @@
 import React, { FC, useEffect } from 'react'
 import { FloatingActionButton } from 'components/buttons/FloatingActionButton'
 import { BellOutlined } from '@ant-design/icons'
-import { useNotification } from './useNotification'
+import { NotificationUtils } from './useNotificationUtils'
 
-export const NotificationFab: FC = () => {
-  const { handleOpen, unseenCount, notifications, handleGetNotifications } = useNotification()
+interface NotificationFabProps {
+  notificationUtils: NotificationUtils
+}
+
+export const NotificationFab: FC<NotificationFabProps> = props => {
+  const { handleOpen, unseenCount, notifications, handleGetNotifications } = props.notificationUtils
 
   useEffect(() => {
     if (notifications.length > 0) return
