@@ -7,12 +7,12 @@ import { hasPermission } from 'services/jwt-reader'
 import { CampaignStateDisplay } from 'components/CampaignStateDisplay'
 import { CampaignActiveDisplay } from 'components/CampaignActiveDisplay'
 import { comboRoles } from 'services/roleHelpers'
-import { UseCampaignFeatures } from '../useCampaign'
+import { CampaignUtils } from '../useCampaignUtils'
 import { useCommonFormRules } from 'hooks'
 import { useDispatch } from 'react-redux'
 
 interface CampaignEditorFormBasicsProps {
-  campaign: UseCampaignFeatures
+  campaignUtils: CampaignUtils
 }
 
 export const CampaignEditorFormBasics: FC<CampaignEditorFormBasicsProps> = props => {
@@ -28,7 +28,7 @@ export const CampaignEditorFormBasics: FC<CampaignEditorFormBasicsProps> = props
     rowGutter,
     prizeOrDiscount,
     setSelectedCouponType
-  } = props.campaign
+  } = props.campaignUtils
 
   return (
     <>

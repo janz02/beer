@@ -31,7 +31,7 @@ import { UserType } from 'models/user'
 import { SiteList } from 'features/sites/siteList/SiteList'
 import { Button } from 'antd'
 import { pageViewRoles } from 'services/roleHelpers'
-import { SiteFeatureConfig } from 'features/sites/siteList/useSiteList'
+import { SiteFeatureConfig } from 'features/sites/siteList/useSiteListUtils'
 
 export const partnersEditorRoles = [
   Roles.Administrator,

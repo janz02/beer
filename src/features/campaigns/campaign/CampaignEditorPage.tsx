@@ -1,12 +1,12 @@
 import React, { useEffect, FC } from 'react'
 import { CampaignEditor } from './components/CampaignEditor'
-import { useCampaign } from './useCampaign'
+import { useCampaignUtils } from './useCampaignUtils'
 
 export const CampaignEditorPage: FC = () => {
-  const campaign = useCampaign()
-  const { getCoupon } = campaign
+  const campaignUtils = useCampaignUtils()
+  const { getCoupon } = campaignUtils
 
   useEffect(() => getCoupon(), [getCoupon])
 
-  return <CampaignEditor editing campaign={campaign} />
+  return <CampaignEditor editing campaignUtils={campaignUtils} />
 }

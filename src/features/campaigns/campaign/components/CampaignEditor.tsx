@@ -10,13 +10,13 @@ import { hasPermission } from 'services/jwt-reader'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { comboRoles } from 'services/roleHelpers'
 import { useDispatch } from 'react-redux'
-import { UseCampaignFeatures } from '../useCampaign'
+import { CampaignUtils } from '../useCampaignUtils'
 import { CampaignEditorForm } from './CampaignEditorForm'
 import { Comments } from './Comments'
 import { CouponState, Roles } from 'api/swagger/coupon'
 
 export interface CampaignEditorProps {
-  campaign: UseCampaignFeatures
+  campaignUtils: CampaignUtils
   editing: boolean
 }
 
@@ -32,7 +32,7 @@ export const CampaignEditor: FC<CampaignEditorProps> = props => {
     setEditing,
     getCategories,
     getMajorPartners
-  } = props.campaign
+  } = props.campaignUtils
 
   useEffect(() => {
     dispatch(setEditing(editing))
@@ -92,11 +92,11 @@ export const CampaignEditor: FC<CampaignEditorProps> = props => {
         />
 
         <NavigationAlert when={modified} />
-        <CampaignEditorForm campaign={props.campaign} />
+        <CampaignEditorForm campaignUtils={props.campaignUtils} />
       </Col>
 
       <Col span={6} className="comment-col">
-        <Comments campaign={props.campaign} />
+        <Comments campaignUtils={props.campaignUtils} />
       </Col>
     </Row>
   )

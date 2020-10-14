@@ -20,7 +20,7 @@ component wouldn't re-render.
 
 Example from the [React documentation](https://reactjs.org/docs/hooks-intro.html):
 
-```js
+```tsx
 import React, { useState } from "react";
 
 function Example() {
@@ -52,9 +52,9 @@ variables and they have nothing to do with FCs.
 It's important to always call hooks in the same order every time the component is called. This can
 be achieved by:
 
-  * Putting them on the top of the function body
-  * Not using hooks in loops or conditions, control flow needs to be linear
-</br>
+- Putting them on the top of the function body
+- Not using hooks in loops or conditions, control flow needs to be linear
+  </br>
 
 **Only use hooks in components**
 
@@ -77,3 +77,18 @@ hooks in the same order.
 The [React Router DOM hooks](react-router-dom-hooks.ts) and [React redux hooks](react-redux-hooks.ts) contains wrappers around Redux's and the React Router's own hooks. These wrappers are needed to be able to mock them in the unit tests. `Jest` can overwrite the exports of these two files because they are ES modules.
 
 Other hooks are documented in the files in which they are defined.
+
+</br>
+
+## Naming conventions
+
+Custom hooks should have their names end with `Utils` and their parameter and the return types too,
+like the `useCampaignUtils` hook:
+
+```tsx
+export const useCampaignUtils = (
+  props: CampaignUtilsProps
+): CampaignUtils => {};
+
+const campaignUtils = useCampaignUtils();
+```

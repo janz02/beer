@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import './CampaignCategoryList.scss'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { UseCampaignCategoryListUtils } from './useCampaignCategoryList'
+import { CampaignCategoryListUtils } from './useCampaignCategoryListUtils'
 
 interface CampaignCategoryListProps {
-  categoryListUtils: UseCampaignCategoryListUtils
+  categoryListUtils: CampaignCategoryListUtils
 }
 
 export const CampaignCategoryList: FC<CampaignCategoryListProps> = props => {

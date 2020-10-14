@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
-import { useProductTab } from './products/useProductTab'
-import { useCampaignCategoryTab } from './campaignCategories/useCampaignCategoryTab'
+import { useProductTabUtils } from './products/useProductTabUtils'
+import { useCampaignCategoryTabUtils } from './campaignCategories/useCampaignCategoryTabUtils'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
-import { useTestGroupCategoryTab } from './testGroupCategory/useTestGroupCategoryTab'
-import { useSegmentationCategoryTab } from './segmentationCategories/useSegmentationCategoryTab'
+import { useTestGroupCategoryTabUtils } from './testGroupCategory/useTestGroupCategoryTabUtils'
+import { useSegmentationCategoryTabUtils } from './segmentationCategories/useSegmentationCategoryTabUtils'
 import { useSystemParamsTabUtils } from './systemParams/tab/useSystemParamsTabUtils'
 
-export interface SettingsTab {
+export interface SettingsTabUtils {
   key: string
   title: string
   roles: Roles[]
@@ -24,10 +24,10 @@ export interface SettingsTab {
 export const SettingsPage: React.FC = () => {
   const allTabs = [
     useSystemParamsTabUtils(),
-    useCampaignCategoryTab(),
-    useSegmentationCategoryTab(),
-    useTestGroupCategoryTab(),
-    useProductTab()
+    useCampaignCategoryTabUtils(),
+    useSegmentationCategoryTabUtils(),
+    useTestGroupCategoryTabUtils(),
+    useProductTabUtils()
   ]
   const permittedTabs = allTabs.filter(tab => hasPermission(tab.roles))
   const [currentTabKey, setCurrentTabKey] = useState(permittedTabs[0]?.key)

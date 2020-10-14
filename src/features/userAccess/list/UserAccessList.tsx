@@ -4,10 +4,10 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
 import { userAccessActions, UserAccessTab } from '../userAccessSlice'
-import { useUserAccessList } from './useUserAccessList'
+import { useUserAccessListUtils } from './useUserAccessListUtils'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
-import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ExportButton } from 'components/buttons/ExportButton'
@@ -30,15 +30,18 @@ export const UserAccessList: FC = () => {
     selectedTab,
     setSelectedTab,
     handleExport
-  } = useUserAccessList()
+  } = useUserAccessListUtils()
 
   useEffect(() => {
     dispatch(userAccessActions.getNkmUsers())
     dispatch(userAccessActions.getPartnerUsers())
   }, [dispatch])
 
-  const nkmColumnOrder = useColumnOrder(nkmUsersColumnsConfig, ColumnStorageName.USER_ACCESS_NKM)
-  const partnerColumnOrder = useColumnOrder(
+  const nkmColumnOrderUtils = useColumnOrderUtils(
+    nkmUsersColumnsConfig,
+    ColumnStorageName.USER_ACCESS_NKM
+  )
+  const partnerColumnOrderUtils = useColumnOrderUtils(
     partnerUsersColumnsConfig,
     ColumnStorageName.USER_ACCES_PARTNER
   )
@@ -57,16 +60,16 @@ export const UserAccessList: FC = () => {
         <ExportButton onClick={handleExport} />
         <ResetFiltersButton onClick={resetFilters} />
         {selectedTab === 'nkm' ? (
-          <ColumnOrderDropdown {...nkmColumnOrder} />
+          <ColumnOrderDropdown {...nkmColumnOrderUtils} />
         ) : (
-          <ColumnOrderDropdown {...partnerColumnOrder} />
+          <ColumnOrderDropdown {...partnerColumnOrderUtils} />
         )}
       </>
     )
   }, [
     selectedTab,
-    nkmColumnOrder,
-    partnerColumnOrder,
+    nkmColumnOrderUtils,
+    partnerColumnOrderUtils,
     resetNkmFilters,
     resetPartnerFilters,
     handleExport
@@ -91,7 +94,7 @@ export const UserAccessList: FC = () => {
             hasHeaderOffset
             {...{
               loading: nkmLoading,
-              columns: nkmColumnOrder.currentColumns,
+              columns: nkmColumnOrderUtils.currentColumns,
               dataSource: nkmUsers.map((u, i) => ({ ...u, key: i })),
               pagination: nkmUsersTableUtils.paginationConfig,
               onChange: nkmUsersTableUtils.handleTableChange
@@ -103,7 +106,7 @@ export const UserAccessList: FC = () => {
             hasHeaderOffset
             {...{
               loading: partnerLoading,
-              columns: partnerColumnOrder.currentColumns,
+              columns: partnerColumnOrderUtils.currentColumns,
               dataSource: partnerUsers.map((u, i) => ({ ...u, key: i })),
               pagination: partnerUsersTableUtils.paginationConfig,
               onChange: partnerUsersTableUtils.handleTableChange

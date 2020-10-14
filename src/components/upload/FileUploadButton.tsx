@@ -5,10 +5,10 @@ import { UploadOutlined, DeleteOutlined } from '@ant-design/icons'
 import React, { FC } from 'react'
 import { Tooltip } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useFileUpload, UseFileUploadProps } from './useFileUpload'
+import { useFileUploadUtils, FileUploadUtilsProps } from './useFileUploadUtils'
 
 export type FileUploadButtonProps = Pick<
-  UseFileUploadProps,
+  FileUploadUtilsProps,
   'disabled' | 'initialFileId' | 'onRemove' | 'onSuccess' | 'onClick'
 >
 
@@ -20,7 +20,7 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
     handleFileUpload: handleSingleImageUpload,
     appendedUploadProps,
     thumbnail
-  } = useFileUpload({
+  } = useFileUploadUtils({
     ...props
   })
 
