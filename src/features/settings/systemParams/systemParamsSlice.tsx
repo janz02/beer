@@ -111,12 +111,13 @@ const updateSystemParam = (
   try {
     dispatch(setEditorState(FeatureState.Loading))
 
-    console.log(param)
     await api.coupon.systemParameters.updateSystemParameter({
       key: param.key || null,
       systemParameterDto: { value: param.value }
     })
+
     dispatch(setEditorState(FeatureState.Success))
+
     callbackFn()
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
