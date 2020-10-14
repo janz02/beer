@@ -26,19 +26,19 @@ export interface UserPermissionVm {
      */
     isSelected?: boolean;
     /**
-     * The id of the user.
+     * 
      * @type {number}
      * @memberof UserPermissionVm
      */
     id?: number;
     /**
-     * The natural name of the user.
+     * 
      * @type {string}
      * @memberof UserPermissionVm
      */
     name?: string | null;
     /**
-     * The email of the user.
+     * 
      * @type {string}
      * @memberof UserPermissionVm
      */
