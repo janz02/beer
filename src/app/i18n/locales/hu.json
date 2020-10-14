@@ -851,8 +851,8 @@
     },
     "keys": {
       "system_settings_partner-campaign-limit": {
-        "description": "A partnerekhez tartozó globális kampány darabszám korlátozás.",
-        "name": "Partner kampány limit"
+        "backend_key_description": "A partnerekhez tartozó globális kampány darabszám korlátozás.",
+        "backend_key_name": "Partner kampány limit"
       }
     }
   },

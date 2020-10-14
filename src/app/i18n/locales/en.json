@@ -851,8 +851,8 @@
     },
     "keys": {
       "system_settings_partner-campaign-limit": {
-        "description": "Global limitation for partners' campaign number.",
-        "name": "Partners' campaign limit"
+        "backend_key_description": "Global limitation for partners' campaign number.",
+        "backend_key_name": "Partners' campaign limit"
       }
     }
   },

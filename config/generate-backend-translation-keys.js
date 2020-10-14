@@ -113,7 +113,7 @@ generateKeys(
   "/api/SystemParameters/Keys",
   fileNameKey,
   "system-params.keys.",
-  ["name", "description"],
+  ["backend_key_name", "backend_key_description"],
   null,
   true
 );
