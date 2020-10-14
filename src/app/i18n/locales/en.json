@@ -347,7 +347,12 @@
       "no-template": "Template ID not found.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",
-      "server-unavailable": "Unsuccessful communication with the server, try again later."
+      "server-unavailable": "Unsuccessful communication with the server, try again later.",
+      "systemParameter": {
+        "partner-campaign-limit-*": "Limit can only be a whole number between 0 and 1000.",
+        "value-is-empty": "System parameters' value is required.",
+        "value-is-not-whole-number": "Value is not a whole number."
+      }
     },
     "coupon": {
       "already-claimed": "Coupon already claimed, use another one.",
@@ -413,6 +418,9 @@
     },
     "sendgrid": {
       "communication": "An error has occured while trying to send an email. Please try again later!"
+    },
+    "service": {
+      "only-read-operations-supported": "Only read operations supported."
     },
     "unknown-try-again": "Please, try again!",
     "validation": {
@@ -832,12 +840,6 @@
     }
   },
   "system-params": {
-    "description": {
-      "customerSupportEmail": "__STRING_NOT_TRANSLATED__",
-      "customerSuppportPhone": "__STRING_NOT_TRANSLATED__",
-      "kkvLimit": "__STRING_NOT_TRANSLATED__",
-      "winnerCouponLink": "__STRING_NOT_TRANSLATED__"
-    },
     "editor": {
       "title": "System parameters"
     },
@@ -846,11 +848,11 @@
       "name": "Parameter name",
       "value": "Parameter value"
     },
-    "key": {
-      "customerSupportEmail": "__STRING_NOT_TRANSLATED__",
-      "customerSuppportPhone": "__STRING_NOT_TRANSLATED__",
-      "kkvLimit": "__STRING_NOT_TRANSLATED__",
-      "winnerCouponLink": "__STRING_NOT_TRANSLATED__"
+    "keys": {
+      "system_settings_partner-campaign-limit": {
+        "description": "Global limitation for partners' campaign number.",
+        "name": "Partners' campaign limit"
+      }
     }
   },
   "test-group-category": {

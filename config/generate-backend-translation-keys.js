@@ -5,6 +5,10 @@ const shell = require("shelljs");
 const fs = require("fs-extra");
 const https = require("https");
 
+// helpers
+// keyMapper removes dots from backend keys and replaces them with underscores
+const keyMapper = keyToFormat => keyToFormat.split(".").join("_");
+
 // 1. Translation key list files
 const fileNameError = "src/app/i18n/backend-generated-error-codes.ts";
 const fileNameEnum = "src/app/i18n/backend-generated-enum-codes.ts";
@@ -12,7 +16,7 @@ const fileNameKey = "src/app/i18n/backend-generated-key-codes.ts";
 
 // 2. Remove old list file and prepare the new one
 (() => {
-  const fileNames = [fileNameError, fileNameEnum];
+  const fileNames = [fileNameError, fileNameEnum, fileNameKey];
   fileNames.forEach(fileName => {
     fs.removeSync(fileName);
     fs.createFileSync(fileName);
@@ -21,7 +25,14 @@ const fileNameKey = "src/app/i18n/backend-generated-key-codes.ts";
 })();
 
 // Function to generate translation keys
-const generateKeys = (path, fileName, prefix = "", onData) => {
+const generateKeys = (
+  path,
+  fileName,
+  prefix = "",
+  postfixes,
+  onData,
+  mappingRequired = false
+) => {
   const req = https.request(
     {
       hostname: "pkm-coupon-dev.grapetest.xyz",
@@ -32,10 +43,28 @@ const generateKeys = (path, fileName, prefix = "", onData) => {
       res.on("data", d => {
         const keys = JSON.parse(d);
         let content = "";
-        content += keys.reduce(
-          (acc, key) => acc + `\ni18n.t('${prefix}${key}')`,
-          ""
-        );
+
+        if (postfixes) {
+          postfixes.forEach(postfix => {
+            content += keys.reduce(
+              (acc, key) =>
+                acc +
+                `\ni18n.t('${prefix}${
+                  mappingRequired ? keyMapper(key) : key
+                }.${postfix}')`,
+              ""
+            );
+            content += "\n";
+          });
+        } else {
+          content += keys.reduce(
+            (acc, key) =>
+              acc +
+              `\ni18n.t('${prefix}${mappingRequired ? keyMapper(key) : key}')`,
+            ""
+          );
+        }
+
         content += "\n";
         fs.appendFileSync(fileName, content);
 
@@ -71,35 +100,22 @@ const checkNotificationLinks = json => {
   }
 };
 
-const checkSystemParamKeys = json => {
-  const systemParamsRaw = fs.readFileSync(
-    "src/features/settings/systemParams/systemParams.json"
-  );
-  const systemParams = JSON.parse(systemParamsRaw);
-  const allSystemParamHasDescription = json.every(key =>
-    systemParams.find(frontendParam => frontendParam.key === key)
-  );
-
-  if (!allSystemParamHasDescription) {
-    throw Error(
-      "System parameter descriptions are missing for the newly added system parameter keys."
-    );
-  }
-};
-
 // 3. Generate lists
 generateKeys("/api/Information", fileNameError);
 generateKeys(
   "/api/Notifications/Types",
   fileNameEnum,
   "enum.notification-type.",
+  null,
   checkNotificationLinks
 );
 generateKeys(
   "/api/SystemParameters/Keys",
   fileNameKey,
-  "system-params.key.",
-  checkSystemParamKeys
+  "system-params.keys.",
+  ["name", "description"],
+  null,
+  true
 );
 
 shell.exec("npm run i18n:generate");
