@@ -21,6 +21,12 @@ import { exists, mapValues } from '../runtime';
 export interface CashierDto {
     /**
      * 
+     * @type {number}
+     * @memberof CashierDto
+     */
+    siteId?: number;
+    /**
+     * 
      * @type {string}
      * @memberof CashierDto
      */
@@ -43,6 +49,7 @@ export function CashierDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
+        'siteId': !exists(json, 'siteId') ? undefined : json['siteId'],
         'cashierId': !exists(json, 'cashierId') ? undefined : json['cashierId'],
         'digitalStampId': !exists(json, 'digitalStampId') ? undefined : json['digitalStampId'],
     };
@@ -57,6 +64,7 @@ export function CashierDtoToJSON(value?: CashierDto | null): any {
     }
     return {
         
+        'siteId': value.siteId,
         'cashierId': value.cashierId,
         'digitalStampId': value.digitalStampId,
     };
