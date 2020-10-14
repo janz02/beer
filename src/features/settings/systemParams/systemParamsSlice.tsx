@@ -93,8 +93,6 @@ const getSystemParams = (params: ListRequestParams = {}): AppThunk => async (
         )
       : []
 
-    console.log(mappedResult[0])
-
     dispatch(
       getSystemParamsSuccess({
         systemParams: mappedResult,
@@ -112,10 +110,14 @@ const updateSystemParam = (
 ): AppThunk => async dispatch => {
   try {
     dispatch(setEditorState(FeatureState.Loading))
-    // todo integration
+
+    console.log(param)
+    await api.coupon.systemParameters.updateSystemParameter({
+      key: param.key || null,
+      systemParameterDto: { value: param.value }
+    })
     dispatch(setEditorState(FeatureState.Success))
     callbackFn()
-    // todo reload store values
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
   }
