@@ -344,6 +344,7 @@
       "field-required": "This field is required.",
       "internal": "Unsuccessful communication with the server, try again later.",
       "max-length-exact": "This field must be less then {{max}} characters.",
+      "max-number-exact": "This field maximum value is {{max}}.",
       "no-template": "Template ID not found.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",

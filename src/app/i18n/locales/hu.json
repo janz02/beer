@@ -344,6 +344,7 @@
       "field-required": "A mező megadása kötelező.",
       "internal": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
+      "max-number-exact": "A mező értéke maximum {{max}} lehet.",
       "no-template": "Nem található sablon azonosító.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",

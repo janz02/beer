@@ -41,10 +41,10 @@ export const useSystemParamsEditorUtils = (
   }
 
   const handleSave = async (updatedParam: SystemParam): Promise<void> => {
+    console.log(updatedParam)
     dispatch(
       systemParamsActions.updateSystemParam(updatedParam, () => {
         handleExit()
-        // dispatch(systemParamsActions.getSystemParams()) // might need this at integration
       })
     )
   }
