@@ -2,18 +2,22 @@ import './GroupedNotificationLists.scss'
 import React, { FC } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import { useTranslation } from 'react-i18next'
-import { useNotification } from './useNotification'
+import { NotificationUtils } from './useNotificationUtils'
 import moment from 'moment'
 import { NotificationList } from './NotificationList'
 
-export const GroupedNotificationLists: FC = () => {
+interface GroupedNotificationListsProps {
+  notificationUtils: NotificationUtils
+}
+
+export const GroupedNotificationLists: FC<GroupedNotificationListsProps> = props => {
   const { t } = useTranslation()
   const {
     filteredNotifications,
     handleGetNotifications,
     handleReadAll,
     canLoadMore
-  } = useNotification()
+  } = props.notificationUtils
 
   const yesterday = moment().subtract(1, 'day')
 
@@ -45,11 +49,13 @@ export const GroupedNotificationLists: FC = () => {
               todayNotifications.length === filteredNotifications.length &&
               filteredNotifications.length !== 0
             }
+            notificationUtils={props.notificationUtils}
           />
           <NotificationList
             groupName={t('notification.yesterday')}
             items={yesterdayNotifications}
             loadMore={yesterdayNotifications.length > 0 && earlierNotifications.length === 0}
+            notificationUtils={props.notificationUtils}
           />
           <NotificationList
             groupName={
@@ -59,6 +65,7 @@ export const GroupedNotificationLists: FC = () => {
             }
             items={earlierNotifications}
             loadMore={earlierNotifications.length > 0 || filteredNotifications.length === 0}
+            notificationUtils={props.notificationUtils}
           />
         </div>
       </InfiniteScroll>

@@ -1,5 +1,5 @@
 import { hasPermission } from 'services/jwt-reader'
-import { notificationRoleConfig } from 'features/notification/useNotification'
+import { notificationRoleConfig } from 'features/notification/useNotificationUtils'
 import { notificationActions } from './notificationSlice'
 import { store } from 'app/store'
 import { SignalrConnection } from 'middlewares/signalR/signalrTypes'

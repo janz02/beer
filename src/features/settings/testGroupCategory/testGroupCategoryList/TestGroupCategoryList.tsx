@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { UseTestGroupCategoryListUtils } from './useTestGroupCategoryList'
+import { TestGroupCategoryListUtils } from './useTestGroupCategoryListUtils'
 import { GenericPopup } from 'components/popups/GenericPopup'
 
 interface CategoryListProps {
-  categoryListUtils: UseTestGroupCategoryListUtils
+  categoryListUtils: TestGroupCategoryListUtils
 }
 
 export const TestGroupCategoryList: FC<CategoryListProps> = props => {

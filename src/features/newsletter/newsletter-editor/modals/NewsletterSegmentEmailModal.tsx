@@ -3,10 +3,13 @@ import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { Form, Input, Select } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
+import { NewsletterEditorModalUtils } from './useNewsletterEditorModalUtils'
 
-import { useNewsletterEditorModals } from './useNewsletterEditorModals'
+interface NewsletterSegmentEmailModalProps {
+  newsletterEditorModalUtils: NewsletterEditorModalUtils
+}
 
-export const NewsletterSegmentEmailModal: FC = () => {
+export const NewsletterSegmentEmailModal: FC<NewsletterSegmentEmailModalProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
@@ -15,7 +18,7 @@ export const NewsletterSegmentEmailModal: FC = () => {
     segments,
     openSegmentEmail,
     handleGetSegmnentsForEmail
-  } = useNewsletterEditorModals()
+  } = props.newsletterEditorModalUtils
 
   useEffect(() => {
     openSegmentEmail && handleGetSegmnentsForEmail()

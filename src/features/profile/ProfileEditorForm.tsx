@@ -3,9 +3,13 @@ import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { history } from 'router/router'
-import { useProfile } from './useProfile'
+import { ProfileUtils } from './useProfileUtils'
 
-export const ProfileEditorForm: FC = () => {
+interface ProfileEditorFormProps {
+  profileUtils: ProfileUtils
+}
+
+export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   const {
@@ -16,7 +20,7 @@ export const ProfileEditorForm: FC = () => {
     prepareFormFields,
     checkFieldsChange,
     handleFinish
-  } = useProfile()
+  } = props.profileUtils
 
   useEffect(() => {
     prepareFormFields()

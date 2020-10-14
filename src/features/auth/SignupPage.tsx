@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { history } from 'router/router'
 import { AuthLayout } from './components/AuthLayout'
 import { useCommonFormRules } from 'hooks/useCommonFormRules'
-import { useAuth } from './useAuth'
+import { useAuthUtils } from './useAuthUtils'
 import styles from './SignupPage.module.scss'
 
 export const SignupPage: React.FC = () => {
   const { t } = useTranslation()
-  const { loading, handleSignup, hasRegistrationCodeInUrl, form } = useAuth()
+  const { loading, handleSignup, hasRegistrationCodeInUrl, form } = useAuthUtils()
   const rule = useCommonFormRules()
 
   return (

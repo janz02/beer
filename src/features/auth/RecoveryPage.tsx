@@ -5,12 +5,12 @@ import { useTranslation } from 'react-i18next'
 import { history } from 'router/router'
 import { AuthLayout } from './components/AuthLayout'
 import { useCommonFormRules } from 'hooks'
-import { useAuth } from './useAuth'
+import { useAuthUtils } from './useAuthUtils'
 import styles from './RecoveryPage.module.scss'
 
 export const RecoveryPage: React.FC = () => {
   const { t } = useTranslation()
-  const { loading, handleRecoverPassword } = useAuth()
+  const { loading, handleRecoverPassword } = useAuthUtils()
   const rule = useCommonFormRules()
 
   return (

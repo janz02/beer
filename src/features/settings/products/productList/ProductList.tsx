@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { UseProductListUtils } from './useProductList'
+import { ProductListUtils } from './useProductListUtils'
 
 interface ProductListProps {
-  productListUtils: UseProductListUtils
+  productListUtils: ProductListUtils
 }
 
 export const ProductList: FC<ProductListProps> = props => {

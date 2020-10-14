@@ -1,15 +1,15 @@
 import React from 'react'
 import { Dropdown, Button } from 'antd'
 import { ColumOrderLayout } from './ColumnOrderLayout'
-import { UseColumnOrderFeatures } from './useColumnOrder'
+import { ColumnOrderUtils } from './useColumnOrderUtils'
 import { useTranslation } from 'react-i18next'
 import { DownOutlined } from '@ant-design/icons'
 import Text from 'antd/lib/typography/Text'
 import styles from './ColumnOrderDropdown.module.scss'
 
 export const ColumnOrderDropdown: <T>(
-  p: UseColumnOrderFeatures<T>
-) => React.ReactElement<UseColumnOrderFeatures<T>> = props => {
+  p: ColumnOrderUtils<T>
+) => React.ReactElement<ColumnOrderUtils<T>> = props => {
   const { t } = useTranslation()
 
   return (

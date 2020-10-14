@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { useCampaignCategoryEditor } from './useCampaignCategoryEditor'
+import { useCampaignCategoryEditorUtils } from './useCampaignCategoryEditorUtils'
 
 export interface CampaignCategoryEditorParams {
   visible?: boolean
@@ -31,7 +31,7 @@ export const CampaignCategoryEditor: FC<CampaignCategoryEditorProps> = props => 
     handleGetCategory,
     handleSave,
     afterCloseExtended
-  } = useCampaignCategoryEditor(props)
+  } = useCampaignCategoryEditorUtils(props)
 
   useEffect(() => {
     handleGetCategory()

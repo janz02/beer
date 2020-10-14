@@ -4,10 +4,10 @@ import { CampaignCategoryEditor } from './categoryEditor/CampaignCategoryEditor'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { campaignCategoryListActions } from './categoryList/campaignCategoryListSlice'
 import { UseGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
-import { UseCampaignCategoryListUtils } from './categoryList/useCampaignCategoryList'
+import { CampaignCategoryListUtils } from './categoryList/useCampaignCategoryListUtils'
 
 export interface CampaignCategoryTabProps {
-  categoryListUtils: UseCampaignCategoryListUtils
+  categoryListUtils: CampaignCategoryListUtils
   modalUtils: UseGenericModalFormEditorUtils
 }
 
