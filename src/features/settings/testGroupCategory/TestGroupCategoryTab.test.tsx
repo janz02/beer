@@ -6,7 +6,7 @@ import { OrderByType } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
 import { Roles } from 'api/swagger/coupon'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route } from 'react-router-dom'
 
 jest.mock('app/store')
