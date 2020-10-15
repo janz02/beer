@@ -22,7 +22,7 @@ interface FileThumbnail {
 export interface FileUploadUtilsProps {
   uploadProps?: UploadProps
   disabled?: boolean
-  onSuccess?: (id: string) => void
+  onSuccess?: (fileDetail: any) => void
   onRemove?: () => void
   onClick?: () => void
   onError?: (error: string) => void
@@ -168,13 +168,18 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
           break
         case 'done':
           handleUploadSuccess(file)
-          onSuccess?.(file.response.id)
+          onSuccess?.({
+            id: file.response.id,
+            extension: file.response.exstension,
+            size: file.size,
+            objectUrl: URL.createObjectURL(file.originFileObj)
+          })
           setFileId(file.response.id)
 
           // validation triggers
-          validateImgDimensions(file.originFileObj)
-          validateFileSize(file.size)
-          validateFileExtension(file.response.extension)
+          // validateImgDimensions(file.originFileObj)
+          // validateFileSize(file.size)
+          // validateFileExtension(file.response.extension)
           break
         case 'removed':
           setThumbnail({ loading: false, error: t('error.unknown-try-again') })
@@ -190,10 +195,10 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
     [
       handleUploadSuccess,
       onSuccess,
-      t,
-      validateImgDimensions,
-      validateFileSize,
-      validateFileExtension
+      t
+      // validateImgDimensions,
+      // validateFileSize,
+      // validateFileExtension
     ]
   )
 

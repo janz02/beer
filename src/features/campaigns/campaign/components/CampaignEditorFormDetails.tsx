@@ -434,35 +434,45 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
       <Row gutter={rowGutter}>
         <Col span={12}>
           <Form.Item
-            name="smallPictureId"
+            name="smallPicture"
             label={t('coupon-create.field.small-image')}
             extra={t('coupon-create.field.small-image-help')}
-            rules={[rule.required(t('error.validation.coupon.small-picture-id-required'))]}
-            help={getFieldState('smallPictureId')}
-            validateStatus={getFieldState('smallPictureId') ? 'error' : undefined}
+            rules={[
+              rule.required(t('error.validation.coupon.small-picture-id-required'))
+              // rule.fileExtension('.jpg,.png'),
+              // rule.fileSize(50),
+              // rule.fileImgDimensions({ width: 360, height: 270 })
+            ]}
+            // help={getFieldState('smallPictureId')}
+            // validateStatus={getFieldState('smallPictureId') ? 'error' : undefined}
           >
             <PictureUploadButton
               disabled={!displayEditor}
-              onSuccess={fileId => {
+              onSuccess={fileDetails => {
                 form.setFieldsValue({
                   ...form.getFieldsValue(),
-                  smallPictureId: fileId
+                  smallPicture: fileDetails
                 })
-                removeError('smallPictureId')
-                form.validateFields(['smallPictureId'])
+                removeError('smallPicture')
+                form.validateFields(['smallPicture'])
               }}
               onRemove={() => {
                 form.setFieldsValue({
                   ...form.getFieldsValue(),
-                  smallPictureId: undefined
+                  smallPicture: undefined
                 })
 
-                removeError('smallPictureId')
-                form.validateFields(['smallPictureId'])
+                removeError('smallPicture')
+                form.validateFields(['smallPicture'])
               }}
-              onError={type => {
-                setError('smallPictureId', type as any)
-              }}
+              // onError={type => {
+              //   form.setFieldsValue({
+              //     ...form.getFieldsValue(),
+              //     smallPictureId: undefined
+              //   })
+              //   setError('smallPictureId', type as any)
+              //   form.validateFields(['smallPictureId'])
+              // }}
               initialFileId={coupon?.smallPictureId}
               allowedImgDimensions={{
                 width: 360,

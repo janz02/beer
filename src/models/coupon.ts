@@ -38,6 +38,7 @@ export interface Coupon {
   approvedBy?: string | null
   approvedDate?: moment.Moment
   smallPictureId?: string | null
+  smallPicture?: { id: string; extension?: string; size?: number; objectUrl?: string }
   bigPictureId?: string | null
   onlineClaimLink?: string | null
   productDetails?: string | null

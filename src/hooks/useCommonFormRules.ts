@@ -1,6 +1,7 @@
 import { Rule } from 'rc-field-form/lib/interface'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
+import { PictureDimensions } from 'components/upload/useFileUploadUtils'
 
 /**
  * Contains validation rules that can be used with Ant Design Forms.
@@ -109,5 +110,74 @@ export function useCommonFormRules() {
     [t]
   )
 
-  return { required, requiredString, password, number, email, max, positiveInteger }
+  /**
+   * FileExtension
+   * @param extensions string, accept attribute of input fields, example: <input type="file" accept=".jpg,.png">
+   * @param message (optional) string
+   */
+  const fileExtension = useCallback(
+    (extensions: string, message?: string): Rule => ({
+      validator: (rule, value) => {
+        // console.log(value)
+        return value ? Promise.reject(new Error('incorrectFileExtension')) : Promise.resolve()
+      },
+      message: message || t('error.common.incorrect-file-extension')
+    }),
+    [t]
+  )
+
+  /**
+   * FileSize
+   * @param size (optional) number
+   * @param message (optional) string
+   */
+  const fileSize = useCallback(
+    (size?: number, message?: string): Rule => ({
+      validator: (rule, value) => {
+        // console.log(value)
+        return value ? Promise.reject(new Error('tooBigFile')) : Promise.resolve()
+      },
+      message: message || t('error.common.file-size-too-big')
+    }),
+    [t]
+  )
+
+  /**
+   * ImgDimensions
+   * @param dimensions allowed picture dimensions in pixel, example: { width: 300, height: 400 }
+   * @param message (optional) string
+   */
+  const fileImgDimensions = useCallback(
+    (dimensions: PictureDimensions, message?: string): Rule => ({
+      validator: (rule, value) => {
+        console.log(value)
+        const img: HTMLImageElement = new Image()
+        // img.onload = () => {}
+        img.src = value.objectUrl
+        return value && (img.width !== dimensions.width || img.height !== dimensions.height)
+          ? Promise.reject(new Error('imgDimensionsNotValid'))
+          : Promise.resolve()
+      },
+      message:
+        message ||
+        t('error.common.img-dimensions-incorrect', {
+          width: dimensions.width,
+          height: dimensions.height
+        })
+    }),
+    [t]
+  )
+
+  return {
+    required,
+    requiredString,
+    password,
+    number,
+    email,
+    max,
+    positiveInteger,
+    fileExtension,
+    fileSize,
+    fileImgDimensions
+  }
 }
