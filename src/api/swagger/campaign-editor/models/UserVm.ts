@@ -14,25 +14,25 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * A dto to describe a user.
+ * 
  * @export
  * @interface UserVm
  */
 export interface UserVm {
     /**
-     * The id of the user.
+     * 
      * @type {number}
      * @memberof UserVm
      */
     id?: number;
     /**
-     * The natural name of the user.
+     * 
      * @type {string}
      * @memberof UserVm
      */
     name?: string | null;
     /**
-     * The email of the user.
+     * 
      * @type {string}
      * @memberof UserVm
      */

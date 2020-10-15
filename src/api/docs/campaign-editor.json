@@ -5067,22 +5067,18 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "The id of the user.",
             "format": "int32"
           },
           "name": {
             "type": "string",
-            "description": "The natural name of the user.",
             "nullable": true
           },
           "email": {
             "type": "string",
-            "description": "The email of the user.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A dto to describe a user."
+        "additionalProperties": false
       },
       "AdGroupVm": {
         "type": "object",
@@ -6689,17 +6685,14 @@
           },
           "id": {
             "type": "integer",
-            "description": "The id of the user.",
             "format": "int32"
           },
           "name": {
             "type": "string",
-            "description": "The natural name of the user.",
             "nullable": true
           },
           "email": {
             "type": "string",
-            "description": "The email of the user.",
             "nullable": true
           }
         },

@@ -344,10 +344,16 @@
       "field-required": "A mező megadása kötelező.",
       "internal": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
+      "max-number-exact": "A mező értéke maximum {{max}} lehet.",
       "no-template": "Nem található sablon azonosító.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
-      "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később."
+      "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
+      "systemParameter": {
+        "partner-campaign-limit-*": "A limit csak 1 és 1000 érték közötti egész szám lehet.",
+        "value-is-empty": "Rednszerparaméterhez kötelező megadni értéket.",
+        "value-is-not-whole-number": "Az érték csak egész szám lehet."
+      }
     },
     "coupon": {
       "already-claimed": "Ez a kupon már ki lett váltva, használjon másik kupont.",
@@ -413,6 +419,9 @@
     },
     "sendgrid": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
+    },
+    "service": {
+      "only-read-operations-supported": "Csak olvasási műveletek engedélyezettek."
     },
     "unknown-try-again": "Kérem, próbálja újra",
     "validation": {
@@ -840,11 +849,11 @@
       "name": "Paraméter név",
       "value": "Paraméter érték"
     },
-    "key": {
-      "customerSupportEmail": "Az ügyfélszolgálat e-mail címe, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
-      "customerSuppportPhone": "Az ügyfélszolgálat telefonszáma, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
-      "kkvLimit": "Megadja a limitációt, hogy egy KKV partnernek párhuzamosan hány jóváhagyott kampánya lehet a rendszerben",
-      "winnerCouponLink": "A KPR websiteon a nyertes kuponok liistáját tartalmazó oldal linkje, amelyet a kiküldött nyeremény értesítő email tartalmaz."
+    "keys": {
+      "system_settings_partner-campaign-limit": {
+        "backend_key_description": "A partnerekhez tartozó globális kampány darabszám korlátozás.",
+        "backend_key_name": "Partner kampány limit"
+      }
     }
   },
   "test-group-category": {
