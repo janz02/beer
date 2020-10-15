@@ -6,7 +6,7 @@ import "./grapesjsMergeTags.module.scss";
 const baseConfig = {
   dataKey: "mergetag",
   blockIconClass: "fa fa-tag",
-  mergeTagInitialName: "mergeTagÉrték",
+  mergeTagInitialName: "mergeTagNév",
   noSelection: "nincs kiválasztva",
   tagSelectOptions: [], // just for initialization, this is from outside, from api call response
   traitConfig: {
@@ -28,7 +28,7 @@ const baseConfig = {
     tagSelect: {
       id: "tagSelectElement",
       attribute: "tagselect", // ONLY LOWERCASE BECAUSE OF HTML ATTRIBUTES!
-      label: "Érték:",
+      label: "Név:",
       options: [] // later loaded from outside
     }
   }
