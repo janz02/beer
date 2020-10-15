@@ -8,7 +8,14 @@
     margin-bottom: 0 !important;
 
     &-title {
-      margin-bottom: 15px !important;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: semi;
+    }
+
+    .notification-detail {
+      margin-bottom: 15px;
+      color: $faded-text-color;
     }
   }
 

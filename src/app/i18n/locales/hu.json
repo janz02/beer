@@ -302,10 +302,22 @@
       "Phone": "Telefon"
     },
     "notification-type": {
-      "CampaignMovedToWaitingState": "Kampány várakozó állapotba került",
-      "CouponClosed": "A kampályhoz tartozó kuponokat kikapcsolták",
-      "CouponCountDepleted": "A kampányhoz tartozó kuponok elfogytak",
-      "PartnerContactRegistered": "Új KKV partner regisztráció:"
+      "CampaignMovedToWaitingState": {
+        "detail": "{{actual.value}} - {{parent.value}} által",
+        "title": "Jóváhagyásra váró kampány érkezett"
+      },
+      "CouponClosed": {
+        "detail": "{{actual.value}} - {{parent.value}} által",
+        "title": "Lezárult a kampány"
+      },
+      "CouponCountDepleted": {
+        "detail": "{{actual.value}} - {{parent.value}}",
+        "title": "Elfogytak a kampányhoz tartozó kuponok"
+      },
+      "PartnerContactRegistered": {
+        "detail": "{{parent.value}} partnerhez {{actual.value}} névvel",
+        "title": "Új kapcsolattartó regisztrált"
+      }
     }
   },
   "error": {

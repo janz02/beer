@@ -35,7 +35,9 @@ describe('NotificationType tests', () => {
 
     // Act
     const allItemHasTranslation = Object.keys(NotificationType).every(e => translations.includes(e))
-    const allItemIsTranslated = translatedStrings.every(e => e !== '__STRING_NOT_TRANSLATED__')
+    const allItemIsTranslated = translatedStrings.every(
+      e => e.detail !== '__STRING_NOT_TRANSLATED__' && e.title !== '__STRING_NOT_TRANSLATED__'
+    )
 
     // Assert
     expect(allItemHasTranslation).toBeTruthy()

@@ -106,7 +106,7 @@ generateKeys(
   "/api/Notifications/Types",
   fileNameEnum,
   "enum.notification-type.",
-  null,
+  ["title","detail"],
   checkNotificationLinks
 );
 generateKeys(
@@ -118,4 +118,4 @@ generateKeys(
   true
 );
 
-shell.exec("npm run i18n:generate");
+// shell.exec("npm run i18n:generate");
