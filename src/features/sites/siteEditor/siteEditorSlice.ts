@@ -191,7 +191,7 @@ const saveCashier = (cashier: Cashier): AppThunk => async (dispatch, getState) =
       await api.coupon.cashiers.updateCashier({ id: cashier.id, cashierDto: cashier })
     } else {
       await api.coupon.cashiers.createCashier({
-        createCashierDto: { ...cashier, siteId: getState().siteEditor.site?.id }
+        cashierDto: { ...cashier, siteId: getState().siteEditor.site?.id }
       })
     }
 

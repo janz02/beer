@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useEffect } from 'react'
+import React, { FC, PropsWithChildren, useEffect, useMemo } from 'react'
 import { Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
@@ -23,14 +23,29 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
   const {
     initialValues,
     loading,
-    getSystemParamById,
+    getSystemParam,
     handleSave,
     afterCloseExtended
   } = useSystemParamsEditorUtils(props)
 
+  const valueRules = useMemo(() => {
+    let result: any[]
+
+    if (initialValues?.type === 'text') {
+      result = [
+        rule.requiredString(t('error.common.field-required')),
+        rule.max(500, t('error.common.max-length-exact', { max: 500 }))
+      ]
+    } else {
+      result = [rule.required(), rule.number(), rule.positiveInteger(), rule.maxValue(1000)]
+    }
+
+    return isReadonly ? [] : result
+  }, [isReadonly, initialValues, t, rule])
+
   useEffect(() => {
-    getSystemParamById()
-  }, [getSystemParamById])
+    getSystemParam()
+  }, [getSystemParam])
 
   return (
     <GenericModalForm
@@ -50,6 +65,10 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
       initialValues={initialValues}
       hideFooter={isReadonly}
     >
+      <Form.Item name="key" className="hidden-form-item">
+        <Input type="hidden" disabled className="readonly-form-item" />
+      </Form.Item>
+
       <Form.Item label={t('system-params.field.name')} name="name">
         <Input disabled className="readonly-form-item" />
       </Form.Item>
@@ -58,18 +77,7 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
         <Input.TextArea disabled className="readonly-form-item" />
       </Form.Item>
 
-      <Form.Item
-        label={t('system-params.field.value')}
-        name="value"
-        rules={
-          !isReadonly
-            ? [
-                rule.requiredString(t('error.common.field-required')),
-                rule.max(500, t('error.common.max-length-exact', { max: 500 }))
-              ]
-            : []
-        }
-      >
+      <Form.Item label={t('system-params.field.value')} name="value" rules={valueRules}>
         <Input
           maxLength={500}
           disabled={isReadonly}
