@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { UseGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
+import { GenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { useDispatch } from '../../../hooks/react-redux-hooks'
 import { SegmentationCategoryListUtils } from './categoryList/useSegmentationCategoryListUtils'
 import { segmentationCategoryListActions } from './categoryList/segmentationCategoryListSlice'
@@ -8,7 +8,7 @@ import { SegmentationCategoryEditor } from './categoryEditor/SegmentationCategor
 
 export interface SegmentationCategoryTabProps {
   categoryListUtils: SegmentationCategoryListUtils
-  modalUtils: UseGenericModalFormEditorUtils
+  modalUtils: GenericModalFormEditorUtils
 }
 
 export const SegmentationCategoryTab: React.FC<SegmentationCategoryTabProps> = props => {
