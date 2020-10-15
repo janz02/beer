@@ -91,6 +91,23 @@ export function useCommonFormRules() {
   )
 
   /**
+   * Max value
+   * @param max number, max value of the integer input
+   * @param message (optional) string
+   */
+  const maxValue = useCallback(
+    (max: number, message?: string): Rule => ({
+      transform: value => {
+        return value ? +value : undefined
+      },
+      type: 'integer',
+      max,
+      message: message || t('error.common.max-number-exact', { max })
+    }),
+    [t]
+  )
+
+  /**
    * Integer
    * @param message (optional) string
    */
@@ -109,5 +126,5 @@ export function useCommonFormRules() {
     [t]
   )
 
-  return { required, requiredString, password, number, email, max, positiveInteger }
+  return { required, requiredString, password, number, email, max, maxValue, positiveInteger }
 }

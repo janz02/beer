@@ -132,22 +132,40 @@ export interface CouponVm {
     categoryId?: number;
     /**
      * 
-     * @type {Array<number>}
+     * @type {number}
      * @memberof CouponVm
      */
-    tags?: Array<number> | null;
+    partnerId?: number;
     /**
      * 
-     * @type {Array<CouponCommentVm>}
+     * @type {boolean}
      * @memberof CouponVm
      */
-    comments?: Array<CouponCommentVm> | null;
+    isActive?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CouponVm
+     */
+    isPartnerActive?: boolean;
     /**
      * 
      * @type {string}
      * @memberof CouponVm
      */
-    predefinedCodesFileId?: string | null;
+    bigPictureId?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    smallPictureId?: string | null;
+    /**
+     * 
+     * @type {CouponMode}
+     * @memberof CouponVm
+     */
+    mode?: CouponMode;
     /**
      * 
      * @type {string}
@@ -186,34 +204,22 @@ export interface CouponVm {
     approvedDate?: Date | null;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof CouponVm
      */
-    bigPictureId?: string | null;
+    drawDate?: Date | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CouponVm
+     */
+    preferredPosition?: number;
     /**
      * 
      * @type {string}
      * @memberof CouponVm
      */
-    smallPictureId?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CouponVm
-     */
-    isActive?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof CouponVm
-     */
-    smallPicture?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CouponVm
-     */
-    bigPicture?: string | null;
+    predefinedCodesFileId?: string | null;
     /**
      * 
      * @type {string}
@@ -226,12 +232,6 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     productDetails?: string | null;
-    /**
-     * 
-     * @type {Date}
-     * @memberof CouponVm
-     */
-    drawDate?: Date | null;
     /**
      * 
      * @type {string}
@@ -258,16 +258,28 @@ export interface CouponVm {
     awardedCampaign?: boolean;
     /**
      * 
-     * @type {CouponMode}
-     * @memberof CouponVm
-     */
-    mode?: CouponMode;
-    /**
-     * 
      * @type {number}
      * @memberof CouponVm
      */
-    partnerId?: number;
+    prizeValue?: number | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CouponVm
+     */
+    tags?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<CouponCommentVm>}
+     * @memberof CouponVm
+     */
+    comments?: Array<CouponCommentVm> | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CouponVm
+     */
+    partnerName?: string | null;
     /**
      * 
      * @type {number}
@@ -292,18 +304,6 @@ export interface CouponVm {
      * @memberof CouponVm
      */
     discardCount?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CouponVm
-     */
-    isPartnerActive?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof CouponVm
-     */
-    prizeValue?: number | null;
 }
 
 export function CouponVmFromJSON(json: any): CouponVm {
@@ -330,35 +330,35 @@ export function CouponVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'discountType': !exists(json, 'discountType') ? undefined : CouponDiscountTypeFromJSON(json['discountType']),
         'discountValue': !exists(json, 'discountValue') ? undefined : json['discountValue'],
         'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
-        'tags': !exists(json, 'tags') ? undefined : json['tags'],
-        'comments': !exists(json, 'comments') ? undefined : (json['comments'] === null ? null : (json['comments'] as Array<any>).map(CouponCommentVmFromJSON)),
-        'predefinedCodesFileId': !exists(json, 'predefinedCodesFileId') ? undefined : json['predefinedCodesFileId'],
+        'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
+        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
+        'isPartnerActive': !exists(json, 'isPartnerActive') ? undefined : json['isPartnerActive'],
+        'bigPictureId': !exists(json, 'bigPictureId') ? undefined : json['bigPictureId'],
+        'smallPictureId': !exists(json, 'smallPictureId') ? undefined : json['smallPictureId'],
+        'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
         'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
         'createdDate': !exists(json, 'createdDate') ? undefined : (json['createdDate'] === null ? null : new Date(json['createdDate'])),
         'modifiedBy': !exists(json, 'modifiedBy') ? undefined : json['modifiedBy'],
         'modifiedDate': !exists(json, 'modifiedDate') ? undefined : (json['modifiedDate'] === null ? null : new Date(json['modifiedDate'])),
         'approvedBy': !exists(json, 'approvedBy') ? undefined : json['approvedBy'],
         'approvedDate': !exists(json, 'approvedDate') ? undefined : (json['approvedDate'] === null ? null : new Date(json['approvedDate'])),
-        'bigPictureId': !exists(json, 'bigPictureId') ? undefined : json['bigPictureId'],
-        'smallPictureId': !exists(json, 'smallPictureId') ? undefined : json['smallPictureId'],
-        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
-        'smallPicture': !exists(json, 'smallPicture') ? undefined : json['smallPicture'],
-        'bigPicture': !exists(json, 'bigPicture') ? undefined : json['bigPicture'],
+        'drawDate': !exists(json, 'drawDate') ? undefined : (json['drawDate'] === null ? null : new Date(json['drawDate'])),
+        'preferredPosition': !exists(json, 'preferredPosition') ? undefined : json['preferredPosition'],
+        'predefinedCodesFileId': !exists(json, 'predefinedCodesFileId') ? undefined : json['predefinedCodesFileId'],
         'onlineClaimLink': !exists(json, 'onlineClaimLink') ? undefined : json['onlineClaimLink'],
         'productDetails': !exists(json, 'productDetails') ? undefined : json['productDetails'],
-        'drawDate': !exists(json, 'drawDate') ? undefined : (json['drawDate'] === null ? null : new Date(json['drawDate'])),
         'prizeRulesFileId': !exists(json, 'prizeRulesFileId') ? undefined : json['prizeRulesFileId'],
         'itemPrice': !exists(json, 'itemPrice') ? undefined : json['itemPrice'],
         'previousYearAverageBasketValue': !exists(json, 'previousYearAverageBasketValue') ? undefined : json['previousYearAverageBasketValue'],
         'awardedCampaign': !exists(json, 'awardedCampaign') ? undefined : json['awardedCampaign'],
-        'mode': !exists(json, 'mode') ? undefined : CouponModeFromJSON(json['mode']),
-        'partnerId': !exists(json, 'partnerId') ? undefined : json['partnerId'],
+        'prizeValue': !exists(json, 'prizeValue') ? undefined : json['prizeValue'],
+        'tags': !exists(json, 'tags') ? undefined : json['tags'],
+        'comments': !exists(json, 'comments') ? undefined : (json['comments'] === null ? null : (json['comments'] as Array<any>).map(CouponCommentVmFromJSON)),
+        'partnerName': !exists(json, 'partnerName') ? undefined : json['partnerName'],
         'showCount': !exists(json, 'showCount') ? undefined : json['showCount'],
         'clickCount': !exists(json, 'clickCount') ? undefined : json['clickCount'],
         'claimCount': !exists(json, 'claimCount') ? undefined : json['claimCount'],
         'discardCount': !exists(json, 'discardCount') ? undefined : json['discardCount'],
-        'isPartnerActive': !exists(json, 'isPartnerActive') ? undefined : json['isPartnerActive'],
-        'prizeValue': !exists(json, 'prizeValue') ? undefined : json['prizeValue'],
     };
 }
 
@@ -385,35 +385,35 @@ export function CouponVmToJSON(value?: CouponVm | null): any {
         'discountType': CouponDiscountTypeToJSON(value.discountType),
         'discountValue': value.discountValue,
         'categoryId': value.categoryId,
-        'tags': value.tags,
-        'comments': value.comments === undefined ? undefined : (value.comments === null ? null : (value.comments as Array<any>).map(CouponCommentVmToJSON)),
-        'predefinedCodesFileId': value.predefinedCodesFileId,
+        'partnerId': value.partnerId,
+        'isActive': value.isActive,
+        'isPartnerActive': value.isPartnerActive,
+        'bigPictureId': value.bigPictureId,
+        'smallPictureId': value.smallPictureId,
+        'mode': CouponModeToJSON(value.mode),
         'createdBy': value.createdBy,
         'createdDate': value.createdDate === undefined ? undefined : (value.createdDate === null ? null : value.createdDate.toISOString()),
         'modifiedBy': value.modifiedBy,
         'modifiedDate': value.modifiedDate === undefined ? undefined : (value.modifiedDate === null ? null : value.modifiedDate.toISOString()),
         'approvedBy': value.approvedBy,
         'approvedDate': value.approvedDate === undefined ? undefined : (value.approvedDate === null ? null : value.approvedDate.toISOString()),
-        'bigPictureId': value.bigPictureId,
-        'smallPictureId': value.smallPictureId,
-        'isActive': value.isActive,
-        'smallPicture': value.smallPicture,
-        'bigPicture': value.bigPicture,
+        'drawDate': value.drawDate === undefined ? undefined : (value.drawDate === null ? null : value.drawDate.toISOString()),
+        'preferredPosition': value.preferredPosition,
+        'predefinedCodesFileId': value.predefinedCodesFileId,
         'onlineClaimLink': value.onlineClaimLink,
         'productDetails': value.productDetails,
-        'drawDate': value.drawDate === undefined ? undefined : (value.drawDate === null ? null : value.drawDate.toISOString()),
         'prizeRulesFileId': value.prizeRulesFileId,
         'itemPrice': value.itemPrice,
         'previousYearAverageBasketValue': value.previousYearAverageBasketValue,
         'awardedCampaign': value.awardedCampaign,
-        'mode': CouponModeToJSON(value.mode),
-        'partnerId': value.partnerId,
+        'prizeValue': value.prizeValue,
+        'tags': value.tags,
+        'comments': value.comments === undefined ? undefined : (value.comments === null ? null : (value.comments as Array<any>).map(CouponCommentVmToJSON)),
+        'partnerName': value.partnerName,
         'showCount': value.showCount,
         'clickCount': value.clickCount,
         'claimCount': value.claimCount,
         'discardCount': value.discardCount,
-        'isPartnerActive': value.isPartnerActive,
-        'prizeValue': value.prizeValue,
     };
 }
 
