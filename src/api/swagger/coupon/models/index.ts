@@ -79,5 +79,6 @@ export * from './TagCategoryVmPaginatedResponse';
 export * from './TagDto';
 export * from './TagVm';
 export * from './TagVmPaginatedResponse';
+export * from './UserNotificationDetailDto';
 export * from './UserNotificationDto';
 export * from './UserVm';

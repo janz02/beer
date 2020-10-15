@@ -18,6 +18,10 @@ import {
     NotificationTypeFromJSON,
     NotificationTypeFromJSONTyped,
     NotificationTypeToJSON,
+    UserNotificationDetailDto,
+    UserNotificationDetailDtoFromJSON,
+    UserNotificationDetailDtoFromJSONTyped,
+    UserNotificationDetailDtoToJSON,
 } from './';
 
 /**
@@ -52,16 +56,16 @@ export interface UserNotificationDto {
     createdDate?: Date;
     /**
      * 
-     * @type {number}
+     * @type {UserNotificationDetailDto}
      * @memberof UserNotificationDto
      */
-    parentId?: number;
+    parent?: UserNotificationDetailDto;
     /**
      * 
-     * @type {number}
+     * @type {UserNotificationDetailDto}
      * @memberof UserNotificationDto
      */
-    actualId?: number;
+    actual?: UserNotificationDetailDto;
     /**
      * 
      * @type {string}
@@ -84,8 +88,8 @@ export function UserNotificationDtoFromJSONTyped(json: any, ignoreDiscriminator:
         'isSeen': !exists(json, 'isSeen') ? undefined : json['isSeen'],
         'type': !exists(json, 'type') ? undefined : NotificationTypeFromJSON(json['type']),
         'createdDate': !exists(json, 'createdDate') ? undefined : (new Date(json['createdDate'])),
-        'parentId': !exists(json, 'parentId') ? undefined : json['parentId'],
-        'actualId': !exists(json, 'actualId') ? undefined : json['actualId'],
+        'parent': !exists(json, 'parent') ? undefined : UserNotificationDetailDtoFromJSON(json['parent']),
+        'actual': !exists(json, 'actual') ? undefined : UserNotificationDetailDtoFromJSON(json['actual']),
         'value': !exists(json, 'value') ? undefined : json['value'],
     };
 }
@@ -103,8 +107,8 @@ export function UserNotificationDtoToJSON(value?: UserNotificationDto | null): a
         'isSeen': value.isSeen,
         'type': NotificationTypeToJSON(value.type),
         'createdDate': value.createdDate === undefined ? undefined : (value.createdDate.toISOString()),
-        'parentId': value.parentId,
-        'actualId': value.actualId,
+        'parent': UserNotificationDetailDtoToJSON(value.parent),
+        'actual': UserNotificationDetailDtoToJSON(value.actual),
         'value': value.value,
     };
 }
