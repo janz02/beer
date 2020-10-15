@@ -5313,8 +5313,14 @@
       "isSeen": false,
       "type": 2,
       "createdDate": "2020-07-11T12:23:34",
-      "parentId": 2,
-      "actualId": 3,
+      "parent": {
+        "id": 2,
+        "value": "Megybefőtt Üzem"
+      },
+      "actual": {
+        "id": 3,
+        "value": "Kis Józsika Kft."
+      },
       "value": "Kis Józsika Kft. regisztrált"
     },
     {
@@ -5322,8 +5328,14 @@
       "isSeen": true,
       "type": 1,
       "createdDate": "2020-06-20T23:59:59",
-      "parentId": 23,
-      "actualId": 34,
+      "parent": {
+        "id": 23,
+        "value": "Kisbolt kft."
+      },
+      "actual": {
+        "id": 34,
+        "value": "Túró Rudi"
+      },
       "value": "Az ingyen túró rudinál valami baj van!"
     },
     {
@@ -5331,8 +5343,14 @@
       "isSeen": true,
       "type": 2,
       "createdDate": "2020-08-01T01:02:03",
-      "parentId": 234,
-      "actualId": 345,
+      "parent": {
+        "id": 234,
+        "value": "Anonim szerencsejátékfüggők társulata"
+      },
+      "actual": {
+        "id": 345,
+        "value": "Marika néni Ltd."
+      },
       "value": "Marika néni Ltd. regisztált"
     }
   ],
@@ -5354,8 +5372,14 @@
       "isSeen": false,
       "type": 2,
       "createdDate": "2020-07-11T12:23:34",
-      "parentId": 2,
-      "actualId": 3,
+      "parent": {
+        "id": 2,
+        "value": "Megybefőtt Üzem"
+      },
+      "actual": {
+        "id": 3,
+        "value": "Kis Józsika Kft."
+      },
       "value": "Kis Józsika Kft. regisztrált"
     },
     {
@@ -5363,8 +5387,14 @@
       "isSeen": true,
       "type": 1,
       "createdDate": "2020-06-20T23:59:59",
-      "parentId": 23,
-      "actualId": 34,
+      "parent": {
+        "id": 23,
+        "value": "Kisbolt kft."
+      },
+      "actual": {
+        "id": 34,
+        "value": "Túró Rudi"
+      },
       "value": "Az ingyen túró rudinál valami baj van!"
     },
     {
@@ -5372,8 +5402,14 @@
       "isSeen": true,
       "type": 2,
       "createdDate": "2020-08-01T01:02:03",
-      "parentId": 234,
-      "actualId": 345,
+      "parent": {
+        "id": 234,
+        "value": "Anonim szerencsejátékfüggők társulata"
+      },
+      "actual": {
+        "id": 345,
+        "value": "Marika néni Ltd."
+      },
       "value": "Marika néni Ltd. regisztált"
     }
   ],
@@ -5395,8 +5431,14 @@
       "isSeen": false,
       "type": 2,
       "createdDate": "2020-07-11T12:23:34",
-      "parentId": 2,
-      "actualId": 3,
+      "parent": {
+        "id": 2,
+        "value": "Megybefőtt Üzem"
+      },
+      "actual": {
+        "id": 3,
+        "value": "Kis Józsika Kft."
+      },
       "value": "Kis Józsika Kft. regisztrált"
     },
     {
@@ -5404,8 +5446,14 @@
       "isSeen": true,
       "type": 1,
       "createdDate": "2020-06-20T23:59:59",
-      "parentId": 23,
-      "actualId": 34,
+      "parent": {
+        "id": 23,
+        "value": "Kisbolt kft."
+      },
+      "actual": {
+        "id": 34,
+        "value": "Túró Rudi"
+      },
       "value": "Az ingyen túró rudinál valami baj van!"
     },
     {
@@ -5413,8 +5461,14 @@
       "isSeen": true,
       "type": 2,
       "createdDate": "2020-08-01T01:02:03",
-      "parentId": 234,
-      "actualId": 345,
+      "parent": {
+        "id": 234,
+        "value": "Anonim szerencsejátékfüggők társulata"
+      },
+      "actual": {
+        "id": 345,
+        "value": "Marika néni Ltd."
+      },
       "value": "Marika néni Ltd. regisztált"
     }
   ],
@@ -11242,6 +11296,20 @@
         ],
         "type": "string"
       },
+      "UserNotificationDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "UserNotificationDto": {
         "type": "object",
         "properties": {
@@ -11259,13 +11327,11 @@
             "type": "string",
             "format": "date-time"
           },
-          "parentId": {
-            "type": "integer",
-            "format": "int32"
+          "parent": {
+            "$ref": "#/components/schemas/UserNotificationDetailDto"
           },
-          "actualId": {
-            "type": "integer",
-            "format": "int32"
+          "actual": {
+            "$ref": "#/components/schemas/UserNotificationDetailDto"
           },
           "value": {
             "type": "string",
