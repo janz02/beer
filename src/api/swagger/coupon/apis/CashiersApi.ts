@@ -24,9 +24,6 @@ import {
     CashierVmPaginatedResponse,
     CashierVmPaginatedResponseFromJSON,
     CashierVmPaginatedResponseToJSON,
-    CreateCashierDto,
-    CreateCashierDtoFromJSON,
-    CreateCashierDtoToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
@@ -39,7 +36,7 @@ import {
 } from '../models';
 
 export interface CreateCashierRequest {
-    createCashierDto?: CreateCashierDto;
+    cashierDto?: CashierDto;
 }
 
 export interface DeleteCashierRequest {
@@ -96,7 +93,7 @@ export class CashiersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateCashierDtoToJSON(requestParameters.createCashierDto),
+            body: CashierDtoToJSON(requestParameters.cashierDto),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => Int32EntityCreatedVmFromJSON(jsonValue));

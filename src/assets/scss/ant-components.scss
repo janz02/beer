@@ -106,4 +106,10 @@
     background-color: transparent;
     color: $text-color;
   }
+
+  .ant-form-item.hidden-form-item,
+  .ant-input[type="hidden"] {
+    height: 0;
+    margin-bottom: 0;
+  }
 }

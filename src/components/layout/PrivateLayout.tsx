@@ -28,7 +28,10 @@ import { profileActions } from 'features/profile/profileSlice'
 import { NotificationFab } from 'features/notification/NotificationFab'
 import { NotificationDrawer } from 'features/notification/NotificationDrawer'
 import { hasPermission } from 'services/jwt-reader'
-import { notificationRoleConfig } from 'features/notification/useNotification'
+import {
+  notificationRoleConfig,
+  useNotificationUtils
+} from 'features/notification/useNotificationUtils'
 import { HeaderMenuButton } from 'components/buttons/HeaderMenuButton'
 
 export const PrivateLayout: React.FC = ({ children }) => {
@@ -38,6 +41,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const [menuOpened, setMenuOpened] = useState(!isMobile)
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile)
   const profile = useSelector((state: RootState) => state.profile.profile)
+  const notificationUtils = useNotificationUtils()
 
   useEffect(() => {
     if (lastMediaQuery !== isMobile) {
@@ -170,7 +174,9 @@ export const PrivateLayout: React.FC = ({ children }) => {
         />
       </SideMenu>
 
-      {hasPermission(notificationRoleConfig) && <NotificationDrawer />}
+      {hasPermission(notificationRoleConfig) && (
+        <NotificationDrawer notificationUtils={notificationUtils} />
+      )}
 
       <Layout>
         <HeaderMenuButton
@@ -179,7 +185,9 @@ export const PrivateLayout: React.FC = ({ children }) => {
         />
         <Layout.Content className="layout-content">
           {children}
-          {hasPermission(notificationRoleConfig) && <NotificationFab />}
+          {hasPermission(notificationRoleConfig) && (
+            <NotificationFab notificationUtils={notificationUtils} />
+          )}
         </Layout.Content>
       </Layout>
     </Layout>

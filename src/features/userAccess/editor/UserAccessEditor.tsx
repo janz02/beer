@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { Form, Select, Radio } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { useUserAccessEditor } from './useUserAccessEditor'
+import { useUserAccessEditorUtils } from './useUserAccessEditorUtils'
 import Typography from 'antd/lib/typography'
 
 const { Text } = Typography
@@ -13,7 +13,12 @@ export const UserAccessEditor: FC = () => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
-  const { editorFormModalProps, roleOptions, editedUserType, editedUser } = useUserAccessEditor()
+  const {
+    editorFormModalProps,
+    roleOptions,
+    editedUserType,
+    editedUser
+  } = useUserAccessEditorUtils()
 
   return (
     <GenericModalForm {...editorFormModalProps}>

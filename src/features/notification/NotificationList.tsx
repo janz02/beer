@@ -1,12 +1,13 @@
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNotification } from './useNotification'
+import { NotificationUtils } from './useNotificationUtils'
 import { Button, List, Empty } from 'antd'
 
 import { NotificationData } from 'models/notification'
 import { NotificationItem } from './NotificationItem'
 
 interface NotificationListProps {
+  notificationUtils: NotificationUtils
   groupName: string
   items: NotificationData[]
   loadMore: boolean
@@ -15,7 +16,7 @@ interface NotificationListProps {
 export const NotificationList: FC<NotificationListProps> = props => {
   const { items, groupName, loadMore } = props
   const { t } = useTranslation()
-  const { loading, handleGetNotifications, canLoadMore } = useNotification()
+  const { loading, handleGetNotifications, canLoadMore } = props.notificationUtils
 
   const loadMoreButton = canLoadMore && (
     <Button
@@ -41,7 +42,9 @@ export const NotificationList: FC<NotificationListProps> = props => {
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('notification.empty-list')} />
         )
       }}
-      renderItem={item => <NotificationItem item={item} />}
+      renderItem={item => (
+        <NotificationItem item={item} notificationUtils={props.notificationUtils} />
+      )}
     />
   ) : null
 }

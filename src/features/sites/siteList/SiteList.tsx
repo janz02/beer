@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
-import { SiteFeatureConfig, useSiteList } from './useSiteList'
+import { SiteFeatureConfig, useSiteListUtils } from './useSiteListUtils'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
@@ -25,7 +25,7 @@ export const SiteList: FC<SiteListProps> = props => {
     siteToDelete,
     resetFilters,
     handleExport
-  } = useSiteList({
+  } = useSiteListUtils({
     config: props.config,
     partnerId: props.partnerId,
     partnerEditorPage: props.partnerEditorPage

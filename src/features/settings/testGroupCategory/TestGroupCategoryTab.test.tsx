@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import React from 'react'
-import { useTestGroupCategoryTab } from './useTestGroupCategoryTab'
+import { useTestGroupCategoryTabUtils } from './useTestGroupCategoryTabUtils'
 import { setupPermissions, setupStore, setupUseParams } from '../../../../config/setupMocks'
 import { OrderByType } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
@@ -43,7 +43,7 @@ setupStore({
 const TestGroupCategoryTabContent: React.FC = () => {
   return (
     <MemoryRouter>
-      <Route>{useTestGroupCategoryTab().tabContent}</Route>
+      <Route>{useTestGroupCategoryTabUtils().tabContent}</Route>
     </MemoryRouter>
   )
 }
@@ -51,7 +51,7 @@ const TestGroupCategoryTabContent: React.FC = () => {
 const TestGroupCategoryHeaderContent: React.FC = () => {
   return (
     <MemoryRouter>
-      <Route>{useTestGroupCategoryTab().headerOptions}</Route>
+      <Route>{useTestGroupCategoryTabUtils().headerOptions}</Route>
     </MemoryRouter>
   )
 }

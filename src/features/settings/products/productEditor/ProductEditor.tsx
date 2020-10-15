@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { GenericModalFormEditorParams } from 'hooks/useGenericModalEditorUtils'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
-import { useProductEditor } from './useProductEditor'
+import { useProductEditorUtils } from './useProductEditorUtils'
 
 export interface ProductEditorParams {
   visible?: boolean
@@ -31,7 +31,7 @@ export const ProductEditor: FC<ProductEditorProps> = props => {
     handleGetProduct,
     handleSave,
     afterCloseExtended
-  } = useProductEditor(props)
+  } = useProductEditorUtils(props)
 
   useEffect(() => {
     handleGetProduct()

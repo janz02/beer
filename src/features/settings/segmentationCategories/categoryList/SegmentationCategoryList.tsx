@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import './SegmentationCategoryList.scss'
 import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
-import { UseSegmentationCategoryListUtils } from './useSegmentationCategoryList'
+import { SegmentationCategoryListUtils } from './useSegmentationCategoryListUtils'
 
 interface SegmentationCategoryListProps {
-  categoryListUtils: UseSegmentationCategoryListUtils
+  categoryListUtils: SegmentationCategoryListUtils
 }
 
 export const SegmentationCategoryList: FC<SegmentationCategoryListProps> = props => {

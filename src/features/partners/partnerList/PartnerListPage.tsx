@@ -17,7 +17,7 @@ import { partnersEditorRoles } from '../partnerEditor/PartnerEditorPage'
 import { PartnerRegistrationStateDisplay } from 'components/PartnerRegistrationStateDisplay'
 import { PartnerRegistrationState } from 'api/swagger/coupon'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
-import { useColumnOrder } from 'components/table-columns/useColumnOrder'
+import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ExportButton } from 'components/buttons/ExportButton'
@@ -125,13 +125,13 @@ export const PartnerListPage: React.FC = () => {
     [actionColumnConfig, columnConfig, t]
   )
 
-  const columnOrder = useColumnOrder(columnsConfig, ColumnStorageName.PARTNER)
+  const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.PARTNER)
 
   const headerOptions = (
     <>
       <ExportButton onClick={handleExport} />
       <ResetFiltersButton onClick={resetFilters} />
-      <ColumnOrderDropdown {...columnOrder} />
+      <ColumnOrderDropdown {...columnOrderUtils} />
       {hasPermission(partnersEditorRoles) ? (
         <AddButton onClick={() => history.push(`/partners/new`)}>{t('partner.list.add')}</AddButton>
       ) : (
@@ -150,7 +150,7 @@ export const PartnerListPage: React.FC = () => {
         <ResponsiveTable
           {...{
             loading,
-            columns: columnOrder.currentColumns,
+            columns: columnOrderUtils.currentColumns,
             dataSource: addKeyProp(partners),
             pagination: paginationConfig,
             onChange: handleTableChange

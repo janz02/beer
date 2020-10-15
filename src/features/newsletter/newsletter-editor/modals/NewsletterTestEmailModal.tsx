@@ -1,14 +1,18 @@
 import React, { FC } from 'react'
 import { GenericModalForm } from 'components/popups/GenericModalForm'
 import { Input, Form } from 'antd'
-import { useNewsletterEditorModals } from './useNewsletterEditorModals'
+import { NewsletterEditorModalUtils } from './useNewsletterEditorModalUtils'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 
-export const NewsletterTestEmailModal: FC = () => {
+interface NewsletterTestEmailModalProps {
+  newsletterEditorModalUtils: NewsletterEditorModalUtils
+}
+
+export const NewsletterTestEmailModal: FC<NewsletterTestEmailModalProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
-  const { testEmailModalFormProps } = useNewsletterEditorModals()
+  const { testEmailModalFormProps } = props.newsletterEditorModalUtils
 
   return (
     <GenericModalForm {...testEmailModalFormProps}>

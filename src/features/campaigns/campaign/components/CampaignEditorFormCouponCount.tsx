@@ -6,13 +6,13 @@ import { FileUploadButton } from 'components/upload/FileUploadButton'
 import { separatorFormatter, separatorParser } from 'services/numberInputHelpers'
 import { campaignActions } from '../../campaignsSlice'
 import { useDispatch } from 'react-redux'
-import { UseCampaignFeatures } from '../useCampaign'
+import { CampaignUtils } from '../useCampaignUtils'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
 import { InputNumberI18n } from 'components/InputNumberI18n'
 
 interface CampaignEditorFormCouponCountProps {
-  campaign: UseCampaignFeatures
+  campaignUtils: CampaignUtils
   form: FormInstance
 }
 
@@ -21,7 +21,7 @@ export const CampaignEditorFormCouponCount: FC<CampaignEditorFormCouponCountProp
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const rule = useCommonFormRules()
-  const { loading, coupon, displayEditor, rowGutter, prizeOrDiscount } = props.campaign
+  const { loading, coupon, displayEditor, rowGutter, prizeOrDiscount } = props.campaignUtils
 
   return (
     <Row gutter={rowGutter}>
