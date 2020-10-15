@@ -9,7 +9,14 @@ import { useFileUploadUtils, FileUploadUtilsProps } from './useFileUploadUtils'
 
 export type PictureUploadButtonProps = Pick<
   FileUploadUtilsProps,
-  'disabled' | 'initialFileId' | 'onRemove' | 'onSuccess'
+  | 'disabled'
+  | 'initialFileId'
+  | 'onRemove'
+  | 'onSuccess'
+  | 'onError'
+  | 'allowedFileSize'
+  | 'allowedExtensions'
+  | 'allowedImgDimensions'
 >
 
 export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
@@ -19,7 +26,8 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
     handleClear,
     handleFileUpload: handleSingleImageUpload,
     appendedUploadProps,
-    thumbnail
+    thumbnail,
+    acceptFileExtensions
   } = useFileUploadUtils({
     mode: 'image',
     ...props
@@ -80,6 +88,7 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
         showUploadList={false}
         listType="picture-card"
         className={`picture-upload ${thumbnail?.error ? 'has-error' : ''}`}
+        accept={acceptFileExtensions}
       >
         <Tooltip title={thumbnail?.error} placement="right" style={{ padding: '1.5rem' }}>
           <Spin spinning={!!thumbnail?.loading}>
@@ -101,7 +110,8 @@ export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {
     options,
     props.disabled,
     thumbnail,
-    uploadButton
+    uploadButton,
+    acceptFileExtensions
   ])
 
   return (

@@ -15,6 +15,7 @@ import { CampaignUtils } from '../useCampaignUtils'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
 import { InputNumberI18n } from 'components/InputNumberI18n'
+import { useFileValidatorUtils } from 'components/upload/useFileValidatorUtils'
 
 interface CampaignEditorFormDetailsProps {
   campaignUtils: CampaignUtils
@@ -43,6 +44,11 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
     selectedCouponType === CouponType.Discount &&
     (selectedCouponDiscountType === CouponDiscountType.FixValue ||
       selectedCouponDiscountType === CouponDiscountType.PercentValue)
+
+  const { setError, getFieldState, removeError } = useFileValidatorUtils([
+    'smallPictureId',
+    'bigPictureId'
+  ])
 
   return (
     <>
@@ -432,6 +438,8 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
             label={t('coupon-create.field.small-image')}
             extra={t('coupon-create.field.small-image-help')}
             rules={[rule.required(t('error.validation.coupon.small-picture-id-required'))]}
+            help={getFieldState('smallPictureId')}
+            validateStatus={getFieldState('smallPictureId') ? 'error' : undefined}
           >
             <PictureUploadButton
               disabled={!displayEditor}
@@ -440,8 +448,8 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                   ...form.getFieldsValue(),
                   smallPictureId: fileId
                 })
-
-                form.validateFields()
+                removeError('smallPictureId')
+                form.validateFields(['smallPictureId'])
               }}
               onRemove={() => {
                 form.setFieldsValue({
@@ -449,9 +457,17 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                   smallPictureId: undefined
                 })
 
-                form.validateFields()
+                removeError('smallPictureId')
+                form.validateFields(['smallPictureId'])
+              }}
+              onError={type => {
+                setError('smallPictureId', type as any)
               }}
               initialFileId={coupon?.smallPictureId}
+              allowedImgDimensions={{
+                width: 360,
+                height: 270
+              }}
             />
           </Form.Item>
         </Col>
@@ -474,7 +490,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                     bigPictureId: fileId
                   })
 
-                  form.validateFields()
+                  form.validateFields(['bigPictureId'])
                 }}
                 onRemove={() => {
                   form.setFieldsValue({
@@ -482,9 +498,13 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                     bigPictureId: undefined
                   })
 
-                  form.validateFields()
+                  form.validateFields(['bigPictureId'])
                 }}
                 initialFileId={coupon?.bigPictureId}
+                allowedImgDimensions={{
+                  width: 360,
+                  height: 540
+                }}
               />
             </Form.Item>
           )}

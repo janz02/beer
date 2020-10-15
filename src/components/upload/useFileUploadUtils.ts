@@ -7,6 +7,11 @@ import { displayBackendError } from 'services/errorHelpers'
 import { getUrl } from 'services/baseUrlHelper'
 import { RequestError } from 'api/middleware'
 
+export interface PictureDimensions {
+  width: number
+  height: number
+}
+
 interface FileThumbnail {
   label?: string | undefined | null
   url?: string
@@ -20,8 +25,12 @@ export interface FileUploadUtilsProps {
   onSuccess?: (id: string) => void
   onRemove?: () => void
   onClick?: () => void
+  onError?: (error: string) => void
   initialFileId?: string | null | undefined
   mode?: 'image' | 'file'
+  allowedFileSize?: number
+  allowedExtensions?: string
+  allowedImgDimensions?: PictureDimensions
 }
 
 export interface FileUploadUtils {
@@ -29,10 +38,21 @@ export interface FileUploadUtils {
   appendedUploadProps?: UploadProps
   handleClear: (id: any) => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
+  acceptFileExtensions?: string
 }
 
 export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils {
-  const { initialFileId, uploadProps, onRemove, onSuccess, mode } = props
+  const {
+    initialFileId,
+    uploadProps,
+    onRemove,
+    onSuccess,
+    mode,
+    allowedExtensions,
+    allowedImgDimensions,
+    allowedFileSize,
+    onError
+  } = props
 
   const [fileId, setFileId] = useState<any>()
 
@@ -77,7 +97,6 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
             break
           }
           default: {
-            // TODO : integrate api
             const fileInfo = await api.files.files.infoFile({ id: fileId })
             setThumbnail({ label: fileInfo.fileName, loading: false })
             break
@@ -98,6 +117,44 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
     setThumbnail({ url: '' })
   }, [handleFileDownload, fileId])
 
+  const validateImgDimensions = useCallback(
+    originImgBlob => {
+      if (mode === 'image') {
+        const img: HTMLImageElement = new Image()
+        const objectUrl = URL.createObjectURL(originImgBlob)
+        img.onload = () => {
+          if (
+            img.width !== allowedImgDimensions?.width ||
+            img.height !== allowedImgDimensions.height
+          ) {
+            onError?.('dimension')
+          }
+        }
+        img.src = objectUrl
+      }
+    },
+    [allowedImgDimensions, mode, onError]
+  )
+
+  const validateFileSize = useCallback(
+    size => {
+      if ((!allowedFileSize && size > 50) || (allowedFileSize && size > allowedFileSize)) {
+        onError?.('size')
+      }
+    },
+    [onError, allowedFileSize]
+  )
+
+  const validateFileExtension = useCallback(
+    extension => {
+      console.log(extension, allowedExtensions)
+      if (!allowedExtensions?.includes(extension)) {
+        onError?.('extension')
+      }
+    },
+    [onError, allowedExtensions]
+  )
+
   const handleFileUpload = useCallback(
     (info: UploadChangeParam<UploadFile<any>>): void => {
       const file = info.file
@@ -113,6 +170,11 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
           handleUploadSuccess(file)
           onSuccess?.(file.response.id)
           setFileId(file.response.id)
+
+          // validation triggers
+          validateImgDimensions(file.originFileObj)
+          validateFileSize(file.size)
+          validateFileExtension(file.response.extension)
           break
         case 'removed':
           setThumbnail({ loading: false, error: t('error.unknown-try-again') })
@@ -125,7 +187,14 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
         }
       }
     },
-    [handleUploadSuccess, onSuccess, t]
+    [
+      handleUploadSuccess,
+      onSuccess,
+      t,
+      validateImgDimensions,
+      validateFileSize,
+      validateFileExtension
+    ]
   )
 
   const handleClear = async () => {
@@ -146,10 +215,23 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
     [uploadProps, apiKey, uploadUrl]
   )
 
+  const acceptFileExtensions = useMemo(() => {
+    if (allowedExtensions) return allowedExtensions
+
+    switch (mode) {
+      case 'image':
+        return '.jpg,.png'
+      case 'file':
+        return '.csv,.pdf,.txt'
+      default:
+    }
+  }, [allowedExtensions, mode])
+
   return {
     thumbnail,
     appendedUploadProps,
     handleFileUpload: handleFileUpload,
-    handleClear
+    handleClear,
+    acceptFileExtensions
   }
 }
