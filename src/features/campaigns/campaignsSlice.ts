@@ -372,7 +372,7 @@ const downloadPrizeFile = (coupon: Coupon): AppThunk => async dispatch => {
   try {
     const fileInfo = await api.files.files.infoFile({ id: coupon.prizeRulesFileId! })
     const blob: Blob = await api.files.files.downloadFile({ id: coupon.prizeRulesFileId! })
-    saveAs(blob, `${fileInfo.fileName}.${fileInfo.exstension}`)
+    saveAs(blob, `${fileInfo.fileName}.${fileInfo.extension}`)
     dispatch(downloadPrizeFileSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
@@ -387,7 +387,7 @@ const downloadPredefinedCodesFile = (coupon: Coupon): AppThunk => async dispatch
       id: coupon.predefinedCodesFileId!
     })
     const blob: Blob = await api.files.files.downloadFile({ id: coupon.predefinedCodesFileId! })
-    saveAs(blob, `${fileInfo.fileName}.${fileInfo.exstension}`)
+    saveAs(blob, `${fileInfo.fileName}.${fileInfo.extension}`)
     dispatch(downloadPredefinedCouponsFileSuccess())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
