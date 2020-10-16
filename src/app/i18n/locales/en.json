@@ -302,10 +302,22 @@
       "Phone": "Phone"
     },
     "notification-type": {
-      "CampaignMovedToWaitingState": "Campaign moved to waiting status",
-      "CouponClosed": "Coupon closed",
-      "CouponCountDepleted": "Coupon count depleted",
-      "PartnerContactRegistered": "New Partner Contact: "
+      "CampaignMovedToWaitingState": {
+        "detail": "{{actual.value}} - by {{parent.value}}",
+        "title": "Campaign moved to waiting status"
+      },
+      "CouponClosed": {
+        "detail": "{{actual.value}} - by {{parent.value}}",
+        "title": "Campaign closed"
+      },
+      "CouponCountDepleted": {
+        "detail": "{{actual.value}} - {{parent.value}}",
+        "title": "Coupon count depleted"
+      },
+      "PartnerContactRegistered": {
+        "detail": "To partner {{parent.value}} with {{actual.value}} name",
+        "title": "New Partner Contact Registered"
+      }
     }
   },
   "error": {
