@@ -3,12 +3,12 @@ import { CampaignCategoryList } from './categoryList/CampaignCategoryList'
 import { CampaignCategoryEditor } from './categoryEditor/CampaignCategoryEditor'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { campaignCategoryListActions } from './categoryList/campaignCategoryListSlice'
-import { UseGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
+import { GenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { CampaignCategoryListUtils } from './categoryList/useCampaignCategoryListUtils'
 
 export interface CampaignCategoryTabProps {
   categoryListUtils: CampaignCategoryListUtils
-  modalUtils: UseGenericModalFormEditorUtils
+  modalUtils: GenericModalFormEditorUtils
 }
 
 export const CampaignCategoryTab: React.FC<CampaignCategoryTabProps> = props => {
