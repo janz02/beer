@@ -118,4 +118,5 @@ generateKeys(
   true
 );
 
-// shell.exec("npm run i18n:generate");
+// Quickfix - wait fo the generateKeys to run so, the i18n:generate won't delete the 'unused' keys
+setTimeout(function(){shell.exec("npm run i18n:generate");}, 5000);
