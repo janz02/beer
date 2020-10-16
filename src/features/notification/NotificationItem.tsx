@@ -7,7 +7,6 @@ import { NotificationUtils } from './useNotificationUtils'
 import { NotificationData } from 'models/notification'
 import { useTranslation } from 'react-i18next'
 import { ListItemMetaProps } from 'antd/lib/list'
-import { NotificationType } from 'api/swagger/coupon'
 import { EnvelopeIcon } from 'components/icons/EnvelopeIcon'
 
 interface NotificationItemProps {
