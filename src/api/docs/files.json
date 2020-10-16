@@ -404,7 +404,7 @@
             "type": "string",
             "nullable": true
           },
-          "exstension": {
+          "extension": {
             "type": "string",
             "nullable": true
           },

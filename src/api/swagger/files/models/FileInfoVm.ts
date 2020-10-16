@@ -30,7 +30,7 @@ export interface FileInfoVm {
      * @type {string}
      * @memberof FileInfoVm
      */
-    exstension?: string | null;
+    extension?: string | null;
     /**
      * 
      * @type {number}
@@ -62,7 +62,7 @@ export function FileInfoVmFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'fileName': !exists(json, 'fileName') ? undefined : json['fileName'],
-        'exstension': !exists(json, 'exstension') ? undefined : json['exstension'],
+        'extension': !exists(json, 'extension') ? undefined : json['extension'],
         'sizeInBytes': !exists(json, 'sizeInBytes') ? undefined : json['sizeInBytes'],
         'contentType': !exists(json, 'contentType') ? undefined : json['contentType'],
         'properties': !exists(json, 'properties') ? undefined : json['properties'],
@@ -79,7 +79,7 @@ export function FileInfoVmToJSON(value?: FileInfoVm | null): any {
     return {
         
         'fileName': value.fileName,
-        'exstension': value.exstension,
+        'extension': value.extension,
         'sizeInBytes': value.sizeInBytes,
         'contentType': value.contentType,
         'properties': value.properties,
