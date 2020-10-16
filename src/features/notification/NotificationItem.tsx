@@ -7,7 +7,6 @@ import { NotificationUtils } from './useNotificationUtils'
 import { NotificationData } from 'models/notification'
 import { useTranslation } from 'react-i18next'
 import { ListItemMetaProps } from 'antd/lib/list'
-import { NotificationType } from 'api/swagger/coupon'
 import { EnvelopeIcon } from 'components/icons/EnvelopeIcon'
 
 interface NotificationItemProps {
@@ -21,34 +20,25 @@ export const NotificationItem: FC<NotificationItemProps> = props => {
   const { handleInspectItem, handleNavigateItem } = props.notificationUtils
 
   const meta: ListItemMetaProps = {
+    title: t(`enum.notification-type.${item.type}.title`, { ...item }),
     description: (
-      <Row justify="space-between">
-        <Col className="notification-date">
-          <MomentDisplay date={moment(item.createdDate)} mode="from now" />
-        </Col>
-        <Col>
-          <EnvelopeIcon opened={item.isSeen} onClick={(e: Event) => handleInspectItem(e, item)} />
-        </Col>
-      </Row>
+      <div>
+        <Row className="notification-detail">
+          {t(`enum.notification-type.${item.type}.detail`, {
+            ...item,
+            interpolation: { escapeValue: false }
+          })}
+        </Row>
+        <Row justify="space-between">
+          <Col className="notification-date">
+            <MomentDisplay date={moment(item.createdDate)} mode="from now" />
+          </Col>
+          <Col>
+            <EnvelopeIcon opened={item.isSeen} onClick={(e: Event) => handleInspectItem(e, item)} />
+          </Col>
+        </Row>
+      </div>
     )
-  }
-
-  switch (item.type) {
-    case NotificationType.CampaignMovedToWaitingState:
-      meta.title = t(`enum.notification-type.${item.type}`)
-      break
-    case NotificationType.PartnerContactRegistered:
-      meta.title = `${t(`enum.notification-type.${item.type}`)} ${item.value}`
-      break
-    case NotificationType.CouponClosed:
-      meta.title = t(`enum.notification-type.${item.type}`)
-      break
-    case NotificationType.CouponCountDepleted:
-      meta.title = t(`enum.notification-type.${item.type}`)
-      break
-    default:
-      meta.title = t(`enum.notification-type.${item.type}`)
-      break
   }
 
   return (
