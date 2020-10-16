@@ -115,6 +115,7 @@ export const useCampaignUtils = (): CampaignUtils => {
       handleCouponSave({
         ...values,
         smallPictureId: values.smallPicture.id,
+        bigPictureId: values.bigPicture.id,
         categoryId: +values.categoryId,
         discountValue: +values.discountValue,
         minimumShoppingValue: +values.minimumShoppingValue,

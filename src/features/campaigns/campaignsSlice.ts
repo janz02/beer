@@ -149,7 +149,8 @@ const getCoupon = (id: number): AppThunk => async dispatch => {
         comments: coupon.comments?.map(x => {
           return { ...x, dateTime: moment(x.dateTime) }
         }),
-        smallPicture: { id: coupon.smallPictureId }
+        smallPicture: { id: coupon.smallPictureId },
+        bigPicture: { id: coupon.bigPictureId }
       } as Coupon)
     )
   } catch (err) {

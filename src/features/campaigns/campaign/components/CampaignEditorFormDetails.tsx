@@ -15,7 +15,6 @@ import { CampaignUtils } from '../useCampaignUtils'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
 import { InputNumberI18n } from 'components/InputNumberI18n'
-import { useFileValidatorUtils } from 'components/upload/useFileValidatorUtils'
 
 interface CampaignEditorFormDetailsProps {
   campaignUtils: CampaignUtils
@@ -44,11 +43,6 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
     selectedCouponType === CouponType.Discount &&
     (selectedCouponDiscountType === CouponDiscountType.FixValue ||
       selectedCouponDiscountType === CouponDiscountType.PercentValue)
-
-  const { setError, getFieldState, removeError } = useFileValidatorUtils([
-    'smallPictureId',
-    'bigPictureId'
-  ])
 
   return (
     <>
@@ -438,13 +432,11 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
             label={t('coupon-create.field.small-image')}
             extra={t('coupon-create.field.small-image-help')}
             rules={[
-              rule.required(t('error.validation.coupon.small-picture-id-required'))
-              // rule.fileExtension('.jpg,.png'),
-              // rule.fileSize(50),
-              // rule.fileImgDimensions({ width: 360, height: 270 })
+              rule.required(t('error.validation.coupon.small-picture-id-required')),
+              rule.fileExtension('.jpg,.png'),
+              rule.fileSize(50),
+              rule.fileImgDimensions({ width: 360, height: 270 })
             ]}
-            // help={getFieldState('smallPictureId')}
-            // validateStatus={getFieldState('smallPictureId') ? 'error' : undefined}
           >
             <PictureUploadButton
               disabled={!displayEditor}
@@ -453,7 +445,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                   ...form.getFieldsValue(),
                   smallPicture: fileDetails
                 })
-                removeError('smallPicture')
+
                 form.validateFields(['smallPicture'])
               }}
               onRemove={() => {
@@ -462,22 +454,9 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                   smallPicture: undefined
                 })
 
-                removeError('smallPicture')
                 form.validateFields(['smallPicture'])
               }}
-              // onError={type => {
-              //   form.setFieldsValue({
-              //     ...form.getFieldsValue(),
-              //     smallPictureId: undefined
-              //   })
-              //   setError('smallPictureId', type as any)
-              //   form.validateFields(['smallPictureId'])
-              // }}
-              initialFileId={coupon?.smallPictureId}
-              allowedImgDimensions={{
-                width: 360,
-                height: 270
-              }}
+              initialFileId={coupon?.smallPicture?.id}
             />
           </Form.Item>
         </Col>
@@ -485,36 +464,35 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
         <Col span={12}>
           {prizeOrDiscount && (
             <Form.Item
-              name="bigPictureId"
+              name="bigPicture"
               label={t('coupon-create.field.big-image')}
               extra={t('coupon-create.field.big-image-help')}
               rules={[
-                rule.required(t('error.validation.coupon.big-picture-id-required-non-banner'))
+                rule.required(t('error.validation.coupon.big-picture-id-required-non-banner')),
+                rule.fileExtension('.jpg,.png'),
+                rule.fileSize(50),
+                rule.fileImgDimensions({ width: 360, height: 540 })
               ]}
             >
               <PictureUploadButton
                 disabled={!displayEditor}
-                onSuccess={fileId => {
+                onSuccess={fileDetails => {
                   form.setFieldsValue({
                     ...form.getFieldsValue(),
-                    bigPictureId: fileId
+                    bigPicture: fileDetails
                   })
 
-                  form.validateFields(['bigPictureId'])
+                  form.validateFields(['bigPicture'])
                 }}
                 onRemove={() => {
                   form.setFieldsValue({
                     ...form.getFieldsValue(),
-                    bigPictureId: undefined
+                    bigPicture: undefined
                   })
 
-                  form.validateFields(['bigPictureId'])
+                  form.validateFields(['bigPicture'])
                 }}
-                initialFileId={coupon?.bigPictureId}
-                allowedImgDimensions={{
-                  width: 360,
-                  height: 540
-                }}
+                initialFileId={coupon?.bigPicture?.id}
               />
             </Form.Item>
           )}

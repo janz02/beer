@@ -135,8 +135,9 @@ export function useCommonFormRules() {
   const fileExtension = useCallback(
     (extensions: string, message?: string): Rule => ({
       validator: (rule, value) => {
-        // console.log(value)
-        return value ? Promise.reject(new Error('incorrectFileExtension')) : Promise.resolve()
+        return value && !extensions.includes(value.extension)
+          ? Promise.reject(new Error('incorrectFileExtension'))
+          : Promise.resolve()
       },
       message: message || t('error.common.incorrect-file-extension')
     }),
@@ -145,14 +146,18 @@ export function useCommonFormRules() {
 
   /**
    * FileSize
-   * @param size (optional) number
+   * @param size (optional) number: file size in megabytes
    * @param message (optional) string
    */
   const fileSize = useCallback(
     (size?: number, message?: string): Rule => ({
       validator: (rule, value) => {
-        // console.log(value)
-        return value ? Promise.reject(new Error('tooBigFile')) : Promise.resolve()
+        const convertToMB = (fileSize: number): number => fileSize / 1024 / 1024
+        const maxSize = size || 50
+
+        return value && convertToMB(value.size) > maxSize
+          ? Promise.reject(new Error('tooBigFile'))
+          : Promise.resolve()
       },
       message: message || t('error.common.file-size-too-big')
     }),
@@ -167,11 +172,9 @@ export function useCommonFormRules() {
   const fileImgDimensions = useCallback(
     (dimensions: PictureDimensions, message?: string): Rule => ({
       validator: (rule, value) => {
-        console.log(value)
-        const img: HTMLImageElement = new Image()
-        // img.onload = () => {}
-        img.src = value.objectUrl
-        return value && (img.width !== dimensions.width || img.height !== dimensions.height)
+        return value &&
+          (dimensions.width !== value.dimensions.width ||
+            dimensions.height !== value.dimensions.height)
           ? Promise.reject(new Error('imgDimensionsNotValid'))
           : Promise.resolve()
       },
@@ -192,6 +195,7 @@ export function useCommonFormRules() {
     number,
     email,
     max,
+    maxValue,
     positiveInteger,
     fileExtension,
     fileSize,

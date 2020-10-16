@@ -25,12 +25,9 @@ export interface FileUploadUtilsProps {
   onSuccess?: (fileDetail: any) => void
   onRemove?: () => void
   onClick?: () => void
-  onError?: (error: string) => void
   initialFileId?: string | null | undefined
   mode?: 'image' | 'file'
-  allowedFileSize?: number
   allowedExtensions?: string
-  allowedImgDimensions?: PictureDimensions
 }
 
 export interface FileUploadUtils {
@@ -42,17 +39,7 @@ export interface FileUploadUtils {
 }
 
 export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils {
-  const {
-    initialFileId,
-    uploadProps,
-    onRemove,
-    onSuccess,
-    mode,
-    allowedExtensions,
-    allowedImgDimensions,
-    allowedFileSize,
-    onError
-  } = props
+  const { initialFileId, uploadProps, onRemove, onSuccess, mode, allowedExtensions } = props
 
   const [fileId, setFileId] = useState<any>()
 
@@ -170,16 +157,14 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
           handleUploadSuccess(file)
           onSuccess?.({
             id: file.response.id,
-            extension: file.response.exstension,
+            extension: file.response.extension,
             size: file.size,
-            objectUrl: URL.createObjectURL(file.originFileObj)
+            dimensions: {
+              width: +file.response?.properties?.Width || null,
+              height: +file.response?.properties?.Height || null
+            }
           })
           setFileId(file.response.id)
-
-          // validation triggers
-          // validateImgDimensions(file.originFileObj)
-          // validateFileSize(file.size)
-          // validateFileExtension(file.response.extension)
           break
         case 'removed':
           setThumbnail({ loading: false, error: t('error.unknown-try-again') })
