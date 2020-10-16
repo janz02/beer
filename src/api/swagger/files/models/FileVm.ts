@@ -36,7 +36,25 @@ export interface FileVm {
      * @type {string}
      * @memberof FileVm
      */
-    exstension?: string | null;
+    extension?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FileVm
+     */
+    sizeInBytes?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileVm
+     */
+    contentType?: string | null;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     * @memberof FileVm
+     */
+    properties?: { [key: string]: string; } | null;
 }
 
 export function FileVmFromJSON(json: any): FileVm {
@@ -51,7 +69,10 @@ export function FileVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): Fi
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'fileName': !exists(json, 'fileName') ? undefined : json['fileName'],
-        'exstension': !exists(json, 'exstension') ? undefined : json['exstension'],
+        'extension': !exists(json, 'extension') ? undefined : json['extension'],
+        'sizeInBytes': !exists(json, 'sizeInBytes') ? undefined : json['sizeInBytes'],
+        'contentType': !exists(json, 'contentType') ? undefined : json['contentType'],
+        'properties': !exists(json, 'properties') ? undefined : json['properties'],
     };
 }
 
@@ -66,7 +87,10 @@ export function FileVmToJSON(value?: FileVm | null): any {
         
         'id': value.id,
         'fileName': value.fileName,
-        'exstension': value.exstension,
+        'extension': value.extension,
+        'sizeInBytes': value.sizeInBytes,
+        'contentType': value.contentType,
+        'properties': value.properties,
     };
 }
 
