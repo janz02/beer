@@ -1,9 +1,10 @@
-import { render } from 'enzyme'
+import '@testing-library/jest-dom'
 import React from 'react'
 import { useSegmentationListUtils } from './useSegmentationListUtils'
 import { setupStore } from '../../../../config/setupMocks'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import moment from 'moment'
+import { render, screen } from '@testing-library/react'
 
 jest.mock('app/store')
 
@@ -46,14 +47,9 @@ const SegmentationTableContent: React.FC = () => {
   return <ResponsiveTable {...tableProps} />
 }
 
-describe('segmentation table tests', () => {
-  it('segmentations appear in the table', () => {
-    // Act
-    const tableContent = render(<SegmentationTableContent />)
+test('segmentations appear in the table', () => {
+  render(<SegmentationTableContent />)
 
-    // Assert
-    expect(tableContent.html()).toBeDefined()
-    // expect(tabContent.html()).toContain('Segmentation1')
-    //  expect(tabContent.html()).toContain('Segmentation2')
-  })
+  expect(screen.getByText(/Segmentation1/)).toBeInTheDocument()
+  expect(screen.getByText(/Segmentation2/)).toBeInTheDocument()
 })
