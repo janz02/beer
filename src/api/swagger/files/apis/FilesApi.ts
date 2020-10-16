@@ -24,9 +24,6 @@ import {
     FileAccess,
     FileAccessFromJSON,
     FileAccessToJSON,
-    FileInfoVm,
-    FileInfoVmFromJSON,
-    FileInfoVmToJSON,
     FileVm,
     FileVmFromJSON,
     FileVmToJSON,
@@ -286,7 +283,7 @@ export class FilesApi extends runtime.BaseAPI {
     /**
      * Returns info about the requested file
      */
-    async infoFileRaw(requestParameters: InfoFileRequest): Promise<runtime.ApiResponse<FileInfoVm>> {
+    async infoFileRaw(requestParameters: InfoFileRequest): Promise<runtime.ApiResponse<FileVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling infoFile.');
         }
@@ -306,13 +303,13 @@ export class FilesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FileInfoVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileVmFromJSON(jsonValue));
     }
 
     /**
      * Returns info about the requested file
      */
-    async infoFile(requestParameters: InfoFileRequest): Promise<FileInfoVm> {
+    async infoFile(requestParameters: InfoFileRequest): Promise<FileVm> {
         const response = await this.infoFileRaw(requestParameters);
         return await response.value();
     }
