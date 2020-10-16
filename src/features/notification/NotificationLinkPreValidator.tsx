@@ -24,7 +24,7 @@ export const NotificationLinkPreValidator = {
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async CampaignMovedToWaitingState(actualId: number, parentId: number): Promise<boolean> {
+  async CampaignMovedToWaitingState(actualId: number, parentId: number | null): Promise<boolean> {
     return await this.GetCoupon(actualId)
   },
 
@@ -34,12 +34,12 @@ export const NotificationLinkPreValidator = {
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async CouponCountDepleted(actualId: number, parentId: number): Promise<boolean> {
+  async CouponCountDepleted(actualId: number, parentId: number | null): Promise<boolean> {
     return await this.GetCoupon(actualId)
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async CouponClosed(actualId: number, parentId: number): Promise<boolean> {
+  async CouponClosed(actualId: number, parentId: number | null): Promise<boolean> {
     return await this.GetCoupon(actualId)
   }
 }

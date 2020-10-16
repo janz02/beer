@@ -1,7 +1,8 @@
 import React from 'react'
-import { Route, RouteProps, Redirect } from 'react-router-dom'
+import { RouteProps, Redirect } from 'react-router-dom'
 import { PublicLayout } from 'components/layout/PublicLayout'
 import { isLoggedIn } from 'services/jwt-reader'
+import { ApmRoute } from '@elastic/apm-rum-react'
 
 interface PublicRouteProps extends RouteProps {
   onlyPublic?: boolean
@@ -16,7 +17,7 @@ export const PublicRoute: React.FC<PublicRouteProps> = props => {
 
   return (
     <PublicLayout>
-      <Route {...props} />
+      <ApmRoute {...props} />
     </PublicLayout>
   )
 }

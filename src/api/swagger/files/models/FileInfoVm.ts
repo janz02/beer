@@ -31,6 +31,24 @@ export interface FileInfoVm {
      * @memberof FileInfoVm
      */
     exstension?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FileInfoVm
+     */
+    sizeInBytes?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileInfoVm
+     */
+    contentType?: string | null;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     * @memberof FileInfoVm
+     */
+    properties?: { [key: string]: string; } | null;
 }
 
 export function FileInfoVmFromJSON(json: any): FileInfoVm {
@@ -45,6 +63,9 @@ export function FileInfoVmFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         
         'fileName': !exists(json, 'fileName') ? undefined : json['fileName'],
         'exstension': !exists(json, 'exstension') ? undefined : json['exstension'],
+        'sizeInBytes': !exists(json, 'sizeInBytes') ? undefined : json['sizeInBytes'],
+        'contentType': !exists(json, 'contentType') ? undefined : json['contentType'],
+        'properties': !exists(json, 'properties') ? undefined : json['properties'],
     };
 }
 
@@ -59,6 +80,9 @@ export function FileInfoVmToJSON(value?: FileInfoVm | null): any {
         
         'fileName': value.fileName,
         'exstension': value.exstension,
+        'sizeInBytes': value.sizeInBytes,
+        'contentType': value.contentType,
+        'properties': value.properties,
     };
 }
 
