@@ -800,6 +800,18 @@
       "title": "Szegmentáció"
     }
   },
+  
+  "segmentation-editor": {
+    "title-edit": "Szegmentáció szerkesztése",
+    "title-create": "Szegmentáció létrehozása",
+    "basics": {
+      "title": "Alap információk",
+      "name": "Szegmentáció neve",
+      "category": "Szegmentáció kategória"
+    },
+    "button-create": "Létrehozás",
+    "button-save": "Mentés"
+  },
   "segmentation-category": {
     "add": "Új szegmentációs kategória hozzáadása",
     "editor-create": "Létrehozás",

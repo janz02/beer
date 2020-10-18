@@ -800,6 +800,17 @@
       "title": "Segmentation"
     }
   },
+  "segmentation-editor": {
+    "title-edit": "Edit segmentation",
+    "title-create": "Create segmentation",
+    "basics": {
+      "title": "Basic information",
+      "name": "Segmentation name",
+      "category": "Segmentation category"
+    },
+    "button-create": "Create",
+    "button-save": "Save"
+  },
   "segmentation-category": {
     "add": "Add new segmentation category",
     "editor-create": "Create",
