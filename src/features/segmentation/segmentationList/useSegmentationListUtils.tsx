@@ -95,7 +95,7 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
         }
       })
     ],
-    [columnConfig, t]
+    [columnConfig, t, isEditor, actionColumnConfig]
   )
 
   const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.SEGMENTATION)

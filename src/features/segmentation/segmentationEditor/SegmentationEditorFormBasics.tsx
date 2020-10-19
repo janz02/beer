@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Col, Form, Input, Row, Select } from 'antd'
 import { useCommonFormRules } from 'hooks'
@@ -21,8 +21,8 @@ export const SegmentationEditorFormBasics: React.FC<SegmentationEditorFormBasics
             name="name"
             label={t('segmentation-editor.basics.name')}
             rules={[
-              rule.requiredString(t('error.validation.coupon.name-required')),
-              rule.max(60, t('error.validation.coupon.name-max-length-60'))
+              rule.requiredString(t('error.validation.segmentation-editor.name-required')),
+              rule.max(60, t('error.validation.segmentation-editor.name-max-length-60'))
             ]}
           >
             <Input maxLength={60} />
@@ -31,13 +31,13 @@ export const SegmentationEditorFormBasics: React.FC<SegmentationEditorFormBasics
 
         <Col span={8} offset={4}>
           <Form.Item
-            name="categoryId"
+            name="segmentationCategoryId"
             label={t('segmentation-editor.basics.category')}
             rules={[rule.required(t('error.validation.segmentation-editor.category-required'))]}
           >
-            <Select onChange={x => {}}>
+            <Select>
               {categories?.map(x => (
-                <Select.Option key={x.id} value={x.id + ''}>
+                <Select.Option key={x.id} value={x.id!}>
                   {x.name}
                 </Select.Option>
               ))}

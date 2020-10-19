@@ -7,10 +7,12 @@ import { message } from 'antd'
 import { api } from 'api'
 import { QueryBuilderField, SegmentationVm } from 'api/swagger/campaign-editor'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
+import { SegmentationQuery } from 'models/campaign/segmentationQuery'
 
 interface SegmentationEditorState {
-  segmentation?: CampaignSegmentation
+  segmentation: CampaignSegmentation
   categories?: SegmentationCategory[]
+  segmentationQuery?: SegmentationQuery
   fields?: QueryBuilderField[]
   error: boolean
   loading: boolean
@@ -18,6 +20,7 @@ interface SegmentationEditorState {
 }
 
 const initialState: SegmentationEditorState = {
+  segmentation: {},
   error: false,
   loading: false,
   loadingDelete: false
@@ -33,11 +36,14 @@ const segmentationEditorSlice = createSlice({
     },
     getSegmentationSuccess(
       state,
-      action: PayloadAction<[CampaignSegmentation, SegmentationCategory[], QueryBuilderField[]]>
+      action: PayloadAction<
+        [CampaignSegmentation, SegmentationCategory[], SegmentationQuery, QueryBuilderField[]]
+      >
     ) {
       state.segmentation = action.payload[0]
       state.categories = action.payload[1]
-      state.fields = action.payload[2]
+      state.segmentationQuery = action.payload[2]
+      state.fields = action.payload[3]
       state.loading = false
       state.error = false
     },
@@ -71,14 +77,10 @@ const segmentationEditorSlice = createSlice({
 const {
   getSegmentationSuccess,
   getSegmentationFail,
-  getSegmentationRequest
-} = segmentationEditorSlice.actions
-const {
+  getSegmentationRequest,
   deleteSegmentationRequest,
   deleteSegmentationSuccess,
-  deleteSegmentationFail
-} = segmentationEditorSlice.actions
-const {
+  deleteSegmentationFail,
   saveSegmentationSuccess,
   saveSegmentationFail,
   saveSegmentationRequest
@@ -92,21 +94,19 @@ export const getSegmentation = (id: number): AppThunk => async dispatch => {
   try {
     dispatch(getSegmentationRequest())
     const segmentation = await api.campaignEditor.segmentations.getSegmentation({ id })
+    const segmentationQuery = await api.campaignEditor.segmentationQueries.getSegmentationQuery({
+      segmentationId: id
+    })
+    const { fields } = await api.campaignEditor.segmentationQueries.getConfig()
+
     const {
       items: categories
     } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({})
-
-    const segmentationQueryResponse = await api.campaignEditor.segmentationQueries.getSegmentationQuery(
-      {
-        segmentationId: id
-      }
-    )
-
-    const { fields } = await api.campaignEditor.segmentationQueries.getConfig()
     dispatch(
       getSegmentationSuccess([
         segmentation as CampaignSegmentation,
         categories as SegmentationCategory[],
+        segmentationQuery as SegmentationQuery,
         fields as QueryBuilderField[]
       ])
     )
@@ -120,12 +120,13 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
   getState
 ) => {
   try {
-    const segmentation = getState().segmentationEditor.segmentation
+    const { segmentation, segmentationQuery } = getState().segmentationEditor
     dispatch(saveSegmentationRequest())
 
     if (segmentation?.id) {
       await api.campaignEditor.segmentations.updateSegmentation({
         createUpdateSegmentationCommand: {
+          ...segmentationQuery,
           ...segmentation,
           ...data
         } as SegmentationVm
@@ -135,12 +136,13 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
     } else {
       await api.campaignEditor.segmentations.createSegmentation({
         createUpdateSegmentationCommand: {
+          ...segmentationQuery,
           ...segmentation,
           ...data
         } as SegmentationVm
       })
 
-      // history.push(`/segmentations/${createdSegmentationId}`)
+      history.push(`/segmentations`)
     }
     dispatch(saveSegmentationSuccess())
     message.success(i18n.t('common.message.save-success'), 5)
