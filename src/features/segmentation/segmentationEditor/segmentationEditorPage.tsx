@@ -10,6 +10,7 @@ import { SegmentationEditorForm } from './SegmentationEditorForm'
 import { history } from 'router/router'
 import { useSegmentationEditorUtils } from './useSegmentationEditorUtils'
 import { useDispatch } from 'react-redux'
+import { QueryBuilderSidebarView } from './queryBuilder/QueryBuilderSidebarView'
 
 export const SegmentationEditorPage: React.FC = () => {
   const { t } = useTranslation()
@@ -56,8 +57,10 @@ export const SegmentationEditorPage: React.FC = () => {
         </Col>
 
         <Col span={6} className="comment-col">
-          asdaisd
-          {/* <Comments campaignUtils={props.campaignUtils} /> */}
+          <QueryBuilderSidebarView
+            fields={segmentationEditorUtils.fields}
+            onFieldSelected={segmentationEditorUtils.handleOnSidebarFieldSelected}
+          />
         </Col>
       </Row>
     </>

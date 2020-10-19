@@ -1,3 +1,4 @@
+import { QueryBuilderField } from 'api/swagger/campaign-editor/models'
 import { RootState } from 'app/rootReducer'
 import { UseFormUtils, useFormUtils } from 'hooks/useFormUtils'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
@@ -12,6 +13,8 @@ interface SegmentationEditorUtilsProps {
 export interface SegmentationEditorUtils {
   formUtils: UseFormUtils
   categories?: SegmentationCategory[]
+  fields?: QueryBuilderField[]
+  handleOnSidebarFieldSelected: (selectedField: string) => void
 }
 
 export const useSegmentationEditorUtils = (
@@ -20,7 +23,7 @@ export const useSegmentationEditorUtils = (
   const { id } = props
 
   const dispatch = useDispatch()
-  const { segmentation, categories, loading } = useSelector(
+  const { segmentation, categories, fields, loading } = useSelector(
     (state: RootState) => state.segmentationEditor
   )
 
@@ -41,7 +44,11 @@ export const useSegmentationEditorUtils = (
       name: segmentation?.name ?? '',
       categoryId: segmentation?.segmentationCategoryId
     })
-  }, [dispatch, segmentation])
+  }, [dispatch, segmentation, formUtils])
 
-  return { formUtils, categories }
+  const handleOnSidebarFieldSelected = (selectedField: string): void => {
+    console.log(selectedField)
+  }
+
+  return { formUtils, categories, fields, handleOnSidebarFieldSelected }
 }

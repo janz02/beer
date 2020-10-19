@@ -5,12 +5,13 @@ import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
-import { SegmentationVm } from 'api/swagger/campaign-editor'
+import { QueryBuilderField, SegmentationVm } from 'api/swagger/campaign-editor'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 
 interface SegmentationEditorState {
   segmentation?: CampaignSegmentation
   categories?: SegmentationCategory[]
+  fields?: QueryBuilderField[]
   error: boolean
   loading: boolean
   loadingDelete: boolean
@@ -32,10 +33,11 @@ const segmentationEditorSlice = createSlice({
     },
     getSegmentationSuccess(
       state,
-      action: PayloadAction<[CampaignSegmentation, SegmentationCategory[]]>
+      action: PayloadAction<[CampaignSegmentation, SegmentationCategory[], QueryBuilderField[]]>
     ) {
       state.segmentation = action.payload[0]
       state.categories = action.payload[1]
+      state.fields = action.payload[2]
       state.loading = false
       state.error = false
     },
@@ -93,10 +95,19 @@ export const getSegmentation = (id: number): AppThunk => async dispatch => {
     const {
       items: categories
     } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({})
+
+    const segmentationQueryResponse = await api.campaignEditor.segmentationQueries.getSegmentationQuery(
+      {
+        segmentationId: id
+      }
+    )
+
+    const { fields } = await api.campaignEditor.segmentationQueries.getConfig()
     dispatch(
       getSegmentationSuccess([
         segmentation as CampaignSegmentation,
-        categories as SegmentationCategory[]
+        categories as SegmentationCategory[],
+        fields as QueryBuilderField[]
       ])
     )
   } catch (err) {
