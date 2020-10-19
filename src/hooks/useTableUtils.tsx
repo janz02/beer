@@ -51,7 +51,7 @@ export interface ListRequestParams extends Pagination {
   orderByType?: OrderByType
 }
 
-export interface UseTableUtilsProps<T> {
+export interface TableUtilsProps<T> {
   listParamsState: ListRequestParams
   filterKeys?: (keyof T)[]
   sortWithoutDefaultOption?: boolean
@@ -89,7 +89,7 @@ interface ColumnConfigParams extends ColumnType<any> {
   renderMode?: 'date time' | null
 }
 
-export interface UseTableUtils<T> {
+export interface TableUtils<T> {
   paginationConfig: false | TablePaginationConfig
   handleTableChange: any
   columnConfig: (params: ColumnConfigParams) => ColumnType<T>
@@ -144,9 +144,7 @@ export const basePaginationConfig = (
  // For filtering with dropdown select
 
  */
-function useTableUtils<T extends { [key: string]: any }>(
-  props: UseTableUtilsProps<T>
-): UseTableUtils<T> {
+function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<T>): TableUtils<T> {
   const { listParamsState, getDataAction, filterKeys, sortWithoutDefaultOption } = props
   const isMobile = useIsMobile()
   const dispatch = useDispatch()

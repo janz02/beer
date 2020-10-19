@@ -3,7 +3,7 @@ import { Form } from 'antd'
 
 import { FormInstance } from 'antd/lib/form'
 
-export interface UseFormUtils<T = any> {
+export interface FormUtils<T = any> {
   form: FormInstance
   submitable: boolean
   modified: boolean
@@ -17,7 +17,7 @@ export interface UseFormUtils<T = any> {
 /**
  * Utility hook for forms with a Save button
  */
-export function useFormUtils<T = any>(): UseFormUtils<T> {
+export function useFormUtils<T = any>(): FormUtils<T> {
   const [form] = Form.useForm()
   const [submitable, setSubmitable] = useState(false)
   const [modified, setModified] = useState(false)
