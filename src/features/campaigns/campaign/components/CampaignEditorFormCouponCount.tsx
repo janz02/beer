@@ -10,6 +10,7 @@ import { CampaignUtils } from '../useCampaignUtils'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
 import { InputNumberI18n } from 'components/InputNumberI18n'
+import { FileExtension } from 'components/upload/fileUploadHelper'
 
 interface CampaignEditorFormCouponCountProps {
   campaignUtils: CampaignUtils
@@ -47,30 +48,31 @@ export const CampaignEditorFormCouponCount: FC<CampaignEditorFormCouponCountProp
       {prizeOrDiscount && (
         <Col span={8}>
           <Form.Item
-            name="predefinedCodesFileId"
+            name="predefinedCodesFile"
             label={t('coupon-create.field.upload')}
             extra={t('coupon-create.field.upload-help')}
           >
             <FileUploadButton
               disabled={!displayEditor}
-              onSuccess={fileId => {
+              onSuccess={fileDetail => {
                 form.setFieldsValue({
                   ...form.getFieldsValue(),
-                  predefinedCodesFileId: fileId
+                  predefinedCodesFile: fileDetail
                 })
 
-                form.validateFields()
+                form.validateFields(['predefinedCodesFile'])
               }}
               onRemove={() => {
                 form.setFieldsValue({
                   ...form.getFieldsValue(),
-                  predefinedCodesFileId: undefined
+                  predefinedCodesFile: undefined
                 })
 
-                form.validateFields()
+                form.validateFields(['predefinedCodesFile'])
               }}
               onClick={() => dispatch(campaignActions.downloadPredefinedCodesFile(coupon!))}
-              initialFileId={coupon?.predefinedCodesFileId}
+              initialFileId={coupon?.predefinedCodesFile?.id}
+              allowedExtensions={`${FileExtension.CSV},${FileExtension.TXT}`}
             />
           </Form.Item>
         </Col>

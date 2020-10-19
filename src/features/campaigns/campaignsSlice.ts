@@ -150,7 +150,9 @@ const getCoupon = (id: number): AppThunk => async dispatch => {
           return { ...x, dateTime: moment(x.dateTime) }
         }),
         smallPicture: { id: coupon.smallPictureId },
-        bigPicture: { id: coupon.bigPictureId }
+        bigPicture: { id: coupon.bigPictureId },
+        prizeRulesFile: { id: coupon.prizeRulesFileId },
+        predefinedCodesFile: { id: coupon.predefinedCodesFileId }
       } as Coupon)
     )
   } catch (err) {

@@ -9,7 +9,7 @@ import { useFileUploadUtils, FileUploadUtilsProps } from './useFileUploadUtils'
 
 export type PictureUploadButtonProps = Pick<
   FileUploadUtilsProps,
-  'disabled' | 'initialFileId' | 'onRemove' | 'onSuccess' | 'allowedExtensions'
+  'disabled' | 'initialFileId' | 'onRemove' | 'onSuccess'
 >
 
 export const PictureUploadButton: FC<PictureUploadButtonProps> = props => {

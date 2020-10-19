@@ -1,11 +1,13 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { UploadFile, UploadProps, UploadChangeParam } from 'antd/lib/upload/interface'
+import { UploadFile, UploadProps, UploadChangeParam, RcFile } from 'antd/lib/upload/interface'
 import { useTranslation } from 'react-i18next'
 import { api } from 'api'
 import { getBase64 } from 'services/file-reader'
 import { displayBackendError } from 'services/errorHelpers'
 import { getUrl } from 'services/baseUrlHelper'
 import { RequestError } from 'api/middleware'
+import { notification } from 'antd'
+import { FileExtension, FILE_TYPES, MAX_FILE_SIZE_IN_MB } from './fileUploadHelper'
 
 export interface PictureDimensions {
   width: number
@@ -36,6 +38,7 @@ export interface FileUploadUtils {
   handleClear: (id: any) => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
   acceptFileExtensions?: string
+  beforeUpload: any // todo
 }
 
 export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils {
@@ -104,44 +107,6 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
     setThumbnail({ url: '' })
   }, [handleFileDownload, fileId])
 
-  const validateImgDimensions = useCallback(
-    originImgBlob => {
-      if (mode === 'image') {
-        const img: HTMLImageElement = new Image()
-        const objectUrl = URL.createObjectURL(originImgBlob)
-        img.onload = () => {
-          if (
-            img.width !== allowedImgDimensions?.width ||
-            img.height !== allowedImgDimensions.height
-          ) {
-            onError?.('dimension')
-          }
-        }
-        img.src = objectUrl
-      }
-    },
-    [allowedImgDimensions, mode, onError]
-  )
-
-  const validateFileSize = useCallback(
-    size => {
-      if ((!allowedFileSize && size > 50) || (allowedFileSize && size > allowedFileSize)) {
-        onError?.('size')
-      }
-    },
-    [onError, allowedFileSize]
-  )
-
-  const validateFileExtension = useCallback(
-    extension => {
-      console.log(extension, allowedExtensions)
-      if (!allowedExtensions?.includes(extension)) {
-        onError?.('extension')
-      }
-    },
-    [onError, allowedExtensions]
-  )
-
   const handleFileUpload = useCallback(
     (info: UploadChangeParam<UploadFile<any>>): void => {
       const file = info.file
@@ -177,14 +142,7 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
         }
       }
     },
-    [
-      handleUploadSuccess,
-      onSuccess,
-      t
-      // validateImgDimensions,
-      // validateFileSize,
-      // validateFileExtension
-    ]
+    [handleUploadSuccess, onSuccess, t]
   )
 
   const handleClear = async () => {
@@ -196,32 +154,71 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
     }
   }
 
-  const appendedUploadProps = useMemo(
-    (): UploadProps => ({
-      ...uploadProps,
-      action: uploadUrl,
-      headers: { Authorization: apiKey }
-    }),
-    [uploadProps, apiKey, uploadUrl]
-  )
-
   const acceptFileExtensions = useMemo(() => {
     if (allowedExtensions) return allowedExtensions
 
     switch (mode) {
       case 'image':
-        return '.jpg,.png'
+        return `${FileExtension.JPG},${FileExtension.PNG}`
       case 'file':
-        return '.csv,.pdf,.txt'
+        return `${FileExtension.CSV},${FileExtension.TXT},${FileExtension.PDF}`
       default:
     }
   }, [allowedExtensions, mode])
+
+  const isAllowedType = useCallback(
+    (type: any): boolean => {
+      const allowedMimes = acceptFileExtensions
+        ? acceptFileExtensions
+            .split(',')
+            .map(extension => FILE_TYPES.find(t => t.extension === extension))
+        : []
+
+      return !!allowedMimes?.find(el => el?.mimeType === type)
+    },
+    [acceptFileExtensions]
+  )
+
+  const beforeUpload = useCallback(
+    (file: RcFile): boolean => {
+      // extension check
+      const isOkExtension = isAllowedType(file.type)
+      if (!isOkExtension) {
+        notification.error({
+          message: t('error.common.incorrect-file-extension'),
+          duration: null
+        })
+      }
+
+      // file size check
+      const isLessThanMax = file.size / 1024 / 1024 < MAX_FILE_SIZE_IN_MB
+      if (!isLessThanMax) {
+        notification.error({
+          message: t('error.common.file-size-too-big'),
+          duration: null
+        })
+      }
+      return isOkExtension && isLessThanMax
+    },
+    [t, isAllowedType]
+  )
+
+  const appendedUploadProps = useMemo(
+    (): UploadProps => ({
+      ...uploadProps,
+      action: uploadUrl,
+      headers: { Authorization: apiKey },
+      beforeUpload: beforeUpload
+    }),
+    [uploadProps, apiKey, uploadUrl, beforeUpload]
+  )
 
   return {
     thumbnail,
     appendedUploadProps,
     handleFileUpload: handleFileUpload,
     handleClear,
-    acceptFileExtensions
+    acceptFileExtensions,
+    beforeUpload
   }
 }

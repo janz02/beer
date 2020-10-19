@@ -31,6 +31,7 @@ export interface Coupon {
   clickCount?: number
   claimCount?: number
   predefinedCodesFileId?: string | null
+  predefinedCodesFile?: { id: string; extension?: string; size?: number; dimensions?: string }
   createdBy?: string | null
   createdDate?: moment.Moment
   modifiedBy?: string | null
@@ -45,6 +46,7 @@ export interface Coupon {
   productDetails?: string | null
   drawDate?: moment.Moment
   prizeRulesFileId?: string | null
+  prizeRulesFile?: { id: string; extension?: string; size?: number; dimensions?: string }
   itemPrice?: number | null
   previousYearAverageBasketValue?: number | null
   awardedCampaign?: boolean

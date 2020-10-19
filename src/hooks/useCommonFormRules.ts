@@ -2,6 +2,7 @@ import { Rule } from 'rc-field-form/lib/interface'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
 import { PictureDimensions } from 'components/upload/useFileUploadUtils'
+import { MAX_FILE_SIZE_IN_MB } from 'components/upload/fileUploadHelper'
 
 /**
  * Contains validation rules that can be used with Ant Design Forms.
@@ -153,7 +154,7 @@ export function useCommonFormRules() {
     (size?: number, message?: string): Rule => ({
       validator: (rule, value) => {
         const convertToMB = (fileSize: number): number => fileSize / 1024 / 1024
-        const maxSize = size || 50
+        const maxSize = size || MAX_FILE_SIZE_IN_MB
 
         return value && convertToMB(value.size) > maxSize
           ? Promise.reject(new Error('tooBigFile'))
