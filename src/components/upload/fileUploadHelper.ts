@@ -25,3 +25,8 @@ export const FILE_TYPES = [
 ]
 
 export const MAX_FILE_SIZE_IN_MB = 50
+
+export interface PictureDimensions {
+  width: number
+  height: number
+}

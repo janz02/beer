@@ -19,8 +19,7 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
     handleClear,
     handleFileUpload: handleSingleImageUpload,
     appendedUploadProps,
-    thumbnail,
-    acceptFileExtensions
+    thumbnail
   } = useFileUploadUtils({
     ...props
   })
@@ -68,7 +67,6 @@ export const FileUploadButton: FC<FileUploadButtonProps> = props => {
         showUploadList={false}
         listType="picture-card"
         className={`file-upload ${thumbnail?.error ? 'has-error' : ''}`}
-        accept={acceptFileExtensions}
       >
         <Tooltip title={thumbnail?.error} placement="right" style={{ padding: '1.5rem' }}>
           {uploadButton}

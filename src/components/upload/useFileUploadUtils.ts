@@ -9,11 +9,6 @@ import { RequestError } from 'api/middleware'
 import { notification } from 'antd'
 import { FileExtension, FILE_TYPES, MAX_FILE_SIZE_IN_MB } from './fileUploadHelper'
 
-export interface PictureDimensions {
-  width: number
-  height: number
-}
-
 interface FileThumbnail {
   label?: string | undefined | null
   url?: string
@@ -38,7 +33,7 @@ export interface FileUploadUtils {
   handleClear: (id: any) => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
   acceptFileExtensions?: string
-  beforeUpload: any // todo
+  beforeUpload: (file: RcFile) => boolean
 }
 
 export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils {
@@ -208,9 +203,10 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
       ...uploadProps,
       action: uploadUrl,
       headers: { Authorization: apiKey },
-      beforeUpload: beforeUpload
+      beforeUpload: beforeUpload,
+      accept: acceptFileExtensions
     }),
-    [uploadProps, apiKey, uploadUrl, beforeUpload]
+    [uploadProps, apiKey, uploadUrl, beforeUpload, acceptFileExtensions]
   )
 
   return {

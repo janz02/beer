@@ -1,8 +1,7 @@
 import { Rule } from 'rc-field-form/lib/interface'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
-import { PictureDimensions } from 'components/upload/useFileUploadUtils'
-import { MAX_FILE_SIZE_IN_MB } from 'components/upload/fileUploadHelper'
+import { MAX_FILE_SIZE_IN_MB, PictureDimensions } from 'components/upload/fileUploadHelper'
 
 /**
  * Contains validation rules that can be used with Ant Design Forms.
