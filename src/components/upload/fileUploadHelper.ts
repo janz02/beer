@@ -24,7 +24,7 @@ export const FILE_TYPES = [
   { mimeType: MIMEType.CSV, extension: FileExtension.CSV }
 ]
 
-export const MAX_FILE_SIZE_IN_MB = 50
+export const MAX_FILE_SIZE_IN_MB = 51
 
 export interface PictureDimensions {
   width: number
