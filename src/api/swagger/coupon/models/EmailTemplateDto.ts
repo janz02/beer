@@ -16,28 +16,28 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CreateEmailTemplateDto
+ * @interface EmailTemplateDto
  */
-export interface CreateEmailTemplateDto {
+export interface EmailTemplateDto {
     /**
      * 
      * @type {string}
-     * @memberof CreateEmailTemplateDto
+     * @memberof EmailTemplateDto
      */
     name?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof CreateEmailTemplateDto
+     * @memberof EmailTemplateDto
      */
     content?: string | null;
 }
 
-export function CreateEmailTemplateDtoFromJSON(json: any): CreateEmailTemplateDto {
-    return CreateEmailTemplateDtoFromJSONTyped(json, false);
+export function EmailTemplateDtoFromJSON(json: any): EmailTemplateDto {
+    return EmailTemplateDtoFromJSONTyped(json, false);
 }
 
-export function CreateEmailTemplateDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateEmailTemplateDto {
+export function EmailTemplateDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): EmailTemplateDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -48,7 +48,7 @@ export function CreateEmailTemplateDtoFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function CreateEmailTemplateDtoToJSON(value?: CreateEmailTemplateDto | null): any {
+export function EmailTemplateDtoToJSON(value?: EmailTemplateDto | null): any {
     if (value === undefined) {
         return undefined;
     }

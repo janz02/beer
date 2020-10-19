@@ -114,7 +114,7 @@ const createNewsletterTemplate = (name: string): AppThunk => async dispatch => {
   try {
     dispatch(setCreateState(FeatureState.Loading))
     const id = await api.coupon.emailTemplates.createEmailTemplate({
-      createEmailTemplateDto: {
+      emailTemplateDto: {
         name,
         content: `<div style="height: 10%; text-align: center; padding: 1rem">${name}</div>`
       }
