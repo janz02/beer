@@ -3,6 +3,7 @@ import { RootState } from 'app/rootReducer'
 import { UseFormUtils, useFormUtils } from 'hooks/useFormUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
+import { SegmentationQuery } from 'models/campaign/segmentationQuery'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -25,7 +26,7 @@ export interface SegmentationEditorUtils {
   checkFieldsChange: () => void
   handleSave: (values: CampaignSegmentation) => void
   fields?: QueryBuilderField[]
-  handleOnSidebarFieldSelected: (selectedField: string) => void
+  segmentationQuery?: SegmentationQuery
 }
 
 export const useSegmentationEditorUtils = (
@@ -34,7 +35,7 @@ export const useSegmentationEditorUtils = (
   const { id } = props
 
   const dispatch = useDispatch()
-  const { segmentation, categories, fields, loading } = useSelector(
+  const { segmentation, categories, fields, loading, segmentationQuery } = useSelector(
     (state: RootState) => state.segmentationEditor
   )
 
@@ -59,10 +60,6 @@ export const useSegmentationEditorUtils = (
     dispatch(saveSegmentation(values))
   }
 
-  const handleOnSidebarFieldSelected = (selectedField: string): void => {
-    console.log(selectedField)
-  }
-
   return {
     id,
     formUtils,
@@ -73,6 +70,6 @@ export const useSegmentationEditorUtils = (
     fields,
     checkFieldsChange,
     handleSave,
-    handleOnSidebarFieldSelected
+    segmentationQuery
   }
 }

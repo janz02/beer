@@ -55,7 +55,7 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
 
   return (
     <div>
-      <ResponsiveCard title={t('querybuilder.sidebar.header')}>
+      <ResponsiveCard title={t('query-builder.sidebar.header')}>
         <ul className="query-builder-sidebar">
           {!!fields &&
             Object.keys(fields).map((subField: any, idx: number) => {
