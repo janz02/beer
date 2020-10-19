@@ -17,16 +17,14 @@ setupStore({
       {
         key: 'example_key0',
         id: 0,
-        value: 'Some string value',
-        type: 'text',
+        value: 'Some value0',
         name: 'example_key0 name',
         description: 'example_key0 description'
       },
       {
         key: 'example_key1',
         id: 1,
-        value: 50,
-        type: 'number',
+        value: 'Some value1',
         name: 'example_key1 name',
         description: 'example_key1 description'
       }

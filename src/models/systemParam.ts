@@ -4,5 +4,4 @@ export interface SystemParam extends SystemParameterVm {
   id: number
   name: string
   description?: string
-  type: 'number' | 'text'
 }
