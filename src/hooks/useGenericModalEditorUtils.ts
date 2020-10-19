@@ -7,14 +7,14 @@ export interface GenericModalFormEditorParams {
   isNew?: boolean
 }
 
-export interface UseGenericModalFormEditorProps {
+export interface GenericModalFormEditorUtilsProps {
   dataId: string | undefined
   rootRoute: string
   detailRoute?: string
   disableCreate?: boolean
 }
 
-export interface UseGenericModalFormEditorUtils {
+export interface GenericModalFormEditorUtils {
   editorParams: GenericModalFormEditorParams
   routeToEditor: (requestDataId?: number) => void
   handleExit: () => void
@@ -31,8 +31,8 @@ export interface UseGenericModalFormEditorUtils {
  * @param props.disableCreate Ignore the "new" value in the `dataId`.
  */
 export const useGenericModalFormEditorUtils = (
-  props: UseGenericModalFormEditorProps
-): UseGenericModalFormEditorUtils => {
+  props: GenericModalFormEditorUtilsProps
+): GenericModalFormEditorUtils => {
   const { dataId, rootRoute, detailRoute, disableCreate } = props
 
   const [editorParams, setEditorParams] = useState<GenericModalFormEditorParams>({
