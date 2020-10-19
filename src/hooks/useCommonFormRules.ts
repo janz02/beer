@@ -1,7 +1,11 @@
 import { Rule } from 'rc-field-form/lib/interface'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
-import { MAX_FILE_SIZE_IN_MB, PictureDimensions } from 'components/upload/fileUploadHelper'
+import {
+  FrontendFileValue,
+  MAX_FILE_SIZE_IN_MB,
+  PictureDimensions
+} from 'components/upload/fileUploadHelper'
 
 /**
  * Contains validation rules that can be used with Ant Design Forms.
@@ -169,14 +173,19 @@ export function useCommonFormRules() {
    * @param dimensions allowed picture dimensions in pixel, example: { width: 300, height: 400 }
    * @param message (optional) string
    */
-  const fileImgDimensions = useCallback(
+  const fileImgDimensionsExactMatch = useCallback(
     (dimensions: PictureDimensions, message?: string): Rule => ({
-      validator: (rule, value) => {
-        return value &&
-          (dimensions.width !== value.dimensions.width ||
-            dimensions.height !== value.dimensions.height)
-          ? Promise.reject(new Error('imgDimensionsNotValid'))
-          : Promise.resolve()
+      validator: (rule, value: FrontendFileValue) => {
+        if (!value || !value.dimensions) {
+          return Promise.resolve()
+        } else if (
+          dimensions.width === value.dimensions.width &&
+          dimensions.height === value.dimensions.height
+        ) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject(new Error('imgDimensionsNotValid'))
+        }
       },
       message:
         message ||
@@ -199,6 +208,6 @@ export function useCommonFormRules() {
     positiveInteger,
     fileExtension,
     fileSize,
-    fileImgDimensions
+    fileImgDimensionsExactMatch
   }
 }

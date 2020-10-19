@@ -30,3 +30,10 @@ export interface PictureDimensions {
   width: number
   height: number
 }
+
+export interface FrontendFileValue {
+  id: string
+  extension?: string
+  size?: number
+  dimensions?: PictureDimensions
+}

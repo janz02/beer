@@ -394,7 +394,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                   }}
                   onClick={() => dispatch(campaignActions.downloadPrizeFile(coupon!))}
                   initialFileId={coupon?.prizeRulesFile?.id}
-                  allowedExtensions={`${FileExtension.PDF}`}
+                  allowedExtensions={[FileExtension.PDF]}
                 />
               </Form.Item>
             </Col>
@@ -435,7 +435,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
             extra={t('coupon-create.field.small-image-help')}
             rules={[
               rule.required(t('error.validation.coupon.small-picture-id-required')),
-              rule.fileImgDimensions({ width: 360, height: 270 })
+              rule.fileImgDimensionsExactMatch({ width: 360, height: 270 })
             ]}
           >
             <PictureUploadButton
@@ -457,6 +457,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                 form.validateFields(['smallPicture'])
               }}
               initialFileId={coupon?.smallPicture?.id}
+              allowedExtensions={[FileExtension.JPG, FileExtension.PNG]}
             />
           </Form.Item>
         </Col>
@@ -469,7 +470,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               extra={t('coupon-create.field.big-image-help')}
               rules={[
                 rule.required(t('error.validation.coupon.big-picture-id-required-non-banner')),
-                rule.fileImgDimensions({ width: 360, height: 540 })
+                rule.fileImgDimensionsExactMatch({ width: 360, height: 540 })
               ]}
             >
               <PictureUploadButton
@@ -491,6 +492,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
                   form.validateFields(['bigPicture'])
                 }}
                 initialFileId={coupon?.bigPicture?.id}
+                allowedExtensions={[FileExtension.JPG, FileExtension.PNG]}
               />
             </Form.Item>
           )}

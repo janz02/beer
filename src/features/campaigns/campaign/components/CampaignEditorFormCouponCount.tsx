@@ -72,7 +72,7 @@ export const CampaignEditorFormCouponCount: FC<CampaignEditorFormCouponCountProp
               }}
               onClick={() => dispatch(campaignActions.downloadPredefinedCodesFile(coupon!))}
               initialFileId={coupon?.predefinedCodesFile?.id}
-              allowedExtensions={`${FileExtension.CSV},${FileExtension.TXT}`}
+              allowedExtensions={[FileExtension.CSV, FileExtension.TXT]}
             />
           </Form.Item>
         </Col>

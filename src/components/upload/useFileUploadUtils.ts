@@ -7,7 +7,12 @@ import { displayBackendError } from 'services/errorHelpers'
 import { getUrl } from 'services/baseUrlHelper'
 import { RequestError } from 'api/middleware'
 import { notification } from 'antd'
-import { FileExtension, FILE_TYPES, MAX_FILE_SIZE_IN_MB } from './fileUploadHelper'
+import {
+  FileExtension,
+  FILE_TYPES,
+  FrontendFileValue,
+  MAX_FILE_SIZE_IN_MB
+} from './fileUploadHelper'
 
 interface FileThumbnail {
   label?: string | undefined | null
@@ -24,7 +29,7 @@ export interface FileUploadUtilsProps {
   onClick?: () => void
   initialFileId?: string | null | undefined
   mode?: 'image' | 'file'
-  allowedExtensions?: string
+  allowedExtensions?: FileExtension[]
 }
 
 export interface FileUploadUtils {
@@ -123,7 +128,7 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
               width: +file.response?.properties?.Width || null,
               height: +file.response?.properties?.Height || null
             }
-          })
+          } as FrontendFileValue)
           setFileId(file.response.id)
           break
         case 'removed':
@@ -149,29 +154,20 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
     }
   }
 
-  const acceptFileExtensions = useMemo(() => {
-    if (allowedExtensions) return allowedExtensions
-
-    switch (mode) {
-      case 'image':
-        return `${FileExtension.JPG},${FileExtension.PNG}`
-      case 'file':
-        return `${FileExtension.CSV},${FileExtension.TXT},${FileExtension.PDF}`
-      default:
-    }
-  }, [allowedExtensions, mode])
+  const acceptFileExtensions = useMemo(
+    () => (allowedExtensions ? allowedExtensions.join(',') : undefined),
+    [allowedExtensions]
+  )
 
   const isAllowedType = useCallback(
     (type: any): boolean => {
-      const allowedMimes = acceptFileExtensions
-        ? acceptFileExtensions
-            .split(',')
-            .map(extension => FILE_TYPES.find(t => t.extension === extension))
+      const allowedMimes = allowedExtensions
+        ? allowedExtensions.map(extension => FILE_TYPES.find(t => t.extension === extension))
         : []
 
       return !!allowedMimes?.find(el => el?.mimeType === type)
     },
-    [acceptFileExtensions]
+    [allowedExtensions]
   )
 
   const beforeUpload = useCallback(
