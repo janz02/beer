@@ -854,7 +854,7 @@
   },
   "system-params": {
     "editor": {
-      "title": "Rendszerparaméterek"
+      "title": "Rendszerparaméter módosítás"
     },
     "field": {
       "description": "Paraméter leírás",

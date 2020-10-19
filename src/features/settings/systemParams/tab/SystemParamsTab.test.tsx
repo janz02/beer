@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import React from 'react'
 import { FeatureState } from 'models/featureState'
 import { Roles } from 'api/swagger/coupon'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter, Route } from 'react-router-dom'
 import { useSystemParamsTabUtils } from './useSystemParamsTabUtils'
 import { setupPermissions, setupStore, setupUseParams } from '../../../../../config/setupMocks'
@@ -56,10 +56,74 @@ const SystemParamsHeaderContent: React.FC = () => {
 }
 
 test('SystemParamsTab should contain keys from store', () => {
-  setupPermissions([Roles.Administrator])
+  // Arrange
+  setupPermissions([])
 
+  // Act
   render(<SystemParamsTabContent />)
 
+  // Assert
   expect(screen.getByText(/example_key0 name/)).toBeInTheDocument()
   expect(screen.getByText(/example_key1 name/)).toBeInTheDocument()
+})
+
+test('admins have edit edit button', () => {
+  // Arrange
+  setupPermissions([Roles.Administrator])
+
+  // Act
+  const { container } = render(<SystemParamsTabContent />)
+  const editButton = container.querySelector('button[name="crudEdit"]')
+
+  // Assert
+  expect(editButton).toBeInTheDocument()
+})
+
+test('admins can edit system params', () => {
+  // Arrange
+  setupPermissions([Roles.Administrator])
+
+  // Act
+  const { container } = render(<SystemParamsTabContent />)
+  const editButton = container.querySelector('button[name="crudEdit"]')
+  fireEvent.click(editButton as any)
+
+  // Assert
+  expect(screen.getByText(/Edit system parameter/)).toBeInTheDocument()
+})
+
+test('other users only have view button', () => {
+  // Arrange
+  setupPermissions([])
+
+  // Act
+  const { container } = render(<SystemParamsTabContent />)
+  const editButton = container.querySelector('button[name="crudEdit"]')
+  const viewButton = container.querySelector('button[name="crudView"]')
+
+  // Assert
+  expect(viewButton).toBeInTheDocument()
+  expect(editButton).not.toBeInTheDocument()
+})
+
+test('admin cannot create system parameters', () => {
+  // Arrange
+  setupPermissions([Roles.Administrator])
+
+  // Act
+  render(<SystemParamsHeaderContent />)
+
+  // Assert
+  expect(screen.queryByText(/Create/)).toBeNull()
+})
+
+test('other users cannot create system parameters', () => {
+  // Arrange
+  setupPermissions([])
+
+  // Act
+  render(<SystemParamsHeaderContent />)
+
+  // Assert
+  expect(screen.queryByText(/Create/)).toBeNull()
 })

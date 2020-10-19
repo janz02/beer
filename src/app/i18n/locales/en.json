@@ -854,7 +854,7 @@
   },
   "system-params": {
     "editor": {
-      "title": "System parameters"
+      "title": "Edit system parameter"
     },
     "field": {
       "description": "Parameter description",
