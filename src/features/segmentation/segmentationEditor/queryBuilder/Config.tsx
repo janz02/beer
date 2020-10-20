@@ -27,14 +27,13 @@ TODO:
 	- a query builder config.js becsomagolasa egy componensbe, a szerver es default configok merge-je is tortenhet ebben a componensbe
 */
 import React from 'react'
-import { Widgets, BasicConfig, FieldProps } from 'react-awesome-query-builder'
+import { BasicConfig, FieldProps } from 'react-awesome-query-builder'
+import AntdWidgets from 'react-awesome-query-builder/lib/components/widgets/antd'
 import merge from 'lodash/merge'
 // import en_US from "antd/lib/locale-provider/en_US";
 import hu_HU from 'antd/lib/locale-provider/hu_HU'
 import i18n from 'i18next'
 
-// const { FieldSelect, FieldDropdown } = Widgets
-const { VanillaFieldSelect } = Widgets
 const conjunctions = {
   AND: {
     ...BasicConfig.conjunctions.AND,
@@ -205,6 +204,7 @@ const types = {
   })
 }
 
+const { FieldTreeSelect } = AntdWidgets
 const localeSettings = {
   locale: {
     short: 'hu',
@@ -234,8 +234,8 @@ const localeSettings = {
   canLeaveEmptyGroup: true, // after deletion
   canReorder: true,
   maxNesting: 10,
-  renderField: (props: FieldProps) => <VanillaFieldSelect {...props} />,
-  renderOperator: (props: FieldProps) => <VanillaFieldSelect {...props} />
+  renderField: (props: FieldProps) => <FieldTreeSelect {...props} />,
+  renderOperator: (props: FieldProps) => <FieldTreeSelect {...props} />
 }
 
 const settings = {
