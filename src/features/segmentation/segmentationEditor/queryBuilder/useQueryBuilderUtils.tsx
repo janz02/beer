@@ -1,13 +1,11 @@
 import Immutable from 'immutable'
-import merge from 'lodash/merge'
 import { SegmentationRuleResult } from '../../../../models/campaign/segmentationRuleResult'
-import { Utils, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
+import { Utils, BuilderProps, ImmutableTree, Config, Fields } from 'react-awesome-query-builder'
 import stringify from 'json-stringify-safe'
 import { convertSingleValuesToArray } from './queryBuilderUtils'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import loadedConfig from './Config'
-
 import {
   setTree,
   setRules,
@@ -16,6 +14,7 @@ import {
   setRuleResults,
   GROUP
 } from '../segmentationEditorSlice'
+import { QueryBuilderField } from 'api/swagger/campaign-editor'
 
 const { getTree, queryBuilderFormat } = Utils
 
@@ -54,12 +53,21 @@ export interface QueryBuilderUtils {
   handleOnSidebarFieldSelected: (selectedField: string) => void
 }
 
+const transformFields = (fields?: QueryBuilderField[] | null): Fields | undefined | null =>
+  fields &&
+  ((fields.map(({ subFields, ...rest }) => ({
+    subfields: transformFields(subFields),
+    ...rest
+  })) as unknown) as Fields)
+
 export const useQueryBuilderUtils = (): QueryBuilderUtils => {
   const { fields, queryBuilder } = useSelector((state: RootState) => state.segmentationEditor)
   const { actions, rules, tree, initialConditions, ruleResults } = queryBuilder
 
-  let config = ({ ...loadedConfig } as unknown) as Config
-  config.fields = merge(fields, config.fields) || {}
+  let config = ({
+    ...loadedConfig,
+    fields: transformFields(fields || [])
+  } as unknown) as Config
 
   const dispatch = useDispatch()
 
@@ -214,6 +222,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     }
   }
   const update = (updatedTree: ImmutableTree, updatedConfig: Config): void => {
+    // TODO: useState is needed for mutable variables
     config = updatedConfig
     dispatch(setTree(updatedTree))
     dispatch(setRules([]))
