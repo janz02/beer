@@ -1,6 +1,11 @@
 import { Rule } from 'rc-field-form/lib/interface'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
+import {
+  FrontendFileValue,
+  MAX_FILE_SIZE_IN_MB,
+  PictureDimensions
+} from 'components/upload/fileUploadHelper'
 
 /**
  * Contains validation rules that can be used with Ant Design Forms.
@@ -126,5 +131,83 @@ export function useCommonFormRules() {
     [t]
   )
 
-  return { required, requiredString, password, number, email, max, maxValue, positiveInteger }
+  /**
+   * FileExtension
+   * @param extensions string, accept attribute of input fields, example: <input type="file" accept=".jpg,.png">
+   * @param message (optional) string
+   */
+  const fileExtension = useCallback(
+    (extensions: string, message?: string): Rule => ({
+      validator: (rule, value) => {
+        return value && !extensions.includes(value.extension)
+          ? Promise.reject(new Error('incorrectFileExtension'))
+          : Promise.resolve()
+      },
+      message: message || t('error.common.incorrect-file-extension')
+    }),
+    [t]
+  )
+
+  /**
+   * FileSize
+   * @param size (optional) number: file size in megabytes
+   * @param message (optional) string
+   */
+  const fileSize = useCallback(
+    (size?: number, message?: string): Rule => ({
+      validator: (rule, value) => {
+        const convertToMB = (fileSize: number): number => fileSize / 1024 / 1024
+        const maxSize = size || MAX_FILE_SIZE_IN_MB
+
+        return value && convertToMB(value.size) > maxSize
+          ? Promise.reject(new Error('tooBigFile'))
+          : Promise.resolve()
+      },
+      message: message || t('error.common.file-size-too-big')
+    }),
+    [t]
+  )
+
+  /**
+   * ImgDimensions
+   * @param dimensions allowed picture dimensions in pixel, example: { width: 300, height: 400 }
+   * @param message (optional) string
+   */
+  const fileImgDimensionsExactMatch = useCallback(
+    (dimensions: PictureDimensions, message?: string): Rule => ({
+      validator: (rule, value: FrontendFileValue) => {
+        if (!value || !value.dimensions) {
+          return Promise.resolve()
+        } else if (
+          dimensions.width === value.dimensions.width &&
+          dimensions.height === value.dimensions.height
+        ) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject(new Error('imgDimensionsNotValid'))
+        }
+      },
+      message:
+        message ||
+        t('error.common.img-dimensions-incorrect', {
+          width: dimensions.width,
+          height: dimensions.height
+        })
+    }),
+    [t]
+  )
+
+  return {
+    required,
+    requiredString,
+    password,
+    number,
+    email,
+    max,
+    maxValue,
+    positiveInteger,
+    fileExtension,
+    fileSize,
+    fileImgDimensionsExactMatch
+  }
 }

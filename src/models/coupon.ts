@@ -7,6 +7,7 @@ import {
   CouponMode
 } from 'api/swagger/coupon'
 import { CouponComment } from './couponComment'
+import { FrontendFileValue } from 'components/upload/fileUploadHelper'
 
 export interface Coupon {
   id?: number
@@ -31,6 +32,7 @@ export interface Coupon {
   clickCount?: number
   claimCount?: number
   predefinedCodesFileId?: string | null
+  predefinedCodesFile?: FrontendFileValue
   createdBy?: string | null
   createdDate?: moment.Moment
   modifiedBy?: string | null
@@ -38,11 +40,14 @@ export interface Coupon {
   approvedBy?: string | null
   approvedDate?: moment.Moment
   smallPictureId?: string | null
+  smallPicture?: FrontendFileValue
   bigPictureId?: string | null
+  bigPicture?: FrontendFileValue
   onlineClaimLink?: string | null
   productDetails?: string | null
   drawDate?: moment.Moment
   prizeRulesFileId?: string | null
+  prizeRulesFile?: FrontendFileValue
   itemPrice?: number | null
   previousYearAverageBasketValue?: number | null
   awardedCampaign?: boolean
