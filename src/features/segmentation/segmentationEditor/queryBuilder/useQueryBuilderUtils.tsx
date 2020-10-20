@@ -1,14 +1,23 @@
 import Immutable from 'immutable'
 import merge from 'lodash/merge'
-import loadedConfig from './Config'
 import { SegmentationRuleResult } from '../../../../models/campaign/segmentationRuleResult'
 import { Utils, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
 import stringify from 'json-stringify-safe'
 import { convertSingleValuesToArray } from './queryBuilderUtils'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'app/rootReducer'
+import loadedConfig from './Config'
 
-const { loadTree, getTree, queryBuilderFormat, uuid } = Utils
-const GROUP = 'group'
-const emptyInitValue = { id: uuid(), type: GROUP }
+import {
+  setTree,
+  setRules,
+  setActions,
+  setInitialConditions,
+  setRuleResults,
+  GROUP
+} from '../segmentationEditorSlice'
+
+const { getTree, queryBuilderFormat } = Utils
 
 export interface ConditionChangeEvents {
   preserved: QueryBuilderRuleModel[]
@@ -30,11 +39,6 @@ export interface SegmentationRuleResponse {
   filteredSize: number
 }
 
-export interface QueryBuilderUtilsProps {
-  fields: any
-  queryBuilderTree: any
-}
-
 export interface QueryBuilderUtils {
   config: Config
   query: object | undefined
@@ -50,18 +54,14 @@ export interface QueryBuilderUtils {
   handleOnSidebarFieldSelected: (selectedField: string) => void
 }
 
-export const useQueryBuilderUtils = (props: QueryBuilderUtilsProps): QueryBuilderUtils => {
-  const { fields, queryBuilderTree } = props
-  let config: Config = ({ ...loadedConfig } as unknown) as Config
+export const useQueryBuilderUtils = (): QueryBuilderUtils => {
+  const { fields, queryBuilder } = useSelector((state: RootState) => state.segmentationEditor)
+  const { actions, rules, tree, initialConditions, ruleResults } = queryBuilder
+
+  let config = ({ ...loadedConfig } as unknown) as Config
   config.fields = merge(fields, config.fields) || {}
 
-  let initialConditions: QueryBuilderRuleModel[] = []
-  let rules: QueryBuilderRuleModel[] = []
-  let actions: { [key: string]: Function }
-
-  let ruleResults: SegmentationRuleResult[] = []
-
-  let tree: ImmutableTree = loadTree(queryBuilderTree || emptyInitValue)
+  const dispatch = useDispatch()
 
   const query = (): object | undefined => {
     const query = queryBuilderFormat(tree, config)
@@ -125,7 +125,9 @@ export const useQueryBuilderUtils = (props: QueryBuilderUtilsProps): QueryBuilde
   }
 
   const setQueryBuilderActionsRef = (builder: BuilderProps): void => {
-    actions = builder.actions
+    if (!actions.addRule) {
+      dispatch(setActions(builder.actions))
+    }
   }
 
   const updateResults = (queryResults: SegmentationRuleResponse[] = []): void => {
@@ -164,7 +166,7 @@ export const useQueryBuilderUtils = (props: QueryBuilderUtilsProps): QueryBuilde
       const node = treeNode.toJS()
       if (!existsRule(node.id)) {
         const rule = createRule(node)
-        rules = [...rules, rule]
+        dispatch(setRules([...rules, rule]))
       }
     }
 
@@ -178,7 +180,7 @@ export const useQueryBuilderUtils = (props: QueryBuilderUtilsProps): QueryBuilde
         flattenTree(childNode)
       } else if (jsRule.type === 'rule' && !!jsRule.properties.field && !existsRule(jsRule.id)) {
         const rule = createRule(jsRule)
-        rules = [...rules, rule]
+        dispatch(setRules([...rules, rule]))
       }
     }
   }
@@ -191,13 +193,15 @@ export const useQueryBuilderUtils = (props: QueryBuilderUtilsProps): QueryBuilde
         deletedRules.push(result.ruleId)
       }
     })
-    ruleResults = ruleResults.filter(x => !deletedRules.includes(x.ruleId))
+    const results = ruleResults.filter(x => !deletedRules.includes(x.ruleId))
+    dispatch(setRuleResults(results))
 
     // new rules
     rules.forEach(rule => {
       const existsRuleResult = !!getRuleResult(rule.id)
       if (!existsRuleResult) {
-        ruleResults.push({ ruleId: rule.id } as SegmentationRuleResult)
+        const updatedRuleResults = [...ruleResults, { ruleId: rule.id } as SegmentationRuleResult]
+        dispatch(setRuleResults(updatedRuleResults))
       }
     })
     // if all rules are deleted, reset the total result too
@@ -211,12 +215,12 @@ export const useQueryBuilderUtils = (props: QueryBuilderUtilsProps): QueryBuilde
   }
   const update = (updatedTree: ImmutableTree, updatedConfig: Config): void => {
     config = updatedConfig
-    tree = updatedTree
-    rules = []
+    dispatch(setTree(updatedTree))
+    dispatch(setRules([]))
     flattenTree(tree)
     // keep track of initial rules to support added/removed rules calc
     if (initialConditions.length === 0) {
-      initialConditions = [...conditions()]
+      dispatch(setInitialConditions([...conditions()]))
     }
     refreshRuleResults()
   }

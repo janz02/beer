@@ -8,7 +8,23 @@ import { api } from 'api'
 import { QueryBuilderField, SegmentationVm } from 'api/swagger/campaign-editor'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
+import { ImmutableTree, JsonGroup, Utils } from 'react-awesome-query-builder'
+import { QueryBuilderRuleModel } from './queryBuilder/useQueryBuilderUtils'
+import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
 
+const { loadTree, uuid } = Utils
+
+export const GROUP = 'group'
+const emptyInitValue = { id: uuid(), type: GROUP }
+
+interface QueryBuilderState {
+  query: object | undefined
+  tree: ImmutableTree
+  rules: QueryBuilderRuleModel[]
+  actions: { [key: string]: Function }
+  initialConditions: QueryBuilderRuleModel[]
+  ruleResults: SegmentationRuleResult[]
+}
 interface SegmentationEditorState {
   segmentation: CampaignSegmentation
   categories?: SegmentationCategory[]
@@ -17,13 +33,22 @@ interface SegmentationEditorState {
   error: boolean
   loading: boolean
   loadingDelete: boolean
+  queryBuilder: QueryBuilderState
 }
 
 const initialState: SegmentationEditorState = {
   segmentation: {},
   error: false,
   loading: false,
-  loadingDelete: false
+  loadingDelete: false,
+  queryBuilder: {
+    actions: {},
+    rules: [],
+    initialConditions: [],
+    ruleResults: [],
+    tree: loadTree(emptyInitValue as JsonGroup),
+    query: undefined
+  }
 }
 
 const segmentationEditorSlice = createSlice({
@@ -70,6 +95,21 @@ const segmentationEditorSlice = createSlice({
     },
     deleteSegmentationFail(state) {
       state.loadingDelete = true
+    },
+    setTree(state, action: PayloadAction<ImmutableTree>) {
+      state.queryBuilder.tree = action.payload
+    },
+    setRules(state, action: PayloadAction<QueryBuilderRuleModel[]>) {
+      state.queryBuilder.rules = action.payload
+    },
+    setActions(state, action: PayloadAction<{ [key: string]: Function }>) {
+      state.queryBuilder.actions = action.payload
+    },
+    setRuleResults(state, action: PayloadAction<SegmentationRuleResult[]>) {
+      state.queryBuilder.ruleResults = action.payload
+    },
+    setInitialConditions(state, action: PayloadAction<QueryBuilderRuleModel[]>) {
+      state.queryBuilder.initialConditions = action.payload
     }
   }
 })
@@ -86,7 +126,14 @@ const {
   saveSegmentationRequest
 } = segmentationEditorSlice.actions
 
-export const { resetSegmentationEditor } = segmentationEditorSlice.actions
+export const {
+  resetSegmentationEditor,
+  setTree,
+  setRules,
+  setActions,
+  setInitialConditions,
+  setRuleResults
+} = segmentationEditorSlice.actions
 
 export const segmentationEditorReducer = segmentationEditorSlice.reducer
 
@@ -102,6 +149,7 @@ export const getSegmentation = (id: number): AppThunk => async dispatch => {
     const {
       items: categories
     } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({})
+
     dispatch(
       getSegmentationSuccess([
         segmentation as CampaignSegmentation,
@@ -110,6 +158,10 @@ export const getSegmentation = (id: number): AppThunk => async dispatch => {
         fields as QueryBuilderField[]
       ])
     )
+
+    const loadedTree: ImmutableTree = loadTree(segmentationQuery?.tree as any)
+
+    dispatch(setTree(loadedTree))
   } catch (err) {
     dispatch(getSegmentationFail())
   }

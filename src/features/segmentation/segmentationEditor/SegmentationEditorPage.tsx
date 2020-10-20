@@ -16,11 +16,8 @@ export const SegmentationEditorPage: React.FC = () => {
   const segmentationEditorUtils = useSegmentationEditorUtils({
     id: segmentationId ? +segmentationId : undefined
   })
-  const { modified, fields, segmentationQuery } = segmentationEditorUtils
-  const queryBuilderUtils = useQueryBuilderUtils({
-    fields,
-    queryBuilderTree: segmentationQuery?.tree
-  })
+  const { modified } = segmentationEditorUtils
+  const queryBuilderUtils = useQueryBuilderUtils()
   const title = segmentationId
     ? t('segmentation-editor.title-edit')
     : t('segmentation-editor.title-create')

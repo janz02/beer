@@ -73,12 +73,12 @@ const operators = {
     valueLabels: [i18n.t('query-builder.from'), i18n.t('query-builder.to')],
     textSeparators: []
   },
-  /* range_not_between: {
-    ...BasicConfig.operators.range_not_between,
-    label: i18n.t('query-builder.operator.range_not_between.label'),
+  range_not_between: {
+    ...BasicConfig.operators.not_between,
+    label: i18n.t('query-builder.operator.range-not-between.label'),
     valueLabels: [i18n.t('query-builder.from'), i18n.t('query-builder.to')],
     textSeparators: []
-  }, */
+  },
   is_empty: {
     ...BasicConfig.operators.is_empty,
     label: i18n.t('query-builder.operator.is-empty.label')

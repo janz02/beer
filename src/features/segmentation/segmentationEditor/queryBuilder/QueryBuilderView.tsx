@@ -19,15 +19,8 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
     props.queryBuilder.setQueryBuilderActionsRef(builder)
 
     return (
-      <div>
-        <div className="query-builder">
-          <Builder {...builder} />
-        </div>
-        {/* {
-          <small>
-            <pre>{stringify(builder.tree, undefined, 2)}</pre>
-          </small>
-        } */}
+      <div className="query-builder">
+        <Builder {...builder} />
       </div>
     )
   }
@@ -37,7 +30,7 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
     return rule ? <RuleResultContainer ruleResult={rule} emptyValue="?" /> : <></>
   }
 
-  const refresh = (): AppThunk => async dispatch => {
+  const refresh = (): AppThunk => async () => {
     if (props.queryBuilder.query !== undefined) {
       const result = await api.campaignEditor.segmentationQueries.querySegmentationQueries({
         queryBuilderQuery: props.queryBuilder.query
