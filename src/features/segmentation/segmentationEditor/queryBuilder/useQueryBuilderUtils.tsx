@@ -62,7 +62,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
   useEffect(() => {
     setConfig(({
       ...loadedConfig,
-      fields: transformFields(fields || [])
+      fields: transformFields(fields)
     } as unknown) as Config)
   }, [fields])
 
