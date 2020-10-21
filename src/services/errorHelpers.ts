@@ -11,7 +11,7 @@ import { RequestError } from 'api/middleware'
 export const displayBackendError = (error: RequestError, url?: string): void => {
   let errorForLog = {}
   let i = 0
-  error.errors?.forEach(errorItem => {
+  error?.errors?.forEach(errorItem => {
     i++
     let message = errorItem.errorkey ? i18n.t(errorItem.errorkey) : errorItem.message
     // In case it has errorkey but it isn't translated yet use the english message.
@@ -27,9 +27,9 @@ export const displayBackendError = (error: RequestError, url?: string): void => 
 
   console.table({
     url: url,
-    code: error.code,
-    guid: error.guid,
-    stacktrace: error.stacktrace,
+    code: error?.code,
+    guid: error?.guid,
+    stacktrace: error?.stacktrace,
     ...errorForLog
   })
 }

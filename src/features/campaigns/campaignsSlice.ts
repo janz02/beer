@@ -148,7 +148,11 @@ const getCoupon = (id: number): AppThunk => async dispatch => {
         drawDate: coupon.drawDate && moment(coupon.drawDate),
         comments: coupon.comments?.map(x => {
           return { ...x, dateTime: moment(x.dateTime) }
-        })
+        }),
+        smallPicture: { id: coupon.smallPictureId },
+        bigPicture: { id: coupon.bigPictureId },
+        prizeRulesFile: { id: coupon.prizeRulesFileId },
+        predefinedCodesFile: { id: coupon.predefinedCodesFileId }
       } as Coupon)
     )
   } catch (err) {
