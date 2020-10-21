@@ -85,8 +85,6 @@ const getSystemParams = (params: ListRequestParams = {}): AppThunk => async (
             ({
               ...sysparam,
               id: index,
-              value: sysparam.value && +sysparam.value ? +sysparam.value : sysparam.value,
-              type: sysparam.value && +sysparam.value ? 'number' : 'text',
               name: i18n.t(`system-params.keys.${keyMapper(sysparam.key)}.backend_key_name`),
               description: i18n.t(
                 `system-params.keys.${keyMapper(sysparam.key)}.backend_key_description`

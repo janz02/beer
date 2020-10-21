@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useEffect, useMemo } from 'react'
+import React, { FC, PropsWithChildren, useEffect } from 'react'
 import { Form, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
@@ -27,21 +27,6 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
     handleSave,
     afterCloseExtended
   } = useSystemParamsEditorUtils(props)
-
-  const valueRules = useMemo(() => {
-    let result: any[]
-
-    if (initialValues?.type === 'text') {
-      result = [
-        rule.requiredString(t('error.common.field-required')),
-        rule.max(500, t('error.common.max-length-exact', { max: 500 }))
-      ]
-    } else {
-      result = [rule.required(), rule.number(), rule.positiveInteger(), rule.maxValue(1000)]
-    }
-
-    return isReadonly ? [] : result
-  }, [isReadonly, initialValues, t, rule])
 
   useEffect(() => {
     getSystemParam()
@@ -77,7 +62,14 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
         <Input.TextArea disabled className="readonly-form-item" />
       </Form.Item>
 
-      <Form.Item label={t('system-params.field.value')} name="value" rules={valueRules}>
+      <Form.Item
+        label={t('system-params.field.value')}
+        name="value"
+        rules={[
+          rule.requiredString(t('error.common.field-required')),
+          rule.max(500, t('error.common.max-length-exact', { max: 500 }))
+        ]}
+      >
         <Input
           maxLength={500}
           disabled={isReadonly}

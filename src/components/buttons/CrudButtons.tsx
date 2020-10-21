@@ -36,28 +36,28 @@ export const CrudButtons: FC<CrudButtonsProps> = props => {
     <div className="crudButtons">
       {onSend && (
         <Tooltip {...tooltipConfig} title={t('common.send')}>
-          <Button className="crud-button" onClick={onSend}>
+          <Button className="crud-button" onClick={onSend} name="crudSend">
             <SendOutlined />
           </Button>
         </Tooltip>
       )}
       {onView && (
         <Tooltip {...tooltipConfig} title={t('common.view')}>
-          <Button className="crud-button" onClick={onView}>
+          <Button className="crud-button" onClick={onView} name="crudView">
             {useRightCircleForView ? <RightCircleOutlined /> : <EyeOutlined />}
           </Button>
         </Tooltip>
       )}
       {onEdit && (
         <Tooltip {...tooltipConfig} title={t('common.edit')}>
-          <Button className="crud-button" onClick={onEdit}>
+          <Button className="crud-button" onClick={onEdit} name="crudEdit">
             <FormOutlined />
           </Button>
         </Tooltip>
       )}
       {onDelete && (
         <Tooltip {...tooltipConfig} title={t('common.delete')}>
-          <Button className="crud-button" onClick={onDelete}>
+          <Button className="crud-button" onClick={onDelete} name="crudDelete">
             <DeleteOutlined />
           </Button>
         </Tooltip>

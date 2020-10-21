@@ -4503,7 +4503,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateEmailTemplateDto"
+                "$ref": "#/components/schemas/EmailTemplateDto"
               }
             }
           }
@@ -4622,18 +4622,180 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateSummaryVmPaginatedResponse"
-                }
+                  "$ref": "#/components/schemas/EmailTemplateVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 1,
+      "name": "9GAG",
+      "history": [
+        {
+          "id": 1,
+          "content": "FreshPosting",
+          "modifiedBy": "Mischevious Admin",
+          "modifiedAt": "2020-06-15T10:00:00",
+          "version": 1
+        },
+        {
+          "id": 3,
+          "content": "FreshPosting",
+          "modifiedBy": "Rightful Admin",
+          "modifiedAt": "2020-06-20T11:12:13",
+          "version": 3
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    },
+    {
+      "id": 2,
+      "name": "nCore",
+      "history": [
+        {
+          "id": 2,
+          "content": "Christmas Game",
+          "modifiedBy": "Main Admin",
+          "modifiedAt": "2019-12-15T10:00:00",
+          "version": 2
+        },
+        {
+          "id": 4,
+          "content": "Game Over",
+          "modifiedBy": "Little Admin",
+          "modifiedAt": "2019-12-31T10:00:00",
+          "version": 4
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 2,
+  "size": 4
+}
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateSummaryVmPaginatedResponse"
-                }
+                  "$ref": "#/components/schemas/EmailTemplateVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 1,
+      "name": "9GAG",
+      "history": [
+        {
+          "id": 1,
+          "content": "FreshPosting",
+          "modifiedBy": "Mischevious Admin",
+          "modifiedAt": "2020-06-15T10:00:00",
+          "version": 1
+        },
+        {
+          "id": 3,
+          "content": "FreshPosting",
+          "modifiedBy": "Rightful Admin",
+          "modifiedAt": "2020-06-20T11:12:13",
+          "version": 3
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    },
+    {
+      "id": 2,
+      "name": "nCore",
+      "history": [
+        {
+          "id": 2,
+          "content": "Christmas Game",
+          "modifiedBy": "Main Admin",
+          "modifiedAt": "2019-12-15T10:00:00",
+          "version": 2
+        },
+        {
+          "id": 4,
+          "content": "Game Over",
+          "modifiedBy": "Little Admin",
+          "modifiedAt": "2019-12-31T10:00:00",
+          "version": 4
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 2,
+  "size": 4
+}
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateSummaryVmPaginatedResponse"
-                }
+                  "$ref": "#/components/schemas/EmailTemplateVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 1,
+      "name": "9GAG",
+      "history": [
+        {
+          "id": 1,
+          "content": "FreshPosting",
+          "modifiedBy": "Mischevious Admin",
+          "modifiedAt": "2020-06-15T10:00:00",
+          "version": 1
+        },
+        {
+          "id": 3,
+          "content": "FreshPosting",
+          "modifiedBy": "Rightful Admin",
+          "modifiedAt": "2020-06-20T11:12:13",
+          "version": 3
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    },
+    {
+      "id": 2,
+      "name": "nCore",
+      "history": [
+        {
+          "id": 2,
+          "content": "Christmas Game",
+          "modifiedBy": "Main Admin",
+          "modifiedAt": "2019-12-15T10:00:00",
+          "version": 2
+        },
+        {
+          "id": 4,
+          "content": "Game Over",
+          "modifiedBy": "Little Admin",
+          "modifiedAt": "2019-12-31T10:00:00",
+          "version": 4
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 2,
+  "size": 4
+}
               }
             }
           },
@@ -4713,7 +4875,10 @@
       "modifiedAt": "2008-06-06T00:00:00",
       "version": 3
     }
-  ]
+  ],
+  "modifiedBy": "",
+  "modifiedAt": "2008-07-07T00:00:00",
+  "version": 1
 }
               },
               "application/json": {
@@ -4745,7 +4910,10 @@
       "modifiedAt": "2008-06-06T00:00:00",
       "version": 3
     }
-  ]
+  ],
+  "modifiedBy": "",
+  "modifiedAt": "2008-07-07T00:00:00",
+  "version": 1
 }
               },
               "text/json": {
@@ -4777,7 +4945,10 @@
       "modifiedAt": "2008-06-06T00:00:00",
       "version": 3
     }
-  ]
+  ],
+  "modifiedBy": "",
+  "modifiedAt": "2008-07-07T00:00:00",
+  "version": 1
 }
               }
             }
@@ -4824,6 +4995,58 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "EmailTemplates"
+        ],
+        "summary": "NotAvailable",
+        "operationId": "updateEmailTemplate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Nothing",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Nothing",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Nothing",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "EmailTemplates"
@@ -4846,6 +5069,82 @@
         "responses": {
           "204": {
             "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/EmailTemplates/Export": {
+      "get": {
+        "tags": [
+          "EmailTemplates"
+        ],
+        "summary": "Exports an entity list sorted and filtered",
+        "description": "Exports the entity list with the specified filters applied in a csv file",
+        "operationId": "exportEmailTemplates",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "modifiedAt",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export: Csv file of entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
           }
         }
       }
@@ -11167,7 +11466,7 @@
           }
         }
       },
-      "CreateEmailTemplateDto": {
+      "EmailTemplateDto": {
         "type": "object",
         "properties": {
           "name": {
@@ -11177,59 +11476,6 @@
           "content": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "EmailTemplateSummaryVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "EmailTemplateSummaryVmPaginatedResponse": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EmailTemplateSummaryVm"
-            },
-            "nullable": true
-          },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "from": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "to": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -11275,6 +11521,46 @@
               "$ref": "#/components/schemas/EmailTemplateHistoryVm"
             },
             "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "EmailTemplateVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailTemplateVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
