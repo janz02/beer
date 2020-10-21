@@ -30,9 +30,7 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
 
   const setRefresh = (): void => {
     clearTimeout(refreshTimeout)
-    refreshTimeout = setTimeout(async () => {
-      props.queryBuilder.refresh()
-    }, 2000)
+      refreshTimeout = setTimeout(props.queryBuilder.refresh(), 2000)
   }
 
   const onChange = (immutableTree: ImmutableTree, config: Config): void => {

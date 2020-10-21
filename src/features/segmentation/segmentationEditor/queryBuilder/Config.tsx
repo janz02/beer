@@ -251,5 +251,4 @@ export default {
   widgets,
   types,
   settings
-  // fields: {}
 }
