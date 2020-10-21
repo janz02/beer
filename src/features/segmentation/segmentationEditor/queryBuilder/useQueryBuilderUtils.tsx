@@ -159,7 +159,6 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
       value: rule.properties ? rule.properties.value : ''
     } as QueryBuilderRuleModel
 
-    console.log(rule, newRule)
     return newRule
   }
 

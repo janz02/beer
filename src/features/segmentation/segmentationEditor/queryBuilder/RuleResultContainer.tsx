@@ -28,8 +28,8 @@ export const RuleResultContainer: React.FC<RuleResultContainerProps> = props => 
     <div>
       <div className="statistics">
         <div className="inputs">
-          <Input placeholder="total" readOnly value={total()} />
-          <Input placeholder="filtered" readOnly value={filtered()} />
+          <span>T:{total()}</span>
+          <span>F:{filtered()}</span>
         </div>
       </div>
     </div>
