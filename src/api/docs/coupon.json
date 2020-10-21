@@ -11407,8 +11407,24 @@
             "type": "string",
             "nullable": true
           },
-          "exstension": {
+          "extension": {
             "type": "string",
+            "nullable": true
+          },
+          "sizeInBytes": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
             "nullable": true
           }
         }

@@ -365,14 +365,13 @@
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",
       "server-unavailable": "Unsuccessful communication with the server, try again later.",
       "systemParameter": {
-        "partner-campaign-limit-*": "Limit can only be a whole number between 1 and 1000.",
+        "partner-campaign-limit": "Partner campaign limit can only be a whole number between 1 and 10000.",
         "value-is-empty": "System parameters' value is required.",
         "value-is-not-whole-number": "Value is not a whole number."
       }
     },
     "coupon": {
       "already-claimed": "Coupon already claimed, use another one.",
-      "big-picture-invalid": "Big picture file format or size is invalid, follow the instructions on the form.",
       "cannot-claim": "Cannot claim coupon, try again later.",
       "cant-be-deleted": "You don't have the permission to delete this campaign.",
       "cant-change-state": "You don't have the permission to change the state of this campaign.",
@@ -385,8 +384,6 @@
       "partner-must-be-major": "Only major partners can be selected, choose a major partner",
       "predefined-file-is-empty": "Predefined code file is empty, check the content of the CSV file and the count.",
       "predefinied-file-invalid": "Predefined code file must be valid CSV file, check its type and content.",
-      "prize-rules-invalid": "Prize rule file must be a PDF file, check the content of file.",
-      "small-picture-invalid": "Small picture file format or size is invalid.",
       "type-has-no-codes": "This campaign type does not produce coupon codes, so they cannot be downloaded.",
       "user-code-cant-save": "Operation cannot be completed, try again later."
     },
@@ -398,12 +395,19 @@
       "not-found-version": "E-mail template version not found, choose a different version."
     },
     "file": {
+      "big-picture-size": "Big coupon picture size is too big.",
+      "big-picture-too-big": "Big coupon picture width or height is incorrect.",
+      "big-picture-type-not-supported": "Big coupon picture extension is not supported.",
       "download-fail": "Couldn't fetch your file.",
-      "image-type-not-supported": "Unsupported image type.",
-      "invalid-image-size": "Invalid image dimensions.",
       "invalid-prize-rule-type": "Invalid prize rule type.",
       "not-supported-format": "Unsupported file format.",
-      "too-big": "The uploaded file exceeds maximum file size of 51MB. Please upload something smaller."
+      "predefined-codes-too-big": "Predefined codes file is too big.",
+      "predefined-codes-type-not-supported": "Predefined codes file extension is not supported.",
+      "prize-rules-too-big": "Prize rules file is too big.",
+      "prize-rules-type-not-supported": "Prize rules file extension is not supported.",
+      "small-picture-size": "Small coupon picture size is too big.",
+      "small-picture-too-big": "Small coupon picture width or height is incorrect",
+      "small-picture-type-not-supported": "Small coupon picture file extension is not supported."
     },
     "not-found": "Not found.",
     "notification": {

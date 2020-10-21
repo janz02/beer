@@ -6,13 +6,12 @@ import moment from 'moment'
 import { message } from 'antd'
 import i18n from 'app/i18n'
 import { history } from 'router/router'
-import { CouponState, CouponType, CouponMode, CouponDiscountType } from 'api/swagger/coupon'
+import { CouponState, CouponType, CouponMode, CouponDiscountType, FileVm } from 'api/swagger/coupon'
 import { CouponComment } from 'models/couponComment'
 import { Partner } from 'models/partner'
 import { saveAs } from 'file-saver'
 import { Coupon } from 'models/coupon'
 import { FeatureState } from 'models/featureState'
-import { FileVm } from 'api/swagger/files'
 
 interface CampaignsState {
   coupon?: Coupon

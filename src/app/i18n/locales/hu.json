@@ -365,14 +365,13 @@
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
       "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "systemParameter": {
-        "partner-campaign-limit-*": "A limit csak 1 és 1000 érték közötti egész szám lehet.",
+        "partner-campaign-limit": "A partner kampány limit csak 1 és 10000 közötti egész szám lehet.",
         "value-is-empty": "Rednszerparaméterhez kötelező megadni értéket.",
         "value-is-not-whole-number": "Az érték csak egész szám lehet."
       }
     },
     "coupon": {
       "already-claimed": "Ez a kupon már ki lett váltva, használjon másik kupont.",
-      "big-picture-invalid": "Nagy kép formátuma vagy mérete nem megfelelő, kövesse a felület utasításait.",
       "cannot-claim": "A kupont nem lehet kiváltani, próbálkozzon később.",
       "cant-be-deleted": "Nincs jogosultsága törölni ezt a kampányt.",
       "cant-change-state": "Nincs jogosultsága megváltoztatni a kampány állapotát.",
@@ -385,8 +384,6 @@
       "partner-must-be-major": "Kiválasztott partnernek kiemelt partnernek kell lennie, válasszon kiemelt partnert.",
       "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia, ellenőrize a CSV fájl tartalmát és számosságát.",
       "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie, ellenőrize a CSV fájl tartalmát és számosságát.",
-      "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie, ellenőrizze a PDF fájl tartamát",
-      "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő, kövesse a felület utasításait.",
       "type-has-no-codes": "Ehhez a kampány típushoz nem tartoznak kuponkódok, azokat ne lehet letölteni.",
       "user-code-cant-save": "Kérés sikertelen, prübálkozzon később."
     },
@@ -398,12 +395,19 @@
       "not-found-version": "Nem található ilyen verziójú e-mail sablon, válaszzon másik verziót."
     },
     "file": {
+      "big-picture-size": "Nagy kupon kép mérete túl nagy.",
+      "big-picture-too-big": "Nagy kupon kép szélessége vagy magassága nem megfelelő.",
+      "big-picture-type-not-supported": "Nagy kupon kép kiterjesztése nem megfelelő.",
       "download-fail": "Keresett fájl nem található, törlődött a rendszerből.",
-      "image-type-not-supported": "Rossz kép formátum, válasszon megfelelő formátumot.",
-      "invalid-image-size": "Rossz kép méret, válasszon megfelelő képméretet.",
       "invalid-prize-rule-type": "Rossz nyeremény szabály típus, válasszon PDF fájl formátumot.",
       "not-supported-format": "Nem támogatott fájl formátum, válasszon támogatott formátumot.",
-      "too-big": "A feltöltött fájl mérete meghaladja az 51MB-os méretet. Kérem töltsön fel egy kisebb fájlt!"
+      "predefined-codes-too-big": "Kuponkódok fájl mérete túl nagy.",
+      "predefined-codes-type-not-supported": "Kuponkódok fájl kiterjesztése nem megfelelő.",
+      "prize-rules-too-big": "Nyereményjáték szabályzat fájl mérete túl nagy.",
+      "prize-rules-type-not-supported": "Nyereményjáték szabályzat fájl kiterjesztése nem megfelelő.",
+      "small-picture-size": "Kis kupon kép mérete túl nagy.",
+      "small-picture-too-big": "Kis kupon kép szélessége vagy magassága nem megfelelő.",
+      "small-picture-type-not-supported": "Kis kupon kép kiterjesztése nem megfelelő."
     },
     "not-found": "Nem található.",
     "notification": {
