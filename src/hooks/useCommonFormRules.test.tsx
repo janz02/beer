@@ -3,9 +3,10 @@ import React, { FC } from 'react'
 import userEvent from '@testing-library/user-event'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { useCommonFormRules } from './useCommonFormRules'
-import { Form, Button, Input } from 'antd'
+import { Form, Button, Input, Upload } from 'antd'
 import { I18nextProvider } from 'react-i18next'
 import i18n from 'app/i18n'
+import { FileExtension } from 'components/upload/fileUploadHelper'
 
 // NOTE: because we are using antd we need to use waitFor() for assertions
 // because custom antd rules are async validators
@@ -630,4 +631,284 @@ test('positiveInteger rule: pass validation', async () => {
   await waitFor(() =>
     expect(screen.queryByText(/This field can only be a positive integer/)).not.toBeInTheDocument()
   )
+})
+
+const FileExtensionExample: FC = () => {
+  const [form] = Form.useForm()
+  const formRules = useCommonFormRules()
+
+  return (
+    <I18nextProvider i18n={i18n}>
+      <Form form={form}>
+        <Form.Item
+          name="fileExtensionInput"
+          label="File Extension Input"
+          rules={[formRules.fileExtension([FileExtension.JPG], 'Incorrect extension.')]}
+        >
+          <Upload
+            name="file"
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            headers={{
+              authorization: 'authorization-text'
+            }}
+            onChange={info => {
+              // NOTE: this is note how we get the file values in the real implementation
+              form.setFieldsValue({
+                fileExtensionInput: {
+                  extension: `.${info.file.name.split('.')[1]}`,
+                  size: info.file.size,
+                  id: info.file.uid
+                }
+              })
+
+              form.validateFields(['fileExtensionInput'])
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button htmlType="submit">Submit</Button>
+        </Form.Item>
+      </Form>
+    </I18nextProvider>
+  )
+}
+
+test('fileExtension rule: with not allowed extension does not pass validation', async () => {
+  // Arrange
+  const rendered = render(<FileExtensionExample />)
+  const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })
+  const inputField = rendered.container.querySelector('input[type="file"]')
+
+  // Act
+  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
+  fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
+
+  // Assert
+  await waitFor(() => expect(screen.getByText(/Incorrect extension./)).toBeInTheDocument())
+})
+
+test('fileExtension rule: with allowed extension pass validation', async () => {
+  // Arrange
+  const rendered = render(<FileExtensionExample />)
+  const file = new File(['(⌐□_□)'], 'chucknorris.jpg', { type: 'image/jpeg' })
+  const inputField = rendered.container.querySelector('input[type="file"]')
+
+  // Act
+  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
+  fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
+
+  // Assert
+  await waitFor(() => expect(screen.queryByText(/Incorrect extension./)).not.toBeInTheDocument())
+})
+
+const FileSizeExample: FC = () => {
+  const [form] = Form.useForm()
+  const formRules = useCommonFormRules()
+
+  return (
+    <I18nextProvider i18n={i18n}>
+      <Form form={form}>
+        <Form.Item
+          name="fileSizeInput"
+          label="File Size Input"
+          rules={[formRules.fileSize(0.005, 'File too big.')]}
+        >
+          <Upload
+            name="file"
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            headers={{
+              authorization: 'authorization-text'
+            }}
+            onChange={info => {
+              // NOTE: this is note how we get the file values in the real implementation
+              form.setFieldsValue({
+                fileSizeInput: {
+                  extension: `.${info.file.name.split('.')[1]}`,
+                  size: info.file.size,
+                  id: info.file.uid
+                }
+              })
+
+              form.validateFields(['fileSizeInput'])
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button htmlType="submit">Submit</Button>
+        </Form.Item>
+      </Form>
+    </I18nextProvider>
+  )
+}
+
+test('fileSize rule: with big size does not pass validation', async () => {
+  // Arrange
+  const rendered = render(<FileSizeExample />)
+  const file = new File(
+    [
+      '(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)(⌐□_□)'
+    ],
+    'chucknorrises.png',
+    {
+      type: 'image/png'
+    }
+  )
+  const inputField = rendered.container.querySelector('input[type="file"]')
+
+  // Act
+  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
+  fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
+
+  // Assert
+  await waitFor(() => expect(screen.getByText(/File too big./)).toBeInTheDocument())
+})
+
+test('fileSize rule: with size below allowed pass validation', async () => {
+  // Arrange
+  const rendered = render(<FileSizeExample />)
+  const file = new File(['_'], 'underscore.png', { type: 'image/png' })
+  const inputField = rendered.container.querySelector('input[type="file"]')
+
+  // Act
+  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
+  fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
+
+  // Assert
+  await waitFor(() => expect(screen.queryByText(/File too big./)).not.toBeInTheDocument())
+})
+
+const FileImgDimensionsExactMatchExample1: FC = () => {
+  const [form] = Form.useForm()
+  const formRules = useCommonFormRules()
+
+  return (
+    <I18nextProvider i18n={i18n}>
+      <Form form={form}>
+        <Form.Item
+          name="fileImgDimensionsInput"
+          label="File Img Dimensions Input"
+          rules={[
+            formRules.fileImgDimensionsExactMatch(
+              { width: 48, height: 48 },
+              'Picture dimensions incorrect.'
+            )
+          ]}
+        >
+          <Upload
+            name="file"
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            headers={{
+              authorization: 'authorization-text'
+            }}
+            onChange={info => {
+              // NOTE: this is note how we get the file values in the real implementation
+              form.setFieldsValue({
+                fileImgDimensionsInput: {
+                  extension: `.${info.file.name.split('.')[1]}`,
+                  size: info.file.size,
+                  id: info.file.uid,
+                  dimensions: {
+                    width: 48,
+                    height: 48
+                  }
+                }
+              })
+
+              form.validateFields(['fileImgDimensionsInput'])
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button htmlType="submit">Submit</Button>
+        </Form.Item>
+      </Form>
+    </I18nextProvider>
+  )
+}
+
+test('fileImgDimensionsExactMatch rule: with correct dimensions pass validation', async () => {
+  // Arrange
+  const rendered = render(<FileImgDimensionsExactMatchExample1 />)
+  const file = new File(['anything'], 'mockImage.png', { type: 'image/png' })
+  const inputField = rendered.container.querySelector('input[type="file"]')
+
+  // Act
+  fireEvent.change(inputField as HTMLInputElement, {
+    target: { files: [file] }
+  })
+  fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
+
+  // Assert
+  await waitFor(() =>
+    expect(screen.queryByText(/Picture dimensions incorrect./)).not.toBeInTheDocument()
+  )
+})
+
+const FileImgDimensionsExactMatchExample2: FC = () => {
+  const [form] = Form.useForm()
+  const formRules = useCommonFormRules()
+
+  return (
+    <I18nextProvider i18n={i18n}>
+      <Form form={form}>
+        <Form.Item
+          name="fileImgDimensionsInput"
+          label="File Img Dimensions Input"
+          rules={[
+            formRules.fileImgDimensionsExactMatch(
+              { width: 48, height: 48 },
+              'Picture dimensions incorrect.'
+            )
+          ]}
+        >
+          <Upload
+            name="file"
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            headers={{
+              authorization: 'authorization-text'
+            }}
+            onChange={info => {
+              // NOTE: this is note how we get the file values in the real implementation
+              form.setFieldsValue({
+                fileImgDimensionsInput: {
+                  extension: `.${info.file.name.split('.')[1]}`,
+                  size: info.file.size,
+                  id: info.file.uid,
+                  dimensions: {
+                    width: 72,
+                    height: 72
+                  }
+                }
+              })
+
+              form.validateFields(['fileImgDimensionsInput'])
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button htmlType="submit">Submit</Button>
+        </Form.Item>
+      </Form>
+    </I18nextProvider>
+  )
+}
+
+test('fileImgDimensionsExactMatch rule: incorrect dimensions does not pass validation', async () => {
+  // Arrange
+  const rendered = render(<FileImgDimensionsExactMatchExample2 />)
+  const file = new File(['anything'], 'mockImage.png', { type: 'image/png' })
+  const inputField = rendered.container.querySelector('input[type="file"]')
+
+  // Act
+  fireEvent.change(inputField as HTMLInputElement, {
+    target: { files: [file] }
+  })
+  fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
+
+  // Assert
+  await waitFor(() => expect(screen.getByText(/Picture dimensions incorrect./)).toBeInTheDocument())
 })

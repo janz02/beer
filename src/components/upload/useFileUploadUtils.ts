@@ -182,7 +182,7 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
       }
 
       // file size check
-      const isLessThanMax = file.size / 1024 / 1024 < MAX_FILE_SIZE_IN_MB
+      const isLessThanMax = file.size / 1024 / 1024 <= MAX_FILE_SIZE_IN_MB
       if (!isLessThanMax) {
         notification.error({
           message: t('error.common.file-size-too-big'),
