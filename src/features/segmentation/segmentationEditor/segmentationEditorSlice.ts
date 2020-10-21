@@ -9,7 +9,10 @@ import { QueryBuilderField, SegmentationVm } from 'api/swagger/campaign-editor'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
 import { ImmutableTree, JsonGroup, Utils } from 'react-awesome-query-builder'
-import { QueryBuilderRuleModel } from './queryBuilder/useQueryBuilderUtils'
+import {
+  QueryBuilderRuleModel,
+  SegmentationRuleResponse
+} from './queryBuilder/useQueryBuilderUtils'
 import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
 
 const { loadTree, uuid } = Utils
@@ -102,6 +105,9 @@ const segmentationEditorSlice = createSlice({
     setRules(state, action: PayloadAction<QueryBuilderRuleModel[]>) {
       state.queryBuilder.rules = action.payload
     },
+    setQuery(state, action: PayloadAction<object[]>) {
+      state.queryBuilder.query = action.payload
+    },
     setActions(state, action: PayloadAction<{ [key: string]: Function }>) {
       state.queryBuilder.actions = action.payload
     },
@@ -130,6 +136,7 @@ export const {
   resetSegmentationEditor,
   setTree,
   setRules,
+  setQuery,
   setActions,
   setInitialConditions,
   setRuleResults
@@ -158,10 +165,6 @@ export const getSegmentation = (id: number): AppThunk => async dispatch => {
         fields as QueryBuilderField[]
       ])
     )
-
-    const loadedTree: ImmutableTree = loadTree(segmentationQuery?.tree as any)
-
-    dispatch(setTree(loadedTree))
   } catch (err) {
     dispatch(getSegmentationFail())
   }
@@ -216,4 +219,19 @@ export const deleteSegmentation = (id: number): AppThunk => async dispatch => {
     dispatch(deleteSegmentationFail())
     return { id, error: true }
   }
+}
+
+export const refreshQueryResults = (callback: any): AppThunk => async (dispatch, getState) => {
+  try {
+    const { queryBuilder } = getState().segmentationEditor
+    const { query } = queryBuilder
+
+    if (query) {
+      const result = await api.campaignEditor.segmentationQueries.querySegmentationQueries({
+        queryBuilderQuery: query
+      })
+      dispatch(setRuleResults(result as SegmentationRuleResponse[]))
+      callback()
+    }
+  } catch (err) {}
 }

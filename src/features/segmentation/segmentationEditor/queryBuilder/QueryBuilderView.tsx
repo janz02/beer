@@ -1,12 +1,10 @@
 import React from 'react'
 import { Query, Builder, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
-import { QueryBuilderUtils, SegmentationRuleResponse } from './useQueryBuilderUtils'
+import { QueryBuilderUtils } from './useQueryBuilderUtils'
 import { RuleResultContainer } from './RuleResultContainer'
 // import 'antd/dist/antd.css'
 import 'react-awesome-query-builder/css/styles.scss'
 import 'react-awesome-query-builder/css/compact_styles.scss' // optional, for more compact styles
-import { api } from 'api'
-import { AppThunk } from 'app/store'
 
 interface QueryBuilderViewProps {
   queryBuilder: QueryBuilderUtils
@@ -30,19 +28,10 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
     return rule ? <RuleResultContainer ruleResult={rule} emptyValue="?" /> : <></>
   }
 
-  const refresh = (): AppThunk => async () => {
-    if (props.queryBuilder.query !== undefined) {
-      const result = await api.campaignEditor.segmentationQueries.querySegmentationQueries({
-        queryBuilderQuery: props.queryBuilder.query
-      })
-      props.queryBuilder.updateResults(result as SegmentationRuleResponse[])
-    }
-  }
-
   const setRefresh = (): void => {
     clearTimeout(refreshTimeout)
     refreshTimeout = setTimeout(async () => {
-      await refresh()
+      props.queryBuilder.refresh()
     }, 2000)
   }
 
@@ -51,7 +40,7 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
     setRefresh()
   }
 
-  if (!props.queryBuilder.config.fields) {
+  if (!props.queryBuilder.config.fields && !props.queryBuilder.tree) {
     return <></>
   }
 
