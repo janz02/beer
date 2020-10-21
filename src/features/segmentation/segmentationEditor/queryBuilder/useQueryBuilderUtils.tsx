@@ -40,12 +40,12 @@ export interface SegmentationRuleResponse {
 }
 
 export interface QueryBuilderUtils {
+  rules: QueryBuilderRuleModel[]
   config: Config
   tree: ImmutableTree
   treeTotal: SegmentationRuleResult
   treeAsString: string
   conditionChanges(): ConditionChangeEvents
-  setRule(selectedField: string): void
   setQueryBuilderActionsRef(builder: BuilderProps): void
   getRuleResult(ruleId: string): SegmentationRuleResult | undefined
   update(immutableTree: ImmutableTree, config: Config): void
@@ -260,11 +260,11 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
 
   return {
     config,
+    rules,
     tree,
     treeTotal: treeTotal(),
     treeAsString: treeAsString(),
     conditionChanges,
-    setRule,
     setQueryBuilderActionsRef,
     getRuleResult,
     update,
