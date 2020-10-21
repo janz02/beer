@@ -1,8 +1,8 @@
 import Immutable from 'immutable'
 import { SegmentationRuleResult } from '../../../../models/campaign/segmentationRuleResult'
-import { Utils, BuilderProps, ImmutableTree, Config, Fields } from 'react-awesome-query-builder'
+import { Utils, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
 import stringify from 'json-stringify-safe'
-import { convertSingleValuesToArray } from './queryBuilderUtils'
+import { convertSingleValuesToArray, transformFields } from './queryBuilderHelper'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import loadedConfig from './Config'
@@ -14,7 +14,7 @@ import {
   setRuleResults,
   GROUP
 } from '../segmentationEditorSlice'
-import { QueryBuilderField } from 'api/swagger/campaign-editor'
+import { useEffect, useState } from 'react'
 
 const { getTree, queryBuilderFormat } = Utils
 
@@ -53,21 +53,18 @@ export interface QueryBuilderUtils {
   handleOnSidebarFieldSelected: (selectedField: string) => void
 }
 
-const transformFields = (fields?: QueryBuilderField[] | null): Fields | undefined | null =>
-  fields &&
-  ((fields.map(({ subFields, ...rest }) => ({
-    subfields: transformFields(subFields),
-    ...rest
-  })) as unknown) as Fields)
-
 export const useQueryBuilderUtils = (): QueryBuilderUtils => {
   const { fields, queryBuilder } = useSelector((state: RootState) => state.segmentationEditor)
   const { actions, rules, tree, initialConditions, ruleResults } = queryBuilder
 
-  let config = ({
-    ...loadedConfig,
-    fields: transformFields(fields || [])
-  } as unknown) as Config
+  const [config, setConfig] = useState<Config>(({ ...loadedConfig } as unknown) as Config)
+
+  useEffect(() => {
+    setConfig(({
+      ...loadedConfig,
+      fields: transformFields(fields || [])
+    } as unknown) as Config)
+  }, [fields])
 
   const dispatch = useDispatch()
 
@@ -148,7 +145,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     })
   }
   const appendNewRule = (): string => {
-    const rule = actions.addRule(treePath)
+    const rule = actions.addRule(treePath())
     return rule.id
   }
 
@@ -222,8 +219,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     }
   }
   const update = (updatedTree: ImmutableTree, updatedConfig: Config): void => {
-    // TODO: useState is needed for mutable variables
-    config = updatedConfig
+    setConfig(updatedConfig)
     dispatch(setTree(updatedTree))
     dispatch(setRules([]))
     flattenTree(tree)

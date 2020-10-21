@@ -1,3 +1,6 @@
+import { QueryBuilderField } from 'api/swagger/campaign-editor'
+import { Fields } from 'react-awesome-query-builder'
+
 const createField = (field: any, t: any, hasSubfield: boolean): any => {
   let listValues
   if (!!field.listValues && Object.keys(field.listValues).length !== 0) {
@@ -52,5 +55,12 @@ export const convertSingleValuesToArray = (obj: any): void => {
     }
   }
 }
+
+export const transformFields = (fields?: QueryBuilderField[] | null): Fields | undefined | null =>
+  fields &&
+  ((fields.map(({ subFields, ...rest }) => ({
+    subfields: transformFields(subFields),
+    ...rest
+  })) as unknown) as Fields)
 
 export default buildFieldConfig
