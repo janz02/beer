@@ -66,7 +66,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
 
   let config = ({
     ...loadedConfig,
-    fields: transformFields(fields || [])
+    fields: transformFields(fields)
   } as unknown) as Config
 
   const dispatch = useDispatch()
@@ -148,7 +148,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     })
   }
   const appendNewRule = (): string => {
-    const rule = actions.addRule(treePath)
+    const rule = actions.addRule(treePath())
     return rule.id
   }
 
