@@ -58,8 +58,9 @@ export const convertSingleValuesToArray = (obj: any): void => {
 
 export const transformFields = (fields?: QueryBuilderField[] | null): Fields | undefined | null =>
   fields &&
-  ((fields.map(({ subFields, ...rest }) => ({
+  ((fields.map(({ subFields, operators, ...rest }) => ({
     subfields: transformFields(subFields),
+    operators: operators?.map(op => op.toLowerCase()),
     ...rest
   })) as unknown) as Fields)
 
