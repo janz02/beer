@@ -82,14 +82,6 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
           return (
             <CrudButtons
               onEdit={isEditor ? () => history.push(`/segmentations/${record.id}`) : undefined}
-              onDelete={
-                isEditor
-                  ? () => {
-                      // dispatch(campaignListActions.prepareCampaignDelete(record))
-                      throw 'todooo'
-                    }
-                  : undefined
-              }
             />
           )
         }
