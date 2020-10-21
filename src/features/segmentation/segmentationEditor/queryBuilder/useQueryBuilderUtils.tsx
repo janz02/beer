@@ -50,7 +50,7 @@ export interface QueryBuilderUtils {
   getRuleResult(ruleId: string): SegmentationRuleResult | undefined
   update(immutableTree: ImmutableTree, config: Config): void
   handleOnSidebarFieldSelected: (selectedField: string) => void
-  refresh: () => Promise<void>
+  refresh: () => void
 }
 
 export const useQueryBuilderUtils = (): QueryBuilderUtils => {
