@@ -250,6 +250,5 @@ export default {
   operators,
   widgets,
   types,
-  settings,
-  fields: {}
+  settings
 }
