@@ -30,7 +30,7 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
     return rule ? <RuleResultContainer ruleResult={rule} emptyValue="?" /> : <></>
   }
 
-  const refresh = (): AppThunk => async () => {
+  const refresh = async (): Promise<void> => {
     if (props.queryBuilder.query !== undefined) {
       const result = await api.campaignEditor.segmentationQueries.querySegmentationQueries({
         queryBuilderQuery: props.queryBuilder.query
@@ -41,9 +41,7 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
 
   const setRefresh = (): void => {
     clearTimeout(refreshTimeout)
-    refreshTimeout = setTimeout(async () => {
-      await refresh()
-    }, 2000)
+    refreshTimeout = setTimeout(refresh, 2000)
   }
 
   const onChange = (immutableTree: ImmutableTree, config: Config): void => {
