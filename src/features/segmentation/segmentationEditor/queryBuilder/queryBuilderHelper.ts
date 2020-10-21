@@ -56,12 +56,15 @@ export const convertSingleValuesToArray = (obj: any): void => {
   }
 }
 
-export const transformFields = (fields?: QueryBuilderField[] | null): Fields | undefined | null =>
-  fields &&
-  ((fields.map(({ subFields, operators, ...rest }) => ({
-    subfields: transformFields(subFields),
-    operators: operators?.map(op => op.toLowerCase()),
-    ...rest
-  })) as unknown) as Fields)
+export const transformFields = (fields?: QueryBuilderField[] | null): Fields | undefined | null => {
+  if (fields) {
+    const transformedField = (fields.map(({ subFields, operators, ...rest }) => ({
+      subfields: transformFields(subFields),
+      operators: operators?.map(op => op.toLowerCase()),
+      ...Object.fromEntries(Object.entries(rest).map(([k, v]) => [k.toLowerCase(), v]))
+    })) as unknown) as Fields
+    return transformedField
+  }
+}
 
 export default buildFieldConfig
