@@ -116,7 +116,7 @@ export const useCampaignUtils = (): CampaignUtils => {
         ...values,
         smallPictureId: values.smallPicture.id,
         bigPictureId: values.bigPicture.id,
-        prizeRulesFileId: values.prizeRulesFile.id,
+        prizeRulesFileId: values.prizeRulesFile ? values.prizeRulesFile.id : null,
         predefinedCodesFileId: values.predefinedCodesFile ? values.predefinedCodesFile.id : null,
         categoryId: +values.categoryId,
         discountValue: +values.discountValue,

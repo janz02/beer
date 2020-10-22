@@ -62,6 +62,10 @@ export interface InfoFileRequest {
     id: string | null;
 }
 
+export interface KeepFileRequest {
+    id: string | null;
+}
+
 export interface UploadFileRequest {
     file?: Blob | null;
     fileAccess?: FileAccess;
@@ -176,7 +180,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deletes a file on the server
+     * Sets a file expired
      */
     async deleteFileRaw(requestParameters: DeleteFileRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -202,7 +206,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deletes a file on the server
+     * Sets a file expired
      */
     async deleteFile(requestParameters: DeleteFileRequest): Promise<void> {
         await this.deleteFileRaw(requestParameters);
@@ -312,6 +316,68 @@ export class FilesApi extends runtime.BaseAPI {
     async infoFile(requestParameters: InfoFileRequest): Promise<FileVm> {
         const response = await this.infoFileRaw(requestParameters);
         return await response.value();
+    }
+
+    /**
+     * Deletes a file expiration date
+     */
+    async keepFileRaw(requestParameters: KeepFileRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling keepFile.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Files/{id}/Keep`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Deletes a file expiration date
+     */
+    async keepFile(requestParameters: KeepFileRequest): Promise<void> {
+        await this.keepFileRaw(requestParameters);
+    }
+
+    /**
+     * Deletes all expired files
+     */
+    async pruneFileRaw(): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Files/Prune`,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Deletes all expired files
+     */
+    async pruneFile(): Promise<void> {
+        await this.pruneFileRaw();
     }
 
     /**

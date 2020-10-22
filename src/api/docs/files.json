@@ -102,7 +102,7 @@
         "tags": [
           "Files"
         ],
-        "summary": "Deletes a file on the server",
+        "summary": "Sets a file expired",
         "operationId": "deleteFile",
         "parameters": [
           {
@@ -325,6 +325,47 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Files/{id}/Keep": {
+      "put": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Deletes a file expiration date",
+        "operationId": "keepFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/Prune": {
+      "delete": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Deletes all expired files",
+        "operationId": "pruneFile",
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
