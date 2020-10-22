@@ -60,6 +60,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
   const { actions, rules, tree, initialConditions, ruleResults } = queryBuilder
 
   const [config, setConfig] = useState<Config>(({ ...loadedConfig } as unknown) as Config)
+  const [treeInit, setTreeInit] = useState(false)
   const dispatch = useDispatch()
 
   const query = (): void => {
@@ -128,7 +129,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
   }
 
   const setQueryBuilderActionsRef = (builder: BuilderProps): void => {
-    if (!actions.addRule) {
+    if (!actions.addRule && config.fields) {
       dispatch(setActions(builder.actions))
     }
   }
@@ -246,17 +247,20 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
   }
 
   useEffect(() => {
-    if (segmentationQuery?.tree && !config.fields) {
+    if (!config.fields && fields) {
       const initialConfig = ({
         ...loadedConfig,
         fields: transformFields(fields)
       } as unknown) as Config
-
-      const initialTree: ImmutableTree = loadTree(segmentationQuery?.tree as any)
-
-      update(initialTree, initialConfig)
+      setConfig(initialConfig)
     }
-  }, [fields, tree, segmentationQuery, config, rules, update, dispatch, flattenTree])
+
+    if (segmentationQuery?.tree && !treeInit) {
+      setTreeInit(true)
+      const initialTree: ImmutableTree = loadTree(segmentationQuery?.tree as any)
+      update(initialTree, config)
+    }
+  }, [fields, tree, treeInit, segmentationQuery, config, rules, update, dispatch, flattenTree])
 
   return {
     config,

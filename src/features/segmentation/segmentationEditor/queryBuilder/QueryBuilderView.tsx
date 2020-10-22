@@ -38,11 +38,7 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
     setRefresh()
   }
 
-  if (
-    !props.queryBuilder.config.fields &&
-    !props.queryBuilder.tree &&
-    props.queryBuilder.rules.length !== 2
-  ) {
+  if (!props.queryBuilder.config.fields || !props.queryBuilder.tree) {
     return <></>
   }
 
