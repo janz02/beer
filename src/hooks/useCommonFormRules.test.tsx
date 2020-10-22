@@ -49,10 +49,10 @@ test('required rule: without value does not pass validation', async () => {
 test('required rule: with value passes validation', async () => {
   // Arrange
   render(<RequiredExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Required Input/)
   userEvent.type(inputField, 'something')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -100,10 +100,10 @@ test('requiredString rule: empty value does not pass validation', async () => {
 test('requiredString rule: whitespace does not pass validation', async () => {
   // Arrange
   render(<RequiredStringExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Required String Input/)
   userEvent.type(inputField, ' ')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -115,10 +115,10 @@ test('requiredString rule: whitespace does not pass validation', async () => {
 test('requiredString rule: with value pass validation', async () => {
   // Arrange
   render(<RequiredStringExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Required String Input/)
   userEvent.type(inputField, 'something')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -152,10 +152,10 @@ const PasswordExample: FC = () => {
 test('password rule: less than 8 characters does not pass validation', async () => {
   // Arrange
   render(<PasswordExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Password Input/)
   userEvent.type(inputField, 'Pass1?')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -165,13 +165,13 @@ test('password rule: less than 8 characters does not pass validation', async () 
 test('password rule: more than 64 characters does not pass validation', async () => {
   // Arrange
   render(<PasswordExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Password Input/)
   userEvent.type(
     inputField,
     'Pass1?013456789013456789013456789013456789013456789013456789013456789'
   )
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -181,10 +181,10 @@ test('password rule: more than 64 characters does not pass validation', async ()
 test('password rule: with space does not pass validation', async () => {
   // Arrange
   render(<PasswordExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Password Input/)
   userEvent.type(inputField, 'Password1 ?')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -194,10 +194,10 @@ test('password rule: with space does not pass validation', async () => {
 test('password rule: without special character does not pass validation', async () => {
   // Arrange
   render(<PasswordExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Password Input/)
   userEvent.type(inputField, 'Password1')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -207,10 +207,10 @@ test('password rule: without special character does not pass validation', async 
 test('password rule: with hungarian character does not pass validation', async () => {
   // Arrange
   render(<PasswordExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Password Input/)
   userEvent.type(inputField, 'Passzwörd1?')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -220,10 +220,10 @@ test('password rule: with hungarian character does not pass validation', async (
 test('password rule: with correct form pass validation', async () => {
   // Arrange
   render(<PasswordExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Password Input/)
   userEvent.type(inputField, 'Password1?')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -257,10 +257,10 @@ const NumberExample: FC = () => {
 test('number rule: with string value does not pass validation', async () => {
   // Arrange
   render(<NumberExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Number Input/)
   userEvent.type(inputField, 'asdf')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -270,10 +270,10 @@ test('number rule: with string value does not pass validation', async () => {
 test('number rule: with other than number characters does not pass validation', async () => {
   // Arrange
   render(<NumberExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Number Input/)
   userEvent.type(inputField, '+1')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -283,10 +283,10 @@ test('number rule: with other than number characters does not pass validation', 
 test('number rule: with number only characters pass validation', async () => {
   // Arrange
   render(<NumberExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Number Input/)
   userEvent.type(inputField, '123')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -320,10 +320,10 @@ const EmailExample: FC = () => {
 test('email rule: 1st part cannot end with dot character', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, 'a.@a.aa')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -333,10 +333,10 @@ test('email rule: 1st part cannot end with dot character', async () => {
 test('email rule: 1st part cannot start with dot character', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, '.a@a.aa')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -346,10 +346,10 @@ test('email rule: 1st part cannot start with dot character', async () => {
 test('email rule: 1st part can have special characters', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, 'a$ßa@a.aa')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -359,10 +359,10 @@ test('email rule: 1st part can have special characters', async () => {
 test('email rule: 2nd part can have dash as special character', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, 'a@a-a.aa')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -372,10 +372,10 @@ test('email rule: 2nd part can have dash as special character', async () => {
 test('email rule: 2nd part can have dot as special character', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, 'a@a.a.aa')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -385,10 +385,10 @@ test('email rule: 2nd part can have dot as special character', async () => {
 test('email rule: 1st part cannot have more than one dot after each other', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, 'a..a@a.aa')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -398,10 +398,10 @@ test('email rule: 1st part cannot have more than one dot after each other', asyn
 test('email rule: 2nd part cannot have more than one dot after each other', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, 'a@a..aa')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -411,10 +411,10 @@ test('email rule: 2nd part cannot have more than one dot after each other', asyn
 test('email rule: 3rd part cannot have less than 2 characters', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, 'a@a.a')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -424,10 +424,10 @@ test('email rule: 3rd part cannot have less than 2 characters', async () => {
 test('email rule: minimum email form pass validation', async () => {
   // Arrange
   render(<EmailExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Email Input/)
   userEvent.type(inputField, 'a@a.aa')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -459,10 +459,10 @@ const MaxExample: FC = () => {
 test('max rule: does not pass validation', async () => {
   // Arrange
   render(<MaxExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Max Input/)
   userEvent.type(inputField, 'asdf')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -472,10 +472,10 @@ test('max rule: does not pass validation', async () => {
 test('max rule: pass validation', async () => {
   // Arrange
   render(<MaxExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Max Input/)
   userEvent.type(inputField, 'asd')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -509,10 +509,10 @@ const MaxValueExample: FC = () => {
 test('maxValue rule: does not pass validation', async () => {
   // Arrange
   render(<MaxValueExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Max Value Input/)
   userEvent.type(inputField, '101')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -524,10 +524,10 @@ test('maxValue rule: does not pass validation', async () => {
 test('maxValue rule: string value does not pass validation', async () => {
   // Arrange
   render(<MaxValueExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Max Value Input/)
   userEvent.type(inputField, 'asdf')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -539,10 +539,10 @@ test('maxValue rule: string value does not pass validation', async () => {
 test('maxValue rule: pass validation', async () => {
   // Arrange
   render(<MaxValueExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Max Value Input/)
   userEvent.type(inputField, '100')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -576,10 +576,10 @@ const PositiveIntegerExample: FC = () => {
 test('positiveInteger rule: string value does not pass validation', async () => {
   // Arrange
   render(<PositiveIntegerExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Positive Integer Input/)
   userEvent.type(inputField, 'asdf')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -591,10 +591,10 @@ test('positiveInteger rule: string value does not pass validation', async () => 
 test('positiveInteger rule: negative value does not pass validation', async () => {
   // Arrange
   render(<PositiveIntegerExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Positive Integer Input/)
   userEvent.type(inputField, '-1')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -606,10 +606,10 @@ test('positiveInteger rule: negative value does not pass validation', async () =
 test('positiveInteger rule: 0 value does not pass validation', async () => {
   // Arrange
   render(<PositiveIntegerExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Positive Integer Input/)
   userEvent.type(inputField, '0')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -621,10 +621,10 @@ test('positiveInteger rule: 0 value does not pass validation', async () => {
 test('positiveInteger rule: pass validation', async () => {
   // Arrange
   render(<PositiveIntegerExample />)
-
-  // Act
   const inputField = screen.getByLabelText(/Positive Integer Input/)
   userEvent.type(inputField, '1')
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -679,9 +679,9 @@ test('fileExtension rule: with not allowed extension does not pass validation', 
   const rendered = render(<FileExtensionExample />)
   const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })
   const inputField = rendered.container.querySelector('input[type="file"]')
+  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
 
   // Act
-  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -693,9 +693,9 @@ test('fileExtension rule: with allowed extension pass validation', async () => {
   const rendered = render(<FileExtensionExample />)
   const file = new File(['(⌐□_□)'], 'chucknorris.jpg', { type: 'image/jpeg' })
   const inputField = rendered.container.querySelector('input[type="file"]')
+  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
 
   // Act
-  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -756,9 +756,9 @@ test('fileSize rule: with big size does not pass validation', async () => {
     }
   )
   const inputField = rendered.container.querySelector('input[type="file"]')
+  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
 
   // Act
-  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -770,9 +770,9 @@ test('fileSize rule: with size below allowed pass validation', async () => {
   const rendered = render(<FileSizeExample />)
   const file = new File(['_'], 'underscore.png', { type: 'image/png' })
   const inputField = rendered.container.querySelector('input[type="file"]')
+  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
 
   // Act
-  fireEvent.change(inputField as HTMLInputElement, { target: { files: [file] } })
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -834,11 +834,11 @@ test('fileImgDimensionsExactMatch rule: with correct dimensions pass validation'
   const rendered = render(<FileImgDimensionsExactMatchExample1 />)
   const file = new File(['anything'], 'mockImage.png', { type: 'image/png' })
   const inputField = rendered.container.querySelector('input[type="file"]')
-
-  // Act
   fireEvent.change(inputField as HTMLInputElement, {
     target: { files: [file] }
   })
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert
@@ -902,11 +902,11 @@ test('fileImgDimensionsExactMatch rule: incorrect dimensions does not pass valid
   const rendered = render(<FileImgDimensionsExactMatchExample2 />)
   const file = new File(['anything'], 'mockImage.png', { type: 'image/png' })
   const inputField = rendered.container.querySelector('input[type="file"]')
-
-  // Act
   fireEvent.change(inputField as HTMLInputElement, {
     target: { files: [file] }
   })
+
+  // Act
   fireEvent.click(screen.getByText(/Submit/).closest('button') as HTMLButtonElement)
 
   // Assert

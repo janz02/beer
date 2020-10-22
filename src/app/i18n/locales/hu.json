@@ -365,7 +365,7 @@
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
       "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "systemParameter": {
-        "partner-campaign-limit": "A partner kampány limit csak 1 és 10000 közötti egész szám lehet.",
+        "partner-campaign-limit": "A partner kampány limit csak 1 és 10 000 közötti egész szám lehet.",
         "value-is-empty": "Rednszerparaméterhez kötelező megadni értéket.",
         "value-is-not-whole-number": "Az érték csak egész szám lehet."
       }
