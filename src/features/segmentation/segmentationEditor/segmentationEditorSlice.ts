@@ -35,6 +35,7 @@ interface SegmentationEditorState {
   fields?: QueryBuilderField[]
   error: boolean
   loading: boolean
+  saving: boolean
   queryBuilder: QueryBuilderState
 }
 
@@ -42,6 +43,7 @@ const initialState: SegmentationEditorState = {
   segmentation: {},
   error: false,
   loading: false,
+  saving: false,
   queryBuilder: {
     actions: {},
     rules: [],
@@ -74,18 +76,17 @@ const segmentationEditorSlice = createSlice({
       state.error = false
     },
     getSegmentationFail(state) {
-      state.loading = false
       state.error = true
     },
     saveSegmentationRequest(state) {
-      state.loading = true
+      state.saving = true
     },
     saveSegmentationSuccess(state) {
-      state.loading = false
+      state.saving = false
       state.error = false
     },
     saveSegmentationFail(state) {
-      state.loading = false
+      state.saving = false
       state.error = true
     },
     setTree(state, action: PayloadAction<ImmutableTree>) {

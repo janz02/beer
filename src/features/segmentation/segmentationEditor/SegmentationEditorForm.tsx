@@ -14,7 +14,7 @@ interface SegmentationEditorFormProps {
 export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = props => {
   const { t } = useTranslation()
   const { segmentationEditorUtils, queryBuilderUtils } = props
-  const { submitable, loading, id, checkFieldsChange, handleSave } = segmentationEditorUtils
+  const { submitable, saving, id, checkFieldsChange, handleSave } = segmentationEditorUtils
 
   return (
     <>
@@ -37,7 +37,7 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
           </Collapse.Panel>
         </Collapse>
 
-        <Button type="primary" htmlType="submit" disabled={!submitable} loading={loading}>
+        <Button type="primary" htmlType="submit" disabled={!submitable} loading={saving}>
           {!id ? t('segmentation-editor.button-create') : t('segmentation-editor.button-save')}
         </Button>
       </Form>

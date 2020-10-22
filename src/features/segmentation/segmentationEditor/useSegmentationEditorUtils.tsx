@@ -20,9 +20,9 @@ export interface SegmentationEditorUtils {
   id?: number
   formUtils: UseFormUtils
   categories?: SegmentationCategory[]
-  loading: boolean
   submitable: boolean
   modified: boolean
+  saving: boolean
   checkFieldsChange: () => void
   handleSave: (values: CampaignSegmentation) => void
   fields?: QueryBuilderField[]
@@ -35,7 +35,7 @@ export const useSegmentationEditorUtils = (
   const { id } = props
 
   const dispatch = useDispatch()
-  const { segmentation, categories, fields, loading, segmentationQuery } = useSelector(
+  const { segmentation, categories, fields, segmentationQuery, saving } = useSelector(
     (state: RootState) => state.segmentationEditor
   )
 
@@ -64,9 +64,9 @@ export const useSegmentationEditorUtils = (
     id,
     formUtils,
     categories,
-    loading,
     submitable,
     modified,
+    saving,
     fields,
     checkFieldsChange,
     handleSave,
