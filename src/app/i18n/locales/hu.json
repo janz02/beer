@@ -395,17 +395,17 @@
       "not-found-version": "Nem található ilyen verziójú e-mail sablon, válaszzon másik verziót."
     },
     "file": {
-      "big-picture-size": "Nagy kupon kép mérete túl nagy.",
+      "big-picture-size": "Nagy kupon kép mérete túl nagy, a maximum fájl méret 51 MB.",
       "big-picture-too-big": "Nagy kupon kép szélessége vagy magassága nem megfelelő.",
       "big-picture-type-not-supported": "Nagy kupon kép kiterjesztése nem megfelelő.",
       "download-fail": "Keresett fájl nem található, törlődött a rendszerből.",
       "invalid-prize-rule-type": "Rossz nyeremény szabály típus, válasszon PDF fájl formátumot.",
       "not-supported-format": "Nem támogatott fájl formátum, válasszon támogatott formátumot.",
-      "predefined-codes-too-big": "Kuponkódok fájl mérete túl nagy.",
+      "predefined-codes-too-big": "Kuponkódok fájl mérete túl nagy, a maximum fájl méret 51 MB.",
       "predefined-codes-type-not-supported": "Kuponkódok fájl kiterjesztése nem megfelelő.",
-      "prize-rules-too-big": "Nyereményjáték szabályzat fájl mérete túl nagy.",
+      "prize-rules-too-big": "Nyereményjáték szabályzat fájl mérete túl nagy, a maximum fájl méret 51 MB.",
       "prize-rules-type-not-supported": "Nyereményjáték szabályzat fájl kiterjesztése nem megfelelő.",
-      "small-picture-size": "Kis kupon kép mérete túl nagy.",
+      "small-picture-size": "Kis kupon kép mérete túl nagy, a maximum fájl méret 51 MB.",
       "small-picture-too-big": "Kis kupon kép szélessége vagy magassága nem megfelelő.",
       "small-picture-type-not-supported": "Kis kupon kép kiterjesztése nem megfelelő."
     },

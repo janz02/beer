@@ -395,17 +395,17 @@
       "not-found-version": "E-mail template version not found, choose a different version."
     },
     "file": {
-      "big-picture-size": "Big coupon picture size is too big.",
+      "big-picture-size": "Big coupon picture size is too big, maxmimum file size is 51 MB.",
       "big-picture-too-big": "Big coupon picture width or height is incorrect.",
       "big-picture-type-not-supported": "Big coupon picture extension is not supported.",
       "download-fail": "Couldn't fetch your file.",
       "invalid-prize-rule-type": "Invalid prize rule type.",
       "not-supported-format": "Unsupported file format.",
-      "predefined-codes-too-big": "Predefined codes file is too big.",
+      "predefined-codes-too-big": "Predefined codes file is too big, maxmimum file size is 51 MB.",
       "predefined-codes-type-not-supported": "Predefined codes file extension is not supported.",
-      "prize-rules-too-big": "Prize rules file is too big.",
+      "prize-rules-too-big": "Prize rules file is too big, maxmimum file size is 51 MB.",
       "prize-rules-type-not-supported": "Prize rules file extension is not supported.",
-      "small-picture-size": "Small coupon picture size is too big.",
+      "small-picture-size": "Small coupon picture size is too bi, maxmimum file size is 51 MB.",
       "small-picture-too-big": "Small coupon picture width or height is incorrect",
       "small-picture-type-not-supported": "Small coupon picture file extension is not supported."
     },
