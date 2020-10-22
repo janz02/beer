@@ -12,7 +12,7 @@ import { Partner } from 'models/partner'
 import { saveAs } from 'file-saver'
 import { Coupon } from 'models/coupon'
 import { FeatureState } from 'models/featureState'
-import { FileVm } from 'api/swagger/files'
+import { FileVm } from 'api/swagger/coupon/models'
 
 interface CampaignsState {
   coupon?: Coupon

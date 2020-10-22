@@ -75,7 +75,7 @@ export const PartnerEditorForm: React.FC<PartnerEditorFormProps> = props => {
       floatingOptions={options}
       floatingBackButton={backButtonProps}
     >
-      <NavigationAlert when={modified && mode === EditorMode.EDIT} />
+      <NavigationAlert when={modified} />
       <Form
         name="partner-editor-form"
         onFinish={handleSubmit}
