@@ -35,7 +35,6 @@ interface SegmentationEditorState {
   fields?: QueryBuilderField[]
   error: boolean
   loading: boolean
-  loadingDelete: boolean
   queryBuilder: QueryBuilderState
 }
 
@@ -43,7 +42,6 @@ const initialState: SegmentationEditorState = {
   segmentation: {},
   error: false,
   loading: false,
-  loadingDelete: false,
   queryBuilder: {
     actions: {},
     rules: [],
@@ -90,15 +88,6 @@ const segmentationEditorSlice = createSlice({
       state.loading = false
       state.error = true
     },
-    deleteSegmentationRequest(state) {
-      state.loadingDelete = true
-    },
-    deleteSegmentationSuccess(state) {
-      state.loadingDelete = false
-    },
-    deleteSegmentationFail(state) {
-      state.loadingDelete = true
-    },
     setTree(state, action: PayloadAction<ImmutableTree>) {
       state.queryBuilder.tree = action.payload
     },
@@ -124,9 +113,6 @@ const {
   getSegmentationSuccess,
   getSegmentationFail,
   getSegmentationRequest,
-  deleteSegmentationRequest,
-  deleteSegmentationSuccess,
-  deleteSegmentationFail,
   saveSegmentationSuccess,
   saveSegmentationFail,
   saveSegmentationRequest
@@ -204,20 +190,6 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
   } catch (err) {
     console.log(err)
     dispatch(saveSegmentationFail())
-  }
-}
-
-export const deleteSegmentation = (id: number): AppThunk => async dispatch => {
-  try {
-    dispatch(deleteSegmentationRequest())
-    // await api.campaignEditor.segmentations.delete({ id })
-    dispatch(deleteSegmentationSuccess())
-    message.success(i18n.t('common.message.delete-success'), 5)
-    history.push(`/segmentations`)
-    return { id }
-  } catch (err) {
-    dispatch(deleteSegmentationFail())
-    return { id, error: true }
   }
 }
 
