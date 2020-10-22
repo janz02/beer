@@ -2,7 +2,7 @@ import Immutable from 'immutable'
 import { SegmentationRuleResult } from '../../../../models/campaign/segmentationRuleResult'
 import { Utils, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
 import stringify from 'json-stringify-safe'
-import { convertSingleValuesToArray, transformFields } from './queryBuilderHelper'
+import { buildFieldConfig, convertSingleValuesToArray } from './queryBuilderHelper'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import loadedConfig from './Config'
@@ -17,6 +17,7 @@ import {
   GROUP
 } from '../segmentationEditorSlice'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const { loadTree, getTree, queryBuilderFormat } = Utils
 export interface ConditionChangeEvents {
@@ -61,11 +62,11 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
 
   const [config, setConfig] = useState<Config>(({ ...loadedConfig } as unknown) as Config)
   const [treeInit, setTreeInit] = useState(false)
+  const [t] = useTranslation()
   const dispatch = useDispatch()
 
   const query = (): void => {
     const query = queryBuilderFormat(tree, config)
-
     if (!('rules' in query)) {
       return undefined
     }
@@ -248,9 +249,11 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
 
   useEffect(() => {
     if (!config.fields && fields) {
+      const modifiedFields = buildFieldConfig(fields, t)
+
       const initialConfig = ({
         ...loadedConfig,
-        fields: transformFields(fields)
+        fields: modifiedFields
       } as unknown) as Config
       setConfig(initialConfig)
     }
@@ -260,7 +263,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
       const initialTree: ImmutableTree = loadTree(segmentationQuery?.tree as any)
       update(initialTree, config)
     }
-  }, [fields, tree, treeInit, segmentationQuery, config, rules, update, dispatch, flattenTree])
+  }, [fields, tree, treeInit, segmentationQuery, config, rules, update, dispatch, flattenTree, t])
 
   return {
     config,

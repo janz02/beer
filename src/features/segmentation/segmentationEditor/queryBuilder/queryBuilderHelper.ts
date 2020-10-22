@@ -1,12 +1,11 @@
 import { QueryBuilderField } from 'api/swagger/campaign-editor'
-import { Fields } from 'react-awesome-query-builder'
+import { TFunction } from 'i18next'
 
 const createField = (field: any, t: any, hasSubfield: boolean): any => {
   let listValues
   if (!!field.listValues && Object.keys(field.listValues).length !== 0) {
     listValues = field.listValues
   }
-
   return {
     label: t(field.label + (hasSubfield ? '.rootProperty' : '')),
     label2: t(field.selectedLabel + (hasSubfield ? '.rootProperty' : '')),
@@ -17,18 +16,28 @@ const createField = (field: any, t: any, hasSubfield: boolean): any => {
   }
 }
 
-export const buildFieldConfig = (queryBuilderFields: any, fieldConfig: any, t: any): void => {
+export const buildFieldConfig = (
+  queryBuilderFields: QueryBuilderField[],
+  t: TFunction
+): QueryBuilderField[] => {
+  const fields: QueryBuilderField[] = []
+
   for (const field of queryBuilderFields) {
-    const key = field.fieldName
-    if (field.subFields.length === 0) {
-      // field level
-      fieldConfig[key] = createField(field, t, false)
-    } else {
-      // subfields
-      fieldConfig[key] = createField(field, t, true)
-      buildFieldConfig(field.subFields, fieldConfig[key].subfields, t)
+    const key: any = field.fieldName
+    if (key && field.subFields) {
+      if (field.subFields.length === 0) {
+        // field level
+        const createdField = createField(field, t, false)
+        fields[key] = createdField
+      } else {
+        // subfields
+        const createdField = createField(field, t, true)
+        createdField.subfields = buildFieldConfig(field.subFields, t)
+        fields[key] = createdField
+      }
     }
   }
+  return fields
 }
 
 // Converts the rule values -> value field to an array
@@ -55,16 +64,3 @@ export const convertSingleValuesToArray = (obj: any): void => {
     }
   }
 }
-
-export const transformFields = (fields?: QueryBuilderField[] | null): Fields | undefined | null => {
-  if (fields) {
-    const transformedField = (fields.map(({ subFields, operators, ...rest }) => ({
-      subfields: transformFields(subFields),
-      operators: operators?.map(op => op.toLowerCase()),
-      ...Object.fromEntries(Object.entries(rest).map(([k, v]) => [k.toLowerCase(), v]))
-    })) as unknown) as Fields
-    return transformedField
-  }
-}
-
-export default buildFieldConfig
