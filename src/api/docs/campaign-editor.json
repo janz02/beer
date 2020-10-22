@@ -1405,6 +1405,54 @@
         ]
       }
     },
+    "/api/Information/GetErrorKeys": {
+      "get": {
+        "tags": [
+          "Information"
+        ],
+        "summary": "Returns the error keys that could be returned by the API.",
+        "operationId": "getErrorKeys",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/Languages": {
       "get": {
         "tags": [
@@ -7899,6 +7947,10 @@
     {
       "name": "Emails",
       "description": "The basic controller to handle mail send for the EDE."
+    },
+    {
+      "name": "Information",
+      "description": "Endpoint to get different kinds of information about the API."
     },
     {
       "name": "Languages",
