@@ -16,39 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CreateEmailTemplateDto
+ * @interface UserNotificationDetailDto
  */
-export interface CreateEmailTemplateDto {
+export interface UserNotificationDetailDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof UserNotificationDetailDto
+     */
+    id?: number | null;
     /**
      * 
      * @type {string}
-     * @memberof CreateEmailTemplateDto
+     * @memberof UserNotificationDetailDto
      */
-    name?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateEmailTemplateDto
-     */
-    content?: string | null;
+    value?: string | null;
 }
 
-export function CreateEmailTemplateDtoFromJSON(json: any): CreateEmailTemplateDto {
-    return CreateEmailTemplateDtoFromJSONTyped(json, false);
+export function UserNotificationDetailDtoFromJSON(json: any): UserNotificationDetailDto {
+    return UserNotificationDetailDtoFromJSONTyped(json, false);
 }
 
-export function CreateEmailTemplateDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateEmailTemplateDto {
+export function UserNotificationDetailDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserNotificationDetailDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'content': !exists(json, 'content') ? undefined : json['content'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'value': !exists(json, 'value') ? undefined : json['value'],
     };
 }
 
-export function CreateEmailTemplateDtoToJSON(value?: CreateEmailTemplateDto | null): any {
+export function UserNotificationDetailDtoToJSON(value?: UserNotificationDetailDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +57,8 @@ export function CreateEmailTemplateDtoToJSON(value?: CreateEmailTemplateDto | nu
     }
     return {
         
-        'name': value.name,
-        'content': value.content,
+        'id': value.id,
+        'value': value.value,
     };
 }
 

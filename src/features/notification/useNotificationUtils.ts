@@ -110,14 +110,13 @@ export const useNotificationUtils = (): NotificationUtils => {
   const preValidateNotificationLink = async (item: NotificationData): Promise<boolean> => {
     if (
       item.type &&
-      item.actualId !== undefined &&
-      item.parentId !== undefined &&
+      item.actual.id !== undefined &&
       NotificationLinkPreValidator[item.type] !== undefined
     ) {
       try {
         const preValidation = await NotificationLinkPreValidator[item.type](
-          item.actualId,
-          item.parentId
+          item.actual.id ?? 0,
+          item.parent.id ?? 0
         )
         return preValidation
       } catch {
@@ -136,12 +135,12 @@ export const useNotificationUtils = (): NotificationUtils => {
       return undefined
     }
 
-    if (notification.actualId) {
-      link = link.replace('{actualId}', notification.actualId.toString())
+    if (notification.actual.id) {
+      link = link.replace('{actualId}', notification.actual.id.toString())
     }
 
-    if (notification.parentId) {
-      link = link.replace('{parentId}', notification.parentId.toString())
+    if (notification.parent.id) {
+      link = link.replace('{parentId}', notification.parent.id.toString())
     }
 
     // Do not return with invalid link

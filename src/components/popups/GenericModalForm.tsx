@@ -96,6 +96,7 @@ export const GenericModalForm: FC<GenericModalFormProps> = props => {
         form.resetFields()
         modalProps?.afterClose?.()
       }}
+      maskClosable={false}
     >
       <NavigationAlert when={!disabledNavPrompt && modified} />
       {/* fix: for some reason spinning={undefined} is the same as spinning={true} */}

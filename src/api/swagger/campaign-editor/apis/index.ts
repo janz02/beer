@@ -3,6 +3,7 @@ export * from './CampaignResultsApi';
 export * from './CampaignsApi';
 export * from './ChannelsApi';
 export * from './EmailsApi';
+export * from './InformationApi';
 export * from './LanguagesApi';
 export * from './LocalizationsApi';
 export * from './PermissionsApi';

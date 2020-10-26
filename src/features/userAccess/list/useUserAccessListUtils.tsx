@@ -3,7 +3,7 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { userAccessActions, UserAccessTab } from '../userAccessSlice'
-import { useTableUtils, UseTableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess, UserType } from 'models/user'
 import { ColumnsType } from 'antd/lib/table'
@@ -15,8 +15,8 @@ import { FeatureState } from 'models/featureState'
 interface UserAccessListUtils {
   partnerUsersColumnsConfig: ColumnsType<UserAccess>
   nkmUsersColumnsConfig: ColumnsType<UserAccess>
-  nkmUsersTableUtils: UseTableUtils<UserAccess>
-  partnerUsersTableUtils: UseTableUtils<UserAccess>
+  nkmUsersTableUtils: TableUtils<UserAccess>
+  partnerUsersTableUtils: TableUtils<UserAccess>
   nkmUsers: UserAccess[]
   nkmLoading: boolean
   partnerUsers: UserAccess[]

@@ -1,7 +1,9 @@
+@import "assets/scss/_variables";
+
 .underlined {
   text-decoration: underline;
 }
 
 .text-faded {
-  color: #595959;
+  color: $faded-text-color;
 }

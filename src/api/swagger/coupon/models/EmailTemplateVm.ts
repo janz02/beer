@@ -44,6 +44,24 @@ export interface EmailTemplateVm {
      * @memberof EmailTemplateVm
      */
     history?: Array<EmailTemplateHistoryVm> | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmailTemplateVm
+     */
+    modifiedBy?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof EmailTemplateVm
+     */
+    modifiedAt?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmailTemplateVm
+     */
+    version?: number;
 }
 
 export function EmailTemplateVmFromJSON(json: any): EmailTemplateVm {
@@ -59,6 +77,9 @@ export function EmailTemplateVmFromJSONTyped(json: any, ignoreDiscriminator: boo
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'history': !exists(json, 'history') ? undefined : (json['history'] === null ? null : (json['history'] as Array<any>).map(EmailTemplateHistoryVmFromJSON)),
+        'modifiedBy': !exists(json, 'modifiedBy') ? undefined : json['modifiedBy'],
+        'modifiedAt': !exists(json, 'modifiedAt') ? undefined : (new Date(json['modifiedAt'])),
+        'version': !exists(json, 'version') ? undefined : json['version'],
     };
 }
 
@@ -74,6 +95,9 @@ export function EmailTemplateVmToJSON(value?: EmailTemplateVm | null): any {
         'id': value.id,
         'name': value.name,
         'history': value.history === undefined ? undefined : (value.history === null ? null : (value.history as Array<any>).map(EmailTemplateHistoryVmToJSON)),
+        'modifiedBy': value.modifiedBy,
+        'modifiedAt': value.modifiedAt === undefined ? undefined : (value.modifiedAt.toISOString()),
+        'version': value.version,
     };
 }
 

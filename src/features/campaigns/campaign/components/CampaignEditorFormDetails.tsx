@@ -15,6 +15,7 @@ import { CampaignUtils } from '../useCampaignUtils'
 import { useCommonFormRules } from 'hooks'
 import { FormInstance } from 'antd/lib/form'
 import { InputNumberI18n } from 'components/InputNumberI18n'
+import { FileExtension } from 'components/upload/fileUploadHelper'
 
 interface CampaignEditorFormDetailsProps {
   campaignUtils: CampaignUtils
@@ -366,7 +367,7 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
 
             <Col span={8}>
               <Form.Item
-                name="prizeRulesFileId"
+                name="prizeRulesFile"
                 label={t('coupon-create.field.prize-rules')}
                 extra={t('coupon-create.field.prize-rules-help')}
                 rules={[
@@ -375,24 +376,25 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
               >
                 <FileUploadButton
                   disabled={!displayEditor}
-                  onSuccess={fileId => {
+                  onSuccess={fileDetail => {
                     form.setFieldsValue({
                       ...form.getFieldsValue(),
-                      prizeRulesFileId: fileId
+                      prizeRulesFile: fileDetail
                     })
 
-                    form.validateFields()
+                    form.validateFields(['prizeRulesFile'])
                   }}
                   onRemove={() => {
                     form.setFieldsValue({
                       ...form.getFieldsValue(),
-                      prizeRulesFileId: undefined
+                      prizeRulesFile: undefined
                     })
 
-                    form.validateFields()
+                    form.validateFields(['prizeRulesFile'])
                   }}
                   onClick={() => dispatch(campaignActions.downloadPrizeFile(coupon!))}
-                  initialFileId={coupon?.prizeRulesFileId}
+                  initialFileId={coupon?.prizeRulesFile?.id}
+                  allowedExtensions={[FileExtension.PDF]}
                 />
               </Form.Item>
             </Col>
@@ -428,30 +430,34 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
       <Row gutter={rowGutter}>
         <Col span={12}>
           <Form.Item
-            name="smallPictureId"
+            name="smallPicture"
             label={t('coupon-create.field.small-image')}
             extra={t('coupon-create.field.small-image-help')}
-            rules={[rule.required(t('error.validation.coupon.small-picture-id-required'))]}
+            rules={[
+              rule.required(t('error.validation.coupon.small-picture-id-required')),
+              rule.fileImgDimensionsExactMatch({ width: 360, height: 270 })
+            ]}
           >
             <PictureUploadButton
               disabled={!displayEditor}
-              onSuccess={fileId => {
+              onSuccess={fileDetails => {
                 form.setFieldsValue({
                   ...form.getFieldsValue(),
-                  smallPictureId: fileId
+                  smallPicture: fileDetails
                 })
 
-                form.validateFields()
+                form.validateFields(['smallPicture'])
               }}
               onRemove={() => {
                 form.setFieldsValue({
                   ...form.getFieldsValue(),
-                  smallPictureId: undefined
+                  smallPicture: undefined
                 })
 
-                form.validateFields()
+                form.validateFields(['smallPicture'])
               }}
-              initialFileId={coupon?.smallPictureId}
+              initialFileId={coupon?.smallPicture?.id}
+              allowedExtensions={[FileExtension.JPG, FileExtension.PNG]}
             />
           </Form.Item>
         </Col>
@@ -459,32 +465,34 @@ export const CampaignEditorFormDetails: FC<CampaignEditorFormDetailsProps> = pro
         <Col span={12}>
           {prizeOrDiscount && (
             <Form.Item
-              name="bigPictureId"
+              name="bigPicture"
               label={t('coupon-create.field.big-image')}
               extra={t('coupon-create.field.big-image-help')}
               rules={[
-                rule.required(t('error.validation.coupon.big-picture-id-required-non-banner'))
+                rule.required(t('error.validation.coupon.big-picture-id-required-non-banner')),
+                rule.fileImgDimensionsExactMatch({ width: 360, height: 540 })
               ]}
             >
               <PictureUploadButton
                 disabled={!displayEditor}
-                onSuccess={fileId => {
+                onSuccess={fileDetails => {
                   form.setFieldsValue({
                     ...form.getFieldsValue(),
-                    bigPictureId: fileId
+                    bigPicture: fileDetails
                   })
 
-                  form.validateFields()
+                  form.validateFields(['bigPicture'])
                 }}
                 onRemove={() => {
                   form.setFieldsValue({
                     ...form.getFieldsValue(),
-                    bigPictureId: undefined
+                    bigPicture: undefined
                   })
 
-                  form.validateFields()
+                  form.validateFields(['bigPicture'])
                 }}
-                initialFileId={coupon?.bigPictureId}
+                initialFileId={coupon?.bigPicture?.id}
+                allowedExtensions={[FileExtension.JPG, FileExtension.PNG]}
               />
             </Form.Item>
           )}

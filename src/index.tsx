@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import 'assets/scss/index.scss'
 import * as serviceWorker from 'serviceWorker'
 import './app/i18n'
+import './app/apm'
 import { configApiMiddleware } from 'api/middleware'
 
 const render = (): void => {

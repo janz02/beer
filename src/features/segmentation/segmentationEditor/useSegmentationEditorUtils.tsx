@@ -1,6 +1,6 @@
 import { QueryBuilderField } from 'api/swagger/campaign-editor/models'
 import { RootState } from 'app/rootReducer'
-import { UseFormUtils, useFormUtils } from 'hooks/useFormUtils'
+import { FormUtils, useFormUtils } from 'hooks/useFormUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
@@ -18,7 +18,7 @@ interface SegmentationEditorUtilsProps {
 
 export interface SegmentationEditorUtils {
   id?: number
-  formUtils: UseFormUtils
+  formUtils: FormUtils
   categories?: SegmentationCategory[]
   submitable: boolean
   modified: boolean

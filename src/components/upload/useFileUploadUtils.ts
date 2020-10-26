@@ -1,11 +1,18 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { UploadFile, UploadProps, UploadChangeParam } from 'antd/lib/upload/interface'
+import { UploadFile, UploadProps, UploadChangeParam, RcFile } from 'antd/lib/upload/interface'
 import { useTranslation } from 'react-i18next'
 import { api } from 'api'
 import { getBase64 } from 'services/file-reader'
 import { displayBackendError } from 'services/errorHelpers'
 import { getUrl } from 'services/baseUrlHelper'
 import { RequestError } from 'api/middleware'
+import { notification } from 'antd'
+import {
+  FileExtension,
+  FILE_TYPES,
+  FrontendFileValue,
+  MAX_FILE_SIZE_IN_MB
+} from './fileUploadHelper'
 
 interface FileThumbnail {
   label?: string | undefined | null
@@ -17,11 +24,12 @@ interface FileThumbnail {
 export interface FileUploadUtilsProps {
   uploadProps?: UploadProps
   disabled?: boolean
-  onSuccess?: (id: string) => void
+  onSuccess?: (fileDetail: any) => void
   onRemove?: () => void
   onClick?: () => void
   initialFileId?: string | null | undefined
   mode?: 'image' | 'file'
+  allowedExtensions?: FileExtension[]
 }
 
 export interface FileUploadUtils {
@@ -29,10 +37,12 @@ export interface FileUploadUtils {
   appendedUploadProps?: UploadProps
   handleClear: (id: any) => void
   handleFileUpload: (info: UploadChangeParam<UploadFile<any>>) => void
+  acceptFileExtensions?: string
+  beforeUpload: (file: RcFile) => boolean
 }
 
 export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils {
-  const { initialFileId, uploadProps, onRemove, onSuccess, mode } = props
+  const { initialFileId, uploadProps, onRemove, onSuccess, mode, allowedExtensions } = props
 
   const [fileId, setFileId] = useState<any>()
 
@@ -77,7 +87,6 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
             break
           }
           default: {
-            // TODO : integrate api
             const fileInfo = await api.files.files.infoFile({ id: fileId })
             setThumbnail({ label: fileInfo.fileName, loading: false })
             break
@@ -111,7 +120,15 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
           break
         case 'done':
           handleUploadSuccess(file)
-          onSuccess?.(file.response.id)
+          onSuccess?.({
+            id: file.response.id,
+            extension: file.response.extension,
+            size: file.size,
+            dimensions: {
+              width: +file.response?.properties?.Width || null,
+              height: +file.response?.properties?.Height || null
+            }
+          } as FrontendFileValue)
           setFileId(file.response.id)
           break
         case 'removed':
@@ -137,19 +154,63 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
     }
   }
 
+  const acceptFileExtensions = useMemo(
+    () => (allowedExtensions ? allowedExtensions.join(',') : undefined),
+    [allowedExtensions]
+  )
+
+  const isAllowedType = useCallback(
+    (type: any): boolean => {
+      const allowedMimes = allowedExtensions
+        ? allowedExtensions.map(extension => FILE_TYPES.find(t => t.extension === extension))
+        : []
+
+      return !!allowedMimes?.find(el => el?.mimeType === type)
+    },
+    [allowedExtensions]
+  )
+
+  const beforeUpload = useCallback(
+    (file: RcFile): boolean => {
+      // extension check
+      const isOkExtension = isAllowedType(file.type)
+      if (!isOkExtension) {
+        notification.error({
+          message: t('error.common.incorrect-file-extension'),
+          duration: null
+        })
+      }
+
+      // file size check
+      const isLessThanMax = file.size / 1024 / 1024 <= MAX_FILE_SIZE_IN_MB
+      if (!isLessThanMax) {
+        notification.error({
+          message: t('error.common.file-size-too-big'),
+          duration: null
+        })
+      }
+      return isOkExtension && isLessThanMax
+    },
+    [t, isAllowedType]
+  )
+
   const appendedUploadProps = useMemo(
     (): UploadProps => ({
       ...uploadProps,
       action: uploadUrl,
-      headers: { Authorization: apiKey }
+      headers: { Authorization: apiKey },
+      beforeUpload: beforeUpload,
+      accept: acceptFileExtensions
     }),
-    [uploadProps, apiKey, uploadUrl]
+    [uploadProps, apiKey, uploadUrl, beforeUpload, acceptFileExtensions]
   )
 
   return {
     thumbnail,
     appendedUploadProps,
     handleFileUpload: handleFileUpload,
-    handleClear
+    handleClear,
+    acceptFileExtensions,
+    beforeUpload
   }
 }

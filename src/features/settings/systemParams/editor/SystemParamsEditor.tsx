@@ -23,14 +23,14 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
   const {
     initialValues,
     loading,
-    getSystemParamById,
+    getSystemParam,
     handleSave,
     afterCloseExtended
   } = useSystemParamsEditorUtils(props)
 
   useEffect(() => {
-    getSystemParamById()
-  }, [getSystemParamById])
+    getSystemParam()
+  }, [getSystemParam])
 
   return (
     <GenericModalForm
@@ -50,6 +50,10 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
       initialValues={initialValues}
       hideFooter={isReadonly}
     >
+      <Form.Item name="key" className="hidden-form-item">
+        <Input type="hidden" disabled className="readonly-form-item" />
+      </Form.Item>
+
       <Form.Item label={t('system-params.field.name')} name="name">
         <Input disabled className="readonly-form-item" />
       </Form.Item>
@@ -61,14 +65,10 @@ export const SystemParamsEditor: FC<SystemParamsEditorProps> = props => {
       <Form.Item
         label={t('system-params.field.value')}
         name="value"
-        rules={
-          !isReadonly
-            ? [
-                rule.requiredString(t('error.common.field-required')),
-                rule.max(500, t('error.common.max-length-exact', { max: 500 }))
-              ]
-            : []
-        }
+        rules={[
+          rule.requiredString(t('error.common.field-required')),
+          rule.max(500, t('error.common.max-length-exact', { max: 500 }))
+        ]}
       >
         <Input
           maxLength={500}

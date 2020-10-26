@@ -102,7 +102,7 @@
         "tags": [
           "Files"
         ],
-        "summary": "Deletes a file on the server",
+        "summary": "Sets a file expired",
         "operationId": "deleteFile",
         "parameters": [
           {
@@ -150,17 +150,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/FileInfoVm"
+                  "$ref": "#/components/schemas/FileVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FileInfoVm"
+                  "$ref": "#/components/schemas/FileVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FileInfoVm"
+                  "$ref": "#/components/schemas/FileVm"
                 }
               }
             }
@@ -329,6 +329,47 @@
         }
       }
     },
+    "/api/Files/{id}/Keep": {
+      "put": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Deletes a file expiration date",
+        "operationId": "keepFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/Prune": {
+      "delete": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Deletes all expired files",
+        "operationId": "pruneFile",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Information": {
       "get": {
         "tags": [
@@ -390,22 +431,23 @@
             "type": "string",
             "nullable": true
           },
-          "exstension": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "FileInfoVm": {
-        "type": "object",
-        "properties": {
-          "fileName": {
+          "extension": {
             "type": "string",
             "nullable": true
           },
-          "exstension": {
+          "sizeInBytes": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "contentType": {
             "type": "string",
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
             "nullable": true
           }
         },

@@ -48,9 +48,9 @@ import {
     CouponVm,
     CouponVmFromJSON,
     CouponVmToJSON,
-    DetailedCouponVmPaginatedResponse,
-    DetailedCouponVmPaginatedResponseFromJSON,
-    DetailedCouponVmPaginatedResponseToJSON,
+    CouponVmPaginatedResponse,
+    CouponVmPaginatedResponseFromJSON,
+    CouponVmPaginatedResponseToJSON,
     FileVm,
     FileVmFromJSON,
     FileVmToJSON,
@@ -587,7 +587,7 @@ export class CouponsApi extends runtime.BaseAPI {
      * Returns the Coupon list with the specified filters applied
      * Gets a Coupon entity list sorted and filtered
      */
-    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<DetailedCouponVmPaginatedResponse>> {
+    async getCouponsRaw(requestParameters: GetCouponsRequest): Promise<runtime.ApiResponse<CouponVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.includeArchived !== undefined) {
@@ -699,14 +699,14 @@ export class CouponsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DetailedCouponVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CouponVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the Coupon list with the specified filters applied
      * Gets a Coupon entity list sorted and filtered
      */
-    async getCoupons(requestParameters: GetCouponsRequest): Promise<DetailedCouponVmPaginatedResponse> {
+    async getCoupons(requestParameters: GetCouponsRequest): Promise<CouponVmPaginatedResponse> {
         const response = await this.getCouponsRaw(requestParameters);
         return await response.value();
     }

@@ -8,6 +8,8 @@ import {
 import { FeatureState } from 'models/featureState'
 import { SystemParam } from 'models/systemParam'
 import i18n from 'app/i18n'
+import { api } from 'api'
+import { SystemParameterVm } from 'api/swagger/coupon'
 
 interface SystemParamsState {
   systemParamsList: SystemParam[]
@@ -68,44 +70,32 @@ const getSystemParams = (params: ListRequestParams = {}): AppThunk => async (
 ) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const revisedParams = reviseListRequestParams(getState().systemParams.listParams, params)
 
-    // todo integration
-    const items = [
-      {
-        id: 1,
-        name: 'KKV kampány limit',
-        key: 'kkvLimit',
-        value: '20',
-        description: i18n.t(`system-params.key.${'kkvLimit'}`)
-      },
-      {
-        id: 2,
-        name: 'Ügyfélszolgálat telefonszám',
-        key: 'customerSuppportPhone',
-        value: '06 20 123 4567',
-        description: i18n.t(`system-params.key.${'customerSuppportPhone'}`)
-      },
-      {
-        id: 3,
-        name: 'Ügyfélszolgálat e-mail cím',
-        key: 'customerSupportEmail',
-        value: 'ugyfelszolgalat@nkmplusz.hu',
-        description: i18n.t(`system-params.key.${'customerSupportEmail'}`)
-      },
-      {
-        id: 4,
-        name: 'KPR nyertes kuponok gyűjtője link',
-        key: 'winnerCouponLink',
-        value: '/WinnerCoupon',
-        description: i18n.t(`system-params.key.${'winnerCouponLink'}`)
-      }
-    ]
-    const pagination = { totalCount: 4, from: 0, to: 10, page: 1, size: 10 }
+    const keyMapper = (keyToFormat?: string | null): string =>
+      keyToFormat ? keyToFormat.split('.').join('_') : ''
+
+    const revisedParams = reviseListRequestParams(getState().systemParams.listParams, params)
+    const { result, ...pagination } = await api.coupon.systemParameters.getSystemParameters(
+      revisedParams
+    )
+
+    const mappedResult = result
+      ? result.map(
+          (sysparam: SystemParameterVm, index: number) =>
+            ({
+              ...sysparam,
+              id: index,
+              name: i18n.t(`system-params.keys.${keyMapper(sysparam.key)}.backend_key_name`),
+              description: i18n.t(
+                `system-params.keys.${keyMapper(sysparam.key)}.backend_key_description`
+              )
+            } as SystemParam)
+        )
+      : []
 
     dispatch(
       getSystemParamsSuccess({
-        systemParams: items,
+        systemParams: mappedResult,
         listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
@@ -120,10 +110,15 @@ const updateSystemParam = (
 ): AppThunk => async dispatch => {
   try {
     dispatch(setEditorState(FeatureState.Loading))
-    // todo integration
+
+    await api.coupon.systemParameters.updateSystemParameter({
+      key: param.key || null,
+      systemParameterDto: { value: param.value }
+    })
+
     dispatch(setEditorState(FeatureState.Success))
+
     callbackFn()
-    // todo reload store values
   } catch (err) {
     dispatch(setEditorState(FeatureState.Error))
   }

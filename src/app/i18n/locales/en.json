@@ -302,10 +302,22 @@
       "Phone": "Phone"
     },
     "notification-type": {
-      "CampaignMovedToWaitingState": "Campaign moved to waiting status",
-      "CouponClosed": "Coupon closed",
-      "CouponCountDepleted": "Coupon count depleted",
-      "PartnerContactRegistered": "New Partner Contact: "
+      "CampaignMovedToWaitingState": {
+        "detail": "{{actual.value}} - by {{parent.value}}",
+        "title": "Campaign moved to waiting status"
+      },
+      "CouponClosed": {
+        "detail": "{{actual.value}} - by {{parent.value}}",
+        "title": "Campaign closed"
+      },
+      "CouponCountDepleted": {
+        "detail": "{{actual.value}} - {{parent.value}}",
+        "title": "Coupon count depleted"
+      },
+      "PartnerContactRegistered": {
+        "detail": "To partner {{parent.value}} with {{actual.value}} name",
+        "title": "New Partner Contact Registered"
+      }
     }
   },
   "error": {
@@ -342,16 +354,24 @@
       "cant-modify": "Cannot be modified.",
       "field-number": "This field must be a number.",
       "field-required": "This field is required.",
+      "file-size-too-big": "File size is too big.",
+      "img-dimensions-incorrect": "The width and height of the picture can only be {{width}}x{{height}} pixels.",
+      "incorrect-file-extension": "Not supported file extension.",
       "internal": "Unsuccessful communication with the server, try again later.",
       "max-length-exact": "This field must be less then {{max}} characters.",
+      "max-number-exact": "This field maximum value is {{max}}.",
       "no-template": "Template ID not found.",
       "number-must-be-positive-integer": "Field must be a positive integer.",
       "parameter-missing-or-invalid": "Parameter missing or is invalid.",
-      "server-unavailable": "Unsuccessful communication with the server, try again later."
+      "server-unavailable": "Unsuccessful communication with the server, try again later.",
+      "systemParameter": {
+        "partner-campaign-limit": "Partner campaign limit can only be a whole number between 1 and 10000.",
+        "value-is-empty": "System parameters' value is required.",
+        "value-is-not-whole-number": "Value is not a whole number."
+      }
     },
     "coupon": {
       "already-claimed": "Coupon already claimed, use another one.",
-      "big-picture-invalid": "Big picture file format or size is invalid, follow the instructions on the form.",
       "cannot-claim": "Cannot claim coupon, try again later.",
       "cant-be-deleted": "You don't have the permission to delete this campaign.",
       "cant-change-state": "You don't have the permission to change the state of this campaign.",
@@ -364,8 +384,6 @@
       "partner-must-be-major": "Only major partners can be selected, choose a major partner",
       "predefined-file-is-empty": "Predefined code file is empty, check the content of the CSV file and the count.",
       "predefinied-file-invalid": "Predefined code file must be valid CSV file, check its type and content.",
-      "prize-rules-invalid": "Prize rule file must be a PDF file, check the content of file.",
-      "small-picture-invalid": "Small picture file format or size is invalid.",
       "type-has-no-codes": "This campaign type does not produce coupon codes, so they cannot be downloaded.",
       "user-code-cant-save": "Operation cannot be completed, try again later."
     },
@@ -377,12 +395,19 @@
       "not-found-version": "E-mail template version not found, choose a different version."
     },
     "file": {
+      "big-picture-size": "Big coupon picture size is too big, maxmimum file size is 51 MB.",
+      "big-picture-too-big": "Big coupon picture width or height is incorrect.",
+      "big-picture-type-not-supported": "Big coupon picture extension is not supported.",
       "download-fail": "Couldn't fetch your file.",
-      "image-type-not-supported": "Unsupported image type.",
-      "invalid-image-size": "Invalid image dimensions.",
       "invalid-prize-rule-type": "Invalid prize rule type.",
       "not-supported-format": "Unsupported file format.",
-      "too-big": "The uploaded file exceeds maximum file size of 51MB. Please upload something smaller."
+      "predefined-codes-too-big": "Predefined codes file is too big, maxmimum file size is 51 MB.",
+      "predefined-codes-type-not-supported": "Predefined codes file extension is not supported.",
+      "prize-rules-too-big": "Prize rules file is too big, maxmimum file size is 51 MB.",
+      "prize-rules-type-not-supported": "Prize rules file extension is not supported.",
+      "small-picture-size": "Small coupon picture size is too bi, maxmimum file size is 51 MB.",
+      "small-picture-too-big": "Small coupon picture width or height is incorrect",
+      "small-picture-type-not-supported": "Small coupon picture file extension is not supported."
     },
     "not-found": "Not found.",
     "notification": {
@@ -413,6 +438,9 @@
     },
     "sendgrid": {
       "communication": "An error has occured while trying to send an email. Please try again later!"
+    },
+    "service": {
+      "only-read-operations-supported": "Only read operations supported."
     },
     "unknown-try-again": "Please, try again!",
     "validation": {
@@ -944,18 +972,18 @@
   },
   "system-params": {
     "editor": {
-      "title": "System parameters"
+      "title": "Edit system parameter"
     },
     "field": {
       "description": "Parameter description",
       "name": "Parameter name",
       "value": "Parameter value"
     },
-    "key": {
-      "customerSupportEmail": "__STRING_NOT_TRANSLATED__",
-      "customerSuppportPhone": "__STRING_NOT_TRANSLATED__",
-      "kkvLimit": "__STRING_NOT_TRANSLATED__",
-      "winnerCouponLink": "__STRING_NOT_TRANSLATED__"
+    "keys": {
+      "system_settings_partner-campaign-limit": {
+        "backend_key_description": "Global limitation for partners' campaign number.",
+        "backend_key_name": "Partners' campaign limit"
+      }
     }
   },
   "test-group-category": {
