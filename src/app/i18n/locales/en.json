@@ -837,7 +837,7 @@
       "range-between": {
         "label": "Range between"
       },
-      "range_not_between": {
+      "range-not-between": {
         "label": "Range not between"
       },
       "select-any-in": {

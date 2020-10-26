@@ -608,9 +608,9 @@
         "one-time-use-required": "Egyszer használatos szegmens megadása kötelező. Kérem adjon meg egy megfelelő szegmenst!"
       },
       "segmentation-editor": {
-        "category-required": "__STRING_NOT_TRANSLATED__",
-        "name-max-length-60": "__STRING_NOT_TRANSLATED__",
-        "name-required": "__STRING_NOT_TRANSLATED__"
+        "category-required": "Szegmens kategória megadása kötelező, kérem adjon meg egy megfelelő kategóriát.",
+        "name-max-length-60": "Szegmens neve maximum 60 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-required": "Szegmens név megadása kötelező, kérem adjon meg egy megfelelő nevet."
       },
       "segments": {
         "list-required": "Szegmens lista megadása kötelező, kérem adjon meg egy email listát."
@@ -820,31 +820,31 @@
         "label": "között"
       },
       "is-empty": {
-        "label": "__STRING_NOT_TRANSLATED__"
+        "label": "üres"
       },
       "is-not-empty": {
-        "label": "__STRING_NOT_TRANSLATED__"
+        "label": "nem üres"
       },
       "like": {
         "label": "tartalmaz"
       },
       "not-between": {
-        "label": "__STRING_NOT_TRANSLATED__"
+        "label": "nincs közte"
       },
       "not-like": {
-        "label": "__STRING_NOT_TRANSLATED__"
+        "label": "nem tartalmaz"
       },
       "range-between": {
-        "label": "__STRING_NOT_TRANSLATED__"
+        "label": "között (intervallum)"
       },
-      "range_not_between": {
+      "range-not-between": {
         "label": "nincs közte (intervallum)"
       },
       "select-any-in": {
-        "label": "__STRING_NOT_TRANSLATED__"
+        "label": "tartalmazza"
       },
       "select-not-any-in": {
-        "label": "__STRING_NOT_TRANSLATED__"
+        "label": "nem tartalmazza"
       }
     },
     "or": "Vagy",

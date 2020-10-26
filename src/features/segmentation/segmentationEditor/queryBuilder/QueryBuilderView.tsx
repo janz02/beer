@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Query, Builder, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
 import { QueryBuilderUtils } from './useQueryBuilderUtils'
 import { RuleResultContainer } from './RuleResultContainer'
@@ -11,7 +11,7 @@ interface QueryBuilderViewProps {
 }
 
 export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
-  let refreshTimeout: any
+  const [queryRefreshReady, setQueryRefreshReady] = useState(true)
 
   const renderBuilder = (builder: BuilderProps): JSX.Element => {
     props.queryBuilder.setQueryBuilderActionsRef(builder)
@@ -29,8 +29,13 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
   }
 
   const setRefresh = (): void => {
-    clearTimeout(refreshTimeout)
-    refreshTimeout = setTimeout(props.queryBuilder.refresh, 2000)
+    if (queryRefreshReady) {
+      setQueryRefreshReady(false)
+      setTimeout(() => {
+        props.queryBuilder.refresh()
+        setQueryRefreshReady(true)
+      }, 2000)
+    }
   }
 
   const onChange = (immutableTree: ImmutableTree, config: Config): void => {
