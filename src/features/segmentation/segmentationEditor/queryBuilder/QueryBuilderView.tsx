@@ -5,6 +5,7 @@ import { RuleResultContainer } from './RuleResultContainer'
 // import 'antd/dist/antd.css'
 import 'react-awesome-query-builder/css/styles.scss'
 import 'react-awesome-query-builder/css/compact_styles.scss' // optional, for more compact styles
+import './QueryBuilderView.scss'
 
 interface QueryBuilderViewProps {
   queryBuilder: QueryBuilderUtils

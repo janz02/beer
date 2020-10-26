@@ -851,6 +851,10 @@
     "range-slider": {
       "placeholder": "Válassza ki a tartományt"
     },
+    "result": {
+      "filtered": "Szűrt",
+      "total": "Összes"
+    },
     "rule": {
       "field": {
         "label": "Mező",

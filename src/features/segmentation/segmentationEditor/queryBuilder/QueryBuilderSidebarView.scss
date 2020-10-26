@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/variables";
+
 .query-builder-sidebar {
   padding-left: 0;
 
@@ -7,5 +9,90 @@
     button {
       border: none;
     }
+  }
+
+  & ul {
+    position: relative;
+    max-width: 100%;
+    margin: 0 0 0 1em;
+    padding: 0.5em 0 0.5em 0;
+    font-stretch: condensed;
+    font-style: italic;
+    list-style: none;
+    text-indent: 0.5em;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 1.75em;
+      left: -0.9em;
+      width: calc(100% + 1em);
+      height: 0.15em;
+      opacity: 0.4;
+      background: $Color-Foreground-Headers;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 1.9em;
+      left: 0;
+      width: 0.1em;
+      height: calc(100% - 3.25em);
+      opacity: 0.25;
+      background: $Color-Foreground-Headers;
+    }
+
+    & > div.p-card-body > div.p-card-content {
+      & > ul {
+        &::before {
+          left: 0;
+          width: 100%;
+        }
+
+        margin: 0;
+      }
+
+      padding: 0.5em;
+      padding-top: 0;
+    }
+
+    & > li {
+      &::before {
+        content: "";
+        position: absolute;
+        top: calc(50% - 0.075em);
+        left: 0.1em;
+        width: 0.9em;
+        height: 0.15em;
+        opacity: 0.4;
+        background: $Color-Foreground-Headers;
+      }
+
+      position: relative;
+      padding: 0 0 0 1em;
+      text-indent: 0;
+    }
+  }
+
+  & button.p-button-text-only {
+    &:focus {
+      box-shadow: unset;
+    }
+
+    & > span.p-button-text {
+      padding: 0.2em 0.5em;
+      overflow: hidden;
+      color: $Color-Foreground-Inline-Button;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    margin: 0.15em 0;
+    overflow: hidden;
+    outline: none;
+    box-shadow: none;
+    font-size: $FontSize-Default-Header;
+    text-align: left;
   }
 }

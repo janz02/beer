@@ -204,7 +204,7 @@ const types = {
   })
 }
 
-const { FieldTreeSelect } = AntdWidgets
+const { FieldSelect, FieldDropdown } = AntdWidgets
 const localeSettings = {
   locale: {
     short: 'hu',
@@ -234,8 +234,8 @@ const localeSettings = {
   canLeaveEmptyGroup: true, // after deletion
   canReorder: true,
   maxNesting: 10,
-  renderField: (props: FieldProps) => <FieldTreeSelect {...props} />,
-  renderOperator: (props: FieldProps) => <FieldTreeSelect {...props} />
+  renderField: (props: FieldProps) => <FieldDropdown {...props} />,
+  renderOperator: (props: FieldProps) => <FieldSelect {...props} />
 }
 
 const settings = {

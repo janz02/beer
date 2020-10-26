@@ -851,6 +851,10 @@
     "range-slider": {
       "placeholder": "Select range"
     },
+    "result": {
+      "filtered": "Filtered",
+      "total": "Total"
+    },
     "rule": {
       "field": {
         "label": "Field",
