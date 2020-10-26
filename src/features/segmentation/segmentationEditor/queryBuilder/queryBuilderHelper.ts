@@ -1,7 +1,8 @@
 import { QueryBuilderField } from 'api/swagger/campaign-editor'
 import { TFunction } from 'i18next'
+import { Fields } from 'react-awesome-query-builder'
 
-const createField = (field: any, t: any, hasSubfield: boolean): any => {
+const createField = (field: QueryBuilderField, t: TFunction, hasSubfield: boolean): any => {
   let listValues
   if (!!field.listValues && Object.keys(field.listValues).length !== 0) {
     listValues = field.listValues
@@ -16,14 +17,11 @@ const createField = (field: any, t: any, hasSubfield: boolean): any => {
   }
 }
 
-export const buildFieldConfig = (
-  queryBuilderFields: QueryBuilderField[],
-  t: TFunction
-): QueryBuilderField[] => {
-  const fields: QueryBuilderField[] = []
+export const buildFieldConfig = (queryBuilderFields: QueryBuilderField[], t: TFunction): Fields => {
+  const fields: Fields = {}
 
   for (const field of queryBuilderFields) {
-    const key: any = field.fieldName
+    const key = field.fieldName
     if (key && field.subFields) {
       if (field.subFields.length === 0) {
         // field level
