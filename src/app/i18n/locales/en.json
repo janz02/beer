@@ -922,6 +922,7 @@
       "segmentSize": "Segment size"
     },
     "list": {
+      "add": "Add new segmentation",
       "title": "Segmentation"
     }
   },

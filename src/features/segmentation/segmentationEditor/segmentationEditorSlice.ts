@@ -28,11 +28,15 @@ interface QueryBuilderState {
   initialConditions: QueryBuilderRuleModel[]
   ruleResults: SegmentationRuleResult[]
 }
-interface SegmentationEditorState {
-  segmentation: CampaignSegmentation
+
+interface SegmentationEditorLoadedData {
+  segmentation?: CampaignSegmentation
   categories?: SegmentationCategory[]
   segmentationQuery?: SegmentationQuery
   fields?: QueryBuilderField[]
+}
+
+interface SegmentationEditorState extends SegmentationEditorLoadedData {
   error: boolean
   loading: boolean
   saving: boolean
@@ -40,7 +44,6 @@ interface SegmentationEditorState {
 }
 
 const initialState: SegmentationEditorState = {
-  segmentation: {},
   error: false,
   loading: false,
   saving: false,
@@ -62,16 +65,8 @@ const segmentationEditorSlice = createSlice({
     getSegmentationRequest(state) {
       state.loading = true
     },
-    getSegmentationSuccess(
-      state,
-      action: PayloadAction<
-        [CampaignSegmentation, SegmentationCategory[], SegmentationQuery, QueryBuilderField[]]
-      >
-    ) {
-      state.segmentation = action.payload[0]
-      state.categories = action.payload[1]
-      state.segmentationQuery = action.payload[2]
-      state.fields = action.payload[3]
+    getSegmentationSuccess(state, action: PayloadAction<SegmentationEditorLoadedData>) {
+      Object.assign(state, action.payload)
       state.loading = false
       state.error = false
     },
@@ -131,26 +126,32 @@ export const {
 
 export const segmentationEditorReducer = segmentationEditorSlice.reducer
 
-export const getSegmentation = (id: number): AppThunk => async dispatch => {
+export const getSegmentation = (id?: number): AppThunk => async dispatch => {
   try {
     dispatch(getSegmentationRequest())
-    const segmentation = await api.campaignEditor.segmentations.getSegmentation({ id })
-    const segmentationQuery = await api.campaignEditor.segmentationQueries.getSegmentationQuery({
-      segmentationId: id
-    })
-    const { fields } = await api.campaignEditor.segmentationQueries.getConfig()
 
+    let segmentation
+    let segmentationQuery
+
+    if (id) {
+      segmentation = await api.campaignEditor.segmentations.getSegmentation({ id })
+      segmentationQuery = await api.campaignEditor.segmentationQueries.getSegmentationQuery({
+        segmentationId: id
+      })
+    }
+
+    const { fields } = await api.campaignEditor.segmentationQueries.getConfig()
     const {
       items: categories
     } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({})
 
     dispatch(
-      getSegmentationSuccess([
-        segmentation as CampaignSegmentation,
-        categories as SegmentationCategory[],
-        segmentationQuery as SegmentationQuery,
-        fields as QueryBuilderField[]
-      ])
+      getSegmentationSuccess({
+        segmentation: segmentation as CampaignSegmentation | undefined,
+        categories: categories as SegmentationCategory[],
+        segmentationQuery: segmentationQuery as SegmentationQuery | undefined,
+        fields: fields as QueryBuilderField[]
+      })
     )
   } catch (err) {
     dispatch(getSegmentationFail())

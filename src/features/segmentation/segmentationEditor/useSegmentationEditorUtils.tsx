@@ -43,13 +43,11 @@ export const useSegmentationEditorUtils = (
   const { submitable, modified, setFieldsValue, checkFieldsChange } = formUtils
 
   useEffect(() => {
-    setFieldsValue(segmentation)
+    setFieldsValue(segmentation || {})
   }, [segmentation, setFieldsValue])
 
   useEffect(() => {
-    if (id) {
-      dispatch(getSegmentation(+id))
-    }
+    dispatch(getSegmentation(id))
 
     return () => {
       dispatch(resetSegmentationEditor())

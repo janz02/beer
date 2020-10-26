@@ -922,6 +922,7 @@
       "segmentSize": "Szegmensméret"
     },
     "list": {
+      "add": "Új szegmentáció hozzáadás",
       "title": "Szegmentáció"
     }
   },
