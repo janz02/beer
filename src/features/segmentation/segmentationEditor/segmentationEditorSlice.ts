@@ -170,7 +170,8 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
         createUpdateSegmentationCommand: {
           ...segmentationQuery,
           ...segmentation,
-          ...data
+          ...data,
+          queryId: segmentationQuery?.id
         } as SegmentationVm
       })
 
