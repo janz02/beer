@@ -15,6 +15,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { hasPermission } from 'services/jwt-reader'
 import { pageViewRoles } from 'services/roleHelpers'
 import { history } from 'router/router'
+import { AddButton } from 'components/buttons/AddButton'
 
 export interface SegmentationListUtils {
   tableProps: ResponsiveTableProps
@@ -115,9 +116,12 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
       <>
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrderUtils} />
+        <AddButton onClick={() => history.push(`/segmentations/new`)}>
+          {t('segmentation.list.add')}
+        </AddButton>
       </>
     ),
-    [columnOrderUtils, resetFilters]
+    [columnOrderUtils, resetFilters, t]
   )
 
   return {

@@ -45,6 +45,7 @@
     "react-scripts": "^3.3.0",
     "redux": "^4.0.4",
     "typescript": "^3.8.0",
+    "use-debounce": "^5.0.1",
     "value-or-function": "^3.0.0"
   },
   "devDependencies": {

@@ -193,13 +193,13 @@ const types = {
         widgetProps: {
           valuePlaceholder: i18n.t('query-builder.slider.placeholder')
         }
-      },
-      rangeslider: {
+      }
+      /* rangeslider: {
         widgetProps: {
           valuePlaceholder: i18n.t('query-builder.range-slider.placeholder'),
           valueLabels: [i18n.t('query-builder.from'), i18n.t('query-builder.to')]
         }
-      }
+      } */
     }
   })
 }
