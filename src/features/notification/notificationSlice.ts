@@ -41,7 +41,7 @@ interface NotificationState {
   activeFilter: NotificationFilterType
 }
 
-interface NotifiacationListActionPayload {
+interface NotificationListActionPayload {
   list: NotificationData[]
   unseenCount: number
   listParams: ListRequestParams
@@ -84,7 +84,7 @@ const notificationSlice = createSlice({
     setRtConnectionState(state, action: PayloadAction<HubConnectionState | undefined>) {
       state.rtConnectionState = action.payload
     },
-    patchNotificationList(state, action: PayloadAction<NotifiacationListActionPayload>) {
+    patchNotificationList(state, action: PayloadAction<NotificationListActionPayload>) {
       const { list, unseenCount, listParams, listContentState } = action.payload
       state.listState = FeatureState.Success
       state.unseenCount = unseenCount
@@ -182,11 +182,14 @@ const getNotifications = (): AppThunk => async (dispatch, getState) => {
     const list =
       response.result?.map<NotificationData>(n => ({
         ...n,
-        createdDate: moment(n.createdDate)
+        createdDate: moment(n.createdDate),
+        parent: { ...n.parent },
+        actual: { ...n.actual }
       })) ?? []
+
     const unseenCount = response.unseenCount ?? 0
 
-    const actionPayload: NotifiacationListActionPayload = {
+    const actionPayload: NotificationListActionPayload = {
       list,
       unseenCount,
       listParams: newListParams,
@@ -237,10 +240,12 @@ const getRecentNotifications = (): AppThunk => async (dispatch, getState) => {
     const list =
       response.result?.map<NotificationData>(n => ({
         ...n,
-        createdDate: moment(n.createdDate)
+        createdDate: moment(n.createdDate),
+        parent: { ...n.parent },
+        actual: { ...n.actual }
       })) ?? []
 
-    const actionPayload: NotifiacationListActionPayload = {
+    const actionPayload: NotificationListActionPayload = {
       list,
       unseenCount: response.unseenCount ?? 0,
       listParams: newListParams,

@@ -98,7 +98,7 @@ export const PermissionEditorForm: React.FC<PermissionEditorFormProps> = props =
       floatingOptions={options}
       floatingBackButton={backButtonProps}
     >
-      <NavigationAlert when={modified && mode === EditorMode.EDIT} />
+      <NavigationAlert when={modified} />
       <Form
         className="permission-editor-form"
         name="permission-editor-form"

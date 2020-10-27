@@ -116,12 +116,16 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
       <>
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrderUtils} />
-        <AddButton onClick={() => history.push(`/segmentations/new`)}>
-          {t('segmentation.list.add')}
-        </AddButton>
+        {isEditor ? (
+          <AddButton onClick={() => history.push(`/segmentations/new`)}>
+            {t('segmentation.list.add')}
+          </AddButton>
+        ) : (
+          undefined
+        )}
       </>
     ),
-    [columnOrderUtils, resetFilters, t]
+    [columnOrderUtils, resetFilters, isEditor, t]
   )
 
   return {

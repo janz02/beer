@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { TestGroupCategoryListUtils } from './testGroupCategoryList/useTestGroupCategoryListUtils'
-import { UseGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
+import { GenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { testGroupCategoryListActions } from './testGroupCategoryList/testGroupCategoryListSlice'
 import { TestGroupCategoryList } from './testGroupCategoryList/TestGroupCategoryList'
 import { TestGroupCategoryEditor } from './testGroupCategoryEditor/TestGroupCategoryEditor'
 
 export interface CategoryTabProps {
   categoryListUtils: TestGroupCategoryListUtils
-  modalUtils: UseGenericModalFormEditorUtils
+  modalUtils: GenericModalFormEditorUtils
 }
 
 export const TestGroupCategoryTab: React.FC<CategoryTabProps> = props => {

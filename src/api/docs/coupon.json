@@ -1326,7 +1326,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCashierDto"
+                "$ref": "#/components/schemas/CashierDto"
               }
             }
           }
@@ -2887,13 +2887,14 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/CouponVmPaginatedResponse"
                 },
                 "example": {
   "result": [
     {
       "id": 1,
       "name": "Ingyen Túró Rudi!",
+      "description": "Kaphatsz egy ingyen Túró Rudit!",
       "rank": 100,
       "type": 0,
       "state": 100,
@@ -2902,30 +2903,43 @@
       "expireDate": "2021-09-01T10:00:00",
       "couponCount": 50000,
       "minimumShoppingValue": 500,
+      "discountType": 100,
       "discountValue": 100.0,
       "categoryId": 1,
+      "partnerId": 1,
       "isActive": false,
       "isPartnerActive": false,
-      "partnerName": "Tesco",
-      "showCount": 0,
-      "clickCount": 0,
-      "claimCount": 0,
-      "smallPictureId": "Na meg ez se",
       "bigPictureId": "És nem is lesz",
+      "smallPictureId": "Na meg ez se",
       "mode": 100,
-      "discountType": 100,
       "createdBy": "Sales Ernő",
       "createdDate": "2020-04-11T13:42:50",
       "modifiedBy": "Kasszás Erzsi",
       "modifiedDate": null,
       "approvedBy": "Menedzser Endre",
       "approvedDate": "2020-07-12T20:30:40",
+      "drawDate": null,
       "preferredPosition": 4,
-      "drawDate": null
+      "predefinedCodesFileId": null,
+      "onlineClaimLink": "https://isitchristmas.com/",
+      "productDetails": "https://isitchristmas.today/",
+      "prizeRulesFileId": "missingId",
+      "itemPrice": 12,
+      "previousYearAverageBasketValue": 123,
+      "awardedCampaign": false,
+      "prizeValue": 321,
+      "tags": null,
+      "comments": null,
+      "partnerName": "Tesco",
+      "showCount": 0,
+      "clickCount": 0,
+      "claimCount": 0,
+      "discardCount": 21
     },
     {
       "id": 2,
       "name": "Pisztácia fagyi!",
+      "description": "MissingDescription",
       "rank": 300,
       "type": 200,
       "state": 100,
@@ -2934,26 +2948,38 @@
       "expireDate": "2021-10-01T10:00:00",
       "couponCount": 50000,
       "minimumShoppingValue": 500,
+      "discountType": 100,
       "discountValue": 100.0,
       "categoryId": 2,
+      "partnerId": 76,
       "isActive": true,
       "isPartnerActive": true,
-      "partnerName": "Firpo",
-      "showCount": 50,
-      "clickCount": 1225,
-      "claimCount": 150,
-      "smallPictureId": "Csokoládé nem is volt",
       "bigPictureId": "Pisztácia kifogyott",
+      "smallPictureId": "Csokoládé nem is volt",
       "mode": 200,
-      "discountType": 100,
       "createdBy": "Charlie Firpo",
       "createdDate": "2020-05-01T01:12:23",
       "modifiedBy": "Charlie Firpo",
       "modifiedDate": "2020-06-01T10:12:23",
       "approvedBy": "Johnny Firpo",
       "approvedDate": "2020-03-10T10:20:30",
+      "drawDate": "2021-11-01T01:01:01",
       "preferredPosition": 3,
-      "drawDate": "2021-11-01T01:01:01"
+      "predefinedCodesFileId": "ASDF247GD8",
+      "onlineClaimLink": null,
+      "productDetails": "NoProductsHere",
+      "prizeRulesFileId": null,
+      "itemPrice": 9,
+      "previousYearAverageBasketValue": 98,
+      "awardedCampaign": true,
+      "prizeValue": 987,
+      "tags": null,
+      "comments": null,
+      "partnerName": "Firpo",
+      "showCount": 50,
+      "clickCount": 1225,
+      "claimCount": 150,
+      "discardCount": 9876
     }
   ],
   "page": 1,
@@ -2964,13 +2990,14 @@
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/CouponVmPaginatedResponse"
                 },
                 "example": {
   "result": [
     {
       "id": 1,
       "name": "Ingyen Túró Rudi!",
+      "description": "Kaphatsz egy ingyen Túró Rudit!",
       "rank": 100,
       "type": 0,
       "state": 100,
@@ -2979,30 +3006,43 @@
       "expireDate": "2021-09-01T10:00:00",
       "couponCount": 50000,
       "minimumShoppingValue": 500,
+      "discountType": 100,
       "discountValue": 100.0,
       "categoryId": 1,
+      "partnerId": 1,
       "isActive": false,
       "isPartnerActive": false,
-      "partnerName": "Tesco",
-      "showCount": 0,
-      "clickCount": 0,
-      "claimCount": 0,
-      "smallPictureId": "Na meg ez se",
       "bigPictureId": "És nem is lesz",
+      "smallPictureId": "Na meg ez se",
       "mode": 100,
-      "discountType": 100,
       "createdBy": "Sales Ernő",
       "createdDate": "2020-04-11T13:42:50",
       "modifiedBy": "Kasszás Erzsi",
       "modifiedDate": null,
       "approvedBy": "Menedzser Endre",
       "approvedDate": "2020-07-12T20:30:40",
+      "drawDate": null,
       "preferredPosition": 4,
-      "drawDate": null
+      "predefinedCodesFileId": null,
+      "onlineClaimLink": "https://isitchristmas.com/",
+      "productDetails": "https://isitchristmas.today/",
+      "prizeRulesFileId": "missingId",
+      "itemPrice": 12,
+      "previousYearAverageBasketValue": 123,
+      "awardedCampaign": false,
+      "prizeValue": 321,
+      "tags": null,
+      "comments": null,
+      "partnerName": "Tesco",
+      "showCount": 0,
+      "clickCount": 0,
+      "claimCount": 0,
+      "discardCount": 21
     },
     {
       "id": 2,
       "name": "Pisztácia fagyi!",
+      "description": "MissingDescription",
       "rank": 300,
       "type": 200,
       "state": 100,
@@ -3011,26 +3051,38 @@
       "expireDate": "2021-10-01T10:00:00",
       "couponCount": 50000,
       "minimumShoppingValue": 500,
+      "discountType": 100,
       "discountValue": 100.0,
       "categoryId": 2,
+      "partnerId": 76,
       "isActive": true,
       "isPartnerActive": true,
-      "partnerName": "Firpo",
-      "showCount": 50,
-      "clickCount": 1225,
-      "claimCount": 150,
-      "smallPictureId": "Csokoládé nem is volt",
       "bigPictureId": "Pisztácia kifogyott",
+      "smallPictureId": "Csokoládé nem is volt",
       "mode": 200,
-      "discountType": 100,
       "createdBy": "Charlie Firpo",
       "createdDate": "2020-05-01T01:12:23",
       "modifiedBy": "Charlie Firpo",
       "modifiedDate": "2020-06-01T10:12:23",
       "approvedBy": "Johnny Firpo",
       "approvedDate": "2020-03-10T10:20:30",
+      "drawDate": "2021-11-01T01:01:01",
       "preferredPosition": 3,
-      "drawDate": "2021-11-01T01:01:01"
+      "predefinedCodesFileId": "ASDF247GD8",
+      "onlineClaimLink": null,
+      "productDetails": "NoProductsHere",
+      "prizeRulesFileId": null,
+      "itemPrice": 9,
+      "previousYearAverageBasketValue": 98,
+      "awardedCampaign": true,
+      "prizeValue": 987,
+      "tags": null,
+      "comments": null,
+      "partnerName": "Firpo",
+      "showCount": 50,
+      "clickCount": 1225,
+      "claimCount": 150,
+      "discardCount": 9876
     }
   ],
   "page": 1,
@@ -3041,13 +3093,14 @@
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DetailedCouponVmPaginatedResponse"
+                  "$ref": "#/components/schemas/CouponVmPaginatedResponse"
                 },
                 "example": {
   "result": [
     {
       "id": 1,
       "name": "Ingyen Túró Rudi!",
+      "description": "Kaphatsz egy ingyen Túró Rudit!",
       "rank": 100,
       "type": 0,
       "state": 100,
@@ -3056,30 +3109,43 @@
       "expireDate": "2021-09-01T10:00:00",
       "couponCount": 50000,
       "minimumShoppingValue": 500,
+      "discountType": 100,
       "discountValue": 100.0,
       "categoryId": 1,
+      "partnerId": 1,
       "isActive": false,
       "isPartnerActive": false,
-      "partnerName": "Tesco",
-      "showCount": 0,
-      "clickCount": 0,
-      "claimCount": 0,
-      "smallPictureId": "Na meg ez se",
       "bigPictureId": "És nem is lesz",
+      "smallPictureId": "Na meg ez se",
       "mode": 100,
-      "discountType": 100,
       "createdBy": "Sales Ernő",
       "createdDate": "2020-04-11T13:42:50",
       "modifiedBy": "Kasszás Erzsi",
       "modifiedDate": null,
       "approvedBy": "Menedzser Endre",
       "approvedDate": "2020-07-12T20:30:40",
+      "drawDate": null,
       "preferredPosition": 4,
-      "drawDate": null
+      "predefinedCodesFileId": null,
+      "onlineClaimLink": "https://isitchristmas.com/",
+      "productDetails": "https://isitchristmas.today/",
+      "prizeRulesFileId": "missingId",
+      "itemPrice": 12,
+      "previousYearAverageBasketValue": 123,
+      "awardedCampaign": false,
+      "prizeValue": 321,
+      "tags": null,
+      "comments": null,
+      "partnerName": "Tesco",
+      "showCount": 0,
+      "clickCount": 0,
+      "claimCount": 0,
+      "discardCount": 21
     },
     {
       "id": 2,
       "name": "Pisztácia fagyi!",
+      "description": "MissingDescription",
       "rank": 300,
       "type": 200,
       "state": 100,
@@ -3088,26 +3154,38 @@
       "expireDate": "2021-10-01T10:00:00",
       "couponCount": 50000,
       "minimumShoppingValue": 500,
+      "discountType": 100,
       "discountValue": 100.0,
       "categoryId": 2,
+      "partnerId": 76,
       "isActive": true,
       "isPartnerActive": true,
-      "partnerName": "Firpo",
-      "showCount": 50,
-      "clickCount": 1225,
-      "claimCount": 150,
-      "smallPictureId": "Csokoládé nem is volt",
       "bigPictureId": "Pisztácia kifogyott",
+      "smallPictureId": "Csokoládé nem is volt",
       "mode": 200,
-      "discountType": 100,
       "createdBy": "Charlie Firpo",
       "createdDate": "2020-05-01T01:12:23",
       "modifiedBy": "Charlie Firpo",
       "modifiedDate": "2020-06-01T10:12:23",
       "approvedBy": "Johnny Firpo",
       "approvedDate": "2020-03-10T10:20:30",
+      "drawDate": "2021-11-01T01:01:01",
       "preferredPosition": 3,
-      "drawDate": "2021-11-01T01:01:01"
+      "predefinedCodesFileId": "ASDF247GD8",
+      "onlineClaimLink": null,
+      "productDetails": "NoProductsHere",
+      "prizeRulesFileId": null,
+      "itemPrice": 9,
+      "previousYearAverageBasketValue": 98,
+      "awardedCampaign": true,
+      "prizeValue": 987,
+      "tags": null,
+      "comments": null,
+      "partnerName": "Firpo",
+      "showCount": 50,
+      "clickCount": 1225,
+      "claimCount": 150,
+      "discardCount": 9876
     }
   ],
   "page": 1,
@@ -3297,8 +3375,8 @@
                 },
                 "example": {
   "id": 1,
-  "name": "Ingyen T�r� Rudi!",
-  "description": "Ingy� t�r�s rudesz!",
+  "name": "Ingyen Túró Rudi!",
+  "description": "Ingyé túrós rudesz!",
   "rank": 100,
   "type": 0,
   "state": 100,
@@ -3310,38 +3388,38 @@
   "discountType": 100,
   "discountValue": 100.0,
   "categoryId": 1,
+  "partnerId": 1,
+  "isActive": true,
+  "isPartnerActive": true,
+  "bigPictureId": "És nem is lesz",
+  "smallPictureId": "Na meg ez se",
+  "mode": 100,
+  "createdBy": "Sales Erno",
+  "createdDate": "2020-04-11T13:42:50",
+  "modifiedBy": "Kasszás Erzsi",
+  "modifiedDate": null,
+  "approvedBy": "Menedzser Endre",
+  "approvedDate": "2020-07-12T20:30:40",
+  "drawDate": null,
+  "preferredPosition": 0,
+  "predefinedCodesFileId": null,
+  "onlineClaimLink": null,
+  "productDetails": "Kapsz egy ingyen túrórudit!!!444négynégy",
+  "prizeRulesFileId": "Majd lesz valahogy",
+  "itemPrice": null,
+  "previousYearAverageBasketValue": null,
+  "awardedCampaign": false,
+  "prizeValue": null,
   "tags": [
     1,
     3
   ],
   "comments": [],
-  "predefinedCodesFileId": null,
-  "createdBy": "Sales Erno",
-  "createdDate": "2020-04-11T13:42:50",
-  "modifiedBy": "Kassz�s Erzsi",
-  "modifiedDate": null,
-  "approvedBy": "Menedzser Endre",
-  "approvedDate": "2020-07-12T20:30:40",
-  "bigPictureId": "�s nem is lesz",
-  "smallPictureId": "Na meg ez se",
-  "isActive": true,
-  "smallPicture": "Nem kell ilyesmi",
-  "bigPicture": "Az nincs",
-  "onlineClaimLink": null,
-  "productDetails": "Kapsz egy ingyen t�r�rudit!!!444n�gyn�gy",
-  "drawDate": null,
-  "prizeRulesFileId": "Majd lesz valahogy",
-  "itemPrice": null,
-  "previousYearAverageBasketValue": null,
-  "awardedCampaign": false,
-  "mode": 100,
-  "partnerId": 1,
+  "partnerName": null,
   "showCount": 0,
   "clickCount": 0,
   "claimCount": 0,
-  "discardCount": 0,
-  "isPartnerActive": true,
-  "prizeValue": null
+  "discardCount": 0
 }
               },
               "application/json": {
@@ -3350,8 +3428,8 @@
                 },
                 "example": {
   "id": 1,
-  "name": "Ingyen T�r� Rudi!",
-  "description": "Ingy� t�r�s rudesz!",
+  "name": "Ingyen Túró Rudi!",
+  "description": "Ingyé túrós rudesz!",
   "rank": 100,
   "type": 0,
   "state": 100,
@@ -3363,38 +3441,38 @@
   "discountType": 100,
   "discountValue": 100.0,
   "categoryId": 1,
+  "partnerId": 1,
+  "isActive": true,
+  "isPartnerActive": true,
+  "bigPictureId": "És nem is lesz",
+  "smallPictureId": "Na meg ez se",
+  "mode": 100,
+  "createdBy": "Sales Erno",
+  "createdDate": "2020-04-11T13:42:50",
+  "modifiedBy": "Kasszás Erzsi",
+  "modifiedDate": null,
+  "approvedBy": "Menedzser Endre",
+  "approvedDate": "2020-07-12T20:30:40",
+  "drawDate": null,
+  "preferredPosition": 0,
+  "predefinedCodesFileId": null,
+  "onlineClaimLink": null,
+  "productDetails": "Kapsz egy ingyen túrórudit!!!444négynégy",
+  "prizeRulesFileId": "Majd lesz valahogy",
+  "itemPrice": null,
+  "previousYearAverageBasketValue": null,
+  "awardedCampaign": false,
+  "prizeValue": null,
   "tags": [
     1,
     3
   ],
   "comments": [],
-  "predefinedCodesFileId": null,
-  "createdBy": "Sales Erno",
-  "createdDate": "2020-04-11T13:42:50",
-  "modifiedBy": "Kassz�s Erzsi",
-  "modifiedDate": null,
-  "approvedBy": "Menedzser Endre",
-  "approvedDate": "2020-07-12T20:30:40",
-  "bigPictureId": "�s nem is lesz",
-  "smallPictureId": "Na meg ez se",
-  "isActive": true,
-  "smallPicture": "Nem kell ilyesmi",
-  "bigPicture": "Az nincs",
-  "onlineClaimLink": null,
-  "productDetails": "Kapsz egy ingyen t�r�rudit!!!444n�gyn�gy",
-  "drawDate": null,
-  "prizeRulesFileId": "Majd lesz valahogy",
-  "itemPrice": null,
-  "previousYearAverageBasketValue": null,
-  "awardedCampaign": false,
-  "mode": 100,
-  "partnerId": 1,
+  "partnerName": null,
   "showCount": 0,
   "clickCount": 0,
   "claimCount": 0,
-  "discardCount": 0,
-  "isPartnerActive": true,
-  "prizeValue": null
+  "discardCount": 0
 }
               },
               "text/json": {
@@ -3403,8 +3481,8 @@
                 },
                 "example": {
   "id": 1,
-  "name": "Ingyen T�r� Rudi!",
-  "description": "Ingy� t�r�s rudesz!",
+  "name": "Ingyen Túró Rudi!",
+  "description": "Ingyé túrós rudesz!",
   "rank": 100,
   "type": 0,
   "state": 100,
@@ -3416,38 +3494,38 @@
   "discountType": 100,
   "discountValue": 100.0,
   "categoryId": 1,
+  "partnerId": 1,
+  "isActive": true,
+  "isPartnerActive": true,
+  "bigPictureId": "És nem is lesz",
+  "smallPictureId": "Na meg ez se",
+  "mode": 100,
+  "createdBy": "Sales Erno",
+  "createdDate": "2020-04-11T13:42:50",
+  "modifiedBy": "Kasszás Erzsi",
+  "modifiedDate": null,
+  "approvedBy": "Menedzser Endre",
+  "approvedDate": "2020-07-12T20:30:40",
+  "drawDate": null,
+  "preferredPosition": 0,
+  "predefinedCodesFileId": null,
+  "onlineClaimLink": null,
+  "productDetails": "Kapsz egy ingyen túrórudit!!!444négynégy",
+  "prizeRulesFileId": "Majd lesz valahogy",
+  "itemPrice": null,
+  "previousYearAverageBasketValue": null,
+  "awardedCampaign": false,
+  "prizeValue": null,
   "tags": [
     1,
     3
   ],
   "comments": [],
-  "predefinedCodesFileId": null,
-  "createdBy": "Sales Erno",
-  "createdDate": "2020-04-11T13:42:50",
-  "modifiedBy": "Kassz�s Erzsi",
-  "modifiedDate": null,
-  "approvedBy": "Menedzser Endre",
-  "approvedDate": "2020-07-12T20:30:40",
-  "bigPictureId": "�s nem is lesz",
-  "smallPictureId": "Na meg ez se",
-  "isActive": true,
-  "smallPicture": "Nem kell ilyesmi",
-  "bigPicture": "Az nincs",
-  "onlineClaimLink": null,
-  "productDetails": "Kapsz egy ingyen t�r�rudit!!!444n�gyn�gy",
-  "drawDate": null,
-  "prizeRulesFileId": "Majd lesz valahogy",
-  "itemPrice": null,
-  "previousYearAverageBasketValue": null,
-  "awardedCampaign": false,
-  "mode": 100,
-  "partnerId": 1,
+  "partnerName": null,
   "showCount": 0,
   "clickCount": 0,
   "claimCount": 0,
-  "discardCount": 0,
-  "isPartnerActive": true,
-  "prizeValue": null
+  "discardCount": 0
 }
               }
             }
@@ -3712,6 +3790,7 @@
     {
       "id": 1,
       "name": "Ingyen Túró Rudi!",
+      "description": "Kaphatsz egy ingyen Túró Rudit!",
       "rank": 100,
       "type": 0,
       "state": 100,
@@ -3720,30 +3799,43 @@
       "expireDate": "2021-09-01T10:00:00",
       "couponCount": 50000,
       "minimumShoppingValue": 500,
+      "discountType": 100,
       "discountValue": 100.0,
       "categoryId": 1,
+      "partnerId": 1,
       "isActive": false,
       "isPartnerActive": false,
-      "partnerName": "Tesco",
-      "showCount": 0,
-      "clickCount": 0,
-      "claimCount": 0,
-      "smallPictureId": "Na meg ez se",
       "bigPictureId": "És nem is lesz",
+      "smallPictureId": "Na meg ez se",
       "mode": 100,
-      "discountType": 100,
       "createdBy": "Sales Ernő",
       "createdDate": "2020-04-11T13:42:50",
       "modifiedBy": "Kasszás Erzsi",
       "modifiedDate": null,
       "approvedBy": "Menedzser Endre",
       "approvedDate": "2020-07-12T20:30:40",
+      "drawDate": null,
       "preferredPosition": 4,
-      "drawDate": null
+      "predefinedCodesFileId": null,
+      "onlineClaimLink": "https://isitchristmas.com/",
+      "productDetails": "https://isitchristmas.today/",
+      "prizeRulesFileId": "missingId",
+      "itemPrice": 12,
+      "previousYearAverageBasketValue": 123,
+      "awardedCampaign": false,
+      "prizeValue": 321,
+      "tags": null,
+      "comments": null,
+      "partnerName": "Tesco",
+      "showCount": 0,
+      "clickCount": 0,
+      "claimCount": 0,
+      "discardCount": 21
     },
     {
       "id": 2,
       "name": "Pisztácia fagyi!",
+      "description": "MissingDescription",
       "rank": 300,
       "type": 200,
       "state": 100,
@@ -3752,26 +3844,38 @@
       "expireDate": "2021-10-01T10:00:00",
       "couponCount": 50000,
       "minimumShoppingValue": 500,
+      "discountType": 100,
       "discountValue": 100.0,
       "categoryId": 2,
+      "partnerId": 76,
       "isActive": true,
       "isPartnerActive": true,
-      "partnerName": "Firpo",
-      "showCount": 50,
-      "clickCount": 1225,
-      "claimCount": 150,
-      "smallPictureId": "Csokoládé nem is volt",
       "bigPictureId": "Pisztácia kifogyott",
+      "smallPictureId": "Csokoládé nem is volt",
       "mode": 200,
-      "discountType": 100,
       "createdBy": "Charlie Firpo",
       "createdDate": "2020-05-01T01:12:23",
       "modifiedBy": "Charlie Firpo",
       "modifiedDate": "2020-06-01T10:12:23",
       "approvedBy": "Johnny Firpo",
       "approvedDate": "2020-03-10T10:20:30",
+      "drawDate": "2021-11-01T01:01:01",
       "preferredPosition": 3,
-      "drawDate": "2021-11-01T01:01:01"
+      "predefinedCodesFileId": "ASDF247GD8",
+      "onlineClaimLink": null,
+      "productDetails": "NoProductsHere",
+      "prizeRulesFileId": null,
+      "itemPrice": 9,
+      "previousYearAverageBasketValue": 98,
+      "awardedCampaign": true,
+      "prizeValue": 987,
+      "tags": null,
+      "comments": null,
+      "partnerName": "Firpo",
+      "showCount": 50,
+      "clickCount": 1225,
+      "claimCount": 150,
+      "discardCount": 9876
     }
   ],
   "page": 1,
@@ -4399,7 +4503,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateEmailTemplateDto"
+                "$ref": "#/components/schemas/EmailTemplateDto"
               }
             }
           }
@@ -4518,18 +4622,180 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateSummaryVmPaginatedResponse"
-                }
+                  "$ref": "#/components/schemas/EmailTemplateVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 1,
+      "name": "9GAG",
+      "history": [
+        {
+          "id": 1,
+          "content": "FreshPosting",
+          "modifiedBy": "Mischevious Admin",
+          "modifiedAt": "2020-06-15T10:00:00",
+          "version": 1
+        },
+        {
+          "id": 3,
+          "content": "FreshPosting",
+          "modifiedBy": "Rightful Admin",
+          "modifiedAt": "2020-06-20T11:12:13",
+          "version": 3
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    },
+    {
+      "id": 2,
+      "name": "nCore",
+      "history": [
+        {
+          "id": 2,
+          "content": "Christmas Game",
+          "modifiedBy": "Main Admin",
+          "modifiedAt": "2019-12-15T10:00:00",
+          "version": 2
+        },
+        {
+          "id": 4,
+          "content": "Game Over",
+          "modifiedBy": "Little Admin",
+          "modifiedAt": "2019-12-31T10:00:00",
+          "version": 4
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 2,
+  "size": 4
+}
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateSummaryVmPaginatedResponse"
-                }
+                  "$ref": "#/components/schemas/EmailTemplateVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 1,
+      "name": "9GAG",
+      "history": [
+        {
+          "id": 1,
+          "content": "FreshPosting",
+          "modifiedBy": "Mischevious Admin",
+          "modifiedAt": "2020-06-15T10:00:00",
+          "version": 1
+        },
+        {
+          "id": 3,
+          "content": "FreshPosting",
+          "modifiedBy": "Rightful Admin",
+          "modifiedAt": "2020-06-20T11:12:13",
+          "version": 3
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    },
+    {
+      "id": 2,
+      "name": "nCore",
+      "history": [
+        {
+          "id": 2,
+          "content": "Christmas Game",
+          "modifiedBy": "Main Admin",
+          "modifiedAt": "2019-12-15T10:00:00",
+          "version": 2
+        },
+        {
+          "id": 4,
+          "content": "Game Over",
+          "modifiedBy": "Little Admin",
+          "modifiedAt": "2019-12-31T10:00:00",
+          "version": 4
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 2,
+  "size": 4
+}
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateSummaryVmPaginatedResponse"
-                }
+                  "$ref": "#/components/schemas/EmailTemplateVmPaginatedResponse"
+                },
+                "example": {
+  "result": [
+    {
+      "id": 1,
+      "name": "9GAG",
+      "history": [
+        {
+          "id": 1,
+          "content": "FreshPosting",
+          "modifiedBy": "Mischevious Admin",
+          "modifiedAt": "2020-06-15T10:00:00",
+          "version": 1
+        },
+        {
+          "id": 3,
+          "content": "FreshPosting",
+          "modifiedBy": "Rightful Admin",
+          "modifiedAt": "2020-06-20T11:12:13",
+          "version": 3
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    },
+    {
+      "id": 2,
+      "name": "nCore",
+      "history": [
+        {
+          "id": 2,
+          "content": "Christmas Game",
+          "modifiedBy": "Main Admin",
+          "modifiedAt": "2019-12-15T10:00:00",
+          "version": 2
+        },
+        {
+          "id": 4,
+          "content": "Game Over",
+          "modifiedBy": "Little Admin",
+          "modifiedAt": "2019-12-31T10:00:00",
+          "version": 4
+        }
+      ],
+      "modifiedBy": null,
+      "modifiedAt": "0001-01-01T00:00:00",
+      "version": 0
+    }
+  ],
+  "page": 1,
+  "from": 1,
+  "to": 2,
+  "size": 4
+}
               }
             }
           },
@@ -4609,7 +4875,10 @@
       "modifiedAt": "2008-06-06T00:00:00",
       "version": 3
     }
-  ]
+  ],
+  "modifiedBy": "",
+  "modifiedAt": "2008-07-07T00:00:00",
+  "version": 1
 }
               },
               "application/json": {
@@ -4641,7 +4910,10 @@
       "modifiedAt": "2008-06-06T00:00:00",
       "version": 3
     }
-  ]
+  ],
+  "modifiedBy": "",
+  "modifiedAt": "2008-07-07T00:00:00",
+  "version": 1
 }
               },
               "text/json": {
@@ -4673,7 +4945,10 @@
       "modifiedAt": "2008-06-06T00:00:00",
       "version": 3
     }
-  ]
+  ],
+  "modifiedBy": "",
+  "modifiedAt": "2008-07-07T00:00:00",
+  "version": 1
 }
               }
             }
@@ -4720,6 +4995,58 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "EmailTemplates"
+        ],
+        "summary": "NotAvailable",
+        "operationId": "updateEmailTemplate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Nothing",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Nothing",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Nothing",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "EmailTemplates"
@@ -4742,6 +5069,82 @@
         "responses": {
           "204": {
             "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/EmailTemplates/Export": {
+      "get": {
+        "tags": [
+          "EmailTemplates"
+        ],
+        "summary": "Exports an entity list sorted and filtered",
+        "description": "Exports the entity list with the specified filters applied in a csv file",
+        "operationId": "exportEmailTemplates",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "modifiedAt",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export: Csv file of entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
           }
         }
       }
@@ -5209,8 +5612,14 @@
       "isSeen": false,
       "type": 2,
       "createdDate": "2020-07-11T12:23:34",
-      "parentId": 2,
-      "actualId": 3,
+      "parent": {
+        "id": 2,
+        "value": "Megybefőtt Üzem"
+      },
+      "actual": {
+        "id": 3,
+        "value": "Kis Józsika Kft."
+      },
       "value": "Kis Józsika Kft. regisztrált"
     },
     {
@@ -5218,8 +5627,14 @@
       "isSeen": true,
       "type": 1,
       "createdDate": "2020-06-20T23:59:59",
-      "parentId": 23,
-      "actualId": 34,
+      "parent": {
+        "id": 23,
+        "value": "Kisbolt kft."
+      },
+      "actual": {
+        "id": 34,
+        "value": "Túró Rudi"
+      },
       "value": "Az ingyen túró rudinál valami baj van!"
     },
     {
@@ -5227,8 +5642,14 @@
       "isSeen": true,
       "type": 2,
       "createdDate": "2020-08-01T01:02:03",
-      "parentId": 234,
-      "actualId": 345,
+      "parent": {
+        "id": 234,
+        "value": "Anonim szerencsejátékfüggők társulata"
+      },
+      "actual": {
+        "id": 345,
+        "value": "Marika néni Ltd."
+      },
       "value": "Marika néni Ltd. regisztált"
     }
   ],
@@ -5250,8 +5671,14 @@
       "isSeen": false,
       "type": 2,
       "createdDate": "2020-07-11T12:23:34",
-      "parentId": 2,
-      "actualId": 3,
+      "parent": {
+        "id": 2,
+        "value": "Megybefőtt Üzem"
+      },
+      "actual": {
+        "id": 3,
+        "value": "Kis Józsika Kft."
+      },
       "value": "Kis Józsika Kft. regisztrált"
     },
     {
@@ -5259,8 +5686,14 @@
       "isSeen": true,
       "type": 1,
       "createdDate": "2020-06-20T23:59:59",
-      "parentId": 23,
-      "actualId": 34,
+      "parent": {
+        "id": 23,
+        "value": "Kisbolt kft."
+      },
+      "actual": {
+        "id": 34,
+        "value": "Túró Rudi"
+      },
       "value": "Az ingyen túró rudinál valami baj van!"
     },
     {
@@ -5268,8 +5701,14 @@
       "isSeen": true,
       "type": 2,
       "createdDate": "2020-08-01T01:02:03",
-      "parentId": 234,
-      "actualId": 345,
+      "parent": {
+        "id": 234,
+        "value": "Anonim szerencsejátékfüggők társulata"
+      },
+      "actual": {
+        "id": 345,
+        "value": "Marika néni Ltd."
+      },
       "value": "Marika néni Ltd. regisztált"
     }
   ],
@@ -5291,8 +5730,14 @@
       "isSeen": false,
       "type": 2,
       "createdDate": "2020-07-11T12:23:34",
-      "parentId": 2,
-      "actualId": 3,
+      "parent": {
+        "id": 2,
+        "value": "Megybefőtt Üzem"
+      },
+      "actual": {
+        "id": 3,
+        "value": "Kis Józsika Kft."
+      },
       "value": "Kis Józsika Kft. regisztrált"
     },
     {
@@ -5300,8 +5745,14 @@
       "isSeen": true,
       "type": 1,
       "createdDate": "2020-06-20T23:59:59",
-      "parentId": 23,
-      "actualId": 34,
+      "parent": {
+        "id": 23,
+        "value": "Kisbolt kft."
+      },
+      "actual": {
+        "id": 34,
+        "value": "Túró Rudi"
+      },
       "value": "Az ingyen túró rudinál valami baj van!"
     },
     {
@@ -5309,8 +5760,14 @@
       "isSeen": true,
       "type": 2,
       "createdDate": "2020-08-01T01:02:03",
-      "parentId": 234,
-      "actualId": 345,
+      "parent": {
+        "id": 234,
+        "value": "Anonim szerencsejátékfüggők társulata"
+      },
+      "actual": {
+        "id": 345,
+        "value": "Marika néni Ltd."
+      },
       "value": "Marika néni Ltd. regisztált"
     }
   ],
@@ -10363,7 +10820,7 @@
           }
         }
       },
-      "CreateCashierDto": {
+      "CashierDto": {
         "type": "object",
         "properties": {
           "siteId": {
@@ -10431,19 +10888,6 @@
           "size": {
             "type": "integer",
             "format": "int32"
-          }
-        }
-      },
-      "CashierDto": {
-        "type": "object",
-        "properties": {
-          "cashierId": {
-            "type": "string",
-            "nullable": true
-          },
-          "digitalStampId": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -10697,159 +11141,6 @@
           }
         }
       },
-      "DetailedCouponVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "rank": {
-            "$ref": "#/components/schemas/CouponRank"
-          },
-          "type": {
-            "$ref": "#/components/schemas/CouponType"
-          },
-          "state": {
-            "$ref": "#/components/schemas/CouponState"
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "expireDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "couponCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "minimumShoppingValue": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "discountValue": {
-            "type": "number",
-            "format": "float",
-            "nullable": true
-          },
-          "categoryId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "isPartnerActive": {
-            "type": "boolean"
-          },
-          "partnerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "showCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "clickCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "claimCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "smallPictureId": {
-            "type": "string",
-            "nullable": true
-          },
-          "bigPictureId": {
-            "type": "string",
-            "nullable": true
-          },
-          "mode": {
-            "$ref": "#/components/schemas/CouponMode"
-          },
-          "discountType": {
-            "$ref": "#/components/schemas/CouponDiscountType"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "approvedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "approvedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "preferredPosition": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "drawDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        }
-      },
-      "DetailedCouponVmPaginatedResponse": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DetailedCouponVm"
-            },
-            "nullable": true
-          },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "from": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "to": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
       "CouponVm": {
         "type": "object",
         "properties": {
@@ -10908,24 +11199,26 @@
             "type": "integer",
             "format": "int32"
           },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
+          "partnerId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "comments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CouponCommentVm"
-            },
-            "nullable": true
+          "isActive": {
+            "type": "boolean"
           },
-          "predefinedCodesFileId": {
+          "isPartnerActive": {
+            "type": "boolean"
+          },
+          "bigPictureId": {
             "type": "string",
             "nullable": true
+          },
+          "smallPictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "mode": {
+            "$ref": "#/components/schemas/CouponMode"
           },
           "createdBy": {
             "type": "string",
@@ -10954,22 +11247,16 @@
             "format": "date-time",
             "nullable": true
           },
-          "bigPictureId": {
+          "drawDate": {
             "type": "string",
+            "format": "date-time",
             "nullable": true
           },
-          "smallPictureId": {
-            "type": "string",
-            "nullable": true
+          "preferredPosition": {
+            "type": "integer",
+            "format": "int32"
           },
-          "isActive": {
-            "type": "boolean"
-          },
-          "smallPicture": {
-            "type": "string",
-            "nullable": true
-          },
-          "bigPicture": {
+          "predefinedCodesFileId": {
             "type": "string",
             "nullable": true
           },
@@ -10979,11 +11266,6 @@
           },
           "productDetails": {
             "type": "string",
-            "nullable": true
-          },
-          "drawDate": {
-            "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "prizeRulesFileId": {
@@ -11003,12 +11285,29 @@
           "awardedCampaign": {
             "type": "boolean"
           },
-          "mode": {
-            "$ref": "#/components/schemas/CouponMode"
-          },
-          "partnerId": {
+          "prizeValue": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CouponCommentVm"
+            },
+            "nullable": true
+          },
+          "partnerName": {
+            "type": "string",
+            "nullable": true
           },
           "showCount": {
             "type": "integer",
@@ -11025,14 +11324,34 @@
           "discardCount": {
             "type": "integer",
             "format": "int32"
-          },
-          "isPartnerActive": {
-            "type": "boolean"
-          },
-          "prizeValue": {
-            "type": "integer",
-            "format": "int32",
+          }
+        }
+      },
+      "CouponVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CouponVm"
+            },
             "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -11088,8 +11407,24 @@
             "type": "string",
             "nullable": true
           },
-          "exstension": {
+          "extension": {
             "type": "string",
+            "nullable": true
+          },
+          "sizeInBytes": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
             "nullable": true
           }
         }
@@ -11147,7 +11482,7 @@
           }
         }
       },
-      "CreateEmailTemplateDto": {
+      "EmailTemplateDto": {
         "type": "object",
         "properties": {
           "name": {
@@ -11157,59 +11492,6 @@
           "content": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "EmailTemplateSummaryVm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "EmailTemplateSummaryVmPaginatedResponse": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EmailTemplateSummaryVm"
-            },
-            "nullable": true
-          },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "from": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "to": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -11255,6 +11537,46 @@
               "$ref": "#/components/schemas/EmailTemplateHistoryVm"
             },
             "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "EmailTemplateVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailTemplateVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -11276,6 +11598,20 @@
         ],
         "type": "string"
       },
+      "UserNotificationDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "UserNotificationDto": {
         "type": "object",
         "properties": {
@@ -11293,13 +11629,11 @@
             "type": "string",
             "format": "date-time"
           },
-          "parentId": {
-            "type": "integer",
-            "format": "int32"
+          "parent": {
+            "$ref": "#/components/schemas/UserNotificationDetailDto"
           },
-          "actualId": {
-            "type": "integer",
-            "format": "int32"
+          "actual": {
+            "$ref": "#/components/schemas/UserNotificationDetailDto"
           },
           "value": {
             "type": "string",

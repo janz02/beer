@@ -10,10 +10,10 @@ import { useSystemParamsListUtils } from '../lister/useSystemParamsListUtils'
 
 export const useSystemParamsTabUtils = (): SettingsTabUtils => {
   const { t } = useTranslation()
-  const { id } = useParams<{ id: string }>()
+  const { tab, id } = useParams<{ tab: string; id: string }>()
 
   const editorUtils = useGenericModalFormEditorUtils({
-    dataId: id,
+    dataId: tab === 'system-params' ? id : undefined,
     rootRoute: '/settings',
     detailRoute: '/system-params',
     disableCreate: true

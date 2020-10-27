@@ -302,10 +302,22 @@
       "Phone": "Telefon"
     },
     "notification-type": {
-      "CampaignMovedToWaitingState": "Kampány várakozó állapotba került",
-      "CouponClosed": "A kampályhoz tartozó kuponokat kikapcsolták",
-      "CouponCountDepleted": "A kampányhoz tartozó kuponok elfogytak",
-      "PartnerContactRegistered": "Új KKV partner regisztráció:"
+      "CampaignMovedToWaitingState": {
+        "detail": "{{actual.value}} - {{parent.value}} által",
+        "title": "Jóváhagyásra váró kampány érkezett"
+      },
+      "CouponClosed": {
+        "detail": "{{actual.value}} - {{parent.value}} által",
+        "title": "Lezárult a kampány"
+      },
+      "CouponCountDepleted": {
+        "detail": "{{actual.value}} - {{parent.value}}",
+        "title": "Elfogytak a kampányhoz tartozó kuponok"
+      },
+      "PartnerContactRegistered": {
+        "detail": "{{parent.value}} partnerhez {{actual.value}} névvel",
+        "title": "Új kapcsolattartó regisztrált"
+      }
     }
   },
   "error": {
@@ -342,16 +354,24 @@
       "cant-modify": "Mező nem módosítható.",
       "field-number": "Ebbe a mezőbe számot kell megadni.",
       "field-required": "A mező megadása kötelező.",
+      "file-size-too-big": "Túl nagy fájl méret.",
+      "img-dimensions-incorrect": "A kép szélessége csak {{width}} és magassága csak {{height}} pixel lehet.",
+      "incorrect-file-extension": "Nem megengedett fájl kiterjesztés.",
       "internal": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
+      "max-number-exact": "A mező értéke maximum {{max}} lehet.",
       "no-template": "Nem található sablon azonosító.",
       "number-must-be-positive-integer": "A mezőbe pozitív egész számot kell megadni.",
       "parameter-missing-or-invalid": "Hiányzó vagy invalid paraméter.",
-      "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később."
+      "server-unavailable": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
+      "systemParameter": {
+        "partner-campaign-limit": "A partner kampány limit csak 1 és 10000 közötti egész szám lehet.",
+        "value-is-empty": "Rednszerparaméterhez kötelező megadni értéket.",
+        "value-is-not-whole-number": "Az érték csak egész szám lehet."
+      }
     },
     "coupon": {
       "already-claimed": "Ez a kupon már ki lett váltva, használjon másik kupont.",
-      "big-picture-invalid": "Nagy kép formátuma vagy mérete nem megfelelő, kövesse a felület utasításait.",
       "cannot-claim": "A kupont nem lehet kiváltani, próbálkozzon később.",
       "cant-be-deleted": "Nincs jogosultsága törölni ezt a kampányt.",
       "cant-change-state": "Nincs jogosultsága megváltoztatni a kampány állapotát.",
@@ -364,8 +384,6 @@
       "partner-must-be-major": "Kiválasztott partnernek kiemelt partnernek kell lennie, válasszon kiemelt partnert.",
       "predefined-file-is-empty": "A kuponkódok fájljának mindenképpen kell kódokat tartalmaznia, ellenőrize a CSV fájl tartalmát és számosságát.",
       "predefinied-file-invalid": "A kuponkódok fájljájnak mindenképp CSV fájlnak kell lennie, ellenőrize a CSV fájl tartalmát és számosságát.",
-      "prize-rules-invalid": "A játékszabályzat fájljának mindenképp PDF fájlnak kell lennie, ellenőrizze a PDF fájl tartamát",
-      "small-picture-invalid": "Kis kép formátuma vagy mérete nem megfelelő, kövesse a felület utasításait.",
       "type-has-no-codes": "Ehhez a kampány típushoz nem tartoznak kuponkódok, azokat ne lehet letölteni.",
       "user-code-cant-save": "Kérés sikertelen, prübálkozzon később."
     },
@@ -377,12 +395,19 @@
       "not-found-version": "Nem található ilyen verziójú e-mail sablon, válaszzon másik verziót."
     },
     "file": {
+      "big-picture-size": "Nagy kupon kép mérete túl nagy, a maximum fájl méret 51 MB.",
+      "big-picture-too-big": "Nagy kupon kép szélessége vagy magassága nem megfelelő.",
+      "big-picture-type-not-supported": "Nagy kupon kép kiterjesztése nem megfelelő.",
       "download-fail": "Keresett fájl nem található, törlődött a rendszerből.",
-      "image-type-not-supported": "Rossz kép formátum, válasszon megfelelő formátumot.",
-      "invalid-image-size": "Rossz kép méret, válasszon megfelelő képméretet.",
       "invalid-prize-rule-type": "Rossz nyeremény szabály típus, válasszon PDF fájl formátumot.",
       "not-supported-format": "Nem támogatott fájl formátum, válasszon támogatott formátumot.",
-      "too-big": "A feltöltött fájl mérete meghaladja az 51MB-os méretet. Kérem töltsön fel egy kisebb fájlt!"
+      "predefined-codes-too-big": "Kuponkódok fájl mérete túl nagy, a maximum fájl méret 51 MB.",
+      "predefined-codes-type-not-supported": "Kuponkódok fájl kiterjesztése nem megfelelő.",
+      "prize-rules-too-big": "Nyereményjáték szabályzat fájl mérete túl nagy, a maximum fájl méret 51 MB.",
+      "prize-rules-type-not-supported": "Nyereményjáték szabályzat fájl kiterjesztése nem megfelelő.",
+      "small-picture-size": "Kis kupon kép mérete túl nagy, a maximum fájl méret 51 MB.",
+      "small-picture-too-big": "Kis kupon kép szélessége vagy magassága nem megfelelő.",
+      "small-picture-type-not-supported": "Kis kupon kép kiterjesztése nem megfelelő."
     },
     "not-found": "Nem található.",
     "notification": {
@@ -413,6 +438,9 @@
     },
     "sendgrid": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
+    },
+    "service": {
+      "only-read-operations-supported": "Csak olvasási műveletek engedélyezettek."
     },
     "unknown-try-again": "Kérem, próbálja újra",
     "validation": {
@@ -945,18 +973,18 @@
   },
   "system-params": {
     "editor": {
-      "title": "Rendszerparaméterek"
+      "title": "Rendszerparaméter módosítás"
     },
     "field": {
       "description": "Paraméter leírás",
       "name": "Paraméter név",
       "value": "Paraméter érték"
     },
-    "key": {
-      "customerSupportEmail": "Az ügyfélszolgálat e-mail címe, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
-      "customerSuppportPhone": "Az ügyfélszolgálat telefonszáma, amit a kiküldött nyeremény értesítő e-mail tartalmaz.",
-      "kkvLimit": "Megadja a limitációt, hogy egy KKV partnernek párhuzamosan hány jóváhagyott kampánya lehet a rendszerben",
-      "winnerCouponLink": "A KPR websiteon a nyertes kuponok liistáját tartalmazó oldal linkje, amelyet a kiküldött nyeremény értesítő email tartalmaz."
+    "keys": {
+      "system_settings_partner-campaign-limit": {
+        "backend_key_description": "A partnerekhez tartozó globális kampány darabszám korlátozás.",
+        "backend_key_name": "Partner kampány limit"
+      }
     }
   },
   "test-group-category": {

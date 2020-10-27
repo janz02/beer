@@ -15,18 +15,18 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateEmailTemplateDto,
-    CreateEmailTemplateDtoFromJSON,
-    CreateEmailTemplateDtoToJSON,
-    EmailTemplateSummaryVmPaginatedResponse,
-    EmailTemplateSummaryVmPaginatedResponseFromJSON,
-    EmailTemplateSummaryVmPaginatedResponseToJSON,
+    EmailTemplateDto,
+    EmailTemplateDtoFromJSON,
+    EmailTemplateDtoToJSON,
     EmailTemplateVersionDto,
     EmailTemplateVersionDtoFromJSON,
     EmailTemplateVersionDtoToJSON,
     EmailTemplateVm,
     EmailTemplateVmFromJSON,
     EmailTemplateVmToJSON,
+    EmailTemplateVmPaginatedResponse,
+    EmailTemplateVmPaginatedResponseFromJSON,
+    EmailTemplateVmPaginatedResponseToJSON,
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
@@ -39,11 +39,20 @@ import {
 } from '../models';
 
 export interface CreateEmailTemplateRequest {
-    createEmailTemplateDto?: CreateEmailTemplateDto;
+    emailTemplateDto?: EmailTemplateDto;
 }
 
 export interface DeleteEmailTemplateRequest {
     id: number;
+}
+
+export interface ExportEmailTemplatesRequest {
+    name?: string | null;
+    modifiedAt?: Date | null;
+    page?: number;
+    pageSize?: number;
+    orderBy?: string | null;
+    orderByType?: OrderByType;
 }
 
 export interface GetEmailTemplateRequest {
@@ -67,6 +76,11 @@ export interface RestoreEmailTemplateVersionRequest {
 export interface SaveEmailTemplateVersionRequest {
     id: number;
     emailTemplateVersionDto?: EmailTemplateVersionDto;
+}
+
+export interface UpdateEmailTemplateRequest {
+    id: number;
+    emailTemplateDto?: EmailTemplateDto;
 }
 
 /**
@@ -94,7 +108,7 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateEmailTemplateDtoToJSON(requestParameters.createEmailTemplateDto),
+            body: EmailTemplateDtoToJSON(requestParameters.emailTemplateDto),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => Int32EntityCreatedVmFromJSON(jsonValue));
@@ -143,6 +157,62 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Exports the entity list with the specified filters applied in a csv file
+     * Exports an entity list sorted and filtered
+     */
+    async exportEmailTemplatesRaw(requestParameters: ExportEmailTemplatesRequest): Promise<runtime.ApiResponse<Blob>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.modifiedAt !== undefined) {
+            queryParameters['modifiedAt'] = (requestParameters.modifiedAt as any).toISOString();
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['orderBy'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.orderByType !== undefined) {
+            queryParameters['orderByType'] = requestParameters.orderByType;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/EmailTemplates/Export`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Exports the entity list with the specified filters applied in a csv file
+     * Exports an entity list sorted and filtered
+     */
+    async exportEmailTemplates(requestParameters: ExportEmailTemplatesRequest): Promise<Blob> {
+        const response = await this.exportEmailTemplatesRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Gets an email template
      */
     async getEmailTemplateRaw(requestParameters: GetEmailTemplateRequest): Promise<runtime.ApiResponse<EmailTemplateVm>> {
@@ -179,7 +249,7 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
     /**
      * Gets all the available Email Templates
      */
-    async getEmailTemplatesRaw(requestParameters: GetEmailTemplatesRequest): Promise<runtime.ApiResponse<EmailTemplateSummaryVmPaginatedResponse>> {
+    async getEmailTemplatesRaw(requestParameters: GetEmailTemplatesRequest): Promise<runtime.ApiResponse<EmailTemplateVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -219,13 +289,13 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => EmailTemplateSummaryVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => EmailTemplateVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
      * Gets all the available Email Templates
      */
-    async getEmailTemplates(requestParameters: GetEmailTemplatesRequest): Promise<EmailTemplateSummaryVmPaginatedResponse> {
+    async getEmailTemplates(requestParameters: GetEmailTemplatesRequest): Promise<EmailTemplateVmPaginatedResponse> {
         const response = await this.getEmailTemplatesRaw(requestParameters);
         return await response.value();
     }
@@ -305,6 +375,42 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
      */
     async saveEmailTemplateVersion(requestParameters: SaveEmailTemplateVersionRequest): Promise<void> {
         await this.saveEmailTemplateVersionRaw(requestParameters);
+    }
+
+    /**
+     * NotAvailable
+     */
+    async updateEmailTemplateRaw(requestParameters: UpdateEmailTemplateRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateEmailTemplate.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/EmailTemplates/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EmailTemplateDtoToJSON(requestParameters.emailTemplateDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * NotAvailable
+     */
+    async updateEmailTemplate(requestParameters: UpdateEmailTemplateRequest): Promise<void> {
+        await this.updateEmailTemplateRaw(requestParameters);
     }
 
 }
