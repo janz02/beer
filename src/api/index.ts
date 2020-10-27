@@ -37,7 +37,9 @@ import { errorHandlingMiddleware } from './middleware'
 import { Middleware, Configuration as CouponConfiguration } from '../api/swagger/coupon/runtime'
 import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
 import { Configuration as FilesConfiguration } from '../api/swagger/files/runtime'
+import { Configuration as AdminConfiguration } from '../api/swagger/admin/runtime'
 import { getUrl } from 'services/baseUrlHelper'
+import { CompaniesApi, TransactionApi } from './swagger/admin'
 
 // ---- BASE CONFIG
 const apiMiddleware: Middleware[] = [...errorHandlingMiddleware]
@@ -56,6 +58,10 @@ export const apiBaseConfig = (props?: ApiBaseConfigProps) => ({
 
 // ---- OTHER CONFIGS
 // todo update appendUrl props when apis are available from same origin
+export const adminConfig: AdminConfiguration = new AdminConfiguration(
+  apiBaseConfig({ appendUrl: process.env.REACT_APP_ADMIN_API_URL })
+)
+
 export const couponConfig: CouponConfiguration = new CouponConfiguration(
   apiBaseConfig({ appendUrl: process.env.REACT_APP_COUPON_API_URL })
 )
@@ -69,6 +75,10 @@ export const filesConfig: FilesConfiguration = new FilesConfiguration(
 )
 
 export const api = {
+  admin: {
+    companies: new CompaniesApi(adminConfig),
+    transaction: new TransactionApi(adminConfig)
+  },
   coupon: {
     coupons: new CouponsApi(couponConfig),
     tags: new TagsApi(couponConfig),
