@@ -43,14 +43,6 @@
       "title": "Subject"
     }
   },
-  "coupon-campaign-category": {
-    "add": "Add new Coupon campaign category",
-    "editor-create": "Create",
-    "editor-edit": "Edit",
-    "field": {
-      "name": "Category name"
-    }
-  },
   "campaign-product": {
     "add": "Add new Product",
     "editor-create": "New product",
@@ -178,6 +170,14 @@
       "banner": "Banner",
       "discount": "Discount",
       "prize": "Prize"
+    }
+  },
+  "coupon-campaign-category": {
+    "add": "Add new Coupon campaign category",
+    "editor-create": "Create",
+    "editor-edit": "Edit",
+    "field": {
+      "name": "Category name"
     }
   },
   "coupon-campaign-create": {
@@ -950,8 +950,8 @@
     "title-edit": "Edit segmentation"
   },
   "settings": {
-    "coupon-campaign-categories": "Coupon Campaign categories",
     "campaign-products": "Products",
+    "coupon-campaign-categories": "Coupon Campaign categories",
     "segmentation-categories": "Segmentation categories",
     "system-params": "System parameters",
     "test-group-categories": "Testgroup categories"

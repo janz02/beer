@@ -43,14 +43,6 @@
       "title": "Tárgy"
     }
   },
-  "coupon-campaign-category": {
-    "add": "Új Kupon kampány kategória hozzáadása",
-    "editor-create": "Létrehozás",
-    "editor-edit": "Szerkesztés",
-    "field": {
-      "name": "Kategória neve"
-    }
-  },
   "campaign-product": {
     "add": "Új termék létrehozása",
     "editor-create": "Új termék létrehozása",
@@ -180,6 +172,14 @@
       "prize": "Nyeremény"
     }
   },
+  "coupon-campaign-category": {
+    "add": "Új Kupon kampány kategória hozzáadása",
+    "editor-create": "Létrehozás",
+    "editor-edit": "Szerkesztés",
+    "field": {
+      "name": "Kategória neve"
+    }
+  },
   "coupon-campaign-create": {
     "activate": "Aktiválás",
     "audit": "Audit",
@@ -288,7 +288,7 @@
     "preferred-position": "Preferált pozíció",
     "rank": "Kedvezmény szint",
     "redeem-count": "Beváltások száma",
-    "show-archived": "Archivált kupon kampányok mutatása",
+    "show-archived": "Archivált kampányok mutatása",
     "small-image": "Kupon kis kép",
     "start-date": "Kampány kezdete",
     "state": "Kampány státusz",
@@ -950,8 +950,8 @@
     "title-edit": "Szegmentáció szerkesztése"
   },
   "settings": {
-    "coupon-campaign-categories": "Kupon Kampány kategóriák",
     "campaign-products": "Termékek",
+    "coupon-campaign-categories": "Kupon Kampány kategóriák",
     "segmentation-categories": "Szegmentációs kategóriák",
     "system-params": "Rendszerparaméterek",
     "test-group-categories": "Tesztcsoport osztályok"
