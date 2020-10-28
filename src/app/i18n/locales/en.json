@@ -635,6 +635,11 @@
         "name-required": "Segment name is required. Please make sure, that the segment name starts with \"PKM\"",
         "one-time-use-required": "One time use value required for the segment. Please provide a value regarding one time use of the segment!"
       },
+      "segmentation-editor": {
+        "category-required": "Segment category is required. Please provide a valid segment category!",
+        "name-max-length-60": "Segment name cannot be longer than 60 characters. Please use a shorter name!",
+        "name-required": "Segment name is required. Please provide a valid segment name!"
+      },
       "segments": {
         "list-required": "Segments list is required. Please provide a valid list of segments!"
       },
@@ -816,6 +821,98 @@
     "save": "Save changes",
     "save-profile-success": "Successfully saved the profile."
   },
+  "query-builder": {
+    "add-group": {
+      "label": "Add new group"
+    },
+    "add-rule": {
+      "label": "Add new rule"
+    },
+    "and": "And",
+    "date": {
+      "placeholder": "Enter date"
+    },
+    "datetime": {
+      "placeholder": "Datetime"
+    },
+    "from": "From ",
+    "multiselect": {
+      "placeholder": "please select values"
+    },
+    "not": "Not",
+    "number": {
+      "placeholder": "Enter number"
+    },
+    "operator": {
+      "between": {
+        "label": "Between"
+      },
+      "is-empty": {
+        "label": "Empty"
+      },
+      "is-not-empty": {
+        "label": "Not empty"
+      },
+      "like": {
+        "label": "Like"
+      },
+      "not-between": {
+        "label": "Not between"
+      },
+      "not-like": {
+        "label": "Not like"
+      },
+      "range-between": {
+        "label": "Range between"
+      },
+      "range-not-between": {
+        "label": "Range not between"
+      },
+      "select-any-in": {
+        "label": "Any in"
+      },
+      "select-not-any-in": {
+        "label": "Not any in"
+      }
+    },
+    "or": "Or",
+    "range-slider": {
+      "placeholder": "Select range"
+    },
+    "result": {
+      "filtered": "Filtered",
+      "total": "Total"
+    },
+    "rule": {
+      "field": {
+        "label": "Field",
+        "placeholder": "Field"
+      },
+      "operator": {
+        "placeholder": "Please select"
+      },
+      "value": {
+        "label": "Value",
+        "placeholder": "Value"
+      }
+    },
+    "select": {
+      "placeholder": "Please select"
+    },
+    "sidebar": {
+      "header": "Segmentation details"
+    },
+    "slider": {
+      "placeholder": "Move the slider"
+    },
+    "text": {
+      "placeholder": "Enter text"
+    },
+    "time": {
+      "placeholder": "Time"
+    },
+    "to": "To"
+  },
   "segmentation": {
     "field": {
       "category": "Segmentation category",
@@ -825,6 +922,7 @@
       "segmentSize": "Segment size"
     },
     "list": {
+      "add": "Add new segmentation",
       "title": "Segmentation"
     }
   },
@@ -836,6 +934,20 @@
       "created-date": "Date of creation",
       "name": "Category name"
     }
+  },
+  "segmentation-editor": {
+    "basics": {
+      "category": "Segmentation category",
+      "name": "Segmentation name",
+      "title": "Basic information"
+    },
+    "button-create": "Create",
+    "button-save": "Save",
+    "query": {
+      "title": "Segmentation"
+    },
+    "title-create": "Create segmentation",
+    "title-edit": "Edit segmentation"
   },
   "settings": {
     "coupon-campaign-categories": "Coupon Campaign categories",

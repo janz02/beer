@@ -11,6 +11,11 @@ import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { getSegmentations, resetSegmentationFilters } from './segmentationListSlice'
+import { CrudButtons } from 'components/buttons/CrudButtons'
+import { hasPermission } from 'services/jwt-reader'
+import { pageViewRoles } from 'services/roleHelpers'
+import { history } from 'router/router'
+import { AddButton } from 'components/buttons/AddButton'
 
 export interface SegmentationListUtils {
   tableProps: ResponsiveTableProps
@@ -29,9 +34,15 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
     (state: RootState) => state.segmentationList
   )
 
-  const { paginationConfig, handleTableChange, columnConfig, addKeyProp } = useTableUtils<
-    CampaignSegmentation
-  >({
+  const isEditor = hasPermission(pageViewRoles.segmentationEditor)
+
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnConfig,
+    actionColumnConfig,
+    addKeyProp
+  } = useTableUtils<CampaignSegmentation>({
     listParamsState: listParams,
     filterKeys: ['name', 'categoryName', 'createdDate'],
     getDataAction: getSegmentations
@@ -65,9 +76,19 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
         sort: true,
         renderMode: 'date time',
         filterMode: FilterMode.DATERANGEPICKER
+      }),
+      actionColumnConfig({
+        fixed: 'right',
+        render(record: CampaignSegmentation) {
+          return (
+            <CrudButtons
+              onEdit={isEditor ? () => history.push(`/segmentations/${record.id}`) : undefined}
+            />
+          )
+        }
       })
     ],
-    [columnConfig, t]
+    [columnConfig, t, isEditor, actionColumnConfig]
   )
 
   const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.SEGMENTATION)
@@ -95,9 +116,16 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
       <>
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrderUtils} />
+        {isEditor ? (
+          <AddButton onClick={() => history.push(`/segmentations/new`)}>
+            {t('segmentation.list.add')}
+          </AddButton>
+        ) : (
+          undefined
+        )}
       </>
     ),
-    [columnOrderUtils, resetFilters]
+    [columnOrderUtils, resetFilters, isEditor, t]
   )
 
   return {

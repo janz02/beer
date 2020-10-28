@@ -635,6 +635,11 @@
         "name-required": "Szegmens nevét kötelező megadni, kérem adjon meg egy megfelelő nevet.",
         "one-time-use-required": "Egyszer használatos szegmens megadása kötelező. Kérem adjon meg egy megfelelő szegmenst!"
       },
+      "segmentation-editor": {
+        "category-required": "Szegmens kategória megadása kötelező, kérem adjon meg egy megfelelő kategóriát.",
+        "name-max-length-60": "Szegmens neve maximum 60 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-required": "Szegmens név megadása kötelező, kérem adjon meg egy megfelelő nevet."
+      },
       "segments": {
         "list-required": "Szegmens lista megadása kötelező, kérem adjon meg egy email listát."
       },
@@ -816,6 +821,98 @@
     "save": "Módosítás mentése",
     "save-profile-success": "Profil mentése sikeres."
   },
+  "query-builder": {
+    "add-group": {
+      "label": "Új csoport hozzáadása"
+    },
+    "add-rule": {
+      "label": "Új változó hozzáadása"
+    },
+    "and": "És",
+    "date": {
+      "placeholder": "Dátum"
+    },
+    "datetime": {
+      "placeholder": "Dátum"
+    },
+    "from": "Tól",
+    "multiselect": {
+      "placeholder": "Kérem válasszon értékeket"
+    },
+    "not": "Tagadás",
+    "number": {
+      "placeholder": "Szám"
+    },
+    "operator": {
+      "between": {
+        "label": "között"
+      },
+      "is-empty": {
+        "label": "üres"
+      },
+      "is-not-empty": {
+        "label": "nem üres"
+      },
+      "like": {
+        "label": "tartalmaz"
+      },
+      "not-between": {
+        "label": "nincs közte"
+      },
+      "not-like": {
+        "label": "nem tartalmaz"
+      },
+      "range-between": {
+        "label": "között (intervallum)"
+      },
+      "range-not-between": {
+        "label": "nincs közte (intervallum)"
+      },
+      "select-any-in": {
+        "label": "tartalmazza"
+      },
+      "select-not-any-in": {
+        "label": "nem tartalmazza"
+      }
+    },
+    "or": "Vagy",
+    "range-slider": {
+      "placeholder": "Válassza ki a tartományt"
+    },
+    "result": {
+      "filtered": "Szűrt",
+      "total": "Összes"
+    },
+    "rule": {
+      "field": {
+        "label": "Mező",
+        "placeholder": "Mező"
+      },
+      "operator": {
+        "placeholder": "Kérem válasszon"
+      },
+      "value": {
+        "label": "Érték",
+        "placeholder": "Érték"
+      }
+    },
+    "select": {
+      "placeholder": "Kérem válasszon"
+    },
+    "sidebar": {
+      "header": "Szegmentáció specifikáció"
+    },
+    "slider": {
+      "placeholder": "Mozgassa a slidert"
+    },
+    "text": {
+      "placeholder": "Keresett szöveg"
+    },
+    "time": {
+      "placeholder": "Időpont"
+    },
+    "to": "Ig"
+  },
   "segmentation": {
     "field": {
       "category": "Szegmentáció kategóriája",
@@ -825,6 +922,7 @@
       "segmentSize": "Szegmensméret"
     },
     "list": {
+      "add": "Új szegmentáció létrehozása",
       "title": "Szegmentáció"
     }
   },
@@ -836,6 +934,20 @@
       "created-date": "Létrehozás dátuma",
       "name": "Kategória neve"
     }
+  },
+  "segmentation-editor": {
+    "basics": {
+      "category": "Szegmentáció kategória",
+      "name": "Szegmentáció neve",
+      "title": "Alap információk"
+    },
+    "button-create": "Létrehozás",
+    "button-save": "Mentés",
+    "query": {
+      "title": "Szegmentáció"
+    },
+    "title-create": "Szegmentáció létrehozása",
+    "title-edit": "Szegmentáció szerkesztése"
   },
   "settings": {
     "coupon-campaign-categories": "Kupon Kampány kategóriák",
