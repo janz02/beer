@@ -65,10 +65,10 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const mainOptions = useMemo<SideMenuOptionProps[]>(
     () => [
       {
-        label: t('menu.campaigns'),
-        link: '/campaigns',
+        label: t('menu.coupon-campaigns'),
+        link: '/couponCampaigns',
         icon: <BarcodeOutlined />,
-        roles: pageViewRoles.campaigns
+        roles: pageViewRoles.couponCampaigns
       },
       {
         label: t('menu.partners'),
