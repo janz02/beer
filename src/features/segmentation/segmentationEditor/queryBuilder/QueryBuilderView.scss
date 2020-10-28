@@ -1,0 +1,341 @@
+@import "../../../../assets/scss/variables";
+
+.group-or-rule {
+  & .group,
+  &.group {
+    &::before,
+    &::after {
+      content: unset;
+    }
+
+    & .group--children {
+      padding-right: 0.2em;
+      padding-left: 0.3em;
+    }
+
+    & .ant-btn-group-sm > .ant-btn {
+      &.ant-btn-icon-only {
+        width: 2.5em;
+      }
+
+      &:not(.action--DELETE) {
+        background-color: $Color-Background-Card-Header-Base;
+        color: $Color-Foreground-Inline-Button;
+      }
+
+      height: 2.5em;
+      margin: 0.5em 0;
+      border-color: transparent;
+      box-shadow: 0 0 0.6em $Color-Segmentation-Groupborders;
+    }
+
+    & .ant-btn,
+    .ant-select,
+    .ant-select-selection,
+    .ant-input,
+    .ant-calendar-picker {
+      border-width: 0.1rem;
+      border-color: $Color-Foreground-Input-Base;
+      box-shadow: 0.1em 0.05em 0.2em $Color-Foreground-Input-Base;
+
+      &:enabled:hover {
+        border-color: $Color-SolidSimpleSeparator;
+      }
+
+      &.ant-btn-primary {
+        border-color: $Color-SolidSimpleSeparator;
+        background-color: $Color-Background-Card-Header-Button-Highlight;
+        color: $Color-Foreground-Inline-Button;
+      }
+
+      &[disabled].ant-btn-primary,
+      &:not(:enabled).ant-btn-primary {
+        border-color: $Color-SolidSimpleSeparator;
+        background-color: $Color-Background-Card-Header-Button-Highlight;
+        color: $Color-Foreground-Inline-Button;
+      }
+
+      &[disabled] {
+        opacity: 0.4;
+      }
+    }
+
+    & .ant-input-number-sm {
+      & .ant-input-number-handler-wrap {
+        display: none;
+      }
+
+      & .ant-input-number-input-wrap {
+        & input {
+          padding: 0 0.2em;
+          font-size: 1em;
+        }
+
+        height: 100%;
+      }
+
+      height: 2.2em;
+      border-color: $Color-Foreground-Input-Base;
+      box-shadow: 0.1em 0.05em 0.2em $Color-Foreground-Input-Base;
+    }
+
+    & div.group--header > div:not([class]) {
+      position: relative;
+      left: 2em;
+      width: calc(30% - 0.5em);
+      height: 3em;
+      padding: 0.45em 0;
+
+      & .statistics {
+        width: 100%;
+        height: calc(100% - 1em);
+
+        & div.inputs {
+          display: inline-flex;
+          justify-content: space-around;
+          width: 100%;
+          height: 100%;
+
+          & input {
+            flex: 0;
+            flex-basis: 45%;
+            min-width: 5em;
+            height: 2em;
+            margin: unset;
+            opacity: 0.75;
+            background: $Color-Background-Input-Base;
+            box-shadow: 0 0 1.2em $Color-Segmentation-Groupborders;
+            color: $Color-Foreground-Input-Base;
+            text-align: center;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    position: relative;
+    border-width: 0.15em;
+    border-color: $Color-Segmentation-Groupborders;
+    background-color: $Color-Segmentation-Group-Background;
+    box-shadow: 0.1em 0.05em 1.2em $Color-Segmentation-Groupborders;
+  }
+
+  & .group-or-rule-container {
+    display: block;
+    position: relative;
+
+    & .rule {
+      &.qb-draggable {
+        position: absolute;
+        padding-left: 0;
+        overflow: hidden;
+        white-space: nowrap;
+
+        & .rule--header,
+        & .rule--after-widget {
+          display: none;
+        }
+      }
+
+      &::before,
+      &::after {
+        content: unset;
+      }
+
+      display: inline-flex;
+      position: unset;
+      flex: unset;
+      width: unset;
+      min-width: 30%;
+      max-width: 70%;
+      min-height: 3.3em;
+      margin: 0.15em 0;
+      padding: 0.3em 0.5em;
+      border: 0.15em solid $Color-Segmentation-Groupborders;
+      border-radius: 0.5em;
+      background-color: $Color-Segmentation-Rule-Background;
+      box-shadow: 0 0 1.2em $Color-Segmentation-Groupborders;
+
+      & > .rule--drag-handler {
+        display: inline-flex;
+      }
+
+      & .rule--operator {
+        margin-right: 0.5em;
+      }
+
+      & .rule--body {
+        & > * {
+          margin-top: 0.2em;
+          float: left;
+        }
+
+        & .rule--widget {
+          & > .widget--widget {
+            &:first-of-type {
+              margin-left: 0;
+            }
+
+            margin-left: 0.5em;
+          }
+
+          height: 100%;
+        }
+
+        & > div.rule--value {
+          height: 2.3em;
+        }
+
+        & button[role="switch"] {
+          &.ant-switch-checked span {
+            margin-right: 1.8em;
+            margin-left: 0.5em;
+          }
+
+          & span {
+            margin-right: 0.5em;
+            margin-left: 1.8em;
+            transition: margin-left 0.4s ease-in-out, margin-right 0.4s ease-in-out;
+            font-size: 1.2em;
+          }
+
+          &.ant-switch-checked {
+            &::after {
+              left: calc(100% - 0.3em);
+            }
+
+            background-color: $Color-Background-Card-Header-Button-Highlight;
+          }
+
+          &::after {
+            top: 0.1em;
+            left: 0.2em;
+            width: 1.35em;
+            height: 1.35em;
+          }
+
+          height: 1.8em;
+          margin: 0.25em;
+        }
+
+        & button:not([role="switch"]),
+        & input,
+        & div.ant-select-selection {
+          & .ant-select-search__field {
+            height: 1.8em;
+            padding: 0.2em;
+          }
+
+          & .ant-select-selection__placeholder {
+            margin-left: 0.2em;
+          }
+
+          & ul {
+            width: 100%;
+            height: 100%;
+
+            & li {
+              &.ant-select-search.ant-select-search--inline {
+                display: none;
+              }
+
+              height: 100%;
+              margin: 0 0.2em;
+              padding: 0.5em 1.5em 0.5em 0.5em;
+            }
+          }
+
+          & .ant-select-selection__rendered {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0 0.1em;
+          }
+
+          & div.ant-select-selection-selected-value {
+            margin: 0.35em 1.5em 0.35em 0.35em;
+          }
+
+          position: relative;
+          top: 0;
+          left: 0;
+          height: 2.3em;
+          margin: 0;
+
+          /* background: $Color-Background-Input-Base; */
+          border-color: $Color-Foreground-Input-Base;
+          background: $Color-Segmentation-Rule-Background;
+          box-shadow: 0.1em 0.05em 0.2em $Color-Foreground-Input-Base;
+        }
+      }
+
+      & .rule--header {
+        & button {
+          width: 2em;
+          height: 2em;
+        }
+
+        position: absolute;
+        top: 0.35em;
+        left: calc(100% - 5em);
+        height: 3.4em;
+        margin: 0;
+        padding: 0 1em;
+        border: 0.15em solid $Color-Segmentation-Groupborders;
+        border-radius: 0.5em;
+        opacity: 0.95;
+        background-color: $Color-Segmentation-Rule-Background;
+        box-shadow: 0.8em 0 1.2em $Color-Segmentation-Groupborders;
+      }
+
+      & .rule--after-widget:empty {
+        display: none;
+      }
+
+      & .rule--after-widget {
+        position: absolute;
+        top: 0.35em;
+        left: calc(70% + 0.5em);
+        width: calc(30% - 5.5em);
+        height: 3.4em;
+        margin: 0;
+        padding: 0.45em 0;
+        border-top: 0.15em solid $Color-Segmentation-Groupborders;
+        border-bottom: 0.15em solid $Color-Segmentation-Groupborders;
+        border-left: 0.15em solid $Color-Segmentation-Groupborders;
+        border-radius: 0.5em;
+        background: $Color-Segmentation-Rule-Background;
+        box-shadow: -0.8em 0 1.2em $Color-Segmentation-Groupborders;
+      }
+    }
+  }
+}
+
+[ant-click-animating-without-extra-node="true"]::after {
+  content: "";
+  animation-duration: 0s;
+}
+
+div.p-card-content > div.ColumnSeparation {
+  > * {
+    width: 47.5%;
+    min-width: unset;
+    margin: 0 1%;
+  }
+}
+
+div.p-card.p-component.SegmentationQueryBuilder {
+  & .p-card-content {
+    & .query-builder {
+      position: relative;
+      top: -0.25em;
+      margin: 0.25em;
+    }
+
+    padding: 0;
+  }
+
+  max-height: 999em;
+  margin-top: 0.5em;
+  background-color: $Color-Segmentation-background;
+}
