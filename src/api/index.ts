@@ -59,7 +59,9 @@ export const apiBaseConfig = (props?: ApiBaseConfigProps) => ({
 // ---- OTHER CONFIGS
 // todo update appendUrl props when apis are available from same origin
 export const adminConfig: AdminConfiguration = new AdminConfiguration(
-  apiBaseConfig({ appendUrl: process.env.REACT_APP_ADMIN_API_URL })
+  apiBaseConfig({
+    appendUrl: process.env.REACT_APP_ADMIN_API_URL
+  })
 )
 
 export const couponConfig: CouponConfiguration = new CouponConfiguration(

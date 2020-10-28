@@ -4,7 +4,7 @@ import 'assets/scss/index.scss'
 import * as serviceWorker from 'serviceWorker'
 import './app/i18n'
 import './app/apm'
-import { configApiMiddleware } from 'api/middleware'
+import { configApiMiddleware, transactionMiddleware } from 'api/middleware'
 
 const render = (): void => {
   const App = require('./app/App').App
@@ -12,6 +12,7 @@ const render = (): void => {
 }
 
 configApiMiddleware()
+transactionMiddleware()
 
 render()
 
