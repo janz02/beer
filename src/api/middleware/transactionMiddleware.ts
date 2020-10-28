@@ -8,7 +8,7 @@ const appliesToMicroservices: any[] = [process.env.REACT_APP_ADMIN_API_URL]
 const shouldApplyMiddleware = (url: string): boolean =>
   appliesToMicroservices.some(ms => url.includes(ms))
 
-const rollback = async (guid: any) => {
+const rollback = async (guid: string) => {
   try {
     await api.admin.transaction.rollbackTransaction({ xRTDTransactionGuid: guid })
     // NOTE: we may need to always Promise.reject here, check if Admin MS endpoints are called
@@ -22,7 +22,7 @@ const rollback = async (guid: any) => {
   }
 }
 
-const commit = async (guid: any) => {
+const commit = async (guid: string) => {
   try {
     await api.admin.transaction.commitTransaction({ xRTDTransactionGuid: guid })
     return Promise.resolve()
@@ -31,7 +31,7 @@ const commit = async (guid: any) => {
   }
 }
 
-const create = async (guid: any) => {
+const create = async (guid: string) => {
   try {
     await api.admin.transaction.createTransaction({ xRTDTransactionGuid: guid })
     return Promise.resolve()
