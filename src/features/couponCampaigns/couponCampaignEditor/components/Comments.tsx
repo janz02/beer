@@ -9,7 +9,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useCommonFormRules } from 'hooks'
-import { CouponCampaignUtils } from '../useCouponCampaignUtils'
+import { CouponCampaignUtils } from '../../couponCampaignEditor/useCouponCampaignUtils'
 
 interface CommentsProps {
   campaignUtils: CouponCampaignUtils

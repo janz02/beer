@@ -9,7 +9,7 @@ import {
   getSeparatorAndSuffixFormatter,
   getSeparatorAndSuffixParser
 } from 'services/numberInputHelpers'
-import { couponCampaignActions } from '../../couponCampaignsSlice'
+import { couponCampaignActions } from '../../../couponCampaigns/couponCampaignsSlice'
 import { useDispatch } from 'react-redux'
 import { CouponCampaignUtils } from '../useCouponCampaignUtils'
 import { useCommonFormRules } from 'hooks'

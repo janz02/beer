@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Button, Row, Col, Form } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { ExportOutlined } from '@ant-design/icons'
-import { couponCampaignActions } from '../../couponCampaignsSlice'
+import { couponCampaignActions } from '../../../couponCampaigns/couponCampaignsSlice'
 import { useDispatch } from 'react-redux'
 import { CouponCampaignUtils } from '../useCouponCampaignUtils'
 

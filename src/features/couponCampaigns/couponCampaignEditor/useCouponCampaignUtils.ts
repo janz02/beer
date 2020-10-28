@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FeatureState } from 'models/featureState'
 import { RootState } from 'app/rootReducer'
 import { CouponCampaign } from 'models/couponCampaign'
-import { couponCampaignActions } from '../couponCampaignsSlice'
+import { couponCampaignActions } from '../../couponCampaigns/couponCampaignsSlice'
 import { useParams } from 'react-router-dom'
 import { toValidId } from 'services/paramsHelpers'
 import {
