@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import './CampaignEditor.scss'
+import './CouponCampaignEditor.scss'
 import { Form, Button, Popconfirm, Timeline, Select } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import { useTranslation } from 'react-i18next'
@@ -9,10 +9,10 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import Title from 'antd/lib/typography/Title'
 import { MomentDisplay } from 'components/MomentDisplay'
 import { useCommonFormRules } from 'hooks'
-import { CampaignUtils } from '../useCampaignUtils'
+import { CouponCampaignUtils } from '../useCouponCampaignUtils'
 
 interface CommentsProps {
-  campaignUtils: CampaignUtils
+  campaignUtils: CouponCampaignUtils
 }
 
 export const Comments: FC<CommentsProps> = ({ campaignUtils }) => {

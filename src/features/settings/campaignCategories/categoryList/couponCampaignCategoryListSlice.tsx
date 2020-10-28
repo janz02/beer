@@ -6,23 +6,21 @@ import {
   ListRequestParams,
   recalculatePaginationAfterDeletion,
   reviseListRequestParams,
-  OrderByType,
-  storableListRequestParams
+  storableListRequestParams,
+  OrderByType
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
-import moment from 'moment'
 
-interface SegmentationCategoryListState {
+interface CouponCategoryListState {
   categories: CouponCampaignCategory[]
   listParams: ListRequestParams
   listState: FeatureState
   deleteState: FeatureState
 }
 
-const initialState: SegmentationCategoryListState = {
+const initialState: CouponCategoryListState = {
   categories: [],
   listParams: {
-    page: 1,
     pageSize: 10,
     orderBy: 'name',
     orderByType: OrderByType.Ascending
@@ -31,8 +29,8 @@ const initialState: SegmentationCategoryListState = {
   deleteState: FeatureState.Initial
 }
 
-const segmentationCategoryListSlice = createSlice({
-  name: 'segmentationCategoryList',
+const couponCampaignCategoryListSlice = createSlice({
+  name: 'couponCampaignCategoryList',
   initialState,
   reducers: {
     resetCategoryList: () => initialState,
@@ -62,27 +60,20 @@ const {
   setDeleteState,
   getCategoriesSuccess,
   resetCategoryList
-} = segmentationCategoryListSlice.actions
+} = couponCampaignCategoryListSlice.actions
 
 const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(
-      getState().segmentationCategoryList.listParams,
+      getState().couponCampaignCategoryList.listParams,
       params
     )
-
-    const {
-      items,
-      ...pagination
-    } = await api.campaignEditor.segmentationCategories.getSegmentationCategories(revisedParams)
+    const { result, ...pagination } = await api.coupon.categories.getCategories(revisedParams)
 
     dispatch(
       getCategoriesSuccess({
-        categories: items?.map(x => ({
-          ...x,
-          createdDate: moment(x.createdDate)
-        })) as CouponCampaignCategory[],
+        categories: result as CouponCampaignCategory[],
         listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
@@ -99,10 +90,10 @@ const resetCategoryFilters = (): AppThunk => async dispatch => {
 const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setDeleteState(FeatureState.Loading))
-    await api.campaignEditor.segmentationCategories.deleteSegmentationCategory({ id })
+    await api.coupon.categories.deleteCategory({ id })
     dispatch(setDeleteState(FeatureState.Success))
     const newPage = recalculatePaginationAfterDeletion(
-      getState().segmentationCategoryList.listParams
+      getState().couponCampaignCategoryList.listParams
     )
     dispatch(getCategories({ page: newPage }))
     return { id }
@@ -112,11 +103,11 @@ const deleteCategory = (id: number): AppThunk => async (dispatch, getState) => {
   }
 }
 
-export const segmentationCategoryListActions = {
+export const couponCampaignCategoryListActions = {
   resetCategoryList,
   getCategories,
   resetCategoryFilters,
   deleteCategory
 }
 
-export const segmentationCategoryListReducer = segmentationCategoryListSlice.reducer
+export const couponCampaignCategoryListReducer = couponCampaignCategoryListSlice.reducer

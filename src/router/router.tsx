@@ -3,9 +3,9 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { PrivateRoute } from 'router/PrivateRoute'
 import { DashboardPage } from 'features/dashboard/DashboardPage'
-import { CampaignCreatePage } from 'features/campaigns/campaign/CampaignCreatePage'
-import { CampaignEditorPage } from 'features/campaigns/campaign/CampaignEditorPage'
-import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
+import { CouponCampaignCreatePage } from 'features/campaigns/campaign/CouponCampaignCreatePage'
+import { CouponCampaignEditorPage } from 'features/campaigns/campaign/CouponCampaignEditorPage'
+import { CouponCampaignListPage } from 'features/campaigns/campaignList/CouponCampaignListPage'
 import { PublicRoute } from 'router/PublicRoute'
 import { LoginPage } from 'features/auth/LoginPage'
 import { RecoveryPage } from 'features/auth/RecoveryPage'
@@ -14,7 +14,7 @@ import { ErrorPage } from '../components/error/ErrorPage'
 import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
-import { CampaignViewPage } from 'features/campaigns/campaign/CampaignViewPage'
+import { CouponCampaignViewPage } from 'features/campaigns/campaign/CouponCampaignViewPage'
 import { UserAccessPage } from 'features/userAccess/UserAccessPage'
 import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
@@ -34,7 +34,7 @@ const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
     return <Redirect to="/auth" />
   }
-  return <Redirect to="/campaigns" />
+  return <Redirect to="/couponCampaigns" />
 }
 
 const Routes = (): JSX.Element => (
@@ -94,27 +94,27 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/campaigns"
-      roles={pageViewRoles.campaigns}
-      component={CampaignListPage}
+      path="/couponCampaigns"
+      roles={pageViewRoles.couponCampaigns}
+      component={CouponCampaignListPage}
     />
     <PrivateRoute
       exact
-      path="/campaign"
+      path="/couponCampaign"
       roles={pageViewRoles.couponCreator}
-      component={CampaignCreatePage}
+      component={CouponCampaignCreatePage}
     />
     <PrivateRoute
       exact
-      path="/campaign/:id"
-      roles={pageViewRoles.campaigns}
-      component={CampaignViewPage}
+      path="/couponCampaign/:id"
+      roles={pageViewRoles.couponCampaigns}
+      component={CouponCampaignViewPage}
     />
     <PrivateRoute
       exact
-      path="/campaign/:id/edit"
+      path="/couponCampaign/:id/edit"
       roles={pageViewRoles.couponEditor}
-      component={CampaignEditorPage}
+      component={CouponCampaignEditorPage}
     />
     <PrivateRoute
       exact

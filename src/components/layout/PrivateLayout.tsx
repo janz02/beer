@@ -66,9 +66,9 @@ export const PrivateLayout: React.FC = ({ children }) => {
     () => [
       {
         label: t('menu.campaigns'),
-        link: '/campaigns',
+        link: '/couponCampaigns',
         icon: <BarcodeOutlined />,
-        roles: pageViewRoles.campaigns
+        roles: pageViewRoles.couponCampaigns
       },
       {
         label: t('menu.partners'),

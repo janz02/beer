@@ -1,4 +1,4 @@
-import { campaignActions } from '../features/campaigns/campaignsSlice'
+import { couponCampaignActions } from '../features/campaigns/couponCampaignsSlice'
 import { batch } from 'react-redux'
 import { notificationActions } from 'features/notification/notificationSlice'
 import { AppThunk } from './store'
@@ -11,9 +11,9 @@ import { resetPartnersList } from 'features/partners/partnerList/partnerListSlic
 import { resetSelfPartner } from 'features/partners/selfPartner/selfPartnerSlice'
 import { resetPartnerEditor } from 'features/partners/partnerEditor/partnerEditorSlice'
 import { profileActions } from 'features/profile/profileSlice'
-import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
-import { campaignCategoryEditorActions } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
-import { campaignCategoryListActions } from 'features/settings/campaignCategories/categoryList/campaignCategoryListSlice'
+import { couponCampaignListActions } from 'features/campaigns/campaignList/couponCampaignListSlice'
+import { couponCampaignCategoryEditorActions } from 'features/settings/campaignCategories/categoryEditor/couponCampaignCategoryEditorSlice'
+import { couponCampaignCategoryListActions } from 'features/settings/campaignCategories/categoryList/couponCampaignCategoryListSlice'
 import { segmentationCategoryListActions } from 'features/settings/segmentationCategories/categoryList/segmentationCategoryListSlice'
 import { segmentationCategoryEditorActions } from 'features/settings/segmentationCategories/categoryEditor/segmentationCategoryEditorSlice'
 import { partnerContactListActions } from 'features/partnerContact/list/partnerContactListSlice'
@@ -37,10 +37,10 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(notificationActions.resetNotification())
     dispatch(siteListActions.reset())
     dispatch(siteEditorActions.reset())
-    dispatch(campaignActions.resetCampaigns())
-    dispatch(campaignListActions.resetCampaignList())
-    dispatch(campaignCategoryEditorActions.resetCategoryEditor())
-    dispatch(campaignCategoryListActions.resetCategoryList())
+    dispatch(couponCampaignActions.resetCampaigns())
+    dispatch(couponCampaignListActions.resetCampaignList())
+    dispatch(couponCampaignCategoryEditorActions.resetCategoryEditor())
+    dispatch(couponCampaignCategoryListActions.resetCategoryList())
     dispatch(segmentationCategoryListActions.resetCategoryList())
     dispatch(segmentationCategoryEditorActions.resetCategoryEditor())
     dispatch(userAccessActions.reset())

@@ -3,26 +3,26 @@ import { useParams } from 'hooks/react-router-dom-hooks'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { AddButton } from 'components/buttons/AddButton'
 import { useTranslation } from 'react-i18next'
+import { CouponCampaignCategoryTab } from './CouponCampaignCategoryTab'
 import { hasPermission } from 'services/jwt-reader'
 import { SettingsTabUtils } from '../SettingsPage'
 import { pageViewRoles } from 'services/roleHelpers'
-import { SegmentationCategoryTab } from './SegmentationCategoryTab'
-import { PartitionOutlined } from '@ant-design/icons'
-import { useSegmentationCategoryListUtils } from './categoryList/useSegmentationCategoryListUtils'
+import { useCouponCampaignCategoryListUtils } from './categoryList/useCouponCampaignCategoryListUtils'
+import { AppstoreAddOutlined } from '@ant-design/icons'
 
-export const useSegmentationCategoryTabUtils = (): SettingsTabUtils => {
+export const useCouponCampaignCategoryTabUtils = (): SettingsTabUtils => {
   const { t } = useTranslation()
   const { tab, id } = useParams()
 
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
 
   const modalUtils = useGenericModalFormEditorUtils({
-    dataId: tab === 'segmentation-categories' ? id : undefined,
+    dataId: tab === 'campaign-categories' ? id : undefined,
     rootRoute: '/settings',
-    detailRoute: '/segmentation-categories'
+    detailRoute: '/campaign-categories'
   })
 
-  const categoryListUtils = useSegmentationCategoryListUtils({
+  const categoryListUtils = useCouponCampaignCategoryListUtils({
     onOpenEditor: modalUtils.routeToEditor
   })
 
@@ -30,26 +30,28 @@ export const useSegmentationCategoryTabUtils = (): SettingsTabUtils => {
     () =>
       isEditorUser ? (
         <AddButton onClick={() => modalUtils.routeToEditor()}>
-          {t('segmentation-category.add')}
+          {t('campaign-category.add')}
         </AddButton>
       ) : (
         <></>
       ),
-    [isEditorUser, modalUtils, t]
+    [modalUtils, isEditorUser, t]
   )
 
   const tabContent = useMemo(
-    () => <SegmentationCategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />,
+    () => (
+      <CouponCampaignCategoryTab modalUtils={modalUtils} categoryListUtils={categoryListUtils} />
+    ),
     [modalUtils, categoryListUtils]
   )
 
   return {
-    key: 'segmentation-categories',
-    title: t('settings.segmentation-categories'),
-    roles: pageViewRoles.segmentationCategories,
+    key: 'campaign-categories',
+    title: t('settings.campaign-categories'),
+    roles: pageViewRoles.couponCampaignCategories,
     headerOptions,
     tabContent,
-    icon: <PartitionOutlined />,
+    icon: <AppstoreAddOutlined />,
     notificationCount: 0,
     resetFilters: categoryListUtils.resetFilters
   }
