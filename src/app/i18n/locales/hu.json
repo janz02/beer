@@ -43,14 +43,6 @@
       "title": "Tárgy"
     }
   },
-  "campaign-category": {
-    "add": "Új kampány kategória hozzáadása",
-    "editor-create": "Létrehozás",
-    "editor-edit": "Szerkesztés",
-    "field": {
-      "name": "Kategória neve"
-    }
-  },
   "campaign-product": {
     "add": "Új termék létrehozása",
     "editor-create": "Új termék létrehozása",
@@ -180,7 +172,15 @@
       "prize": "Nyeremény"
     }
   },
-  "coupon-create": {
+  "coupon-campaign-category": {
+    "add": "Új Kupon kampány kategória hozzáadása",
+    "editor-create": "Létrehozás",
+    "editor-edit": "Szerkesztés",
+    "field": {
+      "name": "Kategória neve"
+    }
+  },
+  "coupon-campaign-create": {
     "activate": "Aktiválás",
     "audit": "Audit",
     "campaign-basics": "Kampány alapadatok",
@@ -193,7 +193,7 @@
     "download-redeemed-coupons": "Beváltott kuponok letöltése",
     "download-redeemed-coupons-help": "A kampány ideje alatt a beváltások időközi ellenőrzésére, a kampány végén a beváltások alapján történő jutalékelszámoláshoz a teljesítésigazolás alapjául szolgáló dokumentum.",
     "edit": "Szerkesztés",
-    "editor-title": "Kampány szerkesztő",
+    "editor-title": "Kupon Kampány szerkesztő",
     "field": {
       "approved": "Jóváhagyva",
       "awarded-campaign": "Kitüntett kampány jelölő",
@@ -258,18 +258,18 @@
     "inactivate": "Inaktiválás",
     "status-title": "Státusz módosítás"
   },
-  "coupon-editor": {
+  "coupon-campaign-editor": {
     "comment-delete-confirm-message": "Biztos benne, hogy szeretné törölni ezt a kommentet? A törlés végleges.",
     "save-coupon-status-success": "Kupon státusz mentése sikeres",
     "save-coupon-success": "Sikeres kupon mentés",
     "timeline-title": "Előzmények"
   },
-  "coupon-list": {
+  "coupon-campaign-list": {
     "accepted-tab": "Futó / jóváhagyott",
-    "add": "Új kampány létrehozása",
+    "add": "Új Kupon kampány létrehozása",
     "all-tab": "Összes",
     "campaign-type": "Kampány típus",
-    "campaigns": "Kampányok",
+    "campaigns": "Kupon Kampányok",
     "category": "Kampány kategória",
     "click-count": "Kattintások száma",
     "closed-tab": "Lezárt",
@@ -304,15 +304,15 @@
     "notification-type": {
       "CampaignMovedToWaitingState": {
         "detail": "{{actual.value}} - {{parent.value}} által",
-        "title": "Jóváhagyásra váró kampány érkezett"
+        "title": "Jóváhagyásra váró kupon kampány érkezett"
       },
       "CouponClosed": {
         "detail": "{{actual.value}} - {{parent.value}} által",
-        "title": "Lezárult a kampány"
+        "title": "Lezárult a kupon kampány"
       },
       "CouponCountDepleted": {
         "detail": "{{actual.value}} - {{parent.value}}",
-        "title": "Elfogytak a kampányhoz tartozó kuponok"
+        "title": "Elfogytak a kupon kampányhoz tartozó kuponok"
       },
       "PartnerContactRegistered": {
         "detail": "{{parent.value}} partnerhez {{actual.value}} névvel",
@@ -635,6 +635,11 @@
         "name-required": "Szegmens nevét kötelező megadni, kérem adjon meg egy megfelelő nevet.",
         "one-time-use-required": "Egyszer használatos szegmens megadása kötelező. Kérem adjon meg egy megfelelő szegmenst!"
       },
+      "segmentation-editor": {
+        "category-required": "Szegmens kategória megadása kötelező, kérem adjon meg egy megfelelő kategóriát.",
+        "name-max-length-60": "Szegmens neve maximum 60 karakter lehet, kérem adjon meg egy rövidebb nevet.",
+        "name-required": "Szegmens név megadása kötelező, kérem adjon meg egy megfelelő nevet."
+      },
       "segments": {
         "list-required": "Szegmens lista megadása kötelező, kérem adjon meg egy email listát."
       },
@@ -673,7 +678,7 @@
   },
   "menu": {
     "bp-history": "ÜP History",
-    "campaigns": "Kampányok",
+    "coupon-campaigns": "Kupon Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
@@ -816,6 +821,98 @@
     "save": "Módosítás mentése",
     "save-profile-success": "Profil mentése sikeres."
   },
+  "query-builder": {
+    "add-group": {
+      "label": "Új csoport hozzáadása"
+    },
+    "add-rule": {
+      "label": "Új változó hozzáadása"
+    },
+    "and": "És",
+    "date": {
+      "placeholder": "Dátum"
+    },
+    "datetime": {
+      "placeholder": "Dátum"
+    },
+    "from": "Tól",
+    "multiselect": {
+      "placeholder": "Kérem válasszon értékeket"
+    },
+    "not": "Tagadás",
+    "number": {
+      "placeholder": "Szám"
+    },
+    "operator": {
+      "between": {
+        "label": "között"
+      },
+      "is-empty": {
+        "label": "üres"
+      },
+      "is-not-empty": {
+        "label": "nem üres"
+      },
+      "like": {
+        "label": "tartalmaz"
+      },
+      "not-between": {
+        "label": "nincs közte"
+      },
+      "not-like": {
+        "label": "nem tartalmaz"
+      },
+      "range-between": {
+        "label": "között (intervallum)"
+      },
+      "range-not-between": {
+        "label": "nincs közte (intervallum)"
+      },
+      "select-any-in": {
+        "label": "tartalmazza"
+      },
+      "select-not-any-in": {
+        "label": "nem tartalmazza"
+      }
+    },
+    "or": "Vagy",
+    "range-slider": {
+      "placeholder": "Válassza ki a tartományt"
+    },
+    "result": {
+      "filtered": "Szűrt",
+      "total": "Összes"
+    },
+    "rule": {
+      "field": {
+        "label": "Mező",
+        "placeholder": "Mező"
+      },
+      "operator": {
+        "placeholder": "Kérem válasszon"
+      },
+      "value": {
+        "label": "Érték",
+        "placeholder": "Érték"
+      }
+    },
+    "select": {
+      "placeholder": "Kérem válasszon"
+    },
+    "sidebar": {
+      "header": "Szegmentáció specifikáció"
+    },
+    "slider": {
+      "placeholder": "Mozgassa a slidert"
+    },
+    "text": {
+      "placeholder": "Keresett szöveg"
+    },
+    "time": {
+      "placeholder": "Időpont"
+    },
+    "to": "Ig"
+  },
   "segmentation": {
     "field": {
       "category": "Szegmentáció kategóriája",
@@ -825,6 +922,7 @@
       "segmentSize": "Szegmensméret"
     },
     "list": {
+      "add": "Új szegmentáció létrehozása",
       "title": "Szegmentáció"
     }
   },
@@ -837,9 +935,23 @@
       "name": "Kategória neve"
     }
   },
+  "segmentation-editor": {
+    "basics": {
+      "category": "Szegmentáció kategória",
+      "name": "Szegmentáció neve",
+      "title": "Alap információk"
+    },
+    "button-create": "Létrehozás",
+    "button-save": "Mentés",
+    "query": {
+      "title": "Szegmentáció"
+    },
+    "title-create": "Szegmentáció létrehozása",
+    "title-edit": "Szegmentáció szerkesztése"
+  },
   "settings": {
-    "campaign-categories": "Kampány kategóriák",
     "campaign-products": "Termékek",
+    "coupon-campaign-categories": "Kupon Kampány kategóriák",
     "segmentation-categories": "Szegmentációs kategóriák",
     "system-params": "Rendszerparaméterek",
     "test-group-categories": "Tesztcsoport osztályok"
@@ -888,13 +1000,13 @@
     "role": {
       "administrator": "Adminisztrátor",
       "businesspartnermanager": "Ügyfél menedzser",
-      "campaignmanager": "Kampány menedzser",
+      "campaignmanager": "Kupon Kampány menedzser",
       "partnermanager": "Partner menedzser"
     },
     "role-short": {
       "administrator": "Admin",
       "businesspartnermanager": "Ügyfél men.",
-      "campaignmanager": "Kampány men.",
+      "campaignmanager": "Kupon Kampány men.",
       "mainpartnercontact": "Fő kapcs.",
       "normalpartnercontact": "Norm kapcs.",
       "partnermanager": "Partner men."

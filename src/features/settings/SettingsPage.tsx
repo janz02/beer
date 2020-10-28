@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { hasPermission } from 'services/jwt-reader'
 import { useProductTabUtils } from './products/useProductTabUtils'
-import { useCampaignCategoryTabUtils } from './campaignCategories/useCampaignCategoryTabUtils'
+import { useCouponCampaignCategoryTabUtils } from './couponCampaignCategories/useCouponCampaignCategoryTabUtils'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { Roles } from 'api/swagger/coupon'
@@ -24,7 +24,7 @@ export interface SettingsTabUtils {
 export const SettingsPage: React.FC = () => {
   const allTabs = [
     useSystemParamsTabUtils(),
-    useCampaignCategoryTabUtils(),
+    useCouponCampaignCategoryTabUtils(),
     useSegmentationCategoryTabUtils(),
     useTestGroupCategoryTabUtils(),
     useProductTabUtils()

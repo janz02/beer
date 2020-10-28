@@ -4,8 +4,8 @@ import { routerHistoryStore } from '../router/routerHistoryStore'
 import { userAccessReducer } from 'features/userAccess/userAccessSlice'
 import { newsletterEditorReducer } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { authReducer } from 'features/auth/authSlice'
-import { campaignListReducer } from 'features/campaigns/campaignList/campaignListSlice'
-import { campaignsReducer } from 'features/campaigns/campaignsSlice'
+import { couponCampaignListReducer } from 'features/couponCampaigns/couponCampaignList/couponCampaignListSlice'
+import { couponCampaignsReducer } from 'features/couponCampaigns/couponCampaignsSlice'
 import { notificationReducer } from 'features/notification/notificationSlice'
 import { profileReducer } from 'features/profile/profileSlice'
 import { siteEditorReducer } from 'features/sites/siteEditor/siteEditorSlice'
@@ -13,10 +13,10 @@ import { newsletterListReducer } from 'features/newsletter/newsletterList/newsle
 import { partnersListReducer } from 'features/partners/partnerList/partnerListSlice'
 import { selfPartnerReducer } from 'features/partners/selfPartner/selfPartnerSlice'
 import { partnerEditorReducer } from 'features/partners/partnerEditor/partnerEditorSlice'
-import { campaignCategoryListReducer } from 'features/settings/campaignCategories/categoryList/campaignCategoryListSlice'
+import { couponCampaignCategoryListReducer } from 'features/settings/couponCampaignCategories/categoryList/couponCampaignCategoryListSlice'
 import { segmentationCategoryListReducer } from 'features/settings/segmentationCategories/categoryList/segmentationCategoryListSlice'
 import { segmentationCategoryEditorReducer } from 'features/settings/segmentationCategories/categoryEditor/segmentationCategoryEditorSlice'
-import { campaignCategoryEditorReducer } from 'features/settings/campaignCategories/categoryEditor/campaignCategoryEditorSlice'
+import { couponCampaignCategoryEditorReducer } from 'features/settings/couponCampaignCategories/categoryEditor/couponCampaignCategoryEditorSlice'
 import { partnerContactListReducer } from 'features/partnerContact/list/partnerContactListSlice'
 import { partnerContactModalReducer } from 'features/partnerContact/modal/partnerContactModalSlice'
 import { bpHistoryReducer } from 'features/bpHistory/bpHistorySlice'
@@ -29,6 +29,7 @@ import { createBrowserHistory } from 'history'
 import { permissionListReducer } from 'features/permissions/permissionList/permissionListSlice'
 import { permissionEditorReducer } from 'features/permissions/permissionEditor/permissionEditorSlice'
 import { segmentationListReducer } from 'features/segmentation/segmentationList/segmentationListSlice'
+import { segmentationEditorReducer } from 'features/segmentation/segmentationEditor/segmentationEditorSlice'
 import { systemParamsReducer } from 'features/settings/systemParams/systemParamsSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
@@ -40,10 +41,10 @@ export const rootReducer = combineReducers({
   routerHistory: routerHistoryStore,
   auth: authReducer,
   profile: profileReducer,
-  campaignList: campaignListReducer,
-  campaigns: campaignsReducer,
-  campaignCategoryList: campaignCategoryListReducer,
-  campaignCategoryEditor: campaignCategoryEditorReducer,
+  couponCampaignList: couponCampaignListReducer,
+  couponCampaigns: couponCampaignsReducer,
+  couponCampaignCategoryList: couponCampaignCategoryListReducer,
+  couponCampaignCategoryEditor: couponCampaignCategoryEditorReducer,
   segmentationCategoryEditor: segmentationCategoryEditorReducer,
   segmentationCategoryList: segmentationCategoryListReducer,
   selfPartner: selfPartnerReducer,
@@ -65,6 +66,7 @@ export const rootReducer = combineReducers({
   permissionList: permissionListReducer,
   permissionEditor: permissionEditorReducer,
   segmentationList: segmentationListReducer,
+  segmentationEditor: segmentationEditorReducer,
   systemParams: systemParamsReducer
 })
 

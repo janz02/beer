@@ -3,9 +3,9 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { PrivateRoute } from 'router/PrivateRoute'
 import { DashboardPage } from 'features/dashboard/DashboardPage'
-import { CampaignCreatePage } from 'features/campaigns/campaign/CampaignCreatePage'
-import { CampaignEditorPage } from 'features/campaigns/campaign/CampaignEditorPage'
-import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
+import { CouponCampaignCreatePage } from 'features/couponCampaigns/couponCampaignEditor/CouponCampaignCreatePage'
+import { CouponCampaignEditorPage } from 'features/couponCampaigns/couponCampaignEditor/CouponCampaignEditorPage'
+import { CouponCampaignListPage } from 'features/couponCampaigns/couponCampaignList/CouponCampaignListPage'
 import { PublicRoute } from 'router/PublicRoute'
 import { LoginPage } from 'features/auth/LoginPage'
 import { RecoveryPage } from 'features/auth/RecoveryPage'
@@ -14,7 +14,7 @@ import { ErrorPage } from '../components/error/ErrorPage'
 import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
-import { CampaignViewPage } from 'features/campaigns/campaign/CampaignViewPage'
+import { CouponCampaignViewPage } from 'features/couponCampaigns/couponCampaignEditor/CouponCampaignViewPage'
 import { UserAccessPage } from 'features/userAccess/UserAccessPage'
 import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
@@ -29,12 +29,13 @@ import { PermissionEditorPage } from 'features/permissions/permissionEditor/Perm
 import { PermissionListPage } from 'features/permissions/permissionList/PermissionListPage'
 import { BpHistoryListPage } from 'features/bpHistory/bpHistoryList/BpHistoryListPage'
 import { SegmentationListPage } from 'features/segmentation/segmentationList/SegmentationList'
+import { SegmentationEditorPage } from 'features/segmentation/segmentationEditor/SegmentationEditorPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
     return <Redirect to="/auth" />
   }
-  return <Redirect to="/campaigns" />
+  return <Redirect to="/couponCampaigns" />
 }
 
 const Routes = (): JSX.Element => (
@@ -94,27 +95,27 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/campaigns"
-      roles={pageViewRoles.campaigns}
-      component={CampaignListPage}
+      path="/couponCampaigns"
+      roles={pageViewRoles.couponCampaigns}
+      component={CouponCampaignListPage}
     />
     <PrivateRoute
       exact
-      path="/campaign"
+      path="/couponCampaign"
       roles={pageViewRoles.couponCreator}
-      component={CampaignCreatePage}
+      component={CouponCampaignCreatePage}
     />
     <PrivateRoute
       exact
-      path="/campaign/:id"
-      roles={pageViewRoles.campaigns}
-      component={CampaignViewPage}
+      path="/couponCampaign/:id"
+      roles={pageViewRoles.couponCampaigns}
+      component={CouponCampaignViewPage}
     />
     <PrivateRoute
       exact
-      path="/campaign/:id/edit"
+      path="/couponCampaign/:id/edit"
       roles={pageViewRoles.couponEditor}
-      component={CampaignEditorPage}
+      component={CouponCampaignEditorPage}
     />
     <PrivateRoute
       exact
@@ -167,6 +168,12 @@ const Routes = (): JSX.Element => (
       path="/segmentations"
       roles={pageViewRoles.segmentations}
       component={SegmentationListPage}
+    />
+    <PrivateRoute
+      exact
+      path={['/segmentations/new', '/segmentations/:segmentationId']}
+      roles={pageViewRoles.segmentationEditor}
+      component={SegmentationEditorPage}
     />
     <Route path="*" render={onDefaultRoute} />
   </Switch>
