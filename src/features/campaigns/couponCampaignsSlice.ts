@@ -60,11 +60,11 @@ const couponCampaignsSlice = createSlice({
       state.featureState = FeatureState.Success
     },
     createCouponSuccess(state) {
-      message.success(i18n.t('coupon-create.create-coupon-success'), 10)
+      message.success(i18n.t('coupon-campaign-create.create-coupon-success'), 10)
       state.featureState = FeatureState.Success
     },
     updateCouponSuccess(state) {
-      message.success(i18n.t('coupon-editor.save-coupon-success'), 10)
+      message.success(i18n.t('coupon-campaign-editor.save-coupon-success'), 10)
       state.featureState = FeatureState.Success
     },
     deleteCouponCommentsSuccess(state) {
@@ -80,7 +80,7 @@ const couponCampaignsSlice = createSlice({
       state.featureState = FeatureState.Success
     },
     updateCouponStatusSuccess(state) {
-      message.success(i18n.t('coupon-editor.save-coupon-status-success'), 10)
+      message.success(i18n.t('coupon-campaign-editor.save-coupon-status-success'), 10)
       state.featureState = FeatureState.Success
     },
     getCategoriesSuccess(state, action: PayloadAction<CouponCampaignCategory[]>) {

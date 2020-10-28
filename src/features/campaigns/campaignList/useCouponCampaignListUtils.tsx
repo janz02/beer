@@ -107,7 +107,7 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
   const columnsConfig = useMemo(
     (): ColumnType<CouponCampaign>[] => [
       columnConfig({
-        title: t('coupon-list.campaign-type'),
+        title: t('coupon-campaign-list.campaign-type'),
         key: 'type',
         ellipsis: false,
         sort: true,
@@ -118,29 +118,29 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         render: (value: CouponType) => <CouponCampaignTypeDisplay type={value} />
       }),
       columnConfig({
-        title: t('coupon-list.partner'),
+        title: t('coupon-campaign-list.partner'),
         ellipsis: false,
         key: 'partnerName',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
-        title: t('coupon-list.view-count'),
+        title: t('coupon-campaign-list.view-count'),
         ellipsis: false,
         key: 'showCount'
       }),
       columnConfig({
-        title: t('coupon-list.click-count'),
+        title: t('coupon-campaign-list.click-count'),
         ellipsis: false,
         key: 'clickCount'
       }),
       columnConfig({
-        title: t('coupon-list.redeem-count'),
+        title: t('coupon-campaign-list.redeem-count'),
         ellipsis: false,
         key: 'claimCount'
       }),
       columnConfig({
-        title: t('coupon-list.name'),
+        title: t('coupon-campaign-list.name'),
         ellipsis: false,
         width: '10rem',
         key: 'name',
@@ -148,7 +148,7 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
-        title: t('coupon-list.state'),
+        title: t('coupon-campaign-list.state'),
         key: 'state',
         ellipsis: false,
         sort: true,
@@ -159,14 +159,14 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         render: (value: CouponState) => <CouponCampaignStateDisplay state={value} />
       }),
       columnConfig({
-        title: t('coupon-list.status'),
+        title: t('coupon-campaign-list.status'),
         key: 'isActive',
         ellipsis: false,
         width: '5rem',
         filterMode: FilterMode.ACTIVE_INACTIVE
       }),
       columnConfig({
-        title: t('coupon-list.category'),
+        title: t('coupon-campaign-list.category'),
         key: 'categoryId',
         ellipsis: false,
         sort: true,
@@ -180,7 +180,7 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.rank'),
+        title: t('coupon-campaign-list.rank'),
         key: 'rank',
         ellipsis: false,
         sort: true,
@@ -193,7 +193,7 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.small-image'),
+        title: t('coupon-campaign-list.small-image'),
         ellipsis: false,
         key: 'smallPictureId',
         render(value) {
@@ -201,21 +201,21 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.start-date'),
+        title: t('coupon-campaign-list.start-date'),
         key: 'startDate',
         ellipsis: false,
         sort: true,
         filterMode: FilterMode.DATEPICKER
       }),
       columnConfig({
-        title: t('coupon-list.end-date'),
+        title: t('coupon-campaign-list.end-date'),
         ellipsis: false,
         key: 'endDate',
         sort: true,
         filterMode: FilterMode.DATEPICKER
       }),
       columnConfig({
-        title: t('coupon-list.expire-date'),
+        title: t('coupon-campaign-list.expire-date'),
         key: 'expireDate',
         ellipsis: false,
         sort: true,
@@ -225,7 +225,7 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.draw-date'),
+        title: t('coupon-campaign-list.draw-date'),
         key: 'drawDate',
         ellipsis: false,
         sort: true,
@@ -235,7 +235,7 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.mode'),
+        title: t('coupon-campaign-list.mode'),
         key: 'mode',
         ellipsis: false,
         sort: true,
@@ -248,7 +248,7 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.discount-type'),
+        title: t('coupon-campaign-list.discount-type'),
         key: 'discountType',
         ellipsis: false,
         sort: true,
@@ -264,7 +264,7 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.discount-amount'),
+        title: t('coupon-campaign-list.discount-amount'),
         ellipsis: false,
         key: 'discountValue',
         sort: true,
@@ -275,14 +275,14 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
         }
       }),
       columnConfig({
-        title: t('coupon-list.coupon-count'),
+        title: t('coupon-campaign-list.coupon-count'),
         ellipsis: false,
         key: 'couponCount',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
-        title: t('coupon-list.minimum-shopping-value'),
+        title: t('coupon-campaign-list.minimum-shopping-value'),
         key: 'minimumShoppingValue',
         ellipsis: false,
         sort: true,
@@ -294,14 +294,14 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
       }),
       // TODO: integrate
       // columnConfig({
-      //   title: t('coupon-list.preferred-position'),
+      //   title: t('coupon-campaign-list.preferred-position'),
       //   ellipsis: false,
       //   key: 'preferredPosition',
       //   sort: true,
       //   filterMode: FilterMode.SEARCH
       // }),
       columnConfig({
-        title: t('coupon-list.user'),
+        title: t('coupon-campaign-list.user'),
         ellipsis: false,
         key: 'createdBy',
         sort: true,

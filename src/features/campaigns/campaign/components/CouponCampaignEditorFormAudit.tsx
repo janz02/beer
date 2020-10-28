@@ -15,7 +15,7 @@ export const CouponCampaignEditorFormAudit: FC<CouponCampaignEditorFormAuditProp
   return (
     <Row gutter={rowGutter}>
       <Col span={8}>
-        <Form.Item label={t('coupon-create.field.created')}>
+        <Form.Item label={t('coupon-campaign-create.field.created')}>
           {coupon?.createdBy && (
             <div>
               {`${coupon?.createdBy}, `}
@@ -26,7 +26,7 @@ export const CouponCampaignEditorFormAudit: FC<CouponCampaignEditorFormAuditProp
       </Col>
 
       <Col span={8}>
-        <Form.Item label={t('coupon-create.field.modified')}>
+        <Form.Item label={t('coupon-campaign-create.field.modified')}>
           {coupon?.modifiedBy && (
             <div>
               {`${coupon?.modifiedBy}, `}
@@ -37,7 +37,7 @@ export const CouponCampaignEditorFormAudit: FC<CouponCampaignEditorFormAuditProp
       </Col>
 
       <Col span={8}>
-        <Form.Item label={t('coupon-create.field.approved')}>
+        <Form.Item label={t('coupon-campaign-create.field.approved')}>
           {coupon?.approvedBy && (
             <div>
               {`${coupon?.approvedBy}, `}

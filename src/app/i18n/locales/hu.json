@@ -43,8 +43,8 @@
       "title": "Tárgy"
     }
   },
-  "campaign-category": {
-    "add": "Új kampány kategória hozzáadása",
+  "coupon-campaign-category": {
+    "add": "Új Kupon kampány kategória hozzáadása",
     "editor-create": "Létrehozás",
     "editor-edit": "Szerkesztés",
     "field": {
@@ -180,7 +180,7 @@
       "prize": "Nyeremény"
     }
   },
-  "coupon-create": {
+  "coupon-campaign-create": {
     "activate": "Aktiválás",
     "audit": "Audit",
     "campaign-basics": "Kampány alapadatok",
@@ -193,7 +193,7 @@
     "download-redeemed-coupons": "Beváltott kuponok letöltése",
     "download-redeemed-coupons-help": "A kampány ideje alatt a beváltások időközi ellenőrzésére, a kampány végén a beváltások alapján történő jutalékelszámoláshoz a teljesítésigazolás alapjául szolgáló dokumentum.",
     "edit": "Szerkesztés",
-    "editor-title": "Kampány szerkesztő",
+    "editor-title": "Kupon Kampány szerkesztő",
     "field": {
       "approved": "Jóváhagyva",
       "awarded-campaign": "Kitüntett kampány jelölő",
@@ -258,18 +258,18 @@
     "inactivate": "Inaktiválás",
     "status-title": "Státusz módosítás"
   },
-  "coupon-editor": {
+  "coupon-campaign-editor": {
     "comment-delete-confirm-message": "Biztos benne, hogy szeretné törölni ezt a kommentet? A törlés végleges.",
     "save-coupon-status-success": "Kupon státusz mentése sikeres",
     "save-coupon-success": "Sikeres kupon mentés",
     "timeline-title": "Előzmények"
   },
-  "coupon-list": {
+  "coupon-campaign-list": {
     "accepted-tab": "Futó / jóváhagyott",
-    "add": "Új kampány létrehozása",
+    "add": "Új Kupon kampány létrehozása",
     "all-tab": "Összes",
     "campaign-type": "Kampány típus",
-    "campaigns": "Kampányok",
+    "campaigns": "Kupon Kampányok",
     "category": "Kampány kategória",
     "click-count": "Kattintások száma",
     "closed-tab": "Lezárt",
@@ -288,7 +288,7 @@
     "preferred-position": "Preferált pozíció",
     "rank": "Kedvezmény szint",
     "redeem-count": "Beváltások száma",
-    "show-archived": "Archivált kampányok mutatása",
+    "show-archived": "Archivált kupon kampányok mutatása",
     "small-image": "Kupon kis kép",
     "start-date": "Kampány kezdete",
     "state": "Kampány státusz",
@@ -304,15 +304,15 @@
     "notification-type": {
       "CampaignMovedToWaitingState": {
         "detail": "{{actual.value}} - {{parent.value}} által",
-        "title": "Jóváhagyásra váró kampány érkezett"
+        "title": "Jóváhagyásra váró kupon kampány érkezett"
       },
       "CouponClosed": {
         "detail": "{{actual.value}} - {{parent.value}} által",
-        "title": "Lezárult a kampány"
+        "title": "Lezárult a kupon kampány"
       },
       "CouponCountDepleted": {
         "detail": "{{actual.value}} - {{parent.value}}",
-        "title": "Elfogytak a kampányhoz tartozó kuponok"
+        "title": "Elfogytak a kupon kampányhoz tartozó kuponok"
       },
       "PartnerContactRegistered": {
         "detail": "{{parent.value}} partnerhez {{actual.value}} névvel",
@@ -673,7 +673,7 @@
   },
   "menu": {
     "bp-history": "ÜP History",
-    "campaigns": "Kampányok",
+    "coupon-campaigns": "Kupon Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
@@ -838,7 +838,7 @@
     }
   },
   "settings": {
-    "campaign-categories": "Kampány kategóriák",
+    "coupon-campaign-categories": "Kupon Kampány kategóriák",
     "campaign-products": "Termékek",
     "segmentation-categories": "Szegmentációs kategóriák",
     "system-params": "Rendszerparaméterek",
@@ -888,13 +888,13 @@
     "role": {
       "administrator": "Adminisztrátor",
       "businesspartnermanager": "Ügyfél menedzser",
-      "campaignmanager": "Kampány menedzser",
+      "campaignmanager": "Kupon Kampány menedzser",
       "partnermanager": "Partner menedzser"
     },
     "role-short": {
       "administrator": "Admin",
       "businesspartnermanager": "Ügyfél men.",
-      "campaignmanager": "Kampány men.",
+      "campaignmanager": "Kupon Kampány men.",
       "mainpartnercontact": "Fő kapcs.",
       "normalpartnercontact": "Norm kapcs.",
       "partnermanager": "Partner men."

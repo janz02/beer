@@ -38,8 +38,8 @@ export const CouponCampaignCategoryEditor: FC<CouponCampaignCategoryEditorProps>
   }, [handleGetCategory])
 
   const modalTitle = isNew
-    ? t('campaign-category.editor-create')
-    : t('campaign-category.editor-edit')
+    ? t('coupon-campaign-category.editor-create')
+    : t('coupon-campaign-category.editor-edit')
 
   return (
     <GenericModalForm
@@ -53,13 +53,13 @@ export const CouponCampaignCategoryEditor: FC<CouponCampaignCategoryEditorProps>
         onCancel: handleExit
       }}
       formProps={{
-        name: 'campaign-category-editor',
+        name: 'coupon-campaign-category-editor',
         onFinish: handleSave
       }}
       initialValues={initialValues}
     >
       <Form.Item
-        label={t('campaign-category.field.name')}
+        label={t('coupon-campaign-category.field.name')}
         name="name"
         rules={[
           rule.requiredString(t('error.validation.category.name-required')),

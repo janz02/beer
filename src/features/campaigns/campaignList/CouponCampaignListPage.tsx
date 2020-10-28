@@ -85,7 +85,7 @@ export const CouponCampaignListPage: FC = () => {
       <>
         {hasPermission(couponCreateRoles) && (
           <AddButton onClick={() => history.push(`/couponCampaign`)}>
-            {t('coupon-list.add')}
+            {t('coupon-campaign-list.add')}
           </AddButton>
         )}
       </>
@@ -101,7 +101,7 @@ export const CouponCampaignListPage: FC = () => {
             handleIncludeArchivedChange(e.target.checked)
           }}
         >
-          {t('coupon-list.show-archived')}
+          {t('coupon-campaign-list.show-archived')}
         </Checkbox>
       ),
     [activeTabKey, handleIncludeArchivedChange, t]
@@ -127,7 +127,7 @@ export const CouponCampaignListPage: FC = () => {
       <ResponsiveCard
         disableAutoScale
         width="full"
-        floatingTitle={t('coupon-list.campaigns')}
+        floatingTitle={t('coupon-campaign-list.campaigns')}
         forTable
         paddedBottom
         floatingOptions={cardHeaderActions}

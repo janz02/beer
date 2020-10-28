@@ -56,7 +56,7 @@ export const useCouponCampaignCategoryListUtils = (
   const columnsConfig: ColumnType<CouponCampaignCategory>[] = useMemo(
     () => [
       columnConfig({
-        title: t('campaign-category.field.name'),
+        title: t('coupon-campaign-category.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH

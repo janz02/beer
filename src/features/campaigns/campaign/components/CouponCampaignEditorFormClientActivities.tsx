@@ -19,27 +19,29 @@ export const CouponCampaignEditorFormClientActivities: FC<CouponCampaignEditorFo
     <>
       <Row gutter={rowGutter}>
         <Col span={6}>
-          <p style={{ float: 'left', paddingRight: '5px' }}>{t('coupon-create.field.showCount')}</p>
+          <p style={{ float: 'left', paddingRight: '5px' }}>
+            {t('coupon-campaign-create.field.showCount')}
+          </p>
           <p style={{ float: 'right' }}>{coupon?.showCount}</p>
         </Col>
 
         <Col span={6}>
           <p style={{ float: 'left', paddingRight: '5px' }}>
-            {t('coupon-create.field.clickCount')}
+            {t('coupon-campaign-create.field.clickCount')}
           </p>
           <p style={{ float: 'right' }}>{coupon?.clickCount}</p>
         </Col>
 
         <Col span={6}>
           <p style={{ float: 'left', paddingRight: '5px' }}>
-            {t('coupon-create.field.claimCount')}
+            {t('coupon-campaign-create.field.claimCount')}
           </p>
           <p style={{ float: 'right' }}>{coupon?.claimCount}</p>
         </Col>
 
         <Col span={6}>
           <p style={{ float: 'left', paddingRight: '5px' }}>
-            {t('coupon-create.field.discardCount')}
+            {t('coupon-campaign-create.field.discardCount')}
           </p>
           <p style={{ float: 'right' }}>{coupon?.discardCount}</p>
         </Col>
@@ -48,7 +50,7 @@ export const CouponCampaignEditorFormClientActivities: FC<CouponCampaignEditorFo
       {prizeOrDiscount && (
         <Row gutter={rowGutter}>
           <Col span={8}>
-            <Form.Item extra={t('coupon-create.download-redeemed-coupons-help')}>
+            <Form.Item extra={t('coupon-campaign-create.download-redeemed-coupons-help')}>
               <Button
                 type="default"
                 loading={loading}
@@ -57,7 +59,7 @@ export const CouponCampaignEditorFormClientActivities: FC<CouponCampaignEditorFo
                   dispatch(couponCampaignActions.downloadClaimedCoupons(coupon!))
                 }}
               >
-                {t('coupon-create.download-redeemed-coupons')}
+                {t('coupon-campaign-create.download-redeemed-coupons')}
               </Button>
             </Form.Item>
           </Col>

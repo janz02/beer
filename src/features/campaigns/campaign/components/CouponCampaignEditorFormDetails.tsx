@@ -51,8 +51,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
         <Col span={8}>
           <Form.Item
             name="categoryId"
-            label={t('coupon-create.field.category')}
-            extra={t('coupon-create.field.category-help')}
+            label={t('coupon-campaign-create.field.category')}
+            extra={t('coupon-campaign-create.field.category-help')}
             rules={[rule.required(t('error.validation.category.id-required'))]}
           >
             <Select disabled={!displayEditor}>
@@ -68,8 +68,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
         <Col span={8}>
           <Form.Item
             name="rank"
-            label={t('coupon-create.field.rank')}
-            extra={t('coupon-create.field.rank-help')}
+            label={t('coupon-campaign-create.field.rank')}
+            extra={t('coupon-campaign-create.field.rank-help')}
             rules={[rule.required(t('error.validation.coupon.rank-required'))]}
           >
             <Select disabled={!displayEditor || !hasAllPermissions([Roles.CampaignManager])}>
@@ -85,8 +85,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={8}>
             <Form.Item
               name="mode"
-              label={t('coupon-create.field.mode')}
-              extra={t('coupon-create.field.mode-help')}
+              label={t('coupon-campaign-create.field.mode')}
+              extra={t('coupon-campaign-create.field.mode-help')}
               rules={[rule.required(t('error.validation.coupon.mode-required-for-discount'))]}
             >
               <Select
@@ -109,7 +109,7 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={24}>
             <Form.Item
               name="onlineClaimLink"
-              label={t('coupon-create.field.online-claim-link')}
+              label={t('coupon-campaign-create.field.online-claim-link')}
               rules={[
                 rule.required(t('error.validation.coupon.online-claim-link-required-for-online')),
                 rule.max(2000, t('error.validation.coupon.online-claim-link-max-length-2000'))
@@ -124,8 +124,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={8}>
             <Form.Item
               name="expireDate"
-              label={t('coupon-create.field.expiration-date')}
-              extra={t('coupon-create.field.expiration-date-help')}
+              label={t('coupon-campaign-create.field.expiration-date')}
+              extra={t('coupon-campaign-create.field.expiration-date-help')}
               rules={[
                 rule.required(t('error.validation.coupon.expire-date-required-for-discount'))
               ]}
@@ -139,8 +139,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={24}>
             <Form.Item
               name="productDetails"
-              label={t('coupon-create.field.banner-link')}
-              extra={t('coupon-create.field.banner-link-help')}
+              label={t('coupon-campaign-create.field.banner-link')}
+              extra={t('coupon-campaign-create.field.banner-link-help')}
               rules={[rule.required(), rule.max(2000)]}
             >
               <Input disabled={!displayEditor} maxLength={2000} />
@@ -152,7 +152,7 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={8}>
             <Form.Item
               name="drawDate"
-              label={t('coupon-create.field.draw-date')}
+              label={t('coupon-campaign-create.field.draw-date')}
               rules={[rule.required(t('error.validation.coupon.draw-date-required-for-prize'))]}
             >
               <DatePicker disabled={!displayEditor} />
@@ -164,8 +164,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={8}>
             <Form.Item
               name="discountType"
-              label={t('coupon-create.field.discount-type')}
-              extra={t('coupon-create.field.discount-type-help')}
+              label={t('coupon-campaign-create.field.discount-type')}
+              extra={t('coupon-campaign-create.field.discount-type-help')}
               rules={[
                 rule.requiredString(
                   t('error.validation.coupon.discount-type-required-for-discount')
@@ -192,11 +192,11 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={8}>
             <Form.Item
               name="discountValue"
-              label={t('coupon-create.field.discount-amount')}
+              label={t('coupon-campaign-create.field.discount-amount')}
               extra={
                 selectedCouponDiscountType === CouponDiscountType.PercentValue
-                  ? t('coupon-create.field.discount-amount-percent-help')
-                  : t('coupon-create.field.discount-amount-fix-help')
+                  ? t('coupon-campaign-create.field.discount-amount-percent-help')
+                  : t('coupon-campaign-create.field.discount-amount-fix-help')
               }
               dependencies={['discountType']}
               rules={[
@@ -261,8 +261,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={8}>
             <Form.Item
               name="minimumShoppingValue"
-              label={t('coupon-create.field.minimum-shopping-value')}
-              extra={t('coupon-create.field.minimum-shopping-value-help')}
+              label={t('coupon-campaign-create.field.minimum-shopping-value')}
+              extra={t('coupon-campaign-create.field.minimum-shopping-value-help')}
               rules={[rule.positiveInteger()]}
             >
               <InputNumberI18n
@@ -280,7 +280,7 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
             <Col span={8}>
               <Form.Item
                 name="itemPrice"
-                label={t('coupon-create.field.item-price')}
+                label={t('coupon-campaign-create.field.item-price')}
                 dependencies={['previousYearAverageBasketValue']}
                 rules={[
                   rule.positiveInteger(),
@@ -299,7 +299,7 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
                     }
                   })
                 ]}
-                extra={t('coupon-create.field.item-price-help')}
+                extra={t('coupon-campaign-create.field.item-price-help')}
                 className="mark-label-as-required"
               >
                 <InputNumberI18n
@@ -314,8 +314,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
             <Col span={8}>
               <Form.Item
                 name="previousYearAverageBasketValue"
-                label={t('coupon-create.field.previous-year-average-basket-value')}
-                extra={t('coupon-create.field.previous-year-average-basket-value-help')}
+                label={t('coupon-campaign-create.field.previous-year-average-basket-value')}
+                extra={t('coupon-campaign-create.field.previous-year-average-basket-value-help')}
                 dependencies={['itemPrice']}
                 rules={[
                   rule.positiveInteger(),
@@ -350,7 +350,7 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
             <Col span={8}>
               <Form.Item
                 name="prizeValue"
-                label={t('coupon-create.field.prize-value')}
+                label={t('coupon-campaign-create.field.prize-value')}
                 rules={[
                   rule.required(t('error.validation.coupon.prize-value-required-for-prize')),
                   rule.positiveInteger()
@@ -368,8 +368,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
             <Col span={8}>
               <Form.Item
                 name="prizeRulesFile"
-                label={t('coupon-create.field.prize-rules')}
-                extra={t('coupon-create.field.prize-rules-help')}
+                label={t('coupon-campaign-create.field.prize-rules')}
+                extra={t('coupon-campaign-create.field.prize-rules-help')}
                 rules={[
                   rule.required(t('error.validation.coupon.prize-rules-file-id-required-for-prize'))
                 ]}
@@ -405,8 +405,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={24}>
             <Form.Item
               name="productDetails"
-              label={t('coupon-create.field.webshop-link')}
-              extra={t('coupon-create.field.webshop-link-help')}
+              label={t('coupon-campaign-create.field.webshop-link')}
+              extra={t('coupon-campaign-create.field.webshop-link-help')}
               rules={[rule.required(), rule.max(2000)]}
             >
               <Input disabled={!displayEditor} maxLength={2000} />
@@ -418,10 +418,10 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           <Col span={8}>
             <Form.Item
               name="awardedCampaign"
-              label={t('coupon-create.field.awarded-campaign')}
+              label={t('coupon-campaign-create.field.awarded-campaign')}
               valuePropName="checked"
             >
-              <Checkbox>{t('coupon-create.field.display-fix-banner-campaign')}</Checkbox>
+              <Checkbox>{t('coupon-campaign-create.field.display-fix-banner-campaign')}</Checkbox>
             </Form.Item>
           </Col>
         )}
@@ -431,8 +431,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
         <Col span={12}>
           <Form.Item
             name="smallPicture"
-            label={t('coupon-create.field.small-image')}
-            extra={t('coupon-create.field.small-image-help')}
+            label={t('coupon-campaign-create.field.small-image')}
+            extra={t('coupon-campaign-create.field.small-image-help')}
             rules={[
               rule.required(t('error.validation.coupon.small-picture-id-required')),
               rule.fileImgDimensionsExactMatch({ width: 360, height: 270 })
@@ -466,8 +466,8 @@ export const CouponCampaignEditorFormDetails: FC<CouponCampaignEditorFormDetails
           {prizeOrDiscount && (
             <Form.Item
               name="bigPicture"
-              label={t('coupon-create.field.big-image')}
-              extra={t('coupon-create.field.big-image-help')}
+              label={t('coupon-campaign-create.field.big-image')}
+              extra={t('coupon-campaign-create.field.big-image-help')}
               rules={[
                 rule.required(t('error.validation.coupon.big-picture-id-required-non-banner')),
                 rule.fileImgDimensionsExactMatch({ width: 360, height: 540 })

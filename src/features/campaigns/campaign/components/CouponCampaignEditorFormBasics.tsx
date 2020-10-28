@@ -36,7 +36,7 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
         <Col span={6}>
           <Form.Item
             name="type"
-            label={t('coupon-create.field.type')}
+            label={t('coupon-campaign-create.field.type')}
             rules={[rule.required(t('error.validation.coupon.type-required'))]}
           >
             <Select
@@ -56,7 +56,7 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
 
         <Col span={12} offset={6}>
           {!couponIsNew && (
-            <Form.Item label={t('coupon-create.field.state')}>
+            <Form.Item label={t('coupon-campaign-create.field.state')}>
               <CouponCampaignStateDisplay state={coupon?.state} />
             </Form.Item>
           )}
@@ -66,7 +66,7 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
       <Row gutter={rowGutter}>
         <Col span={12}>
           {hasPermission(comboRoles.forNkm) ? (
-            <Form.Item name="partnerId" label={t('coupon-create.field.partner-name')}>
+            <Form.Item name="partnerId" label={t('coupon-campaign-create.field.partner-name')}>
               <Select disabled={!displayEditor || !couponIsNew}>
                 {majorPartners &&
                   majorPartners.map(x => (
@@ -81,7 +81,7 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
               </Select>
             </Form.Item>
           ) : (
-            <Form.Item label={t('coupon-create.field.partner-name')}>
+            <Form.Item label={t('coupon-campaign-create.field.partner-name')}>
               <>{userData?.partnerName}</>
             </Form.Item>
           )}
@@ -89,7 +89,7 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
 
         <Col span={12}>
           {!couponIsNew && (
-            <Form.Item label={t('coupon-create.field.is-active')}>
+            <Form.Item label={t('coupon-campaign-create.field.is-active')}>
               <CouponCampaignActiveDisplay coupon={coupon} />
             </Form.Item>
           )}
@@ -100,8 +100,8 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
         <Col span={12} order={1}>
           <Form.Item
             name="name"
-            label={t('coupon-create.field.name')}
-            extra={t('coupon-create.field.name-help')}
+            label={t('coupon-campaign-create.field.name')}
+            extra={t('coupon-campaign-create.field.name-help')}
             rules={[
               rule.requiredString(t('error.validation.coupon.name-required')),
               rule.max(60, t('error.validation.coupon.name-max-length-60'))
@@ -114,8 +114,8 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
         <Col span={12} order={prizeOrDiscount ? 2 : 3}>
           <Form.Item
             name="startDate"
-            label={t('coupon-create.field.distribution-start-date')}
-            extra={t('coupon-create.field.distribution-start-date-help')}
+            label={t('coupon-campaign-create.field.distribution-start-date')}
+            extra={t('coupon-campaign-create.field.distribution-start-date-help')}
             rules={[rule.required(t('error.validation.coupon.start-date-required'))]}
           >
             <DatePicker disabled={!displayEditor} />
@@ -126,8 +126,8 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
           {prizeOrDiscount && (
             <Form.Item
               name="description"
-              label={t('coupon-create.field.description')}
-              extra={t('coupon-create.field.description-help')}
+              label={t('coupon-campaign-create.field.description')}
+              extra={t('coupon-campaign-create.field.description-help')}
               rules={[
                 rule.requiredString(t('error.validation.coupon.description-required-non-banner')),
                 rule.max(255, t('error.validation.coupon.description-max-length-255'))
@@ -141,8 +141,8 @@ export const CouponCampaignEditorFormBasics: FC<CouponCampaignEditorFormBasicsPr
         <Col span={12} order={4}>
           <Form.Item
             name="endDate"
-            label={t('coupon-create.field.distribution-end-date')}
-            extra={t('coupon-create.field.distribution-end-date-help')}
+            label={t('coupon-campaign-create.field.distribution-end-date')}
+            extra={t('coupon-campaign-create.field.distribution-end-date-help')}
             rules={[rule.required(t('error.validation.coupon.end-date-required'))]}
           >
             <DatePicker disabled={!displayEditor} />

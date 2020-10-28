@@ -55,7 +55,9 @@ export const CouponCampaignEditor: FC<CouponCampaignEditorProps> = props => {
           {coupon &&
             (coupon.state === CouponState.Created || coupon.state === CouponState.Waiting) && (
               <Button type="primary" htmlType="button">
-                <Link to={`/couponCampaign/${coupon?.id}/edit`}>{t('coupon-create.edit')}</Link>
+                <Link to={`/couponCampaign/${coupon?.id}/edit`}>
+                  {t('coupon-campaign-create.edit')}
+                </Link>
               </Button>
             )}
           {hasPermission([
@@ -73,7 +75,9 @@ export const CouponCampaignEditor: FC<CouponCampaignEditorProps> = props => {
                   handleCouponActivate()
                 }}
               >
-                {coupon.isActive ? t('coupon-create.inactivate') : t('coupon-create.activate')}
+                {coupon.isActive
+                  ? t('coupon-campaign-create.inactivate')
+                  : t('coupon-campaign-create.activate')}
               </Button>
             )}
         </>
@@ -87,7 +91,7 @@ export const CouponCampaignEditor: FC<CouponCampaignEditorProps> = props => {
       <Col span={18} className="editor-col">
         <ResponsiveHeader
           type="floating"
-          title={t('coupon-create.editor-title')}
+          title={t('coupon-campaign-create.editor-title')}
           options={couponActionButtons}
         />
 

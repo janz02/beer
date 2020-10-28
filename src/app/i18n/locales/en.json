@@ -43,8 +43,8 @@
       "title": "Subject"
     }
   },
-  "campaign-category": {
-    "add": "Add new campaign category",
+  "coupon-campaign-category": {
+    "add": "Add new Coupon campaign category",
     "editor-create": "Create",
     "editor-edit": "Edit",
     "field": {
@@ -180,7 +180,7 @@
       "prize": "Prize"
     }
   },
-  "coupon-create": {
+  "coupon-campaign-create": {
     "activate": "Activate",
     "audit": "Audit",
     "campaign-basics": "Campaign basics",
@@ -193,7 +193,7 @@
     "download-redeemed-coupons": "Download claimed coupons",
     "download-redeemed-coupons-help": "This document will be used when they will check the claims while the campaign is running. Also this document will be used at the end of the campaign when they will calculate the commission.",
     "edit": "Edit",
-    "editor-title": "Campaign editor",
+    "editor-title": "Coupon Campaign editor",
     "field": {
       "approved": "Approved",
       "awarded-campaign": "Highlighted campaign sign",
@@ -258,18 +258,18 @@
     "inactivate": "Inactivate",
     "status-title": "Modify state"
   },
-  "coupon-editor": {
+  "coupon-campaign-editor": {
     "comment-delete-confirm-message": "Are you sure you want to delete this comment? Deletion is permanent.",
     "save-coupon-status-success": "Campaign status changed successfully.",
     "save-coupon-success": "Campaign saved successfully.",
     "timeline-title": "Timeline"
   },
-  "coupon-list": {
+  "coupon-campaign-list": {
     "accepted-tab": "Accepted",
-    "add": "Create new campaign",
+    "add": "Create new Coupon campaign",
     "all-tab": "All",
     "campaign-type": "Campaign type",
-    "campaigns": "Campaigns",
+    "campaigns": "Coupon Campaigns",
     "category": "Campaign category",
     "click-count": "Click count",
     "closed-tab": "Closed",
@@ -304,11 +304,11 @@
     "notification-type": {
       "CampaignMovedToWaitingState": {
         "detail": "{{actual.value}} - by {{parent.value}}",
-        "title": "Campaign moved to waiting status"
+        "title": "Coupon Campaign moved to waiting status"
       },
       "CouponClosed": {
         "detail": "{{actual.value}} - by {{parent.value}}",
-        "title": "Campaign closed"
+        "title": "Coupon Campaign closed"
       },
       "CouponCountDepleted": {
         "detail": "{{actual.value}} - {{parent.value}}",
@@ -673,7 +673,7 @@
   },
   "menu": {
     "bp-history": "BP History",
-    "campaigns": "Campaigns",
+    "coupon-campaigns": "Coupon Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
@@ -838,7 +838,7 @@
     }
   },
   "settings": {
-    "campaign-categories": "Campaign categories",
+    "coupon-campaign-categories": "Coupon Campaign categories",
     "campaign-products": "Products",
     "segmentation-categories": "Segmentation categories",
     "system-params": "System parameters",
@@ -888,13 +888,13 @@
     "role": {
       "administrator": "Administrator",
       "businesspartnermanager": "Business Partner Manager",
-      "campaignmanager": "Campaign Manager",
+      "campaignmanager": "Coupon Campaign Manager",
       "partnermanager": "Partner Manager"
     },
     "role-short": {
       "administrator": "Admin",
       "businesspartnermanager": "Business Man.",
-      "campaignmanager": "Campaign Man.",
+      "campaignmanager": "Coupon Campaign Man.",
       "mainpartnercontact": "Main",
       "normalpartnercontact": "Normal",
       "partnermanager": "Partner Man."

@@ -34,27 +34,27 @@ export const CouponCampaignListTabs: FC<CouponCampaignListTabsProps> = ({
     () => [
       {
         key: CouponListTabKey.Waiting,
-        title: t('coupon-list.pending-tab'),
+        title: t('coupon-campaign-list.pending-tab'),
         icon: <CarryOutOutlined />
       },
       {
         key: CouponListTabKey.Accepted,
-        title: t('coupon-list.accepted-tab'),
+        title: t('coupon-campaign-list.accepted-tab'),
         icon: <ClockCircleOutlined />
       },
       {
         key: CouponListTabKey.Closed,
-        title: t('coupon-list.closed-tab'),
+        title: t('coupon-campaign-list.closed-tab'),
         icon: <LockOutlined />
       },
       {
         key: CouponListTabKey.Created,
-        title: t('coupon-list.created-tab'),
+        title: t('coupon-campaign-list.created-tab'),
         icon: <RocketOutlined />
       },
       {
         key: CouponListTabKey.All,
-        title: t('coupon-list.all-tab'),
+        title: t('coupon-campaign-list.all-tab'),
         icon: <CompassOutlined />
       }
     ],

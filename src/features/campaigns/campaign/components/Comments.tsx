@@ -73,8 +73,8 @@ export const Comments: FC<CommentsProps> = ({ campaignUtils }) => {
   return (
     <>
       {!displayEditor && (
-        <ResponsiveCard innerTitle={t('coupon-create.status-title')} paddedBottom>
-          <Form name="coupon-editor-comment-form" layout="vertical" {...commentFormProps}>
+        <ResponsiveCard innerTitle={t('coupon-campaign-create.status-title')} paddedBottom>
+          <Form name="coupon-campaign-editor-comment-form" layout="vertical" {...commentFormProps}>
             <Form.Item
               name="couponState"
               dependencies={['comment']}
@@ -98,7 +98,7 @@ export const Comments: FC<CommentsProps> = ({ campaignUtils }) => {
               (coupon.state === CouponState.Created || coupon.state === CouponState.Waiting) && (
                 <Form.Item
                   name="comment"
-                  label={t('coupon-create.field.comment')}
+                  label={t('coupon-campaign-create.field.comment')}
                   dependencies={['couponState']}
                   rules={[
                     rule.max(200, t('error.validation.coupon.comment.max-length-200')),
@@ -128,7 +128,7 @@ export const Comments: FC<CommentsProps> = ({ campaignUtils }) => {
       )}
 
       <div className="comment-col__comments">
-        <Title level={3}>{t('coupon-editor.timeline-title')}</Title>
+        <Title level={3}>{t('coupon-campaign-editor.timeline-title')}</Title>
         <Timeline>
           {coupon &&
             coupon.comments &&
@@ -155,7 +155,7 @@ export const Comments: FC<CommentsProps> = ({ campaignUtils }) => {
                 <div className="timeline-item__body text-faded">
                   {x.comment} - {x.from}
                   <Popconfirm
-                    title={t('coupon-editor.comment-delete-confirm-message')}
+                    title={t('coupon-campaign-editor.comment-delete-confirm-message')}
                     onConfirm={() => {
                       handleDeleteCouponCommment(coupon, x)
                     }}

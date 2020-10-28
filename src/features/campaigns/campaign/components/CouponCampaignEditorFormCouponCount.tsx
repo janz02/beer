@@ -29,8 +29,8 @@ export const CouponCampaignEditorFormCouponCount: FC<CouponCampaignEditorFormCou
       <Col span={8}>
         <Form.Item
           name="couponCount"
-          label={t('coupon-create.field.coupon-count')}
-          extra={t('coupon-create.field.coupon-count-help')}
+          label={t('coupon-campaign-create.field.coupon-count')}
+          extra={t('coupon-campaign-create.field.coupon-count-help')}
           rules={[
             rule.required(t('error.validation.coupon.count-required')),
             rule.positiveInteger()
@@ -49,8 +49,8 @@ export const CouponCampaignEditorFormCouponCount: FC<CouponCampaignEditorFormCou
         <Col span={8}>
           <Form.Item
             name="predefinedCodesFile"
-            label={t('coupon-create.field.upload')}
-            extra={t('coupon-create.field.upload-help')}
+            label={t('coupon-campaign-create.field.upload')}
+            extra={t('coupon-campaign-create.field.upload-help')}
           >
             <FileUploadButton
               disabled={!displayEditor}
@@ -80,7 +80,7 @@ export const CouponCampaignEditorFormCouponCount: FC<CouponCampaignEditorFormCou
 
       {!!coupon?.id && prizeOrDiscount && (
         <Col span={8}>
-          <Form.Item name="download" label={t('coupon-create.field.download')}>
+          <Form.Item name="download" label={t('coupon-campaign-create.field.download')}>
             <Button
               type="primary"
               loading={loading}
@@ -89,7 +89,7 @@ export const CouponCampaignEditorFormCouponCount: FC<CouponCampaignEditorFormCou
                 dispatch(couponCampaignActions.downloadCoupons(coupon!))
               }}
             >
-              {t('coupon-create.download-coupons')}
+              {t('coupon-campaign-create.download-coupons')}
             </Button>
           </Form.Item>
         </Col>

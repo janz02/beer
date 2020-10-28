@@ -36,28 +36,28 @@ export const CouponCampaignEditorForm: FC<CouponCampaignEditorFormProps> = props
   }, [handleCouponChange, coupon])
 
   return (
-    <Form name="coupon-editor-form" layout="vertical" form={form} {...formProps}>
+    <Form name="coupon-campaign-editor-form" layout="vertical" form={form} {...formProps}>
       <Collapse defaultActiveKey={['1']}>
-        <Collapse.Panel header={t('coupon-create.campaign-basics')} key="1">
+        <Collapse.Panel header={t('coupon-campaign-create.campaign-basics')} key="1">
           <CouponCampaignEditorFormBasics campaignUtils={props.campaignUtils} />
         </Collapse.Panel>
       </Collapse>
 
       <Collapse defaultActiveKey={['1']}>
-        <Collapse.Panel header={t('coupon-create.campaign-details')} key="1">
+        <Collapse.Panel header={t('coupon-campaign-create.campaign-details')} key="1">
           <CouponCampaignEditorFormDetails form={form} campaignUtils={props.campaignUtils} />
         </Collapse.Panel>
       </Collapse>
 
       <Collapse defaultActiveKey={['1']}>
-        <Collapse.Panel header={t('coupon-create.field.coupon-count')} key="1">
+        <Collapse.Panel header={t('coupon-campaign-create.field.coupon-count')} key="1">
           <CouponCampaignEditorFormCouponCount form={form} campaignUtils={props.campaignUtils} />
         </Collapse.Panel>
       </Collapse>
 
       {!displayEditor && (
         <Collapse defaultActiveKey={['1']}>
-          <Collapse.Panel header={t('coupon-create.client-activities')} key="1">
+          <Collapse.Panel header={t('coupon-campaign-create.client-activities')} key="1">
             <CouponCampaignEditorFormClientActivities campaignUtils={props.campaignUtils} />
           </Collapse.Panel>
         </Collapse>
@@ -65,7 +65,7 @@ export const CouponCampaignEditorForm: FC<CouponCampaignEditorFormProps> = props
 
       {!displayEditor && (
         <Collapse defaultActiveKey={['1']}>
-          <Collapse.Panel header={t('coupon-create.audit')} key="1">
+          <Collapse.Panel header={t('coupon-campaign-create.audit')} key="1">
             <CouponCampaignEditorFormAudit campaignUtils={props.campaignUtils} />
           </Collapse.Panel>
         </Collapse>
@@ -93,7 +93,7 @@ export const CouponCampaignEditorForm: FC<CouponCampaignEditorFormProps> = props
                 disabled={!submitable}
                 loading={loading}
               >
-                {t('coupon-create.create-and-accept')}
+                {t('coupon-campaign-create.create-and-accept')}
               </Button>
             )}
 
@@ -104,7 +104,7 @@ export const CouponCampaignEditorForm: FC<CouponCampaignEditorFormProps> = props
               disabled={!submitable}
               loading={loading}
             >
-              {couponIsNew ? t('coupon-create.create') : t('common.save')}
+              {couponIsNew ? t('coupon-campaign-create.create') : t('common.save')}
             </Button>
           </Col>
         </Row>

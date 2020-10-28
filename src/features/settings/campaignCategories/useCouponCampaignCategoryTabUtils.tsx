@@ -17,9 +17,9 @@ export const useCouponCampaignCategoryTabUtils = (): SettingsTabUtils => {
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
 
   const modalUtils = useGenericModalFormEditorUtils({
-    dataId: tab === 'campaign-categories' ? id : undefined,
+    dataId: tab === 'coupon-campaign-categories' ? id : undefined,
     rootRoute: '/settings',
-    detailRoute: '/campaign-categories'
+    detailRoute: '/coupon-campaign-categories'
   })
 
   const categoryListUtils = useCouponCampaignCategoryListUtils({
@@ -30,7 +30,7 @@ export const useCouponCampaignCategoryTabUtils = (): SettingsTabUtils => {
     () =>
       isEditorUser ? (
         <AddButton onClick={() => modalUtils.routeToEditor()}>
-          {t('campaign-category.add')}
+          {t('coupon-campaign-category.add')}
         </AddButton>
       ) : (
         <></>
@@ -46,8 +46,8 @@ export const useCouponCampaignCategoryTabUtils = (): SettingsTabUtils => {
   )
 
   return {
-    key: 'campaign-categories',
-    title: t('settings.campaign-categories'),
+    key: 'coupon-campaign-categories',
+    title: t('settings.coupon-campaign-categories'),
     roles: pageViewRoles.couponCampaignCategories,
     headerOptions,
     tabContent,
