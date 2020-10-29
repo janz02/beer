@@ -24,6 +24,7 @@ import { testGroupCategoryListActions } from 'features/settings/testGroupCategor
 import { testGroupCategoryEditorActions } from 'features/settings/testGroupCategory/testGroupCategoryEditor/testGroupCategoryEditorSlice'
 import { resetBpHistory } from 'features/bpHistory/bpHistorySlice'
 import { systemParamsActions } from 'features/settings/systemParams/systemParamsSlice'
+import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -55,6 +56,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(testGroupCategoryEditorActions.resetCategoryEditor())
     dispatch(resetBpHistory())
     dispatch(systemParamsActions.resetSystemParams())
+    dispatch(campaignListActions.resetCampaignFilters())
     logout && dispatch(resetRouterHistory())
   })
 }

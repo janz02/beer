@@ -43,6 +43,29 @@
       "title": "Subject"
     }
   },
+  "campaign-list": {
+    "company": {
+      "add": "New",
+      "title": "Companies"
+    },
+    "field": {
+      "createdDate": "Date of creation",
+      "modifiedDate": "Date of modification",
+      "name": "Campaign name",
+      "product": "Product",
+      "requestor": "Requestor",
+      "responsible": "Responsible",
+      "segmentation": "Segmentation",
+      "status": "Status",
+      "timing": "Campaign timing",
+      "type": "Type"
+    },
+    "partner": {
+      "add": "New",
+      "title": "Partners"
+    },
+    "title": "Campaigns"
+  },
   "campaign-product": {
     "add": "Add new Product",
     "editor-create": "New product",
@@ -678,6 +701,7 @@
   },
   "menu": {
     "bp-history": "BP History",
+    "campaigns": "Campaigns",
     "coupon-campaigns": "Coupon Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",

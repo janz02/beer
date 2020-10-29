@@ -45,21 +45,24 @@ export const CouponCampaignListPage: FC = () => {
   const columnOrders = {
     [CouponListTabKey.Waiting]: useColumnOrderUtils(
       columnsConfig,
-      ColumnStorageName.CAMPAIGN_WAITING
+      ColumnStorageName.COUPON_CAMPAIGN_WAITING
     ),
     [CouponListTabKey.Accepted]: useColumnOrderUtils(
       columnsConfig,
-      ColumnStorageName.CAMPAIGN_ACCEPTED
+      ColumnStorageName.COUPON_CAMPAIGN_ACCEPTED
     ),
     [CouponListTabKey.Closed]: useColumnOrderUtils(
       columnsConfig,
-      ColumnStorageName.CAMPAIGN_CLOSED
+      ColumnStorageName.COUPON_CAMPAIGN_CLOSED
     ),
     [CouponListTabKey.Created]: useColumnOrderUtils(
       columnsConfig,
-      ColumnStorageName.CAMPAIGN_CREATED
+      ColumnStorageName.COUPON_CAMPAIGN_CREATED
     ),
-    [CouponListTabKey.All]: useColumnOrderUtils(columnsConfig, ColumnStorageName.CAMPAIGN_ALL)
+    [CouponListTabKey.All]: useColumnOrderUtils(
+      columnsConfig,
+      ColumnStorageName.COUPON_CAMPAIGN_ALL
+    )
   }
 
   const tableProps = {

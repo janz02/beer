@@ -43,6 +43,29 @@
       "title": "Tárgy"
     }
   },
+  "campaign-list": {
+    "company": {
+      "add": "Új",
+      "title": "Cégek"
+    },
+    "field": {
+      "createdDate": "Létrehozás dátuma",
+      "modifiedDate": "Módosítás dátuma",
+      "name": "Kampány neve",
+      "product": "Termék",
+      "requestor": "Igénylő",
+      "responsible": "Felelős ",
+      "segmentation": "Szegmentáció",
+      "status": "Státusz",
+      "timing": "Kampány időzítése",
+      "type": "Típus"
+    },
+    "partner": {
+      "add": "Új",
+      "title": "Partnerek"
+    },
+    "title": "Kampányok"
+  },
   "campaign-product": {
     "add": "Új termék létrehozása",
     "editor-create": "Új termék létrehozása",
@@ -678,6 +701,7 @@
   },
   "menu": {
     "bp-history": "ÜP History",
+    "campaigns": "Kampányok",
     "coupon-campaigns": "Kupon Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
