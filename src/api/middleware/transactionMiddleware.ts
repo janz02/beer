@@ -3,10 +3,19 @@ import { v4 } from 'uuid'
 import { api } from 'api'
 import { adminConfig } from '../index'
 
+const excludedEndpoints = [
+  '/api/Transaction/Commit',
+  '/api/Transaction/Create',
+  '/api/Transaction/Rollback'
+]
+
 const appliesToMicroservices: any[] = [process.env.REACT_APP_ADMIN_API_URL]
 
 const shouldApplyMiddleware = (url: string): boolean =>
-  appliesToMicroservices.some(ms => url.includes(ms))
+  appliesToMicroservices.some(ms => url.toLowerCase().includes(ms.toLowerCase()))
+
+const isExcludedEndpoint = (url: string): boolean =>
+  excludedEndpoints.some(endpoint => url.toLowerCase().includes(endpoint.toLowerCase()))
 
 const rollback = async (guid: string) => {
   try {
@@ -51,7 +60,7 @@ export const middleware: Middleware[] = [
           'X-RTD-Transaction-Guid': guid
         }
 
-        if (ctx.init.method !== 'GET') {
+        if (ctx.init.method !== 'GET' && !isExcludedEndpoint(ctx.url)) {
           return create(guid)
         }
       } else {
@@ -61,7 +70,11 @@ export const middleware: Middleware[] = [
   },
   {
     post: async (ctx: ResponseContext) => {
-      if (shouldApplyMiddleware(ctx.url) && ctx.init.method !== 'GET') {
+      if (
+        shouldApplyMiddleware(ctx.url) &&
+        ctx.init.method !== 'GET' &&
+        !isExcludedEndpoint(ctx.url)
+      ) {
         const transactionGuid = (ctx.init.headers as any)['X-RTD-Transaction-Guid']
 
         if (ctx.response.status >= 400) {
