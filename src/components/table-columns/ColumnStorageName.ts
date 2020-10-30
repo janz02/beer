@@ -10,5 +10,6 @@ export enum ColumnStorageName {
   USER_ACCES_PARTNER = 'user-access-partner-columns',
   BP_HISTORY = 'bp-history-columns',
   PERMISSION = 'permission-columns',
-  SEGMENTATION = 'segmentation-columns'
+  SEGMENTATION = 'segmentation-columns',
+  PROFILES = 'profiles-columns'
 }
