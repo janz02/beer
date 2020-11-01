@@ -54,7 +54,7 @@ export const CompaniesList: FC = () => {
         onChange={x => setSelectedTab(x)}
         tabBarExtraContent={tabBarActions}
       >
-        <TabPane key="nkm" tab={<TabPanelTitle title={t('organization.companies.title')} />}>
+        <TabPane key="companies" tab={<TabPanelTitle title={t('organization.companies.title')} />}>
           <ResponsiveTable
             hasHeaderOffset
             {...{

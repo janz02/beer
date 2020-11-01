@@ -25,7 +25,7 @@ export const useCompanyListUtils = (): CompaniesListUtils => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const [selectedTab, setSelectedTab] = useState<string>('nkm')
+  const [selectedTab, setSelectedTab] = useState<string>('companies')
 
   const { listParams, listState, companies } = useSelector((state: RootState) => state.companies)
 
