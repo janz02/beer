@@ -17,7 +17,8 @@ import {
   ContactsOutlined,
   HistoryOutlined,
   ClusterOutlined,
-  PieChartOutlined
+  PieChartOutlined,
+  DeploymentUnitOutlined
 } from '@ant-design/icons'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -136,6 +137,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
 
   const footerOptions = useMemo<SideMenuOptionProps[]>(
     () => [
+      {
+        label: t('menu.organization'),
+        link: '/organization',
+        icon: <DeploymentUnitOutlined />,
+        roles: pageViewRoles.organization
+      },
       {
         // Slice is necessary because this way the tooltip won't shoot off
         // far right when the name is really long.

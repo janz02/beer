@@ -30,6 +30,7 @@ import { PermissionListPage } from 'features/permissions/permissionList/Permissi
 import { BpHistoryListPage } from 'features/bpHistory/bpHistoryList/BpHistoryListPage'
 import { SegmentationListPage } from 'features/segmentation/segmentationList/SegmentationList'
 import { SegmentationEditorPage } from 'features/segmentation/segmentationEditor/SegmentationEditorPage'
+import { OrganizationPage } from 'features/organization/OrganizationPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -174,6 +175,12 @@ const Routes = (): JSX.Element => (
       path={['/segmentations/new', '/segmentations/:segmentationId']}
       roles={pageViewRoles.segmentationEditor}
       component={SegmentationEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/organization"
+      roles={pageViewRoles.organization}
+      component={OrganizationPage}
     />
     <Route path="*" render={onDefaultRoute} />
   </Switch>

@@ -688,7 +688,8 @@
     "segmentations": "Szegmentáció",
     "settings": "Beállítások",
     "sites": "Telephelyek",
-    "users": "Felhasználók"
+    "users": "Felhasználók",
+    "organization": "Szervezeti struktúra"
   },
   "newsletter": {
     "add": "Új sablon hozzáadása",
@@ -729,6 +730,20 @@
     "read-all": "Összes megjelölése olvasottként",
     "today": "Ma",
     "yesterday": "Tegnap"
+  },
+  "organization": {
+    "title": "Szervezeti struktúra",
+    "companies": {
+      "field": {
+        "status": "Státusz",
+        "name": "Név",
+        "profiles": "Profilok száma",
+        "groups": "Csoportok száma",
+        "job-roles": "Munkakörök száma",
+        "campaigns": "Kampányok száma"
+      },
+      "title": "Cégek"
+    }
   },
   "partner": {
     "editor": {
