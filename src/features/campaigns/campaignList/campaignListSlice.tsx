@@ -7,8 +7,9 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
-import { CampaignListItem } from 'models/campaign/campaign'
+import { CampaignListItem } from 'models/campaign/campaignListItem'
 import moment from 'moment'
+import { CampaignStatus } from 'models/campaign/campaignStatus'
 
 export type CampaignListTab = 'company' | 'partner'
 
@@ -97,15 +98,21 @@ const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async 
     dispatch(getCampaignsRequest())
 
     const revisedParams = reviseListRequestParams(getState().campaignList.companyListParams, params)
+    const fixedRevisedParams = { ...revisedParams, status: revisedParams.statusId }
 
-    const { items, ...pagination } = await api.campaignEditor.campaigns.getCampaigns(revisedParams)
+    const { items, ...pagination } = await api.campaignEditor.campaigns.getCampaigns(
+      fixedRevisedParams
+    )
     const campaigns =
       items?.map<CampaignListItem>(campaign => ({
         ...(campaign as CampaignListItem),
         startDate: moment(campaign.startDate),
         endDate: moment(campaign.endDate),
         createdDate: moment(campaign.createdDate),
-        modifiedDate: moment(campaign.modifiedDate)
+        modifiedDate: moment(campaign.modifiedDate),
+        status: campaign.statusId
+          ? ('campaign-status.' + CampaignStatus[campaign.statusId]).toString().toLowerCase()
+          : null
       })) ?? []
     dispatch(
       getCompanyCampaignsSuccess({

@@ -75,6 +75,17 @@
       "name": "Product name"
     }
   },
+  "campaign-status": {
+    "approved": "Approved",
+    "created": "Created",
+    "draftcampaign": "Draft",
+    "drafttreatment": "Draft",
+    "senttotestgroup": "Sent to test group",
+    "started": "Started",
+    "startedmanually": "Manually started",
+    "stopped": "Stopped",
+    "stoppedmanually": "Manually stopped"
+  },
   "cashier-editor": {
     "editor-create": "Create cashier",
     "editor-edit": "Edit cashier",

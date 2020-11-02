@@ -7,7 +7,7 @@ import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
-import { CampaignListItem } from 'models/campaign/campaign'
+import { CampaignListItem } from 'models/campaign/campaignListItem'
 import { history } from 'router/router'
 import { pageViewRoles } from 'services/roleHelpers'
 import { AddButton } from 'components/buttons/AddButton'
@@ -17,6 +17,8 @@ import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtil
 import { ExportButton } from 'components/buttons/ExportButton'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { CampaignStatus } from 'models/campaign/campaignStatus'
+import { ColumnFilterItem } from 'antd/lib/table/interface'
 
 interface CampaignListUtils {
   companyCampaignTableProps: ResponsiveTableProps
@@ -67,14 +69,19 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.status'),
         key: 'statusId',
         sort: true,
-        filterMode: FilterMode.FILTER
-        // filters:
-        //   categories?.map(x => {
-        //     return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-        //   }) ?? [],
-        // render(value: string) {
-        //   return categories && categories.find(x => x.id === +value)?.name
-        // }
+        filterMode: FilterMode.ENUM,
+        filters:
+          Object.keys(CampaignStatus)
+            .filter(x => !isNaN(+x))
+            .map(x => {
+              return {
+                text: +x ? t('campaign-status.' + CampaignStatus[+x].toLowerCase()) : null,
+                value: +x
+              } as ColumnFilterItem
+            }) ?? [],
+        render(value: string) {
+          return +value ? t('campaign-status.' + CampaignStatus[+value].toLowerCase()) : null
+        }
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.name'),
@@ -301,12 +308,12 @@ export const useCampaignListUtils = (): CampaignListUtils => {
   }, [dispatch])
 
   const handleCompanyExport = useCallback((): void => {
-    dispatch(campaignListActions.exportCompanyCampaigns())
-  }, [dispatch])
+    campaignListActions.exportCompanyCampaigns()
+  }, [])
 
   const handlePartnerExport = useCallback((): void => {
-    dispatch(campaignListActions.exportPartnerCampaigns())
-  }, [dispatch])
+    campaignListActions.exportPartnerCampaigns()
+  }, [])
 
   const tabBarExtraContent = useMemo(() => {
     const resetFilters = (): void => {

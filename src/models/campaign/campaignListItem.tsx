@@ -5,6 +5,7 @@ export interface CampaignListItem {
   endDate?: moment.Moment | null
   createdBy?: string | null
   responsible?: string | null
+  status?: string | null
   statusId?: number
   canDelete?: boolean
   typeId?: number | null

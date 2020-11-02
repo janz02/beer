@@ -75,6 +75,17 @@
       "name": "Termék megnevezése"
     }
   },
+  "campaign-status": {
+    "approved": "Jóváhagyott",
+    "created": "Létrehozott",
+    "draftcampaign": "Draft",
+    "drafttreatment": "Draft",
+    "senttotestgroup": "Tesztcsoportnak kiküldött",
+    "started": "Indított",
+    "startedmanually": "Manuálisan indított",
+    "stopped": "Leállított",
+    "stoppedmanually": "Manuálisan leállított"
+  },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
     "editor-edit": "Pénztár szerkesztés",

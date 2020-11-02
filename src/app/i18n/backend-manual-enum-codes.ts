@@ -61,3 +61,13 @@ t(`enum.channel-type.Phone`)
 // Boolean mappings
 t(`user-access.field.partnerType.major`)
 t(`user-access.field.partnerType.normal`)
+
+t(`campaign-status.draftcampaign`)
+t(`campaign-status.drafttreatment`)
+t(`campaign-status.created`)
+t(`campaign-status.senttotestgroup`)
+t(`campaign-status.approved`)
+t(`campaign-status.started`)
+t(`campaign-status.startedmanually`)
+t(`campaign-status.stopped`)
+t(`campaign-status.stoppedmanually`)
