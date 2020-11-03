@@ -737,10 +737,11 @@
       "field": {
         "status": "Státusz",
         "name": "Név",
-        "profiles": "Profilok száma",
-        "groups": "Csoportok száma",
-        "job-roles": "Munkakörök száma",
-        "campaigns": "Kampányok száma"
+        "profile-count": "Profilok száma",
+        "group-count": "Csoportok száma",
+        "job-role-count": "Munkakörök száma",
+        "campaign-count": "Kampányok száma",
+        "created-date": "Létrehozás dátuma"
       },
       "title": "Cégek"
     }

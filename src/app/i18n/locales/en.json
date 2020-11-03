@@ -737,10 +737,11 @@
       "field": {
         "status": "Status",
         "name": "Name",
-        "profiles": "Profils",
-        "groups": "Groups",
-        "job-roles": "Job roles",
-        "campaigns": "Campaigns"
+        "profile-count": "Profils",
+        "group-count": "Groups",
+        "job-role-count": "Job roles",
+        "campaign-count": "Campaigns",
+        "created-date": "Date of creation"
       },
       "title": "Companies"
     }

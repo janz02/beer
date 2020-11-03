@@ -22,13 +22,13 @@ const getRandomCompany = (id: number): Company => {
 
   return {
     id,
-    status: 'active',
+    isActive: true,
     name,
-    profiles: Math.floor(Math.random() * 10),
-    groups: Math.floor(Math.random() * 10),
-    jobRoles: Math.floor(Math.random() * 10),
-    campaigns: Math.floor(Math.random() * 10),
-    dateOfCreation: moment()
+    profileCount: Math.floor(Math.random() * 10),
+    groupCount: Math.floor(Math.random() * 10),
+    jobRoleCount: Math.floor(Math.random() * 10),
+    campaignCount: Math.floor(Math.random() * 10),
+    createdDate: moment()
   }
 }
 

@@ -1,10 +1,10 @@
 export interface Company {
   id: number
-  status: 'active' | 'inactive'
+  isActive?: boolean | null
   name: string
-  profiles: number
-  groups: number
-  jobRoles: number
-  campaigns: number
-  dateOfCreation: moment.Moment
+  profileCount: number
+  groupCount: number
+  jobRoleCount: number
+  campaignCount: number
+  createdDate: moment.Moment
 }

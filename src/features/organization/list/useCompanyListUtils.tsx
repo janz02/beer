@@ -10,6 +10,7 @@ import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 import { Company } from 'models/company'
+import { MomentDisplay } from 'components/MomentDisplay'
 
 interface CompaniesListUtils {
   columnsConfig: ColumnsType<Company>
@@ -31,7 +32,14 @@ export const useCompanyListUtils = (): CompaniesListUtils => {
 
   const tableUtils = useTableUtils<Company>({
     listParamsState: listParams,
-    filterKeys: ['name', 'profiles', 'groups', 'jobRoles', 'campaigns', 'dateOfCreation'],
+    filterKeys: [
+      'name',
+      'profileCount',
+      'groupCount',
+      'jobRoleCount',
+      'campaignCount',
+      'createdDate'
+    ],
     getDataAction: companiesActions.getCompanies
   })
 
@@ -51,24 +59,31 @@ export const useCompanyListUtils = (): CompaniesListUtils => {
         filterMode: FilterMode.SEARCH
       }),
       tableUtils.columnConfig({
-        title: t('organization.companies.field.profiles'),
-        key: 'profiles',
+        title: t('organization.companies.field.profile-count'),
+        key: 'profileCount',
         sort: true
       }),
       tableUtils.columnConfig({
-        title: t('organization.companies.field.groups'),
-        key: 'groups',
+        title: t('organization.companies.field.group-counut'),
+        key: 'groupCount',
         sort: true
       }),
       tableUtils.columnConfig({
-        title: t('organization.companies.field.job-roles'),
-        key: 'jobRoles',
+        title: t('organization.companies.field.job-role-count'),
+        key: 'jobRoleCount',
         sort: true
       }),
       tableUtils.columnConfig({
-        title: t('organization.companies.field.campaigns'),
-        key: 'campaigns',
+        title: t('organization.companies.field.campaign-count'),
+        key: 'campaignCount',
         sort: true
+      }),
+      tableUtils.columnConfig({
+        title: t('organization.companies.field.created-date'),
+        key: 'createdDate',
+        sort: true,
+        renderMode: 'date time',
+        filterMode: FilterMode.DATEPICKER
       }),
       hasPermission([Roles.Administrator])
         ? tableUtils.actionColumnConfig({
