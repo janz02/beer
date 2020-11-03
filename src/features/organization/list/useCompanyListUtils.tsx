@@ -88,7 +88,7 @@ export const useCompanyListUtils = (): CompaniesListUtils => {
       hasPermission([Roles.Administrator])
         ? tableUtils.actionColumnConfig({
             render(company: Company) {
-              return <CrudButtons onEdit={() => ({})} />
+              return <CrudButtons onEdit={() => ({})} onDelete={() => ({})} />
             }
           })
         : {}
