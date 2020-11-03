@@ -71,3 +71,6 @@ t(`campaign-status.started`)
 t(`campaign-status.startedmanually`)
 t(`campaign-status.stopped`)
 t(`campaign-status.stoppedmanually`)
+
+t(`campaign-channel.email`)
+t(`campaign-channel.phone`)

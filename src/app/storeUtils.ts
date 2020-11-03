@@ -56,7 +56,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(testGroupCategoryEditorActions.resetCategoryEditor())
     dispatch(resetBpHistory())
     dispatch(systemParamsActions.resetSystemParams())
-    dispatch(campaignListActions.resetCampaignFilters())
+    dispatch(campaignListActions.resetCampaignsList())
     logout && dispatch(resetRouterHistory())
   })
 }

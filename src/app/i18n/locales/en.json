@@ -43,6 +43,10 @@
       "title": "Subject"
     }
   },
+  "campaign-channel": {
+    "email": "Email",
+    "phone": "Phone"
+  },
   "campaign-list": {
     "company": {
       "add": "New",

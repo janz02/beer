@@ -10,12 +10,16 @@ import {
 import { CampaignListItem } from 'models/campaign/campaignListItem'
 import moment from 'moment'
 import { CampaignStatus } from 'models/campaign/campaignStatus'
+import { Product } from 'models/campaign/product'
+import { ChannelVm, GetManyProductsRequest } from 'api/swagger/campaign-editor'
 
 export type CampaignListTab = 'company' | 'partner'
 
 interface CampaignListState {
   companyCampaigns: CampaignListItem[]
   partnerCampaigns: CampaignListItem[]
+  products: Product[]
+  channels: ChannelVm[]
   error: boolean
   loading: boolean
   companyListParams: ListRequestParams
@@ -27,6 +31,8 @@ const initialState: CampaignListState = {
   loading: false,
   companyCampaigns: [],
   partnerCampaigns: [],
+  products: [],
+  channels: [],
   companyListParams: {
     pageSize: 10
   },
@@ -41,7 +47,7 @@ const campaignListSlice = createSlice({
   reducers: {
     resetCampaignsList: () => initialState,
     resetCompanyListParams(state) {
-      state.companyCampaigns = initialState.companyCampaigns
+      state.companyListParams = initialState.companyListParams
     },
     resetPartnerListParams(state) {
       state.partnerListParams = initialState.partnerListParams
@@ -71,6 +77,12 @@ const campaignListSlice = createSlice({
       state.loading = false
       state.error = true
     },
+    getProducts(state, action: PayloadAction<{ products: Product[] }>) {
+      state.products = action.payload.products
+    },
+    getChannels(state, action: PayloadAction<{ channels: ChannelVm[] }>) {
+      state.channels = action.payload.channels
+    },
     deleteSuccess(state) {
       state.loading = false
       state.error = false
@@ -84,6 +96,8 @@ const {
   getCampaignsRequest,
   getCompanyCampaignsSuccess,
   getCampaignsFail,
+  getProducts,
+  getChannels,
   deleteSuccess
 } = campaignListSlice.actions
 export const { resetCampaignsList } = campaignListSlice.actions
@@ -114,6 +128,21 @@ const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async 
           ? ('campaign-status.' + CampaignStatus[campaign.statusId]).toString().toLowerCase()
           : null
       })) ?? []
+
+    const productIds = campaigns.filter(x => x.productId).map(x => x.productId)
+    if (productIds && productIds.length > 0) {
+      const products = (await api.campaignEditor.products.getManyProducts({
+        ids: productIds
+      } as GetManyProductsRequest)) as Product[]
+
+      dispatch(getProducts({ products }))
+    }
+
+    const channelsResponse = await api.campaignEditor.channels.getChannels({ pageSize: -1 })
+    if (channelsResponse.items && channelsResponse.items.length > 0) {
+      dispatch(getChannels({ channels: channelsResponse.items }))
+    }
+
     dispatch(
       getCompanyCampaignsSuccess({
         campaigns: campaigns,
@@ -154,21 +183,24 @@ const exportPartnerCampaigns = (): void => {
   // TODO
 }
 
-const resetCampaignFilters = (): AppThunk => async dispatch => {
+const resetCompanyCampaignFilters = (): AppThunk => async dispatch => {
   dispatch(resetCompanyListParams())
-  dispatch(resetPartnerListParams())
   dispatch(getCompanyCampaigns())
+}
+
+const resetPartnerCampaignFilters = (): AppThunk => async dispatch => {
+  dispatch(resetPartnerListParams())
   dispatch(getPartnerCampaigns())
 }
 
 export const campaignListActions = {
+  resetCampaignsList,
   getCompanyCampaigns,
   getPartnerCampaigns,
   exportCompanyCampaigns,
   exportPartnerCampaigns,
-  resetCampaignFilters,
-  resetCompanyListParams,
-  resetPartnerListParams,
+  resetCompanyCampaignFilters,
+  resetPartnerCampaignFilters,
   deleteCompanyCampaign,
   deletePartnerCampaign
 }

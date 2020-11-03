@@ -19,6 +19,8 @@ import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { CampaignStatus } from 'models/campaign/campaignStatus'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
+import { MomentDisplay } from 'components/MomentDisplay'
+import moment from 'moment'
 
 interface CampaignListUtils {
   companyCampaignTableProps: ResponsiveTableProps
@@ -46,6 +48,8 @@ export const useCampaignListUtils = (): CampaignListUtils => {
     partnerCampaigns,
     companyListParams,
     partnerListParams,
+    products,
+    channels,
     loading
   } = useSelector((state: RootState) => state.campaignList)
 
@@ -87,36 +91,46 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH
-        // render(value: string) {
-        //   return as link
-        // }
+        filterMode: FilterMode.SEARCH,
+        disableSearchHighlight: true,
+        render: (value: string, campaign: CampaignListItem): React.ReactNode => {
+          return <a href={`/campaigns/${campaign.id}`}>{value}</a>
+        }
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.type'),
-        key: 'typeId',
+        key: 'channelId',
         sort: true,
-        filterMode: FilterMode.FILTER
-        // filters:
-        //   categories?.map(x => {
-        //     return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-        //   }) ?? [],
-        // render(value: string) {
-        //   return categories && categories.find(x => x.id === +value)?.name
-        // }
+        filterMode: FilterMode.ENUM,
+        filters:
+          channels?.map(x => {
+            return {
+              text: x.name && t('campaign-channel.' + x.name?.toLowerCase()),
+              value: x.id?.toString()
+            } as ColumnFilterItem
+          }) ?? [],
+        render(value: string, campaign: CampaignListItem) {
+          return value
+          // const campaignChannels = campaign.channels.map(
+          //  x => channels && channels.find(x => x.id === +value)?.name
+          // )
+          // return campaignChannels.map(x=> x && t('campaign-channel.'+x.toLowerCase())).join(', ')
+        }
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.timing'),
         key: 'startDate',
         sort: true,
-        filterMode: FilterMode.DATEPICKER
-        // filters:
-        //   categories?.map(x => {
-        //     return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-        //   }) ?? [],
-        // render(value: string) {
-        //   return categories && categories.find(x => x.id === +value)?.name
-        // }
+        filterMode: FilterMode.DATERANGEPICKER,
+        render: (value: moment.Moment, campaign: CampaignListItem): React.ReactNode => {
+          return (
+            <>
+              <MomentDisplay date={campaign.startDate} />
+              <br />
+              {campaign.endDate ? <MomentDisplay date={campaign.endDate} /> : undefined}
+            </>
+          )
+        }
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.segmentation'),
@@ -128,73 +142,44 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.product'),
         key: 'productId',
         sort: true,
-        filterMode: FilterMode.FILTER
-        // filters:
-        //   categories?.map(x => {
-        //     return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-        //   }) ?? [],
-        // render(value: string) {
-        //   return categories && categories.find(x => x.id === +value)?.name
-        // }
+        filterMode: FilterMode.FILTER,
+        filters:
+          products?.map(x => {
+            return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
+          }) ?? [],
+        render(value: string) {
+          return products && products.find(x => x.id === +value)?.name
+        }
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.requestor'),
         key: 'createdBy',
         sort: true,
-        filterMode: FilterMode.FILTER
-        // filters:
-        //   categories?.map(x => {
-        //     return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-        //   }) ?? [],
-        // render(value: string) {
-        //   return categories && categories.find(x => x.id === +value)?.name
-        // }
+        filterMode: FilterMode.SEARCH
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.createdDate'),
         key: 'createdDate',
         sort: true,
-        filterMode: FilterMode.DATEPICKER
-        // filters:
-        //   categories?.map(x => {
-        //     return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-        //   }) ?? [],
-        // render(value: string) {
-        //   return categories && categories.find(x => x.id === +value)?.name
-        // }
+        filterMode: FilterMode.DATERANGEPICKER
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.responsible'),
         key: 'responsible',
         sort: true,
-        filterMode: FilterMode.FILTER
-        // filters:
-        //   categories?.map(x => {
-        //     return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-        //   }) ?? [],
-        // render(value: string) {
-        //   return categories && categories.find(x => x.id === +value)?.name
-        // }
+        filterMode: FilterMode.SEARCH
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.modifiedDate'),
         key: 'modifiedDate',
         sort: true,
         filterMode: FilterMode.DATEPICKER
-        // filters:
-        //   categories?.map(x => {
-        //     return { text: x.name, value: x.id?.toString() } as ColumnFilterItem
-        //   }) ?? [],
-        // render(value: string) {
-        //   return categories && categories.find(x => x.id === +value)?.name
-        // }
       }),
       isEditorUser
         ? companyCampaignTableUtils.actionColumnConfig({
             render(campaign: CampaignListItem) {
               return (
                 <CrudButtons
-                  onView={() => history.push(`/campaigns/${campaign.id}`)}
                   onEdit={
                     isEditorUser ? () => history.push(`/campaigns/${campaign.id}`) : undefined
                   }
@@ -211,7 +196,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
           })
         : {}
     ],
-    [t, dispatch, companyCampaignTableUtils, isEditorUser]
+    [t, dispatch, companyCampaignTableUtils, isEditorUser, products, channels]
   )
 
   const companyColumnOrderUtils = useColumnOrderUtils(
@@ -300,11 +285,11 @@ export const useCampaignListUtils = (): CampaignListUtils => {
   )
 
   const resetCompanyFilters = useCallback((): void => {
-    dispatch(campaignListActions.resetCompanyListParams())
+    dispatch(campaignListActions.resetCompanyCampaignFilters())
   }, [dispatch])
 
   const resetPartnerFilters = useCallback((): void => {
-    dispatch(campaignListActions.resetPartnerListParams())
+    dispatch(campaignListActions.resetPartnerCampaignFilters())
   }, [dispatch])
 
   const handleCompanyExport = useCallback((): void => {

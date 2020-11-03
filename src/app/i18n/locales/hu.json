@@ -43,6 +43,10 @@
       "title": "Tárgy"
     }
   },
+  "campaign-channel": {
+    "email": "Email",
+    "phone": "Telefon"
+  },
   "campaign-list": {
     "company": {
       "add": "Új",
