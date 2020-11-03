@@ -64,7 +64,7 @@ export const useCompanyListUtils = (): CompaniesListUtils => {
         sort: true
       }),
       tableUtils.columnConfig({
-        title: t('organization.companies.field.group-counut'),
+        title: t('organization.companies.field.group-count'),
         key: 'groupCount',
         sort: true
       }),

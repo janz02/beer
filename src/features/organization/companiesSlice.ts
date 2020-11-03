@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { api } from 'api'
 import { AppThunk } from 'app/store'
 import {
   ListRequestParams,
@@ -7,7 +8,7 @@ import {
 } from 'hooks/useTableUtils'
 import { Company } from 'models/company'
 import { FeatureState } from 'models/featureState'
-import { getCompaniesMock } from './companiesMock'
+import moment from 'moment'
 
 interface State {
   companies: Company[]
@@ -51,10 +52,11 @@ const getCompanies = (params: ListRequestParams = {}): AppThunk => async (dispat
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().companies.listParams, params)
-    const { result, ...pagination } = await getCompaniesMock(revisedParams)
+    const { result, ...pagination } = await api.admin.companies.getCompanies(revisedParams)
     dispatch(
       getCompaniesSuccess({
-        companies: result as Company[],
+        companies:
+          result?.map(x => ({ ...x, createdDate: moment(x.createdDate) } as Company)) || [],
         listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
