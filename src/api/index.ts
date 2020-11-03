@@ -25,7 +25,6 @@ import {
   SegmentationQueriesApi,
   SegmentationCategoriesApi,
   SegmentationsApi,
-  SharepointApi,
   TemplatesApi,
   TestGroupCategoriesApi,
   CampaignResultsApi,
@@ -114,7 +113,6 @@ export const api = {
     segmentationCategories: new SegmentationCategoriesApi(campaignEditorConfig),
     segmentationQueries: new SegmentationQueriesApi(campaignEditorConfig),
     segmentations: new SegmentationsApi(campaignEditorConfig),
-    sharepoint: new SharepointApi(campaignEditorConfig),
     staticMergeTags: new StaticMergeTagsApi(campaignEditorConfig),
     templates: new TemplatesApi(campaignEditorConfig),
     testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig)

@@ -14,6 +14,11 @@
 
 
 import * as runtime from '../runtime';
+import {
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
+} from '../models';
 
 export interface GetQueryLocalizationsRequest {
     langId: string;
@@ -41,7 +46,7 @@ export class LocalizationsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Localizations/QueryLocalization/{langId}`.replace(`{${"langId"}}`, encodeURIComponent(String(requestParameters.langId))),
+            path: `/api/Localizations/GetLocalizations/{langId}`.replace(`{${"langId"}}`, encodeURIComponent(String(requestParameters.langId))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

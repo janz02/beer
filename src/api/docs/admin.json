@@ -15,8 +15,8 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Creates a Category entity",
-        "description": "Returns the id of the Category upon success",
+        "summary": "Creates a Company entity",
+        "description": "Returns the id of the Company upon success",
         "operationId": "createCompany",
         "parameters": [
           {
@@ -29,7 +29,7 @@
           }
         ],
         "requestBody": {
-          "description": "Details of the Category",
+          "description": "Details of the Company",
           "content": {
             "application/json": {
               "schema": {
@@ -91,8 +91,8 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Gets a Category entity list sorted and filtered",
-        "description": "Returns the Category list with the specified filters applied",
+        "summary": "Gets a Company entity list sorted and filtered",
+        "description": "Returns the Company list with the specified filters applied",
         "operationId": "getCompanies",
         "parameters": [
           {
@@ -100,6 +100,59 @@
             "in": "query",
             "schema": {
               "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "createdDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "profileCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "groupCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "jobRoleCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "campaignCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
               "nullable": true
             }
           },
@@ -151,19 +204,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":42,"name":"YourCompany"},{"id":69,"name":"NotYourCompany"}],"page":1,"from":1,"to":2,"size":42}
+                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":69,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":42,"name":"YourCompany"},{"id":69,"name":"NotYourCompany"}],"page":1,"from":1,"to":2,"size":42}
+                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":69,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":42,"name":"YourCompany"},{"id":69,"name":"NotYourCompany"}],"page":1,"from":1,"to":2,"size":42}
+                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":69,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
               }
             }
           },
@@ -198,18 +251,18 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Gets a Category entity by Id",
-        "description": "Returns the Category with the specified Id upon success",
+        "summary": "Gets a Company entity by Id",
+        "description": "Returns the Company with the specified Id upon success",
         "operationId": "getCompany",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the Category",
+            "description": "Id of the Company",
             "required": true,
             "schema": {
               "type": "integer",
-              "description": "Id of the Category",
+              "description": "Id of the Company",
               "format": "int32"
             }
           },
@@ -224,25 +277,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful query: Category entity",
+            "description": "Successful query: Company entity",
             "content": {
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVm"
                 },
-                "example": {"id":65,"name":"YourCompany"}
+                "example": {"id":65,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVm"
                 },
-                "example": {"id":65,"name":"YourCompany"}
+                "example": {"id":65,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVm"
                 },
-                "example": {"id":65,"name":"YourCompany"}
+                "example": {"id":65,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}
               }
             }
           },
@@ -295,8 +348,8 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Updates a Category entity",
-        "description": "Updates a Category entity with Id of \"id\" to entity \"category\"",
+        "summary": "Updates a Company entity",
+        "description": "Updates a Company entity with Id of \"id\" to entity \"company\"",
         "operationId": "updateCompany",
         "parameters": [
           {
@@ -382,8 +435,8 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Deletes a Category entity",
-        "description": "Deletes the Category entity with Id of \"id\"",
+        "summary": "Deletes a Company entity",
+        "description": "Deletes the Company entity with Id of \"id\"",
         "operationId": "deleteCompany",
         "parameters": [
           {
@@ -421,8 +474,8 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Exports a Category entity list sorted and filtered in a csv file",
-        "description": "Exports the Category list with the specified filters applied in a csv file",
+        "summary": "Exports a Company entity list sorted and filtered in a csv file",
+        "description": "Exports the Company list with the specified filters applied in a csv file",
         "operationId": "exportCompanies",
         "parameters": [
           {
@@ -430,6 +483,59 @@
             "in": "query",
             "schema": {
               "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "createdDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "profileCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "groupCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "jobRoleCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "campaignCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
               "nullable": true
             }
           },
@@ -475,7 +581,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful export: Csv file of Category entities",
+            "description": "Successful export: Csv file of Company entities",
             "content": {
               "application/octet-stream;charset=utf-8": {
                 "schema": {
@@ -490,6 +596,54 @@
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/Companies/{id}/Status": {
+      "put": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Sets the a Company's status",
+        "description": "Sets the status of a Company with Id of \"id\"",
+        "operationId": "setCompanyStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of entity to delete",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully set"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -702,6 +856,29 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "profileCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jobRoleCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "campaignCount": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -731,6 +908,15 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompanyStatusDto": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

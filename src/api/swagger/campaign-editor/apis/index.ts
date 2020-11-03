@@ -11,7 +11,7 @@ export * from './ProductsApi';
 export * from './SegmentationCategoriesApi';
 export * from './SegmentationQueriesApi';
 export * from './SegmentationsApi';
-export * from './SharepointApi';
+export * from './SharePointApi';
 export * from './SiteLevelSettingsApi';
 export * from './StandaloneUsersApi';
 export * from './StaticMergeTagsApi';

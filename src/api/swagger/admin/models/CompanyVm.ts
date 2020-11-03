@@ -31,6 +31,42 @@ export interface CompanyVm {
      * @memberof CompanyVm
      */
     name?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CompanyVm
+     */
+    isActive?: boolean;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CompanyVm
+     */
+    createdDate?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof CompanyVm
+     */
+    profileCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CompanyVm
+     */
+    groupCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CompanyVm
+     */
+    jobRoleCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CompanyVm
+     */
+    campaignCount?: number;
 }
 
 export function CompanyVmFromJSON(json: any): CompanyVm {
@@ -45,6 +81,12 @@ export function CompanyVmFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'isActive': !exists(json, 'isActive') ? undefined : json['isActive'],
+        'createdDate': !exists(json, 'createdDate') ? undefined : (new Date(json['createdDate'])),
+        'profileCount': !exists(json, 'profileCount') ? undefined : json['profileCount'],
+        'groupCount': !exists(json, 'groupCount') ? undefined : json['groupCount'],
+        'jobRoleCount': !exists(json, 'jobRoleCount') ? undefined : json['jobRoleCount'],
+        'campaignCount': !exists(json, 'campaignCount') ? undefined : json['campaignCount'],
     };
 }
 
@@ -59,6 +101,12 @@ export function CompanyVmToJSON(value?: CompanyVm | null): any {
         
         'id': value.id,
         'name': value.name,
+        'isActive': value.isActive,
+        'createdDate': value.createdDate === undefined ? undefined : (value.createdDate.toISOString()),
+        'profileCount': value.profileCount,
+        'groupCount': value.groupCount,
+        'jobRoleCount': value.jobRoleCount,
+        'campaignCount': value.campaignCount,
     };
 }
 
