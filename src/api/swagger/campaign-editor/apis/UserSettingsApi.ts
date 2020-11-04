@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
     UserSettingsVm,
     UserSettingsVmFromJSON,
     UserSettingsVmToJSON,
