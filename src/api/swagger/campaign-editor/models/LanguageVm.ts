@@ -16,28 +16,28 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface LanguagesVm
+ * @interface LanguageVm
  */
-export interface LanguagesVm {
+export interface LanguageVm {
     /**
      * 
      * @type {number}
-     * @memberof LanguagesVm
+     * @memberof LanguageVm
      */
     id?: number;
     /**
      * 
      * @type {string}
-     * @memberof LanguagesVm
+     * @memberof LanguageVm
      */
     isoCode?: string | null;
 }
 
-export function LanguagesVmFromJSON(json: any): LanguagesVm {
-    return LanguagesVmFromJSONTyped(json, false);
+export function LanguageVmFromJSON(json: any): LanguageVm {
+    return LanguageVmFromJSONTyped(json, false);
 }
 
-export function LanguagesVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): LanguagesVm {
+export function LanguageVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): LanguageVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -48,7 +48,7 @@ export function LanguagesVmFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function LanguagesVmToJSON(value?: LanguagesVm | null): any {
+export function LanguageVmToJSON(value?: LanguageVm | null): any {
     if (value === undefined) {
         return undefined;
     }

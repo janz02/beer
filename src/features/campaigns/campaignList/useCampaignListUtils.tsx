@@ -21,6 +21,7 @@ import { CampaignStatus } from 'models/campaign/campaignStatus'
 import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
 import moment from 'moment'
+import { SettingsButton } from 'components/buttons/SettingsButton'
 
 interface CampaignListUtils {
   companyCampaignTableProps: ResponsiveTableProps
@@ -110,11 +111,14 @@ export const useCampaignListUtils = (): CampaignListUtils => {
             } as ColumnFilterItem
           }) ?? [],
         render(value: string, campaign: CampaignListItem) {
-          return value
-          // const campaignChannels = campaign.channels.map(
-          //  x => channels && channels.find(x => x.id === +value)?.name
-          // )
-          // return campaignChannels.map(x=> x && t('campaign-channel.'+x.toLowerCase())).join(', ')
+          const campaignChannels = campaign.channels?.map(
+            x => channels && channels.find(channel => channel.id === x)?.name
+          )
+          if (campaignChannels && campaignChannels.length > 0) {
+            return campaignChannels
+              .map(x => x && t('campaign-channel.' + x.toLowerCase()))
+              .join(', ')
+          }
         }
       }),
       companyCampaignTableUtils.columnConfig({
@@ -300,6 +304,9 @@ export const useCampaignListUtils = (): CampaignListUtils => {
     campaignListActions.exportPartnerCampaigns()
   }, [])
 
+  const handleSettings = (): void => {
+    // TODO Open settings
+  }
   const tabBarExtraContent = useMemo(() => {
     const resetFilters = (): void => {
       if (isCompanyCampaign) {
@@ -322,6 +329,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         ) : (
           <ColumnOrderDropdown {...partnerColumnOrderUtils} />
         )}
+        <SettingsButton onClick={handleSettings} />
       </>
     )
   }, [

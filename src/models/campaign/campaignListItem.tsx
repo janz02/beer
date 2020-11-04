@@ -13,4 +13,6 @@ export interface CampaignListItem {
   segmentation?: number | null
   createdDate?: moment.Moment
   modifiedDate?: moment.Moment | null
+  channels?: Array<number> | null
+  channelId?: number | null
 }

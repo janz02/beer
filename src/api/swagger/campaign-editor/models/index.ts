@@ -39,7 +39,7 @@ export * from './FunctionPermissionVmPaginatedSearchResponse';
 export * from './InlineObject';
 export * from './Int32LabelValuePair';
 export * from './Int32LabelValueTree';
-export * from './LanguagesVm';
+export * from './LanguageVm';
 export * from './LoginRequestCommand';
 export * from './Operator';
 export * from './OrderByType';

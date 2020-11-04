@@ -73,6 +73,7 @@ export interface GetCampaignsRequest {
     createdDateTo?: string;
     status?: string;
     productId?: string;
+    channelId?: string;
     statuses?: Array<string>;
     skip?: number;
     take?: number;
@@ -345,6 +346,10 @@ export class CampaignsApi extends runtime.BaseAPI {
 
         if (requestParameters.productId !== undefined) {
             queryParameters['ProductId'] = requestParameters.productId;
+        }
+
+        if (requestParameters.channelId !== undefined) {
+            queryParameters['ChannelId'] = requestParameters.channelId;
         }
 
         if (requestParameters.statuses) {
