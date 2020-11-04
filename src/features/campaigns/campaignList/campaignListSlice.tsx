@@ -124,8 +124,6 @@ const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async 
         endDate: moment(campaign.endDate),
         createdDate: moment(campaign.createdDate),
         modifiedDate: moment(campaign.modifiedDate),
-        productId: campaign.id,
-        channels: [1],
         status: campaign.statusId
           ? ('campaign-status.' + CampaignStatus[campaign.statusId]).toString().toLowerCase()
           : null
