@@ -8,7 +8,7 @@ import { couponCampaignListReducer } from 'features/couponCampaigns/couponCampai
 import { couponCampaignsReducer } from 'features/couponCampaigns/couponCampaignsSlice'
 import { notificationReducer } from 'features/notification/notificationSlice'
 import { profileReducer } from 'features/profile/profileSlice'
-import { companiesReducer } from 'features/organization/companiesSlice'
+import { companiesReducer } from 'features/organization/companies/companiesSlice'
 import { siteEditorReducer } from 'features/sites/siteEditor/siteEditorSlice'
 import { newsletterListReducer } from 'features/newsletter/newsletterList/newsletterListSlice'
 import { partnersListReducer } from 'features/partners/partnerList/partnerListSlice'

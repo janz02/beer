@@ -1,32 +1,31 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { companiesActions } from '../companiesSlice'
+import { companiesActions } from './companiesSlice'
 import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
-import { ColumnsType } from 'antd/lib/table'
+import { ColumnsType, ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 import { Company } from 'models/company'
-import { MomentDisplay } from 'components/MomentDisplay'
+import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 
-interface CompaniesListUtils {
-  columnsConfig: ColumnsType<Company>
+export interface CompaniesUtils {
+  currentColumns: ColumnType<Company>[]
   tableUtils: TableUtils<Company>
   companies: Company[]
   companiesLoading: boolean
-  selectedTab: string
-  setSelectedTab: (tab: string) => void
-  resetFilters: () => void
+  tabBarActions: JSX.Element
 }
 
-export const useCompanyListUtils = (): CompaniesListUtils => {
+export const useCompaniesUtils = (): CompaniesUtils => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-
-  const [selectedTab, setSelectedTab] = useState<string>('companies')
 
   const { listParams, listState, companies } = useSelector((state: RootState) => state.companies)
 
@@ -100,13 +99,22 @@ export const useCompanyListUtils = (): CompaniesListUtils => {
     dispatch(companiesActions.resetCompaniesFilters())
   }
 
+  const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.COMPANIES)
+
+  const tabBarActions = useMemo(() => {
+    return (
+      <>
+        <ResetFiltersButton onClick={resetFilters} />
+        <ColumnOrderDropdown {...columnOrderUtils} />
+      </>
+    )
+  }, [columnOrderUtils, resetFilters])
+
   return {
-    columnsConfig,
+    currentColumns: columnOrderUtils.currentColumns,
     tableUtils,
     companies,
     companiesLoading: listState === FeatureState.Loading,
-    resetFilters,
-    selectedTab,
-    setSelectedTab
+    tabBarActions
   }
 }
