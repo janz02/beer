@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
@@ -32,6 +32,7 @@ export const useCompaniesUtils = (): CompaniesUtils => {
   const tableUtils = useTableUtils<Company>({
     listParamsState: listParams,
     filterKeys: [
+      'isActive',
       'name',
       'profileCount',
       'groupCount',
@@ -95,9 +96,9 @@ export const useCompaniesUtils = (): CompaniesUtils => {
     [tableUtils, t]
   )
 
-  const resetFilters = (): void => {
+  const resetFilters = useCallback(() => {
     dispatch(companiesActions.resetCompaniesFilters())
-  }
+  }, [dispatch])
 
   const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.COMPANIES)
 
