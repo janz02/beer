@@ -14,6 +14,7 @@ import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdow
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+import { ActivenessSwitch } from 'components/ActivenessSwitch'
 
 export interface CompaniesUtils {
   currentColumns: ColumnType<Company>[]
@@ -27,7 +28,9 @@ export const useCompaniesUtils = (): CompaniesUtils => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const { listParams, listState, companies } = useSelector((state: RootState) => state.companies)
+  const { listParams, listState, companies, savingStatusIds } = useSelector(
+    (state: RootState) => state.companies
+  )
 
   const tableUtils = useTableUtils<Company>({
     listParamsState: listParams,
@@ -49,7 +52,18 @@ export const useCompaniesUtils = (): CompaniesUtils => {
         title: t('organization.companies.field.status'),
         filterMode: FilterMode.ACTIVE_INACTIVE,
         key: 'isActive',
-        width: '7rem'
+        width: '7rem',
+        render(value: boolean, company: Company) {
+          return (
+            <ActivenessSwitch
+              isActive={value}
+              onChange={x => {
+                dispatch(companiesActions.setCompanyStatus(company.id, x))
+              }}
+              loading={!!savingStatusIds[company.id]}
+            />
+          )
+        }
       }),
       tableUtils.columnConfig({
         title: t('organization.companies.field.name'),
@@ -87,13 +101,13 @@ export const useCompaniesUtils = (): CompaniesUtils => {
       }),
       hasPermission([Roles.Administrator])
         ? tableUtils.actionColumnConfig({
-            render(company: Company) {
+            render() {
               return <CrudButtons onEdit={() => ({})} onDelete={() => ({})} />
             }
           })
         : {}
     ],
-    [tableUtils, t]
+    [dispatch, tableUtils, t]
   )
 
   const resetFilters = useCallback(() => {

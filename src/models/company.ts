@@ -1,6 +1,6 @@
 export interface Company {
   id: number
-  isActive?: boolean | null
+  isActive: boolean
   name: string
   profileCount: number
   groupCount: number

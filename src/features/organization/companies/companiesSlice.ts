@@ -12,12 +12,14 @@ import moment from 'moment'
 
 interface State {
   companies: Company[]
+  savingStatusIds: { [id: number]: boolean }
   listParams: ListRequestParams
   listState: FeatureState
 }
 
 const initialState: State = {
   companies: [],
+  savingStatusIds: {},
   listParams: {
     pageSize: 10
   },
@@ -35,6 +37,18 @@ const slice = createSlice({
     setListState(state, action: PayloadAction<FeatureState>) {
       state.listState = action.payload
     },
+    setCompanyStatusRequest(state, action: PayloadAction<number>) {
+      state.savingStatusIds[action.payload] = true
+    },
+    setCompanyStatusSuccess(state, action: PayloadAction<{ id: number; isActive: boolean }>) {
+      const { id, isActive } = action.payload
+      const company = state.companies.find(x => x.id === id)
+      if (company) {
+        company.isActive = isActive
+      }
+
+      delete state.savingStatusIds[action.payload.id]
+    },
     getCompaniesSuccess(
       state,
       action: PayloadAction<{ companies: Company[]; listParams: ListRequestParams }>
@@ -46,7 +60,14 @@ const slice = createSlice({
   }
 })
 
-const { reset, resetListParams, setListState, getCompaniesSuccess } = slice.actions
+const {
+  reset,
+  resetListParams,
+  setListState,
+  getCompaniesSuccess,
+  setCompanyStatusRequest,
+  setCompanyStatusSuccess
+} = slice.actions
 
 const getCompanies = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
@@ -65,6 +86,16 @@ const getCompanies = (params: ListRequestParams = {}): AppThunk => async (dispat
   }
 }
 
+const setCompanyStatus = (id: number, isActive: boolean): AppThunk => async dispatch => {
+  try {
+    dispatch(setCompanyStatusRequest(id))
+    await api.admin.companies.setCompanyStatus({ id, companyStatusDto: { isActive } })
+    dispatch(setCompanyStatusSuccess({ id, isActive }))
+  } catch (err) {
+    dispatch(setListState(FeatureState.Error))
+  }
+}
+
 const resetCompaniesFilters = (): AppThunk => async dispatch => {
   dispatch(resetListParams())
   dispatch(getCompanies())
@@ -74,6 +105,7 @@ export const companiesReducer = slice.reducer
 
 export const companiesActions = {
   getCompanies,
+  setCompanyStatus,
   resetCompaniesFilters,
   reset
 }
