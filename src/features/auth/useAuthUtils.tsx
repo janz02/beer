@@ -5,6 +5,7 @@ import { authActions } from './authSlice'
 import { useParams } from 'react-router-dom'
 import { FormInstance } from 'antd/lib/form'
 import { useFormUtils } from 'hooks/useFormUtils'
+import { withCurrentTransaction } from 'app/apm'
 
 interface AuthUtils {
   form: FormInstance
@@ -27,6 +28,7 @@ export const useAuthUtils = (): AuthUtils => {
   const loading = featureState === FeatureState.Loading
 
   const handleLogin = (values: any): void => {
+    withCurrentTransaction(t => (t.name = 'Click - login'))
     dispatch(authActions.login(values))
   }
 
