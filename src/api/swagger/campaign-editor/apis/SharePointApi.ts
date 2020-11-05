@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    ProblemDetails,
+    ProblemDetailsFromJSON,
+    ProblemDetailsToJSON,
     TreeNodeVm,
     TreeNodeVmFromJSON,
     TreeNodeVmToJSON,
@@ -24,17 +27,17 @@ export interface GetFileStructureRequest {
     withoutFile?: boolean;
 }
 
-export interface UploadFromSharepointRequest {
+export interface UploadFromSharePointRequest {
     body?: string;
 }
 
 /**
  * no description
  */
-export class SharepointApi extends runtime.BaseAPI {
+export class SharePointApi extends runtime.BaseAPI {
 
     /**
-     * Returns a folder structure of a dedicated - configured sharepoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
+     * Returns a folder structure of a dedicated - configured SharePoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
     async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<TreeNodeVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -50,7 +53,7 @@ export class SharepointApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Sharepoint/GetFileStructureFromSharepoint`,
+            path: `/api/SharePoint/GetFileStructure`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -60,7 +63,7 @@ export class SharepointApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns a folder structure of a dedicated - configured sharepoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
+     * Returns a folder structure of a dedicated - configured SharePoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
     async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<TreeNodeVm>> {
         const response = await this.getFileStructureRaw(requestParameters);
@@ -68,9 +71,9 @@ export class SharepointApi extends runtime.BaseAPI {
     }
 
     /**
-     * Creates segmentation via NKM.RTD.CampaignEditor.Controllers.SegmentationsController used mchanism to  process CSV and create segment. The file which selected on sharepoint got to be   a CSV.
+     * Creates segmentation via NKM.RTD.CampaignEditor.Controllers.SegmentationsController used mechanism to  process CSV and create segment. The file which selected on SharePoint got to be   a CSV.
      */
-    async uploadFromSharepointRaw(requestParameters: UploadFromSharepointRequest): Promise<runtime.ApiResponse<number>> {
+    async uploadFromSharePointRaw(requestParameters: UploadFromSharePointRequest): Promise<runtime.ApiResponse<number>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -82,7 +85,7 @@ export class SharepointApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Sharepoint/UploadFileFromSharepoint`,
+            path: `/api/SharePoint/UploadFileFromSharePoint`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -93,10 +96,10 @@ export class SharepointApi extends runtime.BaseAPI {
     }
 
     /**
-     * Creates segmentation via NKM.RTD.CampaignEditor.Controllers.SegmentationsController used mchanism to  process CSV and create segment. The file which selected on sharepoint got to be   a CSV.
+     * Creates segmentation via NKM.RTD.CampaignEditor.Controllers.SegmentationsController used mechanism to  process CSV and create segment. The file which selected on SharePoint got to be   a CSV.
      */
-    async uploadFromSharepoint(requestParameters: UploadFromSharepointRequest): Promise<number> {
-        const response = await this.uploadFromSharepointRaw(requestParameters);
+    async uploadFromSharePoint(requestParameters: UploadFromSharePointRequest): Promise<number> {
+        const response = await this.uploadFromSharePointRaw(requestParameters);
         return await response.value();
     }
 

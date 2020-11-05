@@ -133,6 +133,18 @@ export interface CampaignListItemVm {
      * @memberof CampaignListItemVm
      */
     canStop?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignListItemVm
+     */
+    productId?: number;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CampaignListItemVm
+     */
+    channels?: Array<number> | null;
 }
 
 export function CampaignListItemVmFromJSON(json: any): CampaignListItemVm {
@@ -164,6 +176,8 @@ export function CampaignListItemVmFromJSONTyped(json: any, ignoreDiscriminator: 
         'canDelete': !exists(json, 'canDelete') ? undefined : json['canDelete'],
         'canStart': !exists(json, 'canStart') ? undefined : json['canStart'],
         'canStop': !exists(json, 'canStop') ? undefined : json['canStop'],
+        'productId': !exists(json, 'productId') ? undefined : json['productId'],
+        'channels': !exists(json, 'channels') ? undefined : json['channels'],
     };
 }
 
@@ -195,6 +209,8 @@ export function CampaignListItemVmToJSON(value?: CampaignListItemVm | null): any
         'canDelete': value.canDelete,
         'canStart': value.canStart,
         'canStop': value.canStop,
+        'productId': value.productId,
+        'channels': value.channels,
     };
 }
 

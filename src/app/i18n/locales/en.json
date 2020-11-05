@@ -688,7 +688,8 @@
     "segmentations": "Segmentation",
     "settings": "Settings",
     "sites": "Sites",
-    "users": "Users"
+    "users": "Users",
+    "organization": "Organization"
   },
   "newsletter": {
     "add": "Add new template",
@@ -729,6 +730,21 @@
     "read-all": "Mark all as Read",
     "today": "Today",
     "yesterday": "Yesterday"
+  },
+  "organization": {
+    "title": "Organizational structure",
+    "companies": {
+      "field": {
+        "status": "Status",
+        "name": "Name",
+        "profile-count": "Profils",
+        "group-count": "Groups",
+        "job-role-count": "Job roles",
+        "campaign-count": "Campaigns",
+        "created-date": "Date of creation"
+      },
+      "title": "Companies"
+    }
   },
   "partner": {
     "editor": {

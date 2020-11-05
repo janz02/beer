@@ -17,7 +17,8 @@ import {
   ContactsOutlined,
   HistoryOutlined,
   ClusterOutlined,
-  PieChartOutlined
+  PieChartOutlined,
+  DeploymentUnitOutlined
 } from '@ant-design/icons'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -129,6 +130,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/permissions',
         icon: <ClusterOutlined />,
         roles: pageViewRoles.permissions
+      },
+      {
+        label: t('menu.organization'),
+        link: '/organization',
+        icon: <DeploymentUnitOutlined />,
+        roles: pageViewRoles.organization
       }
     ],
     [t]

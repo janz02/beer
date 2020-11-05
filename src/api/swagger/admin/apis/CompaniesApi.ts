@@ -18,6 +18,9 @@ import {
     CompanyDto,
     CompanyDtoFromJSON,
     CompanyDtoToJSON,
+    CompanyStatusDto,
+    CompanyStatusDtoFromJSON,
+    CompanyStatusDtoToJSON,
     CompanyVm,
     CompanyVmFromJSON,
     CompanyVmToJSON,
@@ -47,6 +50,12 @@ export interface DeleteCompanyRequest {
 
 export interface ExportCompaniesRequest {
     name?: string | null;
+    isActive?: boolean | null;
+    createdDate?: Date | null;
+    profileCount?: number | null;
+    groupCount?: number | null;
+    jobRoleCount?: number | null;
+    campaignCount?: number | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -56,6 +65,12 @@ export interface ExportCompaniesRequest {
 
 export interface GetCompaniesRequest {
     name?: string | null;
+    isActive?: boolean | null;
+    createdDate?: Date | null;
+    profileCount?: number | null;
+    groupCount?: number | null;
+    jobRoleCount?: number | null;
+    campaignCount?: number | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -66,6 +81,12 @@ export interface GetCompaniesRequest {
 export interface GetCompanyRequest {
     id: number;
     xRTDTransactionGuid?: string;
+}
+
+export interface SetCompanyStatusRequest {
+    id: number;
+    xRTDTransactionGuid?: string;
+    companyStatusDto?: CompanyStatusDto;
 }
 
 export interface UpdateCompanyRequest {
@@ -80,8 +101,8 @@ export interface UpdateCompanyRequest {
 export class CompaniesApi extends runtime.BaseAPI {
 
     /**
-     * Returns the id of the Category upon success
-     * Creates a Category entity
+     * Returns the id of the Company upon success
+     * Creates a Company entity
      */
     async createCompanyRaw(requestParameters: CreateCompanyRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -110,8 +131,8 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the id of the Category upon success
-     * Creates a Category entity
+     * Returns the id of the Company upon success
+     * Creates a Company entity
      */
     async createCompany(requestParameters: CreateCompanyRequest): Promise<Int32EntityCreatedVm> {
         const response = await this.createCompanyRaw(requestParameters);
@@ -119,8 +140,8 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deletes the Category entity with Id of \"id\"
-     * Deletes a Category entity
+     * Deletes the Company entity with Id of \"id\"
+     * Deletes a Company entity
      */
     async deleteCompanyRaw(requestParameters: DeleteCompanyRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -150,22 +171,46 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deletes the Category entity with Id of \"id\"
-     * Deletes a Category entity
+     * Deletes the Company entity with Id of \"id\"
+     * Deletes a Company entity
      */
     async deleteCompany(requestParameters: DeleteCompanyRequest): Promise<void> {
         await this.deleteCompanyRaw(requestParameters);
     }
 
     /**
-     * Exports the Category list with the specified filters applied in a csv file
-     * Exports a Category entity list sorted and filtered in a csv file
+     * Exports the Company list with the specified filters applied in a csv file
+     * Exports a Company entity list sorted and filtered in a csv file
      */
     async exportCompaniesRaw(requestParameters: ExportCompaniesRequest): Promise<runtime.ApiResponse<Blob>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.createdDate !== undefined) {
+            queryParameters['createdDate'] = (requestParameters.createdDate as any).toISOString();
+        }
+
+        if (requestParameters.profileCount !== undefined) {
+            queryParameters['profileCount'] = requestParameters.profileCount;
+        }
+
+        if (requestParameters.groupCount !== undefined) {
+            queryParameters['groupCount'] = requestParameters.groupCount;
+        }
+
+        if (requestParameters.jobRoleCount !== undefined) {
+            queryParameters['jobRoleCount'] = requestParameters.jobRoleCount;
+        }
+
+        if (requestParameters.campaignCount !== undefined) {
+            queryParameters['campaignCount'] = requestParameters.campaignCount;
         }
 
         if (requestParameters.page !== undefined) {
@@ -205,8 +250,8 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Exports the Category list with the specified filters applied in a csv file
-     * Exports a Category entity list sorted and filtered in a csv file
+     * Exports the Company list with the specified filters applied in a csv file
+     * Exports a Company entity list sorted and filtered in a csv file
      */
     async exportCompanies(requestParameters: ExportCompaniesRequest): Promise<Blob> {
         const response = await this.exportCompaniesRaw(requestParameters);
@@ -214,14 +259,38 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the Category list with the specified filters applied
-     * Gets a Category entity list sorted and filtered
+     * Returns the Company list with the specified filters applied
+     * Gets a Company entity list sorted and filtered
      */
     async getCompaniesRaw(requestParameters: GetCompaniesRequest): Promise<runtime.ApiResponse<CompanyVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['isActive'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.createdDate !== undefined) {
+            queryParameters['createdDate'] = (requestParameters.createdDate as any).toISOString();
+        }
+
+        if (requestParameters.profileCount !== undefined) {
+            queryParameters['profileCount'] = requestParameters.profileCount;
+        }
+
+        if (requestParameters.groupCount !== undefined) {
+            queryParameters['groupCount'] = requestParameters.groupCount;
+        }
+
+        if (requestParameters.jobRoleCount !== undefined) {
+            queryParameters['jobRoleCount'] = requestParameters.jobRoleCount;
+        }
+
+        if (requestParameters.campaignCount !== undefined) {
+            queryParameters['campaignCount'] = requestParameters.campaignCount;
         }
 
         if (requestParameters.page !== undefined) {
@@ -261,8 +330,8 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the Category list with the specified filters applied
-     * Gets a Category entity list sorted and filtered
+     * Returns the Company list with the specified filters applied
+     * Gets a Company entity list sorted and filtered
      */
     async getCompanies(requestParameters: GetCompaniesRequest): Promise<CompanyVmPaginatedResponse> {
         const response = await this.getCompaniesRaw(requestParameters);
@@ -270,8 +339,8 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the Category with the specified Id upon success
-     * Gets a Category entity by Id
+     * Returns the Company with the specified Id upon success
+     * Gets a Company entity by Id
      */
     async getCompanyRaw(requestParameters: GetCompanyRequest): Promise<runtime.ApiResponse<CompanyVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -301,8 +370,8 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the Category with the specified Id upon success
-     * Gets a Category entity by Id
+     * Returns the Company with the specified Id upon success
+     * Gets a Company entity by Id
      */
     async getCompany(requestParameters: GetCompanyRequest): Promise<CompanyVm> {
         const response = await this.getCompanyRaw(requestParameters);
@@ -310,8 +379,50 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a Category entity with Id of \"id\" to entity \"category\"
-     * Updates a Category entity
+     * Sets the status of a Company with Id of \"id\"
+     * Sets the a Company\'s status
+     */
+    async setCompanyStatusRaw(requestParameters: SetCompanyStatusRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling setCompanyStatus.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Companies/{id}/Status`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CompanyStatusDtoToJSON(requestParameters.companyStatusDto),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Sets the status of a Company with Id of \"id\"
+     * Sets the a Company\'s status
+     */
+    async setCompanyStatus(requestParameters: SetCompanyStatusRequest): Promise<void> {
+        await this.setCompanyStatusRaw(requestParameters);
+    }
+
+    /**
+     * Updates a Company entity with Id of \"id\" to entity \"company\"
+     * Updates a Company entity
      */
     async updateCompanyRaw(requestParameters: UpdateCompanyRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -344,8 +455,8 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a Category entity with Id of \"id\" to entity \"category\"
-     * Updates a Category entity
+     * Updates a Company entity with Id of \"id\" to entity \"company\"
+     * Updates a Company entity
      */
     async updateCompany(requestParameters: UpdateCompanyRequest): Promise<void> {
         await this.updateCompanyRaw(requestParameters);
