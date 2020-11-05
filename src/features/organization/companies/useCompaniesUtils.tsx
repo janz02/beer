@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { companiesActions } from './companiesSlice'
 import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
@@ -107,7 +107,7 @@ export const useCompaniesUtils = (): CompaniesUtils => {
           })
         : {}
     ],
-    [dispatch, tableUtils, t]
+    [dispatch, tableUtils, t, savingStatusIds]
   )
 
   const resetFilters = useCallback(() => {
