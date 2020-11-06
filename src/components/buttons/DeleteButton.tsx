@@ -20,6 +20,7 @@ export const DeleteButton: FC<DeleteButtonProps> = props => {
         icon={<DeleteOutlined />}
         shape="circle"
         style={{ marginLeft: '1rem' }}
+        data-testid="delete-button"
         {...btnProps}
       />
     </Tooltip>
