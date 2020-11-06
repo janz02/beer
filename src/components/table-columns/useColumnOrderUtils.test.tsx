@@ -60,7 +60,7 @@ test('useColumnOrder custom hook tests', () => {
   act(() => {
     result.current.hideColumn(defaultColumns[1])
   })
-  console.log(result.current)
+
   expect(result.current.hiddenColumns.length).toEqual(2)
   expect(result.current.tempColumns.length).toEqual(1)
 
