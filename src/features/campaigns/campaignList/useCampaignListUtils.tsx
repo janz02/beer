@@ -64,7 +64,9 @@ export const useCampaignListUtils = (): CampaignListUtils => {
       'segmentation',
       'productId',
       'createdBy',
-      'channelId'
+      'channelId',
+      'responsible',
+      'createdDate'
     ],
     getDataAction: campaignListActions.getCompanyCampaigns
   })

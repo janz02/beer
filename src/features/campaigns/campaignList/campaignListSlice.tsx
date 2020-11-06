@@ -11,7 +11,7 @@ import { CampaignListItem } from 'models/campaign/campaignListItem'
 import moment from 'moment'
 import { CampaignStatus } from 'models/campaign/campaignStatus'
 import { Product } from 'models/campaign/product'
-import { ChannelVm, GetManyProductsRequest } from 'api/swagger/campaign-editor'
+import { ChannelVm } from 'api/swagger/campaign-editor'
 
 export type CampaignListTab = 'company' | 'partner'
 
@@ -129,14 +129,16 @@ const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async 
           : null
       })) ?? []
 
-    if (!getState().campaignList.products) {
-      const products = (await api.campaignEditor.products.getProducts({
+    if (getState().campaignList.products.length === 0) {
+      const productsResponse = await api.campaignEditor.products.getProducts({
         pageSize: -1
-      })) as Product[]
-      dispatch(getProducts({ products }))
+      })
+      if (productsResponse.items && productsResponse.items.length > 0) {
+        dispatch(getProducts({ products: productsResponse.items as Product[] }))
+      }
     }
 
-    if (!getState().campaignList.channels) {
+    if (getState().campaignList.channels.length === 0) {
       const channelsResponse = await api.campaignEditor.channels.getChannels({ pageSize: -1 })
       if (channelsResponse.items && channelsResponse.items.length > 0) {
         dispatch(getChannels({ channels: channelsResponse.items }))
