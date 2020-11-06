@@ -32,6 +32,7 @@ import { SegmentationListPage } from 'features/segmentation/segmentationList/Seg
 import { SegmentationEditorPage } from 'features/segmentation/segmentationEditor/SegmentationEditorPage'
 import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
 import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
+import { OrganizationPage } from 'features/organization/OrganizationPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -188,6 +189,12 @@ const Routes = (): JSX.Element => (
       path={['/campaigns/new', '/campaigns/:campaignId']}
       roles={pageViewRoles.campaignEditor}
       component={CampaignEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/organization"
+      roles={pageViewRoles.organization}
+      component={OrganizationPage}
     />
     <Route path="*" render={onDefaultRoute} />
   </Switch>

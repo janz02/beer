@@ -12,5 +12,6 @@ export enum ColumnStorageName {
   PERMISSION = 'permission-columns',
   SEGMENTATION = 'segmentation-columns',
   CAMPAIGN_COMPANY = 'campaign-company-columns',
-  CAMPAIGN_PARTNER = 'campaign-partner-columns'
+  CAMPAIGN_PARTNER = 'campaign-partner-columns',
+  COMPANIES = 'company-columns'
 }

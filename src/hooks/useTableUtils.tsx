@@ -275,12 +275,14 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
             { value: false, text: inactiveText }
           ]
 
-          config.render = value => (
-            <ActivenessDisplay
-              status={value ? 'active' : 'inactive'}
-              text={value ? activeText : inactiveText}
-            />
-          )
+          if (!config.render) {
+            config.render = value => (
+              <ActivenessDisplay
+                status={value ? 'active' : 'inactive'}
+                text={value ? activeText : inactiveText}
+              />
+            )
+          }
           break
         }
         case FilterMode.ENUM:

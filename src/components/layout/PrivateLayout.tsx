@@ -17,6 +17,7 @@ import {
   ContactsOutlined,
   HistoryOutlined,
   ClusterOutlined,
+  DeploymentUnitOutlined,
   PieChartOutlined,
   PlayCircleOutlined
 } from '@ant-design/icons'
@@ -136,6 +137,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/permissions',
         icon: <ClusterOutlined />,
         roles: pageViewRoles.permissions
+      },
+      {
+        label: t('menu.organization'),
+        link: '/organization',
+        icon: <DeploymentUnitOutlined />,
+        roles: pageViewRoles.organization
       }
     ],
     [t]

@@ -52,7 +52,7 @@ const create = async (guid: string) => {
 export const middleware: Middleware[] = [
   {
     pre: async (ctx: ResponseContext) => {
-      if (shouldApplyMiddleware(ctx.url)) {
+      if (shouldApplyMiddleware(ctx.url) && !isExcludedEndpoint(ctx.url)) {
         const guid = v4()
 
         ctx.init.headers = {
