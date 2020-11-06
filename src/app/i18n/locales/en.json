@@ -43,6 +43,33 @@
       "title": "Subject"
     }
   },
+  "campaign-channel": {
+    "email": "Email",
+    "phone": "Phone"
+  },
+  "campaign-list": {
+    "company": {
+      "add": "New",
+      "title": "Companies"
+    },
+    "field": {
+      "createdDate": "Date of creation",
+      "modifiedDate": "Date of modification",
+      "name": "Campaign name",
+      "product": "Product",
+      "requestor": "Requestor",
+      "responsible": "Responsible",
+      "segmentation": "Segmentation",
+      "status": "Status",
+      "timing": "Campaign timing",
+      "type": "Type"
+    },
+    "partner": {
+      "add": "New",
+      "title": "Partners"
+    },
+    "title": "Campaigns"
+  },
   "campaign-product": {
     "add": "Add new Product",
     "editor-create": "New product",
@@ -51,6 +78,17 @@
       "createdDate": "Created date",
       "name": "Product name"
     }
+  },
+  "campaign-status": {
+    "approved": "Approved",
+    "created": "Created",
+    "draftcampaign": "Draft",
+    "drafttreatment": "Draft",
+    "senttotestgroup": "Sent to test group",
+    "started": "Started",
+    "startedmanually": "Manually started",
+    "stopped": "Stopped",
+    "stoppedmanually": "Manually stopped"
   },
   "cashier-editor": {
     "editor-create": "Create cashier",
@@ -129,6 +167,7 @@
     "save": "Save",
     "search": "Search",
     "send": "Send",
+    "table-settings": "Settings",
     "try-again": "Try again...",
     "upload": "Upload",
     "view": "View",
@@ -678,6 +717,7 @@
   },
   "menu": {
     "bp-history": "BP History",
+    "campaigns": "Campaigns",
     "coupon-campaigns": "Coupon Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",

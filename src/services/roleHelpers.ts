@@ -65,5 +65,7 @@ export const pageViewRoles = {
   permissions: [Roles.Administrator],
   permissionEditor: [Roles.Administrator],
   segmentations: [Roles.Administrator],
-  segmentationEditor: [Roles.Administrator]
+  segmentationEditor: [Roles.Administrator],
+  campaigns: comboRoles.forAll,
+  campaignEditor: comboRoles.forAll
 }
