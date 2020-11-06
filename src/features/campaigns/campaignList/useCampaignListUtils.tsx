@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { campaignListActions, CampaignListTab } from './campaignListSlice'
 import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
@@ -305,9 +305,6 @@ export const useCampaignListUtils = (): CampaignListUtils => {
     campaignListActions.exportPartnerCampaigns()
   }, [])
 
-  const handleSettings = (): void => {
-    // TODO Open settings
-  }
   const tabBarExtraContent = useMemo(() => {
     const resetFilters = (): void => {
       if (isCompanyCampaign) {
@@ -317,19 +314,24 @@ export const useCampaignListUtils = (): CampaignListUtils => {
       }
     }
 
+    const handleExport = (): void => {
+      if (isCompanyCampaign) {
+        handleCompanyExport()
+      } else {
+        handlePartnerExport()
+      }
+    }
+    const handleSettings = (): void => {
+      // TODO Open settings
+    }
+
+    const columnOrderUtils = isCompanyCampaign ? companyColumnOrderUtils : partnerColumnOrderUtils
+
     return (
       <>
-        {isCompanyCampaign ? (
-          <ExportButton onClick={handleCompanyExport} />
-        ) : (
-          <ExportButton onClick={handlePartnerExport} />
-        )}
+        <ExportButton onClick={handleExport} />
         <ResetFiltersButton onClick={resetFilters} />
-        {isCompanyCampaign ? (
-          <ColumnOrderDropdown {...companyColumnOrderUtils} />
-        ) : (
-          <ColumnOrderDropdown {...partnerColumnOrderUtils} />
-        )}
+        <ColumnOrderDropdown {...columnOrderUtils} />
         <SettingsButton onClick={handleSettings} />
       </>
     )

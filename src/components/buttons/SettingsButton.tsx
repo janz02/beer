@@ -8,7 +8,6 @@ import { hasPermission } from 'services/jwt-reader'
 export const SettingsButton: FC<ButtonProps> = ({ children, ...props }) => {
   const { t } = useTranslation()
 
-  // TODO check export permissions
   return hasPermission() ? (
     <Button
       type="primary"

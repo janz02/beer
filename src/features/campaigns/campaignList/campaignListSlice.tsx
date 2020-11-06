@@ -113,7 +113,7 @@ const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async 
 
     const revisedParams = reviseListRequestParams(getState().campaignList.companyListParams, params)
     const fixedRevisedParams = { ...revisedParams, status: revisedParams.statusId }
-    console.log(params, revisedParams)
+
     const { items, ...pagination } = await api.campaignEditor.campaigns.getCampaigns(
       fixedRevisedParams
     )
@@ -129,18 +129,18 @@ const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async 
           : null
       })) ?? []
 
-    const productIds = campaigns.filter(x => x.productId).map(x => x.productId)
-    if (productIds && productIds.length > 0) {
-      const products = (await api.campaignEditor.products.getManyProducts({
-        ids: productIds
-      } as GetManyProductsRequest)) as Product[]
-
+    if (!getState().campaignList.products) {
+      const products = (await api.campaignEditor.products.getProducts({
+        pageSize: -1
+      })) as Product[]
       dispatch(getProducts({ products }))
     }
 
-    const channelsResponse = await api.campaignEditor.channels.getChannels({ pageSize: -1 })
-    if (channelsResponse.items && channelsResponse.items.length > 0) {
-      dispatch(getChannels({ channels: channelsResponse.items }))
+    if (!getState().campaignList.channels) {
+      const channelsResponse = await api.campaignEditor.channels.getChannels({ pageSize: -1 })
+      if (channelsResponse.items && channelsResponse.items.length > 0) {
+        dispatch(getChannels({ channels: channelsResponse.items }))
+      }
     }
 
     dispatch(
