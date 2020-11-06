@@ -1,20 +1,20 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { ColumnType } from 'antd/lib/table'
 import { DropResult } from 'react-beautiful-dnd'
 import { ColumnStorageName } from './ColumnStorageName'
 import { SelectValue } from 'antd/lib/select'
+import { ExtendedColumnType } from './ExtendedColumnType'
 
 export interface ColumnOrderUtils<T> {
   visible: boolean
-  currentColumns: ColumnType<T>[]
-  tempColumns: ColumnType<T>[]
-  hiddenColumns: ColumnType<T>[]
+  currentColumns: ExtendedColumnType<T>[]
+  tempColumns: ExtendedColumnType<T>[]
+  hiddenColumns: ExtendedColumnType<T>[]
   handleChangeVisibility: () => void
   handleApplyChanges: () => void
   handleResetToDefault: () => void
   addColumn: (value: SelectValue) => void
   addOrRemoveAllColumn: (value: boolean) => void
-  hideColumn: (column: ColumnType<T>) => void
+  hideColumn: (column: ExtendedColumnType<T>) => void
   onDragEnd: (result: DropResult) => void
 }
 
@@ -29,18 +29,18 @@ export interface ColumnOrderUtils<T> {
  * @param storageName the name for the localStorage, to get and set the columns order
  */
 export const useColumnOrderUtils = <T extends {}>(
-  defaultColumns: ColumnType<T>[],
+  defaultColumns: ExtendedColumnType<T>[],
   storageName: ColumnStorageName
 ): ColumnOrderUtils<T> => {
   const [visible, setVisible] = useState<boolean>(false)
-  const [tempColumns, setTempColumns] = useState<ColumnType<T>[]>([])
-  const [shownColumns, setShownColumns] = useState<ColumnType<T>[]>([])
-  const [hiddenColumns, setHiddenColumns] = useState<ColumnType<T>[]>([])
+  const [tempColumns, setTempColumns] = useState<ExtendedColumnType<T>[]>([])
+  const [shownColumns, setShownColumns] = useState<ExtendedColumnType<T>[]>([])
+  const [hiddenColumns, setHiddenColumns] = useState<ExtendedColumnType<T>[]>([])
 
   const changeVisibility = (): void => setVisible(!visible)
 
   const getCurrentColumnsConfig = useCallback(
-    (dataIndexes: string[]): ColumnType<T>[] => {
+    (dataIndexes: string[]): ExtendedColumnType<T>[] => {
       return defaultColumns
         .filter(column => !column.dataIndex || dataIndexes.includes(String(column.dataIndex)))
         .sort((column1, column2) => {
@@ -73,7 +73,8 @@ export const useColumnOrderUtils = <T extends {}>(
     if (storedDataIndexes) {
       reorderColumns(JSON.parse(storedDataIndexes))
     } else {
-      setShownColumns([...defaultColumns])
+      setShownColumns(defaultColumns.filter(x => !x.hiddenByDefault))
+      setHiddenColumns(defaultColumns.filter(x => x.hiddenByDefault))
     }
   }
 
@@ -108,7 +109,7 @@ export const useColumnOrderUtils = <T extends {}>(
     setTempColumns([
       ...tempColumns,
       ...defaultColumns.filter(column => String(column.dataIndex) === value.toString())
-    ] as ColumnType<T>[])
+    ] as ExtendedColumnType<T>[])
   }
 
   const addOrRemoveAllColumn = (value: boolean): void => {
@@ -116,19 +117,21 @@ export const useColumnOrderUtils = <T extends {}>(
       setTempColumns([...tempColumns, ...hiddenColumns])
       setHiddenColumns([])
     } else {
-      setTempColumns([])
-      setHiddenColumns(defaultColumns.filter(column => column.dataIndex))
+      setTempColumns(defaultColumns.filter(column => column.cannotBeHidden))
+      setHiddenColumns(defaultColumns.filter(column => column.dataIndex && !column.cannotBeHidden))
     }
   }
 
-  const hideColumn = (column: ColumnType<T>): void => {
-    setHiddenColumns([...hiddenColumns, column])
-    setTempColumns(tempColumns.filter(tempColumn => tempColumn !== column))
+  const hideColumn = (column: ExtendedColumnType<T>): void => {
+    if (!column.cannotBeHidden) {
+      setHiddenColumns([...hiddenColumns, column])
+      setTempColumns(tempColumns.filter(tempColumn => tempColumn !== column))
+    }
   }
 
   const resetToDefault = (): void => {
-    setTempColumns(defaultColumns.filter(column => column.dataIndex))
-    setHiddenColumns([])
+    setTempColumns(defaultColumns.filter(column => column.dataIndex && !column.hiddenByDefault))
+    setHiddenColumns(defaultColumns.filter(column => column.hiddenByDefault))
   }
 
   useEffect(() => {
@@ -137,10 +140,10 @@ export const useColumnOrderUtils = <T extends {}>(
   }, [])
 
   useEffect(() => {
-    setTempColumns(shownColumns.filter(column => column.dataIndex))
+    setTempColumns(shownColumns.filter(column => column.dataIndex && !column.hiddenByDefault))
   }, [shownColumns])
 
-  const currentColumns = useMemo((): ColumnType<T>[] => {
+  const currentColumns = useMemo((): ExtendedColumnType<T>[] => {
     const dataIndexes: string[] = shownColumns.map(column => String(column.dataIndex))
     return getCurrentColumnsConfig(dataIndexes)
   }, [getCurrentColumnsConfig, shownColumns])
