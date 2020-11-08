@@ -1,7 +1,12 @@
+import { DownOutlined } from '@ant-design/icons'
+import { Dropdown, Menu } from 'antd'
+import { AddButton } from 'components/buttons/AddButton'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
-import React, { FC, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { hasPermission } from 'services/jwt-reader'
+import { pageViewRoles } from 'services/roleHelpers'
 import { CompaniesTable } from './companies/CompaniesTable'
 import { useCompaniesUtils } from './companies/useCompaniesUtils'
 
@@ -10,6 +15,35 @@ export const OrganizationPage: FC = () => {
   const [currentTabKey, setCurrentTabKey] = useState('companies')
   const companiesUtils = useCompaniesUtils()
 
+  const headerOptions = useMemo(() => {
+    const menu = (
+      <Menu>
+        <Menu.Item>{t('organization.new.company')}</Menu.Item>
+        <Menu.Item>{t('organization.new.group')}</Menu.Item>
+        <Menu.Item>{t('organization.new.job-role')}</Menu.Item>
+      </Menu>
+    )
+
+    return (
+      <>
+        {hasPermission(pageViewRoles.organizationEditor) && (
+          <Dropdown overlay={menu}>
+            <AddButton>
+              {t('organization.new.new')} <DownOutlined />
+            </AddButton>
+          </Dropdown>
+        )}
+      </>
+    )
+  }, [t])
+
+  let tabBarActions: JSX.Element | undefined
+  switch (currentTabKey) {
+    case 'companies':
+      tabBarActions = companiesUtils.tabBarActions
+      break
+  }
+
   return (
     <ResponsiveCard
       disableAutoScale
@@ -17,16 +51,22 @@ export const OrganizationPage: FC = () => {
       forTable
       paddedBottom
       floatingTitle={t('organization.title')}
+      floatingOptions={headerOptions}
     >
       <ResponsiveTabs
         type="card"
         defaultActiveKey={currentTabKey}
         onChange={x => setCurrentTabKey(x)}
-        tabBarExtraContent={companiesUtils.tabBarActions}
+        tabBarExtraContent={tabBarActions}
       >
         <TabPane key="companies" tab={<TabPanelTitle title={t('organization.companies.title')} />}>
           <CompaniesTable companiesUtils={companiesUtils} />
         </TabPane>
+        <TabPane key="groups" tab={<TabPanelTitle title={t('organization.groups.title')} />} />
+        <TabPane
+          key="job-roles"
+          tab={<TabPanelTitle title={t('organization.job-roles.title')} />}
+        />
       </ResponsiveTabs>
     </ResponsiveCard>
   )
