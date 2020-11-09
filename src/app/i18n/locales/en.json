@@ -777,13 +777,25 @@
       "field": {
         "status": "Status",
         "name": "Name",
-        "profile-count": "Profils",
+        "profile-count": "Profiles",
         "group-count": "Groups",
         "job-role-count": "Job roles",
         "campaign-count": "Campaigns",
         "created-date": "Date of creation"
       },
       "title": "Companies"
+    },
+    "groups": {
+      "title": "Groups"
+    },
+    "job-roles": {
+      "title": "Job roles"
+    },
+    "new": {
+      "new": "New",
+      "company": "Company",
+      "group": "Group",
+      "job-role": "Job role"
     }
   },
   "partner": {

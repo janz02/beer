@@ -777,13 +777,25 @@
       "field": {
         "status": "Státusz",
         "name": "Név",
-        "profile-count": "Profilok száma",
-        "group-count": "Csoportok száma",
-        "job-role-count": "Munkakörök száma",
-        "campaign-count": "Kampányok száma",
+        "profile-count": "Felhasználók",
+        "group-count": "Csoportok",
+        "job-role-count": "Munkakörök",
+        "campaign-count": "Kampányok",
         "created-date": "Létrehozás dátuma"
       },
       "title": "Cégek"
+    },
+    "groups": {
+      "title": "Csoportok"
+    },
+    "job-roles": {
+      "title": "Munkakörök"
+    },
+    "new": {
+      "new": "Új",
+      "company": "Cég",
+      "group": "Csoport",
+      "job-role": "Munkakör"
     }
   },
   "partner": {
