@@ -9,6 +9,7 @@ import {
 import { Company } from 'models/company'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 interface State {
   companies: Company[]
@@ -101,11 +102,23 @@ const resetCompaniesFilters = (): AppThunk => async dispatch => {
   dispatch(getCompanies())
 }
 
+const exportCompanies = (): AppThunk => async (dispatch, getState) => {
+  const { listParams } = getState().companies
+
+  try {
+    const file = await api.admin.companies.exportCompanies(listParams)
+    downloadBlobAsCsv(file)
+  } catch (err) {
+    return { error: err.toString() }
+  }
+}
+
 export const companiesReducer = slice.reducer
 
 export const companiesActions = {
   getCompanies,
   setCompanyStatus,
   resetCompaniesFilters,
-  reset
+  reset,
+  exportCompanies
 }

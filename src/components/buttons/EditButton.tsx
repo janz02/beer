@@ -12,6 +12,7 @@ export const EditButton: FC<ButtonProps> = ({ children, ...props }) => {
       icon={<EditOutlined />}
       size="large"
       style={{ marginLeft: '1rem' }}
+      data-testid="edit-button"
       {...props}
     >
       {children ?? t('common.edit')}

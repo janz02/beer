@@ -15,6 +15,7 @@ import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ActivenessSwitch } from 'components/ActivenessSwitch'
+import { ExportButton } from 'components/buttons/ExportButton'
 
 export interface CompaniesUtils {
   currentColumns: ColumnType<Company>[]
@@ -116,14 +117,19 @@ export const useCompaniesUtils = (): CompaniesUtils => {
 
   const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.COMPANIES)
 
+  const handleExport = useCallback((): void => {
+    dispatch(companiesActions.exportCompanies())
+  }, [dispatch])
+
   const tabBarActions = useMemo(() => {
     return (
       <>
+        <ExportButton onClick={handleExport} />
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrderUtils} />
       </>
     )
-  }, [columnOrderUtils, resetFilters])
+  }, [columnOrderUtils, resetFilters, handleExport])
 
   return {
     currentColumns: columnOrderUtils.currentColumns,

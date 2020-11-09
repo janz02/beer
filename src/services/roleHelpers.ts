@@ -31,6 +31,7 @@ export const comboRoles = {
 export const pageViewRoles = {
   users: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   organization: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
+  organizationEditor: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerManager],
   newsletters: [Roles.Administrator, Roles.CampaignManager],
   couponCampaigns: comboRoles.forAll,
   couponCreator: [Roles.Administrator, Roles.CampaignManager, Roles.PartnerContactEditor],
@@ -66,6 +67,6 @@ export const pageViewRoles = {
   permissionEditor: [Roles.Administrator],
   segmentations: [Roles.Administrator],
   segmentationEditor: [Roles.Administrator],
-  campaigns: comboRoles.forAll,
-  campaignEditor: comboRoles.forAll
+  campaigns: [Roles.Administrator],
+  campaignEditor: [Roles.Administrator]
 }
