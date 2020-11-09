@@ -53,26 +53,26 @@ steps:
 
   - script: npm ci
 
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
-        npm run generate-client
-        git add .
-        $changed = git status -s
-        if( $changed ) {
-          Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
-          Write-Host "==================================================="
-          Write-Host ">Changes: "
-          Write-Host $changed
-          Write-Host ">Diff: "
-          Get-Content (git format-patch HEAD^)
-          throw "Error"
-        } else {
-          Write-Host "The solution is using the latest API client."
-        }
-    displayName: 'Check for new version of the Backend API'
+  # - task: PowerShell@2
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: |
+  #       if( $env:APICLIENTCHECK -eq "Skip" ) { Write-Host "Skipping checking whether the solution is using the latest Api client or not"; return; }
+  #       npm run generate-client
+  #       git add .
+  #       $changed = git status -s
+  #       if( $changed ) {
+  #         Write-Host "##vso[task.LogIssue type=error;]There is a new version of the Backend API, please refresh the frontend api client by running npm run generate-client, and commiting the changes. If this is an urgent case, you can override ApiClientCheck parameter to `"Skip`" manually in the Advanved options when queueing build."
+  #         Write-Host "==================================================="
+  #         Write-Host ">Changes: "
+  #         Write-Host $changed
+  #         Write-Host ">Diff: "
+  #         Get-Content (git format-patch HEAD^)
+  #         throw "Error"
+  #       } else {
+  #         Write-Host "The solution is using the latest API client."
+  #       }
+  #   displayName: 'Check for new version of the Backend API'
 
   # - task: PowerShell@2
   #   inputs:
