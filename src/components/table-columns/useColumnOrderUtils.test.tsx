@@ -8,18 +8,22 @@ import { DropResult } from 'react-beautiful-dnd'
 const defaultColumns = [
   {
     title: 'Column1',
-    dataIndex: 'column1'
+    dataIndex: 'column1',
+    cannotBeHidden: true
   },
   {
     title: 'Column2',
     dataIndex: 'column2'
   },
   {
-    title: 'Column3'
+    title: 'Column3',
+    dataIndex: 'column3',
+    hiddenByDefault: true
   }
 ]
+const initialColumns = [defaultColumns[0], defaultColumns[1]]
 
-const changedColumns = [defaultColumns[1], defaultColumns[0]]
+const changedColumns = [defaultColumns[1], defaultColumns[0], defaultColumns[2]]
 
 const columnsAfterApply = [defaultColumns[1], defaultColumns[0], defaultColumns[2]]
 
@@ -42,7 +46,7 @@ test('useColumnOrder custom hook tests', () => {
     useColumnOrderUtils(defaultColumns, ColumnStorageName.PERMISSION)
   )
 
-  expect(result.current.currentColumns).toStrictEqual(defaultColumns)
+  expect(result.current.currentColumns).toStrictEqual(initialColumns)
   expect(localStorage.getItem).toHaveBeenCalledTimes(1)
 
   // show layout visible
@@ -52,20 +56,28 @@ test('useColumnOrder custom hook tests', () => {
 
   expect(result.current.visible).toBe(true)
 
-  // hide first column
+  // hide second column
+  act(() => {
+    result.current.hideColumn(defaultColumns[1])
+  })
+
+  expect(result.current.hiddenColumns.length).toEqual(2)
+  expect(result.current.tempColumns.length).toEqual(1)
+
+  // add back second column
+  act(() => {
+    result.current.addColumn(result.current.hiddenColumns[0].dataIndex as SelectValue)
+  })
+
+  expect(result.current.hiddenColumns.length).toEqual(1)
+  expect(result.current.tempColumns.length).toEqual(2)
+
+  // try to hide first column
   act(() => {
     result.current.hideColumn(defaultColumns[0])
   })
 
   expect(result.current.hiddenColumns.length).toEqual(1)
-  expect(result.current.tempColumns.length).toEqual(1)
-
-  // add back first column
-  act(() => {
-    result.current.addColumn(result.current.hiddenColumns[0].dataIndex as SelectValue)
-  })
-
-  expect(result.current.hiddenColumns.length).toEqual(0)
   expect(result.current.tempColumns.length).toEqual(2)
 
   // remove all column
@@ -74,7 +86,7 @@ test('useColumnOrder custom hook tests', () => {
   })
 
   expect(result.current.hiddenColumns.length).toEqual(2)
-  expect(result.current.tempColumns.length).toEqual(0)
+  expect(result.current.tempColumns.length).toEqual(1)
 
   // add all column
   act(() => {
@@ -82,7 +94,7 @@ test('useColumnOrder custom hook tests', () => {
   })
 
   expect(result.current.hiddenColumns.length).toEqual(0)
-  expect(result.current.tempColumns.length).toEqual(2)
+  expect(result.current.tempColumns.length).toEqual(3)
 
   // change first 2 column order
   act(() => {

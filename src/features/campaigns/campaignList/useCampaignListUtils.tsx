@@ -41,7 +41,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
   const { t } = useTranslation()
 
   const [selectedTab, setSelectedTab] = useState<CampaignListTab>(companyTabName)
-  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.campaignEditor), [])
   const isCompanyCampaign = useMemo(() => selectedTab === companyTabName, [selectedTab])
 
   const {
@@ -77,6 +77,8 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.status'),
         key: 'statusId',
         sort: true,
+        ellipsis: false,
+        cannotBeHidden: true,
         filterMode: FilterMode.ENUM,
         filters:
           Object.keys(CampaignStatus)
@@ -95,6 +97,8 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.name'),
         key: 'name',
         sort: true,
+        ellipsis: false,
+        cannotBeHidden: true,
         filterMode: FilterMode.SEARCH,
         disableSearchHighlight: true,
         render: (value: string, campaign: CampaignListItem): React.ReactNode => {
@@ -105,6 +109,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.type'),
         key: 'channelId',
         sort: true,
+        ellipsis: false,
         filterMode: FilterMode.ENUM,
         filters:
           channels?.map(x => {
@@ -128,6 +133,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.timing'),
         key: 'startDate',
         sort: true,
+        ellipsis: false,
         filterMode: FilterMode.DATERANGEPICKER,
         render: (value: moment.Moment, campaign: CampaignListItem): React.ReactNode => {
           return (
@@ -143,12 +149,14 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.segmentation'),
         key: 'segmentation',
         sort: true,
+        ellipsis: false,
         filterMode: FilterMode.FILTER
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.product'),
         key: 'productId',
         sort: true,
+        ellipsis: false,
         filterMode: FilterMode.FILTER,
         filters:
           products?.map(x => {
@@ -162,28 +170,35 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.requestor'),
         key: 'createdBy',
         sort: true,
+        ellipsis: false,
         filterMode: FilterMode.SEARCH
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.createdDate'),
         key: 'createdDate',
         sort: true,
+        ellipsis: false,
         filterMode: FilterMode.DATERANGEPICKER
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.responsible'),
         key: 'responsible',
         sort: true,
-        filterMode: FilterMode.SEARCH
+        ellipsis: false,
+        filterMode: FilterMode.SEARCH,
+        hiddenByDefault: true
       }),
       companyCampaignTableUtils.columnConfig({
         title: t('campaign-list.field.modifiedDate'),
         key: 'modifiedDate',
         sort: true,
-        filterMode: FilterMode.DATEPICKER
+        ellipsis: false,
+        filterMode: FilterMode.DATEPICKER,
+        hiddenByDefault: true
       }),
       isEditorUser
         ? companyCampaignTableUtils.actionColumnConfig({
+            fixed: 'right',
             render(campaign: CampaignListItem) {
               return (
                 <CrudButtons
@@ -218,7 +233,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
 
   const companyCampaignTableProps: ResponsiveTableProps = useMemo(
     () => ({
-      hasHeaderOffset: true,
+      hasFixedColumn: true,
       loading,
       columns: companyColumnOrderUtils.currentColumns,
       dataSource: companyCampaignSource,
