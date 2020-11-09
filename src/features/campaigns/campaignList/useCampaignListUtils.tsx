@@ -41,7 +41,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
   const { t } = useTranslation()
 
   const [selectedTab, setSelectedTab] = useState<CampaignListTab>(companyTabName)
-  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.settingsEditor), [])
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.campaignEditor), [])
   const isCompanyCampaign = useMemo(() => selectedTab === companyTabName, [selectedTab])
 
   const {
