@@ -246,11 +246,10 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
         case FilterMode.DATERANGEPICKER:
           config.filterDropdown = DateRangePickerTableDropdown
           config.filterIcon = () => <CalendarOutlined />
-          config.render = (value: any) => (
-            <div>
-              <MomentDisplay date={value[0]} /> - <MomentDisplay date={value[1]} />
-            </div>
-          )
+
+          if (!config.render) {
+            config.render = (value: any) => <MomentDisplay date={value} />
+          }
           break
         case FilterMode.FILTER:
           if (filters?.length) {

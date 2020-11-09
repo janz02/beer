@@ -32,6 +32,7 @@ import { permissionEditorReducer } from 'features/permissions/permissionEditor/p
 import { segmentationListReducer } from 'features/segmentation/segmentationList/segmentationListSlice'
 import { segmentationEditorReducer } from 'features/segmentation/segmentationEditor/segmentationEditorSlice'
 import { systemParamsReducer } from 'features/settings/systemParams/systemParamsSlice'
+import { campaignsListReducer } from 'features/campaigns/campaignList/campaignListSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
 // Probably a mock for the router/ history needed for proper solution, but needs more investigation
@@ -69,7 +70,8 @@ export const rootReducer = combineReducers({
   permissionEditor: permissionEditorReducer,
   segmentationList: segmentationListReducer,
   segmentationEditor: segmentationEditorReducer,
-  systemParams: systemParamsReducer
+  systemParams: systemParamsReducer,
+  campaignList: campaignsListReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

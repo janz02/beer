@@ -30,6 +30,8 @@ import { PermissionListPage } from 'features/permissions/permissionList/Permissi
 import { BpHistoryListPage } from 'features/bpHistory/bpHistoryList/BpHistoryListPage'
 import { SegmentationListPage } from 'features/segmentation/segmentationList/SegmentationList'
 import { SegmentationEditorPage } from 'features/segmentation/segmentationEditor/SegmentationEditorPage'
+import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
+import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
 import { OrganizationPage } from 'features/organization/OrganizationPage'
 
 const onDefaultRoute = (): JSX.Element => {
@@ -175,6 +177,18 @@ const Routes = (): JSX.Element => (
       path={['/segmentations/new', '/segmentations/:segmentationId']}
       roles={pageViewRoles.segmentationEditor}
       component={SegmentationEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/campaigns"
+      roles={pageViewRoles.campaigns}
+      component={CampaignListPage}
+    />
+    <PrivateRoute
+      exact
+      path={['/campaigns/new', '/campaigns/:campaignId']}
+      roles={pageViewRoles.campaignEditor}
+      component={CampaignEditorPage}
     />
     <PrivateRoute
       exact

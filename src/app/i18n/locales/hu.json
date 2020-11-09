@@ -43,6 +43,33 @@
       "title": "Tárgy"
     }
   },
+  "campaign-channel": {
+    "email": "Email",
+    "phone": "Telefon"
+  },
+  "campaign-list": {
+    "company": {
+      "add": "Új",
+      "title": "Cégek"
+    },
+    "field": {
+      "createdDate": "Létrehozás dátuma",
+      "modifiedDate": "Módosítás dátuma",
+      "name": "Kampány neve",
+      "product": "Termék",
+      "requestor": "Igénylő",
+      "responsible": "Felelős ",
+      "segmentation": "Szegmentáció",
+      "status": "Státusz",
+      "timing": "Kampány időzítése",
+      "type": "Típus"
+    },
+    "partner": {
+      "add": "Új",
+      "title": "Partnerek"
+    },
+    "title": "Kampányok"
+  },
   "campaign-product": {
     "add": "Új termék létrehozása",
     "editor-create": "Új termék létrehozása",
@@ -51,6 +78,17 @@
       "createdDate": "Létrehozás dátuma",
       "name": "Termék megnevezése"
     }
+  },
+  "campaign-status": {
+    "approved": "Jóváhagyott",
+    "created": "Létrehozott",
+    "draftcampaign": "Draft",
+    "drafttreatment": "Draft",
+    "senttotestgroup": "Tesztcsoportnak kiküldött",
+    "started": "Indított",
+    "startedmanually": "Manuálisan indított",
+    "stopped": "Leállított",
+    "stoppedmanually": "Manuálisan leállított"
   },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
@@ -129,6 +167,7 @@
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
+    "table-settings": "Beállítások",
     "try-again": "Újra próbálkozás...",
     "upload": "Feltöltés",
     "view": "Megtekintés",
@@ -678,6 +717,7 @@
   },
   "menu": {
     "bp-history": "ÜP History",
+    "campaigns": "Kampányok",
     "coupon-campaigns": "Kupon Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
