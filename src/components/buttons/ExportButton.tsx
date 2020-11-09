@@ -15,6 +15,7 @@ export const ExportButton: FC<ButtonProps> = ({ children, ...props }) => {
       icon={<DownloadOutlined />}
       size="small"
       title={t('common.export')}
+      data-testid="export-button"
       {...props}
     >
       {children}
