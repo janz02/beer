@@ -53,6 +53,7 @@ export const useCompaniesUtils = (): CompaniesUtils => {
         filterMode: FilterMode.ACTIVE_INACTIVE,
         key: 'isActive',
         width: '7rem',
+        cannotBeHidden: true,
         render(value: boolean, company: Company) {
           return (
             <ActivenessSwitch
@@ -68,7 +69,7 @@ export const useCompaniesUtils = (): CompaniesUtils => {
       tableUtils.columnConfig({
         title: t('organization.companies.field.name'),
         key: 'name',
-        // width: '35%',
+        cannotBeHidden: true,
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
