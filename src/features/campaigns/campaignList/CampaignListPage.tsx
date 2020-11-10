@@ -22,6 +22,7 @@ export const CampaignListPage: FC = () => {
   } = useCampaignListUtils()
 
   useEffect(() => {
+    dispatch(campaignListActions.getCampaignProperties())
     dispatch(campaignListActions.getCompanyCampaigns())
     dispatch(campaignListActions.getPartnerCampaigns())
   }, [dispatch])

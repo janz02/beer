@@ -104,6 +104,24 @@ export const { resetCampaignsList } = campaignListSlice.actions
 
 export const campaignsListReducer = campaignListSlice.reducer
 
+const getCampaignProperties = (): AppThunk => async (dispatch, getState) => {
+  if (getState().campaignList.products.length === 0) {
+    const productsResponse = await api.campaignEditor.products.getProducts({
+      pageSize: -1
+    })
+    if (productsResponse.items && productsResponse.items.length > 0) {
+      dispatch(getProducts({ products: productsResponse.items as Product[] }))
+    }
+  }
+
+  if (getState().campaignList.channels.length === 0) {
+    const channelsResponse = await api.campaignEditor.channels.getChannels({ pageSize: -1 })
+    if (channelsResponse.items && channelsResponse.items.length > 0) {
+      dispatch(getChannels({ channels: channelsResponse.items }))
+    }
+  }
+}
+
 const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async (
   dispatch,
   getState
@@ -128,22 +146,6 @@ const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async 
           ? ('campaign-status.' + CampaignStatus[campaign.statusId]).toString().toLowerCase()
           : null
       })) ?? []
-
-    if (getState().campaignList.products.length === 0) {
-      const productsResponse = await api.campaignEditor.products.getProducts({
-        pageSize: -1
-      })
-      if (productsResponse.items && productsResponse.items.length > 0) {
-        dispatch(getProducts({ products: productsResponse.items as Product[] }))
-      }
-    }
-
-    if (getState().campaignList.channels.length === 0) {
-      const channelsResponse = await api.campaignEditor.channels.getChannels({ pageSize: -1 })
-      if (channelsResponse.items && channelsResponse.items.length > 0) {
-        dispatch(getChannels({ channels: channelsResponse.items }))
-      }
-    }
 
     dispatch(
       getCompanyCampaignsSuccess({
@@ -197,6 +199,7 @@ const resetPartnerCampaignFilters = (): AppThunk => async dispatch => {
 
 export const campaignListActions = {
   resetCampaignsList,
+  getCampaignProperties,
   getCompanyCampaigns,
   getPartnerCampaigns,
   exportCompanyCampaigns,
