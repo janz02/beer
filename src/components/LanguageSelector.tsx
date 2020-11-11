@@ -73,41 +73,46 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
     )
   }
 
-  // If it is for public display, it should render a dropdown
-  if (props.public) {
-    return (
-      <Dropdown className="language-selector" overlay={languageOptionsDropDown} trigger={['click']}>
-        <div>
-          <CurrentLanguageImg />
-          <span className="language-selector__text">{t('languages.language')}</span>
-          <DownOutlined />
-        </div>
-      </Dropdown>
-    )
-  }
-
-  // Otherwise it will be in a menu, so display a menu
   return (
-    <Menu
-      theme="dark"
-      selectable={false}
-      key="language"
-      className={`language-selector language-selector-dropdown-content ${props.className}`}
-    >
-      <SubMenu
-        key="language"
-        title={
+    <>
+      {props.public && (
+        <Dropdown
+          className="language-selector"
+          overlay={languageOptionsDropDown}
+          trigger={['click']}
+        >
           <div>
             <CurrentLanguageImg />
-
-            <span hidden={props.collapsed} className="language-selector__text">
-              {t('languages.language')}
-            </span>
+            <span className="language-selector__text">{t('languages.language')}</span>
+            <DownOutlined />
           </div>
-        }
-      >
-        {languageOptions()}
-      </SubMenu>
-    </Menu>
+        </Dropdown>
+      )}
+
+      {!props.public && (
+        <Menu
+          theme="dark"
+          selectable={false}
+          key="language"
+          className={`language-selector language-selector-dropdown-content ${props.className}`}
+          mode={props.collapsed ? 'vertical' : 'inline'}
+        >
+          <SubMenu
+            key="language"
+            title={
+              <div>
+                <CurrentLanguageImg />
+
+                <span hidden={props.collapsed} className="language-selector__text">
+                  {t('languages.language')}
+                </span>
+              </div>
+            }
+          >
+            {languageOptions()}
+          </SubMenu>
+        </Menu>
+      )}
+    </>
   )
 }

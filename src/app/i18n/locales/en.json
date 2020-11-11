@@ -732,7 +732,11 @@
     "settings": "Settings",
     "sites": "Sites",
     "users": "Users",
-    "organization": "Organization"
+    "organization": "Organization",
+    "sections": {
+      "campaigns": "Campaigns",
+      "settings": "Settings"
+    }
   },
   "newsletter": {
     "add": "Add new template",

@@ -8,10 +8,11 @@ import './SideMenu.scss'
 export interface SideMenuProps {
   open: boolean
   onClose: (open: boolean) => void
+  className?: string
 }
 
 export const SideMenu: FC<SideMenuProps> = props => {
-  const { open, onClose, children } = props
+  const { open, onClose, className, children } = props
   const isMobile = useIsMobile()
 
   const Header: FC = () => (
@@ -34,8 +35,10 @@ export const SideMenu: FC<SideMenuProps> = props => {
           onClose={() => onClose(false)}
           visible={open}
         >
-          <Header />
-          {children}
+          <div className="items-container">
+            <Header />
+            {children}
+          </div>
         </Drawer>
       ) : (
         <Layout.Sider
@@ -45,8 +48,10 @@ export const SideMenu: FC<SideMenuProps> = props => {
           collapsed={!open}
           onCollapse={collapsed => onClose(collapsed)}
         >
-          <Header />
-          {children}
+          <div className="items-container">
+            <Header />
+            {children}
+          </div>
         </Layout.Sider>
       )}
     </>

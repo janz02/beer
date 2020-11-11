@@ -732,7 +732,11 @@
     "settings": "Beállítások",
     "sites": "Telephelyek",
     "users": "Felhasználók",
-    "organization": "Szervezet"
+    "organization": "Szervezet",
+    "sections": {
+      "campaigns": "Kampányok",
+      "settings": "Beállítások"
+    }
   },
   "newsletter": {
     "add": "Új sablon hozzáadása",

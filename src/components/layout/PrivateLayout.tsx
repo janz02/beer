@@ -35,6 +35,8 @@ import {
   useNotificationUtils
 } from 'features/notification/useNotificationUtils'
 import { HeaderMenuButton } from 'components/buttons/HeaderMenuButton'
+import { LanguageSelector } from 'components/LanguageSelector'
+import { AppVersion } from './AppVersion'
 
 export const PrivateLayout: React.FC = ({ children }) => {
   const dispatch = useDispatch()
@@ -150,6 +152,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
 
   const footerOptions = useMemo<SideMenuOptionProps[]>(
     () => [
+      { component: <LanguageSelector collapsed={!menuOpened} /> },
       {
         // Slice is necessary because this way the tooltip won't shoot off
         // far right when the name is really long.
@@ -166,26 +169,55 @@ export const PrivateLayout: React.FC = ({ children }) => {
         labelTooltip: profile?.name ?? t('menu.profile'),
         icon: <UserOutlined />,
         roles: pageViewRoles.readonlyProfile
-      },
+      }
+    ],
+    [profile, t, menuOpened]
+  )
+
+  const appVersionOptions = useMemo<SideMenuOptionProps[]>(
+    () => [{ component: <AppVersion /> }],
+    []
+  )
+
+  const logoutOptions = useMemo<SideMenuOptionProps[]>(
+    () => [
       {
         label: t('auth.logout'),
         icon: <LogoutOutlined />,
         onClick: () => dispatch(logout())
       }
     ],
-    [dispatch, profile, t]
+    [dispatch, t]
   )
 
   return (
     <Layout className="layout">
       <SideMenu open={menuOpened} onClose={(open: boolean) => setMenuOpened(open)}>
-        <SideMenuOptions options={mainOptions} handleClose={closeDrawer} />
-        <SideMenuOptions
-          collapsed={!menuOpened}
-          footer
-          options={footerOptions}
-          handleClose={closeDrawer}
-        />
+        <div className="section-upper">
+          <SideMenuOptions
+            options={mainOptions}
+            handleClose={closeDrawer}
+            title={t('menu.sections.campaigns')}
+          />
+        </div>
+        <div className="section-lower">
+          <SideMenuOptions
+            collapsed={!menuOpened}
+            options={footerOptions}
+            handleClose={closeDrawer}
+            title={t('menu.sections.settings')}
+          />
+          <SideMenuOptions
+            collapsed={!menuOpened}
+            options={logoutOptions}
+            handleClose={closeDrawer}
+          />
+          <SideMenuOptions
+            collapsed={!menuOpened}
+            options={appVersionOptions}
+            handleClose={closeDrawer}
+          />
+        </div>
       </SideMenu>
 
       {hasPermission(notificationRoleConfig) && (
