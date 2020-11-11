@@ -80,15 +80,18 @@
     }
   },
   "campaign-status": {
+    "set" : "Set",
+    "segmented" : "Segmented",
+    "content" : "Content",
+    "callcenter" : "Call Center",
+    "tested": "Tested",
     "approved": "Approved",
-    "created": "Created",
-    "draftcampaign": "Draft",
-    "drafttreatment": "Draft",
-    "senttotestgroup": "Sent to test group",
     "started": "Started",
     "startedmanually": "Manually started",
-    "stopped": "Stopped",
-    "stoppedmanually": "Manually stopped"
+    "paused" : "Paused",
+    "finished" : "Finished",
+    "closed" : "Closed",
+    "cancelled" : "Cancelled"
   },
   "cashier-editor": {
     "editor-create": "Create cashier",
