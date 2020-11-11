@@ -15,12 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    ProblemDetails,
-    ProblemDetailsFromJSON,
-    ProblemDetailsToJSON,
-    TreeNodeVm,
-    TreeNodeVmFromJSON,
-    TreeNodeVmToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDCampaignEditorPrototypesTreeNodeVm,
+    NKMRTDCampaignEditorPrototypesTreeNodeVmFromJSON,
+    NKMRTDCampaignEditorPrototypesTreeNodeVmToJSON,
 } from '../models';
 
 export interface GetFileStructureRequest {
@@ -39,7 +39,7 @@ export class SharePointApi extends runtime.BaseAPI {
     /**
      * Returns a folder structure of a dedicated - configured SharePoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
-    async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<TreeNodeVm>>> {
+    async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorPrototypesTreeNodeVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.withoutFile !== undefined) {
@@ -59,13 +59,13 @@ export class SharePointApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TreeNodeVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorPrototypesTreeNodeVmFromJSON));
     }
 
     /**
      * Returns a folder structure of a dedicated - configured SharePoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
-    async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<TreeNodeVm>> {
+    async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<NKMRTDCampaignEditorPrototypesTreeNodeVm>> {
         const response = await this.getFileStructureRaw(requestParameters);
         return await response.value();
     }

@@ -1,8 +1,12 @@
-import { QueryBuilderField } from 'api/swagger/campaign-editor'
+import { NKMRTDApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
 import { TFunction } from 'i18next'
 import { Fields } from 'react-awesome-query-builder'
 
-const createField = (field: QueryBuilderField, t: TFunction, hasSubfield: boolean): any => {
+const createField = (
+  field: NKMRTDApplicationModelsSegmentationQueryBuilderField,
+  t: TFunction,
+  hasSubfield: boolean
+): any => {
   let listValues
   if (!!field.listValues && Object.keys(field.listValues).length !== 0) {
     listValues = field.listValues
@@ -17,7 +21,10 @@ const createField = (field: QueryBuilderField, t: TFunction, hasSubfield: boolea
   }
 }
 
-export const buildFieldConfig = (queryBuilderFields: QueryBuilderField[], t: TFunction): Fields => {
+export const buildFieldConfig = (
+  queryBuilderFields: NKMRTDApplicationModelsSegmentationQueryBuilderField[],
+  t: TFunction
+): Fields => {
   const fields: Fields = {}
 
   for (const field of queryBuilderFields) {

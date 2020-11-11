@@ -9,6 +9,7 @@ import {
 import { BpHistoryItem } from 'models/campaign/bpHistoryItem'
 import { BpHistoryTemplate } from 'models/campaign/bpHistoryTemplate'
 import moment from 'moment'
+import { GetEventsRequest } from 'api/swagger/campaign-editor'
 
 interface BpHistoryState {
   bpHistoryItems: BpHistoryItem[]
@@ -92,9 +93,9 @@ export const getBpHistory = (params: ListRequestParams = {}): AppThunk => async 
       params
     )
 
-    const { items, ...pagination } = await api.campaignEditor.campaignResults.getEvents(
-      revisedParams
-    )
+    const { items, ...pagination } = await api.campaignEditor.campaignResults.getEvents({
+      ...(revisedParams as GetEventsRequest)
+    })
 
     dispatch(
       getBpHistorySuccess({
@@ -120,7 +121,7 @@ export const getBpHistoryTemplateById = (id: number): AppThunk => async dispatch
   try {
     dispatch(getBpHistoryRequest())
 
-    const template: BpHistoryTemplate = await api.campaignEditor.templates.getTemplateById({ id })
+    const template: BpHistoryTemplate = await api.campaignEditor.templates.getTemplate({ id })
 
     dispatch(getBpHistoryTemplateSuccess({ template }))
   } catch (err) {
