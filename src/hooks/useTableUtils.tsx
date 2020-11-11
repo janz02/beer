@@ -3,7 +3,7 @@ import { TablePaginationConfig } from 'antd/lib/table'
 import { useIsMobile } from './useIsMobile'
 import { useDispatch } from './react-redux-hooks'
 import { PaginationConfig } from 'antd/lib/pagination'
-import { SorterResult, SortOrder, ColumnFilterItem, ColumnType } from 'antd/lib/table/interface'
+import { SorterResult, SortOrder, ColumnFilterItem } from 'antd/lib/table/interface'
 import { SearchOutlined, CalendarOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
 import { SearchTableDropdown } from 'components/table-dropdowns/SearchTableDropdown'
@@ -13,6 +13,7 @@ import { MomentDisplay } from 'components/MomentDisplay'
 import { useTranslation } from 'react-i18next'
 import { ActivenessDisplay } from 'components/ActivenessDisplay'
 import moment from 'moment'
+import { ExtendedColumnType } from 'components/table-columns/ExtendedColumnType'
 
 export enum OrderByType {
   Ascending = 'Ascending',
@@ -80,7 +81,7 @@ export interface ActivenessOptions {
   deleted?: string
 }
 
-interface ColumnConfigParams extends ColumnType<any> {
+interface ColumnConfigParams extends ExtendedColumnType<any> {
   key: string
   filterMode?: FilterMode
   filters?: ColumnFilterItem[]
@@ -92,8 +93,8 @@ interface ColumnConfigParams extends ColumnType<any> {
 export interface TableUtils<T> {
   paginationConfig: false | TablePaginationConfig
   handleTableChange: any
-  columnConfig: (params: ColumnConfigParams) => ColumnType<T>
-  actionColumnConfig: (params: Partial<ColumnConfigParams>) => ColumnType<T>
+  columnConfig: (params: ColumnConfigParams) => ExtendedColumnType<T>
+  actionColumnConfig: (params: Partial<ColumnConfigParams>) => ExtendedColumnType<T>
   addKeyProp: (data?: T[]) => T[]
 }
 
@@ -216,10 +217,10 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
    * rendered with `MomentDisplay`
    */
   const columnConfig = useCallback(
-    (params: ColumnConfigParams): ColumnType<any> => {
+    (params: ColumnConfigParams): ExtendedColumnType<any> => {
       const { key, filterMode, sort, filters, disableSearchHighlight, renderMode, ...rest } = params
 
-      const config: ColumnType<T> = {
+      const config: ExtendedColumnType<T> = {
         ellipsis: true,
         ...rest,
         dataIndex: key,
@@ -246,11 +247,10 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
         case FilterMode.DATERANGEPICKER:
           config.filterDropdown = DateRangePickerTableDropdown
           config.filterIcon = () => <CalendarOutlined />
-          config.render = (value: any) => (
-            <div>
-              <MomentDisplay date={value[0]} /> - <MomentDisplay date={value[1]} />
-            </div>
-          )
+
+          if (!config.render) {
+            config.render = (value: any) => <MomentDisplay date={value} />
+          }
           break
         case FilterMode.FILTER:
           if (filters?.length) {
@@ -276,12 +276,14 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
             { value: false, text: inactiveText }
           ]
 
-          config.render = value => (
-            <ActivenessDisplay
-              status={value ? 'active' : 'inactive'}
-              text={value ? activeText : inactiveText}
-            />
-          )
+          if (!config.render) {
+            config.render = value => (
+              <ActivenessDisplay
+                status={value ? 'active' : 'inactive'}
+                text={value ? activeText : inactiveText}
+              />
+            )
+          }
           break
         }
         case FilterMode.ENUM:
@@ -310,7 +312,9 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
   /**
    * Config for the column that contains the edit, view or delete buttons
    */
-  const actionColumnConfig = useCallback((params: Partial<ColumnConfigParams>): ColumnType<any> => {
+  const actionColumnConfig = useCallback((params: Partial<ColumnConfigParams>): ExtendedColumnType<
+    any
+  > => {
     return {
       key: 'actions',
       colSpan: 1,

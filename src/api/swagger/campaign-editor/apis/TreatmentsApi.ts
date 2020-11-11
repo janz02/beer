@@ -15,9 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    TreatmentVm,
-    TreatmentVmFromJSON,
-    TreatmentVmToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationModelsCampaignTreatmentVm,
+    NKMRTDApplicationModelsCampaignTreatmentVmFromJSON,
+    NKMRTDApplicationModelsCampaignTreatmentVmToJSON,
 } from '../models';
 
 export interface GetTreatmentRequest {
@@ -32,7 +35,7 @@ export class TreatmentsApi extends runtime.BaseAPI {
     /**
      * Gets the requested treatment, identified by the container campaign id.
      */
-    async getTreatmentRaw(requestParameters: GetTreatmentRequest): Promise<runtime.ApiResponse<TreatmentVm>> {
+    async getTreatmentRaw(requestParameters: GetTreatmentRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsCampaignTreatmentVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTreatment.');
         }
@@ -52,13 +55,13 @@ export class TreatmentsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TreatmentVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsCampaignTreatmentVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested treatment, identified by the container campaign id.
      */
-    async getTreatment(requestParameters: GetTreatmentRequest): Promise<TreatmentVm> {
+    async getTreatment(requestParameters: GetTreatmentRequest): Promise<NKMRTDApplicationModelsCampaignTreatmentVm> {
         const response = await this.getTreatmentRaw(requestParameters);
         return await response.value();
     }

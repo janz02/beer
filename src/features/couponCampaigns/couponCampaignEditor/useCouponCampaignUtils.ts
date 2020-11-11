@@ -118,7 +118,7 @@ export const useCouponCampaignUtils = (): CouponCampaignUtils => {
       handleCouponSave({
         ...values,
         smallPictureId: values.smallPicture.id,
-        bigPictureId: values.bigPicture.id,
+        bigPictureId: values.bigPicture?.id,
         prizeRulesFileId: values.prizeRulesFile ? values.prizeRulesFile.id : null,
         predefinedCodesFileId: values.predefinedCodesFile ? values.predefinedCodesFile.id : null,
         categoryId: +values.categoryId,

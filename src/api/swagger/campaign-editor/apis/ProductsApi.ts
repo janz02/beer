@@ -15,25 +15,28 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateProductCommand,
-    CreateProductCommandFromJSON,
-    CreateProductCommandToJSON,
-    OrderByType,
-    OrderByTypeFromJSON,
-    OrderByTypeToJSON,
-    ProductVm,
-    ProductVmFromJSON,
-    ProductVmToJSON,
-    ProductVmPaginatedSearchResponse,
-    ProductVmPaginatedSearchResponseFromJSON,
-    ProductVmPaginatedSearchResponseToJSON,
-    UpdateProductCommand,
-    UpdateProductCommandFromJSON,
-    UpdateProductCommandToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVmToJSON,
+    NKMRTDApplicationModelsViewModelsProductVm,
+    NKMRTDApplicationModelsViewModelsProductVmFromJSON,
+    NKMRTDApplicationModelsViewModelsProductVmToJSON,
+    NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand,
+    NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommandFromJSON,
+    NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommandToJSON,
+    NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand,
+    NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommandFromJSON,
+    NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommandToJSON,
 } from '../models';
 
 export interface CreateProductRequest {
-    createProductCommand?: CreateProductCommand;
+    nKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand?: NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand;
 }
 
 export interface DeleteProductRequest {
@@ -56,12 +59,12 @@ export interface GetProductsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: OrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface UpdateProductRequest {
     id: number;
-    updateProductCommand?: UpdateProductCommand;
+    nKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand?: NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand;
 }
 
 /**
@@ -88,7 +91,7 @@ export class ProductsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateProductCommandToJSON(requestParameters.createProductCommand),
+            body: NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommandToJSON(requestParameters.nKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -140,7 +143,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Returns the products identified by the ids.
      */
-    async getManyProductsRaw(requestParameters: GetManyProductsRequest): Promise<runtime.ApiResponse<Array<ProductVm>>> {
+    async getManyProductsRaw(requestParameters: GetManyProductsRequest): Promise<runtime.ApiResponse<Array<NKMRTDApplicationModelsViewModelsProductVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -160,13 +163,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProductVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDApplicationModelsViewModelsProductVmFromJSON));
     }
 
     /**
      * Returns the products identified by the ids.
      */
-    async getManyProducts(requestParameters: GetManyProductsRequest): Promise<Array<ProductVm>> {
+    async getManyProducts(requestParameters: GetManyProductsRequest): Promise<Array<NKMRTDApplicationModelsViewModelsProductVm>> {
         const response = await this.getManyProductsRaw(requestParameters);
         return await response.value();
     }
@@ -174,7 +177,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Gets the requested product, identified by id.
      */
-    async getProductRaw(requestParameters: GetProductRequest): Promise<runtime.ApiResponse<ProductVm>> {
+    async getProductRaw(requestParameters: GetProductRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsProductVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProduct.');
         }
@@ -194,13 +197,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ProductVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsProductVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested product, identified by id.
      */
-    async getProduct(requestParameters: GetProductRequest): Promise<ProductVm> {
+    async getProduct(requestParameters: GetProductRequest): Promise<NKMRTDApplicationModelsViewModelsProductVm> {
         const response = await this.getProductRaw(requestParameters);
         return await response.value();
     }
@@ -208,7 +211,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Returns the products for the actual query.
      */
-    async getProductsRaw(requestParameters: GetProductsRequest): Promise<runtime.ApiResponse<ProductVmPaginatedSearchResponse>> {
+    async getProductsRaw(requestParameters: GetProductsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -256,13 +259,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ProductVmPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the products for the actual query.
      */
-    async getProducts(requestParameters: GetProductsRequest): Promise<ProductVmPaginatedSearchResponse> {
+    async getProducts(requestParameters: GetProductsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm> {
         const response = await this.getProductsRaw(requestParameters);
         return await response.value();
     }
@@ -291,7 +294,7 @@ export class ProductsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: UpdateProductCommandToJSON(requestParameters.updateProductCommand),
+            body: NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommandToJSON(requestParameters.nKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand),
         });
 
         return new runtime.VoidApiResponse(response);

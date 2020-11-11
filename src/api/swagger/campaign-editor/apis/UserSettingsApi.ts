@@ -15,9 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    UserSettingsVm,
-    UserSettingsVmFromJSON,
-    UserSettingsVmToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationModelsViewModelsUserSettingsVm,
+    NKMRTDApplicationModelsViewModelsUserSettingsVmFromJSON,
+    NKMRTDApplicationModelsViewModelsUserSettingsVmToJSON,
 } from '../models';
 
 export interface SetLanguageRequest {
@@ -32,7 +35,7 @@ export class UserSettingsApi extends runtime.BaseAPI {
     /**
      * Get current user\'s setting
      */
-    async getUserSettingRaw(): Promise<runtime.ApiResponse<UserSettingsVm>> {
+    async getUserSettingRaw(): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsUserSettingsVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -48,13 +51,13 @@ export class UserSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserSettingsVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsUserSettingsVmFromJSON(jsonValue));
     }
 
     /**
      * Get current user\'s setting
      */
-    async getUserSetting(): Promise<UserSettingsVm> {
+    async getUserSetting(): Promise<NKMRTDApplicationModelsViewModelsUserSettingsVm> {
         const response = await this.getUserSettingRaw();
         return await response.value();
     }

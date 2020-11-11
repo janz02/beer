@@ -43,6 +43,33 @@
       "title": "Tárgy"
     }
   },
+  "campaign-channel": {
+    "email": "Email",
+    "phone": "Telefon"
+  },
+  "campaign-list": {
+    "company": {
+      "add": "Új",
+      "title": "Cégek"
+    },
+    "field": {
+      "createdDate": "Létrehozás dátuma",
+      "modifiedDate": "Módosítás dátuma",
+      "name": "Kampány neve",
+      "product": "Termék",
+      "requestor": "Igénylő",
+      "responsible": "Felelős ",
+      "segmentation": "Szegmentáció",
+      "status": "Státusz",
+      "timing": "Kampány időzítése",
+      "type": "Típus"
+    },
+    "partner": {
+      "add": "Új",
+      "title": "Partnerek"
+    },
+    "title": "Kampányok"
+  },
   "campaign-product": {
     "add": "Új termék létrehozása",
     "editor-create": "Új termék létrehozása",
@@ -51,6 +78,20 @@
       "createdDate": "Létrehozás dátuma",
       "name": "Termék megnevezése"
     }
+  },
+  "campaign-status": {
+    "set" : "Beállított",
+    "segmented" : "Szegmentált",
+    "content" : "Tartalom",
+    "callcenter" : "Call Center",
+    "tested": "Tesztelt",
+    "approved": "Jóváhagyott",
+    "started": "Elindított",
+    "startedmanually": "Manuálisan elindított",
+    "paused" : "Szüneteltetett",
+    "finished" : "Lezárult",
+    "closed" : "Leállított",
+    "cancelled" : "Visszavont"
   },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
@@ -129,6 +170,7 @@
     "save": "Mentés",
     "search": "Keresés",
     "send": "Küldés",
+    "table-settings": "Beállítások",
     "try-again": "Újra próbálkozás...",
     "upload": "Feltöltés",
     "view": "Megtekintés",
@@ -678,6 +720,7 @@
   },
   "menu": {
     "bp-history": "ÜP History",
+    "campaigns": "Kampányok",
     "coupon-campaigns": "Kupon Kampányok",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
@@ -688,7 +731,8 @@
     "segmentations": "Szegmentáció",
     "settings": "Beállítások",
     "sites": "Telephelyek",
-    "users": "Felhasználók"
+    "users": "Felhasználók",
+    "organization": "Szervezet"
   },
   "newsletter": {
     "add": "Új sablon hozzáadása",
@@ -729,6 +773,33 @@
     "read-all": "Összes megjelölése olvasottként",
     "today": "Ma",
     "yesterday": "Tegnap"
+  },
+  "organization": {
+    "title": "Szervezeti struktúra",
+    "companies": {
+      "field": {
+        "status": "Státusz",
+        "name": "Név",
+        "profile-count": "Felhasználók",
+        "group-count": "Csoportok",
+        "job-role-count": "Munkakörök",
+        "campaign-count": "Kampányok",
+        "created-date": "Létrehozás dátuma"
+      },
+      "title": "Cégek"
+    },
+    "groups": {
+      "title": "Csoportok"
+    },
+    "job-roles": {
+      "title": "Munkakörök"
+    },
+    "new": {
+      "new": "Új",
+      "company": "Cég",
+      "group": "Csoport",
+      "job-role": "Munkakör"
+    }
   },
   "partner": {
     "editor": {

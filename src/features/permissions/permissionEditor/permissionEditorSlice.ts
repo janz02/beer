@@ -8,7 +8,12 @@ import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
-import { AdGroupVm, FunctionPermissionVm, PermissionVm, UserVm } from 'api/swagger/campaign-editor'
+import {
+  NKMRTDCampaignEditorPrototypesAdGroupVm,
+  NKMRTDCampaignEditorPrototypesFunctionPermissionVm,
+  NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand,
+  NKMRTDCampaignEditorPrototypesUserPermissionVm
+} from 'api/swagger/campaign-editor'
 
 interface PermissionEditorState {
   permission?: CampaignPermission
@@ -168,10 +173,14 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
 ) => {
   try {
     const permission = getState().permissionEditor.permission
-    const users = getState().permissionEditor.campaignUsers?.map(x => x as UserVm)
-    const adGroups = getState().permissionEditor.campaignAdGroups?.map(x => x as AdGroupVm)
+    const users = getState().permissionEditor.campaignUsers?.map(
+      x => x as NKMRTDCampaignEditorPrototypesUserPermissionVm
+    )
+    const adGroups = getState().permissionEditor.campaignAdGroups?.map(
+      x => x as NKMRTDCampaignEditorPrototypesAdGroupVm
+    )
     const functionPermissions = getState().permissionEditor.campaignFunctionPermissions?.map(
-      x => x as FunctionPermissionVm
+      x => x as NKMRTDCampaignEditorPrototypesFunctionPermissionVm
     )
 
     dispatch(savePermissionRequest())
@@ -179,23 +188,23 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
     if (permission?.id) {
       await api.campaignEditor.permissions.updatePermission({
         id: permission.id,
-        createUpdatePermissionCommand: {
+        nKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommand: {
           ...permission,
           ...data,
           adGroups: adGroups,
           users: users,
           functionPermissions: functionPermissions
-        } as PermissionVm
+        } as NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand
       })
       dispatch(getPermission(permission.id))
     } else {
       const createdPermissionId = await api.campaignEditor.permissions.createPermission({
-        createUpdatePermissionCommand: {
+        nKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand: {
           ...data,
           adGroups: adGroups,
           users: users,
           functionPermissions: functionPermissions
-        } as PermissionVm
+        } as NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand
       })
 
       history.push(`/permissions/${createdPermissionId}`)

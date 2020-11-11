@@ -15,35 +15,41 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateSegmentationFromCsvCommand,
-    CreateSegmentationFromCsvCommandFromJSON,
-    CreateSegmentationFromCsvCommandToJSON,
-    CreateUpdateSegmentationCommand,
-    CreateUpdateSegmentationCommandFromJSON,
-    CreateUpdateSegmentationCommandToJSON,
-    DiscountSegmentVm,
-    DiscountSegmentVmFromJSON,
-    DiscountSegmentVmToJSON,
-    OrderByType,
-    OrderByTypeFromJSON,
-    OrderByTypeToJSON,
-    SegmentListItemVmPaginatedSearchResponse,
-    SegmentListItemVmPaginatedSearchResponseFromJSON,
-    SegmentListItemVmPaginatedSearchResponseToJSON,
-    SegmentationType,
-    SegmentationTypeFromJSON,
-    SegmentationTypeToJSON,
-    SegmentationVm,
-    SegmentationVmFromJSON,
-    SegmentationVmToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationEnumsSegmentationType,
+    NKMRTDApplicationEnumsSegmentationTypeFromJSON,
+    NKMRTDApplicationEnumsSegmentationTypeToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVmToJSON,
+    NKMRTDApplicationModelsViewModelsDiscountSegmentVm,
+    NKMRTDApplicationModelsViewModelsDiscountSegmentVmFromJSON,
+    NKMRTDApplicationModelsViewModelsDiscountSegmentVmToJSON,
+    NKMRTDApplicationModelsViewModelsSegmentationVm,
+    NKMRTDApplicationModelsViewModelsSegmentationVmFromJSON,
+    NKMRTDApplicationModelsViewModelsSegmentationVmToJSON,
+    NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
+    NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommandFromJSON,
+    NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommandToJSON,
+    NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand,
+    NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandFromJSON,
+    NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandToJSON,
+    NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand,
+    NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandFromJSON,
+    NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandToJSON,
 } from '../models';
 
-export interface CreateFromCsvRequest {
-    createSegmentationFromCsvCommand?: CreateSegmentationFromCsvCommand;
+export interface CreateFromCsvSegmentationRequest {
+    nKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand?: NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand;
 }
 
 export interface CreateSegmentationRequest {
-    createUpdateSegmentationCommand?: CreateUpdateSegmentationCommand;
+    nKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand?: NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand;
 }
 
 export interface DownloadBusinessPartnersRequest {
@@ -64,18 +70,19 @@ export interface GetSegmentationsRequest {
     createdDateTo?: string;
     categoryName?: string;
     segmentationCategoryId?: number;
-    type?: SegmentationType;
+    type?: NKMRTDApplicationEnumsSegmentationType;
     skip?: number;
     take?: number;
     orderBy?: string;
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: OrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface UpdateSegmentationRequest {
-    createUpdateSegmentationCommand?: CreateUpdateSegmentationCommand;
+    id: string;
+    nKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand?: NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand;
 }
 
 export interface UploadCsvForSegmentationRequest {
@@ -91,7 +98,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
      * These partners are different than others, has to be different id\'s as well,   although they will act like a normal segment partners and can have problems   during matching request from EDE
      * Create a CSV like segment with the given partners.
      */
-    async createFromCsvRaw(requestParameters: CreateFromCsvRequest): Promise<runtime.ApiResponse<number>> {
+    async createFromCsvSegmentationRaw(requestParameters: CreateFromCsvSegmentationRequest): Promise<runtime.ApiResponse<number>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -107,7 +114,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateSegmentationFromCsvCommandToJSON(requestParameters.createSegmentationFromCsvCommand),
+            body: NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandToJSON(requestParameters.nKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -117,8 +124,8 @@ export class SegmentationsApi extends runtime.BaseAPI {
      * These partners are different than others, has to be different id\'s as well,   although they will act like a normal segment partners and can have problems   during matching request from EDE
      * Create a CSV like segment with the given partners.
      */
-    async createFromCsv(requestParameters: CreateFromCsvRequest): Promise<number> {
-        const response = await this.createFromCsvRaw(requestParameters);
+    async createFromCsvSegmentation(requestParameters: CreateFromCsvSegmentationRequest): Promise<number> {
+        const response = await this.createFromCsvSegmentationRaw(requestParameters);
         return await response.value();
     }
 
@@ -141,7 +148,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUpdateSegmentationCommandToJSON(requestParameters.createUpdateSegmentationCommand),
+            body: NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommandToJSON(requestParameters.nKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -192,7 +199,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Get the connected discound based on the id identifier.
      */
-    async getDiscountSegmentationRaw(requestParameters: GetDiscountSegmentationRequest): Promise<runtime.ApiResponse<DiscountSegmentVm>> {
+    async getDiscountSegmentationRaw(requestParameters: GetDiscountSegmentationRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsDiscountSegmentVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDiscountSegmentation.');
         }
@@ -212,13 +219,13 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DiscountSegmentVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsDiscountSegmentVmFromJSON(jsonValue));
     }
 
     /**
      * Get the connected discound based on the id identifier.
      */
-    async getDiscountSegmentation(requestParameters: GetDiscountSegmentationRequest): Promise<DiscountSegmentVm> {
+    async getDiscountSegmentation(requestParameters: GetDiscountSegmentationRequest): Promise<NKMRTDApplicationModelsViewModelsDiscountSegmentVm> {
         const response = await this.getDiscountSegmentationRaw(requestParameters);
         return await response.value();
     }
@@ -226,7 +233,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Gets the requested segmentation, identified by id.
      */
-    async getSegmentationRaw(requestParameters: GetSegmentationRequest): Promise<runtime.ApiResponse<SegmentationVm>> {
+    async getSegmentationRaw(requestParameters: GetSegmentationRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsSegmentationVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSegmentation.');
         }
@@ -246,13 +253,13 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsSegmentationVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested segmentation, identified by id.
      */
-    async getSegmentation(requestParameters: GetSegmentationRequest): Promise<SegmentationVm> {
+    async getSegmentation(requestParameters: GetSegmentationRequest): Promise<NKMRTDApplicationModelsViewModelsSegmentationVm> {
         const response = await this.getSegmentationRaw(requestParameters);
         return await response.value();
     }
@@ -260,7 +267,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Returns the segmentation for the actual query.
      */
-    async getSegmentationsRaw(requestParameters: GetSegmentationsRequest): Promise<runtime.ApiResponse<SegmentListItemVmPaginatedSearchResponse>> {
+    async getSegmentationsRaw(requestParameters: GetSegmentationsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -328,13 +335,13 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentListItemVmPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the segmentation for the actual query.
      */
-    async getSegmentations(requestParameters: GetSegmentationsRequest): Promise<SegmentListItemVmPaginatedSearchResponse> {
+    async getSegmentations(requestParameters: GetSegmentationsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVm> {
         const response = await this.getSegmentationsRaw(requestParameters);
         return await response.value();
     }
@@ -344,6 +351,10 @@ export class SegmentationsApi extends runtime.BaseAPI {
      * Update the current instance with the fulfilled model
      */
     async updateSegmentationRaw(requestParameters: UpdateSegmentationRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateSegmentation.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -355,11 +366,11 @@ export class SegmentationsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/Segmentations/Update`,
-            method: 'POST',
+            path: `/api/Segmentations/Update/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUpdateSegmentationCommandToJSON(requestParameters.createUpdateSegmentationCommand),
+            body: NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandToJSON(requestParameters.nKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand),
         });
 
         return new runtime.VoidApiResponse(response);

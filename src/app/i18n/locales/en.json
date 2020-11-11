@@ -43,6 +43,33 @@
       "title": "Subject"
     }
   },
+  "campaign-channel": {
+    "email": "Email",
+    "phone": "Phone"
+  },
+  "campaign-list": {
+    "company": {
+      "add": "New",
+      "title": "Companies"
+    },
+    "field": {
+      "createdDate": "Date of creation",
+      "modifiedDate": "Date of modification",
+      "name": "Campaign name",
+      "product": "Product",
+      "requestor": "Requestor",
+      "responsible": "Responsible",
+      "segmentation": "Segmentation",
+      "status": "Status",
+      "timing": "Campaign timing",
+      "type": "Type"
+    },
+    "partner": {
+      "add": "New",
+      "title": "Partners"
+    },
+    "title": "Campaigns"
+  },
   "campaign-product": {
     "add": "Add new Product",
     "editor-create": "New product",
@@ -51,6 +78,20 @@
       "createdDate": "Created date",
       "name": "Product name"
     }
+  },
+  "campaign-status": {
+    "set" : "Set",
+    "segmented" : "Segmented",
+    "content" : "Content",
+    "callcenter" : "Call Center",
+    "tested": "Tested",
+    "approved": "Approved",
+    "started": "Started",
+    "startedmanually": "Manually started",
+    "paused" : "Paused",
+    "finished" : "Finished",
+    "closed" : "Closed",
+    "cancelled" : "Cancelled"
   },
   "cashier-editor": {
     "editor-create": "Create cashier",
@@ -129,6 +170,7 @@
     "save": "Save",
     "search": "Search",
     "send": "Send",
+    "table-settings": "Settings",
     "try-again": "Try again...",
     "upload": "Upload",
     "view": "View",
@@ -678,6 +720,7 @@
   },
   "menu": {
     "bp-history": "BP History",
+    "campaigns": "Campaigns",
     "coupon-campaigns": "Coupon Campaigns",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
@@ -688,7 +731,8 @@
     "segmentations": "Segmentation",
     "settings": "Settings",
     "sites": "Sites",
-    "users": "Users"
+    "users": "Users",
+    "organization": "Organization"
   },
   "newsletter": {
     "add": "Add new template",
@@ -729,6 +773,33 @@
     "read-all": "Mark all as Read",
     "today": "Today",
     "yesterday": "Yesterday"
+  },
+  "organization": {
+    "title": "Organizational structure",
+    "companies": {
+      "field": {
+        "status": "Status",
+        "name": "Name",
+        "profile-count": "Profiles",
+        "group-count": "Groups",
+        "job-role-count": "Job roles",
+        "campaign-count": "Campaigns",
+        "created-date": "Date of creation"
+      },
+      "title": "Companies"
+    },
+    "groups": {
+      "title": "Groups"
+    },
+    "job-roles": {
+      "title": "Job roles"
+    },
+    "new": {
+      "new": "New",
+      "company": "Company",
+      "group": "Group",
+      "job-role": "Job role"
+    }
   },
   "partner": {
     "editor": {

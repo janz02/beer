@@ -11,6 +11,7 @@ import {
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
+import { GetProductsRequest } from 'api/swagger/campaign-editor'
 
 interface CouponProductListState {
   products: Product[]
@@ -67,7 +68,9 @@ const getProducts = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().productList.listParams, params)
-    const { items, ...pagination } = await api.campaignEditor.products.getProducts(revisedParams)
+    const { items, ...pagination } = await api.campaignEditor.products.getProducts({
+      ...(revisedParams as GetProductsRequest)
+    })
 
     const products =
       items?.map<Product>(c => ({

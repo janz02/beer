@@ -17,7 +17,9 @@ import {
   ContactsOutlined,
   HistoryOutlined,
   ClusterOutlined,
-  PieChartOutlined
+  DeploymentUnitOutlined,
+  PieChartOutlined,
+  PlayCircleOutlined
 } from '@ant-design/icons'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -64,6 +66,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
 
   const mainOptions = useMemo<SideMenuOptionProps[]>(
     () => [
+      {
+        label: t('menu.campaigns'),
+        link: '/campaigns',
+        icon: <PlayCircleOutlined />,
+        roles: pageViewRoles.campaigns
+      },
       {
         label: t('menu.coupon-campaigns'),
         link: '/couponCampaigns',
@@ -129,6 +137,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/permissions',
         icon: <ClusterOutlined />,
         roles: pageViewRoles.permissions
+      },
+      {
+        label: t('menu.organization'),
+        link: '/organization',
+        icon: <DeploymentUnitOutlined />,
+        roles: pageViewRoles.organization
       }
     ],
     [t]

@@ -11,6 +11,7 @@ import {
 } from 'hooks/useTableUtils'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
+import { GetSegmentationCategoriesRequest } from 'api/swagger/campaign-editor'
 
 interface SegmentationCategoryListState {
   categories: CouponCampaignCategory[]
@@ -75,7 +76,9 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
     const {
       items,
       ...pagination
-    } = await api.campaignEditor.segmentationCategories.getSegmentationCategories(revisedParams)
+    } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({
+      ...(revisedParams as GetSegmentationCategoriesRequest)
+    })
 
     dispatch(
       getCategoriesSuccess({

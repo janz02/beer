@@ -31,6 +31,9 @@ import { BpHistoryListPage } from 'features/bpHistory/bpHistoryList/BpHistoryLis
 import { SegmentationListPage } from 'features/segmentation/segmentationList/SegmentationList'
 import { SegmentationEditorPage } from 'features/segmentation/segmentationEditor/SegmentationEditorPage'
 import { ProfilesPage } from 'features/profiles/ProfilesPage'
+import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
+import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
+import { OrganizationPage } from 'features/organization/OrganizationPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -177,6 +180,24 @@ const Routes = (): JSX.Element => (
       component={SegmentationEditorPage}
     />
     <PrivateRoute exact path="/profiles" roles={pageViewRoles.profiles} component={ProfilesPage} />
+    <PrivateRoute
+      exact
+      path="/campaigns"
+      roles={pageViewRoles.campaigns}
+      component={CampaignListPage}
+    />
+    <PrivateRoute
+      exact
+      path={['/campaigns/new', '/campaigns/:campaignId']}
+      roles={pageViewRoles.campaignEditor}
+      component={CampaignEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/organization"
+      roles={pageViewRoles.organization}
+      component={OrganizationPage}
+    />
     <Route path="*" render={onDefaultRoute} />
   </Switch>
 )

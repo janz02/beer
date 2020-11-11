@@ -1,9 +1,9 @@
 export enum ColumnStorageName {
-  CAMPAIGN_WAITING = 'campaign-waiting-columns',
-  CAMPAIGN_ACCEPTED = 'campaign-accepted-columns',
-  CAMPAIGN_CLOSED = 'campaign-closed-columns',
-  CAMPAIGN_CREATED = 'campaign-created-columns',
-  CAMPAIGN_ALL = 'campaign-all-columns',
+  COUPON_CAMPAIGN_WAITING = 'coupon-campaign-waiting-columns',
+  COUPON_CAMPAIGN_ACCEPTED = 'coupon-campaign-accepted-columns',
+  COUPON_CAMPAIGN_CLOSED = 'coupon-campaign-closed-columns',
+  COUPON_CAMPAIGN_CREATED = 'coupon-campaign-created-columns',
+  COUPON_CAMPAIGN_ALL = 'coupon-campaign-all-columns',
   PARTNER = 'partner-columns',
   NEWSLETTER = 'newsletter-columns',
   USER_ACCESS_NKM = 'user-access-nkm-columns',
@@ -11,5 +11,8 @@ export enum ColumnStorageName {
   BP_HISTORY = 'bp-history-columns',
   PERMISSION = 'permission-columns',
   SEGMENTATION = 'segmentation-columns',
-  PROFILES = 'profiles-columns'
+  PROFILES = 'profiles-columns',
+  CAMPAIGN_COMPANY = 'campaign-company-columns',
+  CAMPAIGN_PARTNER = 'campaign-partner-columns',
+  COMPANIES = 'company-columns'
 }
