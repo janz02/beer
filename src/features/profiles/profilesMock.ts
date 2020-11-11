@@ -1,5 +1,5 @@
 import { ListRequestParams, Pagination } from 'hooks/useTableUtils'
-import { Profile } from 'models/profile2'
+import { Profile, ProfileStatus } from 'models/profile2'
 import moment from 'moment'
 
 interface GetProfilesResponse extends Pagination {
@@ -17,21 +17,32 @@ const getRandomString = (length: number): string => {
   return result
 }
 
+const getRandomStatus = (): ProfileStatus => {
+  switch (Math.floor(Math.random() * 3)) {
+    case 0:
+      return 'approved'
+    case 1:
+      return 'declined'
+    default:
+      return 'waiting-for-approval'
+  }
+}
+
 const getRandomProfile = (id: number): Profile => {
   const name = getRandomString(10)
   const username = name.toLowerCase()
 
   return {
     id,
-    status: 'active',
+    status: getRandomStatus(),
     name,
     username,
     email: username + '@test.com',
-    groups: Math.floor(Math.random() * 10),
+    group: getRandomString(10),
     permissions: Math.floor(Math.random() * 10),
-    registrationDate: moment(),
+    dateOfRegistration: moment(),
     company: 'company',
-    jobDescription: 'job'
+    jobRole: 'job'
   }
 }
 

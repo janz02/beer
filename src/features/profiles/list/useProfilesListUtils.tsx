@@ -9,7 +9,8 @@ import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
-import { Profile } from 'models/profile2'
+import { Profile, ProfileStatus } from 'models/profile2'
+import { ProfileStatusDisplay } from './ProfileStatusDisplay'
 
 interface ProfilesListUtils {
   columnsConfig: ColumnsType<Profile>
@@ -25,7 +26,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const [selectedTab, setSelectedTab] = useState<string>('nkm')
+  const [selectedTab, setSelectedTab] = useState<string>('all')
 
   const { listParams, listState, profiles } = useSelector((state: RootState) => state.profiles)
 
@@ -39,9 +40,17 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
     () => [
       tableUtils.columnConfig({
         title: t('profiles.field.status'),
-        filterMode: FilterMode.ACTIVE_INACTIVE,
-        key: 'isActive',
-        width: '7rem'
+        filterMode: FilterMode.ENUM,
+        key: 'status',
+        width: '10rem',
+        filters: [
+          { value: 'approved', text: t('profiles.status.approved') },
+          { value: 'declined', text: t('profiles.status.declined') },
+          { value: 'waiting-for-approval', text: t('profiles.status.waiting-for-approval') }
+        ],
+        render(status: ProfileStatus) {
+          return <ProfileStatusDisplay status={status} />
+        }
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.name'),
@@ -63,16 +72,37 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
         filterMode: FilterMode.SEARCH
       }),
       tableUtils.columnConfig({
-        title: t('profiles.field.groups'),
-        key: 'groups',
+        title: t('profiles.field.group'),
+        key: 'group',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.permissions'),
         key: 'permissions',
+        sort: true
+      }),
+      tableUtils.columnConfig({
+        title: t('organization.companies.field.created-date'),
+        key: 'dateOfRegistration',
+        sort: true,
+        renderMode: 'date time',
+        filterMode: FilterMode.DATEPICKER,
+        hiddenByDefault: true
+      }),
+      tableUtils.columnConfig({
+        title: t('profiles.field.company'),
+        key: 'company',
         sort: false,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        hiddenByDefault: true
+      }),
+      tableUtils.columnConfig({
+        title: t('profiles.field.job-role'),
+        key: 'jobRole',
+        sort: false,
+        filterMode: FilterMode.SEARCH,
+        hiddenByDefault: true
       }),
       hasPermission([Roles.Administrator])
         ? tableUtils.actionColumnConfig({

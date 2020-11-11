@@ -1,3 +1,4 @@
+import './ProfilesList.scss'
 import React, { FC, useEffect, useMemo } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
@@ -10,6 +11,13 @@ import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+import { Dropdown, Menu } from 'antd'
+import { AddButton } from 'components/buttons/AddButton'
+import { hasPermission } from 'services/jwt-reader'
+import { DownOutlined } from '@ant-design/icons'
+import { Roles } from 'api/swagger/coupon'
+import { ExportButton } from 'components/buttons/ExportButton'
+import { SettingsButton } from 'components/buttons/SettingsButton'
 
 export const ProfilesList: FC = () => {
   const dispatch = useDispatch()
@@ -31,14 +39,50 @@ export const ProfilesList: FC = () => {
 
   const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.PROFILES)
 
+  const headerOptions = useMemo(() => {
+    const menu = (
+      <Menu>
+        <Menu.Item>{t('profiles.new.bulk-upload')}</Menu.Item>
+        <Menu.Item>{t('profiles.new.send-invitation')}</Menu.Item>
+      </Menu>
+    )
+
+    return (
+      <>
+        {hasPermission([Roles.Administrator]) && (
+          <Dropdown overlay={menu}>
+            <AddButton>
+              {t('profiles.new.new')} <DownOutlined />
+            </AddButton>
+          </Dropdown>
+        )}
+      </>
+    )
+  }, [t])
+
   const tabBarActions = useMemo(() => {
     return (
       <>
+        <ExportButton className="profiles-export-button" />
+        <SettingsButton />
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrderUtils} />
       </>
     )
   }, [columnOrderUtils, resetFilters])
+
+  const table = (
+    <ResponsiveTable
+      hasHeaderOffset
+      {...{
+        loading: profilesLoading,
+        columns: columnOrderUtils.currentColumns,
+        dataSource: profiles.map((u, i) => ({ ...u, key: i })),
+        pagination: tableUtils.paginationConfig,
+        onChange: tableUtils.handleTableChange
+      }}
+    />
+  )
 
   return (
     <ResponsiveCard
@@ -47,6 +91,7 @@ export const ProfilesList: FC = () => {
       forTable
       paddedBottom
       floatingTitle={t('profiles.title')}
+      floatingOptions={headerOptions}
     >
       <ResponsiveTabs
         type="card"
@@ -54,17 +99,17 @@ export const ProfilesList: FC = () => {
         onChange={x => setSelectedTab(x)}
         tabBarExtraContent={tabBarActions}
       >
-        <TabPane key="nkm" tab={<TabPanelTitle title={t('profiles.tab')} />}>
-          <ResponsiveTable
-            hasHeaderOffset
-            {...{
-              loading: profilesLoading,
-              columns: columnOrderUtils.currentColumns,
-              dataSource: profiles.map((u, i) => ({ ...u, key: i })),
-              pagination: tableUtils.paginationConfig,
-              onChange: tableUtils.handleTableChange
-            }}
-          />
+        <TabPane key="all" tab={<TabPanelTitle title={t('profiles.tab.all')} />}>
+          {table}
+        </TabPane>
+        <TabPane
+          key="waiting-for-approval"
+          tab={<TabPanelTitle title={t('profiles.tab.waiting-for-approval')} />}
+        >
+          {table}
+        </TabPane>
+        <TabPane key="declined" tab={<TabPanelTitle title={t('profiles.tab.declined')} />}>
+          {table}
         </TabPane>
       </ResponsiveTabs>
     </ResponsiveCard>

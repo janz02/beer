@@ -80,18 +80,18 @@
     }
   },
   "campaign-status": {
-    "set" : "Set",
-    "segmented" : "Segmented",
-    "content" : "Content",
-    "callcenter" : "Call Center",
+    "set": "Set",
+    "segmented": "Segmented",
+    "content": "Content",
+    "callcenter": "Call Center",
     "tested": "Tested",
     "approved": "Approved",
     "started": "Started",
     "startedmanually": "Manually started",
-    "paused" : "Paused",
-    "finished" : "Finished",
-    "closed" : "Closed",
-    "cancelled" : "Cancelled"
+    "paused": "Paused",
+    "finished": "Finished",
+    "closed": "Closed",
+    "cancelled": "Cancelled"
   },
   "cashier-editor": {
     "editor-create": "Create cashier",
@@ -732,7 +732,8 @@
     "settings": "Settings",
     "sites": "Sites",
     "users": "Users",
-    "organization": "Organization"
+    "organization": "Organization",
+    "profiles": "Profiles"
   },
   "newsletter": {
     "add": "Add new template",
@@ -891,6 +892,30 @@
     },
     "save": "Save changes",
     "save-profile-success": "Successfully saved the profile."
+  },
+  "profiles": {
+    "field": {
+      "status": "Status",
+      "name": "Name",
+      "username": "Username",
+      "email": "E-mail",
+      "group": "Group",
+      "permissions": "Permissions",
+      "date-of-registration": "Date of registration",
+      "company": "Company",
+      "job-role": "Job description"
+    },
+    "new": {
+      "new": "New",
+      "bulk-upload": "Bulk upload",
+      "send-invitation": "Send invitation"
+    },
+    "tab": {
+      "all": "All",
+      "waiting-for-approval": "Waiting for approval",
+      "declined": "Declined"
+    },
+    "title": "Profiles"
   },
   "query-builder": {
     "add-group": {

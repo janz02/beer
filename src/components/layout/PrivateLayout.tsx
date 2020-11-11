@@ -143,6 +143,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/organization',
         icon: <DeploymentUnitOutlined />,
         roles: pageViewRoles.organization
+      },
+      {
+        label: t('menu.profiles'),
+        link: '/profiles',
+        icon: <UsergroupAddOutlined />,
+        roles: pageViewRoles.profiles
       }
     ],
     [t]
@@ -150,12 +156,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
 
   const footerOptions = useMemo<SideMenuOptionProps[]>(
     () => [
-      {
-        label: t('menu.profiles'),
-        link: '/profiles',
-        icon: <UsergroupAddOutlined />,
-        roles: pageViewRoles.profiles
-      },
       {
         // Slice is necessary because this way the tooltip won't shoot off
         // far right when the name is really long.

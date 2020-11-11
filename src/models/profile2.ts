@@ -1,12 +1,14 @@
+export type ProfileStatus = 'approved' | 'declined' | 'waiting-for-approval'
+
 export interface Profile {
   id: number
-  status: 'active' | 'inactive' | 'waiting-for-approve'
+  status: ProfileStatus
   name: string
   username: string
   email: string
-  groups: number
+  group: string
   permissions: number
-  registrationDate: moment.Moment
+  dateOfRegistration: moment.Moment
   company: string
-  jobDescription: string
+  jobRole: string
 }
