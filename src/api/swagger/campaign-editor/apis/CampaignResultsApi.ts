@@ -15,15 +15,18 @@
 
 import * as runtime from '../runtime';
 import {
-    CampaignResultEventVmPaginatedSearchResponse,
-    CampaignResultEventVmPaginatedSearchResponseFromJSON,
-    CampaignResultEventVmPaginatedSearchResponseToJSON,
-    OrderByType,
-    OrderByTypeFromJSON,
-    OrderByTypeToJSON,
-    UploadCsvCommand,
-    UploadCsvCommandFromJSON,
-    UploadCsvCommandToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVmToJSON,
+    NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand,
+    NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommandFromJSON,
+    NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON,
 } from '../models';
 
 export interface DownloadCsvRequest {
@@ -42,11 +45,11 @@ export interface GetEventsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: OrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface UploadCsvForCampaignResultRequest {
-    uploadCsvCommand?: UploadCsvCommand;
+    nKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand?: NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand;
 }
 
 /**
@@ -55,7 +58,7 @@ export interface UploadCsvForCampaignResultRequest {
 export class CampaignResultsApi extends runtime.BaseAPI {
 
     /**
-     * Download a CSV structured file for a campaign with a given segmentation. Provides   infromations which are already processed only.
+     * Download a CSV structured file for a campaign with a given segmentation. Provides   information which are already processed only.
      */
     async downloadCsvRaw(requestParameters: DownloadCsvRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -85,7 +88,7 @@ export class CampaignResultsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Download a CSV structured file for a campaign with a given segmentation. Provides   infromations which are already processed only.
+     * Download a CSV structured file for a campaign with a given segmentation. Provides   information which are already processed only.
      */
     async downloadCsv(requestParameters: DownloadCsvRequest): Promise<void> {
         await this.downloadCsvRaw(requestParameters);
@@ -94,7 +97,7 @@ export class CampaignResultsApi extends runtime.BaseAPI {
     /**
      * Queries for the result information from the database with the given filters and parameters
      */
-    async getEventsRaw(requestParameters: GetEventsRequest): Promise<runtime.ApiResponse<CampaignResultEventVmPaginatedSearchResponse>> {
+    async getEventsRaw(requestParameters: GetEventsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.campaignId !== undefined) {
@@ -154,13 +157,13 @@ export class CampaignResultsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignResultEventVmPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVmFromJSON(jsonValue));
     }
 
     /**
      * Queries for the result information from the database with the given filters and parameters
      */
-    async getEvents(requestParameters: GetEventsRequest): Promise<CampaignResultEventVmPaginatedSearchResponse> {
+    async getEvents(requestParameters: GetEventsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm> {
         const response = await this.getEventsRaw(requestParameters);
         return await response.value();
     }
@@ -184,7 +187,7 @@ export class CampaignResultsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UploadCsvCommandToJSON(requestParameters.uploadCsvCommand),
+            body: NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON(requestParameters.nKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand),
         });
 
         return new runtime.VoidApiResponse(response);

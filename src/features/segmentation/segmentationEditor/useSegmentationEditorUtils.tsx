@@ -1,4 +1,4 @@
-import { QueryBuilderField } from 'api/swagger/campaign-editor/models'
+import { NKMRTDApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor/models'
 import { RootState } from 'app/rootReducer'
 import { FormUtils, useFormUtils } from 'hooks/useFormUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
@@ -25,7 +25,7 @@ export interface SegmentationEditorUtils {
   saving: boolean
   checkFieldsChange: () => void
   handleSave: (values: CampaignSegmentation) => void
-  fields?: QueryBuilderField[]
+  fields?: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
   segmentationQuery?: SegmentationQuery
 }
 

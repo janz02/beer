@@ -15,17 +15,20 @@
 
 import * as runtime from '../runtime';
 import {
-    EmailTemplateVm,
-    EmailTemplateVmFromJSON,
-    EmailTemplateVmToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDCampaignEditorPrototypesEmailTemplateVm,
+    NKMRTDCampaignEditorPrototypesEmailTemplateVmFromJSON,
+    NKMRTDCampaignEditorPrototypesEmailTemplateVmToJSON,
 } from '../models';
+
+export interface GetTemplateRequest {
+    id: number;
+}
 
 export interface GetTemplateByGuidRequest {
     guid: string;
-}
-
-export interface GetTemplateByIdRequest {
-    id: number;
 }
 
 /**
@@ -34,9 +37,43 @@ export interface GetTemplateByIdRequest {
 export class TemplatesApi extends runtime.BaseAPI {
 
     /**
+     * Gets the requested template, identified by id.
+     */
+    async getTemplateRaw(requestParameters: GetTemplateRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesEmailTemplateVm>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTemplate.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Templates/GetTemplateById/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesEmailTemplateVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Gets the requested template, identified by id.
+     */
+    async getTemplate(requestParameters: GetTemplateRequest): Promise<NKMRTDCampaignEditorPrototypesEmailTemplateVm> {
+        const response = await this.getTemplateRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Gets the requested template, identified by guid.
      */
-    async getTemplateByGuidRaw(requestParameters: GetTemplateByGuidRequest): Promise<runtime.ApiResponse<EmailTemplateVm>> {
+    async getTemplateByGuidRaw(requestParameters: GetTemplateByGuidRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesEmailTemplateVm>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getTemplateByGuid.');
         }
@@ -56,48 +93,14 @@ export class TemplatesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => EmailTemplateVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesEmailTemplateVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested template, identified by guid.
      */
-    async getTemplateByGuid(requestParameters: GetTemplateByGuidRequest): Promise<EmailTemplateVm> {
+    async getTemplateByGuid(requestParameters: GetTemplateByGuidRequest): Promise<NKMRTDCampaignEditorPrototypesEmailTemplateVm> {
         const response = await this.getTemplateByGuidRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Gets the requested template, identified by id.
-     */
-    async getTemplateByIdRaw(requestParameters: GetTemplateByIdRequest): Promise<runtime.ApiResponse<EmailTemplateVm>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTemplateById.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/api/Templates/GetTemplateById/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EmailTemplateVmFromJSON(jsonValue));
-    }
-
-    /**
-     * Gets the requested template, identified by id.
-     */
-    async getTemplateById(requestParameters: GetTemplateByIdRequest): Promise<EmailTemplateVm> {
-        const response = await this.getTemplateByIdRaw(requestParameters);
         return await response.value();
     }
 

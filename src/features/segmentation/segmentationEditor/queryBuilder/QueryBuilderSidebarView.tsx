@@ -2,11 +2,11 @@ import React from 'react'
 import { Button } from 'antd'
 import { ResponsiveCard } from '../../../../components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
-import { QueryBuilderField } from 'api/swagger/campaign-editor'
+import { NKMRTDApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
 import './QueryBuilderSidebarView.scss'
 
 interface SidebarViewProps {
-  fields?: QueryBuilderField[]
+  fields?: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
   onFieldSelected: (field: string) => void
 }
 
@@ -14,7 +14,10 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
   const { t } = useTranslation()
   const { fields, onFieldSelected } = props
 
-  const renderFieldsFor = (parentPrefix: string, subFields: QueryBuilderField[]): JSX.Element => (
+  const renderFieldsFor = (
+    parentPrefix: string,
+    subFields: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
+  ): JSX.Element => (
     <>
       {subFields.map((x, idx) => {
         return (
@@ -35,10 +38,10 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
 
   const renderMenuItems = (
     localizationPrefix: string,
-    fields: QueryBuilderField[]
+    fields: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
   ): JSX.Element => (
     <>
-      {fields.map((x: QueryBuilderField, idx: number) => {
+      {fields.map((x: NKMRTDApplicationModelsSegmentationQueryBuilderField, idx: number) => {
         return (
           <React.Fragment key={idx}>
             <ul>
@@ -57,7 +60,7 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
       <ResponsiveCard title={t('query-builder.sidebar.header')}>
         <ul className="query-builder-sidebar">
           {!!fields &&
-            fields.map((x: QueryBuilderField, idx: number) => {
+            fields.map((x: NKMRTDApplicationModelsSegmentationQueryBuilderField, idx: number) => {
               return (
                 <React.Fragment key={idx}>
                   {x.label}

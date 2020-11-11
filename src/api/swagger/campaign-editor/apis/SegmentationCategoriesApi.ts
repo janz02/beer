@@ -15,25 +15,28 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateSegmentationCategoryCommand,
-    CreateSegmentationCategoryCommandFromJSON,
-    CreateSegmentationCategoryCommandToJSON,
-    OrderByType,
-    OrderByTypeFromJSON,
-    OrderByTypeToJSON,
-    SegmentationCategoryVm,
-    SegmentationCategoryVmFromJSON,
-    SegmentationCategoryVmToJSON,
-    SegmentationCategoryVmPaginatedSearchResponse,
-    SegmentationCategoryVmPaginatedSearchResponseFromJSON,
-    SegmentationCategoryVmPaginatedSearchResponseToJSON,
-    UpdateSegmentationCategoryCommand,
-    UpdateSegmentationCategoryCommandFromJSON,
-    UpdateSegmentationCategoryCommandToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVmToJSON,
+    NKMRTDApplicationModelsViewModelsSegmentationCategoryVm,
+    NKMRTDApplicationModelsViewModelsSegmentationCategoryVmFromJSON,
+    NKMRTDApplicationModelsViewModelsSegmentationCategoryVmToJSON,
+    NKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand,
+    NKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommandFromJSON,
+    NKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommandToJSON,
+    NKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand,
+    NKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommandFromJSON,
+    NKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommandToJSON,
 } from '../models';
 
 export interface CreateSegmentationCategoryRequest {
-    createSegmentationCategoryCommand?: CreateSegmentationCategoryCommand;
+    nKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand?: NKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand;
 }
 
 export interface DeleteSegmentationCategoryRequest {
@@ -52,7 +55,7 @@ export interface GetSegmentationCategoriesRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: OrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface GetSegmentationCategoryRequest {
@@ -61,7 +64,7 @@ export interface GetSegmentationCategoryRequest {
 
 export interface UpdateSegmentationCategoryRequest {
     id: number;
-    updateSegmentationCategoryCommand?: UpdateSegmentationCategoryCommand;
+    nKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand?: NKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand;
 }
 
 /**
@@ -88,7 +91,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateSegmentationCategoryCommandToJSON(requestParameters.createSegmentationCategoryCommand),
+            body: NKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommandToJSON(requestParameters.nKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -140,7 +143,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the segmentation categories identified by the ids.
      */
-    async getManySegmentationCategoriesRaw(requestParameters: GetManySegmentationCategoriesRequest): Promise<runtime.ApiResponse<Array<SegmentationCategoryVm>>> {
+    async getManySegmentationCategoriesRaw(requestParameters: GetManySegmentationCategoriesRequest): Promise<runtime.ApiResponse<Array<NKMRTDApplicationModelsViewModelsSegmentationCategoryVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -160,13 +163,13 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SegmentationCategoryVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDApplicationModelsViewModelsSegmentationCategoryVmFromJSON));
     }
 
     /**
      * Returns the segmentation categories identified by the ids.
      */
-    async getManySegmentationCategories(requestParameters: GetManySegmentationCategoriesRequest): Promise<Array<SegmentationCategoryVm>> {
+    async getManySegmentationCategories(requestParameters: GetManySegmentationCategoriesRequest): Promise<Array<NKMRTDApplicationModelsViewModelsSegmentationCategoryVm>> {
         const response = await this.getManySegmentationCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -174,7 +177,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the segmentation categories for the actual query.
      */
-    async getSegmentationCategoriesRaw(requestParameters: GetSegmentationCategoriesRequest): Promise<runtime.ApiResponse<SegmentationCategoryVmPaginatedSearchResponse>> {
+    async getSegmentationCategoriesRaw(requestParameters: GetSegmentationCategoriesRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -222,13 +225,13 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationCategoryVmPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the segmentation categories for the actual query.
      */
-    async getSegmentationCategories(requestParameters: GetSegmentationCategoriesRequest): Promise<SegmentationCategoryVmPaginatedSearchResponse> {
+    async getSegmentationCategories(requestParameters: GetSegmentationCategoriesRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVm> {
         const response = await this.getSegmentationCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -236,7 +239,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
     /**
      * Gets the requested segmentation category, identified by id.
      */
-    async getSegmentationCategoryRaw(requestParameters: GetSegmentationCategoryRequest): Promise<runtime.ApiResponse<SegmentationCategoryVm>> {
+    async getSegmentationCategoryRaw(requestParameters: GetSegmentationCategoryRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsSegmentationCategoryVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSegmentationCategory.');
         }
@@ -256,13 +259,13 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationCategoryVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsSegmentationCategoryVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested segmentation category, identified by id.
      */
-    async getSegmentationCategory(requestParameters: GetSegmentationCategoryRequest): Promise<SegmentationCategoryVm> {
+    async getSegmentationCategory(requestParameters: GetSegmentationCategoryRequest): Promise<NKMRTDApplicationModelsViewModelsSegmentationCategoryVm> {
         const response = await this.getSegmentationCategoryRaw(requestParameters);
         return await response.value();
     }
@@ -291,7 +294,7 @@ export class SegmentationCategoriesApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: UpdateSegmentationCategoryCommandToJSON(requestParameters.updateSegmentationCategoryCommand),
+            body: NKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommandToJSON(requestParameters.nKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand),
         });
 
         return new runtime.VoidApiResponse(response);
