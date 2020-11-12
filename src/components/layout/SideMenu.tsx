@@ -47,6 +47,7 @@ export const SideMenu: FC<SideMenuProps> = props => {
           collapsible
           collapsed={!open}
           onCollapse={collapsed => onClose(collapsed)}
+          width={300}
         >
           <div className="items-container">
             <Header />

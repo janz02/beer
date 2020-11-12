@@ -83,7 +83,7 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = ({
   const mapOptions = (items: SideMenuOptionProps[]): JSX.Element[] => {
     const filtered = items.filter(option => hasPermission(option.roles ?? []))
 
-    return filtered.map((option, i) => {
+    return filtered.map(option => {
       if (option.component) {
         return option.component
       } else {

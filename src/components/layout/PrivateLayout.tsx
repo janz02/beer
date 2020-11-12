@@ -193,7 +193,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
   return (
     <Layout className="layout">
       <SideMenu open={menuOpened} onClose={(open: boolean) => setMenuOpened(open)}>
-        <div className="section-upper">
+        <div className={menuOpened ? 'section-upper' : 'section-upper section-collapsed'}>
           <SideMenuOptions
             options={mainOptions}
             handleClose={closeDrawer}
