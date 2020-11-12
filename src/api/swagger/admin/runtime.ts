@@ -13,7 +13,7 @@
  */
 
 
-export const BASE_PATH = "https://pkm-coupon-dev.grapetest.xyz/admin".replace(/\/+$/, "");
+export const BASE_PATH = "https://optima-dev.grapetest.xyz/admin".replace(/\/+$/, "");
 
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
