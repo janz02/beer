@@ -1,0 +1,71 @@
+// for firefox
+* {
+  scrollbar-width: auto;
+  scrollbar-color: auto;
+}
+
+// for other browsers
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-button {
+  &:start:decrement,
+  &:end:increment {
+    display: block;
+    width: 15px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &:start:decrement:horizontal {
+    background-image: url(../img/icon_chevron_left_brandG-64.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: contain;
+  }
+
+  &:end:increment:horizontal {
+    background-image: url(../img/icon_chevron_right_brandG.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: contain;
+  }
+
+  &:start:decrement:vertical {
+    background-image: url(../img/icon_chevron_up-64_brandG.svg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+  }
+
+  &:end:increment:vertical {
+    background-image: url(../img/icon_chevron_down-64_brandG.svg);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+  }
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: lightgray;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.custom-scroll {
+  // for firefox
+  &--thin {
+    scrollbar-width: thin;
+  }
+
+  // for other browsers
+  &--dark::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 39, 75);
+  }
+}
