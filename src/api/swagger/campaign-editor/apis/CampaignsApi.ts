@@ -15,24 +15,27 @@
 
 import * as runtime from '../runtime';
 import {
-    AssignTestGroupCategoriesCommand,
-    AssignTestGroupCategoriesCommandFromJSON,
-    AssignTestGroupCategoriesCommandToJSON,
-    CampaignListItemVmPaginatedSearchResponse,
-    CampaignListItemVmPaginatedSearchResponseFromJSON,
-    CampaignListItemVmPaginatedSearchResponseToJSON,
-    CampaignVm,
-    CampaignVmFromJSON,
-    CampaignVmToJSON,
-    CreateCampaignCommand,
-    CreateCampaignCommandFromJSON,
-    CreateCampaignCommandToJSON,
-    OrderByType,
-    OrderByTypeFromJSON,
-    OrderByTypeToJSON,
-    UpdateCampaignCommand,
-    UpdateCampaignCommandFromJSON,
-    UpdateCampaignCommandToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVmToJSON,
+    NKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommand,
+    NKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommandFromJSON,
+    NKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommandToJSON,
+    NKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand,
+    NKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandFromJSON,
+    NKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandToJSON,
+    NKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommand,
+    NKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommandFromJSON,
+    NKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommandToJSON,
+    NKMRTDCampaignEditorPrototypesCampaignVm,
+    NKMRTDCampaignEditorPrototypesCampaignVmFromJSON,
+    NKMRTDCampaignEditorPrototypesCampaignVmToJSON,
 } from '../models';
 
 export interface ApproveCampaignRequest {
@@ -40,7 +43,7 @@ export interface ApproveCampaignRequest {
 }
 
 export interface CreateCampaignRequest {
-    createCampaignCommand?: CreateCampaignCommand;
+    nKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommand?: NKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommand;
 }
 
 export interface DeleteCampaignRequest {
@@ -81,12 +84,12 @@ export interface GetCampaignsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: OrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface SendCampaignToTestGroupRequest {
     campaignId: string;
-    assignTestGroupCategoriesCommand?: AssignTestGroupCategoriesCommand;
+    nKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand?: NKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand;
 }
 
 export interface StartCampaignImmediatelyRequest {
@@ -98,7 +101,7 @@ export interface StopCampaignImmediatelyRequest {
 }
 
 export interface UpdateCampaignRequest {
-    updateCampaignCommand?: UpdateCampaignCommand;
+    nKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommand?: NKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommand;
 }
 
 /**
@@ -108,7 +111,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved for the indicated id identified  campaign.
      */
     async approveCampaignRaw(requestParameters: ApproveCampaignRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -134,7 +137,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved for the indicated id identified  campaign.
      */
     async approveCampaign(requestParameters: ApproveCampaignRequest): Promise<void> {
         await this.approveCampaignRaw(requestParameters);
@@ -143,7 +146,7 @@ export class CampaignsApi extends runtime.BaseAPI {
     /**
      * Creates the dedicates campaign. The creation will results in an identification,  assigned to the current instance.
      */
-    async createCampaignRaw(requestParameters: CreateCampaignRequest): Promise<runtime.ApiResponse<void>> {
+    async createCampaignRaw(requestParameters: CreateCampaignRequest): Promise<runtime.ApiResponse<number>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -159,17 +162,18 @@ export class CampaignsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateCampaignCommandToJSON(requestParameters.createCampaignCommand),
+            body: NKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommandToJSON(requestParameters.nKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommand),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.TextApiResponse(response) as any;
     }
 
     /**
      * Creates the dedicates campaign. The creation will results in an identification,  assigned to the current instance.
      */
-    async createCampaign(requestParameters: CreateCampaignRequest): Promise<void> {
-        await this.createCampaignRaw(requestParameters);
+    async createCampaign(requestParameters: CreateCampaignRequest): Promise<number> {
+        const response = await this.createCampaignRaw(requestParameters);
+        return await response.value();
     }
 
     /**
@@ -207,7 +211,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created for the indicated id identified  campaign.
      */
     async disapproveCampaignRaw(requestParameters: DisapproveCampaignRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -233,16 +237,16 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created for the indicated id identified  campaign.
      */
     async disapproveCampaign(requestParameters: DisapproveCampaignRequest): Promise<void> {
         await this.disapproveCampaignRaw(requestParameters);
     }
 
     /**
-     * Query for a dedicates campaign dentified by id.
+     * Query for a dedicates campaign identified by id.
      */
-    async getCampaignRaw(requestParameters: GetCampaignRequest): Promise<runtime.ApiResponse<CampaignVm>> {
+    async getCampaignRaw(requestParameters: GetCampaignRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesCampaignVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCampaign.');
         }
@@ -262,22 +266,22 @@ export class CampaignsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesCampaignVmFromJSON(jsonValue));
     }
 
     /**
-     * Query for a dedicates campaign dentified by id.
+     * Query for a dedicates campaign identified by id.
      */
-    async getCampaign(requestParameters: GetCampaignRequest): Promise<CampaignVm> {
+    async getCampaign(requestParameters: GetCampaignRequest): Promise<NKMRTDCampaignEditorPrototypesCampaignVm> {
         const response = await this.getCampaignRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Ther is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
+     * Their is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
      * Returns the campaigns for the actual query.
      */
-    async getCampaignsRaw(requestParameters: GetCampaignsRequest): Promise<runtime.ApiResponse<CampaignListItemVmPaginatedSearchResponse>> {
+    async getCampaignsRaw(requestParameters: GetCampaignsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -397,14 +401,14 @@ export class CampaignsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignListItemVmPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVmFromJSON(jsonValue));
     }
 
     /**
-     * Ther is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
+     * Their is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
      * Returns the campaigns for the actual query.
      */
-    async getCampaigns(requestParameters: GetCampaignsRequest): Promise<CampaignListItemVmPaginatedSearchResponse> {
+    async getCampaigns(requestParameters: GetCampaignsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVm> {
         const response = await this.getCampaignsRaw(requestParameters);
         return await response.value();
     }
@@ -433,7 +437,7 @@ export class CampaignsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: AssignTestGroupCategoriesCommandToJSON(requestParameters.assignTestGroupCategoriesCommand),
+            body: NKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandToJSON(requestParameters.nKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -449,7 +453,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually for the indicated id identified  campaign.
      */
     async startCampaignImmediatelyRaw(requestParameters: StartCampaignImmediatelyRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -475,7 +479,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually for the indicated id identified  campaign.
      */
     async startCampaignImmediately(requestParameters: StartCampaignImmediatelyRequest): Promise<void> {
         await this.startCampaignImmediatelyRaw(requestParameters);
@@ -483,7 +487,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Started or   NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StoppedManually   for the indicated id identified campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Started or   NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StoppedManually   for the indicated id identified campaign.
      */
     async stopCampaignImmediatelyRaw(requestParameters: StopCampaignImmediatelyRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -509,7 +513,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for statua change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Started or   NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StoppedManually   for the indicated id identified campaign.
+     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Started or   NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StoppedManually   for the indicated id identified campaign.
      */
     async stopCampaignImmediately(requestParameters: StopCampaignImmediatelyRequest): Promise<void> {
         await this.stopCampaignImmediatelyRaw(requestParameters);
@@ -518,7 +522,7 @@ export class CampaignsApi extends runtime.BaseAPI {
     /**
      * Update the current instance with the fulfilled model
      */
-    async updateCampaignRaw(requestParameters: UpdateCampaignRequest): Promise<runtime.ApiResponse<CampaignVm>> {
+    async updateCampaignRaw(requestParameters: UpdateCampaignRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -534,18 +538,17 @@ export class CampaignsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: UpdateCampaignCommandToJSON(requestParameters.updateCampaignCommand),
+            body: NKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommandToJSON(requestParameters.nKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommand),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CampaignVmFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      * Update the current instance with the fulfilled model
      */
-    async updateCampaign(requestParameters: UpdateCampaignRequest): Promise<CampaignVm> {
-        const response = await this.updateCampaignRaw(requestParameters);
-        return await response.value();
+    async updateCampaign(requestParameters: UpdateCampaignRequest): Promise<void> {
+        await this.updateCampaignRaw(requestParameters);
     }
 
 }
