@@ -15,22 +15,28 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateUpdatePermissionCommand,
-    CreateUpdatePermissionCommandFromJSON,
-    CreateUpdatePermissionCommandToJSON,
-    OrderByType,
-    OrderByTypeFromJSON,
-    OrderByTypeToJSON,
-    PermissionVm,
-    PermissionVmFromJSON,
-    PermissionVmToJSON,
-    PermissionVmPaginatedSearchResponse,
-    PermissionVmPaginatedSearchResponseFromJSON,
-    PermissionVmPaginatedSearchResponseToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVmToJSON,
+    NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand,
+    NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommandFromJSON,
+    NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommandToJSON,
+    NKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommand,
+    NKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommandFromJSON,
+    NKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommandToJSON,
+    NKMRTDCampaignEditorPrototypesPermissionVm,
+    NKMRTDCampaignEditorPrototypesPermissionVmFromJSON,
+    NKMRTDCampaignEditorPrototypesPermissionVmToJSON,
 } from '../models';
 
 export interface CreatePermissionRequest {
-    createUpdatePermissionCommand?: CreateUpdatePermissionCommand;
+    nKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand?: NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand;
 }
 
 export interface DeletePermissionRequest {
@@ -53,12 +59,12 @@ export interface GetPermissionsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: OrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface UpdatePermissionRequest {
     id: number;
-    createUpdatePermissionCommand?: CreateUpdatePermissionCommand;
+    nKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommand?: NKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommand;
 }
 
 /**
@@ -85,7 +91,7 @@ export class PermissionsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUpdatePermissionCommandToJSON(requestParameters.createUpdatePermissionCommand),
+            body: NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommandToJSON(requestParameters.nKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -135,7 +141,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Returns the permissions identified by the ids.
      */
-    async getManyPermissionsRaw(requestParameters: GetManyPermissionsRequest): Promise<runtime.ApiResponse<Array<PermissionVm>>> {
+    async getManyPermissionsRaw(requestParameters: GetManyPermissionsRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorPrototypesPermissionVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -155,13 +161,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PermissionVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorPrototypesPermissionVmFromJSON));
     }
 
     /**
      * Returns the permissions identified by the ids.
      */
-    async getManyPermissions(requestParameters: GetManyPermissionsRequest): Promise<Array<PermissionVm>> {
+    async getManyPermissions(requestParameters: GetManyPermissionsRequest): Promise<Array<NKMRTDCampaignEditorPrototypesPermissionVm>> {
         const response = await this.getManyPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -169,7 +175,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Gets the requested permission, identified by id.
      */
-    async getPermissionRaw(requestParameters: GetPermissionRequest): Promise<runtime.ApiResponse<PermissionVm>> {
+    async getPermissionRaw(requestParameters: GetPermissionRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesPermissionVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPermission.');
         }
@@ -189,13 +195,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => PermissionVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesPermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested permission, identified by id.
      */
-    async getPermission(requestParameters: GetPermissionRequest): Promise<PermissionVm> {
+    async getPermission(requestParameters: GetPermissionRequest): Promise<NKMRTDCampaignEditorPrototypesPermissionVm> {
         const response = await this.getPermissionRaw(requestParameters);
         return await response.value();
     }
@@ -203,7 +209,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Returns the permissions for the actual query.
      */
-    async getPermissionsRaw(requestParameters: GetPermissionsRequest): Promise<runtime.ApiResponse<PermissionVmPaginatedSearchResponse>> {
+    async getPermissionsRaw(requestParameters: GetPermissionsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -251,13 +257,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => PermissionVmPaginatedSearchResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the permissions for the actual query.
      */
-    async getPermissions(requestParameters: GetPermissionsRequest): Promise<PermissionVmPaginatedSearchResponse> {
+    async getPermissions(requestParameters: GetPermissionsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVm> {
         const response = await this.getPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -286,7 +292,7 @@ export class PermissionsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUpdatePermissionCommandToJSON(requestParameters.createUpdatePermissionCommand),
+            body: NKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommandToJSON(requestParameters.nKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommand),
         });
 
         return new runtime.VoidApiResponse(response);

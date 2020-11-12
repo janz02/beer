@@ -34,39 +34,52 @@ import {
 
 export interface AppendFileRequest {
     id: string | null;
+    xRTDTransactionGuid?: string;
     appendDto?: AppendDto;
 }
 
 export interface CloseFileRequest {
     id: string | null;
+    xRTDTransactionGuid?: string;
 }
 
 export interface CreateFileRequest {
+    xRTDTransactionGuid?: string;
     createFileDto?: CreateFileDto;
 }
 
 export interface DeleteFileRequest {
     id: string | null;
+    xRTDTransactionGuid?: string;
 }
 
 export interface DownloadFileRequest {
     id: string | null;
+    xRTDTransactionGuid?: string;
 }
 
 export interface DownloadThumbnailRequest {
     id?: string | null;
     size?: ThumbNailSize;
+    xRTDTransactionGuid?: string;
 }
 
 export interface InfoFileRequest {
     id: string | null;
+    xRTDTransactionGuid?: string;
 }
 
 export interface KeepFileRequest {
     id: string | null;
+    xRTDTransactionGuid?: string;
+}
+
+export interface PruneFileRequest {
+    xRTDTransactionGuid?: string;
 }
 
 export interface UploadFileRequest {
+    xRTDTransactionGuid?: string;
     file?: Blob | null;
     fileAccess?: FileAccess;
 }
@@ -89,6 +102,10 @@ export class FilesApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -124,6 +141,10 @@ export class FilesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -155,6 +176,10 @@ export class FilesApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -191,6 +216,10 @@ export class FilesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -223,6 +252,10 @@ export class FilesApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -262,6 +295,10 @@ export class FilesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -295,6 +332,10 @@ export class FilesApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -330,6 +371,10 @@ export class FilesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -354,10 +399,14 @@ export class FilesApi extends runtime.BaseAPI {
     /**
      * Deletes all expired files
      */
-    async pruneFileRaw(): Promise<runtime.ApiResponse<void>> {
+    async pruneFileRaw(requestParameters: PruneFileRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -376,8 +425,8 @@ export class FilesApi extends runtime.BaseAPI {
     /**
      * Deletes all expired files
      */
-    async pruneFile(): Promise<void> {
-        await this.pruneFileRaw();
+    async pruneFile(requestParameters: PruneFileRequest): Promise<void> {
+        await this.pruneFileRaw(requestParameters);
     }
 
     /**
@@ -387,6 +436,10 @@ export class FilesApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

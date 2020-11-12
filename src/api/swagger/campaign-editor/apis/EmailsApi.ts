@@ -15,9 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    ActionEvent,
-    ActionEventFromJSON,
-    ActionEventToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDCampaignEditorPrototypesActionEvent,
+    NKMRTDCampaignEditorPrototypesActionEventFromJSON,
+    NKMRTDCampaignEditorPrototypesActionEventToJSON,
 } from '../models';
 
 /**
@@ -29,7 +32,7 @@ export class EmailsApi extends runtime.BaseAPI {
      * Sent message not means action has been made, only has chance for an action if the  appropriate conditions are met.
      * Sends the appropriate campaigns for the message processor engine.
      */
-    async sendEmailRaw(): Promise<runtime.ApiResponse<Array<ActionEvent>>> {
+    async sendEmailRaw(): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorPrototypesActionEvent>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -45,14 +48,14 @@ export class EmailsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ActionEventFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorPrototypesActionEventFromJSON));
     }
 
     /**
      * Sent message not means action has been made, only has chance for an action if the  appropriate conditions are met.
      * Sends the appropriate campaigns for the message processor engine.
      */
-    async sendEmail(): Promise<Array<ActionEvent>> {
+    async sendEmail(): Promise<Array<NKMRTDCampaignEditorPrototypesActionEvent>> {
         const response = await this.sendEmailRaw();
         return await response.value();
     }

@@ -15,9 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
-    ProblemDetails,
-    ProblemDetailsFromJSON,
-    ProblemDetailsToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
 } from '../models';
 
 export interface GetQueryLocalizationsRequest {

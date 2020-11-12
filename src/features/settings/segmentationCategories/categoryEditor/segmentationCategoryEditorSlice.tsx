@@ -60,11 +60,16 @@ const saveCategory = (category: SegmentationCategory): AppThunk => async dispatc
     if (id && !isNaN(id)) {
       await api.campaignEditor.segmentationCategories.updateSegmentationCategory({
         id,
-        updateSegmentationCategoryCommand: { id, name: category.name }
+        nKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand: {
+          id,
+          name: category.name
+        }
       })
     } else {
       id = await api.campaignEditor.segmentationCategories.createSegmentationCategory({
-        createSegmentationCategoryCommand: { name: category.name }
+        nKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand: {
+          name: category.name
+        }
       })
     }
 

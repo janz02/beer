@@ -8,6 +8,7 @@ import {
 } from 'hooks/useTableUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
 import moment from 'moment'
+import { GetSegmentationsRequest } from 'api/swagger/campaign-editor'
 
 interface SegmentationListState {
   segmentations: CampaignSegmentation[]
@@ -80,9 +81,9 @@ export const getSegmentations = (params: ListRequestParams = {}): AppThunk => as
       createdDateTo: params.createdDateTo
     }
 
-    const { items, ...pagination } = await api.campaignEditor.segmentations.getSegmentations(
-      apiCallParams
-    )
+    const { items, ...pagination } = await api.campaignEditor.segmentations.getSegmentations({
+      ...(apiCallParams as GetSegmentationsRequest)
+    })
 
     // Retention of createdDate filter
     // Subtraction is needed from  the end date because 1 day added when the request was created

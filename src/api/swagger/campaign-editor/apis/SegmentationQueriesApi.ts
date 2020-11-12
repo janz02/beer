@@ -15,21 +15,24 @@
 
 import * as runtime from '../runtime';
 import {
-    QueryBuilderFieldConfigVm,
-    QueryBuilderFieldConfigVmFromJSON,
-    QueryBuilderFieldConfigVmToJSON,
-    QueryBuilderQuery,
-    QueryBuilderQueryFromJSON,
-    QueryBuilderQueryToJSON,
-    SegmentationQueryResultVm,
-    SegmentationQueryResultVmFromJSON,
-    SegmentationQueryResultVmToJSON,
-    SegmentationQueryVm,
-    SegmentationQueryVmFromJSON,
-    SegmentationQueryVmToJSON,
+    MicrosoftAspNetCoreMvcProblemDetails,
+    MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
+    MicrosoftAspNetCoreMvcProblemDetailsToJSON,
+    NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfig,
+    NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfigFromJSON,
+    NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfigToJSON,
+    NKMRTDApplicationModelsViewModelsSegmentationQueryResultVm,
+    NKMRTDApplicationModelsViewModelsSegmentationQueryResultVmFromJSON,
+    NKMRTDApplicationModelsViewModelsSegmentationQueryResultVmToJSON,
+    NKMRTDApplicationModelsViewModelsSegmentationQueryVm,
+    NKMRTDApplicationModelsViewModelsSegmentationQueryVmFromJSON,
+    NKMRTDApplicationModelsViewModelsSegmentationQueryVmToJSON,
+    NKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery,
+    NKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQueryFromJSON,
+    NKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQueryToJSON,
 } from '../models';
 
-export interface GetMergeTagsRequest {
+export interface GetMergeTagsSegmentationQueriesRequest {
     language: string;
 }
 
@@ -38,7 +41,7 @@ export interface GetSegmentationQueryRequest {
 }
 
 export interface QuerySegmentationQueriesRequest {
-    queryBuilderQuery?: QueryBuilderQuery;
+    nKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery?: NKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery;
 }
 
 /**
@@ -50,7 +53,7 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
      * For further infromation https://github.com/ukrbublik/react-awesome-query-builder
      * Returns the configuration for the frontend controllers.
      */
-    async getConfigRaw(): Promise<runtime.ApiResponse<QueryBuilderFieldConfigVm>> {
+    async getConfigSegmentationQueryRaw(): Promise<runtime.ApiResponse<NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfig>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -66,24 +69,24 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => QueryBuilderFieldConfigVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfigFromJSON(jsonValue));
     }
 
     /**
      * For further infromation https://github.com/ukrbublik/react-awesome-query-builder
      * Returns the configuration for the frontend controllers.
      */
-    async getConfig(): Promise<QueryBuilderFieldConfigVm> {
-        const response = await this.getConfigRaw();
+    async getConfigSegmentationQuery(): Promise<NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfig> {
+        const response = await this.getConfigSegmentationQueryRaw();
         return await response.value();
     }
 
     /**
      * Returns a dictionary of user merge tags.  Keys are displayable texts, values are column names from the top level table of the query builder config.
      */
-    async getMergeTagsRaw(requestParameters: GetMergeTagsRequest): Promise<runtime.ApiResponse<{ [key: string]: string; }>> {
+    async getMergeTagsSegmentationQueriesRaw(requestParameters: GetMergeTagsSegmentationQueriesRequest): Promise<runtime.ApiResponse<{ [key: string]: string; }>> {
         if (requestParameters.language === null || requestParameters.language === undefined) {
-            throw new runtime.RequiredError('language','Required parameter requestParameters.language was null or undefined when calling getMergeTags.');
+            throw new runtime.RequiredError('language','Required parameter requestParameters.language was null or undefined when calling getMergeTagsSegmentationQueries.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -107,15 +110,15 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
     /**
      * Returns a dictionary of user merge tags.  Keys are displayable texts, values are column names from the top level table of the query builder config.
      */
-    async getMergeTags(requestParameters: GetMergeTagsRequest): Promise<{ [key: string]: string; }> {
-        const response = await this.getMergeTagsRaw(requestParameters);
+    async getMergeTagsSegmentationQueries(requestParameters: GetMergeTagsSegmentationQueriesRequest): Promise<{ [key: string]: string; }> {
+        const response = await this.getMergeTagsSegmentationQueriesRaw(requestParameters);
         return await response.value();
     }
 
     /**
      * Gets the requested query, identified by segmentationId.
      */
-    async getSegmentationQueryRaw(requestParameters: GetSegmentationQueryRequest): Promise<runtime.ApiResponse<SegmentationQueryVm>> {
+    async getSegmentationQueryRaw(requestParameters: GetSegmentationQueryRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsSegmentationQueryVm>> {
         if (requestParameters.segmentationId === null || requestParameters.segmentationId === undefined) {
             throw new runtime.RequiredError('segmentationId','Required parameter requestParameters.segmentationId was null or undefined when calling getSegmentationQuery.');
         }
@@ -135,13 +138,13 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SegmentationQueryVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsSegmentationQueryVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested query, identified by segmentationId.
      */
-    async getSegmentationQuery(requestParameters: GetSegmentationQueryRequest): Promise<SegmentationQueryVm> {
+    async getSegmentationQuery(requestParameters: GetSegmentationQueryRequest): Promise<NKMRTDApplicationModelsViewModelsSegmentationQueryVm> {
         const response = await this.getSegmentationQueryRaw(requestParameters);
         return await response.value();
     }
@@ -149,7 +152,7 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
     /**
      * Used to query the backend for the actual result of a query builder tree/query  Due to known limitations of the GET request, URL max length, used with POST   to bypass the limitations. As much as GET body request is not well supported,  this violation was introduced.
      */
-    async querySegmentationQueriesRaw(requestParameters: QuerySegmentationQueriesRequest): Promise<runtime.ApiResponse<Array<SegmentationQueryResultVm>>> {
+    async querySegmentationQueriesRaw(requestParameters: QuerySegmentationQueriesRequest): Promise<runtime.ApiResponse<Array<NKMRTDApplicationModelsViewModelsSegmentationQueryResultVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -165,16 +168,16 @@ export class SegmentationQueriesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: QueryBuilderQueryToJSON(requestParameters.queryBuilderQuery),
+            body: NKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQueryToJSON(requestParameters.nKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SegmentationQueryResultVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDApplicationModelsViewModelsSegmentationQueryResultVmFromJSON));
     }
 
     /**
      * Used to query the backend for the actual result of a query builder tree/query  Due to known limitations of the GET request, URL max length, used with POST   to bypass the limitations. As much as GET body request is not well supported,  this violation was introduced.
      */
-    async querySegmentationQueries(requestParameters: QuerySegmentationQueriesRequest): Promise<Array<SegmentationQueryResultVm>> {
+    async querySegmentationQueries(requestParameters: QuerySegmentationQueriesRequest): Promise<Array<NKMRTDApplicationModelsViewModelsSegmentationQueryResultVm>> {
         const response = await this.querySegmentationQueriesRaw(requestParameters);
         return await response.value();
     }

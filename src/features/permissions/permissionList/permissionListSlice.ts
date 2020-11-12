@@ -7,6 +7,7 @@ import {
   storableListRequestParams
 } from 'hooks/useTableUtils'
 import { CampaignPermission } from 'models/campaign/campaignPermission'
+import { GetPermissionsRequest } from 'api/swagger/campaign-editor'
 
 interface PermissionListState {
   permissions: CampaignPermission[]
@@ -70,9 +71,9 @@ export const getPermissions = (params: ListRequestParams = {}): AppThunk => asyn
 
     const revisedParams = reviseListRequestParams(getState().permissionList.listParams, params)
 
-    const { items, ...pagination } = await api.campaignEditor.permissions.getPermissions(
-      revisedParams
-    )
+    const { items, ...pagination } = await api.campaignEditor.permissions.getPermissions({
+      ...(revisedParams as GetPermissionsRequest)
+    })
 
     dispatch(
       getPermissionsSuccess({
