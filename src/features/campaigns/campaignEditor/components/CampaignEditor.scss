@@ -2,24 +2,6 @@
 $smallFontSize: 9px;
 $smallFontColor: rgb(169, 169, 169);
 
-.create-campaign-form {
-  .create-campaign-form-content {
-    .ant-row.ant-row-end.ant-row-middle {
-      display: flex;
-      justify-content: flex-end;
-      padding: 10px;
-
-      .edit-campaign-status {
-        padding-right: 10px;
-      }
-
-      .campaign-user-logs-title {
-        padding-left: 10px;
-      }
-    }
-  }
-}
-
 .campaign-user-logs {
   display: grid;
   width: 100%;
