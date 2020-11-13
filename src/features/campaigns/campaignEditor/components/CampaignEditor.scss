@@ -1,0 +1,64 @@
+@import "assets/scss/_variables";
+$smallFontSize: 9px;
+$smallFontColor: rgb(169, 169, 169);
+
+.create-campaign-form {
+  .create-campaign-form-content {
+    .ant-row.ant-row-end.ant-row-middle {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px;
+
+      .edit-campaign-status {
+        padding-right: 10px;
+      }
+
+      .campaign-user-logs-title {
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+.campaign-user-logs {
+  display: grid;
+  width: 100%;
+  min-width: 400px;
+  min-height: 40px;
+  padding: 5px;
+  border: 1px;
+  border-style: solid;
+  border-color: $smallFontColor;
+  font-size: small;
+  justify-items: auto;
+
+  div.ant-col {
+    padding: 0 5px 0 5px;
+  }
+
+  div.ant-row:nth-child(2) {
+    font-size: $smallFontSize;
+  }
+}
+
+.campaign-user-logs-title {
+  color: $smallFontColor;
+  font-size: $smallFontSize;
+}
+
+.edit-campaign-status {
+  div.ant-row:nth-child(1) {
+    color: $smallFontColor;
+    font-size: $smallFontSize;
+  }
+}
+
+.create-campaign-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+
+  .ant-col {
+    padding: 3px;
+  }
+}

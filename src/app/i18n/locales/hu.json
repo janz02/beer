@@ -222,6 +222,13 @@
       "name": "Kategória neve"
     }
   },
+"campaign-create": {
+    "title":"Kampány Létrehozása",
+    "status-creation":"Státusz (Kampány Létrehozás)",
+    "user-logs":"Felhaszálói napló",
+    "save-draft":"Piszkozat mentése & Kilépés",
+    "next-section":"Következő (Szegmentálás)"
+  },
   "coupon-campaign-create": {
     "activate": "Aktiválás",
     "audit": "Audit",

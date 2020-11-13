@@ -222,6 +222,13 @@
       "name": "Category name"
     }
   },
+  "campaign-create": {
+    "title":"Create Campaign",
+    "status-creation":"Status (Campaign Creation)",
+    "user-logs":"User Logs",
+    "save-draft":"Save draft & Exits",
+    "next-section":"Next (Segmentation)"
+  },
   "coupon-campaign-create": {
     "activate": "Activate",
     "audit": "Audit",
