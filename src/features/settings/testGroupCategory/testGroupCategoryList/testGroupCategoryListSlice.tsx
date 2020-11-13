@@ -11,6 +11,7 @@ import {
 import { FeatureState } from 'models/featureState'
 import { TestGroupCategory } from 'models/campaign/testGroupCategory'
 import moment from 'moment'
+import { GetTestGroupCategoriesRequest } from 'api/swagger/campaign-editor'
 
 interface TestGroupCategoryListState {
   categories: TestGroupCategory[]
@@ -74,7 +75,9 @@ const getCategories = (params: ListRequestParams = {}): AppThunk => async (dispa
     const {
       items,
       ...pagination
-    } = await api.campaignEditor.testGroupCategories.getTestGroupCategories(revisedParams)
+    } = await api.campaignEditor.testGroupCategories.getTestGroupCategories({
+      ...(revisedParams as GetTestGroupCategoriesRequest)
+    })
 
     dispatch(
       getCategoriesSuccess({

@@ -15,12 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    CreateCampaignTreatmentVm,
-    CreateCampaignTreatmentVmFromJSON,
-    CreateCampaignTreatmentVmToJSON,
-    CreateCampaignVm,
-    CreateCampaignVmFromJSON,
-    CreateCampaignVmToJSON,
+    NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm,
+    NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVmFromJSON,
+    NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVmToJSON,
+    NKMRTDCampaignEditorPrototypesCreateCampaignVm,
+    NKMRTDCampaignEditorPrototypesCreateCampaignVmFromJSON,
+    NKMRTDCampaignEditorPrototypesCreateCampaignVmToJSON,
 } from '../models';
 
 /**
@@ -32,10 +32,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
      * Used in the secound screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignTreatmentRaw(): Promise<runtime.ApiResponse<CreateCampaignTreatmentVm>> {
+    async createCampaignTreatmentRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
 
         const response = await this.request({
             path: `/api/ViewModels/CreateCampaignTreatment`,
@@ -44,14 +48,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateCampaignTreatmentVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVmFromJSON(jsonValue));
     }
 
     /**
      * Used in the secound screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignTreatment(): Promise<CreateCampaignTreatmentVm> {
+    async createCampaignTreatment(): Promise<NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm> {
         const response = await this.createCampaignTreatmentRaw();
         return await response.value();
     }
@@ -60,10 +64,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
      * Used in the first screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignViewModelRaw(): Promise<runtime.ApiResponse<CreateCampaignVm>> {
+    async createCampaignViewModelRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesCreateCampaignVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
 
         const response = await this.request({
             path: `/api/ViewModels/CreateCampaign`,
@@ -72,14 +80,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateCampaignVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesCreateCampaignVmFromJSON(jsonValue));
     }
 
     /**
      * Used in the first screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignViewModel(): Promise<CreateCampaignVm> {
+    async createCampaignViewModel(): Promise<NKMRTDCampaignEditorPrototypesCreateCampaignVm> {
         const response = await this.createCampaignViewModelRaw();
         return await response.value();
     }

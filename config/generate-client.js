@@ -4,19 +4,19 @@
 const services = [
   {
     name: "coupon",
-    url: "https://pkm-coupon-dev.grapetest.xyz/swagger/v1/swagger.json"
+    url: "https://optima-dev.grapetest.xyz/swagger/v1/swagger.json"
   },
   {
     name: "files",
-    url: "https://pkm-files-dev.grapetest.xyz/swagger/v1/swagger.json"
+    url: "https://optima-dev.grapetest.xyz/files/swagger/v1/swagger.json"
   },
   {
     name: "campaign-editor",
-    url: "https://rtd-campaigneditor-dev.grapetest.xyz/swagger/v1/swagger.json"
+    url: "https://rtd-dev.grapetest.xyz/swagger/v1/swagger.json"
   },
   {
     name: "admin",
-    url: "https://pkm-coupon-dev.grapetest.xyz/admin/swagger/v1/swagger.json"
+    url: "https://optima-dev.grapetest.xyz/admin/swagger/v1/swagger.json"
   }
 ];
 

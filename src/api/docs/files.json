@@ -12,6 +12,16 @@
         ],
         "summary": "Uploads a file to the server",
         "operationId": "uploadFile",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -60,6 +70,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -82,6 +95,14 @@
               "description": "ID of the file to download",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -95,6 +116,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -115,11 +139,22 @@
               "description": "ID of the file",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -142,6 +177,14 @@
               "description": "ID of the file",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -164,6 +207,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -175,6 +221,16 @@
         ],
         "summary": "Creates a file on internal storage and leaves it open to append",
         "operationId": "createFile",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "DTO containing details and content of the file",
           "content": {
@@ -205,6 +261,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -227,6 +286,14 @@
               "description": "File ID to append to",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -242,6 +309,9 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -264,6 +334,14 @@
               "description": "File ID to close",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -286,6 +364,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -312,6 +393,14 @@
             "schema": {
               "$ref": "#/components/schemas/ThumbNailSize"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -325,6 +414,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -347,11 +439,22 @@
               "description": "",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -363,9 +466,22 @@
         ],
         "summary": "Deletes all expired files",
         "operationId": "pruneFile",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -377,6 +493,16 @@
         ],
         "summary": "Returns a list of all the exception errorkeys",
         "operationId": "getErrorKeys",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful query: string list of exception errorkeys",
@@ -406,6 +532,150 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/Transaction/Commit": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "Commits a transaction in the database",
+        "operationId": "commitTransaction",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful commit of the transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/Transaction/Create": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "Creates a transaction in the database",
+        "operationId": "createTransaction",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful creation of the transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/Transaction/Rollback": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "Rollbacks a transaction in the database",
+        "operationId": "rollbackTransaction",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful rollback of the transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -492,6 +762,36 @@
           "Small"
         ],
         "type": "string"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": false
+        }
       }
     },
     "securitySchemes": {

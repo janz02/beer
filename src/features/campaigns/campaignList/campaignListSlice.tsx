@@ -11,7 +11,8 @@ import { CampaignListItem } from 'models/campaign/campaignListItem'
 import moment from 'moment'
 import { CampaignStatus } from 'models/campaign/campaignStatus'
 import { Product } from 'models/campaign/product'
-import { ChannelVm } from 'api/swagger/campaign-editor'
+import { Channel } from 'models/campaign/channel'
+import { GetCampaignsRequest } from 'api/swagger/campaign-editor'
 
 export type CampaignListTab = 'company' | 'partner'
 
@@ -19,7 +20,7 @@ interface CampaignListState {
   companyCampaigns: CampaignListItem[]
   partnerCampaigns: CampaignListItem[]
   products: Product[]
-  channels: ChannelVm[]
+  channels: Channel[]
   error: boolean
   loading: boolean
   companyListParams: ListRequestParams
@@ -80,7 +81,7 @@ const campaignListSlice = createSlice({
     getProducts(state, action: PayloadAction<{ products: Product[] }>) {
       state.products = action.payload.products
     },
-    getChannels(state, action: PayloadAction<{ channels: ChannelVm[] }>) {
+    getChannels(state, action: PayloadAction<{ channels: Channel[] }>) {
       state.channels = action.payload.channels
     },
     deleteSuccess(state) {
@@ -117,7 +118,7 @@ const getCampaignProperties = (): AppThunk => async (dispatch, getState) => {
   if (getState().campaignList.channels.length === 0) {
     const channelsResponse = await api.campaignEditor.channels.getChannels({ pageSize: -1 })
     if (channelsResponse.items && channelsResponse.items.length > 0) {
-      dispatch(getChannels({ channels: channelsResponse.items }))
+      dispatch(getChannels({ channels: channelsResponse.items as Channel[] }))
     }
   }
 }
@@ -132,9 +133,9 @@ const getCompanyCampaigns = (params: ListRequestParams = {}): AppThunk => async 
     const revisedParams = reviseListRequestParams(getState().campaignList.companyListParams, params)
     const fixedRevisedParams = { ...revisedParams, status: revisedParams.statusId }
 
-    const { items, ...pagination } = await api.campaignEditor.campaigns.getCampaigns(
-      fixedRevisedParams
-    )
+    const { items, ...pagination } = await api.campaignEditor.campaigns.getCampaigns({
+      ...(fixedRevisedParams as GetCampaignsRequest)
+    })
     const campaigns =
       items?.map<CampaignListItem>(campaign => ({
         ...(campaign as CampaignListItem),

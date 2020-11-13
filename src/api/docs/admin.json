@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://pkm-coupon-dev.grapetest.xyz/admin"
+      "url": "https://optima-dev.grapetest.xyz/admin"
     }
   ],
   "paths": {
