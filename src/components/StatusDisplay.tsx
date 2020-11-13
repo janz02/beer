@@ -15,7 +15,7 @@ export const StatusDisplay: React.FC<StatusDisplayProps> = ({ color, text }) => 
           background: color
         }}
       />
-      {text}
+      <span>{text}</span>
     </div>
   )
 }

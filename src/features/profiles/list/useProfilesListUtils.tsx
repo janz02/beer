@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
 import { profilesActions } from '../profilesSlice'
 import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
@@ -115,13 +115,13 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
                       <ActionButton
                         icon={<CheckCircleOutlined />}
                         tooltip={t('profiles.action-buttons.approve')}
-                        onClick={() => {}}
+                        // onClick={() => {}}
                         name="approve"
                       />
                       <ActionButton
                         icon={<CloseCircleOutlined />}
                         tooltip={t('profiles.action-buttons.decline')}
-                        onClick={() => {}}
+                        // onClick={() => {}}
                         name="decline"
                       />
                     </>
@@ -129,7 +129,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
                   <ActionButton
                     icon={<FormOutlined />}
                     tooltip={t('common.edit')}
-                    onClick={() => {}}
+                    // onClick={() => {}}
                     name="crudEdit"
                   />
                 </ActionButtons>
