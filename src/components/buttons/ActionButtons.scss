@@ -1,12 +1,12 @@
 @import "assets/scss/_variables";
 
-td > .crudButtons {
+td > .action-buttons {
   padding: 0 5px;
   text-align: right;
   white-space: nowrap;
 }
 
-.crud-button {
+.action-button {
   border: none;
   font-size: 1.5em;
   height: auto;

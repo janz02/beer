@@ -1,6 +1,4 @@
-import './CrudButtons.scss'
 import React, { FC } from 'react'
-import { Tooltip, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import {
   FormOutlined,
@@ -9,13 +7,8 @@ import {
   SendOutlined,
   EyeOutlined
 } from '@ant-design/icons'
-import { TooltipProps } from 'antd/lib/tooltip'
-
-const tooltipConfig: Partial<TooltipProps> = {
-  mouseEnterDelay: 0.5,
-  placement: 'topRight',
-  style: { marginLeft: '0.5rem' }
-}
+import { ActionButtons } from './ActionButtons'
+import { ActionButton } from './ActionButton'
 
 export interface CrudButtonsProps {
   onDelete?: () => void
@@ -33,35 +26,39 @@ export const CrudButtons: FC<CrudButtonsProps> = props => {
   const { t } = useTranslation()
 
   return (
-    <div className="crudButtons">
+    <ActionButtons>
       {onSend && (
-        <Tooltip {...tooltipConfig} title={t('common.send')}>
-          <Button className="crud-button" onClick={onSend} name="crudSend">
-            <SendOutlined />
-          </Button>
-        </Tooltip>
+        <ActionButton
+          icon={<SendOutlined />}
+          tooltip={t('common.send')}
+          onClick={onSend}
+          name="crudSend"
+        />
       )}
       {onView && (
-        <Tooltip {...tooltipConfig} title={t('common.view')}>
-          <Button className="crud-button" onClick={onView} name="crudView">
-            {useRightCircleForView ? <RightCircleOutlined /> : <EyeOutlined />}
-          </Button>
-        </Tooltip>
+        <ActionButton
+          icon={useRightCircleForView ? <RightCircleOutlined /> : <EyeOutlined />}
+          tooltip={t('common.view')}
+          onClick={onView}
+          name="crudView"
+        />
       )}
       {onEdit && (
-        <Tooltip {...tooltipConfig} title={t('common.edit')}>
-          <Button className="crud-button" onClick={onEdit} name="crudEdit">
-            <FormOutlined />
-          </Button>
-        </Tooltip>
+        <ActionButton
+          icon={<FormOutlined />}
+          tooltip={t('common.edit')}
+          onClick={onEdit}
+          name="crudEdit"
+        />
       )}
       {onDelete && (
-        <Tooltip {...tooltipConfig} title={t('common.delete')}>
-          <Button className="crud-button" onClick={onDelete} name="crudDelete">
-            <DeleteOutlined />
-          </Button>
-        </Tooltip>
+        <ActionButton
+          icon={<DeleteOutlined />}
+          tooltip={t('common.delete')}
+          onClick={onDelete}
+          name="crudDelete"
+        />
       )}
-    </div>
+    </ActionButtons>
   )
 }

@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
-import { CrudButtons } from 'components/buttons/CrudButtons'
 import { profilesActions } from '../profilesSlice'
 import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
@@ -11,6 +10,9 @@ import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 import { Profile, ProfileStatus } from 'models/profile2'
 import { ProfileStatusDisplay } from './ProfileStatusDisplay'
+import { ActionButtons } from 'components/buttons/ActionButtons'
+import { ActionButton } from 'components/buttons/ActionButton'
+import { CheckCircleOutlined, CloseCircleOutlined, FormOutlined } from '@ant-design/icons'
 
 interface ProfilesListUtils {
   columnsConfig: ColumnsType<Profile>
@@ -42,7 +44,6 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
         title: t('profiles.field.status'),
         filterMode: FilterMode.ENUM,
         key: 'status',
-        width: '10rem',
         filters: [
           { value: 'approved', text: t('profiles.status.approved') },
           { value: 'declined', text: t('profiles.status.declined') },
@@ -55,7 +56,6 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       tableUtils.columnConfig({
         title: t('profiles.field.name'),
         key: 'name',
-        // width: '35%',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
@@ -106,8 +106,34 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       }),
       hasPermission([Roles.Administrator])
         ? tableUtils.actionColumnConfig({
+            width: 'auto',
             render(profile: Profile) {
-              return <CrudButtons onEdit={() => ({})} />
+              return (
+                <ActionButtons>
+                  {profile.status === 'waiting-for-approval' && (
+                    <>
+                      <ActionButton
+                        icon={<CheckCircleOutlined />}
+                        tooltip={t('profiles.action-buttons.approve')}
+                        onClick={() => {}}
+                        name="approve"
+                      />
+                      <ActionButton
+                        icon={<CloseCircleOutlined />}
+                        tooltip={t('profiles.action-buttons.decline')}
+                        onClick={() => {}}
+                        name="decline"
+                      />
+                    </>
+                  )}
+                  <ActionButton
+                    icon={<FormOutlined />}
+                    tooltip={t('common.edit')}
+                    onClick={() => {}}
+                    name="crudEdit"
+                  />
+                </ActionButtons>
+              )
             }
           })
         : {}

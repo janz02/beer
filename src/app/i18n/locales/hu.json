@@ -915,6 +915,10 @@
       "declined": "Inaktív",
       "waiting-for-approval": "Jóváhagyásra vár"
     },
+    "action-buttons": {
+      "approve": "Jóváhagyás",
+      "decline": "Elutasítás"
+    },
     "tab": {
       "all": "Összes",
       "waiting-for-approval": "Jóváhagyásra vár",

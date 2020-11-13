@@ -910,6 +910,15 @@
       "bulk-upload": "Bulk upload",
       "send-invitation": "Send invitation"
     },
+    "status": {
+      "approved": "Active",
+      "declined": "Inactive",
+      "waiting-for-approval": "Waiting for approval"
+    },
+    "action-buttons": {
+      "approve": "Approve",
+      "decline": "Decline"
+    },
     "tab": {
       "all": "All",
       "waiting-for-approval": "Waiting for approval",
