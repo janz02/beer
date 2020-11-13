@@ -1,9 +1,9 @@
 import { ListRequestParams, Pagination } from 'hooks/useTableUtils'
-import { Profile, ProfileStatus } from 'models/profile2'
+import { ProfileListItem, ProfileStatus } from 'models/profileListItem'
 import moment from 'moment'
 
 interface GetProfilesResponse extends Pagination {
-  result: Profile[]
+  result: ProfileListItem[]
 }
 
 const getRandomString = (length: number): string => {
@@ -28,7 +28,7 @@ const getRandomStatus = (): ProfileStatus => {
   }
 }
 
-const getRandomProfile = (id: number): Profile => {
+const getRandomProfile = (id: number): ProfileListItem => {
   const name = getRandomString(10)
   const username = name.toLowerCase()
 
@@ -50,7 +50,7 @@ export const getProfilesMock = async (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   listParams: ListRequestParams
 ): Promise<GetProfilesResponse> => {
-  const result: Profile[] = []
+  const result: ProfileListItem[] = []
   for (let i = 1; i <= 10; i++) {
     result.push(getRandomProfile(i))
   }

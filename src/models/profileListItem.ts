@@ -1,6 +1,6 @@
 export type ProfileStatus = 'approved' | 'declined' | 'waiting-for-approval'
 
-export interface Profile {
+export interface ProfileListItem {
   id: number
   status: ProfileStatus
   name: string

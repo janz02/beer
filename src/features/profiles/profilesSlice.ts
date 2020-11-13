@@ -5,12 +5,12 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
-import { Profile } from 'models/profile2'
+import { ProfileListItem } from 'models/profileListItem'
 import { FeatureState } from 'models/featureState'
 import { getProfilesMock } from './profilesMock'
 
 interface State {
-  profiles: Profile[]
+  profiles: ProfileListItem[]
   listParams: ListRequestParams
   listState: FeatureState
 }
@@ -36,7 +36,7 @@ const slice = createSlice({
     },
     getProfilesSuccess(
       state,
-      action: PayloadAction<{ profiles: Profile[]; listParams: ListRequestParams }>
+      action: PayloadAction<{ profiles: ProfileListItem[]; listParams: ListRequestParams }>
     ) {
       state.profiles = action.payload.profiles
       state.listParams = action.payload.listParams
@@ -54,7 +54,7 @@ const getProfiles = (params: ListRequestParams = {}): AppThunk => async (dispatc
     const { result, ...pagination } = await getProfilesMock(revisedParams)
     dispatch(
       getProfilesSuccess({
-        profiles: result as Profile[],
+        profiles: result as ProfileListItem[],
         listParams: storableListRequestParams(revisedParams, pagination)
       })
     )

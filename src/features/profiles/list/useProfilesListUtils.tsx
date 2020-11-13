@@ -8,16 +8,16 @@ import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
-import { Profile, ProfileStatus } from 'models/profile2'
+import { ProfileListItem, ProfileStatus } from 'models/profileListItem'
 import { ProfileStatusDisplay } from './ProfileStatusDisplay'
 import { ActionButtons } from 'components/buttons/ActionButtons'
 import { ActionButton } from 'components/buttons/ActionButton'
 import { CheckCircleOutlined, CloseCircleOutlined, FormOutlined } from '@ant-design/icons'
 
 interface ProfilesListUtils {
-  columnsConfig: ColumnsType<Profile>
-  tableUtils: TableUtils<Profile>
-  profiles: Profile[]
+  columnsConfig: ColumnsType<ProfileListItem>
+  tableUtils: TableUtils<ProfileListItem>
+  profiles: ProfileListItem[]
   profilesLoading: boolean
   selectedTab: string
   setSelectedTab: (tab: string) => void
@@ -32,13 +32,13 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
 
   const { listParams, listState, profiles } = useSelector((state: RootState) => state.profiles)
 
-  const tableUtils = useTableUtils<Profile>({
+  const tableUtils = useTableUtils<ProfileListItem>({
     listParamsState: listParams,
     filterKeys: ['name', 'username', 'email'],
     getDataAction: profilesActions.getProfiles
   })
 
-  const columnsConfig: ColumnsType<Profile> = useMemo(
+  const columnsConfig: ColumnsType<ProfileListItem> = useMemo(
     () => [
       tableUtils.columnConfig({
         title: t('profiles.field.status'),
@@ -107,7 +107,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       hasPermission([Roles.Administrator])
         ? tableUtils.actionColumnConfig({
             width: 'auto',
-            render(profile: Profile) {
+            render(profile: ProfileListItem) {
               return (
                 <ActionButtons>
                   {profile.status === 'waiting-for-approval' && (

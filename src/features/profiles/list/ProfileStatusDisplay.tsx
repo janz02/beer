@@ -1,6 +1,6 @@
 import { StatusDisplay } from 'components/StatusDisplay'
 import { TFunction } from 'i18next'
-import { ProfileStatus } from 'models/profile2'
+import { ProfileStatus } from 'models/profileListItem'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
