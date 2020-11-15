@@ -1,7 +1,7 @@
 import React from 'react'
 import EnLogo from 'assets/img/flags/en.svg'
 import HuLogo from 'assets/img/flags/hu.svg'
-import { Dropdown, Menu } from 'antd'
+import { Dropdown, Menu, Tooltip } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import './LanguageSelector.scss'
@@ -83,7 +83,9 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
         >
           <div>
             <CurrentLanguageImg />
-            <span className="language-selector__text">{t('languages.language')}</span>
+            <Tooltip title={t('languages.language')}>
+              <span className="language-selector__text">{t('languages.language')}</span>
+            </Tooltip>
             <DownOutlined />
           </div>
         </Dropdown>
@@ -103,9 +105,11 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
               <div>
                 <CurrentLanguageImg />
 
-                <span hidden={props.collapsed} className="language-selector__text">
-                  {t('languages.language')}
-                </span>
+                <Tooltip title={t('languages.language')}>
+                  <span hidden={props.collapsed} className="language-selector__text">
+                    {t('languages.language')}
+                  </span>
+                </Tooltip>
               </div>
             }
           >
