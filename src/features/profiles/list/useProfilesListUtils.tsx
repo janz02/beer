@@ -84,7 +84,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       }),
       tableUtils.columnConfig({
         title: t('organization.companies.field.created-date'),
-        key: 'dateOfRegistration',
+        key: 'createdDate',
         sort: true,
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER,

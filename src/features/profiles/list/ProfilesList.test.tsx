@@ -18,7 +18,7 @@ setupStore({
         email: '7otixbusf7@test.com',
         group: 'Efm89zCQGf',
         permissions: 8,
-        dateOfRegistration: '2020-11-13T07:46:36.496Z',
+        createdDate: '2020-11-13T07:46:36.496Z',
         company: 'company',
         jobRole: 'job'
       },
@@ -30,7 +30,7 @@ setupStore({
         email: 'vlachyhz5b@test.com',
         group: 't6uqCuLFIA',
         permissions: 3,
-        dateOfRegistration: '2020-11-13T07:46:36.497Z',
+        createdDate: '2020-11-13T07:46:36.497Z',
         company: 'company',
         jobRole: 'job'
       }

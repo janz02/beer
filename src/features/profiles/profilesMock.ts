@@ -40,7 +40,7 @@ const getRandomProfile = (id: number): ProfileListItem => {
     email: username + '@test.com',
     group: getRandomString(10),
     permissions: Math.floor(Math.random() * 10),
-    dateOfRegistration: moment(),
+    createdDate: moment(),
     company: 'company',
     jobRole: 'job'
   }

@@ -8,7 +8,7 @@ export interface ProfileListItem {
   email: string
   group: string
   permissions: number
-  dateOfRegistration: moment.Moment
+  createdDate: moment.Moment
   company: string
   jobRole: string
 }
