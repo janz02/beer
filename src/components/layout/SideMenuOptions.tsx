@@ -50,13 +50,11 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = ({
     >
       {option.icon}
       <Tooltip title={option.labelTooltip || option.label}>
-        <span>{option.label}</span>
+        <>
+          <span>{option.label}</span>
+          {option.link && <Link to={option.link} />}
+        </>
       </Tooltip>
-      {/* {option.link && (
-        <Tooltip title={option.labelTooltip}>
-          <Link to={option.link} />
-        </Tooltip>
-      )} */}
     </Menu.Item>
   )
 
@@ -78,13 +76,11 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = ({
           <>
             {option.icon}
             <Tooltip title={option.labelTooltip || option.label}>
-              <span>{option.label}</span>
+              <>
+                <span>{option.label}</span>
+                {option.link && <Link to={option.link} />}
+              </>
             </Tooltip>
-            {option.link && (
-              <Tooltip title={option.labelTooltip}>
-                <Link to={option.link} />
-              </Tooltip>
-            )}
           </>
         }
       >
