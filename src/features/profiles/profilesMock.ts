@@ -64,3 +64,10 @@ export const getProfilesMock = async (
     pageSize: 10
   }
 }
+
+export const getExportProfilesCsv = async (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  listParams: ListRequestParams
+): Promise<Blob> => {
+  return new Blob([getRandomString(10)])
+}

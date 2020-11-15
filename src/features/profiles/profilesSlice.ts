@@ -7,7 +7,8 @@ import {
 } from 'hooks/useTableUtils'
 import { ProfileListItem } from 'models/profileListItem'
 import { FeatureState } from 'models/featureState'
-import { getProfilesMock } from './profilesMock'
+import { getExportProfilesCsv, getProfilesMock } from './profilesMock'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 interface State {
   profiles: ProfileListItem[]
@@ -68,10 +69,21 @@ const resetProfilesFilters = (): AppThunk => async dispatch => {
   dispatch(getProfiles())
 }
 
+const exportProfiles = (): AppThunk => async (dispatch, getState) => {
+  const { listParams } = getState().profiles
+
+  try {
+    downloadBlobAsCsv(await getExportProfilesCsv(listParams))
+  } catch (err) {
+    return { error: err.toString() }
+  }
+}
+
 export const profilesReducer = slice.reducer
 
 export const profilesActions = {
   getProfiles,
   resetProfilesFilters,
-  reset
+  reset,
+  exportProfiles
 }

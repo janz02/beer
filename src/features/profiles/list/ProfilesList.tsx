@@ -63,13 +63,18 @@ export const ProfilesList: FC = () => {
   const tabBarActions = useMemo(() => {
     return (
       <>
-        <ExportButton className="profiles-export-button" />
+        <ExportButton
+          className="profiles-export-button"
+          onClick={() => {
+            dispatch(profilesActions.exportProfiles())
+          }}
+        />
         <SettingsButton />
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrderUtils} />
       </>
     )
-  }, [columnOrderUtils, resetFilters])
+  }, [dispatch, columnOrderUtils, resetFilters])
 
   const table = (
     <ResponsiveTable
