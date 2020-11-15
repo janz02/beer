@@ -25,6 +25,8 @@ import { testGroupCategoryEditorActions } from 'features/settings/testGroupCateg
 import { resetBpHistory } from 'features/bpHistory/bpHistorySlice'
 import { systemParamsActions } from 'features/settings/systemParams/systemParamsSlice'
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
+import { profilesActions } from 'features/profiles/profilesSlice'
+import { companiesActions } from 'features/organization/companies/companiesSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -35,6 +37,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
   batch(() => {
     dispatch(authActions.resetAuth())
     dispatch(profileActions.resetProfile())
+    dispatch(profilesActions.reset())
     dispatch(notificationActions.resetNotification())
     dispatch(siteListActions.reset())
     dispatch(siteEditorActions.reset())
@@ -57,6 +60,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetBpHistory())
     dispatch(systemParamsActions.resetSystemParams())
     dispatch(campaignListActions.resetCampaignsList())
+    dispatch(companiesActions.reset())
     logout && dispatch(resetRouterHistory())
   })
 }
