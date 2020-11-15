@@ -6,9 +6,9 @@ import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
 import {
-  NKMRTDApplicationModelsSegmentationQueryBuilderField,
-  NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
-  NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
+  NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField,
+  NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
+  NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
 } from 'api/swagger/campaign-editor'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
@@ -37,7 +37,7 @@ interface SegmentationEditorLoadedData {
   segmentation?: CampaignSegmentation
   categories?: SegmentationCategory[]
   segmentationQuery?: SegmentationQuery
-  fields?: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
+  fields?: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
 }
 
 interface SegmentationEditorState extends SegmentationEditorLoadedData {
@@ -154,7 +154,7 @@ export const getSegmentation = (id?: number): AppThunk => async dispatch => {
         segmentation: segmentation as CampaignSegmentation | undefined,
         categories: categories as SegmentationCategory[],
         segmentationQuery: segmentationQuery as SegmentationQuery | undefined,
-        fields: fields as NKMRTDApplicationModelsSegmentationQueryBuilderField[]
+        fields: fields as NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
       })
     )
   } catch (err) {
@@ -173,22 +173,22 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
     if (segmentation?.id) {
       await api.campaignEditor.segmentations.updateSegmentation({
         id: data.id!.toString(),
-        nKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: {
+        nKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: {
           ...segmentationQuery,
           ...segmentation,
           ...data,
           queryId: segmentationQuery?.id
-        } as NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
+        } as NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
       })
 
       dispatch(getSegmentation(segmentation.id))
     } else {
       await api.campaignEditor.segmentations.createSegmentation({
-        nKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand: {
+        nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand: {
           ...segmentationQuery,
           ...segmentation,
           ...data
-        } as NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand
+        } as NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand
       })
 
       history.push(`/segmentations`)
@@ -208,7 +208,7 @@ export const refreshQueryResults = (callback: any): AppThunk => async (dispatch,
 
     if (query) {
       const result = await api.campaignEditor.segmentationQueries.querySegmentationQueries({
-        nKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery: query
+        nKMRTDCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery: query
       })
       dispatch(setRuleResults(result as SegmentationRuleResponse[]))
       callback()

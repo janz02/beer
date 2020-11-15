@@ -20,17 +20,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesProfileVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesProfileVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesProfileVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
                 }
               }
             }
@@ -81,7 +81,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsUserVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm"
                   }
                 }
               },
@@ -89,7 +89,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsUserVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm"
                   }
                 }
               },
@@ -97,7 +97,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsUserVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm"
                   }
                 }
               }
@@ -138,17 +138,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
                 }
               }
             }
@@ -188,17 +188,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
                 }
               }
             }
@@ -238,17 +238,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
                 }
               }
             }
@@ -277,7 +277,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorAccountsCommandsLoginLoginCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand"
               }
             }
           }
@@ -500,7 +500,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -510,17 +510,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
                 }
               }
             }
@@ -630,7 +630,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand"
               }
             }
           }
@@ -676,7 +676,7 @@
           "Campaigns"
         ],
         "summary": "Returns the campaigns for the actual query.",
-        "description": "Their is an implicit parameter which query NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign\r\nonly for the user who created the draft state, in order to protect it from other users\r\nand let a sandbox campaign designment for the end user.",
+        "description": "Their is an implicit parameter which query NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign\r\nonly for the user who created the draft state, in order to protect it from other users\r\nand let a sandbox campaign designment for the end user.",
         "operationId": "getCampaigns",
         "parameters": [
           {
@@ -869,7 +869,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -879,17 +879,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
                 }
               }
             }
@@ -953,17 +953,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
                 }
               }
             }
@@ -1111,7 +1111,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand"
               }
             }
           }
@@ -1186,7 +1186,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand"
               }
             }
           }
@@ -1254,7 +1254,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups\r\nto NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved for the indicated id identified\r\ncampaign.",
+        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups\r\nto NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified\r\ncampaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "approveCampaign",
         "requestBody": {
@@ -1331,7 +1331,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved\r\nto NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created for the indicated id identified\r\ncampaign.",
+        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved\r\nto NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified\r\ncampaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "disapproveCampaign",
         "requestBody": {
@@ -1408,7 +1408,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Approved\r\nto NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually for the indicated id identified\r\ncampaign.",
+        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved\r\nto NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually for the indicated id identified\r\ncampaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "startCampaignImmediately",
         "requestBody": {
@@ -1485,7 +1485,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Started or \r\nNKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.StoppedManually \r\nfor the indicated id identified campaign.",
+        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or \r\nNKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually \r\nfor the indicated id identified campaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "stopCampaignImmediately",
         "requestBody": {
@@ -1562,7 +1562,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.Created\r\nto NKM.RTD.CampaignEditor.Prototypes.CampaignStatus.SentToTestGroups for the indicated model \r\nidentified campaign.",
+        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Created\r\nto NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command \r\nidentified campaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "sendCampaignToTestGroup",
         "parameters": [
@@ -1580,7 +1580,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand"
               }
             }
           }
@@ -1668,17 +1668,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsChannelVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsChannelVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsChannelVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               }
             }
@@ -1796,7 +1796,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -1806,17 +1806,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               }
             }
@@ -1881,7 +1881,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsChannelVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                   }
                 }
               },
@@ -1889,7 +1889,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsChannelVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                   }
                 }
               },
@@ -1897,7 +1897,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsChannelVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                   }
                 }
               }
@@ -1970,7 +1970,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesActionEvent"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent"
                   }
                 }
               },
@@ -1978,7 +1978,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesActionEvent"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent"
                   }
                 }
               },
@@ -1986,7 +1986,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesActionEvent"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent"
                   }
                 }
               }
@@ -2109,7 +2109,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsCampaignLanguageVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm"
                   }
                 }
               },
@@ -2117,7 +2117,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsCampaignLanguageVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm"
                   }
                 }
               },
@@ -2125,7 +2125,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsCampaignLanguageVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm"
                   }
                 }
               }
@@ -2290,7 +2290,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -2300,17 +2300,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               }
             }
@@ -2371,17 +2371,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesPermissionVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               }
             }
@@ -2466,7 +2466,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesPermissionVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                   }
                 }
               },
@@ -2474,7 +2474,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesPermissionVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                   }
                 }
               },
@@ -2482,7 +2482,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesPermissionVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                   }
                 }
               }
@@ -2551,7 +2551,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand"
               }
             }
           }
@@ -2636,7 +2636,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand"
               }
             }
           }
@@ -2815,17 +2815,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsProductVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsProductVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsProductVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               }
             }
@@ -2950,7 +2950,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -2960,17 +2960,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               }
             }
@@ -3035,7 +3035,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsProductVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                   }
                 }
               },
@@ -3043,7 +3043,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsProductVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                   }
                 }
               },
@@ -3051,7 +3051,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsProductVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                   }
                 }
               }
@@ -3120,7 +3120,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand"
               }
             }
           }
@@ -3186,7 +3186,7 @@
           "Products"
         ],
         "summary": "Update the current instance with the fulfilled model",
-        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Prototypes.ErrorContract.",
+        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
         "operationId": "updateProduct",
         "parameters": [
           {
@@ -3205,7 +3205,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand"
               }
             }
           }
@@ -3389,7 +3389,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                   }
                 }
               },
@@ -3397,7 +3397,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                   }
                 }
               },
@@ -3405,7 +3405,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                   }
                 }
               }
@@ -3531,7 +3531,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -3541,17 +3541,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               }
             }
@@ -3612,17 +3612,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               }
             }
@@ -3690,7 +3690,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand"
               }
             }
           }
@@ -3756,7 +3756,7 @@
           "SegmentationCategories"
         ],
         "summary": "Update the current instance with the fulfilled model",
-        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Prototypes.ErrorContract.",
+        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
         "operationId": "updateSegmentationCategory",
         "parameters": [
           {
@@ -3775,7 +3775,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand"
               }
             }
           }
@@ -3955,17 +3955,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationQueryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationQueryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationQueryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
                 }
               }
             }
@@ -4036,7 +4036,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery"
               }
             }
           }
@@ -4049,7 +4049,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationQueryResultVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
                   }
                 }
               },
@@ -4057,7 +4057,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationQueryResultVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
                   }
                 }
               },
@@ -4065,7 +4065,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationQueryResultVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
                   }
                 }
               }
@@ -4119,17 +4119,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
                 }
               }
             }
@@ -4338,7 +4338,7 @@
             "name": "Type",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsSegmentationType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
             }
           },
           {
@@ -4395,7 +4395,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -4405,17 +4405,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
                 }
               }
             }
@@ -4476,17 +4476,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
                 }
               }
             }
@@ -4554,7 +4554,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand"
               }
             }
           }
@@ -4600,7 +4600,7 @@
           "Segmentations"
         ],
         "summary": "Update the current instance with the fulfilled model",
-        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Prototypes.ErrorContract.",
+        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
         "operationId": "updateSegmentation",
         "parameters": [
           {
@@ -4617,7 +4617,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand"
               }
             }
           }
@@ -4806,7 +4806,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand"
               }
             }
           }
@@ -4891,17 +4891,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsDiscountSegmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsDiscountSegmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsDiscountSegmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
                 }
               }
             }
@@ -4982,7 +4982,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTreeNodeVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
                   }
                 }
               },
@@ -4990,7 +4990,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTreeNodeVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
                   }
                 }
               },
@@ -4998,7 +4998,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTreeNodeVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
                   }
                 }
               }
@@ -5182,7 +5182,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -5192,17 +5192,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               }
             }
@@ -5263,17 +5263,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               }
             }
@@ -5351,7 +5351,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand"
               }
             }
           }
@@ -5423,7 +5423,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand"
               }
             }
           }
@@ -5475,7 +5475,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand"
               }
             }
           }
@@ -5704,7 +5704,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand"
               }
             }
           }
@@ -5757,7 +5757,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand"
               }
             }
           }
@@ -5810,7 +5810,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand"
               }
             }
           }
@@ -5863,7 +5863,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand"
               }
             }
           }
@@ -5919,7 +5919,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand"
               }
             }
           }
@@ -5984,17 +5984,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
                 }
               }
             }
@@ -6042,7 +6042,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsCampaignCreateStaticMergeTagCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand"
               }
             }
           }
@@ -6127,17 +6127,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               }
             }
@@ -6269,7 +6269,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -6279,17 +6279,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               }
             }
@@ -6354,7 +6354,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                   }
                 }
               },
@@ -6362,7 +6362,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                   }
                 }
               },
@@ -6370,7 +6370,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                   }
                 }
               }
@@ -6451,7 +6451,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand"
               }
             }
           }
@@ -6630,17 +6630,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesEmailTemplateVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesEmailTemplateVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesEmailTemplateVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               }
             }
@@ -6724,17 +6724,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesEmailTemplateVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesEmailTemplateVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesEmailTemplateVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               }
             }
@@ -6818,17 +6818,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               }
             }
@@ -6953,7 +6953,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDApplicationEnumsOrderByType"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -6963,17 +6963,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               }
             }
@@ -7038,7 +7038,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                   }
                 }
               },
@@ -7046,7 +7046,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                   }
                 }
               },
@@ -7054,7 +7054,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                   }
                 }
               }
@@ -7123,7 +7123,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand"
               }
             }
           }
@@ -7189,7 +7189,7 @@
           "TestGroupCategories"
         ],
         "summary": "Update the current instance with the fulfilled model",
-        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Prototypes.ErrorContract.",
+        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
         "operationId": "updateTestGroupCategory",
         "parameters": [
           {
@@ -7208,7 +7208,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand"
               }
             }
           }
@@ -7389,7 +7389,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
                   }
                 }
               },
@@ -7397,7 +7397,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
                   }
                 }
               },
@@ -7405,7 +7405,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
                   }
                 }
               }
@@ -7487,17 +7487,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm"
                 }
               }
             }
@@ -7620,17 +7620,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsUserSettingsVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsUserSettingsVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsUserSettingsVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
                 }
               }
             }
@@ -7680,17 +7680,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCreateCampaignVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCreateCampaignVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCreateCampaignVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
                 }
               }
             }
@@ -7720,17 +7720,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
                 }
               }
             }
@@ -7749,7 +7749,7 @@
   },
   "components": {
     "schemas": {
-      "NKMRTDCampaignEditorPrototypesProfileVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm": {
         "type": "object",
         "properties": {
           "name": {
@@ -7817,7 +7817,7 @@
           "additionalProperties": false
         }
       },
-      "NKMRTDApplicationModelsViewModelsUserVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -7835,34 +7835,30 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesAdGroupVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
-            "description": "The id of the ad group.",
             "format": "int32"
           },
           "name": {
             "type": "string",
-            "description": "The name of the ad group.",
             "nullable": true
           },
           "isSelected": {
-            "type": "boolean",
-            "description": "Whether the connection between the ad group and the permission is 'live' or 'active'.\r\nTrue means users belonging to the group are given the permission. False means they are not."
+            "type": "boolean"
           }
         },
-        "additionalProperties": false,
-        "description": "A model to describe an ad group that belongs to permissions."
+        "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesAdGroupVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
             },
             "nullable": true
           },
@@ -7889,12 +7885,11 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesUserPermissionVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm": {
         "type": "object",
         "properties": {
           "isSelected": {
-            "type": "boolean",
-            "description": "Whether the connection between the user and the permission is 'live' or 'active'.\r\nTrue means the user is given the permission. False means they are not."
+            "type": "boolean"
           },
           "id": {
             "type": "integer",
@@ -7909,16 +7904,15 @@
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A model to describe a user that belongs to permissions."
+        "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesUserPermissionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
             },
             "nullable": true
           },
@@ -7945,7 +7939,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesFunctionPermissionVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -7968,13 +7962,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesFunctionPermissionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
             },
             "nullable": true
           },
@@ -8001,7 +7995,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorAccountsCommandsLoginLoginCommand": {
+      "NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand": {
         "type": "object",
         "properties": {
           "username": {
@@ -8015,14 +8009,14 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationEnumsOrderByType": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType": {
         "enum": [
           "Ascending",
           "Descending"
         ],
         "type": "string"
       },
-      "NKMRTDCampaignEditorPrototypesCampaignResultEventVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8073,13 +8067,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignResultEventVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
             },
             "nullable": true
           },
@@ -8106,7 +8100,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand": {
+      "NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand": {
         "type": "object",
         "properties": {
           "campaignId": {
@@ -8124,7 +8118,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsCampaignListItemVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8215,13 +8209,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsCampaignListItemVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsCampaignListItemVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
             },
             "nullable": true
           },
@@ -8309,7 +8303,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesEmailTemplateVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8339,7 +8333,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationEnumsSegmentationType": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType": {
         "enum": [
           "Query",
           "Csv",
@@ -8347,14 +8341,14 @@
         ],
         "type": "string"
       },
-      "NKMRTDApplicationEnumsCondition": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsCondition": {
         "enum": [
           "And",
           "Or"
         ],
         "type": "string"
       },
-      "NKMRTDApplicationEnumsOperator": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsOperator": {
         "enum": [
           "Equal",
           "Not_equal",
@@ -8379,7 +8373,7 @@
         ],
         "type": "string"
       },
-      "NKMRTDApplicationEnumsControlType": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsControlType": {
         "enum": [
           "Number",
           "Text",
@@ -8392,7 +8386,7 @@
         ],
         "type": "string"
       },
-      "NKMRTDApplicationModelsViewModelsQueryValues": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryValues": {
         "type": "object",
         "properties": {
           "value": {
@@ -8405,13 +8399,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsQueryBuilderQuery": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery": {
         "type": "object",
         "properties": {
           "condition": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsCondition"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsCondition"
               }
             ],
             "nullable": true
@@ -8430,7 +8424,7 @@
           "operator": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsOperator"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOperator"
               }
             ],
             "nullable": true
@@ -8438,7 +8432,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsControlType"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsControlType"
               }
             ],
             "nullable": true
@@ -8446,21 +8440,21 @@
           "rules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsQueryBuilderQuery"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
             },
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsQueryValues"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryValues"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationEnumsQueryConditionOperation": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsQueryConditionOperation": {
         "enum": [
           "Preserved",
           "Added",
@@ -8469,7 +8463,7 @@
         ],
         "type": "string"
       },
-      "NKMRTDApplicationModelsViewModelsSegmentConditionVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm": {
         "type": "object",
         "properties": {
           "ruleId": {
@@ -8483,7 +8477,7 @@
           "operation": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsQueryConditionOperation"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsQueryConditionOperation"
               }
             ]
           },
@@ -8501,7 +8495,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsSegmentationQueryVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8519,7 +8513,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsQueryBuilderQuery"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -8527,14 +8521,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentConditionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsDiscountSegmentVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8552,7 +8546,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsSegmentationType"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -8587,7 +8581,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationQueryVm"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
               }
             ],
             "nullable": true
@@ -8595,7 +8589,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesDiscountVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8621,14 +8615,14 @@
           "templates": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesEmailTemplateVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
             },
             "nullable": true
           },
           "segment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsDiscountSegmentVm"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
               }
             ],
             "nullable": true
@@ -8636,7 +8630,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesTreatmentVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreatmentVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8728,14 +8722,14 @@
           "discounts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesDiscountVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesTestGroupCategoryWithNameVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryWithNameVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8749,13 +8743,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm": {
         "type": "object",
         "properties": {
           "testGroupCategory": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTestGroupCategoryWithNameVm"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryWithNameVm"
               }
             ],
             "nullable": true
@@ -8763,14 +8757,14 @@
           "users": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsUserVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesCampaignVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm": {
         "type": "object",
         "properties": {
           "canBeSendOutToTestGroup": {
@@ -8867,7 +8861,7 @@
           "treatment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTreatmentVm"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreatmentVm"
               }
             ],
             "nullable": true
@@ -8875,14 +8869,14 @@
           "testGroupCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorCampaignsCommandsCreateCampaignCreateCampaignCommand": {
+      "NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -8948,7 +8942,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsRequestsEmailTemplateDto": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsEmailTemplateDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -8974,7 +8968,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsRequestsSegmentationQueryDto": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsSegmentationQueryDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -8992,7 +8986,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsQueryBuilderQuery"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -9000,14 +8994,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentConditionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsRequestsDiscountSegmentDto": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsDiscountSegmentDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -9021,7 +9015,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsSegmentationType"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -9052,7 +9046,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsRequestsSegmentationQueryDto"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsSegmentationQueryDto"
               }
             ],
             "nullable": true
@@ -9060,7 +9054,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsRequestsDiscountDto": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsDiscountDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -9086,14 +9080,14 @@
           "templates": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsRequestsEmailTemplateDto"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsEmailTemplateDto"
             },
             "nullable": true
           },
           "segment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsRequestsDiscountSegmentDto"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsDiscountSegmentDto"
               }
             ],
             "nullable": true
@@ -9101,7 +9095,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsRequestsTreatmentDto": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsTreatmentDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -9195,14 +9189,14 @@
           "discounts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsRequestsDiscountDto"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsDiscountDto"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorCampaignsCommandsUpdateCampaignUpdateCampaignCommand": {
+      "NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9276,7 +9270,7 @@
           "treatment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsRequestsTreatmentDto"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsTreatmentDto"
               }
             ],
             "nullable": true
@@ -9284,7 +9278,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand": {
+      "NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9294,7 +9288,7 @@
           "campaignTestGroupCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
             },
             "nullable": true
           },
@@ -9304,7 +9298,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsChannelVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9318,13 +9312,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsChannelVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
             },
             "nullable": true
           },
@@ -9351,7 +9345,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesExtendedProperty": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsExtendedProperty": {
         "type": "object",
         "properties": {
           "key": {
@@ -9365,7 +9359,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesActionEvent": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent": {
         "type": "object",
         "properties": {
           "eventId": {
@@ -9391,7 +9385,7 @@
           "extendedAttributes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesExtendedProperty"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsExtendedProperty"
             },
             "nullable": true,
             "readOnly": true
@@ -9399,7 +9393,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsCampaignLanguageVm": {
+      "NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9413,30 +9407,27 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesPermissionVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
-            "description": "Id of permission. Should only be used if the model is describing an already existing permission.",
             "format": "int32"
           },
           "name": {
             "type": "string",
-            "description": "Name of the permission.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A model to describe the structure of Permissions."
+        "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesPermissionVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesPermissionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
             },
             "nullable": true
           },
@@ -9463,82 +9454,77 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPermissionsCommandsCreatePermissionCreatePermissionCommand": {
+      "NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "Name of the permission.",
             "nullable": true
           },
           "adGroups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesAdGroupVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
             },
-            "description": "A list of ad groups that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
             "nullable": true
           },
           "users": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesUserPermissionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
             },
-            "description": "A list of users that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
             "nullable": true
           },
           "functionPermissions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesFunctionPermissionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
             },
-            "description": "A list of function permissions that belong to this permission.",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPermissionsCommandsUpdatePermissionUpdatePermissionCommand": {
+      "NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
-            "description": "Id of permission. Should only be used if the model is describing an already existing permission.",
             "format": "int32"
           },
           "name": {
             "type": "string",
-            "description": "Name of the permission.",
             "nullable": true
           },
           "adGroups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesAdGroupVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
             },
-            "description": "A list of ad groups that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
             "nullable": true
           },
           "users": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesUserPermissionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
             },
-            "description": "A list of users that belong to this permission.\r\nUse IsSelected to define if the connection is active.",
             "nullable": true
           },
           "functionPermissions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesFunctionPermissionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
             },
-            "description": "A list of function permissions that belong to this permission.",
             "nullable": true
+          },
+          "requestId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsProductVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9556,13 +9542,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsProductVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
             },
             "nullable": true
           },
@@ -9589,7 +9575,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand": {
+      "NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -9599,7 +9585,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand": {
+      "NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9609,11 +9595,15 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "requestId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsSegmentationCategoryVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9631,13 +9621,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentationCategoryVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentationCategoryVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
             },
             "nullable": true
           },
@@ -9664,7 +9654,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand": {
+      "NKMRTDCampaignEditorApplicationSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -9674,7 +9664,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand": {
+      "NKMRTDCampaignEditorApplicationSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9684,17 +9674,21 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "requestId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery": {
+      "NKMRTDCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery": {
         "type": "object",
         "properties": {
           "condition": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsCondition"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsCondition"
               }
             ],
             "nullable": true
@@ -9713,7 +9707,7 @@
           "operator": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsOperator"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOperator"
               }
             ],
             "nullable": true
@@ -9721,7 +9715,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsControlType"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsControlType"
               }
             ],
             "nullable": true
@@ -9729,21 +9723,21 @@
           "rules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsQueryBuilderQuery"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
             },
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsQueryValues"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryValues"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsSegmentationQueryResultVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm": {
         "type": "object",
         "properties": {
           "ruleId": {
@@ -9761,7 +9755,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsSegmentationOperator": {
+      "NKMRTDCampaignEditorApplicationModelsSegmentationOperator": {
         "enum": [
           "Equal",
           "Notequal",
@@ -9786,7 +9780,7 @@
         ],
         "type": "string"
       },
-      "NKMRTDApplicationModelsSegmentationQueryBuilderField": {
+      "NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField": {
         "type": "object",
         "properties": {
           "fieldName": {
@@ -9808,7 +9802,7 @@
           "operators": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsSegmentationOperator"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationOperator"
             },
             "nullable": true
           },
@@ -9822,20 +9816,20 @@
           "subFields": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsSegmentationQueryBuilderField"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsSegmentationQueryBuilderFieldConfig": {
+      "NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig": {
         "type": "object",
         "properties": {
           "fields": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsSegmentationQueryBuilderField"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField"
             },
             "nullable": true,
             "readOnly": true
@@ -9843,7 +9837,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsSegmentListItemVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9880,13 +9874,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSegmentListItemVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentListItemVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
             },
             "nullable": true
           },
@@ -9913,7 +9907,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsBusinessPartner": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner": {
         "type": "object",
         "properties": {
           "id": {
@@ -9939,7 +9933,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsSegmentationVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9953,7 +9947,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsSegmentationType"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -9988,14 +9982,14 @@
           "businessPartners": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsBusinessPartner"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand": {
+      "NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10009,7 +10003,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsSegmentationType"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -10045,7 +10039,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsQueryBuilderQuery"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -10053,15 +10047,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentConditionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
             },
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "TODO ca It is possible that CreateUpdateSegmentationCommand can be removed then it has to replace it, but it used by Campaign as well"
+        "additionalProperties": false
       },
-      "NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand": {
+      "NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10075,7 +10068,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationEnumsSegmentationType"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -10111,7 +10104,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsQueryBuilderQuery"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -10119,14 +10112,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSegmentConditionVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand": {
+      "NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -10136,14 +10129,14 @@
           "businessPartners": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsBusinessPartner"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesTreeNodeVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm": {
         "type": "object",
         "properties": {
           "key": {
@@ -10157,7 +10150,7 @@
           "children": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTreeNodeVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
             },
             "nullable": true
           },
@@ -10171,7 +10164,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsSiteLevelSettingVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10189,13 +10182,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsSiteLevelSettingVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
             },
             "nullable": true
           },
@@ -10222,7 +10215,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand": {
+      "NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10236,11 +10229,15 @@
           "value": {
             "type": "string",
             "nullable": true
+          },
+          "requestId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand": {
+      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -10261,7 +10258,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand": {
+      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand": {
         "type": "object",
         "properties": {
           "guid": {
@@ -10271,67 +10268,56 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesModelsRequestsUserExtensionInfoBase": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsUserExtensionInfoBase": {
         "type": "object",
         "properties": {
           "company": {
             "type": "string",
-            "nullable": true,
-            "example": "Grape Solutions Zrt."
+            "nullable": true
           },
           "department": {
             "type": "string",
-            "nullable": true,
-            "example": "Application Development Department"
+            "nullable": true
           },
           "position": {
             "type": "string",
-            "nullable": true,
-            "example": "Software Developer"
+            "nullable": true
           },
           "phoneNumber": {
             "type": "string",
-            "nullable": true,
-            "example": "+3618809200"
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand": {
+      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand": {
         "type": "object",
         "properties": {
           "guid": {
             "type": "string",
-            "description": "One-time guid that identifies the user for this operation.",
-            "format": "uuid",
-            "example": "0a1a91b3-fd95-466b-98cb-d36bdee6fb88"
+            "format": "uuid"
           },
           "newPassword": {
             "type": "string",
-            "description": "The new password which will be set.",
-            "nullable": true,
-            "example": "th4'qU1cKbR0WNF0xjump$0V3rth3l4zyd0g"
+            "nullable": true
           },
           "extensionInfo": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesModelsRequestsUserExtensionInfoBase"
+                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsUserExtensionInfoBase"
               }
             ],
-            "description": "Extension object which can contain values to set.<br />\r\nSet this object only if you want to modify the user's extension information to the given values.<br />\r\nIf you do not set a property, it will not be modified.",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommand": {
+      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand": {
         "type": "object",
         "properties": {
           "email": {
             "type": "string",
-            "description": "Email address that identifies the standalone user",
-            "nullable": true,
-            "example": "test@email.com"
+            "nullable": true
           },
           "captchaToken": {
             "type": "string",
@@ -10340,14 +10326,12 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand": {
+      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand": {
         "type": "object",
         "properties": {
           "email": {
             "type": "string",
-            "description": "Email address that identifies the standalone user",
-            "nullable": true,
-            "example": "test@email.com"
+            "nullable": true
           },
           "captchaToken": {
             "type": "string",
@@ -10356,7 +10340,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand": {
+      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand": {
         "type": "object",
         "properties": {
           "userDiscriminatorId": {
@@ -10365,59 +10349,50 @@
           },
           "company": {
             "type": "string",
-            "nullable": true,
-            "example": "Grape Solutions Zrt."
+            "nullable": true
           },
           "department": {
             "type": "string",
-            "nullable": true,
-            "example": "Application Development Department"
+            "nullable": true
           },
           "position": {
             "type": "string",
-            "nullable": true,
-            "example": "Software Developer"
+            "nullable": true
           },
           "phoneNumber": {
             "type": "string",
-            "nullable": true,
-            "example": "+3618809200"
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm": {
         "type": "object",
         "properties": {
           "company": {
             "type": "string",
-            "nullable": true,
-            "example": "Grape Solutions Zrt."
+            "nullable": true
           },
           "department": {
             "type": "string",
-            "nullable": true,
-            "example": "Application Development Department"
+            "nullable": true
           },
           "position": {
             "type": "string",
-            "nullable": true,
-            "example": "Software Developer"
+            "nullable": true
           },
           "phoneNumber": {
             "type": "string",
-            "nullable": true,
-            "example": "+3618809200"
+            "nullable": true
           },
           "userDiscriminatorId": {
             "type": "integer",
-            "format": "int32",
-            "example": 1
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsCampaignCreateStaticMergeTagCommand": {
+      "NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -10431,7 +10406,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsStaticMergeTagVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10453,13 +10428,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsStaticMergeTagVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
             },
             "nullable": true
           },
@@ -10486,7 +10461,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommand": {
+      "NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10504,7 +10479,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesTestGroupCategoryVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10522,13 +10497,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesTestGroupCategoryVm"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
             },
             "nullable": true
           },
@@ -10555,7 +10530,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand": {
+      "NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -10565,7 +10540,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand": {
+      "NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10575,11 +10550,15 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "requestId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsCampaignTreatmentVm": {
+      "NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10641,7 +10620,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsUserSettingsVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10659,7 +10638,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32": {
         "type": "object",
         "properties": {
           "label": {
@@ -10673,69 +10652,69 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesCreateCampaignVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm": {
         "type": "object",
         "properties": {
           "departments": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "products": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "responsibles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "requesters": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "serviceTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "businessTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "marketTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "productTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesLabelValueTreeOfSystemInt32": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValueTreeOfSystemInt32": {
         "type": "object",
         "properties": {
           "label": {
@@ -10757,83 +10736,83 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm": {
+      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm": {
         "type": "object",
         "properties": {
           "channels": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "actionPoints": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "emailTimeRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "emailResendRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "emailResendFrequencies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "segments": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorPrototypesLabelValueTreeOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValueTreeOfSystemInt32"
             },
             "nullable": true
           },
           "segmentDiscountTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "phoneTimeRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "phoneRecallRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "phoneRecallFrequencies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "templateTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDApplicationModelsViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           }
@@ -10853,7 +10832,7 @@
   "tags": [
     {
       "name": "Accounts",
-      "description": "Defines the endpoint which is responsible for the basic authenticated user information\r\nand provide the capability to login. The M:NKM.RTD.CampaignEditor.Controllers.AccountsController.Login(NKM.RTD.CampaignEditor.Accounts.Commands.Login.LoginCommand) API\r\nused for the basic authentication and the M:NKM.RTD.CampaignEditor.Controllers.AccountsController.RefreshToken\r\nis for refresh the actual authentication."
+      "description": "Defines the endpoint which is responsible for the basic authenticated user information\r\nand provide the capability to login. The M:NKM.RTD.CampaignEditor.Controllers.AccountsController.Login(NKM.RTD.CampaignEditor.Application.Accounts.Commands.Login.LoginCommand) API\r\nused for the basic authentication and the M:NKM.RTD.CampaignEditor.Controllers.AccountsController.RefreshToken\r\nis for refresh the actual authentication."
     },
     {
       "name": "CampaignResults",
@@ -10861,7 +10840,7 @@
     },
     {
       "name": "Campaigns",
-      "description": "Defines the campaign related operations for the enduser. This API endpoint is \r\nresponsible for all operation which can be made for a campaign creation or \r\nmodification. The basic usage is to create the campaign with \r\nNKM.RTD.CampaignEditor.Prototypes.CampaignStatus.DraftCampaign then create the neccesity \r\nNKM.RTD.CampaignEditor.Controllers.TreatmentsController operations, assign segment, via appropriate\r\nNKM.RTD.CampaignEditor.Controllers.SegmentationsController, update status via the appropriate method e.g.:\r\nM:NKM.RTD.CampaignEditor.Controllers.CampaignsController.Approve(System.Int32), M:NKM.RTD.CampaignEditor.Controllers.CampaignsController.StartNow(System.Int32)."
+      "description": "Defines the campaign related operations for the enduser. This API endpoint is \r\nresponsible for all operation which can be made for a campaign creation or \r\nmodification. The basic usage is to create the campaign with \r\nNKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign then create the neccesity \r\nNKM.RTD.CampaignEditor.Controllers.TreatmentsController operations, assign segment, via appropriate\r\nNKM.RTD.CampaignEditor.Controllers.SegmentationsController, update status via the appropriate method e.g.:\r\nM:NKM.RTD.CampaignEditor.Controllers.CampaignsController.Approve(System.Int32), M:NKM.RTD.CampaignEditor.Controllers.CampaignsController.StartNow(System.Int32)."
     },
     {
       "name": "Channels",
@@ -10929,7 +10908,7 @@
     },
     {
       "name": "Treatments",
-      "description": "API for treatment retrive. The basic treatment CRUD is hidden by enduser."
+      "description": "API for treatment retrieve. The basic treatment CRUD is hidden by enduser."
     },
     {
       "name": "UserSettings",

@@ -18,24 +18,24 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVm,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVmFromJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVmToJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVm,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVmFromJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVmToJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVm,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVmFromJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVmToJSON,
-    NKMRTDApplicationModelsViewModelsUserVm,
-    NKMRTDApplicationModelsViewModelsUserVmFromJSON,
-    NKMRTDApplicationModelsViewModelsUserVmToJSON,
-    NKMRTDCampaignEditorAccountsCommandsLoginLoginCommand,
-    NKMRTDCampaignEditorAccountsCommandsLoginLoginCommandFromJSON,
-    NKMRTDCampaignEditorAccountsCommandsLoginLoginCommandToJSON,
-    NKMRTDCampaignEditorPrototypesProfileVm,
-    NKMRTDCampaignEditorPrototypesProfileVmFromJSON,
-    NKMRTDCampaignEditorPrototypesProfileVmToJSON,
+    NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand,
+    NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommandFromJSON,
+    NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommandToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVmToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVmToJSON,
 } from '../models';
 
 export interface GetAdGroupsRequest {
@@ -51,7 +51,7 @@ export interface GetUsersForPermissionRequest {
 }
 
 export interface LoginRequest {
-    nKMRTDCampaignEditorAccountsCommandsLoginLoginCommand?: NKMRTDCampaignEditorAccountsCommandsLoginLoginCommand;
+    nKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand?: NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand;
 }
 
 /**
@@ -62,7 +62,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Query for groups in the system which were synchronized from the domain Active Directory
      */
-    async getAdGroupsRaw(requestParameters: GetAdGroupsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVm>> {
+    async getAdGroupsRaw(requestParameters: GetAdGroupsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.permissionId !== undefined) {
@@ -82,13 +82,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmFromJSON(jsonValue));
     }
 
     /**
      * Query for groups in the system which were synchronized from the domain Active Directory
      */
-    async getAdGroups(requestParameters: GetAdGroupsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesAdGroupVm> {
+    async getAdGroups(requestParameters: GetAdGroupsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm> {
         const response = await this.getAdGroupsRaw(requestParameters);
         return await response.value();
     }
@@ -96,7 +96,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Query for all function permission for the given permissionId.
      */
-    async getFunctionPermissionsRaw(requestParameters: GetFunctionPermissionsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVm>> {
+    async getFunctionPermissionsRaw(requestParameters: GetFunctionPermissionsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.permissionId !== undefined) {
@@ -116,13 +116,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Query for all function permission for the given permissionId.
      */
-    async getFunctionPermissions(requestParameters: GetFunctionPermissionsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesFunctionPermissionVm> {
+    async getFunctionPermissions(requestParameters: GetFunctionPermissionsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm> {
         const response = await this.getFunctionPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -131,7 +131,7 @@ export class AccountsApi extends runtime.BaseAPI {
      * Has only temporary implementation on service since there is no exact functional  requirement for the profile!
      * Returns basic information about the current user. The profile will be returned.
      */
-    async getMyAccountRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesProfileVm>> {
+    async getMyAccountRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -147,14 +147,14 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesProfileVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVmFromJSON(jsonValue));
     }
 
     /**
      * Has only temporary implementation on service since there is no exact functional  requirement for the profile!
      * Returns basic information about the current user. The profile will be returned.
      */
-    async getMyAccount(): Promise<NKMRTDCampaignEditorPrototypesProfileVm> {
+    async getMyAccount(): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm> {
         const response = await this.getMyAccountRaw();
         return await response.value();
     }
@@ -162,7 +162,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Returns all the users stored in the system.
      */
-    async getUserAccountsRaw(): Promise<runtime.ApiResponse<Array<NKMRTDApplicationModelsViewModelsUserVm>>> {
+    async getUserAccountsRaw(): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -178,13 +178,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDApplicationModelsViewModelsUserVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVmFromJSON));
     }
 
     /**
      * Returns all the users stored in the system.
      */
-    async getUserAccounts(): Promise<Array<NKMRTDApplicationModelsViewModelsUserVm>> {
+    async getUserAccounts(): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm>> {
         const response = await this.getUserAccountsRaw();
         return await response.value();
     }
@@ -192,7 +192,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Query for all directly referenced users for the given permissionId.
      */
-    async getUsersForPermissionRaw(requestParameters: GetUsersForPermissionRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVm>> {
+    async getUsersForPermissionRaw(requestParameters: GetUsersForPermissionRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.permissionId !== undefined) {
@@ -212,13 +212,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Query for all directly referenced users for the given permissionId.
      */
-    async getUsersForPermission(requestParameters: GetUsersForPermissionRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesUserPermissionVm> {
+    async getUsersForPermission(requestParameters: GetUsersForPermissionRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm> {
         const response = await this.getUsersForPermissionRaw(requestParameters);
         return await response.value();
     }
@@ -243,7 +243,7 @@ export class AccountsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorAccountsCommandsLoginLoginCommandToJSON(requestParameters.nKMRTDCampaignEditorAccountsCommandsLoginLoginCommand),
+            body: NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
