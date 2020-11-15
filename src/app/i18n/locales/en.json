@@ -722,38 +722,36 @@
     "bp-history": "BP History",
     "campaigns": "Campaigns",
     "coupon-campaigns": {
-      "title": "Coupon Campaigns",
-      "list": "List of Coupon Campaigns"
+      "list": "List of Coupon Campaigns",
+      "title": "Coupon Campaigns"
     },
     "dashboard": "Dashboard",
-    "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
     "permissions": "Permissions",
     "profile": "Profile",
     "profiles": {
-      "title": "Profiles",
-      "organizations": "Organization Structures"
+      "organizations": "Organization Structures",
+      "title": "Profiles"
     },
-    "segmentations": {
-      "title": "Segmentation",
-      "list": "List of Segmentations",
-      "groups": "Groups"
-    },
-    "settings": "Settings",
-    "sites": "Sites",
-    "users": "Users",
-    "organization": "Organization",
     "sections": {
       "campaigns": "Campaigns",
       "settings": "Settings"
     },
-    "treatment": {
-      "title": "Treatment",
-      "templates": "Templates",
-      "channels": "Channels"
+    "segmentations": {
+      "groups": "Groups",
+      "list": "List of Segmentations",
+      "title": "Segmentation"
     },
+    "settings": "Settings",
+    "sites": "Sites",
+    "treatment": {
+      "channels": "Channels",
+      "templates": "Templates",
+      "title": "Treatment"
+    },
+    "users": "Users",
     "workflow": "Workflow"
   },
   "newsletter": {
@@ -797,16 +795,15 @@
     "yesterday": "Yesterday"
   },
   "organization": {
-    "title": "Organizational structure",
     "companies": {
       "field": {
-        "status": "Status",
-        "name": "Name",
-        "profile-count": "Profiles",
+        "campaign-count": "Campaigns",
+        "created-date": "Date of creation",
         "group-count": "Groups",
         "job-role-count": "Job roles",
-        "campaign-count": "Campaigns",
-        "created-date": "Date of creation"
+        "name": "Name",
+        "profile-count": "Profiles",
+        "status": "Status"
       },
       "title": "Companies"
     },
@@ -817,11 +814,12 @@
       "title": "Job roles"
     },
     "new": {
-      "new": "New",
       "company": "Company",
       "group": "Group",
-      "job-role": "Job role"
-    }
+      "job-role": "Job role",
+      "new": "New"
+    },
+    "title": "Organizational structure"
   },
   "partner": {
     "editor": {
@@ -899,6 +897,10 @@
       "add": "New Permission",
       "title": "Permissions"
     }
+  },
+  "placeholder": {
+    "description": "This page is not there yet. Our developers are working hard to bring you new content, please, visit this page later!",
+    "title": "Under construction"
   },
   "profile": {
     "editor-title": "Profile",
