@@ -721,14 +721,26 @@
   "menu": {
     "bp-history": "ÜP History",
     "campaigns": "Kampányok",
-    "coupon-campaigns": "Kupon Kampányok",
+    "coupon-campaigns": {
+      "title": "Kupon Kampányok",
+      "list": "Kupon Kampányok Lista"
+    },
+    "dashboard": "Dashboard",
     "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "permissions": "Jogosultságkezelés",
     "profile": "Profil",
-    "segmentations": "Szegmentáció",
+    "profiles": {
+      "title": "Profilok",
+      "organizations": "Céges struktúrák"
+    },
+    "segmentations": {
+      "title": "Szegmentáció",
+      "list": "Szegmentáció lista",
+      "groups": "Csoportok"
+    },
     "settings": "Beállítások",
     "sites": "Telephelyek",
     "users": "Felhasználók",
@@ -736,7 +748,13 @@
     "sections": {
       "campaigns": "Kampányok",
       "settings": "Beállítások"
-    }
+    },
+    "treatment": {
+      "title": "Kezelés",
+      "templates": "Hírlevél",
+      "channels": "Csatornák"
+    },
+    "workflow": "Munkamenet"
   },
   "newsletter": {
     "add": "Új sablon hozzáadása",

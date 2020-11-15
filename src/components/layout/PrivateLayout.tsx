@@ -19,7 +19,14 @@ import {
   ClusterOutlined,
   DeploymentUnitOutlined,
   PieChartOutlined,
-  PlayCircleOutlined
+  PlayCircleOutlined,
+  GroupOutlined,
+  BarsOutlined,
+  PhoneOutlined,
+  AppstoreOutlined,
+  NodeIndexOutlined,
+  AuditOutlined,
+  FundProjectionScreenOutlined
 } from '@ant-design/icons'
 import { useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
@@ -69,52 +76,83 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const mainOptions = useMemo<SideMenuOptionProps[]>(
     () => [
       {
+        label: t('menu.dashboard'),
+        link: '/dashboard',
+        icon: <AppstoreOutlined />
+      },
+      {
         label: t('menu.campaigns'),
         link: '/campaigns',
         icon: <PlayCircleOutlined />,
         roles: pageViewRoles.campaigns
       },
       {
-        label: t('menu.coupon-campaigns'),
-        link: '/couponCampaigns',
+        label: t('menu.coupon-campaigns.title'),
         icon: <BarcodeOutlined />,
-        roles: pageViewRoles.couponCampaigns
+        roles: pageViewRoles.couponCampaigns,
+        subItems: [
+          {
+            label: t('menu.coupon-campaigns.list'),
+            link: '/couponCampaigns',
+            icon: <BarsOutlined />,
+            roles: pageViewRoles.couponCampaigns
+          },
+          {
+            label: t('menu.users'),
+            link: '/users',
+            icon: <UsergroupAddOutlined />,
+            roles: pageViewRoles.users
+          },
+          {
+            label: t('menu.settings'),
+            link: '/settings',
+            icon: <SettingOutlined />,
+            roles: pageViewRoles.settings
+          }
+        ]
       },
       {
-        label: t('menu.partners'),
-        link: '/partners',
-        icon: <HomeFilled />,
-        roles: pageViewRoles.partners
-      },
-      {
-        label: t('menu.segmentations'),
-        link: '/segmentations',
+        label: t('menu.segmentations.title'),
         icon: <PieChartOutlined />,
-        roles: pageViewRoles.segmentations
+        roles: pageViewRoles.segmentations,
+        subItems: [
+          {
+            label: t('menu.segmentations.list'),
+            link: '/segmentations-list',
+            icon: <BarsOutlined />,
+            roles: pageViewRoles.segmentations
+          },
+          {
+            label: t('menu.segmentations.groups'),
+            link: '/segmentations-groups',
+            icon: <GroupOutlined />,
+            roles: pageViewRoles.segmentations
+          }
+        ]
+      },
+      {
+        label: t('menu.treatment.title'),
+        icon: <FundProjectionScreenOutlined />,
+        roles: [...pageViewRoles.newsletters],
+        subItems: [
+          {
+            label: t('menu.treatment.templates'),
+            link: '/newsletter',
+            icon: <SendOutlined />,
+            roles: pageViewRoles.newsletters
+          },
+          {
+            label: t('menu.treatment.channels'),
+            link: '/channels',
+            icon: <PhoneOutlined />
+          }
+        ]
       },
       {
         label: t('menu.partner-data'),
         link: '/selfpartner',
         icon: <ContactsOutlined />,
         roles: pageViewRoles.selfpartner
-      },
-      {
-        label: t('menu.newsletter'),
-        link: '/newsletter',
-        icon: <SendOutlined />,
-        roles: pageViewRoles.newsletters
-      },
-      {
-        label: t('menu.users'),
-        link: '/users',
-        icon: <UsergroupAddOutlined />,
-        roles: pageViewRoles.users
-      },
-      {
-        label: t('menu.settings'),
-        link: '/settings',
-        icon: <SettingOutlined />,
-        roles: pageViewRoles.settings
       },
       {
         label: t('menu.sites'),
@@ -133,6 +171,31 @@ export const PrivateLayout: React.FC = ({ children }) => {
         link: '/bp-history',
         icon: <HistoryOutlined />,
         roles: pageViewRoles.bpHistory
+      }
+    ],
+    [t]
+  )
+
+  const footerOptions = useMemo<SideMenuOptionProps[]>(
+    () => [
+      {
+        label: t('menu.profiles.title'),
+        icon: <AuditOutlined />,
+        roles: [...pageViewRoles.organization],
+        subItems: [
+          {
+            label: t('menu.profiles.organizations'),
+            link: '/organization',
+            icon: <DeploymentUnitOutlined />,
+            roles: pageViewRoles.organization
+          }
+        ]
+      },
+      {
+        label: t('menu.partners'),
+        link: '/partners',
+        icon: <HomeFilled />,
+        roles: pageViewRoles.partners
       },
       {
         label: t('menu.permissions'),
@@ -141,17 +204,10 @@ export const PrivateLayout: React.FC = ({ children }) => {
         roles: pageViewRoles.permissions
       },
       {
-        label: t('menu.organization'),
-        link: '/organization',
-        icon: <DeploymentUnitOutlined />,
-        roles: pageViewRoles.organization
-      }
-    ],
-    [t]
-  )
-
-  const footerOptions = useMemo<SideMenuOptionProps[]>(
-    () => [
+        label: t('menu.workflow'),
+        link: '/workflow',
+        icon: <NodeIndexOutlined />
+      },
       { component: <LanguageSelector collapsed={!menuOpened} /> },
       {
         // Slice is necessary because this way the tooltip won't shoot off
@@ -194,16 +250,14 @@ export const PrivateLayout: React.FC = ({ children }) => {
     <Layout className="layout">
       <SideMenu open={menuOpened} onClose={(open: boolean) => setMenuOpened(open)}>
         <div
-          className={
-            menuOpened
-              ? 'section-upper custom-scroll--thin custom-scroll--dark'
-              : 'section-upper custom-scroll--thin custom-scroll--dark section-collapsed'
-          }
+          className={`section-upper custom-scroll--thin custom-scroll--dark ${
+            menuOpened ? '' : 'section-collapsed'
+          }`}
         >
           <SideMenuOptions
             options={mainOptions}
             handleClose={closeDrawer}
-            title={t('menu.sections.campaigns')}
+            title={menuOpened ? t('menu.sections.campaigns') : ''}
           />
         </div>
         <div className="section-lower">
@@ -211,7 +265,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
             collapsed={!menuOpened}
             options={footerOptions}
             handleClose={closeDrawer}
-            title={t('menu.sections.settings')}
+            title={menuOpened ? t('menu.sections.settings') : ''}
           />
           <SideMenuOptions
             collapsed={!menuOpened}

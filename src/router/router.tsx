@@ -33,6 +33,7 @@ import { SegmentationEditorPage } from 'features/segmentation/segmentationEditor
 import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
 import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
 import { OrganizationPage } from 'features/organization/OrganizationPage'
+import { PlaceholderPage } from 'components/placeholder/PlaceholderPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -49,6 +50,8 @@ const Routes = (): JSX.Element => (
     <PublicRoute exact path={['/error', '/error/:type']} component={ErrorPage} />
     <PublicRoute exact path="/error/:type" component={ErrorPage} />
     <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+    <PrivateRoute exact path="/channels" component={PlaceholderPage} />
+    <PrivateRoute exact path="/workflow" component={PlaceholderPage} />
     <PrivateRoute
       exact
       path="/selfpartner"
@@ -168,15 +171,21 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/segmentations"
+      path="/segmentations-list"
       roles={pageViewRoles.segmentations}
       component={SegmentationListPage}
     />
     <PrivateRoute
       exact
-      path={['/segmentations/new', '/segmentations/:segmentationId']}
+      path={['/segmentations-list/new', '/segmentations-list/:segmentationId']}
       roles={pageViewRoles.segmentationEditor}
       component={SegmentationEditorPage}
+    />
+    <PrivateRoute
+      exact
+      path="/segmentations-groups"
+      roles={pageViewRoles.segmentations}
+      component={PlaceholderPage}
     />
     <PrivateRoute
       exact

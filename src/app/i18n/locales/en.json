@@ -721,14 +721,26 @@
   "menu": {
     "bp-history": "BP History",
     "campaigns": "Campaigns",
-    "coupon-campaigns": "Coupon Campaigns",
+    "coupon-campaigns": {
+      "title": "Coupon Campaigns",
+      "list": "List of Coupon Campaigns"
+    },
+    "dashboard": "Dashboard",
     "newsletter": "Newsletter",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
     "permissions": "Permissions",
     "profile": "Profile",
-    "segmentations": "Segmentation",
+    "profiles": {
+      "title": "Profiles",
+      "organizations": "Organization Structures"
+    },
+    "segmentations": {
+      "title": "Segmentation",
+      "list": "List of Segmentations",
+      "groups": "Groups"
+    },
     "settings": "Settings",
     "sites": "Sites",
     "users": "Users",
@@ -736,7 +748,13 @@
     "sections": {
       "campaigns": "Campaigns",
       "settings": "Settings"
-    }
+    },
+    "treatment": {
+      "title": "Treatment",
+      "templates": "Templates",
+      "channels": "Channels"
+    },
+    "workflow": "Workflow"
   },
   "newsletter": {
     "add": "Add new template",
