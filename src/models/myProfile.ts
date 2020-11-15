@@ -1,4 +1,4 @@
-export interface Profile {
+export interface MyProfile {
   id?: number
   partnerId?: number
   name?: string | null

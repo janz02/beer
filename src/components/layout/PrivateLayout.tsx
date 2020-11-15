@@ -26,7 +26,7 @@ import { RootState } from 'app/rootReducer'
 import { useTranslation } from 'react-i18next'
 import { logout } from 'features/auth/authSlice'
 import { pageViewRoles } from 'services/roleHelpers'
-import { profileActions } from 'features/profile/profileSlice'
+import { myProfileActions } from 'features/profile/myProfileSlice'
 import { NotificationFab } from 'features/notification/NotificationFab'
 import { NotificationDrawer } from 'features/notification/NotificationDrawer'
 import { hasPermission } from 'services/jwt-reader'
@@ -42,7 +42,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
   const isMobile = useIsMobile()
   const [menuOpened, setMenuOpened] = useState(!isMobile)
   const [lastMediaQuery, setLastMediaQuery] = useState(isMobile)
-  const profile = useSelector((state: RootState) => state.profile.profile)
+  const profile = useSelector((state: RootState) => state.myProfile.profile)
   const notificationUtils = useNotificationUtils()
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
   }, [isMobile, lastMediaQuery])
 
   useEffect(() => {
-    dispatch(profileActions.getProfile())
+    dispatch(myProfileActions.getMyProfile())
   }, [dispatch])
 
   const closeDrawer = (): void => {
@@ -159,19 +159,19 @@ export const PrivateLayout: React.FC = ({ children }) => {
       {
         // Slice is necessary because this way the tooltip won't shoot off
         // far right when the name is really long.
-        label: profile?.name?.slice(0, 20) ?? t('menu.profile'),
-        labelTooltip: profile?.name ?? t('menu.profile'),
-        link: '/profile',
+        label: profile?.name?.slice(0, 20) ?? t('menu.my-profile'),
+        labelTooltip: profile?.name ?? t('menu.my-profile'),
+        link: '/my-profile',
         icon: <UserOutlined />,
-        roles: pageViewRoles.profile
+        roles: pageViewRoles.myProfile
       },
       {
         // Slice is necessary because this way the tooltip won't shoot off
         // far right when the name is really long.
-        label: profile?.name?.slice(0, 20) ?? t('menu.profile'),
-        labelTooltip: profile?.name ?? t('menu.profile'),
+        label: profile?.name?.slice(0, 20) ?? t('menu.my-profile'),
+        labelTooltip: profile?.name ?? t('menu.my-profile'),
         icon: <UserOutlined />,
-        roles: pageViewRoles.readonlyProfile
+        roles: pageViewRoles.readonlyMyProfile
       },
       {
         label: t('auth.logout'),

@@ -11,7 +11,7 @@ import { LoginPage } from 'features/auth/LoginPage'
 import { RecoveryPage } from 'features/auth/RecoveryPage'
 import { SignupPage } from 'features/auth/SignupPage'
 import { ErrorPage } from '../components/error/ErrorPage'
-import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
+import { MyProfileEditorPage } from 'features/profile/MyProfileEditorPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { CouponCampaignViewPage } from 'features/couponCampaigns/couponCampaignEditor/CouponCampaignViewPage'
@@ -131,9 +131,9 @@ const Routes = (): JSX.Element => (
 
     <PrivateRoute
       exact
-      path="/profile"
-      roles={pageViewRoles.profile}
-      component={ProfileEditorPage}
+      path="/my-profile"
+      roles={pageViewRoles.myProfile}
+      component={MyProfileEditorPage}
     />
 
     <PrivateRoute

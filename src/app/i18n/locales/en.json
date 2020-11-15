@@ -727,13 +727,27 @@
     "partner-data": "Partner data",
     "partners": "Partners",
     "permissions": "Permissions",
-    "profile": "Profile",
+    "my-profile": "Profile",
     "segmentations": "Segmentation",
     "settings": "Settings",
     "sites": "Sites",
     "users": "Users",
     "organization": "Organization",
     "profiles": "Profiles"
+  },
+  "my-profile": {
+    "editor-title": "Profile",
+    "field": {
+      "code": "Partner registration code",
+      "email": "Email",
+      "name": "Full name",
+      "new-password": "New password",
+      "new-password-again": "New password again",
+      "old-password": "Old password",
+      "phone": "Phone"
+    },
+    "save": "Save changes",
+    "save-profile-success": "Successfully saved the profile."
   },
   "newsletter": {
     "add": "Add new template",
@@ -878,20 +892,6 @@
       "add": "New Permission",
       "title": "Permissions"
     }
-  },
-  "profile": {
-    "editor-title": "Profile",
-    "field": {
-      "code": "Partner registration code",
-      "email": "Email",
-      "name": "Full name",
-      "new-password": "New password",
-      "new-password-again": "New password again",
-      "old-password": "Old password",
-      "phone": "Phone"
-    },
-    "save": "Save changes",
-    "save-profile-success": "Successfully saved the profile."
   },
   "profiles": {
     "field": {

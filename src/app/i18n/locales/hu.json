@@ -727,13 +727,27 @@
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "permissions": "Jogosultságkezelés",
-    "profile": "Profil",
+    "my-profile": "Profil",
     "segmentations": "Szegmentáció",
     "settings": "Beállítások",
     "sites": "Telephelyek",
     "users": "Felhasználók",
     "organization": "Szervezet",
     "profiles": "Profilok"
+  },
+  "my-profile": {
+    "editor-title": "Profiladatok",
+    "field": {
+      "code": "Partner regisztrációs kód",
+      "email": "E-mail cím",
+      "name": "Teljes név",
+      "new-password": "Új jelszó",
+      "new-password-again": "Új jelszó ismét",
+      "old-password": "Régi jelszó",
+      "phone": "Telefonszám"
+    },
+    "save": "Módosítás mentése",
+    "save-profile-success": "Profil mentése sikeres."
   },
   "newsletter": {
     "add": "Új sablon hozzáadása",
@@ -878,20 +892,6 @@
       "add": "Új jogosultság hozzáadása",
       "title": "Jogosultságkezelés"
     }
-  },
-  "profile": {
-    "editor-title": "Profiladatok",
-    "field": {
-      "code": "Partner regisztrációs kód",
-      "email": "E-mail cím",
-      "name": "Teljes név",
-      "new-password": "Új jelszó",
-      "new-password-again": "Új jelszó ismét",
-      "old-password": "Régi jelszó",
-      "phone": "Telefonszám"
-    },
-    "save": "Módosítás mentése",
-    "save-profile-success": "Profil mentése sikeres."
   },
   "profiles": {
     "field": {

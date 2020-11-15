@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { message } from 'antd'
 import i18n from 'app/i18n'
-import { Profile } from 'models/profile'
+import { MyProfile } from 'models/myProfile'
 import { api } from 'api'
 import { FeatureState } from 'models/featureState'
 
 interface ProfileState {
   editable?: boolean
-  profile?: Profile
+  profile?: MyProfile
   featureState: FeatureState
 }
 
@@ -17,20 +17,20 @@ const initialState: ProfileState = {
 }
 
 const profileSlice = createSlice({
-  name: 'profile',
+  name: 'myProfile',
   initialState,
   reducers: {
     resetProfile: () => initialState,
     setFeatureState(state, action: PayloadAction<FeatureState>) {
       state.featureState = action.payload
     },
-    getProfileSuccess(state, action: PayloadAction<Profile>) {
+    getProfileSuccess(state, action: PayloadAction<MyProfile>) {
       state.editable = true
       state.profile = action.payload
       state.featureState = FeatureState.Success
     },
     updateProfileSuccess(state) {
-      message.success(i18n.t('profile.save-profile-success'), 10)
+      message.success(i18n.t('my-profile.save-profile-success'), 10)
       state.featureState = FeatureState.Success
     }
   }
@@ -43,7 +43,7 @@ const {
   setFeatureState
 } = profileSlice.actions
 
-const getProfile = (): AppThunk => async dispatch => {
+const getMyProfile = (): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
@@ -55,25 +55,25 @@ const getProfile = (): AppThunk => async dispatch => {
   }
 }
 
-const updateProfile = (profile: Profile): AppThunk => async (dispatch, getState) => {
+const updateMyProfile = (profile: MyProfile): AppThunk => async (dispatch, getState) => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
     await api.coupon.partnerContacts.updateMyPartnerContact({
-      partnerContactSelfDto: { ...getState().profile.profile, ...profile }
+      partnerContactSelfDto: { ...getState().myProfile.profile, ...profile }
     })
 
     dispatch(updateProfileSuccess())
-    dispatch(getProfile())
+    dispatch(getMyProfile())
   } catch (err) {
     dispatch(setFeatureState(FeatureState.Error))
   }
 }
 
-export const profileActions = {
+export const myProfileActions = {
   resetProfile,
-  getProfile,
-  updateProfile
+  getMyProfile,
+  updateMyProfile
 }
 
-export const profileReducer = profileSlice.reducer
+export const myProfileReducer = profileSlice.reducer

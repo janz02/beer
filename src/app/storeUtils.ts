@@ -10,7 +10,7 @@ import { resetRouterHistory } from 'router/routerHistoryStore'
 import { resetPartnersList } from 'features/partners/partnerList/partnerListSlice'
 import { resetSelfPartner } from 'features/partners/selfPartner/selfPartnerSlice'
 import { resetPartnerEditor } from 'features/partners/partnerEditor/partnerEditorSlice'
-import { profileActions } from 'features/profile/profileSlice'
+import { myProfileActions } from 'features/profile/myProfileSlice'
 import { couponCampaignListActions } from 'features/couponCampaigns/couponCampaignList/couponCampaignListSlice'
 import { couponCampaignCategoryEditorActions } from 'features/settings/couponCampaignCategories/categoryEditor/couponCampaignCategoryEditorSlice'
 import { couponCampaignCategoryListActions } from 'features/settings/couponCampaignCategories/categoryList/couponCampaignCategoryListSlice'
@@ -36,7 +36,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
   const { logout } = params
   batch(() => {
     dispatch(authActions.resetAuth())
-    dispatch(profileActions.resetProfile())
+    dispatch(myProfileActions.resetProfile())
     dispatch(profilesActions.reset())
     dispatch(notificationActions.resetNotification())
     dispatch(siteListActions.reset())

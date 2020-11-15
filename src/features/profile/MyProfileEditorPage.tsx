@@ -1,15 +1,15 @@
 import React, { useEffect, FC } from 'react'
 import { useDispatch } from 'hooks/react-redux-hooks'
-import { ProfileEditorForm } from './ProfileEditorForm'
-import { useProfileUtils } from './useProfileUtils'
+import { MyProfileEditorForm } from './MyProfileEditorForm'
+import { useMyProfileUtils } from './useMyProfileUtils'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 
-export const ProfileEditorPage: FC = () => {
+export const MyProfileEditorPage: FC = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const profileUtils = useProfileUtils()
+  const profileUtils = useMyProfileUtils()
   const { modified, getProfile, getMyPartner } = profileUtils
 
   useEffect(() => {
@@ -21,9 +21,9 @@ export const ProfileEditorPage: FC = () => {
   }, [dispatch, getMyPartner])
 
   return (
-    <ResponsiveCard floatingTitle={t('profile.editor-title')}>
+    <ResponsiveCard floatingTitle={t('my-profile.editor-title')}>
       <NavigationAlert when={modified} />
-      <ProfileEditorForm profileUtils={profileUtils} />
+      <MyProfileEditorForm profileUtils={profileUtils} />
     </ResponsiveCard>
   )
 }

@@ -3,13 +3,13 @@ import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useCommonFormRules } from 'hooks'
 import { history } from 'router/router'
-import { ProfileUtils } from './useProfileUtils'
+import { MyProfileUtils } from './useMyProfileUtils'
 
-interface ProfileEditorFormProps {
-  profileUtils: ProfileUtils
+interface MyProfileEditorFormProps {
+  profileUtils: MyProfileUtils
 }
 
-export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
+export const MyProfileEditorForm: FC<MyProfileEditorFormProps> = props => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   const {
@@ -38,7 +38,7 @@ export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
     >
       <Form.Item
         name="name"
-        label={t('profile.field.name')}
+        label={t('my-profile.field.name')}
         rules={[
           rule.requiredString(t('error.validation.common.user-name-required')),
           rule.max(100, t('error.validation.common.user-name-max-length-100'))
@@ -47,11 +47,11 @@ export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
         <Input disabled={!editable} maxLength={100} />
       </Form.Item>
 
-      <Form.Item name="email" label={t('profile.field.email')}>
+      <Form.Item name="email" label={t('my-profile.field.email')}>
         <Input disabled />
       </Form.Item>
 
-      <Form.Item label={t('profile.field.old-password')} name="oldPassword">
+      <Form.Item label={t('my-profile.field.old-password')} name="oldPassword">
         <Input.Password disabled={!editable} />
       </Form.Item>
 
@@ -59,7 +59,7 @@ export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
         name="password"
         dependencies={['oldPassword']}
         hasFeedback
-        label={t('profile.field.new-password')}
+        label={t('my-profile.field.new-password')}
         extra={t('common.field.help.password-format')}
         rules={[
           ({ getFieldValue }) => ({
@@ -79,7 +79,7 @@ export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
       <Form.Item
         name="passwordAgain"
         hasFeedback
-        label={t('profile.field.new-password-again')}
+        label={t('my-profile.field.new-password-again')}
         dependencies={['password']}
         rules={[
           ({ getFieldValue }) => ({
@@ -97,14 +97,14 @@ export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
 
       <Form.Item
         name="phone"
-        label={t('profile.field.phone')}
+        label={t('my-profile.field.phone')}
         rules={[rule.max(20, t('error.validation.common.phone-max-length-20'))]}
         extra={t('common.field.help.phone-format')}
       >
         <Input disabled={!editable} type="tel" maxLength={20} />
       </Form.Item>
 
-      <Form.Item name="registerCode" label={t('profile.field.code')}>
+      <Form.Item name="registerCode" label={t('my-profile.field.code')}>
         <Input disabled />
       </Form.Item>
 
@@ -123,7 +123,7 @@ export const ProfileEditorForm: FC<ProfileEditorFormProps> = props => {
           disabled={!submitable}
           loading={loading}
         >
-          {t('profile.save')}
+          {t('my-profile.save')}
         </Button>
       </div>
     </Form>
