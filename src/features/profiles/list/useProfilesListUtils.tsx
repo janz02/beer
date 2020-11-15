@@ -34,7 +34,16 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
 
   const tableUtils = useTableUtils<ProfileListItem>({
     listParamsState: listParams,
-    filterKeys: ['name', 'username', 'email'],
+    filterKeys: [
+      'status',
+      'name',
+      'username',
+      'email',
+      'group',
+      'createdDate',
+      'company',
+      'jobRole'
+    ],
     getDataAction: profilesActions.getProfiles
   })
 
@@ -57,7 +66,8 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
         title: t('profiles.field.name'),
         key: 'name',
         sort: true,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        cannotBeHidden: true
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.username'),
