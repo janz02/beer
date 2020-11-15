@@ -722,38 +722,36 @@
     "bp-history": "ÜP History",
     "campaigns": "Kampányok",
     "coupon-campaigns": {
-      "title": "Kupon Kampányok",
-      "list": "Kupon Kampányok Lista"
+      "list": "Kupon Kampányok Lista",
+      "title": "Kupon Kampányok"
     },
     "dashboard": "Dashboard",
-    "newsletter": "Hírlevél",
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "permissions": "Jogosultságkezelés",
     "profile": "Profil",
     "profiles": {
-      "title": "Profilok",
-      "organizations": "Céges struktúrák"
+      "organizations": "Céges struktúrák",
+      "title": "Profilok"
     },
-    "segmentations": {
-      "title": "Szegmentáció",
-      "list": "Szegmentáció lista",
-      "groups": "Csoportok"
-    },
-    "settings": "Beállítások",
-    "sites": "Telephelyek",
-    "users": "Felhasználók",
-    "organization": "Szervezet",
     "sections": {
       "campaigns": "Kampányok",
       "settings": "Beállítások"
     },
-    "treatment": {
-      "title": "Kezelés",
-      "templates": "Hírlevél",
-      "channels": "Csatornák"
+    "segmentations": {
+      "groups": "Csoportok",
+      "list": "Szegmentáció lista",
+      "title": "Szegmentáció"
     },
+    "settings": "Beállítások",
+    "sites": "Telephelyek",
+    "treatment": {
+      "channels": "Csatornák",
+      "templates": "Hírlevél",
+      "title": "Kezelés"
+    },
+    "users": "Felhasználók",
     "workflow": "Munkamenet"
   },
   "newsletter": {
@@ -797,16 +795,15 @@
     "yesterday": "Tegnap"
   },
   "organization": {
-    "title": "Szervezeti struktúra",
     "companies": {
       "field": {
-        "status": "Státusz",
-        "name": "Név",
-        "profile-count": "Felhasználók",
+        "campaign-count": "Kampányok",
+        "created-date": "Létrehozás dátuma",
         "group-count": "Csoportok",
         "job-role-count": "Munkakörök",
-        "campaign-count": "Kampányok",
-        "created-date": "Létrehozás dátuma"
+        "name": "Név",
+        "profile-count": "Felhasználók",
+        "status": "Státusz"
       },
       "title": "Cégek"
     },
@@ -817,11 +814,12 @@
       "title": "Munkakörök"
     },
     "new": {
-      "new": "Új",
       "company": "Cég",
       "group": "Csoport",
-      "job-role": "Munkakör"
-    }
+      "job-role": "Munkakör",
+      "new": "Új"
+    },
+    "title": "Szervezeti struktúra"
   },
   "partner": {
     "editor": {
@@ -899,6 +897,10 @@
       "add": "Új jogosultság hozzáadása",
       "title": "Jogosultságkezelés"
     }
+  },
+  "placeholder": {
+    "description": "Ez az oldal még nem készült el. Fejlesztőink minden erejükkel azon dolgoznak, hogy új funkciókat szállítsanak, kérjük, térj vissza később!",
+    "title": "Fejlesztés alatt"
   },
   "profile": {
     "editor-title": "Profiladatok",
