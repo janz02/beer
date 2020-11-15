@@ -6,13 +6,13 @@ import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 import { ProfileListItem, ProfileStatus } from 'models/profileListItem'
 import { ProfileStatusDisplay } from './ProfileStatusDisplay'
 import { ActionButtons } from 'components/buttons/ActionButtons'
 import { ActionButton } from 'components/buttons/ActionButton'
 import { CheckCircleOutlined, CloseCircleOutlined, FormOutlined } from '@ant-design/icons'
+import { pageViewRoles } from 'services/roleHelpers'
 
 interface ProfilesListUtils {
   columnsConfig: ColumnsType<ProfileListItem>
@@ -104,7 +104,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true
       }),
-      hasPermission([Roles.Administrator])
+      hasPermission(pageViewRoles.profileEditor)
         ? tableUtils.actionColumnConfig({
             width: 'auto',
             render(profile: ProfileListItem) {

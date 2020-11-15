@@ -15,9 +15,9 @@ import { Dropdown, Menu } from 'antd'
 import { AddButton } from 'components/buttons/AddButton'
 import { hasPermission } from 'services/jwt-reader'
 import { DownOutlined } from '@ant-design/icons'
-import { Roles } from 'api/swagger/coupon'
 import { ExportButton } from 'components/buttons/ExportButton'
 import { SettingsButton } from 'components/buttons/SettingsButton'
+import { pageViewRoles } from 'services/roleHelpers'
 
 export const ProfilesList: FC = () => {
   const dispatch = useDispatch()
@@ -49,7 +49,7 @@ export const ProfilesList: FC = () => {
 
     return (
       <>
-        {hasPermission([Roles.Administrator]) && (
+        {hasPermission(pageViewRoles.profileEditor) && (
           <Dropdown overlay={menu}>
             <AddButton>
               {t('profiles.new.new')} <DownOutlined />
