@@ -184,6 +184,12 @@ export const PrivateLayout: React.FC = ({ children }) => {
         roles: [...pageViewRoles.organization],
         subItems: [
           {
+            label: t('menu.profiles.list'),
+            link: '/profiles',
+            icon: <UsergroupAddOutlined />,
+            roles: pageViewRoles.profiles
+          },
+          {
             label: t('menu.profiles.organizations'),
             link: '/organization',
             icon: <DeploymentUnitOutlined />,
@@ -210,12 +216,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
       },
       { component: <LanguageSelector collapsed={!menuOpened} /> },
       {
-        label: t('menu.profiles'),
-        link: '/profiles',
-        icon: <UsergroupAddOutlined />,
-        roles: pageViewRoles.profiles
-      }
-      {
         // Slice is necessary because this way the tooltip won't shoot off
         // far right when the name is really long.
         label: profile?.name?.slice(0, 20) ?? t('menu.my-profile'),
@@ -230,6 +230,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
         label: profile?.name?.slice(0, 20) ?? t('menu.my-profile'),
         labelTooltip: profile?.name ?? t('menu.my-profile'),
         icon: <UserOutlined />,
+        roles: pageViewRoles.readonlyMyProfile
       }
     ],
     [profile, t, menuOpened]
@@ -242,7 +243,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
 
   const logoutOptions = useMemo<SideMenuOptionProps[]>(
     () => [
-        roles: pageViewRoles.readonlyMyProfile
       {
         label: t('auth.logout'),
         icon: <LogoutOutlined />,

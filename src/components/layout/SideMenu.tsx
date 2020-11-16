@@ -8,11 +8,10 @@ import './SideMenu.scss'
 export interface SideMenuProps {
   open: boolean
   onClose: (open: boolean) => void
-  className?: string
 }
 
 export const SideMenu: FC<SideMenuProps> = props => {
-  const { open, onClose, className, children } = props
+  const { open, onClose, children } = props
   const isMobile = useIsMobile()
 
   const Header: FC = () => (
