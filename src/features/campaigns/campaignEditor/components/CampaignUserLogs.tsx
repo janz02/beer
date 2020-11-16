@@ -8,7 +8,7 @@ export interface CampaignUserLogsProps {
   campaign: CampaignListItem | undefined
 }
 
-export const CampaignUserLogs: FC<CampaignUserLogsProps> = props => {
+export const CampaignUserLogs: FC<CampaignUserLogsProps> = ({ campaign }) => {
   const { t } = useTranslation()
 
   return (
@@ -16,13 +16,13 @@ export const CampaignUserLogs: FC<CampaignUserLogsProps> = props => {
       <span className="campaign-user-logs-title">{t('campaign-create.user-logs')}</span>
       <div className="campaign-user-logs">
         <Row>
-          <Col span={4}>{props.campaign?.startDate?.format('YYYY.MM.DD')}</Col>
-          <Col span={8}>{props.campaign?.responsible}</Col>
-          <Col span={10}>{props.campaign != null ? 'Edited: Campaign settings' : ''}</Col>
+          <Col span={4}>{campaign?.startDate?.format('YYYY.MM.DD')}</Col>
+          <Col span={8}>{campaign?.responsible}</Col>
+          <Col span={10}>{campaign != null ? 'Edited: Campaign settings' : ''}</Col>
         </Row>
         <Row>
-          <Col span={4}>{props.campaign?.startDate?.format('hh.mm')}</Col>
-          <Col span={8}>{props.campaign != null ? '(Marketing)' : ''}</Col>
+          <Col span={4}>{campaign?.startDate?.format('hh.mm')}</Col>
+          <Col span={8}>{campaign != null ? '(Marketing)' : ''}</Col>
           <Col span={10} />
         </Row>
       </div>

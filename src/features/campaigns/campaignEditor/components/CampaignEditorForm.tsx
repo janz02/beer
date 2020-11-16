@@ -11,10 +11,10 @@ export interface CampaignEditorProps {
   campaignId: number | undefined
 }
 
-export const CampaignEditorForm: FC<CampaignEditorProps> = props => {
+export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
   const campaign = useSelector((state: RootState) =>
-    state.campaignList.companyCampaigns.find(x => x.id === props.campaignId)
+    state.campaignList.companyCampaigns.find(x => x.id === campaignId)
   )
 
   return (
