@@ -47,6 +47,8 @@ export const useCompaniesUtils = (): CompaniesUtils => {
     getDataAction: companiesActions.getCompanies
   })
 
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
+
   const columnsConfig: ColumnsType<Company> = useMemo(
     () => [
       tableUtils.columnConfig({
@@ -101,7 +103,7 @@ export const useCompaniesUtils = (): CompaniesUtils => {
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
       }),
-      hasPermission(pageViewRoles.organizationEditor)
+      isEditorUser
         ? tableUtils.actionColumnConfig({
             render() {
               return <CrudButtons onEdit={() => ({})} onDelete={() => ({})} />
@@ -109,7 +111,7 @@ export const useCompaniesUtils = (): CompaniesUtils => {
           })
         : {}
     ],
-    [dispatch, tableUtils, t, savingStatusIds]
+    [dispatch, tableUtils, t, savingStatusIds, isEditorUser]
   )
 
   const resetFilters = useCallback(() => {

@@ -47,6 +47,8 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
     getDataAction: profilesActions.getProfiles
   })
 
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.profileEditor), [])
+
   const columnsConfig: ColumnsType<ProfileListItem> = useMemo(
     () => [
       tableUtils.columnConfig({
@@ -114,7 +116,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true
       }),
-      hasPermission(pageViewRoles.profileEditor)
+      isEditorUser
         ? tableUtils.actionColumnConfig({
             width: 'auto',
             render(profile: ProfileListItem) {
@@ -148,7 +150,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
           })
         : {}
     ],
-    [tableUtils, t]
+    [tableUtils, t, isEditorUser]
   )
 
   const resetFilters = (): void => {

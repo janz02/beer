@@ -39,6 +39,8 @@ export const ProfilesList: FC = () => {
 
   const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.PROFILES)
 
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.profileEditor), [])
+
   const headerOptions = useMemo(() => {
     const menu = (
       <Menu>
@@ -49,7 +51,7 @@ export const ProfilesList: FC = () => {
 
     return (
       <>
-        {hasPermission(pageViewRoles.profileEditor) && (
+        {isEditorUser && (
           <Dropdown overlay={menu}>
             <AddButton>
               {t('profiles.new.new')} <DownOutlined />
@@ -58,7 +60,7 @@ export const ProfilesList: FC = () => {
         )}
       </>
     )
-  }, [t])
+  }, [isEditorUser, t])
 
   const tabBarActions = useMemo(() => {
     return (
