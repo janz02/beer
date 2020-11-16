@@ -26,20 +26,28 @@ export const QueryBuilderView: React.FC = () => {
     return rule ? <RuleResultContainer ruleResult={rule} emptyValue="?" /> : <></>
   }
 
-  const setRefresh = (immutableTree: ImmutableTree): void => {
+  const setRefresh = (updatedTree: ImmutableTree): void => {
     if (queryRefreshReady) {
       setQueryRefreshReady(false)
       setTimeout(() => {
         setQueryRefreshReady(true)
-        queryBuilder.refresh(immutableTree)
+        queryBuilder.refresh(updatedTree)
       }, 2000)
     }
   }
 
-  const onChange = async (immutableTree: ImmutableTree, config: Config): Promise<void> => {
-    queryBuilder.update(immutableTree, config)
-    setRefresh(immutableTree)
+  const onChange = async (updatedTree: ImmutableTree, updatedConfig: Config): Promise<void> => {
+    queryBuilder.update(updatedTree, updatedConfig)
+    setRefresh(updatedTree)
   }
+
+  // Update the query results once the rules are ready
+  useEffect(() => {
+    if (queryBuilder.config.fields && queryBuilder.tree && queryBuilder.ruleResults.length === 0) {
+      queryBuilder.update(queryBuilder.tree, queryBuilder.config)
+      queryBuilder.refresh(queryBuilder.tree)
+    }
+  })
 
   if (!queryBuilder.config.fields || !queryBuilder.tree) {
     return <></>
