@@ -4,16 +4,14 @@ import { Button, Collapse, Form } from 'antd'
 import { SegmentationEditorFormBasics } from './SegmentationEditorFormBasics'
 import { SegmentationEditorUtils } from './useSegmentationEditorUtils'
 import { QueryBuilderView } from './queryBuilder/QueryBuilderView'
-import { QueryBuilderUtils } from './queryBuilder/useQueryBuilderUtils'
 
 interface SegmentationEditorFormProps {
   segmentationEditorUtils: SegmentationEditorUtils
-  queryBuilderUtils: QueryBuilderUtils
 }
 
 export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = props => {
   const { t } = useTranslation()
-  const { segmentationEditorUtils, queryBuilderUtils } = props
+  const { segmentationEditorUtils } = props
   const { submitable, saving, id, checkFieldsChange, handleSave } = segmentationEditorUtils
 
   return (
@@ -33,7 +31,7 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
 
         <Collapse defaultActiveKey={['2']}>
           <Collapse.Panel header={t('segmentation-editor.query.title')} key="2">
-            <QueryBuilderView queryBuilder={queryBuilderUtils} />
+            <QueryBuilderView />
           </Collapse.Panel>
         </Collapse>
 

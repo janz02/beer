@@ -1,21 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Query, Builder, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
-import { QueryBuilderUtils } from './useQueryBuilderUtils'
+import { useQueryBuilderUtils } from './useQueryBuilderUtils'
 import { RuleResultContainer } from './RuleResultContainer'
 // import 'antd/dist/antd.css'
 import 'react-awesome-query-builder/css/styles.scss'
 import 'react-awesome-query-builder/css/compact_styles.scss' // optional, for more compact styles
 import './QueryBuilderView.scss'
 
-interface QueryBuilderViewProps {
-  queryBuilder: QueryBuilderUtils
-}
-
-export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
+export const QueryBuilderView: React.FC = () => {
   const [queryRefreshReady, setQueryRefreshReady] = useState(true)
+  const queryBuilder = useQueryBuilderUtils()
 
   const renderBuilder = (builder: BuilderProps): JSX.Element => {
-    props.queryBuilder.setQueryBuilderActionsRef(builder)
+    queryBuilder.setQueryBuilderActionsRef(builder)
 
     return (
       <div className="query-builder">
@@ -25,39 +22,39 @@ export const QueryBuilderView: React.FC<QueryBuilderViewProps> = props => {
   }
 
   const renderQueryResult = ({ id }: any): JSX.Element => {
-    const rule = props.queryBuilder.getRuleResult(id)
+    const rule = queryBuilder.getRuleResult(id)
     return rule ? <RuleResultContainer ruleResult={rule} emptyValue="?" /> : <></>
   }
 
-  const setRefresh = (): void => {
+  const setRefresh = (immutableTree: ImmutableTree): void => {
     if (queryRefreshReady) {
       setQueryRefreshReady(false)
       setTimeout(() => {
-        props.queryBuilder.refresh()
         setQueryRefreshReady(true)
+        queryBuilder.refresh(immutableTree)
       }, 2000)
     }
   }
 
-  const onChange = (immutableTree: ImmutableTree, config: Config): void => {
-    props.queryBuilder.update(immutableTree, config)
-    setRefresh()
+  const onChange = async (immutableTree: ImmutableTree, config: Config): Promise<void> => {
+    queryBuilder.update(immutableTree, config)
+    setRefresh(immutableTree)
   }
 
-  if (!props.queryBuilder.config.fields || !props.queryBuilder.tree) {
+  if (!queryBuilder.config.fields || !queryBuilder.tree) {
     return <></>
   }
 
   return (
     <Query
-      {...props.queryBuilder.config}
+      {...queryBuilder.config}
       // override
       settings={{
-        ...props.queryBuilder.config.settings,
+        ...queryBuilder.config.settings,
         renderAfterWidget: renderQueryResult,
         renderBeforeActions: renderQueryResult
       }}
-      value={props.queryBuilder.tree}
+      value={queryBuilder.tree}
       renderBuilder={renderBuilder}
       onChange={onChange}
     />

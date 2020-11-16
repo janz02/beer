@@ -4,15 +4,16 @@ import { ResponsiveCard } from '../../../../components/responsive/ResponsiveCard
 import { useTranslation } from 'react-i18next'
 import { NKMRTDApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
 import './QueryBuilderSidebarView.scss'
+import { useQueryBuilderUtils } from './useQueryBuilderUtils'
 
 interface SidebarViewProps {
   fields?: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
-  onFieldSelected: (field: string) => void
 }
 
 export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
   const { t } = useTranslation()
-  const { fields, onFieldSelected } = props
+  const { fields } = props
+  const queryBuilder = useQueryBuilderUtils()
 
   const renderFieldsFor = (
     parentPrefix: string,
@@ -24,7 +25,7 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
           <li key={idx}>
             <Button
               onClick={() => {
-                onFieldSelected(`${parentPrefix}.${x.fieldName}`)
+                queryBuilder.handleOnSidebarFieldSelected(`${parentPrefix}.${x.fieldName}`)
               }}
             >
               {// TODO provide translation

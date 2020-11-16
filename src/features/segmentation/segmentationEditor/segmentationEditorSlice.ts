@@ -15,7 +15,8 @@ import { SegmentationQuery } from 'models/campaign/segmentationQuery'
 import { ImmutableTree, JsonGroup, Utils } from 'react-awesome-query-builder'
 import {
   QueryBuilderRuleModel,
-  SegmentationRuleResponse
+  SegmentationRuleResponse,
+  useQueryBuilderUtils
 } from './queryBuilder/useQueryBuilderUtils'
 import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
 
@@ -168,15 +169,18 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
 ) => {
   try {
     const { segmentation, segmentationQuery } = getState().segmentationEditor
+    const { treeTotal } = useQueryBuilderUtils()
     dispatch(saveSegmentationRequest())
 
     if (segmentation?.id) {
       await api.campaignEditor.segmentations.updateSegmentation({
         id: data.id!.toString(),
         nKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: {
+          ...data,
           ...segmentationQuery,
           ...segmentation,
-          ...data,
+          cumulativeIntersection: treeTotal.filteredSize,
+          segmentSize: treeTotal.segmentSize,
           queryId: segmentationQuery?.id
         } as NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
       })
@@ -201,17 +205,15 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
   }
 }
 
-export const refreshQueryResults = (callback: any): AppThunk => async (dispatch, getState) => {
+export const refreshQueryResults = (): AppThunk => async (dispatch, getState) => {
   try {
-    const { queryBuilder } = getState().segmentationEditor
-    const { query } = queryBuilder
-
+    const query = getState().segmentationEditor.queryBuilder.query
     if (query) {
       const result = await api.campaignEditor.segmentationQueries.querySegmentationQueries({
         nKMRTDCampaignEditorSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery: query
       })
+
       dispatch(setRuleResults(result as SegmentationRuleResponse[]))
-      callback()
     }
   } catch (err) {}
 }

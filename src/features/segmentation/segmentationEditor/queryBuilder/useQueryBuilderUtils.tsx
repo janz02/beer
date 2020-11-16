@@ -3,7 +3,7 @@ import { SegmentationRuleResult } from '../../../../models/campaign/segmentation
 import { Utils, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
 import stringify from 'json-stringify-safe'
 import { buildFieldConfig, convertSingleValuesToArray } from './queryBuilderHelper'
-import { useDispatch, useSelector } from 'react-redux'
+import { batch, useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'app/rootReducer'
 import loadedConfig from './Config'
 import {
@@ -18,6 +18,7 @@ import {
 } from '../segmentationEditorSlice'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { resolve } from 'path'
 
 const { loadTree, getTree, queryBuilderFormat } = Utils
 export interface ConditionChangeEvents {
@@ -51,7 +52,7 @@ export interface QueryBuilderUtils {
   getRuleResult(ruleId: string): SegmentationRuleResult | undefined
   update(immutableTree: ImmutableTree, config: Config): void
   handleOnSidebarFieldSelected: (selectedField: string) => void
-  refresh: () => void
+  refresh: (immutableTree: ImmutableTree) => void
 }
 
 export const useQueryBuilderUtils = (): QueryBuilderUtils => {
@@ -70,6 +71,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     if (!('rules' in query)) {
       return undefined
     }
+    console.log(query)
     convertSingleValuesToArray(query)
     dispatch(setQuery(query))
   }
@@ -135,13 +137,6 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     }
   }
 
-  const updateResults = (queryResults: SegmentationRuleResponse[] = []): void => {
-    const results: SegmentationRuleResult[] = queryResults.map(result => {
-      return { ...result } as SegmentationRuleResult
-    })
-    dispatch(setRuleResults(results))
-  }
-
   const appendNewRule = (): string => {
     const rule = actions.addRule(treePath())
     return rule.id
@@ -187,11 +182,13 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
       const children = treeNode.get('children1').toArray()
       for (const childNode of children) {
         const jsRule = childNode.toJS()
+
         if (jsRule.type === GROUP) {
           flattenTree(childNode)
-        } else if (jsRule.type === 'rule' && !!jsRule.properties.field && !existsRule(jsRule.id)) {
+        } else if (jsRule.type === 'rule' && !!jsRule.properties.field) {
           const rule = createRule(jsRule)
-          dispatch(setRules([...rules, rule]))
+          const rulesWithoutUpdated = rules.filter(x => x.id !== rule.id)
+          dispatch(setRules([...rulesWithoutUpdated, rule]))
         }
       }
     },
@@ -208,6 +205,8 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     })
     const results = ruleResults.filter(x => !deletedRules.includes(x.ruleId))
     dispatch(setRuleResults(results))
+
+    console.log(ruleResults, rules)
 
     // new rules
     rules.forEach(rule => {
@@ -227,24 +226,30 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     }
   }, [ruleResults, rules, dispatch, existsRule, getRuleResult, treeId])
 
+  // Thunk + batch
   const update = useCallback(
     (updatedTree: ImmutableTree, updatedConfig: Config): void => {
       setConfig(updatedConfig)
       dispatch(setTree(updatedTree))
       dispatch(setRules([]))
-      flattenTree(tree)
+      flattenTree(updatedTree)
+
+      console.log(
+        (updatedTree?.get('children1') as any)?.toArray()[0].toJS(),
+        (tree?.get('children1') as any)?.toArray()[0].toJS()
+      )
       // keep track of initial rules to support added/removed rules calc
       if (initialConditions.length === 0) {
         dispatch(setInitialConditions([...conditions()]))
       }
-      refreshRuleResults()
     },
-    [initialConditions, tree, conditions, dispatch, flattenTree, refreshRuleResults]
+    [initialConditions, tree, conditions, dispatch, flattenTree]
   )
 
   const refresh = async (): Promise<void> => {
     query()
-    dispatch(refreshQueryResults(updateResults(ruleResults as SegmentationRuleResponse[])))
+    dispatch(refreshQueryResults())
+    refreshRuleResults()
   }
 
   useEffect(() => {
