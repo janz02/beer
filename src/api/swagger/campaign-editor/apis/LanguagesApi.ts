@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDApplicationModelsCampaignLanguageVm,
-    NKMRTDApplicationModelsCampaignLanguageVmFromJSON,
-    NKMRTDApplicationModelsCampaignLanguageVmToJSON,
+    NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm,
+    NKMRTDCampaignEditorApplicationModelsCampaignLanguageVmFromJSON,
+    NKMRTDCampaignEditorApplicationModelsCampaignLanguageVmToJSON,
 } from '../models';
 
 /**
@@ -31,7 +31,7 @@ export class LanguagesApi extends runtime.BaseAPI {
     /**
      * Returns the available application languages.
      */
-    async getLanguagesRaw(): Promise<runtime.ApiResponse<Array<NKMRTDApplicationModelsCampaignLanguageVm>>> {
+    async getLanguagesRaw(): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -47,13 +47,13 @@ export class LanguagesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDApplicationModelsCampaignLanguageVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationModelsCampaignLanguageVmFromJSON));
     }
 
     /**
      * Returns the available application languages.
      */
-    async getLanguages(): Promise<Array<NKMRTDApplicationModelsCampaignLanguageVm>> {
+    async getLanguages(): Promise<Array<NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm>> {
         const response = await this.getLanguagesRaw();
         return await response.value();
     }

@@ -11,6 +11,7 @@ export enum ColumnStorageName {
   BP_HISTORY = 'bp-history-columns',
   PERMISSION = 'permission-columns',
   SEGMENTATION = 'segmentation-columns',
+  PROFILES = 'profiles-columns',
   CAMPAIGN_COMPANY = 'campaign-company-columns',
   CAMPAIGN_PARTNER = 'campaign-partner-columns',
   COMPANIES = 'company-columns'

@@ -80,18 +80,18 @@
     }
   },
   "campaign-status": {
-    "set" : "Beállított",
-    "segmented" : "Szegmentált",
-    "content" : "Tartalom",
-    "callcenter" : "Call Center",
+    "set": "Beállított",
+    "segmented": "Szegmentált",
+    "content": "Tartalom",
+    "callcenter": "Call Center",
     "tested": "Tesztelt",
     "approved": "Jóváhagyott",
     "started": "Elindított",
     "startedmanually": "Manuálisan elindított",
-    "paused" : "Szüneteltetett",
-    "finished" : "Lezárult",
-    "closed" : "Leállított",
-    "cancelled" : "Visszavont"
+    "paused": "Szüneteltetett",
+    "finished": "Lezárult",
+    "closed": "Leállított",
+    "cancelled": "Visszavont"
   },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
@@ -730,10 +730,11 @@
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "permissions": "Jogosultságkezelés",
-    "profile": "Profil",
+    "my-profile": "Profil",
     "profiles": {
       "organizations": "Céges struktúrák",
-      "title": "Profilok"
+      "title": "Profilok",
+      "list": "Profilok Lista"
     },
     "sections": {
       "campaigns": "Kampányok",
@@ -753,6 +754,20 @@
     },
     "users": "Felhasználók",
     "workflow": "Munkamenet"
+  },
+  "my-profile": {
+    "editor-title": "Profiladatok",
+    "field": {
+      "code": "Partner regisztrációs kód",
+      "email": "E-mail cím",
+      "name": "Teljes név",
+      "new-password": "Új jelszó",
+      "new-password-again": "Új jelszó ismét",
+      "old-password": "Régi jelszó",
+      "phone": "Telefonszám"
+    },
+    "save": "Módosítás mentése",
+    "save-profile-success": "Profil mentése sikeres."
   },
   "newsletter": {
     "add": "Új sablon hozzáadása",
@@ -902,19 +917,38 @@
     "description": "Ez az oldal még nem készült el. Fejlesztőink minden erejükkel azon dolgoznak, hogy új funkciókat szállítsanak, kérjük, térj vissza később!",
     "title": "Fejlesztés alatt"
   },
-  "profile": {
-    "editor-title": "Profiladatok",
+  "profiles": {
     "field": {
-      "code": "Partner regisztrációs kód",
-      "email": "E-mail cím",
-      "name": "Teljes név",
-      "new-password": "Új jelszó",
-      "new-password-again": "Új jelszó ismét",
-      "old-password": "Régi jelszó",
-      "phone": "Telefonszám"
+      "status": "Státusz",
+      "name": "Név",
+      "username": "Felhasználó név",
+      "email": "E-mail",
+      "group": "Csoport",
+      "permissions": "Jogosultságok",
+      "date-of-registration": "Regisztráció dátuma",
+      "company": "Cég",
+      "job-role": "Munkakör"
     },
-    "save": "Módosítás mentése",
-    "save-profile-success": "Profil mentése sikeres."
+    "new": {
+      "new": "Új",
+      "bulk-upload": "Tömeges feltöltés",
+      "send-invitation": "Meghívó küldése"
+    },
+    "status": {
+      "approved": "Aktív",
+      "declined": "Inaktív",
+      "waiting-for-approval": "Jóváhagyásra vár"
+    },
+    "action-buttons": {
+      "approve": "Jóváhagyás",
+      "decline": "Elutasítás"
+    },
+    "tab": {
+      "all": "Összes",
+      "waiting-for-approval": "Jóváhagyásra vár",
+      "declined": "Elutasított"
+    },
+    "title": "Profilok"
   },
   "query-builder": {
     "add-group": {

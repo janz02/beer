@@ -18,15 +18,15 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDApplicationEnumsOrderByType,
-    NKMRTDApplicationEnumsOrderByTypeFromJSON,
-    NKMRTDApplicationEnumsOrderByTypeToJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVmFromJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVmToJSON,
-    NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand,
-    NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommandFromJSON,
-    NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON,
+    NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand,
+    NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandFromJSON,
+    NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmToJSON,
 } from '../models';
 
 export interface DownloadCsvRequest {
@@ -45,11 +45,11 @@ export interface GetEventsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDApplicationEnumsOrderByType;
+    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface UploadCsvForCampaignResultRequest {
-    nKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand?: NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand;
+    nKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand?: NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand;
 }
 
 /**
@@ -97,7 +97,7 @@ export class CampaignResultsApi extends runtime.BaseAPI {
     /**
      * Queries for the result information from the database with the given filters and parameters
      */
-    async getEventsRaw(requestParameters: GetEventsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm>> {
+    async getEventsRaw(requestParameters: GetEventsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.campaignId !== undefined) {
@@ -157,13 +157,13 @@ export class CampaignResultsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmFromJSON(jsonValue));
     }
 
     /**
      * Queries for the result information from the database with the given filters and parameters
      */
-    async getEvents(requestParameters: GetEventsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesCampaignResultEventVm> {
+    async getEvents(requestParameters: GetEventsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm> {
         const response = await this.getEventsRaw(requestParameters);
         return await response.value();
     }
@@ -187,7 +187,7 @@ export class CampaignResultsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON(requestParameters.nKMRTDCampaignEditorCampaignResultsCommandsUploadCsvUploadCsvCommand),
+            body: NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand),
         });
 
         return new runtime.VoidApiResponse(response);

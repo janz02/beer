@@ -11,7 +11,7 @@ import { LoginPage } from 'features/auth/LoginPage'
 import { RecoveryPage } from 'features/auth/RecoveryPage'
 import { SignupPage } from 'features/auth/SignupPage'
 import { ErrorPage } from '../components/error/ErrorPage'
-import { ProfileEditorPage } from 'features/profile/ProfileEditorPage'
+import { MyProfileEditorPage } from 'features/profile/MyProfileEditorPage'
 import { SiteEditorPage } from 'features/sites/siteEditor/SiteEditorPage'
 import { NewsletterEditorPage } from 'features/newsletter/newsletter-editor/NewsletterEditorPage'
 import { CouponCampaignViewPage } from 'features/couponCampaigns/couponCampaignEditor/CouponCampaignViewPage'
@@ -30,6 +30,7 @@ import { PermissionListPage } from 'features/permissions/permissionList/Permissi
 import { BpHistoryListPage } from 'features/bpHistory/bpHistoryList/BpHistoryListPage'
 import { SegmentationListPage } from 'features/segmentation/segmentationList/SegmentationList'
 import { SegmentationEditorPage } from 'features/segmentation/segmentationEditor/SegmentationEditorPage'
+import { ProfilesPage } from 'features/profiles/ProfilesPage'
 import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
 import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
 import { OrganizationPage } from 'features/organization/OrganizationPage'
@@ -133,9 +134,9 @@ const Routes = (): JSX.Element => (
 
     <PrivateRoute
       exact
-      path="/profile"
-      roles={pageViewRoles.profile}
-      component={ProfileEditorPage}
+      path="/my-profile"
+      roles={pageViewRoles.myProfile}
+      component={MyProfileEditorPage}
     />
 
     <PrivateRoute
@@ -181,6 +182,7 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.segmentationEditor}
       component={SegmentationEditorPage}
     />
+    <PrivateRoute exact path="/profiles" roles={pageViewRoles.profiles} component={ProfilesPage} />
     <PrivateRoute
       exact
       path="/segmentations-groups"

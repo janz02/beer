@@ -10,7 +10,7 @@ import { resetRouterHistory } from 'router/routerHistoryStore'
 import { resetPartnersList } from 'features/partners/partnerList/partnerListSlice'
 import { resetSelfPartner } from 'features/partners/selfPartner/selfPartnerSlice'
 import { resetPartnerEditor } from 'features/partners/partnerEditor/partnerEditorSlice'
-import { profileActions } from 'features/profile/profileSlice'
+import { myProfileActions } from 'features/profile/myProfileSlice'
 import { couponCampaignListActions } from 'features/couponCampaigns/couponCampaignList/couponCampaignListSlice'
 import { couponCampaignCategoryEditorActions } from 'features/settings/couponCampaignCategories/categoryEditor/couponCampaignCategoryEditorSlice'
 import { couponCampaignCategoryListActions } from 'features/settings/couponCampaignCategories/categoryList/couponCampaignCategoryListSlice'
@@ -25,6 +25,8 @@ import { testGroupCategoryEditorActions } from 'features/settings/testGroupCateg
 import { resetBpHistory } from 'features/bpHistory/bpHistorySlice'
 import { systemParamsActions } from 'features/settings/systemParams/systemParamsSlice'
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
+import { profilesActions } from 'features/profiles/profilesSlice'
+import { companiesActions } from 'features/organization/companies/companiesSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -34,7 +36,8 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
   const { logout } = params
   batch(() => {
     dispatch(authActions.resetAuth())
-    dispatch(profileActions.resetProfile())
+    dispatch(myProfileActions.resetProfile())
+    dispatch(profilesActions.reset())
     dispatch(notificationActions.resetNotification())
     dispatch(siteListActions.reset())
     dispatch(siteEditorActions.reset())
@@ -57,6 +60,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(resetBpHistory())
     dispatch(systemParamsActions.resetSystemParams())
     dispatch(campaignListActions.resetCampaignsList())
+    dispatch(companiesActions.reset())
     logout && dispatch(resetRouterHistory())
   })
 }
