@@ -7,7 +7,6 @@ import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { ColumnsType, ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
-import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 import { Company } from 'models/company'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
@@ -16,6 +15,7 @@ import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtil
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ActivenessSwitch } from 'components/ActivenessSwitch'
 import { ExportButton } from 'components/buttons/ExportButton'
+import { pageViewRoles } from 'services/roleHelpers'
 
 export interface CompaniesUtils {
   currentColumns: ColumnType<Company>[]
@@ -46,6 +46,8 @@ export const useCompaniesUtils = (): CompaniesUtils => {
     ],
     getDataAction: companiesActions.getCompanies
   })
+
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
 
   const columnsConfig: ColumnsType<Company> = useMemo(
     () => [
@@ -101,7 +103,7 @@ export const useCompaniesUtils = (): CompaniesUtils => {
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
       }),
-      hasPermission([Roles.Administrator])
+      isEditorUser
         ? tableUtils.actionColumnConfig({
             render() {
               return <CrudButtons onEdit={() => ({})} onDelete={() => ({})} />
@@ -109,7 +111,7 @@ export const useCompaniesUtils = (): CompaniesUtils => {
           })
         : {}
     ],
-    [dispatch, tableUtils, t, savingStatusIds]
+    [dispatch, tableUtils, t, savingStatusIds, isEditorUser]
   )
 
   const resetFilters = useCallback(() => {
