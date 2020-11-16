@@ -2,11 +2,11 @@ import React from 'react'
 import { Button } from 'antd'
 import { ResponsiveCard } from '../../../../components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
-import { NKMRTDApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
+import { NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
 import './QueryBuilderSidebarView.scss'
 
 interface SidebarViewProps {
-  fields?: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
+  fields?: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
   onFieldSelected: (field: string) => void
 }
 
@@ -16,7 +16,7 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
 
   const renderFieldsFor = (
     parentPrefix: string,
-    subFields: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
+    subFields: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
   ): JSX.Element => (
     <>
       {subFields.map((x, idx) => {
@@ -38,20 +38,22 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
 
   const renderMenuItems = (
     localizationPrefix: string,
-    fields: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
+    fields: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
   ): JSX.Element => (
     <>
-      {fields.map((x: NKMRTDApplicationModelsSegmentationQueryBuilderField, idx: number) => {
-        return (
-          <React.Fragment key={idx}>
-            <ul>
-              {// TODO provide translation
-              x.label?.replace('querybuilder.fields.label.', '')}
-              {renderFieldsFor(`${localizationPrefix}.${x.fieldName}`, x.subFields || [])}
-            </ul>
-          </React.Fragment>
-        )
-      })}
+      {fields.map(
+        (x: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField, idx: number) => {
+          return (
+            <React.Fragment key={idx}>
+              <ul>
+                {// TODO provide translation
+                x.label?.replace('querybuilder.fields.label.', '')}
+                {renderFieldsFor(`${localizationPrefix}.${x.fieldName}`, x.subFields || [])}
+              </ul>
+            </React.Fragment>
+          )
+        }
+      )}
     </>
   )
 
@@ -60,15 +62,20 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
       <ResponsiveCard title={t('query-builder.sidebar.header')}>
         <ul className="query-builder-sidebar">
           {!!fields &&
-            fields.map((x: NKMRTDApplicationModelsSegmentationQueryBuilderField, idx: number) => {
-              return (
-                <React.Fragment key={idx}>
-                  {x.label}
-                  {// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                  renderMenuItems(x.fieldName!, x.subFields!)}
-                </React.Fragment>
-              )
-            })}
+            fields.map(
+              (
+                x: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField,
+                idx: number
+              ) => {
+                return (
+                  <React.Fragment key={idx}>
+                    {x.label}
+                    {// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    renderMenuItems(x.fieldName!, x.subFields!)}
+                  </React.Fragment>
+                )
+              }
+            )}
         </ul>
       </ResponsiveCard>
     </div>

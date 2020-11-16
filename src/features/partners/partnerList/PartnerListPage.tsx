@@ -82,7 +82,7 @@ export const PartnerListPage: React.FC = () => {
         ],
         render: value => {
           const activeness = value.toLowerCase()
-          return <ActivenessDisplay status={activeness} text={t('common.' + activeness)} />
+          return <ActivenessDisplay status={activeness} text={t(`common.${activeness}`)} />
         }
       }),
       columnConfig({

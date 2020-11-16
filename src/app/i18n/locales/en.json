@@ -80,18 +80,18 @@
     }
   },
   "campaign-status": {
-    "set" : "Set",
-    "segmented" : "Segmented",
-    "content" : "Content",
-    "callcenter" : "Call Center",
+    "set": "Set",
+    "segmented": "Segmented",
+    "content": "Content",
+    "callcenter": "Call Center",
     "tested": "Tested",
     "approved": "Approved",
     "started": "Started",
     "startedmanually": "Manually started",
-    "paused" : "Paused",
-    "finished" : "Finished",
-    "closed" : "Closed",
-    "cancelled" : "Cancelled"
+    "paused": "Paused",
+    "finished": "Finished",
+    "closed": "Closed",
+    "cancelled": "Cancelled"
   },
   "cashier-editor": {
     "editor-create": "Create cashier",
@@ -727,12 +727,27 @@
     "partner-data": "Partner data",
     "partners": "Partners",
     "permissions": "Permissions",
-    "profile": "Profile",
+    "my-profile": "Profile",
     "segmentations": "Segmentation",
     "settings": "Settings",
     "sites": "Sites",
     "users": "Users",
-    "organization": "Organization"
+    "organization": "Organization",
+    "profiles": "Profiles"
+  },
+  "my-profile": {
+    "editor-title": "Profile",
+    "field": {
+      "code": "Partner registration code",
+      "email": "Email",
+      "name": "Full name",
+      "new-password": "New password",
+      "new-password-again": "New password again",
+      "old-password": "Old password",
+      "phone": "Phone"
+    },
+    "save": "Save changes",
+    "save-profile-success": "Successfully saved the profile."
   },
   "newsletter": {
     "add": "Add new template",
@@ -878,19 +893,38 @@
       "title": "Permissions"
     }
   },
-  "profile": {
-    "editor-title": "Profile",
+  "profiles": {
     "field": {
-      "code": "Partner registration code",
-      "email": "Email",
-      "name": "Full name",
-      "new-password": "New password",
-      "new-password-again": "New password again",
-      "old-password": "Old password",
-      "phone": "Phone"
+      "status": "Status",
+      "name": "Name",
+      "username": "Username",
+      "email": "E-mail",
+      "group": "Group",
+      "permissions": "Permissions",
+      "date-of-registration": "Date of registration",
+      "company": "Company",
+      "job-role": "Job description"
     },
-    "save": "Save changes",
-    "save-profile-success": "Successfully saved the profile."
+    "new": {
+      "new": "New",
+      "bulk-upload": "Bulk upload",
+      "send-invitation": "Send invitation"
+    },
+    "status": {
+      "approved": "Active",
+      "declined": "Inactive",
+      "waiting-for-approval": "Waiting for approval"
+    },
+    "action-buttons": {
+      "approve": "Approve",
+      "decline": "Decline"
+    },
+    "tab": {
+      "all": "All",
+      "waiting-for-approval": "Waiting for approval",
+      "declined": "Declined"
+    },
+    "title": "Profiles"
   },
   "query-builder": {
     "add-group": {

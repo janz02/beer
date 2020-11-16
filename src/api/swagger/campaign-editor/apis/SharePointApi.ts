@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorPrototypesTreeNodeVm,
-    NKMRTDCampaignEditorPrototypesTreeNodeVmFromJSON,
-    NKMRTDCampaignEditorPrototypesTreeNodeVmToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmToJSON,
 } from '../models';
 
 export interface GetFileStructureRequest {
@@ -39,7 +39,7 @@ export class SharePointApi extends runtime.BaseAPI {
     /**
      * Returns a folder structure of a dedicated - configured SharePoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
-    async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorPrototypesTreeNodeVm>>> {
+    async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.withoutFile !== undefined) {
@@ -59,13 +59,13 @@ export class SharePointApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorPrototypesTreeNodeVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmFromJSON));
     }
 
     /**
      * Returns a folder structure of a dedicated - configured SharePoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
-    async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<NKMRTDCampaignEditorPrototypesTreeNodeVm>> {
+    async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm>> {
         const response = await this.getFileStructureRaw(requestParameters);
         return await response.value();
     }
