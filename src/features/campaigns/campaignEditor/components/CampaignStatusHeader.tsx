@@ -1,6 +1,5 @@
-import { Row, Col } from 'antd'
+import { Row } from 'antd'
 import './CampaignEditor.scss'
-import { CampaignListItem } from 'models/campaign/campaignListItem'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MinusCircleTwoTone } from '@ant-design/icons'
