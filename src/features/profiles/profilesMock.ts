@@ -37,7 +37,7 @@ const getRandomProfile = (id: number): ProfileListItem => {
     status: getRandomStatus(),
     name,
     username,
-    email: username + '@test.com',
+    email: `${username}@test.com`,
     group: getRandomString(10),
     permissions: Math.floor(Math.random() * 10),
     createdDate: moment(),

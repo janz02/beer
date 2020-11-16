@@ -10,5 +10,5 @@ interface ActivenessDisplayProps {
 }
 
 export const ActivenessDisplay: React.FC<ActivenessDisplayProps> = ({ status, text }) => {
-  return <StatusDisplay text={text} className={'status-' + status} />
+  return <StatusDisplay text={text} className={`status-${status}`} />
 }

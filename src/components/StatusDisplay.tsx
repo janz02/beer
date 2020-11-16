@@ -8,7 +8,7 @@ interface StatusDisplayProps {
 
 export const StatusDisplay: React.FC<StatusDisplayProps> = ({ className, text }) => {
   return (
-    <div className={className + ' status-display'}>
+    <div className={`${className} status-display`}>
       <span className="status-badge" />
       <span>{text}</span>
     </div>

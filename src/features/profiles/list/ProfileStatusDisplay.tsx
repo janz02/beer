@@ -11,6 +11,6 @@ interface ProfileStatusDisplayProps {
 export const ProfileStatusDisplay: React.FC<ProfileStatusDisplayProps> = ({ status }) => {
   const { t } = useTranslation()
   return (
-    <StatusDisplay text={t('profiles.status.' + status)} className={'profile-status-' + status} />
+    <StatusDisplay text={t(`profiles.status.${status}`)} className={`profile-status-${status}`} />
   )
 }
