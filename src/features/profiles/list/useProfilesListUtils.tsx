@@ -60,6 +60,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
           { value: 'declined', text: t('profiles.status.declined') },
           { value: 'waiting-for-approval', text: t('profiles.status.waiting-for-approval') }
         ],
+        cannotBeHidden: true,
         render(status: ProfileStatus) {
           return <ProfileStatusDisplay status={status} />
         }
