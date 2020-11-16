@@ -18,28 +18,28 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDApplicationEnumsOrderByType,
-    NKMRTDApplicationEnumsOrderByTypeFromJSON,
-    NKMRTDApplicationEnumsOrderByTypeToJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVm,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVmFromJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVmToJSON,
-    NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm,
-    NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVmFromJSON,
-    NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVmToJSON,
-    NKMRTDCampaignEditorPrototypesTestGroupCategoryVm,
-    NKMRTDCampaignEditorPrototypesTestGroupCategoryVmFromJSON,
-    NKMRTDCampaignEditorPrototypesTestGroupCategoryVmToJSON,
-    NKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand,
-    NKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandFromJSON,
-    NKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandToJSON,
-    NKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand,
-    NKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandFromJSON,
-    NKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmToJSON,
+    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand,
+    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandFromJSON,
+    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandToJSON,
+    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand,
+    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandFromJSON,
+    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandToJSON,
 } from '../models';
 
 export interface CreateTestGroupCategoryRequest {
-    nKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand?: NKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand;
+    nKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand?: NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand;
 }
 
 export interface DeleteTestGroupCategoryRequest {
@@ -62,7 +62,7 @@ export interface GetTestGroupCategoriesRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDApplicationEnumsOrderByType;
+    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface GetTestGroupCategoryRequest {
@@ -71,7 +71,7 @@ export interface GetTestGroupCategoryRequest {
 
 export interface UpdateTestGroupCategoryRequest {
     id: number;
-    nKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand?: NKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand;
+    nKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand?: NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand;
 }
 
 /**
@@ -98,7 +98,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandToJSON(requestParameters.nKMRTDCampaignEditorTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand),
+            body: NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -150,7 +150,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Get test group based on the campaignId.
      */
-    async getCampaignTestGroupCategoriesRaw(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm>>> {
+    async getCampaignTestGroupCategoriesRaw(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.campaignId !== undefined) {
@@ -170,13 +170,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmFromJSON));
     }
 
     /**
      * Get test group based on the campaignId.
      */
-    async getCampaignTestGroupCategories(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<Array<NKMRTDCampaignEditorPrototypesCampaignTestGroupCategoryVm>> {
+    async getCampaignTestGroupCategories(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm>> {
         const response = await this.getCampaignTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -184,7 +184,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the test groups identified by the ids.
      */
-    async getManyTestGroupCategoriesRaw(requestParameters: GetManyTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorPrototypesTestGroupCategoryVm>>> {
+    async getManyTestGroupCategoriesRaw(requestParameters: GetManyTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -204,13 +204,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorPrototypesTestGroupCategoryVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON));
     }
 
     /**
      * Returns the test groups identified by the ids.
      */
-    async getManyTestGroupCategories(requestParameters: GetManyTestGroupCategoriesRequest): Promise<Array<NKMRTDCampaignEditorPrototypesTestGroupCategoryVm>> {
+    async getManyTestGroupCategories(requestParameters: GetManyTestGroupCategoriesRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
         const response = await this.getManyTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -218,7 +218,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the test groups for the actual query.
      */
-    async getTestGroupCategoriesRaw(requestParameters: GetTestGroupCategoriesRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVm>> {
+    async getTestGroupCategoriesRaw(requestParameters: GetTestGroupCategoriesRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -266,13 +266,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the test groups for the actual query.
      */
-    async getTestGroupCategories(requestParameters: GetTestGroupCategoriesRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorPrototypesTestGroupCategoryVm> {
+    async getTestGroupCategories(requestParameters: GetTestGroupCategoriesRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm> {
         const response = await this.getTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -280,7 +280,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Gets the requested test group, identified by id.
      */
-    async getTestGroupCategoryRaw(requestParameters: GetTestGroupCategoryRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesTestGroupCategoryVm>> {
+    async getTestGroupCategoryRaw(requestParameters: GetTestGroupCategoryRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTestGroupCategory.');
         }
@@ -300,19 +300,19 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesTestGroupCategoryVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested test group, identified by id.
      */
-    async getTestGroupCategory(requestParameters: GetTestGroupCategoryRequest): Promise<NKMRTDCampaignEditorPrototypesTestGroupCategoryVm> {
+    async getTestGroupCategory(requestParameters: GetTestGroupCategoryRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm> {
         const response = await this.getTestGroupCategoryRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Prototypes.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateTestGroupCategoryRaw(requestParameters: UpdateTestGroupCategoryRequest): Promise<runtime.ApiResponse<void>> {
@@ -335,14 +335,14 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandToJSON(requestParameters.nKMRTDCampaignEditorTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand),
+            body: NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Prototypes.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateTestGroupCategory(requestParameters: UpdateTestGroupCategoryRequest): Promise<void> {

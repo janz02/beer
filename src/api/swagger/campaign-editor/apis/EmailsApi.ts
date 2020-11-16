@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorPrototypesActionEvent,
-    NKMRTDCampaignEditorPrototypesActionEventFromJSON,
-    NKMRTDCampaignEditorPrototypesActionEventToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent,
+    NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEventFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEventToJSON,
 } from '../models';
 
 /**
@@ -32,7 +32,7 @@ export class EmailsApi extends runtime.BaseAPI {
      * Sent message not means action has been made, only has chance for an action if the  appropriate conditions are met.
      * Sends the appropriate campaigns for the message processor engine.
      */
-    async sendEmailRaw(): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorPrototypesActionEvent>>> {
+    async sendEmailRaw(): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -48,14 +48,14 @@ export class EmailsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorPrototypesActionEventFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEventFromJSON));
     }
 
     /**
      * Sent message not means action has been made, only has chance for an action if the  appropriate conditions are met.
      * Sends the appropriate campaigns for the message processor engine.
      */
-    async sendEmail(): Promise<Array<NKMRTDCampaignEditorPrototypesActionEvent>> {
+    async sendEmail(): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent>> {
         const response = await this.sendEmailRaw();
         return await response.value();
     }

@@ -18,18 +18,18 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDApplicationEnumsOrderByType,
-    NKMRTDApplicationEnumsOrderByTypeFromJSON,
-    NKMRTDApplicationEnumsOrderByTypeToJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVm,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVmFromJSON,
-    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVmToJSON,
-    NKMRTDApplicationModelsViewModelsSiteLevelSettingVm,
-    NKMRTDApplicationModelsViewModelsSiteLevelSettingVmFromJSON,
-    NKMRTDApplicationModelsViewModelsSiteLevelSettingVmToJSON,
-    NKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand,
-    NKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandFromJSON,
-    NKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmToJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON,
+    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmToJSON,
+    NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand,
+    NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandFromJSON,
+    NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandToJSON,
 } from '../models';
 
 export interface GetSiteLevelSettingRequest {
@@ -44,12 +44,12 @@ export interface GetSiteLevelSettingsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDApplicationEnumsOrderByType;
+    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface UpdateSiteLevelSettingRequest {
     id: number;
-    nKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand?: NKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand;
+    nKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand?: NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand;
 }
 
 /**
@@ -60,7 +60,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
     /**
      * Get site level setting by id
      */
-    async getSiteLevelSettingRaw(requestParameters: GetSiteLevelSettingRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsSiteLevelSettingVm>> {
+    async getSiteLevelSettingRaw(requestParameters: GetSiteLevelSettingRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSiteLevelSetting.');
         }
@@ -80,13 +80,13 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsSiteLevelSettingVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON(jsonValue));
     }
 
     /**
      * Get site level setting by id
      */
-    async getSiteLevelSetting(requestParameters: GetSiteLevelSettingRequest): Promise<NKMRTDApplicationModelsViewModelsSiteLevelSettingVm> {
+    async getSiteLevelSetting(requestParameters: GetSiteLevelSettingRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm> {
         const response = await this.getSiteLevelSettingRaw(requestParameters);
         return await response.value();
     }
@@ -94,7 +94,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
     /**
      * Get all site level settings
      */
-    async getSiteLevelSettingsRaw(requestParameters: GetSiteLevelSettingsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVm>> {
+    async getSiteLevelSettingsRaw(requestParameters: GetSiteLevelSettingsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -142,13 +142,13 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON(jsonValue));
     }
 
     /**
      * Get all site level settings
      */
-    async getSiteLevelSettings(requestParameters: GetSiteLevelSettingsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsSiteLevelSettingVm> {
+    async getSiteLevelSettings(requestParameters: GetSiteLevelSettingsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm> {
         const response = await this.getSiteLevelSettingsRaw(requestParameters);
         return await response.value();
     }
@@ -176,7 +176,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandToJSON(requestParameters.nKMRTDCampaignEditorSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand),
+            body: NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand),
         });
 
         return new runtime.VoidApiResponse(response);
