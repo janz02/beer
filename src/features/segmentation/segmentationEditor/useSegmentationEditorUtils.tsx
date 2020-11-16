@@ -4,6 +4,7 @@ import { FormUtils, useFormUtils } from 'hooks/useFormUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
+import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -24,7 +25,7 @@ export interface SegmentationEditorUtils {
   modified: boolean
   saving: boolean
   checkFieldsChange: () => void
-  handleSave: (values: CampaignSegmentation) => void
+  handleSave: (values: CampaignSegmentation, results: SegmentationRuleResult) => void
   fields?: NKMRTDApplicationModelsSegmentationQueryBuilderField[]
   segmentationQuery?: SegmentationQuery
 }
@@ -54,8 +55,8 @@ export const useSegmentationEditorUtils = (
     }
   }, [dispatch, id])
 
-  const handleSave = (values: CampaignSegmentation): void => {
-    dispatch(saveSegmentation(values))
+  const handleSave = (values: CampaignSegmentation, results: SegmentationRuleResult): void => {
+    dispatch(saveSegmentation(values, results))
   }
 
   return {

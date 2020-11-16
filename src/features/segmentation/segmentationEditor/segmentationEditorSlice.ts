@@ -15,8 +15,7 @@ import { SegmentationQuery } from 'models/campaign/segmentationQuery'
 import { ImmutableTree, JsonGroup, Utils } from 'react-awesome-query-builder'
 import {
   QueryBuilderRuleModel,
-  SegmentationRuleResponse,
-  useQueryBuilderUtils
+  SegmentationRuleResponse
 } from './queryBuilder/useQueryBuilderUtils'
 import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
 
@@ -163,26 +162,27 @@ export const getSegmentation = (id?: number): AppThunk => async dispatch => {
   }
 }
 
-export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const saveSegmentation = (
+  data: CampaignSegmentation,
+  results: SegmentationRuleResult
+): AppThunk => async (dispatch, getState) => {
   try {
     const { segmentation, segmentationQuery } = getState().segmentationEditor
-    const { treeTotal } = useQueryBuilderUtils()
     dispatch(saveSegmentationRequest())
 
     if (segmentation?.id) {
+      const command = {
+        ...data,
+        ...segmentationQuery,
+        ...segmentation,
+        cumulativeIntersection: results.filteredSize,
+        segmentSize: results.segmentSize,
+        queryId: segmentationQuery?.id
+      } as NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
+
       await api.campaignEditor.segmentations.updateSegmentation({
-        id: data.id!.toString(),
-        nKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: {
-          ...data,
-          ...segmentationQuery,
-          ...segmentation,
-          cumulativeIntersection: treeTotal.filteredSize,
-          segmentSize: treeTotal.segmentSize,
-          queryId: segmentationQuery?.id
-        } as NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
+        id: segmentation.id.toString(),
+        nKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: command
       })
 
       dispatch(getSegmentation(segmentation.id))
@@ -191,6 +191,8 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
         nKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand: {
           ...segmentationQuery,
           ...segmentation,
+          cumulativeIntersection: results.filteredSize,
+          segmentSize: results.segmentSize,
           ...data
         } as NKMRTDCampaignEditorSegmentationsCommandsCreateSegmentationCreateSegmentationCommand
       })

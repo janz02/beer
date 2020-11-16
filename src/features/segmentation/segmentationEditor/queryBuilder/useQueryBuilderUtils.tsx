@@ -258,7 +258,14 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
 
     if (segmentationQuery?.tree && !treeInit) {
       setTreeInit(true)
-      const initialTree: ImmutableTree = loadTree(segmentationQuery?.tree as any)
+
+      const parsedTree = JSON.parse(segmentationQuery?.tree)
+
+      for (const child in parsedTree.children1) {
+        parsedTree.children1[child].id = child
+      }
+
+      const initialTree: ImmutableTree = loadTree(parsedTree)
       update(initialTree, config)
     }
   }, [fields, tree, treeInit, segmentationQuery, config, rules, update, dispatch, createRules, t])
