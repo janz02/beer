@@ -178,11 +178,11 @@ export const saveSegmentation = (
         cumulativeIntersection: results.filteredSize,
         segmentSize: results.segmentSize,
         queryId: segmentationQuery?.id
-      } as NKMRTDCampaignEditorSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
+      } as NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
 
       await api.campaignEditor.segmentations.updateSegmentation({
         id: segmentation.id.toString(),
-          nKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: command
+        nKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: command
       })
 
       dispatch(getSegmentation(segmentation.id))
