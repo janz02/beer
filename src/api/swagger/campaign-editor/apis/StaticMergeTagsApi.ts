@@ -18,25 +18,25 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVmToJSON,
-    NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand,
-    NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommandFromJSON,
-    NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommandToJSON,
-    NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand,
-    NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommandFromJSON,
-    NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommandToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationModelsCampaignCreateStaticMergeTagCommand,
+    NKMRTDApplicationModelsCampaignCreateStaticMergeTagCommandFromJSON,
+    NKMRTDApplicationModelsCampaignCreateStaticMergeTagCommandToJSON,
+    NKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommand,
+    NKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommandFromJSON,
+    NKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommandToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVmToJSON,
+    NKMRTDApplicationModelsViewModelsStaticMergeTagVm,
+    NKMRTDApplicationModelsViewModelsStaticMergeTagVmFromJSON,
+    NKMRTDApplicationModelsViewModelsStaticMergeTagVmToJSON,
 } from '../models';
 
 export interface CreateStaticMergeTagRequest {
-    nKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand?: NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand;
+    nKMRTDApplicationModelsCampaignCreateStaticMergeTagCommand?: NKMRTDApplicationModelsCampaignCreateStaticMergeTagCommand;
 }
 
 export interface DeleteStaticMergeTagRequest {
@@ -60,12 +60,12 @@ export interface GetStaticMergeTagsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface UpdateStaticMergeTagRequest {
     id: number;
-    nKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand?: NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand;
+    nKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommand?: NKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommand;
 }
 
 /**
@@ -92,7 +92,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand),
+            body: NKMRTDApplicationModelsCampaignCreateStaticMergeTagCommandToJSON(requestParameters.nKMRTDApplicationModelsCampaignCreateStaticMergeTagCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -142,7 +142,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
     /**
      * Returns the StaticMergeTags identified by the ids.
      */
-    async getManyStaticMergeTagsRaw(requestParameters: GetManyStaticMergeTagsRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm>>> {
+    async getManyStaticMergeTagsRaw(requestParameters: GetManyStaticMergeTagsRequest): Promise<runtime.ApiResponse<Array<NKMRTDApplicationModelsViewModelsStaticMergeTagVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -162,13 +162,13 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDApplicationModelsViewModelsStaticMergeTagVmFromJSON));
     }
 
     /**
      * Returns the StaticMergeTags identified by the ids.
      */
-    async getManyStaticMergeTags(requestParameters: GetManyStaticMergeTagsRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm>> {
+    async getManyStaticMergeTags(requestParameters: GetManyStaticMergeTagsRequest): Promise<Array<NKMRTDApplicationModelsViewModelsStaticMergeTagVm>> {
         const response = await this.getManyStaticMergeTagsRaw(requestParameters);
         return await response.value();
     }
@@ -176,7 +176,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
     /**
      * Gets the requested instance, identified by id.
      */
-    async getStaticMergeTagRaw(requestParameters: GetStaticMergeTagRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm>> {
+    async getStaticMergeTagRaw(requestParameters: GetStaticMergeTagRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsStaticMergeTagVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getStaticMergeTag.');
         }
@@ -196,13 +196,13 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsStaticMergeTagVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested instance, identified by id.
      */
-    async getStaticMergeTag(requestParameters: GetStaticMergeTagRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm> {
+    async getStaticMergeTag(requestParameters: GetStaticMergeTagRequest): Promise<NKMRTDApplicationModelsViewModelsStaticMergeTagVm> {
         const response = await this.getStaticMergeTagRaw(requestParameters);
         return await response.value();
     }
@@ -210,7 +210,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
     /**
      * Returns the StaticMergeTags for the actual query.
      */
-    async getStaticMergeTagsRaw(requestParameters: GetStaticMergeTagsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm>> {
+    async getStaticMergeTagsRaw(requestParameters: GetStaticMergeTagsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -262,13 +262,13 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the StaticMergeTags for the actual query.
      */
-    async getStaticMergeTags(requestParameters: GetStaticMergeTagsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm> {
+    async getStaticMergeTags(requestParameters: GetStaticMergeTagsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsStaticMergeTagVm> {
         const response = await this.getStaticMergeTagsRaw(requestParameters);
         return await response.value();
     }
@@ -296,7 +296,7 @@ export class StaticMergeTagsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand),
+            body: NKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommandToJSON(requestParameters.nKMRTDApplicationModelsCampaignUpdateStaticMergeTagCommand),
         });
 
         return new runtime.VoidApiResponse(response);

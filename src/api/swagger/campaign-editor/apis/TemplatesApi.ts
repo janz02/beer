@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmToJSON,
+    NKMRTDCampaignEditorPrototypesEmailTemplateVm,
+    NKMRTDCampaignEditorPrototypesEmailTemplateVmFromJSON,
+    NKMRTDCampaignEditorPrototypesEmailTemplateVmToJSON,
 } from '../models';
 
 export interface GetTemplateRequest {
@@ -39,7 +39,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Gets the requested template, identified by id.
      */
-    async getTemplateRaw(requestParameters: GetTemplateRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm>> {
+    async getTemplateRaw(requestParameters: GetTemplateRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesEmailTemplateVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTemplate.');
         }
@@ -59,13 +59,13 @@ export class TemplatesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesEmailTemplateVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested template, identified by id.
      */
-    async getTemplate(requestParameters: GetTemplateRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm> {
+    async getTemplate(requestParameters: GetTemplateRequest): Promise<NKMRTDCampaignEditorPrototypesEmailTemplateVm> {
         const response = await this.getTemplateRaw(requestParameters);
         return await response.value();
     }
@@ -73,7 +73,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Gets the requested template, identified by guid.
      */
-    async getTemplateByGuidRaw(requestParameters: GetTemplateByGuidRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm>> {
+    async getTemplateByGuidRaw(requestParameters: GetTemplateByGuidRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesEmailTemplateVm>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getTemplateByGuid.');
         }
@@ -93,13 +93,13 @@ export class TemplatesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesEmailTemplateVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested template, identified by guid.
      */
-    async getTemplateByGuid(requestParameters: GetTemplateByGuidRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm> {
+    async getTemplateByGuid(requestParameters: GetTemplateByGuidRequest): Promise<NKMRTDCampaignEditorPrototypesEmailTemplateVm> {
         const response = await this.getTemplateByGuidRaw(requestParameters);
         return await response.value();
     }

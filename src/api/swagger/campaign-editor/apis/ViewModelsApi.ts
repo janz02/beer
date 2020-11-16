@@ -15,12 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmToJSON,
+    NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm,
+    NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVmFromJSON,
+    NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVmToJSON,
+    NKMRTDCampaignEditorPrototypesCreateCampaignVm,
+    NKMRTDCampaignEditorPrototypesCreateCampaignVmFromJSON,
+    NKMRTDCampaignEditorPrototypesCreateCampaignVmToJSON,
 } from '../models';
 
 /**
@@ -32,7 +32,7 @@ export class ViewModelsApi extends runtime.BaseAPI {
      * Used in the secound screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignTreatmentRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm>> {
+    async createCampaignTreatmentRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -48,14 +48,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVmFromJSON(jsonValue));
     }
 
     /**
      * Used in the secound screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignTreatment(): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm> {
+    async createCampaignTreatment(): Promise<NKMRTDCampaignEditorPrototypesCreateCampaignTreatmentVm> {
         const response = await this.createCampaignTreatmentRaw();
         return await response.value();
     }
@@ -64,7 +64,7 @@ export class ViewModelsApi extends runtime.BaseAPI {
      * Used in the first screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignViewModelRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm>> {
+    async createCampaignViewModelRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesCreateCampaignVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -80,14 +80,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesCreateCampaignVmFromJSON(jsonValue));
     }
 
     /**
      * Used in the first screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignViewModel(): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm> {
+    async createCampaignViewModel(): Promise<NKMRTDCampaignEditorPrototypesCreateCampaignVm> {
         const response = await this.createCampaignViewModelRaw();
         return await response.value();
     }

@@ -18,25 +18,25 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmToJSON,
-    NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand,
-    NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandFromJSON,
-    NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandToJSON,
-    NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand,
-    NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandFromJSON,
-    NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVmToJSON,
+    NKMRTDApplicationModelsViewModelsProductVm,
+    NKMRTDApplicationModelsViewModelsProductVmFromJSON,
+    NKMRTDApplicationModelsViewModelsProductVmToJSON,
+    NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand,
+    NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommandFromJSON,
+    NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommandToJSON,
+    NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand,
+    NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommandFromJSON,
+    NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommandToJSON,
 } from '../models';
 
 export interface CreateProductRequest {
-    nKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand?: NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand;
+    nKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand?: NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand;
 }
 
 export interface DeleteProductRequest {
@@ -59,12 +59,12 @@ export interface GetProductsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface UpdateProductRequest {
     id: number;
-    nKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand?: NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand;
+    nKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand?: NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand;
 }
 
 /**
@@ -91,7 +91,7 @@ export class ProductsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand),
+            body: NKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommandToJSON(requestParameters.nKMRTDCampaignEditorProductsCommandsCreateProductCreateProductCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -143,7 +143,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Returns the products identified by the ids.
      */
-    async getManyProductsRaw(requestParameters: GetManyProductsRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm>>> {
+    async getManyProductsRaw(requestParameters: GetManyProductsRequest): Promise<runtime.ApiResponse<Array<NKMRTDApplicationModelsViewModelsProductVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -163,13 +163,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDApplicationModelsViewModelsProductVmFromJSON));
     }
 
     /**
      * Returns the products identified by the ids.
      */
-    async getManyProducts(requestParameters: GetManyProductsRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
+    async getManyProducts(requestParameters: GetManyProductsRequest): Promise<Array<NKMRTDApplicationModelsViewModelsProductVm>> {
         const response = await this.getManyProductsRaw(requestParameters);
         return await response.value();
     }
@@ -177,7 +177,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Gets the requested product, identified by id.
      */
-    async getProductRaw(requestParameters: GetProductRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
+    async getProductRaw(requestParameters: GetProductRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsProductVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProduct.');
         }
@@ -197,13 +197,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsProductVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested product, identified by id.
      */
-    async getProduct(requestParameters: GetProductRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm> {
+    async getProduct(requestParameters: GetProductRequest): Promise<NKMRTDApplicationModelsViewModelsProductVm> {
         const response = await this.getProductRaw(requestParameters);
         return await response.value();
     }
@@ -211,7 +211,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Returns the products for the actual query.
      */
-    async getProductsRaw(requestParameters: GetProductsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
+    async getProductsRaw(requestParameters: GetProductsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -259,19 +259,19 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the products for the actual query.
      */
-    async getProducts(requestParameters: GetProductsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm> {
+    async getProducts(requestParameters: GetProductsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsProductVm> {
         const response = await this.getProductsRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Prototypes.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateProductRaw(requestParameters: UpdateProductRequest): Promise<runtime.ApiResponse<void>> {
@@ -294,14 +294,14 @@ export class ProductsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand),
+            body: NKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommandToJSON(requestParameters.nKMRTDCampaignEditorProductsCommandsUpdateProductUpdateProductCommand),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Prototypes.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateProduct(requestParameters: UpdateProductRequest): Promise<void> {

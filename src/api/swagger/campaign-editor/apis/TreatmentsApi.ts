@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm,
-    NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVmFromJSON,
-    NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVmToJSON,
+    NKMRTDApplicationModelsCampaignTreatmentVm,
+    NKMRTDApplicationModelsCampaignTreatmentVmFromJSON,
+    NKMRTDApplicationModelsCampaignTreatmentVmToJSON,
 } from '../models';
 
 export interface GetTreatmentRequest {
@@ -35,7 +35,7 @@ export class TreatmentsApi extends runtime.BaseAPI {
     /**
      * Gets the requested treatment, identified by the container campaign id.
      */
-    async getTreatmentRaw(requestParameters: GetTreatmentRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm>> {
+    async getTreatmentRaw(requestParameters: GetTreatmentRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsCampaignTreatmentVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTreatment.');
         }
@@ -55,13 +55,13 @@ export class TreatmentsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsCampaignTreatmentVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested treatment, identified by the container campaign id.
      */
-    async getTreatment(requestParameters: GetTreatmentRequest): Promise<NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm> {
+    async getTreatment(requestParameters: GetTreatmentRequest): Promise<NKMRTDApplicationModelsCampaignTreatmentVm> {
         const response = await this.getTreatmentRaw(requestParameters);
         return await response.value();
     }

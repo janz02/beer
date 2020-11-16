@@ -18,15 +18,15 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmToJSON,
+    NKMRTDApplicationEnumsOrderByType,
+    NKMRTDApplicationEnumsOrderByTypeFromJSON,
+    NKMRTDApplicationEnumsOrderByTypeToJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVm,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVmFromJSON,
+    NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVmToJSON,
+    NKMRTDApplicationModelsViewModelsChannelVm,
+    NKMRTDApplicationModelsViewModelsChannelVmFromJSON,
+    NKMRTDApplicationModelsViewModelsChannelVmToJSON,
 } from '../models';
 
 export interface GetChannelRequest {
@@ -40,7 +40,7 @@ export interface GetChannelsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: NKMRTDApplicationEnumsOrderByType;
 }
 
 export interface GetManyChannelsRequest {
@@ -55,7 +55,7 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Gets the requested channel, identified by id.
      */
-    async getChannelRaw(requestParameters: GetChannelRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
+    async getChannelRaw(requestParameters: GetChannelRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsChannelVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getChannel.');
         }
@@ -75,13 +75,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsChannelVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested channel, identified by id.
      */
-    async getChannel(requestParameters: GetChannelRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm> {
+    async getChannel(requestParameters: GetChannelRequest): Promise<NKMRTDApplicationModelsViewModelsChannelVm> {
         const response = await this.getChannelRaw(requestParameters);
         return await response.value();
     }
@@ -89,7 +89,7 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Returns the channels for the actual query.
      */
-    async getChannelsRaw(requestParameters: GetChannelsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
+    async getChannelsRaw(requestParameters: GetChannelsRequest): Promise<runtime.ApiResponse<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.skip !== undefined) {
@@ -133,13 +133,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the channels for the actual query.
      */
-    async getChannels(requestParameters: GetChannelsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm> {
+    async getChannels(requestParameters: GetChannelsRequest): Promise<NKMRTDApplicationModelsResponsesPaginatedSearchResponseOfNKMRTDApplicationModelsViewModelsChannelVm> {
         const response = await this.getChannelsRaw(requestParameters);
         return await response.value();
     }
@@ -147,7 +147,7 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Returns the channels identified by the ids.
      */
-    async getManyChannelsRaw(requestParameters: GetManyChannelsRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm>>> {
+    async getManyChannelsRaw(requestParameters: GetManyChannelsRequest): Promise<runtime.ApiResponse<Array<NKMRTDApplicationModelsViewModelsChannelVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -167,13 +167,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDApplicationModelsViewModelsChannelVmFromJSON));
     }
 
     /**
      * Returns the channels identified by the ids.
      */
-    async getManyChannels(requestParameters: GetManyChannelsRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
+    async getManyChannels(requestParameters: GetManyChannelsRequest): Promise<Array<NKMRTDApplicationModelsViewModelsChannelVm>> {
         const response = await this.getManyChannelsRaw(requestParameters);
         return await response.value();
     }

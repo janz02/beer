@@ -18,27 +18,27 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandToJSON,
+    NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVm,
+    NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVmFromJSON,
+    NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVmToJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand,
+    NKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandFromJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandToJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommand,
+    NKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommandFromJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommandToJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand,
+    NKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandFromJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandToJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand,
+    NKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandFromJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandToJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand,
+    NKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandFromJSON,
+    NKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandToJSON,
+    NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand,
+    NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommandFromJSON,
+    NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommandToJSON,
 } from '../models';
 
 export interface ActivateStandaloneUserRequest {
@@ -46,19 +46,19 @@ export interface ActivateStandaloneUserRequest {
 }
 
 export interface ChangeForgotPasswordRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand;
+    nKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand?: NKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand;
 }
 
 export interface CreateStandaloneUserRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand;
+    nKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand?: NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand;
 }
 
 export interface CreateStandaloneUserByAdminRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand;
+    nKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand?: NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand;
 }
 
 export interface ForgotPasswordRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand;
+    nKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommand?: NKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommand;
 }
 
 export interface GetStandaloneUserRequest {
@@ -70,15 +70,15 @@ export interface GetUserExtensionInfoByPasswordChangeGuidRequest {
 }
 
 export interface ReSendPasswordChangeLinkRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand;
+    nKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand?: NKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand;
 }
 
 export interface SaveExtensionInfoRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand;
+    nKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand?: NKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand;
 }
 
 export interface ValidatePasswordChangeRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand;
+    nKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand?: NKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand;
 }
 
 /**
@@ -139,7 +139,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand),
+            body: NKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandToJSON(requestParameters.nKMRTDCampaignEditorStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -172,7 +172,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand),
+            body: NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommandToJSON(requestParameters.nKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -204,7 +204,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand),
+            body: NKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommandToJSON(requestParameters.nKMRTDCampaignEditorStandaloneUsersCreateUserCreateUserCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -238,7 +238,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand),
+            body: NKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommandToJSON(requestParameters.nKMRTDCampaignEditorStandaloneUsersCommandsForgotPasswordForgotPasswordCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -288,7 +288,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     /**
      * Gets the user extension info by the users password change guid.
      */
-    async getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm>> {
+    async getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVm>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getUserExtensionInfoByPasswordChangeGuid.');
         }
@@ -308,13 +308,13 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the user extension info by the users password change guid.
      */
-    async getUserExtensionInfoByPasswordChangeGuid(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm> {
+    async getUserExtensionInfoByPasswordChangeGuid(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<NKMRTDCampaignEditorPrototypesModelsViewModelsUserExtensionInfoVm> {
         const response = await this.getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters);
         return await response.value();
     }
@@ -339,7 +339,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand),
+            body: NKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandToJSON(requestParameters.nKMRTDCampaignEditorStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -373,7 +373,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand),
+            body: NKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandToJSON(requestParameters.nKMRTDCampaignEditorStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -406,7 +406,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand),
+            body: NKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandToJSON(requestParameters.nKMRTDCampaignEditorStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand),
         });
 
         return new runtime.VoidApiResponse(response);

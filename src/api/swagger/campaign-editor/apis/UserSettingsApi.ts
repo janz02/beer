@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmToJSON,
+    NKMRTDApplicationModelsViewModelsUserSettingsVm,
+    NKMRTDApplicationModelsViewModelsUserSettingsVmFromJSON,
+    NKMRTDApplicationModelsViewModelsUserSettingsVmToJSON,
 } from '../models';
 
 export interface SetLanguageRequest {
@@ -35,7 +35,7 @@ export class UserSettingsApi extends runtime.BaseAPI {
     /**
      * Get current user\'s setting
      */
-    async getUserSettingRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm>> {
+    async getUserSettingRaw(): Promise<runtime.ApiResponse<NKMRTDApplicationModelsViewModelsUserSettingsVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -51,13 +51,13 @@ export class UserSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDApplicationModelsViewModelsUserSettingsVmFromJSON(jsonValue));
     }
 
     /**
      * Get current user\'s setting
      */
-    async getUserSetting(): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm> {
+    async getUserSetting(): Promise<NKMRTDApplicationModelsViewModelsUserSettingsVm> {
         const response = await this.getUserSettingRaw();
         return await response.value();
     }
