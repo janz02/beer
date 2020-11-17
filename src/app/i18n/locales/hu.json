@@ -823,7 +823,15 @@
       "title": "Cégek"
     },
     "groups": {
-      "title": "Csoportok"
+      "title": "Csoportok",
+      "field": {
+        "name": "Név",
+        "company-count": "Cégek",
+        "job-role-count": "Munkakörök",
+        "permission-count": "Jogosultságok",
+        "created-date": "Létrehozás dátuma",
+        "creator": "Létrehoz "
+      }
     },
     "job-roles": {
       "title": "Munkakörök"

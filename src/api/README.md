@@ -72,7 +72,7 @@ npm run start:local
 
 Because `env-cmd` sets these environement variables, they can be accessed in the code with
 `process.env`. When the code runs in some user's browser, environment variables make no sense, but
-Webpack can replace expressions like `process.env.REACT_APP_API_URL` to their defined values in
+Webpack can replace expressions like `process.env.REACT_APP_MODE` to their defined values in
 compile time. This is implemented by the
 [`EnvironmentPlugin`](https://webpack.js.org/plugins/environment-plugin/).
 
