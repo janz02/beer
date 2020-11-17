@@ -18,8 +18,12 @@ $smallFontColor: rgb(169, 169, 169);
     padding: 0 5px 0 5px;
   }
 
-  div.ant-row:nth-child(2) {
+  .campaign-user-log-small-font {
     font-size: $smallFontSize;
+  }
+
+  .campaign-user-log-inner-footer {
+    justify-self: end;
   }
 }
 

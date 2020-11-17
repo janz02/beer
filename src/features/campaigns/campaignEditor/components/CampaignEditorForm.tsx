@@ -25,7 +25,10 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
             <EditCampaignStatus />
           </Col>
           <Col span={12}>
-            <CampaignUserLogs campaign={campaign} visible />
+            <CampaignUserLogs
+              campaignLogs={campaign != null ? [campaign, campaign, campaign, campaign] : []}
+              visible
+            />
           </Col>
           <Divider />
           <Col span={18}>
