@@ -23,7 +23,7 @@ export const QueryBuilderView: React.FC = () => {
 
   const renderQueryResult = ({ id }: any): JSX.Element => {
     const rule = queryBuilder.getRuleResult(id)
-    return rule ? <RuleResultContainer ruleResult={rule} emptyValue="?" /> : <></>
+    return rule ? <RuleResultContainer ruleResult={rule} /> : <></>
   }
 
   const setRefresh = (updatedTree: ImmutableTree): void => {
