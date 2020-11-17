@@ -14,7 +14,7 @@ export interface CampaignEditorProps {
 export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
   const campaign = useSelector((state: RootState) =>
-    state.campaignList.companyCampaigns.find(x => x.id === campaignId)
+    state.campaignList.companyCampaigns.find(campaign => campaign.id === campaignId)
   )
 
   return (
@@ -25,7 +25,7 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
             <EditCampaignStatus />
           </Col>
           <Col span={12}>
-            <CampaignUserLogs campaign={campaign} />
+            <CampaignUserLogs campaign={campaign} visible />
           </Col>
           <Divider />
           <Col span={18}>

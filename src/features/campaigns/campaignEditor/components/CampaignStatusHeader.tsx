@@ -8,15 +8,13 @@ export const EditCampaignStatus: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <>
-      <div className="edit-campaign-status">
-        <Row>{t('campaign-create.status-creation')}</Row>
-        <Row>
-          <span>
-            <MinusCircleTwoTone /> LastFilledTabContent
-          </span>
-        </Row>
-      </div>
-    </>
+    <div className="edit-campaign-status">
+      <Row>{t('campaign-create.status-creation')}</Row>
+      <Row>
+        <span>
+          <MinusCircleTwoTone /> LastFilledTabContent
+        </span>
+      </Row>
+    </div>
   )
 }

@@ -10,7 +10,7 @@ export const CampaignEditorPage: React.FC = () => {
   const id = params.campaignId ? +params.campaignId : undefined
 
   return (
-    <div>
+    <>
       <Row className="campaign-editor-form">
         <Col span={18} className="editor-col">
           <ResponsiveHeader
@@ -26,6 +26,6 @@ export const CampaignEditorPage: React.FC = () => {
         </Col>
       </Row>
       <CampaignEditorForm campaignId={id} />
-    </div>
+    </>
   )
 }
