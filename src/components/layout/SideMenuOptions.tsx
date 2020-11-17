@@ -36,8 +36,6 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = ({
 }) => {
   const path = useSelector((state: RootState) => state.router.location.pathname)
   const pathRoot = useMemo(() => `/${path.split('/')[1]}`, [path])
-  // const history = useHistory()
-  // const [openKeys, setOpenKeys] = useState<string[]>([])
 
   const mapItem = (option: any, index: number): JSX.Element => (
     <Menu.Item
@@ -64,14 +62,6 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = ({
       <SubMenu
         key={key}
         className={`${pathRoot === option.link ? 'ant-menu-item-selected' : ''}`}
-        // onTitleClick={({ key }) => {
-        //   if (!collapsed) {
-        //     if (option.link && pathRoot !== option.link) {
-        //       history.push(option.link)
-        //     }
-        //     setOpenKeys([key])
-        //   }
-        // }}
         title={
           <>
             {option.icon}
@@ -106,11 +96,6 @@ export const SideMenuOptions: FC<SideMenuOptionsProps> = ({
       <Menu
         theme="dark"
         selectedKeys={[pathRoot]}
-        // openKeys={openKeys}
-        // onOpenChange={(keys: any) => {
-        //   if (collapsed || keys.length > 0) return
-        //   setOpenKeys([])
-        // }}
         className={`side-menu-options ${footer ? 'smo-footer' : ''}`}
         mode={collapsed ? 'vertical' : 'inline'}
       >
