@@ -1,16 +1,21 @@
 /**
  * Returns the base url of the app
  */
-export function getUrl(appendUrl?: string, isRtd?: boolean): string {
+export function getUrl(appendUrl?: string): string {
   const { origin } = window.location
-  let baseUrl, apiUrl
+  let apiUrl = ''
 
-  if (process.env.NODE_ENV === 'development') {
-    baseUrl = isRtd ? process.env.REACT_APP_RTD_API_URL : process.env.REACT_APP_API_URL
-    apiUrl = `${baseUrl}${appendUrl}`
-  } else {
-    baseUrl = isRtd ? origin.replace('optima', 'rtd') : origin
-    apiUrl = `${baseUrl}${appendUrl}`
+  switch (process.env.REACT_APP_MODE) {
+    case 'development':
+      apiUrl = `${process.env.REACT_APP_API_URL}${appendUrl}`
+      break
+    case 'production':
+      apiUrl = `${origin}${appendUrl}`
+      break
+    default:
+    case 'local':
+      apiUrl = `${appendUrl}`
+      break
   }
 
   return apiUrl
