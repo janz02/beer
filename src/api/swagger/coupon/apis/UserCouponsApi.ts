@@ -20,6 +20,10 @@ import {
     MyCouponVmToJSON,
 } from '../models';
 
+export interface GetMyUserCouponsRequest {
+    xRTDTransactionGuid?: string;
+}
+
 /**
  * no description
  */
@@ -29,10 +33,14 @@ export class UserCouponsApi extends runtime.BaseAPI {
      * Returns a coupon list that contains up to 8 coupons for the user for today
      * Returns the coupons generated for the user
      */
-    async getMyUserCouponsRaw(): Promise<runtime.ApiResponse<Array<MyCouponVm>>> {
+    async getMyUserCouponsRaw(requestParameters: GetMyUserCouponsRequest): Promise<runtime.ApiResponse<Array<MyCouponVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -52,8 +60,8 @@ export class UserCouponsApi extends runtime.BaseAPI {
      * Returns a coupon list that contains up to 8 coupons for the user for today
      * Returns the coupons generated for the user
      */
-    async getMyUserCoupons(): Promise<Array<MyCouponVm>> {
-        const response = await this.getMyUserCouponsRaw();
+    async getMyUserCoupons(requestParameters: GetMyUserCouponsRequest): Promise<Array<MyCouponVm>> {
+        const response = await this.getMyUserCouponsRaw(requestParameters);
         return await response.value();
     }
 

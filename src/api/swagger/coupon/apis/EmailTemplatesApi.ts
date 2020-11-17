@@ -39,11 +39,13 @@ import {
 } from '../models';
 
 export interface CreateEmailTemplateRequest {
+    xRTDTransactionGuid?: string;
     emailTemplateDto?: EmailTemplateDto;
 }
 
 export interface DeleteEmailTemplateRequest {
     id: number;
+    xRTDTransactionGuid?: string;
 }
 
 export interface ExportEmailTemplatesRequest {
@@ -53,10 +55,12 @@ export interface ExportEmailTemplatesRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
+    xRTDTransactionGuid?: string;
 }
 
 export interface GetEmailTemplateRequest {
     id: number;
+    xRTDTransactionGuid?: string;
 }
 
 export interface GetEmailTemplatesRequest {
@@ -66,20 +70,24 @@ export interface GetEmailTemplatesRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
+    xRTDTransactionGuid?: string;
 }
 
 export interface RestoreEmailTemplateVersionRequest {
     id: number;
     version: number;
+    xRTDTransactionGuid?: string;
 }
 
 export interface SaveEmailTemplateVersionRequest {
     id: number;
+    xRTDTransactionGuid?: string;
     emailTemplateVersionDto?: EmailTemplateVersionDto;
 }
 
 export interface UpdateEmailTemplateRequest {
     id: number;
+    xRTDTransactionGuid?: string;
     emailTemplateDto?: EmailTemplateDto;
 }
 
@@ -98,6 +106,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -134,6 +146,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -189,6 +205,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -223,6 +243,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -278,6 +302,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -317,6 +345,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -354,6 +386,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -390,6 +426,10 @@ export class EmailTemplatesApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

@@ -15,6 +15,10 @@
 
 import * as runtime from '../runtime';
 
+export interface GetErrorKeysRequest {
+    xRTDTransactionGuid?: string;
+}
+
 /**
  * no description
  */
@@ -23,10 +27,14 @@ export class InformationApi extends runtime.BaseAPI {
     /**
      * Returns a list of all the exception errorkeys
      */
-    async getErrorKeysRaw(): Promise<runtime.ApiResponse<Array<string>>> {
+    async getErrorKeysRaw(requestParameters: GetErrorKeysRequest): Promise<runtime.ApiResponse<Array<string>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -45,8 +53,8 @@ export class InformationApi extends runtime.BaseAPI {
     /**
      * Returns a list of all the exception errorkeys
      */
-    async getErrorKeys(): Promise<Array<string>> {
-        const response = await this.getErrorKeysRaw();
+    async getErrorKeys(requestParameters: GetErrorKeysRequest): Promise<Array<string>> {
+        const response = await this.getErrorKeysRaw(requestParameters);
         return await response.value();
     }
 

@@ -31,6 +31,7 @@ export interface ExportMyScoringRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
+    xRTDTransactionGuid?: string;
 }
 
 export interface GetMyScoringRequest {
@@ -38,6 +39,7 @@ export interface GetMyScoringRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
+    xRTDTransactionGuid?: string;
 }
 
 /**
@@ -69,6 +71,10 @@ export class ScoringApi extends runtime.BaseAPI {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -117,6 +123,10 @@ export class ScoringApi extends runtime.BaseAPI {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

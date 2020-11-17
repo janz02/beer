@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,24 +18,24 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommandFromJSON,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommandToJSON,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandFromJSON,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandToJSON,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommandFromJSON,
-    NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommandToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVmToJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand,
+    OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommandFromJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommandToJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand,
+    OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandFromJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandToJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand,
+    OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommandFromJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmToJSON,
 } from '../models';
 
 export interface ApproveCampaignRequest {
@@ -43,7 +43,7 @@ export interface ApproveCampaignRequest {
 }
 
 export interface CreateCampaignRequest {
-    nKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand?: NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand;
+    optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand?: OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand;
 }
 
 export interface DeleteCampaignRequest {
@@ -84,12 +84,12 @@ export interface GetCampaignsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface SendCampaignToTestGroupRequest {
     campaignId: string;
-    nKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand?: NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand;
+    optimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand?: OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand;
 }
 
 export interface StartCampaignImmediatelyRequest {
@@ -101,7 +101,7 @@ export interface StopCampaignImmediatelyRequest {
 }
 
 export interface UpdateCampaignRequest {
-    nKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand?: NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand;
+    optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand?: OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand;
 }
 
 /**
@@ -111,7 +111,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups  to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified  campaign.
      */
     async approveCampaignRaw(requestParameters: ApproveCampaignRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -137,7 +137,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups  to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified  campaign.
      */
     async approveCampaign(requestParameters: ApproveCampaignRequest): Promise<void> {
         await this.approveCampaignRaw(requestParameters);
@@ -162,7 +162,7 @@ export class CampaignsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand),
+            body: OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommandToJSON(requestParameters.optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -211,7 +211,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified  campaign.
      */
     async disapproveCampaignRaw(requestParameters: DisapproveCampaignRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -237,7 +237,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified  campaign.
      */
     async disapproveCampaign(requestParameters: DisapproveCampaignRequest): Promise<void> {
         await this.disapproveCampaignRaw(requestParameters);
@@ -246,7 +246,7 @@ export class CampaignsApi extends runtime.BaseAPI {
     /**
      * Query for a dedicates campaign identified by id.
      */
-    async getCampaignRaw(requestParameters: GetCampaignRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm>> {
+    async getCampaignRaw(requestParameters: GetCampaignRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCampaign.');
         }
@@ -266,22 +266,22 @@ export class CampaignsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmFromJSON(jsonValue));
     }
 
     /**
      * Query for a dedicates campaign identified by id.
      */
-    async getCampaign(requestParameters: GetCampaignRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm> {
+    async getCampaign(requestParameters: GetCampaignRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm> {
         const response = await this.getCampaignRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Their is an implicit parameter which query NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
+     * Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
      * Returns the campaigns for the actual query.
      */
-    async getCampaignsRaw(requestParameters: GetCampaignsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm>> {
+    async getCampaignsRaw(requestParameters: GetCampaignsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -401,21 +401,21 @@ export class CampaignsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmFromJSON(jsonValue));
     }
 
     /**
-     * Their is an implicit parameter which query NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
+     * Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
      * Returns the campaigns for the actual query.
      */
-    async getCampaigns(requestParameters: GetCampaignsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm> {
+    async getCampaigns(requestParameters: GetCampaignsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm> {
         const response = await this.getCampaignsRaw(requestParameters);
         return await response.value();
     }
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Created  to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command   identified campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command   identified campaign.
      */
     async sendCampaignToTestGroupRaw(requestParameters: SendCampaignToTestGroupRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.campaignId === null || requestParameters.campaignId === undefined) {
@@ -437,7 +437,7 @@ export class CampaignsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand),
+            body: OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandToJSON(requestParameters.optimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -445,7 +445,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Created  to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command   identified campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command   identified campaign.
      */
     async sendCampaignToTestGroup(requestParameters: SendCampaignToTestGroupRequest): Promise<void> {
         await this.sendCampaignToTestGroupRaw(requestParameters);
@@ -453,7 +453,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually for the indicated id identified  campaign.
      */
     async startCampaignImmediatelyRaw(requestParameters: StartCampaignImmediatelyRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -479,7 +479,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually for the indicated id identified  campaign.
      */
     async startCampaignImmediately(requestParameters: StartCampaignImmediatelyRequest): Promise<void> {
         await this.startCampaignImmediatelyRaw(requestParameters);
@@ -487,7 +487,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or   NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually   for the indicated id identified campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or   Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually   for the indicated id identified campaign.
      */
     async stopCampaignImmediatelyRaw(requestParameters: StopCampaignImmediatelyRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -513,7 +513,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or   NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually   for the indicated id identified campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or   Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually   for the indicated id identified campaign.
      */
     async stopCampaignImmediately(requestParameters: StopCampaignImmediatelyRequest): Promise<void> {
         await this.stopCampaignImmediatelyRaw(requestParameters);
@@ -538,7 +538,7 @@ export class CampaignsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand),
+            body: OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommandToJSON(requestParameters.optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand),
         });
 
         return new runtime.VoidApiResponse(response);

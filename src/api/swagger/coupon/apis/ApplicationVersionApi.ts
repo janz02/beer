@@ -20,6 +20,10 @@ import {
     ServiceInfoToJSON,
 } from '../models';
 
+export interface GetRequest {
+    xRTDTransactionGuid?: string;
+}
+
 /**
  * no description
  */
@@ -27,10 +31,14 @@ export class ApplicationVersionApi extends runtime.BaseAPI {
 
     /**
      */
-    async getRaw(): Promise<runtime.ApiResponse<ServiceInfo>> {
+    async getRaw(requestParameters: GetRequest): Promise<runtime.ApiResponse<ServiceInfo>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -48,8 +56,8 @@ export class ApplicationVersionApi extends runtime.BaseAPI {
 
     /**
      */
-    async get(): Promise<ServiceInfo> {
-        const response = await this.getRaw();
+    async get(requestParameters: GetRequest): Promise<ServiceInfo> {
+        const response = await this.getRaw(requestParameters);
         return await response.value();
     }
 

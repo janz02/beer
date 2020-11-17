@@ -31,6 +31,7 @@ import {
 
 export interface DeleteSegmentRequest {
     id?: number;
+    xRTDTransactionGuid?: string;
 }
 
 export interface GetSegmentsRequest {
@@ -39,9 +40,11 @@ export interface GetSegmentsRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
+    xRTDTransactionGuid?: string;
 }
 
 export interface UpsertSegmentsRequest {
+    xRTDTransactionGuid?: string;
     createSegmentationCommand?: CreateSegmentationCommand;
 }
 
@@ -60,6 +63,10 @@ export class SegmentsApi extends runtime.BaseAPI {
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -108,6 +115,10 @@ export class SegmentsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -137,6 +148,10 @@ export class SegmentsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

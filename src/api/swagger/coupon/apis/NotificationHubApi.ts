@@ -15,6 +15,14 @@
 
 import * as runtime from '../runtime';
 
+export interface NotificationHubEventsRequest {
+    xRTDTransactionGuid?: string;
+}
+
+export interface TestCampaignMovedToWaitingStateNotificationRequest {
+    xRTDTransactionGuid?: string;
+}
+
 /**
  * no description
  */
@@ -22,10 +30,14 @@ export class NotificationHubApi extends runtime.BaseAPI {
 
     /**
      */
-    async notificationHubEventsRaw(): Promise<runtime.ApiResponse<Array<string>>> {
+    async notificationHubEventsRaw(requestParameters: NotificationHubEventsRequest): Promise<runtime.ApiResponse<Array<string>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -43,17 +55,21 @@ export class NotificationHubApi extends runtime.BaseAPI {
 
     /**
      */
-    async notificationHubEvents(): Promise<Array<string>> {
-        const response = await this.notificationHubEventsRaw();
+    async notificationHubEvents(requestParameters: NotificationHubEventsRequest): Promise<Array<string>> {
+        const response = await this.notificationHubEventsRaw(requestParameters);
         return await response.value();
     }
 
     /**
      */
-    async testCampaignMovedToWaitingStateNotificationRaw(): Promise<runtime.ApiResponse<void>> {
+    async testCampaignMovedToWaitingStateNotificationRaw(requestParameters: TestCampaignMovedToWaitingStateNotificationRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -71,8 +87,8 @@ export class NotificationHubApi extends runtime.BaseAPI {
 
     /**
      */
-    async testCampaignMovedToWaitingStateNotification(): Promise<void> {
-        await this.testCampaignMovedToWaitingStateNotificationRaw();
+    async testCampaignMovedToWaitingStateNotification(requestParameters: TestCampaignMovedToWaitingStateNotificationRequest): Promise<void> {
+        await this.testCampaignMovedToWaitingStateNotificationRaw(requestParameters);
     }
 
 }

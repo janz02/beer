@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "NKM RTD CampaignEditor API",
+    "title": "Optima CampaignEditor API",
     "description": "<h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>",
     "version": "v1"
   },
@@ -20,17 +20,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVm"
                 }
               }
             }
@@ -81,7 +81,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm"
                   }
                 }
               },
@@ -89,7 +89,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm"
                   }
                 }
               },
@@ -97,7 +97,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm"
                   }
                 }
               }
@@ -138,17 +138,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
                 }
               }
             }
@@ -188,17 +188,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
                 }
               }
             }
@@ -238,17 +238,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
                 }
               }
             }
@@ -277,7 +277,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationAccountsCommandsLoginLoginCommand"
               }
             }
           }
@@ -500,7 +500,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -510,17 +510,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
                 }
               }
             }
@@ -623,14 +623,14 @@
         "tags": [
           "CampaignResults"
         ],
-        "summary": "Upload the results made for a M:NKM.RTD.CampaignEditor.Controllers.CampaignResultsController.DownloadCsv(System.Int32,System.Int32) request to\r\na given sharepoint folder. The basic sharepoint configured in the system startup.",
+        "summary": "Upload the results made for a M:Optima.CampaignEditor.Controllers.CampaignResultsController.DownloadCsv(System.Int32,System.Int32) request to\r\na given sharepoint folder. The basic sharepoint configured in the system startup.",
         "operationId": "uploadCsvForCampaignResult",
         "requestBody": {
           "description": "The model determine the path on sharepoint and the CSV to be uploaded",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand"
               }
             }
           }
@@ -676,7 +676,7 @@
           "Campaigns"
         ],
         "summary": "Returns the campaigns for the actual query.",
-        "description": "Their is an implicit parameter which query NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign\r\nonly for the user who created the draft state, in order to protect it from other users\r\nand let a sandbox campaign designment for the end user.",
+        "description": "Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign\r\nonly for the user who created the draft state, in order to protect it from other users\r\nand let a sandbox campaign designment for the end user.",
         "operationId": "getCampaigns",
         "parameters": [
           {
@@ -869,7 +869,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -879,17 +879,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
                 }
               }
             }
@@ -953,17 +953,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm"
                 }
               }
             }
@@ -1111,7 +1111,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand"
               }
             }
           }
@@ -1186,7 +1186,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand"
               }
             }
           }
@@ -1254,7 +1254,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups\r\nto NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified\r\ncampaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified\r\ncampaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "approveCampaign",
         "requestBody": {
@@ -1331,7 +1331,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved\r\nto NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified\r\ncampaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified\r\ncampaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "disapproveCampaign",
         "requestBody": {
@@ -1408,7 +1408,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved\r\nto NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually for the indicated id identified\r\ncampaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually for the indicated id identified\r\ncampaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "startCampaignImmediately",
         "requestBody": {
@@ -1485,7 +1485,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or \r\nNKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually \r\nfor the indicated id identified campaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or \r\nOptima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually \r\nfor the indicated id identified campaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "stopCampaignImmediately",
         "requestBody": {
@@ -1562,7 +1562,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.Created\r\nto NKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command \r\nidentified campaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command \r\nidentified campaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "sendCampaignToTestGroup",
         "parameters": [
@@ -1580,7 +1580,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand"
               }
             }
           }
@@ -1668,17 +1668,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               }
             }
@@ -1796,7 +1796,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -1806,17 +1806,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                 }
               }
             }
@@ -1881,7 +1881,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                   }
                 }
               },
@@ -1889,7 +1889,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                   }
                 }
               },
@@ -1897,7 +1897,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
                   }
                 }
               }
@@ -1970,7 +1970,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsActionEvent"
                   }
                 }
               },
@@ -1978,7 +1978,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsActionEvent"
                   }
                 }
               },
@@ -1986,7 +1986,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsActionEvent"
                   }
                 }
               }
@@ -2109,7 +2109,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsCampaignLanguageVm"
                   }
                 }
               },
@@ -2117,7 +2117,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsCampaignLanguageVm"
                   }
                 }
               },
@@ -2125,7 +2125,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsCampaignLanguageVm"
                   }
                 }
               }
@@ -2290,7 +2290,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -2300,17 +2300,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               }
             }
@@ -2371,17 +2371,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                 }
               }
             }
@@ -2466,7 +2466,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                   }
                 }
               },
@@ -2474,7 +2474,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                   }
                 }
               },
@@ -2482,7 +2482,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
                   }
                 }
               }
@@ -2551,7 +2551,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand"
               }
             }
           }
@@ -2636,7 +2636,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand"
               }
             }
           }
@@ -2815,17 +2815,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               }
             }
@@ -2950,7 +2950,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -2960,17 +2960,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                 }
               }
             }
@@ -3035,7 +3035,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                   }
                 }
               },
@@ -3043,7 +3043,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                   }
                 }
               },
@@ -3051,7 +3051,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
                   }
                 }
               }
@@ -3120,7 +3120,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand"
               }
             }
           }
@@ -3186,7 +3186,7 @@
           "Products"
         ],
         "summary": "Update the current instance with the fulfilled model",
-        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
+        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
         "operationId": "updateProduct",
         "parameters": [
           {
@@ -3205,7 +3205,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand"
               }
             }
           }
@@ -3389,7 +3389,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                   }
                 }
               },
@@ -3397,7 +3397,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                   }
                 }
               },
@@ -3405,7 +3405,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                   }
                 }
               }
@@ -3531,7 +3531,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -3541,17 +3541,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               }
             }
@@ -3612,17 +3612,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
                 }
               }
             }
@@ -3690,7 +3690,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand"
               }
             }
           }
@@ -3756,7 +3756,7 @@
           "SegmentationCategories"
         ],
         "summary": "Update the current instance with the fulfilled model",
-        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
+        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
         "operationId": "updateSegmentationCategory",
         "parameters": [
           {
@@ -3775,7 +3775,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand"
               }
             }
           }
@@ -3955,17 +3955,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
                 }
               }
             }
@@ -4036,7 +4036,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery"
               }
             }
           }
@@ -4049,7 +4049,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
                   }
                 }
               },
@@ -4057,7 +4057,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
                   }
                 }
               },
@@ -4065,7 +4065,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm"
                   }
                 }
               }
@@ -4119,17 +4119,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig"
                 }
               }
             }
@@ -4338,7 +4338,7 @@
             "name": "Type",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
             }
           },
           {
@@ -4395,7 +4395,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -4405,17 +4405,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
                 }
               }
             }
@@ -4476,17 +4476,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm"
                 }
               }
             }
@@ -4554,7 +4554,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand"
               }
             }
           }
@@ -4600,7 +4600,7 @@
           "Segmentations"
         ],
         "summary": "Update the current instance with the fulfilled model",
-        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
+        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
         "operationId": "updateSegmentation",
         "parameters": [
           {
@@ -4617,7 +4617,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand"
               }
             }
           }
@@ -4806,7 +4806,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand"
               }
             }
           }
@@ -4891,17 +4891,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
                 }
               }
             }
@@ -4982,7 +4982,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
                   }
                 }
               },
@@ -4990,7 +4990,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
                   }
                 }
               },
@@ -4998,7 +4998,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
                   }
                 }
               }
@@ -5043,7 +5043,7 @@
         "tags": [
           "SharePoint"
         ],
-        "summary": "Creates segmentation via NKM.RTD.CampaignEditor.Controllers.SegmentationsController used mechanism to\r\nprocess CSV and create segment. The file which selected on SharePoint got to be \r\na CSV.",
+        "summary": "Creates segmentation via Optima.CampaignEditor.Controllers.SegmentationsController used mechanism to\r\nprocess CSV and create segment. The file which selected on SharePoint got to be \r\na CSV.",
         "operationId": "uploadFromSharePoint",
         "requestBody": {
           "description": "The relative path on the SharePoint to be target of the selected file.",
@@ -5182,7 +5182,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -5192,17 +5192,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               }
             }
@@ -5263,17 +5263,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
                 }
               }
             }
@@ -5351,7 +5351,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand"
               }
             }
           }
@@ -5423,7 +5423,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand"
               }
             }
           }
@@ -5475,7 +5475,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand"
               }
             }
           }
@@ -5704,7 +5704,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand"
               }
             }
           }
@@ -5757,7 +5757,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand"
               }
             }
           }
@@ -5810,7 +5810,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand"
               }
             }
           }
@@ -5863,7 +5863,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand"
               }
             }
           }
@@ -5919,7 +5919,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand"
               }
             }
           }
@@ -5984,17 +5984,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm"
                 }
               }
             }
@@ -6042,7 +6042,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand"
               }
             }
           }
@@ -6127,17 +6127,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               }
             }
@@ -6269,7 +6269,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -6279,17 +6279,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                 }
               }
             }
@@ -6354,7 +6354,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                   }
                 }
               },
@@ -6362,7 +6362,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                   }
                 }
               },
@@ -6370,7 +6370,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
                   }
                 }
               }
@@ -6451,7 +6451,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand"
               }
             }
           }
@@ -6630,17 +6630,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               }
             }
@@ -6724,17 +6724,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
                 }
               }
             }
@@ -6818,17 +6818,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               }
             }
@@ -6953,7 +6953,7 @@
             "name": "OrderByType",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
             }
           }
         ],
@@ -6963,17 +6963,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                 }
               }
             }
@@ -7038,7 +7038,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                   }
                 }
               },
@@ -7046,7 +7046,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                   }
                 }
               },
@@ -7054,7 +7054,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
                   }
                 }
               }
@@ -7123,7 +7123,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand"
               }
             }
           }
@@ -7189,7 +7189,7 @@
           "TestGroupCategories"
         ],
         "summary": "Update the current instance with the fulfilled model",
-        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
+        "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.",
         "operationId": "updateTestGroupCategory",
         "parameters": [
           {
@@ -7208,7 +7208,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand"
               }
             }
           }
@@ -7389,7 +7389,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
                   }
                 }
               },
@@ -7397,7 +7397,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
                   }
                 }
               },
@@ -7405,7 +7405,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
+                    "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
                   }
                 }
               }
@@ -7487,17 +7487,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsCampaignTreatmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsCampaignTreatmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsCampaignTreatmentVm"
                 }
               }
             }
@@ -7620,17 +7620,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm"
                 }
               }
             }
@@ -7680,17 +7680,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm"
                 }
               }
             }
@@ -7720,17 +7720,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm"
                 }
               }
             }
@@ -7749,7 +7749,7 @@
   },
   "components": {
     "schemas": {
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVm": {
         "type": "object",
         "properties": {
           "name": {
@@ -7817,7 +7817,7 @@
           "additionalProperties": false
         }
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -7835,7 +7835,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -7852,13 +7852,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
             },
             "nullable": true
           },
@@ -7885,7 +7885,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm": {
         "type": "object",
         "properties": {
           "isSelected": {
@@ -7906,13 +7906,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
             },
             "nullable": true
           },
@@ -7939,7 +7939,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -7962,13 +7962,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
             },
             "nullable": true
           },
@@ -7995,7 +7995,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand": {
+      "OptimaCampaignEditorApplicationAccountsCommandsLoginLoginCommand": {
         "type": "object",
         "properties": {
           "username": {
@@ -8009,14 +8009,14 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType": {
+      "OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType": {
         "enum": [
           "Ascending",
           "Descending"
         ],
         "type": "string"
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8067,13 +8067,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm"
             },
             "nullable": true
           },
@@ -8100,7 +8100,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand": {
+      "OptimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand": {
         "type": "object",
         "properties": {
           "campaignId": {
@@ -8118,7 +8118,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8209,13 +8209,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm"
             },
             "nullable": true
           },
@@ -8303,7 +8303,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8333,7 +8333,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType": {
+      "OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType": {
         "enum": [
           "Query",
           "Csv",
@@ -8341,14 +8341,14 @@
         ],
         "type": "string"
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsCondition": {
+      "OptimaCampaignEditorApplicationCommonMessagesEnumsCondition": {
         "enum": [
           "And",
           "Or"
         ],
         "type": "string"
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsOperator": {
+      "OptimaCampaignEditorApplicationCommonMessagesEnumsOperator": {
         "enum": [
           "Equal",
           "Not_equal",
@@ -8373,7 +8373,7 @@
         ],
         "type": "string"
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsControlType": {
+      "OptimaCampaignEditorApplicationCommonMessagesEnumsControlType": {
         "enum": [
           "Number",
           "Text",
@@ -8386,7 +8386,7 @@
         ],
         "type": "string"
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryValues": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryValues": {
         "type": "object",
         "properties": {
           "value": {
@@ -8399,13 +8399,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery": {
         "type": "object",
         "properties": {
           "condition": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsCondition"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsCondition"
               }
             ],
             "nullable": true
@@ -8424,7 +8424,7 @@
           "operator": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOperator"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOperator"
               }
             ],
             "nullable": true
@@ -8432,7 +8432,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsControlType"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsControlType"
               }
             ],
             "nullable": true
@@ -8440,21 +8440,21 @@
           "rules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
             },
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryValues"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryValues"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesEnumsQueryConditionOperation": {
+      "OptimaCampaignEditorApplicationCommonMessagesEnumsQueryConditionOperation": {
         "enum": [
           "Preserved",
           "Added",
@@ -8463,7 +8463,7 @@
         ],
         "type": "string"
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm": {
         "type": "object",
         "properties": {
           "ruleId": {
@@ -8477,7 +8477,7 @@
           "operation": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsQueryConditionOperation"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsQueryConditionOperation"
               }
             ]
           },
@@ -8495,7 +8495,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8513,7 +8513,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -8521,14 +8521,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8546,7 +8546,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -8581,7 +8581,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryVm"
               }
             ],
             "nullable": true
@@ -8589,7 +8589,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8615,14 +8615,14 @@
           "templates": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm"
             },
             "nullable": true
           },
           "segment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm"
               }
             ],
             "nullable": true
@@ -8630,7 +8630,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreatmentVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsTreatmentVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8722,14 +8722,14 @@
           "discounts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryWithNameVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryWithNameVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -8743,13 +8743,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm": {
         "type": "object",
         "properties": {
           "testGroupCategory": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryWithNameVm"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryWithNameVm"
               }
             ],
             "nullable": true
@@ -8757,14 +8757,14 @@
           "users": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm": {
         "type": "object",
         "properties": {
           "canBeSendOutToTestGroup": {
@@ -8861,7 +8861,7 @@
           "treatment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreatmentVm"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTreatmentVm"
               }
             ],
             "nullable": true
@@ -8869,14 +8869,14 @@
           "testGroupCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand": {
+      "OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -8942,7 +8942,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsEmailTemplateDto": {
+      "OptimaCampaignEditorApplicationCommonMessagesRequestsEmailTemplateDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -8968,7 +8968,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsSegmentationQueryDto": {
+      "OptimaCampaignEditorApplicationCommonMessagesRequestsSegmentationQueryDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -8986,7 +8986,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -8994,14 +8994,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsDiscountSegmentDto": {
+      "OptimaCampaignEditorApplicationCommonMessagesRequestsDiscountSegmentDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -9015,7 +9015,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -9046,7 +9046,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsSegmentationQueryDto"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsSegmentationQueryDto"
               }
             ],
             "nullable": true
@@ -9054,7 +9054,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsDiscountDto": {
+      "OptimaCampaignEditorApplicationCommonMessagesRequestsDiscountDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -9080,14 +9080,14 @@
           "templates": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsEmailTemplateDto"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsEmailTemplateDto"
             },
             "nullable": true
           },
           "segment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsDiscountSegmentDto"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsDiscountSegmentDto"
               }
             ],
             "nullable": true
@@ -9095,7 +9095,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsTreatmentDto": {
+      "OptimaCampaignEditorApplicationCommonMessagesRequestsTreatmentDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -9189,14 +9189,14 @@
           "discounts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsDiscountDto"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsDiscountDto"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand": {
+      "OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9270,7 +9270,7 @@
           "treatment": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsTreatmentDto"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsTreatmentDto"
               }
             ],
             "nullable": true
@@ -9278,7 +9278,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand": {
+      "OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9288,7 +9288,7 @@
           "campaignTestGroupCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm"
             },
             "nullable": true
           },
@@ -9298,7 +9298,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9312,13 +9312,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm"
             },
             "nullable": true
           },
@@ -9345,7 +9345,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsExtendedProperty": {
+      "OptimaCampaignEditorApplicationCommonMessagesRequestsExtendedProperty": {
         "type": "object",
         "properties": {
           "key": {
@@ -9359,7 +9359,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent": {
+      "OptimaCampaignEditorApplicationCommonMessagesRequestsActionEvent": {
         "type": "object",
         "properties": {
           "eventId": {
@@ -9385,7 +9385,7 @@
           "extendedAttributes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsExtendedProperty"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsExtendedProperty"
             },
             "nullable": true,
             "readOnly": true
@@ -9393,7 +9393,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm": {
+      "OptimaCampaignEditorApplicationModelsCampaignLanguageVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9407,7 +9407,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9421,13 +9421,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm"
             },
             "nullable": true
           },
@@ -9454,7 +9454,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand": {
+      "OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -9464,28 +9464,28 @@
           "adGroups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
             },
             "nullable": true
           },
           "users": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
             },
             "nullable": true
           },
           "functionPermissions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand": {
+      "OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9499,21 +9499,21 @@
           "adGroups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm"
             },
             "nullable": true
           },
           "users": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm"
             },
             "nullable": true
           },
           "functionPermissions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm"
             },
             "nullable": true
           },
@@ -9524,7 +9524,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9542,13 +9542,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm"
             },
             "nullable": true
           },
@@ -9575,7 +9575,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand": {
+      "OptimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -9585,7 +9585,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand": {
+      "OptimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9603,7 +9603,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9621,13 +9621,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationCategoryVm"
             },
             "nullable": true
           },
@@ -9654,7 +9654,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand": {
+      "OptimaCampaignEditorApplicationSegmentationCategoriesCommandsCreateSegmentationCategoryCreateSegmentationCategoryCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -9664,7 +9664,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand": {
+      "OptimaCampaignEditorApplicationSegmentationCategoriesCommandsUpdateSegmentationCategoryUpdateSegmentationCategoryCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -9682,13 +9682,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery": {
+      "OptimaCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery": {
         "type": "object",
         "properties": {
           "condition": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsCondition"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsCondition"
               }
             ],
             "nullable": true
@@ -9707,7 +9707,7 @@
           "operator": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsOperator"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOperator"
               }
             ],
             "nullable": true
@@ -9715,7 +9715,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsControlType"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsControlType"
               }
             ],
             "nullable": true
@@ -9723,21 +9723,21 @@
           "rules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
             },
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryValues"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryValues"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationQueryResultVm": {
         "type": "object",
         "properties": {
           "ruleId": {
@@ -9755,7 +9755,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationModelsSegmentationOperator": {
+      "OptimaCampaignEditorApplicationModelsSegmentationOperator": {
         "enum": [
           "Equal",
           "Notequal",
@@ -9780,7 +9780,7 @@
         ],
         "type": "string"
       },
-      "NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField": {
+      "OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField": {
         "type": "object",
         "properties": {
           "fieldName": {
@@ -9802,7 +9802,7 @@
           "operators": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationOperator"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsSegmentationOperator"
             },
             "nullable": true
           },
@@ -9816,20 +9816,20 @@
           "subFields": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig": {
+      "OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderFieldConfig": {
         "type": "object",
         "properties": {
           "fields": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField"
             },
             "nullable": true,
             "readOnly": true
@@ -9837,7 +9837,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9874,13 +9874,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm"
             },
             "nullable": true
           },
@@ -9907,7 +9907,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner": {
         "type": "object",
         "properties": {
           "id": {
@@ -9933,7 +9933,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -9947,7 +9947,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -9982,14 +9982,14 @@
           "businessPartners": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand": {
+      "OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10003,7 +10003,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -10039,7 +10039,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -10047,14 +10047,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand": {
+      "OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10068,7 +10068,7 @@
           "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType"
               }
             ]
           },
@@ -10104,7 +10104,7 @@
           "query": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsQueryBuilderQuery"
               }
             ],
             "nullable": true
@@ -10112,14 +10112,14 @@
           "conditions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentConditionVm"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand": {
+      "OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -10129,14 +10129,14 @@
           "businessPartners": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm": {
         "type": "object",
         "properties": {
           "key": {
@@ -10150,7 +10150,7 @@
           "children": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm"
             },
             "nullable": true
           },
@@ -10164,7 +10164,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10182,13 +10182,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm"
             },
             "nullable": true
           },
@@ -10215,7 +10215,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand": {
+      "OptimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10237,7 +10237,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand": {
+      "OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -10258,7 +10258,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand": {
+      "OptimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand": {
         "type": "object",
         "properties": {
           "guid": {
@@ -10268,7 +10268,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesRequestsUserExtensionInfoBase": {
+      "OptimaCampaignEditorApplicationCommonMessagesRequestsUserExtensionInfoBase": {
         "type": "object",
         "properties": {
           "company": {
@@ -10290,7 +10290,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand": {
+      "OptimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand": {
         "type": "object",
         "properties": {
           "guid": {
@@ -10304,7 +10304,7 @@
           "extensionInfo": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesRequestsUserExtensionInfoBase"
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesRequestsUserExtensionInfoBase"
               }
             ],
             "nullable": true
@@ -10312,7 +10312,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand": {
+      "OptimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand": {
         "type": "object",
         "properties": {
           "email": {
@@ -10326,7 +10326,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand": {
+      "OptimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand": {
         "type": "object",
         "properties": {
           "email": {
@@ -10340,7 +10340,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand": {
+      "OptimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand": {
         "type": "object",
         "properties": {
           "userDiscriminatorId": {
@@ -10366,7 +10366,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm": {
         "type": "object",
         "properties": {
           "company": {
@@ -10392,7 +10392,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand": {
+      "OptimaCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -10406,7 +10406,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10428,13 +10428,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsStaticMergeTagVm"
             },
             "nullable": true
           },
@@ -10461,7 +10461,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand": {
+      "OptimaCampaignEditorApplicationModelsCampaignUpdateStaticMergeTagCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10479,7 +10479,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10497,13 +10497,13 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm"
             },
             "nullable": true
           },
@@ -10530,7 +10530,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand": {
+      "OptimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand": {
         "type": "object",
         "properties": {
           "name": {
@@ -10540,7 +10540,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand": {
+      "OptimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand": {
         "type": "object",
         "properties": {
           "id": {
@@ -10558,7 +10558,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationModelsCampaignTreatmentVm": {
+      "OptimaCampaignEditorApplicationModelsCampaignTreatmentVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10620,7 +10620,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm": {
         "type": "object",
         "properties": {
           "id": {
@@ -10638,7 +10638,7 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32": {
         "type": "object",
         "properties": {
           "label": {
@@ -10652,69 +10652,69 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm": {
         "type": "object",
         "properties": {
           "departments": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "products": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "responsibles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "requesters": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "serviceTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "businessTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "marketTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "productTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValueTreeOfSystemInt32": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValueTreeOfSystemInt32": {
         "type": "object",
         "properties": {
           "label": {
@@ -10736,83 +10736,83 @@
         },
         "additionalProperties": false
       },
-      "NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm": {
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm": {
         "type": "object",
         "properties": {
           "channels": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "actionPoints": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "emailTimeRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "emailResendRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "emailResendFrequencies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "segments": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValueTreeOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValueTreeOfSystemInt32"
             },
             "nullable": true
           },
           "segmentDiscountTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "phoneTimeRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "phoneRecallRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "phoneRecallFrequencies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           },
           "templateTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NKMRTDCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32"
             },
             "nullable": true
           }
@@ -10832,7 +10832,7 @@
   "tags": [
     {
       "name": "Accounts",
-      "description": "Defines the endpoint which is responsible for the basic authenticated user information\r\nand provide the capability to login. The M:NKM.RTD.CampaignEditor.Controllers.AccountsController.Login(NKM.RTD.CampaignEditor.Application.Accounts.Commands.Login.LoginCommand) API\r\nused for the basic authentication and the M:NKM.RTD.CampaignEditor.Controllers.AccountsController.RefreshToken\r\nis for refresh the actual authentication."
+      "description": "Defines the endpoint which is responsible for the basic authenticated user information\r\nand provide the capability to login. The M:Optima.CampaignEditor.Controllers.AccountsController.Login(Optima.CampaignEditor.Application.Accounts.Commands.Login.LoginCommand) API\r\nused for the basic authentication and the M:Optima.CampaignEditor.Controllers.AccountsController.RefreshToken\r\nis for refresh the actual authentication."
     },
     {
       "name": "CampaignResults",
@@ -10840,7 +10840,7 @@
     },
     {
       "name": "Campaigns",
-      "description": "Defines the campaign related operations for the enduser. This API endpoint is \r\nresponsible for all operation which can be made for a campaign creation or \r\nmodification. The basic usage is to create the campaign with \r\nNKM.RTD.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign then create the neccesity \r\nNKM.RTD.CampaignEditor.Controllers.TreatmentsController operations, assign segment, via appropriate\r\nNKM.RTD.CampaignEditor.Controllers.SegmentationsController, update status via the appropriate method e.g.:\r\nM:NKM.RTD.CampaignEditor.Controllers.CampaignsController.Approve(System.Int32), M:NKM.RTD.CampaignEditor.Controllers.CampaignsController.StartNow(System.Int32)."
+      "description": "Defines the campaign related operations for the enduser. This API endpoint is \r\nresponsible for all operation which can be made for a campaign creation or \r\nmodification. The basic usage is to create the campaign with \r\nOptima.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign then create the neccesity \r\nOptima.CampaignEditor.Controllers.TreatmentsController operations, assign segment, via appropriate\r\nOptima.CampaignEditor.Controllers.SegmentationsController, update status via the appropriate method e.g.:\r\nM:Optima.CampaignEditor.Controllers.CampaignsController.Approve(System.Int32), M:Optima.CampaignEditor.Controllers.CampaignsController.StartNow(System.Int32)."
     },
     {
       "name": "Channels",
@@ -10880,11 +10880,11 @@
     },
     {
       "name": "Segmentations",
-      "description": "Segmentation CRUD API with extension of file processing endpoints. This extension \r\noperation was requested for emporary solution since final implementation will be \r\nshipped.\r\n\r\nFinal concept: Query editor handling via NKM.RTD.CampaignEditor.Controllers.SegmentationQueriesController\r\nwith actual group handling. This controller objective scoped to handle query operation\r\nhandler. Deep-, shallow- Copy, campaign connection handling.\r\n\r\nSegmentation purpose: handle a group of people like a reference. All segmentation \r\ncarries a list of people with some matching elements each other. A single instance\r\ncan be part of multiple segmentations based on their properties."
+      "description": "Segmentation CRUD API with extension of file processing endpoints. This extension \r\noperation was requested for emporary solution since final implementation will be \r\nshipped.\r\n\r\nFinal concept: Query editor handling via Optima.CampaignEditor.Controllers.SegmentationQueriesController\r\nwith actual group handling. This controller objective scoped to handle query operation\r\nhandler. Deep-, shallow- Copy, campaign connection handling.\r\n\r\nSegmentation purpose: handle a group of people like a reference. All segmentation \r\ncarries a list of people with some matching elements each other. A single instance\r\ncan be part of multiple segmentations based on their properties."
     },
     {
       "name": "SharePoint",
-      "description": "Contains helper for SharePoint CSV upload. This service will provide thw basic \r\nstructure of a SharePoint folder and uploads a selected file. The operation is\r\nused by NKM.RTD.CampaignEditor.Controllers.SegmentationsController CSV extension."
+      "description": "Contains helper for SharePoint CSV upload. This service will provide thw basic \r\nstructure of a SharePoint folder and uploads a selected file. The operation is\r\nused by Optima.CampaignEditor.Controllers.SegmentationsController CSV extension."
     },
     {
       "name": "SiteLevelSettings",

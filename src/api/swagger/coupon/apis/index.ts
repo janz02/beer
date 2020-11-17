@@ -17,5 +17,6 @@ export * from './SitesApi';
 export * from './SystemParametersApi';
 export * from './TagCategoriesApi';
 export * from './TagsApi';
+export * from './TransactionApi';
 export * from './UserCouponsApi';
 export * from './WalletApi';

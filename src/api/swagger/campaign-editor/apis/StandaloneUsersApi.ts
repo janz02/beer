@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,27 +18,27 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandToJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandFromJSON,
-    NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmToJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandFromJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandToJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandFromJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandFromJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandToJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandFromJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandToJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandFromJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandToJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandFromJSON,
+    OptimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandToJSON,
 } from '../models';
 
 export interface ActivateStandaloneUserRequest {
@@ -46,19 +46,19 @@ export interface ActivateStandaloneUserRequest {
 }
 
 export interface ChangeForgotPasswordRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand;
+    optimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand?: OptimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand;
 }
 
 export interface CreateStandaloneUserRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand;
+    optimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand?: OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand;
 }
 
 export interface CreateStandaloneUserByAdminRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand;
+    optimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand?: OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand;
 }
 
 export interface ForgotPasswordRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand;
+    optimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand?: OptimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand;
 }
 
 export interface GetStandaloneUserRequest {
@@ -70,15 +70,15 @@ export interface GetUserExtensionInfoByPasswordChangeGuidRequest {
 }
 
 export interface ReSendPasswordChangeLinkRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand;
+    optimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand?: OptimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand;
 }
 
 export interface SaveExtensionInfoRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand;
+    optimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand?: OptimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand;
 }
 
 export interface ValidatePasswordChangeRequest {
-    nKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand?: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand;
+    optimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand?: OptimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand;
 }
 
 /**
@@ -139,7 +139,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand),
+            body: OptimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommandToJSON(requestParameters.optimaCampaignEditorApplicationStandaloneUsersCommandsChangeForgotPasswordChangeForgotPasswordCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -172,7 +172,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand),
+            body: OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON(requestParameters.optimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -204,7 +204,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand),
+            body: OptimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommandToJSON(requestParameters.optimaCampaignEditorApplicationStandaloneUsersCommandsCreateUserCreateUserCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -238,7 +238,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand),
+            body: OptimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommandToJSON(requestParameters.optimaCampaignEditorApplicationStandaloneUsersCommandsForgotPasswordForgotPasswordCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -288,7 +288,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     /**
      * Gets the user extension info by the users password change guid.
      */
-    async getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm>> {
+    async getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getUserExtensionInfoByPasswordChangeGuid.');
         }
@@ -308,13 +308,13 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the user extension info by the users password change guid.
      */
-    async getUserExtensionInfoByPasswordChangeGuid(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm> {
+    async getUserExtensionInfoByPasswordChangeGuid(requestParameters: GetUserExtensionInfoByPasswordChangeGuidRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExtensionInfoVm> {
         const response = await this.getUserExtensionInfoByPasswordChangeGuidRaw(requestParameters);
         return await response.value();
     }
@@ -339,7 +339,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand),
+            body: OptimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommandToJSON(requestParameters.optimaCampaignEditorApplicationStandaloneUsersCommandsResendPasswordChangeLinkResendPasswordChangeLinkCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -373,7 +373,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand),
+            body: OptimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommandToJSON(requestParameters.optimaCampaignEditorApplicationStandaloneUsersCommandsSaveExtensionInformationSaveExtensionInformationCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -406,7 +406,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand),
+            body: OptimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommandToJSON(requestParameters.optimaCampaignEditorApplicationStandaloneUsersCommandsValidatePasswordChangeValidatePasswordChangeCommand),
         });
 
         return new runtime.VoidApiResponse(response);

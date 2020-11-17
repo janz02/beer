@@ -198,25 +198,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful query: List of Category entities",
+            "description": "Successful query: List of Company entities",
             "content": {
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":69,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
+                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":43,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":69,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
+                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":43,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CompanyVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":69,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
+                "example": {"result":[{"id":42,"name":"YourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0},{"id":43,"name":"NotYourCompany","isActive":false,"createdDate":"0001-01-01T00:00:00","profileCount":0,"groupCount":0,"jobRoleCount":0,"campaignCount":0}],"page":1,"from":1,"to":2,"size":42}
               }
             }
           },
@@ -648,6 +648,713 @@
         }
       }
     },
+    "/api/Profiles": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Creates a Profile entity",
+        "description": "Returns the id of the Profile upon success",
+        "operationId": "createProfile",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "requestBody": {
+          "description": "Details of the Profile",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation: Id of the new entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                },
+                "example": {"id":42}
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                },
+                "example": {"id":42}
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                },
+                "example": {"id":42}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Gets a Profile entity list sorted and filtered",
+        "description": "Returns the Profile list with the specified filters applied",
+        "operationId": "getProfiles",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ProfileStatus"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "createdDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "groupCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "permissionCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "company",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "jobDescription",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: List of Profile entities",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
+                },
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}],"page":1,"from":1,"to":2,"size":2}
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
+                },
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}],"page":1,"from":1,"to":2,"size":2}
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
+                },
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}],"page":1,"from":1,"to":2,"size":2}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/Profiles/{id}": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Gets a Profile entity by Id",
+        "description": "Returns the Profile with the specified Id upon success",
+        "operationId": "getProfile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the Profile",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of the Profile",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Profile entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVm"
+                },
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVm"
+                },
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVm"
+                },
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}
+              }
+            }
+          },
+          "404": {
+            "description": "Entity not found: error.not-found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Updates a Profile entity",
+        "description": "Updates a Profile entity with Id of \"id\" to entity \"company\"",
+        "operationId": "updateProfile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of entity to update",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "requestBody": {
+          "description": "New entity details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful update"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/Profiles/ExportCategories": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Exports a Profile entity list sorted and filtered in a csv file",
+        "description": "Exports the Profile list with the specified filters applied in a csv file",
+        "operationId": "exportProfiles",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ProfileStatus"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "createdDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "groupCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "permissionCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "company",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "jobDescription",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export: Csv file of Profile entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/Profiles/{id}/Status": {
+      "put": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Sets the a Profile's status",
+        "description": "Sets the status of a Profile with Id of \"id\"",
+        "operationId": "setProfileStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of entity to delete",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully set"
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/Profiles/TabCounts": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Gets tab counts for profiles",
+        "description": "Gets tab counts for profiles",
+        "operationId": "ProfileTabCounts",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile tab counts",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileTabCountsVm"
+                },
+                "example": {"activeOrInactiveCount":5,"waitingForApprovalCount":2,"declinedCount":23}
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileTabCountsVm"
+                },
+                "example": {"activeOrInactiveCount":5,"waitingForApprovalCount":2,"declinedCount":23}
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileTabCountsVm"
+                },
+                "example": {"activeOrInactiveCount":5,"waitingForApprovalCount":2,"declinedCount":23}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
     "/api/Transaction/Commit": {
       "post": {
         "tags": [
@@ -917,6 +1624,137 @@
         "properties": {
           "isActive": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfileStatus": {
+        "enum": [
+          "Active",
+          "InActive",
+          "WaitingForApproval",
+          "Declined"
+        ],
+        "type": "string"
+      },
+      "ProfileDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProfileStatus"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfileVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProfileStatus"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "groupCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "permissionCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "company": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jobDescription": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfileVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfileVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfileStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ProfileStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfileTabCountsVm": {
+        "type": "object",
+        "properties": {
+          "activeOrInactiveCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "waitingForApprovalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "declinedCount": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

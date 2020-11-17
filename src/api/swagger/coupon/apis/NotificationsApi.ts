@@ -33,6 +33,7 @@ import {
 } from '../models';
 
 export interface AddTestNotificationRequest {
+    xRTDTransactionGuid?: string;
     addNotificationTestCommand?: AddNotificationTestCommand;
 }
 
@@ -44,14 +45,25 @@ export interface GetNotificationsRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
+    xRTDTransactionGuid?: string;
+}
+
+export interface NotificationTypesRequest {
+    xRTDTransactionGuid?: string;
+}
+
+export interface SeenAllNotificationsRequest {
+    xRTDTransactionGuid?: string;
 }
 
 export interface SeenNotificationRequest {
     id: number;
+    xRTDTransactionGuid?: string;
 }
 
 export interface UnSeenNotificationRequest {
     id: number;
+    xRTDTransactionGuid?: string;
 }
 
 /**
@@ -68,6 +80,10 @@ export class NotificationsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -128,6 +144,10 @@ export class NotificationsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -154,10 +174,14 @@ export class NotificationsApi extends runtime.BaseAPI {
     /**
      * Returns the possible notification types
      */
-    async notificationTypesRaw(): Promise<runtime.ApiResponse<Array<string>>> {
+    async notificationTypesRaw(requestParameters: NotificationTypesRequest): Promise<runtime.ApiResponse<Array<string>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -176,8 +200,8 @@ export class NotificationsApi extends runtime.BaseAPI {
     /**
      * Returns the possible notification types
      */
-    async notificationTypes(): Promise<Array<string>> {
-        const response = await this.notificationTypesRaw();
+    async notificationTypes(requestParameters: NotificationTypesRequest): Promise<Array<string>> {
+        const response = await this.notificationTypesRaw(requestParameters);
         return await response.value();
     }
 
@@ -185,10 +209,14 @@ export class NotificationsApi extends runtime.BaseAPI {
      * Sets user unseen notifications to seen
      * Updates all notification to seen for the current user
      */
-    async seenAllNotificationsRaw(): Promise<runtime.ApiResponse<void>> {
+    async seenAllNotificationsRaw(requestParameters: SeenAllNotificationsRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -208,8 +236,8 @@ export class NotificationsApi extends runtime.BaseAPI {
      * Sets user unseen notifications to seen
      * Updates all notification to seen for the current user
      */
-    async seenAllNotifications(): Promise<void> {
-        await this.seenAllNotificationsRaw();
+    async seenAllNotifications(requestParameters: SeenAllNotificationsRequest): Promise<void> {
+        await this.seenAllNotificationsRaw(requestParameters);
     }
 
     /**
@@ -224,6 +252,10 @@ export class NotificationsApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -259,6 +291,10 @@ export class NotificationsApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,25 +18,25 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmToJSON,
-    NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand,
-    NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandFromJSON,
-    NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandToJSON,
-    NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand,
-    NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandFromJSON,
-    NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVmToJSON,
+    OptimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand,
+    OptimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandFromJSON,
+    OptimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandToJSON,
+    OptimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand,
+    OptimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandFromJSON,
+    OptimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandToJSON,
 } from '../models';
 
 export interface CreateProductRequest {
-    nKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand?: NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand;
+    optimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand?: OptimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand;
 }
 
 export interface DeleteProductRequest {
@@ -59,12 +59,12 @@ export interface GetProductsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface UpdateProductRequest {
     id: number;
-    nKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand?: NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand;
+    optimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand?: OptimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand;
 }
 
 /**
@@ -91,7 +91,7 @@ export class ProductsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand),
+            body: OptimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommandToJSON(requestParameters.optimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -143,7 +143,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Returns the products identified by the ids.
      */
-    async getManyProductsRaw(requestParameters: GetManyProductsRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm>>> {
+    async getManyProductsRaw(requestParameters: GetManyProductsRequest): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -163,13 +163,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON));
     }
 
     /**
      * Returns the products identified by the ids.
      */
-    async getManyProducts(requestParameters: GetManyProductsRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
+    async getManyProducts(requestParameters: GetManyProductsRequest): Promise<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
         const response = await this.getManyProductsRaw(requestParameters);
         return await response.value();
     }
@@ -177,7 +177,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Gets the requested product, identified by id.
      */
-    async getProductRaw(requestParameters: GetProductRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
+    async getProductRaw(requestParameters: GetProductRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProduct.');
         }
@@ -197,13 +197,13 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested product, identified by id.
      */
-    async getProduct(requestParameters: GetProductRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm> {
+    async getProduct(requestParameters: GetProductRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm> {
         const response = await this.getProductRaw(requestParameters);
         return await response.value();
     }
@@ -211,7 +211,7 @@ export class ProductsApi extends runtime.BaseAPI {
     /**
      * Returns the products for the actual query.
      */
-    async getProductsRaw(requestParameters: GetProductsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
+    async getProductsRaw(requestParameters: GetProductsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -259,19 +259,19 @@ export class ProductsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the products for the actual query.
      */
-    async getProducts(requestParameters: GetProductsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsProductVm> {
+    async getProducts(requestParameters: GetProductsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm> {
         const response = await this.getProductsRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateProductRaw(requestParameters: UpdateProductRequest): Promise<runtime.ApiResponse<void>> {
@@ -294,14 +294,14 @@ export class ProductsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand),
+            body: OptimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommandToJSON(requestParameters.optimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateProduct(requestParameters: UpdateProductRequest): Promise<void> {

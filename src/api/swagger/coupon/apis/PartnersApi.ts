@@ -46,20 +46,24 @@ import {
 
 export interface ActivatePartnerRequest {
     id: number;
+    xRTDTransactionGuid?: string;
     activatePartnerDto?: ActivatePartnerDto;
 }
 
 export interface ChangeRegStatePartnerRequest {
     id: number;
+    xRTDTransactionGuid?: string;
     changePartnerRegistrationStateDto?: ChangePartnerRegistrationStateDto;
 }
 
 export interface CreatePartnerRequest {
+    xRTDTransactionGuid?: string;
     partnerDto?: PartnerDto;
 }
 
 export interface DeletePartnerRequest {
     id: number;
+    xRTDTransactionGuid?: string;
 }
 
 export interface ExportPartnersRequest {
@@ -72,10 +76,16 @@ export interface ExportPartnersRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
+    xRTDTransactionGuid?: string;
+}
+
+export interface GetMyPartnerRequest {
+    xRTDTransactionGuid?: string;
 }
 
 export interface GetPartnerRequest {
     id: number;
+    xRTDTransactionGuid?: string;
 }
 
 export interface GetPartnersRequest {
@@ -88,14 +98,17 @@ export interface GetPartnersRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
+    xRTDTransactionGuid?: string;
 }
 
 export interface UpdateMyPartnerRequest {
+    xRTDTransactionGuid?: string;
     partnerDto?: PartnerDto;
 }
 
 export interface UpdatePartnerRequest {
     id: number;
+    xRTDTransactionGuid?: string;
     partnerDto?: PartnerDto;
 }
 
@@ -118,6 +131,10 @@ export class PartnersApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -157,6 +174,10 @@ export class PartnersApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -190,6 +211,10 @@ export class PartnersApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -227,6 +252,10 @@ export class PartnersApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -295,6 +324,10 @@ export class PartnersApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -321,10 +354,14 @@ export class PartnersApi extends runtime.BaseAPI {
     /**
      * Returns the details about the logged in contact\'s partner
      */
-    async getMyPartnerRaw(): Promise<runtime.ApiResponse<PartnerVm>> {
+    async getMyPartnerRaw(requestParameters: GetMyPartnerRequest): Promise<runtime.ApiResponse<PartnerVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -343,8 +380,8 @@ export class PartnersApi extends runtime.BaseAPI {
     /**
      * Returns the details about the logged in contact\'s partner
      */
-    async getMyPartner(): Promise<PartnerVm> {
-        const response = await this.getMyPartnerRaw();
+    async getMyPartner(requestParameters: GetMyPartnerRequest): Promise<PartnerVm> {
+        const response = await this.getMyPartnerRaw(requestParameters);
         return await response.value();
     }
 
@@ -360,6 +397,10 @@ export class PartnersApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -429,6 +470,10 @@ export class PartnersApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -461,6 +506,10 @@ export class PartnersApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -498,6 +547,10 @@ export class PartnersApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

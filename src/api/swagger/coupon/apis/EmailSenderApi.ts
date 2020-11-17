@@ -30,14 +30,17 @@ import {
 } from '../models';
 
 export interface InvitePartnerContactRequest {
+    xRTDTransactionGuid?: string;
     invitePartnerContactDto?: InvitePartnerContactDto;
 }
 
 export interface SendEmailToSegmentRequest {
+    xRTDTransactionGuid?: string;
     sendEmailToSegmentDto?: SendEmailToSegmentDto;
 }
 
 export interface SendTestEmailRequest {
+    xRTDTransactionGuid?: string;
     sendEmailsDto?: SendEmailsDto;
 }
 
@@ -55,6 +58,10 @@ export class EmailSenderApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -88,6 +95,10 @@ export class EmailSenderApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
@@ -119,6 +130,10 @@ export class EmailSenderApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
+            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        }
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication

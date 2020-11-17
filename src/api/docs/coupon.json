@@ -11,6 +11,16 @@
           "ApplicationVersion"
         ],
         "operationId": "get",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -64,6 +74,9 @@
 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -75,6 +88,16 @@
         ],
         "summary": "Registers a Sme(Kkv) partner",
         "operationId": "registerPartner",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the partner",
           "content": {
@@ -88,6 +111,9 @@
         "responses": {
           "200": {
             "description": "Successful registration"
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred"
@@ -103,6 +129,16 @@
         "summary": "Registers a contact for a partner",
         "description": "Returns nothing, but registers a contact for the partner",
         "operationId": "registerPartnerContact",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Data of the contact",
           "content": {
@@ -136,6 +172,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -148,6 +187,16 @@
         "summary": "Registers a user",
         "description": "Returns nothing, but registers a user",
         "operationId": "registerUser",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Data of the user",
           "content": {
@@ -181,6 +230,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -193,6 +245,16 @@
         "summary": "Logs in a user",
         "description": "Returns user info about the logged in user",
         "operationId": "login",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Login data of the user",
           "content": {
@@ -255,6 +317,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -267,6 +332,16 @@
         "summary": "Refreshes the JWT token",
         "description": "Returns user info about the logged in user",
         "operationId": "refresh",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Refresh Token",
           "content": {
@@ -329,6 +404,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -341,6 +419,16 @@
         "summary": "Changes the password for the logged in User",
         "description": "Returns nothing",
         "operationId": "changePassword",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "New Password",
           "content": {
@@ -374,6 +462,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -397,6 +488,14 @@
               "description": "Query id",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -457,6 +556,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "404": {
             "description": "Not Found: error.not-found"
@@ -558,6 +660,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -705,6 +815,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -803,6 +916,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -950,6 +1071,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -1048,6 +1172,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -1096,6 +1228,9 @@
 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation Error: validation.error"
@@ -1197,6 +1332,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -1246,6 +1389,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "400": {
             "description": "Validation Error: validation.error"
           }
@@ -1271,6 +1417,14 @@
               "description": "Id of the user",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -1307,6 +1461,9 @@
           "200": {
             "description": "Successful update"
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "404": {
             "description": "User not found error: error.not-found"
           }
@@ -1321,6 +1478,16 @@
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
         "operationId": "createCashier",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the entity",
           "content": {
@@ -1380,6 +1547,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -1429,6 +1599,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -1540,6 +1718,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -1563,6 +1744,14 @@
               "description": "Id of the cashier",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -1640,6 +1829,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -1661,6 +1853,14 @@
               "description": "Id of the cashier to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -1716,6 +1916,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -1737,11 +1940,22 @@
               "description": "Id of the cashier to delete",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Successful deletion"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -1793,6 +2007,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -1806,6 +2028,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -1821,6 +2046,16 @@
         "summary": "Creates a Category entity",
         "description": "Returns the id of the Category upon success",
         "operationId": "createCategory",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the Category",
           "content": {
@@ -1880,6 +2115,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -1929,6 +2167,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -2031,6 +2277,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -2054,6 +2303,14 @@
               "description": "Id of the Category",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -2128,6 +2385,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -2149,6 +2409,14 @@
               "description": "Id of entity to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -2204,6 +2472,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -2225,11 +2496,22 @@
               "description": "Id of entity to delete",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Successful deletion"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -2281,6 +2563,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -2294,6 +2584,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -2320,6 +2613,14 @@
               "description": "CouponId for comments",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -2478,6 +2779,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -2499,6 +2803,14 @@
               "description": "Id of Coupon to add a comment to",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -2555,6 +2867,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "200": {
             "description": "Successful creation"
           }
@@ -2591,11 +2906,22 @@
               "description": "Id of comment to delete",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "200": {
             "description": "Successful deletion"
@@ -2617,6 +2943,16 @@
         "summary": "Creates a Coupon entity",
         "description": "Returns the id of the new Coupon upon success",
         "operationId": "createCoupon",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the Coupon",
           "content": {
@@ -2676,6 +3012,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -2879,6 +3218,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -3235,6 +3582,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -3258,6 +3608,14 @@
               "description": "Id of entity to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -3314,6 +3672,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "200": {
             "description": "Successful update"
           }
@@ -3337,11 +3698,22 @@
               "description": "Id of entity to delete",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Successful deletion"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -3363,6 +3735,14 @@
               "description": "Id of the Coupon",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -3569,6 +3949,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -3774,6 +4157,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -3886,6 +4277,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "400": {
             "description": "Validation error occurred: error.common.validation"
           }
@@ -3911,6 +4305,14 @@
               "description": "Id of entity to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -3966,6 +4368,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -3989,6 +4394,14 @@
               "description": "Id of coupon to claim coupon code for",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -4060,6 +4473,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -4083,6 +4499,14 @@
               "description": "Id of coupon to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -4138,6 +4562,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -4161,6 +4588,14 @@
               "description": "Id of coupon to get the codes for",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -4286,6 +4721,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -4309,6 +4747,14 @@
               "description": "Id of coupon to get the codes for",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -4331,6 +4777,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -4360,6 +4809,14 @@
               "description": "Id of coupon to get the codes for",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -4383,6 +4840,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "400": {
             "description": "Validation error occurred: error.common.validation"
           },
@@ -4399,6 +4859,16 @@
         ],
         "summary": "Sends the email template out to the test recipients",
         "operationId": "sendTestEmail",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "The list of the recipients and the email template id",
           "content": {
@@ -4432,6 +4902,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -4443,6 +4916,16 @@
         ],
         "summary": "Sends the email template to the selected segment defined in RTD",
         "operationId": "sendEmailToSegment",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "The list of the recipients and the email template id",
           "content": {
@@ -4457,6 +4940,9 @@
           "204": {
             "description": "Success"
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "200": {
             "description": "The server accepted the command"
           }
@@ -4470,6 +4956,16 @@
         ],
         "summary": "Sends an invite partner contact email to the specified email address",
         "operationId": "invitePartnerContact",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "The recipient email address and the partnerId",
           "content": {
@@ -4483,6 +4979,9 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "200": {
             "description": "The server accepted the command"
@@ -4498,6 +4997,16 @@
         "summary": "Creates an email template",
         "description": "Returns the id of the new template",
         "operationId": "createEmailTemplate",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the new template",
           "content": {
@@ -4557,6 +5066,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -4614,6 +5126,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -4818,6 +5338,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -4840,6 +5363,14 @@
               "description": "The id of the template",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -4992,6 +5523,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -5012,6 +5546,14 @@
               "description": "Nothing",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -5044,6 +5586,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -5064,11 +5609,22 @@
               "description": "The id of the template",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Successful"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -5129,6 +5685,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -5142,6 +5706,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -5168,6 +5735,14 @@
               "description": "The id of the template",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -5223,6 +5798,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -5257,6 +5835,14 @@
               "description": "The version of the template",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -5302,6 +5888,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -5313,6 +5902,16 @@
         ],
         "summary": "Returns a list of all the exception errorkeys",
         "operationId": "getErrorKeys",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful query: string list of exception errorkeys",
@@ -5408,6 +6007,9 @@
 ]
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -5418,9 +6020,22 @@
           "NotificationHub"
         ],
         "operationId": "testCampaignMovedToWaitingStateNotification",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -5431,6 +6046,16 @@
           "NotificationHub"
         ],
         "operationId": "notificationHubEvents",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -5526,6 +6151,9 @@
 ]
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -5594,6 +6222,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -5778,6 +6414,9 @@
 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -5801,6 +6440,14 @@
               "description": "Id of the notification",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -5846,6 +6493,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "401": {
             "description": "Authentication error, the notification doesn't belong to the current user: error.auth.forbidden"
@@ -5872,6 +6522,14 @@
               "description": "Id of the notification",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -5918,6 +6576,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "401": {
             "description": "Authentication error, the notification doesn't belong to the current user: error.auth.forbidden"
           }
@@ -5932,9 +6593,22 @@
         "summary": "Updates all notification to seen for the current user",
         "description": "Sets user unseen notifications to seen",
         "operationId": "seenAllNotifications",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "204": {
             "description": "Successful update"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -5946,6 +6620,16 @@
         ],
         "summary": "Returns the possible notification types",
         "operationId": "NotificationTypes",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns the notification types",
@@ -6041,6 +6725,9 @@
 ]
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -6052,6 +6739,16 @@
         ],
         "summary": "For Testing purposes only",
         "operationId": "addTestNotification",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6065,6 +6762,9 @@
           "200": {
             "description": "Success"
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "204": {
             "description": "Notification added"
           }
@@ -6077,6 +6777,16 @@
           "PartnerContacts"
         ],
         "operationId": "getMyPartnerContact",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -6124,6 +6834,9 @@
 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -6132,6 +6845,16 @@
           "PartnerContacts"
         ],
         "operationId": "updateMyPartnerContact",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -6144,6 +6867,9 @@
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -6163,6 +6889,14 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -6217,6 +6951,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -6234,6 +6971,14 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -6303,6 +7048,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -6383,6 +7131,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -6550,6 +7306,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -6630,6 +7389,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -6643,6 +7410,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -6654,6 +7424,16 @@
         ],
         "summary": "Returns the details about the logged in contact's partner",
         "operationId": "getMyPartner",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful query",
@@ -6716,6 +7496,9 @@
 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -6725,6 +7508,16 @@
         ],
         "summary": "Updates the logged in contact's partner",
         "operationId": "updateMyPartner",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "New details of the partner to update",
           "content": {
@@ -6738,6 +7531,9 @@
         "responses": {
           "200": {
             "description": "Successful update"
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occured: error.common.validation"
@@ -6753,6 +7549,16 @@
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
         "operationId": "createPartner",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the entity",
           "content": {
@@ -6792,6 +7598,9 @@
 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -6874,6 +7683,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -7047,6 +7864,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "400": {
             "description": "Validation error occurred: error.common.validation"
           }
@@ -7072,6 +7892,14 @@
               "description": "Id of the entity",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -7137,6 +7965,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "400": {
             "description": "Validation error occurred: error.common.validation"
           },
@@ -7163,6 +7994,14 @@
               "description": "Id of entity to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -7178,6 +8017,9 @@
         "responses": {
           "200": {
             "description": "Successful update"
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -7205,11 +8047,22 @@
               "description": "Id of entity to delete",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful deletion"
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "404": {
             "description": "Entity not found: error.not-found"
@@ -7294,6 +8147,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -7307,6 +8168,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -7333,6 +8197,14 @@
               "description": "Id of entity to activate/inactivate",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -7348,6 +8220,9 @@
         "responses": {
           "200": {
             "description": "Successful activation"
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "404": {
             "description": "Entity not found: error.not-found"
@@ -7374,6 +8249,14 @@
               "description": "Id of entity to change registration state/inactivate",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -7389,6 +8272,9 @@
         "responses": {
           "200": {
             "description": "Successful registration state change"
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Invalid state for state change"
@@ -7438,6 +8324,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -7582,6 +8476,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -7625,6 +8522,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -7638,6 +8543,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: validation.error"
@@ -7690,6 +8598,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -7851,6 +8767,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -7859,6 +8778,16 @@
           "Segments"
         ],
         "operationId": "upsertSegments",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8006,6 +8935,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -8022,11 +8954,22 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -8039,6 +8982,16 @@
         "summary": "Creates an entity",
         "description": "Returns the id of the entity upon success",
         "operationId": "createSite",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the entity",
           "content": {
@@ -8098,6 +9051,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -8164,6 +9120,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -8305,6 +9269,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -8328,6 +9295,14 @@
               "description": "Id of the entity",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -8405,6 +9380,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -8426,6 +9404,14 @@
               "description": "Id of entity to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -8481,6 +9467,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -8502,11 +9491,22 @@
               "description": "Id of entity to delete",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Successful deletion"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -8575,6 +9575,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -8589,6 +9597,9 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "400": {
             "description": "Validation error occurred: error.common.validation"
           }
@@ -8602,6 +9613,16 @@
         ],
         "summary": "Returns a list of all the system parameter keys",
         "operationId": "getSystemParameterKeys",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful query: string list of system parameter keys",
@@ -8697,6 +9718,9 @@
 ]
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -8720,6 +9744,14 @@
               "description": "Id of the SystemParameterVm",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -8794,6 +9826,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -8853,6 +9888,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -8955,6 +9998,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -9014,6 +10060,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -9027,6 +10081,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -9051,6 +10108,14 @@
               "type": "string",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -9109,6 +10174,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -9121,6 +10189,16 @@
         "summary": "Creates a TagCategory entity",
         "description": "Returns the id of the TagCategory upon success",
         "operationId": "createTagCategory",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the TagCategory",
           "content": {
@@ -9180,6 +10258,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -9229,6 +10310,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -9355,6 +10444,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -9378,6 +10470,14 @@
               "description": "Id of the TagCategory",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -9452,6 +10552,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -9473,6 +10576,14 @@
               "description": "Id of entity to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -9528,6 +10639,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -9549,11 +10663,22 @@
               "description": "Id of entity to delete",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Successful deletion"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -9605,6 +10730,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -9618,6 +10751,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           },
           "400": {
             "description": "Validation error occurred: error.common.validation"
@@ -9633,6 +10769,16 @@
         "summary": "Creates a Tag entity",
         "description": "Returns the id of the Tag upon success",
         "operationId": "createTag",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "requestBody": {
           "description": "Details of the Tag",
           "content": {
@@ -9692,6 +10838,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -9757,6 +10906,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -9913,6 +11070,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -9936,6 +11096,14 @@
               "description": "Id of the Tag",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -10016,6 +11184,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -10037,6 +11208,14 @@
               "description": "Id of entity to update",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "requestBody": {
@@ -10092,6 +11271,9 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       },
@@ -10113,11 +11295,22 @@
               "description": "Id of entity to delete",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Successful deletion"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -10185,6 +11378,14 @@
             "schema": {
               "$ref": "#/components/schemas/OrderByType"
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
@@ -10199,8 +11400,152 @@
               }
             }
           },
+          "412": {
+            "description": "Precondition failed"
+          },
           "400": {
             "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/Transaction/Commit": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "Commits a transaction in the database",
+        "operationId": "commitTransaction",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful commit of the transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/Transaction/Create": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "Creates a transaction in the database",
+        "operationId": "createTransaction",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful creation of the transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/Transaction/Rollback": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "Rollbacks a transaction in the database",
+        "operationId": "rollbackTransaction",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful rollback of the transaction"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -10213,6 +11558,16 @@
         "summary": "Returns the coupons generated for the user",
         "description": "Returns a coupon list that contains up to 8 coupons for the user for today",
         "operationId": "getMyUserCoupons",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful query: list of coupons",
@@ -10329,6 +11684,9 @@
 ]
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -10341,9 +11699,22 @@
         "summary": "Archives all coupon codes",
         "description": "Archives every coupon code in the database",
         "operationId": "archiveWallet",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "204": {
             "description": "Successful archiving"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -10355,6 +11726,16 @@
         ],
         "summary": "Returns claimed coupon codes",
         "operationId": "getMyClaimedCoupons",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -10444,6 +11825,9 @@
 ]
               }
             }
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }
@@ -10477,11 +11861,22 @@
               "description": "CouponCode to delete",
               "nullable": true
             }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         ],
         "responses": {
           "204": {
             "description": "Successful coupon burn"
+          },
+          "412": {
+            "description": "Precondition failed"
           }
         }
       }

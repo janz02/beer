@@ -60,14 +60,14 @@ const saveProduct = (product: Product): AppThunk => async dispatch => {
     if (id && !isNaN(id)) {
       await api.campaignEditor.products.updateProduct({
         id,
-        nKMRTDCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand: {
+        optimaCampaignEditorApplicationProductsCommandsUpdateProductUpdateProductCommand: {
           id,
           name: product.name
         }
       })
     } else {
       const createdProductId: number = await api.campaignEditor.products.createProduct({
-        nKMRTDCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand: {
+        optimaCampaignEditorApplicationProductsCommandsCreateProductCreateProductCommand: {
           name: product.name
         }
       })
