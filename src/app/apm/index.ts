@@ -3,6 +3,7 @@ import { apm, init as initApm } from '@elastic/apm-rum'
 const getEnvironmentFromHostname = (hostname: string): string => {
   if (hostname.includes('dev')) return 'dev'
   if (hostname.includes('qa')) return 'qa'
+  if (hostname.includes('uat')) return 'uat'
 
   return hostname === 'localhost' ? 'dev' : 'prod'
 }
