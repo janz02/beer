@@ -721,19 +721,39 @@
   "menu": {
     "bp-history": "BP History",
     "campaigns": "Campaigns",
-    "coupon-campaigns": "Coupon Campaigns",
-    "newsletter": "Newsletter",
+    "coupon-campaigns": {
+      "list": "List of Coupon Campaigns",
+      "title": "Coupon Campaigns"
+    },
+    "dashboard": "Dashboard",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
     "permissions": "Permissions",
     "my-profile": "Profile",
-    "segmentations": "Segmentation",
+    "profiles": {
+      "organizations": "Organization Structures",
+      "title": "Profiles",
+      "list": "List of Profiles"
+    },
+    "sections": {
+      "campaigns": "Campaigns",
+      "settings": "Settings"
+    },
+    "segmentations": {
+      "groups": "Groups",
+      "list": "List of Segmentations",
+      "title": "Segmentation"
+    },
     "settings": "Settings",
     "sites": "Sites",
+    "treatment": {
+      "channels": "Channels",
+      "templates": "Templates",
+      "title": "Treatment"
+    },
     "users": "Users",
-    "organization": "Organization",
-    "profiles": "Profiles"
+    "workflow": "Workflow"
   },
   "my-profile": {
     "editor-title": "Profile",
@@ -790,16 +810,15 @@
     "yesterday": "Yesterday"
   },
   "organization": {
-    "title": "Organizational structure",
     "companies": {
       "field": {
-        "status": "Status",
-        "name": "Name",
-        "profile-count": "Profiles",
+        "campaign-count": "Campaigns",
+        "created-date": "Date of creation",
         "group-count": "Groups",
         "job-role-count": "Job roles",
-        "campaign-count": "Campaigns",
-        "created-date": "Date of creation"
+        "name": "Name",
+        "profile-count": "Profiles",
+        "status": "Status"
       },
       "title": "Companies"
     },
@@ -818,11 +837,12 @@
       "title": "Job roles"
     },
     "new": {
-      "new": "New",
       "company": "Company",
       "group": "Group",
-      "job-role": "Job role"
-    }
+      "job-role": "Job role",
+      "new": "New"
+    },
+    "title": "Organizational structure"
   },
   "partner": {
     "editor": {
@@ -900,6 +920,10 @@
       "add": "New Permission",
       "title": "Permissions"
     }
+  },
+  "placeholder": {
+    "description": "This page is not there yet. Our developers are working hard to bring you new content, please, visit this page later!",
+    "title": "Under construction"
   },
   "profiles": {
     "field": {

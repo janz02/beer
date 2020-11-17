@@ -721,19 +721,39 @@
   "menu": {
     "bp-history": "ÜP History",
     "campaigns": "Kampányok",
-    "coupon-campaigns": "Kupon Kampányok",
-    "newsletter": "Hírlevél",
+    "coupon-campaigns": {
+      "list": "Kupon Kampányok Lista",
+      "title": "Kupon Kampányok"
+    },
+    "dashboard": "Dashboard",
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "permissions": "Jogosultságkezelés",
     "my-profile": "Profil",
-    "segmentations": "Szegmentáció",
+    "profiles": {
+      "organizations": "Céges struktúrák",
+      "title": "Profilok",
+      "list": "Profilok Lista"
+    },
+    "sections": {
+      "campaigns": "Kampányok",
+      "settings": "Beállítások"
+    },
+    "segmentations": {
+      "groups": "Csoportok",
+      "list": "Szegmentáció lista",
+      "title": "Szegmentáció"
+    },
     "settings": "Beállítások",
     "sites": "Telephelyek",
+    "treatment": {
+      "channels": "Csatornák",
+      "templates": "Hírlevél",
+      "title": "Kezelés"
+    },
     "users": "Felhasználók",
-    "organization": "Szervezet",
-    "profiles": "Profilok"
+    "workflow": "Munkamenet"
   },
   "my-profile": {
     "editor-title": "Profiladatok",
@@ -790,16 +810,15 @@
     "yesterday": "Tegnap"
   },
   "organization": {
-    "title": "Szervezeti struktúra",
     "companies": {
       "field": {
-        "status": "Státusz",
-        "name": "Név",
-        "profile-count": "Felhasználók",
+        "campaign-count": "Kampányok",
+        "created-date": "Létrehozás dátuma",
         "group-count": "Csoportok",
         "job-role-count": "Munkakörök",
-        "campaign-count": "Kampányok",
-        "created-date": "Létrehozás dátuma"
+        "name": "Név",
+        "profile-count": "Felhasználók",
+        "status": "Státusz"
       },
       "title": "Cégek"
     },
@@ -818,11 +837,12 @@
       "title": "Munkakörök"
     },
     "new": {
-      "new": "Új",
       "company": "Cég",
       "group": "Csoport",
-      "job-role": "Munkakör"
-    }
+      "job-role": "Munkakör",
+      "new": "Új"
+    },
+    "title": "Szervezeti struktúra"
   },
   "partner": {
     "editor": {
@@ -900,6 +920,10 @@
       "add": "Új jogosultság hozzáadása",
       "title": "Jogosultságkezelés"
     }
+  },
+  "placeholder": {
+    "description": "Ez az oldal még nem készült el. Fejlesztőink minden erejükkel azon dolgoznak, hogy új funkciókat szállítsanak, kérjük, térj vissza később!",
+    "title": "Fejlesztés alatt"
   },
   "profiles": {
     "field": {

@@ -38,42 +38,39 @@ import { Middleware, Configuration as CouponConfiguration } from '../api/swagger
 import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
 import { Configuration as FilesConfiguration } from '../api/swagger/files/runtime'
 import { Configuration as AdminConfiguration } from '../api/swagger/admin/runtime'
-import { getUrl } from 'services/baseUrlHelper'
 import { CompaniesApi, TransactionApi } from './swagger/admin'
 
 // ---- BASE CONFIG
 const apiMiddleware: Middleware[] = [...errorHandlingMiddleware]
 
 interface ApiBaseConfigProps {
-  appendUrl?: string
+  basePath?: string
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const apiBaseConfig = (props?: ApiBaseConfigProps) => ({
-  // basePath: (process.env.REACT_APP_API_URL || getUrl()) + (props?.appendUrl ?? ''), // would be this one with same origin for apis
-  basePath: getUrl(props?.appendUrl), // todo: update to above when apis are available from same origin
+  basePath: props?.basePath,
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: apiMiddleware
 })
 
 // ---- OTHER CONFIGS
-// todo update appendUrl props when apis are available from same origin
 export const adminConfig: AdminConfiguration = new AdminConfiguration(
   apiBaseConfig({
-    appendUrl: process.env.REACT_APP_ADMIN_API_URL
+    basePath: process.env.REACT_APP_ADMIN_API_URL
   })
 )
 
 export const couponConfig: CouponConfiguration = new CouponConfiguration(
-  apiBaseConfig({ appendUrl: process.env.REACT_APP_COUPON_API_URL })
+  apiBaseConfig({ basePath: process.env.REACT_APP_COUPON_API_URL })
 )
 
 export const campaignEditorConfig: CampaignEditorConfiguration = new CampaignEditorConfiguration(
-  apiBaseConfig({ appendUrl: process.env.REACT_APP_CAMPAIGNEDITOR_API_URL })
+  apiBaseConfig({ basePath: process.env.REACT_APP_CAMPAIGNEDITOR_API_URL })
 )
 
 export const filesConfig: FilesConfiguration = new FilesConfiguration(
-  apiBaseConfig({ appendUrl: process.env.REACT_APP_FILES_API_URL })
+  apiBaseConfig({ basePath: process.env.REACT_APP_FILES_API_URL })
 )
 
 export const api = {
