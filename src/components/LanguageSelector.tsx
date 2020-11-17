@@ -1,7 +1,7 @@
 import React from 'react'
 import EnLogo from 'assets/img/flags/en.svg'
 import HuLogo from 'assets/img/flags/hu.svg'
-import { Dropdown, Menu } from 'antd'
+import { Dropdown, Menu, Tooltip } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import './LanguageSelector.scss'
@@ -73,41 +73,50 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = props => {
     )
   }
 
-  // If it is for public display, it should render a dropdown
-  if (props.public) {
-    return (
-      <Dropdown className="language-selector" overlay={languageOptionsDropDown} trigger={['click']}>
-        <div>
-          <CurrentLanguageImg />
-          <span className="language-selector__text">{t('languages.language')}</span>
-          <DownOutlined />
-        </div>
-      </Dropdown>
-    )
-  }
-
-  // Otherwise it will be in a menu, so display a menu
   return (
-    <Menu
-      theme="dark"
-      selectable={false}
-      key="language"
-      className={`language-selector language-selector-dropdown-content ${props.className}`}
-    >
-      <SubMenu
-        key="language"
-        title={
+    <>
+      {props.public && (
+        <Dropdown
+          className="language-selector"
+          overlay={languageOptionsDropDown}
+          trigger={['click']}
+        >
           <div>
             <CurrentLanguageImg />
-
-            <span hidden={props.collapsed} className="language-selector__text">
-              {t('languages.language')}
-            </span>
+            <Tooltip title={t('languages.language')}>
+              <span className="language-selector__text">{t('languages.language')}</span>
+            </Tooltip>
+            <DownOutlined />
           </div>
-        }
-      >
-        {languageOptions()}
-      </SubMenu>
-    </Menu>
+        </Dropdown>
+      )}
+
+      {!props.public && (
+        <Menu
+          theme="dark"
+          selectable={false}
+          key="language"
+          className={`language-selector language-selector-dropdown-content ${props.className}`}
+          mode={props.collapsed ? 'vertical' : 'inline'}
+        >
+          <SubMenu
+            key="language"
+            title={
+              <div>
+                <CurrentLanguageImg />
+
+                <Tooltip title={t('languages.language')}>
+                  <span hidden={props.collapsed} className="language-selector__text">
+                    {t('languages.language')}
+                  </span>
+                </Tooltip>
+              </div>
+            }
+          >
+            {languageOptions()}
+          </SubMenu>
+        </Menu>
+      )}
+    </>
   )
 }

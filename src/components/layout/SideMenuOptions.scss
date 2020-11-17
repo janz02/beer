@@ -9,7 +9,7 @@
   }
 
   .side-menu-vertical-delimiter {
-    border-top: 1px solid #4C4C4C;
+    border-top: 1px solid #4c4c4c;
   }
 
   .side-menu-nolink {
@@ -18,6 +18,27 @@
 
   .app-version {
     padding-top: 15px;
-    color: #A6ADB4;
+    color: #a6adb4;
+  }
+}
+
+.section-title {
+  padding-left: 24px;
+  color: white;
+  font-weight: bold;
+
+  @media screen and (max-width: 400px) {
+    display: none;
+  }
+}
+
+.section-part {
+  width: 100%;
+  margin-bottom: 0;
+  padding-top: 8px;
+  border-top: 1px solid #4c4c4c;
+
+  &--without-title {
+    padding-top: 0;
   }
 }

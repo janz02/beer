@@ -34,8 +34,10 @@ export const SideMenu: FC<SideMenuProps> = props => {
           onClose={() => onClose(false)}
           visible={open}
         >
-          <Header />
-          {children}
+          <div className="items-container">
+            <Header />
+            {children}
+          </div>
         </Drawer>
       ) : (
         <Layout.Sider
@@ -44,9 +46,12 @@ export const SideMenu: FC<SideMenuProps> = props => {
           collapsible
           collapsed={!open}
           onCollapse={collapsed => onClose(collapsed)}
+          width={300}
         >
-          <Header />
-          {children}
+          <div className="items-container">
+            <Header />
+            {children}
+          </div>
         </Layout.Sider>
       )}
     </>
