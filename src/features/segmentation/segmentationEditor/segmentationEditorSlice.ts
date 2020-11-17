@@ -6,7 +6,6 @@ import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
 import {
-  NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField,
   NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
   NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
 } from 'api/swagger/campaign-editor'
@@ -18,6 +17,7 @@ import {
   SegmentationRuleResponse
 } from './queryBuilder/useQueryBuilderUtils'
 import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
+import { QueryBuilderField } from 'models/campaign/queryBuilderField'
 
 const { loadTree, uuid } = Utils
 
@@ -37,7 +37,7 @@ interface SegmentationEditorLoadedData {
   segmentation?: CampaignSegmentation
   categories?: SegmentationCategory[]
   segmentationQuery?: SegmentationQuery
-  fields?: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+  fields?: QueryBuilderField[]
 }
 
 interface SegmentationEditorState extends SegmentationEditorLoadedData {
@@ -154,7 +154,7 @@ export const getSegmentation = (id?: number): AppThunk => async dispatch => {
         segmentation: segmentation as CampaignSegmentation | undefined,
         categories: categories as SegmentationCategory[],
         segmentationQuery: segmentationQuery as SegmentationQuery | undefined,
-        fields: fields as NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+        fields: fields as QueryBuilderField[]
       })
     )
   } catch (err) {

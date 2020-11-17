@@ -1,7 +1,7 @@
-import { NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor/models'
 import { RootState } from 'app/rootReducer'
 import { FormUtils, useFormUtils } from 'hooks/useFormUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
+import { QueryBuilderField } from 'models/campaign/queryBuilderField'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
 import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
@@ -26,7 +26,7 @@ export interface SegmentationEditorUtils {
   saving: boolean
   checkFieldsChange: () => void
   handleSave: (values: CampaignSegmentation, results: SegmentationRuleResult) => void
-  fields?: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+  fields?: QueryBuilderField[]
   segmentationQuery?: SegmentationQuery
 }
 
