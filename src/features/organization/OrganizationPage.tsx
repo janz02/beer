@@ -15,6 +15,8 @@ export const OrganizationPage: FC = () => {
   const [currentTabKey, setCurrentTabKey] = useState('companies')
   const companiesUtils = useCompaniesUtils()
 
+  const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
+
   const headerOptions = useMemo(() => {
     const menu = (
       <Menu>
@@ -26,7 +28,7 @@ export const OrganizationPage: FC = () => {
 
     return (
       <>
-        {hasPermission(pageViewRoles.organizationEditor) && (
+        {isEditorUser && (
           <Dropdown overlay={menu}>
             <AddButton>
               {t('organization.new.new')} <DownOutlined />
@@ -35,7 +37,7 @@ export const OrganizationPage: FC = () => {
         )}
       </>
     )
-  }, [t])
+  }, [t, isEditorUser])
 
   let tabBarActions: JSX.Element | undefined
   switch (currentTabKey) {

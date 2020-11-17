@@ -1,18 +1,14 @@
-import React from 'react'
 import './ActivenessDisplay.scss'
+import React from 'react'
+import { StatusDisplay } from './StatusDisplay'
 
 export type ActivenessStatus = 'active' | 'inactive' | 'deleted'
 
 interface ActivenessDisplayProps {
-  status?: ActivenessStatus
+  status: ActivenessStatus
   text: string
 }
 
-export const ActivenessDisplay: React.FC<ActivenessDisplayProps> = props => {
-  return (
-    <div className="activeness-display">
-      <span className={'active-inactive-badge ' + props.status} />
-      {props.text}
-    </div>
-  )
+export const ActivenessDisplay: React.FC<ActivenessDisplayProps> = ({ status, text }) => {
+  return <StatusDisplay text={text} className={`status-${status}`} />
 }

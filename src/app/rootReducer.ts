@@ -7,7 +7,8 @@ import { authReducer } from 'features/auth/authSlice'
 import { couponCampaignListReducer } from 'features/couponCampaigns/couponCampaignList/couponCampaignListSlice'
 import { couponCampaignsReducer } from 'features/couponCampaigns/couponCampaignsSlice'
 import { notificationReducer } from 'features/notification/notificationSlice'
-import { profileReducer } from 'features/profile/profileSlice'
+import { myProfileReducer } from 'features/profile/myProfileSlice'
+import { profilesReducer } from 'features/profiles/profilesSlice'
 import { companiesReducer } from 'features/organization/companies/companiesSlice'
 import { siteEditorReducer } from 'features/sites/siteEditor/siteEditorSlice'
 import { newsletterListReducer } from 'features/newsletter/newsletterList/newsletterListSlice'
@@ -42,7 +43,8 @@ export const rootReducer = combineReducers({
   router: connectRouter(browserHistory),
   routerHistory: routerHistoryStore,
   auth: authReducer,
-  profile: profileReducer,
+  myProfile: myProfileReducer,
+  profiles: profilesReducer,
   companies: companiesReducer,
   couponCampaignList: couponCampaignListReducer,
   couponCampaigns: couponCampaignsReducer,
