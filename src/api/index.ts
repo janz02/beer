@@ -46,18 +46,17 @@ const apiMiddleware: Middleware[] = [...errorHandlingMiddleware]
 
 interface ApiBaseConfigProps {
   appendUrl?: string
+  isRtd?: boolean
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const apiBaseConfig = (props?: ApiBaseConfigProps) => ({
-  // basePath: (process.env.REACT_APP_API_URL || getUrl()) + (props?.appendUrl ?? ''), // would be this one with same origin for apis
-  basePath: getUrl(props?.appendUrl), // todo: update to above when apis are available from same origin
+  basePath: getUrl(props?.appendUrl, props?.isRtd),
   apiKey: () => `Bearer ${sessionStorage.getItem('jwt')}`,
   middleware: apiMiddleware
 })
 
 // ---- OTHER CONFIGS
-// todo update appendUrl props when apis are available from same origin
 export const adminConfig: AdminConfiguration = new AdminConfiguration(
   apiBaseConfig({
     appendUrl: process.env.REACT_APP_ADMIN_API_URL
@@ -69,7 +68,7 @@ export const couponConfig: CouponConfiguration = new CouponConfiguration(
 )
 
 export const campaignEditorConfig: CampaignEditorConfiguration = new CampaignEditorConfiguration(
-  apiBaseConfig({ appendUrl: process.env.REACT_APP_CAMPAIGNEDITOR_API_URL })
+  apiBaseConfig({ appendUrl: process.env.REACT_APP_CAMPAIGNEDITOR_API_URL, isRtd: true })
 )
 
 export const filesConfig: FilesConfiguration = new FilesConfiguration(
