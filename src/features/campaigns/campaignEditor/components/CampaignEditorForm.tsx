@@ -1,8 +1,10 @@
 import { Form, Row, Col, Card, Divider } from 'antd'
 import { RootState } from 'app/rootReducer'
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
+import { hasPermission } from 'services/jwt-reader'
+import { pageViewRoles } from 'services/roleHelpers'
 import { CampaignEditorFormFooter } from './CampaignEditorFormFooter'
 import { EditCampaignStatus } from './CampaignStatusHeader'
 import { CampaignUserLogs } from './CampaignUserLogs'
@@ -16,6 +18,10 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
   const campaign = useSelector((state: RootState) =>
     state.campaignList.companyCampaigns.find(campaign => campaign.id === campaignId)
   )
+  const isUserLogVisible = useMemo(
+    () => hasPermission(pageViewRoles.campaignUserLogsVisibility),
+    []
+  )
 
   return (
     <Form className="create-campaign-form">
@@ -25,10 +31,11 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
             <EditCampaignStatus />
           </Col>
           <Col span={12}>
-            <CampaignUserLogs
-              campaignLogs={campaign != null ? [campaign, campaign, campaign, campaign] : []}
-              visible
-            />
+            {isUserLogVisible && (
+              <CampaignUserLogs
+                campaignLogs={campaign != null ? [campaign, campaign, campaign, campaign] : []}
+              />
+            )}
           </Col>
           <Divider />
           <Col span={18}>

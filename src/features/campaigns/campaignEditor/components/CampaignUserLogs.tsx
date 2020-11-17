@@ -11,14 +11,12 @@ export interface UserLog {
 }
 export interface CampaignUserLogsProps {
   campaignLogs: UserLog[]
-  visible: boolean
 }
 
-export const CampaignUserLogs: FC<CampaignUserLogsProps> = ({ campaignLogs, visible }) => {
+export const CampaignUserLogs: FC<CampaignUserLogsProps> = ({ campaignLogs }) => {
   const { t } = useTranslation()
-  const [seeAllLogs, setAllLogsVisibility] = useState(false)
+  const [seeAllLogs, setAllLogsVisibility] = useState<boolean>(false)
 
-  if (!visible) return null
   return (
     <>
       <span className="campaign-user-logs-title">{t('campaign-create.user-logs')}</span>

@@ -70,5 +70,6 @@ export const pageViewRoles = {
   segmentations: [Roles.Administrator],
   segmentationEditor: [Roles.Administrator],
   campaigns: [Roles.Administrator],
-  campaignEditor: [Roles.Administrator]
+  campaignEditor: [Roles.Administrator],
+  campaignUserLogsVisibility: [Roles.Administrator]
 }
