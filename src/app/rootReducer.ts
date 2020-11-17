@@ -7,7 +7,7 @@ import { authReducer } from 'features/auth/authSlice'
 import { couponCampaignListReducer } from 'features/couponCampaigns/couponCampaignList/couponCampaignListSlice'
 import { couponCampaignsReducer } from 'features/couponCampaigns/couponCampaignsSlice'
 import { notificationReducer } from 'features/notification/notificationSlice'
-import { myProfileReducer } from 'features/profile/myProfileSlice'
+import { myProfileReducer } from 'features/myProfile/myProfileSlice'
 import { profilesReducer } from 'features/profiles/profilesSlice'
 import { companiesReducer } from 'features/organization/companies/companiesSlice'
 import { siteEditorReducer } from 'features/sites/siteEditor/siteEditorSlice'
@@ -34,6 +34,7 @@ import { segmentationListReducer } from 'features/segmentation/segmentationList/
 import { segmentationEditorReducer } from 'features/segmentation/segmentationEditor/segmentationEditorSlice'
 import { systemParamsReducer } from 'features/settings/systemParams/systemParamsSlice'
 import { campaignsListReducer } from 'features/campaigns/campaignList/campaignListSlice'
+import { groupsReducer } from 'features/organization/groups/groupsSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
 // Probably a mock for the router/ history needed for proper solution, but needs more investigation
@@ -46,6 +47,7 @@ export const rootReducer = combineReducers({
   myProfile: myProfileReducer,
   profiles: profilesReducer,
   companies: companiesReducer,
+  groups: groupsReducer,
   couponCampaignList: couponCampaignListReducer,
   couponCampaigns: couponCampaignsReducer,
   couponCampaignCategoryList: couponCampaignCategoryListReducer,

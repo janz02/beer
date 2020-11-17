@@ -10,7 +10,7 @@ import { resetRouterHistory } from 'router/routerHistoryStore'
 import { resetPartnersList } from 'features/partners/partnerList/partnerListSlice'
 import { resetSelfPartner } from 'features/partners/selfPartner/selfPartnerSlice'
 import { resetPartnerEditor } from 'features/partners/partnerEditor/partnerEditorSlice'
-import { myProfileActions } from 'features/profile/myProfileSlice'
+import { myProfileActions } from 'features/myProfile/myProfileSlice'
 import { couponCampaignListActions } from 'features/couponCampaigns/couponCampaignList/couponCampaignListSlice'
 import { couponCampaignCategoryEditorActions } from 'features/settings/couponCampaignCategories/categoryEditor/couponCampaignCategoryEditorSlice'
 import { couponCampaignCategoryListActions } from 'features/settings/couponCampaignCategories/categoryList/couponCampaignCategoryListSlice'
@@ -27,6 +27,7 @@ import { systemParamsActions } from 'features/settings/systemParams/systemParams
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
 import { profilesActions } from 'features/profiles/profilesSlice'
 import { companiesActions } from 'features/organization/companies/companiesSlice'
+import { groupsActions } from 'features/organization/groups/groupsSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -61,6 +62,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(systemParamsActions.resetSystemParams())
     dispatch(campaignListActions.resetCampaignsList())
     dispatch(companiesActions.reset())
+    dispatch(groupsActions.reset())
     logout && dispatch(resetRouterHistory())
   })
 }

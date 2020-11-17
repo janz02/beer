@@ -9,11 +9,14 @@ import { hasPermission } from 'services/jwt-reader'
 import { pageViewRoles } from 'services/roleHelpers'
 import { CompaniesTable } from './companies/CompaniesTable'
 import { useCompaniesUtils } from './companies/useCompaniesUtils'
+import { GroupsTable } from './groups/GroupsTable'
+import { useGroupsUtils } from './groups/useGroupsUtils'
 
 export const OrganizationPage: FC = () => {
   const { t } = useTranslation()
   const [currentTabKey, setCurrentTabKey] = useState('companies')
   const companiesUtils = useCompaniesUtils()
+  const groupsUtils = useGroupsUtils()
 
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
 
@@ -44,6 +47,9 @@ export const OrganizationPage: FC = () => {
     case 'companies':
       tabBarActions = companiesUtils.tabBarActions
       break
+    case 'groups':
+      tabBarActions = groupsUtils.tabBarActions
+      break
   }
 
   return (
@@ -64,7 +70,9 @@ export const OrganizationPage: FC = () => {
         <TabPane key="companies" tab={<TabPanelTitle title={t('organization.companies.title')} />}>
           <CompaniesTable companiesUtils={companiesUtils} />
         </TabPane>
-        <TabPane key="groups" tab={<TabPanelTitle title={t('organization.groups.title')} />} />
+        <TabPane key="groups" tab={<TabPanelTitle title={t('organization.groups.title')} />}>
+          <GroupsTable groupsUtils={groupsUtils} />
+        </TabPane>
         <TabPane
           key="job-roles"
           tab={<TabPanelTitle title={t('organization.job-roles.title')} />}
