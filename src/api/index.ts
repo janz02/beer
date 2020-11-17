@@ -38,7 +38,7 @@ import { Middleware, Configuration as CouponConfiguration } from '../api/swagger
 import { Configuration as CampaignEditorConfiguration } from './swagger/campaign-editor/runtime'
 import { Configuration as FilesConfiguration } from '../api/swagger/files/runtime'
 import { Configuration as AdminConfiguration } from '../api/swagger/admin/runtime'
-import { CompaniesApi, TransactionApi } from './swagger/admin'
+import { CompaniesApi, ProfilesApi, TransactionApi } from './swagger/admin'
 
 // ---- BASE CONFIG
 const apiMiddleware: Middleware[] = [...errorHandlingMiddleware]
@@ -76,6 +76,7 @@ export const filesConfig: FilesConfiguration = new FilesConfiguration(
 export const api = {
   admin: {
     companies: new CompaniesApi(adminConfig),
+    profiles: new ProfilesApi(adminConfig),
     transaction: new TransactionApi(adminConfig)
   },
   coupon: {

@@ -130,10 +130,6 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
         const response = await this.request({
             path: `/api/StandaloneUsers/ChangeForgotPassword`,
             method: 'POST',
@@ -162,10 +158,6 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
 
         const response = await this.request({
             path: `/api/StandaloneUsers/CreateUser`,
@@ -228,10 +220,6 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
 
         const response = await this.request({
             path: `/api/StandaloneUsers/ForgotPassword`,
@@ -296,10 +284,6 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
 
         const response = await this.request({
             path: `/api/StandaloneUsers/GetUserExtensionInfoByPasswordChangeGuid/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))),
@@ -396,10 +380,6 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
 
         const response = await this.request({
             path: `/api/StandaloneUsers/ValidatePasswordChange`,

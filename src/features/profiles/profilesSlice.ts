@@ -53,6 +53,7 @@ const getProfiles = (params: ListRequestParams = {}): AppThunk => async (dispatc
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().profiles.listParams, params)
     const { result, ...pagination } = await getProfilesMock(revisedParams)
+
     dispatch(
       getProfilesSuccess({
         profiles: result as ProfileListItem[],
