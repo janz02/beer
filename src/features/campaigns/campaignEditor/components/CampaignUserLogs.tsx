@@ -23,7 +23,7 @@ export const CampaignUserLogs: FC<CampaignUserLogsProps> = ({ campaignLogs }) =>
       <div className="campaign-user-logs">
         {campaignLogs
           ?.filter((value, index) => {
-            if ((index === 0 || seeAllLogs) && !!value) return value
+            if ((index === 0 || seeAllLogs) && value) return value
           })
           .map(campaign => {
             return (
