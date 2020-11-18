@@ -226,7 +226,7 @@
     "title":"Create Campaign",
     "status-creation":"Status (Campaign Creation)",
     "user-logs":"User Logs",
-    "save-draft":"Save draft & Exits",
+    "save-draft":"Save draft & Exit",
     "next-section":"Next (Segmentation)"
   },
   "coupon-campaign-create": {
