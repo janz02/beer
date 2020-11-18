@@ -6,7 +6,7 @@ import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
 import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import {
   getSegmentation,
   resetSegmentationEditor,

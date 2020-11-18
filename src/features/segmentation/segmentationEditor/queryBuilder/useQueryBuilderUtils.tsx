@@ -3,7 +3,7 @@ import { SegmentationRuleResult } from '../../../../models/campaign/segmentation
 import { Utils, BuilderProps, ImmutableTree, Config } from 'react-awesome-query-builder'
 import stringify from 'json-stringify-safe'
 import { buildFieldConfig, convertSingleValuesToArray } from './queryBuilderHelper'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
 import loadedConfig from './Config'
 import {
@@ -56,15 +56,15 @@ export interface QueryBuilderUtils {
 }
 
 export const useQueryBuilderUtils = (): QueryBuilderUtils => {
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+
   const { fields, queryBuilder, segmentationQuery } = useSelector(
     (state: RootState) => state.segmentationEditor
   )
   const { actions, rules, tree, initialConditions, ruleResults } = queryBuilder
-
   const [config, setConfig] = useState<Config>(({ ...loadedConfig } as unknown) as Config)
   const [treeInit, setTreeInit] = useState(false)
-  const [t] = useTranslation()
-  const dispatch = useDispatch()
 
   const query = (updatedTree: ImmutableTree): void => {
     const query = queryBuilderFormat(updatedTree, config)
@@ -112,7 +112,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     }
   }
   const treeId = useCallback((): string => {
-    return tree.get('id').toString()
+    return tree?.get('id').toString()
   }, [tree])
 
   const getRuleResult = useCallback(
