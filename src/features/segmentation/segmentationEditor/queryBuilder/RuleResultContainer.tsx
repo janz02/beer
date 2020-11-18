@@ -29,12 +29,10 @@ export const RuleResultContainer: React.FC<RuleResultContainerProps> = props => 
   }
 
   return (
-    <div>
-      <div className="statistics">
-        <div className="inputs">
-          <Input placeholder={t('query-builder.result.total')} readOnly value={total()} />
-          <Input placeholder={t('query-builder.result.filtered')} readOnly value={filtered()} />
-        </div>
+    <div className="statistics">
+      <div className="inputs">
+        <Input placeholder={t('query-builder.result.total')} readOnly value={total()} />
+        <Input placeholder={t('query-builder.result.filtered')} readOnly value={filtered()} />
       </div>
     </div>
   )

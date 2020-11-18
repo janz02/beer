@@ -84,24 +84,28 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
   }, [rules])
 
   const conditionChanges = (): ConditionChangeEvents => {
-    const addedRules = conditions().filter(rule => !initialConditions.find(r => r.id === rule.id))
+    const addedRules = conditions().filter(
+      rule => !initialConditions.find(condition => condition.id === rule.id)
+    )
 
-    const removedRules = initialConditions.filter(r => !conditions().find(rule => rule.id === r.id))
+    const removedRules = initialConditions.filter(
+      rule => !conditions().find(condition => condition.id === rule.id)
+    )
 
-    const preservedChangedRules = initialConditions.filter(r =>
+    const preservedChangedRules = initialConditions.filter(condition =>
       conditions().find(
         rule =>
-          rule.id === r.id &&
-          (rule.operator !== r.operator ||
-            rule.value.flat().toString() !== r.value.flat().toString())
+          rule.id === condition.id &&
+          (rule.operator !== condition.operator ||
+            rule.value.flat().toString() !== condition.value.flat().toString())
       )
     )
-    const preservedRules = initialConditions.filter(r =>
+    const preservedRules = initialConditions.filter(condition =>
       conditions().find(
         rule =>
-          rule.id === r.id &&
-          rule.operator === r.operator &&
-          rule.value.flat().toString() === r.value.flat().toString()
+          rule.id === condition.id &&
+          rule.operator === condition.operator &&
+          rule.value.flat().toString() === condition.value.flat().toString()
       )
     )
     return {
@@ -117,7 +121,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
 
   const getRuleResult = useCallback(
     (ruleId: string): SegmentationRuleResult | undefined => {
-      return ruleResults.find(f => f.ruleId === ruleId)
+      return ruleResults.find(ruleResult => ruleResult.ruleId === ruleId)
     },
     [ruleResults]
   )
@@ -160,7 +164,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
 
   const existsRule = useCallback(
     (ruleId: string): boolean => {
-      return rules.findIndex(x => x.id === ruleId) !== -1
+      return rules.findIndex(rule => rule.id === ruleId) !== -1
     },
     [rules]
   )
@@ -185,9 +189,9 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
         if (jsRule.type === GROUP) {
           createRules(childNode)
         } else if (jsRule.type === 'rule' && !!jsRule.properties.field) {
-          const rule = createRule(jsRule)
-          const rulesWithoutUpdated = rules.filter(x => x.id !== rule.id)
-          dispatch(setRules([...rulesWithoutUpdated, rule]))
+          const createdRule = createRule(jsRule)
+          const rulesWithoutUpdated = rules.filter(rule => rule.id !== createdRule.id)
+          dispatch(setRules([...rulesWithoutUpdated, createdRule]))
         }
       }
     },
@@ -202,7 +206,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
         deletedRules.push(result.ruleId)
       }
     })
-    const results = ruleResults.filter(x => !deletedRules.includes(x.ruleId))
+    const results = ruleResults.filter(ruleResult => !deletedRules.includes(ruleResult.ruleId))
     dispatch(setRuleResults(results))
 
     // new rules

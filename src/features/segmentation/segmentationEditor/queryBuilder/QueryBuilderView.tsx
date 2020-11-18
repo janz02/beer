@@ -49,11 +49,9 @@ export const QueryBuilderView: React.FC = () => {
     }
   })
 
-  if (!queryBuilder.config.fields || !queryBuilder.tree) {
-    return <></>
-  }
-
-  return (
+  return !queryBuilder.config.fields || !queryBuilder.tree ? (
+    <></>
+  ) : (
     <Query
       {...queryBuilder.config}
       // override

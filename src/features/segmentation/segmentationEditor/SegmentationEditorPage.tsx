@@ -30,7 +30,7 @@ export const SegmentationEditorPage: React.FC = () => {
             backButton={{
               primary: true,
               onClick: () => {
-                history.push('/segmentations')
+                history.push('/segmentations-list')
               }
             }}
           />
