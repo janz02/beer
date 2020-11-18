@@ -89,7 +89,14 @@ export const PrivateLayout: React.FC = ({ children }) => {
       {
         label: t('menu.coupon-campaigns.title'),
         icon: <BarcodeOutlined />,
-        roles: pageViewRoles.couponCampaigns,
+        roles: [
+          ...pageViewRoles.couponCampaigns,
+          ...pageViewRoles.users,
+          ...pageViewRoles.settings,
+          ...pageViewRoles.sites,
+          ...pageViewRoles.contacts,
+          ...pageViewRoles.selfpartner
+        ],
         subItems: [
           {
             label: t('menu.coupon-campaigns.list'),
@@ -108,6 +115,24 @@ export const PrivateLayout: React.FC = ({ children }) => {
             link: '/settings',
             icon: <SettingOutlined />,
             roles: pageViewRoles.settings
+          },
+          {
+            label: t('menu.sites'),
+            link: '/sites',
+            icon: <ShopOutlined />,
+            roles: pageViewRoles.sites
+          },
+          {
+            label: t('menu.partner-contacts'),
+            link: '/contacts',
+            icon: <UsergroupAddOutlined />,
+            roles: pageViewRoles.contacts
+          },
+          {
+            label: t('menu.partner-data'),
+            link: '/selfpartner',
+            icon: <ContactsOutlined />,
+            roles: pageViewRoles.selfpartner
           }
         ]
       },
@@ -149,24 +174,6 @@ export const PrivateLayout: React.FC = ({ children }) => {
         ]
       },
       {
-        label: t('menu.partner-data'),
-        link: '/selfpartner',
-        icon: <ContactsOutlined />,
-        roles: pageViewRoles.selfpartner
-      },
-      {
-        label: t('menu.sites'),
-        link: '/sites',
-        icon: <ShopOutlined />,
-        roles: pageViewRoles.sites
-      },
-      {
-        label: t('menu.partner-contacts'),
-        link: '/contacts',
-        icon: <UsergroupAddOutlined />,
-        roles: pageViewRoles.contacts
-      },
-      {
         label: t('menu.bp-history'),
         link: '/bp-history',
         icon: <HistoryOutlined />,
@@ -181,7 +188,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
       {
         label: t('menu.profiles.title'),
         icon: <AuditOutlined />,
-        roles: [...pageViewRoles.organization],
+        roles: [...pageViewRoles.organization, ...pageViewRoles.profiles],
         subItems: [
           {
             label: t('menu.profiles.list'),
