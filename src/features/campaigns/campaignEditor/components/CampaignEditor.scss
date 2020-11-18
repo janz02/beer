@@ -1,0 +1,50 @@
+@import "assets/scss/_variables";
+$smallFontSize: 9px;
+$smallFontColor: rgb(169, 169, 169);
+
+.campaign-user-logs {
+  display: grid;
+  width: 100%;
+  min-width: 400px;
+  min-height: 40px;
+  padding: 5px;
+  border: 1px;
+  border-style: solid;
+  border-color: $smallFontColor;
+  font-size: small;
+  justify-items: auto;
+
+  div.ant-col {
+    padding: 0 5px 0 5px;
+  }
+
+  .campaign-user-log-small-font {
+    font-size: $smallFontSize;
+  }
+
+  .campaign-user-log-inner-footer {
+    justify-self: end;
+  }
+}
+
+.campaign-user-logs-title {
+  color: $smallFontColor;
+  font-size: $smallFontSize;
+}
+
+.edit-campaign-status {
+  div.ant-row:nth-child(1) {
+    color: $smallFontColor;
+    font-size: $smallFontSize;
+  }
+}
+
+.create-campaign-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+
+  .ant-col {
+    padding: 3px;
+  }
+}
