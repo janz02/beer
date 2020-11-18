@@ -841,6 +841,14 @@
       }
     },
     "job-roles": {
+      "field": {
+        "company-count": "Companies",
+        "created-by": "Creator",
+        "created-date": "Date of creation",
+        "group-count": "Groups",
+        "name": "Name",
+        "profile-count": "Profiles"
+      },
       "title": "Job roles"
     },
     "new": {

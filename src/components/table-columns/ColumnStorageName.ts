@@ -15,5 +15,6 @@ export enum ColumnStorageName {
   CAMPAIGN_COMPANY = 'campaign-company-columns',
   CAMPAIGN_PARTNER = 'campaign-partner-columns',
   COMPANIES = 'company-columns',
-  GROUPS = 'groups-columns'
+  GROUPS = 'groups-columns',
+  JOB_ROLES = 'job-role-columns'
 }

@@ -73,6 +73,7 @@ export const useGroupsUtils = (): GroupsUtils => {
         title: t('organization.groups.field.created-date'),
         key: 'createdDate',
         sort: true,
+        width: '12rem',
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
       }),
