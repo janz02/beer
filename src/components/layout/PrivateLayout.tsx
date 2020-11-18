@@ -130,7 +130,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
           },
           {
             label: t('menu.partner-data'),
-            link: '/selfpartner',
+            link: '/mypartner',
             icon: <ContactsOutlined />,
             roles: pageViewRoles.selfpartner
           }
