@@ -55,7 +55,7 @@ const Routes = (): JSX.Element => (
     <PrivateRoute exact path="/workflow" component={PlaceholderPage} />
     <PrivateRoute
       exact
-      path="/selfpartner"
+      path="/mypartner"
       roles={pageViewRoles.selfpartner}
       component={SelfPartnerEditorPage}
     />
