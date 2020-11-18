@@ -15,7 +15,7 @@ export interface CampaignEditorProps {
 
 export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
-  const campaign = useSelector((state: RootState) =>
+  const campaignForMock = useSelector((state: RootState) =>
     state.campaignList.companyCampaigns.find(campaign => campaign.id === campaignId)
   )
   const isUserLogVisible = useMemo(
@@ -33,7 +33,11 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
           <Col span={12}>
             {isUserLogVisible && (
               <CampaignUserLogs
-                campaignLogs={campaign != null ? [campaign, campaign, campaign, campaign] : []}
+                campaignLogs={
+                  campaignForMock != null
+                    ? [campaignForMock, campaignForMock, campaignForMock, campaignForMock]
+                    : []
+                }
               />
             )}
           </Col>
