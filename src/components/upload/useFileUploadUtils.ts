@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { api } from 'api'
 import { getBase64 } from 'services/file-reader'
 import { displayBackendError } from 'services/errorHelpers'
-import { getUrl } from 'services/baseUrlHelper'
 import { RequestError } from 'api/middleware'
 import { notification } from 'antd'
 import {
@@ -55,7 +54,7 @@ export function useFileUploadUtils(props: FileUploadUtilsProps): FileUploadUtils
   const { t } = useTranslation()
 
   // TODO: Move this logic to Api, this is just a temporary solution
-  const uploadUrl = `${getUrl(process.env.REACT_APP_FILES_API_URL)}/api/Files`
+  const uploadUrl = `${process.env.REACT_APP_FILES_API_URL}/api/Files`
   const apiKey = `Bearer ${sessionStorage.getItem('jwt')}`
 
   const [thumbnail, setThumbnail] = useState<FileThumbnail>()

@@ -39,7 +39,25 @@
 }
 
 .app-version {
-  color: #8C8C8C;
+  color: #8c8c8c;
   font-size: 12px;
   text-align: center;
+}
+
+.section-upper,
+.section-lower {
+  width: 100%;
+}
+
+.section-upper {
+  flex: 1;
+  overflow: auto;
+
+  &.section-collapsed {
+    overflow: hidden;
+  }
+}
+
+.section-lower {
+  margin-bottom: 24px;
 }
