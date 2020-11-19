@@ -837,10 +837,18 @@
         "job-role-count": "Munkakörök",
         "permission-count": "Jogosultságok",
         "created-date": "Létrehozás dátuma",
-        "creator": "Létrehoz "
+        "creator": "Létrehozó"
       }
     },
     "job-roles": {
+      "field": {
+        "company-count": "Cégek",
+        "created-by": "Létrehozó",
+        "created-date": "Létrehozás dátuma",
+        "group-count": "Csoportok",
+        "name": "Név",
+        "profile-count": "Felhasználók"
+      },
       "title": "Munkakörök"
     },
     "new": {

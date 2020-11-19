@@ -2,107 +2,79 @@ import React, { useCallback, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { companiesActions } from './companiesSlice'
+import { jobRolesActions } from './jobRoleListSlice'
 import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { ColumnsType, ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { FeatureState } from 'models/featureState'
-import { Company } from 'models/company'
+import { JobRole } from 'models/jobRole'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
-import { ActivenessSwitch } from 'components/ActivenessSwitch'
 import { ExportButton } from 'components/buttons/ExportButton'
 import { pageViewRoles } from 'services/roleHelpers'
 
-export interface CompaniesUtils {
-  currentColumns: ColumnType<Company>[]
-  tableUtils: TableUtils<Company>
-  companies: Company[]
-  companiesLoading: boolean
+export interface JobRoleListUtils {
+  currentColumns: ColumnType<JobRole>[]
+  tableUtils: TableUtils<JobRole>
+  jobRoles: JobRole[]
+  jobRolesLoading: boolean
   tabBarActions: JSX.Element
 }
 
-export const useCompaniesUtils = (): CompaniesUtils => {
+export const useJobRoleListUtils = (): JobRoleListUtils => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const { listParams, listState, companies, savingStatusIds } = useSelector(
-    (state: RootState) => state.companies
-  )
+  const { listParams, listState, jobRoles } = useSelector((state: RootState) => state.jobRoleList)
 
-  const tableUtils = useTableUtils<Company>({
+  const tableUtils = useTableUtils<JobRole>({
     listParamsState: listParams,
-    filterKeys: [
-      'isActive',
-      'name',
-      'profileCount',
-      'groupCount',
-      'jobRoleCount',
-      'campaignCount',
-      'createdDate'
-    ],
-    getDataAction: companiesActions.getCompanies
+    filterKeys: ['name', 'profileCount', 'groupCount', 'companyCount', 'createdDate', 'createdBy'],
+    getDataAction: jobRolesActions.getJobRoles
   })
 
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
 
-  const columnsConfig: ColumnsType<Company> = useMemo(
+  const columnsConfig: ColumnsType<JobRole> = useMemo(
     () => [
       tableUtils.columnConfig({
-        title: t('organization.companies.field.status'),
-        filterMode: FilterMode.ACTIVE_INACTIVE,
-        key: 'isActive',
-        width: '7rem',
-        cannotBeHidden: true,
-        render(value: boolean, company: Company) {
-          return (
-            <ActivenessSwitch
-              isActive={value}
-              onChange={x => {
-                dispatch(companiesActions.setCompanyStatus(company.id, x))
-              }}
-              loading={!!savingStatusIds[company.id]}
-            />
-          )
-        }
-      }),
-      tableUtils.columnConfig({
-        title: t('organization.companies.field.name'),
+        title: t('organization.job-roles.field.name'),
         key: 'name',
         cannotBeHidden: true,
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
       tableUtils.columnConfig({
-        title: t('organization.companies.field.profile-count'),
+        title: t('organization.job-roles.field.profile-count'),
         key: 'profileCount',
         sort: true
       }),
       tableUtils.columnConfig({
-        title: t('organization.companies.field.group-count'),
+        title: t('organization.job-roles.field.company-count'),
+        key: 'companyCount',
+        sort: true
+      }),
+      tableUtils.columnConfig({
+        title: t('organization.job-roles.field.group-count'),
         key: 'groupCount',
         sort: true
       }),
       tableUtils.columnConfig({
-        title: t('organization.companies.field.job-role-count'),
-        key: 'jobRoleCount',
-        sort: true
-      }),
-      tableUtils.columnConfig({
-        title: t('organization.companies.field.campaign-count'),
-        key: 'campaignCount',
-        sort: true
-      }),
-      tableUtils.columnConfig({
-        title: t('organization.companies.field.created-date'),
+        title: t('organization.job-roles.field.created-date'),
         key: 'createdDate',
         sort: true,
         width: '12rem',
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
+      }),
+      tableUtils.columnConfig({
+        title: t('organization.job-roles.field.created-by'),
+        key: 'createdBy',
+        sort: true,
+        filterMode: FilterMode.SEARCH
       }),
       isEditorUser
         ? tableUtils.actionColumnConfig({
@@ -112,17 +84,17 @@ export const useCompaniesUtils = (): CompaniesUtils => {
           })
         : {}
     ],
-    [dispatch, tableUtils, t, savingStatusIds, isEditorUser]
+    [tableUtils, t, isEditorUser]
   )
 
   const resetFilters = useCallback(() => {
-    dispatch(companiesActions.resetCompaniesFilters())
+    dispatch(jobRolesActions.resetJobRolesFilters())
   }, [dispatch])
 
-  const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.COMPANIES)
+  const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.JOB_ROLES)
 
   const handleExport = useCallback((): void => {
-    dispatch(companiesActions.exportCompanies())
+    dispatch(jobRolesActions.exportJobRoles())
   }, [dispatch])
 
   const tabBarActions = useMemo(() => {
@@ -138,8 +110,8 @@ export const useCompaniesUtils = (): CompaniesUtils => {
   return {
     currentColumns: columnOrderUtils.currentColumns,
     tableUtils,
-    companies,
-    companiesLoading: listState === FeatureState.Loading,
+    jobRoles,
+    jobRolesLoading: listState === FeatureState.Loading,
     tabBarActions
   }
 }
