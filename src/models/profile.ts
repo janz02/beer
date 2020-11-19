@@ -10,5 +10,6 @@ export interface Profile {
   groupCount: number
   permissionCount: number
   company: number
+  companyName: string
   jobDescription: string
 }

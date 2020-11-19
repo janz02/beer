@@ -49,6 +49,7 @@ const getRandomProfile = (id: number, status?: ProfileStatus): Profile => {
     permissionCount: Math.floor(Math.random() * 10),
     createdDate: moment(),
     company: Math.floor(Math.random() * 10),
+    companyName: getRandomString(10),
     jobDescription: getRandomString(10)
   }
 }

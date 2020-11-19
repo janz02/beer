@@ -49,7 +49,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       'createdDate',
       'groupCount',
       'permissionCount',
-      'company',
+      'companyName',
       'jobDescription'
     ],
     getDataAction: profilesActions.getProfiles
@@ -120,7 +120,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.company'),
-        key: 'company',
+        key: 'companyName',
         sort: false,
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true
