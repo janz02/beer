@@ -65,15 +65,15 @@ const getProfiles = (params: ListRequestParams = {}): AppThunk => async (dispatc
     const revisedParams = reviseListRequestParams(listParams, params)
 
     const requestParams = { ...revisedParams }
-    if (selectedTab !== 'all') {
-      switch (selectedTab) {
-        case 'declined':
-          requestParams.status = ProfileStatus.Declined
-          break
-        case 'waiting-for-approval':
-          requestParams.status = ProfileStatus.WaitingForApproval
-          break
-      }
+    switch (selectedTab) {
+      case 'all':
+        break
+      case 'declined':
+        requestParams.status = ProfileStatus.Declined
+        break
+      case 'waiting-for-approval':
+        requestParams.status = ProfileStatus.WaitingForApproval
+        break
     }
 
     const { result, ...pagination } = await api.admin.profiles.getProfiles(requestParams)
