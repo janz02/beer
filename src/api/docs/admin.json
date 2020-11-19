@@ -648,6 +648,500 @@
         }
       }
     },
+    "/api/OrganizationGroups": {
+      "post": {
+        "tags": [
+          "OrganizationGroups"
+        ],
+        "summary": "Creates an Organization Group entity",
+        "description": "Returns the id of the Organization Group upon success",
+        "operationId": "createOrganizationGroup",
+        "parameters": [
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "requestBody": {
+          "description": "Details of the Organization Group",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationGroupDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation: Id of the new entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                },
+                "example": {"id":42}
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                },
+                "example": {"id":42}
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32EntityCreatedVm"
+                },
+                "example": {"id":42}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OrganizationGroups"
+        ],
+        "summary": "Gets an Organization Group entity list sorted and filtered",
+        "description": "Returns the Organization Group list with the specified filters applied",
+        "operationId": "getOrganizationGroups",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "createdBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: List of Organization Group entities",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationGroupVmPaginatedResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationGroupVmPaginatedResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationGroupVmPaginatedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/OrganizationGroups/{id}": {
+      "get": {
+        "tags": [
+          "OrganizationGroups"
+        ],
+        "summary": "Gets an Organization Group entity by Id",
+        "description": "Returns the Organization Group with the specified Id upon success",
+        "operationId": "getOrganizationGroup",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the Organization Group",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of the Organization Group",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Organization Group  entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationGroupVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationGroupVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationGroupVm"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entity not found: error.not-found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OrganizationGroups"
+        ],
+        "summary": "Updates an Organization Group entity",
+        "description": "Updates an Organization Group entity with Id of \"id\" to entity \"company\"",
+        "operationId": "updateOrganizationGroup",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of entity to update",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "requestBody": {
+          "description": "New entity details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationGroupDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful update"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OrganizationGroups"
+        ],
+        "summary": "Deletes an Organization Group entity",
+        "description": "Deletes the Organization Group entity with Id of \"id\"",
+        "operationId": "deleteOrganizationGroup",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Id of entity to delete",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
+          },
+          "412": {
+            "description": "Precondition failed"
+          }
+        }
+      }
+    },
+    "/api/OrganizationGroups/ExportCategories": {
+      "get": {
+        "tags": [
+          "OrganizationGroups"
+        ],
+        "summary": "Exports an Organization Group entity list sorted and filtered in a csv file",
+        "description": "Exports the Organization Group list with the specified filters applied in a csv file",
+        "operationId": "exportOrganizationGroups",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "createdBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "orderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OrderByType"
+            }
+          },
+          {
+            "name": "X-RTD-Transaction-Guid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export: Csv file of Organization Group entities",
+            "content": {
+              "application/octet-stream;charset=utf-8": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition failed"
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
     "/api/Profiles": {
       "post": {
         "tags": [
@@ -1624,6 +2118,82 @@
         "properties": {
           "isActive": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrganizationGroupDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrganizationGroupVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "companies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompanyVm"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrganizationGroupVmPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationGroupVm"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
