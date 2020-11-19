@@ -12,14 +12,14 @@ import { useCompaniesUtils } from './companies/useCompaniesUtils'
 import { GroupsTable } from './groups/GroupsTable'
 import { useGroupsUtils } from './groups/useGroupsUtils'
 import { JobRolesTable } from './jobRoles/JobRolesTable'
-import { useJobRolesUtils } from './jobRoles/useJobRolesListUtils'
+import { useJobRoleListUtils } from './jobRoles/useJobRoleListUtils'
 
 export const OrganizationPage: FC = () => {
   const { t } = useTranslation()
   const [currentTabKey, setCurrentTabKey] = useState('companies')
   const companiesUtils = useCompaniesUtils()
   const groupsUtils = useGroupsUtils()
-  const jobRolesUtils = useJobRolesUtils()
+  const jobRoleListUtils = useJobRoleListUtils()
 
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
 
@@ -54,7 +54,7 @@ export const OrganizationPage: FC = () => {
       tabBarActions = groupsUtils.tabBarActions
       break
     case 'job-roles':
-      tabBarActions = jobRolesUtils.tabBarActions
+      tabBarActions = jobRoleListUtils.tabBarActions
       break
   }
 
@@ -80,7 +80,7 @@ export const OrganizationPage: FC = () => {
           <GroupsTable groupsUtils={groupsUtils} />
         </TabPane>
         <TabPane key="job-roles" tab={<TabPanelTitle title={t('organization.job-roles.title')} />}>
-          <JobRolesTable jobRolesUtils={jobRolesUtils} />
+          <JobRolesTable jobRoleListUtils={jobRoleListUtils} />
         </TabPane>
       </ResponsiveTabs>
     </ResponsiveCard>

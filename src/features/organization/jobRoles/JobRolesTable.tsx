@@ -1,16 +1,16 @@
 import React, { FC, useEffect } from 'react'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
-import { jobRolesActions } from './jobRolesListSlice'
-import { JobRolesUtils } from './useJobRolesListUtils'
+import { jobRolesActions } from './jobRoleListSlice'
+import { JobRoleListUtils } from './useJobRoleListUtils'
 
 interface JobRolesTableProps {
-  jobRolesUtils: JobRolesUtils
+  jobRoleListUtils: JobRoleListUtils
 }
 
 export const JobRolesTable: FC<JobRolesTableProps> = props => {
   const dispatch = useDispatch()
-  const { currentColumns, tableUtils, jobRoles, jobRolesLoading } = props.jobRolesUtils
+  const { currentColumns, tableUtils, jobRoles, jobRolesLoading } = props.jobRoleListUtils
 
   useEffect(() => {
     dispatch(jobRolesActions.getJobRoles())

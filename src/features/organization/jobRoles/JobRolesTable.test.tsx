@@ -5,12 +5,12 @@ import moment from 'moment'
 import React from 'react'
 import { setupPermissions, setupStore } from '../../../../config/setupMocks'
 import { JobRolesTable } from './JobRolesTable'
-import { useJobRolesUtils } from './useJobRolesListUtils'
+import { useJobRoleListUtils } from './useJobRoleListUtils'
 
 jest.mock('app/store')
 
 setupStore({
-  jobRoles: {
+  jobRoleList: {
     jobRoles: [
       {
         id: 1,
@@ -49,7 +49,6 @@ setupStore({
         createdBy: 'Emilia'
       }
     ],
-    savingStatusIds: {},
     listParams: {
       pageSize: 10,
       page: 1,
@@ -62,12 +61,12 @@ setupStore({
 })
 
 const TestJobRolesTable: React.FC = () => {
-  const jobRolesUtils = useJobRolesUtils()
+  const jobRoleListUtils = useJobRoleListUtils()
 
   return (
     <div>
-      {jobRolesUtils.tabBarActions}
-      <JobRolesTable jobRolesUtils={jobRolesUtils} />
+      {jobRoleListUtils.tabBarActions}
+      <JobRolesTable jobRoleListUtils={jobRoleListUtils} />
     </div>
   )
 }

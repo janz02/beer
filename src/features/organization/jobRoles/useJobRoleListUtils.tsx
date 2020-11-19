@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
 import { CrudButtons } from 'components/buttons/CrudButtons'
-import { jobRolesActions } from './jobRolesListSlice'
+import { jobRolesActions } from './jobRoleListSlice'
 import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { ColumnsType, ColumnType } from 'antd/lib/table'
@@ -16,7 +16,7 @@ import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ExportButton } from 'components/buttons/ExportButton'
 import { pageViewRoles } from 'services/roleHelpers'
 
-export interface JobRolesUtils {
+export interface JobRoleListUtils {
   currentColumns: ColumnType<JobRole>[]
   tableUtils: TableUtils<JobRole>
   jobRoles: JobRole[]
@@ -24,7 +24,7 @@ export interface JobRolesUtils {
   tabBarActions: JSX.Element
 }
 
-export const useJobRolesUtils = (): JobRolesUtils => {
+export const useJobRoleListUtils = (): JobRoleListUtils => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 

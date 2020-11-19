@@ -35,7 +35,7 @@ import { segmentationEditorReducer } from 'features/segmentation/segmentationEdi
 import { systemParamsReducer } from 'features/settings/systemParams/systemParamsSlice'
 import { campaignsListReducer } from 'features/campaigns/campaignList/campaignListSlice'
 import { groupsReducer } from 'features/organization/groups/groupsSlice'
-import { jobRolesListReducer } from 'features/organization/jobRoles/jobRolesListSlice'
+import { jobRoleListReducer } from 'features/organization/jobRoles/jobRoleListSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
 // Probably a mock for the router/ history needed for proper solution, but needs more investigation
@@ -77,7 +77,7 @@ export const rootReducer = combineReducers({
   segmentationEditor: segmentationEditorReducer,
   systemParams: systemParamsReducer,
   campaignList: campaignsListReducer,
-  jobRoleList: jobRolesListReducer
+  jobRoleList: jobRoleListReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

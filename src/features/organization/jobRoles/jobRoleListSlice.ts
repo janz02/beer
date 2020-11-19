@@ -11,14 +11,12 @@ import moment from 'moment'
 
 interface State {
   jobRoles: JobRole[]
-  savingStatusIds: { [id: number]: boolean }
   listParams: ListRequestParams
   listState: FeatureState
 }
 
 const initialState: State = {
   jobRoles: [],
-  savingStatusIds: {},
   listParams: {
     pageSize: 10
   },
@@ -77,13 +75,13 @@ const getJobRoles = (params: ListRequestParams = {}): AppThunk => async (dispatc
           }
         ],
         // jobRoles: result?.map(x => ({ ...x, createdDate: moment(x.createdDate) } as JobRole)) || [],
-        listParams: storableListRequestParams(revisedParams, {
+        listParams: {
           pageSize: 10,
           page: 1,
           from: 1,
           to: 2,
           size: 2
-        }) // pagination)
+        } // pagination)
       })
     )
   } catch (err) {
@@ -107,7 +105,7 @@ const exportJobRoles = (): AppThunk => async (dispatch, getState) => {
   } */
 }
 
-export const jobRolesListReducer = slice.reducer
+export const jobRoleListReducer = slice.reducer
 
 export const jobRolesActions = {
   reset,
