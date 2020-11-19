@@ -5,18 +5,25 @@ import {
   reviseListRequestParams,
   storableListRequestParams
 } from 'hooks/useTableUtils'
-import { ProfileListItem } from 'models/profileListItem'
+import { Profile } from 'models/profile'
 import { FeatureState } from 'models/featureState'
-import { getExportProfilesCsv, getProfilesMock } from './profilesMock'
 import { downloadBlobAsCsv } from 'services/file-reader'
+import { api } from 'api'
+import moment from 'moment'
+import { getProfilesMock } from './profilesMock'
+import { ProfileStatus } from 'api/swagger/admin'
+
+export type ProfileListTab = 'all' | 'waiting-for-approval' | 'declined'
 
 interface State {
-  profiles: ProfileListItem[]
+  selectedTab: ProfileListTab
+  profiles: Profile[]
   listParams: ListRequestParams
   listState: FeatureState
 }
 
 const initialState: State = {
+  selectedTab: 'all',
   profiles: [],
   listParams: {
     pageSize: 10
@@ -35,9 +42,12 @@ const slice = createSlice({
     setListState(state, action: PayloadAction<FeatureState>) {
       state.listState = action.payload
     },
+    setSelectedTab(state, action: PayloadAction<ProfileListTab>) {
+      state.selectedTab = action.payload
+    },
     getProfilesSuccess(
       state,
-      action: PayloadAction<{ profiles: ProfileListItem[]; listParams: ListRequestParams }>
+      action: PayloadAction<{ profiles: Profile[]; listParams: ListRequestParams }>
     ) {
       state.profiles = action.payload.profiles
       state.listParams = action.payload.listParams
@@ -46,23 +56,47 @@ const slice = createSlice({
   }
 })
 
-const { reset, resetListParams, setListState, getProfilesSuccess } = slice.actions
+const { reset, resetListParams, setListState, getProfilesSuccess, setSelectedTab } = slice.actions
 
 const getProfiles = (params: ListRequestParams = {}): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setListState(FeatureState.Loading))
-    const revisedParams = reviseListRequestParams(getState().profiles.listParams, params)
-    const { result, ...pagination } = await getProfilesMock(revisedParams)
+
+    const { listParams, selectedTab } = getState().profiles
+    const revisedParams = reviseListRequestParams(listParams, params)
+
+    const requestParams = { ...revisedParams }
+    if (selectedTab !== 'all') {
+      switch (selectedTab) {
+        case 'declined':
+          requestParams.status = ProfileStatus.Declined
+          break
+        case 'waiting-for-approval':
+          requestParams.status = ProfileStatus.WaitingForApproval
+          break
+      }
+    }
+
+    // const { result, ...pagination } = await api.admin.profiles.getProfiles(requestParams)
+    const { result, ...pagination } = await getProfilesMock(requestParams)
 
     dispatch(
       getProfilesSuccess({
-        profiles: result as ProfileListItem[],
+        profiles:
+          result?.map(
+            x => (({ ...x, createdDate: moment(x.createdDate) } as unknown) as Profile)
+          ) || [],
         listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
     dispatch(setListState(FeatureState.Error))
   }
+}
+
+const changeSelectedTab = (tab: ProfileListTab): AppThunk => async dispatch => {
+  dispatch(setSelectedTab(tab))
+  dispatch(getProfiles())
 }
 
 const resetProfilesFilters = (): AppThunk => async dispatch => {
@@ -74,7 +108,7 @@ const exportProfiles = (): AppThunk => async (dispatch, getState) => {
   const { listParams } = getState().profiles
 
   try {
-    downloadBlobAsCsv(await getExportProfilesCsv(listParams))
+    downloadBlobAsCsv(await api.admin.profiles.exportProfiles(listParams))
   } catch (err) {
     return { error: err.toString() }
   }
@@ -86,5 +120,6 @@ export const profilesActions = {
   getProfiles,
   resetProfilesFilters,
   reset,
-  exportProfiles
+  exportProfiles,
+  changeSelectedTab
 }

@@ -943,9 +943,10 @@
       "send-invitation": "Meghívó küldése"
     },
     "status": {
-      "approved": "Aktív",
-      "declined": "Inaktív",
-      "waiting-for-approval": "Jóváhagyásra vár"
+      "active": "Aktív",
+      "inactive": "Inaktív",
+      "waiting-for-approval": "Jóváhagyásra vár",
+      "declined": "Elutasított"
     },
     "action-buttons": {
       "approve": "Jóváhagyás",

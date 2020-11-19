@@ -1,9 +1,10 @@
+import { ProfileStatus } from 'api/swagger/admin'
 import { ListRequestParams, Pagination } from 'hooks/useTableUtils'
-import { ProfileListItem, ProfileStatus } from 'models/profileListItem'
+import { Profile } from 'models/profile'
 import moment from 'moment'
 
 interface GetProfilesResponse extends Pagination {
-  result: ProfileListItem[]
+  result: Profile[]
 }
 
 const getRandomString = (length: number): string => {
@@ -18,31 +19,37 @@ const getRandomString = (length: number): string => {
 }
 
 const getRandomStatus = (): ProfileStatus => {
-  switch (Math.floor(Math.random() * 3)) {
+  switch (Math.floor(Math.random() * 4)) {
     case 0:
-      return 'approved'
+      return ProfileStatus.Active
     case 1:
-      return 'declined'
+      return ProfileStatus.InActive
+    case 2:
+      return ProfileStatus.Declined
     default:
-      return 'waiting-for-approval'
+      return ProfileStatus.WaitingForApproval
   }
 }
 
-const getRandomProfile = (id: number): ProfileListItem => {
+const getRandomProfile = (id: number, status?: ProfileStatus): Profile => {
   const name = getRandomString(10)
-  const username = name.toLowerCase()
+  const userName = name.toLowerCase()
+
+  if (!status) {
+    status = getRandomStatus()
+  }
 
   return {
     id,
-    status: getRandomStatus(),
+    status,
     name,
-    username,
-    email: `${username}@test.com`,
-    group: getRandomString(10),
-    permissions: Math.floor(Math.random() * 10),
+    userName,
+    email: `${userName}@test.com`,
+    groupCount: Math.floor(Math.random() * 10),
+    permissionCount: Math.floor(Math.random() * 10),
     createdDate: moment(),
-    company: 'company',
-    jobRole: 'job'
+    company: Math.floor(Math.random() * 10),
+    jobDescription: getRandomString(10)
   }
 }
 
@@ -50,9 +57,11 @@ export const getProfilesMock = async (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   listParams: ListRequestParams
 ): Promise<GetProfilesResponse> => {
-  const result: ProfileListItem[] = []
+  const status = listParams.status
+
+  const result: Profile[] = []
   for (let i = 1; i <= 10; i++) {
-    result.push(getRandomProfile(i))
+    result.push(getRandomProfile(i, status))
   }
 
   return {
