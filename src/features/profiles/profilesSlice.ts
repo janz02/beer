@@ -114,6 +114,15 @@ const exportProfiles = (): AppThunk => async (dispatch, getState) => {
   }
 }
 
+const setProfileStatus = (id: number, status: ProfileStatus): AppThunk => async dispatch => {
+  try {
+    await api.admin.profiles.setProfileStatus({ id, profileStatusDto: { status } })
+    dispatch(getProfiles())
+  } catch (err) {
+    dispatch(setListState(FeatureState.Error))
+  }
+}
+
 export const profilesReducer = slice.reducer
 
 export const profilesActions = {
@@ -121,5 +130,6 @@ export const profilesActions = {
   resetProfilesFilters,
   reset,
   exportProfiles,
-  changeSelectedTab
+  changeSelectedTab,
+  setProfileStatus
 }

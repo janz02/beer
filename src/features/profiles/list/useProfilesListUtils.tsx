@@ -143,13 +143,21 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
                       <ActionButton
                         icon={<CheckCircleOutlined />}
                         tooltip={t('profiles.action-buttons.approve')}
-                        // onClick={() => {}}
+                        onClick={() => {
+                          dispatch(
+                            profilesActions.setProfileStatus(profile.id, ProfileStatus.Active)
+                          )
+                        }}
                         name="approve"
                       />
                       <ActionButton
                         icon={<CloseCircleOutlined />}
                         tooltip={t('profiles.action-buttons.decline')}
-                        // onClick={() => {}}
+                        onClick={() => {
+                          dispatch(
+                            profilesActions.setProfileStatus(profile.id, ProfileStatus.Declined)
+                          )
+                        }}
                         name="decline"
                       />
                     </>
@@ -166,7 +174,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
           })
         : {}
     ],
-    [tableUtils, t, isEditorUser, selectedTab]
+    [tableUtils, t, isEditorUser, selectedTab, dispatch]
   )
 
   const resetFilters = (): void => {
