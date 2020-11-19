@@ -29,8 +29,6 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  // const [selectedTab, setSelectedTab] = useState<string>('all')
-
   const { listParams, listState, profiles, selectedTab } = useSelector(
     (state: RootState) => state.profiles
   )
