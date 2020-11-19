@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import {
-  ListRequestParams,
-  reviseListRequestParams,
-  storableListRequestParams
-} from 'hooks/useTableUtils'
+import { ListRequestParams, reviseListRequestParams } from 'hooks/useTableUtils'
 import { JobRole } from 'models/jobRole'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'

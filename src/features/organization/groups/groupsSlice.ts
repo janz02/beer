@@ -9,7 +9,7 @@ import { Group } from 'models/group'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
 import { downloadBlobAsCsv } from 'services/file-reader'
-import { getExportGroupsCsv, getGroupsMock } from './groupsMock'
+import { api } from 'api'
 
 interface State {
   groups: Group[]
@@ -53,10 +53,20 @@ const getGroups = (params: ListRequestParams = {}): AppThunk => async (dispatch,
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().groups.listParams, params)
-    const { result, ...pagination } = await getGroupsMock(revisedParams)
+    const { result, ...pagination } = await api.admin.groups.getOrganizationGroups(revisedParams)
     dispatch(
       getGroupsSuccess({
-        groups: result?.map(x => ({ ...x, createdDate: moment(x.createdDate) } as Group)) || [],
+        groups:
+          result?.map(
+            x =>
+              ({
+                ...x,
+                createdAt: moment(x.createdAt),
+                companyCount: x.companies?.length || 0,
+                jobRoleCount: 0,
+                permissionCount: 0
+              } as Group)
+          ) || [],
         listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
@@ -74,7 +84,7 @@ const exportGroups = (): AppThunk => async (dispatch, getState) => {
   const { listParams } = getState().groups
 
   try {
-    const file = await getExportGroupsCsv(listParams)
+    const file = await api.admin.groups.exportOrganizationGroups(listParams)
     downloadBlobAsCsv(file)
   } catch (err) {
     return { error: err.toString() }

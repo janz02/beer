@@ -37,8 +37,8 @@ export const useGroupsUtils = (): GroupsUtils => {
       'companyCount',
       'jobRoleCount',
       'permissionCount',
-      'createdDate',
-      'creator'
+      'createdAt',
+      'createdBy'
     ],
     getDataAction: groupsActions.getGroups
   })
@@ -71,7 +71,7 @@ export const useGroupsUtils = (): GroupsUtils => {
       }),
       tableUtils.columnConfig({
         title: t('organization.groups.field.created-date'),
-        key: 'createdDate',
+        key: 'createdAt',
         sort: true,
         width: '12rem',
         renderMode: 'date time',
@@ -79,7 +79,7 @@ export const useGroupsUtils = (): GroupsUtils => {
       }),
       tableUtils.columnConfig({
         title: t('organization.groups.field.creator'),
-        key: 'creator',
+        key: 'createdBy',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),
