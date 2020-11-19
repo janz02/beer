@@ -1,4 +1,5 @@
-import { Form, Row, Col, Card, Divider } from 'antd'
+import { DashOutlined } from '@ant-design/icons'
+import { Form, Row, Col, Card, Divider, Button } from 'antd'
 import { RootState } from 'app/rootReducer'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -25,7 +26,11 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
 
   return (
     <Form className="create-campaign-form">
-      <Card className="create-campaign-form-content" title={t('campaign-create.title')} extra="...">
+      <Card
+        className="create-campaign-form-content"
+        title={t('campaign-create.title')}
+        extra={<Button icon={<DashOutlined rotate={90} type="primary" />} />}
+      >
         <Row justify="end" align="middle">
           <Col span={8}>
             <EditCampaignStatus />

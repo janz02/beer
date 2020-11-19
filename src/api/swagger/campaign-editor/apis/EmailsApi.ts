@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent,
-    NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEventFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEventToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesRequestsActionEvent,
+    OptimaCampaignEditorApplicationCommonMessagesRequestsActionEventFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesRequestsActionEventToJSON,
 } from '../models';
 
 /**
@@ -32,7 +32,7 @@ export class EmailsApi extends runtime.BaseAPI {
      * Sent message not means action has been made, only has chance for an action if the  appropriate conditions are met.
      * Sends the appropriate campaigns for the message processor engine.
      */
-    async sendEmailRaw(): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent>>> {
+    async sendEmailRaw(): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationCommonMessagesRequestsActionEvent>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -48,14 +48,14 @@ export class EmailsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEventFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationCommonMessagesRequestsActionEventFromJSON));
     }
 
     /**
      * Sent message not means action has been made, only has chance for an action if the  appropriate conditions are met.
      * Sends the appropriate campaigns for the message processor engine.
      */
-    async sendEmail(): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesRequestsActionEvent>> {
+    async sendEmail(): Promise<Array<OptimaCampaignEditorApplicationCommonMessagesRequestsActionEvent>> {
         const response = await this.sendEmailRaw();
         return await response.value();
     }

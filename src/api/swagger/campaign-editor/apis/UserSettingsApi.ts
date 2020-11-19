@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmToJSON,
 } from '../models';
 
 export interface SetLanguageRequest {
@@ -35,7 +35,7 @@ export class UserSettingsApi extends runtime.BaseAPI {
     /**
      * Get current user\'s setting
      */
-    async getUserSettingRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm>> {
+    async getUserSettingRaw(): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -51,13 +51,13 @@ export class UserSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVmFromJSON(jsonValue));
     }
 
     /**
      * Get current user\'s setting
      */
-    async getUserSetting(): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm> {
+    async getUserSetting(): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm> {
         const response = await this.getUserSettingRaw();
         return await response.value();
     }

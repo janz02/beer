@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,18 +18,18 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmToJSON,
-    NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand,
-    NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandFromJSON,
-    NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmToJSON,
+    OptimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand,
+    OptimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandFromJSON,
+    OptimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandToJSON,
 } from '../models';
 
 export interface GetSiteLevelSettingRequest {
@@ -44,12 +44,12 @@ export interface GetSiteLevelSettingsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface UpdateSiteLevelSettingRequest {
     id: number;
-    nKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand?: NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand;
+    optimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand?: OptimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand;
 }
 
 /**
@@ -60,7 +60,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
     /**
      * Get site level setting by id
      */
-    async getSiteLevelSettingRaw(requestParameters: GetSiteLevelSettingRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm>> {
+    async getSiteLevelSettingRaw(requestParameters: GetSiteLevelSettingRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSiteLevelSetting.');
         }
@@ -80,13 +80,13 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON(jsonValue));
     }
 
     /**
      * Get site level setting by id
      */
-    async getSiteLevelSetting(requestParameters: GetSiteLevelSettingRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm> {
+    async getSiteLevelSetting(requestParameters: GetSiteLevelSettingRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm> {
         const response = await this.getSiteLevelSettingRaw(requestParameters);
         return await response.value();
     }
@@ -94,7 +94,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
     /**
      * Get all site level settings
      */
-    async getSiteLevelSettingsRaw(requestParameters: GetSiteLevelSettingsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm>> {
+    async getSiteLevelSettingsRaw(requestParameters: GetSiteLevelSettingsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -142,13 +142,13 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVmFromJSON(jsonValue));
     }
 
     /**
      * Get all site level settings
      */
-    async getSiteLevelSettings(requestParameters: GetSiteLevelSettingsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm> {
+    async getSiteLevelSettings(requestParameters: GetSiteLevelSettingsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSiteLevelSettingVm> {
         const response = await this.getSiteLevelSettingsRaw(requestParameters);
         return await response.value();
     }
@@ -176,7 +176,7 @@ export class SiteLevelSettingsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand),
+            body: OptimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommandToJSON(requestParameters.optimaCampaignEditorApplicationSiteLevelSettingsCommandsUpdateSiteLevelSettingCommand),
         });
 
         return new runtime.VoidApiResponse(response);

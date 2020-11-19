@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,15 +18,15 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVmToJSON,
 } from '../models';
 
 export interface GetChannelRequest {
@@ -40,7 +40,7 @@ export interface GetChannelsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface GetManyChannelsRequest {
@@ -55,7 +55,7 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Gets the requested channel, identified by id.
      */
-    async getChannelRaw(requestParameters: GetChannelRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
+    async getChannelRaw(requestParameters: GetChannelRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getChannel.');
         }
@@ -75,13 +75,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested channel, identified by id.
      */
-    async getChannel(requestParameters: GetChannelRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm> {
+    async getChannel(requestParameters: GetChannelRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm> {
         const response = await this.getChannelRaw(requestParameters);
         return await response.value();
     }
@@ -89,7 +89,7 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Returns the channels for the actual query.
      */
-    async getChannelsRaw(requestParameters: GetChannelsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
+    async getChannelsRaw(requestParameters: GetChannelsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.skip !== undefined) {
@@ -133,13 +133,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the channels for the actual query.
      */
-    async getChannels(requestParameters: GetChannelsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm> {
+    async getChannels(requestParameters: GetChannelsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm> {
         const response = await this.getChannelsRaw(requestParameters);
         return await response.value();
     }
@@ -147,7 +147,7 @@ export class ChannelsApi extends runtime.BaseAPI {
     /**
      * Returns the channels identified by the ids.
      */
-    async getManyChannelsRaw(requestParameters: GetManyChannelsRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm>>> {
+    async getManyChannelsRaw(requestParameters: GetManyChannelsRequest): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -167,13 +167,13 @@ export class ChannelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVmFromJSON));
     }
 
     /**
      * Returns the channels identified by the ids.
      */
-    async getManyChannels(requestParameters: GetManyChannelsRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
+    async getManyChannels(requestParameters: GetManyChannelsRequest): Promise<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm>> {
         const response = await this.getManyChannelsRaw(requestParameters);
         return await response.value();
     }

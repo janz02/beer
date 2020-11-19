@@ -154,7 +154,7 @@ const saveSite = (
 
     let sitePartnerId = partnerId
     if (!sitePartnerId) {
-      const partner = await api.coupon.partner.getMyPartner()
+      const partner = await api.coupon.partner.getMyPartner({})
       sitePartnerId = partner.id
     }
 
