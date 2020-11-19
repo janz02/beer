@@ -166,7 +166,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
           })
         : {}
     ],
-    [tableUtils, t, isEditorUser]
+    [tableUtils, t, isEditorUser, selectedTab]
   )
 
   const resetFilters = (): void => {

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "NKM PKM Admin Api",
+    "title": "Optima Admin",
     "version": "v1"
   },
   "servers": [
@@ -796,7 +796,7 @@
             }
           },
           {
-            "name": "company",
+            "name": "companyId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -861,19 +861,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}],"page":1,"from":1,"to":2,"size":2}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}],"page":1,"from":1,"to":2,"size":2}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}],"page":1,"from":1,"to":2,"size":2}
               }
             }
           },
@@ -940,19 +940,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"company":2,"jobDescription":4}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobDescription":4,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}
               }
             }
           },
@@ -1161,7 +1161,7 @@
             }
           },
           {
-            "name": "company",
+            "name": "companyId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1654,6 +1654,41 @@
           "email": {
             "type": "string",
             "nullable": true
+          },
+          "profilePictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDay": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "jobDescriptionId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -1692,13 +1727,29 @@
             "type": "integer",
             "format": "int32"
           },
-          "company": {
-            "type": "integer",
-            "format": "int32"
-          },
           "jobDescription": {
             "type": "integer",
             "format": "int32"
+          },
+          "profilePictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDay": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

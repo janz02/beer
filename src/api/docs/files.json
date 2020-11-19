@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "NKM PKM Files Api",
+    "title": "Optima Files",
     "version": "v1"
   },
   "paths": {
@@ -14,7 +14,7 @@
         "operationId": "uploadFile",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -97,7 +97,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -141,7 +141,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -179,7 +179,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -223,7 +223,7 @@
         "operationId": "createFile",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -288,7 +288,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -336,7 +336,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -395,7 +395,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -441,7 +441,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -468,7 +468,7 @@
         "operationId": "pruneFile",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -495,7 +495,7 @@
         "operationId": "getErrorKeys",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -548,7 +548,7 @@
         "operationId": "commitTransaction",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -595,7 +595,7 @@
         "operationId": "createTransaction",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -642,7 +642,7 @@
         "operationId": "rollbackTransaction",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-OPTIMA-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
