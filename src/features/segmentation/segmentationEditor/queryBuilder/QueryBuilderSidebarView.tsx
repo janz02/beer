@@ -2,11 +2,11 @@ import React from 'react'
 import { Button } from 'antd'
 import { ResponsiveCard } from '../../../../components/responsive/ResponsiveCard'
 import { useTranslation } from 'react-i18next'
-import { NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
+import { OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
 import './QueryBuilderSidebarView.scss'
 
 interface SidebarViewProps {
-  fields?: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+  fields?: OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
   onFieldSelected: (field: string) => void
 }
 
@@ -16,7 +16,7 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
 
   const renderFieldsFor = (
     parentPrefix: string,
-    subFields: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+    subFields: OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
   ): JSX.Element => (
     <>
       {subFields.map((x, idx) => {
@@ -38,11 +38,11 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
 
   const renderMenuItems = (
     localizationPrefix: string,
-    fields: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+    fields: OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
   ): JSX.Element => (
     <>
       {fields.map(
-        (x: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField, idx: number) => {
+        (x: OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField, idx: number) => {
           return (
             <React.Fragment key={idx}>
               <ul>
@@ -64,7 +64,7 @@ export const QueryBuilderSidebarView: React.FC<SidebarViewProps> = props => {
           {!!fields &&
             fields.map(
               (
-                x: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField,
+                x: OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField,
                 idx: number
               ) => {
                 return (

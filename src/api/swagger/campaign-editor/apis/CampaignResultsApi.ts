@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,15 +18,15 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand,
-    NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandFromJSON,
-    NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmToJSON,
+    OptimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand,
+    OptimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandFromJSON,
+    OptimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmToJSON,
 } from '../models';
 
 export interface DownloadCsvRequest {
@@ -45,11 +45,11 @@ export interface GetEventsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface UploadCsvForCampaignResultRequest {
-    nKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand?: NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand;
+    optimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand?: OptimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand;
 }
 
 /**
@@ -97,7 +97,7 @@ export class CampaignResultsApi extends runtime.BaseAPI {
     /**
      * Queries for the result information from the database with the given filters and parameters
      */
-    async getEventsRaw(requestParameters: GetEventsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm>> {
+    async getEventsRaw(requestParameters: GetEventsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.campaignId !== undefined) {
@@ -157,19 +157,19 @@ export class CampaignResultsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVmFromJSON(jsonValue));
     }
 
     /**
      * Queries for the result information from the database with the given filters and parameters
      */
-    async getEvents(requestParameters: GetEventsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm> {
+    async getEvents(requestParameters: GetEventsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm> {
         const response = await this.getEventsRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Upload the results made for a M:NKM.RTD.CampaignEditor.Controllers.CampaignResultsController.DownloadCsv(System.Int32,System.Int32) request to  a given sharepoint folder. The basic sharepoint configured in the system startup.
+     * Upload the results made for a M:Optima.CampaignEditor.Controllers.CampaignResultsController.DownloadCsv(System.Int32,System.Int32) request to  a given sharepoint folder. The basic sharepoint configured in the system startup.
      */
     async uploadCsvForCampaignResultRaw(requestParameters: UploadCsvForCampaignResultRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -187,14 +187,14 @@ export class CampaignResultsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand),
+            body: OptimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommandToJSON(requestParameters.optimaCampaignEditorApplicationCampaignResultsCommandsUploadCsvUploadCsvCommand),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * Upload the results made for a M:NKM.RTD.CampaignEditor.Controllers.CampaignResultsController.DownloadCsv(System.Int32,System.Int32) request to  a given sharepoint folder. The basic sharepoint configured in the system startup.
+     * Upload the results made for a M:Optima.CampaignEditor.Controllers.CampaignResultsController.DownloadCsv(System.Int32,System.Int32) request to  a given sharepoint folder. The basic sharepoint configured in the system startup.
      */
     async uploadCsvForCampaignResult(requestParameters: UploadCsvForCampaignResultRequest): Promise<void> {
         await this.uploadCsvForCampaignResultRaw(requestParameters);

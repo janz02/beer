@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,38 +18,38 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVmToJSON,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommandFromJSON,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommandToJSON,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandFromJSON,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandToJSON,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandFromJSON,
-    NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVmToJSON,
+    OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
+    OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommandFromJSON,
+    OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommandToJSON,
+    OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand,
+    OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandFromJSON,
+    OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandToJSON,
+    OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand,
+    OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandFromJSON,
+    OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandToJSON,
 } from '../models';
 
 export interface CreateFromCsvSegmentationRequest {
-    nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand?: NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand;
+    optimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand?: OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand;
 }
 
 export interface CreateSegmentationRequest {
-    nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand?: NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand;
+    optimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand?: OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand;
 }
 
 export interface DownloadBusinessPartnersRequest {
@@ -70,19 +70,19 @@ export interface GetSegmentationsRequest {
     createdDateTo?: string;
     categoryName?: string;
     segmentationCategoryId?: number;
-    type?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType;
+    type?: OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType;
     skip?: number;
     take?: number;
     orderBy?: string;
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface UpdateSegmentationRequest {
     id: string;
-    nKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand?: NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand;
+    optimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand?: OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand;
 }
 
 export interface UploadCsvForSegmentationRequest {
@@ -114,7 +114,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand),
+            body: OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommandToJSON(requestParameters.optimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationFromCsvCreateSegmentationFromCsvCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -148,7 +148,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand),
+            body: OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommandToJSON(requestParameters.optimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand),
         });
 
         return new runtime.VoidApiResponse(response);
@@ -199,7 +199,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Get the connected discound based on the id identifier.
      */
-    async getDiscountSegmentationRaw(requestParameters: GetDiscountSegmentationRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm>> {
+    async getDiscountSegmentationRaw(requestParameters: GetDiscountSegmentationRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDiscountSegmentation.');
         }
@@ -219,13 +219,13 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVmFromJSON(jsonValue));
     }
 
     /**
      * Get the connected discound based on the id identifier.
      */
-    async getDiscountSegmentation(requestParameters: GetDiscountSegmentationRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm> {
+    async getDiscountSegmentation(requestParameters: GetDiscountSegmentationRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm> {
         const response = await this.getDiscountSegmentationRaw(requestParameters);
         return await response.value();
     }
@@ -233,7 +233,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Gets the requested segmentation, identified by id.
      */
-    async getSegmentationRaw(requestParameters: GetSegmentationRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm>> {
+    async getSegmentationRaw(requestParameters: GetSegmentationRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSegmentation.');
         }
@@ -253,13 +253,13 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested segmentation, identified by id.
      */
-    async getSegmentation(requestParameters: GetSegmentationRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm> {
+    async getSegmentation(requestParameters: GetSegmentationRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentationVm> {
         const response = await this.getSegmentationRaw(requestParameters);
         return await response.value();
     }
@@ -267,7 +267,7 @@ export class SegmentationsApi extends runtime.BaseAPI {
     /**
      * Returns the segmentation for the actual query.
      */
-    async getSegmentationsRaw(requestParameters: GetSegmentationsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm>> {
+    async getSegmentationsRaw(requestParameters: GetSegmentationsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -335,19 +335,19 @@ export class SegmentationsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the segmentation for the actual query.
      */
-    async getSegmentations(requestParameters: GetSegmentationsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm> {
+    async getSegmentations(requestParameters: GetSegmentationsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsSegmentListItemVm> {
         const response = await this.getSegmentationsRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateSegmentationRaw(requestParameters: UpdateSegmentationRequest): Promise<runtime.ApiResponse<void>> {
@@ -370,14 +370,14 @@ export class SegmentationsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand),
+            body: OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommandToJSON(requestParameters.optimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateSegmentation(requestParameters: UpdateSegmentationRequest): Promise<void> {

@@ -47,7 +47,7 @@ const getMyProfile = (): AppThunk => async dispatch => {
   dispatch(setFeatureState(FeatureState.Loading))
 
   try {
-    const profile = await api.coupon.partnerContacts.getMyPartnerContact()
+    const profile = await api.coupon.partnerContacts.getMyPartnerContact({})
 
     dispatch(getProfileSuccess(profile))
   } catch (err) {

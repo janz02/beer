@@ -57,7 +57,7 @@ export const getMyPartner = (): AppThunk => async dispatch => {
   dispatch(setLoadingStart())
 
   try {
-    const partner = await api.coupon.partner.getMyPartner()
+    const partner = await api.coupon.partner.getMyPartner({})
     dispatch(
       getPartnersSuccess({
         ...partner

@@ -1,9 +1,9 @@
-import { NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
+import { OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor'
 import { TFunction } from 'i18next'
 import { Fields } from 'react-awesome-query-builder'
 
 const createField = (
-  field: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField,
+  field: OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField,
   t: TFunction,
   hasSubfield: boolean
 ): any => {
@@ -22,7 +22,7 @@ const createField = (
 }
 
 export const buildFieldConfig = (
-  queryBuilderFields: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[],
+  queryBuilderFields: OptimaCampaignEditorApplicationModelsSegmentationQueryBuilderField[],
   t: TFunction
 ): Fields => {
   const fields: Fields = {}

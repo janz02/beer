@@ -950,9 +950,10 @@
       "send-invitation": "Send invitation"
     },
     "status": {
-      "approved": "Active",
-      "declined": "Inactive",
-      "waiting-for-approval": "Waiting for approval"
+      "active": "Active",
+      "inactive": "Inactive",
+      "waiting-for-approval": "Waiting for approval",
+      "declined": "Declined"
     },
     "action-buttons": {
       "approve": "Approve",
