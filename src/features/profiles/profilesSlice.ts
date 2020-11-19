@@ -10,7 +10,6 @@ import { FeatureState } from 'models/featureState'
 import { downloadBlobAsCsv } from 'services/file-reader'
 import { api } from 'api'
 import moment from 'moment'
-import { getProfilesMock } from './profilesMock'
 import { ProfileStatus } from 'api/swagger/admin'
 
 export type ProfileListTab = 'all' | 'waiting-for-approval' | 'declined'
@@ -77,8 +76,7 @@ const getProfiles = (params: ListRequestParams = {}): AppThunk => async (dispatc
       }
     }
 
-    // const { result, ...pagination } = await api.admin.profiles.getProfiles(requestParams)
-    const { result, ...pagination } = await getProfilesMock(requestParams)
+    const { result, ...pagination } = await api.admin.profiles.getProfiles(requestParams)
 
     dispatch(
       getProfilesSuccess({
