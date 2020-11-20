@@ -25,7 +25,7 @@ import { testGroupCategoryEditorActions } from 'features/settings/testGroupCateg
 import { resetBpHistory } from 'features/bpHistory/bpHistorySlice'
 import { systemParamsActions } from 'features/settings/systemParams/systemParamsSlice'
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
-import { profilesActions } from 'features/profiles/profilesSlice'
+import { profileListActions } from 'features/profiles/profileList/profileListSlice'
 import { companiesActions } from 'features/organization/companies/companiesSlice'
 import { groupsActions } from 'features/organization/groups/groupsSlice'
 
@@ -38,7 +38,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
   batch(() => {
     dispatch(authActions.resetAuth())
     dispatch(myProfileActions.resetProfile())
-    dispatch(profilesActions.reset())
+    dispatch(profileListActions.reset())
     dispatch(notificationActions.resetNotification())
     dispatch(siteListActions.reset())
     dispatch(siteEditorActions.reset())

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
-import { ProfileListTab, profilesActions } from '../profilesSlice'
+import { ProfileListTab, profileListActions } from './profileListSlice'
 import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { ColumnsType } from 'antd/lib/table'
@@ -15,7 +15,7 @@ import { CheckCircleOutlined, CloseCircleOutlined, FormOutlined } from '@ant-des
 import { pageViewRoles } from 'services/roleHelpers'
 import { ProfileStatus } from 'api/swagger/admin'
 
-interface ProfilesListUtils {
+interface ProfileListUtils {
   columnsConfig: ColumnsType<Profile>
   tableUtils: TableUtils<Profile>
   profiles: Profile[]
@@ -25,16 +25,16 @@ interface ProfilesListUtils {
   resetFilters: () => void
 }
 
-export const useProfilesListUtils = (): ProfilesListUtils => {
+export const useProfileListUtils = (): ProfileListUtils => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const { listParams, listState, profiles, selectedTab } = useSelector(
-    (state: RootState) => state.profiles
+    (state: RootState) => state.profileList
   )
 
   const setSelectedTab = (tab: ProfileListTab): void => {
-    dispatch(profilesActions.changeSelectedTab(tab))
+    dispatch(profileListActions.changeSelectedTab(tab))
   }
 
   const tableUtils = useTableUtils<Profile>({
@@ -50,7 +50,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       'companyName',
       'jobRoleName'
     ],
-    getDataAction: profilesActions.getProfiles
+    getDataAction: profileListActions.getProfiles
   })
 
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.profileEditor), [])
@@ -143,7 +143,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
                         tooltip={t('profiles.action-buttons.approve')}
                         onClick={() => {
                           dispatch(
-                            profilesActions.setProfileStatus(profile.id, ProfileStatus.Active)
+                            profileListActions.setProfileStatus(profile.id, ProfileStatus.Active)
                           )
                         }}
                         name="approve"
@@ -153,7 +153,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
                         tooltip={t('profiles.action-buttons.decline')}
                         onClick={() => {
                           dispatch(
-                            profilesActions.setProfileStatus(profile.id, ProfileStatus.Declined)
+                            profileListActions.setProfileStatus(profile.id, ProfileStatus.Declined)
                           )
                         }}
                         name="decline"
@@ -176,7 +176,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
   )
 
   const resetFilters = (): void => {
-    dispatch(profilesActions.resetProfilesFilters())
+    dispatch(profileListActions.resetProfilesFilters())
   }
 
   return {

@@ -1,11 +1,11 @@
-import './ProfilesList.scss'
+import './ProfileList.scss'
 import React, { FC, useEffect, useMemo } from 'react'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
-import { ProfileListTab, profilesActions } from '../profilesSlice'
-import { useProfilesListUtils } from './useProfilesListUtils'
+import { ProfileListTab, profileListActions } from './profileListSlice'
+import { useProfileListUtils } from './useProfileListUtils'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
@@ -19,7 +19,7 @@ import { ExportButton } from 'components/buttons/ExportButton'
 import { SettingsButton } from 'components/buttons/SettingsButton'
 import { pageViewRoles } from 'services/roleHelpers'
 
-export const ProfilesList: FC = () => {
+export const ProfileList: FC = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -31,10 +31,10 @@ export const ProfilesList: FC = () => {
     resetFilters,
     selectedTab,
     setSelectedTab
-  } = useProfilesListUtils()
+  } = useProfileListUtils()
 
   useEffect(() => {
-    dispatch(profilesActions.getProfiles())
+    dispatch(profileListActions.getProfiles())
   }, [dispatch])
 
   const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.PROFILES)
@@ -68,7 +68,7 @@ export const ProfilesList: FC = () => {
         <ExportButton
           className="profiles-export-button"
           onClick={() => {
-            dispatch(profilesActions.exportProfiles())
+            dispatch(profileListActions.exportProfiles())
           }}
         />
         <SettingsButton />
