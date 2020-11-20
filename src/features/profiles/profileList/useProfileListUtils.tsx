@@ -14,6 +14,7 @@ import { ActionButton } from 'components/buttons/ActionButton'
 import { CheckCircleOutlined, CloseCircleOutlined, FormOutlined } from '@ant-design/icons'
 import { pageViewRoles } from 'services/roleHelpers'
 import { ProfileStatus } from 'api/swagger/admin'
+import { history } from 'router/router'
 
 interface ProfileListUtils {
   columnsConfig: ColumnsType<Profile>
@@ -163,7 +164,9 @@ export const useProfileListUtils = (): ProfileListUtils => {
                   <ActionButton
                     icon={<FormOutlined />}
                     tooltip={t('common.edit')}
-                    // onClick={() => {}}
+                    onClick={() => {
+                      history.push(`/profiles/${profile.id}`)
+                    }}
                     name="crudEdit"
                   />
                 </ActionButtons>

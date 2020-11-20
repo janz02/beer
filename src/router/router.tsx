@@ -35,6 +35,7 @@ import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPa
 import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
 import { OrganizationPage } from 'features/organization/OrganizationPage'
 import { PlaceholderPage } from 'components/placeholder/PlaceholderPage'
+import { ProfileEditorPage } from 'features/profiles/profileEditor/ProfileListPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -187,6 +188,12 @@ const Routes = (): JSX.Element => (
       path="/profiles"
       roles={pageViewRoles.profiles}
       component={ProfileListPage}
+    />
+    <PrivateRoute
+      exact
+      path="/profiles/:profileId"
+      roles={pageViewRoles.profiles}
+      component={ProfileEditorPage}
     />
     <PrivateRoute
       exact
