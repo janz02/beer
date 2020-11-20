@@ -58,7 +58,7 @@ export interface ExportProfilesRequest {
     groupCount?: number | null;
     permissionCount?: number | null;
     companyId?: number | null;
-    jobDescription?: number | null;
+    jobRoleId?: number | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -80,7 +80,7 @@ export interface GetProfilesRequest {
     groupCount?: number | null;
     permissionCount?: number | null;
     companyId?: number | null;
-    jobDescription?: number | null;
+    jobRoleId?: number | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -187,8 +187,8 @@ export class ProfilesApi extends runtime.BaseAPI {
             queryParameters['companyId'] = requestParameters.companyId;
         }
 
-        if (requestParameters.jobDescription !== undefined) {
-            queryParameters['jobDescription'] = requestParameters.jobDescription;
+        if (requestParameters.jobRoleId !== undefined) {
+            queryParameters['jobRoleId'] = requestParameters.jobRoleId;
         }
 
         if (requestParameters.page !== undefined) {
@@ -315,8 +315,8 @@ export class ProfilesApi extends runtime.BaseAPI {
             queryParameters['companyId'] = requestParameters.companyId;
         }
 
-        if (requestParameters.jobDescription !== undefined) {
-            queryParameters['jobDescription'] = requestParameters.jobDescription;
+        if (requestParameters.jobRoleId !== undefined) {
+            queryParameters['jobRoleId'] = requestParameters.jobRoleId;
         }
 
         if (requestParameters.page !== undefined) {

@@ -79,7 +79,13 @@ export interface ProfileVm {
      * @type {number}
      * @memberof ProfileVm
      */
-    jobDescription?: number;
+    jobRoleId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileVm
+     */
+    jobRoleName?: string | null;
     /**
      * 
      * @type {string}
@@ -130,7 +136,8 @@ export function ProfileVmFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'createdDate': !exists(json, 'createdDate') ? undefined : (new Date(json['createdDate'])),
         'groupCount': !exists(json, 'groupCount') ? undefined : json['groupCount'],
         'permissionCount': !exists(json, 'permissionCount') ? undefined : json['permissionCount'],
-        'jobDescription': !exists(json, 'jobDescription') ? undefined : json['jobDescription'],
+        'jobRoleId': !exists(json, 'jobRoleId') ? undefined : json['jobRoleId'],
+        'jobRoleName': !exists(json, 'jobRoleName') ? undefined : json['jobRoleName'],
         'profilePictureId': !exists(json, 'profilePictureId') ? undefined : json['profilePictureId'],
         'birthDay': !exists(json, 'birthDay') ? undefined : (new Date(json['birthDay'])),
         'phoneNumber': !exists(json, 'phoneNumber') ? undefined : json['phoneNumber'],
@@ -156,7 +163,8 @@ export function ProfileVmToJSON(value?: ProfileVm | null): any {
         'createdDate': value.createdDate === undefined ? undefined : (value.createdDate.toISOString()),
         'groupCount': value.groupCount,
         'permissionCount': value.permissionCount,
-        'jobDescription': value.jobDescription,
+        'jobRoleId': value.jobRoleId,
+        'jobRoleName': value.jobRoleName,
         'profilePictureId': value.profilePictureId,
         'birthDay': value.birthDay === undefined ? undefined : (value.birthDay.toISOString()),
         'phoneNumber': value.phoneNumber,

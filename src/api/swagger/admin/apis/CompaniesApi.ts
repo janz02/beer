@@ -421,7 +421,7 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a Company entity with Id of \"id\" to entity \"company\"
+     * Updates a Company entity with Id of \"id\" to entity \"dto\"
      * Updates a Company entity
      */
     async updateCompanyRaw(requestParameters: UpdateCompanyRequest): Promise<runtime.ApiResponse<void>> {
@@ -455,7 +455,7 @@ export class CompaniesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a Company entity with Id of \"id\" to entity \"company\"
+     * Updates a Company entity with Id of \"id\" to entity \"dto\"
      * Updates a Company entity
      */
     async updateCompany(requestParameters: UpdateCompanyRequest): Promise<void> {
