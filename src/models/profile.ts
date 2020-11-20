@@ -11,5 +11,5 @@ export interface Profile {
   permissionCount: number
   company: number
   companyName: string
-  jobDescription: string
+  jobRoleName: string
 }

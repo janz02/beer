@@ -48,7 +48,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       'groupCount',
       'permissionCount',
       'companyName',
-      'jobDescription'
+      'jobRoleName'
     ],
     getDataAction: profilesActions.getProfiles
   })
@@ -125,7 +125,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.job-role'),
-        key: 'jobDescription',
+        key: 'jobRoleName',
         sort: false,
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true

@@ -8,6 +8,8 @@ import {
 import { JobRole } from 'models/jobRole'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
+import { api } from 'api'
+import { downloadBlobAsCsv } from 'services/file-reader'
 
 interface State {
   jobRoles: JobRole[]
@@ -51,37 +53,12 @@ const getJobRoles = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setListState(FeatureState.Loading))
     const revisedParams = reviseListRequestParams(getState().jobRoleList.listParams, params)
-    //  const { result, ...pagination } = await api.admin.jobRoles.getJobRoles(revisedParams)
+    const { result, ...pagination } = await api.admin.jobRoles.getJobRoles(revisedParams)
+
     dispatch(
       getJobRolesSuccess({
-        jobRoles: [
-          {
-            id: 1,
-            name: 'Test',
-            createdDate: moment('2018-12-31T22:43:40.000Z'),
-            profileCount: 4,
-            groupCount: 2,
-            companyCount: 3,
-            createdBy: 'Johanna'
-          },
-          {
-            id: 2,
-            name: 'Second',
-            createdDate: moment('2019-12-31T22:43:40.000Z'),
-            profileCount: 4,
-            groupCount: 2,
-            companyCount: 3,
-            createdBy: 'Josef'
-          }
-        ],
-        // jobRoles: result?.map(x => ({ ...x, createdDate: moment(x.createdDate) } as JobRole)) || [],
-        listParams: {
-          pageSize: 10,
-          page: 1,
-          from: 1,
-          to: 2,
-          size: 2
-        } // pagination)
+        jobRoles: result?.map(x => ({ ...x, createdDate: moment(x.createdDate) } as JobRole)) || [],
+        listParams: storableListRequestParams(revisedParams, pagination)
       })
     )
   } catch (err) {
@@ -95,14 +72,14 @@ const resetJobRolesFilters = (): AppThunk => async dispatch => {
 }
 
 const exportJobRoles = (): AppThunk => async (dispatch, getState) => {
-  /* const { listParams } = getState().jobRoleList
+  const { listParams } = getState().jobRoleList
 
-   try {
+  try {
     const file = await api.admin.jobRoles.exportJobRoles(listParams)
     downloadBlobAsCsv(file)
   } catch (err) {
     return { error: err.toString() }
-  } */
+  }
 }
 
 export const jobRoleListReducer = slice.reducer

@@ -82,16 +82,16 @@ export interface ProfileDto {
     groups?: Array<number> | null;
     /**
      * 
+     * @type {number}
+     * @memberof ProfileDto
+     */
+    jobRoleId?: number;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof ProfileDto
      */
     permissions?: Array<string> | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProfileDto
-     */
-    jobDescriptionId?: number;
 }
 
 export function ProfileDtoFromJSON(json: any): ProfileDto {
@@ -113,8 +113,8 @@ export function ProfileDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'phoneNumber': !exists(json, 'phoneNumber') ? undefined : json['phoneNumber'],
         'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'groups': !exists(json, 'groups') ? undefined : json['groups'],
+        'jobRoleId': !exists(json, 'jobRoleId') ? undefined : json['jobRoleId'],
         'permissions': !exists(json, 'permissions') ? undefined : json['permissions'],
-        'jobDescriptionId': !exists(json, 'jobDescriptionId') ? undefined : json['jobDescriptionId'],
     };
 }
 
@@ -136,8 +136,8 @@ export function ProfileDtoToJSON(value?: ProfileDto | null): any {
         'phoneNumber': value.phoneNumber,
         'companyId': value.companyId,
         'groups': value.groups,
+        'jobRoleId': value.jobRoleId,
         'permissions': value.permissions,
-        'jobDescriptionId': value.jobDescriptionId,
     };
 }
 
