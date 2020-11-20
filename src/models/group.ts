@@ -1,5 +1,3 @@
-import { Company } from './company'
-
 export interface Group {
   id: number
   name: string
