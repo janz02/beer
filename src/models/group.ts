@@ -3,9 +3,10 @@ import { Company } from './company'
 export interface Group {
   id: number
   name: string
+  profileCount: number
   companyCount: number
   jobRoleCount: number
-  permissionCount: number
-  createdAt: moment.Moment
+  permissionsCount: number
+  createdDate: moment.Moment
   createdBy: string
 }

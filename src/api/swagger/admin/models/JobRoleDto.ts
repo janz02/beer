@@ -16,28 +16,28 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface OrganizationGroupDto
+ * @interface JobRoleDto
  */
-export interface OrganizationGroupDto {
+export interface JobRoleDto {
     /**
      * 
      * @type {string}
-     * @memberof OrganizationGroupDto
+     * @memberof JobRoleDto
      */
     name?: string | null;
     /**
      * 
      * @type {Array<number>}
-     * @memberof OrganizationGroupDto
+     * @memberof JobRoleDto
      */
     profileIds?: Array<number> | null;
 }
 
-export function OrganizationGroupDtoFromJSON(json: any): OrganizationGroupDto {
-    return OrganizationGroupDtoFromJSONTyped(json, false);
+export function JobRoleDtoFromJSON(json: any): JobRoleDto {
+    return JobRoleDtoFromJSONTyped(json, false);
 }
 
-export function OrganizationGroupDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): OrganizationGroupDto {
+export function JobRoleDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): JobRoleDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -48,7 +48,7 @@ export function OrganizationGroupDtoFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function OrganizationGroupDtoToJSON(value?: OrganizationGroupDto | null): any {
+export function JobRoleDtoToJSON(value?: JobRoleDto | null): any {
     if (value === undefined) {
         return undefined;
     }

@@ -18,40 +18,40 @@ import {
     Int32EntityCreatedVm,
     Int32EntityCreatedVmFromJSON,
     Int32EntityCreatedVmToJSON,
+    JobRoleDto,
+    JobRoleDtoFromJSON,
+    JobRoleDtoToJSON,
+    JobRoleVm,
+    JobRoleVmFromJSON,
+    JobRoleVmToJSON,
+    JobRoleVmPaginatedResponse,
+    JobRoleVmPaginatedResponseFromJSON,
+    JobRoleVmPaginatedResponseToJSON,
     OrderByType,
     OrderByTypeFromJSON,
     OrderByTypeToJSON,
-    OrganizationGroupDto,
-    OrganizationGroupDtoFromJSON,
-    OrganizationGroupDtoToJSON,
-    OrganizationGroupVm,
-    OrganizationGroupVmFromJSON,
-    OrganizationGroupVmToJSON,
-    OrganizationGroupVmPaginatedResponse,
-    OrganizationGroupVmPaginatedResponseFromJSON,
-    OrganizationGroupVmPaginatedResponseToJSON,
     ProblemDetails,
     ProblemDetailsFromJSON,
     ProblemDetailsToJSON,
 } from '../models';
 
-export interface CreateOrganizationGroupRequest {
+export interface CreateJobRoleRequest {
     xRTDTransactionGuid?: string;
-    organizationGroupDto?: OrganizationGroupDto;
+    jobRoleDto?: JobRoleDto;
 }
 
-export interface DeleteOrganizationGroupRequest {
+export interface DeleteJobRoleRequest {
     id: number;
     xRTDTransactionGuid?: string;
 }
 
-export interface ExportOrganizationGroupsRequest {
+export interface ExportJobRolesRequest {
     name?: string | null;
     createdDate?: Date | null;
     createdBy?: string | null;
     profileCount?: number | null;
+    groupCount?: number | null;
     companyCount?: number | null;
-    jobRoleCount?: number | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -59,18 +59,18 @@ export interface ExportOrganizationGroupsRequest {
     xRTDTransactionGuid?: string;
 }
 
-export interface GetOrganizationGroupRequest {
+export interface GetJobRoleRequest {
     id: number;
     xRTDTransactionGuid?: string;
 }
 
-export interface GetOrganizationGroupsRequest {
+export interface GetJobRolesRequest {
     name?: string | null;
     createdDate?: Date | null;
     createdBy?: string | null;
     profileCount?: number | null;
+    groupCount?: number | null;
     companyCount?: number | null;
-    jobRoleCount?: number | null;
     page?: number;
     pageSize?: number;
     orderBy?: string | null;
@@ -78,22 +78,22 @@ export interface GetOrganizationGroupsRequest {
     xRTDTransactionGuid?: string;
 }
 
-export interface UpdateOrganizationGroupRequest {
+export interface UpdateJobRoleRequest {
     id: number;
     xRTDTransactionGuid?: string;
-    organizationGroupDto?: OrganizationGroupDto;
+    jobRoleDto?: JobRoleDto;
 }
 
 /**
  * no description
  */
-export class OrganizationGroupsApi extends runtime.BaseAPI {
+export class JobRolesApi extends runtime.BaseAPI {
 
     /**
-     * Returns the id of the Organization Group upon success
-     * Creates an Organization Group entity
+     * Returns the id of the Job Role upon success
+     * Creates a Job Role entity
      */
-    async createOrganizationGroupRaw(requestParameters: CreateOrganizationGroupRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
+    async createJobRoleRaw(requestParameters: CreateJobRoleRequest): Promise<runtime.ApiResponse<Int32EntityCreatedVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -109,32 +109,32 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/OrganizationGroups`,
+            path: `/api/JobRoles`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: OrganizationGroupDtoToJSON(requestParameters.organizationGroupDto),
+            body: JobRoleDtoToJSON(requestParameters.jobRoleDto),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => Int32EntityCreatedVmFromJSON(jsonValue));
     }
 
     /**
-     * Returns the id of the Organization Group upon success
-     * Creates an Organization Group entity
+     * Returns the id of the Job Role upon success
+     * Creates a Job Role entity
      */
-    async createOrganizationGroup(requestParameters: CreateOrganizationGroupRequest): Promise<Int32EntityCreatedVm> {
-        const response = await this.createOrganizationGroupRaw(requestParameters);
+    async createJobRole(requestParameters: CreateJobRoleRequest): Promise<Int32EntityCreatedVm> {
+        const response = await this.createJobRoleRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Deletes the Organization Group entity with Id of \"id\"
-     * Deletes an Organization Group entity
+     * Deletes the Job Role  entity with Id of \"id\"
+     * Deletes a Job Role entity
      */
-    async deleteOrganizationGroupRaw(requestParameters: DeleteOrganizationGroupRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteJobRoleRaw(requestParameters: DeleteJobRoleRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteOrganizationGroup.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteJobRole.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -150,7 +150,7 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/OrganizationGroups/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/JobRoles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -160,18 +160,18 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deletes the Organization Group entity with Id of \"id\"
-     * Deletes an Organization Group entity
+     * Deletes the Job Role  entity with Id of \"id\"
+     * Deletes a Job Role entity
      */
-    async deleteOrganizationGroup(requestParameters: DeleteOrganizationGroupRequest): Promise<void> {
-        await this.deleteOrganizationGroupRaw(requestParameters);
+    async deleteJobRole(requestParameters: DeleteJobRoleRequest): Promise<void> {
+        await this.deleteJobRoleRaw(requestParameters);
     }
 
     /**
-     * Exports the Organization Group list with the specified filters applied in a csv file
-     * Exports an Organization Group entity list sorted and filtered in a csv file
+     * Exports the Job Role list with the specified filters applied in a csv file
+     * Exports a Job Role entity list sorted and filtered in a csv file
      */
-    async exportOrganizationGroupsRaw(requestParameters: ExportOrganizationGroupsRequest): Promise<runtime.ApiResponse<Blob>> {
+    async exportJobRolesRaw(requestParameters: ExportJobRolesRequest): Promise<runtime.ApiResponse<Blob>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -190,12 +190,12 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
             queryParameters['profileCount'] = requestParameters.profileCount;
         }
 
-        if (requestParameters.companyCount !== undefined) {
-            queryParameters['companyCount'] = requestParameters.companyCount;
+        if (requestParameters.groupCount !== undefined) {
+            queryParameters['groupCount'] = requestParameters.groupCount;
         }
 
-        if (requestParameters.jobRoleCount !== undefined) {
-            queryParameters['jobRoleCount'] = requestParameters.jobRoleCount;
+        if (requestParameters.companyCount !== undefined) {
+            queryParameters['companyCount'] = requestParameters.companyCount;
         }
 
         if (requestParameters.page !== undefined) {
@@ -225,7 +225,7 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/OrganizationGroups/ExportCategories`,
+            path: `/api/JobRoles/ExportCategories`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -235,21 +235,21 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Exports the Organization Group list with the specified filters applied in a csv file
-     * Exports an Organization Group entity list sorted and filtered in a csv file
+     * Exports the Job Role list with the specified filters applied in a csv file
+     * Exports a Job Role entity list sorted and filtered in a csv file
      */
-    async exportOrganizationGroups(requestParameters: ExportOrganizationGroupsRequest): Promise<Blob> {
-        const response = await this.exportOrganizationGroupsRaw(requestParameters);
+    async exportJobRoles(requestParameters: ExportJobRolesRequest): Promise<Blob> {
+        const response = await this.exportJobRolesRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Returns the Organization Group with the specified Id upon success
-     * Gets an Organization Group entity by Id
+     * Returns the Job Role with the specified Id upon success
+     * Gets a Job Role entity by Id
      */
-    async getOrganizationGroupRaw(requestParameters: GetOrganizationGroupRequest): Promise<runtime.ApiResponse<OrganizationGroupVm>> {
+    async getJobRoleRaw(requestParameters: GetJobRoleRequest): Promise<runtime.ApiResponse<JobRoleVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getOrganizationGroup.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getJobRole.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -265,29 +265,29 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/OrganizationGroups/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/JobRoles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => OrganizationGroupVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => JobRoleVmFromJSON(jsonValue));
     }
 
     /**
-     * Returns the Organization Group with the specified Id upon success
-     * Gets an Organization Group entity by Id
+     * Returns the Job Role with the specified Id upon success
+     * Gets a Job Role entity by Id
      */
-    async getOrganizationGroup(requestParameters: GetOrganizationGroupRequest): Promise<OrganizationGroupVm> {
-        const response = await this.getOrganizationGroupRaw(requestParameters);
+    async getJobRole(requestParameters: GetJobRoleRequest): Promise<JobRoleVm> {
+        const response = await this.getJobRoleRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Returns the Organization Group list with the specified filters applied
-     * Gets an Organization Group entity list sorted and filtered
+     * Returns the Job Role list with the specified filters applied
+     * Gets a Job Role entity list sorted and filtered
      */
-    async getOrganizationGroupsRaw(requestParameters: GetOrganizationGroupsRequest): Promise<runtime.ApiResponse<OrganizationGroupVmPaginatedResponse>> {
+    async getJobRolesRaw(requestParameters: GetJobRolesRequest): Promise<runtime.ApiResponse<JobRoleVmPaginatedResponse>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -306,12 +306,12 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
             queryParameters['profileCount'] = requestParameters.profileCount;
         }
 
-        if (requestParameters.companyCount !== undefined) {
-            queryParameters['companyCount'] = requestParameters.companyCount;
+        if (requestParameters.groupCount !== undefined) {
+            queryParameters['groupCount'] = requestParameters.groupCount;
         }
 
-        if (requestParameters.jobRoleCount !== undefined) {
-            queryParameters['jobRoleCount'] = requestParameters.jobRoleCount;
+        if (requestParameters.companyCount !== undefined) {
+            queryParameters['companyCount'] = requestParameters.companyCount;
         }
 
         if (requestParameters.page !== undefined) {
@@ -341,31 +341,31 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/OrganizationGroups`,
+            path: `/api/JobRoles`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => OrganizationGroupVmPaginatedResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => JobRoleVmPaginatedResponseFromJSON(jsonValue));
     }
 
     /**
-     * Returns the Organization Group list with the specified filters applied
-     * Gets an Organization Group entity list sorted and filtered
+     * Returns the Job Role list with the specified filters applied
+     * Gets a Job Role entity list sorted and filtered
      */
-    async getOrganizationGroups(requestParameters: GetOrganizationGroupsRequest): Promise<OrganizationGroupVmPaginatedResponse> {
-        const response = await this.getOrganizationGroupsRaw(requestParameters);
+    async getJobRoles(requestParameters: GetJobRolesRequest): Promise<JobRoleVmPaginatedResponse> {
+        const response = await this.getJobRolesRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Updates an Organization Group entity with Id of \"id\" to entity \"dto\"
-     * Updates an Organization Group entity
+     * Updates a Job Role entity with Id of \"id\" to entity \"dto\"
+     * Updates a Job Role entity
      */
-    async updateOrganizationGroupRaw(requestParameters: UpdateOrganizationGroupRequest): Promise<runtime.ApiResponse<void>> {
+    async updateJobRoleRaw(requestParameters: UpdateJobRoleRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateOrganizationGroup.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateJobRole.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -383,22 +383,22 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/api/OrganizationGroups/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/api/JobRoles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: OrganizationGroupDtoToJSON(requestParameters.organizationGroupDto),
+            body: JobRoleDtoToJSON(requestParameters.jobRoleDto),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * Updates an Organization Group entity with Id of \"id\" to entity \"dto\"
-     * Updates an Organization Group entity
+     * Updates a Job Role entity with Id of \"id\" to entity \"dto\"
+     * Updates a Job Role entity
      */
-    async updateOrganizationGroup(requestParameters: UpdateOrganizationGroupRequest): Promise<void> {
-        await this.updateOrganizationGroupRaw(requestParameters);
+    async updateJobRole(requestParameters: UpdateJobRoleRequest): Promise<void> {
+        await this.updateJobRoleRaw(requestParameters);
     }
 
 }

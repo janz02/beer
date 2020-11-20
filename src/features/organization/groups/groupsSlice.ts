@@ -61,10 +61,7 @@ const getGroups = (params: ListRequestParams = {}): AppThunk => async (dispatch,
             x =>
               ({
                 ...x,
-                createdAt: moment(x.createdAt),
-                companyCount: x.companies?.length || 0,
-                jobRoleCount: 0,
-                permissionCount: 0
+                createdDate: moment(x.createdDate)
               } as Group)
           ) || [],
         listParams: storableListRequestParams(revisedParams, pagination)

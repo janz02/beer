@@ -16,64 +16,58 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface OrganizationGroupVm
+ * @interface JobRoleVm
  */
-export interface OrganizationGroupVm {
+export interface JobRoleVm {
     /**
      * 
      * @type {number}
-     * @memberof OrganizationGroupVm
+     * @memberof JobRoleVm
      */
     id?: number;
     /**
      * 
      * @type {string}
-     * @memberof OrganizationGroupVm
+     * @memberof JobRoleVm
      */
     name?: string | null;
     /**
      * 
      * @type {Date}
-     * @memberof OrganizationGroupVm
+     * @memberof JobRoleVm
      */
     createdDate?: Date;
     /**
      * 
      * @type {string}
-     * @memberof OrganizationGroupVm
+     * @memberof JobRoleVm
      */
     createdBy?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof OrganizationGroupVm
+     * @memberof JobRoleVm
      */
     profileCount?: number;
     /**
      * 
      * @type {number}
-     * @memberof OrganizationGroupVm
+     * @memberof JobRoleVm
+     */
+    groupCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof JobRoleVm
      */
     companyCount?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof OrganizationGroupVm
-     */
-    jobRoleCount?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof OrganizationGroupVm
-     */
-    permissionsCount?: number;
 }
 
-export function OrganizationGroupVmFromJSON(json: any): OrganizationGroupVm {
-    return OrganizationGroupVmFromJSONTyped(json, false);
+export function JobRoleVmFromJSON(json: any): JobRoleVm {
+    return JobRoleVmFromJSONTyped(json, false);
 }
 
-export function OrganizationGroupVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): OrganizationGroupVm {
+export function JobRoleVmFromJSONTyped(json: any, ignoreDiscriminator: boolean): JobRoleVm {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -84,13 +78,12 @@ export function OrganizationGroupVmFromJSONTyped(json: any, ignoreDiscriminator:
         'createdDate': !exists(json, 'createdDate') ? undefined : (new Date(json['createdDate'])),
         'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
         'profileCount': !exists(json, 'profileCount') ? undefined : json['profileCount'],
+        'groupCount': !exists(json, 'groupCount') ? undefined : json['groupCount'],
         'companyCount': !exists(json, 'companyCount') ? undefined : json['companyCount'],
-        'jobRoleCount': !exists(json, 'jobRoleCount') ? undefined : json['jobRoleCount'],
-        'permissionsCount': !exists(json, 'permissionsCount') ? undefined : json['permissionsCount'],
     };
 }
 
-export function OrganizationGroupVmToJSON(value?: OrganizationGroupVm | null): any {
+export function JobRoleVmToJSON(value?: JobRoleVm | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -104,9 +97,8 @@ export function OrganizationGroupVmToJSON(value?: OrganizationGroupVm | null): a
         'createdDate': value.createdDate === undefined ? undefined : (value.createdDate.toISOString()),
         'createdBy': value.createdBy,
         'profileCount': value.profileCount,
+        'groupCount': value.groupCount,
         'companyCount': value.companyCount,
-        'jobRoleCount': value.jobRoleCount,
-        'permissionsCount': value.permissionsCount,
     };
 }
 
