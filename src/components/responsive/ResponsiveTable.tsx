@@ -1,19 +1,52 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useMemo } from 'react'
 import { Table } from 'antd'
 import { TableProps } from 'antd/lib/table/Table'
 import './ResponsiveTable.scss'
+import { useSelectableRowUtils } from 'hooks'
+
 export interface ResponsiveTableProps extends TableProps<any> {
+  columns: any[]
   hasHeaderOffset?: boolean
   hasFixedColumn?: boolean
+  selectable?: boolean
+  identificationKey?: string
+  onSelectedChange?: (selected: any[]) => void
 }
 
-export const ResponsiveTable: FC<ResponsiveTableProps> = props => {
-  const { hasHeaderOffset, hasFixedColumn, ...tableProps } = props
-
+export const ResponsiveTable: FC<ResponsiveTableProps> = ({
+  hasHeaderOffset,
+  hasFixedColumn,
+  selectable = true,
+  onSelectedChange = () => ({}),
+  columns,
+  dataSource,
+  ...tableProps
+}) => {
   const className =
     `responsive-table ` +
     `${hasHeaderOffset ? 'has-header-offset ' : ''}` +
     `${hasFixedColumn ? 'has-fixed-column ' : ''}`
 
-  return <Table size="small" {...tableProps} className={className} />
+  const { selectColumnConfig, setCurrentPageIds, selectedItems } = useSelectableRowUtils()
+
+  useEffect(() => {
+    setCurrentPageIds(dataSource?.map(el => el.id) || [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataSource])
+
+  useEffect(() => {
+    onSelectedChange(selectedItems)
+  }, [selectedItems, onSelectedChange])
+
+  const columnsOverride = useMemo(() => {
+    return !selectable ? columns : [selectColumnConfig, ...columns]
+  }, [columns, selectable, selectColumnConfig])
+
+  const tablePropsOverride = {
+    ...tableProps,
+    dataSource,
+    columns: columnsOverride
+  }
+
+  return <Table size="small" {...tablePropsOverride} className={className} />
 }
