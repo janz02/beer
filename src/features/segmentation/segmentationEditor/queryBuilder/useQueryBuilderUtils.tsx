@@ -51,7 +51,7 @@ export interface QueryBuilderUtils {
   conditionChanges(): ConditionChangeEvents
   setQueryBuilderActionsRef(builder: BuilderProps): void
   getRuleResult(ruleId: string): SegmentationRuleResult | undefined
-  update(immutableTree: ImmutableTree, config: Config): void
+  update(immutableTree: ImmutableTree, config: Config): boolean
   handleOnSidebarFieldSelected: (selectedField: string) => void
   refresh: (immutableTree: ImmutableTree) => void
 }
@@ -76,9 +76,12 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     dispatch(setQuery(query))
   }
 
-  const treeAsString = (): string => {
-    return stringify(getTree(tree), undefined, 2)
-  }
+  const treeAsString = useCallback(
+    (changedTree?: ImmutableTree): string => {
+      return stringify(getTree(changedTree ?? tree), undefined, 2)
+    },
+    [tree]
+  )
 
   const conditions = useCallback((): QueryBuilderRuleModel[] => {
     return rules.filter(rule => rule.field !== GROUP)
@@ -230,7 +233,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
 
   // Thunk + batch
   const update = useCallback(
-    (updatedTree: ImmutableTree, updatedConfig: Config): void => {
+    (updatedTree: ImmutableTree, updatedConfig: Config): boolean => {
       setConfig(updatedConfig)
       dispatch(setTree(updatedTree))
       dispatch(setRules([]))
@@ -240,8 +243,9 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
       if (initialConditions.length === 0) {
         dispatch(setInitialConditions([...conditions()]))
       }
+      return !segmentationQuery || segmentationQuery?.tree === treeAsString(updatedTree)
     },
-    [initialConditions, conditions, dispatch, createRules]
+    [initialConditions, segmentationQuery, conditions, dispatch, createRules, treeAsString]
   )
 
   const refresh = async (updatedTree: ImmutableTree): Promise<void> => {

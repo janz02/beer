@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
-import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
@@ -204,8 +203,6 @@ export const saveSegmentation = (
       await api.campaignEditor.segmentations.createSegmentation({
         nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand: newSegmentationData
       })
-
-      history.push(`/segmentations-list`)
     }
     dispatch(saveSegmentationSuccess())
     message.success(i18n.t('common.message.save-success'), 5)

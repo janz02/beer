@@ -47,7 +47,7 @@ export const useSegmentationEditorUtils = (
   )
 
   const formUtils = useFormUtils<Partial<CampaignSegmentation>>()
-  const { submitable, modified, setFieldsValue, checkFieldsChange } = formUtils
+  const { submitable, modified, setFieldsValue, checkFieldsChange, resetFormFlags } = formUtils
 
   useEffect(() => {
     setFieldsValue(segmentation || {})
@@ -68,6 +68,7 @@ export const useSegmentationEditorUtils = (
     conditions: QueryBuilderRuleModel[]
   ): void => {
     dispatch(saveSegmentation(values, results, tree, conditions))
+    resetFormFlags()
   }
 
   return {

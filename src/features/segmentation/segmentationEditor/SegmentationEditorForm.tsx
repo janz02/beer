@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Collapse, Form } from 'antd'
+import { Button, Collapse, Form, Input } from 'antd'
 import { SegmentationEditorFormBasics } from './SegmentationEditorFormBasics'
 import { SegmentationEditorUtils } from './useSegmentationEditorUtils'
 import { QueryBuilderView } from './queryBuilder/QueryBuilderView'
@@ -38,7 +38,10 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
 
         <Collapse defaultActiveKey={['2']}>
           <Collapse.Panel header={t('segmentation-editor.query.title')} key="2">
-            <QueryBuilderView />
+            <QueryBuilderView formChangedCallback={checkFieldsChange} />
+            <Form.Item name="query">
+              <Input type="hidden" value={treeAsString} />
+            </Form.Item>
           </Collapse.Panel>
         </Collapse>
 

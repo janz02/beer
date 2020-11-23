@@ -7,7 +7,11 @@ import 'react-awesome-query-builder/css/styles.scss'
 import 'react-awesome-query-builder/css/compact_styles.scss' // optional, for more compact styles
 import './QueryBuilderView.scss'
 
-export const QueryBuilderView: React.FC = () => {
+export interface QueryBuilderViewProps {
+  formChangedCallback: () => void
+}
+
+export const QueryBuilderView: React.FC<QueryBuilderViewProps> = ({ formChangedCallback }) => {
   const [queryRefreshReady, setQueryRefreshReady] = useState(true)
   const queryBuilder = useQueryBuilderUtils()
 
@@ -37,8 +41,12 @@ export const QueryBuilderView: React.FC = () => {
   }
 
   const onChange = async (updatedTree: ImmutableTree, updatedConfig: Config): Promise<void> => {
-    queryBuilder.update(updatedTree, updatedConfig)
+    const isChanged = queryBuilder.update(updatedTree, updatedConfig)
     setRefresh(updatedTree)
+
+    if (isChanged) {
+      formChangedCallback()
+    }
   }
 
   // Update the query results once the rules are ready
