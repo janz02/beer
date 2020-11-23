@@ -67,12 +67,16 @@ const getProfiles = (params: ListRequestParams = {}): AppThunk => async (dispatc
     const requestParams = { ...revisedParams }
     switch (selectedTab) {
       case 'all':
+        if (requestParams.status) {
+          requestParams.statuses = [requestParams.status]
+        }
+
         break
       case 'declined':
-        requestParams.status = ProfileStatus.Declined
+        requestParams.statuses = [ProfileStatus.Declined]
         break
       case 'waiting-for-approval':
-        requestParams.status = ProfileStatus.WaitingForApproval
+        requestParams.statuses = [ProfileStatus.WaitingForApproval]
         break
     }
 
