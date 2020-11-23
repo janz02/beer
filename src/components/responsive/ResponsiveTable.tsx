@@ -39,8 +39,12 @@ export const ResponsiveTable: FC<ResponsiveTableProps> = ({
   }, [selectedItems, onSelectedChange])
 
   const columnsOverride = useMemo(() => {
-    return !selectable ? columns : [selectColumnConfig, ...columns]
-  }, [columns, selectable, selectColumnConfig])
+    if (dataSource && dataSource.length && selectable) {
+      return [selectColumnConfig, ...columns]
+    } else {
+      return columns
+    }
+  }, [dataSource, columns, selectable, selectColumnConfig])
 
   const tablePropsOverride = {
     ...tableProps,
