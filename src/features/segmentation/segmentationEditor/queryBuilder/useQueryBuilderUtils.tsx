@@ -243,7 +243,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
       if (initialConditions.length === 0) {
         dispatch(setInitialConditions([...conditions()]))
       }
-      return !segmentationQuery || segmentationQuery?.tree === treeAsString(updatedTree)
+      return !segmentationQuery || segmentationQuery?.tree !== treeAsString(updatedTree)
     },
     [initialConditions, segmentationQuery, conditions, dispatch, createRules, treeAsString]
   )
