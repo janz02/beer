@@ -34,11 +34,12 @@ export const useGroupsUtils = (): GroupsUtils => {
     listParamsState: listParams,
     filterKeys: [
       'name',
+      'profileCount',
       'companyCount',
       'jobRoleCount',
-      'permissionCount',
+      'permissionsCount',
       'createdDate',
-      'creator'
+      'createdBy'
     ],
     getDataAction: groupsActions.getGroups
   })
@@ -55,6 +56,11 @@ export const useGroupsUtils = (): GroupsUtils => {
         filterMode: FilterMode.SEARCH
       }),
       tableUtils.columnConfig({
+        title: t('organization.groups.field.profile-count'),
+        key: 'profileCount',
+        sort: true
+      }),
+      tableUtils.columnConfig({
         title: t('organization.groups.field.company-count'),
         key: 'companyCount',
         sort: true
@@ -66,19 +72,20 @@ export const useGroupsUtils = (): GroupsUtils => {
       }),
       tableUtils.columnConfig({
         title: t('organization.groups.field.permission-count'),
-        key: 'permissionCount',
+        key: 'permissionsCount',
         sort: true
       }),
       tableUtils.columnConfig({
         title: t('organization.groups.field.created-date'),
         key: 'createdDate',
         sort: true,
+        width: '12rem',
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
       }),
       tableUtils.columnConfig({
         title: t('organization.groups.field.creator'),
-        key: 'creator',
+        key: 'createdBy',
         sort: true,
         filterMode: FilterMode.SEARCH
       }),

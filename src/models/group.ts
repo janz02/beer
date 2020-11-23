@@ -1,9 +1,10 @@
 export interface Group {
   id: number
   name: string
+  profileCount: number
   companyCount: number
   jobRoleCount: number
-  permissionCount: number
+  permissionsCount: number
   createdDate: moment.Moment
-  creator: string
+  createdBy: string
 }

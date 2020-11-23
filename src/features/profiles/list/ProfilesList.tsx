@@ -4,7 +4,7 @@ import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { useTranslation } from 'react-i18next'
-import { profilesActions } from '../profilesSlice'
+import { ProfileListTab, profilesActions } from '../profilesSlice'
 import { useProfilesListUtils } from './useProfilesListUtils'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
@@ -103,7 +103,7 @@ export const ProfilesList: FC = () => {
       <ResponsiveTabs
         type="card"
         defaultActiveKey={selectedTab}
-        onChange={x => setSelectedTab(x)}
+        onChange={x => setSelectedTab(x as ProfileListTab)}
         tabBarExtraContent={tabBarActions}
       >
         <TabPane key="all" tab={<TabPanelTitle title={t('profiles.tab.all')} />}>

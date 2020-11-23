@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { ProfileStatus } from 'api/swagger/admin'
 import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 import React from 'react'
@@ -12,7 +13,7 @@ setupStore({
     profiles: [
       {
         id: 1,
-        status: 'waiting-for-approval',
+        status: ProfileStatus.WaitingForApproval,
         name: '7oTiXBuSf7',
         username: '7otixbusf7',
         email: '7otixbusf7@test.com',
@@ -24,7 +25,7 @@ setupStore({
       },
       {
         id: 2,
-        status: 'declined',
+        status: ProfileStatus.Declined,
         name: 'VLAcHYhZ5B',
         username: 'vlachyhz5b',
         email: 'vlachyhz5b@test.com',
@@ -63,9 +64,10 @@ test('status badges are correct', () => {
   render(<ProfilesList />)
 
   // Assert
-  expect(screen.queryAllByText(/\bprofiles.status.active\b/)).toHaveLength(0)
-  expect(screen.queryAllByText(/\bprofiles.status.declined\b/)).toHaveLength(1)
-  expect(screen.queryAllByText(/\bprofiles.status.waiting-for-approval\b/)).toHaveLength(1)
+  expect(screen.queryAllByText(/\bActive\b/)).toHaveLength(0)
+  // Lengths are 2 because the tab headers are also called the same
+  expect(screen.queryAllByText(/\bWaiting for approval\b/)).toHaveLength(2)
+  expect(screen.queryAllByText(/\bDeclined\b/)).toHaveLength(2)
 })
 
 test('admins can approve or decline', () => {

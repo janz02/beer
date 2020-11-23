@@ -222,12 +222,12 @@
       "name": "Kategória neve"
     }
   },
-"campaign-create": {
-    "title":"Kampány Létrehozása",
-    "status-creation":"Státusz (Kampány Létrehozás)",
-    "user-logs":"Felhaszálói napló",
-    "save-draft":"Piszkozat mentése & Kilépés",
-    "next-section":"Következő (Szegmentálás)"
+  "campaign-create": {
+    "title": "Kampány Létrehozása",
+    "status-creation": "Státusz (Kampány Létrehozás)",
+    "user-logs": "Felhaszálói napló",
+    "save-draft": "Piszkozat mentése & Kilépés",
+    "next-section": "Következő (Szegmentálás)"
   },
   "coupon-campaign-create": {
     "activate": "Aktiválás",
@@ -833,14 +833,23 @@
       "title": "Csoportok",
       "field": {
         "name": "Név",
+        "profile-count": "Felhasználók",
         "company-count": "Cégek",
         "job-role-count": "Munkakörök",
         "permission-count": "Jogosultságok",
         "created-date": "Létrehozás dátuma",
-        "creator": "Létrehoz "
+        "creator": "Létrehozó"
       }
     },
     "job-roles": {
+      "field": {
+        "company-count": "Cégek",
+        "created-by": "Létrehozó",
+        "created-date": "Létrehozás dátuma",
+        "group-count": "Csoportok",
+        "name": "Név",
+        "profile-count": "Felhasználók"
+      },
       "title": "Munkakörök"
     },
     "new": {
@@ -950,9 +959,10 @@
       "send-invitation": "Meghívó küldése"
     },
     "status": {
-      "approved": "Aktív",
-      "declined": "Inaktív",
-      "waiting-for-approval": "Jóváhagyásra vár"
+      "active": "Aktív",
+      "inactive": "Inaktív",
+      "waiting-for-approval": "Jóváhagyásra vár",
+      "declined": "Elutasított"
     },
     "action-buttons": {
       "approve": "Jóváhagyás",

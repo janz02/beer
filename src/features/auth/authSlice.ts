@@ -126,10 +126,10 @@ export const login = (params: any): AppThunk => async (dispatch, state) => {
     const cameFrom = state().routerHistory.cameFrom
     dispatch(loginSuccess(userVm))
 
-    const partner = await api.coupon.partner.getMyPartner()
+    const partner = await api.coupon.partner.getMyPartner({})
     dispatch(setSelfPartner({ id: partner.id, name: partner.name }))
 
-    const contact = await api.coupon.partnerContacts.getMyPartnerContact()
+    const contact = await api.coupon.partnerContacts.getMyPartnerContact({})
     dispatch(setSelfPartnerContact({ id: contact.id }))
 
     if (!cameFrom.includes('error')) {

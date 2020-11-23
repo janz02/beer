@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,25 +18,25 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVmToJSON,
-    NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand,
-    NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommandFromJSON,
-    NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommandToJSON,
-    NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand,
-    NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommandFromJSON,
-    NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVmToJSON,
+    OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand,
+    OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommandFromJSON,
+    OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommandToJSON,
+    OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand,
+    OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommandFromJSON,
+    OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommandToJSON,
 } from '../models';
 
 export interface CreatePermissionRequest {
-    nKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand?: NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand;
+    optimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand?: OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand;
 }
 
 export interface DeletePermissionRequest {
@@ -59,12 +59,12 @@ export interface GetPermissionsRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface UpdatePermissionRequest {
     id: number;
-    nKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand?: NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand;
+    optimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand?: OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand;
 }
 
 /**
@@ -91,7 +91,7 @@ export class PermissionsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand),
+            body: OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommandToJSON(requestParameters.optimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -141,7 +141,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Returns the permissions identified by the ids.
      */
-    async getManyPermissionsRaw(requestParameters: GetManyPermissionsRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm>>> {
+    async getManyPermissionsRaw(requestParameters: GetManyPermissionsRequest): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -161,13 +161,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON));
     }
 
     /**
      * Returns the permissions identified by the ids.
      */
-    async getManyPermissions(requestParameters: GetManyPermissionsRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm>> {
+    async getManyPermissions(requestParameters: GetManyPermissionsRequest): Promise<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm>> {
         const response = await this.getManyPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -175,7 +175,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Gets the requested permission, identified by id.
      */
-    async getPermissionRaw(requestParameters: GetPermissionRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm>> {
+    async getPermissionRaw(requestParameters: GetPermissionRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPermission.');
         }
@@ -195,13 +195,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested permission, identified by id.
      */
-    async getPermission(requestParameters: GetPermissionRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm> {
+    async getPermission(requestParameters: GetPermissionRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm> {
         const response = await this.getPermissionRaw(requestParameters);
         return await response.value();
     }
@@ -209,7 +209,7 @@ export class PermissionsApi extends runtime.BaseAPI {
     /**
      * Returns the permissions for the actual query.
      */
-    async getPermissionsRaw(requestParameters: GetPermissionsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm>> {
+    async getPermissionsRaw(requestParameters: GetPermissionsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -257,13 +257,13 @@ export class PermissionsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the permissions for the actual query.
      */
-    async getPermissions(requestParameters: GetPermissionsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsPermissionVm> {
+    async getPermissions(requestParameters: GetPermissionsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm> {
         const response = await this.getPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -292,7 +292,7 @@ export class PermissionsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand),
+            body: OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommandToJSON(requestParameters.optimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand),
         });
 
         return new runtime.VoidApiResponse(response);

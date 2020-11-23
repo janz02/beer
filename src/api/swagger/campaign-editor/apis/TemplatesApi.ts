@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmToJSON,
 } from '../models';
 
 export interface GetTemplateRequest {
@@ -39,7 +39,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Gets the requested template, identified by id.
      */
-    async getTemplateRaw(requestParameters: GetTemplateRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm>> {
+    async getTemplateRaw(requestParameters: GetTemplateRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTemplate.');
         }
@@ -59,13 +59,13 @@ export class TemplatesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested template, identified by id.
      */
-    async getTemplate(requestParameters: GetTemplateRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm> {
+    async getTemplate(requestParameters: GetTemplateRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm> {
         const response = await this.getTemplateRaw(requestParameters);
         return await response.value();
     }
@@ -73,7 +73,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Gets the requested template, identified by guid.
      */
-    async getTemplateByGuidRaw(requestParameters: GetTemplateByGuidRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm>> {
+    async getTemplateByGuidRaw(requestParameters: GetTemplateByGuidRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getTemplateByGuid.');
         }
@@ -93,13 +93,13 @@ export class TemplatesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested template, identified by guid.
      */
-    async getTemplateByGuid(requestParameters: GetTemplateByGuidRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm> {
+    async getTemplateByGuid(requestParameters: GetTemplateByGuidRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm> {
         const response = await this.getTemplateByGuidRaw(requestParameters);
         return await response.value();
     }

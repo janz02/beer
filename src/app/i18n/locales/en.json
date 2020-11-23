@@ -223,11 +223,11 @@
     }
   },
   "campaign-create": {
-    "title":"Create Campaign",
-    "status-creation":"Status (Campaign Creation)",
-    "user-logs":"User Logs",
-    "save-draft":"Save draft & Exit",
-    "next-section":"Next (Segmentation)"
+    "title": "Create Campaign",
+    "status-creation": "Status (Campaign Creation)",
+    "user-logs": "User Logs",
+    "save-draft": "Save draft & Exit",
+    "next-section": "Next (Segmentation)"
   },
   "coupon-campaign-create": {
     "activate": "Activate",
@@ -833,6 +833,7 @@
       "title": "Groups",
       "field": {
         "name": "Name",
+        "profile-count": "Profiles",
         "company-count": "Companies",
         "job-role-count": "Job roles",
         "permission-count": "Permissions",
@@ -841,6 +842,14 @@
       }
     },
     "job-roles": {
+      "field": {
+        "company-count": "Companies",
+        "created-by": "Creator",
+        "created-date": "Date of creation",
+        "group-count": "Groups",
+        "name": "Name",
+        "profile-count": "Profiles"
+      },
       "title": "Job roles"
     },
     "new": {
@@ -950,9 +959,10 @@
       "send-invitation": "Send invitation"
     },
     "status": {
-      "approved": "Active",
-      "declined": "Inactive",
-      "waiting-for-approval": "Waiting for approval"
+      "active": "Active",
+      "inactive": "Inactive",
+      "waiting-for-approval": "Waiting for approval",
+      "declined": "Declined"
     },
     "action-buttons": {
       "approve": "Approve",

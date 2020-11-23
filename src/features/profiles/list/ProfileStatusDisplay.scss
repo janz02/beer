@@ -1,9 +1,13 @@
-.profile-status-approved .status-badge {
+.profile-status-active .status-badge {
   background: #78e625;
 }
 
-.profile-status-declined .status-badge {
+.profile-status-inactive .status-badge {
   background: #a6adb4;
+}
+
+.profile-status-declined .status-badge {
+  background: #e53225;
 }
 
 .profile-status-waiting-for-approval .status-badge {
