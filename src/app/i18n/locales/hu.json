@@ -222,12 +222,12 @@
       "name": "Kategória neve"
     }
   },
-"campaign-create": {
-    "title":"Kampány Létrehozása",
-    "status-creation":"Státusz (Kampány Létrehozás)",
-    "user-logs":"Felhaszálói napló",
-    "save-draft":"Piszkozat mentése & Kilépés",
-    "next-section":"Következő (Szegmentálás)"
+  "campaign-create": {
+    "title": "Kampány Létrehozása",
+    "status-creation": "Státusz (Kampány Létrehozás)",
+    "user-logs": "Felhaszálói napló",
+    "save-draft": "Piszkozat mentése & Kilépés",
+    "next-section": "Következő (Szegmentálás)"
   },
   "coupon-campaign-create": {
     "activate": "Aktiválás",
@@ -833,6 +833,7 @@
       "title": "Csoportok",
       "field": {
         "name": "Név",
+        "profile-count": "Felhasználók",
         "company-count": "Cégek",
         "job-role-count": "Munkakörök",
         "permission-count": "Jogosultságok",
