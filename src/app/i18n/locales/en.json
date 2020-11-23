@@ -223,11 +223,11 @@
     }
   },
   "campaign-create": {
-    "title":"Create Campaign",
-    "status-creation":"Status (Campaign Creation)",
-    "user-logs":"User Logs",
-    "save-draft":"Save draft & Exit",
-    "next-section":"Next (Segmentation)"
+    "title": "Create Campaign",
+    "status-creation": "Status (Campaign Creation)",
+    "user-logs": "User Logs",
+    "save-draft": "Save draft & Exit",
+    "next-section": "Next (Segmentation)"
   },
   "coupon-campaign-create": {
     "activate": "Activate",
@@ -833,6 +833,7 @@
       "title": "Groups",
       "field": {
         "name": "Name",
+        "profile-count": "Profiles",
         "company-count": "Companies",
         "job-role-count": "Job roles",
         "permission-count": "Permissions",

@@ -15,29 +15,32 @@ setupStore({
       {
         id: 1,
         name: '2iqSmhPKn9',
+        profileCount: 2,
         companyCount: 7,
         jobRoleCount: 9,
-        permissionCount: 4,
+        permissionsCount: 4,
         createdDate: moment(),
-        creator: 'D3YnRJp3Ff'
+        createdBy: 'D3YnRJp3Ff'
       },
       {
         id: 2,
         name: 'eHh5VFc5v8',
+        profileCount: 2,
         companyCount: 7,
         jobRoleCount: 5,
-        permissionCount: 8,
+        permissionsCount: 8,
         createdDate: moment(),
-        creator: '9wHvUrkvEF'
+        createdBy: '9wHvUrkvEF'
       },
       {
         id: 3,
         name: '9mKBkEL5nq',
+        profileCount: 2,
         companyCount: 0,
         jobRoleCount: 6,
-        permissionCount: 0,
+        permissionsCount: 0,
         createdDate: moment(),
-        creator: 'zZkcJsQ5Yp'
+        createdBy: 'zZkcJsQ5Yp'
       }
     ],
     savingStatusIds: {},
