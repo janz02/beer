@@ -24,6 +24,7 @@ export enum THREE_STATE_CHECKBOX {
 export interface SelectableRowUtils {
   selectedItems: any[]
   setCurrentPageIds: (ids: any[]) => void
+  resetSelection: () => void
   selectColumnConfig: any
 }
 
@@ -85,6 +86,8 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
   const { t } = useTranslation()
   const [selectedState, dispatch] = useReducer(reducer, initialSelectedState)
   const { selectedItems, currentPageIds, headerState } = selectedState
+
+  const resetSelection = (): void => dispatch({ type: 'reset_selection', payload: null })
 
   const removeFromSelection = (ids: any[]): void =>
     dispatch({ type: 'remove_selection', payload: ids })
@@ -152,7 +155,7 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
   }
 
   const headerContainer = (
-    <>
+    <span className="table-select__container">
       <Checkbox
         checked={headerState.status !== THREE_STATE_CHECKBOX.NONE}
         className={`table-select__checkbox ${headerState.className}`}
@@ -171,13 +174,13 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
       >
         <DownOutlined />
       </Dropdown>
-    </>
+    </span>
   )
 
   const selectColumnConfig = {
     key: 'selectCheckboxes',
     title: headerContainer,
-    width: '50px',
+    width: '60px',
     render(record: any) {
       return (
         <Checkbox
@@ -201,6 +204,7 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
   return {
     selectedItems,
     selectColumnConfig,
-    setCurrentPageIds
+    setCurrentPageIds,
+    resetSelection
   }
 }
