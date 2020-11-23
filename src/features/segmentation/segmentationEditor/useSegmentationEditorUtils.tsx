@@ -12,6 +12,7 @@ import {
   resetSegmentationEditor,
   saveSegmentation
 } from './segmentationEditorSlice'
+import { QueryBuilderRuleModel } from './queryBuilder/useQueryBuilderUtils'
 
 interface SegmentationEditorUtilsProps {
   id?: number
@@ -25,7 +26,12 @@ export interface SegmentationEditorUtils {
   modified: boolean
   saving: boolean
   checkFieldsChange: () => void
-  handleSave: (values: CampaignSegmentation, results: SegmentationRuleResult) => void
+  handleSave: (
+    values: CampaignSegmentation,
+    results: SegmentationRuleResult,
+    tree: string,
+    conditions: QueryBuilderRuleModel[]
+  ) => void
   fields?: QueryBuilderField[]
   segmentationQuery?: SegmentationQuery
 }
@@ -55,8 +61,13 @@ export const useSegmentationEditorUtils = (
     }
   }, [dispatch, id])
 
-  const handleSave = (values: CampaignSegmentation, results: SegmentationRuleResult): void => {
-    dispatch(saveSegmentation(values, results))
+  const handleSave = (
+    values: CampaignSegmentation,
+    results: SegmentationRuleResult,
+    tree: string,
+    conditions: QueryBuilderRuleModel[]
+  ): void => {
+    dispatch(saveSegmentation(values, results, tree, conditions))
   }
 
   return {

@@ -47,6 +47,7 @@ export interface QueryBuilderUtils {
   treeTotal: SegmentationRuleResult
   treeAsString: string
   ruleResults: SegmentationRuleResult[]
+  conditions: QueryBuilderRuleModel[]
   conditionChanges(): ConditionChangeEvents
   setQueryBuilderActionsRef(builder: BuilderProps): void
   getRuleResult(ruleId: string): SegmentationRuleResult | undefined
@@ -281,6 +282,7 @@ export const useQueryBuilderUtils = (): QueryBuilderUtils => {
     treeTotal: treeTotal(),
     treeAsString: treeAsString(),
     ruleResults,
+    conditions: conditions(),
     conditionChanges,
     setQueryBuilderActionsRef,
     getRuleResult,

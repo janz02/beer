@@ -15,10 +15,10 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
   const { t } = useTranslation()
   const { segmentationEditorUtils } = props
   const { submitable, saving, id, checkFieldsChange, handleSave } = segmentationEditorUtils
-  const { treeTotal } = useQueryBuilderUtils()
+  const { treeTotal, treeAsString, conditions } = useQueryBuilderUtils()
 
   const save = (segmentation: CampaignSegmentation): void => {
-    handleSave(segmentation, treeTotal)
+    handleSave(segmentation, treeTotal, treeAsString, conditions)
   }
 
   return (

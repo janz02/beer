@@ -6,6 +6,7 @@ import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
 import {
+  NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType,
   NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
   NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
 } from 'api/swagger/campaign-editor'
@@ -164,20 +165,23 @@ export const getSegmentation = (id?: number): AppThunk => async dispatch => {
 
 export const saveSegmentation = (
   data: CampaignSegmentation,
-  results: SegmentationRuleResult
+  results: SegmentationRuleResult,
+  tree: string,
+  conditions: QueryBuilderRuleModel[]
 ): AppThunk => async (dispatch, getState) => {
   try {
-    const { segmentation, segmentationQuery } = getState().segmentationEditor
+    const { segmentation, segmentationQuery, queryBuilder } = getState().segmentationEditor
     dispatch(saveSegmentationRequest())
-
     if (segmentation?.id) {
       const command = {
-        ...data,
-        ...segmentationQuery,
         ...segmentation,
-        cumulativeIntersection: results.filteredSize,
+        ...data,
+        tree,
+        conditions,
+        query: queryBuilder.query,
+        queryId: segmentationQuery?.id,
         segmentSize: results.segmentSize,
-        queryId: segmentationQuery?.id
+        cumulativeIntersection: results.filteredSize
       } as NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
 
       await api.campaignEditor.segmentations.updateSegmentation({
@@ -187,17 +191,21 @@ export const saveSegmentation = (
 
       dispatch(getSegmentation(segmentation.id))
     } else {
+      const newSegmentationData = {
+        ...data,
+        tree,
+        conditions,
+        query: queryBuilder.query,
+        segmentSize: results.segmentSize,
+        cumulativeIntersection: results.filteredSize,
+        type: NKMRTDCampaignEditorApplicationCommonMessagesEnumsSegmentationType.Query
+      } as NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand
+
       await api.campaignEditor.segmentations.createSegmentation({
-        nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand: {
-          ...segmentationQuery,
-          ...segmentation,
-          cumulativeIntersection: results.filteredSize,
-          segmentSize: results.segmentSize,
-          ...data
-        } as NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand
+        nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand: newSegmentationData
       })
 
-      history.push(`/segmentations`)
+      history.push(`/segmentations-list`)
     }
     dispatch(saveSegmentationSuccess())
     message.success(i18n.t('common.message.save-success'), 5)
