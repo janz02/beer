@@ -1,6 +1,8 @@
 import { DashOutlined } from '@ant-design/icons'
+import { Form, Row, Col, Card, Divider } from 'antd'
 import { Form, Row, Col, Card, Divider, Button } from 'antd'
 import { RootState } from 'app/rootReducer'
+import { TabPane } from 'components/responsive/tabs'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -9,6 +11,10 @@ import { pageViewRoles } from 'services/roleHelpers'
 import { CampaignEditorFormFooter } from './CampaignEditorFormFooter'
 import { EditCampaignStatus } from './CampaignStatusHeader'
 import { CampaignUserLogs } from './CampaignUserLogs'
+import { ContentTabPane } from './ContentTabPane'
+import { SegmentationTabPane } from './SegmentationTabPane'
+import { SettingsTabPane } from './SettingsTabPane'
+import { TestTabPane } from './TestTabPane'
 
 export interface CampaignEditorProps {
   campaignId: number | undefined
@@ -46,6 +52,20 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
               />
             )}
           </Col>
+          <Tabs>
+            <TabPane tab="Settings" key="settings">
+              <SettingsTabPane campaignId={campaignId} />
+            </TabPane>
+            <TabPane tab="Segmentation" key="segmentation">
+              <SegmentationTabPane campaignId={campaignId} />
+            </TabPane>
+            <TabPane tab="Content(Email)" key="content">
+              <ContentTabPane campaignId={campaignId} />
+            </TabPane>
+            <TabPane tab="Test" key="test">
+              <TestTabPane campaignId={campaignId} />
+            </TabPane>
+          </Tabs>
           <Divider />
           <Col span={18}>
             <CampaignEditorFormFooter />
