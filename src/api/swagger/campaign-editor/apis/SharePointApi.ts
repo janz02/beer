@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmToJSON,
 } from '../models';
 
 export interface GetFileStructureRequest {
@@ -39,7 +39,7 @@ export class SharePointApi extends runtime.BaseAPI {
     /**
      * Returns a folder structure of a dedicated - configured SharePoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
-    async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm>>> {
+    async getFileStructureRaw(requestParameters: GetFileStructureRequest): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.withoutFile !== undefined) {
@@ -59,19 +59,19 @@ export class SharePointApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVmFromJSON));
     }
 
     /**
      * Returns a folder structure of a dedicated - configured SharePoint folder. The   mechanism can returns to file leaf and last folder leaf, depending upon the  withoutFile.
      */
-    async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm>> {
+    async getFileStructure(requestParameters: GetFileStructureRequest): Promise<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsTreeNodeVm>> {
         const response = await this.getFileStructureRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Creates segmentation via NKM.RTD.CampaignEditor.Controllers.SegmentationsController used mechanism to  process CSV and create segment. The file which selected on SharePoint got to be   a CSV.
+     * Creates segmentation via Optima.CampaignEditor.Controllers.SegmentationsController used mechanism to  process CSV and create segment. The file which selected on SharePoint got to be   a CSV.
      */
     async uploadFromSharePointRaw(requestParameters: UploadFromSharePointRequest): Promise<runtime.ApiResponse<number>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -96,7 +96,7 @@ export class SharePointApi extends runtime.BaseAPI {
     }
 
     /**
-     * Creates segmentation via NKM.RTD.CampaignEditor.Controllers.SegmentationsController used mechanism to  process CSV and create segment. The file which selected on SharePoint got to be   a CSV.
+     * Creates segmentation via Optima.CampaignEditor.Controllers.SegmentationsController used mechanism to  process CSV and create segment. The file which selected on SharePoint got to be   a CSV.
      */
     async uploadFromSharePoint(requestParameters: UploadFromSharePointRequest): Promise<number> {
         const response = await this.uploadFromSharePointRaw(requestParameters);

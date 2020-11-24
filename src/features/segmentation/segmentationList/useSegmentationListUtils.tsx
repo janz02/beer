@@ -82,7 +82,7 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
         render(record: CampaignSegmentation) {
           return (
             <CrudButtons
-              onEdit={isEditor ? () => history.push(`/segmentations/${record.id}`) : undefined}
+              onEdit={isEditor ? () => history.push(`/segmentations-list/${record.id}`) : undefined}
             />
           )
         }
@@ -117,7 +117,7 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
         <ResetFiltersButton onClick={resetFilters} />
         <ColumnOrderDropdown {...columnOrderUtils} />
         {isEditor ? (
-          <AddButton onClick={() => history.push(`/segmentations/new`)}>
+          <AddButton onClick={() => history.push(`/segmentations-list/new`)}>
             {t('segmentation.list.add')}
           </AddButton>
         ) : (

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,24 +18,24 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand,
-    NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommandFromJSON,
-    NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommandToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVmToJSON,
+    OptimaCampaignEditorApplicationAccountsCommandsLoginLoginCommand,
+    OptimaCampaignEditorApplicationAccountsCommandsLoginLoginCommandFromJSON,
+    OptimaCampaignEditorApplicationAccountsCommandsLoginLoginCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVmToJSON,
 } from '../models';
 
 export interface GetAdGroupsRequest {
@@ -51,7 +51,7 @@ export interface GetUsersForPermissionRequest {
 }
 
 export interface LoginRequest {
-    nKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand?: NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand;
+    optimaCampaignEditorApplicationAccountsCommandsLoginLoginCommand?: OptimaCampaignEditorApplicationAccountsCommandsLoginLoginCommand;
 }
 
 /**
@@ -62,7 +62,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Query for groups in the system which were synchronized from the domain Active Directory
      */
-    async getAdGroupsRaw(requestParameters: GetAdGroupsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm>> {
+    async getAdGroupsRaw(requestParameters: GetAdGroupsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.permissionId !== undefined) {
@@ -82,13 +82,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVmFromJSON(jsonValue));
     }
 
     /**
      * Query for groups in the system which were synchronized from the domain Active Directory
      */
-    async getAdGroups(requestParameters: GetAdGroupsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm> {
+    async getAdGroups(requestParameters: GetAdGroupsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm> {
         const response = await this.getAdGroupsRaw(requestParameters);
         return await response.value();
     }
@@ -96,7 +96,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Query for all function permission for the given permissionId.
      */
-    async getFunctionPermissionsRaw(requestParameters: GetFunctionPermissionsRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm>> {
+    async getFunctionPermissionsRaw(requestParameters: GetFunctionPermissionsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.permissionId !== undefined) {
@@ -116,13 +116,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Query for all function permission for the given permissionId.
      */
-    async getFunctionPermissions(requestParameters: GetFunctionPermissionsRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm> {
+    async getFunctionPermissions(requestParameters: GetFunctionPermissionsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm> {
         const response = await this.getFunctionPermissionsRaw(requestParameters);
         return await response.value();
     }
@@ -131,7 +131,7 @@ export class AccountsApi extends runtime.BaseAPI {
      * Has only temporary implementation on service since there is no exact functional  requirement for the profile!
      * Returns basic information about the current user. The profile will be returned.
      */
-    async getMyAccountRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm>> {
+    async getMyAccountRaw(): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -147,14 +147,14 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVmFromJSON(jsonValue));
     }
 
     /**
      * Has only temporary implementation on service since there is no exact functional  requirement for the profile!
      * Returns basic information about the current user. The profile will be returned.
      */
-    async getMyAccount(): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsProfileVm> {
+    async getMyAccount(): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsProfileVm> {
         const response = await this.getMyAccountRaw();
         return await response.value();
     }
@@ -162,7 +162,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Returns all the users stored in the system.
      */
-    async getUserAccountsRaw(): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm>>> {
+    async getUserAccountsRaw(): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -178,13 +178,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVmFromJSON));
     }
 
     /**
      * Returns all the users stored in the system.
      */
-    async getUserAccounts(): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserVm>> {
+    async getUserAccounts(): Promise<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm>> {
         const response = await this.getUserAccountsRaw();
         return await response.value();
     }
@@ -192,7 +192,7 @@ export class AccountsApi extends runtime.BaseAPI {
     /**
      * Query for all directly referenced users for the given permissionId.
      */
-    async getUsersForPermissionRaw(requestParameters: GetUsersForPermissionRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm>> {
+    async getUsersForPermissionRaw(requestParameters: GetUsersForPermissionRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.permissionId !== undefined) {
@@ -212,13 +212,13 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVmFromJSON(jsonValue));
     }
 
     /**
      * Query for all directly referenced users for the given permissionId.
      */
-    async getUsersForPermission(requestParameters: GetUsersForPermissionRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm> {
+    async getUsersForPermission(requestParameters: GetUsersForPermissionRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm> {
         const response = await this.getUsersForPermissionRaw(requestParameters);
         return await response.value();
     }
@@ -234,16 +234,12 @@ export class AccountsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
         const response = await this.request({
             path: `/api/Accounts/Login`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationAccountsCommandsLoginLoginCommand),
+            body: OptimaCampaignEditorApplicationAccountsCommandsLoginLoginCommandToJSON(requestParameters.optimaCampaignEditorApplicationAccountsCommandsLoginLoginCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -265,10 +261,6 @@ export class AccountsApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
 
         const response = await this.request({
             path: `/api/Accounts/Logout`,
@@ -295,10 +287,6 @@ export class AccountsApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
 
         const response = await this.request({
             path: `/api/Accounts/RefreshToken`,

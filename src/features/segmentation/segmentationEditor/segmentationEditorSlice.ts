@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
-import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
 import {
-  NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField,
-  NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
-  NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
+  OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType,
+  OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand,
+  OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
 } from 'api/swagger/campaign-editor'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
@@ -18,6 +17,7 @@ import {
   SegmentationRuleResponse
 } from './queryBuilder/useQueryBuilderUtils'
 import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
+import { QueryBuilderField } from 'models/campaign/queryBuilderField'
 
 const { loadTree, uuid } = Utils
 
@@ -37,7 +37,7 @@ interface SegmentationEditorLoadedData {
   segmentation?: CampaignSegmentation
   categories?: SegmentationCategory[]
   segmentationQuery?: SegmentationQuery
-  fields?: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+  fields?: QueryBuilderField[]
 }
 
 interface SegmentationEditorState extends SegmentationEditorLoadedData {
@@ -154,7 +154,7 @@ export const getSegmentation = (id?: number): AppThunk => async dispatch => {
         segmentation: segmentation as CampaignSegmentation | undefined,
         categories: categories as SegmentationCategory[],
         segmentationQuery: segmentationQuery as SegmentationQuery | undefined,
-        fields: fields as NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+        fields: fields as QueryBuilderField[]
       })
     )
   } catch (err) {
@@ -162,36 +162,47 @@ export const getSegmentation = (id?: number): AppThunk => async dispatch => {
   }
 }
 
-export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async (
-  dispatch,
-  getState
-) => {
+export const saveSegmentation = (
+  data: CampaignSegmentation,
+  results: SegmentationRuleResult,
+  tree: string,
+  conditions: QueryBuilderRuleModel[]
+): AppThunk => async (dispatch, getState) => {
   try {
-    const { segmentation, segmentationQuery } = getState().segmentationEditor
+    const { segmentation, segmentationQuery, queryBuilder } = getState().segmentationEditor
     dispatch(saveSegmentationRequest())
-
     if (segmentation?.id) {
+      const command = {
+        ...segmentation,
+        ...data,
+        tree,
+        conditions,
+        query: queryBuilder.query,
+        queryId: segmentationQuery?.id,
+        segmentSize: results.segmentSize,
+        cumulativeIntersection: results.filteredSize
+      } as OptimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
+
       await api.campaignEditor.segmentations.updateSegmentation({
-        id: data.id!.toString(),
-        nKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: {
-          ...segmentationQuery,
-          ...segmentation,
-          ...data,
-          queryId: segmentationQuery?.id
-        } as NKMRTDCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand
+        id: segmentation.id.toString(),
+        optimaCampaignEditorApplicationSegmentationsCommandsUpdateSegmentationUpdateSegmentationCommand: command
       })
 
       dispatch(getSegmentation(segmentation.id))
     } else {
-      await api.campaignEditor.segmentations.createSegmentation({
-        nKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand: {
-          ...segmentationQuery,
-          ...segmentation,
-          ...data
-        } as NKMRTDCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand
-      })
+      const newSegmentationData = {
+        ...data,
+        tree,
+        conditions,
+        query: queryBuilder.query,
+        segmentSize: results.segmentSize,
+        cumulativeIntersection: results.filteredSize,
+        type: OptimaCampaignEditorApplicationCommonMessagesEnumsSegmentationType.Query
+      } as OptimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand
 
-      history.push(`/segmentations`)
+      await api.campaignEditor.segmentations.createSegmentation({
+        optimaCampaignEditorApplicationSegmentationsCommandsCreateSegmentationCreateSegmentationCommand: newSegmentationData
+      })
     }
     dispatch(saveSegmentationSuccess())
     message.success(i18n.t('common.message.save-success'), 5)
@@ -201,17 +212,15 @@ export const saveSegmentation = (data: CampaignSegmentation): AppThunk => async 
   }
 }
 
-export const refreshQueryResults = (callback: any): AppThunk => async (dispatch, getState) => {
+export const refreshQueryResults = (): AppThunk => async (dispatch, getState) => {
   try {
-    const { queryBuilder } = getState().segmentationEditor
-    const { query } = queryBuilder
-
+    const query = getState().segmentationEditor.queryBuilder.query
     if (query) {
       const result = await api.campaignEditor.segmentationQueries.querySegmentationQueries({
-        nKMRTDCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery: query
+        optimaCampaignEditorApplicationSegmentationQueriesQueriesQuerySegmentationQueriesQuerySegmentationQueriesQuery: query
       })
+
       dispatch(setRuleResults(result as SegmentationRuleResponse[]))
-      callback()
     }
   } catch (err) {}
 }

@@ -9,11 +9,11 @@ import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
 import {
-  NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm,
-  NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm,
-  NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm,
-  NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand,
-  NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand
+  OptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm,
+  OptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm,
+  OptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm,
+  OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand,
+  OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand
 } from 'api/swagger/campaign-editor'
 
 interface PermissionEditorState {
@@ -175,13 +175,13 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
   try {
     const permission = getState().permissionEditor.permission
     const users = getState().permissionEditor.campaignUsers?.map(
-      x => x as NKMRTDCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm
+      x => x as OptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm
     )
     const adGroups = getState().permissionEditor.campaignAdGroups?.map(
-      x => x as NKMRTDCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm
+      x => x as OptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm
     )
     const functionPermissions = getState().permissionEditor.campaignFunctionPermissions?.map(
-      x => x as NKMRTDCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm
+      x => x as OptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm
     )
 
     dispatch(savePermissionRequest())
@@ -189,23 +189,23 @@ export const savePermission = (data: CampaignPermission): AppThunk => async (
     if (permission?.id) {
       await api.campaignEditor.permissions.updatePermission({
         id: permission.id,
-        nKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand: {
+        optimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand: {
           ...permission,
           ...data,
           adGroups: adGroups,
           users: users,
           functionPermissions: functionPermissions
-        } as NKMRTDCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand
+        } as OptimaCampaignEditorApplicationPermissionsCommandsUpdatePermissionUpdatePermissionCommand
       })
       dispatch(getPermission(permission.id))
     } else {
       const createdPermissionId = await api.campaignEditor.permissions.createPermission({
-        nKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand: {
+        optimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand: {
           ...data,
           adGroups: adGroups,
           users: users,
           functionPermissions: functionPermissions
-        } as NKMRTDCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand
+        } as OptimaCampaignEditorApplicationPermissionsCommandsCreatePermissionCreatePermissionCommand
       })
 
       history.push(`/permissions/${createdPermissionId}`)

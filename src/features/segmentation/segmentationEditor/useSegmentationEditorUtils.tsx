@@ -1,16 +1,18 @@
-import { NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField } from 'api/swagger/campaign-editor/models'
 import { RootState } from 'app/rootReducer'
 import { FormUtils, useFormUtils } from 'hooks/useFormUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
+import { QueryBuilderField } from 'models/campaign/queryBuilderField'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
 import { SegmentationQuery } from 'models/campaign/segmentationQuery'
+import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import {
   getSegmentation,
   resetSegmentationEditor,
   saveSegmentation
 } from './segmentationEditorSlice'
+import { QueryBuilderRuleModel } from './queryBuilder/useQueryBuilderUtils'
 
 interface SegmentationEditorUtilsProps {
   id?: number
@@ -24,8 +26,13 @@ export interface SegmentationEditorUtils {
   modified: boolean
   saving: boolean
   checkFieldsChange: () => void
-  handleSave: (values: CampaignSegmentation) => void
-  fields?: NKMRTDCampaignEditorApplicationModelsSegmentationQueryBuilderField[]
+  handleSave: (
+    values: CampaignSegmentation,
+    results: SegmentationRuleResult,
+    tree: string,
+    conditions: QueryBuilderRuleModel[]
+  ) => void
+  fields?: QueryBuilderField[]
   segmentationQuery?: SegmentationQuery
 }
 
@@ -40,7 +47,7 @@ export const useSegmentationEditorUtils = (
   )
 
   const formUtils = useFormUtils<Partial<CampaignSegmentation>>()
-  const { submitable, modified, setFieldsValue, checkFieldsChange } = formUtils
+  const { submitable, modified, setFieldsValue, checkFieldsChange, resetFormFlags } = formUtils
 
   useEffect(() => {
     setFieldsValue(segmentation || {})
@@ -54,8 +61,14 @@ export const useSegmentationEditorUtils = (
     }
   }, [dispatch, id])
 
-  const handleSave = (values: CampaignSegmentation): void => {
-    dispatch(saveSegmentation(values))
+  const handleSave = (
+    values: CampaignSegmentation,
+    results: SegmentationRuleResult,
+    tree: string,
+    conditions: QueryBuilderRuleModel[]
+  ): void => {
+    dispatch(saveSegmentation(values, results, tree, conditions))
+    resetFormFlags()
   }
 
   return {

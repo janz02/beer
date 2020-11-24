@@ -4,17 +4,22 @@ import { Button, Collapse, Form } from 'antd'
 import { SegmentationEditorFormBasics } from './SegmentationEditorFormBasics'
 import { SegmentationEditorUtils } from './useSegmentationEditorUtils'
 import { QueryBuilderView } from './queryBuilder/QueryBuilderView'
-import { QueryBuilderUtils } from './queryBuilder/useQueryBuilderUtils'
+import { useQueryBuilderUtils } from './queryBuilder/useQueryBuilderUtils'
+import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
 
 interface SegmentationEditorFormProps {
   segmentationEditorUtils: SegmentationEditorUtils
-  queryBuilderUtils: QueryBuilderUtils
 }
 
 export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = props => {
   const { t } = useTranslation()
-  const { segmentationEditorUtils, queryBuilderUtils } = props
+  const { segmentationEditorUtils } = props
   const { submitable, saving, id, checkFieldsChange, handleSave } = segmentationEditorUtils
+  const { treeTotal, treeAsString, conditions } = useQueryBuilderUtils()
+
+  const saveSegmentationForm = (segmentation: CampaignSegmentation): void => {
+    handleSave(segmentation, treeTotal, treeAsString, conditions)
+  }
 
   return (
     <>
@@ -22,7 +27,7 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
         name="coupon-editor-form"
         layout="vertical"
         form={segmentationEditorUtils.formUtils.form}
-        onFinish={handleSave}
+        onFinish={saveSegmentationForm}
         onFieldsChange={checkFieldsChange}
       >
         <Collapse defaultActiveKey={['1']}>
@@ -33,7 +38,7 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
 
         <Collapse defaultActiveKey={['2']}>
           <Collapse.Panel header={t('segmentation-editor.query.title')} key="2">
-            <QueryBuilderView queryBuilder={queryBuilderUtils} />
+            <QueryBuilderView formChangedCallback={checkFieldsChange} />
           </Collapse.Panel>
         </Collapse>
 

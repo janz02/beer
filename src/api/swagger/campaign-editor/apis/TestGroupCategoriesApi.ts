@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,28 +18,28 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmToJSON,
-    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand,
-    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandFromJSON,
-    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandToJSON,
-    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand,
-    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandFromJSON,
-    NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByTypeToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmToJSON,
+    OptimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand,
+    OptimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandFromJSON,
+    OptimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandToJSON,
+    OptimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand,
+    OptimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandFromJSON,
+    OptimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandToJSON,
 } from '../models';
 
 export interface CreateTestGroupCategoryRequest {
-    nKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand?: NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand;
+    optimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand?: OptimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand;
 }
 
 export interface DeleteTestGroupCategoryRequest {
@@ -62,7 +62,7 @@ export interface GetTestGroupCategoriesRequest {
     ids?: Array<number>;
     page?: number;
     pageSize?: number;
-    orderByType?: NKMRTDCampaignEditorApplicationCommonMessagesEnumsOrderByType;
+    orderByType?: OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType;
 }
 
 export interface GetTestGroupCategoryRequest {
@@ -71,7 +71,7 @@ export interface GetTestGroupCategoryRequest {
 
 export interface UpdateTestGroupCategoryRequest {
     id: number;
-    nKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand?: NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand;
+    optimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand?: OptimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand;
 }
 
 /**
@@ -98,7 +98,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand),
+            body: OptimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommandToJSON(requestParameters.optimaCampaignEditorApplicationTestGroupCategoriesCommandsCreateTestGroupCategoryCreateTestGroupCategoryCommand),
         });
 
         return new runtime.TextApiResponse(response) as any;
@@ -150,7 +150,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Get test group based on the campaignId.
      */
-    async getCampaignTestGroupCategoriesRaw(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm>>> {
+    async getCampaignTestGroupCategoriesRaw(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.campaignId !== undefined) {
@@ -170,13 +170,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVmFromJSON));
     }
 
     /**
      * Get test group based on the campaignId.
      */
-    async getCampaignTestGroupCategories(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm>> {
+    async getCampaignTestGroupCategories(requestParameters: GetCampaignTestGroupCategoriesRequest): Promise<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm>> {
         const response = await this.getCampaignTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -184,7 +184,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the test groups identified by the ids.
      */
-    async getManyTestGroupCategoriesRaw(requestParameters: GetManyTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>>> {
+    async getManyTestGroupCategoriesRaw(requestParameters: GetManyTestGroupCategoriesRequest): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.ids) {
@@ -204,13 +204,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON));
     }
 
     /**
      * Returns the test groups identified by the ids.
      */
-    async getManyTestGroupCategories(requestParameters: GetManyTestGroupCategoriesRequest): Promise<Array<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
+    async getManyTestGroupCategories(requestParameters: GetManyTestGroupCategoriesRequest): Promise<Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
         const response = await this.getManyTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -218,7 +218,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Returns the test groups for the actual query.
      */
-    async getTestGroupCategoriesRaw(requestParameters: GetTestGroupCategoriesRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
+    async getTestGroupCategoriesRaw(requestParameters: GetTestGroupCategoriesRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         if (requestParameters.name !== undefined) {
@@ -266,13 +266,13 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON(jsonValue));
     }
 
     /**
      * Returns the test groups for the actual query.
      */
-    async getTestGroupCategories(requestParameters: GetTestGroupCategoriesRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfNKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm> {
+    async getTestGroupCategories(requestParameters: GetTestGroupCategoriesRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm> {
         const response = await this.getTestGroupCategoriesRaw(requestParameters);
         return await response.value();
     }
@@ -280,7 +280,7 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
     /**
      * Gets the requested test group, identified by id.
      */
-    async getTestGroupCategoryRaw(requestParameters: GetTestGroupCategoryRequest): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
+    async getTestGroupCategoryRaw(requestParameters: GetTestGroupCategoryRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTestGroupCategory.');
         }
@@ -300,19 +300,19 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVmFromJSON(jsonValue));
     }
 
     /**
      * Gets the requested test group, identified by id.
      */
-    async getTestGroupCategory(requestParameters: GetTestGroupCategoryRequest): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm> {
+    async getTestGroupCategory(requestParameters: GetTestGroupCategoryRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsTestGroupCategoryVm> {
         const response = await this.getTestGroupCategoryRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateTestGroupCategoryRaw(requestParameters: UpdateTestGroupCategoryRequest): Promise<runtime.ApiResponse<void>> {
@@ -335,14 +335,14 @@ export class TestGroupCategoriesApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: NKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandToJSON(requestParameters.nKMRTDCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand),
+            body: OptimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommandToJSON(requestParameters.optimaCampaignEditorApplicationTestGroupCategoriesCommandsUpdateTestGroupCategoryUpdateTestGroupCategoryCommand),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is NKM.RTD.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
+     * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason the result is Optima.CampaignEditor.Application.Common.Messages.Responses.ErrorContract.
      * Update the current instance with the fulfilled model
      */
     async updateTestGroupCategory(requestParameters: UpdateTestGroupCategoryRequest): Promise<void> {

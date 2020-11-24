@@ -267,7 +267,7 @@ const readOne = (id: number): AppThunk => async dispatch => {
 
 const readAll = (): AppThunk => async dispatch => {
   try {
-    await api.coupon.notification.seenAllNotifications()
+    await api.coupon.notification.seenAllNotifications({})
     dispatch(readAllSuccess())
   } catch (err) {}
 }

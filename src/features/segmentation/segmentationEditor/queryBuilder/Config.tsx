@@ -194,6 +194,7 @@ const types = {
           valuePlaceholder: i18n.t('query-builder.slider.placeholder')
         }
       }
+      // RangeSlider is not available via BasicConfig
       /* rangeslider: {
         widgetProps: {
           valuePlaceholder: i18n.t('query-builder.range-slider.placeholder'),

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -18,9 +18,9 @@ import {
     MicrosoftAspNetCoreMvcProblemDetails,
     MicrosoftAspNetCoreMvcProblemDetailsFromJSON,
     MicrosoftAspNetCoreMvcProblemDetailsToJSON,
-    NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm,
-    NKMRTDCampaignEditorApplicationModelsCampaignLanguageVmFromJSON,
-    NKMRTDCampaignEditorApplicationModelsCampaignLanguageVmToJSON,
+    OptimaCampaignEditorApplicationModelsCampaignLanguageVm,
+    OptimaCampaignEditorApplicationModelsCampaignLanguageVmFromJSON,
+    OptimaCampaignEditorApplicationModelsCampaignLanguageVmToJSON,
 } from '../models';
 
 /**
@@ -31,7 +31,7 @@ export class LanguagesApi extends runtime.BaseAPI {
     /**
      * Returns the available application languages.
      */
-    async getLanguagesRaw(): Promise<runtime.ApiResponse<Array<NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm>>> {
+    async getLanguagesRaw(): Promise<runtime.ApiResponse<Array<OptimaCampaignEditorApplicationModelsCampaignLanguageVm>>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -47,13 +47,13 @@ export class LanguagesApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NKMRTDCampaignEditorApplicationModelsCampaignLanguageVmFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(OptimaCampaignEditorApplicationModelsCampaignLanguageVmFromJSON));
     }
 
     /**
      * Returns the available application languages.
      */
-    async getLanguages(): Promise<Array<NKMRTDCampaignEditorApplicationModelsCampaignLanguageVm>> {
+    async getLanguages(): Promise<Array<OptimaCampaignEditorApplicationModelsCampaignLanguageVm>> {
         const response = await this.getLanguagesRaw();
         return await response.value();
     }

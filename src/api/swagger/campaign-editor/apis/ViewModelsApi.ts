@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * NKM RTD CampaignEditor API
+ * Optima CampaignEditor API
  * <h5>UI handler and the main responsibility carrier of the application, the two step transaction handling owner. The API defines the public interface for the UI and all the user exposed functions are routed here. The actual methods are supports basic segmentation creation and CSV upload functionality. CSV upload is supported via sharepoint. Authentication and JWT token are generated here from <b>Active Directory</b> login. The substraction of public api descriptions are on the API descriptions.</h5>
  *
  * The version of the OpenAPI document: v1
@@ -15,12 +15,12 @@
 
 import * as runtime from '../runtime';
 import {
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmToJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmFromJSON,
-    NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmToJSON,
 } from '../models';
 
 /**
@@ -32,7 +32,7 @@ export class ViewModelsApi extends runtime.BaseAPI {
      * Used in the secound screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignTreatmentRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm>> {
+    async createCampaignTreatmentRaw(): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -48,14 +48,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVmFromJSON(jsonValue));
     }
 
     /**
      * Used in the secound screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignTreatment(): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm> {
+    async createCampaignTreatment(): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm> {
         const response = await this.createCampaignTreatmentRaw();
         return await response.value();
     }
@@ -64,7 +64,7 @@ export class ViewModelsApi extends runtime.BaseAPI {
      * Used in the first screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignViewModelRaw(): Promise<runtime.ApiResponse<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm>> {
+    async createCampaignViewModelRaw(): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm>> {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -80,14 +80,14 @@ export class ViewModelsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVmFromJSON(jsonValue));
     }
 
     /**
      * Used in the first screen of campaign creation.
      * Returns selection lists of controls to help the user with the options.
      */
-    async createCampaignViewModel(): Promise<NKMRTDCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm> {
+    async createCampaignViewModel(): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm> {
         const response = await this.createCampaignViewModelRaw();
         return await response.value();
     }
