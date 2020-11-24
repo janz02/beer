@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { ReactComponent as Logo } from 'assets/img/logo.svg'
+import { ReactComponent as Logo } from 'assets/img/grapelogo_white.svg'
 import { Layout, Card, Typography } from 'antd'
 import styles from './AuthLayout.module.scss'
 
