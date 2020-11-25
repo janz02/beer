@@ -227,8 +227,23 @@
     "status-creation": "Státusz (Kampány Létrehozás)",
     "user-logs": "Felhaszálói napló",
     "save-draft": "Piszkozat mentése & Kilépés",
-    "next-section": "Következő (Szegmentálás)"
-  },
+    "next-section": "Következő (Szegmentálás)",
+    "content": {
+      "email": {
+        "tab-name":"Tartalom (Email)",
+        "title":"Email Sablon",
+        "device-type":{
+          "title":"Eszköz előnézet választó",
+          "desktop": "Monitor",
+          "mobile": "Telefon",
+          "tablet": "Táblagép"
+        },
+        "template": "Email Sablon",
+        "template-placeholder":"Válasszon Emailt",
+        "template-version": "Verzió",
+        "template-version-placeholder": "Válasszon Verziót"
+      }
+  }},
   "coupon-campaign-create": {
     "activate": "Aktiválás",
     "audit": "Audit",

@@ -227,8 +227,23 @@
     "status-creation": "Status (Campaign Creation)",
     "user-logs": "User Logs",
     "save-draft": "Save draft & Exit",
-    "next-section": "Next (Segmentation)"
-  },
+    "next-section": "Next (Segmentation)",
+    "content": {
+      "email": {
+        "tab-name":"Content (Email)",
+        "title":"Email Template",
+        "device-type":{
+          "title":"Device type preview",
+          "desktop": "Desktop",
+          "mobile": "Mobile",
+          "tablet": "Tablet"
+        },
+        "template": "Email Template",
+        "template-placeholder":"Select Email",
+        "template-version": "Version",
+        "template-version-placeholder": "Select Version"
+      }
+  }},
   "coupon-campaign-create": {
     "activate": "Activate",
     "audit": "Audit",

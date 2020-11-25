@@ -54,14 +54,14 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
           <Divider />
         </Row>
         <Row>
-          <Tabs>
+          <Tabs className="campaign-editor-content">
             <TabPane tab="Settings" key="settings">
               <SettingsTabPane campaignId={campaignId} />
             </TabPane>
             <TabPane tab="Segmentation" key="segmentation">
               <SegmentationTabPane campaignId={campaignId} />
             </TabPane>
-            <TabPane tab="Content(Email)" key="content">
+            <TabPane tab={t('campaign-create.content.email.tab-name')} key="content">
               <EmailContentTabPane campaignId={campaignId} />
             </TabPane>
             <TabPane tab="Test" key="test">
