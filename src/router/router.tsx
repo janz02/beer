@@ -35,7 +35,7 @@ import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPa
 import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
 import { OrganizationPage } from 'features/organization/OrganizationPage'
 import { PlaceholderPage } from 'components/placeholder/PlaceholderPage'
-import { ProfileEditorPage } from 'features/profiles/profileEditor/ProfileListPage'
+import { ProfileEditorPage } from 'features/profiles/profileEditor/ProfileEditorPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {

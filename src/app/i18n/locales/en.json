@@ -975,6 +975,21 @@
     },
     "title": "Profiles"
   },
+  "profile-editor": {
+    "title": "Edit profile",
+    "name": "Name",
+    "birthday": "Birthday",
+    "username": "Username",
+    "email": "E-mail",
+    "button-save": "Save",
+    "button-cancel": "Cancel",
+    "position": "Position",
+    "contacts": "Contacts",
+    "company": "Company",
+    "group": "Group",
+    "job-role": "Job role",
+    "phone": "Phone"
+  },
   "query-builder": {
     "add-group": {
       "label": "Add new group"
