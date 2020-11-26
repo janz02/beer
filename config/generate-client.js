@@ -45,15 +45,15 @@ const generateFetchApi = async ({ name }) => {
 
 const run = async () => {
   console.log("\n\n\n\n Downloading Docs ");
-  fs.removeSync(docsFolder);
-  fs.ensureDirSync(docsFolder);
+  // fs.removeSync(docsFolder);
+  // fs.ensureDirSync(docsFolder);
 
-  for (let i = 0; i < services.length; i++) {
-    const ms = services[i];
-    console.log("\x1b[33m%s\x1b[0m", "\n   ->  Doc: " + ms.name);
-    await downloadDocumentation(ms);
-    console.log("\n\n\n\n");
-  }
+  // for (let i = 0; i < services.length; i++) {
+  //   const ms = services[i];
+  //   console.log("\x1b[33m%s\x1b[0m", "\n   ->  Doc: " + ms.name);
+  //   await downloadDocumentation(ms);
+  //   console.log("\n\n\n\n");
+  // }
 
   fs.removeSync(generatedApisFolder);
   fs.ensureDirSync(generatedApisFolder);
