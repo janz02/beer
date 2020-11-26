@@ -112,4 +112,23 @@
     height: 0;
     margin-bottom: 0;
   }
+
+  .table-select__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .table-select__checkbox.table-select__checkbox--minus {
+    .ant-checkbox-checked .ant-checkbox-inner::after {
+      -webkit-transform: rotate(0deg) scale(1) translate(25%, -80%);
+      transform: rotate(0deg) scale(1) translate(25%, -80%);
+      border-right: 0;
+    }
+  }
+
+  .table-select__dropdown {
+    margin-left: 3px;
+    color: $primary-color;
+  }
 }

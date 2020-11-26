@@ -169,6 +169,9 @@
     "restore": "Visszállítás",
     "save": "Mentés",
     "search": "Keresés",
+    "selection": {
+      "reverse": "Kijelölés megfordítása"
+    },
     "send": "Küldés",
     "table-settings": "Beállítások",
     "try-again": "Újra próbálkozás...",
