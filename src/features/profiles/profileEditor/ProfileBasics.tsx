@@ -1,14 +1,17 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Col, Form, Input, Row } from 'antd'
+import { Col, DatePicker, Form, Input, Row } from 'antd'
 import { useCommonFormRules } from 'hooks'
+import { ProfileEditorPageUtils } from './ProfileEditorUtils'
 
-interface ProfileBasicsProps {}
+interface ProfileBasicsProps {
+  profileEditorPageUtils: ProfileEditorPageUtils
+}
 
 export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
   const { t } = useTranslation()
   // const rule = useCommonFormRules()
-  // const { categories } = props.segmentationEditorUtils
+  const { profile } = props.profileEditorPageUtils
 
   return (
     <>
@@ -27,15 +30,15 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
         </Col>
       </Row>
       <Row gutter={70}>
-        <Col span={7}>
-          <Form.Item name="birthday" label={t('profile-editor.birthday')}>
-            <Input maxLength={60} />
+        <Col span={9}>
+          <Form.Item name="birthDay" label={t('profile-editor.birthday')}>
+            <DatePicker />
           </Form.Item>
         </Col>
-        <Col span={7}>
-          <Form.Item label={t('profile-editor.username')}>username</Form.Item>
+        <Col span={6}>
+          <Form.Item label={t('profile-editor.username')}>{profile?.userName}</Form.Item>
         </Col>
-        <Col span={10}>
+        <Col span={9}>
           <Form.Item name="email" label={t('profile-editor.email')}>
             <Input maxLength={60} />
           </Form.Item>

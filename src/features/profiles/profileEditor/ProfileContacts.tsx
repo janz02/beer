@@ -2,19 +2,21 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Form, Input } from 'antd'
 import { useCommonFormRules } from 'hooks'
+import { ProfileEditorPageUtils } from './ProfileEditorUtils'
 
-interface ProfileContactsProps {}
+interface ProfileContactsProps {
+  profileEditorPageUtils: ProfileEditorPageUtils
+}
 
 export const ProfileContacts: React.FC<ProfileContactsProps> = props => {
   const { t } = useTranslation()
   // const rule = useCommonFormRules()
-  // const { categories } = props.segmentationEditorUtils
 
   return (
     <>
       <h2>{t('profile-editor.contacts')}</h2>
       <Form.Item
-        name="phone"
+        name="phoneNumber"
         label={t('profile-editor.phone')}
         // rules={[
         //   rule.requiredString(t('error.validation.segmentation-editor.name-required')),

@@ -28,6 +28,7 @@ import { campaignListActions } from 'features/campaigns/campaignList/campaignLis
 import { profileListActions } from 'features/profiles/profileList/profileListSlice'
 import { companiesActions } from 'features/organization/companies/companiesSlice'
 import { groupsActions } from 'features/organization/groups/groupsSlice'
+import { profileEditorActions } from 'features/profiles/profileEditor/profileEditorSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -39,6 +40,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(authActions.resetAuth())
     dispatch(myProfileActions.resetProfile())
     dispatch(profileListActions.reset())
+    dispatch(profileEditorActions.reset())
     dispatch(notificationActions.resetNotification())
     dispatch(siteListActions.reset())
     dispatch(siteEditorActions.reset())

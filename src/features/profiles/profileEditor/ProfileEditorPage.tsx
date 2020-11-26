@@ -2,46 +2,83 @@ import './ProfileEditorPage.scss'
 import { Button, Col, Row } from 'antd'
 import Form from 'antd/lib/form/Form'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProfileBasics } from './ProfileBasics'
 import { ProfilePosition } from './ProfilePosition'
 import { ProfileContacts } from './ProfileContacts'
+import { useParams } from 'hooks/react-router-dom-hooks'
+import { useProfileEditorPageUtils } from './ProfileEditorUtils'
+import { NavigationAlert } from 'components/popups/NavigationAlert'
+import { history } from 'router/router'
 
 export const ProfileEditorPage: FC = () => {
   const { t } = useTranslation()
+  const { profileId } = useParams<{ profileId: string }>()
+  const id = profileId ? +profileId : undefined
+  const profileEditorPageUtils = useProfileEditorPageUtils(id)
+  const {
+    submitable,
+    modified,
+    saving,
+    checkFieldsChange,
+    resetFormFlags,
+    handleSave
+  } = profileEditorPageUtils
+
+  const backButtonProps = useMemo(
+    () => ({
+      primary: true,
+      onClick: () => {
+        history.push('/profiles')
+      }
+    }),
+    []
+  )
 
   return (
-    <ResponsiveCard className="profile-editor-card" floatingTitle={t('profile-editor.title')}>
+    <ResponsiveCard
+      className="profile-editor-card"
+      floatingTitle={t('profile-editor.title')}
+      floatingBackButton={backButtonProps}
+    >
       <Form
         name="coupon-editor-form"
         layout="vertical"
-        // form={segmentationEditorUtils.formUtils.form}
-        // onFinish={handleSave}
-        // onFieldsChange={checkFieldsChange}
+        form={profileEditorPageUtils.formUtils.form}
+        onFinish={handleSave}
+        onFieldsChange={checkFieldsChange}
       >
-        <ProfileBasics />
+        <ProfileBasics profileEditorPageUtils={profileEditorPageUtils} />
 
         <Row className="profile-editor-columns" gutter={70}>
           <Col span={12}>
-            <ProfilePosition />
+            <ProfilePosition profileEditorPageUtils={profileEditorPageUtils} />
           </Col>
           <Col span={12}>
-            <ProfileContacts />
+            <ProfileContacts profileEditorPageUtils={profileEditorPageUtils} />
           </Col>
         </Row>
 
         <div className="profile-editor-footer">
           <div className="profile-editor-footer-right">
-            {/* disabled={!submitable} loading={saving} */}
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" disabled={!submitable} loading={saving}>
               {t('profile-editor.button-save')}
             </Button>
           </div>
 
-          <Button type="link">{t('profile-editor.button-cancel')}</Button>
+          <Button
+            type="link"
+            onClick={() => {
+              resetFormFlags()
+              history.push('/profiles')
+            }}
+          >
+            {t('profile-editor.button-cancel')}
+          </Button>
         </div>
       </Form>
+      <NavigationAlert when={modified} />
     </ResponsiveCard>
   )
 }
