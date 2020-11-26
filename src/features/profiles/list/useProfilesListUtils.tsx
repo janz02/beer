@@ -74,6 +74,7 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
               ]
             : undefined,
         cannotBeHidden: true,
+        ellipsis: false,
         render(status: ProfileStatus) {
           return <ProfileStatusDisplay status={status} />
         }
@@ -83,30 +84,35 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH,
-        cannotBeHidden: true
+        cannotBeHidden: true,
+        ellipsis: false
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.username'),
         key: 'userName',
         sort: true,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        ellipsis: false
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.email'),
         key: 'email',
         sort: true,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        ellipsis: false
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.group'),
         key: 'groupCount',
         sort: true,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        ellipsis: false
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.permissions'),
         key: 'permissionCount',
-        sort: true
+        sort: true,
+        ellipsis: false
       }),
       tableUtils.columnConfig({
         title: t('organization.companies.field.created-date'),
@@ -114,25 +120,29 @@ export const useProfilesListUtils = (): ProfilesListUtils => {
         sort: true,
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER,
-        hiddenByDefault: true
+        hiddenByDefault: true,
+        ellipsis: false
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.company'),
         key: 'companyName',
         sort: false,
         filterMode: FilterMode.SEARCH,
-        hiddenByDefault: true
+        hiddenByDefault: true,
+        ellipsis: false
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.job-role'),
         key: 'jobRoleName',
         sort: false,
         filterMode: FilterMode.SEARCH,
-        hiddenByDefault: true
+        hiddenByDefault: true,
+        ellipsis: false
       }),
       isEditorUser
         ? tableUtils.actionColumnConfig({
             width: 'auto',
+            fixed: 'right',
             render(profile: Profile) {
               return (
                 <ActionButtons>
