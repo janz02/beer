@@ -227,7 +227,29 @@
     "status-creation": "Státusz (Kampány Létrehozás)",
     "user-logs": "Felhaszálói napló",
     "save-draft": "Piszkozat mentése & Kilépés",
-    "next-section": "Következő (Szegmentálás)"
+    "next-section": "Következő (Szegmentálás)",
+    "settings":{
+      "campaign-name":"Kampány neve",
+      "requestor":"Igénylő",
+      "campaign-admins-title":"Kampány adminok",
+      "channel-type-title":"Csatorna típusa",
+      "daily-restriction-title":"Napi tiltások",
+      "start-time":"Kezdődik",
+      "end-time":"Végződik",
+      "start-date":"Kezdeti dátum",
+      "end-date":"Zárás dátum",
+      "email-recall-settings-title":"Email visszahívás beállítása",
+      "maximum-recall-attempts":"Visszahívási kísérletek száma",
+      "recall-frequency":"Visszahívás gyakorisága",
+      "email-resending-rules":"Email újraküldési szabályok",
+      "interval-restrictions":"Időszakos korlátozások",
+      "email-delivery-date-restrictions" : "Email kézbesítési korlátozások",
+      "product-title":"Termék",
+      "product-label":"Termék",
+      "timing-title":"Időzítés",
+      "select-timing-type-label":"Időzítés típusa",
+      "approver-validator":"Elfogadó/Érvényesítő"
+    }
   },
   "coupon-campaign-create": {
     "activate": "Aktiválás",
