@@ -9,6 +9,7 @@ export interface Profile {
   birthDay: moment.Moment
   createdDate: moment.Moment
   phoneNumber: string
+  groupIds: number[]
   groupCount: number
   permissionCount: number
   companyId: number

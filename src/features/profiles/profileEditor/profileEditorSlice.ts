@@ -120,7 +120,7 @@ export const saveProfile = (data: Profile): AppThunk => async (dispatch, getStat
         email: data.email,
         birthDay: data.birthDay.utc(true).toDate(),
         companyId: data.companyId,
-        // TODO: groups
+        groups: data.groupIds,
         jobRoleId: data.jobRoleId,
         phoneNumber: data.phoneNumber
       }

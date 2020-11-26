@@ -29,7 +29,7 @@ export const ProfilePosition: React.FC<ProfilePositionProps> = props => {
           ))}
         </Select>
       </Form.Item>
-      <Form.Item name="groupId" label={t('profile-editor.group')}>
+      <Form.Item name="groupIds" label={t('profile-editor.group')}>
         <Select mode="multiple" showArrow>
           {groups?.map(x => (
             <Select.Option key={x.id} value={x.id!}>
