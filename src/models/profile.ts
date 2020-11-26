@@ -16,4 +16,5 @@ export interface Profile {
   companyName: string
   jobRoleId: number
   jobRoleName: string
+  profilePictureId?: string
 }

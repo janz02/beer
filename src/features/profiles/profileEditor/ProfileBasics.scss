@@ -1,0 +1,15 @@
+.profile-editor-basics-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-editor-basics-picture-container {
+  flex: 0 0 190px;
+  // margin-right: 70px;
+  // margin: 0 70px 0 20px;
+}
+
+.profile-editor-basics-controls-container {
+  flex: 1 0 0;
+}

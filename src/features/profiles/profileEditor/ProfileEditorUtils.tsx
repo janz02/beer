@@ -6,7 +6,7 @@ import { Group } from 'models/group'
 import { JobRole } from 'models/jobRole'
 import { Profile } from 'models/profile'
 import { useEffect } from 'react'
-import { getProfile, resetProfileEditor, saveProfile } from './profileEditorSlice'
+import { getProfile, ProfileForm, resetProfileEditor, saveProfile } from './profileEditorSlice'
 
 export interface ProfileEditorPageUtils {
   formUtils: FormUtils
@@ -19,7 +19,7 @@ export interface ProfileEditorPageUtils {
   jobRoles: JobRole[]
   checkFieldsChange: () => void
   resetFormFlags: () => void
-  handleSave: (values: Profile) => void
+  handleSave: (values: ProfileForm) => void
 }
 
 export const useProfileEditorPageUtils = (id?: number): ProfileEditorPageUtils => {
@@ -45,7 +45,7 @@ export const useProfileEditorPageUtils = (id?: number): ProfileEditorPageUtils =
     setFieldsValue(profile || {})
   }, [profile, setFieldsValue])
 
-  const handleSave = (values: Profile): void => {
+  const handleSave = (values: ProfileForm): void => {
     resetFormFlags()
     dispatch(saveProfile(values))
   }

@@ -10,6 +10,7 @@ import { Group } from 'models/group'
 import { JobRole } from 'models/jobRole'
 import moment from 'moment'
 import { ProfileStatus } from 'api/swagger/admin'
+import { FrontendFileValue } from 'components/upload/fileUploadHelper'
 
 interface ProfileEditorLoadedData {
   profile?: Profile
@@ -107,7 +108,18 @@ export const getProfile = (id: number): AppThunk => async dispatch => {
   }
 }
 
-export const saveProfile = (data: Profile): AppThunk => async (dispatch, getState) => {
+export interface ProfileForm {
+  name: string
+  email: string
+  birthDay: moment.Moment
+  companyId: number
+  groupIds: number[]
+  jobRoleId: number
+  phoneNumber: string
+  profilePictureDetails: FrontendFileValue
+}
+
+export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, getState) => {
   try {
     const profile = getState().profileEditor.profile!
     dispatch(saveProfileRequest())
@@ -122,7 +134,8 @@ export const saveProfile = (data: Profile): AppThunk => async (dispatch, getStat
         companyId: data.companyId,
         groups: data.groupIds,
         jobRoleId: data.jobRoleId,
-        phoneNumber: data.phoneNumber
+        phoneNumber: data.phoneNumber,
+        profilePictureId: data.profilePictureDetails.id
       }
     })
 
