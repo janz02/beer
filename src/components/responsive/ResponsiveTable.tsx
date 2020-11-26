@@ -5,11 +5,10 @@ import './ResponsiveTable.scss'
 import { useSelectableRowUtils } from 'hooks'
 
 export interface ResponsiveTableProps extends TableProps<any> {
-  columns: any[]
   hasHeaderOffset?: boolean
   hasFixedColumn?: boolean
   selectable?: boolean
-  identificationKey?: string
+  isBackendPagination?: boolean
   onSelectedChange?: (selected: any[]) => void
 }
 
@@ -17,9 +16,12 @@ export const ResponsiveTable: FC<ResponsiveTableProps> = ({
   hasHeaderOffset,
   hasFixedColumn,
   selectable = true,
+  isBackendPagination = true,
   onSelectedChange = () => ({}),
   columns,
   dataSource,
+  onChange,
+  pagination,
   ...tableProps
 }) => {
   const className =
@@ -27,10 +29,12 @@ export const ResponsiveTable: FC<ResponsiveTableProps> = ({
     `${hasHeaderOffset ? 'has-header-offset ' : ''}` +
     `${hasFixedColumn ? 'has-fixed-column ' : ''}`
 
-  const { selectColumnConfig, setCurrentPageIds, selectedItems } = useSelectableRowUtils()
+  const { selectColumnConfig, setCurrentPageIds, selectedItems } = useSelectableRowUtils({
+    isBackendPagination
+  })
 
   useEffect(() => {
-    setCurrentPageIds(dataSource?.map(el => el.id) || [])
+    setCurrentPageIds(dataSource || [], (pagination as any)?.current, (pagination as any)?.pageSize)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSource])
 
@@ -38,19 +42,24 @@ export const ResponsiveTable: FC<ResponsiveTableProps> = ({
     onSelectedChange(selectedItems)
   }, [selectedItems, onSelectedChange])
 
-  const columnsOverride = useMemo(() => {
+  const extendedColumns = useMemo(() => {
     if (dataSource && dataSource.length && selectable) {
-      return [selectColumnConfig, ...columns]
+      return [selectColumnConfig, ...(columns || [])]
     } else {
       return columns
     }
   }, [dataSource, columns, selectable, selectColumnConfig])
 
-  const tablePropsOverride = {
+  const extendedTableProps = {
     ...tableProps,
     dataSource,
-    columns: columnsOverride
+    columns: extendedColumns,
+    pagination,
+    onChange: (paginationChange: any, filters: any, sorter: any, extra: any) => {
+      setCurrentPageIds(dataSource || [], paginationChange.current, paginationChange.pageSize)
+      onChange?.(paginationChange, filters, sorter, extra)
+    }
   }
 
-  return <Table size="small" {...tablePropsOverride} className={className} />
+  return <Table size="small" {...extendedTableProps} className={className} />
 }

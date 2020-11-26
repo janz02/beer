@@ -2,18 +2,10 @@ import { DownOutlined } from '@ant-design/icons'
 import { Checkbox, Dropdown, Menu } from 'antd'
 import React, { useCallback, useEffect, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
-
-export const arrayElementsContainedInAnother = (a: any, b: any): boolean => {
-  if (!Array.isArray(a) || !Array.isArray(b) || (a.length === 0 && b.length === 0)) return false
-
-  return a.every(val => b.includes(val))
-}
-
-export const someArrayElementsContainedInAnother = (a: any, b: any): boolean => {
-  if (!Array.isArray(a) || !Array.isArray(b) || (a.length === 0 && b.length === 0)) return false
-
-  return a.some(val => b.includes(val))
-}
+import {
+  arrayElementsContainedInAnother,
+  someArrayElementsContainedInAnother
+} from 'services/commonFunctions'
 
 export enum THREE_STATE_CHECKBOX {
   ALL = 'all',
@@ -23,9 +15,13 @@ export enum THREE_STATE_CHECKBOX {
 
 export interface SelectableRowUtils {
   selectedItems: any[]
-  setCurrentPageIds: (ids: any[]) => void
+  setCurrentPageIds: (source: any[], currentPage?: number, pageSize?: number) => void
   resetSelection: () => void
   selectColumnConfig: any
+}
+
+export interface SelectableRowUtilsParams {
+  isBackendPagination: boolean
 }
 
 interface SelectedState {
@@ -82,7 +78,8 @@ function reducer(state: SelectedState, action: SelectedStateAction): any {
   }
 }
 
-export const useSelectableRowUtils = (): SelectableRowUtils => {
+export const useSelectableRowUtils = (props: SelectableRowUtilsParams): SelectableRowUtils => {
+  const { isBackendPagination } = props
   const { t } = useTranslation()
   const [selectedState, dispatch] = useReducer(reducer, initialSelectedState)
   const { selectedItems, currentPageIds, headerState } = selectedState
@@ -94,8 +91,19 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
 
   const addToSelection = (ids: any[]): void => dispatch({ type: 'add_selection', payload: ids })
 
-  const setCurrentPageIds = (ids: any[]): void =>
-    dispatch({ type: 'set_current_page_ids', payload: ids })
+  const setCurrentPageIds = (source: any[], currentPage?: number, pageSize?: number): void => {
+    const mappedIds = source.map(el => el.id)
+
+    if (isBackendPagination) {
+      dispatch({ type: 'set_current_page_ids', payload: mappedIds })
+    } else {
+      const take = pageSize || 10
+      const skip = take * ((currentPage || 1) - 1)
+      const filtered = mappedIds.filter((el, i) => i >= skip && i < skip + take)
+
+      dispatch({ type: 'set_current_page_ids', payload: filtered })
+    }
+  }
 
   const reverseSelection = (): void => {
     const currentPageSelectedIds = currentPageIds.filter((id: any) => selectedItems.includes(id))
@@ -157,6 +165,7 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
   const headerContainer = (
     <span className="table-select__container">
       <Checkbox
+        data-testid="tableSelect_HeaderCheckbox"
         checked={headerState.status !== THREE_STATE_CHECKBOX.NONE}
         className={`table-select__checkbox ${headerState.className}`}
         onChange={headerCheckboxClicked}
@@ -164,7 +173,11 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
       <Dropdown
         overlay={
           <Menu>
-            <Menu.Item key="table_select_reverse" onClick={reverseSelection}>
+            <Menu.Item
+              key="table_select_reverse"
+              data-testid="tableSelect_ReverseSelection"
+              onClick={reverseSelection}
+            >
               {t('common.selection.reverse')}
             </Menu.Item>
           </Menu>
@@ -172,7 +185,7 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
         trigger={['click']}
         className="table-select__dropdown"
       >
-        <DownOutlined />
+        <DownOutlined data-testid="tableSelect_HeaderDropdown" />
       </Dropdown>
     </span>
   )
@@ -184,6 +197,7 @@ export const useSelectableRowUtils = (): SelectableRowUtils => {
     render(record: any) {
       return (
         <Checkbox
+          data-testid={`tableSelect_rowcheckbox_${record.id}`}
           checked={selectedItems.includes(record.id)}
           onChange={e => {
             if (e.target.checked) {
