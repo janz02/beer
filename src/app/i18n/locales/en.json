@@ -232,12 +232,6 @@
       "email": {
         "tab-name":"Content (Email)",
         "title":"Email Template",
-        "device-type":{
-          "title":"Device type preview",
-          "desktop": "Desktop",
-          "mobile": "Mobile",
-          "tablet": "Tablet"
-        },
         "template": "Email Template",
         "template-placeholder":"Select Email",
         "template-version": "Version",
@@ -733,6 +727,14 @@
     "message": {
       "403": "Sorry, you are not authorized to access this page.",
       "default": "Sorry, something went wrong."
+    }
+  },
+  "email-template":{
+    "device-type":{
+      "title":"Device type preview",
+      "desktop": "Desktop",
+      "mobile": "Mobile",
+      "tablet": "Tablet"
     }
   },
   "languages": {

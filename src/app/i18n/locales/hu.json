@@ -232,12 +232,6 @@
       "email": {
         "tab-name":"Tartalom (Email)",
         "title":"Email Sablon",
-        "device-type":{
-          "title":"Eszköz előnézet választó",
-          "desktop": "Monitor",
-          "mobile": "Telefon",
-          "tablet": "Táblagép"
-        },
         "template": "Email Sablon",
         "template-placeholder":"Válasszon Emailt",
         "template-version": "Verzió",
@@ -735,6 +729,14 @@
       "default": "Hiba történt!"
     }
   },
+  "email-template":{
+    "device-type":{
+    "title":"Eszköz előnézet választó",
+    "desktop": "Monitor",
+    "mobile": "Telefon",
+    "tablet": "Táblagép"
+  }
+},
   "languages": {
     "en": "English",
     "hu": "Magyar",
