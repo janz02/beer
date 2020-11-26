@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
-import { history } from 'router/router'
 import i18n from 'app/i18n'
 import { message } from 'antd'
 import { api } from 'api'
@@ -9,7 +8,6 @@ import { Company } from 'models/company'
 import { Group } from 'models/group'
 import { JobRole } from 'models/jobRole'
 import moment from 'moment'
-import { ProfileStatus } from 'api/swagger/admin'
 import { FrontendFileValue } from 'components/upload/fileUploadHelper'
 
 interface ProfileEditorLoadedData {
@@ -115,8 +113,8 @@ export interface ProfileForm {
   companyId: number
   groupIds: number[]
   jobRoleId: number
-  phoneNumber: string
-  profilePictureDetails: FrontendFileValue
+  phoneNumberWithoutCountry: string
+  profilePictureDetails?: FrontendFileValue
 }
 
 export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, getState) => {
@@ -134,8 +132,10 @@ export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, get
         companyId: data.companyId,
         groups: data.groupIds,
         jobRoleId: data.jobRoleId,
-        phoneNumber: data.phoneNumber,
-        profilePictureId: data.profilePictureDetails.id
+        phoneNumber: data.phoneNumberWithoutCountry
+          ? '+36' + data.phoneNumberWithoutCountry
+          : undefined,
+        profilePictureId: data.profilePictureDetails?.id
       }
     })
 

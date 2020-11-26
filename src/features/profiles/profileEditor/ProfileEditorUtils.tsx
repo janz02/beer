@@ -38,11 +38,28 @@ export const useProfileEditorPageUtils = (id?: number): ProfileEditorPageUtils =
     }
   }, [dispatch, id])
 
-  const formUtils = useFormUtils<Partial<Profile>>()
+  const formUtils = useFormUtils<Partial<ProfileForm>>()
   const { submitable, modified, setFieldsValue, checkFieldsChange, resetFormFlags } = formUtils
 
   useEffect(() => {
-    setFieldsValue(profile || {})
+    if (profile) {
+      let phoneNumberWithoutCountry = profile.phoneNumber
+      if (phoneNumberWithoutCountry.startsWith('+36')) {
+        phoneNumberWithoutCountry = phoneNumberWithoutCountry.substring(3)
+      }
+
+      setFieldsValue({
+        name: profile.name,
+        email: profile.email,
+        birthDay: profile.birthDay,
+        companyId: profile.companyId,
+        groupIds: profile.groupIds,
+        jobRoleId: profile.jobRoleId,
+        phoneNumberWithoutCountry
+      })
+    } else {
+      setFieldsValue({})
+    }
   }, [profile, setFieldsValue])
 
   const handleSave = (values: ProfileForm): void => {
