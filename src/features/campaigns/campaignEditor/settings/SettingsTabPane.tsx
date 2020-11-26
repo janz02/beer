@@ -13,7 +13,7 @@ import {
 import TextArea from 'antd/lib/input/TextArea'
 import './CampaignEditor.scss'
 import React, { FC } from 'react'
-import { CampaignEditorProps } from './CampaignEditorForm'
+import { CampaignEditorProps } from '../base/CampaignEditorForm'
 import CheckboxGroup from 'antd/lib/checkbox/Group'
 
 export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {

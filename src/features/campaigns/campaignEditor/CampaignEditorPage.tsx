@@ -4,7 +4,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { history } from 'router/router'
-import { CampaignEditorForm } from './components/CampaignEditorForm'
+import { CampaignEditorForm } from './base/CampaignEditorForm'
 
 export const CampaignEditorPage: React.FC = () => {
   const params = useParams<{ campaignId?: string }>()
