@@ -30,7 +30,7 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
   )
 
   return (
-    <Form className="create-campaign-form">
+    <Form className="create-campaign-form" layout="vertical">
       <Card
         className="create-campaign-form-content"
         title={t('campaign-create.title')}
@@ -54,7 +54,7 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
           <Divider />
         </Row>
         <Row>
-          <Tabs>
+          <Tabs size="large">
             <TabPane tab="Settings" key="settings">
               <SettingsTabPane campaignId={campaignId} />
             </TabPane>

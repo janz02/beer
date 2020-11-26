@@ -48,3 +48,51 @@ $smallFontColor: rgb(169, 169, 169);
     padding: 3px;
   }
 }
+
+.settings-tab {
+  .ant-checkbox-wrapper {
+    display: block;
+    margin-left: 0;
+  }
+
+  label.control-label {
+    color: $smallFontColor;
+    font-size: $smallFontSize;
+  }
+
+  .vertical-splitter {
+    height: 100%;
+  }
+
+  .form-controls-display-grid {
+    .ant-form-item-control-input-content {
+      display: grid;
+    }
+  }
+
+  .form-controls-display-content {
+    .ant-form-item-control-input-content {
+      display: contents;
+
+      div {
+        align-self: flex-end;
+      }
+    }
+
+    .ant-col {
+      margin-right: 5px;
+    }
+  }
+
+  .flex-wrap-unset {
+    flex-wrap: unset;
+
+    div {
+      padding-left: 5px;
+    }
+  }
+
+  .campaign-basic-details {
+    max-width: 500px;
+  }
+}
