@@ -69,6 +69,7 @@ export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePrevi
     if (!editor) return
 
     handleDeviceSelection(selectedDevice)
+
     editor.on('load:before', () => {
       setLoading(true)
     })
@@ -77,10 +78,9 @@ export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePrevi
     })
     editor.on('run:preview', () => {
       setLoading(false)
-      /*  editor.DomComponents.getWrapper().onAll(
-        (comp: { is: (arg0: string) => any; set: (arg0: { editable: boolean }) => any }) =>
-          comp.is('text') && comp.set({ editable: false })
-      ) */
+      editor.DomComponents.getWrapper().onAll((comp: any) => {
+        comp.set({ editable: false })
+      })
     })
 
     editor.setComponents(currentTemplateVersion?.content ?? '')

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useEmailContentUtils } from './useEmailContentUtils'
 import './EmailContentTabPane.scss'
 import { EmailTemplatePreview } from 'components/emailTemplatePreview/EmailTemplatePreview'
+import Title from 'antd/lib/typography/Title'
 
 export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
@@ -19,6 +20,7 @@ export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
     <div>
       <div>
         <Form layout="vertical">
+          <Title level={5}>{t('campaign-create.content.email.title')}</Title>
           <Row gutter={20}>
             <Col span={8}>
               <Form.Item
