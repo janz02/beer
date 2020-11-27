@@ -15,58 +15,60 @@ import { EmailSendingSection } from './EmailSendingSection'
 export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   return (
     <Form className="settings-tab" layout="vertical">
-      <Col className="campaign-basic-details">
-        <BasicCampaignSection campaignId={campaignId} />
-      </Col>
-      <Divider />
+      <div>
+        <Col className="campaign-basic-details">
+          <BasicCampaignSection campaignId={campaignId} />
+        </Col>
+        <Divider />
 
-      <ChannelTypeSection campaignId={campaignId} />
-      <Divider />
+        <ChannelTypeSection campaignId={campaignId} />
+        <Divider />
 
-      <Row gutter={16}>
-        <Col span={7}>
-          <ProductSection />
-        </Col>
-        <Col>
-          <Divider type="vertical" className="vertical-splitter" />
-        </Col>
-        <Col span={7}>
-          <CampaignAdminSection />
-        </Col>
-      </Row>
+        <Row gutter={16}>
+          <Col span={7}>
+            <ProductSection />
+          </Col>
+          <Col>
+            <Divider type="vertical" className="vertical-splitter" />
+          </Col>
+          <Col span={7}>
+            <CampaignAdminSection />
+          </Col>
+        </Row>
 
-      <Divider />
-      <Row gutter={16}>
-        <Col span={7}>
-          <TimingSection />
-        </Col>
-        <Col>
-          <Divider type="vertical" className="vertical-splitter" />
-        </Col>
-        <Col span={7}>
-          <DailyRestrictionSection />
-        </Col>
-        <Col>
-          <Divider type="vertical" className="vertical-splitter" />
-        </Col>
-        <Col span={7}>
-          <IntervalRestrictionSection />
-        </Col>
-      </Row>
+        <Divider />
+        <Row gutter={16}>
+          <Col span={7}>
+            <TimingSection />
+          </Col>
+          <Col>
+            <Divider type="vertical" className="vertical-splitter" />
+          </Col>
+          <Col span={7}>
+            <DailyRestrictionSection />
+          </Col>
+          <Col>
+            <Divider type="vertical" className="vertical-splitter" />
+          </Col>
+          <Col span={7}>
+            <IntervalRestrictionSection />
+          </Col>
+        </Row>
 
-      <Divider />
+        <Divider />
 
-      <Row gutter={16}>
-        <Col span={7}>
-          <EmailRecallSection />
-        </Col>
-        <Col>
-          <Divider type="vertical" className="vertical-splitter" />
-        </Col>
-        <Col span={7}>
-          <EmailSendingSection />
-        </Col>
-      </Row>
+        <Row gutter={16}>
+          <Col span={7}>
+            <EmailRecallSection />
+          </Col>
+          <Col>
+            <Divider type="vertical" className="vertical-splitter" />
+          </Col>
+          <Col span={7}>
+            <EmailSendingSection />
+          </Col>
+        </Row>
+      </div>
     </Form>
   )
 }
