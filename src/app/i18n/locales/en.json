@@ -1,6 +1,6 @@
 {
   "app": {
-    "title": "Plus Campaign Engine"
+    "title": "Grape Optima"
   },
   "auth": {
     "change-password-success": "Password successfully changed.",
@@ -169,6 +169,9 @@
     "restore": "Restore",
     "save": "Save",
     "search": "Search",
+    "selection": {
+      "reverse": "Reverse selection"
+    },
     "send": "Send",
     "table-settings": "Settings",
     "try-again": "Try again...",
@@ -223,11 +226,38 @@
     }
   },
   "campaign-create": {
+    "settings-tab-name":"Settings",
+    "segmentation-tab-name":"Segmentation",
+    "content-tab-name":"Content(Email)",
+    "test-tab-name":"Test",
     "title": "Create Campaign",
     "status-creation": "Status (Campaign Creation)",
     "user-logs": "User Logs",
     "save-draft": "Save draft & Exit",
-    "next-section": "Next (Segmentation)"
+    "next-section": "Next (Segmentation)",
+    "settings":{
+      "campaign-name":"Campaign name",
+      "requestor":"Requestor",
+      "about":"About",
+      "campaign-admins-title":"Campaign admins",
+      "channel-type-title":"Channel type",
+      "daily-restriction-title":"Daily restriction",
+      "start-time":"Start time",
+      "end-time":"End time",
+      "start-date":"Start date",
+      "end-date":"End date",
+      "email-recall-settings-title":"Email re-call settings",
+      "maximum-recall-attempts":"Maximum recall attempts",
+      "recall-frequency":"Recall frequency",
+      "email-resending-rules":"Email re-sending rules",
+      "interval-restrictions":"Interval Restrictions",
+      "email-delivery-date-restrictions" : "Email delivery date restrictions",
+      "product-title":"Product",
+      "product-label":"Product",
+      "timing-title":"Timing",
+      "select-timing-type-label":"Select timing type",
+      "approver-validator":"Approver/Validator"
+    }
   },
   "coupon-campaign-create": {
     "activate": "Activate",
@@ -660,6 +690,10 @@
         "name-max-length-100": "The product name can be maximum 100 characters long. Please add a valid value.",
         "name-required": "The product name field is required. Please add a value."
       },
+      "profile-editor": {
+        "company-required": "A company need to be selected for the profile. Please select from the dropdown.",
+        "job-role-required": "A job role need to be selected for the profile. Please select from the dropdown."
+      },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner code for registration cannot be longer than 10 characters. Please use a shorter partner code!",
         "partner-code-required": "Partner code is required for registration. Please use a valid partner code!"
@@ -974,6 +1008,22 @@
       "declined": "Declined"
     },
     "title": "Profiles"
+  },
+  "profile-editor": {
+    "title": "Edit profile",
+    "name": "Name",
+    "birthday": "Birthday",
+    "username": "Username",
+    "email": "E-mail",
+    "button-save": "Save",
+    "button-cancel": "Cancel",
+    "position": "Position",
+    "contacts": "Contacts",
+    "company": "Company",
+    "group": "Group",
+    "job-role": "Job role",
+    "phone": "Phone",
+    "picture-help": "Only a 512*512 pixel JPG or PNG file can be accepted."
   },
   "query-builder": {
     "add-group": {

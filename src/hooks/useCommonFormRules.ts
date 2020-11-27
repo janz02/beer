@@ -73,6 +73,18 @@ export function useCommonFormRules() {
   )
 
   /**
+   * Phone number
+   * @param message (optional) string
+   */
+  const phoneNumber = useCallback(
+    (message?: string): Rule => ({
+      pattern: new RegExp('^\\d*$'),
+      message: message || t('error.common.field-number')
+    }),
+    [t]
+  )
+
+  /**
    * Email (https://emailregex.com/)
    * @param message (optional) string
    */
@@ -203,6 +215,7 @@ export function useCommonFormRules() {
     requiredString,
     password,
     number,
+    phoneNumber,
     email,
     max,
     maxValue,

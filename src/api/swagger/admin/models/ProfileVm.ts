@@ -116,6 +116,12 @@ export interface ProfileVm {
      * @memberof ProfileVm
      */
     companyName?: string | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof ProfileVm
+     */
+    groupIds?: Array<number> | null;
 }
 
 export function ProfileVmFromJSON(json: any): ProfileVm {
@@ -143,6 +149,7 @@ export function ProfileVmFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'phoneNumber': !exists(json, 'phoneNumber') ? undefined : json['phoneNumber'],
         'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'companyName': !exists(json, 'companyName') ? undefined : json['companyName'],
+        'groupIds': !exists(json, 'groupIds') ? undefined : json['groupIds'],
     };
 }
 
@@ -170,6 +177,7 @@ export function ProfileVmToJSON(value?: ProfileVm | null): any {
         'phoneNumber': value.phoneNumber,
         'companyId': value.companyId,
         'companyName': value.companyName,
+        'groupIds': value.groupIds,
     };
 }
 

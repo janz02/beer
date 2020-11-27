@@ -34,6 +34,7 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
     paddedBottom,
     disableAutoScale,
     width,
+    className,
     ...rest
   } = props
   const isMobile = useIsMobile()
@@ -57,6 +58,8 @@ export const ResponsiveCard: FC<ResponsiveCardProps> = props => {
   return (
     <div
       className={
+        className +
+        ' ' +
         `r-card-container ` +
         `${paddedTop ? 'r-card-container--padded-top ' : ''}` +
         `${paddedBottom ? 'r-card-container--padded-bottom ' : ''}` +

@@ -1,6 +1,6 @@
 {
   "app": {
-    "title": "Plusz Kampány Motor"
+    "title": "Grape Optima"
   },
   "auth": {
     "change-password-success": "Jelszóváltoztatás sikeres",
@@ -169,6 +169,9 @@
     "restore": "Visszállítás",
     "save": "Mentés",
     "search": "Keresés",
+    "selection": {
+      "reverse": "Kijelölés megfordítása"
+    },
     "send": "Küldés",
     "table-settings": "Beállítások",
     "try-again": "Újra próbálkozás...",
@@ -223,11 +226,38 @@
     }
   },
   "campaign-create": {
+    "settings-tab-name":"Beállítások",
+    "segmentation-tab-name":"Szegmentáció",
+    "content-tab-name":"Tartalom (Email)",
+    "test-tab-name":"Teszt",
     "title": "Kampány Létrehozása",
     "status-creation": "Státusz (Kampány Létrehozás)",
     "user-logs": "Felhaszálói napló",
     "save-draft": "Piszkozat mentése & Kilépés",
-    "next-section": "Következő (Szegmentálás)"
+    "next-section": "Következő (Szegmentálás)",
+    "settings":{
+      "campaign-name":"Kampány neve",
+      "requestor":"Igénylő",
+      "about":"Leírás",
+      "campaign-admins-title":"Kampány adminok",
+      "channel-type-title":"Csatorna típusa",
+      "daily-restriction-title":"Napi tiltások",
+      "start-time":"Kezdődik",
+      "end-time":"Végződik",
+      "start-date":"Kezdeti dátum",
+      "end-date":"Zárás dátum",
+      "email-recall-settings-title":"Email visszahívás beállítása",
+      "maximum-recall-attempts":"Visszahívási kísérletek száma",
+      "recall-frequency":"Visszahívás gyakorisága",
+      "email-resending-rules":"Email újraküldési szabályok",
+      "interval-restrictions":"Időszakos korlátozások",
+      "email-delivery-date-restrictions" : "Email kézbesítési korlátozások",
+      "product-title":"Termék",
+      "product-label":"Termék",
+      "timing-title":"Időzítés",
+      "select-timing-type-label":"Időzítés típusa",
+      "approver-validator":"Elfogadó/Érvényesítő"
+    }
   },
   "coupon-campaign-create": {
     "activate": "Aktiválás",
@@ -660,6 +690,10 @@
         "name-max-length-100": "Termék név maximum 100 karakter lehet, kérem adjon meg egy rövidebb nevet",
         "name-required": "Termék név megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
+      "profile-editor": {
+        "company-required": "Cég megadása megadása kötelező, kérem adjon meg egy céget.",
+        "job-role-required": "Munkakör megadása megadása kötelező, kérem adjon meg egy munkakört."
+      },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot.",
         "partner-code-required": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot."
@@ -974,6 +1008,22 @@
       "declined": "Elutasított"
     },
     "title": "Profilok"
+  },
+  "profile-editor": {
+    "title": "Felhasználó szerkesztése",
+    "name": "Név",
+    "birthday": "Születésnap",
+    "username": "Felhasználónév",
+    "email": "E-mail",
+    "button-save": "Mentés",
+    "button-cancel": "Mégse",
+    "position": "Pozíció",
+    "contacts": "Contacts",
+    "company": "Cég",
+    "group": "Csoport",
+    "job-role": "Munkakör",
+    "phone": "Telefonszám",
+    "picture-help": "Csak pontosan 512*512 pixel méretű JPG vagy PNG kiterjesztésű kép fájl fogadható el."
   },
   "query-builder": {
     "add-group": {

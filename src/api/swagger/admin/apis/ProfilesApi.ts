@@ -55,7 +55,7 @@ export interface ExportProfilesRequest {
     userName?: string | null;
     email?: string | null;
     createdDate?: Date | null;
-    groupCount?: number | null;
+    groupIds?: Array<number> | null;
     permissionCount?: number | null;
     companyId?: number | null;
     jobRoleId?: number | null;
@@ -77,7 +77,7 @@ export interface GetProfilesRequest {
     userName?: string | null;
     email?: string | null;
     createdDate?: Date | null;
-    groupCount?: number | null;
+    groupIds?: Array<number> | null;
     permissionCount?: number | null;
     companyId?: number | null;
     jobRoleId?: number | null;
@@ -175,8 +175,8 @@ export class ProfilesApi extends runtime.BaseAPI {
             queryParameters['createdDate'] = (requestParameters.createdDate as any).toISOString();
         }
 
-        if (requestParameters.groupCount !== undefined) {
-            queryParameters['groupCount'] = requestParameters.groupCount;
+        if (requestParameters.groupIds) {
+            queryParameters['groupIds'] = requestParameters.groupIds;
         }
 
         if (requestParameters.permissionCount !== undefined) {
@@ -303,8 +303,8 @@ export class ProfilesApi extends runtime.BaseAPI {
             queryParameters['createdDate'] = (requestParameters.createdDate as any).toISOString();
         }
 
-        if (requestParameters.groupCount !== undefined) {
-            queryParameters['groupCount'] = requestParameters.groupCount;
+        if (requestParameters.groupIds) {
+            queryParameters['groupIds'] = requestParameters.groupIds;
         }
 
         if (requestParameters.permissionCount !== undefined) {
