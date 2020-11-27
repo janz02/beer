@@ -10,10 +10,10 @@ import { pageViewRoles } from 'services/roleHelpers'
 import { CampaignEditorFormFooter } from './CampaignEditorFormFooter'
 import { EditCampaignStatus } from './CampaignStatusHeader'
 import { CampaignUserLogs } from './CampaignUserLogs'
-import { ContentTabPane } from './ContentTabPane'
-import { SegmentationTabPane } from './SegmentationTabPane'
-import { SettingsTabPane } from './SettingsTabPane'
-import { TestTabPane } from './TestTabPane'
+import { EmailContentTabPane } from '../content/email/EmailContentTabPane'
+import { SegmentationTabPane } from '../segmentation/SegmentationTabPane'
+import { SettingsTabPane } from '../settings/SettingsTabPane'
+import { TestTabPane } from '../test/TestTabPane'
 
 export interface CampaignEditorProps {
   campaignId: number | undefined
@@ -62,7 +62,7 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
               <SegmentationTabPane campaignId={campaignId} />
             </TabPane>
             <TabPane tab="Content(Email)" key="content">
-              <ContentTabPane campaignId={campaignId} />
+              <EmailContentTabPane campaignId={campaignId} />
             </TabPane>
             <TabPane tab="Test" key="test">
               <TestTabPane campaignId={campaignId} />
