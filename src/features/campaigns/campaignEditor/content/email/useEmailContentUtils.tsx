@@ -53,6 +53,7 @@ export const useEmailContentUtils = (): EmailContentUtils => {
     if (selectedTemplate?.id) {
       setFieldsValue({ templateVersion: selectedTemplate?.version })
       handleGetTemplate(selectedTemplate?.id)
+      dispatch(newsletterEditorActions.setTemplatePreviewLoading(true))
     }
   }
 

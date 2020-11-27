@@ -3,30 +3,26 @@ import { DeviceType } from './DeviceSelectorButton'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import grapesjs from 'grapesjs'
-import { useSelector } from 'hooks/react-redux-hooks'
+import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { RootState } from 'app/rootReducer'
+import { newsletterEditorActions } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 
 export interface EmailTemplatePreviewUtils {
-  handleDeviceSelection: (device: DeviceType) => void
   loading: boolean
   selectedDevice: DeviceType
+  handleDeviceSelection: (device: DeviceType) => void
 }
 
 export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePreviewUtils => {
-  const { template, currentTemplateVersionId } = useSelector(
+  const dispatch = useDispatch()
+  const { template, currentTemplateVersionId, templatePreviewLoading } = useSelector(
     (state: RootState) => state.newsletterEditor
   )
-  const [loading, setLoading] = useState<boolean>(true)
   const [selectedDevice, setSelectedDevice] = useState(DeviceType.Desktop)
 
   const currentTemplateVersion = useMemo(() => {
     const version = template?.history?.find(h => h?.id === currentTemplateVersionId)
     return version
-  }, [currentTemplateVersionId, template])
-
-  const isLatestTemplate = useMemo(() => {
-    const newestTemplateVersionId = template?.history?.[0]?.id
-    return newestTemplateVersionId === currentTemplateVersionId
   }, [currentTemplateVersionId, template])
 
   const editor = useMemo(() => {
@@ -64,35 +60,26 @@ export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePrevi
     },
     [editor, selectedDevice]
   )
+  useEffect(() => {
+    if (!editor) return
+    editor.on('load', () => {
+      editor.runCommand('preview')
+    })
+
+    editor.on('update', () => {
+      editor.DomComponents.getWrapper().onAll((comp: any) => {
+        comp.set({ editable: false, draggable: false })
+      })
+      dispatch(newsletterEditorActions.setTemplatePreviewLoading(false))
+    })
+  }, [editor, dispatch])
 
   useEffect(() => {
     if (!editor) return
 
     handleDeviceSelection(selectedDevice)
-
-    editor.on('load:before', () => {
-      setLoading(true)
-    })
-    editor.on('load', () => {
-      editor.runCommand('preview')
-    })
-    editor.on('run:preview', () => {
-      setLoading(false)
-      editor.DomComponents.getWrapper().onAll((comp: any) => {
-        comp.set({ editable: false })
-      })
-    })
-
     editor.setComponents(currentTemplateVersion?.content ?? '')
-  }, [
-    editor,
-    selectedDevice,
-    currentTemplateVersion,
-    isLatestTemplate,
-    template,
-    currentTemplateVersionId,
-    handleDeviceSelection
-  ])
+  }, [editor, selectedDevice, currentTemplateVersion, handleDeviceSelection])
 
-  return { loading, selectedDevice, handleDeviceSelection }
+  return { loading: templatePreviewLoading, selectedDevice, handleDeviceSelection }
 }
