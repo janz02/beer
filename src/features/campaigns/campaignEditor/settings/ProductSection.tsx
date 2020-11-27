@@ -8,7 +8,11 @@ export const ProductSection: FC = () => {
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.product-title')}</Title>
-      <Form.Item className="control-label" label={t('campaign-create.settings.product-label')}>
+      <Form.Item
+        required
+        className="control-label"
+        label={t('campaign-create.settings.product-label')}
+      >
         <Select>
           <Select.Option value="1">Ducati monster 600</Select.Option>
         </Select>

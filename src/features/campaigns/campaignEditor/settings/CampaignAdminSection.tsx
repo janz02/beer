@@ -8,12 +8,16 @@ export const CampaignAdminSection: FC = () => {
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.campaign-admins-title')}</Title>
-      <Form.Item className="control-label" label={t('campaign-create.settings.requestor')}>
+      <Form.Item required className="control-label" label={t('campaign-create.settings.requestor')}>
         <Select>
           <Select.Option value="1">Yanik Silver(Marketing)</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item className="control-label" label={t('campaign-create.settings.approver-validator')}>
+      <Form.Item
+        required
+        className="control-label"
+        label={t('campaign-create.settings.approver-validator')}
+      >
         <Select>
           <Select.Option value="1">Gary Hamel(Manager)</Select.Option>
         </Select>

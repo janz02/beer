@@ -11,6 +11,7 @@ export const TimingSection: FC = () => {
       <Row>
         <Col>
           <Form.Item
+            required
             className="control-label"
             label={t('campaign-create.settings.select-timing-type-label')}
           >
@@ -23,12 +24,20 @@ export const TimingSection: FC = () => {
       </Row>
       <Row gutter={10}>
         <Col span={12}>
-          <Form.Item className="control-label" label={t('campaign-create.settings.start-date')}>
+          <Form.Item
+            required
+            className="control-label"
+            label={t('campaign-create.settings.start-date')}
+          >
             <DatePicker />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item className="control-label" label={t('campaign-create.settings.end-date')}>
+          <Form.Item
+            required
+            className="control-label"
+            label={t('campaign-create.settings.end-date')}
+          >
             <DatePicker />
           </Form.Item>
         </Col>
