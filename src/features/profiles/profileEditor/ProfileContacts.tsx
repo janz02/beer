@@ -2,13 +2,8 @@ import './ProfileContacts.scss'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Form, Input } from 'antd'
-import { ProfileEditorPageUtils } from './ProfileEditorUtils'
 
-interface ProfileContactsProps {
-  profileEditorPageUtils: ProfileEditorPageUtils
-}
-
-export const ProfileContacts: React.FC<ProfileContactsProps> = props => {
+export const ProfileContacts: React.FC = () => {
   const { t } = useTranslation()
 
   const phoneRule = {

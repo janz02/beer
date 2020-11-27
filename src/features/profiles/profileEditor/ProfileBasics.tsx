@@ -27,7 +27,6 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
           rules={[rule.fileSize(2), rule.fileImgDimensionsExactMatch({ width: 512, height: 512 })]}
         >
           <PictureUploadButton
-            // disabled={!displayEditor}
             onSuccess={fileDetails => {
               form.setFieldsValue({
                 ...form.getFieldsValue(),

@@ -56,7 +56,7 @@ export const ProfileEditorPage: FC = () => {
             <ProfilePosition profileEditorPageUtils={profileEditorPageUtils} />
           </Col>
           <Col span={12}>
-            <ProfileContacts profileEditorPageUtils={profileEditorPageUtils} />
+            <ProfileContacts />
           </Col>
         </Row>
 
