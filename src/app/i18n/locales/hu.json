@@ -226,6 +226,10 @@
     }
   },
   "campaign-create": {
+    "settings-tab-name":"Beállítások",
+    "segmentation-tab-name":"Szegmentáció",
+    "content-tab-name":"Tartalom (Email)",
+    "test-tab-name":"Teszt",
     "title": "Kampány Létrehozása",
     "status-creation": "Státusz (Kampány Létrehozás)",
     "user-logs": "Felhaszálói napló",
@@ -234,6 +238,7 @@
     "settings":{
       "campaign-name":"Kampány neve",
       "requestor":"Igénylő",
+      "about":"Leírás",
       "campaign-admins-title":"Kampány adminok",
       "channel-type-title":"Csatorna típusa",
       "daily-restriction-title":"Napi tiltások",

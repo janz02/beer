@@ -226,6 +226,10 @@
     }
   },
   "campaign-create": {
+    "settings-tab-name":"Settings",
+    "segmentation-tab-name":"Segmentation",
+    "content-tab-name":"Content(Email)",
+    "test-tab-name":"Test",
     "title": "Create Campaign",
     "status-creation": "Status (Campaign Creation)",
     "user-logs": "User Logs",
@@ -234,6 +238,7 @@
     "settings":{
       "campaign-name":"Campaign name",
       "requestor":"Requestor",
+      "about":"About",
       "campaign-admins-title":"Campaign admins",
       "channel-type-title":"Channel type",
       "daily-restriction-title":"Daily restriction",

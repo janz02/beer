@@ -11,7 +11,7 @@ export const BasicCampaignSection: FC<CampaignEditorProps> = ({ campaignId }) =>
       <Form.Item className="control-label" label={t('campaign-create.settings.campaign-name')}>
         <Input />
       </Form.Item>
-      <Form.Item className="control-label" label={t('campaign-create.settings.requestor')}>
+      <Form.Item className="control-label" label={t('campaign-create.settings.about')}>
         <TextArea rows={4} />
       </Form.Item>
     </>

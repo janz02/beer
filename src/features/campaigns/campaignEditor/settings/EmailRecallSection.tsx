@@ -17,7 +17,7 @@ export const EmailRecallSection: FC = () => {
             <Input type="number" />
           </Form.Item>
         </Col>
-        <Col span={14} className="col-flex-end">
+        <Col span={14}>
           <Form.Item
             className="control-label"
             label={t('campaign-create.settings.recall-frequency')}
