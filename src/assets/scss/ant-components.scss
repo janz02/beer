@@ -131,4 +131,18 @@
     margin-left: 3px;
     color: $primary-color;
   }
+
+  .control-label {
+    .ant-form-item-label label {
+      color: $control-label-font-color;
+      font-size: $control-label-font-size;
+    }
+  }
+
+  .vertical-checkboxes {
+    .ant-checkbox-wrapper {
+      display: block;
+      margin-left: 0;
+    }
+  }
 }

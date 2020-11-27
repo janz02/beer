@@ -8,12 +8,10 @@ export const BasicCampaignSection: FC<CampaignEditorProps> = ({ campaignId }) =>
   const { t } = useTranslation()
   return (
     <>
-      <Form.Item>
-        <label className="control-label">{t('campaign-create.settings.campaign-name')}</label>
-        <Input placeholder="Basic usage" />
+      <Form.Item className="control-label" label={t('campaign-create.settings.campaign-name')}>
+        <Input />
       </Form.Item>
-      <Form.Item>
-        <label className="control-label">{t('campaign-create.settings.requestor')}</label>
+      <Form.Item className="control-label" label={t('campaign-create.settings.requestor')}>
         <TextArea rows={4} />
       </Form.Item>
     </>

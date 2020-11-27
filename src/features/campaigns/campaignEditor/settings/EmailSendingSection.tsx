@@ -7,7 +7,7 @@ export const EmailSendingSection: FC = () => {
   const { t } = useTranslation()
   return (
     <Form.Item label={t('campaign-create.settings.email-resending-rules')}>
-      <CheckboxGroup>
+      <CheckboxGroup className="vertical-checkboxes">
         <Checkbox>Rejected email</Checkbox>
         <Checkbox>Temporarily rejected email</Checkbox>
         <Checkbox>Bounced email</Checkbox>

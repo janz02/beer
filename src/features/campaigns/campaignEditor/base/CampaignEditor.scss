@@ -1,6 +1,4 @@
 @import "assets/scss/_variables";
-$smallFontSize: 9px;
-$smallFontColor: rgb(169, 169, 169);
 
 .campaign-user-logs {
   display: grid;
@@ -9,7 +7,7 @@ $smallFontColor: rgb(169, 169, 169);
   padding: 5px;
   border: 1px;
   border-style: solid;
-  border-color: $smallFontColor;
+  border-color: $control-label-font-color;
   font-size: small;
   justify-items: auto;
 
@@ -18,7 +16,7 @@ $smallFontColor: rgb(169, 169, 169);
   }
 
   .campaign-user-log-small-font {
-    font-size: $smallFontSize;
+    font-size: $control-label-font-size;
   }
 
   .campaign-user-log-inner-footer {
@@ -27,14 +25,14 @@ $smallFontColor: rgb(169, 169, 169);
 }
 
 .campaign-user-logs-title {
-  color: $smallFontColor;
-  font-size: $smallFontSize;
+  color: $control-label-font-color;
+  font-size: $control-label-font-size;
 }
 
 .edit-campaign-status {
   div.ant-row:nth-child(1) {
-    color: $smallFontColor;
-    font-size: $smallFontSize;
+    color: $control-label-font-color;
+    font-size: $control-label-font-size;
   }
 }
 
@@ -49,49 +47,19 @@ $smallFontColor: rgb(169, 169, 169);
 }
 
 .settings-tab {
-  .ant-checkbox-wrapper {
-    display: block;
-    margin-left: 0;
+  .box-title {
+    font-weight: bold;
   }
 
-  label.control-label {
-    color: $smallFontColor;
-    font-size: $smallFontSize;
+  .campaign-basic-details {
+    max-width: 500px;
   }
 
   .vertical-splitter {
     height: 100%;
   }
 
-  .form-controls-display-grid {
-    .ant-form-item-control-input-content {
-      display: grid;
-    }
-  }
-
-  .form-controls-display-content {
-    .ant-form-item-control-input-content {
-      display: contents;
-
-      div {
-        align-self: flex-end;
-      }
-    }
-
-    .ant-col {
-      margin-right: 5px;
-    }
-  }
-
-  .flex-wrap-unset {
-    flex-wrap: unset;
-
-    div {
-      padding-left: 5px;
-    }
-  }
-
-  .campaign-basic-details {
-    max-width: 500px;
+  .col-flex-end {
+    align-self: flex-end;
   }
 }

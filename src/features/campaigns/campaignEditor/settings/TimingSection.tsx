@@ -5,25 +5,33 @@ import { useTranslation } from 'react-i18next'
 export const TimingSection: FC = () => {
   const { t } = useTranslation()
   return (
-    <Form.Item label={t('campaign-create.settings.timing-title')}>
+    <>
+      <label className="box-title">{t('campaign-create.settings.timing-title')}</label>
       <Row>
-        <label className="control-label">
-          {t('campaign-create.settings.select-timing-type-label')}
-        </label>
-        <Select placeholder="Date interval">
-          <Select.Option value="1">Valami timing</Select.Option>
-        </Select>
-      </Row>
-      <Row className="flex-wrap-unset">
         <Col>
-          <label className="control-label">{t('campaign-create.settings.start-date')}</label>
-          <DatePicker />
+          <Form.Item
+            className="control-label"
+            label={t('campaign-create.settings.select-timing-type-label')}
+          >
+            <Select placeholder="Date interval">
+              <Select.Option value="1">Valami timing</Select.Option>
+            </Select>
+          </Form.Item>
         </Col>
-        <Col>
-          <label className="control-label">{t('campaign-create.settings.end-date')}</label>
-          <DatePicker />
+        <Col />
+      </Row>
+      <Row gutter={10}>
+        <Col span={12}>
+          <Form.Item className="control-label" label={t('campaign-create.settings.start-date')}>
+            <DatePicker />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item className="control-label" label={t('campaign-create.settings.end-date')}>
+            <DatePicker />
+          </Form.Item>
         </Col>
       </Row>
-    </Form.Item>
+    </>
   )
 }
