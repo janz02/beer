@@ -81,9 +81,9 @@ export const getProfile = (id: number): AppThunk => async dispatch => {
 
     const [profile, companies, groups, jobRoles] = await Promise.all([
       api.admin.profiles.getProfile({ id }),
-      api.admin.companies.getCompanies({}),
-      api.admin.groups.getOrganizationGroups({}),
-      api.admin.jobRoles.getJobRoles({})
+      api.admin.companies.getCompanies({ pageSize: -1 }),
+      api.admin.groups.getOrganizationGroups({ pageSize: -1 }),
+      api.admin.jobRoles.getJobRoles({ pageSize: -1 })
     ])
 
     dispatch(
