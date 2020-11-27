@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { Drawer, Layout } from 'antd'
 import { useIsMobile } from 'hooks'
-import { ReactComponent as LogoDark } from 'assets/img/logo_dark.svg'
-import { ReactComponent as LogoMini } from 'assets/img/logo_dark_mini.svg'
+import { ReactComponent as LogoDark, ReactComponent as LogoMini } from 'assets/img/grapelogo.svg'
+
 import './SideMenu.scss'
 
 export interface SideMenuProps {
