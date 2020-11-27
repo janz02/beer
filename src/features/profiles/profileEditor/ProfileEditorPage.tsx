@@ -43,7 +43,7 @@ export const ProfileEditorPage: FC = () => {
       floatingBackButton={backButtonProps}
     >
       <Form
-        name="coupon-editor-form"
+        name="profile-editor-form"
         layout="vertical"
         form={profileEditorPageUtils.formUtils.form}
         onFinish={handleSave}

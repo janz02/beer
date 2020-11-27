@@ -14,7 +14,7 @@ export const ProfileContacts: React.FC = () => {
   return (
     <>
       <h2>{t('profile-editor.contacts')}</h2>
-      <Form.Item label={t('profile-editor.phone')}>
+      <Form.Item htmlFor="phoneNumberWithoutCountry" label={t('profile-editor.phone')}>
         <div className="profile-editor-phone-container">
           <div className="profile-editor-phone-country">+36</div>
           <Form.Item name="phoneNumberWithoutCountry" rules={[phoneRule]} noStyle>
