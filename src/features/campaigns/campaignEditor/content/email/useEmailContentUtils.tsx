@@ -5,8 +5,11 @@ import { newsletterListActions } from 'features/newsletter/newsletterList/newsle
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { useCallback, useEffect } from 'react'
 import { Newsletter, NewsletterPreview } from 'models/newsletter'
+import { useFormUtils } from 'hooks/useFormUtils'
+import { FormInstance } from 'antd/lib/form'
 
 interface EmailContentUtils {
+  form: FormInstance<any>
   template: Newsletter | undefined
   templateList: NewsletterPreview[]
   currentTemplateVersionId: number | undefined
@@ -16,6 +19,7 @@ interface EmailContentUtils {
 
 export const useEmailContentUtils = (): EmailContentUtils => {
   const dispatch = useDispatch()
+  const { form, setFieldsValue } = useFormUtils()
   const { template, currentTemplateVersionId } = useSelector(
     (state: RootState) => state.newsletterEditor
   )
@@ -47,6 +51,7 @@ export const useEmailContentUtils = (): EmailContentUtils => {
     const selectedTemplate = templateList.find(x => x.id === value)
 
     if (selectedTemplate?.id) {
+      setFieldsValue({ templateVersion: selectedTemplate?.version })
       handleGetTemplate(selectedTemplate?.id)
     }
   }
@@ -58,6 +63,7 @@ export const useEmailContentUtils = (): EmailContentUtils => {
   }, [templateList, handleGetTemplates])
 
   return {
+    form,
     template,
     templateList,
     currentTemplateVersionId,

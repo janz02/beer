@@ -10,6 +10,7 @@ import Title from 'antd/lib/typography/Title'
 export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
   const {
+    form,
     template,
     templateList,
     handleTemplateSelection,
@@ -19,7 +20,7 @@ export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
   return (
     <div>
       <div>
-        <Form layout="vertical">
+        <Form form={form} layout="vertical">
           <Title level={5}>{t('campaign-create.content.email.title')}</Title>
           <Row gutter={20}>
             <Col span={8}>
@@ -34,7 +35,7 @@ export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                 >
                   {templateList?.map(x =>
                     x.id ? (
-                      <Select.Option key={x.id} value={x.id} selected={x.id === template?.id}>
+                      <Select.Option key={x.id} value={x.id}>
                         {x.name}
                       </Select.Option>
                     ) : (
