@@ -59,7 +59,7 @@ setupStore({
       permissionCount: 0,
       jobRoleId: 1,
       jobRoleName: 'testJobRole',
-      birthDay: moment('2020-11-19T23:00:00.000Z'),
+      birthDay: moment('2020-11-20T00:00:00.000'),
       phoneNumber: 'phoneNumber',
       companyId: 1,
       companyName: 'testCompany',
