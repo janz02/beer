@@ -8,7 +8,6 @@ import { history } from 'router/router'
 import { useSegmentationEditorUtils } from './useSegmentationEditorUtils'
 import { QueryBuilderSidebarView } from './queryBuilder/QueryBuilderSidebarView'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
-import { useQueryBuilderUtils } from './queryBuilder/useQueryBuilderUtils'
 
 export const SegmentationEditorPage: React.FC = () => {
   const { t } = useTranslation()
@@ -17,7 +16,6 @@ export const SegmentationEditorPage: React.FC = () => {
     id: segmentationId ? +segmentationId : undefined
   })
   const { modified } = segmentationEditorUtils
-  const queryBuilderUtils = useQueryBuilderUtils()
   const title = segmentationId
     ? t('segmentation-editor.title-edit')
     : t('segmentation-editor.title-create')
@@ -39,17 +37,11 @@ export const SegmentationEditorPage: React.FC = () => {
           <ResponsiveHeader type="floating" title={title} backButton={backButtonProps} />
 
           <NavigationAlert when={modified} />
-          <SegmentationEditorForm
-            segmentationEditorUtils={segmentationEditorUtils}
-            queryBuilderUtils={queryBuilderUtils}
-          />
+          <SegmentationEditorForm segmentationEditorUtils={segmentationEditorUtils} />
         </Col>
 
         <Col span={6} className="comment-col">
-          <QueryBuilderSidebarView
-            fields={segmentationEditorUtils.fields}
-            onFieldSelected={queryBuilderUtils.handleOnSidebarFieldSelected}
-          />
+          <QueryBuilderSidebarView fields={segmentationEditorUtils.fields} />
         </Col>
       </Row>
     </>
