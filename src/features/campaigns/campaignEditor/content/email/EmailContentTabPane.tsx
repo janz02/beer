@@ -49,16 +49,13 @@ export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                 required
               >
                 <Select
+                  id="template-version-selector"
                   onChange={handleTemplateVersionSelection}
                   placeholder={t('campaign-create.content.email.template-version-placeholder')}
                 >
                   {template?.history?.map(x =>
-                    x.version ? (
-                      <Select.Option
-                        key={x.version}
-                        value={x.version}
-                        selected={x.version === template.version}
-                      >
+                    x.version && x.id ? (
+                      <Select.Option key={x.version} value={x.id}>
                         {x.version}
                       </Select.Option>
                     ) : (

@@ -6,7 +6,7 @@ import './EmailTemplatePreview.scss'
 
 export const EmailTemplatePreview: React.FC = () => {
   const { t } = useTranslation()
-  const { handleDeviceSelection, selected, visible } = useEmailTemplatePreviewUtils('500px')
+  const { handleDeviceSelection, selectedDevice, loading } = useEmailTemplatePreviewUtils('500px')
 
   return (
     <div className="email-preview-container">
@@ -18,25 +18,26 @@ export const EmailTemplatePreview: React.FC = () => {
             onSelect={() => {
               handleDeviceSelection(DeviceType.Desktop)
             }}
-            selected={selected}
+            selected={selectedDevice}
           />
           <DeviceSelectorButton
             type={DeviceType.Tablet}
             onSelect={() => {
               handleDeviceSelection(DeviceType.Tablet)
             }}
-            selected={selected}
+            selected={selectedDevice}
           />
           <DeviceSelectorButton
             type={DeviceType.Mobile}
             onSelect={() => {
               handleDeviceSelection(DeviceType.Mobile)
             }}
-            selected={selected}
+            selected={selectedDevice}
           />
         </div>
       </div>
-      <div id="email-preview" hidden={!visible} />
+      <div id="email-preview" hidden={loading} />
+      <div hidden={!loading}>{t('common.loading')}</div>
     </div>
   )
 }

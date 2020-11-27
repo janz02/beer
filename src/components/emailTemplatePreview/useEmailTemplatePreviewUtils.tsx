@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DeviceType } from './DeviceSelectorButton'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -8,14 +8,26 @@ import { RootState } from 'app/rootReducer'
 
 export interface EmailTemplatePreviewUtils {
   handleDeviceSelection: (device: DeviceType) => void
-  visible: boolean
-  selected: DeviceType
+  loading: boolean
+  selectedDevice: DeviceType
 }
 
 export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePreviewUtils => {
-  const { template } = useSelector((state: RootState) => state.newsletterEditor)
-  const [visible, setVisible] = useState<boolean>(false)
-  const [selected, setSelected] = useState(DeviceType.Desktop)
+  const { template, currentTemplateVersionId } = useSelector(
+    (state: RootState) => state.newsletterEditor
+  )
+  const [loading, setLoading] = useState<boolean>(true)
+  const [selectedDevice, setSelectedDevice] = useState(DeviceType.Desktop)
+
+  const currentTemplateVersion = useMemo(() => {
+    const version = template?.history?.find(h => h?.id === currentTemplateVersionId)
+    return version
+  }, [currentTemplateVersionId, template])
+
+  const isLatestTemplate = useMemo(() => {
+    const newestTemplateVersionId = template?.history?.[0]?.id
+    return newestTemplateVersionId === currentTemplateVersionId
+  }, [currentTemplateVersionId, template])
 
   const editor = useMemo(() => {
     if (!template) return
@@ -26,47 +38,61 @@ export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePrevi
     })
   }, [template, height])
 
-  const handleDeviceSelection = (device: DeviceType): void => {
-    let deviceType
-    switch (device) {
-      case DeviceType.Mobile:
-        deviceType = 'Mobile portrait'
-        break
-      case DeviceType.Tablet:
-        deviceType = 'Tablet'
-        break
-      case DeviceType.Desktop:
-      default:
-        deviceType = 'Desktop'
-        break
-    }
+  const handleDeviceSelection = useCallback(
+    (device: DeviceType): void => {
+      if (device !== selectedDevice) {
+        setSelectedDevice(device)
+      }
 
-    if (editor) {
-      editor.setDevice(deviceType)
-      editor.runCommand('preview')
+      let deviceType
+      switch (device) {
+        case DeviceType.Mobile:
+          deviceType = 'Mobile portrait'
+          break
+        case DeviceType.Tablet:
+          deviceType = 'Tablet'
+          break
+        case DeviceType.Desktop:
+        default:
+          deviceType = 'Desktop'
+          break
+      }
 
-      setSelected(device)
-    }
-  }
+      if (editor) {
+        editor.setDevice(deviceType)
+      }
+    },
+    [editor, selectedDevice]
+  )
 
   useEffect(() => {
     if (!editor) return
+
+    handleDeviceSelection(selectedDevice)
+    editor.on('load:before', () => {
+      setLoading(true)
+    })
     editor.on('load', () => {
       editor.runCommand('preview')
-      editor.setDevice(selected)
-    })
-    editor.on('update', (event: any) => {
-      editor.setDevice(selected)
-      setVisible(false)
     })
     editor.on('run:preview', () => {
-      setVisible(true)
-      editor.DomComponents.getWrapper().onAll(
+      setLoading(false)
+      /*  editor.DomComponents.getWrapper().onAll(
         (comp: { is: (arg0: string) => any; set: (arg0: { editable: boolean }) => any }) =>
           comp.is('text') && comp.set({ editable: false })
-      )
+      ) */
     })
-  }, [editor, selected])
 
-  return { visible, selected, handleDeviceSelection }
+    editor.setComponents(currentTemplateVersion?.content ?? '')
+  }, [
+    editor,
+    selectedDevice,
+    currentTemplateVersion,
+    isLatestTemplate,
+    template,
+    currentTemplateVersionId,
+    handleDeviceSelection
+  ])
+
+  return { loading, selectedDevice, handleDeviceSelection }
 }

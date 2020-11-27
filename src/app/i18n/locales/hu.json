@@ -148,6 +148,7 @@
     "inactivate": "Inaktiválás",
     "inactive": "Inaktív",
     "invite": "Meghívás",
+    "loading":"Betöltés",
     "message": {
       "delete-success": "Sikeres törlés",
       "email-sent": "A kérés sikeresen fel lett dolgozva",

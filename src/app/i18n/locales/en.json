@@ -148,6 +148,7 @@
     "inactivate": "Inactivate",
     "inactive": "Inactive",
     "invite": "Invite",
+    "loading":"Loading",
     "message": {
       "delete-success": "Deleted successfully.",
       "email-sent": "Your request was processed successfully.",

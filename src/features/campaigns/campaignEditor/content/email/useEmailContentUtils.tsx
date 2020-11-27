@@ -4,28 +4,25 @@ import { newsletterEditorActions } from 'features/newsletter/newsletter-editor/n
 import { newsletterListActions } from 'features/newsletter/newsletterList/newsletterListSlice'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { useCallback, useEffect } from 'react'
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-
 import { Newsletter, NewsletterPreview } from 'models/newsletter'
 
 interface EmailContentUtils {
   template: Newsletter | undefined
   templateList: NewsletterPreview[]
+  currentTemplateVersionId: number | undefined
   handleTemplateSelection: (value: SelectValue) => void
   handleTemplateVersionSelection: (value: SelectValue) => void
 }
 
 export const useEmailContentUtils = (): EmailContentUtils => {
   const dispatch = useDispatch()
-  const { template } = useSelector((state: RootState) => state.newsletterEditor)
+  const { template, currentTemplateVersionId } = useSelector(
+    (state: RootState) => state.newsletterEditor
+  )
   const { templateList } = useSelector((state: RootState) => state.newsletterList)
 
-  let templateId: number | undefined
-  let templateVersionId: number | undefined
-
   const handleGetTemplates = useCallback((): void => {
-    dispatch(newsletterListActions.getNewsletterTemplates())
+    dispatch(newsletterListActions.getNewsletterTemplates({ pageSize: -1 }))
   }, [dispatch])
 
   const handleGetTemplate = useCallback(
@@ -39,20 +36,18 @@ export const useEmailContentUtils = (): EmailContentUtils => {
 
   const handleTemplateVersionSelection = (value: SelectValue): void => {
     const selectedTemplateVersion = value as number
+    const selectedTemplate = template?.history?.find(h => h?.id === selectedTemplateVersion)
 
-    if (selectedTemplateVersion) {
-      templateVersionId = selectedTemplateVersion
-      dispatch(newsletterEditorActions.switchNewsletterVersion(templateVersionId))
+    if (selectedTemplate?.id) {
+      dispatch(newsletterEditorActions.switchNewsletterVersion(selectedTemplate?.id))
     }
   }
 
   const handleTemplateSelection = (value: SelectValue): void => {
     const selectedTemplate = templateList.find(x => x.id === value)
 
-    if (selectedTemplate) {
-      templateId = selectedTemplate.id as number
-      templateVersionId = selectedTemplate.version as number
-      handleGetTemplate(templateId)
+    if (selectedTemplate?.id) {
+      handleGetTemplate(selectedTemplate?.id)
     }
   }
 
@@ -65,6 +60,7 @@ export const useEmailContentUtils = (): EmailContentUtils => {
   return {
     template,
     templateList,
+    currentTemplateVersionId,
     handleTemplateSelection,
     handleTemplateVersionSelection
   }
