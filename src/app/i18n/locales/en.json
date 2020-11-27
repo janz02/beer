@@ -992,7 +992,8 @@
     "company": "Company",
     "group": "Group",
     "job-role": "Job role",
-    "phone": "Phone"
+    "phone": "Phone",
+    "picture-help": "Only a 512*512 pixel JPG or PNG file can be accepted."
   },
   "query-builder": {
     "add-group": {

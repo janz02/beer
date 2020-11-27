@@ -23,8 +23,7 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
         {' '}
         <Form.Item
           name="profilePictureDetails"
-          // label={t('coupon-campaign-create.field.small-image')}
-          // extra={t('coupon-campaign-create.field.small-image-help')}
+          extra={t('profile-editor.picture-help')}
           rules={[rule.fileSize(2), rule.fileImgDimensionsExactMatch({ width: 512, height: 512 })]}
         >
           <PictureUploadButton
@@ -54,7 +53,7 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
         <Row gutter={50}>
           <Col span={12}>
             <Form.Item name="name" label={t('profile-editor.name')}>
-              <Input maxLength={60} />
+              <Input maxLength={100} />
             </Form.Item>
           </Col>
         </Row>
@@ -69,7 +68,7 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
           </Col>
           <Col span={9}>
             <Form.Item name="email" label={t('profile-editor.email')}>
-              <Input maxLength={60} />
+              <Input maxLength={60} disabled />
             </Form.Item>
           </Col>
         </Row>
