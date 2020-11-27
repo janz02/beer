@@ -20,7 +20,6 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
   return (
     <div className="profile-editor-basics-container">
       <div className="profile-editor-basics-picture-container">
-        {' '}
         <Form.Item
           name="profilePictureDetails"
           extra={t('profile-editor.picture-help')}
