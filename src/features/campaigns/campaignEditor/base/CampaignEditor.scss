@@ -1,16 +1,13 @@
 @import "assets/scss/_variables";
-$smallFontSize: 9px;
-$smallFontColor: rgb(169, 169, 169);
 
 .campaign-user-logs {
   display: grid;
   width: 100%;
-  min-width: 400px;
   min-height: 40px;
   padding: 5px;
   border: 1px;
   border-style: solid;
-  border-color: $smallFontColor;
+  border-color: $control-label-font-color;
   font-size: small;
   justify-items: auto;
 
@@ -19,7 +16,7 @@ $smallFontColor: rgb(169, 169, 169);
   }
 
   .campaign-user-log-small-font {
-    font-size: $smallFontSize;
+    font-size: $control-label-font-size;
   }
 
   .campaign-user-log-inner-footer {
@@ -28,14 +25,14 @@ $smallFontColor: rgb(169, 169, 169);
 }
 
 .campaign-user-logs-title {
-  color: $smallFontColor;
-  font-size: $smallFontSize;
+  color: $control-label-font-color;
+  font-size: $control-label-font-size;
 }
 
 .edit-campaign-status {
   div.ant-row:nth-child(1) {
-    color: $smallFontColor;
-    font-size: $smallFontSize;
+    color: $control-label-font-color;
+    font-size: $control-label-font-size;
   }
 }
 
@@ -50,5 +47,15 @@ $smallFontColor: rgb(169, 169, 169);
 
   .ant-col {
     padding: 3px;
+  }
+}
+
+.settings-tab {
+  .campaign-basic-details {
+    max-width: 500px;
+  }
+
+  .vertical-splitter {
+    height: 100%;
   }
 }

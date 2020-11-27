@@ -1916,11 +1916,14 @@
             }
           },
           {
-            "name": "groupCount",
+            "name": "groupIds",
             "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32",
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              },
               "nullable": true
             }
           },
@@ -1999,19 +2002,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}],"page":1,"from":1,"to":2,"size":2}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}],"page":1,"from":1,"to":2,"size":2}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}],"page":1,"from":1,"to":2,"size":2}
               }
             }
           },
@@ -2078,19 +2081,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}
               }
             }
           },
@@ -2281,11 +2284,14 @@
             }
           },
           {
-            "name": "groupCount",
+            "name": "groupIds",
             "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32",
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              },
               "nullable": true
             }
           },
@@ -3057,6 +3063,14 @@
           },
           "companyName": {
             "type": "string",
+            "nullable": true
+          },
+          "groupIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           }
         },

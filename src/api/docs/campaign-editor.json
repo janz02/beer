@@ -658,7 +658,7 @@
           "Campaigns"
         ],
         "summary": "Returns the campaigns for the actual query.",
-        "description": "Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign\r\nonly for the user who created the draft state, in order to protect it from other users\r\nand let a sandbox campaign designment for the end user.",
+        "description": "Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Set\r\nonly for the user who created the draft state, in order to protect it from other users\r\nand let a sandbox campaign designment for the end user.",
         "operationId": "getCampaigns",
         "parameters": [
           {
@@ -1236,7 +1236,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified\r\ncampaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Tested\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified\r\ncampaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "approveCampaign",
         "requestBody": {
@@ -1313,7 +1313,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified\r\ncampaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Content for the indicated id identified\r\ncampaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "disapproveCampaign",
         "requestBody": {
@@ -1467,7 +1467,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or \r\nOptima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually \r\nfor the indicated id identified campaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or \r\nOptima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Closed \r\nfor the indicated id identified campaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "stopCampaignImmediately",
         "requestBody": {
@@ -1544,7 +1544,7 @@
         "tags": [
           "Campaigns"
         ],
-        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command \r\nidentified campaign.",
+        "summary": "Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Content\r\nto Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Tested for the indicated command \r\nidentified campaign.",
         "description": "The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was\r\nfailed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.",
         "operationId": "sendCampaignToTestGroup",
         "parameters": [
@@ -5680,7 +5680,7 @@
             "description": "The password change is valid and usable"
           },
           "400": {
-            "description": "\"InvalidPasswordChangeRequest\" or \"ExpiredPasswordChangeRequest\"",
+            "description": "Invalid password change request or Expired password change request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5708,7 +5708,7 @@
           "StandaloneUsers"
         ],
         "summary": "Sets the user's password to the desired new password.\r\nOptionally can be used to change a subset of the user's extension information.",
-        "description": "User is identified by the Guid in the request.\r\n            \r\nValidation error messages (currently with 500 status code):\r\n- \"the request has to contain at least one property to insert or update.\"\r\n- \"InvalidPhoneNumber\"\r\n- \"CompanyTooLong\" - if not null and longer than 200\r\n- \"DepartmentTooLong\" - if not null and longer than 200\r\n- \"PositionTooLong\" - if not null and longer than 200",
+        "description": "User is identified by the Guid in the request.\r\n            \r\nValidation errors:\r\n- The request has to contain at least one property to insert or update.\r\n- Invalid phone number.\r\n- Company too long - if not null and longer than 200.\r\n- Department too long - if not null and longer than 200.\r\n- Position too long - if not null and longer than 200.",
         "operationId": "changeForgotPassword",
         "requestBody": {
           "description": "The request which contains data to persist.",
@@ -5753,7 +5753,7 @@
           "StandaloneUsers"
         ],
         "summary": "Initializes a forgot password operation for the given standalone user.",
-        "description": "- If there is no user for that e-mail, throws \"NoExistingUserWithTheGivenEmail\".\r\n- If the user is inactive, throws \"UserIsInactive\".\r\n- If there is an existing forgotten password request for the user, deletes and recreates it.",
+        "description": "- If there is no user for that e-mail, throws.\r\n- If the user is inactive, throws.\r\n- If there is an existing forgotten password request for the user, deletes and recreates it.",
         "operationId": "forgotPassword",
         "requestBody": {
           "description": "The request object which identifies the user.",
@@ -5798,7 +5798,7 @@
           "StandaloneUsers"
         ],
         "summary": "Resends the password change email to the given standalone user.",
-        "description": "- If there is no user for that e-mail, throws \"NoExistingUserWithTheGivenEmail\".\r\n- If the user is inactive, throws \"UserIsInactive\".\r\n- If there is an existing password change request for the user, deletes and recreates it.",
+        "description": "- If there is no user for that e-mail, throws.\r\n- If the user is inactive, throws.\r\n- If there is an existing password change request for the user, deletes and recreates it.",
         "operationId": "reSendPasswordChangeLink",
         "requestBody": {
           "description": "The request object which identifies the user.",
@@ -5854,7 +5854,7 @@
           "StandaloneUsers"
         ],
         "summary": "Insert or update extension info for user",
-        "description": "Validation error messages (currently with 500 status code):\r\n- \"InputDataCannotBeNullOrEmpty\" if the whole model object is null\r\n- \"the request has to contain at least one property to insert or update.\"\r\n- \"InvalidPhoneNumber\"\r\n- \"CompanyTooLong\" - if not null and longer than 200\r\n- \"DepartmentTooLong\" - if not null and longer than 200\r\n- \"PositionTooLong\" - if not null and longer than 200",
+        "description": "Validation errors:\r\n- Input data cannot be null or empty if the whole model object is null.\r\n- The request has to contain at least one property to insert or update.\r\n- Invalid phone number.\r\n- Company too long - if not null and longer than 200.\r\n- Department too long - if not null and longer than 200.\r\n- Position too long - if not null and longer than 200.",
         "operationId": "saveExtensionInfo",
         "requestBody": {
           "description": "It contains company name, department, position, phone number and userid",
@@ -10774,7 +10774,7 @@
     },
     {
       "name": "Campaigns",
-      "description": "Defines the campaign related operations for the enduser. This API endpoint is \r\nresponsible for all operation which can be made for a campaign creation or \r\nmodification. The basic usage is to create the campaign with \r\nOptima.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign then create the neccesity \r\nOptima.CampaignEditor.Controllers.TreatmentsController operations, assign segment, via appropriate\r\nOptima.CampaignEditor.Controllers.SegmentationsController, update status via the appropriate method e.g.:\r\nM:Optima.CampaignEditor.Controllers.CampaignsController.Approve(System.Int32), M:Optima.CampaignEditor.Controllers.CampaignsController.StartNow(System.Int32)."
+      "description": "Defines the campaign related operations for the enduser. This API endpoint is \r\nresponsible for all operation which can be made for a campaign creation or \r\nmodification. The basic usage is to create the campaign with \r\nOptima.CampaignEditor.Application.Common.Enums.CampaignStatus.Set then create the neccesity \r\nOptima.CampaignEditor.Controllers.TreatmentsController operations, assign segment, via appropriate\r\nOptima.CampaignEditor.Controllers.SegmentationsController, update status via the appropriate method e.g.:\r\nM:Optima.CampaignEditor.Controllers.CampaignsController.Approve(System.Int32), M:Optima.CampaignEditor.Controllers.CampaignsController.StartNow(System.Int32)."
     },
     {
       "name": "Channels",

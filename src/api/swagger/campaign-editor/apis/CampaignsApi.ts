@@ -111,7 +111,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Tested  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified  campaign.
      */
     async approveCampaignRaw(requestParameters: ApproveCampaignRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -137,7 +137,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Tested  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved for the indicated id identified  campaign.
      */
     async approveCampaign(requestParameters: ApproveCampaignRequest): Promise<void> {
         await this.approveCampaignRaw(requestParameters);
@@ -211,7 +211,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Content for the indicated id identified  campaign.
      */
     async disapproveCampaignRaw(requestParameters: DisapproveCampaignRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -237,7 +237,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created for the indicated id identified  campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Approved  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Content for the indicated id identified  campaign.
      */
     async disapproveCampaign(requestParameters: DisapproveCampaignRequest): Promise<void> {
         await this.disapproveCampaignRaw(requestParameters);
@@ -278,7 +278,7 @@ export class CampaignsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
+     * Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Set  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
      * Returns the campaigns for the actual query.
      */
     async getCampaignsRaw(requestParameters: GetCampaignsRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm>> {
@@ -405,7 +405,7 @@ export class CampaignsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.DraftCampaign  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
+     * Their is an implicit parameter which query Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Set  only for the user who created the draft state, in order to protect it from other users  and let a sandbox campaign designment for the end user.
      * Returns the campaigns for the actual query.
      */
     async getCampaigns(requestParameters: GetCampaignsRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm> {
@@ -415,7 +415,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command   identified campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Content  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Tested for the indicated command   identified campaign.
      */
     async sendCampaignToTestGroupRaw(requestParameters: SendCampaignToTestGroupRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.campaignId === null || requestParameters.campaignId === undefined) {
@@ -445,7 +445,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Created  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.SentToTestGroups for the indicated command   identified campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Content  to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Tested for the indicated command   identified campaign.
      */
     async sendCampaignToTestGroup(requestParameters: SendCampaignToTestGroupRequest): Promise<void> {
         await this.sendCampaignToTestGroupRaw(requestParameters);
@@ -487,7 +487,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or   Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually   for the indicated id identified campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or   Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Closed   for the indicated id identified campaign.
      */
     async stopCampaignImmediatelyRaw(requestParameters: StopCampaignImmediatelyRequest): Promise<runtime.ApiResponse<void>> {
         const queryParameters: runtime.HTTPQuery = {};
@@ -513,7 +513,7 @@ export class CampaignsApi extends runtime.BaseAPI {
 
     /**
      * The endpoint basic results in Microsoft.AspNetCore.Mvc.NoContentResult. If the process mechanism was  failed for some reason - e.g. bas initial status, then the result is Microsoft.AspNetCore.Mvc.ForbidResult.
-     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or   Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StoppedManually   for the indicated id identified campaign.
+     * Dedicated endpoint for status change from Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Started or   Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.StartedManually to Optima.CampaignEditor.Application.Common.Enums.CampaignStatus.Closed   for the indicated id identified campaign.
      */
     async stopCampaignImmediately(requestParameters: StopCampaignImmediatelyRequest): Promise<void> {
         await this.stopCampaignImmediatelyRaw(requestParameters);

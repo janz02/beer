@@ -1,5 +1,5 @@
 import { DashOutlined } from '@ant-design/icons'
-import { Form, Row, Col, Card, Divider, Button, Tabs } from 'antd'
+import { Row, Col, Card, Divider, Button, Tabs } from 'antd'
 import { RootState } from 'app/rootReducer'
 import { TabPane } from 'components/responsive/tabs'
 import React, { FC, useMemo } from 'react'
@@ -30,52 +30,52 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
   )
 
   return (
-    <Form className="create-campaign-form">
-      <Card
-        className="create-campaign-form-content"
-        title={t('campaign-create.title')}
-        extra={<Button icon={<DashOutlined rotate={90} type="primary" />} />}
-      >
-        <Row justify="end" align="middle">
-          <Col span={8}>
-            <EditCampaignStatus />
-          </Col>
-          <Col span={12}>
-            {isUserLogVisible && (
-              <CampaignUserLogs
-                campaignLogs={
-                  campaignForMock != null
-                    ? [campaignForMock, campaignForMock, campaignForMock, campaignForMock]
-                    : []
-                }
-              />
-            )}
-          </Col>
-          <Divider />
-        </Row>
-        <Row>
-          <Tabs className="campaign-editor-content">
-            <TabPane tab="Settings" key="settings">
+    <Card
+      className="create-campaign-form-content"
+      title={t('campaign-create.title')}
+      extra={<Button icon={<DashOutlined rotate={90} type="primary" />} />}
+    >
+      <Row justify="end" align="middle">
+        <Col span={8}>
+          <EditCampaignStatus />
+        </Col>
+        <Col span={12}>
+          {isUserLogVisible && (
+            <CampaignUserLogs
+              campaignLogs={
+                campaignForMock != null
+                  ? [campaignForMock, campaignForMock, campaignForMock, campaignForMock]
+                  : []
+              }
+            />
+          )}
+        </Col>
+      </Row>
+      <Divider />
+      <Row>
+        <Col span={24}>
+          <Tabs size="large">
+            <TabPane tab={t('campaign-create.settings-tab-name')} key="settings">
               <SettingsTabPane campaignId={campaignId} />
             </TabPane>
-            <TabPane tab="Segmentation" key="segmentation">
+            <TabPane tab={t('campaign-create.segmentation-tab-name')} key="segmentation">
               <SegmentationTabPane campaignId={campaignId} />
             </TabPane>
             <TabPane tab={t('campaign-create.content.email.tab-name')} key="content">
               <EmailContentTabPane campaignId={campaignId} />
             </TabPane>
-            <TabPane tab="Test" key="test">
+            <TabPane tab={t('campaign-create.test-tab-name')} key="test">
               <TestTabPane campaignId={campaignId} />
             </TabPane>
           </Tabs>
-          <Divider />
-        </Row>
-        <Row>
-          <Col span={22}>
-            <CampaignEditorFormFooter />
-          </Col>
-        </Row>
-      </Card>
-    </Form>
+        </Col>
+        <Divider />
+      </Row>
+      <Row>
+        <Col span={22}>
+          <CampaignEditorFormFooter />
+        </Col>
+      </Row>
+    </Card>
   )
 }
