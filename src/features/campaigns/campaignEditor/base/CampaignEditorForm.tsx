@@ -30,52 +30,50 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
   )
 
   return (
-    <Form className="create-campaign-form" layout="vertical">
-      <Card
-        className="create-campaign-form-content"
-        title={t('campaign-create.title')}
-        extra={<Button icon={<DashOutlined rotate={90} type="primary" />} />}
-      >
-        <Row justify="end" align="middle">
-          <Col span={8}>
-            <EditCampaignStatus />
-          </Col>
-          <Col span={12}>
-            {isUserLogVisible && (
-              <CampaignUserLogs
-                campaignLogs={
-                  campaignForMock != null
-                    ? [campaignForMock, campaignForMock, campaignForMock, campaignForMock]
-                    : []
-                }
-              />
-            )}
-          </Col>
-          <Divider />
-        </Row>
-        <Row>
-          <Tabs size="large">
-            <TabPane tab="Settings" key="settings">
-              <SettingsTabPane campaignId={campaignId} />
-            </TabPane>
-            <TabPane tab="Segmentation" key="segmentation">
-              <SegmentationTabPane campaignId={campaignId} />
-            </TabPane>
-            <TabPane tab="Content(Email)" key="content">
-              <EmailContentTabPane campaignId={campaignId} />
-            </TabPane>
-            <TabPane tab="Test" key="test">
-              <TestTabPane campaignId={campaignId} />
-            </TabPane>
-          </Tabs>
-          <Divider />
-        </Row>
-        <Row>
-          <Col span={22}>
-            <CampaignEditorFormFooter />
-          </Col>
-        </Row>
-      </Card>
-    </Form>
+    <Card
+      className="create-campaign-form-content"
+      title={t('campaign-create.title')}
+      extra={<Button icon={<DashOutlined rotate={90} type="primary" />} />}
+    >
+      <Row justify="end" align="middle">
+        <Col span={8}>
+          <EditCampaignStatus />
+        </Col>
+        <Col span={12}>
+          {isUserLogVisible && (
+            <CampaignUserLogs
+              campaignLogs={
+                campaignForMock != null
+                  ? [campaignForMock, campaignForMock, campaignForMock, campaignForMock]
+                  : []
+              }
+            />
+          )}
+        </Col>
+        <Divider />
+      </Row>
+      <Row>
+        <Tabs size="large">
+          <TabPane tab="Settings" key="settings">
+            <SettingsTabPane campaignId={campaignId} />
+          </TabPane>
+          <TabPane tab="Segmentation" key="segmentation">
+            <SegmentationTabPane campaignId={campaignId} />
+          </TabPane>
+          <TabPane tab="Content(Email)" key="content">
+            <EmailContentTabPane campaignId={campaignId} />
+          </TabPane>
+          <TabPane tab="Test" key="test">
+            <TestTabPane campaignId={campaignId} />
+          </TabPane>
+        </Tabs>
+        <Divider />
+      </Row>
+      <Row>
+        <Col span={22}>
+          <CampaignEditorFormFooter />
+        </Col>
+      </Row>
+    </Card>
   )
 }

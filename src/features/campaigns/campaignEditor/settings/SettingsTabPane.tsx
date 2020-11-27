@@ -1,4 +1,4 @@
-import { Col, Divider, Row } from 'antd'
+import { Col, Divider, Form, Row } from 'antd'
 import './../base/CampaignEditor.scss'
 import React, { FC } from 'react'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
@@ -14,7 +14,7 @@ import { EmailSendingSection } from './EmailSendingSection'
 
 export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   return (
-    <div className="settings-tab">
+    <Form className="settings-tab" layout="vertical">
       <Col className="campaign-basic-details">
         <BasicCampaignSection campaignId={campaignId} />
       </Col>
@@ -67,6 +67,6 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
           <EmailSendingSection />
         </Col>
       </Row>
-    </div>
+    </Form>
   )
 }
