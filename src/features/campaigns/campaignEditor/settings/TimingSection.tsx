@@ -1,4 +1,5 @@
 import { Col, DatePicker, Form, Row, Select } from 'antd'
+import Title from 'antd/lib/typography/Title'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -6,7 +7,7 @@ export const TimingSection: FC = () => {
   const { t } = useTranslation()
   return (
     <>
-      <label className="box-title">{t('campaign-create.settings.timing-title')}</label>
+      <Title level={5}>{t('campaign-create.settings.timing-title')}</Title>
       <Row>
         <Col>
           <Form.Item

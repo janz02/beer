@@ -1,4 +1,5 @@
 import { Col, Form, Input, Row, Select } from 'antd'
+import Title from 'antd/lib/typography/Title'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -6,9 +7,7 @@ export const EmailRecallSection: FC = () => {
   const { t } = useTranslation()
   return (
     <>
-      <label className="box-title">
-        {t('campaign-create.settings.email-recall-settings-title')}
-      </label>
+      <Title level={5}>{t('campaign-create.settings.email-recall-settings-title')}</Title>
       <Row gutter={5}>
         <Col span={10}>
           <Form.Item

@@ -1,4 +1,5 @@
 import { Form, Radio } from 'antd'
+import Title from 'antd/lib/typography/Title'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
@@ -7,7 +8,7 @@ export const ChannelTypeSection: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
   return (
     <>
-      <label className="box-title">{t('campaign-create.settings.channel-type-title')}</label>
+      <Title level={5}>{t('campaign-create.settings.channel-type-title')}</Title>
       <Form.Item>
         <Radio.Group defaultValue="email">
           <Radio value="email">Email</Radio>
