@@ -690,6 +690,10 @@
         "name-max-length-100": "The product name can be maximum 100 characters long. Please add a valid value.",
         "name-required": "The product name field is required. Please add a value."
       },
+      "profile-editor": {
+        "company-required": "A company need to be selected for the profile. Please select from the dropdown.",
+        "job-role-required": "A job role need to be selected for the profile. Please select from the dropdown."
+      },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner code for registration cannot be longer than 10 characters. Please use a shorter partner code!",
         "partner-code-required": "Partner code is required for registration. Please use a valid partner code!"
@@ -1004,6 +1008,22 @@
       "declined": "Declined"
     },
     "title": "Profiles"
+  },
+  "profile-editor": {
+    "title": "Edit profile",
+    "name": "Name",
+    "birthday": "Birthday",
+    "username": "Username",
+    "email": "E-mail",
+    "button-save": "Save",
+    "button-cancel": "Cancel",
+    "position": "Position",
+    "contacts": "Contacts",
+    "company": "Company",
+    "group": "Group",
+    "job-role": "Job role",
+    "phone": "Phone",
+    "picture-help": "Only a 512*512 pixel JPG or PNG file can be accepted."
   },
   "query-builder": {
     "add-group": {

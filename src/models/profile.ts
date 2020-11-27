@@ -6,10 +6,15 @@ export interface Profile {
   name: string
   userName: string
   email: string
+  birthDay: moment.Moment
   createdDate: moment.Moment
+  phoneNumber: string
+  groupIds: number[]
   groupCount: number
   permissionCount: number
-  company: number
+  companyId: number
   companyName: string
+  jobRoleId: number
   jobRoleName: string
+  profilePictureId?: string
 }

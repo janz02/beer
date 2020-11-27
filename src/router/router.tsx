@@ -30,11 +30,12 @@ import { PermissionListPage } from 'features/permissions/permissionList/Permissi
 import { BpHistoryListPage } from 'features/bpHistory/bpHistoryList/BpHistoryListPage'
 import { SegmentationListPage } from 'features/segmentation/segmentationList/SegmentationList'
 import { SegmentationEditorPage } from 'features/segmentation/segmentationEditor/SegmentationEditorPage'
-import { ProfilesPage } from 'features/profiles/ProfilesPage'
+import { ProfileListPage } from 'features/profiles/profileList/ProfileListPage'
 import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPage'
 import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
 import { OrganizationPage } from 'features/organization/OrganizationPage'
 import { PlaceholderPage } from 'components/placeholder/PlaceholderPage'
+import { ProfileEditorPage } from 'features/profiles/profileEditor/ProfileEditorPage'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -182,7 +183,18 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.segmentationEditor}
       component={SegmentationEditorPage}
     />
-    <PrivateRoute exact path="/profiles" roles={pageViewRoles.profiles} component={ProfilesPage} />
+    <PrivateRoute
+      exact
+      path="/profiles"
+      roles={pageViewRoles.profiles}
+      component={ProfileListPage}
+    />
+    <PrivateRoute
+      exact
+      path="/profiles/:profileId"
+      roles={pageViewRoles.profiles}
+      component={ProfileEditorPage}
+    />
     <PrivateRoute
       exact
       path="/segmentations-groups"

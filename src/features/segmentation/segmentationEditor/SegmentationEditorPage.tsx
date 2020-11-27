@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
@@ -20,20 +20,21 @@ export const SegmentationEditorPage: React.FC = () => {
     ? t('segmentation-editor.title-edit')
     : t('segmentation-editor.title-create')
 
+  const backButtonProps = useMemo(
+    () => ({
+      primary: true,
+      onClick: () => {
+        history.push('/segmentations-list')
+      }
+    }),
+    []
+  )
+
   return (
     <>
       <Row className="campaign-editor-form">
         <Col span={18} className="editor-col">
-          <ResponsiveHeader
-            type="floating"
-            title={title}
-            backButton={{
-              primary: true,
-              onClick: () => {
-                history.push('/segmentations-list')
-              }
-            }}
-          />
+          <ResponsiveHeader type="floating" title={title} backButton={backButtonProps} />
 
           <NavigationAlert when={modified} />
           <SegmentationEditorForm segmentationEditorUtils={segmentationEditorUtils} />

@@ -120,7 +120,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     }
 
     /**
-     * User is identified by the Guid in the request.                Validation error messages (currently with 500 status code):  - \"the request has to contain at least one property to insert or update.\"  - \"InvalidPhoneNumber\"  - \"CompanyTooLong\" - if not null and longer than 200  - \"DepartmentTooLong\" - if not null and longer than 200  - \"PositionTooLong\" - if not null and longer than 200
+     * User is identified by the Guid in the request.                Validation errors:  - The request has to contain at least one property to insert or update.  - Invalid phone number.  - Company too long - if not null and longer than 200.  - Department too long - if not null and longer than 200.  - Position too long - if not null and longer than 200.
      * Sets the user\'s password to the desired new password.  Optionally can be used to change a subset of the user\'s extension information.
      */
     async changeForgotPasswordRaw(requestParameters: ChangeForgotPasswordRequest): Promise<runtime.ApiResponse<void>> {
@@ -142,7 +142,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     }
 
     /**
-     * User is identified by the Guid in the request.                Validation error messages (currently with 500 status code):  - \"the request has to contain at least one property to insert or update.\"  - \"InvalidPhoneNumber\"  - \"CompanyTooLong\" - if not null and longer than 200  - \"DepartmentTooLong\" - if not null and longer than 200  - \"PositionTooLong\" - if not null and longer than 200
+     * User is identified by the Guid in the request.                Validation errors:  - The request has to contain at least one property to insert or update.  - Invalid phone number.  - Company too long - if not null and longer than 200.  - Department too long - if not null and longer than 200.  - Position too long - if not null and longer than 200.
      * Sets the user\'s password to the desired new password.  Optionally can be used to change a subset of the user\'s extension information.
      */
     async changeForgotPassword(requestParameters: ChangeForgotPasswordRequest): Promise<void> {
@@ -211,7 +211,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     }
 
     /**
-     * - If there is no user for that e-mail, throws \"NoExistingUserWithTheGivenEmail\".  - If the user is inactive, throws \"UserIsInactive\".  - If there is an existing forgotten password request for the user, deletes and recreates it.
+     * - If there is no user for that e-mail, throws.  - If the user is inactive, throws.  - If there is an existing forgotten password request for the user, deletes and recreates it.
      * Initializes a forgot password operation for the given standalone user.
      */
     async forgotPasswordRaw(requestParameters: ForgotPasswordRequest): Promise<runtime.ApiResponse<void>> {
@@ -233,7 +233,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     }
 
     /**
-     * - If there is no user for that e-mail, throws \"NoExistingUserWithTheGivenEmail\".  - If the user is inactive, throws \"UserIsInactive\".  - If there is an existing forgotten password request for the user, deletes and recreates it.
+     * - If there is no user for that e-mail, throws.  - If the user is inactive, throws.  - If there is an existing forgotten password request for the user, deletes and recreates it.
      * Initializes a forgot password operation for the given standalone user.
      */
     async forgotPassword(requestParameters: ForgotPasswordRequest): Promise<void> {
@@ -304,7 +304,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     }
 
     /**
-     * - If there is no user for that e-mail, throws \"NoExistingUserWithTheGivenEmail\".  - If the user is inactive, throws \"UserIsInactive\".  - If there is an existing password change request for the user, deletes and recreates it.
+     * - If there is no user for that e-mail, throws.  - If the user is inactive, throws.  - If there is an existing password change request for the user, deletes and recreates it.
      * Resends the password change email to the given standalone user.
      */
     async reSendPasswordChangeLinkRaw(requestParameters: ReSendPasswordChangeLinkRequest): Promise<runtime.ApiResponse<void>> {
@@ -330,7 +330,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     }
 
     /**
-     * - If there is no user for that e-mail, throws \"NoExistingUserWithTheGivenEmail\".  - If the user is inactive, throws \"UserIsInactive\".  - If there is an existing password change request for the user, deletes and recreates it.
+     * - If there is no user for that e-mail, throws.  - If the user is inactive, throws.  - If there is an existing password change request for the user, deletes and recreates it.
      * Resends the password change email to the given standalone user.
      */
     async reSendPasswordChangeLink(requestParameters: ReSendPasswordChangeLinkRequest): Promise<void> {
@@ -338,7 +338,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Validation error messages (currently with 500 status code):  - \"InputDataCannotBeNullOrEmpty\" if the whole model object is null  - \"the request has to contain at least one property to insert or update.\"  - \"InvalidPhoneNumber\"  - \"CompanyTooLong\" - if not null and longer than 200  - \"DepartmentTooLong\" - if not null and longer than 200  - \"PositionTooLong\" - if not null and longer than 200
+     * Validation errors:  - Input data cannot be null or empty if the whole model object is null.  - The request has to contain at least one property to insert or update.  - Invalid phone number.  - Company too long - if not null and longer than 200.  - Department too long - if not null and longer than 200.  - Position too long - if not null and longer than 200.
      * Insert or update extension info for user
      */
     async saveExtensionInfoRaw(requestParameters: SaveExtensionInfoRequest): Promise<runtime.ApiResponse<void>> {
@@ -364,7 +364,7 @@ export class StandaloneUsersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Validation error messages (currently with 500 status code):  - \"InputDataCannotBeNullOrEmpty\" if the whole model object is null  - \"the request has to contain at least one property to insert or update.\"  - \"InvalidPhoneNumber\"  - \"CompanyTooLong\" - if not null and longer than 200  - \"DepartmentTooLong\" - if not null and longer than 200  - \"PositionTooLong\" - if not null and longer than 200
+     * Validation errors:  - Input data cannot be null or empty if the whole model object is null.  - The request has to contain at least one property to insert or update.  - Invalid phone number.  - Company too long - if not null and longer than 200.  - Department too long - if not null and longer than 200.  - Position too long - if not null and longer than 200.
      * Insert or update extension info for user
      */
     async saveExtensionInfo(requestParameters: SaveExtensionInfoRequest): Promise<void> {

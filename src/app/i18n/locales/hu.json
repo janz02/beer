@@ -690,6 +690,10 @@
         "name-max-length-100": "Termék név maximum 100 karakter lehet, kérem adjon meg egy rövidebb nevet",
         "name-required": "Termék név megadása kötelelező, kérem adjon meg egy megfelelő nevet."
       },
+      "profile-editor": {
+        "company-required": "Cég megadása megadása kötelező, kérem adjon meg egy céget.",
+        "job-role-required": "Munkakör megadása megadása kötelező, kérem adjon meg egy munkakört."
+      },
       "register-partner-contact": {
         "partner-code-max-length-10": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot.",
         "partner-code-required": "Partner kód hibás, kérem adjon meg egy megfelelő partnerkódot."
@@ -1004,6 +1008,22 @@
       "declined": "Elutasított"
     },
     "title": "Profilok"
+  },
+  "profile-editor": {
+    "title": "Felhasználó szerkesztése",
+    "name": "Név",
+    "birthday": "Születésnap",
+    "username": "Felhasználónév",
+    "email": "E-mail",
+    "button-save": "Mentés",
+    "button-cancel": "Mégse",
+    "position": "Pozíció",
+    "contacts": "Contacts",
+    "company": "Cég",
+    "group": "Csoport",
+    "job-role": "Munkakör",
+    "phone": "Telefonszám",
+    "picture-help": "Csak pontosan 512*512 pixel méretű JPG vagy PNG kiterjesztésű kép fájl fogadható el."
   },
   "query-builder": {
     "add-group": {

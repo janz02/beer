@@ -31,7 +31,7 @@ const initialState: State = {
 }
 
 const slice = createSlice({
-  name: 'profiles',
+  name: 'profileList',
   initialState,
   reducers: {
     reset: () => initialState,
@@ -61,7 +61,7 @@ const getProfiles = (params: ListRequestParams = {}): AppThunk => async (dispatc
   try {
     dispatch(setListState(FeatureState.Loading))
 
-    const { listParams, selectedTab } = getState().profiles
+    const { listParams, selectedTab } = getState().profileList
     const revisedParams = reviseListRequestParams(listParams, params)
 
     const requestParams = { ...revisedParams }
@@ -107,7 +107,7 @@ const resetProfilesFilters = (): AppThunk => async dispatch => {
 }
 
 const exportProfiles = (): AppThunk => async (dispatch, getState) => {
-  const { listParams } = getState().profiles
+  const { listParams } = getState().profileList
 
   try {
     downloadBlobAsCsv(await api.admin.profiles.exportProfiles(listParams))
@@ -125,9 +125,9 @@ const setProfileStatus = (id: number, status: ProfileStatus): AppThunk => async 
   }
 }
 
-export const profilesReducer = slice.reducer
+export const profileListReducer = slice.reducer
 
-export const profilesActions = {
+export const profileListActions = {
   getProfiles,
   resetProfilesFilters,
   reset,
