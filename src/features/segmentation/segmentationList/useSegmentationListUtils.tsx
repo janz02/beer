@@ -54,31 +54,37 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
         title: t('segmentation.field.name'),
         key: 'name',
         sort: true,
+        width: '200px',
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('segmentation.field.category'),
         key: 'categoryName',
         sort: true,
+        ellipsis: false,
         filterMode: FilterMode.SEARCH
       }),
       columnConfig({
         title: t('segmentation.field.cumulativeIntersection'),
-        key: 'cumulativeIntersection'
+        key: 'cumulativeIntersection',
+        ellipsis: false
       }),
       columnConfig({
         title: t('segmentation.field.segmentSize'),
-        key: 'segmentSize'
+        key: 'segmentSize',
+        ellipsis: false
       }),
       columnConfig({
         title: t('segmentation.field.createdDate'),
         key: 'createdDate',
         sort: true,
+        ellipsis: false,
         renderMode: 'date time',
         filterMode: FilterMode.DATERANGEPICKER
       }),
       actionColumnConfig({
         fixed: 'right',
+        width: '50px',
         render(record: CampaignSegmentation) {
           return (
             <CrudButtons
@@ -96,6 +102,7 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
   const tableProps = useMemo(
     () => ({
       loading,
+      hasFixedColumn: true,
       columns: columnOrderUtils.currentColumns,
       dataSource: addKeyProp(segmentations),
       pagination: paginationConfig,

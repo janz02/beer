@@ -82,6 +82,7 @@ export const ProfileList: FC = () => {
     <ResponsiveTable
       hasHeaderOffset
       {...{
+        hasFixedColumn: true,
         loading: profilesLoading,
         columns: columnOrderUtils.currentColumns,
         dataSource: profiles.map((u, i) => ({ ...u, key: i })),
