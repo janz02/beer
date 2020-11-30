@@ -60,6 +60,10 @@ setupStore({
     companyListParams: {
       page: 1,
       pageSize: 10
+    },
+    partnerListParams: {
+      page: 1,
+      pageSize: 10
     }
   }
 })
