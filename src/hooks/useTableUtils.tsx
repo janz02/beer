@@ -45,6 +45,7 @@ export interface Pagination {
   size?: number
   pageSize?: number
 }
+
 export interface ListRequestParams extends Pagination {
   [filterKey: string]: any
   total?: number
@@ -57,6 +58,10 @@ export interface TableUtilsProps<T> {
   filterKeys?: (keyof T)[]
   sortWithoutDefaultOption?: boolean
   getDataAction: (params: ListRequestParams) => any
+  /** Config for the columns that contain data */
+  columnParams: ColumnConfigParams[]
+  /** Config for the column that contains the edit, view or delete buttons */
+  actionColumnParams?: Partial<ColumnConfigParams>
 }
 
 export const reviseListRequestParams = (
@@ -81,20 +86,34 @@ export interface ActivenessOptions {
   deleted?: string
 }
 
-interface ColumnConfigParams extends ExtendedColumnType<any> {
+/**
+ * Configures the Ant Design table
+ */
+export interface ColumnConfigParams extends ExtendedColumnType<any> {
+  /** The property name of the item */
   key: string
+  /** The way that the column can be filtered */
   filterMode?: FilterMode
+  /**
+   * Optional, overwrites the default filters if present. These filters are the values that the
+   * table can be filtered for.
+   */
   filters?: ColumnFilterItem[]
+  /** Enables sorting the table by this column's value */
   sort?: boolean
+  /** Highlighting won't be visible when searching */
   disableSearchHighlight?: boolean
+  /**
+   * If this parameter has the value "date time", the column will be rendered with
+   * `MomentDisplay`
+   */
   renderMode?: 'date time' | null
 }
 
 export interface TableUtils<T> {
   paginationConfig: false | TablePaginationConfig
   handleTableChange: any
-  columnConfig: (params: ColumnConfigParams) => ExtendedColumnType<T>
-  actionColumnConfig: (params: Partial<ColumnConfigParams>) => ExtendedColumnType<T>
+  columnsConfig: ExtendedColumnType<T>[]
   addKeyProp: (data?: T[]) => T[]
 }
 
@@ -146,7 +165,15 @@ export const basePaginationConfig = (
 
  */
 function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<T>): TableUtils<T> {
-  const { listParamsState, getDataAction, filterKeys, sortWithoutDefaultOption } = props
+  const {
+    listParamsState,
+    getDataAction,
+    filterKeys,
+    sortWithoutDefaultOption,
+    actionColumnParams,
+    columnParams
+  } = props
+
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -205,19 +232,8 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
     [listParamsState]
   )
 
-  /**
-   * Configures the Ant Design table
-   * @param params.key The property name of the item
-   * @param params.filterMode The way that the column can be filtered
-   * @param params.filters Optional, overwrites the default filters if present. These filters are
-   * the values that the table can be filtered for.
-   * @param params.sort Enables sorting the table by this column's value
-   * @param params.disableSearchHighlight Highlighting won't be visible when searching
-   * @param params.renderMode If this parameter has the value "date time", the column will be
-   * rendered with `MomentDisplay`
-   */
-  const columnConfig = useCallback(
-    (params: ColumnConfigParams): ExtendedColumnType<any> => {
+  const columnsConfig = useMemo((): ExtendedColumnType<any>[] => {
+    const columnsConfig = columnParams.map(params => {
       const { key, filterMode, sort, filters, disableSearchHighlight, renderMode, ...rest } = params
 
       const config: ExtendedColumnType<T> = {
@@ -305,23 +321,19 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
       }
 
       return config
-    },
-    [listParamsState, searchedTextHighlighter, t, toSortOrder]
-  )
+    })
 
-  /**
-   * Config for the column that contains the edit, view or delete buttons
-   */
-  const actionColumnConfig = useCallback((params: Partial<ColumnConfigParams>): ExtendedColumnType<
-    any
-  > => {
-    return {
-      key: 'actions',
-      colSpan: 1,
-      width: '130px',
-      ...params
+    if (actionColumnParams) {
+      columnsConfig.push({
+        key: 'actions',
+        colSpan: 1,
+        width: '130px',
+        ...actionColumnParams
+      })
     }
-  }, [])
+
+    return columnsConfig
+  }, [listParamsState, searchedTextHighlighter, t, toSortOrder, columnParams, actionColumnParams])
 
   /**
    * `onChange` handler for Ant Design Table
@@ -377,8 +389,7 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
   return {
     paginationConfig,
     handleTableChange,
-    columnConfig,
-    actionColumnConfig,
+    columnsConfig,
     addKeyProp
   }
 }

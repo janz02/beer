@@ -3,9 +3,9 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { companiesActions } from './companiesSlice'
-import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils, TableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
-import { ColumnsType, ColumnType } from 'antd/lib/table'
+import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { FeatureState } from 'models/featureState'
 import { Company } from 'models/company'
@@ -33,25 +33,11 @@ export const useCompaniesUtils = (): CompaniesUtils => {
     (state: RootState) => state.companies
   )
 
-  const tableUtils = useTableUtils<Company>({
-    listParamsState: listParams,
-    filterKeys: [
-      'isActive',
-      'name',
-      'profileCount',
-      'groupCount',
-      'jobRoleCount',
-      'campaignCount',
-      'createdDate'
-    ],
-    getDataAction: companiesActions.getCompanies
-  })
-
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
 
-  const columnsConfig: ColumnsType<Company> = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      tableUtils.columnConfig({
+      {
         title: t('organization.companies.field.status'),
         filterMode: FilterMode.ACTIVE_INACTIVE,
         key: 'isActive',
@@ -68,58 +54,82 @@ export const useCompaniesUtils = (): CompaniesUtils => {
             />
           )
         }
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.companies.field.name'),
         key: 'name',
         cannotBeHidden: true,
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.companies.field.profile-count'),
         key: 'profileCount',
         sort: true
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.companies.field.group-count'),
         key: 'groupCount',
         sort: true
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.companies.field.job-role-count'),
         key: 'jobRoleCount',
         sort: true
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.companies.field.campaign-count'),
         key: 'campaignCount',
         sort: true
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.companies.field.created-date'),
         key: 'createdDate',
         sort: true,
         width: '12rem',
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
-      }),
+      }
+    ],
+    [dispatch, t, savingStatusIds]
+  )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       isEditorUser
-        ? tableUtils.actionColumnConfig({
+        ? {
             render() {
               return <CrudButtons onEdit={() => ({})} onDelete={() => ({})} />
             }
-          })
-        : {}
-    ],
-    [dispatch, tableUtils, t, savingStatusIds, isEditorUser]
+          }
+        : undefined,
+    [isEditorUser]
   )
+
+  const tableUtils = useTableUtils<Company>({
+    listParamsState: listParams,
+    filterKeys: [
+      'isActive',
+      'name',
+      'profileCount',
+      'groupCount',
+      'jobRoleCount',
+      'campaignCount',
+      'createdDate'
+    ],
+    getDataAction: companiesActions.getCompanies,
+    columnParams,
+    actionColumnParams
+  })
 
   const resetFilters = useCallback(() => {
     dispatch(companiesActions.resetCompaniesFilters())
   }, [dispatch])
 
-  const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.COMPANIES)
+  const columnOrderUtils = useColumnOrderUtils(
+    tableUtils.columnsConfig,
+    ColumnStorageName.COMPANIES
+  )
 
   const handleExport = useCallback((): void => {
     dispatch(companiesActions.exportCompanies())

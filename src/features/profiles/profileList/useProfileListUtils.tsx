@@ -2,9 +2,8 @@ import React, { useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
 import { ProfileListTab, profileListActions } from './profileListSlice'
-import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils, TableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
-import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { FeatureState } from 'models/featureState'
 import { Profile } from 'models/profile'
@@ -15,9 +14,11 @@ import { CheckCircleOutlined, CloseCircleOutlined, FormOutlined } from '@ant-des
 import { pageViewRoles } from 'services/roleHelpers'
 import { ProfileStatus } from 'api/swagger/admin'
 import { history } from 'router/router'
+import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
+import { ColumnOrderUtils, useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 
 interface ProfileListUtils {
-  columnsConfig: ColumnsType<Profile>
+  columnOrderUtils: ColumnOrderUtils<Profile>
   tableUtils: TableUtils<Profile>
   profiles: Profile[]
   profilesLoading: boolean
@@ -38,27 +39,11 @@ export const useProfileListUtils = (): ProfileListUtils => {
     dispatch(profileListActions.changeSelectedTab(tab))
   }
 
-  const tableUtils = useTableUtils<Profile>({
-    listParamsState: listParams,
-    filterKeys: [
-      'status',
-      'name',
-      'userName',
-      'email',
-      'createdDate',
-      'groupCount',
-      'permissionCount',
-      'companyName',
-      'jobRoleName'
-    ],
-    getDataAction: profileListActions.getProfiles
-  })
-
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.profileEditor), [])
 
-  const columnsConfig: ColumnsType<Profile> = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      tableUtils.columnConfig({
+      {
         title: t('profiles.field.status'),
         filterMode: FilterMode.ENUM,
         key: 'status',
@@ -79,43 +64,43 @@ export const useProfileListUtils = (): ProfileListUtils => {
         render(status: ProfileStatus) {
           return <ProfileStatusDisplay status={status} />
         }
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH,
         cannotBeHidden: true,
         ellipsis: false
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.username'),
         key: 'userName',
         sort: true,
         filterMode: FilterMode.SEARCH,
         ellipsis: false
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.email'),
         key: 'email',
         sort: true,
         filterMode: FilterMode.SEARCH,
         ellipsis: false
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.group'),
         key: 'groupCount',
         sort: true,
         filterMode: FilterMode.SEARCH,
         ellipsis: false
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.permissions'),
         key: 'permissionCount',
         sort: true,
         ellipsis: false
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.companies.field.created-date'),
         key: 'createdDate',
         sort: true,
@@ -123,25 +108,31 @@ export const useProfileListUtils = (): ProfileListUtils => {
         filterMode: FilterMode.DATEPICKER,
         hiddenByDefault: true,
         ellipsis: false
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.company'),
         key: 'companyName',
         sort: false,
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true,
         ellipsis: false
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.job-role'),
         key: 'jobRoleName',
         sort: false,
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true,
         ellipsis: false
-      }),
+      }
+    ],
+    [t, selectedTab]
+  )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       isEditorUser
-        ? tableUtils.actionColumnConfig({
+        ? {
             width: 'auto',
             fixed: 'right',
             render(profile: Profile) {
@@ -182,18 +173,37 @@ export const useProfileListUtils = (): ProfileListUtils => {
                 </ActionButtons>
               )
             }
-          })
-        : {}
-    ],
-    [tableUtils, t, isEditorUser, selectedTab, dispatch]
+          }
+        : undefined,
+    [t, isEditorUser, dispatch]
   )
+
+  const tableUtils = useTableUtils<Profile>({
+    listParamsState: listParams,
+    filterKeys: [
+      'status',
+      'name',
+      'userName',
+      'email',
+      'createdDate',
+      'groupCount',
+      'permissionCount',
+      'companyName',
+      'jobRoleName'
+    ],
+    getDataAction: profileListActions.getProfiles,
+    columnParams,
+    actionColumnParams
+  })
 
   const resetFilters = (): void => {
     dispatch(profileListActions.resetProfilesFilters())
   }
 
+  const columnOrderUtils = useColumnOrderUtils(tableUtils.columnsConfig, ColumnStorageName.PROFILES)
+
   return {
-    columnsConfig,
+    columnOrderUtils,
     tableUtils,
     profiles,
     profilesLoading: listState === FeatureState.Loading,

@@ -1,10 +1,14 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { partnerContactListActions } from './partnerContactListSlice'
-import { ListRequestParams, useTableUtils, FilterMode } from 'hooks/useTableUtils'
+import {
+  ListRequestParams,
+  useTableUtils,
+  FilterMode,
+  ColumnConfigParams
+} from 'hooks/useTableUtils'
 import { PartnerContact } from 'models/partnerContact'
 import { RootState } from 'app/rootReducer'
-import { ColumnType } from 'antd/lib/table'
 import { UserType } from 'models/user'
 import { CrudButtons, CrudButtonsProps } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
@@ -46,12 +50,6 @@ export const usePartnerContactListUtils = (
     [dispatch, listConstraint]
   )
 
-  const tableUtils = useTableUtils<PartnerContact>({
-    listParamsState: listParams,
-    filterKeys: ['name', 'email', 'phone', 'role'],
-    getDataAction: partnerContactListActions.getContacts
-  })
-
   const resetFilters = (): void => {
     dispatch(partnerContactListActions.resetContactFilters)
   }
@@ -88,16 +86,16 @@ export const usePartnerContactListUtils = (
 
   const roleOptions = useRoleGenerator(userType)
 
-  const columnsConfig: ColumnType<PartnerContact>[] = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      tableUtils.columnConfig({
+      {
         title: t('partner-contact.field.name'),
         key: 'name',
         width: '25%',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         // TODO: Revisit this column after majorPartner and pca/pce roles are finalized.
         title:
           userType === UserType.NKM
@@ -108,37 +106,49 @@ export const usePartnerContactListUtils = (
         width: '12rem',
         filters: roleOptions,
         render: role => (role ? t(`user.role-short.${role?.toLowerCase()}`) : '')
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('partner-contact.field.active'),
         key: 'isActive',
         width: '6rem',
         filterMode: FilterMode.ACTIVE_INACTIVE
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('partner-contact.field.email'),
         key: 'email',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('partner-contact.field.phone'),
         key: 'phone',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      tableUtils.actionColumnConfig({
-        render(_: unknown, record: PartnerContact) {
-          return <CrudButtons {...crudOptions(record)} />
-        }
-      })
+      }
     ],
-    [tableUtils, crudOptions, t, roleOptions, userType]
+    [t, roleOptions, userType]
   )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams>>(
+    () => ({
+      render(_: unknown, record: PartnerContact) {
+        return <CrudButtons {...crudOptions(record)} />
+      }
+    }),
+    [crudOptions]
+  )
+
+  const tableUtils = useTableUtils<PartnerContact>({
+    listParamsState: listParams,
+    filterKeys: ['name', 'email', 'phone', 'role'],
+    getDataAction: partnerContactListActions.getContacts,
+    columnParams,
+    actionColumnParams
+  })
 
   const tableProps: ResponsiveTableProps = {
     loading: listState === FeatureState.Loading,
-    columns: columnsConfig,
+    columns: tableUtils.columnsConfig,
     dataSource: tableUtils.addKeyProp(contacts),
     pagination: tableUtils.paginationConfig,
     onChange: tableUtils.handleTableChange

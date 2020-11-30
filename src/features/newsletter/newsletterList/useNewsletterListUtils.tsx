@@ -5,8 +5,7 @@ import { RootState } from 'app/rootReducer'
 import { FeatureState } from 'models/featureState'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
 import { NewsletterPreview } from 'models/newsletter'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { ColumnType } from 'antd/lib/table'
+import { useTableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { newsletterListActions } from './newsletterListSlice'
 import { history } from 'router/router'
@@ -28,6 +27,7 @@ interface NewsletterListUtils {
   handleGetNewsletterTemplates: () => void
   resetFilters: () => void
 }
+
 export const useNewsletterListUtils = (): NewsletterListUtils => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -51,63 +51,65 @@ export const useNewsletterListUtils = (): NewsletterListUtils => {
     history.push(`/newsletter/${id}`)
   }, [])
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<NewsletterPreview>({
-    listParamsState: listParams,
-    filterKeys: ['name', 'modifiedAt'],
-    getDataAction: getNewsletterTemplates
-  })
-
-  const resetFilters = (): void => {
-    dispatch(resetNewsletterTemplateFilters())
-  }
-
-  const columnsConfig: ColumnType<NewsletterPreview>[] = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      columnConfig({
+      {
         title: t('newsletter.field.template-name'),
         key: 'name',
         sort: true,
         width: '35%',
         filterMode: FilterMode.SEARCH
-      }),
-      columnConfig({
+      },
+      {
         title: t('newsletter.field.template-version'),
         key: 'version',
         width: '4rem'
-      }),
-      columnConfig({
+      },
+      {
         title: t('newsletter.field.template-modified-at'),
         key: 'modifiedAt',
         width: '13rem',
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
-      }),
-      columnConfig({
+      },
+      {
         title: t('newsletter.field.template-modified-by'),
         key: 'modifiedBy'
-      }),
-      actionColumnConfig({
-        render: (record: NewsletterPreview) => (
-          <CrudButtons
-            onEdit={() => editTemplate(record.id)}
-            onDelete={() => {
-              setDeletePopup({
-                data: record,
-                popupVisible: true
-              })
-            }}
-          />
-        )
-      })
+      }
     ],
-    [actionColumnConfig, columnConfig, editTemplate, t]
+    [t]
   )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams>>(
+    () => ({
+      render: (record: NewsletterPreview) => (
+        <CrudButtons
+          onEdit={() => editTemplate(record.id)}
+          onDelete={() => {
+            setDeletePopup({
+              data: record,
+              popupVisible: true
+            })
+          }}
+        />
+      )
+    }),
+    [editTemplate]
+  )
+
+  const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<
+    NewsletterPreview
+  >({
+    listParamsState: listParams,
+    filterKeys: ['name', 'modifiedAt'],
+    getDataAction: getNewsletterTemplates,
+    columnParams,
+    actionColumnParams
+  })
+
+  const resetFilters = (): void => {
+    dispatch(resetNewsletterTemplateFilters())
+  }
 
   const handleSave = async (values: any): Promise<void> => {
     const { templateName } = values

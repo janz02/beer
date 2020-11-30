@@ -2,8 +2,7 @@ import React, { useMemo, useEffect } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { ColumnType } from 'antd/lib/table'
+import { useTableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { hasPermission } from 'services/jwt-reader'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
@@ -40,49 +39,51 @@ export const useSystemParamsListUtils = (
 
   const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<SystemParam>({
-    listParamsState: listParams,
-    filterKeys: ['key', 'value'],
-    sortWithoutDefaultOption: true,
-    getDataAction: () => systemParamsActions.getSystemParams
-  })
-
-  const columnsConfig: ColumnType<SystemParam>[] = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      columnConfig({
+      {
         title: t('system-params.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      columnConfig({
+      },
+      {
         title: t('system-params.field.description'),
         key: 'description'
-      }),
-      columnConfig({
+      },
+      {
         title: t('system-params.field.value'),
         key: 'value',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      actionColumnConfig({
-        render(record: any) {
-          return isEditorUser ? (
-            <CrudButtons onEdit={() => onOpenEditor(record.id)} />
-          ) : (
-            <CrudButtons onView={() => onOpenEditor(record.id)} />
-          )
-        }
-      })
+      }
     ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
+    [t]
   )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams>>(
+    () => ({
+      render(record: any) {
+        return isEditorUser ? (
+          <CrudButtons onEdit={() => onOpenEditor(record.id)} />
+        ) : (
+          <CrudButtons onView={() => onOpenEditor(record.id)} />
+        )
+      }
+    }),
+    [onOpenEditor, isEditorUser]
+  )
+
+  const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<
+    SystemParam
+  >({
+    listParamsState: listParams,
+    filterKeys: ['key', 'value'],
+    sortWithoutDefaultOption: true,
+    getDataAction: () => systemParamsActions.getSystemParams,
+    columnParams,
+    actionColumnParams
+  })
 
   const tableProps: ResponsiveTableProps = useMemo(
     () => ({
