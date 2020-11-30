@@ -46,6 +46,7 @@ export const useProfileListUtils = (): ProfileListUtils => {
       {
         title: t('profiles.field.status'),
         filterMode: FilterMode.ENUM,
+        filterMultiple: true,
         key: 'status',
         filters:
           selectedTab === 'all'

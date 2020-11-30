@@ -241,10 +241,6 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
         key
       }
 
-      if (filterMode) {
-        config.filteredValue = listParamsState?.[key] ? [listParamsState?.[key]] : null
-      }
-
       switch (filterMode) {
         case FilterMode.SEARCH:
           config.filterDropdown = SearchTableDropdown
@@ -301,7 +297,6 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
           break
         }
         case FilterMode.ENUM:
-          config.filterMultiple = false
           config.filters = filters
           break
         default:
@@ -316,6 +311,13 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
 
       if (renderMode === 'date time') {
         config.render = (value: any) => <MomentDisplay date={value} mode="date time" />
+      }
+
+      if (filterMode) {
+        const value = listParamsState?.[key]
+        if (value) {
+          config.filteredValue = config.filterMultiple ? value : [value]
+        }
       }
 
       return config
@@ -367,17 +369,36 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
       requestParams.orderByType = toOrderByType(sorter.order)
       requestParams.orderBy = requestParams.orderByType ? (sorter?.field as string) : undefined
 
-      for (const column of columnParams) {
-        const key = column.key
-        const filterItem = filters?.[key]?.[0]
+      for (const { key, filterMode, filterMultiple } of columnParams) {
+        const filterItems = filters?.[key]
 
-        if (moment.isMoment(filterItem)) {
-          requestParams[key] = filterItem.format('L')
-        } else if (Array.isArray(filterItem)) {
-          requestParams[key + 'From'] = filterItem[0].format('L')
-          requestParams[key + 'To'] = (filterItem[1] as moment.Moment).add(1, 'day').format('L')
-        } else {
-          requestParams[key] = filterItem
+        switch (filterMode) {
+          case FilterMode.DATEPICKER:
+            if (filterItems) {
+              const filterItem = (filterItems[0] as unknown) as moment.Moment
+              requestParams[key] = filterItem.format('L')
+            } else {
+              requestParams[key] = undefined
+            }
+
+            break
+
+          case FilterMode.DATERANGEPICKER:
+            if (filterItems) {
+              const filterItem = (filterItems[0] as unknown) as moment.Moment[]
+              requestParams[key + 'From'] = filterItem[0].format('L')
+              requestParams[key + 'To'] = (filterItem[1] as moment.Moment).add(1, 'day').format('L')
+              break
+            } else {
+              requestParams[key] = undefined
+            }
+
+            break
+
+          default: {
+            requestParams[key] = filterMultiple ? filterItems : filterItems?.[0]
+            break
+          }
         }
       }
 
