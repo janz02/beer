@@ -1,5 +1,5 @@
 import { DashOutlined } from '@ant-design/icons'
-import { Form, Row, Col, Card, Divider, Button, Tabs } from 'antd'
+import { Row, Col, Card, Divider, Button, Tabs } from 'antd'
 import { RootState } from 'app/rootReducer'
 import { TabPane } from 'components/responsive/tabs'
 import React, { FC, useMemo } from 'react'
@@ -61,7 +61,7 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
             <TabPane tab={t('campaign-create.segmentation-tab-name')} key="segmentation">
               <SegmentationTabPane campaignId={campaignId} />
             </TabPane>
-            <TabPane tab={t('campaign-create.content-tab-name')} key="content">
+            <TabPane tab={t('campaign-create.content.email.tab-name')} key="content">
               <EmailContentTabPane campaignId={campaignId} />
             </TabPane>
             <TabPane tab={t('campaign-create.test-tab-name')} key="test">
