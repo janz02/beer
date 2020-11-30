@@ -83,7 +83,6 @@ export const useTestGroupCategoryListUtils = (
     TestGroupCategory
   >({
     listParamsState: listParams,
-    filterKeys: ['name'],
     sortWithoutDefaultOption: true,
     getDataAction: getCategories,
     columnParams,

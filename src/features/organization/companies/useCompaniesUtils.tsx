@@ -108,15 +108,6 @@ export const useCompaniesUtils = (): CompaniesUtils => {
 
   const tableUtils = useTableUtils<Company>({
     listParamsState: listParams,
-    filterKeys: [
-      'isActive',
-      'name',
-      'profileCount',
-      'groupCount',
-      'jobRoleCount',
-      'campaignCount',
-      'createdDate'
-    ],
     getDataAction: companiesActions.getCompanies,
     columnParams,
     actionColumnParams

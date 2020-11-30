@@ -211,18 +211,6 @@ export const useCampaignListUtils = (): CampaignListUtils => {
 
   const companyCampaignTableUtils = useTableUtils<CampaignListItem>({
     listParamsState: companyListParams,
-    filterKeys: [
-      'name',
-      'statusId',
-      'typeId',
-      'startDate',
-      'segmentation',
-      'productId',
-      'createdBy',
-      'channelId',
-      'responsible',
-      'createdDate'
-    ],
     getDataAction: campaignListActions.getCompanyCampaigns,
     columnParams,
     actionColumnParams
@@ -265,18 +253,6 @@ export const useCampaignListUtils = (): CampaignListUtils => {
 
   const partnerCampaignTableUtils = useTableUtils<CampaignListItem>({
     listParamsState: partnerListParams,
-    filterKeys: [
-      'name',
-      'statusId',
-      'typeId',
-      'startDate',
-      'segmentation',
-      'productId',
-      'createdBy',
-      'responsible',
-      'createdDate',
-      'modifiedDate'
-    ],
     getDataAction: campaignListActions.getPartnerCampaigns,
     columnParams,
     actionColumnParams

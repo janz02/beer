@@ -61,7 +61,6 @@ export const usePermissionListUtils = (): PermissionListUtils => {
     CampaignPermission
   >({
     listParamsState: listParams,
-    filterKeys: ['name'],
     getDataAction: getPermissions,
     columnParams,
     actionColumnParams

@@ -55,7 +55,6 @@ export interface ListRequestParams extends Pagination {
 
 export interface TableUtilsProps<T> {
   listParamsState: ListRequestParams
-  filterKeys?: (keyof T)[]
   sortWithoutDefaultOption?: boolean
   getDataAction: (params: ListRequestParams) => any
   /** Config for the columns that contain data */
@@ -168,7 +167,6 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
   const {
     listParamsState,
     getDataAction,
-    filterKeys,
     sortWithoutDefaultOption,
     actionColumnParams,
     columnParams
@@ -368,7 +366,9 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
 
       requestParams.orderByType = toOrderByType(sorter.order)
       requestParams.orderBy = requestParams.orderByType ? (sorter?.field as string) : undefined
-      filterKeys?.forEach((key: any) => {
+
+      for (const column of columnParams) {
+        const key = column.key
         const filterItem = filters?.[key]?.[0]
 
         if (moment.isMoment(filterItem)) {
@@ -379,11 +379,18 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
         } else {
           requestParams[key] = filterItem
         }
-      })
+      }
 
       dispatch(getDataAction(requestParams))
     },
-    [dispatch, filterKeys, getDataAction, listParamsState, sortWithoutDefaultOption, toOrderByType]
+    [
+      dispatch,
+      getDataAction,
+      listParamsState,
+      sortWithoutDefaultOption,
+      toOrderByType,
+      columnParams
+    ]
   )
 
   return {

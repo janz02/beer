@@ -117,7 +117,6 @@ export const useSiteListUtils = ({
 
   const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<Site>({
     listParamsState: listParams,
-    filterKeys: ['name', 'address'],
     getDataAction: siteListActions.getSites,
     columnParams,
     actionColumnParams

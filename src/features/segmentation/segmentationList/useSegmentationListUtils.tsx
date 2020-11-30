@@ -92,7 +92,6 @@ export const useSegmentationListUtils = (): SegmentationListUtils => {
     CampaignSegmentation
   >({
     listParamsState: listParams,
-    filterKeys: ['name', 'categoryName', 'createdDate'],
     getDataAction: getSegmentations,
     columnParams,
     actionColumnParams

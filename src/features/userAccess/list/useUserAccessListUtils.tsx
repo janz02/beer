@@ -99,7 +99,6 @@ export const useUserAccessListUtils = (): UserAccessListUtils => {
 
   const nkmUsersTableUtils = useTableUtils<UserAccess>({
     listParamsState: nkmListParams,
-    filterKeys: ['name', 'email', 'role', 'isActive'],
     getDataAction: userAccessActions.getNkmUsers,
     columnParams: nkmUsersColumnParams,
     actionColumnParams: nkmUsersActionColumnParams
@@ -173,7 +172,6 @@ export const useUserAccessListUtils = (): UserAccessListUtils => {
 
   const partnerUsersTableUtils = useTableUtils<UserAccess>({
     listParamsState: partnerListParams,
-    filterKeys: ['name', 'email', 'partnerName', 'role', 'isActive'],
     getDataAction: userAccessActions.getPartnerUsers,
     columnParams: partnerUsersColumnsParams,
     actionColumnParams: partnerUsersActionColumnsParams

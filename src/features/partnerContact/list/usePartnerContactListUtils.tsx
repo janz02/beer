@@ -140,7 +140,6 @@ export const usePartnerContactListUtils = (
 
   const tableUtils = useTableUtils<PartnerContact>({
     listParamsState: listParams,
-    filterKeys: ['name', 'email', 'phone', 'role'],
     getDataAction: partnerContactListActions.getContacts,
     columnParams,
     actionColumnParams

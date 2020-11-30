@@ -133,7 +133,6 @@ export const useBpHistoryUtils = (): BpHistoryUtils => {
     BpHistoryItem
   >({
     listParamsState: listParams,
-    filterKeys: ['bpId'],
     getDataAction: getBpHistory,
     columnParams,
     actionColumnParams

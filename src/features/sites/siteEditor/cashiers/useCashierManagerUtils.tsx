@@ -102,7 +102,6 @@ export const useCashierManagerUtils = (config: SiteFeatureConfig): CashierManage
     addKeyProp
   } = useTableUtils<Cashier>({
     listParamsState: cashiersListParams,
-    filterKeys: ['cashierId', 'digitalStampId'],
     getDataAction: siteEditorActions.getCashiers,
     columnParams: cashierTableColumnParams,
     actionColumnParams: cashierTableActionColumnParams

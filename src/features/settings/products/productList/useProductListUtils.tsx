@@ -79,7 +79,6 @@ export const useProductListUtils = (props: ProductListUtilsProps): ProductListUt
   const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<Product>(
     {
       listParamsState: listParams,
-      filterKeys: ['name'],
       sortWithoutDefaultOption: true,
       getDataAction: getProducts,
       columnParams,

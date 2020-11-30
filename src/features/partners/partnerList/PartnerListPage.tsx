@@ -119,7 +119,6 @@ export const PartnerListPage: React.FC = () => {
   const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<Partner>(
     {
       listParamsState: listParams,
-      filterKeys: ['name', 'majorPartner', 'partnerState', 'address', 'partnerRegistrationState'],
       getDataAction: getPartners,
       columnParams,
       actionColumnParams

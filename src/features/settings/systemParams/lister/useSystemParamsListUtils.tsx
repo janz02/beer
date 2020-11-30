@@ -78,7 +78,6 @@ export const useSystemParamsListUtils = (
     SystemParam
   >({
     listParamsState: listParams,
-    filterKeys: ['key', 'value'],
     sortWithoutDefaultOption: true,
     getDataAction: () => systemParamsActions.getSystemParams,
     columnParams,

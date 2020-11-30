@@ -77,7 +77,6 @@ export const useCouponCampaignCategoryListUtils = (
     CouponCampaignCategory
   >({
     listParamsState: listParams,
-    filterKeys: ['name'],
     sortWithoutDefaultOption: true,
     getDataAction: getCategories,
     columnParams,

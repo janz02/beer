@@ -93,15 +93,6 @@ export const useGroupsUtils = (): GroupsUtils => {
 
   const tableUtils = useTableUtils<Group>({
     listParamsState: listParams,
-    filterKeys: [
-      'name',
-      'profileCount',
-      'companyCount',
-      'jobRoleCount',
-      'permissionsCount',
-      'createdDate',
-      'createdBy'
-    ],
     getDataAction: groupsActions.getGroups,
     columnParams,
     actionColumnParams

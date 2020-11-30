@@ -101,7 +101,6 @@ export const useNewsletterListUtils = (): NewsletterListUtils => {
     NewsletterPreview
   >({
     listParamsState: listParams,
-    filterKeys: ['name', 'modifiedAt'],
     getDataAction: getNewsletterTemplates,
     columnParams,
     actionColumnParams

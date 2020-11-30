@@ -180,17 +180,6 @@ export const useProfileListUtils = (): ProfileListUtils => {
 
   const tableUtils = useTableUtils<Profile>({
     listParamsState: listParams,
-    filterKeys: [
-      'status',
-      'name',
-      'userName',
-      'email',
-      'createdDate',
-      'groupCount',
-      'permissionCount',
-      'companyName',
-      'jobRoleName'
-    ],
     getDataAction: profileListActions.getProfiles,
     columnParams,
     actionColumnParams

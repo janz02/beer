@@ -83,7 +83,6 @@ export const useSegmentationCategoryListUtils = (
     SegmentationCategory
   >({
     listParamsState: listParams,
-    filterKeys: ['name'],
     sortWithoutDefaultOption: true,
     getDataAction: getCategories,
     columnParams,

@@ -88,7 +88,6 @@ export const useJobRoleListUtils = (): JobRoleListUtils => {
 
   const tableUtils = useTableUtils<JobRole>({
     listParamsState: listParams,
-    filterKeys: ['name', 'profileCount', 'groupCount', 'companyCount', 'createdDate', 'createdBy'],
     getDataAction: jobRolesActions.getJobRoles,
     columnParams,
     actionColumnParams

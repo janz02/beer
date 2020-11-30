@@ -312,25 +312,6 @@ export const useCouponCampaignListUtils = (): CouponCampaignListUtils => {
     CouponCampaign
   >({
     listParamsState: listParams,
-    filterKeys: [
-      'type',
-      'partnerName',
-      'name',
-      'state',
-      'isActive',
-      'categoryId',
-      'rank',
-      'drawDate',
-      'startDate',
-      'endDate',
-      'expireDate',
-      'mode',
-      'discountType',
-      'discountValue',
-      'couponCount',
-      'minimumShoppingValue',
-      'createdBy'
-    ],
     getDataAction: couponCampaignListActions.getCoupons,
     columnParams,
     actionColumnParams
