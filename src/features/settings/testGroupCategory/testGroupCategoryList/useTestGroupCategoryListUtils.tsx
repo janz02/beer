@@ -2,8 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
-import { ColumnType } from 'antd/lib/table'
+import { useTableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { hasPermission } from 'services/jwt-reader'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
@@ -40,35 +39,28 @@ export const useTestGroupCategoryListUtils = (
 
   const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<TestGroupCategory>({
-    listParamsState: listParams,
-    filterKeys: ['name'],
-    sortWithoutDefaultOption: true,
-    getDataAction: getCategories
-  })
-
-  const columnsConfig: ColumnType<TestGroupCategory>[] = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      columnConfig({
+      {
         title: t('test-group-category.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      columnConfig({
+      },
+      {
         title: t('test-group-category.field.created-date'),
         key: 'createdDate',
         width: '13rem',
         renderMode: 'date time'
-      }),
+      }
+    ],
+    [t]
+  )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       isEditorUser
-        ? actionColumnConfig({
+        ? {
             render(record: TestGroupCategory) {
               return (
                 <CrudButtons
@@ -82,11 +74,20 @@ export const useTestGroupCategoryListUtils = (
                 />
               )
             }
-          })
-        : {}
-    ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
+          }
+        : undefined,
+    [onOpenEditor, isEditorUser]
   )
+
+  const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<
+    TestGroupCategory
+  >({
+    listParamsState: listParams,
+    sortWithoutDefaultOption: true,
+    getDataAction: getCategories,
+    columnParams,
+    actionColumnParams
+  })
 
   const tableProps: ResponsiveTableProps = useMemo(
     () => ({

@@ -4,9 +4,8 @@ import { RootState } from 'app/rootReducer'
 import { useGenericModalFormEditorUtils } from 'hooks/useGenericModalEditorUtils'
 import { useParams } from 'react-router-dom'
 import { Cashier } from 'models/cashier'
-import { useTableUtils } from 'hooks/useTableUtils'
+import { ColumnConfigParams, useTableUtils } from 'hooks/useTableUtils'
 import { siteEditorActions } from '../siteEditorSlice'
-import { ColumnType } from 'antd/lib/table'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { ResponsiveTableProps } from 'components/responsive/ResponsiveTable'
@@ -56,53 +55,57 @@ export const useCashierManagerUtils = (config: SiteFeatureConfig): CashierManage
     cashierEditorModalUtils.routeToEditor()
   }
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<Cashier>({
-    listParamsState: cashiersListParams,
-    filterKeys: ['cashierId', 'digitalStampId'],
-    getDataAction: siteEditorActions.getCashiers
-  })
-
-  const cashierTableColumnsConfig: ColumnType<Cashier>[] = useMemo(
+  const cashierTableColumnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      columnConfig({
+      {
         title: t('cashier-list.table.cashier-id'),
         key: 'cashierId',
         sort: true
-      }),
-      columnConfig({
+      },
+      {
         title: t('cashier-list.table.digital-stamp-id'),
         key: 'digitalStampId',
         sort: true
-      }),
-      actionColumnConfig({
-        render(record: Cashier) {
-          let onEdit, onDelete
-
-          if (config.canEdit) {
-            onEdit = () => {
-              record.id && dispatch(siteEditorActions.getCashier(record.id))
-              cashierEditorModalUtils.routeToEditor(record.id)
-            }
-            onDelete = () => {
-              setCashierToDelete({
-                data: record,
-                popupVisible: true
-              })
-            }
-          }
-
-          return <CrudButtons onEdit={onEdit} onDelete={onDelete} />
-        }
-      })
+      }
     ],
-    [columnConfig, t, actionColumnConfig, cashierEditorModalUtils, config, dispatch]
+    [t]
   )
+
+  const cashierTableActionColumnParams = useMemo<Partial<ColumnConfigParams>>(
+    () => ({
+      render(record: Cashier) {
+        let onEdit, onDelete
+
+        if (config.canEdit) {
+          onEdit = () => {
+            record.id && dispatch(siteEditorActions.getCashier(record.id))
+            cashierEditorModalUtils.routeToEditor(record.id)
+          }
+          onDelete = () => {
+            setCashierToDelete({
+              data: record,
+              popupVisible: true
+            })
+          }
+        }
+
+        return <CrudButtons onEdit={onEdit} onDelete={onDelete} />
+      }
+    }),
+    [cashierEditorModalUtils, config, dispatch]
+  )
+
+  const {
+    paginationConfig,
+    handleTableChange,
+    columnsConfig: cashierTableColumnsConfig,
+    addKeyProp
+  } = useTableUtils<Cashier>({
+    listParamsState: cashiersListParams,
+    getDataAction: siteEditorActions.getCashiers,
+    columnParams: cashierTableColumnParams,
+    actionColumnParams: cashierTableActionColumnParams
+  })
 
   const cashierTableProps: ResponsiveTableProps = {
     loading: cashierListState === FeatureState.Loading,

@@ -3,7 +3,7 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { userAccessActions, UserAccessTab } from '../userAccessSlice'
-import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils, TableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
 import { UserAccess, UserType } from 'models/user'
 import { ColumnsType } from 'antd/lib/table'
@@ -43,36 +43,30 @@ export const useUserAccessListUtils = (): UserAccessListUtils => {
     partnerListState
   } = useSelector((state: RootState) => state.userAccess)
 
-  const nkmUsersTableUtils = useTableUtils<UserAccess>({
-    listParamsState: nkmListParams,
-    filterKeys: ['name', 'email', 'role', 'isActive'],
-    getDataAction: userAccessActions.getNkmUsers
-  })
-
   const nkmRoleOptions = useRoleGenerator(UserType.NKM)
 
-  const nkmUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
+  const nkmUsersColumnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      nkmUsersTableUtils.columnConfig({
+      {
         title: t('user-access.field.name'),
         key: 'name',
         width: '35%',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      nkmUsersTableUtils.columnConfig({
+      },
+      {
         title: t('user-access.field.email'),
         key: 'email',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      nkmUsersTableUtils.columnConfig({
+      },
+      {
         title: t('user-access.field.status'),
         filterMode: FilterMode.ACTIVE_INACTIVE,
         key: 'isActive',
         width: '7rem'
-      }),
-      nkmUsersTableUtils.columnConfig({
+      },
+      {
         title: t('user-access.field.role'),
         key: 'role',
         sort: false,
@@ -80,9 +74,15 @@ export const useUserAccessListUtils = (): UserAccessListUtils => {
         filters: nkmRoleOptions,
         render: (value: unknown, user: UserAccess) =>
           user.role ? t(`user.role.${user.role?.toLowerCase()}`) : ''
-      }),
+      }
+    ],
+    [nkmRoleOptions, t]
+  )
+
+  const nkmUsersActionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       hasPermission([Roles.Administrator])
-        ? nkmUsersTableUtils.actionColumnConfig({
+        ? {
             render(user: UserAccess) {
               return (
                 <CrudButtons
@@ -92,54 +92,54 @@ export const useUserAccessListUtils = (): UserAccessListUtils => {
                 />
               )
             }
-          })
-        : {}
-    ],
-    [nkmRoleOptions, nkmUsersTableUtils, t, dispatch]
+          }
+        : undefined,
+    [dispatch]
   )
 
-  const partnerUsersTableUtils = useTableUtils<UserAccess>({
-    listParamsState: partnerListParams,
-    filterKeys: ['name', 'email', 'partnerName', 'role', 'isActive'],
-    getDataAction: userAccessActions.getPartnerUsers
+  const nkmUsersTableUtils = useTableUtils<UserAccess>({
+    listParamsState: nkmListParams,
+    getDataAction: userAccessActions.getNkmUsers,
+    columnParams: nkmUsersColumnParams,
+    actionColumnParams: nkmUsersActionColumnParams
   })
 
   const partnerRoleOptions = useRoleGenerator(UserType.PARTNER)
 
-  const partnerUsersColumnsConfig: ColumnsType<UserAccess> = useMemo(
+  const partnerUsersColumnsParams = useMemo<ColumnConfigParams[]>(
     () => [
-      partnerUsersTableUtils.columnConfig({
+      {
         title: t('user-access.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      partnerUsersTableUtils.columnConfig({
+      },
+      {
         title: t('user-access.field.email'),
         key: 'email',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      partnerUsersTableUtils.columnConfig({
+      },
+      {
         title: t('user-access.field.phone'),
         width: '8rem',
         key: 'phone',
         filterMode: FilterMode.SEARCH
-      }),
-      partnerUsersTableUtils.columnConfig({
+      },
+      {
         title: t('user-access.field.partner-name'),
         width: '10rem',
         key: 'partnerName',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      partnerUsersTableUtils.columnConfig({
+      },
+      {
         title: t('user-access.field.status'),
         key: 'isActive',
         width: '7rem',
         filterMode: FilterMode.ACTIVE_INACTIVE
-      }),
-      partnerUsersTableUtils.columnConfig({
+      },
+      {
         title: t('user-access.field.partner-contact-type'),
         key: 'role',
         filterMode: FilterMode.FILTER,
@@ -147,9 +147,15 @@ export const useUserAccessListUtils = (): UserAccessListUtils => {
         filters: partnerRoleOptions,
         width: '12rem',
         render: role => (role ? t(`user.role-short.${role?.toLowerCase()}`) : '')
-      }),
+      }
+    ],
+    [partnerRoleOptions, t]
+  )
+
+  const partnerUsersActionColumnsParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       hasPermission([Roles.Administrator])
-        ? partnerUsersTableUtils.actionColumnConfig({
+        ? {
             render(user: UserAccess) {
               return (
                 <CrudButtons
@@ -159,11 +165,17 @@ export const useUserAccessListUtils = (): UserAccessListUtils => {
                 />
               )
             }
-          })
-        : {}
-    ],
-    [partnerRoleOptions, partnerUsersTableUtils, t, dispatch]
+          }
+        : undefined,
+    [dispatch]
   )
+
+  const partnerUsersTableUtils = useTableUtils<UserAccess>({
+    listParamsState: partnerListParams,
+    getDataAction: userAccessActions.getPartnerUsers,
+    columnParams: partnerUsersColumnsParams,
+    actionColumnParams: partnerUsersActionColumnsParams
+  })
 
   const resetNkmFilters = (): void => {
     dispatch(userAccessActions.resetNkmUsersFilters())
@@ -178,8 +190,8 @@ export const useUserAccessListUtils = (): UserAccessListUtils => {
   }, [dispatch, selectedTab])
 
   return {
-    partnerUsersColumnsConfig,
-    nkmUsersColumnsConfig,
+    partnerUsersColumnsConfig: partnerUsersTableUtils.columnsConfig,
+    nkmUsersColumnsConfig: nkmUsersTableUtils.columnsConfig,
     nkmUsersTableUtils,
     partnerUsersTableUtils,
     nkmUsers,
