@@ -1,9 +1,13 @@
 import React, { useState, useMemo, useCallback } from 'react'
-import { useTableUtils, FilterMode, ListRequestParams } from 'hooks/useTableUtils'
+import {
+  useTableUtils,
+  FilterMode,
+  ListRequestParams,
+  ColumnConfigParams
+} from 'hooks/useTableUtils'
 import { Site } from 'models/site'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'app/rootReducer'
-import { ColumnType } from 'antd/lib/table'
 import { history } from 'router/router'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { siteListActions } from './siteListSlice'
@@ -45,18 +49,6 @@ export const useSiteListUtils = ({
   const { listParams, sites, listState } = useSelector((s: RootState) => s.siteList)
   const [siteToDelete, setSiteToDelete] = useState<PopupState<Site>>()
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<Site>({
-    listParamsState: listParams,
-    filterKeys: ['name', 'address'],
-    getDataAction: siteListActions.getSites
-  })
-
   const resetFilters = (): void => {
     dispatch(siteListActions.resetSiteFilters)
   }
@@ -75,49 +67,60 @@ export const useSiteListUtils = ({
     [routeRoot]
   )
 
-  const columnsConfig: ColumnType<Site>[] = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      columnConfig({
+      {
         title: t('site-list.table.name'),
         key: 'name',
         width: '35%',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      columnConfig({
+      },
+      {
         title: t('site-list.table.address'),
         key: 'address',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      actionColumnConfig({
-        render(value: unknown, record: Site) {
-          let onView
-          let onEdit
-          let onDelete
-
-          if (config.canEdit) {
-            onEdit = () => record.id && handleEdit(record.id)
-            onDelete = () => {
-              setSiteToDelete({
-                data: record,
-                popupVisible: true
-              })
-            }
-          } else {
-            onView = () => record.id && handleEdit(record.id)
-          }
-
-          return (
-            <>
-              <CrudButtons onView={onView} onEdit={onEdit} onDelete={onDelete} />
-            </>
-          )
-        }
-      })
+      }
     ],
-    [actionColumnConfig, columnConfig, t, handleEdit, config]
+    [t]
   )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams>>(
+    () => ({
+      render(value: unknown, record: Site) {
+        let onView
+        let onEdit
+        let onDelete
+
+        if (config.canEdit) {
+          onEdit = () => record.id && handleEdit(record.id)
+          onDelete = () => {
+            setSiteToDelete({
+              data: record,
+              popupVisible: true
+            })
+          }
+        } else {
+          onView = () => record.id && handleEdit(record.id)
+        }
+
+        return (
+          <>
+            <CrudButtons onView={onView} onEdit={onEdit} onDelete={onDelete} />
+          </>
+        )
+      }
+    }),
+    [handleEdit, config]
+  )
+
+  const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<Site>({
+    listParamsState: listParams,
+    getDataAction: siteListActions.getSites,
+    columnParams,
+    actionColumnParams
+  })
 
   const handleGetSites = useCallback(
     (params?: ListRequestParams) => {

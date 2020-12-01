@@ -3,9 +3,8 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
 import { segmentationCategoryListActions } from './segmentationCategoryListSlice'
-import { FilterMode, useTableUtils } from 'hooks/useTableUtils'
+import { ColumnConfigParams, FilterMode, useTableUtils } from 'hooks/useTableUtils'
 import { SegmentationCategory } from 'models/campaign/segmentationCategory'
-import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
@@ -40,35 +39,28 @@ export const useSegmentationCategoryListUtils = (
 
   const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<SegmentationCategory>({
-    listParamsState: listParams,
-    filterKeys: ['name'],
-    sortWithoutDefaultOption: true,
-    getDataAction: getCategories
-  })
-
-  const columnsConfig: ColumnType<SegmentationCategory>[] = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      columnConfig({
+      {
         title: t('segmentation-category.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      columnConfig({
+      },
+      {
         title: t('segmentation-category.field.created-date'),
         key: 'createdDate',
         width: '13rem',
         renderMode: 'date time'
-      }),
+      }
+    ],
+    [t]
+  )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       isEditorUser
-        ? actionColumnConfig({
+        ? {
             render(record: SegmentationCategory) {
               return (
                 <CrudButtons
@@ -82,11 +74,20 @@ export const useSegmentationCategoryListUtils = (
                 />
               )
             }
-          })
-        : {}
-    ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
+          }
+        : undefined,
+    [onOpenEditor, isEditorUser]
   )
+
+  const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<
+    SegmentationCategory
+  >({
+    listParamsState: listParams,
+    sortWithoutDefaultOption: true,
+    getDataAction: getCategories,
+    columnParams,
+    actionColumnParams
+  })
 
   const tableProps: ResponsiveTableProps = useMemo(
     () => ({
