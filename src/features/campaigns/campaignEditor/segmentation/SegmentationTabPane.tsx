@@ -1,32 +1,33 @@
-import { DownOutlined, InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, Col, Collapse, Row, Form, Modal, Typography } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import { Col, Row, Form, Modal } from 'antd'
+import { AccordionInfo } from 'components/accordion/AccordionInfo'
+import { CustomAccordion } from 'components/accordion/CustomAccordion'
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
-import './SegmentationStyles.scss'
-
-const { Panel } = Collapse
-const { Title, Text } = Typography
 
 export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
-  const [inbuiltActive, setInbuiltActive] = useState(true)
 
   const data = {
+    campaignId,
     inbuiltFilteredResults: 400,
-    fileBasedFilteredResults: 400,
-    inbuiltSegmentations: [],
-    fileBasedSegmentations: []
+    fileBasedFilteredResults: 300
   }
 
-  const handleAddEmptyInbuilt = (event: any): void => {
-    event.stopPropagation()
-    console.log('add inbuilt')
+  const [inbuiltSegmentations, setInbuiltSegmentations] = useState<any[]>([])
+  const [fileBasedSegmentations, setFileBasedSegmentations] = useState<any[]>([])
+
+  const handleAddEmptyInbuilt = (): void => {
+    setInbuiltSegmentations([...inbuiltSegmentations, 'New!'])
   }
 
-  const handleAddEmptyFileBased = (event: any): void => {
-    event.stopPropagation()
-    console.log('add file based')
+  const handleAddEmptyFileBased = (): void => {
+    setFileBasedSegmentations([...fileBasedSegmentations, 'New!'])
+  }
+
+  const handleInfoClick = (): void => {
+    Modal.info({ title: 'Title', content: 'Content' })
   }
 
   const onHandleSubmit = (values: any): void => console.log(values)
@@ -36,47 +37,55 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
       <Form initialValues={data} onFinish={onHandleSubmit} layout="vertical">
         <Row align="middle" justify="start" gutter={[16, 16]}>
           <Col span={24}>
-            <Collapse
-              defaultActiveKey={['1']}
-              expandIcon={() => undefined}
-              onChange={activeKeys => setInbuiltActive(activeKeys.includes('1'))}
+            <CustomAccordion
+              accordionKey="inbuilt"
+              title={t('campaign-create.segmentation.inbuilt-title')}
+              info={
+                <AccordionInfo
+                  type="info"
+                  label={t('campaign-create.segmentation.filtered-results')}
+                  data={data.inbuiltFilteredResults}
+                  onClick={handleInfoClick}
+                />
+              }
+              actionBtnLabel={
+                <>
+                  <PlusOutlined /> {t('campaign-create.segmentation.add-btn')}
+                </>
+              }
+              onActionBtnClick={handleAddEmptyInbuilt}
             >
-              <Panel
-                key="1"
-                header={
-                  <span className="panel-header__container">
-                    <span className="panel-header-title__container">
-                      <span className="panel-header__title">
-                        <Text strong>{t('Inbuilt segmentation')}</Text>
-                        <DownOutlined rotate={inbuiltActive ? 180 : 0} />
-                      </span>
+              {inbuiltSegmentations.map((el, i) => (
+                <div key={`inbuilt__${i}`}>{el}</div>
+              ))}
+            </CustomAccordion>
+          </Col>
 
-                      <span
-                        className="panel-header__info"
-                        onClick={e => {
-                          e.stopPropagation()
-                          Modal.info({ title: 'Info', content: 'Info!!', okText: 'Ok' })
-                        }}
-                      >
-                        <Text>{t('Filtered results')}</Text>
-                        <span>
-                          <Text strong>{data.inbuiltFilteredResults}</Text>
-                          <InfoCircleOutlined />
-                        </span>
-                      </span>
-                    </span>
-                    <Button onClick={handleAddEmptyInbuilt}>
-                      <PlusOutlined /> Add segementation
-                    </Button>
-                  </span>
-                }
-              >
-                {campaignId}
-              </Panel>
-            </Collapse>
+          <Col span={24}>
+            <CustomAccordion
+              accordionKey="filebased"
+              title={t('campaign-create.segmentation.file-based-title')}
+              info={
+                <AccordionInfo
+                  type="info"
+                  label={t('campaign-create.segmentation.filtered-results')}
+                  data={data.fileBasedFilteredResults}
+                  onClick={handleInfoClick}
+                />
+              }
+              actionBtnLabel={
+                <>
+                  <PlusOutlined /> {t('campaign-create.segmentation.add-btn')}
+                </>
+              }
+              onActionBtnClick={handleAddEmptyFileBased}
+            >
+              {fileBasedSegmentations.map((el, i) => (
+                <div key={`filebased__${i}`}>{el}</div>
+              ))}
+            </CustomAccordion>
           </Col>
         </Row>
-        <Button htmlType="submit">Submit</Button>
       </Form>
     </>
   )
