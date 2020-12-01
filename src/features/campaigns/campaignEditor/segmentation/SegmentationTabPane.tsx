@@ -1,15 +1,16 @@
-import { InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { DownOutlined, InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Col, Collapse, Row, Form, Modal, Typography } from 'antd'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
 import './SegmentationStyles.scss'
 
 const { Panel } = Collapse
-const { Title } = Typography
+const { Title, Text } = Typography
 
 export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
+  const [inbuiltActive, setInbuiltActive] = useState(true)
 
   const data = {
     inbuiltFilteredResults: 400,
@@ -35,82 +36,45 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
       <Form initialValues={data} onFinish={onHandleSubmit} layout="vertical">
         <Row align="middle" justify="start" gutter={[16, 16]}>
           <Col span={24}>
-            <Collapse defaultActiveKey={['1']}>
+            <Collapse
+              defaultActiveKey={['1']}
+              expandIcon={() => undefined}
+              onChange={activeKeys => setInbuiltActive(activeKeys.includes('1'))}
+            >
               <Panel
+                key="1"
                 header={
-                  <div className="accordion-header__container">
-                    <div className="accordion-title__container">
-                      <Title level={3} className="accordion-header__title">
-                        {t('Inbuilt segmentation')}
-                      </Title>
-                      <Title
-                        level={4}
-                        className="accordion-header__title accordion-header__title--small"
-                      >
-                        {t('Filtered results')}
-                      </Title>
-                      <Title level={5} className="accordion-header__title">
-                        {data.inbuiltFilteredResults}
-                      </Title>
-                      <span>
-                        <InfoCircleOutlined
-                          onClick={e => {
-                            e.stopPropagation()
-                            Modal.info({ title: 'Info', content: 'Info!!', okText: 'Ok' })
-                          }}
-                        />
+                  <span className="panel-header__container">
+                    <span className="panel-header-title__container">
+                      <span className="panel-header__title">
+                        <Text strong>{t('Inbuilt segmentation')}</Text>
+                        <DownOutlined rotate={inbuiltActive ? 180 : 0} />
                       </span>
-                    </div>
 
+                      <span
+                        className="panel-header__info"
+                        onClick={e => {
+                          e.stopPropagation()
+                          Modal.info({ title: 'Info', content: 'Info!!', okText: 'Ok' })
+                        }}
+                      >
+                        <Text>{t('Filtered results')}</Text>
+                        <span>
+                          <Text strong>{data.inbuiltFilteredResults}</Text>
+                          <InfoCircleOutlined />
+                        </span>
+                      </span>
+                    </span>
                     <Button onClick={handleAddEmptyInbuilt}>
                       <PlusOutlined /> Add segementation
                     </Button>
-                  </div>
+                  </span>
                 }
-                key="1"
               >
                 {campaignId}
               </Panel>
             </Collapse>
           </Col>
-          {/* <Col span={24}>
-            <Collapse defaultActiveKey={['2']}>
-              <Panel
-                header={t('File based custom segmentation')}
-                key="2"
-                extra={
-                  <Row gutter={16}>
-                    <Col span={12}>
-                      <Form.Item
-                        name="fileBasedFilteredResults"
-                        label={t('Filtered results')}
-                        className="control-label"
-                      >
-                        <h4 className={styles['accordion-extra__data']}>
-                          {data.fileBasedFilteredResults}
-                        </h4>
-                        <span>
-                          <InfoCircleOutlined
-                            onClick={e => {
-                              e.stopPropagation()
-                              Modal.info({ title: 'Info', content: 'Info!!', okText: 'Ok' })
-                            }}
-                          />
-                        </span>
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                      <Button onClick={handleAddEmptyFileBased}>
-                        <PlusOutlined /> Add segementation
-                      </Button>
-                    </Col>
-                  </Row>
-                }
-              >
-                {campaignId}
-              </Panel>
-            </Collapse>
-          </Col> */}
         </Row>
         <Button htmlType="submit">Submit</Button>
       </Form>
