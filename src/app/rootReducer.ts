@@ -36,6 +36,7 @@ import { segmentationEditorReducer } from 'features/segmentation/segmentationEdi
 import { systemParamsReducer } from 'features/settings/systemParams/systemParamsSlice'
 import { campaignsListReducer } from 'features/campaigns/campaignList/campaignListSlice'
 import { groupsReducer } from 'features/organization/groups/groupsSlice'
+import { groupEditorReducer } from 'features/organization/groups/groupEditor/groupEditorSlice'
 import { jobRoleListReducer } from 'features/organization/jobRoles/jobRoleListSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
@@ -51,6 +52,7 @@ export const rootReducer = combineReducers({
   profileEditor: profileEditorReducer,
   companies: companiesReducer,
   groups: groupsReducer,
+  groupEditor: groupEditorReducer,
   couponCampaignList: couponCampaignListReducer,
   couponCampaigns: couponCampaignsReducer,
   couponCampaignCategoryList: couponCampaignCategoryListReducer,
