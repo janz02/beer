@@ -30,6 +30,7 @@ interface State {
   template?: Newsletter
   segments: Segment[]
   log?: any
+  templatePreviewLoading: boolean
 }
 
 const initialState: State = {
@@ -43,7 +44,8 @@ const initialState: State = {
   restoreState: FeatureState.Initial,
   emailState: FeatureState.Initial,
   segmentState: FeatureState.Initial,
-  segments: []
+  segments: [],
+  templatePreviewLoading: false
 }
 
 const slice = createSlice({
@@ -116,6 +118,9 @@ const slice = createSlice({
     // For finding the bug in grapes.js
     logGrapesjsEvent(state, action: PayloadAction<any>) {
       state.log = action.payload
+    },
+    setTemplatePreviewLoading(state, action: PayloadAction<boolean>) {
+      state.templatePreviewLoading = action.payload
     }
   }
 })
@@ -126,7 +131,8 @@ const {
   setRestoreState,
   setEmailState,
   setSegmentState,
-  setTemplateContentState
+  setTemplateContentState,
+  setTemplatePreviewLoading
 } = slice.actions
 const { getTemplateSuccess } = slice.actions
 const { getSegmentsSuccess } = slice.actions
@@ -279,6 +285,7 @@ export const newsletterEditorActions = {
   openDiscardModal,
   closeDiscardModal,
   setTemplateContentState,
+  setTemplatePreviewLoading,
   getNewsletterTemplate,
   sendNewsletterEmailToSegment,
   sendNewsletterEmailExample,

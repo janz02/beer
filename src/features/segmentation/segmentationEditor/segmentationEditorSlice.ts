@@ -147,7 +147,7 @@ export const getSegmentation = (id?: number): AppThunk => async dispatch => {
     const { fields } = await api.campaignEditor.segmentationQueries.getConfigSegmentationQuery()
     const {
       items: categories
-    } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({})
+    } = await api.campaignEditor.segmentationCategories.getSegmentationCategories({ pageSize: -1 })
 
     dispatch(
       getSegmentationSuccess({

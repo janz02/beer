@@ -97,10 +97,10 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         title: t('campaign-list.field.name'),
         key: 'name',
         sort: true,
-        ellipsis: false,
         cannotBeHidden: true,
         filterMode: FilterMode.SEARCH,
         disableSearchHighlight: true,
+        ellipsis: false,
         render: (value: string, campaign: CampaignListItem): React.ReactNode => {
           return <a href={`/campaigns/${campaign.id}`}>{value}</a>
         }
@@ -199,6 +199,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
       isEditorUser
         ? companyCampaignTableUtils.actionColumnConfig({
             fixed: 'right',
+            width: 'auto',
             render(campaign: CampaignListItem) {
               return (
                 <CrudButtons
@@ -233,8 +234,9 @@ export const useCampaignListUtils = (): CampaignListUtils => {
 
   const companyCampaignTableProps: ResponsiveTableProps = useMemo(
     () => ({
-      hasFixedColumn: true,
       loading,
+      hasHeaderOffset: true,
+      hasFixedColumn: true,
       columns: companyColumnOrderUtils.currentColumns,
       dataSource: companyCampaignSource,
       pagination: companyCampaignTableUtils.paginationConfig,
@@ -285,6 +287,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
   const partnerCampaignTableProps: ResponsiveTableProps = useMemo(
     () => ({
       hasHeaderOffset: true,
+      hasFixedColumn: true,
       loading,
       columns: partnerColumnOrderUtils.currentColumns,
       dataSource: partnerCampaignSource,

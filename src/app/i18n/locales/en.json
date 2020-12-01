@@ -1,6 +1,6 @@
 {
   "app": {
-    "title": "Plus Campaign Engine"
+    "title": "Grape Optima"
   },
   "auth": {
     "change-password-success": "Password successfully changed.",
@@ -148,6 +148,7 @@
     "inactivate": "Inactivate",
     "inactive": "Inactive",
     "invite": "Invite",
+    "loading": "Loading",
     "message": {
       "delete-success": "Deleted successfully.",
       "email-sent": "Your request was processed successfully.",
@@ -226,37 +227,46 @@
     }
   },
   "campaign-create": {
-    "settings-tab-name":"Settings",
-    "segmentation-tab-name":"Segmentation",
-    "content-tab-name":"Content(Email)",
-    "test-tab-name":"Test",
+    "settings-tab-name": "Settings",
+    "segmentation-tab-name": "Segmentation",
+    "test-tab-name": "Test",
     "title": "Create Campaign",
     "status-creation": "Status (Campaign Creation)",
     "user-logs": "User Logs",
     "save-draft": "Save draft & Exit",
     "next-section": "Next (Segmentation)",
-    "settings":{
-      "campaign-name":"Campaign name",
-      "requestor":"Requestor",
-      "about":"About",
-      "campaign-admins-title":"Campaign admins",
-      "channel-type-title":"Channel type",
-      "daily-restriction-title":"Daily restriction",
-      "start-time":"Start time",
-      "end-time":"End time",
-      "start-date":"Start date",
-      "end-date":"End date",
-      "email-recall-settings-title":"Email re-call settings",
-      "maximum-recall-attempts":"Maximum recall attempts",
-      "recall-frequency":"Recall frequency",
-      "email-resending-rules":"Email re-sending rules",
-      "interval-restrictions":"Interval Restrictions",
-      "email-delivery-date-restrictions" : "Email delivery date restrictions",
-      "product-title":"Product",
-      "product-label":"Product",
-      "timing-title":"Timing",
-      "select-timing-type-label":"Select timing type",
-      "approver-validator":"Approver/Validator"
+    "settings": {
+      "campaign-name": "Campaign name",
+      "requestor": "Requestor",
+      "about": "About",
+      "campaign-admins-title": "Campaign admins",
+      "channel-type-title": "Channel type",
+      "daily-restriction-title": "Daily restriction",
+      "start-time": "Start time",
+      "end-time": "End time",
+      "start-date": "Start date",
+      "end-date": "End date",
+      "email-recall-settings-title": "Email re-call settings",
+      "maximum-recall-attempts": "Maximum recall attempts",
+      "recall-frequency": "Recall frequency",
+      "email-resending-rules": "Email re-sending rules",
+      "interval-restrictions": "Interval Restrictions",
+      "email-delivery-date-restrictions": "Email delivery date restrictions",
+      "product-title": "Product",
+      "product-label": "Product",
+      "timing-title": "Timing",
+      "select-timing-type-label": "Select timing type",
+      "approver-validator": "Approver/Validator"
+    },
+    "content": {
+      "email": {
+        "tab-name": "Content (Email)",
+        "title": "Email Template",
+        "template": "Email Template",
+        "template-placeholder": "Select Email",
+        "template-version": "Version",
+        "template-version-placeholder": "Select Version"
+      }
     }
   },
   "coupon-campaign-create": {
@@ -752,6 +762,14 @@
     "message": {
       "403": "Sorry, you are not authorized to access this page.",
       "default": "Sorry, something went wrong."
+    }
+  },
+  "email-template": {
+    "device-type": {
+      "title": "Device type preview",
+      "desktop": "Desktop",
+      "mobile": "Mobile",
+      "tablet": "Tablet"
     }
   },
   "languages": {
