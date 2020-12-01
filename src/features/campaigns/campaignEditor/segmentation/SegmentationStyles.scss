@@ -1,0 +1,25 @@
+.accordion-header {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    display: inline;
+    margin: 0 4px 0 0 !important;
+
+    &--small {
+      color: gray;
+      font-size: 9px;
+    }
+  }
+}
+
+.accordion-title {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
