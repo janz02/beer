@@ -376,7 +376,7 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
           case FilterMode.DATEPICKER:
             if (filterItems) {
               const filterItem = (filterItems[0] as unknown) as moment.Moment
-              requestParams[key] = filterItem.format('L')
+              requestParams[key] = filterItem
             } else {
               requestParams[key] = undefined
             }
