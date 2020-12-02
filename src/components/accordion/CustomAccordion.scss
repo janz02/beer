@@ -13,3 +13,9 @@
     margin-right: 4px;
   }
 }
+
+.panel--inactive .ant-collapse-item {
+  border-bottom: none;
+  cursor: default;
+  pointer-events: none;
+}
