@@ -1,9 +1,7 @@
 import { ExclamationCircleOutlined, InfoCircleOutlined, WarningOutlined } from '@ant-design/icons'
+import Text from 'antd/lib/typography/Text'
 import React, { FC, useMemo } from 'react'
-import { Typography } from 'antd'
 import './AccordionInfo.scss'
-
-const { Text } = Typography
 
 export interface AccordionInfo {
   label: string

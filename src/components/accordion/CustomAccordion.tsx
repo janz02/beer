@@ -1,10 +1,10 @@
 import { DownOutlined } from '@ant-design/icons'
-import { Button, Collapse, Typography } from 'antd'
+import { Button, Collapse } from 'antd'
+import Text from 'antd/lib/typography/Text'
 import React, { FC, useState } from 'react'
 import './CustomAccordion.scss'
 
 const { Panel } = Collapse
-const { Text } = Typography
 
 export interface CustomAccordionProps {
   accordionKey: string
