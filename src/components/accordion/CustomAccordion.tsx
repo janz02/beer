@@ -1,10 +1,9 @@
 import { DownOutlined } from '@ant-design/icons'
 import { Button, Collapse } from 'antd'
+import CollapsePanel from 'antd/lib/collapse/CollapsePanel'
 import Text from 'antd/lib/typography/Text'
 import React, { FC, useState } from 'react'
 import './CustomAccordion.scss'
-
-const { Panel } = Collapse
 
 export interface CustomAccordionProps {
   accordionKey: string
@@ -38,7 +37,7 @@ export const CustomAccordion: FC<CustomAccordionProps> = ({
         setIsActive(activeKeys.includes(accordionKey))
       }}
     >
-      <Panel
+      <CollapsePanel
         key={accordionKey}
         header={
           <span className="panel-header__container">
@@ -64,7 +63,7 @@ export const CustomAccordion: FC<CustomAccordionProps> = ({
         }
       >
         {children}
-      </Panel>
+      </CollapsePanel>
     </Collapse>
   )
 }
