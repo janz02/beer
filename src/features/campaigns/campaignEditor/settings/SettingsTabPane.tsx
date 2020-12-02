@@ -81,7 +81,9 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
             <Divider type="vertical" className="vertical-splitter" />
           </Col>
           <Col span={7}>
-            <EmailSendingSection />
+            <EmailSendingSection
+              emailReSendingOptions={campaignSettingsFormElements.emailResendRules}
+            />
           </Col>
         </Row>
       </div>
