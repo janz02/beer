@@ -2,18 +2,28 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { CampaignSettingsFormElements } from 'models/campaign/campaignSettingsFormEelements'
-import { OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm } from 'api/swagger/campaign-editor/models'
 
 interface CampaignSettingsState {
   campaignSettingsFormElements: CampaignSettingsFormElements
-  loading: boolean
-  error: boolean
+  isLoading: boolean
+  hasError: boolean
 }
 
 const initialState: CampaignSettingsState = {
-  campaignSettingsFormElements: new CampaignSettingsFormElements(null),
-  loading: false,
-  error: false
+  campaignSettingsFormElements: {
+    emailResendFrequencies: [],
+    emailResendRules: [],
+    emailTimeRules: [],
+    phoneRecallFrequencies: [],
+    phoneTimeRules: [],
+    productTypes: [],
+    products: [],
+    requesters: [],
+    responsibles: [],
+    timingTypes: []
+  },
+  isLoading: true,
+  hasError: false
 }
 
 const campaignSettingsSlice = createSlice({
@@ -21,20 +31,19 @@ const campaignSettingsSlice = createSlice({
   initialState,
   reducers: {
     getCampaignSettingsFormElements(state) {
-      state.loading = true
+      state.isLoading = true
     },
     getCampaignSettingsFormElementsSuccess(
       state,
       action: PayloadAction<CampaignSettingsFormElements>
     ) {
-      const alma = action.payload as CampaignSettingsFormElements
       state.campaignSettingsFormElements = action.payload
-      state.loading = false
-      state.error = false
+      state.isLoading = false
+      state.hasError = false
     },
     getCampaignSettingsFormElementsFail(state) {
-      state.loading = false
-      state.error = true
+      state.isLoading = false
+      state.hasError = true
     }
   }
 })
@@ -51,9 +60,9 @@ export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
   try {
     dispatch(getCampaignSettingsFormElements())
     const viewModels = await api.campaignEditor.viewModels.createCampaignViewModel()
-    const alma = new CampaignSettingsFormElements(viewModels)
+    const formElements = { ...(viewModels as CampaignSettingsFormElements) }
 
-    dispatch(getCampaignSettingsFormElementsSuccess(alma))
+    dispatch(getCampaignSettingsFormElementsSuccess(formElements))
   } catch (err) {
     dispatch(getCampaignSettingsFormElementsFail())
   }
