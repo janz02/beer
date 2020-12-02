@@ -6,11 +6,12 @@ import './AccordionInfo.scss'
 export interface AccordionInfo {
   label: string
   type: 'info' | 'warning' | 'error'
-  data?: any
+  data?: string | number
+  customData?: JSX.Element
   onClick?: Function
 }
 
-export const AccordionInfo: FC<AccordionInfo> = ({ label, data, type, onClick }) => {
+export const AccordionInfo: FC<AccordionInfo> = ({ label, data, customData, type, onClick }) => {
   const icon = useMemo(
     () => (
       <>
@@ -30,11 +31,17 @@ export const AccordionInfo: FC<AccordionInfo> = ({ label, data, type, onClick })
       }}
     >
       <Typography.Text>
-        {label} {!data && <>icon</>}
+        {label} {!data && !customData && <>{icon}</>}
       </Typography.Text>
       {data && (
         <span>
           <Typography.Text strong>{data}</Typography.Text>
+          {icon}
+        </span>
+      )}
+      {customData && (
+        <span>
+          {customData}
           {icon}
         </span>
       )}
