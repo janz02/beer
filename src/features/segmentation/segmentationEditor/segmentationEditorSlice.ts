@@ -18,6 +18,7 @@ import {
 } from './queryBuilder/useQueryBuilderUtils'
 import { SegmentationRuleResult } from 'models/campaign/segmentationRuleResult'
 import { QueryBuilderField } from 'models/campaign/queryBuilderField'
+import { history } from 'router/router'
 
 const { loadTree, uuid } = Utils
 
@@ -76,6 +77,7 @@ const segmentationEditorSlice = createSlice({
     },
     getSegmentationFail(state) {
       state.error = true
+      state.loading = false
     },
     saveSegmentationRequest(state) {
       state.saving = true
@@ -159,6 +161,8 @@ export const getSegmentation = (id?: number): AppThunk => async dispatch => {
     )
   } catch (err) {
     dispatch(getSegmentationFail())
+    history.push('/segmentations-list')
+    message.error(i18n.t('error.segmentation-editor.cannot-open'), 5)
   }
 }
 
@@ -206,6 +210,10 @@ export const saveSegmentation = (
     }
     dispatch(saveSegmentationSuccess())
     message.success(i18n.t('common.message.save-success'), 5)
+
+    if (!segmentation?.id) {
+      history.push('/segmentations-list')
+    }
   } catch (err) {
     console.log(err)
     dispatch(saveSegmentationFail())

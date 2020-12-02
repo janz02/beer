@@ -6,6 +6,8 @@ import { SegmentationEditorUtils } from './useSegmentationEditorUtils'
 import { QueryBuilderView } from './queryBuilder/QueryBuilderView'
 import { useQueryBuilderUtils } from './queryBuilder/useQueryBuilderUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
+import { LoadingOutlined } from '@ant-design/icons'
+import './SegmentationEditorForm.scss'
 
 interface SegmentationEditorFormProps {
   segmentationEditorUtils: SegmentationEditorUtils
@@ -14,14 +16,18 @@ interface SegmentationEditorFormProps {
 export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = props => {
   const { t } = useTranslation()
   const { segmentationEditorUtils } = props
-  const { submitable, saving, id, checkFieldsChange, handleSave } = segmentationEditorUtils
+  const { submitable, saving, loading, id, checkFieldsChange, handleSave } = segmentationEditorUtils
   const { treeTotal, treeAsString, conditions } = useQueryBuilderUtils()
 
   const saveSegmentationForm = (segmentation: CampaignSegmentation): void => {
     handleSave(segmentation, treeTotal, treeAsString, conditions)
   }
 
-  return (
+  return loading ? (
+    <div className="center">
+      <LoadingOutlined />
+    </div>
+  ) : (
     <>
       <Form
         name="coupon-editor-form"

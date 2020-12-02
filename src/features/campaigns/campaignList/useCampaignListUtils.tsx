@@ -22,6 +22,7 @@ import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
 import moment from 'moment'
 import { SettingsButton } from 'components/buttons/SettingsButton'
+import { Link } from 'react-router-dom'
 
 interface CampaignListUtils {
   companyCampaignTableProps: ResponsiveTableProps
@@ -102,7 +103,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         disableSearchHighlight: true,
         ellipsis: false,
         render: (value: string, campaign: CampaignListItem): React.ReactNode => {
-          return <a href={`/campaigns/${campaign.id}`}>{value}</a>
+          return <Link to={`/campaigns/${campaign.id}`}>{value}</Link>
         }
       }),
       companyCampaignTableUtils.columnConfig({

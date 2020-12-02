@@ -226,37 +226,37 @@
     }
   },
   "campaign-create": {
-    "settings-tab-name":"Beállítások",
-    "segmentation-tab-name":"Szegmentáció",
-    "content-tab-name":"Tartalom (Email)",
-    "test-tab-name":"Teszt",
+    "settings-tab-name": "Beállítások",
+    "segmentation-tab-name": "Szegmentáció",
+    "content-tab-name": "Tartalom (Email)",
+    "test-tab-name": "Teszt",
     "title": "Kampány Létrehozása",
     "status-creation": "Státusz (Kampány Létrehozás)",
     "user-logs": "Felhaszálói napló",
     "save-draft": "Piszkozat mentése & Kilépés",
     "next-section": "Következő (Szegmentálás)",
-    "settings":{
-      "campaign-name":"Kampány neve",
-      "requestor":"Igénylő",
-      "about":"Leírás",
-      "campaign-admins-title":"Kampány adminok",
-      "channel-type-title":"Csatorna típusa",
-      "daily-restriction-title":"Napi tiltások",
-      "start-time":"Kezdődik",
-      "end-time":"Végződik",
-      "start-date":"Kezdeti dátum",
-      "end-date":"Zárás dátum",
-      "email-recall-settings-title":"Email visszahívás beállítása",
-      "maximum-recall-attempts":"Visszahívási kísérletek száma",
-      "recall-frequency":"Visszahívás gyakorisága",
-      "email-resending-rules":"Email újraküldési szabályok",
-      "interval-restrictions":"Időszakos korlátozások",
-      "email-delivery-date-restrictions" : "Email kézbesítési korlátozások",
-      "product-title":"Termék",
-      "product-label":"Termék",
-      "timing-title":"Időzítés",
-      "select-timing-type-label":"Időzítés típusa",
-      "approver-validator":"Elfogadó/Érvényesítő"
+    "settings": {
+      "campaign-name": "Kampány neve",
+      "requestor": "Igénylő",
+      "about": "Leírás",
+      "campaign-admins-title": "Kampány adminok",
+      "channel-type-title": "Csatorna típusa",
+      "daily-restriction-title": "Napi tiltások",
+      "start-time": "Kezdődik",
+      "end-time": "Végződik",
+      "start-date": "Kezdeti dátum",
+      "end-date": "Zárás dátum",
+      "email-recall-settings-title": "Email visszahívás beállítása",
+      "maximum-recall-attempts": "Visszahívási kísérletek száma",
+      "recall-frequency": "Visszahívás gyakorisága",
+      "email-resending-rules": "Email újraküldési szabályok",
+      "interval-restrictions": "Időszakos korlátozások",
+      "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
+      "product-title": "Termék",
+      "product-label": "Termék",
+      "timing-title": "Időzítés",
+      "select-timing-type-label": "Időzítés típusa",
+      "approver-validator": "Elfogadó/Érvényesítő"
     }
   },
   "coupon-campaign-create": {
@@ -514,6 +514,9 @@
     },
     "segment": {
       "one-time-use-creation-failed": "Az egyszer használatos szegmens létrehozása közben hiba lépett fel. Kérem próbálja újra!"
+    },
+    "segmentationEditor": {
+      "cannot-open": "A kiválasztott szegmentáció nem nyitható meg, kérem próbálkozzon később."
     },
     "sendgrid": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
