@@ -1,7 +1,5 @@
 import { DownOutlined } from '@ant-design/icons'
-import { Button, Collapse } from 'antd'
-import CollapsePanel from 'antd/lib/collapse/CollapsePanel'
-import Text from 'antd/lib/typography/Text'
+import { Button, Collapse, Typography } from 'antd'
 import React, { FC, useState } from 'react'
 import './CustomAccordion.scss'
 
@@ -37,13 +35,13 @@ export const CustomAccordion: FC<CustomAccordionProps> = ({
         setIsActive(activeKeys.includes(accordionKey))
       }}
     >
-      <CollapsePanel
+      <Collapse.Panel
         key={accordionKey}
         header={
           <span className="panel-header__container">
             <span className="panel-header-title__container">
               <span className="panel-header__title">
-                <Text strong>{title}</Text>
+                <Typography.Text strong>{title}</Typography.Text>
                 <DownOutlined rotate={isActive ? 180 : 0} />
               </span>
 
@@ -63,7 +61,7 @@ export const CustomAccordion: FC<CustomAccordionProps> = ({
         }
       >
         {children}
-      </CollapsePanel>
+      </Collapse.Panel>
     </Collapse>
   )
 }

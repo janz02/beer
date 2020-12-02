@@ -1,5 +1,5 @@
 import { ExclamationCircleOutlined, InfoCircleOutlined, WarningOutlined } from '@ant-design/icons'
-import Text from 'antd/lib/typography/Text'
+import { Typography } from 'antd'
 import React, { FC, useMemo } from 'react'
 import './AccordionInfo.scss'
 
@@ -29,12 +29,12 @@ export const AccordionInfo: FC<AccordionInfo> = ({ label, data, type, onClick })
         onClick?.()
       }}
     >
-      <Text>
+      <Typography.Text>
         {label} {!data && <>icon</>}
-      </Text>
+      </Typography.Text>
       {data && (
         <span>
-          <Text strong>{data}</Text>
+          <Typography.Text strong>{data}</Typography.Text>
           {icon}
         </span>
       )}
