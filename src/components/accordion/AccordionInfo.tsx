@@ -31,7 +31,7 @@ export const AccordionInfo: FC<AccordionInfo> = ({ label, data, customData, type
       }}
     >
       <Typography.Text>
-        {label} {!data && <>icon</>}
+        {label} {!data && !customData && <>{icon}</>}
       </Typography.Text>
       {data && (
         <span>
