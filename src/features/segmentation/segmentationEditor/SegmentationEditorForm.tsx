@@ -16,14 +16,21 @@ interface SegmentationEditorFormProps {
 export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = props => {
   const { t } = useTranslation()
   const { segmentationEditorUtils } = props
-  const { submitable, saving, loading, id, checkFieldsChange, handleSave } = segmentationEditorUtils
+  const {
+    submitable,
+    isSaving,
+    isLoading,
+    id,
+    checkFieldsChange,
+    handleSave
+  } = segmentationEditorUtils
   const { treeTotal, treeAsString, conditions } = useQueryBuilderUtils()
 
   const saveSegmentationForm = (segmentation: CampaignSegmentation): void => {
     handleSave(segmentation, treeTotal, treeAsString, conditions)
   }
 
-  return loading ? (
+  return isLoading ? (
     <div className="center">
       <LoadingOutlined />
     </div>
@@ -63,7 +70,7 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
           type="primary"
           htmlType="submit"
           disabled={!submitable}
-          loading={saving}
+          loading={isSaving}
         >
           {!id ? t('segmentation-editor.button-create') : t('segmentation-editor.button-save')}
         </Button>

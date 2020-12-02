@@ -3,9 +3,8 @@ import { RootState } from 'app/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { FeatureState } from 'models/featureState'
 import { couponCampaignCategoryListActions } from './couponCampaignCategoryListSlice'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { CouponCampaignCategory } from 'models/couponCampaignCategory'
-import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
@@ -40,29 +39,22 @@ export const useCouponCampaignCategoryListUtils = (
 
   const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<CouponCampaignCategory>({
-    listParamsState: listParams,
-    filterKeys: ['name'],
-    sortWithoutDefaultOption: true,
-    getDataAction: getCategories
-  })
-
-  const columnsConfig: ColumnType<CouponCampaignCategory>[] = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      columnConfig({
+      {
         title: t('coupon-campaign-category.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
+      }
+    ],
+    [t]
+  )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       isEditorUser
-        ? actionColumnConfig({
+        ? {
             render(record: CouponCampaignCategory) {
               return (
                 <CrudButtons
@@ -76,11 +68,20 @@ export const useCouponCampaignCategoryListUtils = (
                 />
               )
             }
-          })
-        : {}
-    ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
+          }
+        : undefined,
+    [onOpenEditor, isEditorUser]
   )
+
+  const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<
+    CouponCampaignCategory
+  >({
+    listParamsState: listParams,
+    sortWithoutDefaultOption: true,
+    getDataAction: getCategories,
+    columnParams,
+    actionColumnParams
+  })
 
   const tableProps: ResponsiveTableProps = useMemo(
     () => ({

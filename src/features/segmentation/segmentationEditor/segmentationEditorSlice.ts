@@ -43,15 +43,15 @@ interface SegmentationEditorLoadedData {
 
 interface SegmentationEditorState extends SegmentationEditorLoadedData {
   error: boolean
-  loading: boolean
-  saving: boolean
+  isLoading: boolean
+  isSaving: boolean
   queryBuilder: QueryBuilderState
 }
 
 const initialState: SegmentationEditorState = {
   error: false,
-  loading: false,
-  saving: false,
+  isLoading: false,
+  isSaving: false,
   queryBuilder: {
     actions: {},
     rules: [],
@@ -68,26 +68,26 @@ const segmentationEditorSlice = createSlice({
   reducers: {
     resetSegmentationEditor: () => initialState,
     getSegmentationRequest(state) {
-      state.loading = true
+      state.isLoading = true
     },
     getSegmentationSuccess(state, action: PayloadAction<SegmentationEditorLoadedData>) {
       Object.assign(state, action.payload)
-      state.loading = false
+      state.isLoading = false
       state.error = false
     },
     getSegmentationFail(state) {
       state.error = true
-      state.loading = false
+      state.isLoading = false
     },
     saveSegmentationRequest(state) {
-      state.saving = true
+      state.isSaving = true
     },
     saveSegmentationSuccess(state) {
-      state.saving = false
+      state.isSaving = false
       state.error = false
     },
     saveSegmentationFail(state) {
-      state.saving = false
+      state.isSaving = false
       state.error = true
     },
     setTree(state, action: PayloadAction<ImmutableTree>) {

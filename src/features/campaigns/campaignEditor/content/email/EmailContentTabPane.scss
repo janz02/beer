@@ -1,0 +1,14 @@
+.email-preview-container {
+  height: 580px;
+}
+
+.mark-label-as-required {
+  label::after {
+    content: "*";
+    display: inline-block;
+    margin-left: 4px;
+    font-family: SimSun, sans-serif;
+    font-size: 14px;
+    line-height: 1;
+  }
+}

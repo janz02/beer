@@ -8,9 +8,7 @@ import { ProfileListTab, profileListActions } from './profileListSlice'
 import { useProfileListUtils } from './useProfileListUtils'
 import { ResponsiveTabs, TabPanelTitle, TabPane } from 'components/responsive/tabs'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
-import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
-import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { Dropdown, Menu } from 'antd'
 import { AddButton } from 'components/buttons/AddButton'
 import { hasPermission } from 'services/jwt-reader'
@@ -24,7 +22,7 @@ export const ProfileList: FC = () => {
   const { t } = useTranslation()
 
   const {
-    columnsConfig,
+    columnOrderUtils,
     tableUtils,
     profiles,
     profilesLoading,
@@ -36,8 +34,6 @@ export const ProfileList: FC = () => {
   useEffect(() => {
     dispatch(profileListActions.getProfiles())
   }, [dispatch])
-
-  const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.PROFILES)
 
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.profileEditor), [])
 
