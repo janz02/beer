@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons'
-import { Col, Row, Form, Modal } from 'antd'
+import { Col, Row, Form, Modal, Typography } from 'antd'
 import { AccordionInfo } from 'components/accordion/AccordionInfo'
 import { CustomAccordion } from 'components/accordion/CustomAccordion'
 import React, { FC, useState } from 'react'
@@ -12,7 +12,9 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
   const data = {
     campaignId,
     inbuiltFilteredResults: 400,
-    fileBasedFilteredResults: 300
+    fileBasedFilteredResults: 300,
+    summaryResults: 700,
+    summaryAll: 12500
   }
 
   const [inbuiltSegmentations, setInbuiltSegmentations] = useState<any[]>([])
@@ -36,6 +38,28 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
     <>
       <Form initialValues={data} onFinish={onHandleSubmit} layout="vertical">
         <Row align="middle" justify="start" gutter={[16, 16]}>
+          <Col span={24}>
+            <CustomAccordion
+              defaultActive={false}
+              isInactive
+              accordionKey="summary"
+              title={t('campaign-create.segmentation.summary-title')}
+              info={
+                <AccordionInfo
+                  type="info"
+                  label={t('campaign-create.segmentation.target-title')}
+                  customData={
+                    <>
+                      <Typography.Text strong>{data.summaryResults} / </Typography.Text>
+                      <Typography.Text>{data.summaryAll}</Typography.Text>
+                    </>
+                  }
+                  onClick={handleInfoClick}
+                />
+              }
+            />
+          </Col>
+
           <Col span={24}>
             <CustomAccordion
               accordionKey="inbuilt"

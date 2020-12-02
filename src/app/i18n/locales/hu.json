@@ -64,7 +64,9 @@
       "add-btn": "Szegmentáció hozzáadás",
       "file-based-title": "Fájl alapú szegmentáció",
       "filtered-results": "Szűrt eredmény",
-      "inbuilt-title": "Szerkesztő alapú szegmentáció"
+      "inbuilt-title": "Szerkesztő alapú szegmentáció",
+      "summary-title": "Szegmentáció összegző",
+      "target-title": "Célközönség"
     },
     "segmentation-tab-name": "Szegmentáció",
     "settings": {

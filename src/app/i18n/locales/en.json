@@ -64,7 +64,9 @@
       "add-btn": "Add segmentation",
       "file-based-title": "File based segmentation",
       "filtered-results": "Filtered results",
-      "inbuilt-title": "Inbuilt segmentations"
+      "inbuilt-title": "Inbuilt segmentations",
+      "summary-title": "Segmentation summary",
+      "target-title": "Target audience"
     },
     "segmentation-tab-name": "Segmentation",
     "settings": {
