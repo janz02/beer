@@ -6,8 +6,6 @@ import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
 
-const { Text } = Typography
-
 export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
 
@@ -52,8 +50,8 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                   label={t('campaign-create.segmentation.target-title')}
                   customData={
                     <>
-                      <Text strong>{data.summaryResults} / </Text>
-                      <Text>{data.summaryAll}</Text>
+                      <Typography.Text strong>{data.summaryResults} / </Typography.Text>
+                      <Typography.Text>{data.summaryAll}</Typography.Text>
                     </>
                   }
                   onClick={handleInfoClick}
