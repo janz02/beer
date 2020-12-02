@@ -4,9 +4,6 @@ import { CollapseProps } from 'antd/lib/collapse'
 import React, { FC, useState } from 'react'
 import './CustomAccordion.scss'
 
-const { Panel } = Collapse
-const { Text } = Typography
-
 export interface CustomAccordionProps extends CollapseProps {
   accordionKey: string
   title: string
@@ -47,13 +44,13 @@ export const CustomAccordion: FC<CustomAccordionProps> = ({
       bordered={!isInactive}
       {...rest}
     >
-      <Panel
+      <Collapse.Panel
         key={accordionKey}
         header={
           <span className="panel-header__container">
             <span className="panel-header-title__container">
               <span className="panel-header__title">
-                <Text strong>{title}</Text>
+                <Typography.Text strong>{title}</Typography.Text>
                 {!isInactive && <DownOutlined rotate={isActivePanel ? 180 : 0} />}
               </span>
 
@@ -73,7 +70,7 @@ export const CustomAccordion: FC<CustomAccordionProps> = ({
         }
       >
         {children}
-      </Panel>
+      </Collapse.Panel>
     </Collapse>
   )
 }

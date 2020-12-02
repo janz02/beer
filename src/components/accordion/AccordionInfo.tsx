@@ -3,8 +3,6 @@ import React, { FC, useMemo } from 'react'
 import { Typography } from 'antd'
 import './AccordionInfo.scss'
 
-const { Text } = Typography
-
 export interface AccordionInfo {
   label: string
   type: 'info' | 'warning' | 'error'
@@ -32,12 +30,12 @@ export const AccordionInfo: FC<AccordionInfo> = ({ label, data, customData, type
         onClick?.()
       }}
     >
-      <Text>
+      <Typography.Text>
         {label} {!data && <>icon</>}
-      </Text>
+      </Typography.Text>
       {data && (
         <span>
-          <Text strong>{data}</Text>
+          <Typography.Text strong>{data}</Typography.Text>
           {icon}
         </span>
       )}
