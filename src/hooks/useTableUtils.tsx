@@ -45,6 +45,7 @@ export interface Pagination {
   size?: number
   pageSize?: number
 }
+
 export interface ListRequestParams extends Pagination {
   [filterKey: string]: any
   total?: number
@@ -54,9 +55,12 @@ export interface ListRequestParams extends Pagination {
 
 export interface TableUtilsProps<T> {
   listParamsState: ListRequestParams
-  filterKeys?: (keyof T)[]
   sortWithoutDefaultOption?: boolean
   getDataAction: (params: ListRequestParams) => any
+  /** Config for the columns that contain data */
+  columnParams: ColumnConfigParams[]
+  /** Config for the column that contains the edit, view or delete buttons */
+  actionColumnParams?: Partial<ColumnConfigParams>
 }
 
 export const reviseListRequestParams = (
@@ -81,20 +85,34 @@ export interface ActivenessOptions {
   deleted?: string
 }
 
-interface ColumnConfigParams extends ExtendedColumnType<any> {
+/**
+ * Configures the Ant Design table
+ */
+export interface ColumnConfigParams extends ExtendedColumnType<any> {
+  /** The property name of the item */
   key: string
+  /** The way that the column can be filtered */
   filterMode?: FilterMode
+  /**
+   * Optional, overwrites the default filters if present. These filters are the values that the
+   * table can be filtered for.
+   */
   filters?: ColumnFilterItem[]
+  /** Enables sorting the table by this column's value */
   sort?: boolean
+  /** Highlighting won't be visible when searching */
   disableSearchHighlight?: boolean
+  /**
+   * If this parameter has the value "date time", the column will be rendered with
+   * `MomentDisplay`
+   */
   renderMode?: 'date time' | null
 }
 
 export interface TableUtils<T> {
   paginationConfig: false | TablePaginationConfig
   handleTableChange: any
-  columnConfig: (params: ColumnConfigParams) => ExtendedColumnType<T>
-  actionColumnConfig: (params: Partial<ColumnConfigParams>) => ExtendedColumnType<T>
+  columnsConfig: ExtendedColumnType<T>[]
   addKeyProp: (data?: T[]) => T[]
 }
 
@@ -146,7 +164,14 @@ export const basePaginationConfig = (
 
  */
 function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<T>): TableUtils<T> {
-  const { listParamsState, getDataAction, filterKeys, sortWithoutDefaultOption } = props
+  const {
+    listParamsState,
+    getDataAction,
+    sortWithoutDefaultOption,
+    actionColumnParams,
+    columnParams
+  } = props
+
   const isMobile = useIsMobile()
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -205,19 +230,8 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
     [listParamsState]
   )
 
-  /**
-   * Configures the Ant Design table
-   * @param params.key The property name of the item
-   * @param params.filterMode The way that the column can be filtered
-   * @param params.filters Optional, overwrites the default filters if present. These filters are
-   * the values that the table can be filtered for.
-   * @param params.sort Enables sorting the table by this column's value
-   * @param params.disableSearchHighlight Highlighting won't be visible when searching
-   * @param params.renderMode If this parameter has the value "date time", the column will be
-   * rendered with `MomentDisplay`
-   */
-  const columnConfig = useCallback(
-    (params: ColumnConfigParams): ExtendedColumnType<any> => {
+  const columnsConfig = useMemo((): ExtendedColumnType<any>[] => {
+    const columnsConfig = columnParams.map(params => {
       const { key, filterMode, sort, filters, disableSearchHighlight, renderMode, ...rest } = params
 
       const config: ExtendedColumnType<T> = {
@@ -225,10 +239,6 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
         ...rest,
         dataIndex: key,
         key
-      }
-
-      if (filterMode) {
-        config.filteredValue = listParamsState?.[key] ? [listParamsState?.[key]] : null
       }
 
       switch (filterMode) {
@@ -287,7 +297,6 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
           break
         }
         case FilterMode.ENUM:
-          config.filterMultiple = false
           config.filters = filters
           break
         default:
@@ -304,24 +313,27 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
         config.render = (value: any) => <MomentDisplay date={value} mode="date time" />
       }
 
-      return config
-    },
-    [listParamsState, searchedTextHighlighter, t, toSortOrder]
-  )
+      if (filterMode) {
+        const value = listParamsState?.[key]
+        if (value) {
+          config.filteredValue = config.filterMultiple ? value : [value]
+        }
+      }
 
-  /**
-   * Config for the column that contains the edit, view or delete buttons
-   */
-  const actionColumnConfig = useCallback((params: Partial<ColumnConfigParams>): ExtendedColumnType<
-    any
-  > => {
-    return {
-      key: 'actions',
-      colSpan: 1,
-      width: '130px',
-      ...params
+      return config
+    })
+
+    if (actionColumnParams) {
+      columnsConfig.push({
+        key: 'actions',
+        colSpan: 1,
+        width: '130px',
+        ...actionColumnParams
+      })
     }
-  }, [])
+
+    return columnsConfig
+  }, [listParamsState, searchedTextHighlighter, t, toSortOrder, columnParams, actionColumnParams])
 
   /**
    * `onChange` handler for Ant Design Table
@@ -356,29 +368,56 @@ function useTableUtils<T extends { [key: string]: any }>(props: TableUtilsProps<
 
       requestParams.orderByType = toOrderByType(sorter.order)
       requestParams.orderBy = requestParams.orderByType ? (sorter?.field as string) : undefined
-      filterKeys?.forEach((key: any) => {
-        const filterItem = filters?.[key]?.[0]
 
-        if (moment.isMoment(filterItem)) {
-          requestParams[key] = filterItem.format('L')
-        } else if (Array.isArray(filterItem)) {
-          requestParams[key + 'From'] = filterItem[0].format('L')
-          requestParams[key + 'To'] = (filterItem[1] as moment.Moment).add(1, 'day').format('L')
-        } else {
-          requestParams[key] = filterItem
+      for (const { key, filterMode, filterMultiple } of columnParams) {
+        const filterItems = filters?.[key]
+
+        switch (filterMode) {
+          case FilterMode.DATEPICKER:
+            if (filterItems) {
+              const filterItem = (filterItems[0] as unknown) as moment.Moment
+              requestParams[key] = filterItem
+            } else {
+              requestParams[key] = undefined
+            }
+
+            break
+
+          case FilterMode.DATERANGEPICKER:
+            if (filterItems) {
+              const filterItem = (filterItems[0] as unknown) as moment.Moment[]
+              requestParams[key + 'From'] = filterItem[0].format('L')
+              requestParams[key + 'To'] = (filterItem[1] as moment.Moment).add(1, 'day').format('L')
+              break
+            } else {
+              requestParams[key] = undefined
+            }
+
+            break
+
+          default: {
+            requestParams[key] = filterMultiple ? filterItems : filterItems?.[0]
+            break
+          }
         }
-      })
+      }
 
       dispatch(getDataAction(requestParams))
     },
-    [dispatch, filterKeys, getDataAction, listParamsState, sortWithoutDefaultOption, toOrderByType]
+    [
+      dispatch,
+      getDataAction,
+      listParamsState,
+      sortWithoutDefaultOption,
+      toOrderByType,
+      columnParams
+    ]
   )
 
   return {
     paginationConfig,
     handleTableChange,
-    columnConfig,
-    actionColumnConfig,
+    columnsConfig,
     addKeyProp
   }
 }

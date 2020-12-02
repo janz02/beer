@@ -47,6 +47,55 @@
     "email": "Email",
     "phone": "Telefon"
   },
+  "campaign-create": {
+    "content": {
+      "email": {
+        "tab-name": "Tartalom (Email)",
+        "template": "Email Sablon",
+        "template-placeholder": "Válasszon Emailt",
+        "template-version": "Verzió",
+        "template-version-placeholder": "Válasszon Verziót",
+        "title": "Email Sablon"
+      }
+    },
+    "next-section": "Következő (Szegmentálás)",
+    "save-draft": "Piszkozat mentése & Kilépés",
+    "segmentation": {
+      "add-btn": "Szegmentáció hozzáadás",
+      "file-based-title": "Fájl alapú szegmentáció",
+      "filtered-results": "Szűrt eredmény",
+      "inbuilt-title": "Szerkesztő alapú szegmentáció"
+    },
+    "segmentation-tab-name": "Szegmentáció",
+    "settings": {
+      "about": "Leírás",
+      "approver-validator": "Elfogadó/Érvényesítő",
+      "campaign-admins-title": "Kampány adminok",
+      "campaign-name": "Kampány neve",
+      "channel-type-title": "Csatorna típusa",
+      "daily-restriction-title": "Napi tiltások",
+      "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
+      "email-recall-settings-title": "Email visszahívás beállítása",
+      "email-resending-rules": "Email újraküldési szabályok",
+      "end-date": "Zárás dátum",
+      "end-time": "Végződik",
+      "interval-restrictions": "Időszakos korlátozások",
+      "maximum-recall-attempts": "Visszahívási kísérletek száma",
+      "product-label": "Termék",
+      "product-title": "Termék",
+      "recall-frequency": "Visszahívás gyakorisága",
+      "requestor": "Igénylő",
+      "select-timing-type-label": "Időzítés típusa",
+      "start-date": "Kezdeti dátum",
+      "start-time": "Kezdődik",
+      "timing-title": "Időzítés"
+    },
+    "settings-tab-name": "Beállítások",
+    "status-creation": "Státusz (Kampány Létrehozás)",
+    "test-tab-name": "Teszt",
+    "title": "Kampány Létrehozása",
+    "user-logs": "Felhaszálói napló"
+  },
   "campaign-list": {
     "company": {
       "add": "Új",
@@ -80,18 +129,15 @@
     }
   },
   "campaign-status": {
-    "set": "Beállított",
-    "segmented": "Szegmentált",
-    "content": "Tartalom",
-    "callcenter": "Call Center",
-    "tested": "Tesztelt",
     "approved": "Jóváhagyott",
+    "created": "__STRING_NOT_TRANSLATED__",
+    "draftcampaign": "__STRING_NOT_TRANSLATED__",
+    "drafttreatment": "__STRING_NOT_TRANSLATED__",
+    "senttotestgroup": "__STRING_NOT_TRANSLATED__",
     "started": "Elindított",
     "startedmanually": "Manuálisan elindított",
-    "paused": "Szüneteltetett",
-    "finished": "Lezárult",
-    "closed": "Leállított",
-    "cancelled": "Visszavont"
+    "stopped": "__STRING_NOT_TRANSLATED__",
+    "stoppedmanually": "__STRING_NOT_TRANSLATED__"
   },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
@@ -148,6 +194,7 @@
     "inactivate": "Inaktiválás",
     "inactive": "Inaktív",
     "invite": "Meghívás",
+    "loading": "Betöltés",
     "message": {
       "delete-success": "Sikeres törlés",
       "email-sent": "A kérés sikeresen fel lett dolgozva",
@@ -223,40 +270,6 @@
     "editor-edit": "Szerkesztés",
     "field": {
       "name": "Kategória neve"
-    }
-  },
-  "campaign-create": {
-    "settings-tab-name":"Beállítások",
-    "segmentation-tab-name":"Szegmentáció",
-    "content-tab-name":"Tartalom (Email)",
-    "test-tab-name":"Teszt",
-    "title": "Kampány Létrehozása",
-    "status-creation": "Státusz (Kampány Létrehozás)",
-    "user-logs": "Felhaszálói napló",
-    "save-draft": "Piszkozat mentése & Kilépés",
-    "next-section": "Következő (Szegmentálás)",
-    "settings":{
-      "campaign-name":"Kampány neve",
-      "requestor":"Igénylő",
-      "about":"Leírás",
-      "campaign-admins-title":"Kampány adminok",
-      "channel-type-title":"Csatorna típusa",
-      "daily-restriction-title":"Napi tiltások",
-      "start-time":"Kezdődik",
-      "end-time":"Végződik",
-      "start-date":"Kezdeti dátum",
-      "end-date":"Zárás dátum",
-      "email-recall-settings-title":"Email visszahívás beállítása",
-      "maximum-recall-attempts":"Visszahívási kísérletek száma",
-      "recall-frequency":"Visszahívás gyakorisága",
-      "email-resending-rules":"Email újraküldési szabályok",
-      "interval-restrictions":"Időszakos korlátozások",
-      "email-delivery-date-restrictions" : "Email kézbesítési korlátozások",
-      "product-title":"Termék",
-      "product-label":"Termék",
-      "timing-title":"Időzítés",
-      "select-timing-type-label":"Időzítés típusa",
-      "approver-validator":"Elfogadó/Érvényesítő"
     }
   },
   "coupon-campaign-create": {
@@ -374,6 +387,14 @@
     "status": "Állapot",
     "user": "Létrehozó felhasználó",
     "view-count": "Megjelenések száma"
+  },
+  "email-template": {
+    "device-type": {
+      "desktop": "Monitor",
+      "mobile": "Telefon",
+      "tablet": "Táblagép",
+      "title": "Eszköz előnézet választó"
+    }
   },
   "enum": {
     "channel-type": {
@@ -767,15 +788,15 @@
       "title": "Kupon Kampányok"
     },
     "dashboard": "Dashboard",
+    "my-profile": "Profil",
     "partner-contacts": "Kapcsolattartók",
     "partner-data": "Partner adatok",
     "partners": "Partnerek",
     "permissions": "Jogosultságkezelés",
-    "my-profile": "Profil",
     "profiles": {
+      "list": "Profilok Lista",
       "organizations": "Céges struktúrák",
-      "title": "Profilok",
-      "list": "Profilok Lista"
+      "title": "Profilok"
     },
     "sections": {
       "campaigns": "Kampányok",
@@ -864,16 +885,16 @@
       "title": "Cégek"
     },
     "groups": {
-      "title": "Csoportok",
       "field": {
-        "name": "Név",
-        "profile-count": "Felhasználók",
         "company-count": "Cégek",
-        "job-role-count": "Munkakörök",
-        "permission-count": "Jogosultságok",
         "created-date": "Létrehozás dátuma",
-        "creator": "Létrehozó"
-      }
+        "creator": "Létrehozó",
+        "job-role-count": "Munkakörök",
+        "name": "Név",
+        "permission-count": "Jogosultságok",
+        "profile-count": "Felhasználók"
+      },
+      "title": "Csoportok"
     },
     "job-roles": {
       "field": {
@@ -975,55 +996,54 @@
     "description": "Ez az oldal még nem készült el. Fejlesztőink minden erejükkel azon dolgoznak, hogy új funkciókat szállítsanak, kérjük, térj vissza később!",
     "title": "Fejlesztés alatt"
   },
+  "profile-editor": {
+    "birthday": "Születésnap",
+    "button-cancel": "Mégse",
+    "button-save": "Mentés",
+    "company": "Cég",
+    "contacts": "Contacts",
+    "email": "E-mail",
+    "group": "Csoport",
+    "job-role": "Munkakör",
+    "name": "Név",
+    "phone": "Telefonszám",
+    "picture-help": "Csak pontosan 512*512 pixel méretű JPG vagy PNG kiterjesztésű kép fájl fogadható el.",
+    "position": "Pozíció",
+    "title": "Felhasználó szerkesztése",
+    "username": "Felhasználónév"
+  },
   "profiles": {
-    "field": {
-      "status": "Státusz",
-      "name": "Név",
-      "username": "Felhasználó név",
-      "email": "E-mail",
-      "group": "Csoport",
-      "permissions": "Jogosultságok",
-      "date-of-registration": "Regisztráció dátuma",
-      "company": "Cég",
-      "job-role": "Munkakör"
-    },
-    "new": {
-      "new": "Új",
-      "bulk-upload": "Tömeges feltöltés",
-      "send-invitation": "Meghívó küldése"
-    },
-    "status": {
-      "active": "Aktív",
-      "inactive": "Inaktív",
-      "waiting-for-approval": "Jóváhagyásra vár",
-      "declined": "Elutasított"
-    },
     "action-buttons": {
       "approve": "Jóváhagyás",
       "decline": "Elutasítás"
     },
+    "field": {
+      "company": "Cég",
+      "email": "E-mail",
+      "group": "Csoport",
+      "job-role": "Munkakör",
+      "name": "Név",
+      "permissions": "Jogosultságok",
+      "status": "Státusz",
+      "username": "Felhasználó név"
+    },
+    "new": {
+      "bulk-upload": "Tömeges feltöltés",
+      "new": "Új",
+      "send-invitation": "Meghívó küldése"
+    },
+    "status": {
+      "active": "Aktív",
+      "declined": "Elutasított",
+      "inactive": "Inaktív",
+      "waiting-for-approval": "Jóváhagyásra vár"
+    },
     "tab": {
       "all": "Összes",
-      "waiting-for-approval": "Jóváhagyásra vár",
-      "declined": "Elutasított"
+      "declined": "Elutasított",
+      "waiting-for-approval": "Jóváhagyásra vár"
     },
     "title": "Profilok"
-  },
-  "profile-editor": {
-    "title": "Felhasználó szerkesztése",
-    "name": "Név",
-    "birthday": "Születésnap",
-    "username": "Felhasználónév",
-    "email": "E-mail",
-    "button-save": "Mentés",
-    "button-cancel": "Mégse",
-    "position": "Pozíció",
-    "contacts": "Contacts",
-    "company": "Cég",
-    "group": "Csoport",
-    "job-role": "Munkakör",
-    "phone": "Telefonszám",
-    "picture-help": "Csak pontosan 512*512 pixel méretű JPG vagy PNG kiterjesztésű kép fájl fogadható el."
   },
   "query-builder": {
     "add-group": {

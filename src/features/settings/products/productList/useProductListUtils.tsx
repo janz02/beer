@@ -3,9 +3,8 @@ import { RootState } from 'app/rootReducer'
 import { useDispatch, useSelector } from '../../../../hooks/react-redux-hooks'
 import { FeatureState } from 'models/featureState'
 import { productListActions } from './productListSlice'
-import { FilterMode, useTableUtils } from 'hooks/useTableUtils'
+import { ColumnConfigParams, FilterMode, useTableUtils } from 'hooks/useTableUtils'
 import { Product } from 'models/campaign/product'
-import { ColumnType } from 'antd/lib/table'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { useTranslation } from 'react-i18next'
 import { PopupState, GenericPopupProps } from 'components/popups/GenericPopup'
@@ -36,35 +35,28 @@ export const useProductListUtils = (props: ProductListUtilsProps): ProductListUt
 
   const loading = useMemo(() => listState === FeatureState.Loading, [listState])
 
-  const {
-    paginationConfig,
-    handleTableChange,
-    columnConfig,
-    actionColumnConfig,
-    addKeyProp
-  } = useTableUtils<Product>({
-    listParamsState: listParams,
-    filterKeys: ['name'],
-    sortWithoutDefaultOption: true,
-    getDataAction: getProducts
-  })
-
-  const columnsConfig: ColumnType<Product>[] = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      columnConfig({
+      {
         title: t('campaign-product.field.name'),
         key: 'name',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
-      columnConfig({
+      },
+      {
         title: t('campaign-product.field.createdDate'),
         key: 'createdDate',
         width: '13rem',
         renderMode: 'date time'
-      }),
+      }
+    ],
+    [t]
+  )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       isEditorUser
-        ? actionColumnConfig({
+        ? {
             render(record: Product) {
               return (
                 <CrudButtons
@@ -79,10 +71,19 @@ export const useProductListUtils = (props: ProductListUtilsProps): ProductListUt
                 />
               )
             }
-          })
-        : {}
-    ],
-    [columnConfig, t, actionColumnConfig, onOpenEditor, isEditorUser]
+          }
+        : undefined,
+    [onOpenEditor, isEditorUser]
+  )
+
+  const { paginationConfig, handleTableChange, columnsConfig, addKeyProp } = useTableUtils<Product>(
+    {
+      listParamsState: listParams,
+      sortWithoutDefaultOption: true,
+      getDataAction: getProducts,
+      columnParams,
+      actionColumnParams
+    }
   )
 
   const tableProps: ResponsiveTableProps = useMemo(
