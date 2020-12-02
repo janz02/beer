@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { api } from 'api'
 import { AppThunk } from 'app/store'
-import { FeatureState } from 'models/featureState'
+import {
+  ListRequestParams,
+  reviseListRequestParams,
+  storableListRequestParams
+} from 'hooks/useTableUtils'
+import { CampaignPermission } from 'models/campaign/campaignPermission'
 import { Group } from 'models/group'
 import { Profile } from 'models/profile'
 import moment from 'moment'
@@ -9,13 +14,22 @@ import moment from 'moment'
 interface GroupEditorState {
   group?: Group
   profiles: Profile[]
-  editing?: boolean
-  featureState: FeatureState
+  permissions: CampaignPermission[]
+  hasError: boolean
+  isLoading: boolean
+  isProfilesLoading: boolean
+  isPermissionsLoading: boolean
+  profileListParams: ListRequestParams
 }
 
 const initialState: GroupEditorState = {
+  permissions: [],
   profiles: [],
-  featureState: FeatureState.Initial
+  profileListParams: { pageSize: 10 },
+  isLoading: false,
+  isProfilesLoading: false,
+  isPermissionsLoading: false,
+  hasError: false
 }
 
 export const groupEditorSlice = createSlice({
@@ -23,38 +37,56 @@ export const groupEditorSlice = createSlice({
   initialState,
   reducers: {
     resetGroupEditor: () => initialState,
-    setFeatureState(state, action: PayloadAction<FeatureState>) {
-      state.featureState = action.payload
-    },
     setGroup: (state, action: PayloadAction<Group | undefined>): void => {
       state.group = action.payload
     },
     getGroupSuccess(state, action: PayloadAction<Group>) {
       state.group = action.payload
-      state.featureState = FeatureState.Success
+      state.isLoading = false
     },
-    setEditing(state, action: PayloadAction<boolean>) {
-      state.editing = action.payload
+    getProfilesSuccess: (
+      state,
+      action: PayloadAction<{ profiles: Profile[]; listParams: ListRequestParams }>
+    ): void => {
+      state.profiles = action.payload.profiles
+      state.profileListParams = action.payload.listParams
+      state.isProfilesLoading = false
     },
-    setProfiles: (state, action: PayloadAction<Profile[]>): void => {
-      state.profiles = action.payload
+    getPermissionsSuccess: (state, action: PayloadAction<CampaignPermission[]>): void => {
+      state.permissions = action.payload
+      state.isPermissionsLoading = false
+    },
+    setLoading: (state, action: PayloadAction<boolean>): void => {
+      state.isLoading = action.payload
+    },
+    setPermissionsLoading: (state, action: PayloadAction<boolean>): void => {
+      state.isPermissionsLoading = action.payload
+    },
+    setProfilesLoading: (state, action: PayloadAction<boolean>): void => {
+      state.isProfilesLoading = action.payload
+    },
+    setError: (state): void => {
+      state.hasError = true
     }
   }
 })
 
 export const {
   resetGroupEditor,
-  setEditing,
-  setProfiles,
   getGroupSuccess,
-  setFeatureState
+  getProfilesSuccess,
+  getPermissionsSuccess,
+  setError,
+  setLoading,
+  setProfilesLoading,
+  setPermissionsLoading
 } = groupEditorSlice.actions
 
 const getGroup = (id: number): AppThunk => async dispatch => {
-  dispatch(setFeatureState(FeatureState.Loading))
-
   try {
+    dispatch(setLoading(true))
     const group = await api.admin.groups.getOrganizationGroup({ id })
+
     dispatch(
       getGroupSuccess({
         ...group,
@@ -62,12 +94,64 @@ const getGroup = (id: number): AppThunk => async dispatch => {
       } as Group)
     )
   } catch (err) {
-    dispatch(setFeatureState(FeatureState.Error))
+    console.error(err)
+    dispatch(setError())
+    dispatch(setLoading(false))
+  }
+}
+
+const getGroupProfiles = (id: number, params: ListRequestParams = {}): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch(setProfilesLoading(true))
+    const { profileListParams } = getState().groupEditor
+    const revisedParams = reviseListRequestParams(profileListParams, params)
+
+    const requestParams = { ...revisedParams }
+    if (requestParams.status) {
+      requestParams.statuses = [requestParams.status]
+    }
+    const { result, ...pagination } = await api.admin.profiles.getProfiles({
+      ...requestParams,
+      groupIds: [id]
+    })
+
+    dispatch(
+      getProfilesSuccess({
+        profiles:
+          result?.map(
+            x => (({ ...x, createdDate: moment(x.createdDate) } as unknown) as Profile)
+          ) || [],
+        listParams: storableListRequestParams(revisedParams, pagination)
+      })
+    )
+  } catch (err) {
+    console.error(err)
+    dispatch(setError())
+    dispatch(setProfilesLoading(false))
+  }
+}
+
+const getGroupPermissions = (id: number): AppThunk => async dispatch => {
+  try {
+    dispatch(setPermissionsLoading(true))
+
+    const { items } = await api.campaignEditor.permissions.getPermissions({ pageSize: -1 })
+
+    dispatch(getPermissionsSuccess(items?.map(x => x as CampaignPermission) || []))
+  } catch (err) {
+    console.error(err)
+    dispatch(setError())
+    dispatch(setPermissionsLoading(false))
   }
 }
 
 export const groupEditorActions = {
   getGroup,
+  getGroupProfiles,
+  getGroupPermissions,
   resetGroupEditor
 }
 

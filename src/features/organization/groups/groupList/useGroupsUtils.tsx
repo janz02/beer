@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import { RootState } from 'app/rootReducer'
-import { useSelector, useDispatch } from '../../../hooks/react-redux-hooks'
+import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { groupsActions } from './groupsSlice'
 import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
@@ -15,6 +15,8 @@ import { useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtil
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ExportButton } from 'components/buttons/ExportButton'
 import { pageViewRoles } from 'services/roleHelpers'
+import { Link } from 'react-router-dom'
+import { history } from 'router/router'
 
 export interface GroupsUtils {
   currentColumns: ColumnType<Group>[]
@@ -53,7 +55,10 @@ export const useGroupsUtils = (): GroupsUtils => {
         key: 'name',
         cannotBeHidden: true,
         sort: true,
-        filterMode: FilterMode.SEARCH
+        filterMode: FilterMode.SEARCH,
+        render: (value: string, group: Group): React.ReactNode => {
+          return <Link to={`/organization/group/${group.id}`}>{value}</Link>
+        }
       }),
       tableUtils.columnConfig({
         title: t('organization.groups.field.profile-count'),
@@ -91,8 +96,13 @@ export const useGroupsUtils = (): GroupsUtils => {
       }),
       isEditorUser
         ? tableUtils.actionColumnConfig({
-            render() {
-              return <CrudButtons onEdit={() => ({})} onDelete={() => ({})} />
+            render(record: Group) {
+              return (
+                <CrudButtons
+                  onEdit={() => history.push(`/organization/group/${record.id}`)}
+                  onDelete={() => ({})}
+                />
+              )
             }
           })
         : {}
