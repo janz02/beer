@@ -1,6 +1,6 @@
 import { ExclamationCircleOutlined, InfoCircleOutlined, WarningOutlined } from '@ant-design/icons'
-import React, { FC, useMemo } from 'react'
 import { Typography } from 'antd'
+import React, { FC, useMemo } from 'react'
 import './AccordionInfo.scss'
 
 export interface AccordionInfo {
