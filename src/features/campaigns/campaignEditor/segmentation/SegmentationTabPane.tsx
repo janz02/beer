@@ -1,5 +1,5 @@
-import { PlusOutlined } from '@ant-design/icons'
-import { Col, Row, Form, Modal, Typography } from 'antd'
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
+import { Col, Row, Form, Modal, Typography, Button } from 'antd'
 import { AccordionInfo } from 'components/accordion/AccordionInfo'
 import { CustomAccordion } from 'components/accordion/CustomAccordion'
 import React, { FC, useState } from 'react'
@@ -14,18 +14,9 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
     inbuiltFilteredResults: 400,
     fileBasedFilteredResults: 300,
     summaryResults: 700,
-    summaryAll: 12500
-  }
-
-  const [inbuiltSegmentations, setInbuiltSegmentations] = useState<any[]>([])
-  const [fileBasedSegmentations, setFileBasedSegmentations] = useState<any[]>([])
-
-  const handleAddEmptyInbuilt = (): void => {
-    setInbuiltSegmentations([...inbuiltSegmentations, 'New!'])
-  }
-
-  const handleAddEmptyFileBased = (): void => {
-    setFileBasedSegmentations([...fileBasedSegmentations, 'New!'])
+    summaryAll: 12500,
+    inbuiltSegmentationList: [],
+    fileBasedSegmentationList: []
   }
 
   const handleInfoClick = (): void => {
@@ -61,53 +52,83 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
           </Col>
 
           <Col span={24}>
-            <CustomAccordion
-              accordionKey="inbuilt"
-              title={t('campaign-create.segmentation.inbuilt-title')}
-              info={
-                <AccordionInfo
-                  type="info"
-                  label={t('campaign-create.segmentation.filtered-results')}
-                  data={data.inbuiltFilteredResults}
-                  onClick={handleInfoClick}
-                />
-              }
-              actionBtnLabel={
-                <>
-                  <PlusOutlined /> {t('campaign-create.segmentation.add-btn')}
-                </>
-              }
-              onActionBtnClick={handleAddEmptyInbuilt}
-            >
-              {inbuiltSegmentations.map((el, i) => (
-                <div key={`inbuilt__${i}`}>{el}</div>
-              ))}
-            </CustomAccordion>
+            <Form.List name="inbuiltSegmentationList">
+              {(fields, { add, remove }) => {
+                return (
+                  <>
+                    <CustomAccordion
+                      accordionKey="inbuilt"
+                      title={t('campaign-create.segmentation.inbuilt-title')}
+                      info={
+                        <AccordionInfo
+                          type="info"
+                          label={t('campaign-create.segmentation.filtered-results')}
+                          data={data.inbuiltFilteredResults}
+                          onClick={handleInfoClick}
+                        />
+                      }
+                      actionBtnLabel={
+                        <>
+                          <PlusOutlined /> {t('campaign-create.segmentation.add-btn')}
+                        </>
+                      }
+                      onActionBtnClick={add}
+                    >
+                      <ul>
+                        {fields.map((field, index) => (
+                          <li key={field.key}>
+                            hello {`__${index}`}
+                            <Button onClick={() => remove(index)}>
+                              <DeleteOutlined />
+                            </Button>
+                          </li>
+                        ))}
+                      </ul>
+                    </CustomAccordion>
+                  </>
+                )
+              }}
+            </Form.List>
           </Col>
 
           <Col span={24}>
-            <CustomAccordion
-              accordionKey="filebased"
-              title={t('campaign-create.segmentation.file-based-title')}
-              info={
-                <AccordionInfo
-                  type="info"
-                  label={t('campaign-create.segmentation.filtered-results')}
-                  data={data.fileBasedFilteredResults}
-                  onClick={handleInfoClick}
-                />
-              }
-              actionBtnLabel={
-                <>
-                  <PlusOutlined /> {t('campaign-create.segmentation.add-btn')}
-                </>
-              }
-              onActionBtnClick={handleAddEmptyFileBased}
-            >
-              {fileBasedSegmentations.map((el, i) => (
-                <div key={`filebased__${i}`}>{el}</div>
-              ))}
-            </CustomAccordion>
+            <Form.List name="fileBasedSegmentationList">
+              {(fields, { add, remove }) => {
+                return (
+                  <>
+                    <CustomAccordion
+                      accordionKey="filebased"
+                      title={t('campaign-create.segmentation.file-based-title')}
+                      info={
+                        <AccordionInfo
+                          type="info"
+                          label={t('campaign-create.segmentation.filtered-results')}
+                          data={data.fileBasedFilteredResults}
+                          onClick={handleInfoClick}
+                        />
+                      }
+                      actionBtnLabel={
+                        <>
+                          <PlusOutlined /> {t('campaign-create.segmentation.add-btn')}
+                        </>
+                      }
+                      onActionBtnClick={add}
+                    >
+                      <ul>
+                        {fields.map((field, index) => (
+                          <li key={field.key}>
+                            hello {`__${index}`}
+                            <Button onClick={() => remove(index)}>
+                              <DeleteOutlined />
+                            </Button>
+                          </li>
+                        ))}
+                      </ul>
+                    </CustomAccordion>
+                  </>
+                )
+              }}
+            </Form.List>
           </Col>
         </Row>
       </Form>
