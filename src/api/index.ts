@@ -30,7 +30,8 @@ import {
   CampaignResultsApi,
   AccountsApi,
   StaticMergeTagsApi,
-  ChannelsApi
+  ChannelsApi,
+  ViewModelsApi
 } from './swagger/campaign-editor'
 import { FilesApi, InformationApi as InformationFilesMsApi } from '../api/swagger/files'
 import { errorHandlingMiddleware } from './middleware'
@@ -123,6 +124,7 @@ export const api = {
     staticMergeTags: new StaticMergeTagsApi(campaignEditorConfig),
     templates: new TemplatesApi(campaignEditorConfig),
     testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig),
-    channels: new ChannelsApi(campaignEditorConfig)
+    channels: new ChannelsApi(campaignEditorConfig),
+    viewModels: new ViewModelsApi(campaignEditorConfig)
   }
 }

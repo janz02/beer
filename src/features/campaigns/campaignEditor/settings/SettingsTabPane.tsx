@@ -1,6 +1,6 @@
 import { Col, Divider, Form, Row } from 'antd'
 import './../base/CampaignEditor.scss'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
 import { BasicCampaignSection } from './BasicCampaignSection'
 import { ChannelTypeSection } from './ChannelTypeSection'
@@ -11,8 +11,17 @@ import { DailyRestrictionSection } from './DailyRestrictionSection'
 import { IntervalRestrictionSection } from './IntervalRestrictionSection'
 import { EmailRecallSection } from './EmailRecallSection'
 import { EmailSendingSection } from './EmailSendingSection'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'app/rootReducer'
+import { getCampaignSettingsElements } from './CampaignSettingsSlice'
 
 export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
+  const { campaignSettingsFormElements } = useSelector((state: RootState) => state.campaignSettings)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getCampaignSettingsElements())
+  }, [dispatch])
+
   return (
     <Form className="settings-tab" layout="vertical">
       <div>
@@ -26,20 +35,23 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
 
         <Row gutter={16}>
           <Col span={7}>
-            <ProductSection />
+            <ProductSection products={campaignSettingsFormElements.products} />
           </Col>
           <Col>
             <Divider type="vertical" className="vertical-splitter" />
           </Col>
           <Col span={7}>
-            <CampaignAdminSection />
+            <CampaignAdminSection
+              requesters={campaignSettingsFormElements.requesters}
+              responsibles={campaignSettingsFormElements.responsibles}
+            />
           </Col>
         </Row>
 
         <Divider />
         <Row gutter={16}>
           <Col span={7}>
-            <TimingSection />
+            <TimingSection timingTypes={campaignSettingsFormElements.timingTypes} />
           </Col>
           <Col>
             <Divider type="vertical" className="vertical-splitter" />
@@ -51,7 +63,9 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
             <Divider type="vertical" className="vertical-splitter" />
           </Col>
           <Col span={7}>
-            <IntervalRestrictionSection />
+            <IntervalRestrictionSection
+              restrictionOptions={campaignSettingsFormElements.emailTimeRules}
+            />
           </Col>
         </Row>
 
@@ -59,7 +73,9 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
 
         <Row gutter={16}>
           <Col span={7}>
-            <EmailRecallSection />
+            <EmailRecallSection
+              emailResendOptions={campaignSettingsFormElements.emailResendFrequencies}
+            />
           </Col>
           <Col>
             <Divider type="vertical" className="vertical-splitter" />

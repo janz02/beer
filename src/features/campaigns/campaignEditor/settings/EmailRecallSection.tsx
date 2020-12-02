@@ -1,9 +1,14 @@
 import { Col, Form, Input, Row, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
+import { LabelValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export const EmailRecallSection: FC = () => {
+export interface EmailResendProps {
+  emailResendOptions: LabelValuePair[]
+}
+
+export const EmailRecallSection: FC<EmailResendProps> = ({ emailResendOptions }) => {
   const { t } = useTranslation()
   return (
     <>
@@ -23,7 +28,11 @@ export const EmailRecallSection: FC = () => {
             label={t('campaign-create.settings.recall-frequency')}
           >
             <Select>
-              <Select.Option value="1">6 Months</Select.Option>
+              {emailResendOptions.map(option => (
+                <Select.Option key={option.value} value={option.value}>
+                  {option.label}
+                </Select.Option>
+              ))}
             </Select>
           </Form.Item>
         </Col>

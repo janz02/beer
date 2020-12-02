@@ -34,6 +34,7 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginated
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsAdGroupVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsBusinessPartner';
+export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignTestGroupCategoryVm';

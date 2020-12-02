@@ -1,10 +1,17 @@
 import { Checkbox, Form } from 'antd'
 import CheckboxGroup from 'antd/lib/checkbox/Group'
 import Title from 'antd/lib/typography/Title'
+import { LabelValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export const IntervalRestrictionSection: FC = () => {
+export interface IntervalRestrictionProps {
+  restrictionOptions: LabelValuePair[]
+}
+
+export const IntervalRestrictionSection: FC<IntervalRestrictionProps> = ({
+  restrictionOptions
+}) => {
   const { t } = useTranslation()
   return (
     <>
@@ -14,10 +21,11 @@ export const IntervalRestrictionSection: FC = () => {
         label={t('campaign-create.settings.email-delivery-date-restrictions')}
       >
         <CheckboxGroup className="vertical-checkboxes">
-          <Checkbox value="weekday">Weekday</Checkbox>
-          <Checkbox value="weekend">Weekend</Checkbox>
-          <Checkbox value="feast-day">Feast-day</Checkbox>
-          <Checkbox value="saturday-working-day">Saturday working day</Checkbox>
+          {restrictionOptions.map(option => (
+            <Checkbox key={option.value} value={option.value}>
+              {option.label}
+            </Checkbox>
+          ))}
         </CheckboxGroup>
       </Form.Item>
     </>

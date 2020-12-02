@@ -33,6 +33,9 @@ import {
     OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm,
     OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmFromJSON,
     OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmToJSON,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmFromJSON,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmToJSON,
@@ -40,6 +43,10 @@ import {
 
 export interface ApproveCampaignRequest {
     body?: number;
+}
+
+export interface CampaignDetailRequest {
+    campaignid: number;
 }
 
 export interface CreateCampaignRequest {
@@ -141,6 +148,40 @@ export class CampaignsApi extends runtime.BaseAPI {
      */
     async approveCampaign(requestParameters: ApproveCampaignRequest): Promise<void> {
         await this.approveCampaignRaw(requestParameters);
+    }
+
+    /**
+     * Query for a dedicates campaign detail identified by campaignid.
+     */
+    async campaignDetailRaw(requestParameters: CampaignDetailRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm>> {
+        if (requestParameters.campaignid === null || requestParameters.campaignid === undefined) {
+            throw new runtime.RequiredError('campaignid','Required parameter requestParameters.campaignid was null or undefined when calling campaignDetail.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Campaigns/GetCampaignDetail/{campaignid}`.replace(`{${"campaignid"}}`, encodeURIComponent(String(requestParameters.campaignid))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Query for a dedicates campaign detail identified by campaignid.
+     */
+    async campaignDetail(requestParameters: CampaignDetailRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm> {
+        const response = await this.campaignDetailRaw(requestParameters);
+        return await response.value();
     }
 
     /**

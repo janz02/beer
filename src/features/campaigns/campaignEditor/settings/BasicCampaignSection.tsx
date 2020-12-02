@@ -1,6 +1,5 @@
 import { Form, Input } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
-import { request } from 'http'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
