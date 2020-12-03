@@ -1,0 +1,27 @@
+.card {
+  &__container .ant-collapse-header {
+    pointer-events: none;
+  }
+
+  &__panel,
+  &__delete-btn {
+    pointer-events: all;
+  }
+
+  &__header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__header-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  &__action-btn {
+    width: 100%;
+  }
+}
