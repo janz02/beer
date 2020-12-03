@@ -65,12 +65,12 @@ export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
     const viewModels = await api.campaignEditor.campaigns.settings()
     const formElements = {
       ...(viewModels as CampaignSettingsFormElements),
-      resendingRuleOptions: [],
-      resendFrequencyOptions: []
-      // resendFrequencyOptions:
-      //   (viewModels.channelOptions?.email?.resendFrequencyOptions as TextValuePair[]) ?? [],
-      // resendingRuleOptions:
-      //   (viewModels.channelOptions?.email?.resendingRuleOptions as TextValuePair[]) ?? []
+      // resendingRuleOptions: [],
+      // resendFrequencyOptions: []
+      resendFrequencyOptions: viewModels.channelOptions?.email
+        ?.resendFrequencyOptions as TextValuePair[],
+      resendingRuleOptions: viewModels.channelOptions?.email
+        ?.resendingRuleOptions as TextValuePair[]
     }
 
     dispatch(getCampaignSettingsFormElementsSuccess(formElements))

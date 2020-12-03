@@ -11,19 +11,14 @@ import { DailyRestrictionSection } from './DailyRestrictionSection'
 import { IntervalRestrictionSection } from './IntervalRestrictionSection'
 import { EmailRecallSection } from './EmailRecallSection'
 import { EmailSendingSection } from './EmailSendingSection'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'app/rootReducer'
-import { getCampaignSettingsElements } from './CampaignSettingsSlice'
+import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
+import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
 
 export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
-  const { campaignSettingsFormElements } = useSelector((state: RootState) => state.campaignSettings)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getCampaignSettingsElements())
-  }, [dispatch])
+  const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
 
   return (
-    <Form className="settings-tab" layout="vertical">
+    <Form className="settings-tab" layout="vertical" form={form}>
       <div>
         <Col className="campaign-basic-details">
           <BasicCampaignSection campaignId={campaignId} />
@@ -87,6 +82,11 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
           </Col>
         </Row>
       </div>
+      <Row>
+        <Col span={22}>
+          <CampaignEditorFormFooter onSubmit={handleSubmitButtonClick} />
+        </Col>
+      </Row>
     </Form>
   )
 }

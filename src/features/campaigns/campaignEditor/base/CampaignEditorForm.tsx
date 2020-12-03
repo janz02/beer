@@ -71,11 +71,6 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
         </Col>
         <Divider />
       </Row>
-      <Row>
-        <Col span={22}>
-          <CampaignEditorFormFooter />
-        </Col>
-      </Row>
     </Card>
   )
 }

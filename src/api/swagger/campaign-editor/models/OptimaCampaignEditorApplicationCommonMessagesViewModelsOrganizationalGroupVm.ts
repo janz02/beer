@@ -40,6 +40,30 @@ export interface OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganiza
     name?: string | null;
     /**
      * 
+     * @type {number}
+     * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizationalGroupVm
+     */
+    createdBy?: number;
+    /**
+     * 
+     * @type {Date}
+     * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizationalGroupVm
+     */
+    createdDate?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizationalGroupVm
+     */
+    modifiedBy?: number | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizationalGroupVm
+     */
+    modifiedDate?: Date | null;
+    /**
+     * 
      * @type {Array<OptimaCampaignEditorApplicationModelsCampaignOrganizationalGroupPermissionVm>}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizationalGroupVm
      */
@@ -58,6 +82,10 @@ export function OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizat
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
+        'createdDate': !exists(json, 'createdDate') ? undefined : (new Date(json['createdDate'])),
+        'modifiedBy': !exists(json, 'modifiedBy') ? undefined : json['modifiedBy'],
+        'modifiedDate': !exists(json, 'modifiedDate') ? undefined : (json['modifiedDate'] === null ? null : new Date(json['modifiedDate'])),
         'organizationalGroupPermissions': !exists(json, 'organizationalGroupPermissions') ? undefined : (json['organizationalGroupPermissions'] === null ? null : (json['organizationalGroupPermissions'] as Array<any>).map(OptimaCampaignEditorApplicationModelsCampaignOrganizationalGroupPermissionVmFromJSON)),
     };
 }
@@ -73,6 +101,10 @@ export function OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizat
         
         'id': value.id,
         'name': value.name,
+        'createdBy': value.createdBy,
+        'createdDate': value.createdDate === undefined ? undefined : (value.createdDate.toISOString()),
+        'modifiedBy': value.modifiedBy,
+        'modifiedDate': value.modifiedDate === undefined ? undefined : (value.modifiedDate === null ? null : value.modifiedDate.toISOString()),
         'organizationalGroupPermissions': value.organizationalGroupPermissions === undefined ? undefined : (value.organizationalGroupPermissions === null ? null : (value.organizationalGroupPermissions as Array<any>).map(OptimaCampaignEditorApplicationModelsCampaignOrganizationalGroupPermissionVmToJSON)),
     };
 }

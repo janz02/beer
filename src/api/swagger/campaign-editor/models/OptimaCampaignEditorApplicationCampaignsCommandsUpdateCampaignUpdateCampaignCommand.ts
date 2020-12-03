@@ -70,16 +70,22 @@ export interface OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignU
     productId?: number;
     /**
      * 
-     * @type {Date}
+     * @type {number}
      * @memberof OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand
      */
-    startDate?: Date;
+    timingTypeId?: number | null;
     /**
      * 
      * @type {Date}
      * @memberof OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand
      */
-    endDate?: Date;
+    startDate?: Date | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand
+     */
+    endDate?: Date | null;
     /**
      * 
      * @type {number}
@@ -135,8 +141,9 @@ export function OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUp
         'serviceTypes': !exists(json, 'serviceTypes') ? undefined : json['serviceTypes'],
         'marketTypes': !exists(json, 'marketTypes') ? undefined : json['marketTypes'],
         'productId': !exists(json, 'productId') ? undefined : json['productId'],
-        'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
-        'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
+        'timingTypeId': !exists(json, 'timingTypeId') ? undefined : json['timingTypeId'],
+        'startDate': !exists(json, 'startDate') ? undefined : (json['startDate'] === null ? null : new Date(json['startDate'])),
+        'endDate': !exists(json, 'endDate') ? undefined : (json['endDate'] === null ? null : new Date(json['endDate'])),
         'requesterId': !exists(json, 'requesterId') ? undefined : json['requesterId'],
         'departmentId': !exists(json, 'departmentId') ? undefined : json['departmentId'],
         'responsibleId': !exists(json, 'responsibleId') ? undefined : json['responsibleId'],
@@ -162,8 +169,9 @@ export function OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUp
         'serviceTypes': value.serviceTypes,
         'marketTypes': value.marketTypes,
         'productId': value.productId,
-        'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
-        'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
+        'timingTypeId': value.timingTypeId,
+        'startDate': value.startDate === undefined ? undefined : (value.startDate === null ? null : value.startDate.toISOString()),
+        'endDate': value.endDate === undefined ? undefined : (value.endDate === null ? null : value.endDate.toISOString()),
         'requesterId': value.requesterId,
         'departmentId': value.departmentId,
         'responsibleId': value.responsibleId,

@@ -9556,13 +9556,20 @@
             },
             "nullable": true
           },
+          "timingTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "startDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "endDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "requesterId": {
             "type": "integer",
@@ -9880,13 +9887,20 @@
             "type": "integer",
             "format": "int32"
           },
+          "timingTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "startDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "endDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "requesterId": {
             "type": "integer",
@@ -10274,6 +10288,24 @@
           },
           "name": {
             "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           },
           "organizationalGroupPermissions": {

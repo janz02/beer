@@ -14,6 +14,7 @@ export const ProductSection: FC<ProductProps> = ({ products }) => {
     <>
       <Title level={5}>{t('campaign-create.settings.product-title')}</Title>
       <Form.Item
+        name="productId"
         required
         className="control-label"
         label={t('campaign-create.settings.product-label')}

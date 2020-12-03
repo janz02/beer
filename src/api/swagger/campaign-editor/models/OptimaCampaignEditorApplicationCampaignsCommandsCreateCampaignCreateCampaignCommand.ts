@@ -57,16 +57,22 @@ export interface OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignC
     businessTypes?: Array<number> | null;
     /**
      * 
-     * @type {Date}
+     * @type {number}
      * @memberof OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand
      */
-    startDate?: Date;
+    timingTypeId?: number | null;
     /**
      * 
      * @type {Date}
      * @memberof OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand
      */
-    endDate?: Date;
+    startDate?: Date | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand
+     */
+    endDate?: Date | null;
     /**
      * 
      * @type {number}
@@ -109,8 +115,9 @@ export function OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCr
         'serviceTypes': !exists(json, 'serviceTypes') ? undefined : json['serviceTypes'],
         'marketTypes': !exists(json, 'marketTypes') ? undefined : json['marketTypes'],
         'businessTypes': !exists(json, 'businessTypes') ? undefined : json['businessTypes'],
-        'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
-        'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
+        'timingTypeId': !exists(json, 'timingTypeId') ? undefined : json['timingTypeId'],
+        'startDate': !exists(json, 'startDate') ? undefined : (json['startDate'] === null ? null : new Date(json['startDate'])),
+        'endDate': !exists(json, 'endDate') ? undefined : (json['endDate'] === null ? null : new Date(json['endDate'])),
         'requesterId': !exists(json, 'requesterId') ? undefined : json['requesterId'],
         'departmentId': !exists(json, 'departmentId') ? undefined : json['departmentId'],
         'responsibleId': !exists(json, 'responsibleId') ? undefined : json['responsibleId'],
@@ -133,8 +140,9 @@ export function OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCr
         'serviceTypes': value.serviceTypes,
         'marketTypes': value.marketTypes,
         'businessTypes': value.businessTypes,
-        'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
-        'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
+        'timingTypeId': value.timingTypeId,
+        'startDate': value.startDate === undefined ? undefined : (value.startDate === null ? null : value.startDate.toISOString()),
+        'endDate': value.endDate === undefined ? undefined : (value.endDate === null ? null : value.endDate.toISOString()),
         'requesterId': value.requesterId,
         'departmentId': value.departmentId,
         'responsibleId': value.responsibleId,
