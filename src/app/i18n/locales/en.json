@@ -274,6 +274,40 @@
       "name": "Category name"
     }
   },
+  "campaign-create": {
+    "settings-tab-name": "Settings",
+    "segmentation-tab-name": "Segmentation",
+    "content-tab-name": "Content(Email)",
+    "test-tab-name": "Test",
+    "title": "Create Campaign",
+    "status-creation": "Status (Campaign Creation)",
+    "user-logs": "User Logs",
+    "save-draft": "Save draft & Exit",
+    "next-section": "Next (Segmentation)",
+    "settings": {
+      "campaign-name": "Campaign name",
+      "requestor": "Requestor",
+      "about": "About",
+      "campaign-admins-title": "Campaign admins",
+      "channel-type-title": "Channel type",
+      "daily-restriction-title": "Daily restriction",
+      "start-time": "Start time",
+      "end-time": "End time",
+      "start-date": "Start date",
+      "end-date": "End date",
+      "email-recall-settings-title": "Email re-call settings",
+      "maximum-recall-attempts": "Maximum recall attempts",
+      "recall-frequency": "Recall frequency",
+      "email-resending-rules": "Email re-sending rules",
+      "interval-restrictions": "Interval Restrictions",
+      "email-delivery-date-restrictions": "Email delivery date restrictions",
+      "product-title": "Product",
+      "product-label": "Product",
+      "timing-title": "Timing",
+      "select-timing-type-label": "Select timing type",
+      "approver-validator": "Approver/Validator"
+    }
+  },
   "coupon-campaign-create": {
     "activate": "Activate",
     "audit": "Audit",
@@ -537,6 +571,9 @@
     },
     "segment": {
       "one-time-use-creation-failed": "One time use segment creation has failed. Please try again later!"
+    },
+    "segmentation-editor": {
+      "cannot-open": "The segmentation could not be loaded. Please try again later!"
     },
     "sendgrid": {
       "communication": "An error has occured while trying to send an email. Please try again later!"
