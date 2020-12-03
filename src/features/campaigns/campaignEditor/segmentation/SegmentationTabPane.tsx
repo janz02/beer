@@ -1,10 +1,11 @@
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
-import { Col, Row, Form, Modal, Typography, Button } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import { Col, Row, Form, Modal, Typography, Empty } from 'antd'
 import { AccordionInfo } from 'components/accordion/AccordionInfo'
 import { CustomAccordion } from 'components/accordion/CustomAccordion'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
+import { FormSegmentationCard } from './FormSegmentationCard'
 
 export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
@@ -15,8 +16,20 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
     fileBasedFilteredResults: 300,
     summaryResults: 700,
     summaryAll: 12500,
-    inbuiltSegmentationList: [],
-    fileBasedSegmentationList: []
+    inbuiltSegmentationList: [
+      { segmentationId: 1, segmentationCategoryId: 4 },
+      { segmentationId: 1, segmentationCategoryId: 4 },
+      { segmentationId: 1, segmentationCategoryId: 4 },
+      { segmentationId: 1, segmentationCategoryId: 4 },
+      { segmentationId: 1, segmentationCategoryId: 4 }
+    ],
+    fileBasedSegmentationList: [
+      { url: 'valami' },
+      { url: 'valami' },
+      { url: 'valami' },
+      { url: 'valami' },
+      { url: 'valami' }
+    ]
   }
 
   const handleInfoClick = (): void => {
@@ -24,6 +37,10 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
   }
 
   const onHandleSubmit = (values: any): void => console.log(values)
+
+  const emptySegmentationList = (
+    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('Hozzáadhatsz  szegmentációt')} />
+  )
 
   return (
     <>
@@ -75,12 +92,10 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                       onActionBtnClick={add}
                     >
                       <ul>
+                        {fields.length === 0 && <>{emptySegmentationList}</>}
                         {fields.map((field, index) => (
                           <li key={field.key}>
-                            hello {`__${index}`}
-                            <Button onClick={() => remove(index)}>
-                              <DeleteOutlined />
-                            </Button>
+                            <FormSegmentationCard onRemove={() => remove(index)} />
                           </li>
                         ))}
                       </ul>
@@ -115,12 +130,10 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                       onActionBtnClick={add}
                     >
                       <ul>
+                        {fields.length === 0 && <>{emptySegmentationList}</>}
                         {fields.map((field, index) => (
                           <li key={field.key}>
-                            hello {`__${index}`}
-                            <Button onClick={() => remove(index)}>
-                              <DeleteOutlined />
-                            </Button>
+                            <FormSegmentationCard onRemove={() => remove(index)} />
                           </li>
                         ))}
                       </ul>
