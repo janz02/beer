@@ -31,7 +31,7 @@ export const GroupPermissionsLayout: FC<GroupPermissionsLayoutProps> = ({ groupE
         <Row className="group-editor-form__permissions-row">
           {(permissions && permissions?.length > 4 ? permissions?.slice(0, 4) : permissions)?.map(
             x => (
-              <Col span="5">
+              <Col span="5" key={x.id}>
                 <div className="group-editor-form__permissions-item">
                   <Typography.Text> {x?.name}</Typography.Text>
                   <div>

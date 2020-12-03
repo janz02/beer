@@ -47,7 +47,7 @@ export const OrganizationPage: FC = () => {
         )}
       </>
     )
-  }, [t, isEditorUser])
+  }, [t, groupsUtils, isEditorUser])
 
   let tabBarActions: JSX.Element | undefined
   switch (currentTabKey) {

@@ -54,12 +54,12 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
   const { id } = useParams()
 
   const getGroupDetails = useCallback(() => {
-    if (id && !group) {
+    if (id) {
       dispatch(getGroup(+id))
       dispatch(getGroupProfiles(+id))
       dispatch(getGroupPermissions(+id))
     }
-  }, [id, group, dispatch, getGroup, getGroupProfiles, getGroupPermissions])
+  }, [id, dispatch, getGroup, getGroupProfiles, getGroupPermissions])
 
   const isEditorUser = hasPermission(pageViewRoles.organizationEditor)
 
