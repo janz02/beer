@@ -43,9 +43,48 @@
       "title": "Subject"
     }
   },
-  "campaign-channel": {
-    "email": "Email",
-    "phone": "Phone"
+  "campaign-create": {
+    "content": {
+      "email": {
+        "tab-name": "Content (Email)",
+        "template": "Email Template",
+        "template-placeholder": "Select Email",
+        "template-version": "Version",
+        "template-version-placeholder": "Select Version",
+        "title": "Email Template"
+      }
+    },
+    "next-section": "Next (Segmentation)",
+    "save-draft": "Save draft & Exit",
+    "segmentation-tab-name": "Segmentation",
+    "settings": {
+      "about": "About",
+      "approver-validator": "Approver/Validator",
+      "campaign-admins-title": "Campaign admins",
+      "campaign-name": "Campaign name",
+      "channel-type-title": "Channel type",
+      "daily-restriction-title": "Daily restriction",
+      "email-delivery-date-restrictions": "Email delivery date restrictions",
+      "email-recall-settings-title": "Email re-call settings",
+      "email-resending-rules": "Email re-sending rules",
+      "end-date": "End date",
+      "end-time": "End time",
+      "interval-restrictions": "Interval Restrictions",
+      "maximum-recall-attempts": "Maximum recall attempts",
+      "product-label": "Product",
+      "product-title": "Product",
+      "recall-frequency": "Recall frequency",
+      "requestor": "Requestor",
+      "select-timing-type-label": "Select timing type",
+      "start-date": "Start date",
+      "start-time": "Start time",
+      "timing-title": "Timing"
+    },
+    "settings-tab-name": "Settings",
+    "status-creation": "Status (Campaign Creation)",
+    "test-tab-name": "Test",
+    "title": "Create Campaign",
+    "user-logs": "User Logs"
   },
   "campaign-list": {
     "company": {
@@ -80,18 +119,18 @@
     }
   },
   "campaign-status": {
-    "set": "Set",
-    "segmented": "Segmented",
-    "content": "Content",
-    "callcenter": "Call Center",
-    "tested": "Tested",
     "approved": "Approved",
+    "callcenter": "Call Center",
+    "cancelled": "Cancelled",
+    "closed": "Closed",
+    "content": "Content",
+    "finished": "Finished",
+    "paused": "Paused",
+    "segmented": "Segmented",
+    "set": "Set",
     "started": "Started",
     "startedmanually": "Manually started",
-    "paused": "Paused",
-    "finished": "Finished",
-    "closed": "Closed",
-    "cancelled": "Cancelled"
+    "tested": "Tested"
   },
   "cashier-editor": {
     "editor-create": "Create cashier",
@@ -176,6 +215,7 @@
     "send": "Send",
     "table-settings": "Settings",
     "try-again": "Try again...",
+    "unassign": "Unassign",
     "upload": "Upload",
     "view": "View",
     "yes": "Yes"
@@ -224,49 +264,6 @@
     "editor-edit": "Edit",
     "field": {
       "name": "Category name"
-    }
-  },
-  "campaign-create": {
-    "settings-tab-name": "Settings",
-    "segmentation-tab-name": "Segmentation",
-    "test-tab-name": "Test",
-    "title": "Create Campaign",
-    "status-creation": "Status (Campaign Creation)",
-    "user-logs": "User Logs",
-    "save-draft": "Save draft & Exit",
-    "next-section": "Next (Segmentation)",
-    "settings": {
-      "campaign-name": "Campaign name",
-      "requestor": "Requestor",
-      "about": "About",
-      "campaign-admins-title": "Campaign admins",
-      "channel-type-title": "Channel type",
-      "daily-restriction-title": "Daily restriction",
-      "start-time": "Start time",
-      "end-time": "End time",
-      "start-date": "Start date",
-      "end-date": "End date",
-      "email-recall-settings-title": "Email re-call settings",
-      "maximum-recall-attempts": "Maximum recall attempts",
-      "recall-frequency": "Recall frequency",
-      "email-resending-rules": "Email re-sending rules",
-      "interval-restrictions": "Interval Restrictions",
-      "email-delivery-date-restrictions": "Email delivery date restrictions",
-      "product-title": "Product",
-      "product-label": "Product",
-      "timing-title": "Timing",
-      "select-timing-type-label": "Select timing type",
-      "approver-validator": "Approver/Validator"
-    },
-    "content": {
-      "email": {
-        "tab-name": "Content (Email)",
-        "title": "Email Template",
-        "template": "Email Template",
-        "template-placeholder": "Select Email",
-        "template-version": "Version",
-        "template-version-placeholder": "Select Version"
-      }
     }
   },
   "coupon-campaign-create": {
@@ -384,6 +381,14 @@
     "status": "Status",
     "user": "Creator user",
     "view-count": "View count"
+  },
+  "email-template": {
+    "device-type": {
+      "desktop": "Desktop",
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "title": "Device type preview"
+    }
   },
   "enum": {
     "channel-type": {
@@ -764,14 +769,6 @@
       "default": "Sorry, something went wrong."
     }
   },
-  "email-template": {
-    "device-type": {
-      "title": "Device type preview",
-      "desktop": "Desktop",
-      "mobile": "Mobile",
-      "tablet": "Tablet"
-    }
-  },
   "languages": {
     "en": "English",
     "hu": "Magyar",
@@ -785,15 +782,15 @@
       "title": "Coupon Campaigns"
     },
     "dashboard": "Dashboard",
+    "my-profile": "Profile",
     "partner-contacts": "Contacts",
     "partner-data": "Partner data",
     "partners": "Partners",
     "permissions": "Permissions",
-    "my-profile": "Profile",
     "profiles": {
+      "list": "List of Profiles",
       "organizations": "Organization Structures",
-      "title": "Profiles",
-      "list": "List of Profiles"
+      "title": "Profiles"
     },
     "sections": {
       "campaigns": "Campaigns",
@@ -882,15 +879,26 @@
       "title": "Companies"
     },
     "groups": {
-      "title": "Groups",
       "field": {
-        "name": "Name",
-        "profile-count": "Profiles",
         "company-count": "Companies",
-        "job-role-count": "Job roles",
-        "permission-count": "Permissions",
         "created-date": "Date of creation",
-        "creator": "Creator"
+        "creator": "Creator",
+        "job-role-count": "Job roles",
+        "name": "Name",
+        "permission-count": "Permissions",
+        "profile-count": "Profiles"
+      },
+      "fields": {
+        "created-by": "Created by",
+        "created-date": "Date of creation",
+        "name": "Name"
+      },
+      "permissions": "Permissions ({{totalCount}})",
+      "profiles": "Profiles ({{totalCount}})",
+      "title": "Groups",
+      "viewer": {
+        "edit": "Edit",
+        "title": "Group"
       }
     },
     "job-roles": {
@@ -993,55 +1001,55 @@
     "description": "This page is not there yet. Our developers are working hard to bring you new content, please, visit this page later!",
     "title": "Under construction"
   },
+  "profile-editor": {
+    "birthday": "Birthday",
+    "button-cancel": "Cancel",
+    "button-save": "Save",
+    "company": "Company",
+    "contacts": "Contacts",
+    "email": "E-mail",
+    "group": "Group",
+    "job-role": "Job role",
+    "name": "Name",
+    "phone": "Phone",
+    "picture-help": "Only a 512*512 pixel JPG or PNG file can be accepted.",
+    "position": "Position",
+    "title": "Edit profile",
+    "username": "Username"
+  },
   "profiles": {
-    "field": {
-      "status": "Status",
-      "name": "Name",
-      "username": "Username",
-      "email": "E-mail",
-      "group": "Group",
-      "permissions": "Permissions",
-      "date-of-registration": "Date of registration",
-      "company": "Company",
-      "job-role": "Job description"
-    },
-    "new": {
-      "new": "New",
-      "bulk-upload": "Bulk upload",
-      "send-invitation": "Send invitation"
-    },
-    "status": {
-      "active": "Active",
-      "inactive": "Inactive",
-      "waiting-for-approval": "Waiting for approval",
-      "declined": "Declined"
-    },
     "action-buttons": {
       "approve": "Approve",
       "decline": "Decline"
     },
+    "field": {
+      "campaigns": "Campaigns",
+      "company": "Company",
+      "email": "E-mail",
+      "group": "Group",
+      "job-role": "Job description",
+      "name": "Name",
+      "permissions": "Permissions",
+      "status": "Status",
+      "username": "Username"
+    },
+    "new": {
+      "bulk-upload": "Bulk upload",
+      "new": "New",
+      "send-invitation": "Send invitation"
+    },
+    "status": {
+      "active": "Active",
+      "declined": "Declined",
+      "inactive": "Inactive",
+      "waiting-for-approval": "Waiting for approval"
+    },
     "tab": {
       "all": "All",
-      "waiting-for-approval": "Waiting for approval",
-      "declined": "Declined"
+      "declined": "Declined",
+      "waiting-for-approval": "Waiting for approval"
     },
     "title": "Profiles"
-  },
-  "profile-editor": {
-    "title": "Edit profile",
-    "name": "Name",
-    "birthday": "Birthday",
-    "username": "Username",
-    "email": "E-mail",
-    "button-save": "Save",
-    "button-cancel": "Cancel",
-    "position": "Position",
-    "contacts": "Contacts",
-    "company": "Company",
-    "group": "Group",
-    "job-role": "Job role",
-    "phone": "Phone",
-    "picture-help": "Only a 512*512 pixel JPG or PNG file can be accepted."
   },
   "query-builder": {
     "add-group": {

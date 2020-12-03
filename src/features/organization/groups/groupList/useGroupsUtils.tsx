@@ -24,6 +24,7 @@ export interface GroupsUtils {
   groups: Group[]
   groupsLoading: boolean
   tabBarActions: JSX.Element
+  handleOpenCreatePage: () => void
 }
 
 export const useGroupsUtils = (): GroupsUtils => {
@@ -48,6 +49,12 @@ export const useGroupsUtils = (): GroupsUtils => {
 
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
 
+  const handleOpenCreatePage = useCallback(() => {
+    if (isEditorUser) {
+      history.push('/organization/groups/new')
+    }
+  }, [isEditorUser])
+
   const columnsConfig: ColumnsType<Group> = useMemo(
     () => [
       tableUtils.columnConfig({
@@ -56,8 +63,9 @@ export const useGroupsUtils = (): GroupsUtils => {
         cannotBeHidden: true,
         sort: true,
         filterMode: FilterMode.SEARCH,
+        disableSearchHighlight: true,
         render: (value: string, group: Group): React.ReactNode => {
-          return <Link to={`/organization/group/${group.id}`}>{value}</Link>
+          return <Link to={`/organization/groups/${group.id}`}>{value}</Link>
         }
       }),
       tableUtils.columnConfig({
@@ -99,7 +107,7 @@ export const useGroupsUtils = (): GroupsUtils => {
             render(record: Group) {
               return (
                 <CrudButtons
-                  onEdit={() => history.push(`/organization/group/${record.id}`)}
+                  onEdit={() => history.push(`/organization/groups/${record.id}`)}
                   onDelete={() => ({})}
                 />
               )
@@ -135,6 +143,7 @@ export const useGroupsUtils = (): GroupsUtils => {
     tableUtils,
     groups,
     groupsLoading: listState === FeatureState.Loading,
-    tabBarActions
+    tabBarActions,
+    handleOpenCreatePage
   }
 }

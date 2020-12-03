@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { FilterMode, TableUtils, useTableUtils } from 'hooks/useTableUtils'
 import { Group } from 'models/group'
 import { Profile } from 'models/profile'
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { hasPermission } from 'services/jwt-reader'
 import { pageViewRoles } from 'services/roleHelpers'
@@ -22,13 +22,17 @@ import { Link, useParams } from 'react-router-dom'
 export interface GroupEditorUtils {
   group?: Group
   profiles?: Profile[]
+  profileTotalCount?: number
   permissions?: CampaignPermission[]
+  permissionTotalCount?: number
   isLoading: boolean
   isProfilesLoading: boolean
   isPermissionsLoading: boolean
   isEditorUser: boolean
   profileTableUtils: TableUtils<Profile>
   profileColumnsUtils: ColumnOrderUtils<Profile>
+  getGroupDetails: () => void
+  handleUnassignRole: (roleId: number) => void
 }
 
 export const useGroupEditorUtils = (): GroupEditorUtils => {
@@ -40,26 +44,35 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     isLoading,
     isProfilesLoading,
     isPermissionsLoading,
-    profileListParams
+    profileListParams,
+    profileTotalCount,
+    permissionTotalCount
   } = useSelector((state: RootState) => state.groupEditor)
   const { getGroup, getGroupPermissions, getGroupProfiles } = groupEditorActions
   const { t } = useTranslation()
 
   const { id } = useParams()
 
-  useEffect(() => {
+  const getGroupDetails = useCallback(() => {
     if (id && !group) {
       dispatch(getGroup(+id))
       dispatch(getGroupProfiles(+id))
       dispatch(getGroupPermissions(+id))
     }
-  })
+  }, [id, group, dispatch, getGroup, getGroupProfiles, getGroupPermissions])
 
   const isEditorUser = hasPermission(pageViewRoles.organizationEditor)
 
-  const handleUnassign = useMemo(
+  const handleUnassignProfile = useMemo(
     () => (profileId: number): void => {
       console.log(`unassign profile ${profileId} from group ${group?.id}`)
+    },
+    [group]
+  )
+
+  const handleUnassignRole = useMemo(
+    () => (roleId: number): void => {
+      console.log(`unassign role ${roleId} from group ${group?.id}`)
     },
     [group]
   )
@@ -100,6 +113,7 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         filterMode: FilterMode.SEARCH,
         cannotBeHidden: true,
         ellipsis: false,
+        disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
           return <Link to={`/profiles/${profile.id}`}>{value}</Link>
         }
@@ -109,8 +123,8 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         key: 'companyName',
         sort: false,
         filterMode: FilterMode.SEARCH,
-        hiddenByDefault: true,
         ellipsis: false,
+        disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
           return <Link to={`/companies/${profile.companyId}`}>{value}</Link>
         }
@@ -120,15 +134,15 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         key: 'jobRoleName',
         sort: false,
         filterMode: FilterMode.SEARCH,
-        hiddenByDefault: true,
         ellipsis: false,
+        disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
           return <Link to={`/job-roles/${profile.jobRoleId}`}>{value}</Link>
         }
       }),
       profileTableUtils.columnConfig({
         title: t('profiles.field.campaigns'),
-        key: 'userName',
+        key: 'id',
         sort: true,
         filterMode: FilterMode.SEARCH,
         ellipsis: false
@@ -141,14 +155,14 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
               return (
                 <CrudButtons
                   onEdit={() => history.push(`/profiles/${record.id}`)}
-                  onUnassign={() => handleUnassign(record.id)}
+                  onUnassign={() => handleUnassignProfile(record.id)}
                 />
               )
             }
           })
         : {}
     ],
-    [t, isEditorUser, profileTableUtils, handleUnassign]
+    [t, isEditorUser, profileTableUtils, handleUnassignProfile]
   )
 
   const profileColumnsUtils = useColumnOrderUtils(
@@ -165,6 +179,10 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     isPermissionsLoading,
     isEditorUser,
     profileColumnsUtils,
-    profileTableUtils
+    profileTableUtils,
+    profileTotalCount,
+    permissionTotalCount,
+    getGroupDetails,
+    handleUnassignRole
   }
 }

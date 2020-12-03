@@ -1,78 +1,84 @@
-import React, { FC } from 'react'
-import { Button, Row, Col } from 'antd'
+import React, { FC, useEffect, useMemo } from 'react'
+import { Row, Col, Form } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import { BackButton } from 'components/buttons/BackButton'
 import { history } from 'router/router'
-import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
 import { useGroupEditorUtils } from './useGroupEditorUtils'
-import { LoadingOutlined } from '@ant-design/icons'
 import { GroupProfilesLayout } from './components/GroupProfilesLayout'
-import { GroupPermissionsLayout } from './components/GroupPermissionsLayoutt'
+import { GroupPermissionsLayout } from './components/GroupPermissionsLayout'
 
 import { MomentDisplay } from 'components/MomentDisplay'
+import { LoadingIndicator } from 'components/loading/LoadingIndicator'
+import './GroupViewPage.scss'
+import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
+import { EditButton } from 'components/buttons/EditButton'
 
 export const GroupViewPage: FC<void> = () => {
   const { t } = useTranslation()
   const groupEditorUtils = useGroupEditorUtils()
-  const { group, isLoading, isEditorUser } = groupEditorUtils
+  const { group, isLoading, isEditorUser, getGroupDetails } = groupEditorUtils
 
-  const groupActionButtons = (
-    <div className="group-editor-form__actions">
-      {isEditorUser && (
-        <>
-          {group && (
-            <Button type="primary" htmlType="button">
-              <Link to={`/organization/group/${group?.id}/edit`}>
-                {t('organization.groups.edit')}
-              </Link>
-            </Button>
-          )}
-        </>
-      )}
-      <BackButton onClick={() => history.push('/organization/group')} />
-    </div>
+  useEffect(() => {
+    getGroupDetails()
+  }, [getGroupDetails])
+
+  const cardHeaderActions = useMemo(
+    () => (
+      <>
+        {isEditorUser && (
+          <EditButton onClick={() => history.push(`/organization/groups/${group?.id}/edit`)}>
+            {t('organization.groups.viewer.edit')}
+          </EditButton>
+        )}
+      </>
+    ),
+    [t, group, isEditorUser]
+  )
+
+  const backButtonProps = useMemo(
+    () => ({
+      primary: true,
+      onClick: () => {
+        history.push('/organization/groups')
+      }
+    }),
+    []
   )
 
   return (
-    <>
-      <Row>
-        <Col>
-          <ResponsiveHeader
-            type="floating"
-            title={t('organization.groups.editor-title')}
-            options={groupActionButtons}
-          />
-        </Col>
-      </Row>
-      {isLoading ? (
-        <div className="center">
-          <LoadingOutlined />{' '}
-        </div>
-      ) : (
-        <>
+    <ResponsiveCard
+      className="group-editor-card"
+      floatingTitle={t('organization.groups.viewer.title')}
+      floatingBackButton={backButtonProps}
+      floatingOptions={cardHeaderActions}
+    >
+      <Form layout="vertical">
+        <LoadingIndicator isLoading={isLoading}>
           <Row>
-            <label>{t('organization.groups.fields.name')}</label>
-            <div>{group?.name}</div>
+            <Col span="6">
+              <Form.Item
+                className="group-editor-form__name"
+                label={t('organization.groups.fields.name')}
+              >
+                {group?.name}
+              </Form.Item>
+            </Col>
           </Row>
           <Row>
             <Col span="4">
-              <div>
-                <label>{t('organization.groups.fields.created-date')}</label>
+              <Form.Item label={t('organization.groups.fields.created-date')}>
                 <MomentDisplay date={group?.createdDate} />
-              </div>
+              </Form.Item>
             </Col>
             <Col span="6">
-              <div>
-                <label>{t('organization.groups.fields.created-by')}</label>
-                <div>{group?.createdBy}</div>
-              </div>
+              <Form.Item label={t('organization.groups.fields.created-by')}>
+                {group?.createdBy}
+              </Form.Item>
             </Col>
           </Row>
           <GroupPermissionsLayout groupEditorUtils={groupEditorUtils} />
           <GroupProfilesLayout groupEditorUtils={groupEditorUtils} />
-        </>
-      )}
-    </>
+        </LoadingIndicator>
+      </Form>
+    </ResponsiveCard>
   )
 }

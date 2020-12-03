@@ -14,7 +14,9 @@ import moment from 'moment'
 interface GroupEditorState {
   group?: Group
   profiles: Profile[]
-  permissions: CampaignPermission[]
+  profileTotalCount?: number
+  permissions?: CampaignPermission[]
+  permissionTotalCount?: number
   hasError: boolean
   isLoading: boolean
   isProfilesLoading: boolean
@@ -50,10 +52,12 @@ export const groupEditorSlice = createSlice({
     ): void => {
       state.profiles = action.payload.profiles
       state.profileListParams = action.payload.listParams
+      state.profileTotalCount = action.payload.listParams.size
       state.isProfilesLoading = false
     },
     getPermissionsSuccess: (state, action: PayloadAction<CampaignPermission[]>): void => {
       state.permissions = action.payload
+      state.permissionTotalCount = action.payload.length
       state.isPermissionsLoading = false
     },
     setLoading: (state, action: PayloadAction<boolean>): void => {

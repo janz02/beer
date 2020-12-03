@@ -15,6 +15,7 @@ import { CheckCircleOutlined, CloseCircleOutlined, FormOutlined } from '@ant-des
 import { pageViewRoles } from 'services/roleHelpers'
 import { ProfileStatus } from 'api/swagger/admin'
 import { history } from 'router/router'
+import { Link } from 'react-router-dom'
 
 interface ProfileListUtils {
   columnsConfig: ColumnsType<Profile>
@@ -86,7 +87,11 @@ export const useProfileListUtils = (): ProfileListUtils => {
         sort: true,
         filterMode: FilterMode.SEARCH,
         cannotBeHidden: true,
-        ellipsis: false
+        ellipsis: false,
+        disableSearchHighlight: true,
+        render: (value: string, profile: Profile): React.ReactNode => {
+          return <Link to={`/profiles/${profile.id}`}>{value}</Link>
+        }
       }),
       tableUtils.columnConfig({
         title: t('profiles.field.username'),

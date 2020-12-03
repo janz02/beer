@@ -217,22 +217,21 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/organization"
+      path={['/organization', '/organization/:tab?']}
       roles={pageViewRoles.organization}
       component={OrganizationPage}
     />
-
     <PrivateRoute
       exact
-      path="/organization/group/:id"
+      path={['/organization/groups/new', '/organization/groups/:id/edit']}
       roles={pageViewRoles.organizationEditor}
-      component={GroupViewPage}
+      component={GroupEditorModal}
     />
     <PrivateRoute
       exact
-      path={['/organization/group/new', '/organization/group/:id/edit']}
+      path="/organization/groups/:id"
       roles={pageViewRoles.organizationEditor}
-      component={GroupEditorModal}
+      component={GroupViewPage}
     />
 
     <Route path="*" render={onDefaultRoute} />
