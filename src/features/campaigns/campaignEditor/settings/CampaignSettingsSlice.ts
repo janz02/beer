@@ -1,7 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import { CampaignSettingsFormElements } from 'models/campaign/campaignSettingsFormEelements'
+import {
+  CampaignSettingsFormElements,
+  TextValuePair
+} from 'models/campaign/campaignSettingsFormEelements'
 
 interface CampaignSettingsState {
   campaignSettingsFormElements: CampaignSettingsFormElements
@@ -11,16 +14,16 @@ interface CampaignSettingsState {
 
 const initialState: CampaignSettingsState = {
   campaignSettingsFormElements: {
-    emailResendFrequencies: [],
-    emailResendRules: [],
-    emailTimeRules: [],
+    resendFrequencyOptions: [],
+    resendingRuleOptions: [],
+    intervalRestrictionOptions: [],
     phoneRecallFrequencies: [],
     phoneTimeRules: [],
-    productTypes: [],
     products: [],
-    requesters: [],
-    responsibles: [],
-    timingTypes: []
+    users: [],
+    timingTypes: [],
+    channelOptions: [],
+    channels: []
   },
   isLoading: true,
   hasError: false
@@ -59,23 +62,15 @@ export const campaignSettingsReducer = campaignSettingsSlice.reducer
 export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
   try {
     dispatch(getCampaignSettingsFormElements())
-    const viewModels = await api.campaignEditor.viewModels.createCampaignViewModel()
+    const viewModels = await api.campaignEditor.campaigns.settings()
     const formElements = {
       ...(viewModels as CampaignSettingsFormElements),
-      emailTimeRules: [
-        { label: 'Weekday', value: 1 },
-        { label: 'Weekend', value: 2 },
-        { label: 'Feast-day', value: 3 },
-        { label: 'Saturday working day', value: 4 }
-      ],
-      timingTypes: [{ label: 'Timing types', value: 1 }],
-      emailResendFrequencies: [{ label: '6 month', value: 1 }],
-      emailResendRules: [
-        { label: 'Rejected email', value: 1 },
-        { label: 'Temporarily rejected email', value: 2 },
-        { label: 'Bounced email', value: 3 },
-        { label: 'Spam', value: 4 }
-      ]
+      resendingRuleOptions: [],
+      resendFrequencyOptions: []
+      // resendFrequencyOptions:
+      //   (viewModels.channelOptions?.email?.resendFrequencyOptions as TextValuePair[]) ?? [],
+      // resendingRuleOptions:
+      //   (viewModels.channelOptions?.email?.resendingRuleOptions as TextValuePair[]) ?? []
     }
 
     dispatch(getCampaignSettingsFormElementsSuccess(formElements))

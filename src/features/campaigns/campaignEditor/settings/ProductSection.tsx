@@ -1,11 +1,11 @@
 import { Form, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
-import { LabelValuePair } from 'models/campaign/campaignSettingsFormEelements'
+import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface ProductProps {
-  products: LabelValuePair[]
+  products: TextValuePair[]
 }
 
 export const ProductSection: FC<ProductProps> = ({ products }) => {
@@ -21,7 +21,7 @@ export const ProductSection: FC<ProductProps> = ({ products }) => {
         <Select>
           {products.map(product => (
             <Select.Option key={product.value} value={product.value}>
-              {product.label}
+              {product.text}
             </Select.Option>
           ))}
         </Select>

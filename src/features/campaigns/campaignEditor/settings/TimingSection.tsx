@@ -1,11 +1,11 @@
 import { Col, DatePicker, Form, Row, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
-import { LabelValuePair } from 'models/campaign/campaignSettingsFormEelements'
+import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface TimingProps {
-  timingTypes: LabelValuePair[]
+  timingTypes: TextValuePair[]
 }
 
 export const TimingSection: FC<TimingProps> = ({ timingTypes }) => {
@@ -23,7 +23,7 @@ export const TimingSection: FC<TimingProps> = ({ timingTypes }) => {
             <Select placeholder="Date interval">
               {timingTypes.map(timingType => (
                 <Select.Option key={timingType.value} value={timingType.value}>
-                  {timingType.label}
+                  {timingType.text}
                 </Select.Option>
               ))}
             </Select>

@@ -36,6 +36,9 @@ import {
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmFromJSON,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVmToJSON,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmFromJSON,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmToJSON,
@@ -490,6 +493,38 @@ export class CampaignsApi extends runtime.BaseAPI {
      */
     async sendCampaignToTestGroup(requestParameters: SendCampaignToTestGroupRequest): Promise<void> {
         await this.sendCampaignToTestGroupRaw(requestParameters);
+    }
+
+    /**
+     * Used in the first screen of campaign creation.
+     * Returns selection lists of controls to help the user with the options.
+     */
+    async settingsRaw(): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVm>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Campaigns/Settings`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Used in the first screen of campaign creation.
+     * Returns selection lists of controls to help the user with the options.
+     */
+    async settings(): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVm> {
+        const response = await this.settingsRaw();
+        return await response.value();
     }
 
     /**

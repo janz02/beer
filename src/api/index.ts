@@ -124,7 +124,7 @@ export const api = {
     staticMergeTags: new StaticMergeTagsApi(campaignEditorConfig),
     templates: new TemplatesApi(campaignEditorConfig),
     testGroupCategories: new TestGroupCategoriesApi(campaignEditorConfig),
-    channels: new ChannelsApi(campaignEditorConfig),
-    viewModels: new ViewModelsApi(campaignEditorConfig)
+    channels: new ChannelsApi(campaignEditorConfig)
+    // viewModels: new ViewModelsApi(campaignEditorConfig)
   }
 }

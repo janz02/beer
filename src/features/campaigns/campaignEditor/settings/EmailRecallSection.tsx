@@ -1,11 +1,11 @@
 import { Col, Form, Input, Row, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
-import { LabelValuePair } from 'models/campaign/campaignSettingsFormEelements'
+import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface EmailResendProps {
-  emailResendOptions: LabelValuePair[]
+  emailResendOptions: TextValuePair[]
 }
 
 export const EmailRecallSection: FC<EmailResendProps> = ({ emailResendOptions }) => {
@@ -30,7 +30,7 @@ export const EmailRecallSection: FC<EmailResendProps> = ({ emailResendOptions })
             <Select>
               {emailResendOptions.map(option => (
                 <Select.Option key={option.value} value={option.value}>
-                  {option.label}
+                  {option.text}
                 </Select.Option>
               ))}
             </Select>

@@ -1,12 +1,12 @@
 import { Checkbox, Form } from 'antd'
 import CheckboxGroup from 'antd/lib/checkbox/Group'
 import Title from 'antd/lib/typography/Title'
-import { LabelValuePair } from 'models/campaign/campaignSettingsFormEelements'
+import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface EmailReSendingProps {
-  emailReSendingOptions: LabelValuePair[]
+  emailReSendingOptions: TextValuePair[]
 }
 
 export const EmailSendingSection: FC<EmailReSendingProps> = ({ emailReSendingOptions }) => {
@@ -18,7 +18,7 @@ export const EmailSendingSection: FC<EmailReSendingProps> = ({ emailReSendingOpt
         <CheckboxGroup className="vertical-checkboxes">
           {emailReSendingOptions.map(option => (
             <Checkbox key={option.value} value={option.value}>
-              {option.label}
+              {option.text}
             </Checkbox>
           ))}
         </CheckboxGroup>

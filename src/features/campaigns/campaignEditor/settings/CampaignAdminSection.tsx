@@ -1,12 +1,12 @@
 import { Form, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
-import { LabelValuePair } from 'models/campaign/campaignSettingsFormEelements'
+import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface CampaignAdminProps {
-  requesters: LabelValuePair[]
-  responsibles: LabelValuePair[]
+  requesters: TextValuePair[]
+  responsibles: TextValuePair[]
 }
 
 export const CampaignAdminSection: FC<CampaignAdminProps> = ({ requesters, responsibles }) => {
@@ -18,7 +18,7 @@ export const CampaignAdminSection: FC<CampaignAdminProps> = ({ requesters, respo
         <Select>
           {requesters.map(requester => (
             <Select.Option key={requester.value} value={requester.value}>
-              {requester.label}
+              {requester.text}
             </Select.Option>
           ))}
         </Select>
@@ -31,7 +31,7 @@ export const CampaignAdminSection: FC<CampaignAdminProps> = ({ requesters, respo
         <Select>
           {responsibles.map(responsible => (
             <Select.Option key={responsible.value} value={responsible.value}>
-              {responsible.label}
+              {responsible.text}
             </Select.Option>
           ))}
         </Select>

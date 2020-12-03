@@ -30,7 +30,7 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
         </Col>
         <Divider />
 
-        <ChannelTypeSection campaignId={campaignId} />
+        <ChannelTypeSection channelTypes={campaignSettingsFormElements.channels} />
         <Divider />
 
         <Row gutter={16}>
@@ -42,8 +42,8 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
           </Col>
           <Col span={7}>
             <CampaignAdminSection
-              requesters={campaignSettingsFormElements.requesters}
-              responsibles={campaignSettingsFormElements.responsibles}
+              requesters={campaignSettingsFormElements.users}
+              responsibles={campaignSettingsFormElements.users}
             />
           </Col>
         </Row>
@@ -64,7 +64,7 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
           </Col>
           <Col span={7}>
             <IntervalRestrictionSection
-              restrictionOptions={campaignSettingsFormElements.emailTimeRules}
+              restrictionOptions={campaignSettingsFormElements.intervalRestrictionOptions}
             />
           </Col>
         </Row>
@@ -74,7 +74,7 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
         <Row gutter={16}>
           <Col span={7}>
             <EmailRecallSection
-              emailResendOptions={campaignSettingsFormElements.emailResendFrequencies}
+              emailResendOptions={campaignSettingsFormElements.resendFrequencyOptions}
             />
           </Col>
           <Col>
@@ -82,7 +82,7 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
           </Col>
           <Col span={7}>
             <EmailSendingSection
-              emailReSendingOptions={campaignSettingsFormElements.emailResendRules}
+              emailReSendingOptions={campaignSettingsFormElements.resendingRuleOptions}
             />
           </Col>
         </Row>
