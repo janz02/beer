@@ -3,7 +3,7 @@ import { Roles } from 'api/swagger/coupon'
 import { FeatureState } from 'models/featureState'
 import moment from 'moment'
 import React from 'react'
-import { setupPermissions, setupStore } from '../../../../config/setupMocks'
+import { setupPermissions, setupStore } from '../../../../../config/setupMocks'
 import { GroupsTable } from './GroupsTable'
 import { useGroupsUtils } from './useGroupsUtils'
 

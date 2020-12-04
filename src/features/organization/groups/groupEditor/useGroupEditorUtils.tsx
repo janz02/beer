@@ -190,14 +190,11 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     profiles
   ])
 
-  const resetProfileFilters = useMemo(
-    () => (): void => {
-      if (id) {
-        dispatch(groupEditorActions.resetProfilesFilters(+id))
-      }
-    },
-    [dispatch, id]
-  )
+  const resetProfileFilters = useCallback(() => {
+    if (id) {
+      dispatch(groupEditorActions.resetProfilesFilters(+id))
+    }
+  }, [dispatch, id])
 
   const profileHeaderOptions = useMemo(
     () => (

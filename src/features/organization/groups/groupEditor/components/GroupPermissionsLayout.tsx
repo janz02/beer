@@ -33,11 +33,14 @@ export const GroupPermissionsLayout: FC<GroupPermissionsLayoutProps> = ({ groupE
             x => (
               <Col span="5" key={x.id}>
                 <div className="group-editor-form__permissions-item">
-                  <Typography.Text> {x?.name}</Typography.Text>
+                  <Typography.Text className="group-editor-form__permission-name">
+                    {x?.name}
+                  </Typography.Text>
                   <div>
                     <Button
                       type="primary"
                       icon={<DisconnectOutlined />}
+                      className="group-editor-form__permission-unassign-btn"
                       size="small"
                       onClick={() => {
                         handleUnassignPermission(x.id)

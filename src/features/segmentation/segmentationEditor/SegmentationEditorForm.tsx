@@ -6,8 +6,7 @@ import { SegmentationEditorUtils } from './useSegmentationEditorUtils'
 import { QueryBuilderView } from './queryBuilder/QueryBuilderView'
 import { useQueryBuilderUtils } from './queryBuilder/useQueryBuilderUtils'
 import { CampaignSegmentation } from 'models/campaign/campaignSegmentation'
-import { LoadingOutlined } from '@ant-design/icons'
-import './SegmentationEditorForm.scss'
+import { LoadingIndicator } from 'components/loading/LoadingIndicator'
 
 interface SegmentationEditorFormProps {
   segmentationEditorUtils: SegmentationEditorUtils
@@ -30,12 +29,8 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
     handleSave(segmentation, treeTotal, treeAsString, conditions)
   }
 
-  return isLoading ? (
-    <div className="center">
-      <LoadingOutlined />
-    </div>
-  ) : (
-    <>
+  return (
+    <LoadingIndicator isLoading={isLoading}>
       <Form
         name="coupon-editor-form"
         layout="vertical"
@@ -75,6 +70,6 @@ export const SegmentationEditorForm: React.FC<SegmentationEditorFormProps> = pro
           {!id ? t('segmentation-editor.button-create') : t('segmentation-editor.button-save')}
         </Button>
       </Form>
-    </>
+    </LoadingIndicator>
   )
 }

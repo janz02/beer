@@ -28,15 +28,15 @@
     margin-right: $card-radius;
     padding: 5px;
     border: 1px solid $primary-color;
+  }
 
-    & > span {
-      width: 100%;
-      max-lines: 2;
-    }
+  &__permission-name {
+    align-self: center;
+  }
 
-    & > div {
-      align-self: center;
-    }
+  &__permission-unassign-btn {
+    width: 100%;
+    max-lines: 2;
   }
 
   &__permissions-more {
