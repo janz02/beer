@@ -1,6 +1,6 @@
 import { Col, Divider, Form, Row } from 'antd'
 import './../base/CampaignEditor.scss'
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
 import { BasicCampaignSection } from './BasicCampaignSection'
 import { ChannelTypeSection } from './ChannelTypeSection'

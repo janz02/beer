@@ -14,7 +14,12 @@ export const CampaignAdminSection: FC<CampaignAdminProps> = ({ requesters, respo
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.campaign-admins-title')}</Title>
-      <Form.Item required className="control-label" label={t('campaign-create.settings.requestor')}>
+      <Form.Item
+        required
+        name="requestorId"
+        className="control-label"
+        label={t('campaign-create.settings.requestor')}
+      >
         <Select>
           {requesters.map(requester => (
             <Select.Option key={requester.value} value={requester.value}>
@@ -25,6 +30,7 @@ export const CampaignAdminSection: FC<CampaignAdminProps> = ({ requesters, respo
       </Form.Item>
       <Form.Item
         required
+        name="responsibleId"
         className="control-label"
         label={t('campaign-create.settings.approver-validator')}
       >

@@ -14,7 +14,7 @@ export const ChannelTypeSection: FC<ChannelTypesProps> = ({ channelTypes }) => {
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.channel-type-title')}</Title>
-      <Form.Item>
+      <Form.Item name="channelId">
         <Radio.Group>
           {channelTypes.map(option => (
             <Radio key={option.value} value={option.value}>

@@ -17,6 +17,7 @@ export const TimingSection: FC<TimingProps> = ({ timingTypes }) => {
         <Col>
           <Form.Item
             required
+            name={['timing', 'timingTypeId']}
             className="control-label"
             label={t('campaign-create.settings.select-timing-type-label')}
           >
@@ -35,6 +36,7 @@ export const TimingSection: FC<TimingProps> = ({ timingTypes }) => {
         <Col span={12}>
           <Form.Item
             required
+            name={['timing', 'startDate']}
             className="control-label"
             label={t('campaign-create.settings.start-date')}
           >
@@ -44,6 +46,7 @@ export const TimingSection: FC<TimingProps> = ({ timingTypes }) => {
         <Col span={12}>
           <Form.Item
             required
+            name={['timing', 'endDate']}
             className="control-label"
             label={t('campaign-create.settings.end-date')}
           >
