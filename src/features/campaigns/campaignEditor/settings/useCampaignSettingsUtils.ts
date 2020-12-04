@@ -20,6 +20,7 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
   const handleSubmitButtonClick = useCallback((): void => {
     console.log('submit')
     console.log(form.getFieldsValue())
+    form.validateFields()
   }, [dispatch])
 
   const handleGetSettingFormElements = useCallback((): void => {

@@ -3,7 +3,6 @@ import Title from 'antd/lib/typography/Title'
 import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CampaignEditorProps } from '../base/CampaignEditorForm'
 
 export interface ChannelTypesProps {
   channelTypes: TextValuePair[]

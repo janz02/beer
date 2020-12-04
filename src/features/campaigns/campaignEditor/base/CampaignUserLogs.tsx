@@ -25,9 +25,9 @@ export const CampaignUserLogs: FC<CampaignUserLogsProps> = ({ campaignLogs }) =>
           ?.filter((value, index) => {
             if (index === 0 || seeAllLogs) return value
           })
-          .map(campaign => {
+          .map((campaign, index) => {
             return (
-              <>
+              <div key={index}>
                 <Row>
                   <Col span={4}>
                     <MomentDisplay date={campaign.startDate} mode="date" />
@@ -42,7 +42,7 @@ export const CampaignUserLogs: FC<CampaignUserLogsProps> = ({ campaignLogs }) =>
                   <Col span={8}>(Marketing)</Col>
                   <Col span={10} />
                 </Row>
-              </>
+              </div>
             )
           })}
         {campaignLogs.length > 1 ? (

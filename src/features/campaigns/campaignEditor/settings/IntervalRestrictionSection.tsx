@@ -21,13 +21,13 @@ export const IntervalRestrictionSection: FC<IntervalRestrictionProps> = ({
         className="control-label"
         label={t('campaign-create.settings.email-delivery-date-restrictions')}
       >
-        <CheckboxGroup className="vertical-checkboxes">
+        <Checkbox.Group className="vertical-checkboxes">
           {restrictionOptions.map(option => (
             <Checkbox key={option.value} value={option.value}>
-              {option.text}
+              {t(`campaign-create.settings.${option.text.toLowerCase()}`)}
             </Checkbox>
           ))}
-        </CheckboxGroup>
+        </Checkbox.Group>
       </Form.Item>
     </>
   )

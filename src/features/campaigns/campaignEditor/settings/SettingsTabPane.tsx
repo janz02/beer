@@ -14,14 +14,14 @@ import { EmailSendingSection } from './EmailSendingSection'
 import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
 
-export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
+export const SettingsTabPane: FC = () => {
   const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
 
   return (
     <Form className="settings-tab" layout="vertical" form={form}>
       <div>
         <Col className="campaign-basic-details">
-          <BasicCampaignSection campaignId={campaignId} />
+          <BasicCampaignSection />
         </Col>
         <Divider />
 
@@ -82,6 +82,7 @@ export const SettingsTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
           </Col>
         </Row>
       </div>
+      <Divider />
       <Row>
         <Col span={22}>
           <CampaignEditorFormFooter onSubmit={handleSubmitButtonClick} />

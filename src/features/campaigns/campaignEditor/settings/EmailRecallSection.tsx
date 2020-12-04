@@ -32,7 +32,7 @@ export const EmailRecallSection: FC<EmailResendProps> = ({ emailResendOptions })
             <Select>
               {emailResendOptions.map(option => (
                 <Select.Option key={option.value} value={option.value}>
-                  {option.text}
+                  {t(`campaign-create.settings.${option.text.toLowerCase()}`)}
                 </Select.Option>
               ))}
             </Select>

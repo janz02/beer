@@ -305,7 +305,34 @@
       "product-label": "Product",
       "timing-title": "Timing",
       "select-timing-type-label": "Select timing type",
-      "approver-validator": "Approver/Validator"
+      "approver-validator": "Approver/Validator",
+      "validations":{
+        "required-field":"Field cannot be empty! Please fill the input field!"
+      },
+      "weekday":"Weekday",
+      "weekend":"Weekend",
+      "holiday":"Holiday",
+      "workingsaturday":"Working Saturday",
+      "rejected":"Rejected",
+      "temporarilyrejected":"Temporarily Rejected",
+      "bounce":"Bounce",
+      "spam":"Spam",
+      "unopened":"Unopened",
+      "day1": "1 day",
+      "day2": "2 day",
+      "day3": "3 day",
+      "day4": "4 day",
+      "day5": "5 day",
+      "day6": "6 day",
+      "day7": "7 day",
+      "day8": "8 day",
+      "day9": "9 day",
+      "day10": "10 day",
+      "week1": "1 week",
+      "dateinterval":"Date Interval",
+      "datefrom":"Date From",
+      "dateto":"Date To",
+      "infinite":"Infinite"
     }
   },
   "coupon-campaign-create": {

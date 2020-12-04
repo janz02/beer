@@ -18,7 +18,7 @@ export const EmailSendingSection: FC<EmailReSendingProps> = ({ emailReSendingOpt
         <CheckboxGroup className="vertical-checkboxes">
           {emailReSendingOptions.map(option => (
             <Checkbox key={option.value} value={option.value}>
-              {option.text}
+              {t(`campaign-create.settings.${option.text.toLowerCase()}`)}
             </Checkbox>
           ))}
         </CheckboxGroup>

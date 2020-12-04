@@ -47,6 +47,9 @@ const campaignSettingsSlice = createSlice({
     getCampaignSettingsFormElementsFail(state) {
       state.isLoading = false
       state.hasError = true
+    },
+    saveCampaignSettings() {
+      console.log('Save')
     }
   }
 })
@@ -54,7 +57,8 @@ const campaignSettingsSlice = createSlice({
 const {
   getCampaignSettingsFormElementsSuccess,
   getCampaignSettingsFormElementsFail,
-  getCampaignSettingsFormElements
+  getCampaignSettingsFormElements,
+  saveCampaignSettings
 } = campaignSettingsSlice.actions
 
 export const campaignSettingsReducer = campaignSettingsSlice.reducer
@@ -65,8 +69,6 @@ export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
     const viewModels = await api.campaignEditor.campaigns.settings()
     const formElements = {
       ...(viewModels as CampaignSettingsFormElements),
-      // resendingRuleOptions: [],
-      // resendFrequencyOptions: []
       resendFrequencyOptions: viewModels.channelOptions?.email
         ?.resendFrequencyOptions as TextValuePair[],
       resendingRuleOptions: viewModels.channelOptions?.email

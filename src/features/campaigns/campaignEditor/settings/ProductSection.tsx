@@ -1,5 +1,6 @@
 import { Form, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
+import { useCommonFormRules } from 'hooks'
 import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +11,7 @@ export interface ProductProps {
 
 export const ProductSection: FC<ProductProps> = ({ products }) => {
   const { t } = useTranslation()
+  const rule = useCommonFormRules()
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.product-title')}</Title>
@@ -18,6 +20,7 @@ export const ProductSection: FC<ProductProps> = ({ products }) => {
         required
         className="control-label"
         label={t('campaign-create.settings.product-label')}
+        rules={[rule.required(t('campaign-create.settings.validations.required-field'))]}
       >
         <Select>
           {products.map(product => (
