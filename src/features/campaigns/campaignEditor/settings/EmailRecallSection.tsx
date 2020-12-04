@@ -16,6 +16,7 @@ export const EmailRecallSection: FC<EmailResendProps> = ({ emailResendOptions })
       <Row gutter={5}>
         <Col span={10}>
           <Form.Item
+            name={['emailChannelSettings', 'emailMaxReSends']}
             className="control-label"
             label={t('campaign-create.settings.maximum-recall-attempts')}
           >
@@ -25,6 +26,7 @@ export const EmailRecallSection: FC<EmailResendProps> = ({ emailResendOptions })
         <Col span={14}>
           <Form.Item
             className="control-label"
+            name={['emailChannelSettings', 'emailResendFrequencyId']}
             label={t('campaign-create.settings.recall-frequency')}
           >
             <Select>

@@ -14,7 +14,7 @@ export const EmailSendingSection: FC<EmailReSendingProps> = ({ emailReSendingOpt
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.email-resending-rules')}</Title>
-      <Form.Item>
+      <Form.Item name={['emailChannelSettings', 'resendingRuleOptions']}>
         <CheckboxGroup className="vertical-checkboxes">
           {emailReSendingOptions.map(option => (
             <Checkbox key={option.value} value={option.value}>
