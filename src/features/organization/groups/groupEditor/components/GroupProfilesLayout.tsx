@@ -30,15 +30,13 @@ export const GroupProfilesLayout: FC<GroupProfilesLayoutProps> = ({ groupEditorU
       forTable
     >
       <ResponsiveTable
-        hasHeaderOffset
-        {...{
-          hasFixedColumn: true,
-          loading: isProfilesLoading,
-          columns: profileColumnsUtils.currentColumns,
-          dataSource: profiles!.map((u, i) => ({ ...u, key: i })),
-          pagination: profileTableUtils.paginationConfig,
-          onChange: profileTableUtils.handleTableChange
-        }}
+        hasFixedColumn
+        loading={isProfilesLoading}
+        columns={profileColumnsUtils.currentColumns}
+        dataSource={profiles}
+        pagination={profileTableUtils.paginationConfig}
+        scroll={{ x: true }}
+        onChange={profileTableUtils.handleTableChange}
       />
     </ResponsiveCard>
   )

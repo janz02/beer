@@ -78,7 +78,8 @@ export const useProfileListUtils = (): ProfileListUtils => {
         render: (value: string, profile: Profile): React.ReactNode => {
           return <Link to={`/profiles/${profile.id}`}>{value}</Link>
         }
-      },{
+      },
+      {
         title: t('profiles.field.username'),
         key: 'userName',
         sort: true,

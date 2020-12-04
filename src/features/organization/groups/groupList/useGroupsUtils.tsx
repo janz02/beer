@@ -41,9 +41,9 @@ export const useGroupsUtils = (): GroupsUtils => {
     }
   }, [isEditorUser])
 
-    const columnParams = useMemo<ColumnConfigParams[]>(
-        () => [
-            {
+  const columnParams = useMemo<ColumnConfigParams[]>(
+    () => [
+      {
         title: t('organization.groups.field.name'),
         key: 'name',
         cannotBeHidden: true,
@@ -53,7 +53,8 @@ export const useGroupsUtils = (): GroupsUtils => {
         render: (value: string, group: Group): React.ReactNode => {
           return <Link to={`/organization/groups/${group.id}`}>{value}</Link>
         }
-      },{
+      },
+      {
         title: t('organization.groups.field.profile-count'),
         key: 'profileCount',
         sort: true
@@ -94,7 +95,7 @@ export const useGroupsUtils = (): GroupsUtils => {
   const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
     () =>
       isEditorUser
-        ? tableUtils.actionColumnConfig({
+        ? {
             render(record: Group) {
               return (
                 <CrudButtons

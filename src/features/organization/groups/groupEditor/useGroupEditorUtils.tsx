@@ -1,9 +1,8 @@
-import { ColumnsType } from 'antd/lib/table'
 import { ProfileStatus } from 'api/swagger/admin'
 import { RootState } from 'app/rootReducer'
 import { ProfileStatusDisplay } from 'features/profiles/profileList/ProfileStatusDisplay'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
-import { FilterMode, TableUtils, useTableUtils } from 'hooks/useTableUtils'
+import { ColumnConfigParams, FilterMode, TableUtils, useTableUtils } from 'hooks/useTableUtils'
 import { Group } from 'models/group'
 import { Profile } from 'models/profile'
 import React, { useCallback, useMemo } from 'react'
@@ -91,15 +90,9 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     [group, unassignPermission]
   )
 
-  const profileTableUtils = useTableUtils<Profile>({
-    listParamsState: profileListParams,
-    filterKeys: ['status', 'name', 'companyName', 'jobRoleName'],
-    getDataAction: params => getGroupProfiles(group!.id, params)
-  })
-
-  const profileColumnsConfig: ColumnsType<Profile> = useMemo(
+  const profileColumnsParams = useMemo<ColumnConfigParams[]>(
     () => [
-      profileTableUtils.columnConfig({
+      {
         title: t('profiles.field.status'),
         filterMode: FilterMode.ENUM,
         sort: true,
@@ -118,8 +111,8 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         render(status: ProfileStatus) {
           return <ProfileStatusDisplay status={status} />
         }
-      }),
-      profileTableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.name'),
         key: 'name',
         sort: true,
@@ -128,10 +121,10 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         ellipsis: false,
         disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
-          return <Link to={`/profiles/${profile.id}`}>{value}</Link>
+          return <Link to={`/profiles/${profile.id}`}>{profile.name}</Link>
         }
-      }),
-      profileTableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.company'),
         key: 'companyName',
         sort: true,
@@ -139,10 +132,10 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         ellipsis: false,
         disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
-          return <Link to={`/companies/${profile.companyId}`}>{value}</Link>
+          return <Link to={`/companies/${profile.companyId}`}>{profile.companyName}</Link>
         }
-      }),
-      profileTableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.job-role'),
         key: 'jobRoleName',
         sort: true,
@@ -150,38 +143,53 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         ellipsis: false,
         disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
-          return <Link to={`/job-roles/${profile.jobRoleId}`}>{value}</Link>
+          return <Link to={`/job-roles/${profile.jobRoleId}`}>{profile.jobRoleName}</Link>
         }
-      }),
-      profileTableUtils.columnConfig({
+      },
+      {
         title: t('profiles.field.campaigns'),
         key: 'campaignCount',
         sort: true,
         filterMode: FilterMode.SEARCH,
         ellipsis: false
-      }),
-      isEditorUser
-        ? profileTableUtils.actionColumnConfig({
-            fixed: 'right',
-            width: '50px',
-            render(record: Profile) {
-              return (
-                <CrudButtons
-                  onEdit={() => history.push(`/profiles/${record.id}`)}
-                  onUnassign={() => handleUnassignProfile(record.id)}
-                />
-              )
-            }
-          })
-        : {}
+      }
     ],
-    [t, isEditorUser, profileTableUtils, handleUnassignProfile]
+    [t]
   )
 
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () => ({
+      fixed: 'right',
+      width: '50px',
+      render(record: Profile) {
+        return (
+          <CrudButtons
+            onEdit={() => history.push(`/profiles/${record.id}`)}
+            onUnassign={() => handleUnassignProfile(record.id)}
+          />
+        )
+      }
+    }),
+    [handleUnassignProfile]
+  )
+
+  const profileTableUtils = useTableUtils<Profile>({
+    listParamsState: profileListParams,
+    getDataAction: params => getGroupProfiles(group!.id!, params),
+    columnParams: profileColumnsParams,
+    actionColumnParams: actionColumnParams
+  })
+
   const profileColumnsUtils = useColumnOrderUtils(
-    profileColumnsConfig,
+    profileTableUtils.columnsConfig,
     ColumnStorageName.GROUP_PROFILES
   )
+
+  const profilesSource = useMemo(() => profileTableUtils.addKeyProp(profiles), [
+    profileTableUtils,
+    profiles
+  ])
+
   const resetProfileFilters = useMemo(
     () => (): void => {
       if (id) {
@@ -203,7 +211,7 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
 
   return {
     group,
-    profiles,
+    profiles: profilesSource,
     permissions,
     isLoading,
     isProfilesLoading,
