@@ -15,7 +15,7 @@ export const GroupPermissionsLayout: FC<GroupPermissionsLayoutProps> = ({ groupE
     isPermissionsLoading,
     permissions,
     permissionTotalCount,
-    handleUnassignRole
+    handleUnassignPermission
   } = groupEditorUtils
   const { t } = useTranslation()
 
@@ -40,7 +40,7 @@ export const GroupPermissionsLayout: FC<GroupPermissionsLayoutProps> = ({ groupE
                       icon={<DisconnectOutlined />}
                       size="small"
                       onClick={() => {
-                        handleUnassignRole(x.id!)
+                        handleUnassignPermission(x.id)
                       }}
                     />
                   </div>

@@ -14,7 +14,8 @@ export const GroupProfilesLayout: FC<GroupProfilesLayoutProps> = ({ groupEditorU
     profiles,
     profileColumnsUtils,
     profileTableUtils,
-    profileTotalCount
+    profileTotalCount,
+    profileHeaderOptions
   } = groupEditorUtils
   const { t } = useTranslation()
 
@@ -25,6 +26,7 @@ export const GroupProfilesLayout: FC<GroupProfilesLayoutProps> = ({ groupEditorU
       floatingTitle={t('organization.groups.profiles', {
         totalCount: profileTotalCount
       })}
+      floatingOptions={profileHeaderOptions}
       forTable
     >
       <ResponsiveTable

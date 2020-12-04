@@ -39,6 +39,9 @@ export const groupEditorSlice = createSlice({
   initialState,
   reducers: {
     resetGroupEditor: () => initialState,
+    resetListParams(state) {
+      state.profileListParams = initialState.profileListParams
+    },
     setGroup: (state, action: PayloadAction<Group | undefined>): void => {
       state.group = action.payload
     },
@@ -77,6 +80,7 @@ export const groupEditorSlice = createSlice({
 
 export const {
   resetGroupEditor,
+  resetListParams,
   getGroupSuccess,
   getProfilesSuccess,
   getPermissionsSuccess,
@@ -152,11 +156,26 @@ const getGroupPermissions = (id: number): AppThunk => async dispatch => {
   }
 }
 
+const resetProfilesFilters = (id: number): AppThunk => async dispatch => {
+  dispatch(resetListParams())
+  dispatch(getGroupProfiles(id))
+}
+
+const unassignPermission = (groupId: number, permissionId: number): void => {
+  console.log(`permission ${permissionId} removed from group ${groupId}`)
+}
+const unassignProfile = (groupId: number, profileId: number): void => {
+  console.log(`profile ${profileId} removed from group ${groupId}`)
+}
+
 export const groupEditorActions = {
   getGroup,
   getGroupProfiles,
   getGroupPermissions,
-  resetGroupEditor
+  unassignProfile,
+  unassignPermission,
+  resetGroupEditor,
+  resetProfilesFilters
 }
 
 export const groupEditorReducer = groupEditorSlice.reducer

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { FilterMode, TableUtils, useTableUtils } from 'hooks/useTableUtils'
 import { Group } from 'models/group'
 import { Profile } from 'models/profile'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { hasPermission } from 'services/jwt-reader'
 import { pageViewRoles } from 'services/roleHelpers'
@@ -18,6 +18,8 @@ import { ColumnOrderUtils, useColumnOrderUtils } from 'components/table-columns/
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { Link, useParams } from 'react-router-dom'
+import { ResetFiltersButton } from 'components/ResetFiltersButton'
+import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
 
 export interface GroupEditorUtils {
   group?: Group
@@ -31,8 +33,9 @@ export interface GroupEditorUtils {
   isEditorUser: boolean
   profileTableUtils: TableUtils<Profile>
   profileColumnsUtils: ColumnOrderUtils<Profile>
+  profileHeaderOptions: JSX.Element
   getGroupDetails: () => void
-  handleUnassignRole: (roleId: number) => void
+  handleUnassignPermission: (permissionId: number | undefined) => void
 }
 
 export const useGroupEditorUtils = (): GroupEditorUtils => {
@@ -48,7 +51,14 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     profileTotalCount,
     permissionTotalCount
   } = useSelector((state: RootState) => state.groupEditor)
-  const { getGroup, getGroupPermissions, getGroupProfiles } = groupEditorActions
+
+  const {
+    getGroup,
+    getGroupPermissions,
+    getGroupProfiles,
+    unassignProfile,
+    unassignPermission
+  } = groupEditorActions
   const { t } = useTranslation()
 
   const { id } = useParams()
@@ -64,25 +74,27 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
   const isEditorUser = hasPermission(pageViewRoles.organizationEditor)
 
   const handleUnassignProfile = useMemo(
-    () => (profileId: number): void => {
-      console.log(`unassign profile ${profileId} from group ${group?.id}`)
+    () => (profileId: number | undefined): void => {
+      if (group?.id && profileId) {
+        unassignProfile(profileId, group.id)
+      }
     },
-    [group]
+    [group, unassignProfile]
   )
 
-  const handleUnassignRole = useMemo(
-    () => (roleId: number): void => {
-      console.log(`unassign role ${roleId} from group ${group?.id}`)
+  const handleUnassignPermission = useMemo(
+    () => (permissionId: number | undefined): void => {
+      if (group?.id && permissionId) {
+        unassignPermission(permissionId, group.id)
+      }
     },
-    [group]
+    [group, unassignPermission]
   )
 
   const profileTableUtils = useTableUtils<Profile>({
     listParamsState: profileListParams,
     filterKeys: ['status', 'name', 'companyName', 'jobRoleName'],
-    getDataAction: params => {
-      getGroupProfiles(group!.id!, params)
-    }
+    getDataAction: params => getGroupProfiles(group!.id, params)
   })
 
   const profileColumnsConfig: ColumnsType<Profile> = useMemo(
@@ -90,6 +102,7 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
       profileTableUtils.columnConfig({
         title: t('profiles.field.status'),
         filterMode: FilterMode.ENUM,
+        sort: true,
         key: 'status',
         filters: [
           { value: ProfileStatus.Active, text: t('profiles.status.active') },
@@ -121,7 +134,7 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
       profileTableUtils.columnConfig({
         title: t('profiles.field.company'),
         key: 'companyName',
-        sort: false,
+        sort: true,
         filterMode: FilterMode.SEARCH,
         ellipsis: false,
         disableSearchHighlight: true,
@@ -132,7 +145,7 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
       profileTableUtils.columnConfig({
         title: t('profiles.field.job-role'),
         key: 'jobRoleName',
-        sort: false,
+        sort: true,
         filterMode: FilterMode.SEARCH,
         ellipsis: false,
         disableSearchHighlight: true,
@@ -142,7 +155,7 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
       }),
       profileTableUtils.columnConfig({
         title: t('profiles.field.campaigns'),
-        key: 'id',
+        key: 'campaignCount',
         sort: true,
         filterMode: FilterMode.SEARCH,
         ellipsis: false
@@ -169,6 +182,24 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     profileColumnsConfig,
     ColumnStorageName.GROUP_PROFILES
   )
+  const resetProfileFilters = useMemo(
+    () => (): void => {
+      if (id) {
+        dispatch(groupEditorActions.resetProfilesFilters(+id))
+      }
+    },
+    [dispatch, id]
+  )
+
+  const profileHeaderOptions = useMemo(
+    () => (
+      <>
+        <ResetFiltersButton onClick={resetProfileFilters} />
+        <ColumnOrderDropdown {...profileColumnsUtils} />
+      </>
+    ),
+    [profileColumnsUtils, resetProfileFilters]
+  )
 
   return {
     group,
@@ -180,9 +211,10 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     isEditorUser,
     profileColumnsUtils,
     profileTableUtils,
+    profileHeaderOptions,
     profileTotalCount,
     permissionTotalCount,
     getGroupDetails,
-    handleUnassignRole
+    handleUnassignPermission
   }
 }
