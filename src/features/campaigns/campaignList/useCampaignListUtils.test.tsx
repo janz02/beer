@@ -6,6 +6,7 @@ import { setupStore, setupPermissions, setupEveryPermission } from '../../../../
 import { Roles } from 'api/swagger/coupon'
 import moment from 'moment'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
+import { BrowserRouter } from 'react-router-dom'
 
 jest.mock('app/store')
 jest.mock('moment', () => ({
@@ -60,20 +61,28 @@ setupStore({
     companyListParams: {
       page: 1,
       pageSize: 10
+    },
+    partnerListParams: {
+      page: 1,
+      pageSize: 10
     }
   }
 })
 const CompanyTable: React.FC = () => {
   const props = useCampaignListUtils().companyCampaignTableProps
-  return <ResponsiveTable {...props} />
+  return (
+    <BrowserRouter>
+      <ResponsiveTable {...props} />
+    </BrowserRouter>
+  )
 }
 
 const CompanyHeader: React.FC = () => {
-  return <>{useCampaignListUtils().companyCampaignHeaderOptions} </>
+  return <BrowserRouter>{useCampaignListUtils().companyCampaignHeaderOptions} </BrowserRouter>
 }
 
 const TabBarExtras: React.FC = () => {
-  return <> {useCampaignListUtils().tabBarExtraContent} </>
+  return <BrowserRouter> {useCampaignListUtils().tabBarExtraContent} </BrowserRouter>
 }
 
 describe('campaign list tests', () => {

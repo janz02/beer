@@ -3,9 +3,9 @@ import { RootState } from 'app/rootReducer'
 import { useSelector, useDispatch } from '../../../../hooks/react-redux-hooks'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { groupsActions } from './groupsSlice'
-import { useTableUtils, TableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils, TableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
-import { ColumnsType, ColumnType } from 'antd/lib/table'
+import { ColumnType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { FeatureState } from 'models/featureState'
 import { Group } from 'models/group'
@@ -33,20 +33,6 @@ export const useGroupsUtils = (): GroupsUtils => {
 
   const { listParams, listState, groups } = useSelector((state: RootState) => state.groups)
 
-  const tableUtils = useTableUtils<Group>({
-    listParamsState: listParams,
-    filterKeys: [
-      'name',
-      'profileCount',
-      'companyCount',
-      'jobRoleCount',
-      'permissionsCount',
-      'createdDate',
-      'createdBy'
-    ],
-    getDataAction: groupsActions.getGroups
-  })
-
   const isEditorUser = useMemo(() => hasPermission(pageViewRoles.organizationEditor), [])
 
   const handleOpenCreatePage = useCallback(() => {
@@ -55,9 +41,9 @@ export const useGroupsUtils = (): GroupsUtils => {
     }
   }, [isEditorUser])
 
-  const columnsConfig: ColumnsType<Group> = useMemo(
-    () => [
-      tableUtils.columnConfig({
+    const columnParams = useMemo<ColumnConfigParams[]>(
+        () => [
+            {
         title: t('organization.groups.field.name'),
         key: 'name',
         cannotBeHidden: true,
@@ -67,41 +53,46 @@ export const useGroupsUtils = (): GroupsUtils => {
         render: (value: string, group: Group): React.ReactNode => {
           return <Link to={`/organization/groups/${group.id}`}>{value}</Link>
         }
-      }),
-      tableUtils.columnConfig({
+      },{
         title: t('organization.groups.field.profile-count'),
         key: 'profileCount',
         sort: true
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.groups.field.company-count'),
         key: 'companyCount',
         sort: true
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.groups.field.job-role-count'),
         key: 'jobRoleCount',
         sort: true
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.groups.field.permission-count'),
         key: 'permissionsCount',
         sort: true
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.groups.field.created-date'),
         key: 'createdDate',
         sort: true,
         width: '12rem',
         renderMode: 'date time',
         filterMode: FilterMode.DATEPICKER
-      }),
-      tableUtils.columnConfig({
+      },
+      {
         title: t('organization.groups.field.creator'),
         key: 'createdBy',
         sort: true,
         filterMode: FilterMode.SEARCH
-      }),
+      }
+    ],
+    [t]
+  )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       isEditorUser
         ? tableUtils.actionColumnConfig({
             render(record: Group) {
@@ -112,17 +103,23 @@ export const useGroupsUtils = (): GroupsUtils => {
                 />
               )
             }
-          })
-        : {}
-    ],
-    [tableUtils, t, isEditorUser]
+          }
+        : undefined,
+    [isEditorUser]
   )
+
+  const tableUtils = useTableUtils<Group>({
+    listParamsState: listParams,
+    getDataAction: groupsActions.getGroups,
+    columnParams,
+    actionColumnParams
+  })
+
+  const columnOrderUtils = useColumnOrderUtils(tableUtils.columnsConfig, ColumnStorageName.GROUPS)
 
   const resetFilters = useCallback(() => {
     dispatch(groupsActions.resetGroupsFilters())
   }, [dispatch])
-
-  const columnOrderUtils = useColumnOrderUtils(columnsConfig, ColumnStorageName.GROUPS)
 
   const handleExport = useCallback((): void => {
     dispatch(groupsActions.exportGroups())

@@ -58,27 +58,27 @@
     "save-draft": "Piszkozat mentése & Kilépés",
     "segmentation-tab-name": "Szegmentáció",
     "settings": {
-      "about": "Leírás",
-      "approver-validator": "Elfogadó/Érvényesítő",
-      "campaign-admins-title": "Kampány adminok",
       "campaign-name": "Kampány neve",
+      "requestor": "Igénylő",
+      "about": "Leírás",
+      "campaign-admins-title": "Kampány adminok",
       "channel-type-title": "Csatorna típusa",
       "daily-restriction-title": "Napi tiltások",
-      "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
-      "email-recall-settings-title": "Email visszahívás beállítása",
-      "email-resending-rules": "Email újraküldési szabályok",
-      "end-date": "Zárás dátum",
-      "end-time": "Végződik",
-      "interval-restrictions": "Időszakos korlátozások",
-      "maximum-recall-attempts": "Visszahívási kísérletek száma",
-      "product-label": "Termék",
-      "product-title": "Termék",
-      "recall-frequency": "Visszahívás gyakorisága",
-      "requestor": "Igénylő",
-      "select-timing-type-label": "Időzítés típusa",
-      "start-date": "Kezdeti dátum",
       "start-time": "Kezdődik",
-      "timing-title": "Időzítés"
+      "end-time": "Végződik",
+      "start-date": "Kezdeti dátum",
+      "end-date": "Zárás dátum",
+      "email-recall-settings-title": "Email visszahívás beállítása",
+      "maximum-recall-attempts": "Visszahívási kísérletek száma",
+      "recall-frequency": "Visszahívás gyakorisága",
+      "email-resending-rules": "Email újraküldési szabályok",
+      "interval-restrictions": "Időszakos korlátozások",
+      "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
+      "product-title": "Termék",
+      "product-label": "Termék",
+      "timing-title": "Időzítés",
+      "select-timing-type-label": "Időzítés típusa",
+      "approver-validator": "Elfogadó/Érvényesítő"
     },
     "settings-tab-name": "Beállítások",
     "status-creation": "Státusz (Kampány Létrehozás)",
@@ -529,6 +529,9 @@
     },
     "segment": {
       "one-time-use-creation-failed": "Az egyszer használatos szegmens létrehozása közben hiba lépett fel. Kérem próbálja újra!"
+    },
+    "segmentationEditor": {
+      "cannot-open": "A kiválasztott szegmentáció nem nyitható meg, kérem próbálkozzon később."
     },
     "sendgrid": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."

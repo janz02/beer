@@ -56,29 +56,37 @@
     },
     "next-section": "Next (Segmentation)",
     "save-draft": "Save draft & Exit",
+    "segmentation": {
+      "add-btn": "Add segmentation",
+      "file-based-title": "File based segmentation",
+      "filtered-results": "Filtered results",
+      "inbuilt-title": "Inbuilt segmentations",
+      "summary-title": "Segmentation summary",
+      "target-title": "Target audience"
+    },
     "segmentation-tab-name": "Segmentation",
     "settings": {
-      "about": "About",
-      "approver-validator": "Approver/Validator",
-      "campaign-admins-title": "Campaign admins",
       "campaign-name": "Campaign name",
+      "requestor": "Requestor",
+      "about": "About",
+      "campaign-admins-title": "Campaign admins",
       "channel-type-title": "Channel type",
       "daily-restriction-title": "Daily restriction",
-      "email-delivery-date-restrictions": "Email delivery date restrictions",
-      "email-recall-settings-title": "Email re-call settings",
-      "email-resending-rules": "Email re-sending rules",
-      "end-date": "End date",
-      "end-time": "End time",
-      "interval-restrictions": "Interval Restrictions",
-      "maximum-recall-attempts": "Maximum recall attempts",
-      "product-label": "Product",
-      "product-title": "Product",
-      "recall-frequency": "Recall frequency",
-      "requestor": "Requestor",
-      "select-timing-type-label": "Select timing type",
-      "start-date": "Start date",
       "start-time": "Start time",
-      "timing-title": "Timing"
+      "end-time": "End time",
+      "start-date": "Start date",
+      "end-date": "End date",
+      "email-recall-settings-title": "Email re-call settings",
+      "maximum-recall-attempts": "Maximum recall attempts",
+      "recall-frequency": "Recall frequency",
+      "email-resending-rules": "Email re-sending rules",
+      "interval-restrictions": "Interval Restrictions",
+      "email-delivery-date-restrictions": "Email delivery date restrictions",
+      "product-title": "Product",
+      "product-label": "Product",
+      "timing-title": "Timing",
+      "select-timing-type-label": "Select timing type",
+      "approver-validator": "Approver/Validator"
     },
     "settings-tab-name": "Settings",
     "status-creation": "Status (Campaign Creation)",
@@ -529,6 +537,9 @@
     },
     "segment": {
       "one-time-use-creation-failed": "One time use segment creation has failed. Please try again later!"
+    },
+    "segmentation-editor": {
+      "cannot-open": "The segmentation could not be loaded. Please try again later!"
     },
     "sendgrid": {
       "communication": "An error has occured while trying to send an email. Please try again later!"

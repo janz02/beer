@@ -3,9 +3,8 @@ import { RootState } from 'app/rootReducer'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { CrudButtons } from 'components/buttons/CrudButtons'
 import { campaignListActions, CampaignListTab } from './campaignListSlice'
-import { useTableUtils, FilterMode } from 'hooks/useTableUtils'
+import { useTableUtils, FilterMode, ColumnConfigParams } from 'hooks/useTableUtils'
 import { useTranslation } from 'react-i18next'
-import { ColumnsType } from 'antd/lib/table'
 import { hasPermission } from 'services/jwt-reader'
 import { CampaignListItem } from 'models/campaign/campaignListItem'
 import { history } from 'router/router'
@@ -22,6 +21,7 @@ import { ColumnFilterItem } from 'antd/lib/table/interface'
 import { MomentDisplay } from 'components/MomentDisplay'
 import moment from 'moment'
 import { SettingsButton } from 'components/buttons/SettingsButton'
+import { Link } from 'react-router-dom'
 
 interface CampaignListUtils {
   companyCampaignTableProps: ResponsiveTableProps
@@ -54,26 +54,9 @@ export const useCampaignListUtils = (): CampaignListUtils => {
     loading
   } = useSelector((state: RootState) => state.campaignList)
 
-  const companyCampaignTableUtils = useTableUtils<CampaignListItem>({
-    listParamsState: companyListParams,
-    filterKeys: [
-      'name',
-      'statusId',
-      'typeId',
-      'startDate',
-      'segmentation',
-      'productId',
-      'createdBy',
-      'channelId',
-      'responsible',
-      'createdDate'
-    ],
-    getDataAction: campaignListActions.getCompanyCampaigns
-  })
-
-  const companyCampaignColumnsConfig: ColumnsType<CampaignListItem> = useMemo(
+  const columnParams = useMemo<ColumnConfigParams[]>(
     () => [
-      companyCampaignTableUtils.columnConfig({
+      {
         title: t('campaign-list.field.status'),
         key: 'statusId',
         sort: true,
@@ -92,8 +75,8 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         render(value: string) {
           return +value ? t('campaign-status.' + CampaignStatus[+value].toLowerCase()) : null
         }
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.name'),
         key: 'name',
         sort: true,
@@ -102,10 +85,10 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         disableSearchHighlight: true,
         ellipsis: false,
         render: (value: string, campaign: CampaignListItem): React.ReactNode => {
-          return <a href={`/campaigns/${campaign.id}`}>{value}</a>
+          return <Link to={`/campaigns/${campaign.id}`}>{value}</Link>
         }
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.type'),
         key: 'channelId',
         sort: true,
@@ -128,8 +111,8 @@ export const useCampaignListUtils = (): CampaignListUtils => {
               .join(', ')
           }
         }
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.timing'),
         key: 'startDate',
         sort: true,
@@ -144,15 +127,15 @@ export const useCampaignListUtils = (): CampaignListUtils => {
             </>
           )
         }
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.segmentation'),
         key: 'segmentation',
         sort: true,
         ellipsis: false,
         filterMode: FilterMode.FILTER
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.product'),
         key: 'productId',
         sort: true,
@@ -165,39 +148,45 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         render(value: string) {
           return products && products.find(x => x.id === +value)?.name
         }
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.requestor'),
         key: 'createdBy',
         sort: true,
         ellipsis: false,
         filterMode: FilterMode.SEARCH
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.createdDate'),
         key: 'createdDate',
         sort: true,
         ellipsis: false,
         filterMode: FilterMode.DATERANGEPICKER
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.responsible'),
         key: 'responsible',
         sort: true,
         ellipsis: false,
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true
-      }),
-      companyCampaignTableUtils.columnConfig({
+      },
+      {
         title: t('campaign-list.field.modifiedDate'),
         key: 'modifiedDate',
         sort: true,
         ellipsis: false,
         filterMode: FilterMode.DATEPICKER,
         hiddenByDefault: true
-      }),
+      }
+    ],
+    [t, products, channels]
+  )
+
+  const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
+    () =>
       isEditorUser
-        ? companyCampaignTableUtils.actionColumnConfig({
+        ? {
             fixed: 'right',
             width: 'auto',
             render(campaign: CampaignListItem) {
@@ -216,14 +205,20 @@ export const useCampaignListUtils = (): CampaignListUtils => {
                 />
               )
             }
-          })
-        : {}
-    ],
-    [t, dispatch, companyCampaignTableUtils, isEditorUser, products, channels]
+          }
+        : undefined,
+    [dispatch, isEditorUser]
   )
 
+  const companyCampaignTableUtils = useTableUtils<CampaignListItem>({
+    listParamsState: companyListParams,
+    getDataAction: campaignListActions.getCompanyCampaigns,
+    columnParams,
+    actionColumnParams
+  })
+
   const companyColumnOrderUtils = useColumnOrderUtils(
-    companyCampaignColumnsConfig,
+    companyCampaignTableUtils.columnsConfig,
     ColumnStorageName.CAMPAIGN_COMPANY
   )
 
@@ -259,23 +254,13 @@ export const useCampaignListUtils = (): CampaignListUtils => {
 
   const partnerCampaignTableUtils = useTableUtils<CampaignListItem>({
     listParamsState: partnerListParams,
-    filterKeys: [
-      'name',
-      'statusId',
-      'typeId',
-      'startDate',
-      'segmentation',
-      'productId',
-      'createdBy',
-      'responsible',
-      'createdDate',
-      'modifiedDate'
-    ],
-    getDataAction: campaignListActions.getPartnerCampaigns
+    getDataAction: campaignListActions.getPartnerCampaigns,
+    columnParams,
+    actionColumnParams
   })
 
   const partnerColumnOrderUtils = useColumnOrderUtils(
-    companyCampaignColumnsConfig,
+    companyCampaignTableUtils.columnsConfig,
     ColumnStorageName.CAMPAIGN_PARTNER
   )
 
