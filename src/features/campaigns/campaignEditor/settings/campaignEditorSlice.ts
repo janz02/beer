@@ -30,7 +30,7 @@ const initialState: CampaignSettingsState = {
 }
 
 const campaignEditorSlice = createSlice({
-  name: 'campaignEditorSettings',
+  name: 'campaignEditor',
   initialState,
   reducers: {
     getCampaignSettingsFormElements(state) {
@@ -82,25 +82,6 @@ export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
 }
 export const saveSettings = (campaignSettings: any): AppThunk => async () => {
   try {
-    // Csinani egy tipust amibe atmappelni es megcsinalni a savet
-    // Validacio a formon
-    // rangepicker
-
-    // const alma = {
-    //   optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand: {
-    //     ...campaignSettings,
-    //     timing: {
-    //       ...campaignSettings.timing,
-    //       startDate: (campaignSettings.timing?.startDate as moment.Moment).toDate(),
-    //       endDate: (campaignSettings.timing?.endDate as moment.Moment).toDate(),
-    //       startTime: null,
-    //       endTime: null
-    //     }
-    //   }
-    // }
-    // console.log(alma)
-    // await api.campaignEditor.campaigns.createCampaignsettings(alma)
-    // dispatch(saveCampaignSettingsSuccess())
     console.log(campaignSettings)
   } catch (error) {
     console.log(error)
