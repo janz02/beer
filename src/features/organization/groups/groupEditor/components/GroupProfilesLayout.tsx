@@ -3,6 +3,7 @@ import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GroupEditorUtils } from '../useGroupEditorUtils'
+import styles from './GroupProfilesLayout.module.scss'
 
 interface GroupProfilesLayoutProps {
   groupEditorUtils: GroupEditorUtils
@@ -21,7 +22,7 @@ export const GroupProfilesLayout: FC<GroupProfilesLayoutProps> = ({ groupEditorU
 
   return (
     <ResponsiveCard
-      className="group-editor-form__profile-list"
+      className={styles.list}
       width="full"
       floatingTitle={t('organization.groups.profiles', {
         totalCount: profileTotalCount

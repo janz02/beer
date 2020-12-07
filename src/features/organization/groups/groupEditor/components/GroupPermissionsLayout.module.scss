@@ -1,0 +1,42 @@
+@import "../../../../../assets/scss/ant-variables";
+
+.list {
+  padding: 0;
+
+  > div > div {
+    padding: 10px !important;
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  margin-right: $card-radius;
+  padding: 5px;
+  border: 1px solid $primary-color;
+}
+
+.name {
+  align-self: center;
+}
+
+.unassignBtn {
+  align-self: center;
+  width: 100%;
+  height: fit-content;
+  max-lines: 2;
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  font-weight: 500;
+
+  span {
+    padding-top: 50%;
+    padding-bottom: 50%;
+  }
+}

@@ -8,7 +8,7 @@ import { GroupPermissionsLayout } from './components/GroupPermissionsLayout'
 
 import { MomentDisplay } from 'components/MomentDisplay'
 import { LoadingIndicator } from 'components/loading/LoadingIndicator'
-import './GroupViewPage.scss'
+import styles from './GroupViewPage.module.scss'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { EditButton } from 'components/buttons/EditButton'
 
@@ -46,7 +46,6 @@ export const GroupViewPage: FC<{}> = () => {
 
   return (
     <ResponsiveCard
-      className="group-editor-card"
       floatingTitle={t('organization.groups.viewer.title')}
       floatingBackButton={backButtonProps}
       floatingOptions={cardHeaderActions}
@@ -55,10 +54,7 @@ export const GroupViewPage: FC<{}> = () => {
         <LoadingIndicator isLoading={isLoading}>
           <Row>
             <Col span="6">
-              <Form.Item
-                className="group-editor-form__name"
-                label={t('organization.groups.fields.name')}
-              >
+              <Form.Item className={styles.name} label={t('organization.groups.fields.name')}>
                 {group?.name}
               </Form.Item>
             </Col>
