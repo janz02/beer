@@ -47,7 +47,11 @@ export const CustomAccordion: FC<CustomAccordionProps> = ({
       <Collapse.Panel
         key={accordionKey}
         header={
-          <span className={styles.panelHeader__container}>
+          <span
+            className={`${styles.panelHeader__container} ${
+              isDraggable ? styles.panelHeader__container__draggable : ''
+            }`}
+          >
             <span className={styles.panelHeaderTitle__container}>
               <span className={styles.panelHeader__title}>
                 <Typography.Text strong>{title}</Typography.Text>

@@ -8,9 +8,9 @@ import {
 import { Button, Collapse, Select, Typography, Form, Row, Col, Modal } from 'antd'
 import React, { FC, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from './SegmentationCardInbuiltInput.module.scss'
+import styles from './SegmentationCardBase.module.scss'
 
-export interface SegmentationCardValue {
+export interface SegmentationCardInbuiltInputValue {
   categoryId?: any
   segmentationId?: any
   result?: number
@@ -18,15 +18,15 @@ export interface SegmentationCardValue {
   expandResult?: number
 }
 
-export interface SegmentationCardInputProps {
+export interface SegmentationCardInbuiltInputProps {
   categories?: any[]
   segmentations?: any[]
   onRemove: () => void
-  value?: SegmentationCardValue // from Form.Item
+  value?: SegmentationCardInbuiltInputValue // from Form.Item
   onChange?: Function // from Form.Item
 }
 
-export const SegmentationCardInbuiltInput: FC<SegmentationCardInputProps> = ({
+export const SegmentationCardInbuiltInput: FC<SegmentationCardInbuiltInputProps> = ({
   categories = [],
   segmentations = [],
   value,
@@ -35,7 +35,7 @@ export const SegmentationCardInbuiltInput: FC<SegmentationCardInputProps> = ({
 }) => {
   const { t } = useTranslation()
 
-  const [innerValue, setInnerValue] = useState<SegmentationCardValue>({ ...value })
+  const [innerValue, setInnerValue] = useState<SegmentationCardInbuiltInputValue>({ ...value })
   const { categoryId } = innerValue
 
   const [filteredSegmentations, setFilteredSegmentations] = useState<any[]>()

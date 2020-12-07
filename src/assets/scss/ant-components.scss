@@ -156,6 +156,10 @@
     .ant-collapse-header {
       pointer-events: none;
     }
+
+    &--filebased .ant-collapse-content-box {
+      height: 180px;
+    }
   }
 
   .ant-form-item-has-error {

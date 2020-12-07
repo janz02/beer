@@ -3,6 +3,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-left: -24px;
+
+  &__draggable {
+    margin-left: 0;
+  }
 }
 
 .panelHeaderTitle__container {

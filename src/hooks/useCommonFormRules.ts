@@ -211,7 +211,7 @@ export function useCommonFormRules() {
   )
 
   /**
-   * Segmentation Card Validation for Campaign Editing
+   * Inbuilt Segmentation Card Validation for Campaign Editing
    * @param message (optional) string
    */
   const inbuiltSegmentation = useCallback(
@@ -222,6 +222,22 @@ export function useCommonFormRules() {
           : Promise.resolve()
       },
       message: message || t('error.common.invalid-inbuilt-segmentation')
+    }),
+    [t]
+  )
+
+  /**
+   * File based Segmentation Card Validation for Campaign Editing
+   * @param message (optional) string
+   */
+  const filebasedSegmentation = useCallback(
+    (message?: string): Rule => ({
+      validator: (rule, value: any) => {
+        return !value || (value && !value.fileId)
+          ? Promise.reject(new Error('invalidFilebasedSegmentation'))
+          : Promise.resolve()
+      },
+      message: message || t('error.common.invalid-filebased-segmentation')
     }),
     [t]
   )
@@ -239,6 +255,7 @@ export function useCommonFormRules() {
     fileExtension,
     fileSize,
     fileImgDimensionsExactMatch,
-    inbuiltSegmentation
+    inbuiltSegmentation,
+    filebasedSegmentation
   }
 }
