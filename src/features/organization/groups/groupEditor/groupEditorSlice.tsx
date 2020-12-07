@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { api } from 'api'
+import { ProfileStatus } from 'api/swagger/admin'
 import { AppThunk } from 'app/store'
 import {
   ListRequestParams,
@@ -123,7 +124,8 @@ const getGroupProfiles = (id: number, params: ListRequestParams = {}): AppThunk 
     }
     const { result, ...pagination } = await api.admin.profiles.getProfiles({
       ...requestParams,
-      groupIds: [id]
+      groupIds: [id],
+      statuses: [ProfileStatus.Active, ProfileStatus.InActive]
     })
 
     dispatch(
