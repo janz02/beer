@@ -14,6 +14,6 @@ export const someArrayElementsContainedInAnother = (a: any, b: any): boolean => 
 
 export const sum = (items: any[], prop: string): number => {
   return items.reduce((a, b) => {
-    return (a || 0) + (b ? b[prop] : 0)
+    return (a || 0) + (b && b[prop] ? b[prop] : 0)
   }, 0)
 }

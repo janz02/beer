@@ -52,6 +52,12 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
   const calculateInbuilt = (): void => {
     const summedResult = sum(form.getFieldValue('inbuiltSegmentationList'), 'result')
     const summedExpandedResult = sum(form.getFieldValue('inbuiltSegmentationList'), 'expandResult')
+
+    console.log({
+      list: form.getFieldValue('inbuiltSegmentationList'),
+      summedResult,
+      summedExpandedResult
+    })
     setSummedInbuilt(summedResult + summedExpandedResult)
   }
 
@@ -132,7 +138,10 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                                     rules={[inbuiltSegmentation()]}
                                   >
                                     <SegmentationCardInbuiltInput
-                                      onRemove={() => remove(index)}
+                                      onRemove={() => {
+                                        remove(index)
+                                        calculateInbuilt()
+                                      }}
                                       categories={data.segmentationCategories}
                                       segmentations={data.segmentations}
                                       onChange={calculateInbuilt}
@@ -188,7 +197,10 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                                   >
                                     <SegmentationCardFilebasedInput
                                       onChange={calculateFilebased}
-                                      onRemove={() => remove(index)}
+                                      onRemove={() => {
+                                        remove(index)
+                                        calculateFilebased()
+                                      }}
                                       onDownload={handleDownloadFile}
                                     />
                                   </Form.Item>
