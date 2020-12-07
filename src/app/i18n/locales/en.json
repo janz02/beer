@@ -219,7 +219,8 @@
       "discard-title": "Are you sure about discarding? It cannot be retrieved.",
       "inactivate-title": "Are you sure about inactivating?",
       "restore-title": "Are you sure about restoring this?",
-      "save-title": "Are you sure about saving this?"
+      "save-title": "Are you sure about saving this?",
+      "unassign-title": "Are you sure about unassigning this"
     },
     "reset": "Reset",
     "reset-filters": "Reset filters to defaults",
