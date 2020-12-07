@@ -43,10 +43,6 @@
       "title": "Subject"
     }
   },
-  "campaign-channel": {
-    "email": "Email",
-    "phone": "Phone"
-  },
   "campaign-create": {
     "content": {
       "email": {
@@ -132,14 +128,17 @@
   },
   "campaign-status": {
     "approved": "Approved",
-    "created": "__STRING_NOT_TRANSLATED__",
-    "draftcampaign": "__STRING_NOT_TRANSLATED__",
-    "drafttreatment": "__STRING_NOT_TRANSLATED__",
-    "senttotestgroup": "__STRING_NOT_TRANSLATED__",
+    "callcenter": "Call Center",
+    "cancelled": "Cancelled",
+    "closed": "Closed",
+    "content": "Content",
+    "finished": "Finished",
+    "paused": "Paused",
+    "segmented": "Segmented",
+    "set": "Set",
     "started": "Started",
     "startedmanually": "Manually started",
-    "stopped": "__STRING_NOT_TRANSLATED__",
-    "stoppedmanually": "__STRING_NOT_TRANSLATED__"
+    "tested": "Tested"
   },
   "cashier-editor": {
     "editor-create": "Create cashier",
@@ -224,6 +223,7 @@
     "send": "Send",
     "table-settings": "Settings",
     "try-again": "Try again...",
+    "unassign": "Unassign",
     "upload": "Upload",
     "view": "View",
     "yes": "Yes"
@@ -272,40 +272,6 @@
     "editor-edit": "Edit",
     "field": {
       "name": "Category name"
-    }
-  },
-  "campaign-create": {
-    "settings-tab-name": "Settings",
-    "segmentation-tab-name": "Segmentation",
-    "content-tab-name": "Content(Email)",
-    "test-tab-name": "Test",
-    "title": "Create Campaign",
-    "status-creation": "Status (Campaign Creation)",
-    "user-logs": "User Logs",
-    "save-draft": "Save draft & Exit",
-    "next-section": "Next (Segmentation)",
-    "settings": {
-      "campaign-name": "Campaign name",
-      "requestor": "Requestor",
-      "about": "About",
-      "campaign-admins-title": "Campaign admins",
-      "channel-type-title": "Channel type",
-      "daily-restriction-title": "Daily restriction",
-      "start-time": "Start time",
-      "end-time": "End time",
-      "start-date": "Start date",
-      "end-date": "End date",
-      "email-recall-settings-title": "Email re-call settings",
-      "maximum-recall-attempts": "Maximum recall attempts",
-      "recall-frequency": "Recall frequency",
-      "email-resending-rules": "Email re-sending rules",
-      "interval-restrictions": "Interval Restrictions",
-      "email-delivery-date-restrictions": "Email delivery date restrictions",
-      "product-title": "Product",
-      "product-label": "Product",
-      "timing-title": "Timing",
-      "select-timing-type-label": "Select timing type",
-      "approver-validator": "Approver/Validator"
     }
   },
   "coupon-campaign-create": {
@@ -933,7 +899,18 @@
         "permission-count": "Permissions",
         "profile-count": "Profiles"
       },
-      "title": "Groups"
+      "fields": {
+        "created-by": "Created by",
+        "created-date": "Date of creation",
+        "name": "Name"
+      },
+      "permissions": "Permissions ({{totalCount}})",
+      "profiles": "Profiles ({{totalCount}})",
+      "title": "Groups",
+      "viewer": {
+        "edit": "Edit",
+        "title": "Group"
+      }
     },
     "job-roles": {
       "field": {
@@ -1057,6 +1034,7 @@
       "decline": "Decline"
     },
     "field": {
+      "campaigns": "Campaigns",
       "company": "Company",
       "email": "E-mail",
       "group": "Group",

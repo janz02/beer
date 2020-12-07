@@ -1955,6 +1955,22 @@
             }
           },
           {
+            "name": "companyName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "jobRoleName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -2002,19 +2018,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4}],"page":1,"from":1,"to":2,"size":2}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4}],"page":1,"from":1,"to":2,"size":2}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVmPaginatedResponse"
                 },
-                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}],"page":1,"from":1,"to":2,"size":2}
+                "example": {"result":[{"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4},{"id":66,"name":"YourProfileToo","status":"WaitingForApproval","userName":"sam","email":"sam@sam.uel","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4}],"page":1,"from":1,"to":2,"size":2}
               }
             }
           },
@@ -2081,19 +2097,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfileVm"
                 },
-                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null}
+                "example": {"id":65,"name":"YourProfile","status":"Active","userName":"Jhon","email":"jhon@jhon.son","createdDate":"2020-11-16T00:00:00","groupCount":1,"permissionCount":3,"jobRoleId":1,"jobRoleName":null,"profilePictureId":null,"birthDay":"0001-01-01T00:00:00","phoneNumber":null,"companyId":2,"companyName":null,"groupIds":null,"campaignCount":4}
               }
             }
           },
@@ -2319,6 +2335,22 @@
             "schema": {
               "type": "integer",
               "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "companyName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "jobRoleName",
+            "in": "query",
+            "schema": {
+              "type": "string",
               "nullable": true
             }
           },
@@ -3072,6 +3104,10 @@
               "format": "int32"
             },
             "nullable": true
+          },
+          "campaignCount": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

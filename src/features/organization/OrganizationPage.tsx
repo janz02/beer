@@ -3,20 +3,22 @@ import { Dropdown, Menu } from 'antd'
 import { AddButton } from 'components/buttons/AddButton'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { ResponsiveTabs, TabPane, TabPanelTitle } from 'components/responsive/tabs'
+import { useParams } from 'hooks/react-router-dom-hooks'
 import React, { FC, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { hasPermission } from 'services/jwt-reader'
 import { pageViewRoles } from 'services/roleHelpers'
 import { CompaniesTable } from './companies/CompaniesTable'
 import { useCompaniesUtils } from './companies/useCompaniesUtils'
-import { GroupsTable } from './groups/GroupsTable'
-import { useGroupsUtils } from './groups/useGroupsUtils'
+import { GroupsTable } from './groups/groupList/GroupsTable'
+import { useGroupsUtils } from './groups/groupList/useGroupsUtils'
 import { JobRolesTable } from './jobRoles/JobRolesTable'
 import { useJobRoleListUtils } from './jobRoles/useJobRoleListUtils'
 
 export const OrganizationPage: FC = () => {
   const { t } = useTranslation()
-  const [currentTabKey, setCurrentTabKey] = useState('companies')
+  const { tab } = useParams()
+  const [currentTabKey, setCurrentTabKey] = useState(tab ?? 'companies')
   const companiesUtils = useCompaniesUtils()
   const groupsUtils = useGroupsUtils()
   const jobRoleListUtils = useJobRoleListUtils()
@@ -27,7 +29,9 @@ export const OrganizationPage: FC = () => {
     const menu = (
       <Menu>
         <Menu.Item>{t('organization.new.company')}</Menu.Item>
-        <Menu.Item>{t('organization.new.group')}</Menu.Item>
+        <Menu.Item onClick={() => groupsUtils.handleOpenCreatePage()}>
+          {t('organization.new.group')}
+        </Menu.Item>
         <Menu.Item>{t('organization.new.job-role')}</Menu.Item>
       </Menu>
     )
@@ -43,7 +47,7 @@ export const OrganizationPage: FC = () => {
         )}
       </>
     )
-  }, [t, isEditorUser])
+  }, [t, groupsUtils, isEditorUser])
 
   let tabBarActions: JSX.Element | undefined
   switch (currentTabKey) {
