@@ -122,6 +122,12 @@ export interface ProfileVm {
      * @memberof ProfileVm
      */
     groupIds?: Array<number> | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProfileVm
+     */
+    campaignCount?: number;
 }
 
 export function ProfileVmFromJSON(json: any): ProfileVm {
@@ -150,6 +156,7 @@ export function ProfileVmFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'companyId': !exists(json, 'companyId') ? undefined : json['companyId'],
         'companyName': !exists(json, 'companyName') ? undefined : json['companyName'],
         'groupIds': !exists(json, 'groupIds') ? undefined : json['groupIds'],
+        'campaignCount': !exists(json, 'campaignCount') ? undefined : json['campaignCount'],
     };
 }
 
@@ -178,6 +185,7 @@ export function ProfileVmToJSON(value?: ProfileVm | null): any {
         'companyId': value.companyId,
         'companyName': value.companyName,
         'groupIds': value.groupIds,
+        'campaignCount': value.campaignCount,
     };
 }
 

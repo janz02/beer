@@ -43,37 +43,24 @@
       "title": "Tárgy"
     }
   },
-  "campaign-channel": {
-    "email": "Email",
-    "phone": "Telefon"
-  },
   "campaign-create": {
     "content": {
       "email": {
-        "tab-name": "__STRING_NOT_TRANSLATED__",
-        "template": "__STRING_NOT_TRANSLATED__",
-        "template-placeholder": "__STRING_NOT_TRANSLATED__",
-        "template-version": "__STRING_NOT_TRANSLATED__",
-        "template-version-placeholder": "__STRING_NOT_TRANSLATED__",
-        "title": "__STRING_NOT_TRANSLATED__"
+        "tab-name": "Tartalom (Email)",
+        "template": "Email Sablon",
+        "template-placeholder": "Válasszon Emailt",
+        "template-version": "Verzió",
+        "template-version-placeholder": "Válasszon Verziót",
+        "title": "Email Sablon"
       }
     },
     "next-section": "Következő (Szegmentálás)",
     "save-draft": "Piszkozat mentése & Kilépés",
     "segmentation": {
-      "add-btn": "Szegmentáció hozzáadása",
-      "category-default": "- nincs kiválasztva -",
-      "category-label": "Szűrés szegmentáció kategória alapján",
-      "category-placeholder": "Válasszon kategóriát",
-      "definition": "Szegmentáció definíció",
-      "empty-list": "Hozzáadhatsz szegmentációt",
-      "expand-btn": "Szegmentáció kiegészítése",
-      "expanded-label": "Kiegészített szegmentáció",
+      "add-btn": "Szegmentáció hozzáadás",
       "file-based-title": "Fájl alapú szegmentáció",
       "filtered-results": "Szűrt eredmény",
-      "inbuilt-title": "Szegmentáció szerkesztő",
-      "segmentation-label": "Szegmentációk",
-      "segmentation-placeholder": "Válasszon szegmentációt",
+      "inbuilt-title": "Szerkesztő alapú szegmentáció",
       "summary-title": "Szegmentáció összegző",
       "target-title": "Célközönség"
     },
@@ -141,14 +128,17 @@
   },
   "campaign-status": {
     "approved": "Jóváhagyott",
-    "created": "__STRING_NOT_TRANSLATED__",
-    "draftcampaign": "__STRING_NOT_TRANSLATED__",
-    "drafttreatment": "__STRING_NOT_TRANSLATED__",
-    "senttotestgroup": "__STRING_NOT_TRANSLATED__",
+    "callcenter": "Call Center",
+    "cancelled": "Visszavont",
+    "closed": "Leállított",
+    "content": "Tartalom",
+    "finished": "Lezárult",
+    "paused": "Szüneteltetett",
+    "segmented": "Szegmentált",
+    "set": "Beállított",
     "started": "Elindított",
     "startedmanually": "Manuálisan elindított",
-    "stopped": "__STRING_NOT_TRANSLATED__",
-    "stoppedmanually": "__STRING_NOT_TRANSLATED__"
+    "tested": "Tesztelt"
   },
   "cashier-editor": {
     "editor-create": "Pénztár létrehozás",
@@ -233,6 +223,7 @@
     "send": "Küldés",
     "table-settings": "Beállítások",
     "try-again": "Újra próbálkozás...",
+    "unassign": "Hozzárendelés megszüntetése",
     "upload": "Feltöltés",
     "view": "Megtekintés",
     "yes": "Igen"
@@ -550,7 +541,7 @@
       "one-time-use-creation-failed": "Az egyszer használatos szegmens létrehozása közben hiba lépett fel. Kérem próbálja újra!"
     },
     "segmentation-editor": {
-      "cannot-open": "__STRING_NOT_TRANSLATED__"
+      "cannot-open": "A kiválasztott szegmentáció nem nyitható meg, kérem próbálkozzon később."
     },
     "sendgrid": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."
@@ -910,7 +901,18 @@
         "permission-count": "Jogosultságok",
         "profile-count": "Felhasználók"
       },
-      "title": "Csoportok"
+      "fields": {
+        "created-by": "Létrehozó",
+        "created-date": "Létrehozás dátuma",
+        "name": "Név"
+      },
+      "permissions": "Jogosultságok ({{totalCount}})",
+      "profiles": "Felhasználók ({{totalCount}})",
+      "title": "Csoportok",
+      "viewer": {
+        "edit": "Szerkesztés",
+        "title": "Csoport"
+      }
     },
     "job-roles": {
       "field": {
@@ -1034,6 +1036,7 @@
       "decline": "Elutasítás"
     },
     "field": {
+      "campaigns": "Kampányok",
       "company": "Cég",
       "email": "E-mail",
       "group": "Csoport",

@@ -21,6 +21,9 @@ import {
     OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand,
     OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommandFromJSON,
     OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommandToJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand,
+    OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommandFromJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommandToJSON,
     OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand,
     OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandFromJSON,
     OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandToJSON,
@@ -33,6 +36,12 @@ import {
     OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm,
     OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmFromJSON,
     OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVmToJSON,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmFromJSON,
     OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVmToJSON,
@@ -42,8 +51,16 @@ export interface ApproveCampaignRequest {
     body?: number;
 }
 
+export interface CampaignDetailRequest {
+    campaignid: number;
+}
+
 export interface CreateCampaignRequest {
     optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand?: OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand;
+}
+
+export interface CreateCampaignsettingsRequest {
+    optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand?: OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand;
 }
 
 export interface DeleteCampaignRequest {
@@ -144,6 +161,40 @@ export class CampaignsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Query for a dedicates campaign detail identified by campaignid.
+     */
+    async campaignDetailRaw(requestParameters: CampaignDetailRequest): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm>> {
+        if (requestParameters.campaignid === null || requestParameters.campaignid === undefined) {
+            throw new runtime.RequiredError('campaignid','Required parameter requestParameters.campaignid was null or undefined when calling campaignDetail.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Campaigns/GetCampaignDetail/{campaignid}`.replace(`{${"campaignid"}}`, encodeURIComponent(String(requestParameters.campaignid))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Query for a dedicates campaign detail identified by campaignid.
+     */
+    async campaignDetail(requestParameters: CampaignDetailRequest): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm> {
+        const response = await this.campaignDetailRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Creates the dedicates campaign. The creation will results in an identification,  assigned to the current instance.
      */
     async createCampaignRaw(requestParameters: CreateCampaignRequest): Promise<runtime.ApiResponse<number>> {
@@ -173,6 +224,39 @@ export class CampaignsApi extends runtime.BaseAPI {
      */
     async createCampaign(requestParameters: CreateCampaignRequest): Promise<number> {
         const response = await this.createCampaignRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Creates the dedicates campaign. The creation will results in an identification,  assigned to the current instance.
+     */
+    async createCampaignsettingsRaw(requestParameters: CreateCampaignsettingsRequest): Promise<runtime.ApiResponse<number>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Campaigns/CreateSettings`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommandToJSON(requestParameters.optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand),
+        });
+
+        return new runtime.TextApiResponse(response) as any;
+    }
+
+    /**
+     * Creates the dedicates campaign. The creation will results in an identification,  assigned to the current instance.
+     */
+    async createCampaignsettings(requestParameters: CreateCampaignsettingsRequest): Promise<number> {
+        const response = await this.createCampaignsettingsRaw(requestParameters);
         return await response.value();
     }
 
@@ -449,6 +533,38 @@ export class CampaignsApi extends runtime.BaseAPI {
      */
     async sendCampaignToTestGroup(requestParameters: SendCampaignToTestGroupRequest): Promise<void> {
         await this.sendCampaignToTestGroupRaw(requestParameters);
+    }
+
+    /**
+     * Used in the first screen of campaign creation.
+     * Returns selection lists of controls to help the user with the options.
+     */
+    async settingsRaw(): Promise<runtime.ApiResponse<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVm>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Campaigns/Settings`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVmFromJSON(jsonValue));
+    }
+
+    /**
+     * Used in the first screen of campaign creation.
+     * Returns selection lists of controls to help the user with the options.
+     */
+    async settings(): Promise<OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignSettingsVm> {
+        const response = await this.settingsRaw();
+        return await response.value();
     }
 
     /**

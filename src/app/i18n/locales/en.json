@@ -43,37 +43,24 @@
       "title": "Subject"
     }
   },
-  "campaign-channel": {
-    "email": "Email",
-    "phone": "Phone"
-  },
   "campaign-create": {
     "content": {
       "email": {
-        "tab-name": "__STRING_NOT_TRANSLATED__",
-        "template": "__STRING_NOT_TRANSLATED__",
-        "template-placeholder": "__STRING_NOT_TRANSLATED__",
-        "template-version": "__STRING_NOT_TRANSLATED__",
-        "template-version-placeholder": "__STRING_NOT_TRANSLATED__",
-        "title": "__STRING_NOT_TRANSLATED__"
+        "tab-name": "Content (Email)",
+        "template": "Email Template",
+        "template-placeholder": "Select Email",
+        "template-version": "Version",
+        "template-version-placeholder": "Select Version",
+        "title": "Email Template"
       }
     },
     "next-section": "Next (Segmentation)",
     "save-draft": "Save draft & Exit",
     "segmentation": {
       "add-btn": "Add segmentation",
-      "category-default": "- not selected -",
-      "category-label": "Filter by segmentation category",
-      "category-placeholder": "Select a category",
-      "definition": "Segmentation definition",
-      "empty-list": "You can add segmentation",
-      "expand-btn": "Expand with custom rules",
-      "expanded-label": "Expanded rules",
       "file-based-title": "File based segmentation",
       "filtered-results": "Filtered results",
-      "inbuilt-title": "Inbuilt segmentation",
-      "segmentation-label": "Segmentations",
-      "segmentation-placeholder": "Select a segmentation",
+      "inbuilt-title": "Inbuilt segmentations",
       "summary-title": "Segmentation summary",
       "target-title": "Target audience"
     },
@@ -141,14 +128,17 @@
   },
   "campaign-status": {
     "approved": "Approved",
-    "created": "__STRING_NOT_TRANSLATED__",
-    "draftcampaign": "__STRING_NOT_TRANSLATED__",
-    "drafttreatment": "__STRING_NOT_TRANSLATED__",
-    "senttotestgroup": "__STRING_NOT_TRANSLATED__",
+    "callcenter": "Call Center",
+    "cancelled": "Cancelled",
+    "closed": "Closed",
+    "content": "Content",
+    "finished": "Finished",
+    "paused": "Paused",
+    "segmented": "Segmented",
+    "set": "Set",
     "started": "Started",
     "startedmanually": "Manually started",
-    "stopped": "__STRING_NOT_TRANSLATED__",
-    "stoppedmanually": "__STRING_NOT_TRANSLATED__"
+    "tested": "Tested"
   },
   "cashier-editor": {
     "editor-create": "Create cashier",
@@ -233,6 +223,7 @@
     "send": "Send",
     "table-settings": "Settings",
     "try-again": "Try again...",
+    "unassign": "Unassign",
     "upload": "Upload",
     "view": "View",
     "yes": "Yes"
@@ -910,7 +901,18 @@
         "permission-count": "Permissions",
         "profile-count": "Profiles"
       },
-      "title": "Groups"
+      "fields": {
+        "created-by": "Created by",
+        "created-date": "Date of creation",
+        "name": "Name"
+      },
+      "permissions": "Permissions ({{totalCount}})",
+      "profiles": "Profiles ({{totalCount}})",
+      "title": "Groups",
+      "viewer": {
+        "edit": "Edit",
+        "title": "Group"
+      }
     },
     "job-roles": {
       "field": {
@@ -1034,6 +1036,7 @@
       "decline": "Decline"
     },
     "field": {
+      "campaigns": "Campaigns",
       "company": "Company",
       "email": "E-mail",
       "group": "Group",

@@ -5,6 +5,7 @@ import { FeatureState } from 'models/featureState'
 import React from 'react'
 import { setupPermissions, setupStore } from '../../../../config/setupMocks'
 import { ProfileList } from './ProfileList'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 jest.mock('app/store')
 
@@ -47,11 +48,19 @@ setupStore({
   }
 })
 
+const TestProfileList: React.FC = () => {
+  return (
+    <Router>
+      <ProfileList />
+    </Router>
+  )
+}
+
 test('profiles appear in the list', () => {
   // Arrange
 
   // Act
-  render(<ProfileList />)
+  render(<TestProfileList />)
 
   // Assert
   expect(screen.queryByText(/\bVLAcHYhZ5B\b/)).toBeTruthy()
@@ -61,7 +70,7 @@ test('status badges are correct', () => {
   // Arrange
 
   // Act
-  render(<ProfileList />)
+  render(<TestProfileList />)
 
   // Assert
   expect(screen.queryAllByText(/\bActive\b/)).toHaveLength(0)
@@ -75,7 +84,7 @@ test('admins can approve or decline', () => {
   setupPermissions([Roles.Administrator])
 
   // Act
-  render(<ProfileList />)
+  render(<TestProfileList />)
 
   // Assert
   expect(screen.getAllByLabelText('check-circle')).toBeTruthy()
@@ -87,7 +96,7 @@ test('other users dont have crud buttons', () => {
   setupPermissions([])
 
   // Act
-  render(<ProfileList />)
+  render(<TestProfileList />)
 
   // Assert
   expect(screen.queryByLabelText(/aria-label="check-circle"/)).toBeFalsy()
