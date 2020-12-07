@@ -121,7 +121,11 @@ export const useProfileListUtils = (): ProfileListUtils => {
         sort: false,
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true,
-        ellipsis: false
+        ellipsis: false,
+        disableSearchHighlight: true,
+        render: (value: string, profile: Profile): React.ReactNode => {
+          return <Link to={`/companies/${profile.companyId}`}>{profile.companyName}</Link>
+        }
       },
       {
         title: t('profiles.field.job-role'),
@@ -129,7 +133,11 @@ export const useProfileListUtils = (): ProfileListUtils => {
         sort: false,
         filterMode: FilterMode.SEARCH,
         hiddenByDefault: true,
-        ellipsis: false
+        ellipsis: false,
+        disableSearchHighlight: true,
+        render: (value: string, profile: Profile): React.ReactNode => {
+          return <Link to={`/job-roles/${profile.jobRoleId}`}>{profile.jobRoleName}</Link>
+        }
       }
     ],
     [t, selectedTab]

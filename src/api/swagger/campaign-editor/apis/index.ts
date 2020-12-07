@@ -6,6 +6,7 @@ export * from './EmailsApi';
 export * from './InformationApi';
 export * from './LanguagesApi';
 export * from './LocalizationsApi';
+export * from './OrganizationalGroupsApi';
 export * from './PermissionsApi';
 export * from './ProductsApi';
 export * from './SegmentationCategoriesApi';
