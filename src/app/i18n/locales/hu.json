@@ -50,21 +50,30 @@
   "campaign-create": {
     "content": {
       "email": {
-        "tab-name": "Tartalom (Email)",
-        "template": "Email Sablon",
-        "template-placeholder": "Válasszon Emailt",
-        "template-version": "Verzió",
-        "template-version-placeholder": "Válasszon Verziót",
-        "title": "Email Sablon"
+        "tab-name": "__STRING_NOT_TRANSLATED__",
+        "template": "__STRING_NOT_TRANSLATED__",
+        "template-placeholder": "__STRING_NOT_TRANSLATED__",
+        "template-version": "__STRING_NOT_TRANSLATED__",
+        "template-version-placeholder": "__STRING_NOT_TRANSLATED__",
+        "title": "__STRING_NOT_TRANSLATED__"
       }
     },
     "next-section": "Következő (Szegmentálás)",
     "save-draft": "Piszkozat mentése & Kilépés",
     "segmentation": {
-      "add-btn": "Szegmentáció hozzáadás",
+      "add-btn": "Szegmentáció hozzáadása",
+      "category-default": "- nincs kiválasztva -",
+      "category-label": "Szűrés szegmentáció kategória alapján",
+      "category-placeholder": "Válasszon kategóriát",
+      "definition": "Szegmentáció definíció",
+      "empty-list": "Hozzáadhatsz szegmentációt",
+      "expand-btn": "Szegmentáció kiegészítése",
+      "expanded-label": "Kiegészített szegmentáció",
       "file-based-title": "Fájl alapú szegmentáció",
       "filtered-results": "Szűrt eredmény",
-      "inbuilt-title": "Szerkesztő alapú szegmentáció",
+      "inbuilt-title": "Szegmentáció szerkesztő",
+      "segmentation-label": "Szegmentációk",
+      "segmentation-placeholder": "Válasszon szegmentációt",
       "summary-title": "Szegmentáció összegző",
       "target-title": "Célközönség"
     },
@@ -274,40 +283,6 @@
       "name": "Kategória neve"
     }
   },
-  "campaign-create": {
-    "settings-tab-name": "Beállítások",
-    "segmentation-tab-name": "Szegmentáció",
-    "content-tab-name": "Tartalom (Email)",
-    "test-tab-name": "Teszt",
-    "title": "Kampány Létrehozása",
-    "status-creation": "Státusz (Kampány Létrehozás)",
-    "user-logs": "Felhaszálói napló",
-    "save-draft": "Piszkozat mentése & Kilépés",
-    "next-section": "Következő (Szegmentálás)",
-    "settings": {
-      "campaign-name": "Kampány neve",
-      "requestor": "Igénylő",
-      "about": "Leírás",
-      "campaign-admins-title": "Kampány adminok",
-      "channel-type-title": "Csatorna típusa",
-      "daily-restriction-title": "Napi tiltások",
-      "start-time": "Kezdődik",
-      "end-time": "Végződik",
-      "start-date": "Kezdeti dátum",
-      "end-date": "Zárás dátum",
-      "email-recall-settings-title": "Email visszahívás beállítása",
-      "maximum-recall-attempts": "Visszahívási kísérletek száma",
-      "recall-frequency": "Visszahívás gyakorisága",
-      "email-resending-rules": "Email újraküldési szabályok",
-      "interval-restrictions": "Időszakos korlátozások",
-      "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
-      "product-title": "Termék",
-      "product-label": "Termék",
-      "timing-title": "Időzítés",
-      "select-timing-type-label": "Időzítés típusa",
-      "approver-validator": "Elfogadó/Érvényesítő"
-    }
-  },
   "coupon-campaign-create": {
     "activate": "Aktiválás",
     "audit": "Audit",
@@ -494,6 +469,8 @@
       "img-dimensions-incorrect": "A kép szélessége csak {{width}} és magassága csak {{height}} pixel lehet.",
       "incorrect-file-extension": "Nem megengedett fájl kiterjesztés.",
       "internal": "Sikertelen kommunikáció a szerverrel, próbálkozzon később.",
+      "invalid-filebased-segmentation": "Hiányzó szegmentációs fájl.",
+      "invalid-inbuilt-segmentation": "Szegmentáció kiválasztása kötelező.",
       "max-length-exact": "A mező nem lehet {{max}} karakternél hosszabb.",
       "max-number-exact": "A mező értéke maximum {{max}} lehet.",
       "no-template": "Nem található sablon azonosító.",
@@ -572,8 +549,8 @@
     "segment": {
       "one-time-use-creation-failed": "Az egyszer használatos szegmens létrehozása közben hiba lépett fel. Kérem próbálja újra!"
     },
-    "segmentationEditor": {
-      "cannot-open": "A kiválasztott szegmentáció nem nyitható meg, kérem próbálkozzon később."
+    "segmentation-editor": {
+      "cannot-open": "__STRING_NOT_TRANSLATED__"
     },
     "sendgrid": {
       "communication": "Belső rendszer nem elérhető, kérem próbálkozzon később."

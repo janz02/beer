@@ -50,21 +50,30 @@
   "campaign-create": {
     "content": {
       "email": {
-        "tab-name": "Content (Email)",
-        "template": "Email Template",
-        "template-placeholder": "Select Email",
-        "template-version": "Version",
-        "template-version-placeholder": "Select Version",
-        "title": "Email Template"
+        "tab-name": "__STRING_NOT_TRANSLATED__",
+        "template": "__STRING_NOT_TRANSLATED__",
+        "template-placeholder": "__STRING_NOT_TRANSLATED__",
+        "template-version": "__STRING_NOT_TRANSLATED__",
+        "template-version-placeholder": "__STRING_NOT_TRANSLATED__",
+        "title": "__STRING_NOT_TRANSLATED__"
       }
     },
     "next-section": "Next (Segmentation)",
     "save-draft": "Save draft & Exit",
     "segmentation": {
       "add-btn": "Add segmentation",
+      "category-default": "- not selected -",
+      "category-label": "Filter by segmentation category",
+      "category-placeholder": "Select a category",
+      "definition": "Segmentation definition",
+      "empty-list": "You can add segmentation",
+      "expand-btn": "Expand with custom rules",
+      "expanded-label": "Expanded rules",
       "file-based-title": "File based segmentation",
       "filtered-results": "Filtered results",
-      "inbuilt-title": "Inbuilt segmentations",
+      "inbuilt-title": "Inbuilt segmentation",
+      "segmentation-label": "Segmentations",
+      "segmentation-placeholder": "Select a segmentation",
       "summary-title": "Segmentation summary",
       "target-title": "Target audience"
     },
@@ -274,40 +283,6 @@
       "name": "Category name"
     }
   },
-  "campaign-create": {
-    "settings-tab-name": "Settings",
-    "segmentation-tab-name": "Segmentation",
-    "content-tab-name": "Content(Email)",
-    "test-tab-name": "Test",
-    "title": "Create Campaign",
-    "status-creation": "Status (Campaign Creation)",
-    "user-logs": "User Logs",
-    "save-draft": "Save draft & Exit",
-    "next-section": "Next (Segmentation)",
-    "settings": {
-      "campaign-name": "Campaign name",
-      "requestor": "Requestor",
-      "about": "About",
-      "campaign-admins-title": "Campaign admins",
-      "channel-type-title": "Channel type",
-      "daily-restriction-title": "Daily restriction",
-      "start-time": "Start time",
-      "end-time": "End time",
-      "start-date": "Start date",
-      "end-date": "End date",
-      "email-recall-settings-title": "Email re-call settings",
-      "maximum-recall-attempts": "Maximum recall attempts",
-      "recall-frequency": "Recall frequency",
-      "email-resending-rules": "Email re-sending rules",
-      "interval-restrictions": "Interval Restrictions",
-      "email-delivery-date-restrictions": "Email delivery date restrictions",
-      "product-title": "Product",
-      "product-label": "Product",
-      "timing-title": "Timing",
-      "select-timing-type-label": "Select timing type",
-      "approver-validator": "Approver/Validator"
-    }
-  },
   "coupon-campaign-create": {
     "activate": "Activate",
     "audit": "Audit",
@@ -494,6 +469,8 @@
       "img-dimensions-incorrect": "The width and height of the picture can only be {{width}}x{{height}} pixels.",
       "incorrect-file-extension": "Not supported file extension.",
       "internal": "Unsuccessful communication with the server, try again later.",
+      "invalid-filebased-segmentation": "Missing segmentation file.",
+      "invalid-inbuilt-segmentation": "Segmentation select is required.",
       "max-length-exact": "This field must be less then {{max}} characters.",
       "max-number-exact": "This field maximum value is {{max}}.",
       "no-template": "Template ID not found.",
