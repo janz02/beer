@@ -12,7 +12,7 @@ import './GroupViewPage.scss'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import { EditButton } from 'components/buttons/EditButton'
 
-export const GroupViewPage: FC<void> = () => {
+export const GroupViewPage: FC<{}> = () => {
   const { t } = useTranslation()
   const groupEditorUtils = useGroupEditorUtils()
   const { group, isLoading, isEditorUser, getGroupDetails } = groupEditorUtils
