@@ -1,12 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
-import moment from 'moment'
 import {
   CampaignSettingsFormElements,
   TextValuePair
 } from 'models/campaign/campaignSettingsFormEelements'
-import { OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand } from 'api/swagger/campaign-editor/models'
 
 interface CampaignSettingsState {
   campaignSettingsFormElements: CampaignSettingsFormElements
@@ -60,8 +58,7 @@ const campaignSettingsSlice = createSlice({
 const {
   getCampaignSettingsFormElementsSuccess,
   getCampaignSettingsFormElementsFail,
-  getCampaignSettingsFormElements,
-  saveCampaignSettingsSuccess
+  getCampaignSettingsFormElements
 } = campaignSettingsSlice.actions
 
 export const campaignSettingsReducer = campaignSettingsSlice.reducer
@@ -83,7 +80,7 @@ export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
     dispatch(getCampaignSettingsFormElementsFail())
   }
 }
-export const saveSettings = (campaignSettings: any): AppThunk => async dispatch => {
+export const saveSettings = (campaignSettings: any): AppThunk => async () => {
   try {
     // Csinani egy tipust amibe atmappelni es megcsinalni a savet
     // Validacio a formon

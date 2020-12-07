@@ -4,11 +4,11 @@ import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export interface EmailResendProps {
+export interface EmailResendSectionProps {
   emailResendOptions: TextValuePair[]
 }
 
-export const EmailRecallSection: FC<EmailResendProps> = ({ emailResendOptions }) => {
+export const EmailResendSection: FC<EmailResendSectionProps> = ({ emailResendOptions }) => {
   const { t } = useTranslation()
   return (
     <>

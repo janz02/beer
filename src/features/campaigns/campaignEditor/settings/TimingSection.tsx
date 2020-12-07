@@ -5,11 +5,11 @@ import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export interface TimingProps {
+export interface TimingSectionProps {
   timingTypes: TextValuePair[]
 }
 
-export const TimingSection: FC<TimingProps> = ({ timingTypes }) => {
+export const TimingSection: FC<TimingSectionProps> = ({ timingTypes }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   return (

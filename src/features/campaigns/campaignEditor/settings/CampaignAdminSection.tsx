@@ -5,12 +5,15 @@ import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export interface CampaignAdminProps {
+export interface CampaignAdminSectionProps {
   requesters: TextValuePair[]
   responsibles: TextValuePair[]
 }
 
-export const CampaignAdminSection: FC<CampaignAdminProps> = ({ requesters, responsibles }) => {
+export const CampaignAdminSection: FC<CampaignAdminSectionProps> = ({
+  requesters,
+  responsibles
+}) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   return (

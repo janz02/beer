@@ -5,11 +5,11 @@ import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export interface IntervalRestrictionProps {
+export interface IntervalRestrictionSectionProps {
   restrictionOptions: TextValuePair[]
 }
 
-export const IntervalRestrictionSection: FC<IntervalRestrictionProps> = ({
+export const IntervalRestrictionSection: FC<IntervalRestrictionSectionProps> = ({
   restrictionOptions
 }) => {
   const { t } = useTranslation()

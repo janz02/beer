@@ -9,7 +9,7 @@ export interface EmailReSendingProps {
   emailReSendingOptions: TextValuePair[]
 }
 
-export const EmailSendingSection: FC<EmailReSendingProps> = ({ emailReSendingOptions }) => {
+export const EmailReSendingSection: FC<EmailReSendingProps> = ({ emailReSendingOptions }) => {
   const { t } = useTranslation()
   return (
     <>

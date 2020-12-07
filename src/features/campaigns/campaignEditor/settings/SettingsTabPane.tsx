@@ -1,7 +1,6 @@
 import { Col, Divider, Form, Row } from 'antd'
 import './../base/CampaignEditor.scss'
 import React, { FC } from 'react'
-import { CampaignEditorProps } from '../base/CampaignEditorForm'
 import { BasicCampaignSection } from './BasicCampaignSection'
 import { ChannelTypeSection } from './ChannelTypeSection'
 import { ProductSection } from './ProductSection'
@@ -9,8 +8,8 @@ import { CampaignAdminSection } from './CampaignAdminSection'
 import { TimingSection } from './TimingSection'
 import { DailyRestrictionSection } from './DailyRestrictionSection'
 import { IntervalRestrictionSection } from './IntervalRestrictionSection'
-import { EmailRecallSection } from './EmailRecallSection'
-import { EmailSendingSection } from './EmailSendingSection'
+import { EmailResendSection } from './EmailRecallSection'
+import { EmailReSendingSection } from './EmailSendingSection'
 import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
 
@@ -68,7 +67,7 @@ export const SettingsTabPane: FC = () => {
 
         <Row gutter={16}>
           <Col span={7}>
-            <EmailRecallSection
+            <EmailResendSection
               emailResendOptions={campaignSettingsFormElements.resendFrequencyOptions}
             />
           </Col>
@@ -76,7 +75,7 @@ export const SettingsTabPane: FC = () => {
             <Divider type="vertical" className="vertical-splitter" />
           </Col>
           <Col span={7}>
-            <EmailSendingSection
+            <EmailReSendingSection
               emailReSendingOptions={campaignSettingsFormElements.resendingRuleOptions}
             />
           </Col>

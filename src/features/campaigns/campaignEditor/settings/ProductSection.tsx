@@ -5,11 +5,11 @@ import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export interface ProductProps {
+export interface ProductSectionProps {
   products: TextValuePair[]
 }
 
-export const ProductSection: FC<ProductProps> = ({ products }) => {
+export const ProductSection: FC<ProductSectionProps> = ({ products }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   return (

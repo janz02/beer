@@ -83,7 +83,7 @@ export const rootReducer = combineReducers({
   systemParams: systemParamsReducer,
   campaignList: campaignsListReducer,
   jobRoleList: jobRoleListReducer,
-  campaignSettings: campaignSettingsReducer
+  campaignEditor: campaignSettingsReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

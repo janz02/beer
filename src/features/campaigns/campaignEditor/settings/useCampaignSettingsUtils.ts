@@ -15,7 +15,7 @@ interface CampaignSettingsUtils {
 export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
   const dispatch = useDispatch()
   const { form } = useFormUtils()
-  const { campaignSettingsFormElements } = useSelector((state: RootState) => state.campaignSettings)
+  const { campaignSettingsFormElements } = useSelector((state: RootState) => state.campaignEditor)
 
   const handleSubmitButtonClick = useCallback(
     (values: any): void => {
