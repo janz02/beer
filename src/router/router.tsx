@@ -36,6 +36,8 @@ import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEd
 import { OrganizationPage } from 'features/organization/OrganizationPage'
 import { PlaceholderPage } from 'components/placeholder/PlaceholderPage'
 import { ProfileEditorPage } from 'features/profiles/profileEditor/ProfileEditorPage'
+import { GroupViewPage } from 'features/organization/groups/groupEditor/GroupViewPage'
+import { GroupEditorModal } from 'features/organization/groups/groupEditor/GroupEditorModal'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {
@@ -215,10 +217,23 @@ const Routes = (): JSX.Element => (
     />
     <PrivateRoute
       exact
-      path="/organization"
+      path={['/organization', '/organization/:tab?']}
       roles={pageViewRoles.organization}
       component={OrganizationPage}
     />
+    <PrivateRoute
+      exact
+      path={['/organization/groups/new', '/organization/groups/:id/edit']}
+      roles={pageViewRoles.organizationEditor}
+      component={GroupEditorModal}
+    />
+    <PrivateRoute
+      exact
+      path="/organization/groups/:id"
+      roles={pageViewRoles.organizationEditor}
+      component={GroupViewPage}
+    />
+
     <Route path="*" render={onDefaultRoute} />
   </Switch>
 )

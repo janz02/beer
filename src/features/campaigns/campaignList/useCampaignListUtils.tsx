@@ -97,7 +97,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
         filters:
           channels?.map(x => {
             return {
-              text: x.name && t('campaign-channel.' + x.name?.toLowerCase()),
+              text: x.name && t('enum.channel-type.' + x.name?.toLowerCase()),
               value: x.id?.toString()
             } as ColumnFilterItem
           }) ?? [],
@@ -107,7 +107,7 @@ export const useCampaignListUtils = (): CampaignListUtils => {
           )
           if (campaignChannels && campaignChannels.length > 0) {
             return campaignChannels
-              .map(x => x && t('campaign-channel.' + x.toLowerCase()))
+              .map(x => x && t('enum.channel-type.' + x.toLowerCase()))
               .join(', ')
           }
         }

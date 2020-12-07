@@ -35,7 +35,8 @@ import { segmentationListReducer } from 'features/segmentation/segmentationList/
 import { segmentationEditorReducer } from 'features/segmentation/segmentationEditor/segmentationEditorSlice'
 import { systemParamsReducer } from 'features/settings/systemParams/systemParamsSlice'
 import { campaignsListReducer } from 'features/campaigns/campaignList/campaignListSlice'
-import { groupsReducer } from 'features/organization/groups/groupsSlice'
+import { groupsReducer } from 'features/organization/groups/groupList/groupsSlice'
+import { groupEditorReducer } from 'features/organization/groups/groupEditor/groupEditorSlice'
 import { jobRoleListReducer } from 'features/organization/jobRoles/jobRoleListSlice'
 import { campaignSettingsReducer } from 'features/campaigns/campaignEditor/settings/CampaignSettingsSlice'
 
@@ -52,6 +53,7 @@ export const rootReducer = combineReducers({
   profileEditor: profileEditorReducer,
   companies: companiesReducer,
   groups: groupsReducer,
+  groupEditor: groupEditorReducer,
   couponCampaignList: couponCampaignListReducer,
   couponCampaigns: couponCampaignsReducer,
   couponCampaignCategoryList: couponCampaignCategoryListReducer,

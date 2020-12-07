@@ -27,7 +27,8 @@ import { systemParamsActions } from 'features/settings/systemParams/systemParams
 import { campaignListActions } from 'features/campaigns/campaignList/campaignListSlice'
 import { profileListActions } from 'features/profiles/profileList/profileListSlice'
 import { companiesActions } from 'features/organization/companies/companiesSlice'
-import { groupsActions } from 'features/organization/groups/groupsSlice'
+import { groupsActions } from 'features/organization/groups/groupList/groupsSlice'
+import { groupEditorActions } from 'features/organization/groups/groupEditor/groupEditorSlice'
 import { profileEditorActions } from 'features/profiles/profileEditor/profileEditorSlice'
 
 interface HardResetParams {
@@ -65,6 +66,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(campaignListActions.resetCampaignsList())
     dispatch(companiesActions.reset())
     dispatch(groupsActions.reset())
+    dispatch(groupEditorActions.resetGroupEditor())
     logout && dispatch(resetRouterHistory())
   })
 }
