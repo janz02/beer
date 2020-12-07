@@ -1,21 +1,15 @@
-.panel-header__container {
+.panelHeader__container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 
-.panel-header-title__container {
+.panelHeaderTitle__container {
   display: flex;
   align-items: center;
 
   * {
     margin-right: 4px;
   }
-}
-
-.panel--inactive .ant-collapse-item {
-  border-bottom: none;
-  cursor: default;
-  pointer-events: none;
 }

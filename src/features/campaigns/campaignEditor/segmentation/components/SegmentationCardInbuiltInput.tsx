@@ -8,7 +8,7 @@ import {
 import { Button, Collapse, Select, Typography, Form, Row, Col, Modal } from 'antd'
 import React, { FC, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import './SegmentationCardInput.scss'
+import styles from './SegmentationCardInbuiltInput.module.scss'
 
 export interface SegmentationCardValue {
   categoryId?: any
@@ -26,7 +26,7 @@ export interface SegmentationCardInputProps {
   onChange?: Function // from Form.Item
 }
 
-export const SegmentationCardInput: FC<SegmentationCardInputProps> = ({
+export const SegmentationCardInbuiltInput: FC<SegmentationCardInputProps> = ({
   categories = [],
   segmentations = [],
   value,
@@ -98,15 +98,19 @@ export const SegmentationCardInput: FC<SegmentationCardInputProps> = ({
   }
 
   return (
-    <Collapse defaultActiveKey={['card']} expandIcon={() => undefined} className="card__container">
+    <Collapse
+      defaultActiveKey={['card']}
+      expandIcon={() => undefined}
+      className={styles.card__container}
+    >
       <Collapse.Panel
         key="card"
-        className="card__panel"
+        className={`custom-form-item-card ${styles.card__panel}`}
         header={
-          <span className="card__header-container">
+          <span className={styles.card__headerContainer}>
             <AimOutlined />
-            <span className="card__title-and-btn-container">
-              <span className="card__header-title-container">
+            <span className={styles.card__titleAndBtnContainer}>
+              <span className={styles.card__headerTitleContainer}>
                 <Typography.Text strong>
                   {t('campaign-create.segmentation.definition')}
                 </Typography.Text>
@@ -122,7 +126,7 @@ export const SegmentationCardInput: FC<SegmentationCardInputProps> = ({
                   e.stopPropagation()
                   onRemove()
                 }}
-                className="card__delete-btn"
+                className={styles.card__deleteBtn}
               >
                 <DeleteOutlined />
               </Button>
@@ -153,11 +157,7 @@ export const SegmentationCardInput: FC<SegmentationCardInputProps> = ({
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item
-              label={t('campaign-create.segmentation.segmentation-label')}
-              className="bypass-error-border"
-              required
-            >
+            <Form.Item label={t('campaign-create.segmentation.segmentation-label')} required>
               <Select
                 value={innerValue?.segmentationId}
                 placeholder={t('campaign-create.segmentation.segmentation-placeholder')}
@@ -179,14 +179,14 @@ export const SegmentationCardInput: FC<SegmentationCardInputProps> = ({
               <Button
                 type="dashed"
                 icon={<PlusCircleFilled />}
-                className="card__action-btn"
+                className={styles.card__actionBtn}
                 onClick={handleExpandClick}
               >
                 {t('campaign-create.segmentation.expand-btn')}
               </Button>
             )}
             {innerValue?.isExpanded && (
-              <span className="card__edit-btn-container">
+              <span className={styles.card__editBtnContainer}>
                 <Button icon={<EditFilled />} onClick={handleExpandClick}>
                   {`${t('campaign-create.segmentation.expanded-label')} (${
                     innerValue.expandResult

@@ -7,8 +7,8 @@ import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { sum } from 'services/commonFunctions'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
-import { SegmentationCardInput } from './SegmentationCardInput'
-import './SegmentationTabPane.scss'
+import { SegmentationCardInbuiltInput } from './components/SegmentationCardInbuiltInput'
+import styles from './SegmentationTabPane.module.scss'
 
 export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
@@ -117,7 +117,7 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                     >
                       {fields.length === 0 && <>{emptySegmentationList}</>}
                       {fields.length > 0 && (
-                        <ul className="card-list__container">
+                        <ul className={styles.cardList__container}>
                           {fields.map((field, index) => (
                             <li key={field.key}>
                               <Form.Item
@@ -125,7 +125,7 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                                 fieldKey={[field.fieldKey]}
                                 rules={[inbuiltSegmentation()]}
                               >
-                                <SegmentationCardInput
+                                <SegmentationCardInbuiltInput
                                   onRemove={() => remove(index)}
                                   categories={data.segmentationCategories}
                                   segmentations={data.segmentations}
@@ -168,10 +168,10 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
                     >
                       {fields.length === 0 && <>{emptySegmentationList}</>}
                       {fields.length > 0 && (
-                        <ul className="card-list__container">
+                        <ul className={styles.cardList__container}>
                           {fields.map((field, index) => (
                             <li key={field.key}>
-                              <SegmentationCardInput onRemove={() => remove(index)} />
+                              <SegmentationCardInbuiltInput onRemove={() => remove(index)} />
                             </li>
                           ))}
                         </ul>

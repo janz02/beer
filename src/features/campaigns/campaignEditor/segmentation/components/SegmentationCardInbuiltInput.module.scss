@@ -1,14 +1,10 @@
 .card {
-  &__container .ant-collapse-header {
-    pointer-events: none;
-  }
-
   &__panel,
-  &__delete-btn {
+  &__deleteBtn {
     pointer-events: all;
   }
 
-  &__header-container {
+  &__headerContainer {
     display: flex;
     align-items: baseline;
     justify-content: flex-start;
@@ -19,25 +15,25 @@
     }
   }
 
-  &__title-and-btn-container {
+  &__titleAndBtnContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
   }
 
-  &__header-title-container {
+  &__headerTitleContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
   }
 
-  &__action-btn {
+  &__actionBtn {
     width: 100%;
   }
 
-  &__edit-btn-container {
+  &__editBtnContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,15 +47,4 @@
       flex: auto;
     }
   }
-}
-
-.ant-form-item-has-error .card__panel {
-  border: 1px solid red;
-}
-
-.ant-form-item-has-error
-  .bypass-error-border
-  .ant-select:not(.ant-select-borderless)
-  .ant-select-selector {
-  border-color: lightgray !important;
 }
