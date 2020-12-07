@@ -1,6 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons'
 import { Col, Row, Form, Modal, Typography, Empty, Button } from 'antd'
-import { useForm } from 'antd/lib/form/Form'
 import { AccordionInfo } from 'components/accordion/AccordionInfo'
 import { CustomAccordion } from 'components/accordion/CustomAccordion'
 import { useCommonFormRules } from 'hooks'
@@ -20,16 +19,10 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
     campaignId,
     summaryAll: 12500,
     inbuiltSegmentationList: [
-      // { segmentationId: 1, result: 300, isExpanded: true, expandResult: 34 },
-      // { segmentationId: 1, result: 300, isExpanded: false },
-      // { segmentationId: 1, categoryId: 1, result: 300, isExpanded: false }
+      // { segmentationId: 1, result: 300, isExpanded: true, expandResult: 34 }
     ],
     fileBasedSegmentationList: [
       // { url: 'valami', result: 200 }
-      // { url: 'valami' },
-      // { url: 'valami' },
-      // { url: 'valami' },
-      // { url: 'valami' }
     ]
   }
 

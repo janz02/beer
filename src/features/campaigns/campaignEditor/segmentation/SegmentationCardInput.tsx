@@ -104,29 +104,29 @@ export const SegmentationCardInput: FC<SegmentationCardInputProps> = ({
         className="card__panel"
         header={
           <span className="card__header-container">
-            <span className="card__header-title-container">
-              <span>
-                <AimOutlined />
+            <AimOutlined />
+            <span className="card__title-and-btn-container">
+              <span className="card__header-title-container">
                 <Typography.Text strong>
                   {t('campaign-create.segmentation.definition')}
                 </Typography.Text>
+                <span>
+                  <Typography.Text>
+                    {`${t('campaign-create.segmentation.filtered-results')}: `}
+                  </Typography.Text>
+                  <Typography.Text strong>{innerValue?.result || 0}</Typography.Text>
+                </span>
               </span>
-              <span>
-                <Typography.Text>
-                  {`${t('campaign-create.segmentation.filtered-results')}: `}
-                </Typography.Text>
-                <Typography.Text strong>{innerValue?.result || 0}</Typography.Text>
-              </span>
+              <Button
+                onClick={e => {
+                  e.stopPropagation()
+                  onRemove()
+                }}
+                className="card__delete-btn"
+              >
+                <DeleteOutlined />
+              </Button>
             </span>
-            <Button
-              onClick={e => {
-                e.stopPropagation()
-                onRemove()
-              }}
-              className="card__delete-btn"
-            >
-              <DeleteOutlined />
-            </Button>
           </span>
         }
       >
