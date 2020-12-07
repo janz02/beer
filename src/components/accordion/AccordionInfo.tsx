@@ -1,7 +1,7 @@
 import { ExclamationCircleOutlined, InfoCircleOutlined, WarningOutlined } from '@ant-design/icons'
 import { Typography } from 'antd'
 import React, { FC, useMemo } from 'react'
-import './AccordionInfo.scss'
+import styles from './AccordionInfo.module.scss'
 
 export interface AccordionInfo {
   label: string
@@ -24,7 +24,7 @@ export const AccordionInfo: FC<AccordionInfo> = ({ label, data, customData, type
   )
   return (
     <span
-      className="panel-header__info"
+      className={styles.accordionInfo__container}
       onClick={e => {
         e.stopPropagation()
         onClick?.()

@@ -145,4 +145,34 @@
       margin-left: 0;
     }
   }
+
+  .custom-panel--inactive .ant-collapse-item {
+    border-bottom: none;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .custom-form-item-card {
+    .ant-collapse-header {
+      pointer-events: none;
+    }
+
+    &--filebased .ant-collapse-content-box {
+      height: 180px;
+    }
+  }
+
+  .ant-form-item-has-error {
+    & .custom-form-item-card {
+      border: 1px solid $error-color;
+    }
+
+    &
+      .custom-form-item-card
+      .bypass-error-border
+      .ant-select:not(.ant-select-borderless)
+      .ant-select-selector {
+      border-color: $border-color-base !important;
+    }
+  }
 }

@@ -2,7 +2,7 @@ import { DownOutlined } from '@ant-design/icons'
 import { Button, Collapse, Typography } from 'antd'
 import { CollapseProps } from 'antd/lib/collapse'
 import React, { FC, useState } from 'react'
-import './CustomAccordion.scss'
+import styles from './CustomAccordion.module.scss'
 
 export interface CustomAccordionProps extends CollapseProps {
   accordionKey: string
@@ -40,16 +40,20 @@ export const CustomAccordion: FC<CustomAccordionProps> = ({
           setIsActivePanel(activeKeys.includes(accordionKey))
         }
       }}
-      className={`${className} ${isInactive ? 'panel--inactive' : ''}`}
+      className={`${className} ${isInactive ? 'custom-panel--inactive' : ''}`}
       bordered={!isInactive}
       {...rest}
     >
       <Collapse.Panel
         key={accordionKey}
         header={
-          <span className="panel-header__container">
-            <span className="panel-header-title__container">
-              <span className="panel-header__title">
+          <span
+            className={`${styles.panelHeader__container} ${
+              isDraggable ? styles.panelHeader__container__draggable : ''
+            }`}
+          >
+            <span className={styles.panelHeaderTitle__container}>
+              <span className={styles.panelHeader__title}>
                 <Typography.Text strong>{title}</Typography.Text>
                 {!isInactive && <DownOutlined rotate={isActivePanel ? 180 : 0} />}
               </span>
