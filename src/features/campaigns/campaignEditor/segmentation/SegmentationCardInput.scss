@@ -24,4 +24,30 @@
   &__action-btn {
     width: 100%;
   }
+
+  &__edit-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    > * {
+      margin-right: 4px;
+    }
+
+    > :first-child {
+      flex: auto;
+    }
+  }
+}
+
+.ant-form-item-has-error .card__panel {
+  border: 1px solid red;
+}
+
+.ant-form-item-has-error
+  .bypass-error-border
+  .ant-select:not(.ant-select-borderless)
+  .ant-select-selector {
+  border-color: lightgray !important;
 }
