@@ -37,7 +37,6 @@ import { OrganizationPage } from 'features/organization/OrganizationPage'
 import { PlaceholderPage } from 'components/placeholder/PlaceholderPage'
 import { ProfileEditorPage } from 'features/profiles/profileEditor/ProfileEditorPage'
 import { GroupViewPage } from 'features/organization/groups/groupEditor/GroupViewPage'
-import { GroupEditorModal } from 'features/organization/groups/groupEditor/GroupEditorModal'
 
 const onDefaultRoute = (): JSX.Element => {
   if (!isLoggedIn()) {

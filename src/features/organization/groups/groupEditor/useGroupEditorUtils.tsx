@@ -38,7 +38,7 @@ export interface GroupEditorUtils {
   profileColumnsUtils: ColumnOrderUtils<Profile>
   profileHeaderOptions: JSX.Element
   permissionIdToUnassign: number | undefined
-  unassignPermissionPopupVisible: boolean
+  isUnassignPermissionPopupVisible: boolean
   getGroupDetails: () => void
   handleUnassignPermission: (permissionId: number | undefined) => void
   handleUnassignPermissionApprove: () => void
@@ -58,7 +58,7 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     profileTotalCount,
     permissionTotalCount,
     permissionIdToUnassign,
-    unassignPermissionPopupVisible
+    isUnassignPermissionPopupVisible
   } = useSelector((state: RootState) => state.groupEditor)
 
   const {
@@ -245,7 +245,7 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     profileTotalCount,
     permissionTotalCount,
     permissionIdToUnassign,
-    unassignPermissionPopupVisible,
+    isUnassignPermissionPopupVisible,
     getGroupDetails,
     handleUnassignPermission,
     handleUnassignPermissionApprove,

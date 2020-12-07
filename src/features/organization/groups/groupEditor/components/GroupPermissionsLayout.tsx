@@ -17,7 +17,7 @@ export const GroupPermissionsLayout: FC<GroupPermissionsLayoutProps> = ({ groupE
     permissions,
     permissionTotalCount,
     permissionIdToUnassign,
-    unassignPermissionPopupVisible,
+    isUnassignPermissionPopupVisible,
     handleUnassignPermission,
     handleUnassignPermissionApprove,
     handleUnassignPermissionCancel
@@ -65,7 +65,7 @@ export const GroupPermissionsLayout: FC<GroupPermissionsLayoutProps> = ({ groupE
       <GenericPopup
         id={permissionIdToUnassign}
         type="unassign"
-        visible={unassignPermissionPopupVisible}
+        visible={isUnassignPermissionPopupVisible}
         onOkAction={() => handleUnassignPermissionApprove()}
         onCancel={() => handleUnassignPermissionCancel()}
       />

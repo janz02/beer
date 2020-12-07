@@ -23,7 +23,7 @@ interface GroupEditorState {
   isProfilesLoading: boolean
   isPermissionsLoading: boolean
   profileListParams: ListRequestParams
-  unassignPermissionPopupVisible: boolean
+  isUnassignPermissionPopupVisible: boolean
   permissionIdToUnassign?: number
 }
 
@@ -35,7 +35,7 @@ const initialState: GroupEditorState = {
   isProfilesLoading: false,
   isPermissionsLoading: false,
   hasError: false,
-  unassignPermissionPopupVisible: false
+  isUnassignPermissionPopupVisible: false
 }
 
 export const groupEditorSlice = createSlice({
@@ -81,11 +81,11 @@ export const groupEditorSlice = createSlice({
     },
     showUnassignPermissionPopup: (state, action: PayloadAction<number>): void => {
       state.permissionIdToUnassign = action.payload
-      state.unassignPermissionPopupVisible = true
+      state.isUnassignPermissionPopupVisible = true
     },
     cancelUnassignPermissionPopup: (state): void => {
       state.permissionIdToUnassign = undefined
-      state.unassignPermissionPopupVisible = false
+      state.isUnassignPermissionPopupVisible = false
     }
   }
 })
