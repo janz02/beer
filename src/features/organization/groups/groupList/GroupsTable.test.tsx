@@ -6,6 +6,7 @@ import React from 'react'
 import { setupPermissions, setupStore } from '../../../../../config/setupMocks'
 import { GroupsTable } from './GroupsTable'
 import { useGroupsUtils } from './useGroupsUtils'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 jest.mock('app/store')
 
@@ -59,10 +60,10 @@ const TestGroupsTable: React.FC = () => {
   const groupsUtils = useGroupsUtils()
 
   return (
-    <div>
+    <Router>
       {groupsUtils.tabBarActions}
       <GroupsTable groupsUtils={groupsUtils} />
-    </div>
+    </Router>
   )
 }
 
