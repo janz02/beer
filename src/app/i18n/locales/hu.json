@@ -56,29 +56,37 @@
     },
     "next-section": "Következő (Szegmentálás)",
     "save-draft": "Piszkozat mentése & Kilépés",
+    "segmentation": {
+      "add-btn": "Szegmentáció hozzáadás",
+      "file-based-title": "Fájl alapú szegmentáció",
+      "filtered-results": "Szűrt eredmény",
+      "inbuilt-title": "Szerkesztő alapú szegmentáció",
+      "summary-title": "Szegmentáció összegző",
+      "target-title": "Célközönség"
+    },
     "segmentation-tab-name": "Szegmentáció",
     "settings": {
-      "campaign-name": "Kampány neve",
-      "requestor": "Igénylő",
       "about": "Leírás",
+      "approver-validator": "Elfogadó/Érvényesítő",
       "campaign-admins-title": "Kampány adminok",
+      "campaign-name": "Kampány neve",
       "channel-type-title": "Csatorna típusa",
       "daily-restriction-title": "Napi tiltások",
-      "start-time": "Kezdődik",
-      "end-time": "Végződik",
-      "start-date": "Kezdeti dátum",
-      "end-date": "Zárás dátum",
-      "email-recall-settings-title": "Email visszahívás beállítása",
-      "maximum-recall-attempts": "Visszahívási kísérletek száma",
-      "recall-frequency": "Visszahívás gyakorisága",
-      "email-resending-rules": "Email újraküldési szabályok",
-      "interval-restrictions": "Időszakos korlátozások",
       "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
-      "product-title": "Termék",
+      "email-recall-settings-title": "Email visszahívás beállítása",
+      "email-resending-rules": "Email újraküldési szabályok",
+      "end-date": "Zárás dátum",
+      "end-time": "Végződik",
+      "interval-restrictions": "Időszakos korlátozások",
+      "maximum-recall-attempts": "Visszahívási kísérletek száma",
       "product-label": "Termék",
-      "timing-title": "Időzítés",
+      "product-title": "Termék",
+      "recall-frequency": "Visszahívás gyakorisága",
+      "requestor": "Igénylő",
       "select-timing-type-label": "Időzítés típusa",
-      "approver-validator": "Elfogadó/Érvényesítő"
+      "start-date": "Kezdeti dátum",
+      "start-time": "Kezdődik",
+      "timing-title": "Időzítés"
     },
     "settings-tab-name": "Beállítások",
     "status-creation": "Státusz (Kampány Létrehozás)",
@@ -530,7 +538,7 @@
     "segment": {
       "one-time-use-creation-failed": "Az egyszer használatos szegmens létrehozása közben hiba lépett fel. Kérem próbálja újra!"
     },
-    "segmentationEditor": {
+    "segmentation-editor": {
       "cannot-open": "A kiválasztott szegmentáció nem nyitható meg, kérem próbálkozzon később."
     },
     "sendgrid": {
