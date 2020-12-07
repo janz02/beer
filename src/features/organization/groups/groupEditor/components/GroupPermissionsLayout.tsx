@@ -1,6 +1,7 @@
 import { DisconnectOutlined } from '@ant-design/icons'
 import { Button, Col, Row, Typography } from 'antd'
 import { LoadingIndicator } from 'components/loading/LoadingIndicator'
+import { GenericPopup } from 'components/popups/GenericPopup'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -15,7 +16,11 @@ export const GroupPermissionsLayout: FC<GroupPermissionsLayoutProps> = ({ groupE
     isPermissionsLoading,
     permissions,
     permissionTotalCount,
-    handleUnassignPermission
+    permissionIdToUnassign,
+    unassignPermissionPopupVisible,
+    handleUnassignPermission,
+    handleUnassignPermissionApprove,
+    handleUnassignPermissionCancel
   } = groupEditorUtils
   const { t } = useTranslation()
 
@@ -57,6 +62,13 @@ export const GroupPermissionsLayout: FC<GroupPermissionsLayoutProps> = ({ groupE
           )}
         </Row>
       </LoadingIndicator>
+      <GenericPopup
+        id={permissionIdToUnassign}
+        type="unassign"
+        visible={unassignPermissionPopupVisible}
+        onOkAction={() => handleUnassignPermissionApprove()}
+        onCancel={() => handleUnassignPermissionCancel()}
+      />
     </ResponsiveCard>
   )
 }

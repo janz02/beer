@@ -53,7 +53,7 @@ export const GroupViewPage: FC<{}> = () => {
       <Form layout="vertical">
         <LoadingIndicator isLoading={isLoading}>
           <Row>
-            <Col span="6">
+            <Col span="24">
               <Form.Item className={styles.name} label={t('organization.groups.fields.name')}>
                 {group?.name}
               </Form.Item>

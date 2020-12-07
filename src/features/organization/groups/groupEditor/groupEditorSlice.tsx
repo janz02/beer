@@ -23,6 +23,8 @@ interface GroupEditorState {
   isProfilesLoading: boolean
   isPermissionsLoading: boolean
   profileListParams: ListRequestParams
+  unassignPermissionPopupVisible: boolean
+  permissionIdToUnassign?: number
 }
 
 const initialState: GroupEditorState = {
@@ -32,7 +34,8 @@ const initialState: GroupEditorState = {
   isLoading: false,
   isProfilesLoading: false,
   isPermissionsLoading: false,
-  hasError: false
+  hasError: false,
+  unassignPermissionPopupVisible: false
 }
 
 export const groupEditorSlice = createSlice({
@@ -75,6 +78,14 @@ export const groupEditorSlice = createSlice({
     },
     setError: (state): void => {
       state.hasError = true
+    },
+    showUnassignPermissionPopup: (state, action: PayloadAction<number>): void => {
+      state.permissionIdToUnassign = action.payload
+      state.unassignPermissionPopupVisible = true
+    },
+    cancelUnassignPermissionPopup: (state): void => {
+      state.permissionIdToUnassign = undefined
+      state.unassignPermissionPopupVisible = false
     }
   }
 })
@@ -88,7 +99,9 @@ export const {
   setError,
   setLoading,
   setProfilesLoading,
-  setPermissionsLoading
+  setPermissionsLoading,
+  showUnassignPermissionPopup,
+  cancelUnassignPermissionPopup
 } = groupEditorSlice.actions
 
 const getGroup = (id: number): AppThunk => async dispatch => {
@@ -163,8 +176,12 @@ const resetProfilesFilters = (id: number): AppThunk => async dispatch => {
   dispatch(getGroupProfiles(id))
 }
 
-const unassignPermission = (groupId: number, permissionId: number): void => {
-  console.log(`permission ${permissionId} removed from group ${groupId}`)
+const unassignPermission = (groupId: number): AppThunk => async (dispatch, getState) => {
+  const { permissionIdToUnassign } = getState().groupEditor
+  dispatch(cancelUnassignPermissionPopup())
+  dispatch(getGroupPermissions(groupId))
+
+  console.log(`permission ${permissionIdToUnassign} removed from group ${groupId}`)
 }
 const unassignProfile = (groupId: number, profileId: number): void => {
   console.log(`profile ${profileId} removed from group ${groupId}`)
@@ -176,6 +193,8 @@ export const groupEditorActions = {
   getGroupPermissions,
   unassignProfile,
   unassignPermission,
+  showUnassignPermissionPopup,
+  cancelUnassignPermissionPopup,
   resetGroupEditor,
   resetProfilesFilters
 }

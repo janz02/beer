@@ -9,7 +9,8 @@ import {
   SaveFilled,
   CheckOutlined,
   CloseOutlined,
-  StopOutlined
+  StopOutlined,
+  DisconnectOutlined
 } from '@ant-design/icons'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import { AppThunk } from 'app/store'
@@ -22,6 +23,7 @@ export type PopupType =
   | 'restore'
   | 'activate'
   | 'inactivate'
+  | 'unassign'
 
 // TODO: the async actions are not canceled, introduce sagas if needed
 
@@ -103,6 +105,11 @@ export const GenericPopup: FC<GenericPopupProps> = props => {
       okButtonProps.icon = <StopOutlined />
       title = t(`common.popup.inactivate-title`)
       okText = t(`common.inactivate`)
+      break
+    case 'unassign':
+      okButtonProps.icon = <DisconnectOutlined />
+      title = t(`common.popup.unassign-title`)
+      okText = t(`common.unassign`)
       break
   }
 

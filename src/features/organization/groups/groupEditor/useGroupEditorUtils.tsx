@@ -9,7 +9,11 @@ import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { hasPermission } from 'services/jwt-reader'
 import { pageViewRoles } from 'services/roleHelpers'
-import { groupEditorActions } from './groupEditorSlice'
+import {
+  cancelUnassignPermissionPopup,
+  groupEditorActions,
+  showUnassignPermissionPopup
+} from './groupEditorSlice'
 
 import { history } from 'router/router'
 import { CampaignPermission } from 'models/campaign/campaignPermission'
@@ -33,8 +37,12 @@ export interface GroupEditorUtils {
   profileTableUtils: TableUtils<Profile>
   profileColumnsUtils: ColumnOrderUtils<Profile>
   profileHeaderOptions: JSX.Element
+  permissionIdToUnassign: number | undefined
+  unassignPermissionPopupVisible: boolean
   getGroupDetails: () => void
   handleUnassignPermission: (permissionId: number | undefined) => void
+  handleUnassignPermissionApprove: () => void
+  handleUnassignPermissionCancel: () => void
 }
 
 export const useGroupEditorUtils = (): GroupEditorUtils => {
@@ -48,7 +56,9 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     isPermissionsLoading,
     profileListParams,
     profileTotalCount,
-    permissionTotalCount
+    permissionTotalCount,
+    permissionIdToUnassign,
+    unassignPermissionPopupVisible
   } = useSelector((state: RootState) => state.groupEditor)
 
   const {
@@ -84,11 +94,22 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
   const handleUnassignPermission = useMemo(
     () => (permissionId: number | undefined): void => {
       if (group?.id && permissionId) {
-        unassignPermission(permissionId, group.id)
+        dispatch(showUnassignPermissionPopup(permissionId))
       }
     },
-    [group, unassignPermission]
+    [group, dispatch]
   )
+  const handleUnassignPermissionCancel = (): void => {
+    dispatch(cancelUnassignPermissionPopup())
+  }
+
+  const handleUnassignPermissionApprove = (): void => {
+    if (id && permissionIdToUnassign) {
+      dispatch(unassignPermission(+id))
+    } else {
+      handleUnassignPermissionCancel()
+    }
+  }
 
   const profileColumnsParams = useMemo<ColumnConfigParams[]>(
     () => [
@@ -132,7 +153,9 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         ellipsis: false,
         disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
-          return <Link to={`/companies/${profile.companyId}`}>{profile.companyName}</Link>
+          return (
+            <Link to={`/organization/companies/${profile.companyId}`}>{profile.companyName}</Link>
+          )
         }
       },
       {
@@ -143,7 +166,9 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
         ellipsis: false,
         disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
-          return <Link to={`/job-roles/${profile.jobRoleId}`}>{profile.jobRoleName}</Link>
+          return (
+            <Link to={`/organization/job-roles/${profile.jobRoleId}`}>{profile.jobRoleName}</Link>
+          )
         }
       },
       {
@@ -219,7 +244,11 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
     profileHeaderOptions,
     profileTotalCount,
     permissionTotalCount,
+    permissionIdToUnassign,
+    unassignPermissionPopupVisible,
     getGroupDetails,
-    handleUnassignPermission
+    handleUnassignPermission,
+    handleUnassignPermissionApprove,
+    handleUnassignPermissionCancel
   }
 }

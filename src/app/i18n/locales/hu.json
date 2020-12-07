@@ -210,7 +210,8 @@
       "discard-title": "Biztos, hogy el szeretné vetni a módosításokat? Azok később nem visszaállíthatóak.",
       "inactivate-title": "Biztos, hogy szeretné inaktiválni?",
       "restore-title": "Biztos, hogy vissza szeretné állítani?",
-      "save-title": "Biztos, hogy mentené?"
+      "save-title": "Biztos, hogy mentené?",
+      "unassign-title": "Biztos, hogy szeretné megszüntetni a hozzárendelést?"
     },
     "reset": "Visszállítás",
     "reset-filters": "Szűrők alaphelyzetbe állítása",
