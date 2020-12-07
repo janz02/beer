@@ -29,7 +29,7 @@ const initialState: CampaignSettingsState = {
   hasError: false
 }
 
-const campaignSettingsSlice = createSlice({
+const campaignEditorSlice = createSlice({
   name: 'campaignEditorSettings',
   initialState,
   reducers: {
@@ -59,9 +59,9 @@ const {
   getCampaignSettingsFormElementsSuccess,
   getCampaignSettingsFormElementsFail,
   getCampaignSettingsFormElements
-} = campaignSettingsSlice.actions
+} = campaignEditorSlice.actions
 
-export const campaignSettingsReducer = campaignSettingsSlice.reducer
+export const campaignSettingsReducer = campaignEditorSlice.reducer
 
 export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
   try {
