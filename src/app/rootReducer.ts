@@ -38,7 +38,7 @@ import { campaignsListReducer } from 'features/campaigns/campaignList/campaignLi
 import { groupsReducer } from 'features/organization/groups/groupList/groupsSlice'
 import { groupEditorReducer } from 'features/organization/groups/groupEditor/groupEditorSlice'
 import { jobRoleListReducer } from 'features/organization/jobRoles/jobRoleListSlice'
-import { campaignSettingsReducer } from 'features/campaigns/campaignEditor/settings/CampaignSettingsSlice'
+import { campaignSettingsReducer } from 'features/campaigns/campaignEditor/settings/campaignEditorSlice'
 
 // TODO Temporary fix for app.test.  ../router/router history was used here
 // Probably a mock for the router/ history needed for proper solution, but needs more investigation

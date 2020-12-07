@@ -301,7 +301,7 @@
       "dateinterval":"Date Interval",
       "datefrom":"Date From",
       "dateto":"Date To",
-      "infinite":"Infinite"
+      "infinite":"Infinite",
   "coupon-campaign-create": {
     "activate": "Activate",
     "audit": "Audit",

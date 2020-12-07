@@ -301,7 +301,7 @@
       "dateinterval":"Dátum intervallum",
       "datefrom":"Dátumtól",
       "dateto":"Dátumig",
-      "infinite":"Végtelen"
+      "infinite":"Végtelen",
   "coupon-campaign-create": {
     "activate": "Aktiválás",
     "audit": "Audit",

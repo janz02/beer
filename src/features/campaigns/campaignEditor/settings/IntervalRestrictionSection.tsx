@@ -1,5 +1,4 @@
 import { Checkbox, Form } from 'antd'
-import CheckboxGroup from 'antd/lib/checkbox/Group'
 import Title from 'antd/lib/typography/Title'
 import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'

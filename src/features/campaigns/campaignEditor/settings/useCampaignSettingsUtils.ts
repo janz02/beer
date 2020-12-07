@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { useCallback, useEffect } from 'react'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { FormInstance } from 'antd/lib/form'
-import { campaignSettingsActions, getCampaignSettingsElements } from './CampaignSettingsSlice'
+import { campaignSettingsActions, getCampaignSettingsElements } from './campaignEditorSlice'
 import { CampaignSettingsFormElements } from 'models/campaign/campaignSettingsFormEelements'
 
 interface CampaignSettingsUtils {
