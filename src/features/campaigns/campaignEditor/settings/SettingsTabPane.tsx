@@ -18,7 +18,7 @@ export const SettingsTabPane: FC = () => {
   const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
 
   return (
-    <Form className="settings-tab" layout="vertical" form={form}>
+    <Form className="settings-tab" layout="vertical" form={form} onFinish={handleSubmitButtonClick}>
       <div>
         <Col className="campaign-basic-details">
           <BasicCampaignSection />
@@ -85,7 +85,7 @@ export const SettingsTabPane: FC = () => {
       <Divider />
       <Row>
         <Col span={22}>
-          <CampaignEditorFormFooter onSubmit={handleSubmitButtonClick} />
+          <CampaignEditorFormFooter />
         </Col>
       </Row>
     </Form>

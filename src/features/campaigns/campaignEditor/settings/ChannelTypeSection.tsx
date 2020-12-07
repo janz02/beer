@@ -4,11 +4,11 @@ import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export interface ChannelTypesProps {
+interface ChannelTypeSectionProps {
   channelTypes: TextValuePair[]
 }
 
-export const ChannelTypeSection: FC<ChannelTypesProps> = ({ channelTypes }) => {
+export const ChannelTypeSection: FC<ChannelTypeSectionProps> = ({ channelTypes }) => {
   const { t } = useTranslation()
   return (
     <>

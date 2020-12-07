@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
+import moment from 'moment'
 import {
   CampaignSettingsFormElements,
   TextValuePair
 } from 'models/campaign/campaignSettingsFormEelements'
+import { OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand } from 'api/swagger/campaign-editor/models'
 
 interface CampaignSettingsState {
   campaignSettingsFormElements: CampaignSettingsFormElements
@@ -48,8 +50,9 @@ const campaignSettingsSlice = createSlice({
       state.isLoading = false
       state.hasError = true
     },
-    saveCampaignSettings() {
-      console.log('Save')
+    saveCampaignSettingsSuccess(state) {
+      state.isLoading = false
+      state.hasError = false
     }
   }
 })
@@ -58,7 +61,7 @@ const {
   getCampaignSettingsFormElementsSuccess,
   getCampaignSettingsFormElementsFail,
   getCampaignSettingsFormElements,
-  saveCampaignSettings
+  saveCampaignSettingsSuccess
 } = campaignSettingsSlice.actions
 
 export const campaignSettingsReducer = campaignSettingsSlice.reducer
@@ -79,4 +82,34 @@ export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
   } catch (err) {
     dispatch(getCampaignSettingsFormElementsFail())
   }
+}
+export const saveSettings = (campaignSettings: any): AppThunk => async dispatch => {
+  try {
+    // Csinani egy tipust amibe atmappelni es megcsinalni a savet
+    // Validacio a formon
+    // rangepicker
+
+    // const alma = {
+    //   optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand: {
+    //     ...campaignSettings,
+    //     timing: {
+    //       ...campaignSettings.timing,
+    //       startDate: (campaignSettings.timing?.startDate as moment.Moment).toDate(),
+    //       endDate: (campaignSettings.timing?.endDate as moment.Moment).toDate(),
+    //       startTime: null,
+    //       endTime: null
+    //     }
+    //   }
+    // }
+    // console.log(alma)
+    // await api.campaignEditor.campaigns.createCampaignsettings(alma)
+    // dispatch(saveCampaignSettingsSuccess())
+    console.log(campaignSettings)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const campaignSettingsActions = {
+  saveSettings
 }

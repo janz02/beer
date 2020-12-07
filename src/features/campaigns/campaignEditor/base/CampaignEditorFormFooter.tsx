@@ -3,23 +3,21 @@ import './CampaignEditor.scss'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export interface CampaignEditorProps {
-  onSubmit: () => void
-}
-
-export const CampaignEditorFormFooter: FC<CampaignEditorProps> = ({ onSubmit }) => {
+export const CampaignEditorFormFooter: FC = () => {
   const { t } = useTranslation()
 
   return (
     <div className="create-campaign-buttons">
       <Row>
         <Col>
-          <Button onClick={onSubmit} name="Submit">
+          <Button name="Submit" htmlType="submit">
             {t('campaign-create.save-draft')}
           </Button>
         </Col>
         <Col>
-          <Button name="Next">{t('campaign-create.next-section')}</Button>
+          <Button name="Next" htmlType="submit">
+            {t('campaign-create.next-section')}
+          </Button>
         </Col>
       </Row>
     </div>

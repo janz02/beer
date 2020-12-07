@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { useCallback, useEffect } from 'react'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { FormInstance } from 'antd/lib/form'
-import { getCampaignSettingsElements } from './CampaignSettingsSlice'
+import { campaignSettingsActions, getCampaignSettingsElements } from './CampaignSettingsSlice'
 import { CampaignSettingsFormElements } from 'models/campaign/campaignSettingsFormEelements'
 
 interface CampaignSettingsUtils {
   form: FormInstance<any>
-  handleSubmitButtonClick: () => void
+  handleSubmitButtonClick: (values: any) => void
   campaignSettingsFormElements: CampaignSettingsFormElements
 }
 
@@ -17,11 +17,12 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
   const { form } = useFormUtils()
   const { campaignSettingsFormElements } = useSelector((state: RootState) => state.campaignSettings)
 
-  const handleSubmitButtonClick = useCallback((): void => {
-    console.log('submit')
-    console.log(form.getFieldsValue())
-    form.validateFields()
-  }, [dispatch])
+  const handleSubmitButtonClick = useCallback(
+    (values: any): void => {
+      dispatch(campaignSettingsActions.saveSettings(values))
+    },
+    [dispatch]
+  )
 
   const handleGetSettingFormElements = useCallback((): void => {
     dispatch(getCampaignSettingsElements())
