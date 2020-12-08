@@ -5,6 +5,8 @@ import {
   CampaignSettingsFormElements,
   TextValuePair
 } from 'models/campaign/campaignSettingsFormEelements'
+import { CampaignSettings } from 'models/campaign/campaignSettings'
+import { SystemTimeSpan } from 'api/swagger/campaign-editor/models'
 
 interface CampaignSettingsState {
   campaignSettingsFormElements: CampaignSettingsFormElements
@@ -58,7 +60,8 @@ const campaignEditorSlice = createSlice({
 const {
   getCampaignSettingsFormElementsSuccess,
   getCampaignSettingsFormElementsFail,
-  getCampaignSettingsFormElements
+  getCampaignSettingsFormElements,
+  saveCampaignSettingsSuccess
 } = campaignEditorSlice.actions
 
 export const campaignSettingsReducer = campaignEditorSlice.reducer
@@ -80,8 +83,23 @@ export const getCampaignSettingsElements = (): AppThunk => async dispatch => {
     dispatch(getCampaignSettingsFormElementsFail())
   }
 }
-export const saveSettings = (campaignSettings: any): AppThunk => async () => {
+export const saveSettings = (campaignSettings: CampaignSettings): AppThunk => async dispatch => {
   try {
+    // const settings = {
+    //   optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand: {
+    //     ...campaignSettings,
+    //     timing: {
+    //       ...campaignSettings.timing,
+    //       startDate: campaignSettings.timing?.startDate.toDate(),
+    //       endDate: campaignSettings.timing?.endDate.toDate(),
+    //       startTime: campaignSettings.timing?.startTime.toDate() as SystemTimeSpan,
+    //       endTime: campaignSettings.timing?.endTime.toDate() as SystemTimeSpan
+    //     }
+    //   }
+    // }
+    // console.log(settings)
+    // await api.campaignEditor.campaigns.createCampaignsettings(settings)
+    // dispatch(saveCampaignSettingsSuccess())
     console.log(campaignSettings)
   } catch (error) {
     console.log(error)
