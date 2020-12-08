@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { hasPermission } from 'services/jwt-reader'
 import { pageViewRoles } from 'services/roleHelpers'
-import { CampaignEditorFormFooter } from './CampaignEditorFormFooter'
 import { EditCampaignStatus } from './CampaignStatusHeader'
 import { CampaignUserLogs } from './CampaignUserLogs'
 import { EmailContentTabPane } from '../content/email/EmailContentTabPane'
@@ -56,7 +55,7 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
         <Col span={24}>
           <Tabs size="large">
             <TabPane tab={t('campaign-create.settings-tab-name')} key="settings">
-              <SettingsTabPane campaignId={campaignId} />
+              <SettingsTabPane />
             </TabPane>
             <TabPane tab={t('campaign-create.segmentation-tab-name')} key="segmentation">
               <SegmentationTabPane campaignId={campaignId} />
@@ -68,12 +67,6 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
               <TestTabPane campaignId={campaignId} />
             </TabPane>
           </Tabs>
-        </Col>
-        <Divider />
-      </Row>
-      <Row>
-        <Col span={22}>
-          <CampaignEditorFormFooter />
         </Col>
       </Row>
     </Card>

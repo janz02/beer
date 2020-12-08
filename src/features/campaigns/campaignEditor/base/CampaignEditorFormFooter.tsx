@@ -10,10 +10,14 @@ export const CampaignEditorFormFooter: FC = () => {
     <div className="create-campaign-buttons">
       <Row>
         <Col>
-          <Button name="Submit">{t('campaign-create.save-draft')}</Button>
+          <Button name="Submit" htmlType="submit">
+            {t('campaign-create.save-draft')}
+          </Button>
         </Col>
         <Col>
-          <Button name="Next">{t('campaign-create.next-section')}</Button>
+          <Button name="Next" htmlType="submit">
+            {t('campaign-create.next-section')}
+          </Button>
         </Col>
       </Row>
     </div>
