@@ -30,7 +30,7 @@ export const ProfileEditorPage: FC = () => {
     () => ({
       primary: true,
       onClick: () => {
-        history.push('/profiles')
+        history.goBack()
       }
     }),
     []

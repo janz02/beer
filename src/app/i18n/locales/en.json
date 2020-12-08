@@ -58,9 +58,18 @@
     "save-draft": "Save draft & Exit",
     "segmentation": {
       "add-btn": "Add segmentation",
+      "category-default": "- not selected -",
+      "category-label": "Filter by segmentation category",
+      "category-placeholder": "Select a category",
+      "definition": "Segmentation definition",
+      "empty-list": "You can add segmentation",
+      "expand-btn": "Expand with custom rules",
+      "expanded-label": "Expanded rules",
       "file-based-title": "File based segmentation",
       "filtered-results": "Filtered results",
-      "inbuilt-title": "Inbuilt segmentations",
+      "inbuilt-title": "Inbuilt segmentation",
+      "segmentation-label": "Segmentations",
+      "segmentation-placeholder": "Select a segmentation",
       "summary-title": "Segmentation summary",
       "target-title": "Target audience"
     },
@@ -210,7 +219,8 @@
       "discard-title": "Are you sure about discarding? It cannot be retrieved.",
       "inactivate-title": "Are you sure about inactivating?",
       "restore-title": "Are you sure about restoring this?",
-      "save-title": "Are you sure about saving this?"
+      "save-title": "Are you sure about saving this?",
+      "unassign-title": "Are you sure about unassigning this"
     },
     "reset": "Reset",
     "reset-filters": "Reset filters to defaults",
@@ -488,6 +498,8 @@
       "img-dimensions-incorrect": "The width and height of the picture can only be {{width}}x{{height}} pixels.",
       "incorrect-file-extension": "Not supported file extension.",
       "internal": "Unsuccessful communication with the server, try again later.",
+      "invalid-filebased-segmentation": "Missing segmentation file.",
+      "invalid-inbuilt-segmentation": "Segmentation select is required.",
       "max-length-exact": "This field must be less then {{max}} characters.",
       "max-number-exact": "This field maximum value is {{max}}.",
       "no-template": "Template ID not found.",

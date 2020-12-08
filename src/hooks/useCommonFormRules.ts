@@ -210,6 +210,38 @@ export function useCommonFormRules() {
     [t]
   )
 
+  /**
+   * Inbuilt Segmentation Card Validation for Campaign Editing
+   * @param message (optional) string
+   */
+  const inbuiltSegmentation = useCallback(
+    (message?: string): Rule => ({
+      validator: (rule, value: any) => {
+        return !value || (value && !value.segmentationId)
+          ? Promise.reject(new Error('invalidInbuiltSegmentation'))
+          : Promise.resolve()
+      },
+      message: message || t('error.common.invalid-inbuilt-segmentation')
+    }),
+    [t]
+  )
+
+  /**
+   * File based Segmentation Card Validation for Campaign Editing
+   * @param message (optional) string
+   */
+  const filebasedSegmentation = useCallback(
+    (message?: string): Rule => ({
+      validator: (rule, value: any) => {
+        return !value || (value && !value.fileId)
+          ? Promise.reject(new Error('invalidFilebasedSegmentation'))
+          : Promise.resolve()
+      },
+      message: message || t('error.common.invalid-filebased-segmentation')
+    }),
+    [t]
+  )
+
   return {
     required,
     requiredString,
@@ -222,6 +254,8 @@ export function useCommonFormRules() {
     positiveInteger,
     fileExtension,
     fileSize,
-    fileImgDimensionsExactMatch
+    fileImgDimensionsExactMatch,
+    inbuiltSegmentation,
+    filebasedSegmentation
   }
 }

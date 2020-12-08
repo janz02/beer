@@ -1,0 +1,50 @@
+.card {
+  &__panel,
+  &__deleteBtn {
+    pointer-events: all;
+  }
+
+  &__headerContainer {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    margin-left: -24px;
+
+    > * {
+      margin-right: 8px;
+    }
+  }
+
+  &__titleAndBtnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__headerTitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  &__actionBtn {
+    width: 100%;
+  }
+
+  &__editBtnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    > * {
+      margin-right: 4px;
+    }
+
+    > :first-child {
+      flex: auto;
+    }
+  }
+}
