@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSONTyped,
+    OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON,
+} from './';
+
 /**
  * 
  * @export
@@ -45,10 +52,10 @@ export interface OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaign
     endDate?: Date;
     /**
      * 
-     * @type {string}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    requester?: string | null;
+    requester?: OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm | null;
     /**
      * 
      * @type {string}
@@ -57,10 +64,10 @@ export interface OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaign
     department?: string | null;
     /**
      * 
-     * @type {string}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    responsible?: string | null;
+    responsible?: OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm | null;
     /**
      * 
      * @type {string}
@@ -69,22 +76,22 @@ export interface OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaign
     comment?: string | null;
     /**
      * 
-     * @type {string}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    createdBy?: string | null;
+    createdBy?: OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm | null;
     /**
      * 
-     * @type {string}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    modifiedBy?: string | null;
+    modifiedBy?: OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm | null;
     /**
      * 
-     * @type {string}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    status?: string | null;
+    status?: OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm | null;
     /**
      * 
      * @type {boolean}
@@ -93,16 +100,16 @@ export interface OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaign
     statusIsProcessing?: boolean;
     /**
      * 
-     * @type {string}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    channel?: string | null;
+    channel?: OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm | null;
     /**
      * 
-     * @type {string}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    product?: string | null;
+    product?: OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm | null;
     /**
      * 
      * @type {Date}
@@ -129,28 +136,34 @@ export interface OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaign
     treatmentEndTime?: string | null;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm>}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    timeRules?: Array<string> | null;
+    timeRules?: Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm> | null;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm>}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    resendOrRecallRules?: Array<string> | null;
+    resendOrRecallRules?: Array<OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm> | null;
     /**
      * 
-     * @type {string}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
-    resendFrequency?: string | null;
+    resendFrequency?: OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm | null;
     /**
      * 
      * @type {number}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
     maxResends?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
+     */
+    timingTypeId?: number;
 }
 
 export function OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVmFromJSON(json: any): OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm {
@@ -167,24 +180,25 @@ export function OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignD
         'name': !exists(json, 'name') ? undefined : json['name'],
         'startDate': !exists(json, 'startDate') ? undefined : (new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (new Date(json['endDate'])),
-        'requester': !exists(json, 'requester') ? undefined : json['requester'],
+        'requester': !exists(json, 'requester') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['requester']),
         'department': !exists(json, 'department') ? undefined : json['department'],
-        'responsible': !exists(json, 'responsible') ? undefined : json['responsible'],
+        'responsible': !exists(json, 'responsible') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['responsible']),
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
-        'createdBy': !exists(json, 'createdBy') ? undefined : json['createdBy'],
-        'modifiedBy': !exists(json, 'modifiedBy') ? undefined : json['modifiedBy'],
-        'status': !exists(json, 'status') ? undefined : json['status'],
+        'createdBy': !exists(json, 'createdBy') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['createdBy']),
+        'modifiedBy': !exists(json, 'modifiedBy') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['modifiedBy']),
+        'status': !exists(json, 'status') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['status']),
         'statusIsProcessing': !exists(json, 'statusIsProcessing') ? undefined : json['statusIsProcessing'],
-        'channel': !exists(json, 'channel') ? undefined : json['channel'],
-        'product': !exists(json, 'product') ? undefined : json['product'],
+        'channel': !exists(json, 'channel') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['channel']),
+        'product': !exists(json, 'product') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['product']),
         'treatmentStartDate': !exists(json, 'treatmentStartDate') ? undefined : (json['treatmentStartDate'] === null ? null : new Date(json['treatmentStartDate'])),
         'treatmentEndDate': !exists(json, 'treatmentEndDate') ? undefined : (json['treatmentEndDate'] === null ? null : new Date(json['treatmentEndDate'])),
         'treatmentStartTime': !exists(json, 'treatmentStartTime') ? undefined : json['treatmentStartTime'],
         'treatmentEndTime': !exists(json, 'treatmentEndTime') ? undefined : json['treatmentEndTime'],
-        'timeRules': !exists(json, 'timeRules') ? undefined : json['timeRules'],
-        'resendOrRecallRules': !exists(json, 'resendOrRecallRules') ? undefined : json['resendOrRecallRules'],
-        'resendFrequency': !exists(json, 'resendFrequency') ? undefined : json['resendFrequency'],
+        'timeRules': !exists(json, 'timeRules') ? undefined : (json['timeRules'] === null ? null : (json['timeRules'] as Array<any>).map(OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON)),
+        'resendOrRecallRules': !exists(json, 'resendOrRecallRules') ? undefined : (json['resendOrRecallRules'] === null ? null : (json['resendOrRecallRules'] as Array<any>).map(OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON)),
+        'resendFrequency': !exists(json, 'resendFrequency') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['resendFrequency']),
         'maxResends': !exists(json, 'maxResends') ? undefined : json['maxResends'],
+        'timingTypeId': !exists(json, 'timingTypeId') ? undefined : json['timingTypeId'],
     };
 }
 
@@ -201,24 +215,25 @@ export function OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignD
         'name': value.name,
         'startDate': value.startDate === undefined ? undefined : (value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate.toISOString()),
-        'requester': value.requester,
+        'requester': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.requester),
         'department': value.department,
-        'responsible': value.responsible,
+        'responsible': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.responsible),
         'comment': value.comment,
-        'createdBy': value.createdBy,
-        'modifiedBy': value.modifiedBy,
-        'status': value.status,
+        'createdBy': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.createdBy),
+        'modifiedBy': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.modifiedBy),
+        'status': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.status),
         'statusIsProcessing': value.statusIsProcessing,
-        'channel': value.channel,
-        'product': value.product,
+        'channel': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.channel),
+        'product': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.product),
         'treatmentStartDate': value.treatmentStartDate === undefined ? undefined : (value.treatmentStartDate === null ? null : value.treatmentStartDate.toISOString()),
         'treatmentEndDate': value.treatmentEndDate === undefined ? undefined : (value.treatmentEndDate === null ? null : value.treatmentEndDate.toISOString()),
         'treatmentStartTime': value.treatmentStartTime,
         'treatmentEndTime': value.treatmentEndTime,
-        'timeRules': value.timeRules,
-        'resendOrRecallRules': value.resendOrRecallRules,
-        'resendFrequency': value.resendFrequency,
+        'timeRules': value.timeRules === undefined ? undefined : (value.timeRules === null ? null : (value.timeRules as Array<any>).map(OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON)),
+        'resendOrRecallRules': value.resendOrRecallRules === undefined ? undefined : (value.resendOrRecallRules === null ? null : (value.resendOrRecallRules as Array<any>).map(OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON)),
+        'resendFrequency': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.resendFrequency),
         'maxResends': value.maxResends,
+        'timingTypeId': value.timingTypeId,
     };
 }
 
