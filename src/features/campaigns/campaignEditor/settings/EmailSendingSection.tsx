@@ -1,5 +1,4 @@
 import { Checkbox, Form } from 'antd'
-import CheckboxGroup from 'antd/lib/checkbox/Group'
 import Title from 'antd/lib/typography/Title'
 import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
@@ -15,13 +14,13 @@ export const EmailReSendingSection: FC<EmailReSendingProps> = ({ emailReSendingO
     <>
       <Title level={5}>{t('campaign-create.settings.email-resending-rules')}</Title>
       <Form.Item name={['emailChannelSettings', 'resendingRuleOptions']}>
-        <CheckboxGroup className="vertical-checkboxes">
+        <Checkbox.Group className="vertical-checkboxes">
           {emailReSendingOptions.map(option => (
             <Checkbox key={option.value} value={option.value}>
               {t(`campaign-create.settings.${option.text.toLowerCase()}`)}
             </Checkbox>
           ))}
-        </CheckboxGroup>
+        </Checkbox.Group>
       </Form.Item>
     </>
   )

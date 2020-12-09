@@ -8,10 +8,10 @@ import { CampaignAdminSection } from './CampaignAdminSection'
 import { TimingSection } from './TimingSection'
 import { DailyRestrictionSection } from './DailyRestrictionSection'
 import { IntervalRestrictionSection } from './IntervalRestrictionSection'
-import { EmailResendSection } from './EmailRecallSection'
-import { EmailReSendingSection } from './EmailSendingSection'
 import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
+import { EmailConfigurations } from './EmailConfiguration'
+import { RestrictionConfigurations } from './RestrictionConfigurations'
 
 export const SettingsTabPane: FC = () => {
   const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
@@ -43,43 +43,17 @@ export const SettingsTabPane: FC = () => {
         </Row>
 
         <Divider />
-        <Row gutter={16}>
-          <Col span={7}>
-            <TimingSection timingTypes={campaignSettingsFormElements.timingTypes} />
-          </Col>
-          <Col>
-            <Divider type="vertical" className="vertical-splitter" />
-          </Col>
-          <Col span={7}>
-            <DailyRestrictionSection />
-          </Col>
-          <Col>
-            <Divider type="vertical" className="vertical-splitter" />
-          </Col>
-          <Col span={7}>
-            <IntervalRestrictionSection
-              restrictionOptions={campaignSettingsFormElements.intervalRestrictionOptions}
-            />
-          </Col>
-        </Row>
+        <RestrictionConfigurations
+          timingTypes={campaignSettingsFormElements.timingTypes}
+          intervalRestrictionOptions={campaignSettingsFormElements.intervalRestrictionOptions}
+        />
 
         <Divider />
 
-        <Row gutter={16}>
-          <Col span={7}>
-            <EmailResendSection
-              emailResendOptions={campaignSettingsFormElements.resendFrequencyOptions}
-            />
-          </Col>
-          <Col>
-            <Divider type="vertical" className="vertical-splitter" />
-          </Col>
-          <Col span={7}>
-            <EmailReSendingSection
-              emailReSendingOptions={campaignSettingsFormElements.resendingRuleOptions}
-            />
-          </Col>
-        </Row>
+        <EmailConfigurations
+          resendFrequencyOptions={campaignSettingsFormElements.resendFrequencyOptions}
+          resendingRuleOptions={campaignSettingsFormElements.resendingRuleOptions}
+        />
       </div>
       <Divider />
       <Row>

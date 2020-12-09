@@ -6,7 +6,6 @@ import {
   TextValuePair
 } from 'models/campaign/campaignSettingsFormEelements'
 import { CampaignSettings } from 'models/campaign/campaignSettings'
-import { SystemTimeSpan } from 'api/swagger/campaign-editor/models'
 
 interface CampaignSettingsState {
   campaignSettingsFormElements: CampaignSettingsFormElements

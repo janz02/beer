@@ -94,6 +94,7 @@
       "requestor": "Requestor",
       "select-timing-type-label": "Select timing type",
       "start-date": "Start date",
+      "date-range": "Date Range",
       "start-time": "Start time",
       "timing-title": "Timing",
       "validations":{

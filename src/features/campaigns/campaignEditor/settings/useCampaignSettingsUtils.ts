@@ -18,7 +18,24 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
   const { campaignSettingsFormElements } = useSelector((state: RootState) => state.campaignEditor)
 
   const handleSubmitButtonClick = useCallback(
-    (values: any): void => {
+    (formValues: any): void => {
+      const values = {
+        ...formValues,
+        timing: {
+          ...formValues.timing,
+          endDate: formValues.timing.rangePicker
+            ? formValues.timing.rangePicker[1]
+            : formValues.timing.endDate,
+          startDate: formValues.timing.rangePicker
+            ? formValues.timing.rangePicker[0]
+            : formValues.timing.startDate,
+          startTime: formValues.timing.timeRange && formValues.timing.timeRange[0],
+          endTime: formValues.timing.timeRange && formValues.timing.timeRange[1]
+        },
+        emailChannelSettings: {
+          ...formValues.emailChannelSettings
+        }
+      }
       dispatch(campaignSettingsActions.saveSettings(values))
     },
     [dispatch]
