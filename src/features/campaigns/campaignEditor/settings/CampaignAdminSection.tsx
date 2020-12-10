@@ -1,21 +1,15 @@
 import { Form, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import { useCommonFormRules } from 'hooks'
-import { TextValuePair } from 'models/textValuePair'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 
-export interface CampaignAdminSectionProps {
-  requesters: TextValuePair[]
-  responsibles: TextValuePair[]
-}
-
-export const CampaignAdminSection: FC<CampaignAdminSectionProps> = ({
-  requesters,
-  responsibles
-}) => {
+export const CampaignAdminSection: FC = () => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
+  const { campaignSettingsFormElements } = useCampaignSettingsUtils()
+  const { users } = campaignSettingsFormElements
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.campaign-admins-title')}</Title>
@@ -27,7 +21,7 @@ export const CampaignAdminSection: FC<CampaignAdminSectionProps> = ({
         rules={[rule.required(t('campaign-create.settings.validations.required-field'))]}
       >
         <Select>
-          {requesters.map(requester => (
+          {users.map(requester => (
             <Select.Option key={requester.value} value={requester.value}>
               {requester.text}
             </Select.Option>
@@ -42,7 +36,7 @@ export const CampaignAdminSection: FC<CampaignAdminSectionProps> = ({
         rules={[rule.required(t('campaign-create.settings.validations.required-field'))]}
       >
         <Select>
-          {responsibles.map(responsible => (
+          {users.map(responsible => (
             <Select.Option key={responsible.value} value={responsible.value}>
               {responsible.text}
             </Select.Option>

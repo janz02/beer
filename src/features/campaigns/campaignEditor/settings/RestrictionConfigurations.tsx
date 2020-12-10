@@ -1,19 +1,13 @@
 import { Col, Divider, Row } from 'antd'
-import { TextValuePair } from 'models/textValuePair'
 import React, { FC } from 'react'
 import { DailyRestrictionSection } from './DailyRestrictionSection'
 import { IntervalRestrictionSection } from './IntervalRestrictionSection'
 import { TimingSection } from './TimingSection'
+import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 
-interface RestrictionConfigurationsProps {
-  timingTypes: TextValuePair[]
-  intervalRestrictionOptions: TextValuePair[]
-}
-
-export const RestrictionConfigurations: FC<RestrictionConfigurationsProps> = ({
-  timingTypes,
-  intervalRestrictionOptions
-}) => {
+export const RestrictionConfigurations: FC = () => {
+  const { campaignSettingsFormElements } = useCampaignSettingsUtils()
+  const { timingTypes, intervalRestrictionOptions } = campaignSettingsFormElements
   return (
     <Row gutter={16}>
       <Col span={7}>

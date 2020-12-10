@@ -9,6 +9,7 @@ import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
 import { RestrictionConfigurations } from './RestrictionConfigurations'
 import { EmailConfigurations } from './EmailConfiguration'
+import { Channels } from 'models/channels'
 
 export const SettingsTabPane: FC = () => {
   const { form, handleSubmitButtonClick } = useCampaignSettingsUtils()
@@ -39,7 +40,7 @@ export const SettingsTabPane: FC = () => {
         <Divider />
         <RestrictionConfigurations />
 
-        {channelChosen === 1 && (
+        {channelChosen === Channels.Email && (
           <>
             <Divider />
             <EmailConfigurations />

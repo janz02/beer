@@ -2,6 +2,7 @@ import { Col, DatePicker, Form, Row, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import { useCommonFormRules } from 'hooks'
 import { TextValuePair } from 'models/textValuePair'
+import { TimingTypes } from 'models/timingTypes'
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 export interface TimingSectionProps {
@@ -42,7 +43,7 @@ export const TimingSection: FC<TimingSectionProps> = ({ timingTypes }) => {
         <Col />
       </Row>
       <Row gutter={10}>
-        {selectedDateInterval === 1 ? (
+        {selectedDateInterval === TimingTypes.DateInterval ? (
           <Col span={24}>
             <Form.Item
               required
@@ -54,7 +55,7 @@ export const TimingSection: FC<TimingSectionProps> = ({ timingTypes }) => {
               <RangePicker />
             </Form.Item>
           </Col>
-        ) : selectedDateInterval === 2 ? (
+        ) : selectedDateInterval === TimingTypes.DateFrom ? (
           <Col span={24}>
             <Form.Item
               required
@@ -66,7 +67,7 @@ export const TimingSection: FC<TimingSectionProps> = ({ timingTypes }) => {
               <DatePicker />
             </Form.Item>
           </Col>
-        ) : selectedDateInterval === 3 ? (
+        ) : selectedDateInterval === TimingTypes.DateTo ? (
           <Col span={24}>
             <Form.Item
               required
