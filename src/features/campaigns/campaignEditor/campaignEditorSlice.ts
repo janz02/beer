@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { CampaignSettingsFormElements } from 'models/campaign/campaignSettingsFormElements'
-import { CampaignSettings } from 'models/campaign/campaignSettings'
 import { TextValuePair } from 'models/textValuePair'
 import {
   Campaign,
@@ -12,6 +11,7 @@ import {
 } from 'models/campaign/campaign'
 import moment from 'moment'
 import { CampaignDetailRequest } from 'api/swagger/campaign-editor'
+import { CampaignSettingsUpdateDto } from 'models/campaign/campaignSettings'
 
 interface CampaignEditorState {
   campaignSettingsFormElements: CampaignSettingsFormElements
@@ -163,7 +163,9 @@ export const updateEmailContent = (
   }
 }
 
-export const saveSettings = (campaignSettings: CampaignSettings): AppThunk => async dispatch => {
+export const saveSettings = (
+  campaignSettings: CampaignSettingsUpdateDto
+): AppThunk => async dispatch => {
   try {
     // const settings = {
     //   optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand: {

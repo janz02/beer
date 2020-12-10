@@ -1,4 +1,4 @@
-export interface CampaignSettings {
+export interface CampaignSettingsUpdateDto {
   name: string
   description: string
   channelId: number

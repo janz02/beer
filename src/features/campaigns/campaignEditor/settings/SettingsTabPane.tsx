@@ -7,8 +7,8 @@ import { ProductSection } from './ProductSection'
 import { CampaignAdminSection } from './CampaignAdminSection'
 import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
-import { EmailConfigurations } from './EmailConfiguration'
 import { RestrictionConfigurations } from './RestrictionConfigurations'
+import { EmailConfigurations } from './EmailConfiguration'
 
 export const SettingsTabPane: FC = () => {
   const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
