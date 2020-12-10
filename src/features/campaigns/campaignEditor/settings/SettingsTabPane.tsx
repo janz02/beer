@@ -1,13 +1,10 @@
 import { Col, Divider, Form, Row } from 'antd'
 import './../base/CampaignEditor.scss'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { BasicCampaignSection } from './BasicCampaignSection'
 import { ChannelTypeSection } from './ChannelTypeSection'
 import { ProductSection } from './ProductSection'
 import { CampaignAdminSection } from './CampaignAdminSection'
-import { TimingSection } from './TimingSection'
-import { DailyRestrictionSection } from './DailyRestrictionSection'
-import { IntervalRestrictionSection } from './IntervalRestrictionSection'
 import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
 import { EmailConfigurations } from './EmailConfiguration'
@@ -15,7 +12,7 @@ import { RestrictionConfigurations } from './RestrictionConfigurations'
 
 export const SettingsTabPane: FC = () => {
   const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
-
+  const [channelChosen, setChannelChosen] = useState<number>()
   return (
     <Form className="settings-tab" layout="vertical" form={form} onFinish={handleSubmitButtonClick}>
       <div>
@@ -24,7 +21,10 @@ export const SettingsTabPane: FC = () => {
         </Col>
         <Divider />
 
-        <ChannelTypeSection channelTypes={campaignSettingsFormElements.channels} />
+        <ChannelTypeSection
+          channelTypes={campaignSettingsFormElements.channels}
+          onChange={setChannelChosen}
+        />
         <Divider />
 
         <Row gutter={16}>
@@ -48,12 +48,15 @@ export const SettingsTabPane: FC = () => {
           intervalRestrictionOptions={campaignSettingsFormElements.intervalRestrictionOptions}
         />
 
-        <Divider />
-
-        <EmailConfigurations
-          resendFrequencyOptions={campaignSettingsFormElements.resendFrequencyOptions}
-          resendingRuleOptions={campaignSettingsFormElements.resendingRuleOptions}
-        />
+        {channelChosen === 1 && (
+          <>
+            <Divider />
+            <EmailConfigurations
+              resendFrequencyOptions={campaignSettingsFormElements.resendFrequencyOptions}
+              resendingRuleOptions={campaignSettingsFormElements.resendingRuleOptions}
+            />
+          </>
+        )}
       </div>
       <Divider />
       <Row>

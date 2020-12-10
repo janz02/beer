@@ -8,7 +8,7 @@ export interface EmailReSendingProps {
   emailReSendingOptions: TextValuePair[]
 }
 
-export const EmailReSendingSection: FC<EmailReSendingProps> = ({ emailReSendingOptions }) => {
+export const EmailReSendingRulesSection: FC<EmailReSendingProps> = ({ emailReSendingOptions }) => {
   const { t } = useTranslation()
   return (
     <>
