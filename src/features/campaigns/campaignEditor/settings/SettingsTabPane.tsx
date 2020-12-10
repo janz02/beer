@@ -11,7 +11,7 @@ import { RestrictionConfigurations } from './RestrictionConfigurations'
 import { EmailConfigurations } from './EmailConfiguration'
 
 export const SettingsTabPane: FC = () => {
-  const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
+  const { form, handleSubmitButtonClick } = useCampaignSettingsUtils()
   const [channelChosen, setChannelChosen] = useState<number>()
   return (
     <Form className="settings-tab" layout="vertical" form={form} onFinish={handleSubmitButtonClick}>
@@ -21,40 +21,28 @@ export const SettingsTabPane: FC = () => {
         </Col>
         <Divider />
 
-        <ChannelTypeSection
-          channelTypes={campaignSettingsFormElements.channels}
-          onChange={setChannelChosen}
-        />
+        <ChannelTypeSection onChange={setChannelChosen} />
         <Divider />
 
         <Row gutter={16}>
           <Col span={7}>
-            <ProductSection products={campaignSettingsFormElements.products} />
+            <ProductSection />
           </Col>
           <Col>
             <Divider type="vertical" className="vertical-splitter" />
           </Col>
           <Col span={7}>
-            <CampaignAdminSection
-              requesters={campaignSettingsFormElements.users}
-              responsibles={campaignSettingsFormElements.users}
-            />
+            <CampaignAdminSection />
           </Col>
         </Row>
 
         <Divider />
-        <RestrictionConfigurations
-          timingTypes={campaignSettingsFormElements.timingTypes}
-          intervalRestrictionOptions={campaignSettingsFormElements.intervalRestrictionOptions}
-        />
+        <RestrictionConfigurations />
 
         {channelChosen === 1 && (
           <>
             <Divider />
-            <EmailConfigurations
-              resendFrequencyOptions={campaignSettingsFormElements.resendFrequencyOptions}
-              resendingRuleOptions={campaignSettingsFormElements.resendingRuleOptions}
-            />
+            <EmailConfigurations />
           </>
         )}
       </div>
