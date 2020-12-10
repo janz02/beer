@@ -29,8 +29,16 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
           startDate: formValues.timing.rangePicker
             ? formValues.timing.rangePicker[0]
             : formValues.timing.startDate,
-          startTime: formValues.timing.timeRange && formValues.timing.timeRange[0],
-          endTime: formValues.timing.timeRange && formValues.timing.timeRange[1]
+          startTime: formValues.timing.timeRange && {
+            hours: formValues.timing.timeRange[0].hours(),
+            minutes: formValues.timing.timeRange[0].minutes(),
+            seconds: formValues.timing.timeRange[0].seconds()
+          },
+          endTime: formValues.timing.timeRange && {
+            hours: formValues.timing.timeRange[1].hours(),
+            minutes: formValues.timing.timeRange[1].minutes(),
+            seconds: formValues.timing.timeRange[1].seconds()
+          }
         },
         emailChannelSettings: {
           ...formValues.emailChannelSettings

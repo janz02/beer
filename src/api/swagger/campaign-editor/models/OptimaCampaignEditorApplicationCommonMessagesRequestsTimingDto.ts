@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    SystemTimeSpan,
-    SystemTimeSpanFromJSON,
-    SystemTimeSpanFromJSONTyped,
-    SystemTimeSpanToJSON,
+    OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDto,
+    OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDtoFromJSON,
+    OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDtoFromJSONTyped,
+    OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDtoToJSON,
 } from './';
 
 /**
@@ -52,16 +52,16 @@ export interface OptimaCampaignEditorApplicationCommonMessagesRequestsTimingDto 
     endDate?: Date | null;
     /**
      * 
-     * @type {SystemTimeSpan}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDto}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesRequestsTimingDto
      */
-    startTime?: SystemTimeSpan | null;
+    startTime?: OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDto | null;
     /**
      * 
-     * @type {SystemTimeSpan}
+     * @type {OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDto}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesRequestsTimingDto
      */
-    endTime?: SystemTimeSpan | null;
+    endTime?: OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDto | null;
 }
 
 export function OptimaCampaignEditorApplicationCommonMessagesRequestsTimingDtoFromJSON(json: any): OptimaCampaignEditorApplicationCommonMessagesRequestsTimingDto {
@@ -78,8 +78,8 @@ export function OptimaCampaignEditorApplicationCommonMessagesRequestsTimingDtoFr
         'timingTypeId': !exists(json, 'timingTypeId') ? undefined : json['timingTypeId'],
         'startDate': !exists(json, 'startDate') ? undefined : (json['startDate'] === null ? null : new Date(json['startDate'])),
         'endDate': !exists(json, 'endDate') ? undefined : (json['endDate'] === null ? null : new Date(json['endDate'])),
-        'startTime': !exists(json, 'startTime') ? undefined : SystemTimeSpanFromJSON(json['startTime']),
-        'endTime': !exists(json, 'endTime') ? undefined : SystemTimeSpanFromJSON(json['endTime']),
+        'startTime': !exists(json, 'startTime') ? undefined : OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDtoFromJSON(json['startTime']),
+        'endTime': !exists(json, 'endTime') ? undefined : OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDtoFromJSON(json['endTime']),
     };
 }
 
@@ -96,8 +96,8 @@ export function OptimaCampaignEditorApplicationCommonMessagesRequestsTimingDtoTo
         'timingTypeId': value.timingTypeId,
         'startDate': value.startDate === undefined ? undefined : (value.startDate === null ? null : value.startDate.toISOString()),
         'endDate': value.endDate === undefined ? undefined : (value.endDate === null ? null : value.endDate.toISOString()),
-        'startTime': SystemTimeSpanToJSON(value.startTime),
-        'endTime': SystemTimeSpanToJSON(value.endTime),
+        'startTime': OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDtoToJSON(value.startTime),
+        'endTime': OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDtoToJSON(value.endTime),
     };
 }
 
