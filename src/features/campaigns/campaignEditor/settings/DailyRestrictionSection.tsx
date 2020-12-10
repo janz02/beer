@@ -16,7 +16,7 @@ export const DailyRestrictionSection: FC = () => {
             className="control-label"
             label={t('campaign-create.settings.start-time')}
           >
-            <RangePicker />
+            <RangePicker showSecond={false} />
           </Form.Item>
         </Col>
       </Row>
