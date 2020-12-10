@@ -1,5 +1,5 @@
 import { Col, Divider, Row } from 'antd'
-import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
+import { TextValuePair } from 'models/textValuePair'
 import React, { FC } from 'react'
 import { EmailResendSection } from './EmailRecallSection'
 import { EmailReSendingRulesSection } from './EmailReSendingRulesSection'

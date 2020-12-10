@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { useCallback, useEffect } from 'react'
 import { useFormUtils } from 'hooks/useFormUtils'
 import { FormInstance } from 'antd/lib/form'
-import { campaignEditorActions, getCampaignSettingsElements } from '../campaignEditorSlice'
+import { getCampaignSettingsElements } from '../campaignEditorSlice'
 import { CampaignSettingsFormElements } from 'models/campaign/campaignSettingsFormElements'
 import { Campaign } from 'models/campaign/campaign'
+import { saveSettings } from './../campaignEditorSlice'
 
 interface CampaignSettingsUtils {
   form: FormInstance<any>
@@ -39,7 +40,7 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
           ...formValues.emailChannelSettings
         }
       }
-      dispatch(campaignSettingsActions.saveSettings(values))
+      dispatch(saveSettings(values))
     },
     [dispatch]
   )
