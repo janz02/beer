@@ -85,7 +85,6 @@
       "email-recall-settings-title": "Email visszahívás beállítása",
       "email-resending-rules": "Email újraküldési szabályok",
       "end-date": "Záró dátum",
-      "end-time": "Záró időpont",
       "interval-restrictions": "Időszaki megszorítás",
       "maximum-recall-attempts": "Visszahívási kísérletek száma",
       "product-label": "Termék",
@@ -95,7 +94,7 @@
       "select-timing-type-label": "Időzítés típusa",
       "start-date": "Induló dátum",
       "date-range": "Intervallum",
-      "start-time": "Kezdő időpont",
+      "time-period": "Idő intervallum",
       "timing-title": "Időzítés",
       "validations":{
         "required-field":"A mező nem lehet üres! Kérjük töltse ki a mezőt!"

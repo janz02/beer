@@ -14,7 +14,7 @@ export const DailyRestrictionSection: FC = () => {
           <Form.Item
             name={['timing', 'timeRange']}
             className="control-label"
-            label={t('campaign-create.settings.start-time')}
+            label={t('campaign-create.settings.time-period')}
           >
             <RangePicker showSecond={false} />
           </Form.Item>
