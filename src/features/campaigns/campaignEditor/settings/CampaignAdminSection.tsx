@@ -1,7 +1,7 @@
 import { Form, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import { useCommonFormRules } from 'hooks'
-import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
+import { TextValuePair } from 'models/textValuePair'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 

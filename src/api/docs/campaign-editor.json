@@ -3093,6 +3093,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [PermissionRead]"
           }
         },
         "security": [
@@ -3184,6 +3187,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [PermissionRead]"
           }
         },
         "security": [
@@ -3286,6 +3292,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [PermissionRead]"
           }
         },
         "security": [
@@ -3358,6 +3367,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [PermissionRead, PermissionEdit]"
           }
         },
         "security": [
@@ -3443,6 +3455,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [PermissionRead, PermissionEdit]"
           }
         },
         "security": [
@@ -3474,26 +3489,6 @@
         "responses": {
           "204": {
             "description": "Success"
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
-                }
-              }
-            }
           },
           "404": {
             "description": "Not Found",
@@ -3537,6 +3532,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [PermissionRead, PermissionEdit]"
           }
         },
         "security": [
@@ -10121,6 +10119,20 @@
         },
         "additionalProperties": false
       },
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm": {
         "type": "object",
         "properties": {
@@ -10141,7 +10153,11 @@
             "format": "date-time"
           },
           "requester": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
+              }
+            ],
             "nullable": true
           },
           "department": {
@@ -10149,7 +10165,11 @@
             "nullable": true
           },
           "responsible": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
+              }
+            ],
             "nullable": true
           },
           "comment": {
@@ -10157,26 +10177,46 @@
             "nullable": true
           },
           "createdBy": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
+              }
+            ],
             "nullable": true
           },
           "modifiedBy": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
+              }
+            ],
             "nullable": true
           },
           "status": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
+              }
+            ],
             "nullable": true
           },
           "statusIsProcessing": {
             "type": "boolean"
           },
           "channel": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
+              }
+            ],
             "nullable": true
           },
           "product": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
+              }
+            ],
             "nullable": true
           },
           "treatmentStartDate": {
@@ -10200,25 +10240,33 @@
           "timeRules": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
             },
             "nullable": true
           },
           "resendOrRecallRules": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
             },
             "nullable": true
           },
           "resendFrequency": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm"
+              }
+            ],
             "nullable": true
           },
           "maxResends": {
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "timingTypeId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -10239,20 +10287,6 @@
           },
           "isTestGroupMailsAlreadySentOut": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "text": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
