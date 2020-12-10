@@ -30,6 +30,7 @@ import { companiesActions } from 'features/organization/companies/companiesSlice
 import { groupsActions } from 'features/organization/groups/groupList/groupsSlice'
 import { groupEditorActions } from 'features/organization/groups/groupEditor/groupEditorSlice'
 import { profileEditorActions } from 'features/profiles/profileEditor/profileEditorSlice'
+import { campaignEditorActions } from 'features/campaigns/campaignEditor/campaignEditorSlice'
 
 interface HardResetParams {
   logout?: boolean
@@ -63,10 +64,11 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(testGroupCategoryEditorActions.resetCategoryEditor())
     dispatch(resetBpHistory())
     dispatch(systemParamsActions.resetSystemParams())
-    dispatch(campaignListActions.resetCampaignsList())
     dispatch(companiesActions.reset())
     dispatch(groupsActions.reset())
     dispatch(groupEditorActions.resetGroupEditor())
+    dispatch(campaignListActions.resetCampaignsList())
+    dispatch(campaignEditorActions.reset())
     logout && dispatch(resetRouterHistory())
   })
 }
