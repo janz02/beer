@@ -19,24 +19,6 @@ export const DailyRestrictionSection: FC = () => {
             <RangePicker />
           </Form.Item>
         </Col>
-        {/* <Col span={12}>
-          <Form.Item
-            name={['timing', 'startTime']}
-            className="control-label"
-            label={t('campaign-create.settings.start-time')}
-          >
-            <TimePicker />
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item
-            name={['timing', 'endTime']}
-            className="control-label"
-            label={t('campaign-create.settings.end-time')}
-          >
-            <TimePicker />
-          </Form.Item>
-        </Col> */}
       </Row>
     </>
   )
