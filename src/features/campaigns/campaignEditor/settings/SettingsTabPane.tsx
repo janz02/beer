@@ -7,14 +7,19 @@ import { ProductSection } from './ProductSection'
 import { CampaignAdminSection } from './CampaignAdminSection'
 import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
-import { RestrictionConfigurations } from './RestrictionConfigurations'
 import { EmailConfigurations } from './EmailConfiguration'
+import { RestrictionConfigurations } from './RestrictionConfigurations'
 import { Channels } from 'models/channels'
 
 export const SettingsTabPane: FC = () => {
-  const { form, handleSubmitButtonClick, handleGetSettingFormElements } = useCampaignSettingsUtils()
-  const [channelChosen, setChannelChosen] = useState<number>()
+  const {
+    form,
+    handleSubmitButtonClick,
+    campaignSettingsFormElements,
+    handleGetSettingFormElements
+  } = useCampaignSettingsUtils()
 
+  const [channelChosen, setChannelChosen] = useState<number>()
   useEffect(() => {
     handleGetSettingFormElements()
   }, [handleGetSettingFormElements])
@@ -27,28 +32,37 @@ export const SettingsTabPane: FC = () => {
         </Col>
         <Divider />
 
-        <ChannelTypeSection onChange={setChannelChosen} />
+        <ChannelTypeSection
+          channelTypes={campaignSettingsFormElements.channels}
+          onChange={setChannelChosen}
+        />
         <Divider />
 
         <Row gutter={16}>
           <Col span={7}>
-            <ProductSection />
+            <ProductSection products={campaignSettingsFormElements.products} />
           </Col>
           <Col>
             <Divider type="vertical" className="vertical-splitter" />
           </Col>
           <Col span={7}>
-            <CampaignAdminSection />
+            <CampaignAdminSection users={campaignSettingsFormElements.users} />
           </Col>
         </Row>
 
         <Divider />
-        <RestrictionConfigurations />
+        <RestrictionConfigurations
+          timingTypes={campaignSettingsFormElements.timingTypes}
+          intervalRestrictionOptions={campaignSettingsFormElements.intervalRestrictionOptions}
+        />
 
         {channelChosen === Channels.Email && (
           <>
             <Divider />
-            <EmailConfigurations />
+            <EmailConfigurations
+              resendFrequencyOptions={campaignSettingsFormElements.resendFrequencyOptions}
+              resendingRuleOptions={campaignSettingsFormElements.resendingRuleOptions}
+            />
           </>
         )}
       </div>
