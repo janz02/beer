@@ -1,10 +1,10 @@
-import { Col, DatePicker, Form, Row, Select } from 'antd'
+import { Col, Form, Row, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import { useCommonFormRules } from 'hooks'
 import { TextValuePair } from 'models/textValuePair'
-import { TimingTypes } from 'models/timingTypes'
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { DateSelector } from './DateSelector'
 export interface TimingSectionProps {
   timingTypes: TextValuePair[]
 }
@@ -13,7 +13,6 @@ export const TimingSection: FC<TimingSectionProps> = ({ timingTypes }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   const [selectedDateInterval, setSelectedDateInterval] = useState<number>()
-  const { RangePicker } = DatePicker
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.timing-title')}</Title>
@@ -42,47 +41,7 @@ export const TimingSection: FC<TimingSectionProps> = ({ timingTypes }) => {
         </Col>
         <Col />
       </Row>
-      <Row gutter={10}>
-        {selectedDateInterval === TimingTypes.DateInterval ? (
-          <Col span={24}>
-            <Form.Item
-              required
-              className="control-label"
-              name={['timing', 'rangePicker']}
-              label={t('campaign-create.settings.date-range')}
-              rules={[rule.required(t('campaign-create.settings.validations.required-field'))]}
-            >
-              <RangePicker />
-            </Form.Item>
-          </Col>
-        ) : selectedDateInterval === TimingTypes.DateFrom ? (
-          <Col span={24}>
-            <Form.Item
-              required
-              name={['timing', 'startDate']}
-              className="control-label"
-              label={t('campaign-create.settings.start-date')}
-              rules={[rule.required(t('campaign-create.settings.validations.required-field'))]}
-            >
-              <DatePicker />
-            </Form.Item>
-          </Col>
-        ) : selectedDateInterval === TimingTypes.DateTo ? (
-          <Col span={24}>
-            <Form.Item
-              required
-              name={['timing', 'endDate']}
-              className="control-label"
-              label={t('campaign-create.settings.end-date')}
-              rules={[rule.required(t('campaign-create.settings.validations.required-field'))]}
-            >
-              <DatePicker />
-            </Form.Item>
-          </Col>
-        ) : (
-          <></>
-        )}
-      </Row>
+      <DateSelector selectedDateInterval={selectedDateInterval} />
     </>
   )
 }
