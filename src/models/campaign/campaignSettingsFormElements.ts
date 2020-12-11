@@ -1,7 +1,4 @@
-export interface TextValuePair {
-  text: string
-  value: number
-}
+import { TextValuePair } from 'models/textValuePair'
 
 export interface CampaignSettingsFormElements {
   products: TextValuePair[]

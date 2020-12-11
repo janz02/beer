@@ -1,6 +1,6 @@
 import { Col, Form, Input, Row, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
-import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
+import { TextValuePair } from 'models/textValuePair'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 

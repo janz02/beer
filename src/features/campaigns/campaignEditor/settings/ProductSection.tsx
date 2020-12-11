@@ -1,17 +1,15 @@
 import { Form, Select } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import { useCommonFormRules } from 'hooks'
-import { TextValuePair } from 'models/campaign/campaignSettingsFormEelements'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 
-export interface ProductSectionProps {
-  products: TextValuePair[]
-}
-
-export const ProductSection: FC<ProductSectionProps> = ({ products }) => {
+export const ProductSection: FC = () => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
+  const { campaignSettingsFormElements } = useCampaignSettingsUtils()
+  const { products } = campaignSettingsFormElements
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.product-title')}</Title>
