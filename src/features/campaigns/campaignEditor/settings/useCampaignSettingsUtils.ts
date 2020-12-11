@@ -9,6 +9,7 @@ import { saveSettings } from './../campaignEditorSlice'
 import { CampaignSettingsUpdateDto } from 'models/campaign/campaignSettings'
 import { CampaignEmailSettings } from 'models/campaign/campaign'
 import moment from 'moment'
+import { TextValuePair } from 'models/textValuePair'
 
 interface CampaignSettingsUtils {
   form: FormInstance<CampaignSettingsUpdateDto>
@@ -36,8 +37,16 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
           startDate: formValues.timing.rangePicker
             ? formValues.timing.rangePicker[0]
             : formValues.timing.startDate,
-          startTime: formValues.timing.timeRange && formValues.timing.timeRange[0],
-          endTime: formValues.timing.timeRange && formValues.timing.timeRange[1]
+          startTime: formValues.timing.timeRange && {
+            hours: formValues.timing.timeRange[0].hours(),
+            minutes: formValues.timing.timeRange[0].minutes(),
+            seconds: formValues.timing.timeRange[0].seconds()
+          },
+          endTime: formValues.timing.timeRange && {
+            hours: formValues.timing.timeRange[1].hours(),
+            minutes: formValues.timing.timeRange[1].minutes(),
+            seconds: formValues.timing.timeRange[1].seconds()
+          }
         },
         emailChannelSettings: {
           ...formValues.emailChannelSettings
@@ -54,14 +63,16 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
 
   useEffect(() => {
     if (campaign) {
-      const emailSettings = (campaign?.channelSettings as CampaignEmailSettings)!
+      const emailSettings = campaign?.channelSettings as CampaignEmailSettings
       const settingsUpdateDto: CampaignSettingsUpdateDto = {
         description: campaign?.comment!,
         name: campaign?.name!,
         emailChannelSettings: {
           emailMaxReSends: emailSettings.maxResends!,
           emailResendFrequencyId: emailSettings.resendFrequency?.value!,
-          resendingRuleOptions: emailSettings.resendOrRecallRules?.flatMap(x => x.value)!
+          resendingRuleOptions: emailSettings.resendOrRecallRules?.flatMap(
+            (x: TextValuePair) => x.value
+          )!
         },
         channelId: campaign?.settings?.channel?.value!,
         productId: campaign?.settings?.product?.value!,
@@ -69,11 +80,13 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
         responsibleId: campaign?.responsible?.value!,
         timing: {
           endDate: emailSettings.treatmentEndDate!,
-          endTime: moment(emailSettings.treatmentEndTime)!,
+          endTime: emailSettings.treatmentEndTime!,
           startDate: moment(emailSettings.treatmentStartDate)!,
-          startTime: moment(emailSettings.treatmentStartTime)!,
+          startTime: emailSettings.treatmentStartTime!,
           timingTypeId: emailSettings.timingTypeId!,
-          intervalRestrictionOptions: emailSettings.resendOrRecallRules?.flatMap(x => x.value)!
+          intervalRestrictionOptions: emailSettings.resendOrRecallRules?.flatMap(
+            (x: TextValuePair) => x.value
+          )!
         }
       }
       setFieldsValue(settingsUpdateDto)
