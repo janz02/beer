@@ -12,9 +12,11 @@ import { EmailResendSection } from './EmailRecallSection'
 import { EmailReSendingSection } from './EmailSendingSection'
 import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
+import { useTranslation } from 'react-i18next'
 
 export const SettingsTabPane: FC = () => {
   const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
+  const { t } = useTranslation()
 
   return (
     <Form className="settings-tab" layout="vertical" form={form} onFinish={handleSubmitButtonClick}>
@@ -84,7 +86,10 @@ export const SettingsTabPane: FC = () => {
       <Divider />
       <Row>
         <Col span={22}>
-          <CampaignEditorFormFooter />
+          <CampaignEditorFormFooter
+            submitText={t('campaign-create.settings.save-draft')}
+            nextText={t('campaign-create.settings.next-section')}
+          />
         </Col>
       </Row>
     </Form>
