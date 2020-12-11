@@ -15,6 +15,7 @@ interface CampaignSettingsUtils {
   form: FormInstance<CampaignSettingsUpdateDto>
   handleSubmitButtonClick: (values: any) => void
   campaignSettingsFormElements: CampaignSettingsFormElements
+  handleGetSettingFormElements: () => void
 }
 
 export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
@@ -61,7 +62,6 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
   }, [dispatch])
 
   useEffect(() => {
-    handleGetSettingFormElements()
     if (campaign) {
       const emailSettings = campaign?.channelSettings as CampaignEmailSettings
       const settingsUpdateDto: CampaignSettingsUpdateDto = {
@@ -96,6 +96,7 @@ export const useCampaignSettingsUtils = (): CampaignSettingsUtils => {
   return {
     form,
     campaignSettingsFormElements,
-    handleSubmitButtonClick
+    handleSubmitButtonClick,
+    handleGetSettingFormElements
   }
 }

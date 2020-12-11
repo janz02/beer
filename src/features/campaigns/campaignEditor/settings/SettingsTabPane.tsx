@@ -1,6 +1,6 @@
 import { Col, Divider, Form, Row } from 'antd'
 import './../base/CampaignEditor.scss'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { BasicCampaignSection } from './BasicCampaignSection'
 import { ChannelTypeSection } from './ChannelTypeSection'
 import { ProductSection } from './ProductSection'
@@ -12,8 +12,13 @@ import { EmailConfigurations } from './EmailConfiguration'
 import { Channels } from 'models/channels'
 
 export const SettingsTabPane: FC = () => {
-  const { form, handleSubmitButtonClick } = useCampaignSettingsUtils()
+  const { form, handleSubmitButtonClick, handleGetSettingFormElements } = useCampaignSettingsUtils()
   const [channelChosen, setChannelChosen] = useState<number>()
+
+  useEffect(() => {
+    handleGetSettingFormElements()
+  }, [handleGetSettingFormElements])
+
   return (
     <Form className="settings-tab" layout="vertical" form={form} onFinish={handleSubmitButtonClick}>
       <div>
