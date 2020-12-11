@@ -9,8 +9,8 @@ export interface CampaignSettingsUpdateDto {
     timingTypeId: number
     startDate: moment.Moment
     endDate: moment.Moment
-    startTime: Time
-    endTime: Time
+    startTime: Time | null
+    endTime: Time | null
     intervalRestrictionOptions: number[]
   }
   emailChannelSettings: {

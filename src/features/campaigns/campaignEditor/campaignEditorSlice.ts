@@ -65,6 +65,10 @@ const campaignEditorSlice = createSlice({
     saveCampaignSettingsSuccess(state) {
       state.isLoading = false
       state.hasError = false
+    },
+    saveCampaignSettingsFailure(state) {
+      state.isLoading = false
+      state.hasError = true
     }
   }
 })
@@ -75,7 +79,8 @@ const {
   getCampaignFail,
   getCampaignSuccess,
   getCampaignSettingsFormElementsSuccess,
-  saveCampaignSettingsSuccess
+  saveCampaignSettingsSuccess,
+  saveCampaignSettingsFailure
 } = campaignEditorSlice.actions
 
 export const campaignEditorReducer = campaignEditorSlice.reducer
@@ -167,24 +172,21 @@ export const saveSettings = (
   campaignSettings: CampaignSettingsUpdateDto
 ): AppThunk => async dispatch => {
   try {
-    // const settings = {
-    //   optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand: {
-    //     ...campaignSettings,
-    //     timing: {
-    //       ...campaignSettings.timing,
-    //       startDate: campaignSettings.timing?.startDate.toDate(),
-    //       endDate: campaignSettings.timing?.endDate.toDate(),
-    //       startTime: campaignSettings.timing?.startTime.toDate() as SystemTimeSpan,
-    //       endTime: campaignSettings.timing?.endTime.toDate() as SystemTimeSpan
-    //     }
-    //   }
-    // }
-    // console.log(settings)
-    // await api.campaignEditor.campaigns.createCampaignsettings(settings)
-    // dispatch(saveCampaignSettingsSuccess())
-    console.log(campaignSettings)
+    const settings = {
+      optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand: {
+        ...campaignSettings,
+        timing: {
+          ...campaignSettings.timing,
+          startDate: campaignSettings.timing?.startDate?.toDate(),
+          endDate: campaignSettings.timing?.endDate?.toDate()
+        },
+        emailChannelSettings: { ...campaignSettings.emailChannelSettings }
+      }
+    }
+    await api.campaignEditor.campaigns.createCampaignsettings(settings)
+    dispatch(saveCampaignSettingsSuccess())
   } catch (error) {
-    console.log(error)
+    dispatch(saveCampaignSettingsFailure())
   }
 }
 
