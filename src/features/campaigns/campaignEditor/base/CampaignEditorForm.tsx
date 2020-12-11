@@ -12,7 +12,7 @@ import { CampaignUserLogs } from './CampaignUserLogs'
 import { EmailContentTabPane } from '../content/email/EmailContentTabPane'
 import { SegmentationTabPane } from '../segmentation/SegmentationTabPane'
 import { SettingsTabPane } from '../settings/SettingsTabPane'
-import { TestTabPane } from '../test/TestTabPane'
+import { TestTabPane } from '../test/email/EmailTestTabPane'
 
 export interface CampaignEditorProps {
   campaignId: number | undefined

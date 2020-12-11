@@ -77,38 +77,16 @@
     "settings": {
       "about": "Leírás",
       "approver-validator": "Elfogadó/Érvényesítő",
+      "bounce": "Visszapatan",
       "campaign-admins-title": "Kampány adminok",
       "campaign-name": "Kampány neve",
       "channel-type-title": "Csatorna típusa",
       "daily-restriction-title": "Napi tiltások",
-      "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
-      "email-recall-settings-title": "Email visszahívás beállítása",
-      "email-resending-rules": "Email újraküldési szabályok",
-      "end-date": "Zárás dátum",
-      "end-time": "Végződik",
-      "interval-restrictions": "Időszakos korlátozások",
-      "maximum-recall-attempts": "Visszahívási kísérletek száma",
-      "product-label": "Termék",
-      "product-title": "Termék",
-      "recall-frequency": "Visszahívás gyakorisága",
-      "requestor": "Igénylő",
-      "select-timing-type-label": "Időzítés típusa",
-      "start-date": "Kezdeti dátum",
-      "start-time": "Kezdődik",
-      "timing-title": "Időzítés",
-      "validations":{
-        "required-field":"A mező nem lehet üres! Kérjük töltse ki a mezőt!"
-      },
-      "weekday":"Hétköznap",
-      "weekend":"Hétvége",
-      "holiday":"Szabadnap",
-      "workingsaturday":"Szombati munkanap",
-      "rejected":"Elutasítva",
-      "temporarilyrejected":"Ideiglenesen elutasítva",
-      "bounce":"Visszapatan",
-      "spam":"Spam",
-      "unopened":"Olvasatlan",
+      "datefrom": "Dátumtól",
+      "dateinterval": "Dátum intervallum",
+      "dateto": "Dátumig",
       "day1": "1 nap",
+      "day10": "10 nap",
       "day2": "2 nap",
       "day3": "3 nap",
       "day4": "4 nap",
@@ -117,15 +95,43 @@
       "day7": "7 nap",
       "day8": "8 nap",
       "day9": "9 nap",
-      "day10": "10 nap",
+      "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
+      "email-recall-settings-title": "Email visszahívás beállítása",
+      "email-resending-rules": "Email újraküldési szabályok",
+      "end-date": "Zárás dátum",
+      "end-time": "Végződik",
+      "holiday": "Szabadnap",
+      "infinite": "Végtelen",
+      "interval-restrictions": "Időszakos korlátozások",
+      "maximum-recall-attempts": "Visszahívási kísérletek száma",
+      "product-label": "Termék",
+      "product-title": "Termék",
+      "recall-frequency": "Visszahívás gyakorisága",
+      "requestor": "Igénylő",
+      "select-timing-type-label": "Időzítés típusa",
+      "spam": "Spam",
+      "start-date": "Kezdeti dátum",
+      "start-time": "Kezdődik",
+      "temporarilyrejected": "Ideiglenesen elutasítva",
+      "timing-title": "Időzítés",
+      "unopened": "Olvasatlan",
+      "validations": {
+        "required-field": "A mező nem lehet üres! Kérjük töltse ki a mezőt!"
+      },
       "week1": "1 hét",
-      "dateinterval":"Dátum intervallum",
-      "datefrom":"Dátumtól",
-      "dateto":"Dátumig",
-      "infinite":"Végtelen"
+      "weekday": "Hétköznap",
+      "weekend": "Hétvége",
+      "workingsaturday": "Szombati munkanap"
     },
     "settings-tab-name": "Beállítások",
     "status-creation": "Státusz (Kampány Létrehozás)",
+    "test": {
+      "email": {
+        "send-email": "Teszt email kiküldés",
+        "set-testers": "Tesztelők hozzárendelése",
+        "testers": "Email tesztelők ({{totalCount}})"
+      }
+    },
     "test-tab-name": "Teszt",
     "title": "Kampány Létrehozása",
     "user-logs": "Felhaszálói napló"
@@ -939,16 +945,13 @@
         "profile-count": "Felhasználók"
       },
       "fields": {
-        "created-by": "Létrehozó",
-        "created-date": "Létrehozás dátuma",
         "name": "Név"
       },
       "permissions": "Jogosultságok ({{totalCount}})",
       "profiles": "Felhasználók ({{totalCount}})",
       "title": "Csoportok",
       "viewer": {
-        "edit": "Szerkesztés",
-        "title": "Csoport"
+        "edit": "Szerkesztés"
       }
     },
     "job-roles": {
