@@ -43,8 +43,8 @@ export interface CampaignSmsSettings {
 }
 
 export interface CampaignEmailContent {
-  templateId?: string
-  versionId?: string
+  emailTemplateId?: number
+  emailTemplateVersion?: number
 }
 export interface CampaignSmsContent {
   message?: string

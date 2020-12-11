@@ -7,26 +7,30 @@ import './EmailContentTabPane.scss'
 import { EmailTemplatePreview } from 'components/emailTemplatePreview/EmailTemplatePreview'
 import Title from 'antd/lib/typography/Title'
 import { CampaignEditorFormFooter } from '../../base/CampaignEditorFormFooter'
+import { useCommonFormRules } from 'hooks'
 
-export const EmailContentTabPane: FC<CampaignEditorProps> = () => {
+export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => {
   const { t } = useTranslation()
   const {
     form,
     template,
     templateList,
+    handleSubmit,
     handleTemplateSelection,
     handleTemplateVersionSelection
-  } = useEmailContentUtils()
+  } = useEmailContentUtils(campaignId)
+  const { required } = useCommonFormRules()
 
   return (
     <div>
-      <Form form={form} layout="vertical">
+      <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Title level={5}>{t('campaign-create.content.email.title')}</Title>
         <Row gutter={20}>
           <Col span={8}>
             <Form.Item
-              name="templateName"
+              name="emailTemplateId"
               label={t('campaign-create.content.email.template')}
+              rules={[required()]}
               required
             >
               <Select
@@ -47,8 +51,9 @@ export const EmailContentTabPane: FC<CampaignEditorProps> = () => {
           </Col>
           <Col span={8}>
             <Form.Item
-              name="templateVersion"
+              name="emailTemplateVersion"
               label={t('campaign-create.content.email.template-version')}
+              rules={[required()]}
               required
             >
               <Select
@@ -69,20 +74,20 @@ export const EmailContentTabPane: FC<CampaignEditorProps> = () => {
             </Form.Item>
           </Col>
         </Row>
+        <div hidden={!template}>
+          <EmailTemplatePreview />
+        </div>
+        <Divider />
+        <Row>
+          <Col span={22}>
+            <CampaignEditorFormFooter
+              previousText={t('campaign-create.content.email.previous-section')}
+              submitText={t('campaign-create.content.email.save-draft')}
+              nextText={t('campaign-create.content.email.next-section')}
+            />
+          </Col>
+        </Row>
       </Form>
-      <div hidden={!template}>
-        <EmailTemplatePreview />
-      </div>
-      <Divider />
-      <Row>
-        <Col span={22}>
-          <CampaignEditorFormFooter
-            previousText={t('campaign-create.content.email.previous-section')}
-            submitText={t('campaign-create.content.email.save-draft')}
-            nextText={t('campaign-create.content.email.next-section')}
-          />
-        </Col>
-      </Row>
     </div>
   )
 }
