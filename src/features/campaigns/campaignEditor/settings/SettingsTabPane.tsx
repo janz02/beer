@@ -1,20 +1,23 @@
 import { Col, Divider, Form, Row } from 'antd'
 import './../base/CampaignEditor.scss'
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { BasicCampaignSection } from './BasicCampaignSection'
 import { ChannelTypeSection } from './ChannelTypeSection'
 import { ProductSection } from './ProductSection'
 import { CampaignAdminSection } from './CampaignAdminSection'
-import { TimingSection } from './TimingSection'
-import { DailyRestrictionSection } from './DailyRestrictionSection'
-import { IntervalRestrictionSection } from './IntervalRestrictionSection'
-import { EmailResendSection } from './EmailRecallSection'
-import { EmailReSendingSection } from './EmailSendingSection'
 import { useCampaignSettingsUtils } from './useCampaignSettingsUtils'
 import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
+import { RestrictionConfigurations } from './RestrictionConfigurations'
+import { EmailConfigurations } from './EmailConfiguration'
+import { Channels } from 'models/channels'
 
 export const SettingsTabPane: FC = () => {
-  const { form, handleSubmitButtonClick, campaignSettingsFormElements } = useCampaignSettingsUtils()
+  const { form, handleSubmitButtonClick, handleGetSettingFormElements } = useCampaignSettingsUtils()
+  const [channelChosen, setChannelChosen] = useState<number>()
+
+  useEffect(() => {
+    handleGetSettingFormElements()
+  }, [handleGetSettingFormElements])
 
   return (
     <Form className="settings-tab" layout="vertical" form={form} onFinish={handleSubmitButtonClick}>
@@ -24,62 +27,30 @@ export const SettingsTabPane: FC = () => {
         </Col>
         <Divider />
 
-        <ChannelTypeSection channelTypes={campaignSettingsFormElements.channels} />
+        <ChannelTypeSection onChange={setChannelChosen} />
         <Divider />
 
         <Row gutter={16}>
           <Col span={7}>
-            <ProductSection products={campaignSettingsFormElements.products} />
+            <ProductSection />
           </Col>
           <Col>
             <Divider type="vertical" className="vertical-splitter" />
           </Col>
           <Col span={7}>
-            <CampaignAdminSection
-              requesters={campaignSettingsFormElements.users}
-              responsibles={campaignSettingsFormElements.users}
-            />
+            <CampaignAdminSection />
           </Col>
         </Row>
 
         <Divider />
-        <Row gutter={16}>
-          <Col span={7}>
-            <TimingSection timingTypes={campaignSettingsFormElements.timingTypes} />
-          </Col>
-          <Col>
-            <Divider type="vertical" className="vertical-splitter" />
-          </Col>
-          <Col span={7}>
-            <DailyRestrictionSection />
-          </Col>
-          <Col>
-            <Divider type="vertical" className="vertical-splitter" />
-          </Col>
-          <Col span={7}>
-            <IntervalRestrictionSection
-              restrictionOptions={campaignSettingsFormElements.intervalRestrictionOptions}
-            />
-          </Col>
-        </Row>
+        <RestrictionConfigurations />
 
-        <Divider />
-
-        <Row gutter={16}>
-          <Col span={7}>
-            <EmailResendSection
-              emailResendOptions={campaignSettingsFormElements.resendFrequencyOptions}
-            />
-          </Col>
-          <Col>
-            <Divider type="vertical" className="vertical-splitter" />
-          </Col>
-          <Col span={7}>
-            <EmailReSendingSection
-              emailReSendingOptions={campaignSettingsFormElements.resendingRuleOptions}
-            />
-          </Col>
-        </Row>
+        {channelChosen === Channels.Email && (
+          <>
+            <Divider />
+            <EmailConfigurations />
+          </>
+        )}
       </div>
       <Divider />
       <Row>
