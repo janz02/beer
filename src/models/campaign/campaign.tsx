@@ -1,4 +1,5 @@
 import { TextValuePair } from 'models/textValuePair'
+import { Time } from './campaignSettings'
 
 export interface Campaign {
   id?: number
@@ -29,8 +30,8 @@ export interface CampaignBaseSettings {
 export interface CampaignEmailSettings {
   treatmentStartDate?: moment.Moment | null
   treatmentEndDate?: moment.Moment | null
-  treatmentStartTime?: string | null
-  treatmentEndTime?: string | null
+  treatmentStartTime?: Time | null
+  treatmentEndTime?: Time | null
   timeRules?: Array<TextValuePair> | null
   resendOrRecallRules?: Array<TextValuePair> | null
   resendFrequency?: TextValuePair | null
