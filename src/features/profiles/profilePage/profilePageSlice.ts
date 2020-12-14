@@ -21,6 +21,7 @@ interface ProfilePageState extends ProfileLoadedData {
   error: boolean
   loading: boolean
   saving: boolean
+  isEditMode: boolean
 }
 
 const initialState: ProfilePageState = {
@@ -29,7 +30,8 @@ const initialState: ProfilePageState = {
   jobRoles: [],
   error: false,
   loading: false,
-  saving: false
+  saving: false,
+  isEditMode: false
 }
 
 const profilePageSlice = createSlice({
@@ -58,6 +60,9 @@ const profilePageSlice = createSlice({
     saveProfileFail(state) {
       state.saving = false
       state.error = true
+    },
+    setEditMode(state, action: PayloadAction<{ isEditMode: boolean }>) {
+      state.isEditMode = action.payload.isEditMode
     }
   }
 })
@@ -68,7 +73,8 @@ const {
   getProfileRequest,
   saveProfileSuccess,
   saveProfileFail,
-  saveProfileRequest
+  saveProfileRequest,
+  setEditMode
 } = profilePageSlice.actions
 
 export const { resetProfilePage } = profilePageSlice.actions
@@ -148,5 +154,6 @@ export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, get
 }
 
 export const profilePageActions = {
-  reset: resetProfilePage
+  reset: resetProfilePage,
+  setEditMode: setEditMode
 }

@@ -2,34 +2,36 @@ import './ProfilePage.scss'
 import { Button, Col, Row } from 'antd'
 import Form from 'antd/lib/form/Form'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
-import React, { FC, useMemo } from 'react'
+import React, { FC, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'hooks/react-router-dom-hooks'
 import { useProfileUtils } from './useProfileUtils'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
-import { history } from 'router/router'
 import { ProfileBasics } from './components/ProfileBasics'
 import { ProfilePosition } from './components/ProfilePosition'
 import { ProfileContacts } from './components/ProfileContacts'
+import { useHistory } from 'react-router-dom'
 
-interface ProfilePageProps {
-  mode?: 'edit' | 'view'
-}
-
-// todo default mode view
-export const ProfilePage: FC<ProfilePageProps> = ({ mode = 'edit' }) => {
+export const ProfilePage: FC = () => {
   const { t } = useTranslation()
+  const history = useHistory()
   const { profileId } = useParams<{ profileId: string }>()
   const id = profileId ? +profileId : undefined
-  const profileEditorPageUtils = useProfileUtils(id)
   const {
+    companies,
+    groups,
+    jobRoles,
+    formUtils,
     submitable,
     modified,
     saving,
     checkFieldsChange,
-    resetFormFlags,
-    handleSave
-  } = profileEditorPageUtils
+    handleSave,
+    profile,
+    isEditMode,
+    setEditMode,
+    handleCancel
+  } = useProfileUtils(id)
 
   const backButtonProps = useMemo(
     () => ({
@@ -38,50 +40,56 @@ export const ProfilePage: FC<ProfilePageProps> = ({ mode = 'edit' }) => {
         history.goBack()
       }
     }),
-    []
+    [history]
   )
+
+  useEffect(() => {
+    return () => setEditMode(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <ResponsiveCard
       className="profile-editor-card"
-      floatingTitle={t('profile-editor.title')}
+      floatingTitle={isEditMode ? t('profile-editor.title.edit') : t('profile-editor.title.view')}
       floatingBackButton={backButtonProps}
     >
       <Form
         name="profile-editor-form"
         layout="vertical"
-        form={profileEditorPageUtils.formUtils.form}
+        form={formUtils.form}
         onFinish={handleSave}
         onFieldsChange={checkFieldsChange}
       >
-        <ProfileBasics profileEditorPageUtils={profileEditorPageUtils} />
+        <ProfileBasics profile={profile} form={formUtils.form} isEditMode={isEditMode} />
 
         <Row className="profile-editor-columns" gutter={70}>
           <Col span={12}>
-            <ProfilePosition profileEditorPageUtils={profileEditorPageUtils} />
+            <ProfilePosition
+              companies={companies}
+              groups={groups}
+              jobRoles={jobRoles}
+              isEditMode={isEditMode}
+            />
           </Col>
           <Col span={12}>
-            <ProfileContacts />
+            <ProfileContacts isEditMode={isEditMode} />
           </Col>
         </Row>
 
-        <div className="profile-editor-footer">
-          <div className="profile-editor-footer-right">
-            <Button type="primary" htmlType="submit" disabled={!submitable} loading={saving}>
-              {t('profile-editor.button-save')}
+        {isEditMode && (
+          <div className="profile-editor-footer">
+            <div className="profile-editor-footer-right">
+              <Button type="primary" htmlType="submit" disabled={!submitable} loading={saving}>
+                {t('profile-editor.button-save')}
+              </Button>
+            </div>
+
+            <Button type="link" onClick={handleCancel}>
+              {t('profile-editor.button-cancel')}
             </Button>
           </div>
-
-          <Button
-            type="link"
-            onClick={() => {
-              resetFormFlags()
-              history.push('/profiles')
-            }}
-          >
-            {t('profile-editor.button-cancel')}
-          </Button>
-        </div>
+        )}
       </Form>
       <NavigationAlert when={modified} />
     </ResponsiveCard>

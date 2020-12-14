@@ -5,17 +5,18 @@ import { Col, DatePicker, Form, Input, Row } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 import { FileExtension } from 'components/upload/fileUploadHelper'
-import { ProfileUtils } from '../useProfileUtils'
+import { Profile } from 'models/profile'
+import { FormInstance } from 'antd/lib/form'
 
 interface ProfileBasicsProps {
-  profileEditorPageUtils: ProfileUtils
+  profile?: Profile
+  form: FormInstance
+  isEditMode: boolean
 }
 
-export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
+export const ProfileBasics: React.FC<ProfileBasicsProps> = ({ profile, form, isEditMode }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
-  const { profile, formUtils } = props.profileEditorPageUtils
-  const { form } = formUtils
 
   return (
     <div className="profile-editor-basics-container">
@@ -51,14 +52,14 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
         <Row gutter={50}>
           <Col span={12}>
             <Form.Item name="name" label={t('profile-editor.name')}>
-              <Input maxLength={100} />
+              <Input maxLength={100} disabled={!isEditMode} />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={70}>
           <Col span={9}>
             <Form.Item name="birthDay" label={t('profile-editor.birthday')}>
-              <DatePicker />
+              <DatePicker disabled={!isEditMode} />
             </Form.Item>
           </Col>
           <Col span={6}>

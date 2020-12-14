@@ -1,10 +1,14 @@
 import './ProfileContacts.scss'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Form, Input } from 'antd'
 import { useCommonFormRules } from 'hooks'
 
-export const ProfileContacts: React.FC = () => {
+interface ProfileContactsProps {
+  isEditMode: boolean
+}
+
+export const ProfileContacts: FC<ProfileContactsProps> = ({ isEditMode }) => {
   const { t } = useTranslation()
   const rules = useCommonFormRules()
 
@@ -15,7 +19,7 @@ export const ProfileContacts: React.FC = () => {
         <div className="profile-editor-phone-container">
           <div className="profile-editor-phone-country">+36</div>
           <Form.Item name="phoneNumberWithoutCountry" rules={[rules.phoneNumber()]} noStyle>
-            <Input maxLength={60} />
+            <Input maxLength={60} disabled={!isEditMode} />
           </Form.Item>
         </div>
       </Form.Item>

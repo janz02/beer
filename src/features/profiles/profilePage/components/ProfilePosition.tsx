@@ -2,16 +2,25 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Form, Select } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { ProfileUtils } from '../useProfileUtils'
+import { Company } from 'models/company'
+import { Group } from 'models/group'
+import { JobRole } from 'models/jobRole'
 
 interface ProfilePositionProps {
-  profileEditorPageUtils: ProfileUtils
+  companies?: Company[]
+  groups?: Group[]
+  jobRoles?: JobRole[]
+  isEditMode: boolean
 }
 
-export const ProfilePosition: React.FC<ProfilePositionProps> = props => {
+export const ProfilePosition: React.FC<ProfilePositionProps> = ({
+  companies,
+  groups,
+  jobRoles,
+  isEditMode
+}) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
-  const { companies, groups, jobRoles } = props.profileEditorPageUtils
 
   return (
     <>
@@ -21,7 +30,7 @@ export const ProfilePosition: React.FC<ProfilePositionProps> = props => {
         label={t('profile-editor.company')}
         rules={[rule.required(t('error.validation.profile-editor.company-required'))]}
       >
-        <Select>
+        <Select disabled={!isEditMode}>
           {companies?.map(x => (
             <Select.Option key={x.id} value={x.id!}>
               {x.name}
@@ -30,7 +39,7 @@ export const ProfilePosition: React.FC<ProfilePositionProps> = props => {
         </Select>
       </Form.Item>
       <Form.Item name="groupIds" label={t('profile-editor.group')}>
-        <Select mode="multiple" showArrow>
+        <Select mode="multiple" showArrow disabled={!isEditMode}>
           {groups?.map(x => (
             <Select.Option key={x.id} value={x.id!}>
               {x.name}
@@ -43,7 +52,7 @@ export const ProfilePosition: React.FC<ProfilePositionProps> = props => {
         label={t('profile-editor.job-role')}
         rules={[rule.required(t('error.validation.profile-editor.job-role-required'))]}
       >
-        <Select>
+        <Select disabled={!isEditMode}>
           {jobRoles?.map(x => (
             <Select.Option key={x.id} value={x.id!}>
               {x.name}

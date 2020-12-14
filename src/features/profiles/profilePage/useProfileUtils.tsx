@@ -5,8 +5,15 @@ import { Company } from 'models/company'
 import { Group } from 'models/group'
 import { JobRole } from 'models/jobRole'
 import { Profile } from 'models/profile'
-import { useEffect } from 'react'
-import { getProfile, ProfileForm, resetProfilePage, saveProfile } from './profilePageSlice'
+import { useCallback, useEffect, useMemo } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
+import {
+  getProfile,
+  ProfileForm,
+  resetProfilePage,
+  saveProfile,
+  profilePageActions
+} from './profilePageSlice'
 
 export interface ProfileUtils {
   formUtils: FormUtils
@@ -17,16 +24,24 @@ export interface ProfileUtils {
   companies: Company[]
   groups: Group[]
   jobRoles: JobRole[]
+  isEditMode: boolean
+  isOwnProfile: boolean
   checkFieldsChange: () => void
   resetFormFlags: () => void
   handleSave: (values: ProfileForm) => void
+  setEditMode: (isEditMode: boolean) => void
+  handleCancel: () => void
 }
 
 export const useProfileUtils = (id?: number): ProfileUtils => {
   const dispatch = useDispatch()
-  const { profile, companies, groups, jobRoles, saving } = useSelector(
+  const location = useLocation()
+  const history = useHistory()
+  const { profile, companies, groups, jobRoles, saving, isEditMode } = useSelector(
     (state: RootState) => state.profilePage
   )
+
+  const isOwnProfile = useMemo(() => location.pathname.includes('my-profile'), [location])
 
   useEffect(() => {
     if (id) {
@@ -67,6 +82,22 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
     dispatch(saveProfile(values))
   }
 
+  const setEditMode = useCallback(
+    (isEditMode: boolean): void => {
+      dispatch(profilePageActions.setEditMode({ isEditMode }))
+    },
+    [dispatch]
+  )
+
+  const handleCancel = useCallback((): void => {
+    resetFormFlags()
+    setEditMode(false)
+
+    if (!isOwnProfile) {
+      history.goBack()
+    }
+  }, [setEditMode, isOwnProfile, history, resetFormFlags])
+
   return {
     formUtils,
     submitable,
@@ -78,6 +109,10 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
     jobRoles,
     checkFieldsChange,
     resetFormFlags,
-    handleSave
+    handleSave,
+    isEditMode,
+    setEditMode,
+    handleCancel,
+    isOwnProfile
   }
 }
