@@ -5,16 +5,9 @@ import { Col, DatePicker, Form, Input, Row } from 'antd'
 import { useCommonFormRules } from 'hooks'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 import { FileExtension } from 'components/upload/fileUploadHelper'
-import { Profile } from 'models/profile'
-import { FormInstance } from 'antd/lib/form'
+import { ProfileUtils } from '../useProfileUtils'
 
-interface ProfileBasicsProps {
-  profile?: Profile
-  form: FormInstance
-  isEditMode: boolean
-}
-
-export const ProfileBasics: React.FC<ProfileBasicsProps> = ({ profile, form, isEditMode }) => {
+export const ProfileBasics: React.FC<Partial<ProfileUtils>> = ({ profile, formUtils }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
 
@@ -28,20 +21,20 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = ({ profile, form, isE
         >
           <PictureUploadButton
             onSuccess={fileDetails => {
-              form.setFieldsValue({
-                ...form.getFieldsValue(),
+              formUtils?.form.setFieldsValue({
+                ...formUtils?.form.getFieldsValue(),
                 profilePictureDetails: fileDetails
               })
 
-              form.validateFields(['profilePictureDetails'])
+              formUtils?.form.validateFields(['profilePictureDetails'])
             }}
             onRemove={() => {
-              form.setFieldsValue({
-                ...form.getFieldsValue(),
+              formUtils?.form.setFieldsValue({
+                ...formUtils?.form.getFieldsValue(),
                 profilePictureDetails: undefined
               })
 
-              form.validateFields(['profilePictureDetails'])
+              formUtils?.form.validateFields(['profilePictureDetails'])
             }}
             initialFileId={profile?.profilePictureId}
             allowedExtensions={[FileExtension.JPG, FileExtension.PNG]}
@@ -52,14 +45,14 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = ({ profile, form, isE
         <Row gutter={50}>
           <Col span={12}>
             <Form.Item name="name" label={t('profile-editor.name')}>
-              <Input maxLength={100} disabled={!isEditMode} />
+              <Input maxLength={100} />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={70}>
           <Col span={9}>
             <Form.Item name="birthDay" label={t('profile-editor.birthday')}>
-              <DatePicker disabled={!isEditMode} />
+              <DatePicker />
             </Form.Item>
           </Col>
           <Col span={6}>
