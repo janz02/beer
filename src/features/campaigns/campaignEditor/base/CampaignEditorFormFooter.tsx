@@ -21,19 +21,21 @@ export const CampaignEditorFormFooter: FC<CampaignEditorFormFooterProps> = ({
       <Button className={styles.cancelButton} type="link" htmlType="button">
         {t('campaign-create.cancel-changes')}
       </Button>
-      {previousText ? (
-        <Button className={styles.previousButton} htmlType="button">
-          {previousText}
+      <span>
+        {previousText ? (
+          <Button className={styles.previousButton} htmlType="button">
+            {previousText}
+          </Button>
+        ) : (
+          <></>
+        )}
+        <Button name="Submit" className={styles.submitButton} htmlType="submit">
+          {submitText}
         </Button>
-      ) : (
-        <></>
-      )}
-      <Button name="Submit" htmlType="submit">
-        {submitText}
-      </Button>
-      <Button type="primary" name="Next" htmlType="submit">
-        {nextText}
-      </Button>
+        <Button type="primary" name="Next" htmlType="submit">
+          {nextText}
+        </Button>
+      </span>
     </div>
   )
 }
