@@ -35,7 +35,7 @@ import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPa
 import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
 import { OrganizationPage } from 'features/organization/OrganizationPage'
 import { PlaceholderPage } from 'components/placeholder/PlaceholderPage'
-import { ProfileEditorPage } from 'features/profiles/profileEditor/ProfileEditorPage'
+import { ProfilePage } from 'features/profiles/profilePage/ProfilePage'
 import { GroupViewPage } from 'features/organization/groups/groupEditor/GroupViewPage'
 
 const onDefaultRoute = (): JSX.Element => {
@@ -194,7 +194,7 @@ const Routes = (): JSX.Element => (
       exact
       path="/profiles/:profileId"
       roles={pageViewRoles.profiles}
-      component={ProfileEditorPage}
+      component={ProfilePage}
     />
     <PrivateRoute
       exact

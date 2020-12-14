@@ -3,12 +3,12 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Col, DatePicker, Form, Input, Row } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { ProfileEditorPageUtils } from './ProfileEditorUtils'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 import { FileExtension } from 'components/upload/fileUploadHelper'
+import { ProfileUtils } from '../useProfileUtils'
 
 interface ProfileBasicsProps {
-  profileEditorPageUtils: ProfileEditorPageUtils
+  profileEditorPageUtils: ProfileUtils
 }
 
 export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {

@@ -2,10 +2,10 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Form, Select } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { ProfileEditorPageUtils } from './ProfileEditorUtils'
+import { ProfileUtils } from '../useProfileUtils'
 
 interface ProfilePositionProps {
-  profileEditorPageUtils: ProfileEditorPageUtils
+  profileEditorPageUtils: ProfileUtils
 }
 
 export const ProfilePosition: React.FC<ProfilePositionProps> = props => {

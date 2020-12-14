@@ -1,22 +1,27 @@
-import './ProfileEditorPage.scss'
+import './ProfilePage.scss'
 import { Button, Col, Row } from 'antd'
 import Form from 'antd/lib/form/Form'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ProfileBasics } from './ProfileBasics'
-import { ProfilePosition } from './ProfilePosition'
-import { ProfileContacts } from './ProfileContacts'
 import { useParams } from 'hooks/react-router-dom-hooks'
-import { useProfileEditorPageUtils } from './ProfileEditorUtils'
+import { useProfileUtils } from './useProfileUtils'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { history } from 'router/router'
+import { ProfileBasics } from './components/ProfileBasics'
+import { ProfilePosition } from './components/ProfilePosition'
+import { ProfileContacts } from './components/ProfileContacts'
 
-export const ProfileEditorPage: FC = () => {
+interface ProfilePageProps {
+  mode?: 'edit' | 'view'
+}
+
+// todo default mode view
+export const ProfilePage: FC<ProfilePageProps> = ({ mode = 'edit' }) => {
   const { t } = useTranslation()
   const { profileId } = useParams<{ profileId: string }>()
   const id = profileId ? +profileId : undefined
-  const profileEditorPageUtils = useProfileEditorPageUtils(id)
+  const profileEditorPageUtils = useProfileUtils(id)
   const {
     submitable,
     modified,

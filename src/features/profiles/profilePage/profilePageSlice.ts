@@ -10,20 +10,20 @@ import { JobRole } from 'models/jobRole'
 import moment from 'moment'
 import { FrontendFileValue } from 'components/upload/fileUploadHelper'
 
-interface ProfileEditorLoadedData {
+interface ProfileLoadedData {
   profile?: Profile
   companies: Company[]
   groups: Group[]
   jobRoles: JobRole[]
 }
 
-interface ProfileEditorState extends ProfileEditorLoadedData {
+interface ProfilePageState extends ProfileLoadedData {
   error: boolean
   loading: boolean
   saving: boolean
 }
 
-const initialState: ProfileEditorState = {
+const initialState: ProfilePageState = {
   companies: [],
   groups: [],
   jobRoles: [],
@@ -32,15 +32,15 @@ const initialState: ProfileEditorState = {
   saving: false
 }
 
-const profileEditorSlice = createSlice({
-  name: 'profileEditor',
+const profilePageSlice = createSlice({
+  name: 'profilePage',
   initialState,
   reducers: {
-    resetProfileEditor: () => initialState,
+    resetProfilePage: () => initialState,
     getProfileRequest(state) {
       state.loading = true
     },
-    getProfileSuccess(state, action: PayloadAction<ProfileEditorLoadedData>) {
+    getProfileSuccess(state, action: PayloadAction<ProfileLoadedData>) {
       Object.assign(state, action.payload)
       state.loading = false
       state.error = false
@@ -69,11 +69,11 @@ const {
   saveProfileSuccess,
   saveProfileFail,
   saveProfileRequest
-} = profileEditorSlice.actions
+} = profilePageSlice.actions
 
-export const { resetProfileEditor } = profileEditorSlice.actions
+export const { resetProfilePage } = profilePageSlice.actions
 
-export const profileEditorReducer = profileEditorSlice.reducer
+export const profilePageReducer = profilePageSlice.reducer
 
 export const getProfile = (id: number): AppThunk => async dispatch => {
   try {
@@ -119,7 +119,7 @@ export interface ProfileForm {
 
 export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, getState) => {
   try {
-    const profile = getState().profileEditor.profile!
+    const profile = getState().profilePage.profile!
     dispatch(saveProfileRequest())
 
     await api.admin.profiles.updateProfile({
@@ -147,6 +147,6 @@ export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, get
   }
 }
 
-export const profileEditorActions = {
-  reset: resetProfileEditor
+export const profilePageActions = {
+  reset: resetProfilePage
 }

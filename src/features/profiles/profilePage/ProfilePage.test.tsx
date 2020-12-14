@@ -1,10 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import moment from 'moment'
 import React from 'react'
-import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import { setupStore, setupUseParams } from '../../../../config/setupMocks'
-import { ProfileEditorPage } from './ProfileEditorPage'
+import { ProfilePage } from './ProfilePage'
 
 jest.mock('app/store')
 
@@ -73,7 +72,7 @@ setupUseParams({ profileId: 1 })
 const ProfileEditorPageInRouter: React.FC = () => {
   return (
     <MemoryRouter>
-      <ProfileEditorPage />
+      <ProfilePage mode="edit" />
     </MemoryRouter>
   )
 }

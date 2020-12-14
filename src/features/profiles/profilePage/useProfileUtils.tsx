@@ -6,9 +6,9 @@ import { Group } from 'models/group'
 import { JobRole } from 'models/jobRole'
 import { Profile } from 'models/profile'
 import { useEffect } from 'react'
-import { getProfile, ProfileForm, resetProfileEditor, saveProfile } from './profileEditorSlice'
+import { getProfile, ProfileForm, resetProfilePage, saveProfile } from './profilePageSlice'
 
-export interface ProfileEditorPageUtils {
+export interface ProfileUtils {
   formUtils: FormUtils
   submitable: boolean
   modified: boolean
@@ -22,10 +22,10 @@ export interface ProfileEditorPageUtils {
   handleSave: (values: ProfileForm) => void
 }
 
-export const useProfileEditorPageUtils = (id?: number): ProfileEditorPageUtils => {
+export const useProfileUtils = (id?: number): ProfileUtils => {
   const dispatch = useDispatch()
   const { profile, companies, groups, jobRoles, saving } = useSelector(
-    (state: RootState) => state.profileEditor
+    (state: RootState) => state.profilePage
   )
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const useProfileEditorPageUtils = (id?: number): ProfileEditorPageUtils =
     }
 
     return () => {
-      dispatch(resetProfileEditor())
+      dispatch(resetProfilePage())
     }
   }, [dispatch, id])
 
