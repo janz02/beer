@@ -20,7 +20,7 @@ export const CampaignEditorPage: React.FC = () => {
       dispatch(getCampaign(id))
       dispatch(newsletterEditorActions.clearNewsletterTemplate())
     }
-  })
+  }, [id, dispatch])
   return (
     <>
       <Row className="campaign-editor-form">

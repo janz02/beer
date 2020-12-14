@@ -162,7 +162,7 @@ export const updateEmailContent = (
 ): AppThunk => async dispatch => {
   try {
     dispatch(getCampaignStarted())
-    const response = await api.campaignEditor.campaigns.updateCampaignContent({
+    await api.campaignEditor.campaigns.updateCampaignContent({
       optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand: {
         id,
         emailTemplateId,
