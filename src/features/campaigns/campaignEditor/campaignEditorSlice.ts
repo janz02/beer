@@ -170,7 +170,6 @@ export const updateEmailContent = (
       }
     })
 
-    console.log(response)
     message.success(i18n.t('common.message.save-success'), 5)
   } catch (err) {
     dispatch(getCampaignFail())
