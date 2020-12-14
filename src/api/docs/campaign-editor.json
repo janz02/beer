@@ -1306,6 +1306,81 @@
         ]
       }
     },
+    "/api/Campaigns/UpdateContent/Content": {
+      "put": {
+        "tags": [
+          "Campaigns"
+        ],
+        "summary": "Update the current instance with the fulfilled model",
+        "operationId": "updateCampaignContent",
+        "requestBody": {
+          "description": "The desired modifications to be made. All value has to be filled!",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - requires a role of [CampaignRead, CampaignEdit]"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/Campaigns/GetCampaignDetail/{campaignid}": {
       "get": {
         "tags": [
@@ -2998,6 +3073,486 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/JobRoles/Create": {
+      "post": {
+        "tags": [
+          "JobRoles"
+        ],
+        "summary": "Creates a Job Role entity",
+        "description": "Returns the id of the Job Role upon success",
+        "operationId": "createJobRole",
+        "requestBody": {
+          "description": "Details of the Job Role",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationJobRolesCommandsCreateJobRoleCreateJobRoleCommand"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationJobRolesCommandsCreateJobRoleCreateJobRoleCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationJobRolesCommandsCreateJobRoleCreateJobRoleCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationJobRolesCommandsCreateJobRoleCreateJobRoleCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation: Id of the new entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/JobRoles/GetOne/{id}": {
+      "get": {
+        "tags": [
+          "JobRoles"
+        ],
+        "summary": "Gets a Job Role entity by Id",
+        "description": "Returns the Job Role with the specified Id upon success",
+        "operationId": "getJobRole",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the Job Role",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: Job Role entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/JobRoles/GetAll": {
+      "get": {
+        "tags": [
+          "JobRoles"
+        ],
+        "summary": "Gets a Job Role entity list sorted and filtered",
+        "description": "Returns the Job Role list with the specified filters applied",
+        "operationId": "getJobRoles",
+        "parameters": [
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CreatedDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "CreatedBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProfileCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "GroupCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "CompanyCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query: List of Job Role entities",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/JobRoles/ExportAll/ExportCategories": {
+      "get": {
+        "tags": [
+          "JobRoles"
+        ],
+        "summary": "Exports a Job Role entity list sorted and filtered in a csv file",
+        "description": "Exports the Job Role list with the specified filters applied in a csv file",
+        "operationId": "exportJobRoles",
+        "parameters": [
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CreatedDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "CreatedBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProfileCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "GroupCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "CompanyCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderByType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export: Csv file of Job Role entities",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/JobRoles/Update/{id}": {
+      "put": {
+        "tags": [
+          "JobRoles"
+        ],
+        "summary": "Updates a Job Role entity",
+        "description": "Updates a Job Role entity with Id of \"id\" to entity \"dto\"",
+        "operationId": "updateJobRole",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationJobRolesCommandsUpdateJobRoleUpdateJobRoleCommand"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationJobRolesCommandsUpdateJobRoleUpdateJobRoleCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationJobRolesCommandsUpdateJobRoleUpdateJobRoleCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationJobRolesCommandsUpdateJobRoleUpdateJobRoleCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful update"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          }
+        }
+      }
+    },
+    "/api/JobRoles/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "JobRoles"
+        ],
+        "summary": "Deletes a Job Role entity",
+        "description": "Deletes the Job Role  entity with Id of \"id\"",
+        "operationId": "deleteJobRole",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
           }
         }
       }
@@ -10879,6 +11434,24 @@
         },
         "additionalProperties": false
       },
+      "OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emailTemplateId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emailTemplateVersion": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVm": {
         "type": "object",
         "properties": {
@@ -11023,6 +11596,14 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "emailTemplateId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emailTemplateVersion": {
+            "type": "integer",
+            "format": "int32"
           },
           "timingTypeId": {
             "type": "integer",
@@ -11336,6 +11917,113 @@
             },
             "nullable": true,
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OptimaCampaignEditorApplicationJobRolesCommandsCreateJobRoleCreateJobRoleCommand": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "profileIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "profileCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "companyCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "to": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OptimaCampaignEditorApplicationJobRolesCommandsUpdateJobRoleUpdateJobRoleCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "profileIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -12934,6 +13622,10 @@
     {
       "name": "Information",
       "description": "Endpoint to get different kinds of information about the API."
+    },
+    {
+      "name": "JobRoles",
+      "description": "Defines the jobrole related operations for the enduser. This API endpoint is \r\nresponsible for all operation which can be made for a jobrole creation or \r\nmodification."
     },
     {
       "name": "Languages",

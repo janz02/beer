@@ -163,6 +163,18 @@ export interface OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaign
      * @type {number}
      * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
      */
+    emailTemplateId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
+     */
+    emailTemplateVersion?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignDetailVm
+     */
     timingTypeId?: number;
 }
 
@@ -198,6 +210,8 @@ export function OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignD
         'resendOrRecallRules': !exists(json, 'resendOrRecallRules') ? undefined : (json['resendOrRecallRules'] === null ? null : (json['resendOrRecallRules'] as Array<any>).map(OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON)),
         'resendFrequency': !exists(json, 'resendFrequency') ? undefined : OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmFromJSON(json['resendFrequency']),
         'maxResends': !exists(json, 'maxResends') ? undefined : json['maxResends'],
+        'emailTemplateId': !exists(json, 'emailTemplateId') ? undefined : json['emailTemplateId'],
+        'emailTemplateVersion': !exists(json, 'emailTemplateVersion') ? undefined : json['emailTemplateVersion'],
         'timingTypeId': !exists(json, 'timingTypeId') ? undefined : json['timingTypeId'],
     };
 }
@@ -233,6 +247,8 @@ export function OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignD
         'resendOrRecallRules': value.resendOrRecallRules === undefined ? undefined : (value.resendOrRecallRules === null ? null : (value.resendOrRecallRules as Array<any>).map(OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON)),
         'resendFrequency': OptimaCampaignEditorApplicationCommonMessagesViewModelsSelectOptionVmToJSON(value.resendFrequency),
         'maxResends': value.maxResends,
+        'emailTemplateId': value.emailTemplateId,
+        'emailTemplateVersion': value.emailTemplateVersion,
         'timingTypeId': value.timingTypeId,
     };
 }

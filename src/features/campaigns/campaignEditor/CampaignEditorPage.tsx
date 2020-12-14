@@ -1,5 +1,6 @@
 import { Row, Col } from 'antd'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
+import { newsletterEditorActions } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,8 +18,9 @@ export const CampaignEditorPage: React.FC = () => {
   useEffect(() => {
     if (id) {
       dispatch(getCampaign(id))
+      dispatch(newsletterEditorActions.clearNewsletterTemplate())
     }
-  })
+  }, [id, dispatch])
   return (
     <>
       <Row className="campaign-editor-form">

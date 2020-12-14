@@ -54,16 +54,16 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
       <Row>
         <Col span={24}>
           <Tabs size="large">
-            <TabPane tab={t('campaign-create.settings-tab-name')} key="settings">
+            <TabPane tab={t('campaign-create.settings.tab-name')} key="settings">
               <SettingsTabPane />
             </TabPane>
-            <TabPane tab={t('campaign-create.segmentation-tab-name')} key="segmentation">
+            <TabPane tab={t('campaign-create.segmentation.tab-name')} key="segmentation">
               <SegmentationTabPane campaignId={campaignId} />
             </TabPane>
             <TabPane tab={t('campaign-create.content.email.tab-name')} key="content">
               <EmailContentTabPane campaignId={campaignId} />
             </TabPane>
-            <TabPane tab={t('campaign-create.test-tab-name')} key="test">
+            <TabPane tab={t('campaign-create.test.email.tab-name')} key="test">
               <TestTabPane campaignId={campaignId} />
             </TabPane>
           </Tabs>

@@ -5,6 +5,7 @@ export * from './ChannelsApi';
 export * from './CompaniesApi';
 export * from './EmailsApi';
 export * from './InformationApi';
+export * from './JobRolesApi';
 export * from './LanguagesApi';
 export * from './LocalizationsApi';
 export * from './OrganizationalGroupsApi';

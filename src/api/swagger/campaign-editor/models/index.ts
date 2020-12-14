@@ -5,6 +5,7 @@ export * from './OptimaCampaignEditorApplicationCampaignResultsCommandsUploadCsv
 export * from './OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignCreateCampaignCommand';
 export * from './OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand';
 export * from './OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand';
+export * from './OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand';
 export * from './OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand';
 export * from './OptimaCampaignEditorApplicationCommonMessagesEnumsCondition';
 export * from './OptimaCampaignEditorApplicationCommonMessagesEnumsControlType';
@@ -29,6 +30,7 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginated
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCompanyVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm';
+export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizationalGroupVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsProductVm';
@@ -56,6 +58,7 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscount
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailChannelOptionsVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsEmailTemplateVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm';
+export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsJobRoleVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValuePairOfSystemInt32';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsLabelValueTreeOfSystemInt32';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizationalGroupVm';
@@ -84,6 +87,8 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm';
 export * from './OptimaCampaignEditorApplicationCompaniesCommandsCreateCompanyCreateCompanyCommand';
 export * from './OptimaCampaignEditorApplicationCompaniesCommandsUpdateCompanyUpdateCompanyCommand';
 export * from './OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery';
+export * from './OptimaCampaignEditorApplicationJobRolesCommandsCreateJobRoleCreateJobRoleCommand';
+export * from './OptimaCampaignEditorApplicationJobRolesCommandsUpdateJobRoleUpdateJobRoleCommand';
 export * from './OptimaCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand';
 export * from './OptimaCampaignEditorApplicationModelsCampaignLanguageVm';
 export * from './OptimaCampaignEditorApplicationModelsCampaignOrganizationalGroupPermissionVm';
