@@ -46,6 +46,9 @@
   "campaign-create": {
     "content": {
       "email": {
+        "next-section": "Következő (Teszt)",
+        "previous-section": "Előző (Szegmentáció)",
+        "save-draft": "Piszkozat mentése & Kilépés",
         "tab-name": "Tartalom (Email)",
         "template": "Email Sablon",
         "template-placeholder": "Válasszon Emailt",
@@ -54,8 +57,6 @@
         "title": "Email Sablon"
       }
     },
-    "next-section": "Következő (Szegmentálás)",
-    "save-draft": "Piszkozat mentése & Kilépés",
     "segmentation": {
       "add-btn": "Szegmentáció hozzáadása",
       "category-default": "- nincs kiválasztva -",
@@ -68,20 +69,24 @@
       "file-based-title": "Fájl alapú szegmentáció",
       "filtered-results": "Szűrt eredmény",
       "inbuilt-title": "Szegmentáció szerkesztő",
+      "next-section": "Következő (Tartalom)",
+      "previous-section": "Előzó (Beállítások)",
+      "save-draft": "Piszkozat mentése & Kilépés",
       "segmentation-label": "Szegmentációk",
       "segmentation-placeholder": "Válasszon szegmentációt",
       "summary-title": "Szegmentáció összegző",
+      "tab-name": "Szegmentáció",
       "target-title": "Célközönség"
     },
-    "segmentation-tab-name": "Szegmentáció",
     "settings": {
       "about": "Leírás",
-      "approver-validator": "Elfogadó/Érvényesítő",
+      "approver-validator": "Jóváhagyó",
       "bounce": "Visszapatan",
-      "campaign-admins-title": "Kampány adminok",
+      "campaign-admins-title": "Kampány adminisztrátorok",
       "campaign-name": "Kampány neve",
-      "channel-type-title": "Csatorna típusa",
+      "channel-type-title": "Csatorna kiválasztása",
       "daily-restriction-title": "Napi tiltások",
+      "date-range": "Intervallum",
       "datefrom": "Dátumtól",
       "dateinterval": "Dátum intervallum",
       "dateto": "Dátumig",
@@ -98,21 +103,23 @@
       "email-delivery-date-restrictions": "Email kézbesítési korlátozások",
       "email-recall-settings-title": "Email visszahívás beállítása",
       "email-resending-rules": "Email újraküldési szabályok",
-      "end-date": "Zárás dátum",
-      "end-time": "Végződik",
+      "end-date": "Záró dátum",
       "holiday": "Szabadnap",
-      "infinite": "Végtelen",
-      "interval-restrictions": "Időszakos korlátozások",
+      "infinite": "Folyamatos",
+      "interval-restrictions": "Időszaki megszorítás",
       "maximum-recall-attempts": "Visszahívási kísérletek száma",
+      "next-section": "Következő (Szegmentáció)",
       "product-label": "Termék",
       "product-title": "Termék",
       "recall-frequency": "Visszahívás gyakorisága",
       "requestor": "Igénylő",
+      "save-draft": "Piszkozat mentése & Kilépés",
       "select-timing-type-label": "Időzítés típusa",
       "spam": "Spam",
-      "start-date": "Kezdeti dátum",
-      "start-time": "Kezdődik",
+      "start-date": "Induló dátum",
+      "tab-name": "Beállítások",
       "temporarilyrejected": "Ideiglenesen elutasítva",
+      "time-period": "Idő intervallum",
       "timing-title": "Időzítés",
       "unopened": "Olvasatlan",
       "validations": {
@@ -123,16 +130,15 @@
       "weekend": "Hétvége",
       "workingsaturday": "Szombati munkanap"
     },
-    "settings-tab-name": "Beállítások",
     "status-creation": "Státusz (Kampány Létrehozás)",
     "test": {
       "email": {
         "send-email": "Teszt email kiküldés",
         "set-testers": "Tesztelők hozzárendelése",
+        "tab-name": "Teszt",
         "testers": "Email tesztelők ({{totalCount}})"
       }
     },
-    "test-tab-name": "Teszt",
     "title": "Kampány Létrehozása",
     "user-logs": "Felhaszálói napló"
   },
@@ -937,21 +943,19 @@
     "groups": {
       "field": {
         "company-count": "Cégek",
+        "created-by": "Létrehozó",
         "created-date": "Létrehozás dátuma",
-        "creator": "Létrehozó",
         "job-role-count": "Munkakörök",
         "name": "Név",
         "permission-count": "Jogosultságok",
         "profile-count": "Felhasználók"
       },
-      "fields": {
-        "name": "Név"
-      },
       "permissions": "Jogosultságok ({{totalCount}})",
       "profiles": "Felhasználók ({{totalCount}})",
       "title": "Csoportok",
       "viewer": {
-        "edit": "Szerkesztés"
+        "edit": "Szerkesztés",
+        "title": "Csoport"
       }
     },
     "job-roles": {

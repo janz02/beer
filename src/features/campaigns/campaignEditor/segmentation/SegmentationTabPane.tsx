@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons'
-import { Col, Row, Form, Modal, Typography, Empty, Button } from 'antd'
+import { Col, Row, Form, Modal, Typography, Empty, Divider } from 'antd'
 import { AccordionInfo } from 'components/accordion/AccordionInfo'
 import { CustomAccordion } from 'components/accordion/CustomAccordion'
 import { useCommonFormRules } from 'hooks'
@@ -7,6 +7,7 @@ import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { sum } from 'services/commonFunctions'
 import { CampaignEditorProps } from '../base/CampaignEditorForm'
+import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
 import { SegmentationCardFilebasedInput } from './components/SegmentationCardFilebasedInput'
 import { SegmentationCardInbuiltInput } from './components/SegmentationCardInbuiltInput'
 import styles from './SegmentationTabPane.module.scss'
@@ -216,10 +217,15 @@ export const SegmentationTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
               }}
             </Form.List>
           </Col>
-          <Col>
-            <Button htmlType="submit" type="primary">
-              Submit
-            </Button>
+        </Row>
+        <Divider />
+        <Row>
+          <Col span={22}>
+            <CampaignEditorFormFooter
+              previousText={t('campaign-create.segmentation.previous-section')}
+              submitText={t('campaign-create.segmentation.save-draft')}
+              nextText={t('campaign-create.segmentation.next-section')}
+            />
           </Col>
         </Row>
       </Form>

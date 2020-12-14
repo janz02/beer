@@ -27,6 +27,9 @@ import {
     OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommand,
     OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandFromJSON,
     OptimaCampaignEditorApplicationCampaignsCommandsSendCampaignToTestGroupsSendCampaignToTestGroupsCommandToJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand,
+    OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommandFromJSON,
+    OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommandToJSON,
     OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand,
     OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommandFromJSON,
     OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommandToJSON,
@@ -119,6 +122,10 @@ export interface StopCampaignImmediatelyRequest {
 
 export interface UpdateCampaignRequest {
     optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand?: OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand;
+}
+
+export interface UpdateCampaignContentRequest {
+    optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand?: OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand;
 }
 
 /**
@@ -665,6 +672,38 @@ export class CampaignsApi extends runtime.BaseAPI {
      */
     async updateCampaign(requestParameters: UpdateCampaignRequest): Promise<void> {
         await this.updateCampaignRaw(requestParameters);
+    }
+
+    /**
+     * Update the current instance with the fulfilled model
+     */
+    async updateCampaignContentRaw(requestParameters: UpdateCampaignContentRequest): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/api/Campaigns/UpdateContent/Content`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: OptimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommandToJSON(requestParameters.optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Update the current instance with the fulfilled model
+     */
+    async updateCampaignContent(requestParameters: UpdateCampaignContentRequest): Promise<void> {
+        await this.updateCampaignContentRaw(requestParameters);
     }
 
 }

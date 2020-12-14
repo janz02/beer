@@ -6,12 +6,13 @@ import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CampaignEditorProps } from '../../base/CampaignEditorForm'
 import { useEmailTestUtils } from './useEmailTestUtils'
+import styles from './EmailTestTabPane.module.scss'
 
 export const TestTabPane: FC<CampaignEditorProps> = () => {
   const { t } = useTranslation()
   const {
     template,
-    currentTemplateVersionId,
+    templateVersion,
     emailTesterCount,
     emailTesterTableProps,
     emailTesterHeaderOptions,
@@ -40,19 +41,23 @@ export const TestTabPane: FC<CampaignEditorProps> = () => {
           })}
           floatingOptions={sendTestHeaderOptions}
         >
-          <Row>
-            <Col span="12">
-              <Form.Item label={t('campaign-create.content.email.template')}>
-                {template?.name}
-              </Form.Item>
-            </Col>
-            <Col span="12">
-              <Form.Item label={t('campaign-create.content.email.template-version')}>
-                {currentTemplateVersionId}
-              </Form.Item>
-            </Col>
-          </Row>
-          {/* <EmailTemplatePreview /> */}
+          <Form layout="vertical">
+            <Row>
+              <Col span="12">
+                <Form.Item label={t('campaign-create.content.email.template')}>
+                  {template?.name}
+                </Form.Item>
+              </Col>
+              <Col span="12">
+                <Form.Item label={t('campaign-create.content.email.template-version')}>
+                  {templateVersion}
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+          <div className={styles.emailPreviewContainer}>
+            <EmailTemplatePreview previewHeightPx={500} />
+          </div>
         </ResponsiveCard>
       </Col>
     </Row>

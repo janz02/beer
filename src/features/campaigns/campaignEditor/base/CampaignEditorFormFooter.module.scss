@@ -1,0 +1,13 @@
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+
+  .ant-col {
+    padding: 3px;
+  }
+}
+
+.previousButton {
+  margin-right: 30px;
+}

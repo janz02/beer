@@ -46,6 +46,9 @@
   "campaign-create": {
     "content": {
       "email": {
+        "next-section": "Next (Test)",
+        "previous-section": "Previous (Segmentation)",
+        "save-draft": "Save draft & Exit",
         "tab-name": "Content (Email)",
         "template": "Email Template",
         "template-placeholder": "Select Email",
@@ -54,8 +57,6 @@
         "title": "Email Template"
       }
     },
-    "next-section": "Next (Segmentation)",
-    "save-draft": "Save draft & Exit",
     "segmentation": {
       "add-btn": "Add segmentation",
       "category-default": "- not selected -",
@@ -68,12 +69,15 @@
       "file-based-title": "File based segmentation",
       "filtered-results": "Filtered results",
       "inbuilt-title": "Inbuilt segmentation",
+      "next-section": "Next (Content)",
+      "previous-section": "Previous (Settings)",
+      "save-draft": "Save draft & Exit",
       "segmentation-label": "Segmentations",
       "segmentation-placeholder": "Select a segmentation",
       "summary-title": "Segmentation summary",
+      "tab-name": "Segmentation",
       "target-title": "Target audience"
     },
-    "segmentation-tab-name": "Segmentation",
     "settings": {
       "about": "About",
       "approver-validator": "Approver/Validator",
@@ -82,6 +86,7 @@
       "campaign-name": "Campaign name",
       "channel-type-title": "Channel type",
       "daily-restriction-title": "Daily restriction",
+      "date-range": "Date Range",
       "datefrom": "Date From",
       "dateinterval": "Date Interval",
       "dateto": "Date To",
@@ -99,20 +104,22 @@
       "email-recall-settings-title": "Email re-call settings",
       "email-resending-rules": "Email re-sending rules",
       "end-date": "End date",
-      "end-time": "End time",
       "holiday": "Holiday",
       "infinite": "Infinite",
       "interval-restrictions": "Interval Restrictions",
       "maximum-recall-attempts": "Maximum recall attempts",
+      "next-section": "Next (Segmentation)",
       "product-label": "Product",
       "product-title": "Product",
       "recall-frequency": "Recall frequency",
       "requestor": "Requestor",
+      "save-draft": "Save draft & Exit",
       "select-timing-type-label": "Select timing type",
       "spam": "Spam",
       "start-date": "Start date",
-      "start-time": "Start time",
+      "tab-name": "Settings",
       "temporarilyrejected": "Temporarily Rejected",
+      "time-period": "Time interval",
       "timing-title": "Timing",
       "unopened": "Unopened",
       "validations": {
@@ -123,16 +130,15 @@
       "weekend": "Weekend",
       "workingsaturday": "Working Saturday"
     },
-    "settings-tab-name": "Settings",
     "status-creation": "Status (Campaign Creation)",
     "test": {
       "email": {
         "send-email": "Sent Test Email",
         "set-testers": "Set testers",
+        "tab-name": "Test",
         "testers": "Email testers ({{totalCount}})"
       }
     },
-    "test-tab-name": "Test",
     "title": "Create Campaign",
     "user-logs": "User Logs"
   },
@@ -937,21 +943,19 @@
     "groups": {
       "field": {
         "company-count": "Companies",
+        "created-by": "Created by",
         "created-date": "Date of creation",
-        "creator": "Creator",
         "job-role-count": "Job roles",
         "name": "Name",
         "permission-count": "Permissions",
         "profile-count": "Profiles"
       },
-      "fields": {
-        "name": "Name"
-      },
       "permissions": "Permissions ({{totalCount}})",
       "profiles": "Profiles ({{totalCount}})",
       "title": "Groups",
       "viewer": {
-        "edit": "Edit"
+        "edit": "Edit",
+        "title": "Group"
       }
     },
     "job-roles": {

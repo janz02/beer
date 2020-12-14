@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'app/store'
 import { api } from 'api'
 import { CampaignSettingsFormElements } from 'models/campaign/campaignSettingsFormElements'
-import { CampaignSettings } from 'models/campaign/campaignSettings'
 import { TextValuePair } from 'models/textValuePair'
 import {
   Campaign,
@@ -12,6 +11,9 @@ import {
 } from 'models/campaign/campaign'
 import moment from 'moment'
 import { CampaignDetailRequest } from 'api/swagger/campaign-editor'
+import { CampaignSettingsUpdateDto } from 'models/campaign/campaignSettings'
+import i18n from 'app/i18n'
+import { message } from 'antd'
 import { ListRequestParams } from 'hooks/useTableUtils'
 import { Profile } from 'models/profile'
 
@@ -70,6 +72,10 @@ const campaignEditorSlice = createSlice({
     saveCampaignSettingsSuccess(state) {
       state.isLoading = false
       state.hasError = false
+    },
+    saveCampaignSettingsFailure(state) {
+      state.isLoading = false
+      state.hasError = true
     }
   }
 })
@@ -80,7 +86,8 @@ const {
   getCampaignFail,
   getCampaignSuccess,
   getCampaignSettingsFormElementsSuccess,
-  saveCampaignSettingsSuccess
+  saveCampaignSettingsSuccess,
+  saveCampaignSettingsFailure
 } = campaignEditorSlice.actions
 
 export const campaignEditorReducer = campaignEditorSlice.reducer
@@ -142,8 +149,8 @@ export const getCampaign = (id: number): AppThunk => async dispatch => {
         timingTypeId: campaignDetail.timingTypeId
       } as CampaignEmailSettings,
       content: {
-        templateId: campaignDetail.id, // templateId,
-        versionId: campaignDetail.id // versionId
+        emailTemplateId: campaignDetail.emailTemplateId,
+        emailTemplateVersion: campaignDetail.emailTemplateVersion
       } as CampaignEmailContent
     }
 
@@ -158,45 +165,51 @@ export const getCampaignTesters = (id: number): AppThunk => async dispatch => {
 }
 
 export const updateEmailContent = (
-  campaignId: number,
-  templateId: number,
-  versionId: number
+  id: number,
+  emailTemplateId: number,
+  emailTemplateVersion: number
 ): AppThunk => async dispatch => {
   try {
     dispatch(getCampaignStarted())
-    // const updateResponse = await api.campaignEditor.campaigns.updateCampaign({
-    //   optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand: {} as UpdateCampaignRequest
-    // })
+    await api.campaignEditor.campaigns.updateCampaignContent({
+      optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand: {
+        id,
+        emailTemplateId,
+        emailTemplateVersion
+      }
+    })
+
+    message.success(i18n.t('common.message.save-success'), 5)
   } catch (err) {
     dispatch(getCampaignFail())
   }
 }
 
-export const saveSettings = (campaignSettings: CampaignSettings): AppThunk => async dispatch => {
+export const saveSettings = (
+  campaignSettings: CampaignSettingsUpdateDto
+): AppThunk => async dispatch => {
   try {
-    // const settings = {
-    //   optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand: {
-    //     ...campaignSettings,
-    //     timing: {
-    //       ...campaignSettings.timing,
-    //       startDate: campaignSettings.timing?.startDate.toDate(),
-    //       endDate: campaignSettings.timing?.endDate.toDate(),
-    //       startTime: campaignSettings.timing?.startTime.toDate() as SystemTimeSpan,
-    //       endTime: campaignSettings.timing?.endTime.toDate() as SystemTimeSpan
-    //     }
-    //   }
-    // }
-    // console.log(settings)
-    // await api.campaignEditor.campaigns.createCampaignsettings(settings)
-    // dispatch(saveCampaignSettingsSuccess())
-    console.log(campaignSettings)
+    const settings = {
+      optimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand: {
+        ...campaignSettings,
+        timing: {
+          ...campaignSettings.timing,
+          startDate: campaignSettings.timing?.startDate?.toDate(),
+          endDate: campaignSettings.timing?.endDate?.toDate()
+        },
+        emailChannelSettings: { ...campaignSettings.emailChannelSettings }
+      }
+    }
+    await api.campaignEditor.campaigns.createCampaignsettings(settings)
+    dispatch(saveCampaignSettingsSuccess())
   } catch (error) {
-    console.log(error)
+    dispatch(saveCampaignSettingsFailure())
   }
 }
 
 export const campaignEditorActions = {
   saveSettings,
+  updateEmailContent,
   getCampaign,
   getCampaignTesters,
   reset

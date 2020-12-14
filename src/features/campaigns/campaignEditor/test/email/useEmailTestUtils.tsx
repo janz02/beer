@@ -1,7 +1,6 @@
 import { RootState } from 'app/rootReducer'
-import { newsletterEditorActions } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
-import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import { useSelector } from 'hooks/react-redux-hooks'
+import React, { useCallback, useMemo } from 'react'
 import { Newsletter } from 'models/newsletter'
 import { ProfileStatus } from 'api/swagger/admin'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
@@ -17,7 +16,7 @@ import Button from 'antd/lib/button'
 
 interface EmailTestUtils {
   template: Newsletter | undefined
-  currentTemplateVersionId: number | undefined
+  templateVersion: number | undefined
   emailTesterCount: number
   emailTesterTableProps: any
   emailTesterHeaderOptions: JSX.Element
@@ -25,7 +24,6 @@ interface EmailTestUtils {
 }
 
 export const useEmailTestUtils = (): EmailTestUtils => {
-  const dispatch = useDispatch()
   const { t } = useTranslation()
   const { campaignTesterListParams, campaignTesters } = useSelector(
     (state: RootState) => state.campaignEditor
@@ -35,22 +33,9 @@ export const useEmailTestUtils = (): EmailTestUtils => {
     (state: RootState) => state.newsletterEditor
   )
 
-  const handleGetTemplate = useCallback(
-    (templateId: number | undefined): void => {
-      if (templateId && !isNaN(+templateId)) {
-        dispatch(newsletterEditorActions.getNewsletterTemplate(+templateId))
-      }
-    },
-    [dispatch]
-  )
-
   const handleUnassignTester = useCallback((profileId: number): void => {
     console.log(`profile with ${profileId}' id has been removed from the campaign as a tester`)
   }, [])
-
-  useEffect(() => {
-    handleGetTemplate(template?.id)
-  }, [handleGetTemplate, template])
 
   const emailTesterColumnsParams = useMemo<ColumnConfigParams[]>(
     () => [
@@ -170,7 +155,7 @@ export const useEmailTestUtils = (): EmailTestUtils => {
   )
   return {
     template,
-    currentTemplateVersionId,
+    templateVersion: template?.history?.find(x => x.id === currentTemplateVersionId)?.version,
     emailTesterTableProps,
     emailTesterCount: campaignTesters?.length ?? 0,
     emailTesterHeaderOptions,
