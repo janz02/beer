@@ -1,5 +1,4 @@
 import './ProfilePage.scss'
-import { Button, Col, Row } from 'antd'
 import Form from 'antd/lib/form/Form'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import React, { FC, useEffect, useMemo } from 'react'
@@ -7,10 +6,9 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'hooks/react-router-dom-hooks'
 import { useProfileUtils } from './useProfileUtils'
 import { NavigationAlert } from 'components/popups/NavigationAlert'
-import { ProfileBasics } from './components/ProfileBasics'
-import { ProfilePosition } from './components/ProfilePosition'
-import { ProfileContacts } from './components/ProfileContacts'
 import { useHistory } from 'react-router-dom'
+import { ProfilePageEdit } from './components/ProfilePageEdit'
+import { ProfilePageView } from './components/ProfilePageView'
 
 export const ProfilePage: FC = () => {
   const { t } = useTranslation()
@@ -61,34 +59,25 @@ export const ProfilePage: FC = () => {
         onFinish={handleSave}
         onFieldsChange={checkFieldsChange}
       >
-        <ProfileBasics profile={profile} form={formUtils.form} isEditMode={isEditMode} />
-
-        <Row className="profile-editor-columns" gutter={70}>
-          <Col span={12}>
-            <ProfilePosition
-              companies={companies}
-              groups={groups}
-              jobRoles={jobRoles}
-              isEditMode={isEditMode}
-            />
-          </Col>
-          <Col span={12}>
-            <ProfileContacts isEditMode={isEditMode} />
-          </Col>
-        </Row>
-
         {isEditMode && (
-          <div className="profile-editor-footer">
-            <div className="profile-editor-footer-right">
-              <Button type="primary" htmlType="submit" disabled={!submitable} loading={saving}>
-                {t('profile-editor.button-save')}
-              </Button>
-            </div>
-
-            <Button type="link" onClick={handleCancel}>
-              {t('profile-editor.button-cancel')}
-            </Button>
-          </div>
+          <ProfilePageEdit
+            companies={companies}
+            groups={groups}
+            jobRoles={jobRoles}
+            formUtils={formUtils}
+            submitable={submitable}
+            saving={saving}
+            handleCancel={handleCancel}
+            profile={profile}
+          />
+        )}
+        {!isEditMode && (
+          <ProfilePageView
+            companies={companies}
+            groups={groups}
+            jobRoles={jobRoles}
+            profile={profile}
+          />
         )}
       </Form>
       <NavigationAlert when={modified} />
