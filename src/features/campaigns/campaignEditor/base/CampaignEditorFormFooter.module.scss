@@ -3,11 +3,16 @@
   justify-content: flex-end;
   padding: 5px;
 
-  .ant-col {
-    padding: 3px;
+  button {
+    margin-left: 10px;
   }
 }
 
 .previousButton {
-  margin-right: 30px;
+  margin-right: 50px;
+}
+
+.cancelButton {
+  position: absolute;
+  left: 0;
 }
