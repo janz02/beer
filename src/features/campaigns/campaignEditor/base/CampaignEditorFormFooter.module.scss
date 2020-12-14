@@ -1,10 +1,9 @@
 .buttonContainer {
   display: flex;
-  justify-content: flex-end;
-  padding: 5px;
 
   button {
     margin-left: 10px;
+    float: right;
   }
 }
 
@@ -13,6 +12,5 @@
 }
 
 .cancelButton {
-  position: absolute;
-  left: 0;
+  margin-right: auto;
 }
