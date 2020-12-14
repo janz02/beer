@@ -5,26 +5,18 @@ import { useTranslation } from 'react-i18next'
 
 export const DailyRestrictionSection: FC = () => {
   const { t } = useTranslation()
+  const { RangePicker } = TimePicker
   return (
     <>
       <Title level={5}>{t('campaign-create.settings.daily-restriction-title')}</Title>
       <Row gutter={10}>
-        <Col span={12}>
+        <Col span={24}>
           <Form.Item
-            name={['timing', 'startTime']}
+            name={['timing', 'timeRange']}
             className="control-label"
-            label={t('campaign-create.settings.start-time')}
+            label={t('campaign-create.settings.time-period')}
           >
-            <TimePicker />
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item
-            name={['timing', 'endTime']}
-            className="control-label"
-            label={t('campaign-create.settings.end-time')}
-          >
-            <TimePicker />
+            <RangePicker showSecond={false} />
           </Form.Item>
         </Col>
       </Row>

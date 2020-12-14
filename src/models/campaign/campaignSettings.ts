@@ -1,4 +1,4 @@
-export interface CampaignSettings {
+export interface CampaignSettingsUpdateDto {
   name: string
   description: string
   channelId: number
@@ -9,8 +9,8 @@ export interface CampaignSettings {
     timingTypeId: number
     startDate: moment.Moment
     endDate: moment.Moment
-    startTime: moment.Moment
-    endTime: moment.Moment
+    startTime: Time | null
+    endTime: Time | null
     intervalRestrictionOptions: number[]
   }
   emailChannelSettings: {
@@ -18,4 +18,10 @@ export interface CampaignSettings {
     emailResendFrequencyId: number
     emailMaxReSends: number
   }
+}
+
+export interface Time {
+  hours: number
+  minutes: number
+  seconds: number
 }

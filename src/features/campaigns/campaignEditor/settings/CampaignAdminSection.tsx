@@ -6,14 +6,10 @@ import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface CampaignAdminSectionProps {
-  requesters: TextValuePair[]
-  responsibles: TextValuePair[]
+  users: TextValuePair[]
 }
 
-export const CampaignAdminSection: FC<CampaignAdminSectionProps> = ({
-  requesters,
-  responsibles
-}) => {
+export const CampaignAdminSection: FC<CampaignAdminSectionProps> = ({ users }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
   return (
@@ -27,7 +23,7 @@ export const CampaignAdminSection: FC<CampaignAdminSectionProps> = ({
         rules={[rule.required(t('campaign-create.settings.validations.required-field'))]}
       >
         <Select>
-          {requesters.map(requester => (
+          {users.map(requester => (
             <Select.Option key={requester.value} value={requester.value}>
               {requester.text}
             </Select.Option>
@@ -42,7 +38,7 @@ export const CampaignAdminSection: FC<CampaignAdminSectionProps> = ({
         rules={[rule.required(t('campaign-create.settings.validations.required-field'))]}
       >
         <Select>
-          {responsibles.map(responsible => (
+          {users.map(responsible => (
             <Select.Option key={responsible.value} value={responsible.value}>
               {responsible.text}
             </Select.Option>

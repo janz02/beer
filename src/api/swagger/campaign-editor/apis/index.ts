@@ -2,6 +2,7 @@ export * from './AccountsApi';
 export * from './CampaignResultsApi';
 export * from './CampaignsApi';
 export * from './ChannelsApi';
+export * from './CompaniesApi';
 export * from './EmailsApi';
 export * from './InformationApi';
 export * from './LanguagesApi';

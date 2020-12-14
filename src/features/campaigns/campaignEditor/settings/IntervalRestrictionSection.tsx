@@ -16,6 +16,7 @@ export const IntervalRestrictionSection: FC<IntervalRestrictionSectionProps> = (
     <>
       <Title level={5}>{t('campaign-create.settings.interval-restrictions')}</Title>
       <Form.Item
+        required
         name={['timing', 'intervalRestrictionOptions']}
         className="control-label"
         label={t('campaign-create.settings.email-delivery-date-restrictions')}

@@ -19,6 +19,7 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesRequestsEmailChann
 export * from './OptimaCampaignEditorApplicationCommonMessagesRequestsEmailTemplateDto';
 export * from './OptimaCampaignEditorApplicationCommonMessagesRequestsExtendedProperty';
 export * from './OptimaCampaignEditorApplicationCommonMessagesRequestsSegmentationQueryDto';
+export * from './OptimaCampaignEditorApplicationCommonMessagesRequestsTimeDto';
 export * from './OptimaCampaignEditorApplicationCommonMessagesRequestsTimingDto';
 export * from './OptimaCampaignEditorApplicationCommonMessagesRequestsTreatmentDto';
 export * from './OptimaCampaignEditorApplicationCommonMessagesRequestsUserExtensionInfoBase';
@@ -26,6 +27,7 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginated
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignListItemVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignResultEventVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm';
+export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsCompanyVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsFunctionPermissionVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsOrganizationalGroupVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesResponsesPaginatedSearchResponseOfOptimaCampaignEditorApplicationCommonMessagesViewModelsPermissionVm';
@@ -46,6 +48,7 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaign
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCampaignVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelOptionsVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsChannelVm';
+export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCompanyVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignTreatmentVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsCreateCampaignVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsDiscountSegmentVm';
@@ -78,6 +81,9 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsUserExte
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsUserPermissionVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm';
+export * from './OptimaCampaignEditorApplicationCompaniesCommandsCreateCompanyCreateCompanyCommand';
+export * from './OptimaCampaignEditorApplicationCompaniesCommandsUpdateCompanyUpdateCompanyCommand';
+export * from './OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery';
 export * from './OptimaCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand';
 export * from './OptimaCampaignEditorApplicationModelsCampaignLanguageVm';
 export * from './OptimaCampaignEditorApplicationModelsCampaignOrganizationalGroupPermissionVm';
