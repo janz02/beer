@@ -85,5 +85,11 @@ export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePrevi
     }
   }, [editor, selectedDevice, currentTemplateVersion, handleDeviceSelection])
 
+  useEffect(() => {
+    if (editor) {
+      setSelectedDevice(DeviceType.Desktop)
+    }
+  }, [editor, template])
+
   return { loading: templatePreviewLoading, selectedDevice, handleDeviceSelection }
 }

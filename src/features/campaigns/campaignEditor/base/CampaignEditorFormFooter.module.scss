@@ -1,13 +1,12 @@
 .buttonContainer {
   display: flex;
-  justify-content: flex-end;
-  padding: 5px;
-
-  .ant-col {
-    padding: 3px;
-  }
+  justify-content: space-between;
 }
 
 .previousButton {
-  margin-right: 30px;
+  margin-right: 50px;
+}
+
+.submitButton {
+  margin-right: 10px;
 }

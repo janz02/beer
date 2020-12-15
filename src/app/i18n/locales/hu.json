@@ -44,6 +44,7 @@
     }
   },
   "campaign-create": {
+    "cancel-changes": "Módosítások elvetése",
     "content": {
       "email": {
         "next-section": "Következő (Teszt)",

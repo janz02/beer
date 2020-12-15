@@ -1,5 +1,6 @@
-import { Row, Col, Button } from 'antd'
+import { Button } from 'antd'
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import styles from './CampaignEditorFormFooter.module.scss'
 
 export interface CampaignEditorFormFooterProps {
@@ -13,29 +14,28 @@ export const CampaignEditorFormFooter: FC<CampaignEditorFormFooterProps> = ({
   nextText,
   previousText
 }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={styles.buttonContainer}>
-      <Row>
+      <Button className={styles.cancelButton} type="link" htmlType="button">
+        {t('campaign-create.cancel-changes')}
+      </Button>
+      <span>
         {previousText ? (
-          <Col>
-            <Button className={styles.previousButton} htmlType="button">
-              {previousText}
-            </Button>
-          </Col>
+          <Button className={styles.previousButton} htmlType="button">
+            {previousText}
+          </Button>
         ) : (
           <></>
         )}
-        <Col>
-          <Button name="Submit" htmlType="submit">
-            {submitText}
-          </Button>
-        </Col>
-        <Col>
-          <Button type="primary" name="Next" htmlType="submit">
-            {nextText}
-          </Button>
-        </Col>
-      </Row>
+        <Button name="Submit" className={styles.submitButton} htmlType="submit">
+          {submitText}
+        </Button>
+        <Button type="primary" name="Next" htmlType="submit">
+          {nextText}
+        </Button>
+      </span>
     </div>
   )
 }
