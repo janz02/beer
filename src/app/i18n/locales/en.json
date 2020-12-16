@@ -137,7 +137,7 @@
         "next-section": "Launch",
         "previous-section": "Previous (Content)",
         "save-draft": "Save draft & Exit",
-        "send-email": "Sent Test Email",
+        "send-email": "Send Test Email",
         "set-testers": "Set testers",
         "tab-name": "Test",
         "testers": "Email testers ({{totalCount}})"
