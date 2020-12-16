@@ -1,14 +1,16 @@
 import { Typography } from 'antd'
+import { Roles } from 'api/swagger/coupon'
 import { DATE_FORMAT } from 'components/MomentDisplay'
 import React, { FC, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { hasPermission } from 'services/jwt-reader'
 import { ViewModeProps, ViewModeSelect } from './models'
 import styles from './ViewModeStyles.module.scss'
 
 export const ViewModeInput: FC<ViewModeProps<
   string | moment.Moment | number | ViewModeSelect[] | ViewModeSelect | any
 >> = ({ value, onClick, type = 'text' }) => {
-  const hasRightToNavigate = useMemo(() => true, [])
+  const hasRightToNavigate = useMemo(() => hasPermission([Roles.Administrator]), [])
   const isSelectType = useMemo(() => type === 'select' || type === 'multiselect', [type])
 
   return (

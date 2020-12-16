@@ -11,6 +11,8 @@ import { ProfilePageView } from './components/ProfilePageView'
 import { Button, Dropdown, Empty, Form, Menu, Skeleton } from 'antd'
 import { EditFilled, EllipsisOutlined, LockOutlined } from '@ant-design/icons'
 import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
+import { hasPermission } from 'services/jwt-reader'
+import { Roles } from 'api/swagger/coupon'
 
 export const ProfilePage: FC = () => {
   const { t } = useTranslation()
@@ -37,6 +39,43 @@ export const ProfilePage: FC = () => {
     activityTableUtils,
     error
   } = useProfileUtils(id)
+
+  const canEditOtherUsers = useMemo(() => hasPermission([Roles.Administrator]), [])
+  const hasActionOptions = useMemo(() => canEditOtherUsers || isOwnProfile, [
+    canEditOtherUsers,
+    isOwnProfile
+  ])
+
+  const actionMenu = useMemo(() => {
+    return (
+      <Dropdown
+        overlay={
+          <Menu>
+            {isOwnProfile && (
+              <Menu.Item
+                key="change_password"
+                icon={<LockOutlined />}
+                onClick={() => console.log('change password')}
+              >
+                {t('profile-editor.change-password')}
+              </Menu.Item>
+            )}
+            {canEditOtherUsers && !isOwnProfile && (
+              <Menu.Item
+                key="reset_password"
+                icon={<LockOutlined />}
+                onClick={() => console.log('reset password')}
+              >
+                {t('profile-editor.reset-password')}
+              </Menu.Item>
+            )}
+          </Menu>
+        }
+      >
+        <Button icon={<EllipsisOutlined rotate={90} />} type="primary" />
+      </Dropdown>
+    )
+  }, [canEditOtherUsers, isOwnProfile, t])
 
   const backButtonProps = useMemo(
     () => ({
@@ -73,28 +112,7 @@ export const ProfilePage: FC = () => {
                   }
                 }}
               />
-              <Dropdown
-                overlay={
-                  <Menu>
-                    <Menu.Item
-                      key="change_password"
-                      icon={<LockOutlined />}
-                      onClick={() => console.log('change password')}
-                    >
-                      {t('profile-editor.change-password')}
-                    </Menu.Item>
-                    <Menu.Item
-                      key="reset_password"
-                      icon={<LockOutlined />}
-                      onClick={() => console.log('reset password')}
-                    >
-                      {t('profile-editor.reset-password')}
-                    </Menu.Item>
-                  </Menu>
-                }
-              >
-                <Button icon={<EllipsisOutlined rotate={90} />} type="primary" />
-              </Dropdown>
+              {hasActionOptions && <>{actionMenu}</>}
             </>
           )}
         </>
