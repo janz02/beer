@@ -5,7 +5,7 @@ import { Roles } from 'api/swagger/coupon'
  * ex. usage: hasPermission(comboRoles.forNkm)
  */
 export const comboRoles = {
-  forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor, Roles.Administrator], // todo remove admin
+  forPartner: [Roles.PartnerContactApprover, Roles.PartnerContactEditor],
   forNkm: [
     Roles.Administrator,
     Roles.CampaignManager,
@@ -50,9 +50,9 @@ export const pageViewRoles = {
   couponCampaignCategories: [Roles.Administrator],
   segmentationCategories: [Roles.Administrator],
   segments: comboRoles.forNkm,
-  myProfile: comboRoles.forPartner, // ezeknek is van profile editora
+  myProfile: comboRoles.forPartner,
   readonlyMyProfile: comboRoles.forNkm,
-  selfpartner: comboRoles.forPartner, // ezeknek is van profile editora
+  selfpartner: comboRoles.forPartner,
   partners: comboRoles.forNkm,
   contacts: [Roles.MainPartnerContact],
   contactsEditor: [

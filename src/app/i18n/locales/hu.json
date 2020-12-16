@@ -1,4 +1,13 @@
 {
+  "activity-table": {
+    "field": {
+      "activity": "Tevékenység",
+      "date-of-activity": "Tevékenység ideje",
+      "name": "Név",
+      "status": "Státusz",
+      "type": "Típus"
+    }
+  },
   "app": {
     "title": "Grape Optima"
   },
@@ -1065,6 +1074,7 @@
     "birthday": "Születésnap",
     "button-cancel": "Mégse",
     "button-save": "Mentés",
+    "change-password": "Jelszó változtatás",
     "company": "Cég",
     "contacts": "Kapcsolat",
     "email": "E-mail",
@@ -1075,6 +1085,7 @@
     "picture-help": "Csak pontosan 512*512 pixel méretű JPG vagy PNG kiterjesztésű kép fájl fogadható el.",
     "position": "Pozíció",
     "registrationDate": "Regisztráció",
+    "reset-password": "Jelszó visszaállítás",
     "status": "Státusz",
     "title": {
       "edit": "Profil szerkesztése",

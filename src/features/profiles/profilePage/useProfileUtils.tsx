@@ -1,12 +1,14 @@
 import { RootState } from 'app/rootReducer'
 import { useDispatch, useSelector } from 'hooks/react-redux-hooks'
 import { FormUtils, useFormUtils } from 'hooks/useFormUtils'
+import { ColumnConfigParams, FilterMode, useTableUtils } from 'hooks/useTableUtils'
 import { Company } from 'models/company'
 import { Group } from 'models/group'
 import { JobRole } from 'models/jobRole'
 import { Profile } from 'models/profile'
 import { useCallback, useEffect, useMemo } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 import {
   getProfile,
   ProfileForm,
@@ -27,6 +29,9 @@ export interface ProfileUtils {
   jobRoles: JobRole[]
   isEditMode: boolean
   isOwnProfile: boolean
+  loading: boolean
+  error: boolean
+  activityTableUtils: any
   checkFieldsChange: () => void
   resetFormFlags: () => void
   handleSave: (values: ProfileForm) => void
@@ -35,9 +40,9 @@ export interface ProfileUtils {
 }
 
 export const useProfileUtils = (id?: number): ProfileUtils => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const location = useLocation()
-  const history = useHistory()
   const {
     profile,
     companies,
@@ -45,10 +50,64 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
     jobRoles,
     saving,
     isEditMode,
-    profilePictureUrl
+    profilePictureUrl,
+    loading,
+    error
   } = useSelector((state: RootState) => state.profilePage)
 
-  const isOwnProfile = useMemo(() => location.pathname.includes('my-profile'), [location])
+  const isOwnProfile = useMemo(() => location.pathname === '/me', [location])
+  const formUtils = useFormUtils<Partial<ProfileForm>>()
+  const { submitable, modified, setFieldsValue, checkFieldsChange, resetFormFlags } = formUtils
+  const columnParams = useMemo<ColumnConfigParams[]>(
+    () => [
+      {
+        key: 'activity',
+        title: t('activity-table.field.activity'),
+        sort: true
+      },
+      {
+        key: 'createdDate',
+        title: t('activity-table.field.date-of-activity'),
+        sort: true,
+        renderMode: 'date time',
+        filterMode: FilterMode.DATEPICKER,
+        ellipsis: false
+      },
+      {
+        key: 'type',
+        title: t('activity-table.field.type'),
+        sort: true
+      },
+      {
+        key: 'name',
+        title: t('activity-table.field.name'),
+        sort: true
+      },
+      {
+        key: 'status',
+        title: t('activity-table.field.status'),
+        sort: true,
+        filterMode: FilterMode.ENUM,
+        filterMultiple: true
+      }
+    ],
+    [t]
+  )
+
+  const tableUtils = useTableUtils<Profile>({
+    listParamsState: {},
+    getDataAction: () => ({}),
+    columnParams
+  })
+
+  const activityTableUtils = useMemo(() => {
+    return {
+      columns: columnParams,
+      dataSource: [],
+      pagination: tableUtils.paginationConfig,
+      onChange: tableUtils.handleTableChange
+    }
+  }, [tableUtils, columnParams])
 
   useEffect(() => {
     if (id) {
@@ -59,9 +118,6 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
       dispatch(resetProfilePage())
     }
   }, [dispatch, id])
-
-  const formUtils = useFormUtils<Partial<ProfileForm>>()
-  const { submitable, modified, setFieldsValue, checkFieldsChange, resetFormFlags } = formUtils
 
   useEffect(() => {
     if (profile) {
@@ -99,13 +155,10 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
   const handleCancel = useCallback((): void => {
     resetFormFlags()
     setEditMode(false)
-
-    if (!isOwnProfile) {
-      history.goBack()
-    }
-  }, [setEditMode, isOwnProfile, history, resetFormFlags])
+  }, [setEditMode, resetFormFlags])
 
   return {
+    loading,
     formUtils,
     submitable,
     modified,
@@ -121,6 +174,8 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
     setEditMode,
     handleCancel,
     isOwnProfile,
-    profilePictureUrl
+    profilePictureUrl,
+    activityTableUtils,
+    error
   }
 }

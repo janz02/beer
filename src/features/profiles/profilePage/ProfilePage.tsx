@@ -1,5 +1,4 @@
 import './ProfilePage.scss'
-import Form from 'antd/lib/form/Form'
 import { ResponsiveCard } from 'components/responsive/ResponsiveCard'
 import React, { FC, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,12 +8,15 @@ import { NavigationAlert } from 'components/popups/NavigationAlert'
 import { useHistory } from 'react-router-dom'
 import { ProfilePageEdit } from './components/ProfilePageEdit'
 import { ProfilePageView } from './components/ProfilePageView'
+import { Button, Dropdown, Empty, Form, Menu, Skeleton } from 'antd'
+import { EditFilled, EllipsisOutlined, LockOutlined } from '@ant-design/icons'
+import { ResponsiveTable } from 'components/responsive/ResponsiveTable'
 
 export const ProfilePage: FC = () => {
   const { t } = useTranslation()
   const history = useHistory()
   const { profileId } = useParams<{ profileId: string }>()
-  const id = profileId ? +profileId : undefined
+  const id = profileId ? +profileId : 1 // TODO: default id set to own user id for /me page
   const {
     companies,
     groups,
@@ -29,7 +31,11 @@ export const ProfilePage: FC = () => {
     isEditMode,
     setEditMode,
     handleCancel,
-    profilePictureUrl
+    profilePictureUrl,
+    isOwnProfile,
+    loading,
+    activityTableUtils,
+    error
   } = useProfileUtils(id)
 
   const backButtonProps = useMemo(
@@ -51,7 +57,48 @@ export const ProfilePage: FC = () => {
     <ResponsiveCard
       className="profile-editor-card"
       floatingTitle={isEditMode ? t('profile-editor.title.edit') : t('profile-editor.title.view')}
-      floatingBackButton={backButtonProps}
+      floatingBackButton={!isOwnProfile ? backButtonProps : undefined}
+      floatingOptions={
+        <>
+          {!isEditMode && (
+            <>
+              <Button
+                icon={<EditFilled />}
+                type="primary"
+                onClick={() => {
+                  if (isEditMode) {
+                    handleCancel()
+                  } else {
+                    setEditMode(true)
+                  }
+                }}
+              />
+              <Dropdown
+                overlay={
+                  <Menu>
+                    <Menu.Item
+                      key="change_password"
+                      icon={<LockOutlined />}
+                      onClick={() => console.log('change password')}
+                    >
+                      {t('profile-editor.change-password')}
+                    </Menu.Item>
+                    <Menu.Item
+                      key="reset_password"
+                      icon={<LockOutlined />}
+                      onClick={() => console.log('reset password')}
+                    >
+                      {t('profile-editor.reset-password')}
+                    </Menu.Item>
+                  </Menu>
+                }
+              >
+                <Button icon={<EllipsisOutlined rotate={90} />} type="primary" />
+              </Dropdown>
+            </>
+          )}
+        </>
+      }
     >
       <Form
         name="profile-editor-form"
@@ -60,7 +107,16 @@ export const ProfilePage: FC = () => {
         onFinish={handleSave}
         onFieldsChange={checkFieldsChange}
       >
-        {isEditMode && (
+        {loading && (
+          <>
+            <Skeleton.Avatar active size={200} shape="square" />
+            <Skeleton active />
+          </>
+        )}
+
+        {!loading && error && <Empty />}
+
+        {isEditMode && !loading && !error && (
           <ProfilePageEdit
             companies={companies}
             groups={groups}
@@ -72,7 +128,7 @@ export const ProfilePage: FC = () => {
             profile={profile}
           />
         )}
-        {!isEditMode && (
+        {!isEditMode && !loading && !error && (
           <ProfilePageView
             companies={companies}
             groups={groups}
@@ -82,6 +138,11 @@ export const ProfilePage: FC = () => {
           />
         )}
       </Form>
+
+      {!isEditMode && !isOwnProfile && !loading && !error && (
+        <ResponsiveTable selectable={false} {...activityTableUtils} />
+      )}
+
       <NavigationAlert when={modified} />
     </ResponsiveCard>
   )

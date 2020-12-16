@@ -20,7 +20,7 @@ import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
-import { pageViewRoles } from 'services/roleHelpers'
+import { comboRoles, pageViewRoles } from 'services/roleHelpers'
 import { SettingsPage } from 'features/settings/SettingsPage'
 import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
 import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
@@ -140,6 +140,8 @@ const Routes = (): JSX.Element => (
       roles={pageViewRoles.myProfile}
       component={MyProfileEditorPage}
     />
+
+    <PrivateRoute exact path="/me" roles={comboRoles.forAll} component={ProfilePage} />
 
     <PrivateRoute
       exact

@@ -236,6 +236,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
         // far right when the name is really long.
         label: profile?.name?.slice(0, 20) ?? t('menu.my-profile'),
         labelTooltip: profile?.name ?? t('menu.my-profile'),
+        link: '/me',
         icon: <UserOutlined />,
         roles: pageViewRoles.readonlyMyProfile
       }

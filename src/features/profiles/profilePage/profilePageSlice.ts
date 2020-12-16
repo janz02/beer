@@ -30,7 +30,7 @@ const initialState: ProfilePageState = {
   groups: [],
   jobRoles: [],
   error: false,
-  loading: false,
+  loading: true,
   saving: false,
   isEditMode: false,
   profilePictureUrl: null
@@ -46,11 +46,20 @@ const profilePageSlice = createSlice({
     },
     getProfileSuccess(state, action: PayloadAction<ProfileLoadedData>) {
       Object.assign(state, action.payload)
-      state.loading = false
       state.error = false
     },
     getProfileFail(state) {
       state.error = true
+      state.loading = false
+    },
+    getProfilePictureSuccess(state, action: PayloadAction<{ profilePictureUrl: any }>) {
+      Object.assign(state, action.payload)
+      state.loading = false
+      state.error = false
+    },
+    getProfilePictureFail(state) {
+      state.profilePictureUrl = null
+      state.loading = false
     },
     saveProfileRequest(state) {
       state.saving = true
@@ -76,12 +85,28 @@ const {
   saveProfileSuccess,
   saveProfileFail,
   saveProfileRequest,
-  setEditMode
+  setEditMode,
+  getProfilePictureSuccess,
+  getProfilePictureFail
 } = profilePageSlice.actions
 
 export const { resetProfilePage } = profilePageSlice.actions
 
 export const profilePageReducer = profilePageSlice.reducer
+
+export const getProfilePicture = (id: any): AppThunk => async dispatch => {
+  try {
+    const profilePictureBlob = id ? await api.files.files.downloadFile({ id }) : null
+
+    dispatch(
+      getProfilePictureSuccess({
+        profilePictureUrl: profilePictureBlob ? URL.createObjectURL(profilePictureBlob) : null
+      })
+    )
+  } catch {
+    dispatch(getProfilePictureFail())
+  }
+}
 
 export const getProfile = (id: number): AppThunk => async dispatch => {
   try {
@@ -93,12 +118,6 @@ export const getProfile = (id: number): AppThunk => async dispatch => {
       api.admin.groups.getOrganizationGroups({ pageSize: -1 }),
       api.admin.jobRoles.getJobRoles({ pageSize: -1 })
     ])
-
-    const profilePictureBlob = profile.profilePictureId
-      ? await api.files.files.downloadFile({
-          id: profile.profilePictureId || ''
-        })
-      : null
 
     dispatch(
       getProfileSuccess({
@@ -112,10 +131,11 @@ export const getProfile = (id: number): AppThunk => async dispatch => {
         groups: (groups.result?.map(x => ({ ...x, createdDate: moment(x.createdDate) })) ||
           []) as Group[],
         jobRoles: (jobRoles.result?.map(x => ({ ...x, createdDate: moment(x.createdDate) })) ||
-          []) as JobRole[],
-        profilePictureUrl: profilePictureBlob ? URL.createObjectURL(profilePictureBlob) : null
+          []) as JobRole[]
       })
     )
+
+    dispatch(getProfilePicture(profile.profilePictureId))
   } catch (err) {
     dispatch(getProfileFail())
   }

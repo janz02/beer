@@ -13,6 +13,7 @@ export const ViewModeInput: FC<ViewModeProps<
 
   return (
     <>
+      {(!value || (value as any[])?.length === 0) && <Typography.Text>N/a</Typography.Text>}
       {!isSelectType && (
         <span
           className={onClick ? styles.clickableElement : ''}
