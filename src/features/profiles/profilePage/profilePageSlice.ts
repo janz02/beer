@@ -12,6 +12,7 @@ import { FrontendFileValue } from 'components/upload/fileUploadHelper'
 
 interface ProfileLoadedData {
   profile?: Profile
+  profilePictureUrl?: any
   companies: Company[]
   groups: Group[]
   jobRoles: JobRole[]
@@ -31,7 +32,8 @@ const initialState: ProfilePageState = {
   error: false,
   loading: false,
   saving: false,
-  isEditMode: false
+  isEditMode: false,
+  profilePictureUrl: null
 }
 
 const profilePageSlice = createSlice({
@@ -92,6 +94,12 @@ export const getProfile = (id: number): AppThunk => async dispatch => {
       api.admin.jobRoles.getJobRoles({ pageSize: -1 })
     ])
 
+    const profilePictureBlob = profile.profilePictureId
+      ? await api.files.files.downloadFile({
+          id: profile.profilePictureId || ''
+        })
+      : null
+
     dispatch(
       getProfileSuccess({
         profile: {
@@ -104,7 +112,8 @@ export const getProfile = (id: number): AppThunk => async dispatch => {
         groups: (groups.result?.map(x => ({ ...x, createdDate: moment(x.createdDate) })) ||
           []) as Group[],
         jobRoles: (jobRoles.result?.map(x => ({ ...x, createdDate: moment(x.createdDate) })) ||
-          []) as JobRole[]
+          []) as JobRole[],
+        profilePictureUrl: profilePictureBlob ? URL.createObjectURL(profilePictureBlob) : null
       })
     )
   } catch (err) {

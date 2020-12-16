@@ -21,6 +21,7 @@ export interface ProfileUtils {
   modified: boolean
   saving: boolean
   profile?: Profile
+  profilePictureUrl?: any
   companies: Company[]
   groups: Group[]
   jobRoles: JobRole[]
@@ -37,9 +38,15 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
   const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
-  const { profile, companies, groups, jobRoles, saving, isEditMode } = useSelector(
-    (state: RootState) => state.profilePage
-  )
+  const {
+    profile,
+    companies,
+    groups,
+    jobRoles,
+    saving,
+    isEditMode,
+    profilePictureUrl
+  } = useSelector((state: RootState) => state.profilePage)
 
   const isOwnProfile = useMemo(() => location.pathname.includes('my-profile'), [location])
 
@@ -113,6 +120,7 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
     isEditMode,
     setEditMode,
     handleCancel,
-    isOwnProfile
+    isOwnProfile,
+    profilePictureUrl
   }
 }

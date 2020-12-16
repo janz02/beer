@@ -28,7 +28,8 @@ export const ProfilePage: FC = () => {
     profile,
     isEditMode,
     setEditMode,
-    handleCancel
+    handleCancel,
+    profilePictureUrl
   } = useProfileUtils(id)
 
   const backButtonProps = useMemo(
@@ -77,6 +78,7 @@ export const ProfilePage: FC = () => {
             groups={groups}
             jobRoles={jobRoles}
             profile={profile}
+            profilePictureUrl={profilePictureUrl}
           />
         )}
       </Form>
