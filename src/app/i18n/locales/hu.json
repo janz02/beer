@@ -1089,8 +1089,8 @@
     "reset-password": "Jelszó visszaállítás",
     "status": "Státusz",
     "title": {
-      "edit": "Profil szerkesztése",
-      "view": "Profil"
+      "other-profile": "Felhasználói adatlap",
+      "own-profile": "Fiókom"
     },
     "username": "Felhasználónév"
   },

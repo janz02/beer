@@ -1089,8 +1089,8 @@
     "reset-password": "Reset password",
     "status": "Status",
     "title": {
-      "edit": "Edit profile",
-      "view": "Profile"
+      "other-profile": "Profile",
+      "own-profile": "My account"
     },
     "username": "Username"
   },

@@ -95,7 +95,11 @@ export const ProfilePage: FC = () => {
   return (
     <ResponsiveCard
       className="profile-editor-card"
-      floatingTitle={isEditMode ? t('profile-editor.title.edit') : t('profile-editor.title.view')}
+      floatingTitle={
+        isOwnProfile
+          ? t('profile-editor.title.own-profile')
+          : t('profile-editor.title.other-profile')
+      }
       floatingBackButton={!isOwnProfile ? backButtonProps : undefined}
       floatingOptions={
         <>
