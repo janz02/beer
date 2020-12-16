@@ -40,11 +40,6 @@ export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
     [profile, groups]
   )
 
-  console.log({
-    profile,
-    profilePictureUrl
-  })
-
   return (
     <>
       <Row gutter={[16, 16]}>
