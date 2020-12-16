@@ -134,6 +134,9 @@
     "status-creation": "Status (Campaign Creation)",
     "test": {
       "email": {
+        "next-section": "Launch",
+        "previous-section": "Previous (Content)",
+        "save-draft": "Save draft & Exit",
         "send-email": "Sent Test Email",
         "set-testers": "Set testers",
         "tab-name": "Test",

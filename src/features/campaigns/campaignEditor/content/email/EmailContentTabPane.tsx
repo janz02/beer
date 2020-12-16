@@ -26,7 +26,7 @@ export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Title level={5}>{t('campaign-create.content.email.title')}</Title>
         <Row gutter={20}>
-          <Col span={8}>
+          <Col sm={24} md={12} lg={8}>
             <Form.Item
               name="emailTemplateId"
               label={t('campaign-create.content.email.template')}
@@ -49,7 +49,7 @@ export const EmailContentTabPane: FC<CampaignEditorProps> = ({ campaignId }) => 
               </Select>
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col sm={24} md={12} lg={8}>
             <Form.Item
               name="emailTemplateVersion"
               label={t('campaign-create.content.email.template-version')}

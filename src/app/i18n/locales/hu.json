@@ -134,6 +134,9 @@
     "status-creation": "Státusz (Kampány Létrehozás)",
     "test": {
       "email": {
+        "next-section": "Kampány indítása",
+        "previous-section": "Előzőt (Tartalom)",
+        "save-draft": "Piszkozat mentése & Kilépés",
         "send-email": "Teszt email kiküldés",
         "set-testers": "Tesztelők hozzárendelése",
         "tab-name": "Teszt",
