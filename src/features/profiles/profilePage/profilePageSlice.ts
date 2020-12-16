@@ -175,6 +175,8 @@ export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, get
     })
 
     dispatch(saveProfileSuccess())
+    dispatch(getProfile(profile.id))
+    dispatch(setEditMode({ isEditMode: false }))
     message.success(i18n.t('common.message.save-success'), 5)
   } catch (err) {
     console.log(err)
