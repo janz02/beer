@@ -23,6 +23,7 @@ import { CrudButtons } from 'components/buttons/CrudButtons'
 import { Link, useParams } from 'react-router-dom'
 import { ResetFiltersButton } from 'components/ResetFiltersButton'
 import { ColumnOrderDropdown } from 'components/table-columns/ColumnOrderDropdown'
+import { profilePageActions } from 'features/profiles/profilePage/profilePageSlice'
 
 export interface GroupEditorUtils {
   group?: Group
@@ -189,13 +190,16 @@ export const useGroupEditorUtils = (): GroupEditorUtils => {
       render(record: Profile) {
         return (
           <CrudButtons
-            onEdit={() => history.push(`/profiles/${record.id}`)}
+            onEdit={() => {
+              dispatch(profilePageActions.setEditMode({ isEditMode: true }))
+              history.push(`/profiles/${record.id}`)
+            }}
             onUnassign={() => handleUnassignProfile(record.id)}
           />
         )
       }
     }),
-    [handleUnassignProfile]
+    [handleUnassignProfile, dispatch]
   )
 
   const profileTableUtils = useTableUtils<Profile>({

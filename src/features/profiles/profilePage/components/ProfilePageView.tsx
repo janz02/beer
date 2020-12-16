@@ -20,7 +20,7 @@ export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
     const filtered = companies?.filter(el => el.id === profile?.companyId) || []
 
     return filtered.length > 0
-      ? filtered.map(el => ({ name: el.name, linkTo: `/valami/${el.id}` }))[0]
+      ? filtered.map(el => ({ name: el.name, linkTo: `/organization/companies/${el.id}` }))[0]
       : null
   }, [companies, profile])
 
@@ -28,7 +28,7 @@ export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
     const filtered = jobRoles?.filter(el => el.id === profile?.jobRoleId) || []
 
     return filtered.length > 0
-      ? filtered.map(el => ({ name: el.name, linkTo: `/valami/${el.id}` }))[0]
+      ? filtered.map(el => ({ name: el.name, linkTo: `/organization/job-roles/${el.id}` }))[0]
       : null
   }, [jobRoles, profile])
 
@@ -36,7 +36,7 @@ export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
     () =>
       groups
         ?.filter(el => profile?.groupIds.includes(el.id))
-        .map(el => ({ name: el.name, linkTo: `/valami/${el.id}` })) || null,
+        .map(el => ({ name: el.name, linkTo: `/organization/groups/${el.id}` })) || null,
     [profile, groups]
   )
 
