@@ -44,8 +44,12 @@
     }
   },
   "campaign-create": {
+    "cancel-changes": "Módosítások elvetése",
     "content": {
       "email": {
+        "next-section": "Következő (Teszt)",
+        "previous-section": "Előző (Szegmentáció)",
+        "save-draft": "Piszkozat mentése & Kilépés",
         "tab-name": "Tartalom (Email)",
         "template": "Email Sablon",
         "template-placeholder": "Válasszon Emailt",
@@ -54,8 +58,6 @@
         "title": "Email Sablon"
       }
     },
-    "next-section": "Következő (Szegmentálás)",
-    "save-draft": "Piszkozat mentése & Kilépés",
     "segmentation": {
       "add-btn": "Szegmentáció hozzáadása",
       "category-default": "- nincs kiválasztva -",
@@ -68,12 +70,15 @@
       "file-based-title": "Fájl alapú szegmentáció",
       "filtered-results": "Szűrt eredmény",
       "inbuilt-title": "Szegmentáció szerkesztő",
+      "next-section": "Következő (Tartalom)",
+      "previous-section": "Előzó (Beállítások)",
+      "save-draft": "Piszkozat mentése & Kilépés",
       "segmentation-label": "Szegmentációk",
       "segmentation-placeholder": "Válasszon szegmentációt",
       "summary-title": "Szegmentáció összegző",
+      "tab-name": "Szegmentáció",
       "target-title": "Célközönség"
     },
-    "segmentation-tab-name": "Szegmentáció",
     "settings": {
       "about": "Leírás",
       "approver-validator": "Jóváhagyó",
@@ -104,13 +109,16 @@
       "infinite": "Folyamatos",
       "interval-restrictions": "Időszaki megszorítás",
       "maximum-recall-attempts": "Visszahívási kísérletek száma",
+      "next-section": "Következő (Szegmentáció)",
       "product-label": "Termék",
       "product-title": "Termék",
       "recall-frequency": "Visszahívás gyakorisága",
       "requestor": "Igénylő",
+      "save-draft": "Piszkozat mentése & Kilépés",
       "select-timing-type-label": "Időzítés típusa",
       "spam": "Spam",
       "start-date": "Induló dátum",
+      "tab-name": "Beállítások",
       "temporarilyrejected": "Ideiglenesen elutasítva",
       "time-period": "Idő intervallum",
       "timing-title": "Időzítés",
@@ -123,9 +131,12 @@
       "weekend": "Hétvége",
       "workingsaturday": "Szombati munkanap"
     },
-    "settings-tab-name": "Beállítások",
     "status-creation": "Státusz (Kampány Létrehozás)",
-    "test-tab-name": "Teszt",
+    "test": {
+      "email": {
+        "tab-name": "Teszt"
+      }
+    },
     "title": "Kampány Létrehozása",
     "user-logs": "Felhaszálói napló"
   },

@@ -1,12 +1,13 @@
 import { Row, Col } from 'antd'
 import { ResponsiveHeader } from 'components/responsive/ResponsiveHeader'
+import { newsletterEditorActions } from 'features/newsletter/newsletter-editor/newsletterEditorSlice'
 import { useDispatch } from 'hooks/react-redux-hooks'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { history } from 'router/router'
 import { CampaignEditorForm } from './base/CampaignEditorForm'
-import { getCampaign } from './campaignEditorSlice'
+import { campaignEditorActions, getCampaign } from './campaignEditorSlice'
 
 export const CampaignEditorPage: React.FC = () => {
   const params = useParams<{ campaignId?: string }>()
@@ -15,10 +16,12 @@ export const CampaignEditorPage: React.FC = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(newsletterEditorActions.clearNewsletterTemplate())
+    dispatch(campaignEditorActions.reset())
     if (id) {
       dispatch(getCampaign(id))
     }
-  })
+  }, [id, dispatch])
   return (
     <>
       <Row className="campaign-editor-form">

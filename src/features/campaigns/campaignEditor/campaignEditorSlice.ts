@@ -12,6 +12,8 @@ import {
 import moment from 'moment'
 import { CampaignDetailRequest } from 'api/swagger/campaign-editor'
 import { CampaignSettingsUpdateDto } from 'models/campaign/campaignSettings'
+import i18n from 'app/i18n'
+import { message } from 'antd'
 
 interface CampaignEditorState {
   campaignSettingsFormElements: CampaignSettingsFormElements
@@ -142,8 +144,8 @@ export const getCampaign = (id: number): AppThunk => async dispatch => {
         timingTypeId: campaignDetail.timingTypeId
       } as CampaignEmailSettings,
       content: {
-        templateId: campaignDetail.id, // templateId,
-        versionId: campaignDetail.id // versionId
+        emailTemplateId: campaignDetail.emailTemplateId,
+        emailTemplateVersion: campaignDetail.emailTemplateVersion
       } as CampaignEmailContent
     }
 
@@ -154,15 +156,21 @@ export const getCampaign = (id: number): AppThunk => async dispatch => {
 }
 
 export const updateEmailContent = (
-  campaignId: number,
-  templateId: number,
-  versionId: number
+  id: number,
+  emailTemplateId: number,
+  emailTemplateVersion: number
 ): AppThunk => async dispatch => {
   try {
     dispatch(getCampaignStarted())
-    // const updateResponse = await api.campaignEditor.campaigns.updateCampaign({
-    //   optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignUpdateCampaignCommand: {} as UpdateCampaignRequest
-    // })
+    await api.campaignEditor.campaigns.updateCampaignContent({
+      optimaCampaignEditorApplicationCampaignsCommandsUpdateCampaignContentUpdateCampaignContentCommand: {
+        id,
+        emailTemplateId,
+        emailTemplateVersion
+      }
+    })
+
+    message.success(i18n.t('common.message.save-success'), 5)
   } catch (err) {
     dispatch(getCampaignFail())
   }
@@ -192,6 +200,7 @@ export const saveSettings = (
 
 export const campaignEditorActions = {
   saveSettings,
+  updateEmailContent,
   getCampaign,
   reset
 }

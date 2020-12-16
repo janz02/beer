@@ -44,8 +44,12 @@
     }
   },
   "campaign-create": {
+    "cancel-changes": "Cancel changes",
     "content": {
       "email": {
+        "next-section": "Next (Test)",
+        "previous-section": "Previous (Segmentation)",
+        "save-draft": "Save draft & Exit",
         "tab-name": "Content (Email)",
         "template": "Email Template",
         "template-placeholder": "Select Email",
@@ -54,8 +58,6 @@
         "title": "Email Template"
       }
     },
-    "next-section": "Next (Segmentation)",
-    "save-draft": "Save draft & Exit",
     "segmentation": {
       "add-btn": "Add segmentation",
       "category-default": "- not selected -",
@@ -68,12 +70,15 @@
       "file-based-title": "File based segmentation",
       "filtered-results": "Filtered results",
       "inbuilt-title": "Inbuilt segmentation",
+      "next-section": "Next (Content)",
+      "previous-section": "Previous (Settings)",
+      "save-draft": "Save draft & Exit",
       "segmentation-label": "Segmentations",
       "segmentation-placeholder": "Select a segmentation",
       "summary-title": "Segmentation summary",
+      "tab-name": "Segmentation",
       "target-title": "Target audience"
     },
-    "segmentation-tab-name": "Segmentation",
     "settings": {
       "about": "About",
       "approver-validator": "Approver/Validator",
@@ -104,13 +109,16 @@
       "infinite": "Infinite",
       "interval-restrictions": "Interval Restrictions",
       "maximum-recall-attempts": "Maximum recall attempts",
+      "next-section": "Next (Segmentation)",
       "product-label": "Product",
       "product-title": "Product",
       "recall-frequency": "Recall frequency",
       "requestor": "Requestor",
+      "save-draft": "Save draft & Exit",
       "select-timing-type-label": "Select timing type",
       "spam": "Spam",
       "start-date": "Start date",
+      "tab-name": "Settings",
       "temporarilyrejected": "Temporarily Rejected",
       "time-period": "Time interval",
       "timing-title": "Timing",
@@ -123,9 +131,12 @@
       "weekend": "Weekend",
       "workingsaturday": "Working Saturday"
     },
-    "settings-tab-name": "Settings",
     "status-creation": "Status (Campaign Creation)",
-    "test-tab-name": "Test",
+    "test": {
+      "email": {
+        "tab-name": "Test"
+      }
+    },
     "title": "Create Campaign",
     "user-logs": "User Logs"
   },

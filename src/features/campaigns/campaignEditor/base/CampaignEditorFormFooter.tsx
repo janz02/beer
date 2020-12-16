@@ -1,25 +1,41 @@
-import { Row, Col, Button } from 'antd'
-import './CampaignEditor.scss'
+import { Button } from 'antd'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import styles from './CampaignEditorFormFooter.module.scss'
 
-export const CampaignEditorFormFooter: FC = () => {
+export interface CampaignEditorFormFooterProps {
+  submitText: string
+  nextText: string
+  previousText?: string
+}
+
+export const CampaignEditorFormFooter: FC<CampaignEditorFormFooterProps> = ({
+  submitText,
+  nextText,
+  previousText
+}) => {
   const { t } = useTranslation()
 
   return (
-    <div className="create-campaign-buttons">
-      <Row>
-        <Col>
-          <Button name="Submit" htmlType="submit">
-            {t('campaign-create.save-draft')}
+    <div className={styles.buttonContainer}>
+      <Button className={styles.cancelButton} type="link" htmlType="button">
+        {t('campaign-create.cancel-changes')}
+      </Button>
+      <span>
+        {previousText ? (
+          <Button className={styles.previousButton} htmlType="button">
+            {previousText}
           </Button>
-        </Col>
-        <Col>
-          <Button name="Next" htmlType="submit">
-            {t('campaign-create.next-section')}
-          </Button>
-        </Col>
-      </Row>
+        ) : (
+          <></>
+        )}
+        <Button name="Submit" className={styles.submitButton} htmlType="submit">
+          {submitText}
+        </Button>
+        <Button type="primary" name="Next" htmlType="submit">
+          {nextText}
+        </Button>
+      </span>
     </div>
   )
 }

@@ -10,6 +10,7 @@ import { CampaignEditorFormFooter } from '../base/CampaignEditorFormFooter'
 import { EmailConfigurations } from './EmailConfiguration'
 import { RestrictionConfigurations } from './RestrictionConfigurations'
 import { Channels } from 'models/channels'
+import { useTranslation } from 'react-i18next'
 
 export const SettingsTabPane: FC = () => {
   const {
@@ -18,6 +19,7 @@ export const SettingsTabPane: FC = () => {
     campaignSettingsFormElements,
     handleGetSettingFormElements
   } = useCampaignSettingsUtils()
+  const { t } = useTranslation()
 
   const [channelChosen, setChannelChosen] = useState<number>()
   useEffect(() => {
@@ -69,7 +71,10 @@ export const SettingsTabPane: FC = () => {
       <Divider />
       <Row>
         <Col span={22}>
-          <CampaignEditorFormFooter />
+          <CampaignEditorFormFooter
+            submitText={t('campaign-create.settings.save-draft')}
+            nextText={t('campaign-create.settings.next-section')}
+          />
         </Col>
       </Row>
     </Form>

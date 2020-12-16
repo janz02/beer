@@ -60,26 +60,36 @@ export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePrevi
     },
     [editor, selectedDevice]
   )
-  useEffect(() => {
-    if (!editor) return
-    editor.on('load', () => {
-      editor.runCommand('preview')
-    })
 
-    editor.on('update', () => {
-      editor.DomComponents.getWrapper().onAll((comp: any) => {
-        comp.set({ editable: false, draggable: false })
+  useEffect(() => {
+    if (editor) {
+      editor.on('load', () => {
+        editor.runCommand('preview')
       })
-      dispatch(newsletterEditorActions.setTemplatePreviewLoading(false))
-    })
+
+      editor.on('update', () => {
+        editor.DomComponents.getWrapper().onAll((comp: any) => {
+          comp.set({ editable: false, draggable: false })
+        })
+        dispatch(newsletterEditorActions.setTemplatePreviewLoading(false))
+      })
+    }
   }, [editor, dispatch])
 
   useEffect(() => {
-    if (!editor) return
-
-    handleDeviceSelection(selectedDevice)
-    editor.setComponents(currentTemplateVersion?.content ?? '')
+    if (editor) {
+      // grapesjs issue - when a new template is selected, retain the previously selected device
+      // grapesjs editor.setDevice will die when a template is reinitialized
+      // handleDeviceSelection(selectedDevice)
+      editor.setComponents(currentTemplateVersion?.content ?? '')
+    }
   }, [editor, selectedDevice, currentTemplateVersion, handleDeviceSelection])
+
+  useEffect(() => {
+    if (editor) {
+      setSelectedDevice(DeviceType.Desktop)
+    }
+  }, [editor, template])
 
   return { loading: templatePreviewLoading, selectedDevice, handleDeviceSelection }
 }
