@@ -1,14 +1,17 @@
 import { render, screen } from '@testing-library/react'
+import { Roles } from 'api/swagger/coupon'
 import moment from 'moment'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { setupStore, setupUseParams } from '../../../../config/setupMocks'
+import { setupStore, setupUseParams, setupPermissions } from '../../../../config/setupMocks'
 import { ProfilePage } from './ProfilePage'
 
 jest.mock('app/store')
 
+setupPermissions([Roles.Administrator])
+
 setupStore({
-  profileEditor: {
+  profilePage: {
     companies: [
       {
         id: 1,
@@ -47,6 +50,8 @@ setupStore({
     error: false,
     loading: false,
     saving: false,
+    isEditMode: true,
+    profilePictureUrl: null,
     profile: {
       id: 1,
       name: 'Superman',
@@ -72,7 +77,7 @@ setupUseParams({ profileId: 1 })
 const ProfileEditorPageInRouter: React.FC = () => {
   return (
     <MemoryRouter>
-      <ProfilePage mode="edit" />
+      <ProfilePage />
     </MemoryRouter>
   )
 }
