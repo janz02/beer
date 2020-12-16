@@ -19,7 +19,7 @@ const isExcludedEndpoint = (url: string): boolean =>
 
 const rollback = async (guid: string) => {
   try {
-    await api.admin.transaction.rollbackTransaction({ xRTDTransactionGuid: guid })
+    await api.admin.transaction.rollbackTransaction({ xOptimaTransactionGuid: guid })
     // NOTE: we may need to always Promise.reject here, check if Admin MS endpoints are called
     return Promise.reject(
       new Error(
@@ -33,7 +33,7 @@ const rollback = async (guid: string) => {
 
 const commit = async (guid: string) => {
   try {
-    await api.admin.transaction.commitTransaction({ xRTDTransactionGuid: guid })
+    await api.admin.transaction.commitTransaction({ xOptimaTransactionGuid: guid })
     return Promise.resolve()
   } catch {
     return Promise.reject(new Error(`Transaction commit failed. Transaction guid: ${guid}`))
@@ -42,7 +42,7 @@ const commit = async (guid: string) => {
 
 const create = async (guid: string) => {
   try {
-    await api.admin.transaction.createTransaction({ xRTDTransactionGuid: guid })
+    await api.admin.transaction.createTransaction({ xOptimaTransactionGuid: guid })
     return Promise.resolve()
   } catch {
     return Promise.reject(new Error(`Transaction create failed. Transaction guid: ${guid}`))

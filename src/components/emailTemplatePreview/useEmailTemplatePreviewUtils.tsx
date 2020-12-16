@@ -26,12 +26,13 @@ export const useEmailTemplatePreviewUtils = (height: string): EmailTemplatePrevi
   }, [currentTemplateVersionId, template])
 
   const editor = useMemo(() => {
-    if (!template) return
-    return grapesjs.init({
-      container: '#email-preview',
-      height: height,
-      showToolbar: 0
-    })
+    if (template) {
+      return grapesjs.init({
+        container: '#email-preview',
+        height: height,
+        showToolbar: 0
+      })
+    }
   }, [template, height])
 
   const handleDeviceSelection = useCallback(

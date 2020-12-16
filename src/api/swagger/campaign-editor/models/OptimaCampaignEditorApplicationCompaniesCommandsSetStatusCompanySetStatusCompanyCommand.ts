@@ -16,28 +16,28 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery
+ * @interface OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand
  */
-export interface OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery {
+export interface OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand {
     /**
      * 
      * @type {boolean}
-     * @memberof OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery
+     * @memberof OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand
      */
     isActive?: boolean;
     /**
      * 
      * @type {number}
-     * @memberof OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery
+     * @memberof OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand
      */
     requestId?: number;
 }
 
-export function OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQueryFromJSON(json: any): OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery {
-    return OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQueryFromJSONTyped(json, false);
+export function OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommandFromJSON(json: any): OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand {
+    return OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommandFromJSONTyped(json, false);
 }
 
-export function OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQueryFromJSONTyped(json: any, ignoreDiscriminator: boolean): OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery {
+export function OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommandFromJSONTyped(json: any, ignoreDiscriminator: boolean): OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -48,7 +48,7 @@ export function OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanyS
     };
 }
 
-export function OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQueryToJSON(value?: OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery | null): any {
+export function OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommandToJSON(value?: OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand | null): any {
     if (value === undefined) {
         return undefined;
     }

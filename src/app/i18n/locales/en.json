@@ -143,7 +143,13 @@
     "status-creation": "Status (Campaign Creation)",
     "test": {
       "email": {
-        "tab-name": "Test"
+        "next-section": "Launch",
+        "previous-section": "Previous (Content)",
+        "save-draft": "Save draft & Exit",
+        "send-email": "Send Test Email",
+        "set-testers": "Set testers",
+        "tab-name": "Test",
+        "testers": "Email testers ({{totalCount}})"
       }
     },
     "title": "Create Campaign",
@@ -950,17 +956,12 @@
     "groups": {
       "field": {
         "company-count": "Companies",
+        "created-by": "Created by",
         "created-date": "Date of creation",
-        "creator": "Creator",
         "job-role-count": "Job roles",
         "name": "Name",
         "permission-count": "Permissions",
         "profile-count": "Profiles"
-      },
-      "fields": {
-        "created-by": "Created by",
-        "created-date": "Date of creation",
-        "name": "Name"
       },
       "permissions": "Permissions ({{totalCount}})",
       "profiles": "Profiles ({{totalCount}})",
