@@ -1,4 +1,5 @@
 export * from './AccountsApi';
+export * from './AdminApi';
 export * from './CampaignResultsApi';
 export * from './CampaignsApi';
 export * from './ChannelsApi';

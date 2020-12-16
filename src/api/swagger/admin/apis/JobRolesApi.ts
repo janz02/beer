@@ -36,13 +36,13 @@ import {
 } from '../models';
 
 export interface CreateJobRoleRequest {
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
     jobRoleDto?: JobRoleDto;
 }
 
 export interface DeleteJobRoleRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface ExportJobRolesRequest {
@@ -56,12 +56,12 @@ export interface ExportJobRolesRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface GetJobRoleRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface GetJobRolesRequest {
@@ -75,12 +75,12 @@ export interface GetJobRolesRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface UpdateJobRoleRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
     jobRoleDto?: JobRoleDto;
 }
 
@@ -100,8 +100,8 @@ export class JobRolesApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -141,8 +141,8 @@ export class JobRolesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -216,8 +216,8 @@ export class JobRolesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -256,8 +256,8 @@ export class JobRolesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -332,8 +332,8 @@ export class JobRolesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -374,8 +374,8 @@ export class JobRolesApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {

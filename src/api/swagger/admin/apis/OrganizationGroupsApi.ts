@@ -36,13 +36,13 @@ import {
 } from '../models';
 
 export interface CreateOrganizationGroupRequest {
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
     organizationGroupDto?: OrganizationGroupDto;
 }
 
 export interface DeleteOrganizationGroupRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface ExportOrganizationGroupsRequest {
@@ -56,12 +56,12 @@ export interface ExportOrganizationGroupsRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface GetOrganizationGroupRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface GetOrganizationGroupsRequest {
@@ -75,12 +75,12 @@ export interface GetOrganizationGroupsRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface UpdateOrganizationGroupRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
     organizationGroupDto?: OrganizationGroupDto;
 }
 
@@ -100,8 +100,8 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -141,8 +141,8 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -216,8 +216,8 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -256,8 +256,8 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -332,8 +332,8 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -374,8 +374,8 @@ export class OrganizationGroupsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {

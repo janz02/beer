@@ -85,10 +85,13 @@ export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsUserPerm
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsUserSettingsVm';
 export * from './OptimaCampaignEditorApplicationCommonMessagesViewModelsUserVm';
 export * from './OptimaCampaignEditorApplicationCompaniesCommandsCreateCompanyCreateCompanyCommand';
+export * from './OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand';
 export * from './OptimaCampaignEditorApplicationCompaniesCommandsUpdateCompanyUpdateCompanyCommand';
-export * from './OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery';
 export * from './OptimaCampaignEditorApplicationJobRolesCommandsCreateJobRoleCreateJobRoleCommand';
 export * from './OptimaCampaignEditorApplicationJobRolesCommandsUpdateJobRoleUpdateJobRoleCommand';
+export * from './OptimaCampaignEditorApplicationModelsAdminInt32EntityCreatedVm';
+export * from './OptimaCampaignEditorApplicationModelsAdminProfileDto';
+export * from './OptimaCampaignEditorApplicationModelsAdminProfileStatus';
 export * from './OptimaCampaignEditorApplicationModelsCampaignCreateStaticMergeTagCommand';
 export * from './OptimaCampaignEditorApplicationModelsCampaignLanguageVm';
 export * from './OptimaCampaignEditorApplicationModelsCampaignOrganizationalGroupPermissionVm';

@@ -53,7 +53,7 @@ export const CampaignEditorForm: FC<CampaignEditorProps> = ({ campaignId }) => {
       <Divider />
       <Row>
         <Col span={24}>
-          <Tabs size="large" destroyInactiveTabPane>
+          <Tabs size="large">
             <TabPane tab={t('campaign-create.settings.tab-name')} key="settings">
               <SettingsTabPane />
             </TabPane>

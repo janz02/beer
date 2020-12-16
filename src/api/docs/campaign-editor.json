@@ -392,6 +392,140 @@
         }
       }
     },
+    "/api/Admin/Profile": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Creates a Profile entity",
+        "description": "Returns the id of the Profile upon success",
+        "operationId": "createProfile",
+        "requestBody": {
+          "description": "Details of the Profile",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation: Id of the new entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminInt32EntityCreatedVm"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminInt32EntityCreatedVm"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminInt32EntityCreatedVm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/Admin/Profile/{id}": {
+      "put": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Updates a Profile entity",
+        "description": "Updates a Profile entity with Id of \"id\" to entity \"company\"",
+        "operationId": "updateProfile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of entity to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "New entity details",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful update"
+          },
+          "404": {
+            "description": "Entity not found: error.not-found"
+          },
+          "400": {
+            "description": "Validation error occurred: error.common.validation"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/CampaignResults/GetEvents": {
       "get": {
         "tags": [
@@ -1169,7 +1303,40 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCampaignsCommandsCreateCampaignSettingsCreateCampaignSettingsCommand"
-              }
+              },
+              "example": {
+  "name": "Name of Campaign",
+  "description": "Description of Campaign",
+  "channelId": 1,
+  "productId": 1,
+  "requestorId": 1,
+  "responsibleId": 1,
+  "timing": {
+    "intervalRestrictionOptions": [
+      1
+    ],
+    "timingTypeId": 1,
+    "startDate": "2020-12-17T13:56:50.5881382Z",
+    "endDate": "2020-12-30T13:56:50.5881447Z",
+    "startTime": {
+      "hours": 8,
+      "minutes": 0,
+      "seconds": 0
+    },
+    "endTime": {
+      "hours": 16,
+      "minutes": 0,
+      "seconds": 0
+    }
+  },
+  "emailChannelSettings": {
+    "resendingRuleOptions": [
+      1
+    ],
+    "emailResendFrequencyId": 1,
+    "emailMaxReSends": 5
+  }
+}
             }
           }
         },
@@ -2237,7 +2404,10 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCompaniesCommandsCreateCompanyCreateCompanyCommand"
-              }
+              },
+              "example": {
+  "name": "Company Name"
+}
             }
           }
         },
@@ -2325,7 +2495,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCompaniesCommandsUpdateCompanyUpdateCompanyCommand"
-              }
+              },
+              "example": {
+  "id": 12,
+  "name": "Company New Name",
+  "requestId": 0
+}
             }
           }
         },
@@ -2749,8 +2924,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery"
-              }
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand"
+              },
+              "example": {
+  "isActive": false,
+  "requestId": 12
+}
             }
           }
         },
@@ -3025,9 +3204,6 @@
           },
           "401": {
             "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - requires a role of [EmailSend]"
           }
         },
         "security": [
@@ -10020,6 +10196,86 @@
         },
         "additionalProperties": false
       },
+      "OptimaCampaignEditorApplicationModelsAdminProfileStatus": {
+        "enum": [
+          "Active",
+          "InActive",
+          "WaitingForApproval",
+          "Declined"
+        ],
+        "type": "string"
+      },
+      "OptimaCampaignEditorApplicationModelsAdminProfileDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimaCampaignEditorApplicationModelsAdminProfileStatus"
+              }
+            ],
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "profilePictureId": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDay": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "jobDescriptionId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OptimaCampaignEditorApplicationModelsAdminInt32EntityCreatedVm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "OptimaCampaignEditorApplicationCommonMessagesEnumsOrderByType": {
         "enum": [
           "Ascending",
@@ -11860,7 +12116,7 @@
         },
         "additionalProperties": false
       },
-      "OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery": {
+      "OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand": {
         "type": "object",
         "properties": {
           "isActive": {

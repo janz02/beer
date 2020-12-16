@@ -20,7 +20,7 @@
         "operationId": "createCompany",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -188,7 +188,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -267,7 +267,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -364,7 +364,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -451,7 +451,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -571,7 +571,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -621,7 +621,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -658,7 +658,7 @@
         "operationId": "createJobRole",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -817,7 +817,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -896,7 +896,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -993,7 +993,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1080,7 +1080,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1191,7 +1191,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1230,7 +1230,7 @@
         "operationId": "createOrganizationGroup",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1389,7 +1389,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1465,7 +1465,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1559,7 +1559,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1646,7 +1646,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1757,7 +1757,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -1796,7 +1796,7 @@
         "operationId": "createProfile",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2002,7 +2002,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2081,7 +2081,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2178,7 +2178,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2386,7 +2386,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2436,7 +2436,7 @@
             }
           },
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2473,7 +2473,7 @@
         "operationId": "ProfileTabCounts",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2540,7 +2540,7 @@
         "operationId": "commitTransaction",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2587,7 +2587,7 @@
         "operationId": "createTransaction",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
@@ -2634,7 +2634,7 @@
         "operationId": "rollbackTransaction",
         "parameters": [
           {
-            "name": "X-RTD-Transaction-Guid",
+            "name": "X-Optima-Transaction-Guid",
             "in": "header",
             "schema": {
               "type": "string"
