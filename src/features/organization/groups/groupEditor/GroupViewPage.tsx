@@ -54,19 +54,19 @@ export const GroupViewPage: FC<{}> = () => {
         <LoadingIndicator isLoading={isLoading}>
           <Row>
             <Col span="24">
-              <Form.Item className={styles.name} label={t('organization.groups.fields.name')}>
+              <Form.Item className={styles.name} label={t('organization.groups.field.name')}>
                 {group?.name}
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span="4">
-              <Form.Item label={t('organization.groups.fields.created-date')}>
+              <Form.Item label={t('organization.groups.field.created-date')}>
                 <MomentDisplay date={group?.createdDate} />
               </Form.Item>
             </Col>
             <Col span="6">
-              <Form.Item label={t('organization.groups.fields.created-by')}>
+              <Form.Item label={t('organization.groups.field.created-by')}>
                 {group?.createdBy}
               </Form.Item>
             </Col>

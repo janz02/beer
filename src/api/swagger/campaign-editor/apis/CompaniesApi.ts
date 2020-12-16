@@ -30,12 +30,12 @@ import {
     OptimaCampaignEditorApplicationCompaniesCommandsCreateCompanyCreateCompanyCommand,
     OptimaCampaignEditorApplicationCompaniesCommandsCreateCompanyCreateCompanyCommandFromJSON,
     OptimaCampaignEditorApplicationCompaniesCommandsCreateCompanyCreateCompanyCommandToJSON,
+    OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand,
+    OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommandFromJSON,
+    OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommandToJSON,
     OptimaCampaignEditorApplicationCompaniesCommandsUpdateCompanyUpdateCompanyCommand,
     OptimaCampaignEditorApplicationCompaniesCommandsUpdateCompanyUpdateCompanyCommandFromJSON,
     OptimaCampaignEditorApplicationCompaniesCommandsUpdateCompanyUpdateCompanyCommandToJSON,
-    OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery,
-    OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQueryFromJSON,
-    OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQueryToJSON,
 } from '../models';
 
 export interface CreateCompanyRequest {
@@ -86,7 +86,7 @@ export interface GetCompanyRequest {
 
 export interface SetCompanyStatusRequest {
     id: number;
-    optimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery?: OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery;
+    optimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand?: OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand;
 }
 
 export interface UpdateCompanyRequest {
@@ -404,7 +404,7 @@ export class CompaniesApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: OptimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQueryToJSON(requestParameters.optimaCampaignEditorApplicationCompaniesQueriesSetStatusCompanySetStatusCompanyQuery),
+            body: OptimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommandToJSON(requestParameters.optimaCampaignEditorApplicationCompaniesCommandsSetStatusCompanySetStatusCompanyCommand),
         });
 
         return new runtime.VoidApiResponse(response);

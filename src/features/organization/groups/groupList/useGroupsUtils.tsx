@@ -83,7 +83,7 @@ export const useGroupsUtils = (): GroupsUtils => {
         filterMode: FilterMode.DATEPICKER
       },
       {
-        title: t('organization.groups.field.creator'),
+        title: t('organization.groups.field.created-by'),
         key: 'createdBy',
         sort: true,
         filterMode: FilterMode.SEARCH

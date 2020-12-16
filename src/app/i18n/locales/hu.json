@@ -134,7 +134,13 @@
     "status-creation": "Státusz (Kampány Létrehozás)",
     "test": {
       "email": {
-        "tab-name": "Teszt"
+        "next-section": "Kampány indítása",
+        "previous-section": "Előzőt (Tartalom)",
+        "save-draft": "Piszkozat mentése & Kilépés",
+        "send-email": "Teszt email kiküldés",
+        "set-testers": "Tesztelők hozzárendelése",
+        "tab-name": "Teszt",
+        "testers": "Email tesztelők ({{totalCount}})"
       }
     },
     "title": "Kampány Létrehozása",
@@ -941,17 +947,12 @@
     "groups": {
       "field": {
         "company-count": "Cégek",
+        "created-by": "Létrehozó",
         "created-date": "Létrehozás dátuma",
-        "creator": "Létrehozó",
         "job-role-count": "Munkakörök",
         "name": "Név",
         "permission-count": "Jogosultságok",
         "profile-count": "Felhasználók"
-      },
-      "fields": {
-        "created-by": "Létrehozó",
-        "created-date": "Létrehozás dátuma",
-        "name": "Név"
       },
       "permissions": "Jogosultságok ({{totalCount}})",
       "profiles": "Felhasználók ({{totalCount}})",

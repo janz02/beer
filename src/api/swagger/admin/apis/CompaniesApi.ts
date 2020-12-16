@@ -39,13 +39,13 @@ import {
 } from '../models';
 
 export interface CreateCompanyRequest {
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
     companyDto?: CompanyDto;
 }
 
 export interface DeleteCompanyRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface ExportCompaniesRequest {
@@ -60,7 +60,7 @@ export interface ExportCompaniesRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface GetCompaniesRequest {
@@ -75,23 +75,23 @@ export interface GetCompaniesRequest {
     pageSize?: number;
     orderBy?: string | null;
     orderByType?: OrderByType;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface GetCompanyRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface SetCompanyStatusRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
     companyStatusDto?: CompanyStatusDto;
 }
 
 export interface UpdateCompanyRequest {
     id: number;
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
     companyDto?: CompanyDto;
 }
 
@@ -111,8 +111,8 @@ export class CompaniesApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -152,8 +152,8 @@ export class CompaniesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -231,8 +231,8 @@ export class CompaniesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -311,8 +311,8 @@ export class CompaniesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -351,8 +351,8 @@ export class CompaniesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -393,8 +393,8 @@ export class CompaniesApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -435,8 +435,8 @@ export class CompaniesApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {

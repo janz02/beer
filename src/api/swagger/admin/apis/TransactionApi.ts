@@ -21,15 +21,15 @@ import {
 } from '../models';
 
 export interface CommitTransactionRequest {
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface CreateTransactionRequest {
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 export interface RollbackTransactionRequest {
-    xRTDTransactionGuid?: string;
+    xOptimaTransactionGuid?: string;
 }
 
 /**
@@ -45,8 +45,8 @@ export class TransactionApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -78,8 +78,8 @@ export class TransactionApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -111,8 +111,8 @@ export class TransactionApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.xRTDTransactionGuid !== undefined && requestParameters.xRTDTransactionGuid !== null) {
-            headerParameters['X-RTD-Transaction-Guid'] = String(requestParameters.xRTDTransactionGuid);
+        if (requestParameters.xOptimaTransactionGuid !== undefined && requestParameters.xOptimaTransactionGuid !== null) {
+            headerParameters['X-Optima-Transaction-Guid'] = String(requestParameters.xOptimaTransactionGuid);
         }
 
         if (this.configuration && this.configuration.apiKey) {

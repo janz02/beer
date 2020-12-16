@@ -14,9 +14,13 @@ import { CampaignDetailRequest } from 'api/swagger/campaign-editor'
 import { CampaignSettingsUpdateDto } from 'models/campaign/campaignSettings'
 import i18n from 'app/i18n'
 import { message } from 'antd'
+import { ListRequestParams } from 'hooks/useTableUtils'
+import { Profile } from 'models/profile'
 
 interface CampaignEditorState {
   campaignSettingsFormElements: CampaignSettingsFormElements
+  campaignTesterListParams: ListRequestParams
+  campaignTesters?: Profile[]
   campaign?: Campaign
   isLoading: boolean
   hasError: boolean
@@ -35,6 +39,7 @@ const initialState: CampaignEditorState = {
     channelOptions: [],
     channels: []
   },
+  campaignTesterListParams: { pageSize: 10 },
   isLoading: true,
   hasError: false
 }
@@ -155,6 +160,10 @@ export const getCampaign = (id: number): AppThunk => async dispatch => {
   }
 }
 
+export const getCampaignTesters = (id: number): AppThunk => async dispatch => {
+  // TODO
+}
+
 export const updateEmailContent = (
   id: number,
   emailTemplateId: number,
@@ -202,5 +211,6 @@ export const campaignEditorActions = {
   saveSettings,
   updateEmailContent,
   getCampaign,
+  getCampaignTesters,
   reset
 }

@@ -2,17 +2,23 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { DeviceSelectorButton, DeviceType } from './DeviceSelectorButton'
 import { useEmailTemplatePreviewUtils } from './useEmailTemplatePreviewUtils'
-import './EmailTemplatePreview.scss'
+import styles from './EmailTemplatePreview.module.scss'
 
-export const EmailTemplatePreview: React.FC = () => {
+interface EmailTemplatePreviewProps {
+  previewHeightPx: number
+}
+
+export const EmailTemplatePreview: React.FC<EmailTemplatePreviewProps> = ({ previewHeightPx }) => {
   const { t } = useTranslation()
-  const { handleDeviceSelection, selectedDevice, loading } = useEmailTemplatePreviewUtils('500px')
+  const { handleDeviceSelection, selectedDevice, loading } = useEmailTemplatePreviewUtils(
+    `${previewHeightPx}px`
+  )
 
   return (
-    <div className="email-preview-container">
+    <>
       <div>
-        <span className="device-selector-title">{t('email-template.device-type.title')}</span>
-        <div className="device-selector">
+        <span className={styles.deviceSelectorTitle}>{t('email-template.device-type.title')}</span>
+        <div className={styles.deviceSelector}>
           <DeviceSelectorButton
             type={DeviceType.Desktop}
             onSelect={() => {
@@ -36,8 +42,8 @@ export const EmailTemplatePreview: React.FC = () => {
           />
         </div>
       </div>
-      <div id="email-preview" hidden={loading} />
+      <div id="email-preview" className={styles.emailPreview} hidden={loading} />
       <div hidden={!loading}>{t('common.loading')}</div>
-    </div>
+    </>
   )
 }
