@@ -1,7 +1,5 @@
 export interface ViewProps<T> {
   value?: T
-  onClick?: Function
-  onChange?: Function
   hasRightToNavigate?: boolean
 }
 
