@@ -19,9 +19,9 @@ interface ProfileLoadedData {
 }
 
 interface ProfilePageState extends ProfileLoadedData {
-  error: boolean
-  loading: boolean
-  saving: boolean
+  hasError: boolean
+  isLoading: boolean
+  isSaving: boolean
   isEditMode: boolean
 }
 
@@ -29,9 +29,9 @@ const initialState: ProfilePageState = {
   companies: [],
   groups: [],
   jobRoles: [],
-  error: false,
-  loading: true,
-  saving: false,
+  hasError: false,
+  isLoading: true,
+  isSaving: false,
   isEditMode: false,
   profilePictureUrl: null
 }
@@ -42,35 +42,35 @@ const profilePageSlice = createSlice({
   reducers: {
     resetProfilePage: () => initialState,
     getProfileRequest(state) {
-      state.loading = true
+      state.isLoading = true
     },
     getProfileSuccess(state, action: PayloadAction<ProfileLoadedData>) {
       Object.assign(state, action.payload)
-      state.error = false
+      state.hasError = false
     },
     getProfileFail(state) {
-      state.error = true
-      state.loading = false
+      state.hasError = true
+      state.isLoading = false
     },
     getProfilePictureSuccess(state, action: PayloadAction<{ profilePictureUrl: any }>) {
       Object.assign(state, action.payload)
-      state.loading = false
-      state.error = false
+      state.isLoading = false
+      state.hasError = false
     },
     getProfilePictureFail(state) {
       state.profilePictureUrl = null
-      state.loading = false
+      state.isLoading = false
     },
     saveProfileRequest(state) {
-      state.saving = true
+      state.isSaving = true
     },
     saveProfileSuccess(state) {
-      state.saving = false
-      state.error = false
+      state.isSaving = false
+      state.hasError = false
     },
     saveProfileFail(state) {
-      state.saving = false
-      state.error = true
+      state.isSaving = false
+      state.hasError = true
     },
     setEditMode(state, action: PayloadAction<{ isEditMode: boolean }>) {
       state.isEditMode = action.payload.isEditMode

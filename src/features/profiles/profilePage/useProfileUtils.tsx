@@ -21,7 +21,7 @@ export interface ProfileUtils {
   formUtils: FormUtils
   submitable: boolean
   modified: boolean
-  saving: boolean
+  isSaving: boolean
   profile?: Profile
   profilePictureUrl?: any
   companies: Company[]
@@ -29,8 +29,8 @@ export interface ProfileUtils {
   jobRoles: JobRole[]
   isEditMode: boolean
   isOwnProfile: boolean
-  loading: boolean
-  error: boolean
+  isLoading: boolean
+  hasError: boolean
   activityTableUtils: any
   checkFieldsChange: () => void
   resetFormFlags: () => void
@@ -48,11 +48,11 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
     companies,
     groups,
     jobRoles,
-    saving,
+    isSaving,
     isEditMode,
     profilePictureUrl,
-    loading,
-    error
+    isLoading,
+    hasError
   } = useSelector((state: RootState) => state.profilePage)
 
   const isOwnProfile = useMemo(() => location.pathname === '/me', [location])
@@ -158,11 +158,11 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
   }, [setEditMode, resetFormFlags])
 
   return {
-    loading,
+    isLoading,
     formUtils,
     submitable,
     modified,
-    saving,
+    isSaving,
     profile,
     companies,
     groups,
@@ -176,6 +176,6 @@ export const useProfileUtils = (id?: number): ProfileUtils => {
     isOwnProfile,
     profilePictureUrl,
     activityTableUtils,
-    error
+    hasError
   }
 }

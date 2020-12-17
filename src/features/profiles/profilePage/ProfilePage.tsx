@@ -26,7 +26,7 @@ export const ProfilePage: FC = () => {
     formUtils,
     submitable,
     modified,
-    saving,
+    isSaving,
     checkFieldsChange,
     handleSave,
     profile,
@@ -35,9 +35,9 @@ export const ProfilePage: FC = () => {
     handleCancel,
     profilePictureUrl,
     isOwnProfile,
-    loading,
+    isLoading,
     activityTableUtils,
-    error
+    hasError
   } = useProfileUtils(id)
 
   const canEditOtherUsers = useMemo(() => hasPermission([Roles.Administrator]), [])
@@ -129,28 +129,28 @@ export const ProfilePage: FC = () => {
         onFinish={handleSave}
         onFieldsChange={checkFieldsChange}
       >
-        {loading && (
+        {isLoading && (
           <>
             <Skeleton.Avatar active size={200} shape="square" />
             <Skeleton active />
           </>
         )}
 
-        {!loading && error && <Empty />}
+        {!isLoading && hasError && <Empty />}
 
-        {isEditMode && !loading && !error && (
+        {isEditMode && !isLoading && !hasError && (
           <ProfilePageEdit
             companies={companies}
             groups={groups}
             jobRoles={jobRoles}
             formUtils={formUtils}
             submitable={submitable}
-            saving={saving}
+            isSaving={isSaving}
             handleCancel={handleCancel}
             profile={profile}
           />
         )}
-        {!isEditMode && !loading && !error && (
+        {!isEditMode && !isLoading && !hasError && (
           <ProfilePageView
             companies={companies}
             groups={groups}
@@ -161,7 +161,7 @@ export const ProfilePage: FC = () => {
         )}
       </Form>
 
-      {!isEditMode && !isOwnProfile && !loading && !error && (
+      {!isEditMode && !isOwnProfile && !isLoading && !hasError && (
         <ResponsiveTable selectable={false} {...activityTableUtils} />
       )}
 

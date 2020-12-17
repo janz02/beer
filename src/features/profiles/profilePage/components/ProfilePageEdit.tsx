@@ -13,7 +13,7 @@ export const ProfilePageEdit: FC<Partial<ProfileUtils>> = ({
   groups,
   jobRoles,
   submitable,
-  saving,
+  isSaving,
   handleCancel
 }) => {
   const { t } = useTranslation()
@@ -32,7 +32,7 @@ export const ProfilePageEdit: FC<Partial<ProfileUtils>> = ({
 
       <div className="profile-editor-footer">
         <div className="profile-editor-footer-right">
-          <Button type="primary" htmlType="submit" disabled={!submitable} loading={saving}>
+          <Button type="primary" htmlType="submit" disabled={!submitable} loading={isSaving}>
             {t('profile-editor.button-save')}
           </Button>
         </div>
