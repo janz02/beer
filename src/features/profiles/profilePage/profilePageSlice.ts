@@ -10,54 +10,70 @@ import { JobRole } from 'models/jobRole'
 import moment from 'moment'
 import { FrontendFileValue } from 'components/upload/fileUploadHelper'
 
-interface ProfileEditorLoadedData {
+interface ProfileLoadedData {
   profile?: Profile
+  profilePictureUrl?: any
   companies: Company[]
   groups: Group[]
   jobRoles: JobRole[]
 }
 
-interface ProfileEditorState extends ProfileEditorLoadedData {
-  error: boolean
-  loading: boolean
-  saving: boolean
+interface ProfilePageState extends ProfileLoadedData {
+  hasError: boolean
+  isLoading: boolean
+  isSaving: boolean
+  isEditMode: boolean
 }
 
-const initialState: ProfileEditorState = {
+const initialState: ProfilePageState = {
   companies: [],
   groups: [],
   jobRoles: [],
-  error: false,
-  loading: false,
-  saving: false
+  hasError: false,
+  isLoading: true,
+  isSaving: false,
+  isEditMode: false,
+  profilePictureUrl: null
 }
 
-const profileEditorSlice = createSlice({
-  name: 'profileEditor',
+const profilePageSlice = createSlice({
+  name: 'profilePage',
   initialState,
   reducers: {
-    resetProfileEditor: () => initialState,
+    resetProfilePage: () => initialState,
     getProfileRequest(state) {
-      state.loading = true
+      state.isLoading = true
     },
-    getProfileSuccess(state, action: PayloadAction<ProfileEditorLoadedData>) {
+    getProfileSuccess(state, action: PayloadAction<ProfileLoadedData>) {
       Object.assign(state, action.payload)
-      state.loading = false
-      state.error = false
+      state.hasError = false
     },
     getProfileFail(state) {
-      state.error = true
+      state.hasError = true
+      state.isLoading = false
+    },
+    getProfilePictureSuccess(state, action: PayloadAction<{ profilePictureUrl: any }>) {
+      Object.assign(state, action.payload)
+      state.isLoading = false
+      state.hasError = false
+    },
+    getProfilePictureFail(state) {
+      state.profilePictureUrl = null
+      state.isLoading = false
     },
     saveProfileRequest(state) {
-      state.saving = true
+      state.isSaving = true
     },
     saveProfileSuccess(state) {
-      state.saving = false
-      state.error = false
+      state.isSaving = false
+      state.hasError = false
     },
     saveProfileFail(state) {
-      state.saving = false
-      state.error = true
+      state.isSaving = false
+      state.hasError = true
+    },
+    setEditMode(state, action: PayloadAction<{ isEditMode: boolean }>) {
+      state.isEditMode = action.payload.isEditMode
     }
   }
 })
@@ -68,12 +84,29 @@ const {
   getProfileRequest,
   saveProfileSuccess,
   saveProfileFail,
-  saveProfileRequest
-} = profileEditorSlice.actions
+  saveProfileRequest,
+  setEditMode,
+  getProfilePictureSuccess,
+  getProfilePictureFail
+} = profilePageSlice.actions
 
-export const { resetProfileEditor } = profileEditorSlice.actions
+export const { resetProfilePage } = profilePageSlice.actions
 
-export const profileEditorReducer = profileEditorSlice.reducer
+export const profilePageReducer = profilePageSlice.reducer
+
+export const getProfilePicture = (id: any): AppThunk => async dispatch => {
+  try {
+    const profilePictureBlob = id ? await api.files.files.downloadFile({ id }) : null
+
+    dispatch(
+      getProfilePictureSuccess({
+        profilePictureUrl: profilePictureBlob ? URL.createObjectURL(profilePictureBlob) : null
+      })
+    )
+  } catch {
+    dispatch(getProfilePictureFail())
+  }
+}
 
 export const getProfile = (id: number): AppThunk => async dispatch => {
   try {
@@ -101,6 +134,8 @@ export const getProfile = (id: number): AppThunk => async dispatch => {
           []) as JobRole[]
       })
     )
+
+    dispatch(getProfilePicture(profile.profilePictureId))
   } catch (err) {
     dispatch(getProfileFail())
   }
@@ -119,7 +154,7 @@ export interface ProfileForm {
 
 export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, getState) => {
   try {
-    const profile = getState().profileEditor.profile!
+    const profile = getState().profilePage.profile!
     dispatch(saveProfileRequest())
 
     await api.admin.profiles.updateProfile({
@@ -140,6 +175,8 @@ export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, get
     })
 
     dispatch(saveProfileSuccess())
+    dispatch(getProfile(profile.id))
+    dispatch(setEditMode({ isEditMode: false }))
     message.success(i18n.t('common.message.save-success'), 5)
   } catch (err) {
     console.log(err)
@@ -147,6 +184,7 @@ export const saveProfile = (data: ProfileForm): AppThunk => async (dispatch, get
   }
 }
 
-export const profileEditorActions = {
-  reset: resetProfileEditor
+export const profilePageActions = {
+  reset: resetProfilePage,
+  setEditMode: setEditMode
 }

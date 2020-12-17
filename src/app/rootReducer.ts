@@ -9,7 +9,7 @@ import { couponCampaignsReducer } from 'features/couponCampaigns/couponCampaigns
 import { notificationReducer } from 'features/notification/notificationSlice'
 import { myProfileReducer } from 'features/myProfile/myProfileSlice'
 import { profileListReducer } from 'features/profiles/profileList/profileListSlice'
-import { profileEditorReducer } from 'features/profiles/profileEditor/profileEditorSlice'
+import { profilePageReducer } from 'features/profiles/profilePage/profilePageSlice'
 import { companiesReducer } from 'features/organization/companies/companiesSlice'
 import { siteEditorReducer } from 'features/sites/siteEditor/siteEditorSlice'
 import { newsletterListReducer } from 'features/newsletter/newsletterList/newsletterListSlice'
@@ -50,7 +50,7 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   myProfile: myProfileReducer,
   profileList: profileListReducer,
-  profileEditor: profileEditorReducer,
+  profilePage: profilePageReducer,
   companies: companiesReducer,
   groups: groupsReducer,
   groupEditor: groupEditorReducer,

@@ -5,10 +5,12 @@ import { useTranslation } from 'react-i18next'
 import { ProfileStatus } from 'api/swagger/admin'
 
 interface ProfileStatusDisplayProps {
-  status: ProfileStatus
+  status?: ProfileStatus
 }
 
-export const kebabCasedProfileStatus = (status: ProfileStatus): string => {
+export const kebabCasedProfileStatus = (status?: ProfileStatus): string => {
+  if (!status) return ''
+
   switch (status) {
     case ProfileStatus.Active:
       return 'active'

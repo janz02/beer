@@ -3,19 +3,13 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Col, DatePicker, Form, Input, Row } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { ProfileEditorPageUtils } from './ProfileEditorUtils'
 import { PictureUploadButton } from 'components/upload/PictueUploadButton'
 import { FileExtension } from 'components/upload/fileUploadHelper'
+import { ProfileUtils } from '../useProfileUtils'
 
-interface ProfileBasicsProps {
-  profileEditorPageUtils: ProfileEditorPageUtils
-}
-
-export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
+export const ProfileBasics: React.FC<Partial<ProfileUtils>> = ({ profile, formUtils }) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
-  const { profile, formUtils } = props.profileEditorPageUtils
-  const { form } = formUtils
 
   return (
     <div className="profile-editor-basics-container">
@@ -27,20 +21,20 @@ export const ProfileBasics: React.FC<ProfileBasicsProps> = props => {
         >
           <PictureUploadButton
             onSuccess={fileDetails => {
-              form.setFieldsValue({
-                ...form.getFieldsValue(),
+              formUtils?.form.setFieldsValue({
+                ...formUtils?.form.getFieldsValue(),
                 profilePictureDetails: fileDetails
               })
 
-              form.validateFields(['profilePictureDetails'])
+              formUtils?.form.validateFields(['profilePictureDetails'])
             }}
             onRemove={() => {
-              form.setFieldsValue({
-                ...form.getFieldsValue(),
+              formUtils?.form.setFieldsValue({
+                ...formUtils?.form.getFieldsValue(),
                 profilePictureDetails: undefined
               })
 
-              form.validateFields(['profilePictureDetails'])
+              formUtils?.form.validateFields(['profilePictureDetails'])
             }}
             initialFileId={profile?.profilePictureId}
             allowedExtensions={[FileExtension.JPG, FileExtension.PNG]}

@@ -2,16 +2,15 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Form, Select } from 'antd'
 import { useCommonFormRules } from 'hooks'
-import { ProfileEditorPageUtils } from './ProfileEditorUtils'
+import { ProfileUtils } from '../useProfileUtils'
 
-interface ProfilePositionProps {
-  profileEditorPageUtils: ProfileEditorPageUtils
-}
-
-export const ProfilePosition: React.FC<ProfilePositionProps> = props => {
+export const ProfilePosition: React.FC<Partial<ProfileUtils>> = ({
+  companies,
+  groups,
+  jobRoles
+}) => {
   const { t } = useTranslation()
   const rule = useCommonFormRules()
-  const { companies, groups, jobRoles } = props.profileEditorPageUtils
 
   return (
     <>

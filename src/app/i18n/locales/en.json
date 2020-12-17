@@ -1,4 +1,13 @@
 {
+  "activity-table": {
+    "field": {
+      "activity": "Activity",
+      "date-of-activity": "Date of activity",
+      "name": "Name",
+      "status": "Status",
+      "type": "Type"
+    }
+  },
   "app": {
     "title": "Grape Optima"
   },
@@ -1066,6 +1075,7 @@
     "birthday": "Birthday",
     "button-cancel": "Cancel",
     "button-save": "Save",
+    "change-password": "Change password",
     "company": "Company",
     "contacts": "Contacts",
     "email": "E-mail",
@@ -1075,7 +1085,13 @@
     "phone": "Phone",
     "picture-help": "Only a 512*512 pixel JPG or PNG file can be accepted.",
     "position": "Position",
-    "title": "Edit profile",
+    "registrationDate": "Registration",
+    "reset-password": "Reset password",
+    "status": "Status",
+    "title": {
+      "other-profile": "Profile",
+      "own-profile": "My account"
+    },
     "username": "Username"
   },
   "profiles": {

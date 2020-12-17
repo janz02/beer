@@ -20,7 +20,7 @@ import { isLoggedIn } from 'services/jwt-reader'
 import { PartnerListPage } from 'features/partners/partnerList/PartnerListPage'
 import { SelfPartnerEditorPage } from 'features/partners/selfPartner/SelfPartnerEditorPage'
 import { PartnerEditorPage } from 'features/partners/partnerEditor/PartnerEditorPage'
-import { pageViewRoles } from 'services/roleHelpers'
+import { comboRoles, pageViewRoles } from 'services/roleHelpers'
 import { SettingsPage } from 'features/settings/SettingsPage'
 import { NewsletterListPage } from 'features/newsletter/newsletterList/NewsletterListPage'
 import { PartnerContactPage } from 'features/partnerContact/PartnerContactPage'
@@ -35,7 +35,7 @@ import { CampaignListPage } from 'features/campaigns/campaignList/CampaignListPa
 import { CampaignEditorPage } from 'features/campaigns/campaignEditor/CampaignEditorPage'
 import { OrganizationPage } from 'features/organization/OrganizationPage'
 import { PlaceholderPage } from 'components/placeholder/PlaceholderPage'
-import { ProfileEditorPage } from 'features/profiles/profileEditor/ProfileEditorPage'
+import { ProfilePage } from 'features/profiles/profilePage/ProfilePage'
 import { GroupViewPage } from 'features/organization/groups/groupEditor/GroupViewPage'
 
 const onDefaultRoute = (): JSX.Element => {
@@ -141,6 +141,8 @@ const Routes = (): JSX.Element => (
       component={MyProfileEditorPage}
     />
 
+    <PrivateRoute exact path="/me" roles={comboRoles.forAll} component={ProfilePage} />
+
     <PrivateRoute
       exact
       path="/newsletter"
@@ -194,7 +196,7 @@ const Routes = (): JSX.Element => (
       exact
       path="/profiles/:profileId"
       roles={pageViewRoles.profiles}
-      component={ProfileEditorPage}
+      component={ProfilePage}
     />
     <PrivateRoute
       exact

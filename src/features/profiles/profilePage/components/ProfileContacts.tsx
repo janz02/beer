@@ -1,10 +1,11 @@
 import './ProfileContacts.scss'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Form, Input } from 'antd'
 import { useCommonFormRules } from 'hooks'
+import { ProfileUtils } from '../useProfileUtils'
 
-export const ProfileContacts: React.FC = () => {
+export const ProfileContacts: FC<Partial<ProfileUtils>> = () => {
   const { t } = useTranslation()
   const rules = useCommonFormRules()
 

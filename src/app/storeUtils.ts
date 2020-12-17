@@ -29,7 +29,7 @@ import { profileListActions } from 'features/profiles/profileList/profileListSli
 import { companiesActions } from 'features/organization/companies/companiesSlice'
 import { groupsActions } from 'features/organization/groups/groupList/groupsSlice'
 import { groupEditorActions } from 'features/organization/groups/groupEditor/groupEditorSlice'
-import { profileEditorActions } from 'features/profiles/profileEditor/profileEditorSlice'
+import { profilePageActions } from 'features/profiles/profilePage/profilePageSlice'
 import { campaignEditorActions } from 'features/campaigns/campaignEditor/campaignEditorSlice'
 
 interface HardResetParams {
@@ -42,7 +42,7 @@ export const hardResetStore = (params: HardResetParams = {}): AppThunk => async 
     dispatch(authActions.resetAuth())
     dispatch(myProfileActions.resetProfile())
     dispatch(profileListActions.reset())
-    dispatch(profileEditorActions.reset())
+    dispatch(profilePageActions.reset())
     dispatch(notificationActions.resetNotification())
     dispatch(siteListActions.reset())
     dispatch(siteEditorActions.reset())

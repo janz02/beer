@@ -17,6 +17,7 @@ import { history } from 'router/router'
 import { ColumnStorageName } from 'components/table-columns/ColumnStorageName'
 import { ColumnOrderUtils, useColumnOrderUtils } from 'components/table-columns/useColumnOrderUtils'
 import { Link } from 'react-router-dom'
+import { profilePageActions } from '../profilePage/profilePageSlice'
 
 interface ProfileListUtils {
   columnOrderUtils: ColumnOrderUtils<Profile>
@@ -76,7 +77,16 @@ export const useProfileListUtils = (): ProfileListUtils => {
         ellipsis: false,
         disableSearchHighlight: true,
         render: (value: string, profile: Profile): React.ReactNode => {
-          return <Link to={`/profiles/${profile.id}`}>{value}</Link>
+          return (
+            <Link
+              to={`/profiles/${profile.id}`}
+              onClick={() => {
+                dispatch(profilePageActions.setEditMode({ isEditMode: false }))
+              }}
+            >
+              {value}
+            </Link>
+          )
         }
       },
       {
@@ -140,7 +150,7 @@ export const useProfileListUtils = (): ProfileListUtils => {
         }
       }
     ],
-    [t, selectedTab]
+    [t, selectedTab, dispatch]
   )
 
   const actionColumnParams = useMemo<Partial<ColumnConfigParams> | undefined>(
@@ -180,6 +190,7 @@ export const useProfileListUtils = (): ProfileListUtils => {
                     icon={<FormOutlined />}
                     tooltip={t('common.edit')}
                     onClick={() => {
+                      dispatch(profilePageActions.setEditMode({ isEditMode: true }))
                       history.push(`/profiles/${profile.id}`)
                     }}
                     name="crudEdit"
