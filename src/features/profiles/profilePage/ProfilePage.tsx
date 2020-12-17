@@ -36,8 +36,7 @@ export const ProfilePage: FC = () => {
     profilePictureUrl,
     isOwnProfile,
     isLoading,
-    activityTableUtils,
-    hasError
+    activityTableUtils
   } = useProfileUtils(id)
 
   const canEditOtherUsers = useMemo(() => hasPermission([Roles.Administrator]), [])
@@ -136,9 +135,9 @@ export const ProfilePage: FC = () => {
           </>
         )}
 
-        {!isLoading && hasError && <Empty />}
+        {!isLoading && !profile && <Empty />}
 
-        {isEditMode && !isLoading && !hasError && (
+        {profile && isEditMode && !isLoading && (
           <ProfilePageEdit
             companies={companies}
             groups={groups}
@@ -150,7 +149,7 @@ export const ProfilePage: FC = () => {
             profile={profile}
           />
         )}
-        {!isEditMode && !isLoading && !hasError && (
+        {profile && !isEditMode && !isLoading && (
           <ProfilePageView
             companies={companies}
             groups={groups}
@@ -161,7 +160,7 @@ export const ProfilePage: FC = () => {
         )}
       </Form>
 
-      {!isEditMode && !isOwnProfile && !isLoading && !hasError && (
+      {profile && !isEditMode && !isOwnProfile && !isLoading && (
         <ResponsiveTable selectable={false} {...activityTableUtils} />
       )}
 
