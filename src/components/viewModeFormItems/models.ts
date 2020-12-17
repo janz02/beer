@@ -1,11 +1,19 @@
-export interface ViewModeProps<T> {
+export interface ViewProps<T> {
   value?: T
   onClick?: Function
   onChange?: Function
-  type?: 'text' | 'email' | 'phone' | 'name' | 'date' | 'select' | 'multiselect'
+  hasRightToNavigate?: boolean
 }
 
-export interface ViewModeSelect {
+export interface ViewSelect {
   name: string
   linkTo: string
+}
+
+export interface ViewInputProps<T> extends ViewProps<T> {
+  type?: 'text' | 'email' | 'phone' | 'name' | 'date'
+}
+
+export interface ViewSelectProps<T> extends ViewProps<T> {
+  type?: 'select' | 'multiselect'
 }

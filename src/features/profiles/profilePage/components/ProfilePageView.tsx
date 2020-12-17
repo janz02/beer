@@ -2,10 +2,12 @@ import React, { FC, useMemo } from 'react'
 import { Col, Form, Row, Image } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { ProfileUtils } from '../useProfileUtils'
-import { ViewModeInput, ViewModeSelect } from 'components/viewModeFormItems'
+import { ViewModeInput, ViewModeSelect, ViewSelect } from 'components/viewModeFormItems'
 import './ProfileBasics.scss'
 import noProfilePicture from 'assets/img/noprofile.png'
 import { ProfileStatusDisplay } from 'features/profiles/profileList/ProfileStatusDisplay'
+import { hasPermission } from 'services/jwt-reader'
+import { Roles } from 'api/swagger/coupon'
 
 export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
   profile,
@@ -16,7 +18,7 @@ export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
 }) => {
   const { t } = useTranslation()
 
-  const company = useMemo<ViewModeSelect | null>(() => {
+  const company = useMemo<ViewSelect | null>(() => {
     const filtered = companies?.filter(el => el.id === profile?.companyId) || []
 
     return filtered.length > 0
@@ -24,7 +26,7 @@ export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
       : null
   }, [companies, profile])
 
-  const jobRole = useMemo<ViewModeSelect | null>(() => {
+  const jobRole = useMemo<ViewSelect | null>(() => {
     const filtered = jobRoles?.filter(el => el.id === profile?.jobRoleId) || []
 
     return filtered.length > 0
@@ -32,13 +34,15 @@ export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
       : null
   }, [jobRoles, profile])
 
-  const groupList = useMemo<ViewModeSelect[] | null>(
+  const groupList = useMemo<ViewSelect[] | null>(
     () =>
       groups
         ?.filter(el => profile?.groupIds.includes(el.id))
         .map(el => ({ name: el.name, linkTo: `/organization/groups/${el.id}` })) || null,
     [profile, groups]
   )
+
+  const hasRightToNavigate = useMemo(() => hasPermission([Roles.Administrator]), [])
 
   return (
     <>
@@ -99,17 +103,29 @@ export const ProfilePageView: FC<Partial<ProfileUtils>> = ({
             </Col>
             <Col xs={24}>
               <Form.Item label={t('profile-editor.company')}>
-                <ViewModeInput type="select" value={company} />
+                <ViewModeSelect
+                  type="select"
+                  value={company}
+                  hasRightToNavigate={hasRightToNavigate}
+                />
               </Form.Item>
             </Col>
             <Col xs={24}>
               <Form.Item label={t('profile-editor.group')}>
-                <ViewModeInput type="multiselect" value={groupList || []} />
+                <ViewModeSelect
+                  type="multiselect"
+                  value={groupList || []}
+                  hasRightToNavigate={hasRightToNavigate}
+                />
               </Form.Item>
             </Col>
             <Col xs={24}>
               <Form.Item label={t('profile-editor.job-role')}>
-                <ViewModeInput type="select" value={jobRole} />
+                <ViewModeSelect
+                  type="select"
+                  value={jobRole}
+                  hasRightToNavigate={hasRightToNavigate}
+                />
               </Form.Item>
             </Col>
           </Row>
