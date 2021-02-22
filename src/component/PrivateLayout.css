@@ -1,0 +1,56 @@
+.layout {
+  display: block;
+}
+
+.content {
+  padding: 0 10vw;
+  position: relative;
+  top: 50px;
+  padding: auto;
+}
+
+.header {
+  z-index: 1;
+  width: 100%;
+  background-color: #282c34;
+  height: 30px;
+  display: flex;
+  position: fixed;
+  top: 0;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  padding: 10px 0;
+}
+
+.header a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+.header a:hover {
+  color: lightgrey;
+}
+
+.logo {
+  height: 20px;
+  margin: 0 10px;
+  pointer-events: none;
+}
+
+.userName {
+  color: white;
+}
+
+.logoutButton {
+  margin: 0 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 0 5vw;
+  }
+  .userName {
+    display: none;
+  }
+}

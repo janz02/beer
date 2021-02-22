@@ -1,0 +1,36 @@
+
+.filterBox{
+  background-color: white;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.filterBox h3{
+  margin: 0;
+}
+
+.filterBox input{
+  margin: 0 10px;
+}
+
+.beerContainer {
+  align-items: center;
+}
+
+.beerImage {
+  height: 20px;
+}
+.beerName {
+  font-size: 8px;
+}
+
+.beerPercentile {
+  font-size: 10px;
+  font-weight: 15px;
+}
+
+.strong {
+  color: red;
+}

@@ -1,0 +1,23 @@
+.beerList{
+  
+}
+
+.beerContainer {
+  align-items: center;
+}
+
+.beerImage {
+  height: 20px;
+}
+.beerName {
+  font-size: 8px;
+}
+
+.beerPercentile {
+  font-size: 10px;
+  font-weight: 15px;
+
+}
+.strong {
+  color: red;
+}
