@@ -23,6 +23,10 @@
   grid-column-gap: 50px;
 }
 
+ul{
+  list-style-type: none;
+}
+
 .beerItem {
   height: 100px;
   width: 100px;
@@ -31,6 +35,11 @@
   justify-content: center;
   background: white;
   background: linear-gradient(45deg, white, yellow);
+  cursor: grab;
+}
+
+.beerItem:active {
+  cursor: grabbing;
 }
 
 .beerItemImage {
