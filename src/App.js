@@ -5,7 +5,6 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import { createBrowserHistory } from "history";
 import { LoginPage } from "./feature/loginPage/LoginPage.js";
 import { BeerListPage } from "./feature/beerList/BeerListPage.js";
 import { BeerDetailPage } from "./feature/beerDetail/BeerDetailPage.js";
@@ -26,12 +25,11 @@ function App() {
       <Switch>
         <Route path="/login" component={LoginPage} />
         <PrivateRoute path="/beers" component={BeerListPage} />
-        <PrivateRoute exact path="/beer/:beerId" component={BeerDetailPage} />
+        <PrivateRoute path="/beer/:beerId" component={BeerDetailPage} />
         <Route path="*" render={onDefaultRoute} />
       </Switch>
     </Router>
   );
 }
-export const history = createBrowserHistory();
 
 export default App;

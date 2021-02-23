@@ -1,5 +1,4 @@
 import React from "react";
-import { history } from "../App.js";
 import logo from "../asset/logo.svg";
 import "./PrivateLayout.css";
 
@@ -7,10 +6,9 @@ export const PrivateLayout = ({ children }) => {
   const logout = () => {
     //TODO remove loggedin from state
     window.location = "/login";
-    history.push("/login");
   };
 
-  const user = "Loggend in user";
+  const user = "Logged in user";
 
   return (
     <div className="layout">

@@ -1,10 +1,9 @@
 import React from "react";
-import { history } from "../../App.js";
 import "./LoginPage.css";
 
 export const LoginPage = () => {
   const onSubmit = () => {
-    history.push("/beers");
+    window.location = "/beers"
 
     fetch(`https://yesno.wtf/api`, {
       method: "GET",
@@ -20,7 +19,7 @@ export const LoginPage = () => {
       .then((data) => {
         if (data.answer === "yes") {
           //set loggedin to true
-          history.push("/beers");
+          window.location = "/beers"
         } else {
           console.error("wrong credentials, please try again");
         }

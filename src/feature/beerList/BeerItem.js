@@ -1,9 +1,8 @@
 import React from "react";
-import { history } from "../../App.js";
 
 export const BeerItem = (props) => {
   const showDetails = (id) => {
-    history.push(`/beer/${id}`);
+    window.location = `/beer/${id}`
   };
 
   return (

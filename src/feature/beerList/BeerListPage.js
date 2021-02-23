@@ -4,7 +4,37 @@ import "./BeerListPage.css";
 
 export const BeerListPage = () => {
   let beers = [];
-  let filteredBeers = [];
+  let filteredBeers = [{
+    "name":"Keg",
+    "percentile":5.1,
+    "id":10,
+    "image":"https://images.punkapi.com/v2/keg.png"
+  },{
+    "name":"Keg",
+    "percentile":5.1,
+    "id":10,
+    "image":"https://images.punkapi.com/v2/keg.png"
+  },{
+    "name":"Keg",
+    "percentile":5.1,
+    "id":10,
+    "image":"https://images.punkapi.com/v2/keg.png"
+  },{
+    "name":"Keg",
+    "percentile":5.1,
+    "id":10,
+    "image":"https://images.punkapi.com/v2/keg.png"
+  },{
+    "name":"Keg",
+    "percentile":5.1,
+    "id":10,
+    "image":"https://images.punkapi.com/v2/keg.png"
+  },{
+    "name":"Keg",
+    "percentile":5.1,
+    "id":10,
+    "image":"https://images.punkapi.com/v2/keg.png"
+  }];
   useEffect(() => {
     if (beers.length === 0) {
     }

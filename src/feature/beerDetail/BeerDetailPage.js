@@ -1,12 +1,13 @@
 import React from "react";
 import "./BeerDetailPage.css";
-import { history } from "../../App.js";
 export const BeerDetailPage = () => {
   const beer = {};
 
   return (
     <div className=".beerContainer">
-      <button onClick={() => history.push("/beers")}>Back to the beers</button>
+      <button onClick={() => (window.location = "/beers")}>
+        Back to the beers
+      </button>
       <img
         className="beerImage"
         alt={`A bottle of fresh ${beer.name}`}
