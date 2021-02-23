@@ -1,5 +1,4 @@
-
-.filterBox{
+.filterBox {
   background-color: white;
   padding: 20px;
   border: 1px solid black;
@@ -7,28 +6,44 @@
   width: fit-content;
 }
 
-.filterBox h3{
+.filterBox h3 {
   margin: 0;
 }
 
-.filterBox input{
+.filterBox input {
   margin: 0 10px;
 }
 
 .beerContainer {
-  align-items: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fill, 120px);
+  grid-row-gap: 50px;
+  grid-column-gap: 50px;
 }
 
-.beerImage {
-  height: 20px;
-}
-.beerName {
-  font-size: 8px;
+.beerItem {
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  border-radius: 50px;
+  justify-content: center;
+  background: white;
+  background: linear-gradient(45deg, white, yellow);
 }
 
-.beerPercentile {
-  font-size: 10px;
-  font-weight: 15px;
+.beerItemImage {
+  padding-top: 5px;
+  height: 40px;
+}
+
+.beerItemName {
+  font-size: 0.7em;
+}
+
+.beerItemPercentile {
+  font-weight: 600;
 }
 
 .strong {

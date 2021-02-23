@@ -21,17 +21,17 @@ export const BeerListPage = () => {
     "image":"https://images.punkapi.com/v2/keg.png"
   },{
     "name":"Keg",
-    "percentile":5.1,
+    "percentile":4.1,
     "id":10,
     "image":"https://images.punkapi.com/v2/keg.png"
   },{
     "name":"Keg",
-    "percentile":5.1,
+    "percentile":7.1,
     "id":10,
     "image":"https://images.punkapi.com/v2/keg.png"
   },{
     "name":"Keg",
-    "percentile":5.1,
+    "percentile":15.1,
     "id":10,
     "image":"https://images.punkapi.com/v2/keg.png"
   }];

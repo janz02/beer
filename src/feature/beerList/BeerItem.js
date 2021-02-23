@@ -2,22 +2,26 @@ import React from "react";
 
 export const BeerItem = (props) => {
   const showDetails = (id) => {
-    window.location = `/beer/${id}`
+    window.location = `/beer/${id}`;
   };
 
   return (
-    <div className=".beerContainer" onClick={() => showDetails(props.id)}>
-      <img
-        className="beerImage"
-        alt={`A bottle of fresh ${props.name}`}
-        src={props.image}
-      />
-      <span className="beerName">{props.name}</span>
-      <span
-        className={`beerPercentile${props.percentile > 5.5 ? " strong" : ""}`}
+    <div className="beerItem" onClick={() => showDetails(props.id)}>
+      <div>
+        <img
+          className="beerItemImage"
+          alt={`A bottle of fresh ${props.name}`}
+          src={props.image}
+        />
+      </div>
+      <div className="beerItemName">{props.name}</div>
+      <div
+        className={`beerItemPercentile${
+          props.percentile > 5.5 ? " strong" : ""
+        }`}
       >
-        {props.percentile}
-      </span>
+        {props.percentile}%
+      </div>
     </div>
   );
 };
