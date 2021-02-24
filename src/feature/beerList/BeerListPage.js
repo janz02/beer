@@ -1,114 +1,46 @@
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { BeerFinder } from "./BeerFinder.js";
 import { BeerItem } from "./BeerItem.js";
+import { getBeers } from "./beerListSlice";
 import "./BeerListPage.css";
 
 export const BeerListPage = () => {
-  let beers = [];
-  let filteredBeers = [
-    {
-      name: "Keg",
-      percentile: 5.1,
-      id: 1,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 5.1,
-      id: 453,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 5.1,
-      id: 111,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 4.1,
-      id: 6,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 7.1,
-      id: 1,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 15.1,
-      id: 13,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 4.1,
-      id: 6,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 7.1,
-      id: 1,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 15.1,
-      id: 13,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 4.1,
-      id: 6,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 7.1,
-      id: 1,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-    {
-      name: "Keg",
-      percentile: 15.1,
-      id: 13,
-      image: "https://images.punkapi.com/v2/keg.png",
-    },
-  ];
+  const dispatch = useDispatch();
+  const { beers, hasErrors, isLoading } = useSelector(
+    (state) => state.beerList
+  );
+
   useEffect(() => {
-    if (beers.length === 0) {
+    if (!beers) {
+      dispatch(getBeers());
     }
-  });
+  }, [beers, hasErrors, dispatch]);
+
+  useEffect(() => {
+    if (hasErrors) {
+      window.alert("Sorry, could not load your beers");
+    }
+  }, [hasErrors]);
 
   return (
-    <form>
+    <>
       <h1>The palette</h1>
 
-      <div className="filterBox">
-        <h3>Filter</h3>
-        <table>
-          <tr>
-            <td>by name</td>
-            <td><input type="text" /></td>
-          </tr>
-          <tr>
-            <td>by strength</td>
-            <td><input type="number"  /></td>
-          </tr>
-        </table>
-      </div>
+      <BeerFinder />
 
       <h3>The seeked ones</h3>
-      <div className="beerContainer">
-        {filteredBeers.length > 0 ? (
-          filteredBeers.map((beer) => <BeerItem {...beer} />)
-        ) : (
-          <div>No results</div>
-        )}
-      </div>
-    </form>
+      {isLoading ? (
+        <>Your beers are filling</>
+      ) : (
+        <div className="beerContainer">
+          {beers && beers.length > 0 ? (
+            beers.map((beer) => <BeerItem key={beer.id} {...beer} />)
+          ) : (
+            <div>No results</div>
+          )}
+        </div>
+      )}
+    </>
   );
 };

@@ -1,38 +1,33 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../app/authSlice";
+
 import "./LoginPage.css";
 
 export const LoginPage = () => {
-  const onSubmit = () => {
-    window.location = "/beers"
+  const dispatch = useDispatch();
+  const { isLoading, hasErrors } = useSelector((state) => state.auth);
 
-    fetch(`https://yesno.wtf/api`, {
-      method: "GET",
-      credentials: "omit",
-      mode: "no-cors",
-      referrerPolicy: "no-referrer",
-      headers: { "Access-Control-Allow-Origin": "*" },
-    })
-      .then((resp) => {
-        return resp.json();
-      })
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const username = e.target[0].value;
+      //const pass = e.target[0].value;
 
-      .then((data) => {
-        if (data.answer === "yes") {
-          //set loggedin to true
-          window.location = "/beers"
-        } else {
-          console.error("wrong credentials, please try again");
-        }
-      })
+      dispatch(login(username));
+    },
+    [dispatch]
+  );
 
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  useEffect(() => {
+    if (hasErrors) {
+      window.alert("Wrong credentials");
+    }
+  }, [hasErrors]);
 
   return (
     <div className="loginPage">
-      <form className="loginForm" onSubmit={onSubmit}>
+      <form className="loginForm" onSubmit={(e) => onSubmit(e)}>
         <h1>Login</h1>
         <label>Username</label>
         <input type="email" required={true} />
@@ -40,10 +35,7 @@ export const LoginPage = () => {
         <label>Password</label>
         <input type="password" required={true} />
 
-        <input
-          type="submit"
-          value="Login"
-        />
+        <input type="submit" value="Login" disabled={isLoading} />
       </form>
     </div>
   );

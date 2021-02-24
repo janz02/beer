@@ -1,26 +1,27 @@
 import React from "react";
+import { history } from "../../App";
 
-export const BeerItem = (props) => {
+export const BeerItem = (beer) => {
   const showDetails = (id) => {
-    window.location = `/beer/${id}`;
+    history.push(`/beer/${id}`);
   };
 
   return (
-    <div className="beerItem" onClick={() => showDetails(props.id)}>
+    <div className="beerItem" onClick={() => showDetails(beer.id)}>
       <div>
         <img
           className="beerItemImage"
-          alt={`A bottle of fresh ${props.name}`}
-          src={props.image}
+          alt={`A bottle of fresh ${beer.name}`}
+          src={beer.image_url}
         />
       </div>
-      <div className="beerItemName">{props.name}</div>
+      <div className="beerItemName">{beer.name}</div>
       <div
         className={`beerItemPercentile${
-          props.percentile > 5.5 ? " strong" : ""
+          beer.abv > 5.5 ? " strong" : ""
         }`}
       >
-        {props.percentile}%
+        {beer.abv}%
       </div>
     </div>
   );

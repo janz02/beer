@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../app/authSlice";
 import logo from "../asset/logo.svg";
 import "./PrivateLayout.css";
 
 export const PrivateLayout = ({ children }) => {
-  const logout = () => {
-    //TODO remove loggedin from state
-    window.location = "/login";
-  };
+  const dispatch = useDispatch();
+  const { username } = useSelector((state) => state.auth);
 
-  const user = "Logged in user";
+  const handleLogout = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
 
   return (
     <div className="layout">
@@ -18,8 +20,10 @@ export const PrivateLayout = ({ children }) => {
           <a href="/beers">Beers</a>
         </span>
         <span>
-          <span className="userName">{user}</span>
-          <button className="logoutButton" onClick={logout}>Logout</button>
+          <span className="userName">{username}</span>
+          <button className="logoutButton" onClick={()=>handleLogout()}>
+            Logout
+          </button>
         </span>
       </header>
       <div className="content">{children}</div>

@@ -22,8 +22,7 @@
   grid-row-gap: 50px;
   grid-column-gap: 50px;
 }
-
-ul{
+.beerContainer ul{
   list-style-type: none;
 }
 
