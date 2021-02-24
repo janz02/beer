@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { BeerFinder } from "./BeerFinder.js";
-import { BeerItem } from "./BeerItem.js";
+import { BeerFinder } from "./components/BeerFinder.js";
+import { BeerItem } from "./components/BeerItem.js";
 import { getBeers } from "./beerListSlice";
 import "./BeerListPage.css";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getBeers } from "./beerListSlice";
+import { getBeers } from "../beerListSlice";
 import { useDebouncedCallback } from "use-debounce";
 
 export const BeerFinder = () => {

@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { resetBeers } from "../feature/beerList/beerListSlice";
+import { resetBeer } from "../feature/beerDetail/beerDetailSlice";
 import { history } from "../App";
 
 export const authSlice = createSlice({
@@ -61,6 +63,8 @@ export const login = (username) => {
 
 export const logout = () => {
   return (dispatch) => {
+    dispatch(resetBeer());
+    dispatch(resetBeers());
     dispatch(logoutRequest());
     history.push("/login");
   };

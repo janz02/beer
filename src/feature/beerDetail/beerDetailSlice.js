@@ -1,18 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  beer: {},
+  isLoading: false,
+  hasErrors: false,
+};
+
 export const beerDetailSlice = createSlice({
   name: "beerDetail",
-  initialState: {
-    beer: {},
-    isLoading: false,
-    hasErrors: false,
-  },
+  initialState,
   reducers: {
-    reset: (state) => {
-      state.beer = {};
-      state.isLoading = false;
-      state.hasErrors = false;
-    },
+    reset: () => initialState,
     getBeerRequest: (state) => {
       state.beerLoading = true;
     },
@@ -35,7 +33,7 @@ export const {
   getBeerFailure,
 } = beerDetailSlice.actions;
 
-export function getBeer(id) {
+export const getBeer = (id) => {
   return async (dispatch) => {
     dispatch(getBeerRequest());
 
@@ -51,6 +49,6 @@ export function getBeer(id) {
         dispatch(getBeerFailure());
       });
   };
-}
-export const resetBeer = reset
+};
+export const resetBeer = reset;
 export const beerDetailReducer = beerDetailSlice.reducer;
