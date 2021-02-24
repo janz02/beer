@@ -1,6 +1,7 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { getBeers } from "./beerListSlice";
+import { useDebouncedCallback } from "use-debounce";
 
 export const BeerFinder = () => {
   const dispatch = useDispatch();
@@ -18,15 +19,15 @@ export const BeerFinder = () => {
     return queryParams.join("&");
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = useDebouncedCallback((e) => {
     const input = e.target.form.elements;
     const filter = createQueryString(input);
 
     dispatch(getBeers(filter));
-  };
+  }, 600);
 
   return (
-    <form onChange={handleSearch}>
+    <form onChange={(e) => handleSearch.callback(e)}>
       <div className="filterBox">
         <h3>Filter</h3>
         <table>
